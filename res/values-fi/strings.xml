@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Valintaperuste: ero UTC-aikaan"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Päiväys"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Aika"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Lukitse automaattisesti"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> virransäästötilan jälkeen"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Heti lepotilasta heräämisen jälkeen, ellei avaaja ole <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> virransäästötilan jälkeen, paitsi kun lukitusta pitää avattuna <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Lukitse näytön aikakatkaisun jälkeen"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> aikarajan jälkeen"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Heti aikarajan jälkeen, paitsi kun <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> pitää lukitusta avattuna"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> aikakatkaisun jälkeen, paitsi kun <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> pitää lukitusta avattuna"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Näytä omistajan tiedot lukitusnäytöllä"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Lukitusnäytön teksti"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Käytä widgetejä"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Järjestelmänvalvojan estämä"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Näytä lukitusasetus"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Näytä virtapainikeasetus, joka poistaa käytöstä Smart Lockin, lukituksen avaamisen sormenjäljellä ja lukitusnäytön ilmoitukset."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Näytä virtapainikeasetus, joka poistaa käytöstä Smart Lockin, lukituksen biometrisen avaamisen ja lukitusnäytön ilmoitukset."</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Luotettavat tahot vain pitävät avattuna"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Kun tämä on käytössä, luotettavat tahot pitävät puhelimen avattuna pidempään mutta eivät voi enää avata lukittua laitetta."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Lukitse näyttö ilman luotettavaa tahoa"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Näytön lukitus, sormenjälki"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Näytön lukitus"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Kasvot lisätty"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Määritä kasvojentunnistus napauttamalla"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Kasvojentunnistus"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Face Unlockin määritys"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Aseta Face Unlock"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Määritä Face Unlock"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face Unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face Unlock työkäyttöön"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Face Unlockin määritys"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Määritä Face Unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Todennus kasvojen avulla"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Aloita"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Peruuta"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Ei kiitos"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Hyväksyn"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Lisää"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Lukituksen avaaminen kasvoilla"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Todennus kasvojen avulla"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Avaa puhelin tai hyväksy ostoksia sormenjäljellä.\n\nHuom. Tämän laitteen lukitusta ei voi avata kasvojentunnistuksella. Saat lisätietoja organisaatiosi järjestelmänvalvojalta."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Kasvojen rekisteröinti epäonnistui."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Kaikki valmiina. Hyvältä näyttää."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Valmis"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Paranna Face Unlockin toimintaa"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Määritä Face Unlock uudelleen"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Määritä Face Unlock uudelleen"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Paranna tietosuojaa ja suorituskykyä"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Määritä Face Unlock"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Poista nykyinen data, niin voit määrittää Face Unlockin uudelleen.\n\nFace Unlockin käyttämä kasvodata poistetaan pysyvästi ja turvallisesti. Poistamisen jälkeen tarvitset PIN-koodia, kuviota tai salasanaa puhelimen lukituksen avaamiseen, sovelluksiin kirjautumiseen ja maksujen vahvistamiseen."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Käytä Face Unlockia:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Lukituksen avaaminen"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Sovelluskirjautuminen, maksut"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Vaadi Face Unlockia varten"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Näytön katsominen silmät auki"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Vaadi, että puhelimen lukitus avataan katsomalla näyttöä silmät auki"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Vahvista-painike"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Pyydä aina vahvistusta sovellusten todennuksen yhteydessä"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Face Unlock ‑vaatimukset"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Edellytä avoimia silmiä"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Puhelin aukeaa vain, jos silmät ovat auki"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Pyydä aina vahvistusta"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Vaadi aina vahvistusta, kun lukitus avataan kasvoilla sovelluksissa"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Poista kasvodata"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Aseta uusi Face Unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Face Unlockin avulla voit avata laitteesi latauksen, kirjautua sovelluksiin ja vahvistaa maksuja.\n\nPidä mielessä:\nPuhelimen katsominen voi avata sen lukituksen, vaikka et olisi tarkoittanut tehdä niin.\n\nJoku muu voi avata puhelimesi lukituksen, jos hän pitää puhelinta kasvojesi edessä, kun silmäsi ovat auki.\n\nJoku muu voi avata puhelimesi lukituksen, jos hän näyttää sinulta (esim. lapsesi tai identtinen kaksosesi)."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Määritä Face Unlock"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Face Unlockin avulla voit avata laitteesi lukituksen, kirjautua sovelluksiin ja vahvistaa maksuja.\n\nPidä mielessä:\nPuhelimen katsominen voi avata sen lukituksen haluamattasi.\n\nJoku muu voi avata puhelimesi lukituksen pitämällä sitä kasvojesi edessä, vaikka silmäsi ovat kiinni.\n\nSinulta näyttävä henkilö (esim. identtinen kaksonen) voi avata puhelimen lukituksen."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Poistetaanko kasvodata?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Face Unlockin tallentama data poistetaan pysyvästi ja turvallisesti. Poistamisen jälkeen tarvitset PIN-koodia, kuviota tai salasanaa puhelimen lukituksen avaamiseen, sovelluksiin kirjautumiseen ja maksujen vahvistamiseen."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Face Unlockin käyttämä kasvodata poistetaan pysyvästi ja turvallisesti. Poistamisen jälkeen tarvitset PIN-koodia, kuviota tai salasanaa puhelimen lukituksen avaamiseen, sovelluksiin kirjautumiseen ja maksujen vahvistamiseen."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Avaa puhelimen lukitus Face Unlockilla"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Sormenjälki"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Sormenjälkien hallinta"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Sormenj. käyttökohde"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Suojaa tablettiasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi sormenjälkitunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Suojaa laitettasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi sormenjälkitunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Suojaa puhelintasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi sormenjälkitunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Suojaa tablettiasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi kasvojentunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Suojaa laitettasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi kasvojentunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Suojaa puhelintasi näytön lukituksella, jotta kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi kasvojentunnistuksen. Valitse Peruuta, ja määritä sitten PIN-koodi, kuvio tai salasana."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Kun suojaat tablettisi näytön lukituksella, kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi Face Unlockin. Palaa takaisin valitsemalla Peruuta."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Kun suojaat laitteen näytön lukituksella, kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi Face Unlockin. Palaa takaisin valitsemalla Peruuta."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Kun suojaat puhelimen näytön lukituksella, kukaan ei voi käyttää sitä, jos se katoaa tai varastetaan. Tarvitset näytön lukituksen myös määrittääksesi Face Unlockin. Palaa takaisin valitsemalla Peruuta."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Ohitetaanko PIN-koodin asetus?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Ohitetaanko salasanan asetus?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Ohitetaanko kuvion asetus?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Sormenjälki ja salasana"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Jatka ilman sormenjälkeä"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Voit avata puhelimen lukituksen käyttämällä sormenjälkeäsi. Turvallisuussyistä tämä edellyttää, että määrität näytön varalukitustavan."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Kasvojentunnistus ja kuvio"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Kasvojentunnistus ja PIN-koodi"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Kasvojentunnistus ja salasana"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Jatka ilman kasvojentunnistusta"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face Unlock ja kuvio"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face Unlock ja PIN-koodi"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Face Unlock ja salasana"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Jatka ilman Face Unlockia"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Voit avata puhelimen lukituksen kasvojentunnistuksella. Turvallisuussyistä tämä edellyttää, että määrität näytön varalukitustavan."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Järj.valvojan, salauskäyt. tai tunnuksien tall.tilan estämä"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ei mitään"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimoi kirkkaus ympäristön valoisuuden mukaan. Voit yhä säätää kirkkautta väliaikaisesti itse."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Näytön kirkkaus mukautuu automaattisesti ympäristöösi ja toimintaasi. Voit auttaa mukautuvaa kirkkautta oppimaan mieltymyksesi siirtämällä liukusäädintä."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Näytä valkotasapaino"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Huomionäyttö"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Päällä / näyttö ei sammu, kun katsot sitä"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Pois käytöstä"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Estää näyttöä sammumasta, kun katsot sitä."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kameran käyttöoikeus tarvitaan"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Napauta ja määritä käyttöoikeudet personoinnin palveluihin."</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Estää näyttöä sammumasta, kun katsot sitä"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Huomionäyttö näkee etukameralla, katsooko joku näyttöä. Ominaisuus toimii laitteella, eikä kuvia ikinä tallenneta tai lähetetä Googlelle."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Pidä näyttö päällä, kun sitä katsotaan."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Yövalo"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Yövalo tekee näytöstä keltasävyisen. Sen avulla näytön katselu heikossa valossa on helpompaa ja saatat nukahtaa helpommin."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Aikataulu"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Muokkaa näyttöäsi"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Valitse taustakuva"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Tee Pixelistä näköisesi"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Kokeile eri tyylejä, taustakuvia, kelloja ja muuta."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Kokeile eri tyylejä, taustakuvia ja muuta"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Näytönsäästäjä"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Latauksen aikana tai telakoituna"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Kumpi vain"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Salasana on asetettu"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN-koodi asetettu"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Kuvio on asetettu"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Aseta salasana kasvotodennusta varten"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Valitse kuvio kasvojentunnistusta varten"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Aseta PIN kasvojentunnistusta varten"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Määritä salasana Face Unlockia varten"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Valitse kuvio Face Unlockia varten"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Määritä PIN-koodi Face Unlockia varten"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Jatka piirtämällä laitteesi kuvio."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Jatka antamalla laitteesi PIN-koodi."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Jatka antamalla laitteesi salasana."</string>
@@ -1789,7 +1805,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="4864525074768391381">"Näytä profiilin kuvio piirrettäessä"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="4389015658335522989">"Kosketusvärinä"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="5735444062633666327">"Virtapainike: välitön lukitus"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Paitsi kun lukitusta pitää avattuna <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="8196258755143711694">"Paitsi kun <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> pitää lukitusta avattuna"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Aseta lukituksenpoistokuvio"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Vaihda lukituksenpoistokuvio."</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Lukituksenpoistokuvion piirtäminen"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Käynnistä tai sammuta esteettömyyspalvelu pyyhkäisemällä näytön alalaidasta ylös kolmella sormella.\n\nVaihda palveluiden välillä pyyhkäisemällä ylös kolmella sormella ja koskettamalla pitkään."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Esteettömyys-painikkeen toiminnoksi on valittu <xliff:g id="SERVICE">%1$s</xliff:g>. Jos haluat käyttää suurennusta, kosketa Esteettömyys-painiketta pitkään ja valitse suurennus."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Esteettömyyseleen asetus on <xliff:g id="SERVICE">%1$s</xliff:g>. Jos haluat käyttää suurennusta, pyyhkäise kahdella sormella ylös näytön alalaidasta ja paina pitkään. Valitse sitten suurennus."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Pikakomento: äänenvoimakkuuspainike"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Pikanäppäinpalvelu"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Salli käyttö lukitusnäytöllä"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Käytä palvelua"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Käytä värinkorjausta"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Käytä tekstityksiä"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Kaikki sovellukset eivät tue tätä asetusta."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Jatka"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Kuulolaitteet"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Ei yhdistettyjä kuulolaitteita"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Näytä vedettävällä ilmoitusalueella, tilapalkissa ja lukitusnäytöllä"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Vilkuta valoa"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lukitusnäyttö"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Lukitusnäytön ohittaminen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Siirry Face Unlockin jälkeen suoraan viimeisimmälle näytölle"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Lukitusnäyttö, ohita"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kun työprofiili on lukittu"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Ilmoitukset lukitusnäytöllä"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Näytä ääni-ilmoitukset ja hiljaiset ilmoitukset"</string>
@@ -4037,7 +4058,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> sovellusta saa käyttää rajattomasti dataa, kun Data Saver on käytössä.</item>
       <item quantity="one">1 sovellus saa käyttää rajattomasti dataa, kun Data Saver on käytössä.</item>
     </plurals>
-    <string name="data_usage_title" msgid="3659356290392241789">"Ensisijainen Data"</string>
+    <string name="data_usage_title" msgid="3659356290392241789">"Ensisijainen data"</string>
     <string name="data_usage_wifi_title" msgid="7063659423081820720">"Wi‑Fi-data"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> käytetty"</string>
     <string name="data_used_formatted" msgid="2989129931961311051">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> käytetty"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sijoitustiedot puuttuvat."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Tätä avainta ei ole sijoitustiedoissa."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Teema"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Korostusväri"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Otsikko/leipäteksti"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Kuvakkeen muoto"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Laitteen oletusasetus"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Näyttölovi"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"näyttölovi, näytön lovi"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Järjestelmän grafiikkaohjain"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Asetusta ei tueta tällä puhelimella."</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Asetusta ei tueta tällä tabletilla"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Asetusta ei tueta tällä laitteella"</string>
@@ -4541,7 +4557,7 @@
     <string name="network_connection_request_dialog_title" msgid="3502355504717957803">"Käytettävä laite: <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
     <string name="network_connection_timeout_dialog_message" msgid="3711556077945728716">"Laitteita ei löytynyt. Varmista, että laitteet ovat päällä ja voivat muodostaa yhteyden."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="8924405960181020156">"Yritä uudelleen"</string>
-    <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Jokin meni vikaan. Sovellus peruutti laitteenvalintapyynnön."</string>
+    <string name="network_connection_errorstate_dialog_message" msgid="6953778550775646710">"Jotain meni pieleen.. Sovellus peruutti laitteenvalintapyynnön."</string>
     <string name="network_connection_connect_successful" msgid="5935510954474494928">"Yhteyden muodostus onnistui"</string>
     <string name="network_connection_request_dialog_showall" msgid="6938922880244567521">"Näytä kaikki"</string>
     <plurals name="show_bluetooth_devices" formatted="false" msgid="1715020480026568408">

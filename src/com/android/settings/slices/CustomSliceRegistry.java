@@ -26,6 +26,7 @@ import android.util.ArrayMap;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.display.AdaptiveSleepPreferenceController;
 import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.homepage.contextualcards.deviceinfo.DataUsageSlice;
@@ -34,7 +35,9 @@ import com.android.settings.homepage.contextualcards.deviceinfo.EmergencyInfoSli
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
+import com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice;
+import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
 import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
@@ -62,6 +65,16 @@ public class CustomSliceRegistry {
             .authority(SettingsSlicesContract.AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
+            .build();
+
+    /**
+     *  Uri for Contextual Adaptive Sleep Slice
+     */
+    public static final Uri CONTEXTUAL_ADAPTIVE_SLEEP_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_INTENT)
+            .appendPath(AdaptiveSleepPreferenceController.PREF_NAME)
             .build();
 
     /**
@@ -149,6 +162,15 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("enhanced_4g_lte")
+            .build();
+    /**
+     * Slice Uri for Face Enrollment
+     */
+    public static final Uri FACE_ENROLL_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("face_unlock_greeting_card")
             .build();
     /**
      * Backing Uri for the Flashlight Slice.
@@ -328,21 +350,23 @@ public class CustomSliceRegistry {
 
         sUriToSlice.put(BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
         sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
+        sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
         sUriToSlice.put(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI,
                 ContextualNotificationChannelSlice.class);
         sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         sUriToSlice.put(DATA_USAGE_SLICE_URI, DataUsageSlice.class);
         sUriToSlice.put(DEVICE_INFO_SLICE_URI, DeviceInfoSlice.class);
         sUriToSlice.put(EMERGENCY_INFO_SLICE_URI, EmergencyInfoSlice.class);
+        sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
         sUriToSlice.put(LOCATION_SLICE_URI, LocationSlice.class);
         sUriToSlice.put(LOW_STORAGE_SLICE_URI, LowStorageSlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
+        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
         sUriToSlice.put(NOTIFICATION_CHANNEL_SLICE_URI, NotificationChannelSlice.class);
         sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
-        sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {

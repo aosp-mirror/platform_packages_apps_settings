@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Kiválasztás UTC-eltolódással"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Dátum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Idő"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatikus zárolás"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó mód után"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Rögtön az alvó mód bekapcsolása után, kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> feloldva tartja"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> alvó üzemmód után; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Zárolás a képernyő időkorlátja után"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Az időkorlát után azonnal, kivéve ha a következő tartja feloldva: <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"Az időkorlát után ennyivel: <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>; kivéve, ha a <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> feloldva tartja"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Tulajdonosi adatok megjelenítése a lezáró képernyőn"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Képernyőzár üzenete"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Modulengedélyezés"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"A rendszergazda kikapcsolta"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"A zárolás lehetőség megjelenítése"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"A Smart Lock szolgáltatást, az ujjlenyomattal történő feloldást és a zárolási képernyő értesítéseit kikapcsoló gomb megjelenítése."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"A Smart Lock szolgáltatást, a biometrikus feloldást és a zárolási képernyő értesítéseit kikapcsoló gomb megjelenítése"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"A trust agentek kibővítik a feloldást"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ha engedélyezve van, a trust agent komponensek tovább tartják feloldva az eszközt, de a zárolt eszközt többé nem tudják feloldani."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Képernyő zárolása megbízhatóság nélkül"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Képernyőzár, ujjlenyomat"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Képernyőzár"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Arc hozzáadva"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Koppintson az arcfelismerés megadásához"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Arcfelismerés"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Az Arcalapú feloldás beállítása"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Arcalapú feloldás"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Arcalapú feloldás munkaprofilhoz"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Az arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Arcalapú feloldás beállítása"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Kezdés"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Mégse"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nem, köszönöm"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Elfogadás"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Bővebben"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Feloldás arccal"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Használja arcát a telefon feloldásához vagy vásárlások engedélyezéséhez.\n\nMegjegyzés: Nem használhatja arcát az eszköz feloldására. Ha további információra van szüksége, forduljon szervezete rendszergazdájához."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Az arc regisztrálása sikertelen volt."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Minden beállítva. Jónak tűnik."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Kész"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Javítsa az arcalapú feloldás teljesítményét"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Állítsa be újra az arcalapú feloldást"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Állítsa be újra az arcalapú feloldást"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Javítsa a teljesítményt és a biztonságot"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Az arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Törölje a jelenlegi arcadatokat az arcalapú feloldás ismételt beállításához.\n\nAz arcadatokat véglegesen és biztonságosan töröljük. Az eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához, az alkalmazásokba való bejelentkezéshez és a fizetések megerősítéséhez."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Arcalapú feloldás:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Zárolás feloldása"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Alkalmazásbejelentkezés, fizetés"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Kötelező az arcalapú feloldásnál"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Nyitott szem a kamerába nézéskor"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"A zárolás feloldásához mindig nyitott szemmel kell a képernyőre nézni"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Megerősítő gomb"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Az alkalmazásokban való hitelesítés során mindig kérjen megerősítést"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Az arcalapú feloldás követelményei"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"A szemének nyitva kell lennie"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"A telefon feloldásához nyitva kell lennie a szemének"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Mindig kérjen megerősítést"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Alkalmazáson belüli arcalapú feloldáshoz megerősítés is szükséges"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Arcadatok törlése"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Arcalapú feloldás új beállítása"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Az arcalapú feloldás segítségével feloldhatja telefonja zárolását, bejelentkezhet alkalmazásokba, illetve megerősíthet fizetéseket.\n\nNe feledje:\nHa a telefonja felé fordul, azzal akkor is feloldhatja az eszköz zárolását, ha nem áll szándékában.\n\nTelefonját más is feloldhatja, ha az Ön arca elé tartja, amikor szemei nyitva vannak.\n\nElőfordulhat, hogy telefonját az Önre nagyon hasonlító személyek is feloldhatják, például gyermeke vagy egypetéjű ikertestvére."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Az arcalapú feloldás segítségével feloldhatja eszköze zárolását, bejelentkezhet alkalmazásokba, illetve megerősítheti a fizetéseket.\n\nNe feledje:\nAkaratlanul is feloldhatja a telefont, amikor ránéz.\n\nA telefont mások is feloldhatják, ha az Ön arca elé tartják, még akkor is, ha csukva van a szeme.\n\nElőfordulhat, hogy telefonja zárolását egy Önre nagyon hasonlító személy, például egypetéjű ikertestvére is feloldhatja."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Törli az arcadatokat?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Az arcalapú feloldás által mentett adatok véglegesen és biztonságosan törlődnek. Az eltávolításuk után PIN-kóddal, mintával vagy jelszóval kell feloldania telefonja zárolását, bejelentkeznie az alkalmazásokba, illetve megerősítenie a fizetési tranzakciókat."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Az arcalapú feloldáshoz használt arcadatokat véglegesen és biztonságosan töröljük. Az eltávolítás után PIN-kódra, mintára vagy jelszóra lesz szüksége a telefon feloldásához, az alkalmazásokba való bejelentkezéshez és a tranzakciók megerősítéséhez."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"A telefon feloldásához használja az arcalapú feloldást"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Ujjlenyomat"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Ujjlenyomatok kezelése"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Ujjlenyomat ehhez:"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Védje meg táblagépét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Védje meg eszközét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Védje meg telefonját képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az ujjlenyomat beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Védje meg táblagépét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Védje meg eszközét képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Védje meg telefonját képernyőzár beállításával, hogy senki más ne használhassa, amennyiben elveszne, illetve ellopnák. Az arcfelismerés beállításához rendelkeznie kell képernyőzár-beállítással is. Koppintson a Mégse lehetőségre, majd állítson be PIN-kódot, mintát vagy jelszót."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Képernyőzárral védett táblagépéhez nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Képernyőzárral védett eszközéhez nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Képernyőzárral védett telefonjához nem férhetnek hozzá, ha ellopják vagy elveszíti. A képernyőzár az arcalapú feloldás használatához is szükséges. A visszalépéshez koppintson a Mégse gombra."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Kihagyja a PIN-kód beállítását?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Kihagyja a jelszó beállítását?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Kihagyja a minta beállítását?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Ujjlenyomat + jelszó"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Folytatás ujjlenyomat nélkül"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Telefonját feloldhatja az ujjlenyomata segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Arcfelismerés + minta"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Arcfelismerés + PIN-kód"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Arcfelismerés + jelszó"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Folytatás arcfelismerés nélkül"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Arcalapú feloldás + minta"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Arcalapú feloldás + PIN-kód"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Arcalapú feloldás + jelszó"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Folytatás arcalapú feloldás nélkül"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Feloldhatja telefonját arca segítségével. Biztonsági okokból ezen beállítás esetében szükség van másodlagos képernyőzárra is."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Rendszergazda, szabályzat vagy adattár letiltotta"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Nincs"</string>
@@ -1214,15 +1226,19 @@
     <string name="auto_brightness_very_high_title" msgid="8867164854439331022">"Nagyon magas"</string>
     <string name="auto_brightness_subtitle" msgid="6454652530864093466">"Előnyben részesített fényerőszint"</string>
     <string name="auto_brightness_off_summary" msgid="7629228736838155268">"Ne módosuljon a rendelkezésre álló fény alapján"</string>
-    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Megnövekedett akkumulátorhasználat"</string>
+    <string name="auto_brightness_very_high_summary" msgid="4551003097086220709">"Növeli az akkumulátorhasználatot"</string>
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"A fényerőt a rendelkezésre álló fényhez optimalizálja. Átmenetileg továbbra is módosíthatja a fényerőt, ha be van kapcsolva a funkció."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"A képernyő fényerőssége automatikusan alkalmazkodik a környezethez és az adott tevékenységhez. A csúszka manuális mozgatásával segít az alkalmazkodó fényerő funkciónak az Ön személyes preferenciáinak megtanulásában."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Kijelző fehéregyensúlya"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Ki"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera-hozzáférés szükséges"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Koppintson ide az Eszköz-személyreszabási szolgáltatások engedélyeinek kezeléséhez"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Amíg Ön a képernyőt nézi, megakadályozza annak kikapcsolását"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"A Képernyőfigyelő az előlapi kamerát használja annak ellenőrzésére, hogy nézi-e felhasználó a képernyőt. A funkció az eszközön működik, és a fotókat sosem tárolja vagy küldi tovább a Google-nak."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ne kapcsoljon ki a képernyő, amíg nézem"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Éjszakai fény"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Az Éjszakai fény borostyánsárga árnyalatúra színezi a képernyőt, hogy gyenge fény mellett se legyen kellemetlen a képernyőre nézni. Emellett az elalvást is megkönnyítheti."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Ütemezés"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Képernyő személyre szabása"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Válasszon háttérképet"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"A Pixel személyre szabása"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Próbáljon ki más stílusokat, háttérképeket, órákat stb."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Próbáljon ki más stílusokat, háttérképeket és egyebeket"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Képernyővédő"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Töltés és dokkolás közben"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Bármelyik"</string>
@@ -1279,7 +1295,7 @@
     <string name="doze_title" msgid="2375510714460456687">"Új értesítések"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Képernyő felébresztése értesítés érkezésekor"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Mindig bekapcsolva"</string>
-    <string name="doze_always_on_summary" msgid="6978257596231155345">"Az idő, az értesítési ikonok és egyéb információk megjelenítése. Megnövekedett akkumulátorhasználat."</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Az idő, az értesítési ikonok és egyéb információk megjelenítése. Növeli az akkumulátorhasználatot."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Betűméret"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Szöveg nagyítása és kicsinyítése"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM-kártya lezárási beállításai"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"A jelszó beállítva"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"A PIN-kód beállítva"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"A minta beállítva"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Az arcfelismeréshez adjon meg jelszót"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Az arcfelismeréshez adjon meg mintát"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Az arcfelismeréshez adjon meg PIN-kódot"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Az arcalapú feloldáshoz adjon meg jelszót"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Az arcalapú feloldáshoz adjon meg mintát"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Az arcalapú feloldáshoz adjon meg PIN-kódot"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"A folytatáshoz használja eszköze feloldó mintáját"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"A folytatáshoz írja be eszköze PIN-kódját"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"A folytatáshoz írja be eszköze jelszavát"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"A kisegítő szolgáltatás be- vagy kikapcsolásához csúsztasson három ujjával felfelé a képernyő aljáról.\n\nA szolgáltatások közötti váltáshoz csúsztasson felfelé három ujjával, és ne engedje el a képernyőt."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Értem"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"A Kisegítő lehetőségek gomb a következőre van állítva: <xliff:g id="SERVICE">%1$s</xliff:g>. Nagyításhoz tartsa lenyomva a Kisegítő lehetőségek gombot, majd válassza a nagyítás lehetőséget."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"A kisegítő kézmozdulat a következőre van beállítva: <xliff:g id="SERVICE">%1$s</xliff:g>. A nagyítás használatához gyorsan csúsztassa fel két ujját a képernyő aljáról, majd tartsa. Ezután válassza a nagyítás lehetőséget."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Gyorsparancs a hangerőgombokkal"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Gyorsparancs-szolgáltatás"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Engedélyezés a lezárási képernyőn"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Szolgáltatás használata"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Színkorrekció használata"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Feliratok használata"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Nem minden alkalmazás támogatja ezt a beállítást."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Tovább"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hallókészülékek"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nincs csatlakoztatva hallókészülék"</string>
@@ -3378,10 +3396,13 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Megjelenítés a lehúzható értesítések között, az állapotsoron és a lezárási képernyőn"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Villogó fény"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lezárási képernyő"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Lezárási képernyő kihagyása"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Arcalapú feloldás után a legutóbbi képernyő megnyitása"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Lezárási képernyő, Kihagyás, Megkerülés"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Zárolt munkaprofil esetén"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Értesítések a lezárási képernyőn"</string>
-    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Hangjelzéssel járó és néma értesítések megjelenítése"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Csak hangjelzéssel járó értesítések megjelenítése"</string>
+    <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Figyelemfelkeltő és néma értesítések megjelenítése"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="3085615237751195449">"Csak a figyelemfelkeltő értesítések megjelenítése"</string>
     <string name="lock_screen_notifs_show_none" msgid="3357167536259901686">"Ne jelenjenek meg értesítések"</string>
     <string name="lock_screen_notifs_redact" msgid="3942294440983226225">"Bizalmas értesítések"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="3095153536179931941">"Bizalmas tartalmak megjelenítése lezárt állapotban"</string>
@@ -3414,7 +3435,7 @@
     <string name="notification_importance_high_title" msgid="8792310396497954857">"Felugró értesítés a képernyőn"</string>
     <string name="notification_block_title" msgid="1366361048463539674">"Tiltás"</string>
     <string name="notification_silence_title" msgid="6986752165900591125">"Néma"</string>
-    <string name="notification_alert_title" msgid="2267584776990348784">"Értesítések"</string>
+    <string name="notification_alert_title" msgid="2267584776990348784">"Figyelemfelkeltő"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Megszakítások engedélyezése"</string>
     <string name="allow_interruption_summary" msgid="7870159391333957050">"Az alkalmazás aktiválhat hangjelzést, rezgést és/vagy értesítéseket jeleníthet meg a képernyőn"</string>
     <string name="notification_channel_summary_min" msgid="2965790706738495761">"A lehúzható értesítési felületen egyetlen sorrá csukhatja össze az értesítéseket"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"A rangsortárgy hiányzik."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"A rangsortárgy nem tartalmazza ezt a kulcsot."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Témák"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Kiemelés színe"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Címsor/törzsszöveg betűtípusa"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Ikon alakja"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Alapértelmezett"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Képernyőkivágás"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"képernyőkivágás, sziget"</string>
@@ -4216,7 +4234,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="3436302177038243869">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye kezébe telefonját."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="4938504160398665156">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye a kezébe táblagépét."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="4264958533375250254">"Az idő, az értesítések és egyéb információk megtekintéséhez vegye kezébe eszközét."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Koppintson a telefon megtekintéséhez"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="5458679563086979424">"Koppintás a telefon megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="9108878716863882877">"Koppintson a táblagép megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="7071150656699666085">"Koppintson az eszköz megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_summary" msgid="8862155601920379979">"Az idő, az értesítések és egyéb információk megtekintéséhez koppintson a képernyőre."</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Rendszer grafikus drivere"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"A beállítás nem támogatott ezen a telefonon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"A beállítás nem támogatott ezen a táblagépen"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"A beállítás nem támogatott ezen az eszközön"</string>
@@ -4551,7 +4567,7 @@
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Nincs Bluetooth-eszköz"</string>
     <string name="bluetooth_left_name" msgid="2133431890020995442">"Bal"</string>
     <string name="bluetooth_right_name" msgid="525578831502355410">"Jobb"</string>
-    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Középső"</string>
+    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Tok"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Beállítások panel"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"Internetkapcsolat"</string>
     <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Hangerő"</string>

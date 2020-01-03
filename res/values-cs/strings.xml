@@ -354,16 +354,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Vybrat podle posunu od UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Čas"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automaticky zamknout za"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po přechodu do spánku"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Okamžitě po režimu spánku, pokud odemknutí není udržováno pomocí agenta <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po přechodu do spánku, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Interval zamčení obrazovky"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Okamžitě po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po vypršení časového limitu, pokud odemknutí není udržováno funkcí <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Zobrazovat vlastníka na zamčené obrazovce"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"Zpráva na zamčené obrazovce"</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"Zpráva na obr.uzamčení"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivovat widgety"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Zakázáno administrátorem"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Zobrazit možnost uzamčení"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Zobrazí vypínač, který vypíná funkci Smart Lock, odemykání otiskem prstu a oznámení na obrazovce uzamčení."</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Zobrazí vypínač, který vypíná funkci Smart Lock, biometrické odemykání a oznámení na obrazovce uzamčení"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Agenti důvěry jen prodlužují odemčení"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Bude-li tato možnost aktivována, agenti důvěry ponechají vaše zařízení odemčená delší dobu, ale uzamčené zařízení už nebudou moci odemknout."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Zamknout obrazovku při ztrátě důvěry"</string>
@@ -392,7 +392,7 @@
     <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefon není šifrován"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Zařízení je zašifrováno"</string>
     <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Zařízení není šifrováno"</string>
-    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Zobrazení na obrazovce uzamčení"</string>
+    <string name="lockscreen_settings_title" msgid="1099738951060387656">"Vzhled obrazovky uzamčení"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="278055252361575926">"Co zobrazit"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Moje poloha, odemknutí obrazovky, zámek SIM, zámek úložiště pověření"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Nastavení funkce Moje poloha, odemknutí obrazovky a zamknutí úložiště pověření"</string>
@@ -403,10 +403,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Zámek obrazovky, otisky prstů"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Zámek obrazovky"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Obličej přidán"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Klepnutím nastavíte ověřování obličejem"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Ověřování obličejem"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Jak nastavit Odemknutí obličejem"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Nastavení odemknutí obličejem"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Nastavit odemknutí obličejem"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Odemknutí obličejem"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Odemknutí obličejem pro práci"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Jak nastavit odemknutí obličejem"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Nastavení odemknutí obličejem"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Začít"</string>
@@ -415,11 +416,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Zrušit"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Ne, děkuji"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Souhlasím"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Další"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Odemykání pomocí obličeje"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Odemykejte telefon a schvalujte nákupy pomocí obličeje.\n\nPoznámka: Obličej nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -434,19 +439,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Registrace obličeje nefungovala."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Vše je nastaveno."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Hotovo"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Vylepšení výkonu odemknutí obličejem"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Nastavte odemknutí obličejem znovu"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Nastavte odemknutí obličejem znovu"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Vylepšení zabezpečení a výkonu"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Nastavte odemknutí obličejem"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Chcete-li odemknutí obličejem nastavit znovu, vymažte stávající obličej.\n\nÚdaje o obličeji používané k odemknutí obličejem budou trvale a bezpečně smazány. Po odstranění budete k odemknutí telefonu, přihlašování do aplikací nebo potvrzení plateb muset zadat PIN, gesto nebo heslo."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Použít odemknutí obličejem pro:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Odemykání telefonu"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Přihlašování do aplikací a platby"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Požadavky na odemknutí obličejem"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Pohled na obrazovku s otevřenýma očima"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Telefon odemknete tak, že se budete na obrazovku dívat s otevřenýma očima"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Tlačítko potvrzení"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Při ověřování v aplikacích vždy vyžadovat potvrzení"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Požadavky na odemknutí obličejem"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Požadovat otevřené oči"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"K odemknutí telefonu musíte mít otevřené oči"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Vždy vyžadovat potvrzení"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Při použití odemknutí obličejem v aplikacích vždy vyžadovat potvrzení"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Smazat data obličeje"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Nastavit nové odemknutí obličejem"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Pomocí Odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když jej namíří na váš obličej a vy budete mít otevřené oči.\n\nTelefon by mohla odemknout i osoba, která je vám hodně podobná, například vaše dítě nebo dvojče."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Nastavit odemknutí obličejem"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Pomocí odemknutí obličejem můžete odemykat zařízení, přihlašovat se do aplikací a potvrzovat platby.\n\nPřipomínáme:\nTelefon můžete odemknout pohledem, i když zrovna nechcete.\n\nTelefon může odemknout i někdo jiný, když ho namíří na váš obličej (i když budete mít zavřené oči).\n\nTelefon by mohla odemknout i osoba, která je vám hodně podobná, například vaše dvojče."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Smazat data o obličeji?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Data zaznamenaná pomocí funkce odemknutí obličejem budou trvale a bezpečně smazána. Po odstranění budete z účelem odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Údaje o obličeji používané k odemknutí obličejem budou trvale a bezpečně smazány. Po odstranění budete k odemknutí telefonu, přihlášení do aplikace nebo potvrzení platby muset zadat PIN, gesto nebo heslo."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Odemykejte telefon pomocí obličeje"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisk prstu"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Správa otisků prstů"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"K čemu otisk používat"</string>
@@ -499,9 +511,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Ochraňte svůj tablet pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Ochraňte své zařízení pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Ochraňte svůj telefon pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit otisk prstu. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Ochraňte svůj tablet pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Ochraňte své zařízení pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Ochraňte svůj telefon pomocí zámku obrazovky, aby ho v případě ztráty či odcizení nemohl použít nikdo cizí. Zámek obrazovky budete také potřebovat, pokud si budete chtít nastavit ověření obličejem. Klepněte na Zrušit, potom nastavte kód PIN, gesto nebo heslo."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Pokud svůj tablet ochráníte zámkem obrazovky, v případě ztráty či odcizení ho nebude moci použít nikdo cizí. Zámek obrazovky je potřeba také k nastavení odemknutí obličejem. Chcete-li se vrátit zpět, klepněte na Zrušit."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Pokud své zařízení ochráníte zámkem obrazovky, v případě ztráty či odcizení ho nebude moci použít nikdo cizí. Zámek obrazovky je potřeba také k nastavení odemknutí obličejem. Chcete-li se vrátit zpět, klepněte na Zrušit."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Pokud svůj telefon ochráníte zámkem obrazovky, v případě ztráty či odcizení ho nebude moci použít nikdo cizí. Zámek obrazovky je potřeba také k nastavení odemknutí obličejem. Chcete-li se vrátit zpět, klepněte na Zrušit."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Přeskočit nastavení kódu PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Přeskočit nastavení hesla?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Přeskočit nastavení gesta?"</string>
@@ -602,10 +614,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Otisk prstu a heslo"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Pokračovat bez otisku prstu"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Zařízení můžete odemknout otiskem prstu. Z bezpečnostních důvodů tato možnost vyžaduje záložní zámek obrazovky."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Ověření pomocí obličeje a gesta"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Ověření pomocí obličeje a kódu PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Ověření pomocí obličeje a hesla"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Pokračovat bez ověření pomocí obličeje"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Odemknutí obličejem + gesto"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Odemknutí obličejem + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Odemknutí obličejem + heslo"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Pokračovat bez odemknutí obličejem"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Zařízení můžete odemknout pomocí obličeje. Z bezpečnostních důvodů tato možnost vyžaduje záložní zámek obrazovky."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Zakázáno administrátorem, zásadami šifrování nebo úložištěm pověření"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Žádná"</string>
@@ -1256,11 +1268,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimalizovat jas podle okolního světla. I když je tato funkce zapnutá, můžete jas dočasně upravit."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Jas obrazovky se automaticky přizpůsobí okolí a činnostem. Ručním posunutím posuvníku informujete funkci adaptivního jasu o svých preferencích."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Vyvážení bílé na obrazovce"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Vnímavá obrazovka"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Zapnuto / obrazovka se nevypne, když se na ni budete dívat"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Vypnuto"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Zabrání ve vypnutí obrazovky, když se na ni budete dívat."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Je třeba udělit přístup k fotoaparátu"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Klepnutím můžete spravovat oprávnění služeb personalizace zařízení"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Zabrání ve vypnutí obrazovky, když se na ni budete dívat"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Vnímavá obrazovka pomocí přední kamery sleduje, zda se někdo dívá na obrazovku. Data se zpracovávají v zařízení a snímky nejsou odesílány do Googlu."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Při sledování obsahu nevypínat obrazovku"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Noční režim"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Noční režim obrazovku zbarví do oranžova. Čtení a sledování obrazovky při tlumeném osvětlení tak bude snazší a bude se vám lépe usínat."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Plán"</string>
@@ -1297,7 +1313,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Přizpůsobte si obrazovku"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Vybrat tapetu"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Přizpůsobte si svůj Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Vyzkoušejte různé styly, tapety, hodiny a další"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Vyzkoušejte různé styly, tapety apod."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Spořič obrazovky"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Při nabíjení nebo v doku"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"V obou případech"</string>
@@ -1786,9 +1802,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Heslo bylo nastaveno"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Kód PIN byl nastaven"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Gesto bylo nastaveno"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Nastavte heslo pro ověření obličejem"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Nastavte gesto pro ověření obličejem"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Nastavte PIN pro ověření obličejem"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Nastavte heslo pro odemknutí obličejem"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Nastavte gesto pro odemknutí obličejem"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Nastavte PIN pro odemknutí obličejem"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Chcete-li pokračovat, zadejte gesto zařízení."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Chcete-li pokračovat, zadejte PIN zařízení."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Chcete-li pokračovat, zadejte heslo zařízení."</string>
@@ -2135,6 +2151,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Službu přístupnosti můžete zapnout nebo vypnout přejetím třemi prsty nahoru od dolního okraje obrazovky.\n\nChcete-li přepnout mezi službami, přejeďte nahoru třemi prsty a podržte je."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Tlačítko Přístupnost je nastaveno na službu <xliff:g id="SERVICE">%1$s</xliff:g>. Chcete-li použít zvětšení, klepněte na tlačítko Přístupnost, podržte jej a vyberte zvětšení."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Gesto usnadnění přístupu je nastaveno na funkci <xliff:g id="SERVICE">%1$s</xliff:g>. Chcete-li použít zvětšení, přejeďte dvěma prsty ze spodní části obrazovky nahoru a podržte obrazovku. Potom vyberte zvětšení."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Zkratka tlačítka hlasitosti"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Služba ovládaná zkratkou"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Povolit na obrazovce uzamčení"</string>
@@ -2171,6 +2188,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Používat službu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Používat korekci barev"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Používat titulky"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Toto nastavení podporují jen některé aplikace."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Pokračovat"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Naslouchátka"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nejsou připojena žádná naslouchátka"</string>
@@ -2366,9 +2384,9 @@
     <string name="controls_subtitle" msgid="390468421138288702">"Upravit spotřebu energie"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Zahrnuté balíčky"</string>
     <string name="battery_tip_summary_title" msgid="368729969313047399">"Aplikace běží normálně"</string>
-    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"V telefonu dochází k běžnému využití baterie na pozadí"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"V tabletu dochází k běžnému využití baterie na pozadí"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"V zařízení dochází k běžnému využití baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="default" msgid="2198778125778121221">"V telefonu dochází k běžnému využívání baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="1183976728682325345">"V tabletu dochází k běžnému využívání baterie na pozadí"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="363718204492523920">"V zařízení dochází k běžnému využívání baterie na pozadí"</string>
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Nízká kapacita baterie"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"Baterie není schopna zajistit dobrou výdrž"</string>
     <string name="battery_tip_smart_battery_title" product="default" msgid="2542822112725248683">"Zvyšte životnost baterie telefonu"</string>
@@ -3235,7 +3253,7 @@
     <string name="keywords_dark_ui_mode" msgid="8999745898782012625">"motiv, světlý, tmavý, režim"</string>
     <string name="keywords_systemui_theme" msgid="9112852512550404882">"tmavý motiv"</string>
     <string name="keywords_device_feedback" msgid="564493721125966719">"chyba"</string>
-    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambientní displej, displej zámku obrazovky"</string>
+    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Ambientní displej, vzhled obrazovky uzamčení"</string>
     <string name="keywords_lock_screen_notif" msgid="6716392855813576197">"oznámení na obrazovce uzamčení, oznámení"</string>
     <string name="keywords_face_settings" msgid="7505388678116799329">"obličej"</string>
     <string name="keywords_fingerprint_settings" msgid="4425098764810291897">"otisk prstu, přidat otisk prstu"</string>
@@ -3468,6 +3486,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Zobrazí se na vysouvacím panelu, stavovém řádku a obrazovce uzamčení"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Blikání kontrolky"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Obrazovka uzamčení"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Přeskočit obrazovku uzamčení"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Po odemknutí obličejem přejít přímo na poslední obrazovku"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Obrazovka uzamčení, přeskočení, obejití"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Když je profil uzamčen"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Oznámení na obrazovce uzamčení"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Zobrazovat upozorňující a tichá oznámení"</string>
@@ -3958,7 +3979,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"Použití snímku obrazovky"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"Asistenční aplikace bude mít přístup k obrazu na obrazovce"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"Zablikání obrazovky"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"Když asistenční aplikace na obrazovce nebo snímku obrazovky narazí na text, okraje obrazovky zablikají"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"Když asistenční aplikace z obrazovky nebo snímku obrazovky získá text, okraje obrazovky zablikají"</string>
     <string name="assist_footer" msgid="1982791172085896864">"Asistenční aplikace vám může pomoci na základě informací na zobrazené obrazovce. Některé aplikace podporují Launcher i hlasový vstup a nabízejí integrovanou asistenci."</string>
     <string name="average_memory_use" msgid="829566450150198512">"Průměrné využití paměti"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"Maximální využití paměti"</string>
@@ -4252,9 +4273,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekt hodnocení chybí."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekt hodnocení tento klíč neobsahuje."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Nastavování motivů"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Barva zvýraznění"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Písmo pro nadpis/tělo"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Tvar ikony"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Výchozí nastavení zařízení"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Výřez displeje"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"výřez displeje"</string>
@@ -4540,11 +4558,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Systémový ovladač grafiky"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Nastavení v tomto telefonu není podporováno"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Nastavení v tomto tabletu není podporováno"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Nastavení v tomto zařízení není podporováno"</string>
@@ -4591,7 +4607,7 @@
     <string name="empty_networks_list" msgid="2578752112731781190">"Žádná síť nebyla nalezena."</string>
     <string name="network_query_error" msgid="7487714485362598410">"Nebyla nalezena žádná síť. Zkuste to znovu."</string>
     <string name="forbidden_network" msgid="4626592887509826545">"(zakázáno)"</string>
-    <string name="no_sim_card" msgid="1360669528113557381">"Není vložena SIM karta"</string>
+    <string name="no_sim_card" msgid="1360669528113557381">"Chybí SIM karta"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="3956515670308744433">"Preferovaný režim sítě: preferováno WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="5225727680228194864">"Preferovaný režim sítě: pouze GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="8956197584659205699">"Preferovaný režim sítě: pouze WCDMA"</string>

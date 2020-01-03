@@ -42,6 +42,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
     private byte[] mToken;
     private SettingsActivity mActivity;
     private Button mButton;
+    private boolean mIsClicked;
 
     public FaceSettingsEnrollButtonPreferenceController(Context context) {
         this(context, KEY);
@@ -63,6 +64,7 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     @Override
     public void onClick(View v) {
+        mIsClicked = true;
         final Intent intent = new Intent();
         intent.setClassName("com.android.settings", FaceEnrollIntroduction.class.getName());
         intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
@@ -81,6 +83,13 @@ public class FaceSettingsEnrollButtonPreferenceController extends BasePreference
 
     public void setToken(byte[] token) {
         mToken = token;
+    }
+
+    // Return the click state, then clear its state.
+    public boolean isClicked() {
+        final boolean wasClicked = mIsClicked;
+        mIsClicked = false;
+        return wasClicked;
     }
 
     public void setActivity(SettingsActivity activity) {

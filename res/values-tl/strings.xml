@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Pumili ayon sa UTC offset"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Petsa"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Oras"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Awtomatikong i-lock"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos ng sleep"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Pagkatapos mismo ng pag-sleep, maliban na lang kung pinanatiling naka-unlock ng <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos ng pag-sleep, maliban na lang kung pinanatiling naka-unlock ng <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"I-lock pagkatapos mag-time out ng screen"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos mag-time out"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Pagkatapos na pagkatapos mag-time out, maliban kung pinapanatiling naka-unlock ng <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pagkatapos mag-time out, maliban kung pinapanatiling naka-unlock ng <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Ipakita ang info ng may-ari sa lock screen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mensahe sa lock screen"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"I-enable ang widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Na-disable ng admin"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Ipakita ang opsyong lockdown"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Ipakita ang opsyong power button na nag-o off sa Smart Lock, pag-unlock gamit ang fingerprint, at mga notification sa lock screen"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Ipakita ang opsyong power button na nag-o-off ng Smart Lock, pag-unlock gamit ang biometrics, at mga notification sa lock screen"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Extend unlock para lang sa trust agent"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Kung naka-enable, pananatilihin ng mga trust agent na mas matagal na naka-unlock ang iyong device, ngunit hindi na makakapag-unlock ng naka-lock na device."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"I-lock ang screen kapag nawala ang trust"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Lock ng screen, fingerprint"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Lock ng screen"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Naidagdag ang mukha"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tap at set up, i-authenticate ang mukha"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"I-authenticate, mukha"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Paano i-set up ang Face unlock"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"I-set up ang Face unlock"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"I-set up ang face unlock"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face unlock para sa trabaho"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Paano i-set up ang face unlock"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"I-set up ang face unlock"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Gamitin ang mukha mo sa pag-authenticate"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Simula"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Kanselahin"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Hindi, salamat"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Sumasang-ayon"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Higit pa"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Mag-unlock gamit ang mukha mo"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Gamitin ang mukha mo sa pag-authenticate"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Gamitin ang iyong mukha para i-unlock ang telepono mo o aprubahan ang mga pagbili.\n\nTandaan: Hindi mo maaaring gamitin ang iyong mukha para i-unlock ang device na ito. Para sa higit pang impormasyon, makipag-ugnayan sa admin ng iyong organisasyon."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Gamitin ang iyong mukha para i-unlock ang telepono mo, awtorisahan ang mga pagbili, o mag-sign in sa mga app"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Hindi gumana ang pag-enroll ng mukha."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Handa na ang lahat. Mukhang maganda."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Tapos na"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Pahusayin ang performance ng face unlock"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"I-set up ulit ang face unlock"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"I-set up ulit ang face unlock"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Paigtingin ang seguridad at performance"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"I-set up ang face unlock"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"I-delete ang kasalukuyan mong face data para ma-set up ulit ang face unlock.\n\nPermanente at secure na made-delete ang face data na ginagamit ng face unlock. Pagkatapos alisin, kakailanganin ang PIN, pattern, o password para i-unlock ang telepono, mag-sign in sa mga app, at kumpirmahin ang pagbabayad."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Mag-face unlock sa"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Pag-unlock sa phone"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Pag-sign in/pagbabayad sa app"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Kailanganin para sa face unlock"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Pagtingin sa screen nang dilat"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Para i-unlock, palaging dapat nakatingin ka sa screen nang nakadilat"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Button ng pagkumpirma"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Kapag nag-o-authenticate sa mga app, palaging humiling ng kumpirmasyon"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Mga kinakailangan para sa face unlock"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"I-require na nakadilat"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Para i-unlock ang telepono, dapat ay nakadilat ka"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Palaging humiling ng kumpirmasyon"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Kapag gumagamit ng face unlock sa app, laging humiling ng kumpirmasyon"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"I-delete: face data"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Mag-set up ng bagong face unlock"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Gamitin ang Face unlock para i-unlock ang iyong device, mag-sign in sa mga app, at magkumpirma ng mga pagbabayad.\n\nTandaan:\nPuwedeng hindi sinasadyang ma-unlock ang telepono kapag tumingin dito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha habang nakadilat ka.\n\nPuwedeng ma-unlock ng isang taong kamukha mo, halimbawa, ng iyong anak o kapatid, ang telepono mo."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"I-set up ang face unlock"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Gamitin ang face unlock para i-unlock ang iyong device, mag-sign in sa mga app, at magkumpirma ng mga pagbabayad.\n\nTandaan:\nPuwedeng hindi sinasadyang ma-unlock ang telepono kapag tumingin ka rito.\n\nPuwedeng ma-unlock ng ibang tao ang iyong telepono kung itatapat ito sa mukha mo, kahit na nakapikit ka.\n\nPuwedeng ma-unlock ang iyong telepono ng isang taong kamukhang-kamukha mo, halimbawa, ng iyong kapatid."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"I-delete ang data ng mukha?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Permanente at secure na ide-delete ang data na naitala ng face unlock. Pagkatapos nitong maalis, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo, mag-sign in sa mga app, at kumpirmahin ang mga pagbabayad."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Permanente at secure na made-delete ang face data na ginagamit ng face unlock. Pagkatapos nitong maalis, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo, mag-sign in sa mga app, at kumpirmahin ang mga pagbabayad."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Gamitin ang face unlock para i-unlock ang iyong telepono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerprint"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Pamahalaan fingerprint"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Gamit fingerprint para"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Protektahan ang iyong tablet sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang fingerprint. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Protektahan ang iyong device sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang fingerprint. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Protektahan ang iyong telepono sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang fingerprint. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Protektahan ang iyong tablet sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang pag-authenticate ng mukha. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Protektahan ang iyong device sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang pag-authenticate ng mukha. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Protektahan ang iyong telepono sa pamamagitan ng opsyon sa lock ng screen para walang makakagamit nito kapag nawala o ninakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang pag-authenticate ng mukha. I-tap ang Kanselahin, pagkatapos ay magtakda ng PIN, pattern, o password."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Sa pamamagitan ng pagprotekta sa iyong tablet gamit ang opsyon sa lock ng screen, walang makakagamit dito kung nawala o nanakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang face unlock. Para bumaik, i-tap ang Kanselahin."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Sa pamamagitan ng pagprotekta sa iyong device gamit ang opsyon sa lock ng screen, walang makakagamit dito kung nawala o nanakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang face unlock. Para bumaik, i-tap ang Kanselahin."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Sa pamamagitan ng pagprotekta sa iyong telepono gamit ang opsyon sa lock ng screen, walang makakagamit dito kung nawala o nanakaw ito. Kailangan mo rin ng opsyon sa lock ng screen para i-set up ang face unlock. Para bumaik, i-tap ang Kanselahin."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Laktawan ang pag-set up ng PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Laktawan ang pag-set up ng password?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Laktawan ang pag-set up ng pattern?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingerprint + Password"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Magpatuloy nang walang fingerprint"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Maa-unlock mo ang telepono mo gamit ang iyong fingerprint. Para sa seguridad, nangangailagan ang opsyong ito ng backup na lock ng screen."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Pag-authenticate ng mukha + Pattern"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Pag-authenticate ng mukha + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Pag-authenticate ng mukha + Password"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Magpatuloy sa pag-authenticate ng mukha"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face unlock + Pattern"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face unlock + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Face unlock + Password"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Magpatuloy nang walang face unlock"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Maa-unlock mo ang iyong telepono gamit ang mukha mo. Para sa seguridad, nangangailangan ang opsyong ito ng backup na lock ng screen."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Na-disable ng admin, patakaran sa pag-encrypt, o storage ng kredensyal"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Wala"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"I-optimize ang liwanag ayon sa ilaw. Kapag naka-on, pansamantala mo pa ring maisasaayos ang liwanag."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Awtomatikong maa-adjust ang brightness ng iyong screen sa kapaligiran at mga aktibidad mo. Maaari mong manual na galawin ang slider para matulungan ang adaptive brightness na matutunan ang iyong mga kagustuhan."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"White balance ng display"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Atensyon sa screen"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Naka-on / Hindi mag-o-off ang screen kung tinitingnan mo ito"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Naka-off"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Pinipigilang mag-off ang iyong screen kung tinitingnan mo ito."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kailangan ng access sa camera"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"I-tap para pamahalaan ang mga pahintulot para sa Mga Serbisyo sa Pag-personalize ng Device"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Pinipigilang mag-off ang iyong screen kung tinitingnan mo ito"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ginagamit ng atensyon sa screen ang camera sa harap para makita kung may taong tumitingin sa screen. Gumagana ito sa device, at hindi kailanman sino-store o ipinapadala sa Google ang mga larawan."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Pinapanatiling naka-on ang screen habang tinitingnan ito"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Night Light"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Dahil sa Night Light, nagiging kulay amber ang iyong screen. Mas pinapadali nitong matingnan ang iyong screen o makapagbasa sa dim light, at maaaring makatulong sa iyong mas mabilis na makatulog."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Iskedyul"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"I-personalize ang iyong screen"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pumili ng wallpaper sa"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"I-customize ang iyong Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Sumubok ng iba\'t ibang istilo, wallpaper, orasan, atbp"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Sumubok ng iba\'t ibang istilo, wallpaper, at higit pa"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Habang nagcha-charge o naka-dock"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Alinman"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Naitakda ang password"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Naitakda ang PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Itinakda ang pattern"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"I-authenticate: mukha, set ng password"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"I-authenticate ang mukha, set ng pattern"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Mag-authenticate ng mukha, i-set ang PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Para sa face unlock, mag-set ng password"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Para sa face unlock, mag-set ng pattern"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Para sa face unlock, mag-set ng PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Gamitin ang iyong pattern sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Ilagay ang iyong PIN sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Ilagay ang iyong password sa device upang magpatuloy"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang button na Pagiging Naa-access. Upang gumamit ng pag-magnify, pindutin nang matagal ang button na Pagiging Naa-access, pagkatapos ay piliin ang pag-magnify."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Nakatakda sa <xliff:g id="SERVICE">%1$s</xliff:g> ang galaw ng pagiging accessible. Para magamit ang pag-magnify, mag-swipe pataas gamit ang dalawang daliri mula sa ibaba ng screen at i-hold. Pagkatapos ay piliin ang pag-magnify."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Shortcut gamit ang volume key"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Serbisyo ng shortcut"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Payagan mula sa lock screen"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Gamitin ang serbisyo"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Gumamit ng pagwawasto ng kulay"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Gumamit ng mga caption"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"May mga app na hindi sumusuporta sa setting na ito."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Magpatuloy"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Mga hearing aid"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Walang nakakonektang hearing aid"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Ipakita sa pull-down na shade, status bar, at lock screen"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Patay-sinding ilaw"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Lock screen"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Laktawan ang lock screen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Pagka-face unlock, dumiretso sa huling ginamit na screen"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Lock screen, Lockscreen, Laktawan, I-bypass"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kapag naka-lock ang work profile"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Mga notification sa lockscreen"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Ipakita ang mga nag-aalerto at tahimik na notification"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Walang object sa ranking."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Walang ganitong key ang object sa ranking."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Pagtatakda ng Tema"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Kulay ng accent"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Font ng Headline / Body"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Hugis ng icon"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Default ng device"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Cutout ng display"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"cutout ng display, notch"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Graphics Driver ng System"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Hindi sinusuportahan ang setting sa teleponong ito"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Hindi sinusuportahan ang setting sa tablet na ito"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Hindi sinusuportahan ang setting sa device na ito"</string>

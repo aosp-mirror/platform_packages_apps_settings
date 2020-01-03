@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Zgjidh sipas ndryshimit në UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Kyçja automatike"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pas kalimit në gjendje gjumi"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Menjëherë pas gjumit, përveçse kur mbahet i shkyçur nga <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pas kalimit në gjendje gjumi, përveçse kur mbahet i shkyçur nga <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Kyçe pas kohës së pritjes së ekranit"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pas kohës së pritjes"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Menjëherë pas kohës së pritjes, përveçse kur mbahet i shkyçur nga <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> pas kohës së pritjes, përveçse kur mbahet i shkyçur nga <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Shfaq informacionin e zotëruesit në ekranin e kyçjes"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mesazhi i ekranit të kyçjes"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Aktivizo miniapl."</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Çaktivizuar nga administratori"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Shfaq opsionin e bllokimit"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Shfaq opsionin e butonit të energjisë që çaktivizon Smart Lock, shkyçjen me gjurmën e gishtit dhe njoftimet në ekranin e kyçjes"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Shfaq opsionin e butonit të energjisë që çaktivizon Smart Lock, shkyçjen biometrike dhe njoftimet në ekranin e kyçjes"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Shkyçja e zgjeruar vetëm për agjentët e besimit"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Nëse janë aktivizuar, agjentët e besimit do ta mbajnë pajisjen tënde të shkyçur për një kohë më të gjatë, por nuk mund ta shkyçin më një pajisje të kyçur."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Kyçe ekranin kur të humbasë besimi"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Kyçja e ekranit, gjurma e gishtit"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Kyçja e ekranit"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Fytyra u shtua"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Trokit për të vendosur vërtetimin me fytyrë"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Vërtetimi me fytyrë"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Si të konfigurosh \"Shkyçjen me fytyrë\""</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Konfiguro \"Shkyçjen me fytyrë\""</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Konfiguro shkyçjen me fytyrë"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Shkyçja me fytyrë"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Shkyç me fytyrë për profilin e punës"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Si të konfigurosh \"Shkyçjen me fytyrë\""</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Konfiguro shkyçjen me fytyrë"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Përdor fytyrën për të vërtetuar"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Nis"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Anulo"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Jo, faleminderit"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Pranoj"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Më shumë"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Shkyç me fytyrë"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Përdor fytyrën për të vërtetuar"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Përdor fytyrën për të shkyçur telefonin ose për të miratuar blerjet.\n\nShënim. Nuk mund ta përdorësh fytyrën tënde për të shkyçur këtë pajisje. Për më shumë informacione, kontakto me administratorin e organizatës sate."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Përdor fytyrën për të shkyçur telefonin, për të autorizuar blerjet ose për t\'u identifikuar në aplikacione"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Regjistrimi i fytyrës nuk funksionoi"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Gjithçka gati. Duket mirë."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"U krye"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Përmirëso cilësinë e funksionimit të shkyçjes me fytyrë"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Konfiguro shkyçjen me fytyrë përsëri"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Konfiguro shkyçjen me fytyrë përsëri"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Përmirëso sigurinë dhe cilësinë e funksionimit"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Konfiguro shkyçjen me fytyrë"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Fshi të dhënat aktuale të fytyrës për të konfiguruar përsëri shkyçjen me fytyrë.\n\nTë dhënat e fytyrës që përdoren nga shkyçja me fytyrë do të fshihen përgjithmonë dhe në mënyrë të sigurt. Pas heqjes, do të të duhet kodi PIN, motivi ose fjalëkalimi për ta shkyçur telefonin, për t\'u identifikuar në aplikacione dhe për të konfirmuar pagesat."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Përdor shkyçjen me fytyrën për"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Shkyçja e telefonit"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Identifikimi dhe pagesat e aplikacionit"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Kërko për shkyçjen me fytyrën"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Hap sytë kur shikon ekranin"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Për ta shkyçur telefonin, kërko gjithmonë që të shikosh në ekran me sytë të hapur"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Butoni i konfirmimit"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Kërko gjithmonë konfirmimin kur vërtetohet për aplikacionet"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Kërkesat për shkyçjen me fytyrë"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Kërkon që sytë të jenë të hapur"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Për ta shkyçur telefonin, sytë e tu duhet të jenë të hapur"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Kërko gjithmonë konfirmimin"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Kërko gjithmonë hapin e konfirmimit kur përdor shkyçjen me fytyrë në aplikacione"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Fshi të dhënat e fytyrës"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Konfiguro një shkyçje të re me fytyrë"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Përdor Shkyçjen me fytyrën për të shkyçur pajisjen, për t\'u identifikuar tek aplikacionet dhe për të konfirmuar pagesat.\n\nKi parasysh:\nShikimi te telefoni mund ta shkyçë atë kur nuk planifikon këtë.\n\nTelefoni yt mund të shkyçet nga dikush tjetër nëse ai mbahet te fytyra jote kur i ke sytë të hapur.\n\nTelefoni yt mund të shkyçet nga dikush që ngjan shumë me ty, p.sh. fëmija yt ose një binjak."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Konfiguro shkyçjen me fytyrë"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Përdor \"Shkyçjen me fytyrën\" për të shkyçur pajisjen, për t\'u identifikuar tek aplikacionet dhe për të konfirmuar pagesat.\n\nKi parasysh:\nShikimi te telefoni mund ta shkyçë atë kur nuk planifikon këtë.\n\nTelefoni yt mund të shkyçet nga dikush tjetër nëse ai mbahet te fytyra jote, edhe nëse sytë i ke të mbyllur.\n\nTelefoni yt mund të shkyçet nga dikush që ngjan shumë me ty, p.sh. nga një binjak."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Do t\'i fshish të dhënat e fytyrës?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Të dhënat e regjistruara nga shkyçja me fytyrën do të fshihen përgjithmonë dhe në mënyrë të sigurt. Pas heqjes, do të të duhet kodi PIN, motivi ose fjalëkalimi për ta shkyçur telefonin, për t\'u identifikuar në aplikacione dhe për të konfirmuar pagesat."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Të dhënat e fytyrës që përdoren nga shkyçja me fytyrë do të fshihen përgjithmonë dhe në mënyrë të sigurt. Pas heqjes, do të të duhet kodi PIN, motivi ose fjalëkalimi për ta shkyçur telefonin, për t\'u identifikuar në aplikacione dhe për të konfirmuar pagesat."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Përdor shkyçjen me fytyrë për të shkyçur telefonin tënd"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Gjurma e gishtit"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Menaxho gjurm. gishtit"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Përdor gjurmën për"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mbroje tabletin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mbroje pajisjen tënde me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mbroje telefonin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar gjurmën e gishtit. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mbroje tabletin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mbroje pajisjen tënde me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mbroje telefonin tënd me një opsion për kyçjen e ekranit në mënyrë që askush të mos jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar vërtetimin me fytyrë. Trokit tek \"Anulo\" dhe më pas vendos një kod PIN, një motiv ose fjalëkalim."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Duke mbrojtur tabletin tënd me një opsion për kyçjen e ekranit, askush nuk do të jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar shkyçjen me fytyrë. Për t\'u kthyer, trokit tek \"Anulo\"."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Duke mbrojtur pajisjen tënde me një opsion për kyçjen e ekranit, askush nuk do të jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar shkyçjen me fytyrë. Për t\'u kthyer, trokit tek \"Anulo\"."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Duke mbrojtur telefonin tënd me një opsion për kyçjen e ekranit, askush nuk do të jetë në gjendje ta përdorë nëse të humb ose vidhet. Të duhet gjithashtu edhe një opsion për kyçjen e ekranit për të konfiguruar shkyçjen me fytyrë. Për t\'u kthyer, trokit tek \"Anulo\"."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Do ta kapërcesh konfigurimin e kodit PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Do ta kapërcesh konfigurimin e fjalëkalimit?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Do ta kapërcesh konfigurimin e motivit?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Gjurma e gishtit + Fjalëkalimi"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Vazhdo pa gjurmën e gishtit"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Mund ta shkyçësh telefonin duke përdorur gjurmën e gishtit. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Vërtetimi me fytyrë + Motivi"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Vërtetimi me fytyrë + Kodi PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Vërtetimi me fytyrë + Fjalëkalimi"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Vazhdo pa vërtetimin me fytyrë"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Shkyçje me fytyrë + Motivi"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Shkyçja me fytyrë + Kodi PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Shkyçja me fytyrë + Fjalëkalimi"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Vazhdo pa shkyçjen me fytyrë"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Mund ta shkyçësh telefonin duke përdorur fytyrën. Për siguri, ky opsion kërkon një kyçje rezervë të ekranit."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Çaktivizuar nga administratori, politika e enkriptimit ose hapësira ruajtëse e kredencialeve"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Asnjë"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizo nivelin e ndriçimit sipas dritës së ambientit. Kur ky funksion është aktiv, mund ta rregullosh përsëri përkohësisht ndriçimin."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ndriçimi i ekranit tënd do t\'i përshtatet automatikisht mjedisit dhe aktiviteteve të tua. Mund ta lëvizësh rrëshqitësin manualisht për të ndihmuar ndriçimin përshtatës që të mësojë preferencat e tua."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Shfaq balancimin e të bardhës"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Vëmendja ndaj ekranit"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiv / Ekrani nuk do të fiket nëse shikon tek ai"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Joaktiv"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Parandalon fikjen e ekranit nëse shikon tek ai."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Nevojitet qasja te kamera"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Trokit për të menaxhuar autorizimet për \"Shërbimet e personalizimit të pajisjes\""</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Parandalon fikjen e ekranit nëse shikon tek ai"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Vëmendja ndaj ekranit përdor kamerën e përparme për të parë nëse dikush po shikon tek ekrani. Funksionon në pajisje dhe imazhet nuk dërgohen apo ruhen asnjëherë te Google."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Mbaje ekranin aktiv kur e shikon"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Drita e natës"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Drita e natës e ngjyros ekranin në ngjyrë qelibari. Kjo e bën më të lehtë shikimin e ekranit ose leximin në dritë të zbehtë dhe mund të të ndihmojë të flesh gjumë më lehtë."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Planifikimi"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizo ekranin"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Zgjidh imazhin e sfondit nga"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Personalizo Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Provo stile, imazhe sfondi, ora të ndryshme etj."</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Provo stile, imazhe sfondi të ndryshme etj."</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Mbrojtësi i ekranit"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Gjatë karikimit ose lidhjes me stacionin"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Në të dyja rastet"</string>
@@ -1437,7 +1453,7 @@
     <string name="storage_title_usb" msgid="679612779321689418">"Lidhja e kompjuterit me USB-në"</string>
     <string name="usb_connection_category" msgid="7805945595165422882">"Lidh si"</string>
     <string name="usb_mtp_title" msgid="3399663424394065964">"Pajisje e jashtme \"media\" (MTP)"</string>
-    <string name="usb_mtp_summary" msgid="4617321473211391236">"Lejon që të transferosh skedarët \"media\" në Windows ose duke përdorur \"Transferimin e skedarëve të Androidit\" në Mac (shiko www.android.com/filetransfer)"</string>
+    <string name="usb_mtp_summary" msgid="4617321473211391236">"Lejon që të transferosh skedarët \"media\" në Windows ose duke përdorur \"Transferimin e skedarëve të Android\" në Mac (shiko www.android.com/filetransfer)"</string>
     <string name="usb_ptp_title" msgid="3852760810622389620">"Kamera (PTP)"</string>
     <string name="usb_ptp_summary" msgid="7406889433172511530">"Lejon që të transferosh fotografi duke përdorur softuerin e kamerës dhe të transferosh çdo skedar në kompjuterë që nuk e mbështesin MTP-në"</string>
     <string name="usb_midi_title" msgid="3069990264258413994">"MIDI"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Fjalëkalimi është caktuar"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Kodi PIN është caktuar"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Motivi është caktuar"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Për të përdorur vërtetimin me fytyrë, vendos fjalëkalimin"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Për të përdorur vërtetimin me fytyrë, vendos motivin"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Për të përdorur vërtetimin me fytyrë, vendos kodin PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Për të përdorur shkyçjen me fytyrë, cakto fjalëkalimin"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Për të përdorur shkyçjen me fytyrë, cakto motivin"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Për të përdorur kyçjen me fytyrë, cakto kodin PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Përdor motivin e pajisjes për të vazhduar"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Fut kodin PIN të pajisjes për të vazhduar"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Fut fjalëkalimin e pajisjes për të vazhduar"</string>
@@ -2080,17 +2096,18 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="3411979839172752057">"Trokit 3 herë për ta zmadhuar"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="3693116360267980492">"Trokit te një buton për të zmadhuar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="5258868553337478505"><b>"Për të zmadhuar"</b>", trokit me shpejtësi tek ekrani 3 herë.\n"<ul><li>"Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"Afro 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", trokit me shpejtësi 3 herë tek ekrani dhe mbaj të shtypur gishtin në trokitjen e tretë.\n"<ul><li>"Zvarrite për të zhvendosur ekranin"</li>\n<li>"Ngrije gishtin për ta zvogëluar"</li></ul>\n\n"Nuk mund të zmadhosh te tastiera dhe te shiriti i navigimit."</string>
-    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kur aktivizohet zmadhimi, mund të zmadhosh mbi ekranin tënd.\n\n"<b>"Për të zmadhuar"</b>", nis zmadhimin, më pas trokit diku në ekran.\n"<ul><li>"• Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"• Bashko 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", nis zmadhimin, më pas prek dhe mbaj prekur diku në ekran.\n"<ul><li>"• Zvarrit për të lëvizur rrotull në ekran"</li>\n<li>"• Ngrije gishtin për të vogëluar"</li></ul>\n\n"Nuk mund të zmadhosh mbi tastierë ose shiritin e navigimit."</string>
+    <string name="accessibility_screen_magnification_navbar_summary" msgid="2272878354599332009">"Kur aktivizohet zmadhimi, mund të zmadhosh mbi ekranin tënd.\n\n"<b>"Për të zmadhuar"</b>", nis zmadhimin, më pas trokit diku në ekran.\n"<ul><li>"• Zvarrit 2 ose më shumë gishta për të lëvizur"</li>\n<li>"• Bashko 2 ose më shumë gishta për të rregulluar zmadhimin"</li></ul>\n\n<b>"Për të zmadhuar përkohësisht"</b>", nis zmadhimin, më pas prek dhe mbaj të shtypur diku në ekran.\n"<ul><li>"• Zvarrit për të lëvizur rrotull në ekran"</li>\n<li>"• Ngri gishtin për të zvogëluar"</li></ul>\n\n"Nuk mund të zmadhosh mbi tastierë ose shiritin e navigimit."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="3682222614034474845">"Përdor butonin e qasshmërisë për të hapur"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="1342726230497913398">"Përdor gjestin për të hapur"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8539392614235820285">"Përdor gjestin e ri të qasshmërisë"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Për të aktivizuar ose çaktivizuar këtë shërbim, trokit mbi butonin e qasshmërisë<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>në fund të ekranit.\n\nPër të kaluar mes shërbimeve, prek dhe mbaj prekur butonin e qasshmërisë."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me dy gishta dhe mbaje prekur."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="4803108127318033537">"Për të aktivizuar ose çaktivizuar këtë shërbim, trokit mbi butonin e qasshmërisë<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>në fund të ekranit.\n\nPër të kaluar mes shërbimeve, prek dhe mbaj të shtypur butonin e qasshmërisë."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="5331865763478710038">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar nga një shërbim te tjetri, rrëshqit shpejt lart me dy gishta dhe mbaje të shtypur."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7656710338811226339">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="3582632565941330367">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me dy gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"E kuptova"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Butoni i \"Qasshmërisë\" është caktuar te <xliff:g id="SERVICE">%1$s</xliff:g>. Për të përdorur zmadhimin, prek dhe mbaj butonin e \"Qasshmërisë\" dhe më pas zgjidh zmadhimin."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Gjesti i qasshmërisë është caktuar në <xliff:g id="SERVICE">%1$s</xliff:g>. Për të përdorur zmadhimin, rrëshqit lart me dy gishta nga fundi i ekranit dhe mbaje. Më pas zgjidh zmadhimin."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Shkurtorja e tastit të volumit"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Shërbimi i shkurtores"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Lejo nga ekrani i kyçjes"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Përdor shërbimin"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Përdor korrigjimin e ngjyrave"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Përdor titrat"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Jo të gjitha aplikacionet e mbështesin këtë cilësim."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Vazhdo"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Aparatet e dëgjimit"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nuk ka asnjë aparat dëgjimi të lidhur"</string>
@@ -2968,7 +2986,7 @@
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"Në terminalin \"Prek dhe paguaj\", paguaj me:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"Pagesa në terminal"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Konfiguro një aplikacion pagese. Më pas thjesht mbaj shtypur pjesën e pasme të telefonit me një terminal me simbolin e pagesave pa kontakt."</string>
-    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"E kuptova!"</string>
+    <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"E kuptova"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Më shumë..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Të caktohet si preferencë?"</string>
     <string name="nfc_payment_set_default" msgid="8532426406310833489">"Të përdoret gjithmonë <xliff:g id="APP">%1$s</xliff:g> për \"Prek dhe paguaj\"?"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Shfaq në strehën me tërheqje poshtë, shiritin e statusit dhe në ekranin e kyçjes"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Drita me pulsim"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ekrani i kyçjes"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Kapërce ekranin e kyçjes"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Pas shkyçjes me fytyrë, shko direkt te ekrani i fundit i përdorur"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Ekrani i kyçjes, ekrani i bllokimit, kapërce, anashkalo"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kur profili i punës është i kyçur"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Njoftimet në ekranin e kyçjes"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Shfaq njoftimet sinjalizuese dhe në heshtje"</string>
@@ -4004,7 +4025,7 @@
     <string name="ota_disable_automatic_update_summary" msgid="940729694354373087">"Zbato përditësimet kur të riniset pajisja"</string>
     <string name="usage" msgid="2977875522080448986">"Përdorimi"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Përdorimi i të dhënave celulare"</string>
-    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Përdorimi i të dhënave"</string>
+    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Përdorimi i të dhënave të aplikacionit"</string>
     <string name="wifi_data_usage" msgid="771603760674507659">"Përdorimi i të dhënave me Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Përdorimi i të dhënave me eternet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Objekti i renditjes mungon."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekti i renditjes nuk e përmban këtë çelës."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Krijimi i temës"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Ngjyra e theksit"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Fonti i titullit / trupit"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Forma e ikonës"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Parazgjedhja e pajisjes"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Prerja e ekranit"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"prerje ekrani, e prerë"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Drejtuesi i grafikës së sistemit"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Cilësimi nuk mbështetet në këtë telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Cilësimi nuk mbështetet në këtë tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Cilësimi nuk mbështetet në këtë pajisje"</string>
@@ -4531,7 +4547,7 @@
     <string name="register_automatically" msgid="518185886971595020">"Regjistrim automatik…"</string>
     <string name="roaming_alert_title" msgid="7458177294163751484">"Të lejohet shfrytëzimi i roaming-ut?"</string>
     <string name="roaming_check_price_warning" msgid="4979418631753681300">"Kontakto me operatorin celular të rrjetit për çmimin."</string>
-    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Përdorimi i të dhënave të aplikacioneve"</string>
+    <string name="mobile_data_usage_title" msgid="7862429216994894656">"Përdorimi i të dhënave të aplikacionit"</string>
     <string name="mobile_network_mode_error" msgid="4784347953600013818">"Regjim i pavlefshëm i rrjetit <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Shpërfille."</string>
     <string name="mobile_network_apn_title" msgid="7610812642954395440">"Emrat e pikës së qasjes"</string>
     <string name="manual_mode_disallowed_summary" msgid="2085670341790561153">"Nuk ofrohet kur është e lidhur me <xliff:g id="CARRIER">%1$s</xliff:g>"</string>

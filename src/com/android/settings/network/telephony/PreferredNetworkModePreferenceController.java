@@ -58,13 +58,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         } else if (carrierConfig == null) {
             visible = false;
         } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)) {
-            visible = false;
-        } else if (carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)
-                && !telephonyManager.getServiceState().getRoaming()
-                && telephonyManager.getServiceState().getDataRegState()
-                == ServiceState.STATE_IN_SERVICE) {
+                CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
+                || carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL)) {
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = true;

@@ -349,16 +349,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Auf UTC-Basis auswählen"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Uhrzeit"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatisch sperren"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Aktivierung des Ruhemodus"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Unmittelbar nach Aktivierung des Ruhemodus, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"Nach <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> im Ruhezustand, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Displaysperre nach autom. Ausschalten des Displays"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Unmittelbar nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> nach Ablauf des Zeitlimits, außer bei dauerhafter Entsperrung durch <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Infos zum Eigentümer auf Sperrbildschirm anzeigen"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Sperrbildschirmnachricht"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Widgets aktivieren"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Vom Administrator deaktiviert"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Option zum Sperren anzeigen"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Option für Ein-/Aus-Taste des Displays, durch die Smart Lock, das Entsperren per Fingerabdruck und Benachrichtigungen auf dem Sperrbildschirm deaktiviert werden"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Option für Ein/Aus-Taste des Displays, durch die Smart Lock, das biometrische Entsperren und Benachrichtigungen auf dem Sperrbildschirm deaktiviert werden"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Trust Agents können Entsperrung nur verlängern"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Wenn aktiviert, halten Trust Agents das Gerät länger entsperrt, sie können aber gesperrte Geräte nicht mehr entsperren"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Bildschirm sperren, wenn nicht mehr vertrauenswürdig"</string>
@@ -392,14 +392,15 @@
     <string name="security_passwords_title" msgid="2881269890053568809">"Datenschutz"</string>
     <string name="disabled_by_administrator_summary" msgid="1601828700318996341">"Vom Administrator deaktiviert"</string>
     <string name="security_status_title" msgid="5848766673665944640">"Sicherheitsstatus"</string>
-    <string name="security_dashboard_summary_face" msgid="268234254306703218">"Displaysperre, Gesichtserkennung"</string>
+    <string name="security_dashboard_summary_face" msgid="268234254306703218">"Displaysperre, Face Unlock"</string>
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Displaysperre und Fingerabdruck"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Displaysperre"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Gesicht hinzugefügt"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Tippen, um Gesichtserkennung einzurichten"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Gesichtserkennung"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Face Unlock einrichten"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Face Unlock einrichten"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Face Unlock einrichten"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Face Unlock"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Face Unlock für die Arbeit"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Face Unlock einrichten"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Face Unlock einrichten"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Starten"</string>
@@ -408,11 +409,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Abbrechen"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Nein danke"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Zustimmen"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Mehr"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Per Gesicht entsperren"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Per Gesichtserkennung authentifizieren"</string>
-    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Verwende die Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
-    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Du kannst die Gesichtserkennung verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kannst du nicht per Gesichtserkennung entsperren. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
-    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Verwende die Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden"</string>
+    <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Verwende Face Unlock, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Du kannst Face Unlock verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kannst du nicht per Face Unlock entsperren. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
+    <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Verwende Face Unlock, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -427,19 +432,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Anmeldung per Gesichtserkennung ist fehlgeschlagen."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Sieht gut aus. Du bist fertig."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Fertig"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Geschwindigkeit von Face Unlock verbessern"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Face Unlock erneut einrichten"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Face Unlock erneut einrichten"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Sicherheit und Leistung verbessern"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Face Unlock einrichten"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Du musst die aktuellen Gesichtsdaten löschen, um Face Unlock neu einzurichten.\n\nDie Daten werden endgültig und sicher gelöscht. Nach dem Entfernen benötigst du wieder deine PIN, dein Muster oder dein Passwort, um dein Smartphone entsperren, dich bei Apps anmelden und Zahlungen bestätigen zu können."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Face Unlock nutzen für"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Smartphone entsperren"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"App-Anmeldung &amp; Zahlungen"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Für Face Unlock erforderlich"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Augen auf Bildschirm gerichtet"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Zum Entsperren musst du mit offenen Augen auf den Bildschirm blicken"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Schaltfläche zum Bestätigen"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Bei Authentifizierung für Apps immer Bestätigung anfordern"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Voraussetzungen für Face Unlock"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Augen müssen geöffnet sein"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Zum Entsperren des Smartphones müssen deine Augen geöffnet sein"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Bestätigung immer erforderlich"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Bei der Nutzung von Face Unlock in Apps immer Bestätigung anfordern"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Gesichtsdaten löschen"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Face Unlock neu einrichten"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Mit Face Unlock kannst du dein Gerät entsperren, dich in Apps anmelden und Zahlungen bestätigen.\n\nWenn du diese Option nutzt, solltest du Folgendes bedenken:\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, während deine Augen geöffnet sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise deinem Kind oder deinem eineiigen Zwilling."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Face Unlock einrichten"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Mit Face Unlock kannst du dein Gerät entsperren, dich in Apps anmelden und Zahlungen bestätigen.\n\nWenn du diese Option nutzt, solltest du Folgendes bedenken:\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, auch wenn deine Augen geschlossen sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Gesichtsdaten löschen?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Mit Face Unlock aufgezeichnete Daten werden dauerhaft und sicher gelöscht. Nach dem Entfernen benötigst du deine PIN, dein Muster oder dein Passwort zum Entsperren deines Smartphones, zum Anmelden bei Apps und zum Bestätigen von Zahlungen."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Die von Face Unlock aufgezeichneten Gesichtsdaten werden endgültig und sicher gelöscht. Nach dem Entfernen benötigst du wieder deine PIN, dein Muster oder dein Passwort, um dein Smartphone entsperren, dich bei Apps anmelden und Zahlungen bestätigen zu können."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Verwende Face Unlock, um dein Smartphone zu entsperren"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Fingerabdruck"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Fingerabdrücke verwalten"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Abdruck nutzen für"</string>
@@ -490,9 +502,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Mit der Displaysperre kannst du dein Tablet schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Mit der Displaysperre kannst du dein Gerät schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es bei Diebstahl oder anderweitigem Verlust von niemand anders verwendet werden kann. Die Displaysperre ist auch für die Authentifizierung per Fingerabdruck erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Mit der Displaysperre kannst du dein Tablet schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Mit der Displaysperre kannst du dein Gerät schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Die Displaysperre ist auch für die Gesichtserkennung erforderlich. Tippe auf \"Abbrechen\" und lege dann eine PIN, ein Muster oder ein Passwort fest."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Mit der Displaysperre kannst du dein Tablet schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Du musst auch die Displaysperre einrichten, um Face Unlock nutzen zu können. Tippe auf \"Abbrechen\", um zurückzugehen."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Mit der Displaysperre kannst du dein Gerät schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Du musst auch die Displaysperre einrichten, um Face Unlock nutzen zu können. Tippe auf \"Abbrechen\", um zurückzugehen."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Mit der Displaysperre kannst du dein Smartphone schützen, damit es niemand anders verwenden kann, falls es gestohlen wird oder du es verloren hast. Du musst auch die Displaysperre einrichten, um Face Unlock nutzen zu können. Tippe auf \"Abbrechen\", um zurückzugehen."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN-Einrichtung überspringen?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Passworteinrichtung überspringen?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Mustereinrichtung überspringen?"</string>
@@ -593,10 +605,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Fingerabdruck + Passwort"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Weiter ohne Fingerabdruck"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Du kannst dein Smartphone mit deinem Fingerabdruck entsperren. Aus Sicherheitsgründen benötigst du bei dieser Option eine alternative Displaysperre."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Gesichtserkennung und Muster"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Gesichtserkennung und PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Gesichtserkennung und Passwort"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Ohne Gesichtserkennung fortfahren"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Face Unlock + Muster"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Face Unlock + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Face Unlock + Passwort"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Ohne Face Unlock fortfahren"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Du kannst dein Smartphone über die Gesichtserkennung entsperren. Aus Sicherheitsgründen benötigst du bei dieser Option eine alternative Displaysperre."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Durch Administrator, Richtlinie oder Anmeldedatenspeicher deaktiviert"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Keine"</string>
@@ -1182,7 +1194,7 @@
     <string name="accessibility_personal_account_title" msgid="2169071663029067826">"Privates Konto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="1910951467596035063">"Suche"</string>
     <string name="display_settings" msgid="7965901687241669598">"Display"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Display automatisch drehen"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Bildschirm automatisch drehen"</string>
     <string name="color_mode_title" msgid="9186249332902370471">"Farben"</string>
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Natürlich"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Verstärkt"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"\"Helligkeit an Lichtverhältnisse anpassen\": Ist diese Funktion aktiviert, kannst du die Helligkeit dennoch vorübergehend ändern."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Weißabgleich des Bildschirms"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Aufmerksamkeitserkennung"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Aus"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Verhindert, dass dein Bildschirm ausgeschaltet wird, wenn du ihn ansiehst."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Zugriff auf Kamera erforderlich"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Tippen, um Berechtigungen für Dienste zur Gerätepersonalisierung zu verwalten"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Verhindert, dass der Bildschirm ausgeschaltet wird, wenn du auf ihn schaust"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Die Funktion \"Aufmerksamkeitserkennung\" verwendet die Frontkamera, um zu erkennen, ob jemand den Bildschirm ansieht. Es werden dabei keine Bilder gespeichert und auch nie an Google gesendet."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Bildschirm aktiviert lassen, solange du auf ihn schaust"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Nachtlicht"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Die Funktion \"Nachtlicht\" gibt der Displayanzeige eine gelbe Tönung. Das schont in dunklen Umgebungen die Augen und kann das Einschlafen erleichtern."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zeitplan"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Display personalisieren"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Hintergrund auswählen"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel personalisieren"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Verschiedene Designs, Hintergründe &amp; Uhren ausprobieren"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Verschiedene Designs und Hintergründe ausprobieren"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Bildschirmschoner"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Beim Aufladen oder wenn in Dockingstation"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"In beiden Fällen"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Das Passwort wurde festgelegt."</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"Die PIN wurde festgelegt."</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Das Muster wurde festgelegt."</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Für Gesichtserkennung Passwort festlegen"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Für Gesichtserkennung Muster festlegen"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Für Gesichtserkennung PIN festlegen"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Für Face Unlock Passwort festlegen"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Für Face Unlock Muster festlegen"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Für Face Unlock PIN festlegen"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Gib zum Fortfahren das Muster für dein Gerät ein"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Gib zum Fortfahren die PIN für dein Gerät ein"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Gib zum Fortfahren das Passwort für dein Gerät ein"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Du kannst die Bedienungshilfen aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Diensten wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte es gedrückt."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"OK"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Die Schaltfläche für die Bedienungshilfen ist auf <xliff:g id="SERVICE">%1$s</xliff:g> gestellt. Um die Vergrößerung nutzen zu können, tippe &amp; halte die Schaltfläche für die Bedienungshilfen gedrückt und wähle anschließend \"Vergrößerung\" aus."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Die Touch-Geste für die Bedienungshilfen ist auf den Dienst \"<xliff:g id="SERVICE">%1$s</xliff:g>\" eingestellt. Wenn du die Vergrößerung verwenden möchtest, wische mit zwei Fingern vom unteren Bildschirmrand nach oben und halte den Bildschirm gedrückt. Wähle dann \"Vergrößerung\" aus."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Verknüpfung für Lautstärketaste"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Verknüpfter Dienst"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Auf dem Sperrbildschirm erlauben"</string>
@@ -2114,7 +2131,7 @@
     <string name="accessibility_setting_item_control_timeout_title" msgid="870367947690762063">"Zeit zum Reagieren"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="3076566452307147390">"Zeit zum Reagieren"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="6557680564604287459">"Hier kannst du auswählen, wie lange Nachrichten sichtbar sind, die eine Reaktion erfordern, aber nur vorübergehend angezeigt werden.\n\nDiese Einstellung wird nicht von allen Apps unterstützt."</string>
-    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Reaktionszeit Berühren/Halten"</string>
+    <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"\"Berühren und halten\"-Reaktionszeit"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="2119647786141420802">"Farbumkehr"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Kann sich auf die Leistung auswirken"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2434062071927416098">"Verweildauer"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Dienst aktivieren"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Farbkorrektur aktivieren"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Untertitel aktivieren"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Diese Einstellung wird nicht von allen Apps unterstützt."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Weiter"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Hörhilfen"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Keine Hörhilfen verbunden"</string>
@@ -2956,7 +2974,7 @@
     <string name="application_restrictions" msgid="8207332020898004394">"Apps und Inhalte zulassen"</string>
     <string name="apps_with_restrictions_header" msgid="3660449891478534440">"Apps mit Einschränkungen"</string>
     <string name="apps_with_restrictions_settings_button" msgid="3841347287916635821">"App-Einstellungen erweitern"</string>
-    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Mobil bezahlen"</string>
+    <string name="nfc_payment_settings_title" msgid="1807298287380821613">"Kontaktlos bezahlen"</string>
     <string name="nfc_payment_how_it_works" msgid="3028822263837896720">"Funktionsweise"</string>
     <string name="nfc_payment_no_apps" msgid="5477904979148086424">"Mit deinem Smartphone in Geschäften bezahlen"</string>
     <string name="nfc_payment_default" msgid="8648420259219150395">"Standard-App für Zahlungen"</string>
@@ -2965,14 +2983,14 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"Standard-App verwenden"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"Immer"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"Außer wenn eine andere Zahlungs-App geöffnet ist"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"An einem Terminal für mobiles Bezahlen folgende App nutzen:"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"An einem Terminal für kontaktloses Bezahlen folgende App nutzen:"</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"An der Kasse bezahlen"</string>
     <string name="nfc_how_it_works_content" msgid="4749007806393224934">"Richte eine Zahlungs-App ein. Halte die Rückseite deines Smartphones an eine beliebige Kasse mit dem Symbol zum mobilen Bezahlen."</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"Ok"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"Mehr…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"Als bevorzugte Einstellung festlegen?"</string>
-    <string name="nfc_payment_set_default" msgid="8532426406310833489">"Beim mobilen Bezahlen immer <xliff:g id="APP">%1$s</xliff:g> verwenden?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="6993301165940432743">"Beim mobilen Bezahlen immer <xliff:g id="APP_0">%1$s</xliff:g> statt <xliff:g id="APP_1">%2$s</xliff:g> verwenden?"</string>
+    <string name="nfc_payment_set_default" msgid="8532426406310833489">"Zum kontaktlosen Bezahlen immer <xliff:g id="APP">%1$s</xliff:g> verwenden?"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="6993301165940432743">"Zum kontaktlosen Bezahlen immer <xliff:g id="APP_0">%1$s</xliff:g> statt <xliff:g id="APP_1">%2$s</xliff:g> verwenden?"</string>
     <string name="restriction_settings_title" msgid="4233515503765879736">"Einschränkungen"</string>
     <string name="restriction_menu_reset" msgid="2067644523489568173">"Einschränkungen aufheben"</string>
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN ändern"</string>
@@ -3140,10 +3158,10 @@
     <string name="keywords_profile_challenge" msgid="789611397846512845">"herausforderung bei der arbeit, arbeit, profil"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"arbeitsprofil, verwaltetes profil, gruppieren, gruppierung, arbeit, profil"</string>
     <string name="keywords_gesture" msgid="3526905012224714078">"gesten, bewegungen, touch-gesten"</string>
-    <string name="keywords_payment_settings" msgid="5220104934130446416">"Bezahlen, tippen, Zahlungen"</string>
+    <string name="keywords_payment_settings" msgid="5220104934130446416">"Bezahlen, kontaktlos, Zahlungen"</string>
     <string name="keywords_backup" msgid="470070289135403022">"Sicherung, sicherung"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"Touch-Geste"</string>
-    <string name="keywords_face_unlock" msgid="254144854349092754">"Face, Unlock, Gesichtserkennung, Anmeldung"</string>
+    <string name="keywords_face_unlock" msgid="254144854349092754">"Face, Unlock, Face Unlock, Gesichtserkennung, Anmeldung"</string>
     <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl version, imei sv"</string>
     <string name="keywords_sim_status" msgid="6682044233620329507">"netzwerk, status des mobilfunknetzes, servicestatus, signalstärke, typ des mobilfunknetzes, roaming, iccid, eid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"seriennummer, hardwareversion"</string>
@@ -3264,7 +3282,7 @@
     <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Keine Pop-up-Benachrichtigungen"</string>
     <string name="zen_mode_block_effect_status" msgid="1651527249762752921">"Symbole in der Statusleiste oben auf dem Bildschirm ausblenden"</string>
     <string name="zen_mode_block_effect_badge" msgid="214553506070597320">"App-Benachrichtigungspunkte auf App-Symbolen ausblenden"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"\"Bitte nicht stören\" wird bei Eingang von Benachrichtigungen nicht beendet"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="4704755879961212658">"\"Bitte nicht stören\" bei Benachrichtigungen nicht beenden"</string>
     <string name="zen_mode_block_effect_list" msgid="4722887783222298295">"Aus Benachrichtigungsleiste ausblenden"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="2617875282623486256">"Nie"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="1230265589026355094">"Bei deaktiviertem Display"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Benachrichtigungen erscheinen in Benachrichtigungs-/Statusleiste und auf Sperrbildschirm"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Benachrichtigungslicht blinkt"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Sperrbildschirm"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Sperrbildschirm überspringen"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Nach Face Unlock direkt zum zuletzt genutzten Bildschirm gehen"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Sperrbildschirm, überspringen, umgehen"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Benachrichtigungen auf dem Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Warn- und lautlose Benachrichtigungen anzeigen"</string>
@@ -3643,9 +3664,9 @@
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Neben dem Fingerabdruck zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Neben der Verwendung deines Fingerabdrucks zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Neben der Gesichtserkennung zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
-    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung der Gesichtserkennung zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pin_for_face" msgid="2017438765366716760">"Neben Face Unlock zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass deine PIN vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Weckrufen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass deine PIN zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="3551827507967661552">"Neben Face Unlock zum Entsperren deines Geräts kannst du dein Gerät noch zusätzlich schützen, indem du festlegst, dass dein Muster vor dem Start eingegeben werden muss. Bis das Gerät startet, können keine Anrufe, Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo können Daten auf verloren gegangenen oder gestohlenen Geräten geschützt werden. Möchtest du festlegen, dass dein Muster zum Starten des Geräts eingegeben werden muss?"</string>
+    <string name="encryption_interstitial_message_password_for_face" msgid="3452793542112093614">"Neben der Verwendung von Face Unlock zum Entsperren des Geräts kannst du es zusätzlich schützen, indem du festlegst, dass vor dem Gerätestart die Eingabe deines Passworts erforderlich ist. Bis das Gerät startet, können weder Anrufe noch Nachrichten oder Benachrichtigungen, einschließlich Warnmeldungen, empfangen werden.\n\nSo schützt du Daten auf verloren gegangenen oder gestohlenen Geräten. Möchtest du festlegen, dass dein Passwort zum Starten des Geräts eingegeben werden muss?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"\"Ja\""</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Nein"</string>
     <string name="restricted_true_label" msgid="4761453839409220473">"Eingeschränkt"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Das Rangobjekt fehlt."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Dieser Schlüssel ist in dem Rangobjekt nicht enthalten."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Designs"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Akzentfarbe"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Schriftart für Überschrift und Haupttext"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Form des Symbols"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Gemäß Standard fürs Gerät"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Display-Aussparung"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"display aussparung, notch"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Grafiktreiber des Systems"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Die Einstellung wird auf diesem Smartphone nicht unterstützt"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Die Einstellung wird auf diesem Tablet nicht unterstützt"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Die Einstellung wird auf diesem Gerät nicht unterstützt"</string>

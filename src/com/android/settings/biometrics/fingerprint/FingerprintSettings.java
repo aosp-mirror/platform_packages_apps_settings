@@ -617,7 +617,7 @@ public class FingerprintSettings extends SubSettings {
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_fingerprint_preference_title),
-                    null, null, challenge, mUserId)) {
+                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);

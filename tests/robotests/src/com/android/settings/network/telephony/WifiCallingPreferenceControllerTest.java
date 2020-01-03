@@ -127,10 +127,10 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcNonRoaming() {
+    public void updateState_nonRoaming_wfcCellularPreferred() {
         assertNull(mController.mSimCallManager);
-        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, false);
-        // update the config value by calling init again.
+        mCarrierConfig.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
 
@@ -147,9 +147,10 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcRoaming() {
+    public void updateState_roaming_wfcWifiPreferred() {
         assertNull(mController.mSimCallManager);
-
+        // useWfcHomeModeForRoaming is false by default. In order to check wfc in roaming mode. We
+        // need the device roaming, and not using home mode in roaming network.
         when(mImsManager.getWfcMode(true)).thenReturn(
                 ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED);
         when(mImsManager.getWfcMode(false)).thenReturn(

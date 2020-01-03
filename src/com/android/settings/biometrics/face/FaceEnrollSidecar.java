@@ -52,7 +52,7 @@ public class FaceEnrollSidecar extends BiometricEnrollSidecar {
             mFaceManager.setActiveUser(mUserId);
         }
 
-        mFaceManager.enroll(mToken, mEnrollmentCancel,
+        mFaceManager.enroll(mUserId, mToken, mEnrollmentCancel,
                 mEnrollmentCallback, mDisabledFeatures);
     }
 

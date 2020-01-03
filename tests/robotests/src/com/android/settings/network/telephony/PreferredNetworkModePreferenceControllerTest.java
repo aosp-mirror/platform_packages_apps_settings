@@ -23,11 +23,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -54,6 +56,8 @@ public class PreferredNetworkModePreferenceControllerTest {
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
+    @Mock
+    private ServiceState mServiceState;
 
     private PersistableBundle mPersistableBundle;
     private PreferredNetworkModePreferenceController mController;
@@ -71,6 +75,7 @@ public class PreferredNetworkModePreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        doReturn(mServiceState).when(mTelephonyManager).getServiceState();
         mPersistableBundle = new PersistableBundle();
         doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
@@ -97,6 +102,25 @@ public class PreferredNetworkModePreferenceControllerTest {
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL, true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_hidePreferredNetworkType_returnUnavailable() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_HIDE_PREFERRED_NETWORK_TYPE_BOOL,
+                true);
+
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+
+        when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+
+        when(mServiceState.getRoaming()).thenReturn(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+
+        when(mServiceState.getRoaming()).thenReturn(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

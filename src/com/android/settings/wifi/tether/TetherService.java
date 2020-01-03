@@ -85,7 +85,7 @@ public class TetherService extends Service {
     public void onCreate() {
         super.onCreate();
         if (DEBUG) Log.d(TAG, "Creating TetherService");
-        String provisionResponse = getResourceForDefaultDataSubId().getString(
+        String provisionResponse = getResourceForActiveDataSubId().getString(
                 com.android.internal.R.string.config_mobile_hotspot_provision_response);
         registerReceiver(mReceiver, new IntentFilter(provisionResponse),
                 android.Manifest.permission.CONNECTIVITY_INTERNAL, null);
@@ -105,7 +105,7 @@ public class TetherService extends Service {
         if (intent.hasExtra(EXTRA_SUBID)) {
             final int tetherSubId = intent.getIntExtra(EXTRA_SUBID,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            final int subId = getTetherServiceWrapper().getDefaultDataSubscriptionId();
+            final int subId = getTetherServiceWrapper().getActiveDataSubscriptionId();
             if (tetherSubId != subId) {
                 Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
                 if (!mInProvisionCheck) {
@@ -273,11 +273,13 @@ public class TetherService extends Service {
     }
 
     private Intent getProvisionBroadcastIntent(int index) {
-        String provisionAction = getResourceForDefaultDataSubId().getString(
+        String provisionAction = getResourceForActiveDataSubId().getString(
                 com.android.internal.R.string.config_mobile_hotspot_provision_app_no_ui);
+        final int subId = getTetherServiceWrapper().getActiveDataSubscriptionId();
         Intent intent = new Intent(provisionAction);
         int type = mCurrentTethers.get(index);
         intent.putExtra(TETHER_CHOICE, type);
+        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
         intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND
                 | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
 
@@ -309,7 +311,7 @@ public class TetherService extends Service {
 
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int period = getResourceForDefaultDataSubId().getInteger(
+        int period = getResourceForActiveDataSubId().getInteger(
                 com.android.internal.R.integer.config_mobile_hotspot_provision_check_period);
         long periodMs = period * MS_PER_HOUR;
         long firstTime = SystemClock.elapsedRealtime() + periodMs;
@@ -362,7 +364,7 @@ public class TetherService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (DEBUG) Log.d(TAG, "Got provision result " + intent);
-            String provisionResponse = getResourceForDefaultDataSubId().getString(
+            String provisionResponse = getResourceForActiveDataSubId().getString(
                     com.android.internal.R.string.config_mobile_hotspot_provision_response);
 
             if (provisionResponse.equals(intent.getAction())) {
@@ -429,14 +431,14 @@ public class TetherService extends Service {
             mUsageStatsManager.setAppInactive(packageName, isInactive);
         }
 
-        int getDefaultDataSubscriptionId() {
-            return SubscriptionManager.getDefaultDataSubscriptionId();
+        int getActiveDataSubscriptionId() {
+            return SubscriptionManager.getActiveDataSubscriptionId();
         }
     }
 
     @VisibleForTesting
-    Resources getResourceForDefaultDataSubId() {
-        final int subId = getTetherServiceWrapper().getDefaultDataSubscriptionId();
+    Resources getResourceForActiveDataSubId() {
+        final int subId = getTetherServiceWrapper().getActiveDataSubscriptionId();
         return Utils.getResourcesForSubId(this, subId);
     }
 }

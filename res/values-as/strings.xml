@@ -349,16 +349,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC অফছেট অনুসৰি বাছনি কৰক"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"তাৰিখ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"সময়"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"স্বয়ংক্ৰিয়ভাৱে লক কৰক"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> সুপ্ত হোৱাৰ পিছত"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>এ আনলক কৰি ৰখা সময়ৰ বাহিৰে, নিদ্ৰাত পৰা লগে লগে"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>এ আনলক কৰি ৰখা সময়ৰ বাহিৰে <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> নিদ্ৰাত পৰাৰ পিছত"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"স্ক্ৰীণৰ সময় ওকলাৰ পিছত লক কৰক"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"সময় ওকলাৰ <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> পিছত"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>এ আনলক কৰি ৰখা সময়ৰ বাহিৰে, সময় ওকলাৰ লগে লগে"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>এ আনলক কৰি ৰখা সময়ৰ বাহিৰে সময় ওকলাৰ <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> পিছত"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"লক স্ক্ৰীণত গৰাকী-বিষয়ক তথ্য দেখুৱাওক"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"লক স্ক্ৰীণত প্ৰদৰ্শিত বাৰ্তা"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"ৱিজেটসমূহ সক্ষম কৰক"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"প্ৰশাসকৰ দ্বাৰা অক্ষম কৰা হৈছে"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"লকডাউন বিকল্পসমূহ দেখুৱাওক"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"লক স্ক্ৰীণত স্মাৰ্ট লক, ফিংগাৰপ্ৰিণ্টৰ জৰিয়তে আনলক কৰাৰ সুবিধা আৰু জাননীসমূহ অফ কৰা পাৱাৰ বুটামৰ বিকল্প দেখুৱাওক"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"লক স্ক্ৰীণত স্মাৰ্ট লক, বায়’মেট্ৰিকৰ জৰিয়তে আনলক কৰাৰ সুবিধা আৰু জাননীসমূহ অফ কৰা পাৱাৰ বুটামৰ বিকল্প দেখুৱাওক"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"বিশ্বাসী এজেণ্টে কেৱল আনলকৰ সময় বৃদ্ধি কৰিব পাৰে"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"যদি সক্ষম কৰা হয় তেন্তে বিশ্বাসী এজেণ্টে আপোনাৰ ডিভাইচটো দীর্ঘ সময় ধৰি আনলক কৰি ৰাখিব কিন্তু কোনো লক হৈ থকা ডিভাইচ আনলক কৰিব নোৱাৰে।"</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"বিশ্বাস হেৰুৱালে স্ক্ৰীণ লক হ’ব"</string>
@@ -396,10 +396,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"স্ক্ৰীণ লক, ফিংগাৰপ্ৰিণ্ট"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"স্ক্ৰীণ লক"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"চেহেৰা যোগ কৰা হ\'ল"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"চেহেৰা প্ৰমাণীকৰণ ছেট আপ কৰিবলৈ টিপক"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"চেহেৰা প্ৰমাণীকৰণ"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"মুখমণ্ডলৰদ্বাৰা খোলাটো কেনেকৈ ছেটআপ কৰে"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"মুখাৱয়বৰ দ্বাৰা খোলাৰ সুবিধা ছেট আপ কৰক"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধা ছেটআপ কৰক"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"মুখাৱয়বৰদ্বাৰা আনলক"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"কর্মস্থানৰ বাবে মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধা"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"মুখাৱয়বৰদ্বাৰা কৰা আনলক কেনেকৈ ছেটআপ কৰে"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"মুখাৱয়বৰ দ্বাৰা আনলক কৰা সুবিধাটো ছেট আপ কৰক"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"প্ৰমাণীকৰণৰ বাবে নিজৰ চেহেৰা ব্যৱহাৰ কৰক"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"আৰম্ভণি"</string>
@@ -408,11 +409,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"বাতিল কৰক"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"নালাগে, ধন্য়বাদ"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"সন্মত"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"অধিক"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"নিজৰ চেহেৰাৰ জৰিয়তে আনলক কৰক"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"প্ৰমাণীকৰণ কৰিবলৈ নিজৰ চেহেৰা ব্য়ৱহাৰ কৰক"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"নিজৰ ফ’ন আনলক কৰা, ক্ৰয়সমূহক স্বীকৃতি দিয়া বা এপসমূহত ছাইন ইন কৰা কাৰ্যৰ বাবে নিজৰ চেহেৰা ব্য়ৱহাৰ কৰক।"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"আপোনাৰ ফ\'নটো আনলক কৰিবলৈ বা ক্ৰয়ৰ অনুমোদন জনাবলৈ আপোনাৰ মুখমণ্ডল ব্যৱহাৰ কৰক।\n\nটোকা: আপুনি এই ডিভাইচটো আনলক কৰিবলৈ আপোনাৰ মুখমণ্ডল ব্যৱহাৰ কৰিব নোৱাৰে৷ অধিক তথ্যৰ বাবে আপোনাৰ প্ৰতিষ্ঠানৰ প্ৰশাসকৰ সৈতে যোগাযোগ কৰক।"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"নিজৰ ফ’ন আনলক কৰা, ক্ৰয়সমূহক স্বীকৃতি দিয়া বা এপসমূহত ছাইন ইন কৰা কাৰ্যৰ বাবে নিজৰ চেহেৰা ব্য়ৱহাৰ কৰক"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -427,19 +432,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"মুখমণ্ডল অন্তৰ্ভুক্ত কৰা কাৰ্যই কাম নকৰিলে।"</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"সকলো সাজু। ঠিকেই দেখা গৈছে।"</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"সম্পন্ন হ’ল"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"মুখাৱয়বেৰে আনলকৰ সুবিধাটোৰ কাৰ্যক্ষমতা উন্নত কৰক"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"মুখাৱয়বেৰে আনলকৰ সুবিধাটো আকৌ ছেট আপ কৰক"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"মুখাৱয়বেৰে আনলকৰ সুবিধাটো আকৌ ছেট আপ কৰক"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"সুৰক্ষা আৰু কাৰ্যক্ষমতা উন্নত কৰক"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"মুখাৱয়বেৰে আনলকৰ সুবিধাটো ছেট আপ কৰক"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"মুখাৱয়বেৰে আনলকৰ সুবিধাটো আকৌ ছেট আপ কৰিবলৈ বৰ্তমানৰ মুখাৱয়ব সম্পৰ্কীয় ডেটাখিনি মচক।\n\nমুখাৱয়বেৰে আনলকৰ সুবিধাটোৱে ব্যৱহাৰ কৰা ডেটাখিনি স্থায়ী তথা সুৰক্ষিতভাৱে মচা হ’ব। আঁতৰোৱাৰ পাছত, ফ’নটো আনলক কৰিবলৈ, এপত ছাইন ইন কৰিবলৈ আৰু পৰিশোধ নিশ্চিত কৰিবলৈ আপোনাক নিজৰ পিন, আৰ্হি অথবা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব।"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"ফে’চ আনলক ব্যৱহাৰ কৰক"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"ফ’নটো আনলক কৰি থকা হৈছে"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"এপ্ ছাইন ইন আৰু পৰিশোধ"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"মুখাৱয়বৰ দ্বাৰা খোলাৰ বাবে প্ৰয়োজনীয়"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"স্ক্ৰীণলৈ চাই থকা চকু"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"ফ’নটো আনলক কৰিবলৈ, সদায় নিজৰ চকু খোলা ৰাখি স্ক্ৰীণলৈ চোৱাৰ প্ৰয়োজন"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"নিশ্চিতকৰণ কৰা বুটাম"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"এপৰ বাবে বিশ্বাসযোগ্যতা প্ৰমাণীকৰণ কৰোঁতে সদায় নিশ্চিতকৰণৰ প্ৰয়োজন"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"মুখাৱয়বৰদ্বাৰা আনলক কৰিবলৈ লগা প্ৰয়োজনীয়তাসমূহ"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"দুচকু খোলা থাকিব লাগিব"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"ফ’নটো আনলক কৰিবলৈ আপোনাৰ দুচকু খোলা থাকিবই লাগিব"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"নিশ্চিতকৰণ সদায় বাধ্যতামূলক"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"মুখাৱয়বেৰে আনলক কৰা সুবিধাৰে এপ্‌ খোলোঁতে প্ৰতিবাৰেই নিশ্চিতকৰণৰ প্ৰয়োজন"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"মুখমণ্ডলৰ ডেটা মচক"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"আনলক কৰিবলৈ নতুন মুখাৱয়ব ছেট আপ কৰক"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"আপোনাৰ ডিভাইচ আনলক কৰিবলৈ, এপত ছাইন ইন কৰিবলৈ আৰু পৰিশোধ নিশ্চিত কৰিবলৈ মুখাৱয়বৰ দ্বাৰা খোলাৰ সুবিধা ব্যৱহাৰ কৰক।\n\nমনত ৰাখিব:\nআপুনি নিবিচাৰিলেও ফ’নটোলৈ চোৱাৰ ফলত সেইটো আনলক হ’ব।\n\nআপোনাৰ দুচকু খোলা ৰাখিলে আন কোনোবাই ফ’নটো আপোনাৰ মুখৰ আগত দাঙি ধৰিও সেইটো আনলক কৰিব পাৰে।\n\nআপোনাৰ ফ’নটো এনে কোনো লোকেও আনলক কৰিব পাৰে যি দেখাত প্ৰায় আপোনাৰ দৰে, যেনে আপোনাৰ সন্তান বা দেখাত একেই ভাতৃ-ভগ্নী।"</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধা ছেটআপ কৰক"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"আপোনাৰ ডিভাইচটো আনলক কৰিবলৈ মুখাৱয়বৰ দ্বাৰা আনলক কৰা সুবিধাটো ব্যৱহাৰ কৰক, এপ্‌সমূহত ছাইন ইন কৰক আৰু পৰিশোধসমূহ নিশ্চিত কৰক।\n\n মনত ৰাখিব:\nআপুনি নিবিচাৰিলেও ফ’নটোলৈ চোৱাৰ ফলত সেইটো আনলক হ’ব পাৰে।\n\nআপোনাৰ দুচকু বন্ধ হৈ থাকিলেও আন কোনোবাই ফ’নটো আপোনাৰ মুখৰ আগত দাঙি ধৰি সেইটো আনলক কৰিব পাৰে।\n\nআপোনাৰ ফ’নটো এনে কোনো লোকেও আনলক কৰিব পাৰে যি দেখাত বহুখিনি আপোনাৰ দৰে, যেনে দেখাত একেই সহোদৰ-সহোদৰা।"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"মুখমণ্ডলৰ ডেটা মচিবনে?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"ফে’চ আনলক ব্যৱহাৰ কৰি ৰেকৰ্ড কৰা ডেটা স্থায়ীভাৱে আৰু সুৰক্ষিতভাৱে মচা হ’ব। আঁতৰোৱাৰ পিছত আপোনাৰ ফ’নটো আনলক কৰিবলৈ পিন আৰ্হি বা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব, এপ্‌সমূহত ছাইন ইন কৰক আৰু পৰিশোধ নিশ্চিত কৰক।"</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"মুখাৱয়বৰ দ্বাৰা আনলক কৰা সুবিধাটোৱে ব্যৱহাৰ কৰা মুখাৱয়ব সম্পৰ্কীয় ডেটা স্থায়ী আৰু সুৰক্ষিতভাৱে মচা হ’ব। আঁতৰোৱাৰ পাছত, আপোনাৰ ফ’নটো আনলক কৰিবলৈ, এপ্‌সমূহত ছাইন ইন কৰিবলৈ আৰু পৰিশোধসমূহ নিশ্চিত কৰিবলৈ আপোনাক নিজৰ পিন, আৰ্হি অথবা পাছৱৰ্ডৰ প্ৰয়োজন হ’ব।"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"আপোনাৰ ফ’নটো আনলক কৰিবলৈ মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধাটো ব্যৱহাৰ কৰক"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"ফিংগাৰপ্ৰিণ্ট"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"ফিংগাৰপ্ৰিণ্টসমূহ পৰিচালনা কৰক"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰক"</string>
@@ -490,9 +502,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"আপোনাৰ টেবলেটটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। ফিংগাৰপ্ৰিণ্ট ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"আপোনাৰ ডিভাইচটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। ফিংগাৰপ্ৰিণ্ট ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"আপোনাৰ ফ’নটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। ফিংগাৰপ্ৰিণ্ট ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"আপোনাৰ টেবলেটটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। মুখমণ্ডল প্ৰমাণীকৰণ ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"আপোনাৰ ডিভাইচটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। মুখমণ্ডল প্ৰমাণীকৰণ ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"আপোনাৰ ফ’নটো কোনো স্ক্ৰীণ লক বিকল্পৰ দ্বাৰা সুৰক্ষিত কৰক যাতে চুৰি হ’লে বা হেৰালে কোনেও সেইটো ব্যৱহাৰ কৰিব নোৱাৰে। মুখমণ্ডল প্ৰমাণীকৰণ ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। বাতিল কৰক-ত টিপক, তাৰ পিছত পিন, আৰ্হি বা পাছৱৰ্ড ছেট কৰক।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"আপোনাৰ টেবলেটটো স্ক্রীণ লক কৰা কোনো বিকল্পেৰে সুৰক্ষিত কৰিলে সেইটো হেৰালে বা চুৰি হ’লেও কোনেও ব্যৱহাৰ কৰিব নোৱাৰিব। মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধাটো ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। উভতি যাবলৈ বাতিল কৰক-ত টিপক।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"আপোনাৰ ডিভাইচটো স্ক্রীণ লক কৰা কোনো বিকল্পেৰে সুৰক্ষিত কৰিলে সেইটো হেৰালে বা চুৰি হ’লেও কোনেও ব্যৱহাৰ কৰিব নোৱাৰিব। মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধাটো ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। উভতি যাবলৈ বাতিল কৰক-ত টিপক।"</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"আপোনাৰ ফ’নটো স্ক্রীণ লক কৰা কোনো বিকল্পেৰে সুৰক্ষিত কৰিলে সেইটো হেৰালে বা চুৰি হ’লেও কোনেও ব্যৱহাৰ কৰিব নোৱাৰিব। মুখাৱয়বৰদ্বাৰা আনলক কৰা সুবিধাটো ছেট আপ কৰিবলৈ আপোনাক এটা স্ক্ৰীণ লক বিকল্পৰো প্ৰয়োজন। উভতি যাবলৈ বাতিল কৰক-ত টিপক।"</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"পিন ছেট আপ নকৰাকৈ এৰি যাবনে?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"পাছৱৰ্ড ছেট আপ এৰি যাব নেকি?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"আৰ্হি ছেট আপ এৰি যাব নেকি?"</string>
@@ -593,10 +605,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"ফিংগাৰপ্ৰিণ্ট + পাছৱৰ্ড"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"ফিংগাৰপ্ৰিণ্টৰ অবিহনে অব্যাহত ৰাখক"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"আপুনি আপোনাৰ ফিংগাৰপ্ৰিণ্ট ব্যৱহাৰ কৰি আপোনাৰ ফ\'নৰ লক খুলিব পাৰে৷ নিৰাপত্তাৰ বাবে, এই বিকল্পটোক এটা বেকআপ স্ক্ৰীণ লকৰ প্ৰয়োজন।"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"চেহেৰা প্ৰমাণীকৰণ + আৰ্হি"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"চেহেৰা প্ৰমাণীকৰণ + পিন"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"চেহেৰা প্ৰমাণীকৰণ + পাছৱৰ্ড"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"চেহেৰা প্ৰমাণীকৰণ অবিহনেই অব্য়াহত ৰাখক"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"মুখাৱয়বৰদ্বাৰা আনলক + আর্হি"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"মুখাৱয়বৰদ্বাৰা আনলক + পিন"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"মুখাৱয়বৰদ্বাৰা আনলক + পাছৱৰ্ড"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"মুখাৱয়বৰ দ্বাৰা আনলক কৰা সুবিধাটো ব্যৱহাৰ কৰি অব্যাহত ৰাখক"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"আপুনি নিজৰ চেহেৰা ব্যৱহাৰ কৰি আপোনাৰ ফ\'নৰ লক খুলিব পাৰে। সুৰক্ষাৰ বাবে, এই বিকল্পটোক বেক আপ স্ক্ৰীণ লকৰ প্ৰয়োজন।"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"প্ৰশাসক, এনক্ৰিপশ্বন নীতি বা ক্ৰেডেনশ্বিয়েল সঞ্চয়াগাৰৰ দ্বাৰা অক্ষম কৰা হৈছে"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"নাই"</string>
@@ -1217,11 +1229,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"উপলব্ধ পোহৰ অনুযায়ী উজ্জ্বলতাৰ স্তৰ অপ্টিমাইজ কৰক। এই সুবিধাটো অন হৈ থাকিলেও আপুনি সাময়িকভাৱে উজ্জ্বলতা সাল-সলনি কৰিব পাৰিব।"</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"আপোনাৰ স্ক্ৰীণৰ উজ্জ্বলতা আপোনাৰ পৰিবেশ আৰু কাৰ্যকলাপবোৰৰ লগত স্ৱয়ংক্ৰিয়ভাৱে খাপ খায়। আপুনি অনুকূলনযোগ্য় উজ্জ্বলতাক আপোনাৰ অগ্ৰাধিকাৰসমূহ বুজিবলৈ সহায় কৰিবৰ বাবে শ্লাইডাৰক মেনুয়েলভাৱে স্থানান্তৰ কৰিব পাৰে।"</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"শুভ্ৰতাৰ সমতা দেখুৱাওক"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"স্ক্ৰীণৰ সতর্কতা"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"অন / আপুনি যদি চাই থাকে তেন্তে স্ক্ৰীণখন কেতিয়াও বন্ধ নহয়"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"অফ আছে"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"আপুনি চাই থাকিলে স্ক্ৰীণখন বন্ধ হোৱাত বাধা দিয়ে।"</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"কেমেৰাৰ এক্সেছৰ দৰকাৰ"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"ডিভাইচ ব্যক্তিগতকৰণ সেৱাসমূহৰ অনুমতি পৰিচালনা কৰিবলৈ টিপক"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"আপুনি চাই থাকিলে স্ক্ৰীণখন বন্ধ হোৱাত বাধা দিয়ে।"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"স্ক্ৰীণৰ সতর্কতাই কোনোবাই স্ক্ৰীণখন চাই আছে নেকি জানিবলৈ সন্মুখৰ কেমেৰা ব্যৱহাৰ কৰে। এই সুবিধাটোৱে ডিভাইচত কাম কৰে আৰু প্ৰতিচ্ছবিবোৰ কেতিয়াও ষ্ট\'ৰ কৰা বা Googleলৈ পঠিওৱা নহয়।"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"স্ক্রীণখনলৈ চাই থাকোঁতে সেইখন অন কৰি ৰাখক"</string>
     <string name="night_display_title" msgid="2626451512200357686">"ৰাতিৰ পোহৰ"</string>
     <string name="night_display_text" msgid="1837277457033025056">"ৰাতিৰ পোহৰে আপোনাৰ স্ক্ৰীণখন মৌ-বৰণীয়া কৰি তোলে। এই কাৰ্যই আপোনাক স্ক্ৰীণখন চাবলৈ বা কম পোহৰতো পঢ়িবলৈ সুবিধা দিয়ে আৰু ই আপোনাক সহজে টোপনি যোৱাতো সহায় কৰিব পাৰে।"</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"সূচী"</string>
@@ -1258,7 +1274,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"আপোনাৰ স্ক্ৰীণখনক ব্যক্তিগত ৰূপ দিয়ক"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"ৱালপেপাৰ বাছক"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"আপোনাৰ Pixel কাষ্টমাইজ কৰক"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"বিভিন্ন শৈলী, ৱালপেপাৰ, ঘড়ী আৰু অধিক ব্যৱহাৰ কৰি চাওক"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"বিভিন্ন শৈলী, ৱালপেপাৰ আৰু অধিক বস্তু ব্যৱহাৰ কৰি চাওক"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"স্ক্ৰীণ ছেভাৰ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"চ্চাৰ্জ কৰোঁতে বা ডক কৰি থওঁতে"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"কোনোবা এটা"</string>
@@ -1743,9 +1759,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"পাছৱৰ্ড ছেট কৰা হ’ল"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"পিন ছেট কৰা হ’ল"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"আৰ্হি ছেট কৰা হ’ল"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"চেহেৰা প্ৰমাণীকৰণ ব্য়ৱহাৰ কৰিবলৈ পাছৱৰ্ড ছেট কৰক"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"চেহেৰা প্ৰমাণীকৰণ ব্য়ৱহাৰ কৰিবলৈ আৰ্হি ছেট কৰক"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"চেহেৰা প্ৰমাণীকৰণ ব্য়ৱহাৰ কৰিবলৈ পিন ছেট কৰক"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"মুখাৱয়বৰদ্বাৰা আনলকৰ বেক আপ ছেট কৰক"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"মুখাৱয়বৰদ্বাৰা কৰা আনলকৰ বেকআপ ছেট কৰক"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"মুখাৱয়বৰদ্বাৰা কৰা আনলকৰ বেকআপ ছেট কৰক"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"অব্যাহত ৰাখিবলৈ আপোনাৰ ডিভাইচৰ আৰ্হিটো দিয়ক।"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"অব্যাহত ৰাখিবলৈ আপোনাৰ ডিভাইচৰ পিন দিয়ক"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"অব্যাহত ৰাখিবলৈ আপোনাৰ ডিভাইচৰ পাছৱৰ্ডটো দিয়ক"</string>
@@ -2090,6 +2106,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"কোনো সাধ্য সুবিধাৰ সেৱা অন বা অফ কৰিবলৈ স্ক্রীণখনৰ একেবাৰে তলিৰ পৰা ওপৰলৈ তিনিটা আঙুলিৰে ছোৱাইপ কৰক।\n\nসেৱাসমূহ সালসলনিকৈ ব্যৱহাৰ কৰিবলৈ তিনিটা আঙুলিৰে ওপৰলৈ ছোৱাইপ কৰি ধৰি ৰাখক।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"বুজি পালোঁ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"দিব্যাংগসকলৰ সুবিধাৰ বুটামটো <xliff:g id="SERVICE">%1$s</xliff:g> হিচাপে ছেট কৰা হৈ আছে। বিবৰ্ধন ব্যৱহাৰ কৰিবলৈ বুটামটো হেঁচি ৰাখক আৰু তাৰ পিছত বিবৰ্ধন বাছনি কৰক।"</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"সাধ্য সুবিধাৰ নিৰ্দেশ <xliff:g id="SERVICE">%1$s</xliff:g>ত ছেট কৰা হৈছে। বিবৰ্ধন ব্যৱহাৰ কৰিবলৈ দুটা আঙুলিৰে স্ক্ৰীণৰ তলৰ পৰা ওপৰলৈ ছোৱাইপ কৰক আৰু ধৰি ৰাখক। তাৰপাছত বিবৰ্ধন বাছনি কৰক।"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"ভলিউম চাবিৰ শ্বৰ্টকাট"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"সেৱা শ্বৰ্টকাট"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"লক স্ক্ৰীণৰ পৰা নিয়ন্ত্ৰণ কৰক"</string>
@@ -2126,6 +2143,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"সেৱা ব্যৱহাৰ কৰক"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"ৰং শুধৰণি ব্যৱহাৰ কৰক"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"কেপশ্বন ব্যৱহাৰ কৰক"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"সকলো এপে এই ছেটিংটো সমর্থন নকৰে।"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"অব্যাহত ৰাখক"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"শ্ৰৱণ যন্ত্ৰ"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"কোনো শ্ৰৱণ যন্ত্ৰ সংযুক্ত হৈ থকা নাই"</string>
@@ -3377,6 +3395,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"পুল-ডাউন শ্বেড, ষ্টেটাছ বাৰ আৰু লক স্ক্ৰীণত দেখুৱাওক"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"অনুজ্জ্বল পোহৰ"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"লক স্ক্ৰীণ"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"লক স্ক্ৰীণ বাদ দিয়ক"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"মুখাৱয়বৰদ্বাৰা আনলক কৰি, পোনপটীয়াকৈ শেহতীয়াকৈ ব্যৱহাৰ কৰা স্ক্ৰীণলৈ যাওক"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"লক স্ক্ৰীণ, লকস্ক্ৰীণ, বাদ দিয়ক, প্ৰতিহত কৰক"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"কৰ্মস্থানৰ প্ৰ\'ফাইল লক থকা অৱস্থাত"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"লকস্ক্ৰীণৰ জাননীসমূহ"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"সতৰ্কবাণী প্ৰদান কৰা আৰু নীৰৱ জাননীসমূহ দেখুৱাওক"</string>
@@ -4113,9 +4134,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"ৰেংকিং অবজেক্ট পোৱা নগ\'ল।"</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"ৰেংকিং অৱজেক্টেত এই কীটো নাই৷"</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"থিম বনাই থকা হৈছে"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"এক্সেণ্টৰ ৰং"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"শিৰোনাম / সাধাৰণ পাঠৰ ফ\'ণ্ট"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"আইকনৰ আকৃতি"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"ডিভাইচৰ ডিফ’ল্ট ছেটিং"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"ডিছপ্লে’ কাটআউট"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ডিছপ্লে’ কাটআউট, ন’চ্চ"</string>
@@ -4379,11 +4397,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"ছিষ্টেম গ্ৰাফিক্স ড্ৰাইভাৰ"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"এইটো ফ\'নত ছেটিং ব্যৱহাৰ কৰিব নোৱাৰি"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"এইটো টেবলেটত ছেটিং ব্যৱহাৰ কৰিব নোৱাৰি"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"এইটো ডিভাইচত ছেটিং ব্যৱহাৰ কৰিব নোৱাৰি"</string>

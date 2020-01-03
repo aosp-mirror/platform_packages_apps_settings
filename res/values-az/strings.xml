@@ -350,16 +350,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"UTC ofsetinə görə seçin"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Tarix"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vaxt"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Avtomatik kilidləyin"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> yuxudan sonra"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən kilidli saxlanma istisna olmaqla, yuxudan dərhal sonra"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"Yatandan <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> dəqiqə sonra, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən kilidli saxlanma istisna olmaqla"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Ekranın avtomatik söndükdən sonra kilinlənsin"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"Vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən dərhal sonra"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kilid ekranında sahib haqqında infonu göstər"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Ekran mesajını kilidləyin"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Vidcetləri aktivləşdirin"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Admin tərəfindən deaktiv edildi"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Kilid seçimini göstərin"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Kilid ekranında Ağıllı Kilidi, barmaq izi ilə kiliddən çıxarmanı və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Kilid ekranında Ağıllı Kilidi, biometrik kilidi və bilidirişləri deaktiv edən yandırıb-söndürmək düyməsini göstərin"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"İnam agentləri yalnız kiliddən çıxarmanı genişləndirir"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Aktiv edilərsə, cihaz kilidlənənə qədər inam agentləri cihazı kilidsiz saxlayacaq, lakin kilidli cihazı kiliddən çıxara bilməyəcək."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Təhlükəli mühitlərdə ekranı kilidləyin"</string>
@@ -397,10 +397,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Ekran kilidi, barmaq izi"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Ekran kilidi"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Üz əlavə edildi"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Üz identifikasiyası ayarlamaq üçün klikləyin"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Üz identifikasiyası"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Üz kilidi ayarlamaq haqqında"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Üz kilidi ayarlayın"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Üz kilidi ayarlayın"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Üz kilidi"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"İş üçün üz kilidi"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Üz kilidi ayarlamaq haqqında"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Başladın"</string>
@@ -409,11 +410,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Ləğv edin"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Yox, çox sağ olun"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Razıyam"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Daha çox"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Üzünüz ilə kildi açın"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Telefonu kiliddən çıxarmaq və ya satınalmaları təsdiq etmək üçün üzünüzdən istifadə edin.\n\nQeyd: Bu cihazı kiliddən çıxarmaq üçün üzünüzdən istifadə edə bilməzsiniz. Ətraflı məlumat üçün təşkilat admini ilə əlaqə saxlayın."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -428,19 +433,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Üz qeydiyyatı işləmədi."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Hamısı hazırdır. Yaxşı görünür."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Hazırdır"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Üz ilə kiliddən çıxarma performansını təkmilləşdirin"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Üz ilə kiliddən çıxarmanı yenidən qoşun"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Üz ilə kiliddən çıxarmanı yenidən qoşun"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Təhlükəsizlik və performansı yeniləyin"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Üz ilə kiliddən çıxarmanı ayarlayın"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Üz ilə kiliddən çıxarmanı yenidən ayarlamaq üçün hazırkı üz datasını silin.\n\nÜz ilə kiliddən çıxarma üçün istifadə edilən üz datası həmişəlik və təhlükəsiz silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə girmək və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Üz tanınması istifadə edin:"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Telefonu kiliddən çıxarmaq"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Tətbiq girişi və ödənişlər"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Üz kilidi üçün tələb edin"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Ekrana baxarkən gözünüzü açın"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Telefonu kiliddən çıxarmaq üçün həmişə gözləriniz açıq şəkildə ekrana baxın"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Təsdiq düyməsi"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Tətbiqlər üçün doğrulanma zamanı həmişə təsdiq tələb edin"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Üz kilidi üçün tələblər"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Gözlər açıq olmalıdır"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Telefonu kiliddən çıxarmaq üçün gözləriniz açıq olmalıdır"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Həmişə təsdiq tələb edin"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Tətbiqlərdə üz kilidi istifadə etdikdə həmişə təsdiq tələb edin"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Üz datasını silin"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Yeni üz kilidi ayarlayın"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün Üz Kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nTelefon gözləriniz açıq halda üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, məsələn, övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Üz kilidi ayarlayın"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Cihazı kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün üz kilidindən istifadə edin.\n\nUnutmayın:\nAçmaq istəmədiyiniz vaxt telefona baxmaqla onu kiliddən çıxara bilərsiniz.\n\nHətta gözləriniz bağlı halda telefon üzünüzə tərəf tutularsa, başqası tərəfindən açıla bilər.\n\nTelefonunuz, həmçinin Sizə oxşayan övladınız və ya oxşar bacı/qardaşınız tərəfindən kiliddən çıxarıla bilər."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Üz datası silinsin?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Üz kilidi ilə qeydə alınmış data həmişəlik və təhlükəsiz şəkildə silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Üz ilə kiliddən çıxarma üçün istifadə edilən üz datası həmişəlik və təhlükəsiz silinəcək. Silindikdən sonra telefonu kiliddən çıxarmaq, tətbiqlərə daxil olmaq və ödənişləri təsdiq etmək üçün PIN, model və ya parol tələb ediləcək."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Telefonu kiliddən çıxarmaq üçün üz kilidindən istifadə edin"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Barmaq izi"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Barmaq izlərini idarə edin"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Bunun üçün barmaq izi istifadə edin:"</string>
@@ -491,9 +503,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Planşetiniz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Cihazınız itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Telefonunuz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Barmaq izini quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Planşetiniz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Cihazınız itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Telefonunuz itərsə və ya oğurlanarsa, başqasının istifadə edə bilməməsi üçün onu ekran kilidi ilə qoruyun. Üz tanınmasını quraşdırmaq üçün də ekran kilidi tələb edilir. \"Ləğv edin\" seçiminə toxunun, sonra PIN, model və ya parol ayarlayın."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Planşetinizi ekran kilidi ilə qorusanız, itməsi və ya oğurlanması halında başqası ondan istifadə edə bilməyəcək. Üz kilidi quraşdırmaq üçün də ekran kilidi tələb edilir. Geri qayıtmaq üçün \"Ləğv edin\" seçiminə toxunun."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Cihazınızı ekran kilidi ilə qorusanız, itməsi və ya oğurlanması halında başqası ondan istifadə edə bilməyəcək. Üz kilidi quraşdırmaq üçün də ekran kilidi tələb edilir. Geri qayıtmaq üçün \"Ləğv edin\" seçiminə toxunun."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Telefonunuzu ekran kilidi ilə qorusanız, itməsi və ya oğurlanması halında başqası ondan istifadə edə bilməyəcək. Üz kilidi quraşdırmaq üçün də ekran kilidi tələb edilir. Geri qayıtmaq üçün \"Ləğv edin\" seçiminə toxunun."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"PIN ayarlanmasını keçmək istəyirsiniz?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Parol ayarlanmasını keçmək istəyirsən?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Model ayarlanmasını keçmək istəyirsiniz?"</string>
@@ -594,10 +606,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Barmaq izi + Parol"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Barmaq izi olmadan davam edin"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Barmaq izinizi istifadə edərək telefonun kilidini aça bilərsiniz. Təhlükəsizlik üçün, bu seçim yedək ekran kilidi tələb edir."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Üz identifikasiyası + Model"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Üz identifikasiyası + PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Üz identifikasiyası + Parol"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Üz identifikasiyası olmadan davam edin"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Üz kilidi + model"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Üz kilidi + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Üz kilidi + parol"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Üz kilidi olmadan davam edin"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Barmaq izinizi istifadə edərək telefonun kilidini aça bilərsiniz. Təhlükəsizlik üçün bu seçim yedək ekran kilidi tələb edir."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Admin, siyasət və ya yaddaş deaktiv etdi"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Heç biri"</string>
@@ -1218,11 +1230,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Əlçatan işıq üçün parlaqlığı optimallaşdırın. Bu funksiya aktiv olduqda parlaqlığı tənzimləyin."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Ekran parlaqlığı avtomatik olaraq ətraf mühitə və fəaliyyətlrinizə görə tənzimlənəcək. Ayarlana bilən parlaqlığın təcihlərinizi öyrənməsi üçün slayderi əlinizlə hərəkət etdirin."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Ağlıq balansını göstərin"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Ekran həssaslığı"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Aktiv/ Ekrana baxırsınızsa, sönməyəcək"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Deaktiv"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Ekrana baxırsınızsa, onu sönməyə qoymayacaq."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Kamera girişi lazımdır"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Cihaz fərdiləşdirmə xidmətlərinin icazələrini idarə etmək üçün toxunun"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Ekrana baxırsınızsa, onu sönməyə qoymayacaq"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Ekran həssaslığı ekrana baxdığınızı bilmək üçün ön kameradan istifadə edir. Bu, cihazda işləyir. Şəkillər heç vaxt Google\'da saxlanılmır, yaxud göndərilmir."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekrana baxarkən açıq saxlayın"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Gecə işığı"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Gecə İşığı kəhrəba rəngində olur. Bununla da ekrana və ya zəif işıqda qırmızıya baxmaq və yuxuya getmək daha asan olur."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Cədvəl"</string>
@@ -1259,7 +1275,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Ekranınızı fərdiləşdirin"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Divar kağızı seçin"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Pixel\'i fərdiləşdirin"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Fərqli üslub, divar kağızı, saat və s. sınayın"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Fərqli üslub, divar kağızı və s. sınayın"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Ekran qoruyucu"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Enerji doldurulan və ya bərkidilən zaman"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Hər ikisi"</string>
@@ -1744,9 +1760,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Parol ayarlandı"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN ayarlandı"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Model müəyyən edildi"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Üz identifikasiyasından istifadə etmək üçün parol ayarlayın"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Üz identifikasiyasından istifadə etmək üçün model ayarlayın"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Üz identifikasiyasından istifadə etmək üçün PIN ayarlayın"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Üz kilidi üçün parol ayarlayın"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Üz kilidindən üçün model ayarlayın"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Üz kilidi istifadə etmək üçün PIN ayarlayın"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Davam etmək üçün cihaz modelinizi istifadə edin"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Davam etmək üçün cihaz PİN kodunu daxil edin"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Davam etmək üçün cihaz parolunu daxil edin"</string>
@@ -2091,6 +2107,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Əlçatımlılıq xidmətini aktiv və ya deaktiv etmək üçün üç barmağınızla ekranın aşağısından yuxarı doğru sürüşdürün.\n\nXidmətlər arasında keçid etmək üçün ekranı üç barmağınızla yuxarı sürüşdürüb saxlayın."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Anladım"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Əlçatımlılıq düyməsi <xliff:g id="SERVICE">%1$s</xliff:g> xidmətinə ayarlanıb. Böyütməni istifadə etmək üçün Əlçatımlılıq düyməsinə toxunaraq basıb saxlayın, daha sonra böyütmə seçin."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Əlçatımlılıq jesti <xliff:g id="SERVICE">%1$s</xliff:g> funksiyasına ayarlanıb. Miqyasdan istifadə etmək üçün ekranın yuxarısndan iki barmağınızla sürüşdürüb saxlayın. Sonra miqyası seçin."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Səs düyməsi qısayolu"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Qısa yol xidməti"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Ekran kilidindən icazə verin"</string>
@@ -2127,6 +2144,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Xidmətdən istifadə edin"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Rəng korreksiyasından istifadə edin"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Başlıqlardan istifadə edin"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Bütün tətbiqlər bu ayarı dəstəkləmir."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Davam edin"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Qulaqlıq"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Qulaqlıq qoşulmayıb"</string>
@@ -3378,6 +3396,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Aşağı açılan menyu, status paneli &amp; kilid ekranında görünür"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Parıltı işığı"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Ekran kilidi"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Kilid ekranını keçin"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Üz ilə kilidi açdıqdan sonra birbaşa əsas səhifə ekranına keçin"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"Ekran kilidi, ekrankilidi, keçin, ötürün"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"İş profili kilidləndikdə"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Kilid ekranında bildirişlər"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Siqnal və səssiz bildirişləri göstərin"</string>
@@ -4114,9 +4135,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Sıralama obyekti yoxdur."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Obyekt sıralamasında bu açar yoxdur."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Temalar"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Vurğulayıcı rəng"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Başlıq/Mətn şrifti"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"İkona fiquru"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Cihaz defoltu"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Ekran kəsimi"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"ekran kəsimi, nişan"</string>
@@ -4380,11 +4398,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistem Qrafik Drayveri"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Ayar bu telefonda dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Ayar bu planşetdə dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Ayar bu cihazda dəstəklənmir"</string>
@@ -4551,7 +4567,7 @@
     <string name="no_bluetooth_devices" msgid="861861879657732058">"Heç bir Bluetooth cihazı qoşulmayıb"</string>
     <string name="bluetooth_left_name" msgid="2133431890020995442">"Sol"</string>
     <string name="bluetooth_right_name" msgid="525578831502355410">"Sağ"</string>
-    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Case"</string>
+    <string name="bluetooth_middle_name" msgid="3272836932362043957">"Qutu"</string>
     <string name="settings_panel_title" msgid="4688575606213055744">"Ayarlar Paneli"</string>
     <string name="internet_connectivity_panel_title" msgid="721392242301676444">"İnternet Bağlantısı"</string>
     <string name="volume_connectivity_panel_title" msgid="9192664643867101356">"Səs səviyyəsi"</string>

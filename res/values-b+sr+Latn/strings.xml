@@ -352,16 +352,16 @@
     <string name="zone_menu_by_offset" msgid="7161573994228041794">"Izab. prema odstup. od UTC-a"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Datum"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Vreme"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"Automatski zaključaj"</string>
-    <string name="lock_after_timeout_summary" msgid="6128431871360905631">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> posle stanja spavanja"</string>
-    <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Odmah posle spavanja, osim kada ga <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ostavlja otključanim"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> posle spavanja, osim kada ga <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ostavlja otključanim"</string>
+    <string name="lock_after_timeout" msgid="3041497579354520533">"Zaključaj posle gašenja ekrana"</string>
+    <string name="lock_after_timeout_summary" msgid="6446294520193562658">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> posle gašenja ekrana"</string>
+    <string name="lock_immediately_summary_with_exception" msgid="4887058374400817711">"Odmah posle gašenja ekrana, osim kada <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ne dozvoljava zaključavanje"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="5693037914721259546">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> posle gašenja ekrana, osim kada <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> sprečava zaključavanje"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Prikaži informacije o vlasniku na zaključ. ekranu"</string>
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Poruka na zaključanom ekranu"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Omogući vidžete"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Administrator je onemogućio"</string>
     <string name="lockdown_settings_title" msgid="7393790212603280213">"Prikaži opciju zaključavanja"</string>
-    <string name="lockdown_settings_summary" msgid="429230431748285997">"Prikazuje se opcija dugmeta za napajanje koja isključuje Smart Lock, otključavanje pomoću otisaka prstiju i obaveštenja na zaključanom ekranu"</string>
+    <string name="lockdown_settings_summary" msgid="4359438673563318171">"Prikazuje opciju dugmeta za napajanje koja isključuje Smart Lock, biometrijsko otključavanje i obaveštenja na zaključanom ekranu"</string>
     <string name="trust_agents_extend_unlock_title" msgid="2796555263565097031">"Pouzdani agenti - duže otključano"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="3976344969220255010">"Ako je omogućeno, pouzdani agenti će omogućiti da uređaj duže ostane otključan, ali ne mogu više da otključavaju zaključan uređaj."</string>
     <string name="trust_lost_locks_screen_title" msgid="2992742466966021682">"Zaključaj ekran kada je agent nepouzdan"</string>
@@ -400,10 +400,11 @@
     <string name="security_dashboard_summary" msgid="6757421634477554939">"Zaključavanje ekrana, otisak prsta"</string>
     <string name="security_dashboard_summary_no_fingerprint" msgid="8129641548372335540">"Zaključavanje ekrana"</string>
     <string name="security_settings_face_preference_summary" msgid="1290187225482642821">"Lice je dodato"</string>
-    <string name="security_settings_face_preference_summary_none" msgid="5460349732790152186">"Dodirom podesite potvrdu identiteta licem"</string>
-    <string name="security_settings_face_preference_title" msgid="7074548721778680481">"Potvr. identit. licem"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="2695443729648587731">"Kako da podesite Otključavanje licem"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="368169172872968330">"Podesite otključavanje licem"</string>
+    <string name="security_settings_face_preference_summary_none" msgid="5596571291522936724">"Podesite otključavanje licem"</string>
+    <string name="security_settings_face_preference_title" msgid="5277300443693527785">"Otključavanje licem"</string>
+    <string name="security_settings_face_profile_preference_title" msgid="3906383224724942953">"Otključavanje lica za Work"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="6027417312490791135">"Kako da podesite otključavanje licem"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4233918594329755623">"Podesite otključavanje licem"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="4697363240703556987">"Potvrdite identitet licem"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4401918487764636333"></string>
     <string name="security_settings_face_enroll_education_start" msgid="6186306855277346454">"Započnite"</string>
@@ -412,11 +413,15 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="4455532390587307262"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7075186169796301461"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="4277182322482408514">"Otkaži"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="8771760983171429187">"Ne, hvala"</string>
+    <string name="security_settings_face_enroll_introduction_agree" msgid="6370134135096047691">"Prihvatam"</string>
+    <string name="security_settings_face_enroll_introduction_more" msgid="8933757421629981560">"Još"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="2694505011712885439">"Otključajte pomoću lica"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="8180330567034286589">"Potvrdite identitet licem"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="6150611993438981458">"Otključavajte telefon, odobravajte kupovine ili se prijavljujte u aplikacije pomoću lica."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="6393270235632444857">"Otključavajte telefon ili odobravajte kupovine pomoću lica.\n\nNapomena: Ne možete da otključavate ovaj uređaj pomoću lica. Više informacija zatražite od administratora organizacije."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="5704661081718707858">"Otključavajte telefon, odobravajte kupovine ili se prijavljujte u aplikacije pomoću lica"</string>
+    <string name="security_settings_face_enroll_introduction_footer_part_0" msgid="3316520154949466889"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_1" msgid="5594630288374571903"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_2" msgid="7576241712527601978"></string>
     <string name="security_settings_face_enroll_introduction_footer_part_3" msgid="7355240941877607603"></string>
@@ -431,19 +436,26 @@
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3825066262969499407">"Registracija lica nije uspela."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="8268014305067971249">"Gotovo. Izgleda da je sve u redu."</string>
     <string name="security_settings_face_enroll_done" msgid="6670735678797960484">"Gotovo"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_title" msgid="2597813999178151532">"Poboljšajte učinak otključavanja licem"</string>
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" msgid="7484130460331761292">"Ponovo podesite otključavanje licem"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_title" msgid="4337628251738248911">"Ponovo podesite otključavanje licem"</string>
+    <string name="security_settings_face_enroll_must_re_enroll_subtitle" msgid="997167500186209482">"Poboljšajte bezbednost i učinak"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6606576886674071486">"Podesite otključavanje licem"</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" msgid="430128610958597146">"Izbrišite aktuelne podatke o licu da biste ponovo podesili otključavanje licem.\n\nPodaci o licu koje koristi otključavanje licem biće trajno i bezbedno izbrisani. Posle brisanja trebaće vam PIN, obrazac ili lozinka da biste otključali telefon, prijavljivali se u aplikacije i potvrđivali plaćanja."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="4087133372842623883">"Koristi otklj. licem za"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="8780794239930621913">"Otključavanje telefona"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="5751549943998662469">"Prijavljivanje u aplikacije i plaćanja"</string>
-    <string name="security_settings_face_settings_require_category" msgid="2643852178287575557">"Zatraži za otključavanje licem"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="1891157027896989860">"Otvorite oči i pogledajte u ekran"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="6063278991544881786">"Da biste otključali telefon, uvek pogledajte u ekran sa otvorenim očima"</string>
-    <string name="security_settings_face_settings_require_confirmation" msgid="3555852478589689141">"Dugme za potvrdu"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="7965662696468917986">"Uvek zahtevaj potvrdu korisnika za potvrdu identiteta u aplikacijama"</string>
+    <string name="security_settings_face_settings_require_category" msgid="2523822050054597822">"Uslovi za otključavanje licem"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="8523824066748480516">"Oči moraju da budu otvorene"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="6595676992796133643">"Da biste otključali telefon, oči moraju da budu otvorene"</string>
+    <string name="security_settings_face_settings_require_confirmation" msgid="2559602923985027572">"Uvek traži potvrdu"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6466094680756211420">"Uvek zahtevaj potvrdu pri korišćenju otključavanja licem u aplikacijama"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="304401377141467791">"Briši podatke o licu"</string>
-    <string name="security_settings_face_settings_enroll" msgid="664990192460698660">"Podesite novo otključavanje licem"</string>
-    <string name="security_settings_face_settings_footer" msgid="7769500154351757004">"Otključajte uređaj, prijavite se u aplikaciju i potvrdite plaćanje pomoću otključavanja licem.\n\nImajte u vidu:\nAko pogledate telefon, možete i nehotice da ga otključate.\n\nTelefon može da otključa neko drugi ako ga približi vašem licu dok su vam oči otvorene.\n\nTelefon može da otključa neko ko mnogo liči na vas, na primer, vaše dete ili identični blizanac."</string>
+    <string name="security_settings_face_settings_enroll" msgid="495403103503629382">"Podesite otključavanje licem"</string>
+    <string name="security_settings_face_settings_footer" msgid="1233594882557106034">"Otključajte uređaj, prijavite se u aplikaciju i potvrdite plaćanje pomoću otključavanja licem.\n\nImajte u vidu:\nAko pogledate telefon, možete nehotice da ga otključate.\n\nTelefon može da otključa neko drugi ako ga približi vašem licu čak i ako su vam oči zatvorene.\n\nTelefon može da otključa neko ko mnogo liči na vas, na primer, identični blizanac."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="4829278778459836075">"Brišete podatke o licu?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="2609671025686003946">"Podaci sačuvani u procesu otključavanja licem biće trajno i bezbedno izbrisani. Posle brisanja trebaće vam PIN, obrazac ili lozinka da biste otključali telefon, prijavljivali se u aplikacije i potvrđivali plaćanja."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="1653339107100339721">"Podaci o licu koje koristi otključavanje licem biće trajno i bezbedno izbrisani. Posle uklanjanja trebaće vam PIN, obrazac ili lozinka da biste otključali telefon, prijavljivali se u aplikacije i potvrđivali plaćanja."</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="4381276009777294566">"Otključajte telefon licem"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2488725232406204350">"Otisak prsta"</string>
     <string name="fingerprint_manage_category_title" msgid="8293801041700001681">"Upravljaj otis. prstiju"</string>
     <string name="fingerprint_usage_category_title" msgid="8438526918999536619">"Koristi otis. prsta za"</string>
@@ -495,9 +507,9 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7914950545902198894">"Zaštitite tablet pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otisak prsta. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="device" msgid="2300047476104528001">"Zaštitite uređaj pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otisak prsta. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="5823994499768751994">"Zaštitite telefon pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otisak prsta. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="4490601819500843860">"Zaštitite tablet pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili potvrdu identiteta licem. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="3741624920522374098">"Zaštitite uređaj pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili potvrdu identiteta licem. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="3523360900206227082">"Zaštitite telefon pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili potvrdu identiteta licem. Dodirnite Otkaži, pa podesite PIN, šablon ili lozinku."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="2053646029913482047">"Zaštitite tablet pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otključavanje licem. Dodirnite Otkaži da biste se vratili."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="8884769457436280503">"Zaštitite uređaj pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otključavanje licem. Dodirnite Otkaži da biste se vratili."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="1752907123591111728">"Zaštitite telefon pomoću opcije zaključavanja ekrana da niko ne bi mogao da ga koristi ako ga izgubite ili vam ga ukradu. Opcija zaključavanja ekrana vam treba i da biste podesili otključavanje licem. Dodirnite Otkaži da biste se vratili."</string>
     <string name="lock_screen_pin_skip_title" msgid="8064328201816780457">"Želite li da preskočite podešavanje PIN-a?"</string>
     <string name="lock_screen_password_skip_title" msgid="4155009417576409182">"Želite li da preskočite podešavanje lozinke?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="6467327818577283960">"Želite li da preskočite podešavanje šablona?"</string>
@@ -598,10 +610,10 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="7351131075806338634">"Imprint + lozinka"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="1441077909803666681">"Nastavite bez otiska prsta"</string>
     <string name="fingerprint_unlock_title" msgid="2826226740306003991">"Možete da otključate telefon pomoću otiska prsta. Ova opcija zahteva rezervni metod zaključavanja ekrana iz bezbednosnih razloga."</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="8792301636367000123">"Potvrda identiteta licem i šablon"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="1196620299595657479">"Potvrda identiteta licem i PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="223117276773907474">"Potvrda identiteta licem i lozinka"</string>
-    <string name="face_unlock_skip_face" msgid="6362883392838482791">"Nastavite bez potvrde identiteta licem"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="4077659104229192018">"Otključavanje licem + šablon"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="1359249613033276716">"Otključavanje licem + PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="7135335310498158870">"Otključavanje licem + lozinka"</string>
+    <string name="face_unlock_skip_face" msgid="3481956557015165094">"Nastavite bez otključavanja licem"</string>
     <string name="face_unlock_title" msgid="9042382084472444316">"Možete da otključate telefon pomoću lica. Ova opcija zahteva rezervni metod zaključavanja ekrana iz bezbednosnih razloga."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="2051593894736282302">"Onemogućio administrator, smernice za šifrovanje ili skladište akreditiva"</string>
     <string name="unlock_set_unlock_mode_off" msgid="5881952274566013651">"Ništa"</string>
@@ -1206,7 +1218,7 @@
     <string name="color_mode_option_natural" msgid="5013837483986772758">"Prirodne"</string>
     <string name="color_mode_option_boosted" msgid="8588223970257287524">"Pojačane"</string>
     <string name="color_mode_option_saturated" msgid="4569683960058798843">"Zasićene"</string>
-    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Prilagodljiv"</string>
+    <string name="color_mode_option_automatic" msgid="7996505473528529568">"Prilagodljivo"</string>
     <string name="color_mode_summary_natural" msgid="6624188642920403099">"Koristite samo tačne boje"</string>
     <string name="color_mode_summary_automatic" msgid="4669516973360709431">"Birajte između živopisnih i tačnih boja"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Promeni položaj automatski prilikom rotiranja tableta"</string>
@@ -1237,11 +1249,15 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Optimizujte nivo osvetljenosti prema svetlu. Možete privremeno da podesite osvetljenost i kad je ova opcija uključena."</string>
     <string name="auto_brightness_description" msgid="7310335517128283729">"Osvetljenost ekrana će se automatski prilagoditi okruženju i aktivnostima. Možete ručno da pomerate klizač da bi prilagodljivo podešavanje osvetljenosti naučilo šta vam odgovara."</string>
     <string name="display_white_balance_title" msgid="4093966473741329340">"Balans bele ekrana"</string>
+    <string name="display_white_balance_summary" msgid="2432539678792029039"></string>
     <string name="adaptive_sleep_title" msgid="455088457232472047">"Pažnja ekrana"</string>
     <string name="adaptive_sleep_summary_on" msgid="410222811715459549">"Uključeno/ekran se neće isključiti ako gledate u njega"</string>
     <string name="adaptive_sleep_summary_off" msgid="3099674463517017514">"Isključeno"</string>
-    <string name="adaptive_sleep_description" msgid="3202004081780217465">"Sprečava isključivanje ekrana ako gledate u njega."</string>
+    <string name="adaptive_sleep_title_no_permission" msgid="7893003608238361004">"Potreban je pristup kameri"</string>
+    <string name="adaptive_sleep_summary_no_permission" msgid="2875851728693203108">"Dodirnite da biste upravljali dozvolama za usluge personalizacije uređaja"</string>
+    <string name="adaptive_sleep_description" msgid="3741651460279997459">"Sprečava isključivanje ekrana ako gledate u njega"</string>
     <string name="adaptive_sleep_privacy" msgid="5335695648960686765">"Pažnja ekrana koristi prednju kameru da bi utvrdila da li neko gleda u ekran. Radi na uređaju, a slike se nikada ne čuvaju niti šalju Google-u."</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="6922838078388927214">"Ekran ostaje uključen dok gledate u njega"</string>
     <string name="night_display_title" msgid="2626451512200357686">"Noćno svetlo"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Noćno svetlo daje ekranu žutonarandžastu nijansu. To vam omogućava da lakše pregledate sadržaj ekrana pri prigušenom svetlu i da lakše zaspite."</string>
     <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Zakažite"</string>
@@ -1278,7 +1294,7 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalizujte ekran"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Izaberite pozadinu iz"</string>
     <string name="style_suggestion_title" msgid="4710867417147087928">"Prilagodite Pixel"</string>
-    <string name="style_suggestion_summary" msgid="4592087484229499188">"Probajte drugačije stilove, pozadine, satove i još mnogo toga"</string>
+    <string name="style_suggestion_summary" msgid="1811974280164432649">"Probajte drugačije stilove, pozadine i još toga"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Čuvar ekrana"</string>
     <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Tokom punjenja ili na baznoj stanici"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Bilo koje od ova dva"</string>
@@ -1765,9 +1781,9 @@
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Lozinka je postavljena"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN je postavljen"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Šablon je postavljen"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="7876621019688907534">"Potvrda identiteta licem zahteva lozinku"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="8070525076987585344">"Potvrda identiteta licem zahteva šablon"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="7304398683609714816">"Potvrda identiteta licem zahteva PIN"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="6696331060928616331">"Otključavanje licem zahteva lozinku"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="3981667199682290816">"Otključavanje licem zahteva šablon"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="3692990199320431002">"Otključavanje licem zahteva PIN"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="2920960858283879113">"Upotrebite šablon za uređaj da biste nastavili"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="4062335874438910487">"Unesite PIN uređaja da biste nastavili"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="3976394862548354966">"Unesite lozinku uređaja da biste nastavili"</string>
@@ -2113,6 +2129,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="8539343463529744661">"Da biste uključili ili isključili uslugu pristupačnosti, prevlačite nagore od dna ekrana pomoću tri prsta.\n\nDa biste prelazili sa jedne usluge na drugu, prevlačite nagore pomoću tri prsta i zadržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="8530755446904847423">"Važi"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="70533120652758190">"Dugme za pristupačnost je podešeno na <xliff:g id="SERVICE">%1$s</xliff:g>. Da biste koristili uvećanje, dodirnite i zadržite dugme za pristupačnost, pa izaberite uvećanje."</string>
+    <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="5558685139615434791">"Pokret za pristupačnost je podešen na funkciju <xliff:g id="SERVICE">%1$s</xliff:g>. Da biste koristili uvećanje, prevlačite nagore od dna ekrana pomoću dva prsta i zadržite. Zatim odaberite uvećanje."</string>
     <string name="accessibility_global_gesture_preference_title" msgid="2048884356166982714">"Taster jačine zvuka kao prečica"</string>
     <string name="accessibility_shortcut_service_title" msgid="4779360749706905640">"Usluga prečice"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5490636079625489534">"Omogući na zaključanom ekranu"</string>
@@ -2149,6 +2166,7 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Koristi uslugu"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Koristi korekciju boja"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Koristi natpise"</string>
+    <string name="accessibility_caption_preference_summary" msgid="7898443636143430927">"Ne podržavaju sve aplikacije ovo podešavanje."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="974461729380409972">"Nastavi"</string>
     <string name="accessibility_hearingaid_title" msgid="8312145423610648518">"Slušni aparati"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="6240237523789614599">"Nije povezan nijedan slušni aparat"</string>
@@ -2931,9 +2949,9 @@
       <item quantity="other">Proveri sertifikate</item>
     </plurals>
     <string name="user_settings_title" msgid="3493908927709169019">"Više korisnika"</string>
-    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Delite uređaj tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na uređaju za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
-    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Delite tablet tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na tabletu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
-    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Delite telefon tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na telefonu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i još mnogo toga."</string>
+    <string name="user_settings_footer_text" product="device" msgid="5947601460660791129">"Delite uređaj tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na uređaju za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
+    <string name="user_settings_footer_text" product="tablet" msgid="2153761434649733502">"Delite tablet tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na tabletu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
+    <string name="user_settings_footer_text" product="default" msgid="2844602828189838075">"Delite telefon tako što ćete dodati nove korisnike. Svaki korisnik ima lični prostor na telefonu za prilagođene početne ekrane, naloge, aplikacije, podešavanja i drugo."</string>
     <string name="user_list_title" msgid="7937158411137563543">"Korisnici i profili"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Dodaj korisnika ili profil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Dodaj korisnika"</string>
@@ -3423,6 +3441,9 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="4222628772925544654">"Prikaži na kliznom panelu, statusnoj traci i zaključanom ekranu"</string>
     <string name="notification_pulse_title" msgid="1905382958860387030">"Uključi treperenje lampice"</string>
     <string name="lock_screen_notifications_title" msgid="7604704224172951090">"Zaključan ekran"</string>
+    <string name="lockscreen_bypass_title" msgid="3077831331856929085">"Preskakanje zaključanog ekrana"</string>
+    <string name="lockscreen_bypass_summary" msgid="2767475923650816867">"Posle otključavanja licem idi direktno na poslednji ekran"</string>
+    <string name="keywords_lockscreen_bypass" msgid="250300001805572693">"zaključani ekran, preskočiti, zaobići"</string>
     <string name="locked_work_profile_notification_title" msgid="8327882003361551992">"Kada je profil za Work zaključan"</string>
     <string name="lock_screen_notifs_title" msgid="3812061224136552712">"Obaveštenja na zaključanom ekranu"</string>
     <string name="lock_screen_notifs_show_all" msgid="5848645268278883539">"Prikazuj zvučna i utišana obaveštenja"</string>
@@ -4183,9 +4204,6 @@
     <string name="notification_log_details_ranking_null" msgid="244660392058720919">"Nedostaje objekat za rangiranje."</string>
     <string name="notification_log_details_ranking_none" msgid="599607025882587844">"Objekat za rangiranje ne sadrži ovu šifru."</string>
     <string name="theme_customization_category" msgid="1049181544004163283">"Teme"</string>
-    <string name="theme_customization_accent_color_title" msgid="2946868019715911717">"Boja za naglašavanje"</string>
-    <string name="theme_customization_font_title" msgid="1634160034866477544">"Font naslova/teksta"</string>
-    <string name="theme_customization_icon_shape_title" msgid="9168569756271940841">"Oblik ikone"</string>
     <string name="theme_customization_device_default" msgid="5058147707906551368">"Podrazumevano podešavanje za uređaj"</string>
     <string name="display_cutout_emulation" msgid="7466869822418376317">"Izrez ekrana"</string>
     <string name="display_cutout_emulation_keywords" msgid="4495418317471622562">"izrezana slika za ekran, urez"</string>
@@ -4460,11 +4478,9 @@
     <string name="game_driver_app_preference_system" msgid="8272672982113332753">"Sistemski upravljački program za grafiku"</string>
     <!-- no translation found for game_driver_all_apps_preference_values:0 (7193648562434970105) -->
     <!-- no translation found for game_driver_all_apps_preference_values:1 (7189663725490629463) -->
-    <!-- no translation found for game_driver_all_apps_preference_values:2 (7166160247759864796) -->
     <!-- no translation found for game_driver_app_preference_values:0 (4271044622117073985) -->
     <!-- no translation found for game_driver_app_preference_values:1 (6628516810440406199) -->
     <!-- no translation found for game_driver_app_preference_values:2 (1760397725970916076) -->
-    <!-- no translation found for game_driver_app_preference_values:3 (6260984152570269090) -->
     <string name="unsupported_setting_summary" product="default" msgid="11246953620654225">"Podešavanje nije podržano na ovom telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="6328431665635673717">"Podešavanje nije podržano na ovom tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="2348970994972110886">"Podešavanje nije podržano na ovom uređaju"</string>
