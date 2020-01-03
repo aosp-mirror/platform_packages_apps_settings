@@ -702,6 +702,24 @@
         <item>Accessibility volume</item>
     </string-array>
 
+    <!-- Keys for the list of accessibility auto click xml. -->
+    <string-array name="accessibility_autoclick_control_selector_keys" translatable="false">
+        <item>accessibility_control_autoclick_default</item>
+        <item>accessibility_control_autoclick_200ms</item>
+        <item>accessibility_control_autoclick_600ms</item>
+        <item>accessibility_control_autoclick_1sec</item>
+        <item>accessibility_control_autoclick_custom</item>
+    </string-array>
+
+    <!-- Values for the list of accessibility auto click, pairs to Keys . -->
+    <integer-array name="accessibility_autoclick_selector_values" translatable="false">
+        <item>0</item>
+        <item>200</item>
+        <item>600</item>
+        <item>1000</item>
+        <item>2000</item>
+    </integer-array>
+
     <!-- Keys for the list of accessibility timeouts xml. -->
     <string-array name="accessibility_timeout_control_selector_keys" translatable="false">
         <item>accessibility_control_timeout_default</item>
