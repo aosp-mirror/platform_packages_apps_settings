@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Siirrä viimeiseksi"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Poista kieli"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Valitse toiminto"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Laitteen tiedot"</string>
     <string name="display_label" msgid="3056320781191343221">"Näyttö"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB-tallennustila"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD-kortti"</string>
@@ -767,6 +766,8 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Napauta tästä kirjautuaksesi verkkoon"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mt/s"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa ottaa Wi-Fin käyttöön."</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Vahvista korjattavien sovell. tavukoodi"</string>
@@ -774,8 +775,10 @@
     <string name="show_refresh_rate" msgid="5742688821872354973">"Näytä päivitysväli"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Näytä nykyisen näytön päivitysväli"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC käyttöön"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC vaihtaa tietoja tämän ja muiden lähellä olevien laitteiden tai kohteiden, esimerkiksi maksupäätteiden, syötteenlukijoiden tai interaktiivisten mainosten/tagien, kanssa."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Suojaa NFC-käyttö"</string>
@@ -853,7 +856,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Wi-Fi-haku on käytössä"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Lisäasetukset"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lisäasetusten avattava luettelo"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"tiivistä"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"laajenna"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Verkon nimi"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Anna SSID"</string>
@@ -864,6 +866,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Tila"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Välityslinkin nopeus"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Vastaanottolinkin nopeus"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Yhteyden nopeus"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Taajuus"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP-osoite"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Tallennettu seuraavan kautta:"</string>
@@ -903,12 +906,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Varmista, että laite on liitetty virtalähteeseen, ladattu ja päällä. Jos ongelma ei ratkea, ota yhteyttä laitteen valmistajaan"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Tämä laite ei tue <xliff:g id="SSID">%1$s</xliff:g>:n lisäämistä"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Kokeile siirtää laite lähemmäs Wi-Fi-tukiasemaa tai ‑reititintä"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Tarkista salasana ja yritä uudelleen"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Ota yhteyttä laitteen valmistajaan"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Tarkista yhteys ja yritä uudelleen"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Valitse verkko"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Yhdistä laitteesi valitsemalla verkko"</string>
@@ -1262,7 +1262,7 @@
     <string name="doze_summary" msgid="1047254712885464738">"Aktivoi näyttö, kun saat ilmoituksia."</string>
     <string name="doze_always_on_title" msgid="3357953547262808865">"Aina käytössä"</string>
     <string name="doze_always_on_summary" msgid="1593188198982222910">"Näytä aika, ilmoituskuvakkeet ja muut tiedot. Tämä asetus kuluttaa akkua nopeammin."</string>
-    <string name="title_font_size" msgid="570613010306330622">"Kirjasimen koko"</string>
+    <string name="title_font_size" msgid="570613010306330622">"Fontin koko"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Suurenna tai pienennä tekstiä."</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM-kortin lukitusasetukset"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kortin lukitus"</string>
@@ -1569,6 +1569,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"APN-oletusasetukset on palautettu."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Palautusvalinnat"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Voit nollata verkon, sovellusten tai laitteen asetukset."</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Sovellukset voidaan nollata"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Nollaa Wi-Fin, mobiiliverkon ja Bluetoothin asetukset"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Tämä nollaa kaikki verkkoasetukset, esimerkiksi seuraavat:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobiilidata"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Tyhjennä ladatut SIM-kortit"</string>
@@ -2041,7 +2042,7 @@
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Näytönlukijat, näyttö, käytönhallinta"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Näköasetukset"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Voit muokata laitteen ominaisuuksia tarpeidesi mukaan. Käytettävyysvalintoja voi muuttaa myöhemmin asetuksissa."</string>
-    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Muuta kirjasinkokoa"</string>
+    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Muuta fonttikokoa"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Näytönlukuohjelmat"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Ääni ja näyttöteksti"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Näyttö"</string>
@@ -2054,26 +2055,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Napauta kohteita näytöllä, niin ne luetaan ääneen."</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tekstitysvalinnat"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Suurennus"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Suurennettava alue"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Valitse alueet, joihin näytön suurennusta käytetään"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Koko näyttö"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Osa näytöstä"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Koko näyttö ja osa näytöstä"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Suurenna koko näyttö"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Suurenna osa näytöstä"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Näytä liikkeen ohjain"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Näytä ohjainsauvan tapainen ohjain suurennettavan alueen siirtämiseksi"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Asetusten suurentaminen"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Suurenna kolmoisnapautuksella"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Suurenna pikanäppäimellä"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Suurenna pikanäppäimellä ja kolmoisnapautuksella."</string>
@@ -2132,7 +2123,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Valitse, miten pitkään haluat nähdä viestit, jotka pyytävät reagoimaan mutta näkyvät vain väliaikaisesti.\n\nKaikki sovellukset eivät tue tätä asetusta."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pitkäkestoisen kosketuksen viive"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Käänteiset värit"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Voi vaikuttaa suorituskykyyn"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Käänteiset värit"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Muuta kirkkaat näytöt tummiksi parantaaksesi kirkkaalle valolle herkkien ihmisten katselukokemusta.\n\nHuom. Tummista väreistä tulee vaaleita. Myös kuvien värit näkyvät käänteisinä."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Viiveajoitus"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Jos käytät hiirtä, voit asettaa osoittimen klikkaamaan automaattisesti, kun se on ollut paikoillaan tietyn aikaa."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Viive ennen klikkausta"</string>
@@ -2142,7 +2134,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Kosketuspalaute"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Valitse <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Käytä värinkorjausta"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Käytä tekstityksiä"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Näytä tekstitykset"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Tekstityksen ulkonäkö"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Tekstin koko, tekstityksen tyyli"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Lisää asetuksia"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Kaikki sovellukset eivät tue tätä asetusta."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Esteettömyyspainike"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Pyyhkäisy kahdella sormella alhaalta ylöspäin"</string>
@@ -2216,7 +2211,7 @@
     <string name="captioning_foreground_opacity" msgid="1395843080697567189">"Tekstin läpinäkyvyys"</string>
     <string name="captioning_edge_color" msgid="6035818279902597518">"Reunan väri"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"Reunan tyyppi"</string>
-    <string name="captioning_typeface" msgid="285325623518361407">"Kirjasinperhe"</string>
+    <string name="captioning_typeface" msgid="285325623518361407">"Fonttiperhe"</string>
     <string name="captioning_preview_text" msgid="4973475065545995704">"Tekstitys näyttää tältä"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"Oletus"</string>
@@ -3132,6 +3127,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Asetukset"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, verkkoyhteys, internet, langaton, data, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi ilmoitus, wifi ilmoitus"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Lopeta värinä, napauta, näppäimistö"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Käytä 24 tunnin kelloa"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Lataa"</string>
@@ -3200,7 +3197,7 @@
     <string name="keywords_storage_settings" msgid="6018856193950281898">"muisti, välimuisti, data, poista, tyhjennä, vapauta, tila"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"yhdistetty, laite, kuulokkeet, kuulokemikrofoni, kaiutin, langaton, pari, nappikuulokkeet, musiikki, media"</string>
     <string name="keywords_wallpaper" msgid="6712776876474488023">"tausta, näyttö, lukitusnäyttö, teema"</string>
-    <string name="keywords_styles" msgid="6312134005271042434">"kuvakkeen muoto, korostusväri, kirjasin"</string>
+    <string name="keywords_styles" msgid="6312134005271042434">"kuvakkeen muoto, korostusväri, fontti"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"oletus, assistant"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"maksu, oletus"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"saapuva ilmoitus"</string>
@@ -3975,8 +3972,8 @@
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Sisäinen tallennustila: <xliff:g id="PERCENTAGE">%1$s</xliff:g> käytössä, <xliff:g id="FREE_SPACE">%2$s</xliff:g> vapaana"</string>
     <string name="display_summary" msgid="5526061030874717172">"Jos laitetta ei käytetä, se siirtyy virransäästötilaan, kun <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> on kulunut."</string>
     <string name="display_dashboard_summary" msgid="5102247404958535634">"Taustakuva, virransäästö, fonttikoko"</string>
-    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"Tyylit, taustakuvat, näytön aikakatkaisu, kirjasinkoko"</string>
-    <string name="display_dashboard_nowallpaper_summary" msgid="6198590533661927162">"Virransäästö, kirjasinkoko"</string>
+    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"Tyylit, taustakuvat, näytön aikakatkaisu, fonttikoko"</string>
+    <string name="display_dashboard_nowallpaper_summary" msgid="6198590533661927162">"Virransäästö, fonttikoko"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Jos laitetta ei käytetä, se siirtyy virransäästötilaan, kun 10 minuuttia on kulunut."</string>
     <string name="memory_summary" msgid="8221954450951651735">"Muistia käytetty keskimäärin <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Kirjautunut sisään käyttäjänä <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -4248,8 +4245,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Suurempi herkkyys voi olla ristiriidassa näytön reunan sovelluseleiden kanssa."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Takaisin-eleen herkkyys"</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Eleasetukset"</string>
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"eleillä navigointi, Takaisin-eleen herkkyys, Takaisin-ele"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Tarkista ilmoitukset kaksoisnapauttamalla puhelimen näyttöä"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Tarkista ilmoitukset kaksoisnapauttamalla tabletin näyttöä"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Tarkista ilmoitukset kaksoisnapauttamalla laitteen näyttöä"</string>
@@ -4596,7 +4592,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Virheellinen verkkotila <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ohita."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tukiasemien nimet"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ei käytettävissä <xliff:g id="CARRIER">%1$s</xliff:g> ‑käytön aikana"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Terveystiedot, hätäyhteystiedot"</string>
     <string name="see_more" msgid="7499355691042812723">"Lisää"</string>
     <string name="see_less" msgid="2642392725363552793">"Näytä vähemmän"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Käytettävä laite: <xliff:g id="APPNAME">%1$s</xliff:g>"</string>

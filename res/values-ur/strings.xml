@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"نیچے منتقل کریں"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"زبان ہٹائیں"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"سرگرمی منتخب کریں"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"آلہ کی معلومات"</string>
     <string name="display_label" msgid="3056320781191343221">"اسکرین"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"‏USB اسٹوریج"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"‏SD کارڈ"</string>
@@ -767,17 +766,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"نیٹ ورک میں سائن ان کرنے کے لیے یہاں تھپتھپائیں"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"‏<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi کو آن کرنا چاہتی ہے"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"‏<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi کو آف کرنا چاہتی ہے"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"قابل ڈیبگ اپپس کے بائٹ کوڈ کی توثیق کریں"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"‏قابل ڈیبگ اپپس کے بائٹ کوڈ کی توثیق کے لیے ART کو اجازت دیں"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"ریفریش کی شرح دکھائیں"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"موجودہ ڈسپلے کی ریفریش کی شرح دکھائیں"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"ٹیبلٹ دوسرے آلہ سے ٹچ ہونے پر ڈیٹا کے تبادلے کی اجازت دیں"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"فون کو دوسرے آلہ سے ٹچ ہونے پر ڈیٹا کے تبادلے کی اجازت دیں"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"‏NFC آن کریں"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"‏NFC اس آلہ اور دیگر قریبی آلات یا اہداف جیسے ادائیگی ٹرمینل، رسائی ریڈرز، اور انٹرایکٹو اشتہارات یا ٹیگز کے درمیان ڈیٹا سوئچ کرتا ہے۔"</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"‏محفوظ NFC"</string>
@@ -855,7 +856,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"‏Wi‑Fi اسکیننگ آن ہے"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"جدید ترین اختیارات"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ڈراپ ڈاؤن فہرست کے اعلی درجے کے اختیارات"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"سکیڑیں"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"پھیلائیں"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"نیٹ ورک کا نام"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"‏SSID درج کریں"</string>
@@ -866,6 +866,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"اسٹیٹس"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"ترسیل کے لنک کی رفتار"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"لنک کی رفتار وصول کریں"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"لنک کی رفتار"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"تعدد"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"‏IP پتہ"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"محفوظ کردہ بذریعہ"</string>
@@ -905,12 +906,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"یقینی بنائیں کے آلہ کو پلگ ان، چارج اور آن کر دیا گیا ہے"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"یقینی بنائیں کے آلہ کو پلگ ان، چارج اور آن کر دیا گیا ہے۔ اگر مسئلہ جاری رہتا ہے تو آلہ کے صنعت کار سے رابطہ کریں"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"<xliff:g id="SSID">%1$s</xliff:g> کو شامل کرنا اس آلہ میں سپورٹ شدہ نہیں ہے"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"‏آلہ کو اپنے Wi-Fi رسائی پوائنٹ/روٹر کے قریب منتقل کرنے کی کوشش کریں"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"پاس ورڈ چیک کریں اور دبارہ کوشش کریں"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"آلہ کے مینوفیکچرر سے رابطہ کریں"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"کنکشن چیک کریں اور دوبارہ کوشش کریں"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"نیٹ ورک منتخب کریں"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"اپنے آلہ کو منسلک کرنے کے لیے نیٹ ورک منتخب کریں"</string>
@@ -1571,6 +1569,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"‏ڈیفالٹ APN ترتیبات کو دوبارہ ترتیب دینے کا عمل مکمل ہو گیا۔"</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"ری سیٹ کے اختیارات"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"نیٹ ورک، ایپس، یا آلہ کو ری سیٹ کیا جا سکتا ہے"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"ایپس کو ری سیٹ کیا جا سکتا ہے"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"‏Wi-Fi، موبائل اور بلوٹوتھ ری سیٹ کریں"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"‏اس سے نیٹ ورک کی سبھی ترتیبات ری سیٹ ہو جائیں گی، بشمول:\n\n"<li>"Wi‑Fi"</li>\n<li>"موبائل ڈیٹا"</li>\n<li>"بلوٹوتھ"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"‏ڈاؤن لوڈ کردہ SIMs کو مٹائیں"</string>
@@ -2056,26 +2055,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"آئٹمز کو بہ آواز بلند پڑھتے ہوئے سننے کیلئے اپنی اسکرین پر ان آئٹمز کو تھپتھپائیں"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"کیپشن کی ترجیحات"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"میگنیفکیشن"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"میگنیفکیشن کی جگہ"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"اسکرین بڑا کرتے وقت آپ جس میگنیفکیشن جگہ(جگہیں) استعمال کرنا چاہتے ہیں وہ منتخب کریں"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"پوری اسکرین"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"اسکرین کا حصہ"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"مکمل اسکرین اور اسکرین کا حصہ"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"پوری اسکرین کو بڑا کریں"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"اسکرین کا حصہ بڑا کریں"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"کنٹرولر منتقل کریں کو دکھائیں"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"میگنیفکیشن کی جگہ منتقل کرنے کے لیے جوائے اسٹک جیسا کنٹرولر دکھائیں"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"ترتیبات کو بڑا کریں"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"تین بار تھپتھپا کر بڑا کریں"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"شارٹ کٹ سے بڑا کریں"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"شارٹ کٹ اور تین بار تھپتھپانے سے بڑا کریں"</string>
@@ -2093,16 +2082,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"ایکسیسبیلٹی سروس آن یا آف کرنے کے لیے، دو انگلیوں سے اسکرین کے نیچے سے اوپر کی طرف سوائپ کریں۔\n\nسروسز کے مابین سوئچ کرنے کے لیے، دو انگلیوں سے اوپر سوائپ کرکے ہولڈ کریں۔"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"ایکسیسبیلٹی سروس آن یا آف کرنے کے لیے، تین انگلیوں سے اسکرین کے نیچے سے اوپر کی طرف سوائپ کریں۔\n\nسروسز کے مابین سوئچ کرنے کے لیے، تین انگلیوں سے اوپر سوائپ کرکے ہولڈ کریں۔"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"سمجھ آ گئی"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"کھولنے کے ليے شارٹ کٹ استعمال کریں"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"بڑا کرنے ليے شارٹ کٹ کا استعمال کریں"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"<xliff:g id="SERVICE">%1$s</xliff:g> کھولنے کے ليے شارٹ کٹ"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"بڑا کرنے ليے شارٹ کٹ"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"رنگ کی اصلاح کھولنے کے ليے شارٹ کٹ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"ایکسیسبیلٹی بٹن"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"نیچے سے اوپر کی طرف 2 انگلیوں سے سوائپ کریں"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"اپنی اسکرین کے نیچے <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> بٹن پر تھپتھپائیں"</string>
@@ -2139,7 +2123,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"ان پیغامات کو دکھانے کی مدت منتخب کریں جو آپ سے کارروائی کرنے کا مطالبہ کرتے ہیں، لیکن عارضی طور پر دکھائی دیتے ہیں۔\n\nسبھی ایپس اس ترتیب کا تعاون نہیں کرتی ہیں۔"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"چھونے اور دبائے رکھنے کا وقفہ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"رنگوں کی تقلیب"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"کارکردگی متاثر ہو سکتی ہے"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"رنگوں کو الٹ کریں"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"ہلکی اسکرینز کو گہرا کر دیں تاکہ جو لوگ چمکدار روشنی سے حساس ہیں انہیں دیکھنے کا بہتر تجربہ ہو سکے۔\n\nنوٹ: گہرا رنگ ہلکا ہو جائے گا۔ تصاویر کے رنگ بھی الٹے ہو جائیں گے۔"</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"پوائنٹر حرکت کے بعد کلک کا وقت"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"اگر آپ ماؤس استعمال کر رہے ہیں تو مخصوص وقت کے لئے کرسر کی حرکت موقوف ہونے پر آپ خودکار طور پر کارروائی کرنے کے لئے کرسر کو سیٹ کر سکتے ہیں۔"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"کلک سے قبل توقف"</string>
@@ -2149,7 +2134,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ٹچ تاثرات"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> استعمال کریں"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"رنگ کی اصلاح استعمال کریں"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"کیپشنز استعمال کریں"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"کیپشنز دکھائیں"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"کیپشن کی ہئیت"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"متن کا سائز اور کیپشن کا طرز"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"مزید اختیارات"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"اس ترتیب کو سبھی ایپس سپورٹ نہیں کرتی ہیں۔"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ایکسیسبیلٹی بٹن"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"نیچے سے اوپر کی طرف 2 انگلیوں سے سوائپ کریں"</string>
@@ -3137,6 +3125,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"ترتیبات"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"‏wifi، wi-fi، نیٹ ورک کنکشن، انٹرنیٹ، وائر لیس، ڈیٹا، wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏Wi‑Fi کی اطلاع، wifi کی اطلاع"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"وائبریشن روکیں، تھپتھپائیں، کی بورڈ"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24 گھنٹے کا فارمیٹ استعمال کریں"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"ڈاؤن لوڈ کریں"</string>
@@ -3392,18 +3382,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"تغیر پذیر اطلاعات"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"تغیر پذیر اطلاع کی ترجیح"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"کم ترجیحی اطلاعات کو لطیف پر خودکار طور پر سیٹ کریں"</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"تغیر پذیر اطلاع کی درجہ بندی"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"مطابقت کے لحاظ سے خودکار طور پر درجہ کی اطلاعات"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"تجویز کردہ کارروائیاں اور جوابات"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"تجویز کردہ کارروائیوں اور جوابات کو خودکار طور پر دکھائیں"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"اطلاع کی اسنوزنگ کی اجازت دیں"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"لطیف اطلاعات کے آئیکنز کو چھپائیں"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"لطیف اطلاعات کے آئیکنز اسٹیٹس بار میں دکھائی نہیں دے رہے ہیں"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"اطلاعاتی ڈاٹس کی اجازت دیں"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"حالیہ گفتگوئیں کی پٹی میں دکھائیں"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"بُلبُلے"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"کچھ اطلاعات اسکرین پر بلبلوں کی طرح ظاہر ہو سکتی ہیں"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"کچھ اطلاعات اور دیگر مواد اسکرین پر بلبلوں کی طرح ظاہر ہو سکتے ہیں۔ بلبلہ کھولنے کے لیے، اس پر تھپتھپائیں۔ اسے برخاست کرنے کے لیے، اسے گھسیٹ کر نیچے اسکرین پر لے جائیں۔"</string>
@@ -4251,17 +4238,12 @@
     <string name="information_label" msgid="6939310810756569298">"معلومات"</string>
     <string name="low_label" msgid="6525629096999711220">"کم"</string>
     <string name="high_label" msgid="357503396626018487">"زیادہ"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"بایاں کنارہ"</string>
+    <string name="right_edge" msgid="1505309103265829121">"دایاں کنارہ"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"اسکرین کے کناروں پر اعلی حساسیت کسی بھی ایپ کے اشاروں کے ساتھ تصادم کا سبب بن سکتی ہیں۔"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"پیچھے کی حساسیت"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"اشارے کی ترتیبات"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"اشاروں والی نیویگیشن، پیچھے کی حساسیت، پیچھے کا اشارہ"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"فون کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"ٹیبلیٹ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"آلہ کو چیک کرنے کیلئے دو بار تھپتھپائیں"</string>
@@ -4608,7 +4590,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"غلط نیٹ ورک موڈ <xliff:g id="NETWORKMODEID">%1$d</xliff:g>۔ نظر انداز کریں۔"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"رسائی کی جگہ کے نام"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> سے منسلک ہونے پر دستیاب نہیں ہے"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"طبی معلومات، ایمرجنسی رابطے"</string>
     <string name="see_more" msgid="7499355691042812723">"مزید دیکھیں"</string>
     <string name="see_less" msgid="2642392725363552793">"کم دیکھیں"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> کے ساتھ استعمال کیا جانے والا آلہ"</string>
@@ -4699,18 +4680,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"آپ کے کام کی پالیسی کی معلومات"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"‏آپ کے IT منتظم کے ذریعے نظم کردہ ترتیبات"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"بگ رپورٹ کا ہینڈلر"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"آپ کے آلے پر کون سی ایپ بگ رپورٹ شارٹ کٹ ہینڈل کرتی اس کا تعین کرتی ہے۔"</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"ذاتی"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"دفتر"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"سسٹم ڈیفالٹ"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"یہ انتخاب اب درست نہیں رہا۔ دوبارہ کوشش کریں۔"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

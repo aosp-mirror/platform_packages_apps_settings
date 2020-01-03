@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Chuyển xuống dưới cùng"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Xóa ngôn ngữ"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Chọn hoạt động"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Thông tin thiết bị"</string>
     <string name="display_label" msgid="3056320781191343221">"Màn hình"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"Bộ nhớ USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"Thẻ SD"</string>
@@ -767,6 +766,8 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Nhấn vào đây để đăng nhập vào mạng"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/giây"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/giây"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> muốn bật Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> muốn tắt Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Xác minh bytecode của ứng dụng có thể gỡ lỗi"</string>
@@ -774,8 +775,10 @@
     <string name="show_refresh_rate" msgid="5742688821872354973">"Hiển thị tốc độ làm mới"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Hiển thị tốc độ làm mới trên màn hình hiện tại"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Cho phép trao đổi dữ liệu khi máy tính bảng chạm vào thiết bị khác"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Cho phép trao đổi dữ liệu khi điện thoại chạm vào thiết bị khác"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Bật NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC trao đổi dữ liệu giữa thiết bị này với các thiết bị hoặc thiết bị đích lân cận khác, chẳng hạn như trạm thanh toán, trình đọc truy cập và các quảng cáo hoặc thẻ tương tác."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Bảo mật NFC"</string>
@@ -853,7 +856,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Đã bật tính năng quét tìm Wi‑Fi"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Danh sách thả xuống của Tùy chọn nâng cao"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"thu gọn"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"mở rộng"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Tên mạng"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Nhập SSID"</string>
@@ -864,6 +866,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Trạng thái"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Tốc độ của liên kết truyền"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Tốc độ nhận đường dẫn liên kết"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Tốc độ liên kết"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Tần số"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"Địa chỉa IP"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Đã lưu thông qua"</string>
@@ -903,12 +906,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Hãy đảm bảo thiết bị đã cắm điện, sạc đầy và đang bật"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Hãy đảm bảo thiết bị đã cắm điện, sạc đầy và đang bật. Nếu sự cố vẫn tiếp diễn, hãy liên hệ với nhà sản xuất thiết bị"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Không hỗ trợ thêm “<xliff:g id="SSID">%1$s</xliff:g>” bằng thiết bị này"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Thử đưa thiết bị đến gần bộ định tuyến/điểm truy cập Wi-Fi"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Kiểm tra mật khẩu rồi thử lại"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Liên hệ với nhà sản xuất thiết bị"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Hãy kiểm tra trạng thái kết nối rồi thử lại"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Chọn mạng"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Để kết nối thiết bị của bạn, hãy chọn một mạng"</string>
@@ -1569,6 +1569,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Đặt lại cài đặt APN mặc định đã hoàn tất."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Tùy chọn đặt lại"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Có thể đặt lại mạng, ứng dụng hoặc thiết bị"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Có thể đặt lại các ứng dụng"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Đặt lại Wi-Fi, di động và Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Thao tác này sẽ đặt lại tất cả các tùy chọn cài đặt mạng, bao gồm:\n\n"<li>"Wi‑Fi"</li>\n<li>"Dữ liệu di động"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Xóa SIM đã tải xuống"</string>
@@ -2054,26 +2055,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Nhấn vào mục trên màn hình của bạn để nghe mục được đọc to"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Tùy chọn phụ đề"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Phóng to"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Khu vực phóng to"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Chọn (các) khu vực phóng to mà bạn muốn dùng khi phóng to màn hình"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Toàn màn hình"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Một phần màn hình"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Toàn màn hình và một phần màn hình"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Phóng to toàn bộ màn hình"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Phóng to một phần màn hình"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Hiển thị bộ điều khiển di chuyển"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Hiển thị cần điều khiển để di chuyển khu vực phóng to"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Cài đặt phóng to"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Phóng to bằng cách nhấn 3 lần"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Phóng to bằng phím tắt"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Phóng to bằng phím tắt và nhấn 3 lần"</string>
@@ -2132,7 +2123,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Chọn thời lượng hiển thị thông báo yêu cầu bạn thực hiện hành động nhưng chỉ hiển thị tạm thời.\n\nKhông phải tất cả ứng dụng đều hỗ trợ tùy chọn cài đặt này."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Thời gian chờ cho chạm và giữ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Đảo màu"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Có thể ảnh hưởng đến hiệu suất"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Đảo ngược màu"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Tùy chọn chuyển màn hình sáng thành tối giúp những người nhạy cảm với ánh sáng chói có thể có trải nghiệm xem tốt hơn.\n\nLưu ý: màu tối sẽ chuyển thành màu sáng. Màu của ảnh cũng sẽ được đảo ngược."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Thời gian dừng"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Nếu đang sử dụng chuột, thì bạn có thể đặt con trỏ chuột để tự động thực hiện hành động khi con trỏ chuột dừng di chuyển trong một khoảng thời gian nhất định."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Trì hoãn trước khi nhấp"</string>
@@ -2142,7 +2134,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Phản hồi chạm"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Sử dụng <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Sử dụng tính năng sửa màu"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Sử dụng phụ đề"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Hiển thị phụ đề"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Giao diện phụ đề"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Cỡ chữ, kiểu phụ đề"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Tùy chọn khác"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Không phải ứng dụng nào cũng hỗ trợ tùy chọn cài đặt này."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Nút hỗ trợ tiếp cận"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"dùng 2 ngón tay vuốt từ dưới lên"</string>
@@ -3132,6 +3127,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Cài đặt"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, kết nối mạng, internet, không dây, dữ liệu, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"thông báo về Wi‑Fi, thông báo wifi"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Ngừng rung, nhấn, bàn phím"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Sử dụng định dạng 24 giờ"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Tải xuống"</string>
@@ -3273,7 +3270,7 @@
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Đặt quy tắc Không làm phiền"</string>
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Lên lịch"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Sử dụng lịch biểu"</string>
-    <string name="zen_mode_option_important_interruptions" msgid="1258558302247351758">"Chỉ ưu tiên"</string>
+    <string name="zen_mode_option_important_interruptions" msgid="1258558302247351758">"Chỉ cho các mục ưu tiên"</string>
     <string name="zen_mode_option_alarms" msgid="5757128948796316657">"Chỉ chuông báo"</string>
     <string name="zen_mode_option_no_interruptions" msgid="2686373425603566479">"Hoàn toàn tắt tiếng"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
@@ -3323,7 +3320,7 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Chế độ Không làm phiền đã được một ứng dụng (<xliff:g id="APP_NAME">%s</xliff:g>) bật tự động"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Chế độ Không làm phiền đang bật đối với <xliff:g id="RULE_NAMES">%s</xliff:g> với các mục cài đặt tùy chỉnh."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="2310353944697868606"><annotation id="link">" Xem mục cài đặt tùy chỉnh"</annotation></string>
-    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Chỉ ưu tiên"</string>
+    <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Chỉ cho các mục ưu tiên"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Đang bật / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Đang tắt / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -4248,8 +4245,7 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Độ nhạy cao hơn có thể xung đột với mọi cử chỉ trong ứng dụng dọc theo các cạnh màn hình."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Độ nhạy với cử chỉ quay lại"</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Tùy chọn cài đặt về cử chỉ"</string>
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"thao tác bằng cử chỉ, độ nhạy với cử chỉ quay lại, cử chỉ quay lại"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Nhấn đúp để kiểm tra điện thoại"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Nhấn đúp để kiểm tra máy tính bảng"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Nhấn đúp để kiểm tra thiết bị"</string>
@@ -4596,7 +4592,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Chế độ mạng <xliff:g id="NETWORKMODEID">%1$d</xliff:g> không hợp lệ. Bỏ qua."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Tên điểm truy cập"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Không sử dụng được khi kết nối với <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Thông tin y tế, người liên hệ lúc khẩn cấp"</string>
     <string name="see_more" msgid="7499355691042812723">"Xem thêm"</string>
     <string name="see_less" msgid="2642392725363552793">"Xem bớt"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Thiết bị sẽ sử dụng với <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
