@@ -187,6 +187,9 @@ public class NetworkOperatorPreference extends Preference {
             return mShow4GForLTE
                     ? R.drawable.ic_signal_strength_4g : R.drawable.signal_strength_lte;
         }
+        if (ci instanceof CellInfoNr) {
+            return R.drawable.signal_strength_5g;
+        }
         return MobileNetworkUtils.NO_CELL_DATA_TYPE_ICON;
     }
 
