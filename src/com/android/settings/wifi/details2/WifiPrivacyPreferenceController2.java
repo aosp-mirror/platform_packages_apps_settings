@@ -88,7 +88,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
             // To activate changing, we need to reconnect network. WiFi will auto connect to
             // current network after disconnect(). Only needed when this is connected network.
             if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
-                mWifiEntry.disconnect();
+                mWifiEntry.disconnect(null /* callback */);
             }
         }
         updateSummary((DropDownPreference) preference, privacy);

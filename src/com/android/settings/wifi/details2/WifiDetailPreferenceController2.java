@@ -75,12 +75,14 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
+import com.android.wifitrackerlib.WifiEntry.ForgetCallback;
+import com.android.wifitrackerlib.WifiEntry.ForgetCallback.ForgetStatus;
+import com.android.wifitrackerlib.WifiEntry.SignInCallback;
+import com.android.wifitrackerlib.WifiEntry.SignInCallback.SignInStatus;
 import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ConnectStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.DisconnectStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.ForgetStatus;
-import com.android.wifitrackerlib.WifiEntry.WifiEntryCallback.SignInStatus;
 
 import java.net.Inet4Address;
 import java.net.Inet6Address;
@@ -95,7 +97,7 @@ import java.util.stream.Collectors;
  */
 public class WifiDetailPreferenceController2 extends AbstractPreferenceController
         implements PreferenceControllerMixin, WifiDialog2Listener, LifecycleObserver, OnPause,
-        OnResume, WifiEntryCallback {
+        OnResume, WifiEntryCallback, ConnectCallback, ForgetCallback, SignInCallback {
 
     private static final String TAG = "WifiDetailsPrefCtrl2";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -214,8 +216,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                         || hasCapabilityChanged(nc, NET_CAPABILITY_VALIDATED)
                         || hasCapabilityChanged(nc, NET_CAPABILITY_CAPTIVE_PORTAL)
                         || hasCapabilityChanged(nc, NET_CAPABILITY_PARTIAL_CONNECTIVITY)) {
-                    // TODO(b/143326832): What to do with WifiEntry?
-                    // mAccessPoint.update(mWifiConfig, mWifiInfo, mNetworkInfo);
                     refreshEntityHeader();
                 }
                 mNetworkCapabilities = nc;
@@ -706,7 +706,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             showConfirmForgetDialog();
             return;
         } else {
-            mWifiEntry.forget();
+            mWifiEntry.forget(this);
         }
 
         mMetricsFeatureProvider.action(
@@ -719,7 +719,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         final AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setPositiveButton(R.string.forget, ((dialog1, which) -> {
                     try {
-                        mWifiEntry.forget();
+                        mWifiEntry.forget(this);
                     } catch (RuntimeException e) {
                         Log.e(TAG, "Failed to remove Passpoint configuration for "
                                 + WifiEntryShell.getPasspointFqdn(mWifiEntry));
@@ -768,7 +768,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private void signIntoNetwork() {
         mMetricsFeatureProvider.action(
                 mFragment.getActivity(), SettingsEnums.ACTION_WIFI_SIGNIN);
-        mConnectivityManager.startCaptivePortalApp(mNetwork);
+        mWifiEntry.signIn(this);
     }
 
     @Override
@@ -814,7 +814,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
     @VisibleForTesting
     void connectNetwork() {
-        mWifiEntry.connect();
+        mWifiEntry.connect(this);
     }
 
     private void refreshMacTitle() {
@@ -849,7 +849,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      */
     @Override
     public void onConnectResult(@ConnectStatus int status) {
-        if (status == WifiEntryCallback.CONNECT_STATUS_SUCCESS) {
+        if (status == ConnectCallback.CONNECT_STATUS_SUCCESS) {
             Toast.makeText(mContext,
                     mContext.getString(R.string.wifi_connected_to_message, mWifiEntry.getTitle()),
                     Toast.LENGTH_SHORT).show();
@@ -868,25 +868,26 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 .setButton3Visible(true);
     }
 
+    // TODO: Add disconnect button.
     /**
      * Result of the disconnect request indicated by the DISCONNECT_STATUS constants.
      */
-    @Override
-    public void onDisconnectResult(@DisconnectStatus int status) {
-        if (status != WifiEntryCallback.DISCONNECT_STATUS_SUCCESS) {
-            Log.e(TAG, "Disconnect Wi-Fi network failed");
-        }
-
-        updateNetworkInfo();
-        refreshPage();
-    }
+    //@Override
+    //public void onDisconnectResult(@DisconnectStatus int status) {
+    //    if (status != DisconnectCallback.DISCONNECT_STATUS_SUCCESS) {
+    //        Log.e(TAG, "Disconnect Wi-Fi network failed");
+    //    }
+    //
+    //    updateNetworkInfo();
+    //    refreshPage();
+    //}
 
     /**
      * Result of the forget request indicated by the FORGET_STATUS constants.
      */
     @Override
     public void onForgetResult(@ForgetStatus int status) {
-        if (status != WifiEntryCallback.FORGET_STATUS_SUCCESS) {
+        if (status != ForgetCallback.FORGET_STATUS_SUCCESS) {
             Log.e(TAG, "Forget Wi-Fi network failed");
         }
 
