@@ -117,7 +117,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
     private static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
     private static final String PREF_KEY_ACCESS_POINTS = "access_points";
-    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
+    private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_wifi_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
     private static final String PREF_KEY_STATUS_MESSAGE = "wifi_status_message";
     @VisibleForTesting
@@ -1096,7 +1096,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 .launch();
     }
 
-    /** Helper method to return whether an WifiEntry is disabled due to a wrong password */
+    /** Helper method to return whether a WifiEntry is disabled due to a wrong password */
     private static boolean isDisabledByWrongPassword(WifiEntry wifiEntry) {
         WifiConfiguration config = wifiEntry.getWifiConfiguration();
         if (config == null) {

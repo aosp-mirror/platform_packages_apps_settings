@@ -46,6 +46,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -71,6 +74,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
     private final UserManager mUm;
     private final PackageManager mPackageManager;
     private final IPackageManager mIPackageManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     /**
      * Internal collection of device admin info objects for all profiles associated with the current
      * user.
@@ -102,6 +106,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = mContext.getPackageManager();
         mIPackageManager = AppGlobals.getPackageManager();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -197,6 +202,8 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         pref.setSummary(item.getDescription());
         pref.setEnabled(item.isEnabled());
         pref.setOnPreferenceClickListener(preference -> {
+            mMetricsFeatureProvider.logClickedPreference(preference,
+                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
             final UserHandle user = item.getUser();
             mContext.startActivityAsUser(item.getLaunchIntent(mContext), user);
             return true;
