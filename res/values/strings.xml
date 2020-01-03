@@ -2763,7 +2763,7 @@
     <string name="night_display_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_never">Will never turn on automatically</string>
-    <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of night display when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="night_display_summary_off_auto_mode_twilight">Will turn on automatically at sunset</string>
@@ -2805,9 +2805,11 @@
     <string name="dark_ui_auto_mode_title">Schedule</string>
     <!-- Dark UI screen, setting option value for Dark UI to *never* turn on/off automatically. [CHAR LIMIT=30] -->
     <string name="dark_ui_auto_mode_never">None</string>
-    <!-- Dark UIscreen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <!-- Dark UI screen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
     <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
-    <!-- Dark UIscreen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <!-- Dark UI screen, setting option value for Dark theme to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=32] -->
+    <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
+    <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
     <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
@@ -2815,12 +2817,20 @@
     <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
     <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
+        <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
+    <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
+    <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
 
