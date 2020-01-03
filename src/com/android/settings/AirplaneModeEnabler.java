@@ -22,11 +22,11 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
-import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settings.network.ProxySubscriptionManager;
@@ -34,7 +34,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,13 +59,12 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     }
 
     private TelephonyManager mTelephonyManager;
-    private ProxySubscriptionManager mProxySubscriptionMgr;
-    private List<ServiceStateListener> mServiceStateListeners;
+    @VisibleForTesting
+    PhoneStateListener mPhoneStateListener;
 
     private GlobalSettingsChangeListener mAirplaneModeObserver;
 
-    public AirplaneModeEnabler(Context context,
-            OnAirplaneModeChangedListener listener) {
+    public AirplaneModeEnabler(Context context, OnAirplaneModeChangedListener listener) {
         super(context, Settings.Global.AIRPLANE_MODE_ON);
 
         mContext = context;
@@ -74,7 +72,16 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         mOnAirplaneModeChangedListener = listener;
 
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
+
+        mPhoneStateListener = new PhoneStateListener() {
+            @Override
+            public void onRadioPowerStateChanged(int state) {
+                if (DEBUG) {
+                    Log.d(LOG_TAG, "RadioPower: " + state);
+                }
+                onAirplaneModeChanged();
+            }
+        };
     }
 
     /**
@@ -88,35 +95,13 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     }
 
     public void resume() {
-        final List<SubscriptionInfo> subInfoList =
-                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-
-        mServiceStateListeners = new ArrayList<ServiceStateListener>();
-
-        // add default listener
-        mServiceStateListeners.add(new ServiceStateListener(mTelephonyManager,
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID, this));
-
-        if (subInfoList != null) {
-            for (SubscriptionInfo subInfo : subInfoList) {
-                mServiceStateListeners.add(new ServiceStateListener(mTelephonyManager,
-                        subInfo.getSubscriptionId(), this));
-            }
-        }
-
-        for (ServiceStateListener listener : mServiceStateListeners) {
-            listener.start();
-        }
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_RADIO_POWER_STATE_CHANGED);
     }
 
     public void pause() {
-        if (mServiceStateListeners == null) {
-            return;
-        }
-        for (ServiceStateListener listener : mServiceStateListeners) {
-            listener.stop();
-        }
-        mServiceStateListeners = null;
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_NONE);
     }
 
     private void setAirplaneModeOn(boolean enabling) {
@@ -159,7 +144,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
             return true;
         }
         final List<SubscriptionInfo> subInfoList =
-                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+                ProxySubscriptionManager.getInstance(mContext).getActiveSubscriptionsInfo();
         if (subInfoList == null) {
             return false;
         }
@@ -200,51 +185,4 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     public boolean isAirplaneModeOn() {
         return WirelessUtils.isAirplaneModeOn(mContext);
     }
-
-    private static class ServiceStateListener extends PhoneStateListener {
-        private ServiceStateListener(TelephonyManager telephonyManager, int subscriptionId,
-                AirplaneModeEnabler enabler) {
-            super();
-            mSubId = subscriptionId;
-            mTelephonyManager = getSubIdSpecificTelephonyManager(telephonyManager);
-            mEnabler = enabler;
-        }
-
-        private final int mSubId;
-        private final TelephonyManager mTelephonyManager;
-        private final AirplaneModeEnabler mEnabler;
-
-        int getSubscriptionId() {
-            return mSubId;
-        }
-
-        void start() {
-            if (mTelephonyManager != null) {
-                mTelephonyManager.listen(this, PhoneStateListener.LISTEN_SERVICE_STATE);
-            }
-        }
-
-        void stop() {
-            if (mTelephonyManager != null) {
-                mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
-            }
-        }
-
-        @Override
-        public void onServiceStateChanged(ServiceState serviceState) {
-            if (DEBUG) {
-                Log.d(LOG_TAG, "ServiceState in sub" + mSubId + ": " + serviceState);
-            }
-            mEnabler.onAirplaneModeChanged();
-        }
-
-        private TelephonyManager getSubIdSpecificTelephonyManager(
-                TelephonyManager telephonyManager) {
-            if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                return telephonyManager;
-            }
-            return telephonyManager.createForSubscriptionId(mSubId);
-        }
-    }
-
 }

@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.os.Build;
@@ -55,15 +57,75 @@ final class AccessibilityUtil {
     }
 
     /**
+     * Annotation for different shortcut type UI type.
+     *
+     * {@code DEFAULT} for displaying default value.
+     * {@code SOFTWARE} for displaying specifying the accessibility services or features which
+     * choose accessibility button in the navigation bar as preferred shortcut.
+     * {@code HARDWARE} for displaying specifying the accessibility services or features which
+     * choose accessibility shortcut as preferred shortcut.
+     * {@code TRIPLETAP} for displaying specifying magnification to be toggled via quickly
+     * tapping screen 3 times as preferred shortcut.
+     */
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            ShortcutType.DEFAULT,
+            ShortcutType.SOFTWARE,
+            ShortcutType.HARDWARE,
+            ShortcutType.TRIPLETAP,
+    })
+
+    /** Denotes the shortcut type. */
+    public @interface ShortcutType {
+        int DEFAULT = 0;
+        int SOFTWARE = 1; // 1 << 0
+        int HARDWARE = 2; // 1 << 1
+        int TRIPLETAP = 4; // 1 << 2
+    }
+
+    /** Denotes the accessibility enabled status */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface State {
+        int OFF = 0;
+        int ON = 1;
+    }
+
+    /**
      * Return On/Off string according to the setting which specifies the integer value 1 or 0. This
      * setting is defined in the secure system settings {@link android.provider.Settings.Secure}.
      */
     static CharSequence getSummary(Context context, String settingsSecureKey) {
         final boolean enabled = Settings.Secure.getInt(context.getContentResolver(),
-                settingsSecureKey, 0) == 1;
+                settingsSecureKey, State.OFF) == State.ON;
         final int resId = enabled ? R.string.accessibility_feature_state_on
                 : R.string.accessibility_feature_state_off;
         return context.getResources().getText(resId);
+    }
+
+    /**
+     * Capitalizes a string by capitalizing the first character and making the remaining characters
+     * lower case.
+     */
+    public static String capitalize(String stringToCapitalize) {
+        if (stringToCapitalize == null) {
+            return null;
+        }
+
+        StringBuilder capitalizedString = new StringBuilder();
+        if (stringToCapitalize.length() > 0) {
+            capitalizedString.append(stringToCapitalize.substring(0, 1).toUpperCase());
+            if (stringToCapitalize.length() > 1) {
+                capitalizedString.append(stringToCapitalize.substring(1).toLowerCase());
+            }
+        }
+        return capitalizedString.toString();
+    }
+
+    /** Determines if a gesture navigation bar is being used. */
+    public static boolean isGestureNavigateEnabled(Context context) {
+        return context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)
+                == NAV_BAR_MODE_GESTURAL;
     }
 
     /**

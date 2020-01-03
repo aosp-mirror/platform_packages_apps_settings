@@ -23,6 +23,8 @@ import android.view.View;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
+
 /**
  * Abstract base activity which handles the actual enrolling for biometrics.
  */
@@ -58,7 +60,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     @Override
     protected void onStop() {
-        super.onStop();
         if (mSidecar != null) {
             mSidecar.setListener(null);
         }
@@ -68,6 +69,9 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                 mSidecar.cancelEnrollment();
                 getSupportFragmentManager()
                         .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+            }
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+                setResult(RESULT_TIMEOUT);
             }
             finish();
         }

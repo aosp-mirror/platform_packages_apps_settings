@@ -19,7 +19,9 @@ package com.android.settings.biometrics.face;
 import static android.app.Activity.RESULT_OK;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
+import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
+import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -89,6 +91,9 @@ public class FaceSettings extends DashboardFragment {
         mRemoveButton.setVisible(false);
         mEnrollButton.setVisible(true);
     };
+
+    private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
+            startActivityForResult(intent, ENROLL_REQUEST);
 
     public static boolean isAvailable(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
@@ -230,11 +235,16 @@ public class FaceSettings extends DashboardFragment {
                     }
                 }
             }
+        } else if (requestCode == ENROLL_REQUEST) {
+            if (resultCode == RESULT_TIMEOUT) {
+                setResult(resultCode, data);
+                finish();
+            }
         }
 
         if (mToken == null) {
             // Didn't get an authentication, finishing
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -252,7 +262,7 @@ public class FaceSettings extends DashboardFragment {
                 }
                 mToken = null;
             }
-            getActivity().finish();
+            finish();
         }
     }
 
@@ -277,6 +287,7 @@ public class FaceSettings extends DashboardFragment {
                 mRemoveController.setActivity((SettingsActivity) getActivity());
             } else if (controller instanceof FaceSettingsEnrollButtonPreferenceController) {
                 mEnrollController = (FaceSettingsEnrollButtonPreferenceController) controller;
+                mEnrollController.setListener(mEnrollListener);
                 mEnrollController.setActivity((SettingsActivity) getActivity());
             }
         }
