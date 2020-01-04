@@ -218,7 +218,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Mutați jos"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Eliminați limba"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Alegeți activitatea"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Informații despre dispozitiv"</string>
     <string name="display_label" msgid="3056320781191343221">"Ecran"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"Stocare USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"Card SD"</string>
@@ -784,17 +783,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Atingeți aici pentru a vă conecta la rețea"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> încearcă să activeze Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> încearcă să dezactiveze Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificați bytecode-ul aplicațiilor care pot fi depanate"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permiteți ART să verifice bytecode-ul pentru aplicațiile care pot fi depanate"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Rata de actualizare"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Afișați rata de actualizare a ecranului"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Permiteți schimbul de date atunci când tableta atinge alt dispozitiv"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Permiteți schimbul de date atunci când telefonul atinge alt dispozitiv"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activați NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC transmite date între acest dispozitiv și alte dispozitive sau ținte din apropiere, cum ar fi terminale de plată, cititoare de acces și anunțuri sau etichete interactive."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Securizați NFC"</string>
@@ -872,7 +873,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Căutare de rețele Wi-Fi activată"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opțiuni avansate"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista drop-down Opțiuni avansate"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"restrângeți"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"extindeți"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Numele rețelei"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introduceți identificatorul SSID"</string>
@@ -883,6 +883,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Stare"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Viteză conectare la transfer"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Viteza conexiunii redirecționării"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Viteză"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Frecvență"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"Adresă IP"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Salvată prin"</string>
@@ -922,12 +923,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Asigurați-vă că dispozitivul este conectat la priză, încărcat și pornit"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Asigurați-vă că dispozitivul este conectat la priză, încărcat și pornit. Dacă problema persistă, contactați producătorul dispozitivului"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Adăugarea „<xliff:g id="SSID">%1$s</xliff:g>” nu este acceptată de acest dispozitiv"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Încercați să mutați dispozitivul mai aproape de router/punctul de acces Wi‑Fi"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Verificați parola și încercați din nou"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Contactați producătorul dispozitivului"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Verificați conexiunea și încercați din nou"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Alegeți rețeaua"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Pentru a vă conecta dispozitivul, alegeți o rețea"</string>
@@ -1592,6 +1590,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Resetarea setărilor APN prestabilite a fost finalizată."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Opțiuni de resetare"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Rețeaua, aplicațiile sau dispozitivul pot fi resetate"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Aplicațiile pot fi resetate"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Resetați Wi-Fi, date mobile și Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Astfel, toate setările pentru rețea vor fi reinițializate, inclusiv:\n\n"<li>"Wi‑Fi,"</li>\n<li>"date mobile,"</li>\n<li>"Bluetooth."</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ștergeți SIM-urile descărcate"</string>
@@ -2106,16 +2105,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Pentru a activa sau dezactiva un serviciu de accesibilitate, glisați în sus cu două degete din partea de jos a ecranului.\n\nPentru a comuta între servicii, glisați în sus cu două degete și țineți lung."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Pentru a activa sau dezactiva un serviciu de accesibilitate, glisați în sus cu trei degete din partea de jos a ecranului.\n\nPentru a comuta între servicii, glisați în sus cu trei degete și țineți lung."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Folosiți comanda rapidă ca să deschideți"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Folosiți comanda rapidă pentru a mări"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Comanda rapidă pentru a deschide <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Comanda rapidă pentru a mări"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Comanda rapidă pentru Corecția culorilor"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Buton de accesibilitate"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Glisați cu două degete în sus din partea de jos"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Atingeți butonul <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> din partea de jos a ecranului"</string>
@@ -2152,7 +2146,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Alegeți durata de afișare a mesajelor care vă cer să acționați, dar care sunt vizibile numai temporar.\n\nNu toate aplicațiile permit această setare."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Întârziere la atingere lungă"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversarea culorilor"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Poate afecta performanța"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Inversați culorile"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Întunecați ecranele luminoase, astfel încât persoanele sensibile la lumină puternică să se bucure de o experiență de vizionare mai plăcută.\n\nNotă: culorile întunecate se deschid. Și culorile imaginilor vor fi inversate."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Durată de staționare"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Dacă folosiți un mouse, puteți seta cursorul să acționeze automat când nu se mai mișcă de un anumit interval de timp."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Întârziere înainte de clic"</string>
@@ -2162,7 +2157,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback la atingere"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Folosiți <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Utilizați corecție de culoare"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Utilizați subtitrările"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Afișează subtitrările"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Aspectul legendei"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Dimensiunea textului, stilul legendei"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Mai multe opțiuni"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Nu toate aplicațiile acceptă această setare."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Buton de accesibilitate"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Glisați cu două degete în sus din partea de jos"</string>
@@ -3172,6 +3170,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Setări"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, conexiune la rețea, internet, wireless, date, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificare Wi-Fi, notificare Wi-Fi"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Opriți vibrațiile, atingeți, tastatură"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Folosiți formatul de 24 de ore"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Descărcați"</string>
@@ -3430,18 +3430,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificări adaptive"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioritatea notificării adaptabile"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Setați automat ca Discrete notificările cu prioritate redusă"</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Poziționare adaptivă a notificărilor"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Poziționați automat notificările după relevanță"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acțiuni și răspunsuri sugerate"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afișați automat acțiunile și răspunsurile sugerate"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permiteți amânarea notificărilor"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ascundeți pictogramele notificărilor discrete"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Pictogramele pentru notificările silențioase nu se afișează în bara de stare"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Permiteți puncte de notificare"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Afișați banda de conversații recente"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Baloane"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Unele notificări pot apărea ca baloane pe ecran"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Unele notificări și alte tipuri de conținut pot apărea ca baloane pe ecran. Pentru a deschide un balon, atingeți-l. Pentru a închide balonul, trageți-l în jos pe ecran."</string>
@@ -4317,15 +4314,11 @@
     <string name="information_label" msgid="6939310810756569298">"Informații"</string>
     <string name="low_label" msgid="6525629096999711220">"Scăzută"</string>
     <string name="high_label" msgid="357503396626018487">"Ridicată"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"Marginea din stânga"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Marginea din dreapta"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"O sensibilitate mai mare poate intra în conflict cu gesturile făcute pe marginile ecranului în aplicație."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilitatea gestului „Înapoi”"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Setări pentru gesturi"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigare prin gesturi, sensibilitatea gestului „Înapoi”, gestul „Înapoi”"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Atingeți de două ori pentru a verifica telefonul"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Atingeți de două ori pentru a verifica tableta"</string>
@@ -4681,7 +4674,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Mod nevalid de rețea <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ignoră."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Numele punctelor de acces"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponibil când este conectat la <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Informații medicale, persoane de contact pentru urgențe"</string>
     <string name="see_more" msgid="7499355691042812723">"Vedeți mai multe"</string>
     <string name="see_less" msgid="2642392725363552793">"Afișați mai puține"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Dispozitivul care va fi folosit cu <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
@@ -4776,18 +4768,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informații despre politica de serviciu"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Setări gestionate de administratorul IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Handler pentru rapoartele de eroare"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Stabilește ce aplicație gestionează comanda rapidă pentru Raportul de eroare pe dispozitivul dvs."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Serviciu"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Valoare prestabilită"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Această opțiune nu mai este validă. Încercați din nou."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

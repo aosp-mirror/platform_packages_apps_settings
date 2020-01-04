@@ -220,7 +220,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Perkelti į apačią"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Pašalinti kalbą"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Pasirinkti veiklą"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Įrenginio informacija"</string>
     <string name="display_label" msgid="3056320781191343221">"Ekranas"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"USB atmintinė"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"SD kortelė"</string>
@@ -801,17 +800,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Palieskite čia, kad prisijungtumėte prie tinklo"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mb/s"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"Programa „<xliff:g id="REQUESTER">%s</xliff:g>“ nori įjungti „Wi-Fi“"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"Programa „<xliff:g id="REQUESTER">%s</xliff:g>“ nori išjungti „Wi-Fi“"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Patvirtinti derinamų pr. baitinę progr."</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Leisti ART patvirtinti derinamų programų baitinę programą"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Rodyti atnaujinimo dažnį"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Rodyti dabartinio vaizdo atnaujinimo dažnį"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Leisti keistis duomenimis, kai planšetinis kompiuteris aptinka kitą įrenginį"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Leisti keistis duomenimis, kai telefonas paliečia kitą įrenginį"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"ALR įjungimas"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"ALR atlieka duomenų mainų operacijas tarp šio ir kitų netoliese esančių įrenginių ar paskirties vietų, pvz., mokėjimo terminalų, prieigos kortelių skaitytuvų ir interaktyvių skelbimų ar žymų."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Saugus ALR"</string>
@@ -889,7 +890,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"„Wi‑Fi“ nuskaitymas įjungtas"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Išplėstinės parinktys"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Išskleidžiamojo sąrašo išplėstinės parinktys"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"sutraukti"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"išskleisti"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Tinklo pavadinimas"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Įveskite SSID"</string>
@@ -900,6 +900,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Būsena"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Perdavimo nuorodos sparta"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Gavimo nuorodos sparta"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Susiejimo greitis"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Dažnis"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"IP adresas"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Išsaugota per"</string>
@@ -939,12 +940,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Įsitikinkite, kad įrenginys įjungtas į maitinimo lizdą, įkrautas ir įjungtas jo maitinimas"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Įsitikinkite, kad įrenginys įjungtas į maitinimo lizdą, įkrautas ir įjungtas jo maitinimas. Jei problema išlieka, susisiekite su įrenginio gamintoju"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Šiame įrenginyje nepalaikomas „<xliff:g id="SSID">%1$s</xliff:g>“ pridėjimas"</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Pabandykite perkelti įrenginį arčiau prie „Wi‑Fi“ prieigos taško ar maršruto parinktuvo"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Patikrinkite slaptažodį ir bandykite dar kartą"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Susisiekite su įrenginio gamintoju"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Patikrinkite ryšį ir bandykite dar kartą"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Tinklo pasirinkimas"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Kad prijungtumėte įrenginį, pasirinkite tinklą"</string>
@@ -1613,6 +1611,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Numatytųjų APN nustatymų nustatymas iš naujo baigtas."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Nustat. parinkt. iš naujo"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Tinklą, programas arba įrenginį galima nustatyti iš naujo"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Programas galima nustatyti iš naujo"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Iš naujo nustatyti „Wi-Fi“, mobiliųjų duomenų ir „Bluetooth“ nustatymus"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Bus iš naujo nustatyti visi tinklo nustatymai, įskaitant:\n\n"<li>"„Wi‑Fi“;"</li>\n<li>"mobiliojo ryšio duomenis;"</li>\n<li>"„Bluetooth“."</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Ištrinti atsisiųstas SIM kort."</string>
@@ -2129,16 +2128,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Norėdami įjungti arba išjungti pritaikomumo paslaugą, perbraukite aukštyn dviem pirštais iš ekrano apačios.\n\nNorėdami perjungti paslaugas, perbraukite aukštyn dviem pirštais ir palaikykite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Norėdami įjungti arba išjungti pritaikomumo paslaugą, perbraukite aukštyn trimis pirštais iš ekrano apačios.\n\nNorėdami perjungti paslaugas, perbraukite aukštyn trimis pirštais ir palaikykite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Supratau"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Atidarymo sparčiojo klavišo naudojimas"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Didinimo sparčiojo klavišo naudojimas"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Paslaugos „<xliff:g id="SERVICE">%1$s</xliff:g>“ atidarymo spartusis klaviš."</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Didinimo spartusis klavišas"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Spalvų taisymo atidarymo spartusis klav."</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Pritaikomumo mygtukas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"2 pirštais perbraukti aukštyn iš apačios"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Ekrano apačioje palieskite mygtuką <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>"</string>
@@ -2175,7 +2169,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Pasirinkite, kiek laiko norite rodyti pranešimus, su kuriais reikia atlikti veiksmus ir kurie matomi tik laikinai.\n\nŠis nustatymas palaikomas ne visose programose."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"„Paliesti ir laikyti“ delsa"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Spalvų inversija"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Gali paveikti našumą"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Pakeisti spalvas"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Padarykite šviesų ekraną tamsiu, kad būtų patogiau žiūrėti žmonėms, kurie yra jautrūs ryškiai šviesai.\n\nPastaba: tamsios spalvos taps šviesios. Vaizdų spalvos irgi bus pakeistos."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Neveikos trukmės nust."</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Jei naudojate pelę, galite nustatyti, kad žymeklis imtų veikti automatiškai, kai nejudės tam tikrą laiką."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Delsa prieš paspaudimą"</string>
@@ -2185,7 +2180,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Lietimo grįžtamasis ryšys"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Naudoti „<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>“"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Naudoti spalvų taisymą"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Naudoti subtitrus"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Rodyti subtitrus"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Subtitrų išvaizda"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Teksto dydis, subtitrų stilius"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Daugiau parinkčių"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Šis nustatymas palaikomas ne visose programose."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Pritaikomumo mygtukas"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"2 pirštais perbraukti aukštyn iš apačios"</string>
@@ -3215,6 +3213,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Nustatymai"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, tinklo ryšys, internetas, belaidis ryšys, duomenys, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"„Wi‑Fi“ pranešimas, „Wi‑Fi“ pranešimas"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Stabdyti vibravimą, paliesti, klaviatūra"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Naudoti 24 val. formatą"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Atsisiųsti"</string>
@@ -3476,18 +3476,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Prisitaikantys pranešimai"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Adaptyviųjų pranešimų prioritetas"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Žemesnio prioriteto pranešimus automatiškai nustatyti kaip netrikdančius"</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Prisitaikantis pranešimų reitingavimas"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automatiškai reitinguoti pranešimus pagal atitikimą"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Siūlomi veiksmai ir atsakymai"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatiškai rodyti siūlomus veiksmus ir atsakymus"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Leisti nustatyti pranešimus snausti"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Netrikdančių pranešimų piktogramų slėpimas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Netrikdančių pranešimų piktogramos nerodomos būsenos juostoje"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Leisti pranešimų taškus"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Pastarųjų pokalbių juostos rodymas"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbulai"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Kai kurie pranešimai gali būti rodomi kaip debesėliai ekrane"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Kai kurie pranešimai ir kitas turinys ekrane gali būti rodomi kaip debesėliai. Jei norite atidaryti debesėlį, palieskite jį. Jei norite jo atsisakyti, vilkite į ekrano apačią."</string>
@@ -4391,15 +4388,11 @@
     <string name="information_label" msgid="6939310810756569298">"Informacija"</string>
     <string name="low_label" msgid="6525629096999711220">"Mažas"</string>
     <string name="high_label" msgid="357503396626018487">"Didelis"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"Kairysis kraštas"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Dešinysis kraštas"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Didesnis jautrumas gali būti nesuderinamas su visais programų gestais palei ekrano kraštus."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Grįžtamasis jautrumas"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Gestų nustatymai"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"naršymas gestais, grįžtamasis jautrumas, grįžtamasis gestas"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Telefono tikrinimas dukart palietus"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Planšetinio kompiuterio tikrinimas dukart palietus"</string>
@@ -4763,7 +4756,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Netinkamas tinklo režimas (<xliff:g id="NETWORKMODEID">%1$d</xliff:g>). Nepaisyti."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Prieigos taškų pavadinimai"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Nepasiekiama, kai prisijungta prie „<xliff:g id="CARRIER">%1$s</xliff:g>“"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Medicininė informacija, kritinės padėties kontaktai"</string>
     <string name="see_more" msgid="7499355691042812723">"Žr. daugiau"</string>
     <string name="see_less" msgid="2642392725363552793">"Žr. mažiau"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Įrenginiai, kuriuos galima naudoti su „<xliff:g id="APPNAME">%1$s</xliff:g>“"</string>
@@ -4862,18 +4854,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Darbo politikos informacija"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nustatymus tvarko jūsų IT administratorius"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikos procesorius"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Pranešimų apie riktus doroklė"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Nustatoma, kuri programa apdoroja pranešimo apie riktą spartųjį klavišą įrenginyje."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Asmeninė"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Darbo"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Numatytasis sistemos nustatymas"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Šios parinkties nebegalima pasirinkti. Bandykite dar kartą."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

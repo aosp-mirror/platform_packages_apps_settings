@@ -220,7 +220,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"У кінець"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Вилучити мову"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Вибрати дію"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Інф-я пристрою"</string>
     <string name="display_label" msgid="3056320781191343221">"Екран"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"Носій USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"Карта SD"</string>
@@ -801,17 +800,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Торкніться тут, щоб увійти в мережу"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Мбіт/с"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Мбіт/с"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"Додаток <xliff:g id="REQUESTER">%s</xliff:g> хоче ввімкнути Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"Додаток <xliff:g id="REQUESTER">%s</xliff:g> хоче вимкнути Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Підтвердьте байт-код налагоджуваних додатків"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Дозволити ART підтверджувати байт-код налагоджуваних додатків"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Частота оновлення"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Показати поточну частоту оновлення екрана"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Дозволити обмін даними, коли планшетний ПК торкнеться іншого пристрою"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Дозволити обмін даними, коли телефон торкнеться іншого пристрою"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Увімкнути NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"За допомогою NFC цей пристрій обмінюється даними з іншими пристроями чи об’єктами поруч, зокрема з платіжними терміналами, пристроями зчитування даних для доступу, інтерактивними оголошеннями та тегами."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Захист NFC"</string>
@@ -889,7 +890,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"Пошук мереж Wi-Fi увімкнено"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Додаткові параметри"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Спадний список додаткових параметрів"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"згорнути"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"розгорнути"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Назва мережі"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Введіть ідентифікатор SSID"</string>
@@ -900,6 +900,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Стан"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Швидкість передавання даних"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Швидкість отримання даних"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Швид. зв\'язку"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Частота"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"ІР-адреса"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Збережено через мережу"</string>
@@ -939,12 +940,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Переконайтеся, що пристрій підключено, заряджено й увімкнено"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Переконайтеся, що пристрій підключено, заряджено й увімкнено. Якщо проблема не зникне, зверніться до виробника пристрою"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"Цей пристрій не підтримує \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Спробуйте піднести пристрій ближче до точки доступу чи маршрутизатора Wi‑Fi"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Перевірте пароль і повторіть спробу"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Зв\'яжіться з виробником пристрою"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Перевірте підключення й повторіть спробу"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Вибрати мережу"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Виберіть мережу, до якої потрібно підключити пристрій"</string>
@@ -1613,6 +1611,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"Налаштування за умовчанням відновлено."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Скинути параметри"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Можна скинути налаштування мережі, додатків або пристрою"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Додатки може бути скинуто"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Скинути параметри Wi-Fi, мобільного передавання даних і Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Буде скинуто всі налаштування мережі, зокрема \n\n"<li>"Wi‑Fi"</li>\n<li>"мобільний трафік"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Видалити завантажені SIM-карти"</string>
@@ -2102,26 +2101,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Щоб почути назву елемента на екрані, торкніться його"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Налаштування субтитрів"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Збільшення"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Область збільшення"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Виберіть області для збільшення масштабу екрана"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"На весь екран"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Частина екрана"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Повноекранний і напівекранний режим"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Збільшити весь екран"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Збільшити частину екрана"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Показати інструмент для переміщення"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Показати джойстик для переміщення області збільшення"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Параметри збільшення"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Збільшувати потрійним торканням"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Збільшувати кнопкою й потрійним дотиком"</string>
@@ -2139,16 +2128,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Щоб увімкнути або вимкнути сервіс спеціальних можливостей, проведіть двома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть двома пальцями вгору й утримуйте екран."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Щоб увімкнути або вимкнути сервіс спеціальних можливостей, проведіть трьома пальцями знизу екрана.\n\nЩоб переключитися між сервісами, проведіть трьома пальцями вгору й утримуйте екран."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Комбінація клавіш для відкриття"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Комбінація клавіш для збільшення"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Комбінація клавіш для відкриття сервісу <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Комбінація клавіш для збільшення"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Комбінація клавіш для Корекції кольору"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Кнопка спеціальних можливостей"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Провести двома пальцями знизу вгору"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Натисніть кнопку <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> у нижній частині екрана"</string>
@@ -2185,7 +2169,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Виберіть, як довго показувати тимчасово видимі повідомлення із закликом до дії.\n\nНе всі додатки підтримують це налаштування."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Затримка натискання й утримування"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Інверсія кольорів"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Може вплинути на продуктивність"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Інвертувати кольори"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Перетворює яскраві кольори на темні, щоб людям із чутливістю до яскравого світла було легше дивитися на екран.\n\nПримітка: темні кольори стануть яскравими. Зображення також буде інвертовано."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Час взаємодії"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Якщо ви використовуєте мишу, можна налаштувати автоматичний клік, коли курсор миші не рухається впродовж певного часу."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Затримка перед кліком"</string>
@@ -2195,7 +2180,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Реакція на дотик"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Використовувати <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Використовувати корекцію кольорів"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Використовувати субтитри"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Показувати субтитри"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Показ субтитрів"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Розмір тексту, стиль субтитрів"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Інші параметри"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Це налаштування підтримують не всі додатки."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Кнопка спеціальних можливостей"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Провести двома пальцями вгору від нижнього краю екрана"</string>
@@ -3225,6 +3213,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Налаштування"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, мережеве з’єднання, інтернет, бездротовий, дані, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"сповіщення Wi‑Fi, сповіщення wifi"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Вимкнути вібрацію, дотик, клавіатура"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-годинний формат"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Завантажити"</string>
@@ -3486,18 +3476,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптивні сповіщення"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Пріоритет адаптивних сповіщень"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Автоматично робити тихими сповіщення з низьким пріоритетом"</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Адаптивне сортування сповіщень"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Автоматичне сортування сповіщень за релевантністю"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Пропоновані дії та відповіді"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Автоматично показувати пропоновані дії та відповіді"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Дозволити відкладання сповіщень"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Сховати значки тихих сповіщень"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Значки тихих сповіщень не показуються в рядку стану"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Дозволити значки сповіщень"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Показати панель нещодавніх повідомлень"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Спливаючі підказки"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Деякі сповіщення можуть з’являтись як спливаючі підказки на екрані"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Деякі сповіщення та інший вміст можуть з’являтися у вигляді спливаючих підказок на екрані. Щоб відкрити спливаючу підказку, натисніть її, а щоб сховати – перетягніть вниз екрана."</string>
@@ -4401,17 +4388,12 @@
     <string name="information_label" msgid="6939310810756569298">"Інформація"</string>
     <string name="low_label" msgid="6525629096999711220">"Низька"</string>
     <string name="high_label" msgid="357503396626018487">"Висока"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"Лівий край"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Правий край"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Через високу чутливість можуть не працювати жести з боків екрана в додатку."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чутливість країв екрана"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Налаштування жестів"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навігація за допомогою жестів, чутливість країв екрана, жест \"назад\""</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Двічі торкнутися, щоб перевірити сповіщення"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Двічі торкніться, щоб перевірити планшет"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Двічі торкніться, щоб перевірити пристрій"</string>
@@ -4774,7 +4756,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"Недійсний режим мережі: <xliff:g id="NETWORKMODEID">%1$d</xliff:g>. Ігнорувати."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Імена точок доступу"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Недоступно, коли підключено до оператора <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Медична інформація, контактні дані екстрених служб"</string>
     <string name="see_more" msgid="7499355691042812723">"Докладніше"</string>
     <string name="see_less" msgid="2642392725363552793">"Показати менше"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Пристрій для використання з додатком <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
@@ -4873,18 +4854,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Інформація про правила роботи"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Налаштування, якими керує адміністратор вашої організації"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"ГП"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Обробник звіту про помилку"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Визначає, яка програма обробляє ярлик звіту про помилку на пристрої."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Особисті додатки"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Робота"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"За умовчанням"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Ця опція вже не дійсна. Повторіть спробу."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

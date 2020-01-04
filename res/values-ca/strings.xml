@@ -216,7 +216,6 @@
     <string name="action_drag_label_move_bottom" msgid="6266165197792827003">"Mou a la part inferior"</string>
     <string name="action_drag_label_remove" msgid="1034900377796780568">"Suprimeix l\'idioma"</string>
     <string name="activity_picker_label" msgid="351250401590691126">"Selecció de l\'activitat"</string>
-    <string name="device_info_label" msgid="2935198177248803716">"Informació del dispositiu"</string>
     <string name="display_label" msgid="3056320781191343221">"Pantalla"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="1850505156136467106">"Emmagatzematge USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="8715502912796241588">"Targeta SD"</string>
@@ -767,17 +766,19 @@
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Toca aquí per iniciar la sessió a la xarxa"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <!-- no translation found for link_speed (931786745741016446) -->
+    <skip />
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> vol activar la Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> vol desactivar la Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verifica el bytecode d\'aplicacions depurables"</string>
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permet que ART verifiqui el bytecode de les aplicacions depurables"</string>
-    <!-- no translation found for show_refresh_rate (5742688821872354973) -->
-    <skip />
-    <!-- no translation found for show_refresh_rate_summary (3558118122374609663) -->
-    <skip />
+    <string name="show_refresh_rate" msgid="5742688821872354973">"Freqüència d\'actualització"</string>
+    <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Freqüència d\'actualització de pantalla actual"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_quick_toggle_summary" product="tablet" msgid="9027030586154852221">"Permet l\'intercanvi de dades quan la tauleta toqui un altre dispositiu"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5961264333260120898">"Permet l\'intercanvi de dades quan el telèfon toqui un altre dispositiu"</string>
+    <!-- no translation found for nfc_quick_toggle_summary (3622326550467939809) -->
+    <skip />
+    <!-- no translation found for nfc_quick_toggle_summary (1460871052409162980) -->
+    <skip />
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activa l\'NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"L\'NFC permet que aquest dispositiu pugui intercanviar dades amb altres dispositius o objectius propers, com ara terminals de pagament, lectors d\'accés o anuncis i etiquetes interactius."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Protegeix NFC"</string>
@@ -855,7 +856,6 @@
     <string name="wifi_settings_scanning_required_enabled" msgid="4721729158927146365">"S\'ha activat la cerca de xarxes Wi‑Fi"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opcions avançades"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Llista desplegable Opcions avançades"</string>
-    <string name="wifi_advanced_toggle_description_expanded" msgid="1086342300472408106">"replega"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"desplega"</string>
     <string name="wifi_ssid" msgid="2713062130735103151">"Nom de la xarxa"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introdueix l\'SSID"</string>
@@ -866,6 +866,7 @@
     <string name="wifi_status" msgid="5349199188871002778">"Estat"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Transmet la velocitat de l\'enllaç"</string>
     <string name="rx_wifi_speed" msgid="5167966079215111232">"Rep la velocitat de l\'enllaç"</string>
+    <string name="wifi_speed" msgid="6562147734565434513">"Velocitat d\'enllaç"</string>
     <string name="wifi_frequency" msgid="3120998420184702834">"Freqüència"</string>
     <string name="wifi_ip_address" msgid="8903577251845268209">"Adreça IP"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"Desada mitjançant"</string>
@@ -905,12 +906,9 @@
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Comprova que el dispositiu tingui bateria i estigui connectat i encès"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Comprova que el dispositiu tingui bateria i estigui connectat i encès. Si el problema continua, contacta amb el fabricant del dispositiu"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"En aquest dispositiu no es pot afegir \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <!-- no translation found for wifi_dpp_failure_cannot_find_network (8519567801353014036) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_authentication (7008840843663520852) -->
-    <skip />
-    <!-- no translation found for wifi_dpp_failure_enrollee_rejected_configuration (982310033782652478) -->
-    <skip />
+    <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"Prova d\'acostar el dispositiu al punt d\'accés Wi‑Fi o l\'encaminador"</string>
+    <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"Comprova la contrasenya i torna-ho a provar"</string>
+    <string name="wifi_dpp_failure_enrollee_rejected_configuration" msgid="982310033782652478">"Contacta amb el fabricant del dispositiu"</string>
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Comprova la connexió i torna-ho a provar"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Tria una xarxa"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Per connectar el dispositiu, tria una xarxa"</string>
@@ -1571,6 +1569,7 @@
     <string name="restore_default_apn_completed" msgid="5167505087078340256">"S\'ha restablert la configuració predeterminada d\'APN."</string>
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Opcions de restabliment"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Es poden restablir la xarxa, les aplicacions o el dispositiu"</string>
+    <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Les aplicacions es poden restablir"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Restableix Wi-Fi, dades mòbils i Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Es restabliran totes les opcions de configuració de la xarxa, inclosos:\n\n"<li>"la Wi‑Fi"</li>\n<li>"les dades mòbils"</li>\n<li>"el Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Esborra les SIM baixades"</string>
@@ -2056,26 +2055,16 @@
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toca els elements de la pantalla per sentir-los en veu alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferències dels subtítols"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliació"</string>
-    <!-- no translation found for accessibility_magnification_mode_title (879250866604403721) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_message (4821458740248772054) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen_summary (2728962784113713010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen_summary (5630032596384610913) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_all_summary (5139954486886669293) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_full_screen (4189574224079433280) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_area_settings_window_screen (7431401975447232976) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_title (4926933143910288191) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_window_control_switch_summary (7628270839775330328) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_service_settings_title (7357466386783992094) -->
-    <skip />
+    <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Àrea d\'ampliació"</string>
+    <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Tria les àrees d\'ampliació que vols utilitzar en ampliar la pantalla"</string>
+    <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Pantalla completa"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Pantalla parcial"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Pantalla completa i pantalla parcial"</string>
+    <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Amplia tota la pantalla"</string>
+    <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Amplia una part de la pantalla"</string>
+    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Mostra el comandament de moviments"</string>
+    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Mostra un comandament semblant a una palanca de control per moure l\'àrea d\'ampliació"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Opcions de configuració d\'ampliació"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Amplia amb tres tocs"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Amplia amb una drecera"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplia amb una drecera i tres tocs"</string>
@@ -2093,16 +2082,11 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Per activar o desactivar un servei d\'accessibilitat, llisca cap amunt amb dos dits des de la part inferior de la pantalla.\n\nPer canviar entre serveis, llisca cap amunt amb dos dits i mantén premut."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Per activar o desactivar un servei d\'accessibilitat, llisca cap amunt amb tres dits des de la part inferior de la pantalla.\n\nPer canviar entre serveis, llisca cap amunt amb tres dits i mantén premut."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entesos"</string>
-    <!-- no translation found for accessibility_shortcut_title (7219851818023989864) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_shortcut_title (3850925633238639131) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title (4922086411442295974) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_magnification (9029389159199076646) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_daltonizer (2875485140645140606) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Utilitza una drecera per obrir"</string>
+    <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Utilitza una drecera per ampliar"</string>
+    <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Drecera per obrir <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_magnification" msgid="9029389159199076646">"Drecera per ampliar"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Drecera per obrir Correcció del color"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Botó d\'accessibilitat"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Llisca amb dos dits des de la part inferior"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Toca el botó <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> a la part inferior de la pantalla"</string>
@@ -2139,7 +2123,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Selecciona el temps que vols tenir per llegir els missatges que es mostren temporalment i et demanen que duguis a terme una acció.\n\nAquesta opció no és compatible amb totes les aplicacions."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Retard en mantenir premut"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversió dels colors"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6737173589782501324">"Pot afectar el rendiment"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"Inverteix els colors"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"Converteix les pantalles clares en fosques perquè les persones sensibles a les llums brillants puguin veure millor la pantalla.\n\nNota: els colors foscos es tornaran clars. També s\'invertiran les imatges."</string>
     <string name="accessibility_autoclick_preference_title" msgid="6771914155290467570">"Temps de permanència"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"Si utilitzes un ratolí, pots configurar-lo perquè el cursor faci accions automàticament quan deixi de moure\'s durant un determinat període de temps."</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="8631645324295801612">"Retard abans del clic"</string>
@@ -2149,7 +2134,10 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Resposta tàctil"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Utilitza <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Utilitza la correcció del color"</string>
-    <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Utilitza subtítols"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Mostra els subtítols"</string>
+    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Aparença dels subtítols"</string>
+    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Mida del text, estil dels subtítols"</string>
+    <string name="captioning_more_options_title" msgid="3484496882942539652">"Més opcions"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"No totes les aplicacions són compatibles amb aquesta opció de configuració."</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botó d\'accessibilitat"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Llisca amb dos dits des de la part inferior"</string>
@@ -3139,6 +3127,8 @@
     <string name="search_results_title" msgid="3360639917793022533">"Configuració"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wi-fi, Wi-Fi, connexió de xarxa, Internet, sense fil, dades, wifi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notificació Wi‑Fi, notificació wifi"</string>
+    <!-- no translation found for keywords_wifi_data_usage (4718555409695862085) -->
+    <skip />
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"aturar la vibració, tocar, teclat"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Utilitza el format de 24 hores"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"baixar"</string>
@@ -3394,18 +3384,15 @@
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificacions adaptatives"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioritat de notificacions adaptativa"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Estableix automàticament les notificacions de prioritat baixa com a discretes"</string>
-    <!-- no translation found for asst_capability_ranking_title (312998580233257581) -->
-    <skip />
-    <!-- no translation found for asst_capability_ranking_summary (2293524677144599450) -->
-    <skip />
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Classificació de les notificacions adaptatives"</string>
+    <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Classifica automàticament les notificacions per ordre de rellevància"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Accions i respostes suggerides"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Mostra automàticament les accions i respostes suggerides"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permet posposar les notificacions"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Amaga les icones de les notificacions discretes"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Les icones de les notificacions discretes no es mostren a la barra d\'estat"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Permet els punts de notificació"</string>
-    <!-- no translation found for notification_people_strip_title (1185857822541001139) -->
-    <skip />
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostra la barra de converses recents"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bombolles"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunes notificacions poden mostrar-se en forma de bombolles a la pantalla"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algunes notificacions i altres tipus de contingut poden mostrar-se en forma de bombolles a la pantalla. Toca una bombolla per obrir-la. Per ignorar-la, arrossega-la fins a la part inferior de la pantalla."</string>
@@ -4253,17 +4240,12 @@
     <string name="information_label" msgid="6939310810756569298">"Informació"</string>
     <string name="low_label" msgid="6525629096999711220">"Baixa"</string>
     <string name="high_label" msgid="357503396626018487">"Alta"</string>
-    <!-- no translation found for left_edge (1513576842959071849) -->
-    <skip />
-    <!-- no translation found for right_edge (1505309103265829121) -->
-    <skip />
-    <!-- no translation found for back_sensitivity_dialog_message (6638367716784103306) -->
-    <skip />
+    <string name="left_edge" msgid="1513576842959071849">"Vora esquerra"</string>
+    <string name="right_edge" msgid="1505309103265829121">"Vora dreta"</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Una sensibilitat alta pot entrar en conflicte amb altres gestos de l\'aplicació que es facin als extrems de la pantalla."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilitat cap enrere"</string>
-    <!-- no translation found for gesture_settings_activity_title (6047431928567911330) -->
-    <skip />
-    <!-- no translation found for keywords_gesture_navigation_settings (667561222717238931) -->
-    <skip />
+    <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Configuració de gestos"</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navegació amb gestos, sensibilitat cap enrere, gest cap enrere"</string>
     <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Doble toc per consultar el telèfon"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Per consultar la tauleta, fes-hi doble toc"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Per consultar el dispositiu, fes-hi doble toc"</string>
@@ -4610,7 +4592,6 @@
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"El mode de xarxa <xliff:g id="NETWORKMODEID">%1$d</xliff:g> no és vàlid. Ignora."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms de punts d\'accés"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No està disponible quan està connectat a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
-    <string name="emergency_info_contextual_card_summary" msgid="4472575229724567215">"Informació mèdica, contactes d\'emergència"</string>
     <string name="see_more" msgid="7499355691042812723">"Mostra\'n més"</string>
     <string name="see_less" msgid="2642392725363552793">"Mostra\'n menys"</string>
     <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Dispositiu per fer servir amb <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
@@ -4701,18 +4682,12 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informació de les teves polítiques professionals"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Configuració gestionada per l\'administrador de TI"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <!-- no translation found for bug_report_handler_title (713439959113250125) -->
-    <skip />
-    <!-- no translation found for bug_report_handler_picker_footer_text (4935758328366585673) -->
-    <skip />
-    <!-- no translation found for personal_profile_app_subtext (5586060806997067676) -->
-    <skip />
-    <!-- no translation found for work_profile_app_subtext (5043419461440127879) -->
-    <skip />
-    <!-- no translation found for system_default_app_subtext (5212055189703164839) -->
-    <skip />
-    <!-- no translation found for select_invalid_bug_report_handler_toast_text (8857326334015386692) -->
-    <skip />
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Gestor de l\'informe d\'errors"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Determina quina aplicació gestiona la drecera per a l\'informe d\'errors al dispositiu."</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personal"</string>
+    <string name="work_profile_app_subtext" msgid="5043419461440127879">"Feina"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Opció predeterminada del sistema"</string>
+    <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Aquesta opció ja no és vàlida. Torna-ho a provar."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

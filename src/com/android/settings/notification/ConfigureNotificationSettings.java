@@ -133,6 +133,7 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference instanceof RingtonePreference) {
+            writePreferenceClickMetric(preference);
             mRequestPreference = (RingtonePreference) preference;
             mRequestPreference.onPrepareRingtonePickerIntent(mRequestPreference.getIntent());
             getActivity().startActivityForResultAsUser(

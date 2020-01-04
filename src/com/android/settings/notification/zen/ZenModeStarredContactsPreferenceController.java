@@ -28,6 +28,7 @@ import android.provider.Contacts;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeStarredContactsPreferenceController extends
@@ -89,6 +90,8 @@ public class ZenModeStarredContactsPreferenceController extends
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        mMetricsFeatureProvider.logClickedPreference(preference,
+                 preference.getExtras().getInt(DashboardFragment.CATEGORY));
         if (mStarredContactsIntent.resolveActivity(mPackageManager) != null) {
             mContext.startActivity(mStarredContactsIntent);
         } else {
