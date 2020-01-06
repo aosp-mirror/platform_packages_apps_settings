@@ -32,7 +32,6 @@ import android.os.Vibrator;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiEntryShell;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -150,24 +149,6 @@ public class WifiDppUtils {
         return wifiConfiguration.preSharedKey;
     }
 
-    private static String getPresharedKey(WifiManager wifiManager, WifiEntry wifiEntry) {
-        final List<WifiConfiguration> privilegedWifiConfigurations =
-                wifiManager.getPrivilegedConfiguredNetworks();
-
-        for (WifiConfiguration privilegedWifiConfiguration : privilegedWifiConfigurations) {
-            if (privilegedWifiConfiguration.networkId == WifiEntryShell.getNetworkId(wifiEntry)) {
-                // WEP uses a shared key hence the AuthAlgorithm.SHARED is used to identify it.
-                if (wifiEntry.getSecurity() == WifiEntry.SECURITY_WEP) {
-                    return privilegedWifiConfiguration
-                            .wepKeys[privilegedWifiConfiguration.wepTxKeyIndex];
-                } else {
-                    return privilegedWifiConfiguration.preSharedKey;
-                }
-            }
-        }
-        return "";
-    }
-
     private static String removeFirstAndLastDoubleQuotes(String str) {
         if (TextUtils.isEmpty(str)) {
             return str;
@@ -268,7 +249,8 @@ public class WifiDppUtils {
             return null;
         }
 
-        setConfiguratorIntentExtra(intent, wifiManager, wifiEntry);
+        final WifiConfiguration wifiConfiguration = wifiEntry.getWifiConfiguration();
+        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
 
         // For a transition mode Wi-Fi AP, creates a QR code that's compatible with more devices
         if (wifiEntry.getSecurity() == WifiEntry.SECURITY_PSK_SAE_TRANSITION) {
@@ -326,13 +308,13 @@ public class WifiDppUtils {
             return null;
         }
 
-        setConfiguratorIntentExtra(intent, wifiManager, wifiEntry);
+        final WifiConfiguration wifiConfiguration = wifiEntry.getWifiConfiguration();
+        setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
 
-        final int networkId = WifiEntryShell.getNetworkId(wifiEntry);
-        if (networkId == WifiConfiguration.INVALID_NETWORK_ID) {
+        if (wifiConfiguration.networkId == WifiConfiguration.INVALID_NETWORK_ID) {
             throw new IllegalArgumentException("Invalid network ID");
         } else {
-            intent.putExtra(EXTRA_WIFI_NETWORK_ID, networkId);
+            intent.putExtra(EXTRA_WIFI_NETWORK_ID, wifiConfiguration.networkId);
         }
 
         return intent;
@@ -417,28 +399,6 @@ public class WifiDppUtils {
         intent.putExtra(EXTRA_WIFI_HIDDEN_SSID, wifiConfiguration.hiddenSSID);
     }
 
-    private static void setConfiguratorIntentExtra(Intent intent, WifiManager wifiManager,
-            WifiEntry wifiEntry) {
-        final String ssid = removeFirstAndLastDoubleQuotes(wifiEntry.getTitle());
-        final String security = getSecurityString(wifiEntry);
-
-        // When the value of this key is read, the actual key is not returned, just a "*".
-        // Call privileged system API to obtain actual key.
-        final String preSharedKey = removeFirstAndLastDoubleQuotes(getPresharedKey(wifiManager,
-                wifiEntry));
-
-        if (!TextUtils.isEmpty(ssid)) {
-            intent.putExtra(EXTRA_WIFI_SSID, ssid);
-        }
-        if (!TextUtils.isEmpty(security)) {
-            intent.putExtra(EXTRA_WIFI_SECURITY, security);
-        }
-        if (!TextUtils.isEmpty(preSharedKey)) {
-            intent.putExtra(EXTRA_WIFI_PRE_SHARED_KEY, preSharedKey);
-        }
-        intent.putExtra(EXTRA_WIFI_HIDDEN_SSID, WifiEntryShell.hiddenSSID(wifiEntry));
-    }
-
     /**
      * Shows authentication screen to confirm credentials (pin, pattern or password) for the current
      * user of the device.
@@ -504,7 +464,7 @@ public class WifiDppUtils {
      * @param wifiEntry The {@link WifiEntry} of the Wi-Fi network
      */
     public static boolean isSupportConfiguratorQrCodeScanner(Context context, WifiEntry wifiEntry) {
-        if (WifiEntryShell.isPasspoint(wifiEntry)) {
+        if (wifiEntry.isSubscription()) {
             return false;
         }
         return isSupportWifiDpp(context, wifiEntry.getSecurity());
