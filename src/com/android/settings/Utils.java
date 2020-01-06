@@ -749,7 +749,7 @@ public final class Utils extends com.android.settingslib.Utils {
                     | PackageManager.MATCH_ANY_USER);
             return appInfo.loadLabel(context.getPackageManager());
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "Unable to find info for package: " + packageName);
+            Log.e(TAG, "Unable to find info for package: " + packageName);
         }
         return null;
     }
