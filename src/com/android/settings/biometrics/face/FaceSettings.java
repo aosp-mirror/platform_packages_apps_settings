@@ -329,10 +329,13 @@ public class FaceSettings extends DashboardFragment {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    final FaceManager faceManager = context.getSystemService(FaceManager.class);
-                    final boolean hasEnrolled = faceManager.hasEnrolledTemplates(
-                            UserHandle.myUserId());
-                    keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK : PREF_KEY_DELETE_FACE_DATA);
+                    if (isAvailable(context)) {
+                        final FaceManager faceManager = context.getSystemService(FaceManager.class);
+                        final boolean hasEnrolled = faceManager.hasEnrolledTemplates(
+                                UserHandle.myUserId());
+                        keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK
+                                : PREF_KEY_DELETE_FACE_DATA);
+                    }
                     return keys;
                 }
             };
