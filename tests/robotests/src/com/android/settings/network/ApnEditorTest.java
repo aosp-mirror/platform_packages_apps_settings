@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
@@ -46,6 +47,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.network.ApnEditor.ApnData;
+import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +60,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class ApnEditorTest {
@@ -96,27 +99,33 @@ public class ApnEditorTest {
     @Mock
     private Cursor mCursor;
 
+    @Mock
+    private FragmentActivity mActivity;
+
     @Captor
     private ArgumentCaptor<Uri> mUriCaptor;
 
     private ApnEditor mApnEditorUT;
-    private FragmentActivity mActivity;
+    private Context mContext;
     private Resources mResources;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.setupActivity(FragmentActivity.class));
-        mResources = mActivity.getResources();
+        mContext = spy(RuntimeEnvironment.application);
+
+        mResources = mContext.getResources();
         mApnEditorUT = spy(new ApnEditor());
 
         doReturn(mActivity).when(mApnEditorUT).getActivity();
         doReturn(mResources).when(mApnEditorUT).getResources();
         doNothing().when(mApnEditorUT).finish();
         doNothing().when(mApnEditorUT).showError();
-        when(mApnEditorUT.getContext()).thenReturn(RuntimeEnvironment.application);
+        doReturn(mContext).when(mApnEditorUT).getContext();
+        doReturn(mContext.getTheme()).when(mActivity).getTheme();
+        doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
 
-        setMockPreference(mActivity);
+        setMockPreference(mContext);
         mApnEditorUT.mApnData = new FakeApnData(APN_DATA);
         mApnEditorUT.sNotSet = "Not Set";
     }
@@ -317,7 +326,7 @@ public class ApnEditorTest {
 
         // WHEN press the back button
         final KeyEvent event = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK);
-        mApnEditorUT.onKey(new View(mActivity), KeyEvent.KEYCODE_BACK, event);
+        mApnEditorUT.onKey(new View(mContext), KeyEvent.KEYCODE_BACK, event);
 
         // THEN the apn data is saved and the apn editor is closed
         verify(mApnEditorUT).validateAndSaveApnData();
@@ -455,7 +464,9 @@ public class ApnEditorTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void onCreate_noAction_shouldFinishAndNoCrash() {
+        doReturn(new Intent()).when(mActivity).getIntent();
         doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
 
         mApnEditorUT.onCreate(null);
