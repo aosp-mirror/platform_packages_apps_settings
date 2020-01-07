@@ -38,17 +38,16 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.Switch;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.PreferredShortcutType;
-import com.android.settings.widget.SwitchBar;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -57,8 +56,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class ToggleScreenMagnificationPreferenceFragment extends
-        ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener,
-        ShortcutPreference.OnClickListener {
+        ToggleFeaturePreferenceFragment implements ShortcutPreference.OnClickListener {
 
     private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcutType";
@@ -78,6 +76,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
+    protected Preference mConfigWarningPreference;
+    protected VideoPreference mVideoPreference;
     protected class VideoPreference extends Preference {
         private ImageView mVideoBackgroundView;
         private OnGlobalLayoutListener mLayoutListener;
@@ -154,24 +154,34 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
     }
 
-    protected VideoPreference mVideoPreference;
-    protected Preference mConfigWarningPreference;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(R.string.accessibility_screen_magnification_title);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
 
         mVideoPreference = new VideoPreference(getPrefContext());
         mVideoPreference.setSelectable(false);
         mVideoPreference.setPersistent(false);
         mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
 
+        final PreferenceCategory optionCategory = new PreferenceCategory(getPrefContext());
+        optionCategory.setTitle(R.string.accessibility_screen_option);
+
+        initShortcutPreference(savedInstanceState);
+
         final Preference settingsPreference = new Preference(getPrefContext());
-        final String SettingsText = getString(R.string.settings_button);
-        settingsPreference.setTitle(SettingsText);
+        settingsPreference.setTitle(R.string.accessibility_magnification_service_settings_title);
         settingsPreference.setKey(SETTINGS_KEY);
         settingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
         settingsPreference.setPersistent(false);
+
+        final PreferenceCategory aboutCategory = new PreferenceCategory(getPrefContext());
+        aboutCategory.setTitle(R.string.accessibility_screen_magnification_about);
 
         mConfigWarningPreference = new Preference(getPrefContext());
         mConfigWarningPreference.setSelectable(false);
@@ -182,17 +192,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
         mVideoPreference.setOrder(0);
-        settingsPreference.setOrder(1);
-        mConfigWarningPreference.setOrder(2);
+        optionCategory.setOrder(1);
+        aboutCategory.setOrder(2);
         preferenceScreen.addPreference(mVideoPreference);
-        preferenceScreen.addPreference(settingsPreference);
-        preferenceScreen.addPreference(mConfigWarningPreference);
-    }
+        preferenceScreen.addPreference(optionCategory);
+        optionCategory.addPreference(mShortcutPreference);
+        optionCategory.addPreference(settingsPreference);
+        preferenceScreen.addPreference(aboutCategory);
+        aboutCategory.addPreference(mConfigWarningPreference);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        initShortcutPreference(savedInstanceState);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -378,11 +386,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        onPreferenceToggled(mPreferenceKey, isChecked);
-    }
-
-    @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
@@ -399,22 +402,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     protected void onInstallSwitchBarToggleSwitch() {
         super.onInstallSwitchBarToggleSwitch();
 
-        mSwitchBar.setCheckedInternal(
-                MagnificationPreferenceFragment.isChecked(getContentResolver(), mPreferenceKey));
-        mSwitchBar.addOnSwitchChangeListener(this);
-    }
-
-    @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-    }
-
-    @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
-                getString(R.string.accessibility_screen_magnification_title));
-        switchBar.setSwitchBarText(switchBarText, switchBarText);
+        // Magnify is temporary-use app which uses shortcut to magnify screen, not by toggle.
+        mSwitchBar.hide();
     }
 
     @Override
@@ -429,13 +418,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         } else {
             mVideoPreference.setVisible(false);
         }
-
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE_RES)) {
-            final int titleRes = arguments.getInt(AccessibilitySettings.EXTRA_TITLE_RES);
-            if (titleRes > 0) {
-                getActivity().setTitle(titleRes);
-            }
-        }
     }
 
     @Override
@@ -443,15 +425,35 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (preference.getChecked()) {
             // TODO(b/142531156): Replace PreferredShortcutType.SOFTWARE value with dialog shortcut
             //  preferred key.
+            optInMagnificationValueToSettings(getContext(), PreferredShortcutType.SOFTWARE);
+
             // TODO(b/142531156): ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED need to be treated
             //  as special case in this file.
-            optInMagnificationValueToSettings(getContext(), PreferredShortcutType.SOFTWARE);
+            if ((mPreferredShortcutType & PreferredShortcutType.SOFTWARE)
+                    == PreferredShortcutType.SOFTWARE) {
+                MagnificationPreferenceFragment.setChecked(getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
+                        /* isChecked= */ true);
+            }
+            if ((mPreferredShortcutType & PreferredShortcutType.TRIPLETAP)
+                    == PreferredShortcutType.TRIPLETAP) {
+                MagnificationPreferenceFragment.setChecked(getContentResolver(),
+                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                        /* isChecked= */ true);
+            }
         } else {
             // TODO(b/142531156): Replace PreferredShortcutType.SOFTWARE value with dialog shortcut
             //  preferred key.
+            optOutMagnificationValueFromSettings(getContext(), PreferredShortcutType.SOFTWARE);
+
             // TODO(b/142531156): ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED need to be treated
             //  as special case in this file.
-            optOutMagnificationValueFromSettings(getContext(), PreferredShortcutType.SOFTWARE);
+            MagnificationPreferenceFragment.setChecked(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
+                    /* isChecked= */ false);
+            MagnificationPreferenceFragment.setChecked(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
+                    /* isChecked= */ false);
         }
     }
 
@@ -480,10 +482,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
-        // Put the shortcutPreference before videoPreference.
-        mShortcutPreference.setOrder(mVideoPreference.getOrder() - 1);
         // TODO(b/142530063): Check the new setting key to decide which summary should be shown.
-        preferenceScreen.addPreference(mShortcutPreference);
     }
 
     private void updateShortcutPreference() {
