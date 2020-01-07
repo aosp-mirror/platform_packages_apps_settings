@@ -56,16 +56,12 @@ import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
-    // The index of the array is isStrongAuth << 2 + isProfile << 1 + isAlpha.
+    // The index of the array is isStrongAuth << 1 + isAlpha.
     private static final int[] DETAIL_TEXTS = new int[] {
         R.string.lockpassword_confirm_your_pin_generic,
         R.string.lockpassword_confirm_your_password_generic,
-        R.string.lockpassword_confirm_your_pin_generic_profile,
-        R.string.lockpassword_confirm_your_password_generic_profile,
         R.string.lockpassword_strong_auth_required_device_pin,
-        R.string.lockpassword_strong_auth_required_device_password,
-        R.string.lockpassword_strong_auth_required_work_pin,
-        R.string.lockpassword_strong_auth_required_work_password,
+        R.string.lockpassword_strong_auth_required_device_password
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
@@ -109,6 +105,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private InputMethodManager mImm;
         private AppearAnimationUtils mAppearAnimationUtils;
         private DisappearAnimationUtils mDisappearAnimationUtils;
+        private boolean mIsManagedProfile;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -148,6 +145,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
             mImm = (InputMethodManager) getActivity().getSystemService(
                     Context.INPUT_METHOD_SERVICE);
+
+            mIsManagedProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
 
             Intent intent = getActivity().getIntent();
             if (intent != null) {
@@ -205,6 +204,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                 return mIsAlpha ? R.string.lockpassword_confirm_your_password_header_frp
                         : R.string.lockpassword_confirm_your_pin_header_frp;
             }
+            if (mIsManagedProfile) {
+                return mIsAlpha ? R.string.lockpassword_confirm_your_work_password_header
+                        : R.string.lockpassword_confirm_your_work_pin_header;
+            }
             return mIsAlpha ? R.string.lockpassword_confirm_your_password_header
                     : R.string.lockpassword_confirm_your_pin_header;
         }
@@ -215,10 +218,8 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         : R.string.lockpassword_confirm_your_pin_details_frp;
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
-            boolean isProfile = UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId);
-            // Map boolean flags to an index by isStrongAuth << 2 + isProfile << 1 + isAlpha.
-            int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((isProfile ? 1 : 0) << 1)
-                    + (mIsAlpha ? 1 : 0);
+            // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.
+            int index = ((isStrongAuthRequired ? 1 : 0) << 1) + (mIsAlpha ? 1 : 0);
             return DETAIL_TEXTS[index];
         }
 
