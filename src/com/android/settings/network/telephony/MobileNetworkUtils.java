@@ -99,12 +99,12 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one subscription.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        final SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        if (subManager == null) {
-            Log.e(TAG, "isWifiCallingEnabled: couldn't get system service.");
+        final int[] subIds = getActiveSubscriptionIdList(context);
+        if (ArrayUtils.isEmpty(subIds)) {
+            Log.d(TAG, "isWifiCallingEnabled: subIds is empty");
             return false;
         }
-        for (int subId : subManager.getActiveSubscriptionIdList()) {
+        for (int subId : subIds) {
             if (isWifiCallingEnabled(context, subId)) {
                 return true;
             }
@@ -465,9 +465,7 @@ public class MobileNetworkUtils {
      * otherwise return {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID}
      */
     public static int getSearchableSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
-        final int subIds[] = subscriptionManager.getActiveSubscriptionIdList();
+        final int[] subIds = getActiveSubscriptionIdList(context);
 
         return subIds.length >= 1 ? subIds[0] : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
@@ -484,14 +482,12 @@ public class MobileNetworkUtils {
      */
     public static int getAvailability(Context context, int defSubId,
             TelephonyAvailabilityCallback callback) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
         if (defSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             // If subId has been set, return the corresponding status
             return callback.getAvailabilityStatus(defSubId);
         } else {
             // Otherwise, search whether there is one subId in device that support this preference
-            final int[] subIds = subscriptionManager.getActiveSubscriptionIdList();
+            final int[] subIds = getActiveSubscriptionIdList(context);
             if (ArrayUtils.isEmpty(subIds)) {
                 return callback.getAvailabilityStatus(
                         SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -638,5 +634,22 @@ public class MobileNetworkUtils {
         final List<String> unsupportedCountries =
                 Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
         return unsupportedCountries.contains(country);
+    }
+
+    private static int[] getActiveSubscriptionIdList(Context context) {
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        final List<SubscriptionInfo> subInfoList =
+                subscriptionManager.getActiveSubscriptionInfoList();
+        if (subInfoList == null) {
+            return new int[0];
+        }
+        int[] activeSubIds = new int[subInfoList.size()];
+        int i = 0;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            activeSubIds[i] = subInfo.getSubscriptionId();
+            i++;
+        }
+        return activeSubIds;
     }
 }
