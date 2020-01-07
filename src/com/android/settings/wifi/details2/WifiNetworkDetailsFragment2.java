@@ -91,7 +91,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.wifi_network_details_fragment;
+        return R.xml.wifi_network_details_fragment2;
     }
 
     @Override
@@ -154,6 +154,11 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
         controllers.add(mWifiDetailPreferenceController2);
+
+        final WifiAutoConnectPreferenceController2 wifiAutoConnectPreferenceController2 =
+                new WifiAutoConnectPreferenceController2(context);
+        wifiAutoConnectPreferenceController2.setWifiEntry(wifiEntry);
+        controllers.add(wifiAutoConnectPreferenceController2);
 
         final AddDevicePreferenceController2 addDevicePreferenceController2 =
                 new AddDevicePreferenceController2(context);

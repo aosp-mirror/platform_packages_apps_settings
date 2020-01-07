@@ -341,7 +341,7 @@ public class WifiConfigController2 implements TextWatcher,
 
             if ((!mWifiEntry.isSaved()
                     && mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED
-                    && !WifiEntryShell.isPasspoint(mWifiEntry))
+                    && !mWifiEntry.isSubscription())
                     || mMode != WifiConfigUiBase2.MODE_VIEW) {
                 showSecurityFields(/* refreshEapMethods */ true, /* refreshCertificates */ true);
                 showIpConfigFields();
@@ -417,7 +417,7 @@ public class WifiConfigController2 implements TextWatcher,
                 }
                 if (mWifiEntry.isSaved()
                         || mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED
-                        || WifiEntryShell.isPasspoint(mWifiEntry)) {
+                        || mWifiEntry.isSubscription()) {
                     mConfigUi.setForgetButton(res.getString(R.string.wifi_forget));
                 }
             }

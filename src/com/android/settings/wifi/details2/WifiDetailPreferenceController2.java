@@ -537,7 +537,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshSsid() {
-        if (WifiEntryShell.isPasspoint(mWifiEntry) || WifiEntryShell.isOsuProvider(mWifiEntry)) {
+        if (mWifiEntry.isSubscription() || WifiEntryShell.isOsuProvider(mWifiEntry)) {
             mSsidPref.setVisible(true);
             mSsidPref.setSummary(mWifiEntry.getTitle());
         } else {
@@ -723,7 +723,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      * Forgets the wifi network associated with this preference.
      */
     private void forgetNetwork() {
-        if (WifiEntryShell.isPasspoint(mWifiEntry)) {
+        if (mWifiEntry.isSubscription()) {
             // Post a dialog to confirm if user really want to forget the passpoint network.
             showConfirmForgetDialog();
             return;
@@ -851,7 +851,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         // For saved Passpoint network, framework doesn't have the field to keep the MAC choice
         // persistently, so Passpoint network will always use the default value so far, which is
         // randomized MAC address, so don't need to modify title.
-        if (WifiEntryShell.isPasspoint(mWifiEntry)) {
+        if (mWifiEntry.isSubscription()) {
             return;
         }
 
