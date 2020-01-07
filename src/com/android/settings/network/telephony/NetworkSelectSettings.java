@@ -85,7 +85,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     private boolean mUseNewApi;
     private long mRequestIdManualNetworkSelect;
     private long mRequestIdManualNetworkScan;
-    private boolean mScreenIsOn;
     private long mWaitingForNumberOfScanResults;
 
     private static final int MIN_NUMBER_OF_SCAN_REQUIRED = 2;
@@ -138,7 +137,6 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (isProgressBarVisible()) {
             return;
         }
-        mScreenIsOn = true;
         if (mWaitingForNumberOfScanResults <= 0) {
             startNetworkQuery();
         }
@@ -158,7 +156,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mScreenIsOn = false;
         if (mWaitingForNumberOfScanResults <= 0) {
             stopNetworkQuery();
         }
@@ -241,7 +238,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                         break;
                     }
                     mWaitingForNumberOfScanResults--;
-                    if ((!mScreenIsOn) && (mWaitingForNumberOfScanResults <= 0)) {
+                    if ((mWaitingForNumberOfScanResults <= 0) && (!isResumed())) {
                         stopNetworkQuery();
                     }
 
