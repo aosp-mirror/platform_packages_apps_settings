@@ -27,6 +27,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -160,41 +161,76 @@ final class AccessibilityUtil {
     }
 
     /**
-     * Opts in component name into colon-separated {@code shortcutType} key's string in Settings.
+     * Opts in component name into multiple {@code shortcutTypes} colon-separated string in
+     * Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes  A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be opted in Settings.
+     */
+    static void optInAllValuesToSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optInValueToSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optInValueToSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+    }
+
+    /**
+     * Opts in component name into {@code shortcutType} colon-separated string in Settings.
      *
      * @param context The current context.
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted in Settings.
      */
+    @VisibleForTesting
     static void optInValueToSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final String targetKey = convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
                 targetKey);
 
-        if (TextUtils.isEmpty(targetString)) {
-            return;
-        }
-
         if (hasValueInSettings(context, shortcutType, componentName)) {
             return;
         }
 
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-
-        joiner.add(targetString);
+        if (!TextUtils.isEmpty(targetString)) {
+            joiner.add(targetString);
+        }
         joiner.add(componentName.flattenToString());
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
     }
 
     /**
-     * Opts out component name into colon-separated {@code shortcutType} key's string in Settings.
+     * Opts out component name into multiple {@code shortcutTypes} colon-separated string in
+     * Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be opted out from Settings.
+     */
+    static void optOutAllValuesFromSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optOutValueFromSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optOutValueFromSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+    }
+
+    /**
+     * Opts out component name into {@code shortcutType} colon-separated string in Settings.
      *
      * @param context The current context.
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted out from Settings.
      */
+    @VisibleForTesting
     static void optOutValueFromSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
@@ -219,13 +255,34 @@ final class AccessibilityUtil {
     }
 
     /**
-     * Returns if component name existed in Settings.
+     * Returns if component name existed in one of {@code shortcutTypes} string in Settings.
+     *
+     * @param context The current context.
+     * @param shortcutTypes A combination of {@link UserShortcutType}.
+     * @param componentName The component name that need to be checked existed in Settings.
+     * @return {@code true} if componentName existed in Settings.
+     */
+    static boolean hasValuesInSettings(Context context, int shortcutTypes,
+            @NonNull ComponentName componentName) {
+        boolean exist = false;
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            exist = hasValueInSettings(context, UserShortcutType.SOFTWARE, componentName);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            exist |= hasValueInSettings(context, UserShortcutType.HARDWARE, componentName);
+        }
+        return exist;
+    }
+
+    /**
+     * Returns if component name existed in {@code shortcutType} string Settings.
      *
      * @param context The current context.
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be checked existed in Settings.
      * @return {@code true} if componentName existed in Settings.
      */
+    @VisibleForTesting
     static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final String targetKey = convertKeyFromSettings(shortcutType);

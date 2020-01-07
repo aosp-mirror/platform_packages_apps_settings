@@ -245,6 +245,12 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         updateUserShortcutType(/* saveChanges= */ true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+        if (mShortcutPreference.getChecked()) {
+            AccessibilityUtil.optInAllValuesToSettings(getContext(), mUserShortcutType,
+                    getComponentName());
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
+                    getComponentName());
+        }
     }
 
     @Override
@@ -303,15 +309,12 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
+        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            AccessibilityUtil.optInValueToSettings(getContext(), UserShortcutType.SOFTWARE,
+            AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes,
                     getComponentName());
         } else {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            AccessibilityUtil.optOutValueFromSettings(getContext(), UserShortcutType.SOFTWARE,
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
                     getComponentName());
         }
     }
@@ -355,11 +358,9 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                 getShortcutPreferenceKey());
 
         if (shortcutPreference != null) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
+            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
             shortcutPreference.setChecked(
-                    AccessibilityUtil.hasValueInSettings(getContext(),
-                            UserShortcutType.SOFTWARE,
+                    AccessibilityUtil.hasValuesInSettings(getContext(), shortcutTypes,
                             getComponentName()));
         }
 

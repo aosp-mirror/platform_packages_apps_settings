@@ -317,6 +317,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         updateUserShortcutType(/* saveChanges= */ true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+        if (mShortcutPreference.getChecked()) {
+            AccessibilityUtil.optInAllValuesToSettings(getContext(), mUserShortcutType,
+                    mComponentName);
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
+                    mComponentName);
+        }
     }
 
     @Override
@@ -346,8 +352,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void initShortcutPreference(Bundle savedInstanceState) {
-        mUserShortcutType = getUserShortcutType(getPrefContext(),
-                UserShortcutType.SOFTWARE);
+        mUserShortcutType = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
 
         // Restore the user shortcut type
         if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
@@ -366,7 +371,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setOnClickListener(this);
         // Put the shortcutPreference before settingsPreference.
         mShortcutPreference.setOrder(-1);
-        // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
         preferenceScreen.addPreference(mShortcutPreference);
     }
 
@@ -376,11 +380,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 getShortcutPreferenceKey());
 
         if (shortcutPreference != null) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
+            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
             shortcutPreference.setChecked(
-                    AccessibilityUtil.hasValueInSettings(getContext(),
-                            UserShortcutType.SOFTWARE,
+                    AccessibilityUtil.hasValuesInSettings(getContext(), shortcutTypes,
                             mComponentName));
         }
     }
@@ -473,20 +475,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
+        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
             if (!getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)) {
                 preference.setChecked(false);
                 showPopupDialog(DialogType.ENABLE_WARNING_FROM_SHORTCUT);
             } else {
-                // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog
-                //  shortcut preferred key.
-                AccessibilityUtil.optInValueToSettings(getContext(), UserShortcutType.SOFTWARE,
+                AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes,
                         mComponentName);
             }
         } else {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            AccessibilityUtil.optOutValueFromSettings(getContext(), UserShortcutType.SOFTWARE,
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
                     mComponentName);
         }
     }
@@ -578,10 +577,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutClicked() {
         final ShortcutPreference shortcutPreference = findPreference(getShortcutPreferenceKey());
         shortcutPreference.setChecked(true);
-        // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-        //  preferred key.
-        AccessibilityUtil.optInValueToSettings(getContext(), UserShortcutType.SOFTWARE,
-                mComponentName);
+
+        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
+        AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes, mComponentName);
 
         mDialog.dismiss();
     }
