@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.Utils;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
@@ -49,6 +50,9 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
 
+    private boolean mIsTouched;
+    private MediaDevice mTopDevice;
+
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
 
@@ -62,6 +66,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     @Override
     protected void onSlicePinned() {
         mMediaDevices.clear();
+        mIsTouched = false;
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
@@ -100,6 +105,11 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         notifySliceChange();
     }
 
+    @Override
+    public void onDeviceAttributesChanged() {
+        notifySliceChange();
+    }
+
     public List<MediaDevice> getMediaDevices() {
         return new ArrayList<>(mMediaDevices);
     }
@@ -118,11 +128,28 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 
+    void setIsTouched(boolean isTouched) {
+        mIsTouched = isTouched;
+    }
+
+    boolean getIsTouched() {
+        return mIsTouched;
+    }
+
+    void setTopDevice(MediaDevice device) {
+        mTopDevice = device;
+    }
+
+    MediaDevice getTopDevice() {
+        return mTopDevice;
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)) {
+            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)
+                    && Utils.isAudioModeOngoingCall(mContext)) {
                 notifySliceChange();
             }
         }

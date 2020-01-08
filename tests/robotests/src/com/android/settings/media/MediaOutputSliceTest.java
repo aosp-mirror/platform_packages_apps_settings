@@ -64,7 +64,6 @@ import java.util.List;
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class MediaOutputSliceTest {
 
-    private static final String TEST_PACKAGE_NAME = "com.fake.android.music";
     private static final String TEST_DEVICE_1_ID = "test_device_1_id";
     private static final String TEST_DEVICE_1_NAME = "test_device_1_name";
     private static final int TEST_DEVICE_1_ICON =
@@ -100,12 +99,12 @@ public class MediaOutputSliceTest {
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
-        mMediaOutputSlice.init(TEST_PACKAGE_NAME, mMediaDeviceUpdateWorker);
+        mMediaOutputSlice.init(mMediaDeviceUpdateWorker);
     }
 
     @Test
     public void getSlice_workerIsNull_shouldReturnZeroRow() {
-        mMediaOutputSlice.init(TEST_PACKAGE_NAME, null);
+        mMediaOutputSlice.init(null);
 
         final Slice slice = mMediaOutputSlice.getSlice();
 

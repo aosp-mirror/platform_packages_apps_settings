@@ -61,7 +61,7 @@ public class MediaOutputSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    void init(String packageName, MediaDeviceUpdateWorker worker) {
+    void init(MediaDeviceUpdateWorker worker) {
         mWorker = worker;
     }
 
@@ -79,15 +79,20 @@ public class MediaOutputSlice implements CustomSliceable {
         }
 
         final List<MediaDevice> devices = getMediaDevices();
+        final MediaDeviceUpdateWorker worker = getWorker();
+        final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
+        final boolean isTouched = worker.getIsTouched();
+        // Fix the last top device when user press device to transfer.
+        final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
-        final MediaDevice connectedDevice = getWorker().getCurrentConnectedMediaDevice();
-        if (connectedDevice != null) {
-            listBuilder.addRow(getActiveDeviceHeaderRow(connectedDevice));
+        if (topDevice != null) {
+            listBuilder.addRow(getActiveDeviceHeaderRow(topDevice));
+            worker.setTopDevice(topDevice);
         }
 
         for (MediaDevice device : devices) {
-            if (connectedDevice == null
-                    || !TextUtils.equals(connectedDevice.getId(), device.getId())) {
+            if (topDevice == null
+                    || !TextUtils.equals(topDevice.getId(), device.getId())) {
                 listBuilder.addRow(getMediaDeviceRow(device));
             }
         }
@@ -173,6 +178,7 @@ public class MediaOutputSlice implements CustomSliceable {
         final MediaDevice device = worker.getMediaDeviceById(id);
         if (device != null) {
             Log.d(TAG, "onNotifyChange() device name : " + device.getName());
+            worker.setIsTouched(true);
             worker.connectDevice(device);
         }
     }

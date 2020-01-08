@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,6 +32,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 
+import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
@@ -40,12 +42,14 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowAudioManager.class)
 public class MediaDeviceUpdateWorkerTest {
 
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
@@ -61,6 +65,7 @@ public class MediaDeviceUpdateWorkerTest {
     private MediaDevice mMediaDevice1;
     private MediaDevice mMediaDevice2;
     private ShadowApplication mShadowApplication;
+    private AudioManager mAudioManager;
 
     @Before
     public void setUp() {
@@ -69,6 +74,7 @@ public class MediaDeviceUpdateWorkerTest {
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI);
         mResolver = mock(ContentResolver.class);
         mShadowApplication = ShadowApplication.getInstance();
+        mAudioManager = mContext.getSystemService(AudioManager.class);
 
         mMediaDevice1 = mock(MediaDevice.class);
         when(mMediaDevice1.getId()).thenReturn(TEST_DEVICE_1_ID);
@@ -90,6 +96,13 @@ public class MediaDeviceUpdateWorkerTest {
     @Test
     public void onSelectedDeviceStateChanged_shouldNotifyChange() {
         mMediaDeviceUpdateWorker.onSelectedDeviceStateChanged(null, 0);
+
+        verify(mResolver).notifyChange(URI, null);
+    }
+
+    @Test
+    public void onDeviceAttributesChanged_shouldNotifyChange() {
+        mMediaDeviceUpdateWorker.onDeviceAttributesChanged();
 
         verify(mResolver).notifyChange(URI, null);
     }
@@ -140,8 +153,9 @@ public class MediaDeviceUpdateWorkerTest {
     }
 
     @Test
-    public void onReceive_shouldNotifyChange() {
+    public void onReceive_inCallState_shouldNotifyChange() {
         mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
 
         mMediaDeviceUpdateWorker.onSlicePinned();
         final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
@@ -150,5 +164,19 @@ public class MediaDeviceUpdateWorkerTest {
         }
 
         verify(mResolver).notifyChange(URI, null);
+    }
+
+    @Test
+    public void onReceive_notInCallState_doNothing() {
+        mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+
+        mMediaDeviceUpdateWorker.onSlicePinned();
+        final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
+        for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
+            receiver.onReceive(mContext, intent);
+        }
+
+        verify(mResolver, never()).notifyChange(URI, null);
     }
 }
