@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,29 +30,27 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 @RunWith(RobolectricTestRunner.class)
-public class MagnificationWindowControlPreferenceControllerTest {
-    private static final String PREF_KEY = "screen_magnification_window_control_switch";
-    // TODO(b/146019459): Use magnification_window_control_enabled.
-    private static final String KEY_CONTROL = Settings.System.MASTER_MONO;
+public class MagnificationEnablePreferenceControllerTest {
+    private static final String PREF_KEY = "screen_magnification_enable";
+    private static final String KEY_ENABLE = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE;
+    private static final int UNKNOWN = -1;
     private Context mContext;
     private SwitchPreference mPreference;
-    private MagnificationWindowControlPreferenceController mController;
+    private MagnificationEnablePreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
-        mController = new MagnificationWindowControlPreferenceController(mContext, PREF_KEY);
+        mController = new MagnificationEnablePreferenceController(mContext, PREF_KEY);
     }
 
     @Test
-    public void isChecked_enabledWindowControl_shouldReturnTrue() {
-        Settings.System.putIntForUser(mContext.getContentResolver(),
-                KEY_CONTROL, State.ON, UserHandle.USER_CURRENT);
+    public void isChecked_enabledFullscreenMagnificationMode_shouldReturnTrue() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                KEY_ENABLE, Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN,
+                UserHandle.USER_CURRENT);
 
         mController.updateState(mPreference);
 
@@ -61,9 +59,10 @@ public class MagnificationWindowControlPreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_disabledWindowControl_shouldReturnFalse() {
-        Settings.System.putIntForUser(mContext.getContentResolver(),
-                KEY_CONTROL, State.OFF, UserHandle.USER_CURRENT);
+    public void isChecked_enabledWindowMagnificationMode_shouldReturnFalse() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                KEY_ENABLE, Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW,
+                UserHandle.USER_CURRENT);
 
         mController.updateState(mPreference);
 
@@ -71,26 +70,24 @@ public class MagnificationWindowControlPreferenceControllerTest {
         assertThat(mPreference.isChecked()).isFalse();
     }
 
+
     @Test
-    public void setChecked_setTrue_shouldEnableWindowControl() {
+    public void setChecked_setTrue_shouldEnableFullscreenMagnificationMode() {
         mController.setChecked(true);
 
-        assertThat(Settings.System.getIntForUser(mContext.getContentResolver(),
-                KEY_CONTROL, State.UNKNOWN, UserHandle.USER_CURRENT)).isEqualTo(State.ON);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                KEY_ENABLE, UNKNOWN,
+                UserHandle.USER_CURRENT)).isEqualTo(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN);
     }
 
     @Test
-    public void setChecked_setFalse_shouldDisableWindowControl() {
+    public void setChecked_setFalse_shouldEnableWindowMagnificationMode() {
         mController.setChecked(false);
 
-        assertThat(Settings.System.getIntForUser(mContext.getContentResolver(),
-                KEY_CONTROL, State.UNKNOWN, UserHandle.USER_CURRENT)).isEqualTo(State.OFF);
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface State {
-        int UNKNOWN = -1;
-        int OFF = 0;
-        int ON = 1;
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                KEY_ENABLE, UNKNOWN,
+                UserHandle.USER_CURRENT)).isEqualTo(
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW);
     }
 }
