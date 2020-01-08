@@ -47,7 +47,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.ims.ImsManager;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
@@ -126,8 +125,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 }
             }
 
-            ImsManager.getInstance(mContext,
-                    SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             restoreDefaultApn(mContext);
             if (mEraseEsim) {
                 return RecoverySystem.wipeEuiccData(mContext, mPackageName);
