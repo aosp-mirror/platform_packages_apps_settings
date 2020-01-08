@@ -159,11 +159,12 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      * SubscriptionManager#INVALID_SUBSCRIPTION_ID
      */
     public static int getDefaultSubscriptionId(Context context) {
-        SubscriptionManager subManager = SubscriptionManager.from(context);
+        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
         if (subManager == null) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         }
-        SubscriptionInfo subscriptionInfo = subManager.getDefaultDataSubscriptionInfo();
+        SubscriptionInfo subscriptionInfo =
+                subManager.getActiveSubscriptionInfo(subManager.getDefaultDataSubscriptionId());
         if (subscriptionInfo == null) {
             List<SubscriptionInfo> list = subManager.getAllSubscriptionInfoList();
             if (list.size() == 0) {
