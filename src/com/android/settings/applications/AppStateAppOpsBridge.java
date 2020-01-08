@@ -328,7 +328,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         public boolean isPermissible() {
             // defining the default behavior as permissible as long as the package requested this
             // permission (this means pre-M gets approval during install time; M apps gets approval
-            // during runtime.
+            // during runtime).
             if (appOpMode == AppOpsManager.MODE_DEFAULT) {
                 return staticPermissionGranted;
             }
