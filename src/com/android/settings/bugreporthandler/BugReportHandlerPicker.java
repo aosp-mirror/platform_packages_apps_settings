@@ -37,6 +37,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -73,6 +74,14 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     @VisibleForTesting
     static String getKey(String handlerApp, int handlerUser) {
         return handlerApp + "#" + handlerUser;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (!DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context)) {
+            getActivity().finish();
+        }
     }
 
     @Override
