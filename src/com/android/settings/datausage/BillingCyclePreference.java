@@ -96,7 +96,7 @@ public class BillingCyclePreference extends Preference
     }
 
     /**
-     * Implementation of MobileDataEnabledListener.Client
+     * Implementation of {@code MobileDataEnabledListener.Client}
      */
     public void onMobileDataEnabledChange() {
         updateEnabled();

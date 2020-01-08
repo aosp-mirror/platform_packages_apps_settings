@@ -25,12 +25,12 @@ public class MobileDataEnabledListener {
     private Context mContext;
     private Client mClient;
     private int mSubId;
-    /**
-     * There're 2 listeners both activated at the same time.
-     * For project that access MOBILE_DATA, only first listener is functional.
-     * For project that access "MOBILE_DATA + subId", first listener will be stopped when receiving
-     * any onChange from second listener.
-     */
+
+    // There're 2 listeners both activated at the same time.
+    // For project that access MOBILE_DATA, only first listener is functional.
+    // For project that access "MOBILE_DATA + subId", first listener will be stopped when receiving
+    // any onChange from second listener.
+
     private GlobalSettingsChangeListener mListener;
     private GlobalSettingsChangeListener mListenerForSubId;
 
