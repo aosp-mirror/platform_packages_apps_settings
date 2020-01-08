@@ -203,7 +203,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private void restoreDefaultApn(Context context) {
         Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
 
-        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
         }
 
