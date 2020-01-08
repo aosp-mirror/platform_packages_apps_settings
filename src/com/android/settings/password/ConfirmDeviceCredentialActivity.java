@@ -186,8 +186,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
         final Bundle bpBundle = new Bundle();
-        mTitle = bpBundle.getString(BiometricPrompt.KEY_TITLE);
-        mDetails = bpBundle.getString(BiometricPrompt.KEY_SUBTITLE);
         bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
         bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
         bpBundle.putBoolean(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS,

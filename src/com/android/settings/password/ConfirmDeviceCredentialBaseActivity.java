@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import android.app.KeyguardManager;
-import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
@@ -65,7 +64,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             return;
         }
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
-            setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
+            setTheme(SetupWizardUtils.getTheme(getIntent()));
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;
         } else if (getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false)) {
