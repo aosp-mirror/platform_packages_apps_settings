@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="tether_prefs_screen"
+    android:title="@string/tether_settings_title_all">
+
+    <PreferenceCategory
+        android:key="wifi_tether_settings_group"
+        android:title="@string/wifi_hotspot_checkbox_text"
+        settings:searchable="false">
+        <com.android.settings.wifi.tether.WifiTetherSsidPreference
+            android:key="wifi_tether_network_name"
+            android:title="@string/wifi_hotspot_name_title"
+            android:summary="@string/summary_placeholder"/>
+
+        <com.android.settings.widget.ValidatedEditTextPreference
+            android:key="wifi_tether_network_password"
+            android:persistent="false"
+            android:title="@string/wifi_hotspot_password_title"/>
+
+        <SwitchPreference
+            android:key="wifi_tether_auto_turn_off"
+            android:title="@string/wifi_hotspot_auto_off_title"
+            android:summary="@string/wifi_hotspot_auto_off_summary"/>
+
+        <ListPreference
+            android:key="wifi_tether_security"
+            android:title="@string/wifi_security"
+            android:summary="@string/summary_placeholder"
+            android:entries="@array/wifi_tether_security"
+            android:entryValues="@array/wifi_tether_security_values"/>
+
+        <ListPreference
+            android:key="wifi_tether_network_ap_band"
+            android:title="@string/wifi_hotspot_ap_band_title"/>
+    </PreferenceCategory>
+
+    <Preference
+        android:key="disabled_on_data_saver"
+        android:summary="@string/tether_settings_disabled_on_data_saver"
+        android:selectable="false"
+        settings:allowDividerAbove="true" />
+
+    <com.android.settingslib.widget.FooterPreference
+        android:key="tether_prefs_footer"
+        android:title="@string/tethering_footer_info"
+        android:selectable="false"
+        settings:searchable="false"/>
+</PreferenceScreen>
