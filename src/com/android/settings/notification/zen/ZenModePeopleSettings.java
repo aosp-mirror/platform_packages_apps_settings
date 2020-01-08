@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,16 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -32,44 +38,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
-public class ZenModeMessagesSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle());
+        final Activity activity = getActivity();
+        final Application app;
+        if (activity != null) {
+            app = activity.getApplication();
+        } else {
+            app = null;
+        }
+        return buildPreferenceControllers(
+                context, getSettingsLifecycle(), app, this, getFragmentManager());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePriorityMessagesPreferenceController(context, lifecycle));
         controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
                 PRIORITY_CATEGORY_MESSAGES, "zen_mode_starred_contacts_messages"));
-        controllers.add(new ZenModeBehaviorFooterPreferenceController(
-                context, lifecycle, R.string.zen_mode_messages_footer));
+        controllers.add(new ZenModePriorityCallsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeStarredContactsPreferenceController(context, lifecycle,
+                PRIORITY_CATEGORY_CALLS, "zen_mode_starred_contacts_callers"));
+        controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
+                context.getResources().getInteger(com.android.internal.R.integer
+                        .config_zen_repeat_callers_threshold)));
+        controllers.add(
+                new ZenModeAllBypassingConversationsPreferenceController(context, app, host));
+        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
+                fragmentManager));
         return controllers;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_messages_settings;
+        return R.xml.zen_mode_people_settings;
     }
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.NOTIFICATION_ZEN_MODE_PRIORITY;
+        return SettingsEnums.DND_PEOPLE;
     }
 
     /**
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_messages_settings) {
+            new BaseSearchIndexProvider(R.xml.zen_mode_people_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null);
+                    return buildPreferenceControllers(context, null, null, null, null);
                 }
             };
 }

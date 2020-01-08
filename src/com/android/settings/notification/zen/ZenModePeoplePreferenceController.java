@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,22 +25,21 @@ import androidx.preference.Preference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeCallsPreferenceController extends
+public class ZenModePeoplePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
-    private final String KEY_BEHAVIOR_SETTINGS;
+    private final String KEY;
     private final ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
-    public ZenModeCallsPreferenceController(Context context, Lifecycle lifecycle,
-            String key) {
+    public ZenModePeoplePreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, key, lifecycle);
-        KEY_BEHAVIOR_SETTINGS = key;
+        KEY = key;
         mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_BEHAVIOR_SETTINGS;
+        return KEY;
     }
 
     @Override
@@ -57,11 +56,12 @@ public class ZenModeCallsPreferenceController extends
             case Settings.Global.ZEN_MODE_ALARMS:
                 preference.setEnabled(false);
                 preference.setSummary(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
-                        NotificationManager.Policy.PRIORITY_CATEGORY_CALLS));
+                        NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES));
                 break;
             default:
                 preference.setEnabled(true);
-                preference.setSummary(mSummaryBuilder.getCallsSettingSummary(getPolicy()));
+                // TODO: How do all of the people options roll up into the summary?
+                //preference.setSummary(mSummaryBuilder.getMessagesSettingSummary(getPolicy()));
         }
     }
 }

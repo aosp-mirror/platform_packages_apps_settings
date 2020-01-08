@@ -7605,6 +7605,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Sound: Summary for the Do not Disturb option and associated settings page. [CHAR LIMIT=240]-->
+    <string name="zen_mode_settings_summary">Only get notified by important people and apps</string>
+
     <!-- Subtitle for the Do not Disturb slice. [CHAR LIMIT=50]-->
     <string name="zen_mode_slice_subtitle">Limit interruptions</string>
 
@@ -7684,7 +7687,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
 
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">When Do Not Disturb is on</string>
+    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
 
     <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Restrict notifications</string>
@@ -7825,15 +7828,19 @@
         <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
     </plurals>
 
-    <!-- Do not disturb settings, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">Mute device but allow exceptions</string>
-    <!-- Do not disturb settings, exceptions to dnd title [CHAR LIMIT=100]-->
-    <string name="zen_category_exceptions">Exceptions</string>
-    <!-- Do not disturb settings, category header [CHAR LIMIT=100]-->
-    <string name="zen_category_schedule">Schedule</string>
+    <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
+    <string name="zen_category_behavior">Exceptions when Do Not Disturb is on</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough [CHAR LIMIT=100]-->
+    <string name="zen_category_people">People</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
+    <string name="zen_category_apps">Apps</string>
+    <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
+    <string name="zen_category_exceptions">Alarms &amp; other interruptions</string>
+    <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
+    <string name="zen_category_schedule">Schedules</string>
+    <!-- Do not disturb settings, main screen, field, dnd visuals [CHAR LIMIT=100]-->
+    <string name="zen_category_visuals">Silenced notifications</string>
 
-    <!-- Do not disturb settings, sound and vibrations exceptions title [CHAR LIMIT=100]-->
-    <string name="zen_sound_title">See all exceptions</string>
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
     <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
@@ -8596,6 +8603,8 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
+    <string name="zen_mode_conversations_title">Conversations</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow messages</string>
 
@@ -8636,31 +8645,46 @@
     <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
-    <string name="zen_mode_alarms">Allow alarms</string>
+    <string name="zen_mode_alarms">Alarms</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow alarms summary -->
+    <string name="zen_mode_alarms_summary">From timers, alarms, security systems, and other apps</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
-    <string name="zen_mode_media">Play media sounds</string>
+    <string name="zen_mode_media">Media sounds</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow media (sound from video) to bypass dnd  summary-->
+    <string name="zen_mode_media_summary">From videos, games, and other media</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
-    <string name="zen_mode_system">Allow touch sounds</string>
+    <string name="zen_mode_system">Touch sounds</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: allow touch sounds to bypass DND summary  -->
+    <string name="zen_mode_system_summary">From your keyboard and other buttons</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
-    <string name="zen_mode_reminders">Allow reminders</string>
+    <string name="zen_mode_reminders">Reminders</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow reminder notifications/sounds to bypass DND summary  -->
+    <string name="zen_mode_reminders_summary">From tasks and reminders</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
-    <string name="zen_mode_events">Allow events</string>
+    <string name="zen_mode_events">Events</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow event notifications/sounds to bypass DND summary -->
+    <string name="zen_mode_events_summary">From upcoming calendar events</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
