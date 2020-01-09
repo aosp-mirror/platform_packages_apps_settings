@@ -69,7 +69,7 @@ public class ShortcutPreferenceTest {
     }
 
     @Test
-    public void testClickLinearLayout_checkboxClicked() {
+    public void clickLinearLayout_checkboxClicked() {
         mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
         mShortcutPreference.setOnClickListener(mListener);
 
@@ -81,7 +81,7 @@ public class ShortcutPreferenceTest {
     }
 
     @Test
-    public void testClickSettings_settingsClicked() {
+    public void clickSettings_settingsClicked() {
         mShortcutPreference.onBindViewHolder(mPreferenceViewHolder);
         mShortcutPreference.setOnClickListener(mListener);
 
@@ -92,7 +92,7 @@ public class ShortcutPreferenceTest {
     }
 
     @Test
-    public void testSetCheckedTrue_getCheckedIsTrue() {
+    public void setCheckedTrue_getCheckedIsTrue() {
         mShortcutPreference.setChecked(true);
 
         assertThat(mShortcutPreference.getChecked()).isEqualTo(true);
