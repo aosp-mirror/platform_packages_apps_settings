@@ -52,7 +52,7 @@ public final class CellInfoUtil {
     /**
      * Returns the title of the network obtained in the manual search.
      *
-     * @param cellId contains the information of the network.
+     * @param cellId contains the identity of the network.
      * @param networkMccMnc contains the MCCMNC string of the network
      * @return Long Name if not null/empty, otherwise Short Name if not null/empty,
      * else MCCMNC string.
