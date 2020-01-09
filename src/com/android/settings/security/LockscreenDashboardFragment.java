@@ -57,6 +57,9 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @VisibleForTesting
     static final String KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE =
             "security_setting_lock_screen_notif_work";
+    @VisibleForTesting
+    static final String KEY_ADD_USER_FROM_LOCK_SCREEN =
+            "security_lockscreen_add_users_when_locked";
 
 
     private AmbientDisplayConfiguration mConfig;
@@ -136,6 +139,13 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */, null /* lifecycle */));
                     return controllers;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> niks = super.getNonIndexableKeys(context);
+                    niks.add(KEY_ADD_USER_FROM_LOCK_SCREEN);
+                    return niks;
                 }
 
                 @Override

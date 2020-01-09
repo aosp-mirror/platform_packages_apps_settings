@@ -21,19 +21,13 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.dream.DreamBackend;
-import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Settings screen for decide when to start screen saver
- */
-@SearchIndexable
 public class WhenToDreamPicker extends RadioButtonPickerFragment {
 
     private static final String TAG = "WhenToDreamPicker";
@@ -126,7 +120,4 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
             return key;
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.when_to_dream_settings);
 }

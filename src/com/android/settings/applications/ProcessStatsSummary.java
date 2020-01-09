@@ -29,13 +29,7 @@ import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.applications.ProcStatsData.MemInfo;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
-/**
- * Settings screen to provide memory stats summary
- */
-@SearchIndexable
 public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenceClickListener {
 
     private static final String KEY_STATUS_HEADER = "status_header";
@@ -131,7 +125,4 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
         }
         return false;
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.process_stats_summary);
 }
