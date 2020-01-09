@@ -201,7 +201,6 @@ public class DataUsageList extends DataUsageBaseFragment
     public void onDestroy() {
         mUidDetailProvider.clearCache();
         mUidDetailProvider = null;
-        mDataStateListener.stop();
 
         super.onDestroy();
     }
@@ -232,7 +231,7 @@ public class DataUsageList extends DataUsageBaseFragment
     }
 
     /**
-     * Implementation of MobileDataEnabledListener.Client
+     * Implementation of {@code MobileDataEnabledListener.Client}
      */
     public void onMobileDataEnabledChange() {
         updatePolicy();
