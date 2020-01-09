@@ -349,7 +349,7 @@ public class WifiDppUtils {
         // When the value of this key is read, the actual key is not returned, just a "*".
         // Call privileged system API to obtain actual key.
         final String preSharedKey = removeFirstAndLastDoubleQuotes(
-                softApConfiguration.getWpa2Passphrase());
+                softApConfiguration.getPassphrase());
 
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);
