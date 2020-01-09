@@ -623,7 +623,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         }
     }
 
-    private ComponentName getComponentName() {
+    ComponentName getComponentName() {
         return mComponentName;
     }
 }

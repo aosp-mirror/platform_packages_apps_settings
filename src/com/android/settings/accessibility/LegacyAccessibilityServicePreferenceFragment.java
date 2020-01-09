@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
+
 import android.os.Bundle;
 import android.view.View;
 
@@ -23,9 +25,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
+import com.google.common.collect.ImmutableSet;
+
 /** For accessibility services that target SDK <= Q. */
 public class LegacyAccessibilityServicePreferenceFragment extends
         ToggleAccessibilityServicePreferenceFragment {
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -39,5 +44,15 @@ public class LegacyAccessibilityServicePreferenceFragment extends
             shortcutPreference.setSummary(hardwareTitle);
             shortcutPreference.setSettingsVisibility(View.GONE);
         }
+        // Only allowed hardware PreferredShortcutType in this fragment.
+        setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
+    }
+
+    private void setAllowedPreferredShortcutType(int type) {
+        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
+                getComponentName().flattenToString(), type);
+
+        SharedPreferenceUtils.setUserShortcutType(getPrefContext(),
+                ImmutableSet.of(shortcut.flattenToString()));
     }
 }
