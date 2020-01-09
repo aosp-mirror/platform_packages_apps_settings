@@ -36,6 +36,7 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -127,12 +128,12 @@ public class PreferredNetworkModePreferenceControllerTest {
     public void updateState_updateByNetworkMode() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getValue()).isEqualTo(
-                String.valueOf(TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.preferred_network_mode_tdscdma_gsm_wcdma_summary));
     }
@@ -140,26 +141,26 @@ public class PreferredNetworkModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_updateSuccess() {
         doReturn(true).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
 
         mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_TDSCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isEqualTo(
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
     }
 
     @Test
     public void onPreferenceChange_updateFail() {
         doReturn(false).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
 
         mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_TDSCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
     }
 }

@@ -44,6 +44,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -171,12 +172,12 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_updateByNetworkMode() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getValue()).isEqualTo(
-                String.valueOf(TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA));
         assertThat(mPreference.getSummary()).isEqualTo("3G");
     }
 
@@ -184,12 +185,12 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void updateState_updateByNetworkMode_useDefaultValue() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getValue()).isEqualTo(
-                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
     }
 
     /**
@@ -392,27 +393,27 @@ public class EnabledNetworkModePreferenceControllerTest {
     @Test
     public void onPreferenceChange_updateSuccess() {
         doReturn(true).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
 
         mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isEqualTo(
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
     }
 
     @Test
     public void onPreferenceChange_updateFail() {
         doReturn(false).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
 
         mController.onPreferenceChange(mPreference,
-                String.valueOf(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA));
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
     }
 
     @Test
@@ -421,24 +422,24 @@ public class EnabledNetworkModePreferenceControllerTest {
         doReturn(mPreference).when(screen).findPreference(KEY);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
         mController.displayPreference(screen);
         mController.updateState(mPreference);
         mLifecycle.handleLifecycleEvent(ON_START);
 
         assertThat(Integer.parseInt(mPreference.getValue())).isEqualTo(
-                TelephonyManager.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
         assertThat(mPreference.getSummary()).isEqualTo("3G");
 
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_GSM_ONLY);
+                TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY);
         final Uri uri = Settings.Global.getUriFor(Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID);
         mContext.getContentResolver().notifyChange(uri, null);
 
         assertThat(Integer.parseInt(mPreference.getValue())).isEqualTo(
-                TelephonyManager.NETWORK_MODE_GSM_ONLY);
+                TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY);
         assertThat(mPreference.getSummary()).isEqualTo("2G");
     }
 }
