@@ -564,6 +564,15 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (preference instanceof LongPressWifiEntryPreference) {
             final WifiEntry selectedEntry =
                     ((LongPressWifiEntryPreference) preference).getWifiEntry();
+
+            if (selectedEntry.isSaved()) {
+                if (!selectedEntry.getWifiConfiguration().getNetworkSelectionStatus()
+                        .getHasEverConnected()) {
+                    launchConfigNewNetworkFragment(selectedEntry);
+                    return true;
+                }
+            }
+
             connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
         } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
