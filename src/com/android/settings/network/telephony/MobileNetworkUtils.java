@@ -56,6 +56,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 
@@ -305,8 +306,8 @@ public class MobileNetworkUtils {
                     context.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                     Phone.PREFERRED_NT_MODE);
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
-                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
+            if (settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return true;
             }
 
@@ -333,8 +334,8 @@ public class MobileNetworkUtils {
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
-                    || networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             } else if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
@@ -397,7 +398,7 @@ public class MobileNetworkUtils {
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
         }
@@ -410,7 +411,7 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
@@ -515,12 +516,12 @@ public class MobileNetworkUtils {
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
                 return true;
             }
