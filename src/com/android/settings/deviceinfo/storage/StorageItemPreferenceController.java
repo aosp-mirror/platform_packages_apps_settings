@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -41,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -256,25 +258,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     public void onLoadFinished(SparseArray<StorageAsyncLoader.AppsStorageResult> result,
             int userId) {
         final StorageAsyncLoader.AppsStorageResult data = result.get(userId);
+        final StorageAsyncLoader.AppsStorageResult profileData = result.get(
+                Utils.getManagedProfileId(mContext.getSystemService(UserManager.class), userId));
 
-        // TODO(b/35927909): Figure out how to split out apps which are only installed for work
-        //       profiles in order to attribute those app's code bytes only to that profile.
-        mPhotoPreference.setStorageSize(
-                data.photosAppsSize + data.externalStats.imageBytes + data.externalStats.videoBytes,
-                mTotalSize);
-        mAudioPreference.setStorageSize(
-                data.musicAppsSize + data.externalStats.audioBytes, mTotalSize);
-        mGamePreference.setStorageSize(data.gamesSize, mTotalSize);
-        mMoviesPreference.setStorageSize(data.videoAppsSize, mTotalSize);
-        mAppPreference.setStorageSize(data.otherAppsSize, mTotalSize);
-
-        long otherExternalBytes =
-                data.externalStats.totalBytes
-                        - data.externalStats.audioBytes
-                        - data.externalStats.videoBytes
-                        - data.externalStats.imageBytes
-                        - data.externalStats.appBytes;
-        mFilePreference.setStorageSize(otherExternalBytes, mTotalSize);
+        mPhotoPreference.setStorageSize(getPhotosSize(data, profileData), mTotalSize);
+        mAudioPreference.setStorageSize(getAudioSize(data, profileData), mTotalSize);
+        mGamePreference.setStorageSize(getGamesSize(data, profileData), mTotalSize);
+        mMoviesPreference.setStorageSize(getMoviesSize(data, profileData), mTotalSize);
+        mAppPreference.setStorageSize(getAppsSize(data, profileData), mTotalSize);
+        mFilePreference.setStorageSize(getFilesSize(data, profileData), mTotalSize);
 
         if (mSystemPreference != null) {
             // Everything else that hasn't already been attributed is tracked as
@@ -335,6 +327,19 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getPhotosSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.photosAppsSize + data.externalStats.imageBytes
+                    + data.externalStats.videoBytes
+                    + profileData.photosAppsSize + profileData.externalStats.imageBytes
+                    + profileData.externalStats.videoBytes;
+        } else {
+            return data.photosAppsSize + data.externalStats.imageBytes
+                    + data.externalStats.videoBytes;
+        }
+    }
+
     private Intent getAudioIntent() {
         if (mVolume == null) {
             return null;
@@ -354,6 +359,16 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getAudioSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.musicAppsSize + data.externalStats.audioBytes
+                    + profileData.musicAppsSize + profileData.externalStats.audioBytes;
+        } else {
+            return data.musicAppsSize + data.externalStats.audioBytes;
+        }
+    }
+
     private Intent getAppsIntent() {
         if (mVolume == null) {
             return null;
@@ -371,6 +386,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getAppsSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.otherAppsSize + profileData.otherAppsSize;
+        } else {
+            return data.otherAppsSize;
+        }
+    }
+
     private Intent getGamesIntent() {
         final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
@@ -383,6 +407,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .toIntent();
     }
 
+    private long getGamesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.gamesSize + profileData.gamesSize;
+        } else {
+            return data.gamesSize;
+        }
+    }
+
     private Intent getMoviesIntent() {
         final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
@@ -393,6 +426,15 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 .setArguments(args)
                 .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
                 .toIntent();
+    }
+
+    private long getMoviesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.videoAppsSize + profileData.videoAppsSize;
+        } else {
+            return data.videoAppsSize;
+        }
     }
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
@@ -414,6 +456,28 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Intent getFilesIntent() {
         return mSvp.findEmulatedForPrivate(mVolume).buildBrowseIntent();
+    }
+
+    private long getFilesSize(StorageAsyncLoader.AppsStorageResult data,
+            StorageAsyncLoader.AppsStorageResult profileData) {
+        if (profileData != null) {
+            return data.externalStats.totalBytes
+                    - data.externalStats.audioBytes
+                    - data.externalStats.videoBytes
+                    - data.externalStats.imageBytes
+                    - data.externalStats.appBytes
+                    + profileData.externalStats.totalBytes
+                    - profileData.externalStats.audioBytes
+                    - profileData.externalStats.videoBytes
+                    - profileData.externalStats.imageBytes
+                    - profileData.externalStats.appBytes;
+        } else {
+            return data.externalStats.totalBytes
+                    - data.externalStats.audioBytes
+                    - data.externalStats.videoBytes
+                    - data.externalStats.imageBytes
+                    - data.externalStats.appBytes;
+        }
     }
 
     private void launchIntent(Intent intent) {
