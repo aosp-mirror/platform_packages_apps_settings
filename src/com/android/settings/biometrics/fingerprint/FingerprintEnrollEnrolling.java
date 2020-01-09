@@ -217,13 +217,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private void stopIconAnimation() {
         mAnimationCancelled = true;
-        mIconAnimationDrawable.stop();
+        if (mIconAnimationDrawable != null) {
+            mIconAnimationDrawable.stop();
+        }
     }
 
     @Override
     protected void onStop() {
-        stopIconAnimation();
         super.onStop();
+        stopIconAnimation();
     }
 
     private void animateProgress(int progress) {
