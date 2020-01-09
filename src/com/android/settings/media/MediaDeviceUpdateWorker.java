@@ -37,7 +37,9 @@ import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * SliceBackgroundWorker for get MediaDevice list and handle MediaDevice state change event.
@@ -46,7 +48,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
 
     private final Context mContext;
-    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+    private final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
 
@@ -110,8 +112,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         notifySliceChange();
     }
 
-    public List<MediaDevice> getMediaDevices() {
-        return new ArrayList<>(mMediaDevices);
+    public Collection<MediaDevice> getMediaDevices() {
+        return mMediaDevices;
     }
 
     public void connectDevice(MediaDevice device) {
@@ -121,7 +123,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     public MediaDevice getMediaDeviceById(String id) {
-        return mLocalMediaManager.getMediaDeviceById(mMediaDevices, id);
+        return mLocalMediaManager.getMediaDeviceById(new ArrayList<>(mMediaDevices), id);
     }
 
     public MediaDevice getCurrentConnectedMediaDevice() {

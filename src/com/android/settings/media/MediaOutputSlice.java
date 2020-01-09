@@ -40,7 +40,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settingslib.media.MediaDevice;
 
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Show the Media device that can be transfer the media.
@@ -78,7 +78,7 @@ public class MediaOutputSlice implements CustomSliceable {
             return listBuilder.build();
         }
 
-        final List<MediaDevice> devices = getMediaDevices();
+        final Collection<MediaDevice> devices = getMediaDevices();
         final MediaDeviceUpdateWorker worker = getWorker();
         final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
         final boolean isTouched = worker.getIsTouched();
@@ -136,8 +136,8 @@ public class MediaOutputSlice implements CustomSliceable {
         return mWorker;
     }
 
-    private List<MediaDevice> getMediaDevices() {
-        final List<MediaDevice> devices = getWorker().getMediaDevices();
+    private Collection<MediaDevice> getMediaDevices() {
+        final Collection<MediaDevice> devices = getWorker().getMediaDevices();
         return devices;
     }
 

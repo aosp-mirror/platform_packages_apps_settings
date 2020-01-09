@@ -116,7 +116,8 @@ public class MediaDeviceUpdateWorkerTest {
         newDevices.add(mMediaDevice2);
 
         mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices = mMediaDeviceUpdateWorker.getMediaDevices();
+        final List<MediaDevice> devices =
+                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
 
         assertThat(devices.get(0).getId()).isEqualTo(newDevices.get(0).getId());
         assertThat(devices.get(1).getId()).isEqualTo(newDevices.get(1).getId());
@@ -134,7 +135,8 @@ public class MediaDeviceUpdateWorkerTest {
         newDevices.add(device3);
 
         mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices = mMediaDeviceUpdateWorker.getMediaDevices();
+        final List<MediaDevice> devices =
+                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
 
         assertThat(devices.size()).isEqualTo(newDevices.size());
     }
@@ -147,7 +149,8 @@ public class MediaDeviceUpdateWorkerTest {
         newDevices.add(mMediaDevice1);
 
         mMediaDeviceUpdateWorker.onDeviceListUpdate(newDevices);
-        final List<MediaDevice> devices = mMediaDeviceUpdateWorker.getMediaDevices();
+        final List<MediaDevice> devices =
+                new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
 
         assertThat(devices.size()).isEqualTo(newDevices.size());
     }
