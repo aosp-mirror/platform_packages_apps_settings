@@ -103,7 +103,7 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         SubscriptionManager subscriptionManager = ((SubscriptionManager) context.getSystemService(
                 Context.TELEPHONY_SUBSCRIPTION_SERVICE));
-        if (!subscriptionManager.isActiveSubId(subId)) {
+        if (!subscriptionManager.isActiveSubscriptionId(subId)) {
             Log.w(TAG, "onEnableMmsDataRequest invalid sub ID " + subId);
             return;
         }

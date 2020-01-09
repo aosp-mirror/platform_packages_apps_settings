@@ -21,6 +21,15 @@
     android:title="@string/special_access">
 
     <Preference
+        android:key="manage_external_storage"
+        android:title="@string/manage_external_storage_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ManageExternalStorageActivity" />
+    </Preference>
+
+    <Preference
         android:key="high_power_apps"
         android:title="@string/high_power_apps"
         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"

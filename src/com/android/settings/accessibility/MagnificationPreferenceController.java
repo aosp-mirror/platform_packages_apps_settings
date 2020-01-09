@@ -67,14 +67,9 @@ public class MagnificationPreferenceController extends BasePreferenceController 
     }
 
     private void configureMagnificationPreferenceIfNeeded() {
-        // Some devices support only a single magnification mode. In these cases, we redirect to
-        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
-        // single list item.
-        if (!MagnificationPreferenceFragment.isApplicable(mContext.getResources())) {
-            mPreference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
-            final Bundle extras = mPreference.getExtras();
-            MagnificationGesturesPreferenceController
-                    .populateMagnificationGesturesPreferenceExtras(extras, mContext);
-        }
+        mPreference.setFragment(ToggleScreenMagnificationPreferenceFragment.class.getName());
+        final Bundle extras = mPreference.getExtras();
+        MagnificationGesturesPreferenceController
+                .populateMagnificationGesturesPreferenceExtras(extras, mContext);
     }
 }

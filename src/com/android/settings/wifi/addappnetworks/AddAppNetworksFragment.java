@@ -62,12 +62,6 @@ import java.util.List;
 public class AddAppNetworksFragment extends InstrumentedFragment {
     public static final String TAG = "AddAppNetworksFragment";
 
-    // Security types of a requested or saved network.
-    private static final String SECURITY_NO_PASSWORD = "nopass";
-    private static final String SECURITY_WEP = "wep";
-    private static final String SECURITY_WPA_PSK = "wpa";
-    private static final String SECURITY_SAE = "sae";
-
     // Possible result values in each item of the returned result list, which is used
     // to inform the caller APP the processed result of each specified network.
     @VisibleForTesting
@@ -269,25 +263,9 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         }
     }
 
-    /**
-     * Classify security type into following types:
-     * 1. {@Code SECURITY_NO_PASSWORD}: No password network or OWE network.
-     * 2. {@Code SECURITY_WEP}: Traditional WEP encryption network.
-     * 3. {@Code SECURITY_WPA_PSK}: WPA/WPA2 preshare key type.
-     * 4. {@Code SECURITY_SAE}: SAE type network.
-     */
-    private String getSecurityType(WifiConfiguration config) {
-        if (config.allowedKeyManagement.get(KeyMgmt.SAE)) {
-            return SECURITY_SAE;
-        }
-        if (config.allowedKeyManagement.get(KeyMgmt.OWE)) {
-            return SECURITY_NO_PASSWORD;
-        }
-        if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK) || config.allowedKeyManagement.get(
-                KeyMgmt.WPA2_PSK)) {
-            return SECURITY_WPA_PSK;
-        }
-        return (config.wepKeys[0] == null) ? SECURITY_NO_PASSWORD : SECURITY_WEP;
+    private String getWepKey(WifiConfiguration config) {
+        return (config.wepTxKeyIndex >= 0 && config.wepTxKeyIndex < config.wepKeys.length)
+                ? config.wepKeys[config.wepTxKeyIndex] : null;
     }
 
     /**
@@ -306,41 +284,40 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
         boolean foundInSavedList;
         int networkPositionInBundle = 0;
-        for (WifiConfiguration specifiecConfig : mAllSpecifiedNetworksList) {
+        for (WifiConfiguration specifiedConfig : mAllSpecifiedNetworksList) {
             foundInSavedList = false;
-            final String displayedSsid = removeDoubleQuotes(specifiecConfig.SSID);
-            final String ssidWithQuotation = addQuotationIfNeeded(specifiecConfig.SSID);
-            final String securityType = getSecurityType(specifiecConfig);
+            final String displayedSsid = removeDoubleQuotes(specifiedConfig.SSID);
+            final String ssidWithQuotation = addQuotationIfNeeded(specifiedConfig.SSID);
+            final int authType = specifiedConfig.getAuthType();
 
             for (WifiConfiguration privilegedWifiConfiguration : savedWifiConfigurations) {
-                final String savedSecurityType = getSecurityType(privilegedWifiConfiguration);
-
                 // If SSID or security type is different, should be new network or need to be
                 // updated network.
                 if (!ssidWithQuotation.equals(privilegedWifiConfiguration.SSID)
-                        || !securityType.equals(savedSecurityType)) {
+                        || authType != privilegedWifiConfiguration.getAuthType()) {
                     continue;
                 }
 
                 //  If specified network and saved network have same security types, we'll check
                 //  more information according to their security type to judge if they are same.
-                switch (securityType) {
-                    case SECURITY_NO_PASSWORD:
+                switch (authType) {
+                    case KeyMgmt.NONE:
+                        final String wep = getWepKey(specifiedConfig);
+                        final String savedWep = getWepKey(privilegedWifiConfiguration);
+                        foundInSavedList = TextUtils.equals(wep, savedWep);
+                        break;
+                    case KeyMgmt.OWE:
                         foundInSavedList = true;
                         break;
-                    case SECURITY_WEP:
-                        if (specifiecConfig.wepKeys[0].equals(
-                                privilegedWifiConfiguration.wepKeys[0])) {
-                            foundInSavedList = true;
-                        }
-                        break;
-                    case SECURITY_WPA_PSK:
-                    case SECURITY_SAE:
-                        if (specifiecConfig.preSharedKey.equals(
+                    case KeyMgmt.WPA_PSK:
+                    case KeyMgmt.WPA2_PSK:
+                    case KeyMgmt.SAE:
+                        if (specifiedConfig.preSharedKey.equals(
                                 privilegedWifiConfiguration.preSharedKey)) {
                             foundInSavedList = true;
                         }
                         break;
+                    // TODO: Check how to judge enterprise type.
                     default:
                         break;
                 }
@@ -353,7 +330,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             } else {
                 // Prepare to add to UI list to show to user
                 UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedSsid,
-                        specifiecConfig, networkPositionInBundle);
+                        specifiedConfig, networkPositionInBundle);
                 mUiToRequestedList.add(uiConfigurationIcon);
             }
             networkPositionInBundle++;

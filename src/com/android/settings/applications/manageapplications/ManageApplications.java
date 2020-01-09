@@ -88,6 +88,7 @@ import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
@@ -100,6 +101,7 @@ import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
@@ -224,6 +226,7 @@ public class ManageApplications extends InstrumentedFragment
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
     public static final int LIST_TYPE_WIFI_ACCESS = 13;
+    public static final int LIST_MANAGE_EXTERNAL_STORAGE = 14;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -311,6 +314,9 @@ public class ManageApplications extends InstrumentedFragment
         } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
+        } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
+            mListType = LIST_MANAGE_EXTERNAL_STORAGE;
+            screenTitle = R.string.manage_external_storage_title;
         } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
@@ -538,6 +544,8 @@ public class ManageApplications extends InstrumentedFragment
                 return SettingsEnums.MANAGE_EXTERNAL_SOURCES;
             case LIST_TYPE_WIFI_ACCESS:
                 return SettingsEnums.CONFIGURE_WIFI;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                return SettingsEnums.MANAGE_EXTERNAL_STORAGE;
             default:
                 return SettingsEnums.PAGE_UNKNOWN;
         }
@@ -640,6 +648,10 @@ public class ManageApplications extends InstrumentedFragment
                 startAppInfoFragment(ChangeWifiStateDetails.class,
                         R.string.change_wifi_state_title);
                 break;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                startAppInfoFragment(ManageExternalStorageDetails.class,
+                        R.string.manage_external_storage_title);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -713,6 +725,8 @@ public class ManageApplications extends InstrumentedFragment
                 return R.string.help_uri_apps_photography;
             case LIST_TYPE_WIFI_ACCESS:
                 return R.string.help_uri_apps_wifi_access;
+            case LIST_MANAGE_EXTERNAL_STORAGE:
+                return R.string.help_uri_manage_external_storage;
             default:
             case LIST_TYPE_MAIN:
                 return R.string.help_uri_apps;
@@ -1031,6 +1045,8 @@ public class ManageApplications extends InstrumentedFragment
                 mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_WIFI_ACCESS) {
                 mExtraInfoBridge = new AppStateChangeWifiStateBridge(mContext, mState, this);
+            } else if (mManageApplications.mListType == LIST_MANAGE_EXTERNAL_STORAGE) {
+                mExtraInfoBridge = new AppStateManageExternalStorageBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1485,6 +1501,9 @@ public class ManageApplications extends InstrumentedFragment
                     break;
                 case LIST_TYPE_WIFI_ACCESS:
                     holder.setSummary(ChangeWifiStateDetails.getSummary(mContext, entry));
+                    break;
+                case LIST_MANAGE_EXTERNAL_STORAGE:
+                    holder.setSummary(ManageExternalStorageDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
