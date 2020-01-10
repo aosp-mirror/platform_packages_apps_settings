@@ -405,21 +405,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
 
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
-
-        // Edit the Wi-Fi network of specified SSID.
-        if (mOpenSsid != null) {
-            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
-                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
-                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
-                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
-                    .filter(wifiEntry -> !wifiEntry.isSaved()
-                            || isDisabledByWrongPassword(wifiEntry))
-                    .findFirst();
-            if (matchedWifiEntry.isPresent()) {
-                mOpenSsid = null;
-                launchConfigNewNetworkFragment(matchedWifiEntry.get());
-            }
-        }
     }
 
     @Override
@@ -673,6 +658,21 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     public void onWifiEntriesChanged() {
         updateWifiEntryPreferencesDelayed();
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
+
+        // Edit the Wi-Fi network of specified SSID.
+        if (mOpenSsid != null) {
+            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
+                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
+                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
+                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
+                    .filter(wifiEntry -> !wifiEntry.isSaved()
+                            || isDisabledByWrongPassword(wifiEntry))
+                    .findFirst();
+            if (matchedWifiEntry.isPresent()) {
+                mOpenSsid = null;
+                launchConfigNewNetworkFragment(matchedWifiEntry.get());
+            }
+        }
     }
 
     @Override
