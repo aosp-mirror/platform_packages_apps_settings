@@ -54,6 +54,7 @@ android_library {
 platform_compat_config {
     name: "settings-platform-compat-config",
     src: ":Settings-core",
+    system_ext_specific: true,
 }
 
 android_app {
@@ -62,7 +63,10 @@ android_app {
     certificate: "platform",
     system_ext_specific: true,
     privileged: true,
-    required: ["privapp_whitelist_com.android.settings"],
+    required: [
+        "privapp_whitelist_com.android.settings",
+        "settings-platform-compat-config",
+    ],
     static_libs: ["Settings-core"],
     resource_dirs: [],
     optimize: {
