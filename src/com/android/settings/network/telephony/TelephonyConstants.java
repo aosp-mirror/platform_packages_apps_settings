@@ -17,6 +17,8 @@
 package com.android.settings.network.telephony;
 
 
+import android.telephony.TelephonyManager;
+
 /**
  * Contains hidden constants copied from the platform.
  */
@@ -133,6 +135,35 @@ public class TelephonyConstants {
 
         /** NR 5G, LTE, TD-SCDMA, CDMA, EVDO, GSM and WCDMA */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 33;
+
+
+        // Grouping of RAFs
+        // imported from {@link android.telephony.RadioAccessFamily}
+        // 2G
+        public static final long GSM = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
+                | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
+                | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE;
+        public static final long CDMA = TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
+                | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
+
+        // 3G
+        public static final long EVDO = TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_0
+                | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_A
+                | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_B
+                | TelephonyManager.NETWORK_TYPE_BITMASK_EHRPD;
+        public static final long HS = TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA
+                | TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA
+                | TelephonyManager.NETWORK_TYPE_BITMASK_HSPA
+                | TelephonyManager.NETWORK_TYPE_BITMASK_HSPAP;
+        public static final long WCDMA = HS | TelephonyManager.NETWORK_TYPE_BITMASK_UMTS;
+
+        // 4G
+        public static final long LTE = TelephonyManager.NETWORK_TYPE_BITMASK_LTE
+                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE_CA;
+
+        // 5G
+        public static final long NR = TelephonyManager.NETWORK_TYPE_BITMASK_NR;
+
     }
 
 

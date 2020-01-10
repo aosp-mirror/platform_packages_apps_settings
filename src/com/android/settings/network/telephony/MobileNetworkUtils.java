@@ -652,4 +652,151 @@ public class MobileNetworkUtils {
         }
         return activeSubIds;
     }
+
+    /**
+     *  Imported from {@link android.telephony.RadioAccessFamily}
+     */
+    public static long getRafFromNetworkType(int type) {
+        switch (type) {
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_PREF:
+                return TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY:
+                return TelephonyManagerConstants.GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_WCDMA_ONLY:
+                return TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_GSM_UMTS:
+                return TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
+                return TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_ONLY:
+                return TelephonyManagerConstants.LTE;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
+                return TelephonyManagerConstants.CDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
+                return TelephonyManagerConstants.EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_GLOBAL:
+                return TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_ONLY:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_WCDMA:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                return TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_ONLY):
+                return TelephonyManagerConstants.NR;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+            case (TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA):
+                return TelephonyManagerConstants.NR
+                        | TelephonyManagerConstants.LTE
+                        | TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA
+                        | TelephonyManagerConstants.CDMA
+                        | TelephonyManagerConstants.EVDO
+                        | TelephonyManagerConstants.GSM
+                        | TelephonyManagerConstants.WCDMA;
+
+            default:
+                return TelephonyManager.NETWORK_TYPE_BITMASK_UNKNOWN;
+        }
+    }
 }
