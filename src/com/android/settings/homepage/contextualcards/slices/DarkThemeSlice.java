@@ -15,23 +15,28 @@
  */
 package com.android.settings.homepage.contextualcards.slices;
 
-import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
-
 import static android.provider.Settings.Global.LOW_POWER_MODE;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
+import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -51,6 +56,7 @@ import java.io.IOException;
 
 public class DarkThemeSlice implements CustomSliceable {
     private static final String TAG = "DarkThemeSlice";
+    private static final boolean DEBUG = Build.IS_DEBUGGABLE;
     private static final int BATTERY_LEVEL_THRESHOLD = 50;
     private static final int DELAY_TIME_EXECUTING_DARK_THEME = 200;
 
@@ -59,6 +65,9 @@ public class DarkThemeSlice implements CustomSliceable {
     static boolean sKeepSliceShow;
     @VisibleForTesting
     static long sActiveUiSession = -1000;
+    @VisibleForTesting
+    static boolean sSliceClicked = false;
+    static boolean sPreChecked = false;
 
     private final Context mContext;
     private final UiModeManager mUiModeManager;
@@ -78,8 +87,21 @@ public class DarkThemeSlice implements CustomSliceable {
             sActiveUiSession = currentUiSession;
             sKeepSliceShow = false;
         }
-        // Dark theme slice will disappear when battery saver is ON.
-        if (mPowerManager.isPowerSaveMode() || (!sKeepSliceShow && !isAvailable(mContext))) {
+
+        // 1. Dark theme slice will disappear when battery saver is ON.
+        // 2. If the slice is shown and the user doesn't toggle it directly, but instead turns on
+        // Dark theme from Quick settings or display page, the card should no longer persist.
+        // This card will persist when user clicks its toggle directly.
+        // 3. If the slice is shown and the user toggles it on (switch to Dark theme) directly,
+        // then user returns to home (launcher), no matter by the Back key or Home gesture.
+        // Next time the Settings displays on screen again this card should no longer persist.
+        if (DEBUG) {
+            Log.d(TAG,
+                    "!sKeepSliceShow = " + !sKeepSliceShow + " !sSliceClicked = "
+                            + !sSliceClicked + " !isAvailable = " + !isAvailable(mContext));
+        }
+        if (mPowerManager.isPowerSaveMode() || ((!sKeepSliceShow || !sSliceClicked)
+                && !isAvailable(mContext))) {
             return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                     ListBuilder.INFINITY)
                     .setIsError(true)
@@ -90,6 +112,12 @@ public class DarkThemeSlice implements CustomSliceable {
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         final IconCompat icon =
                 IconCompat.createWithResource(mContext, R.drawable.dark_theme);
+
+        final boolean isChecked = isDarkThemeMode(mContext);
+        if (sPreChecked != isChecked) {
+            // Dark(Night) mode changed and reset the sSliceClicked.
+            resetValue(isChecked, false);
+        }
         return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
@@ -99,7 +127,7 @@ public class DarkThemeSlice implements CustomSliceable {
                         .setSubtitle(mContext.getText(R.string.dark_theme_slice_subtitle))
                         .setPrimaryAction(
                                 SliceAction.createToggle(toggleAction, null /* actionTitle */,
-                                        isDarkThemeMode(mContext))))
+                                        isChecked)))
                 .build();
     }
 
@@ -112,6 +140,10 @@ public class DarkThemeSlice implements CustomSliceable {
     public void onNotifyChange(Intent intent) {
         final boolean isChecked = intent.getBooleanExtra(android.app.slice.Slice.EXTRA_TOGGLE_STATE,
                 false);
+        // Dark(Night) mode changed by user clicked the toggle in the Dark theme slice.
+        if (isChecked) {
+            resetValue(isChecked, true);
+        }
         // make toggle transition more smooth before dark theme takes effect
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             mUiModeManager.setNightModeActivated(isChecked);
@@ -143,10 +175,15 @@ public class DarkThemeSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    boolean isDarkThemeMode(Context context) {
+    static boolean isDarkThemeMode(Context context) {
         final int currentNightMode =
                 context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    private void resetValue(boolean preChecked, boolean clicked) {
+        sPreChecked = preChecked;
+        sSliceClicked = clicked;
     }
 
     public static class DarkThemeWorker extends SliceBackgroundWorker<Void> {
@@ -160,10 +197,12 @@ public class DarkThemeSlice implements CustomSliceable {
                         }
                     }
                 };
+        private final HomeKeyReceiver mHomeKeyReceiver;
 
         public DarkThemeWorker(Context context, Uri uri) {
             super(context, uri);
             mContext = context;
+            mHomeKeyReceiver = new HomeKeyReceiver();
         }
 
         @Override
@@ -171,15 +210,55 @@ public class DarkThemeSlice implements CustomSliceable {
             mContext.getContentResolver().registerContentObserver(
                     Settings.Global.getUriFor(LOW_POWER_MODE), false /* notifyForDescendants */,
                     mContentObserver);
+            final IntentFilter intentFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+            mContext.registerReceiver(mHomeKeyReceiver, intentFilter);
         }
 
         @Override
         protected void onSliceUnpinned() {
             mContext.getContentResolver().unregisterContentObserver(mContentObserver);
+            mContext.unregisterReceiver(mHomeKeyReceiver);
         }
 
         @Override
         public void close() throws IOException {
+        }
+    }
+
+    /**
+     * A receiver for Home key and recent app key.
+     */
+    public static class HomeKeyReceiver extends BroadcastReceiver {
+        private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
+        private static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
+        private static final String SYSTEM_DIALOG_REASON_KEY = "reason";
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (TextUtils.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS, intent.getAction())) {
+                if (TextUtils.equals(getTargetKey(context),
+                        intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY))) {
+                    if (DEBUG) {
+                        Log.d(TAG, "HomeKeyReceiver : target key = " + getTargetKey(context));
+                    }
+                    if (DarkThemeSlice.isDarkThemeMode(context)) {
+                        FeatureFactory.getFactory(
+                                context).getSlicesFeatureProvider().newUiSession();
+                    }
+                }
+            }
+        }
+
+        private String getTargetKey(Context context) {
+            if (isGestureNavigationEnabled(context)) {
+                return SYSTEM_DIALOG_REASON_RECENT_APPS;
+            }
+            return SYSTEM_DIALOG_REASON_HOME_KEY;
+        }
+
+        private boolean isGestureNavigationEnabled(Context context) {
+            return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
+                    com.android.internal.R.integer.config_navBarInteractionMode);
         }
     }
 }
