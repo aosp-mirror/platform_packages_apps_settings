@@ -46,6 +46,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -120,6 +121,7 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void serviceStateChange_shouldUpdatePrefSummary() {
         final String testCarrierName = "test";
         final Preference mPreference = mock(Preference.class);
@@ -145,6 +147,7 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void airplaneModeTurnedOn_shouldDisablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 1);
@@ -155,6 +158,7 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void airplaneModeTurnedOffAndNoUserRestriction_shouldEnablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 0);
@@ -166,6 +170,7 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void airplaneModeTurnedOffAndHasUserRestriction_shouldDisablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 0);

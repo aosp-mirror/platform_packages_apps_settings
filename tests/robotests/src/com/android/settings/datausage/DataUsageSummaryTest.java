@@ -40,6 +40,7 @@ import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -103,6 +104,7 @@ public class DataUsageSummaryTest {
 
     @Test
     @Config(shadows = ShadowSubscriptionManager.class)
+    @Ignore
     public void configuration_withSim_shouldShowMobileAndWifi() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
