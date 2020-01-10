@@ -31,7 +31,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -42,8 +41,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.R;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,7 +173,7 @@ public class EnabledNetworkModePreferenceController extends
     private void updatePreferenceEntries(ListPreference preference) {
         final int phoneType = mTelephonyManager.getPhoneType();
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        if (phoneType == PhoneConstants.PHONE_TYPE_CDMA) {
+        if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
             final int lteForced = android.provider.Settings.Global.getInt(
                     mContext.getContentResolver(),
                     android.provider.Settings.Global.LTE_SERVICE_FORCED + mSubId,
@@ -217,7 +216,7 @@ public class EnabledNetworkModePreferenceController extends
                     }
                 }
             }
-        } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
+        } else if (phoneType == TelephonyManager.PHONE_TYPE_GSM) {
             if (MobileNetworkUtils.isTdscdmaSupported(mContext, mSubId)) {
                 preference.setEntries(
                         R.array.enabled_networks_tdscdma_choices);
@@ -525,7 +524,7 @@ public class EnabledNetworkModePreferenceController extends
                     preference.setValue(
                             Integer.toString(TelephonyManagerConstants
                                     .NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA));
-                    if (mTelephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA
+                    if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                             || mIsGlobalCdma
                             || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         preference.setSummary(R.string.network_global);
@@ -549,7 +548,7 @@ public class EnabledNetworkModePreferenceController extends
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
                 preference.setValue(
                         Integer.toString(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA));
-                if (mTelephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA
+                if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                         || mIsGlobalCdma
                         || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                     preference.setSummary(R.string.network_global);
