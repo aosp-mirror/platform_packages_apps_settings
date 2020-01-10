@@ -115,11 +115,12 @@ public class EnabledNetworkModePreferenceControllerTest {
                 true);
 
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
-        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_OUT_OF_SERVICE);
+        when(mServiceState.getDataRegistrationState()).thenReturn(
+                ServiceState.STATE_OUT_OF_SERVICE);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
 
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_IN_SERVICE);
-        when(mServiceState.getDataRegState()).thenReturn(ServiceState.STATE_IN_SERVICE);
+        when(mServiceState.getDataRegistrationState()).thenReturn(ServiceState.STATE_IN_SERVICE);
 
         when(mServiceState.getRoaming()).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
