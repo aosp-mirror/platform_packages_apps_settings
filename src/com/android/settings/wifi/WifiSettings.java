@@ -227,7 +227,12 @@ public class WifiSettings extends RestrictedSettingsFragment
         super.onCreate(icicle);
 
         if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-            getContext().startActivity(new Intent("android.settings.WIFI_SETTINGS2"));
+            final Intent intent = new Intent("android.settings.WIFI_SETTINGS2");
+            final Bundle extras = getActivity().getIntent().getExtras();
+            if (extras != null) {
+                intent.putExtras(extras);
+            }
+            getContext().startActivity(intent);
             finish();
             return;
         }
