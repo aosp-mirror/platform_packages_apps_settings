@@ -326,18 +326,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (savedInstanceState != null) {
             mDialogMode = savedInstanceState.getInt(SAVE_DIALOG_MODE);
             mDialogWifiEntryKey = savedInstanceState.getString(SAVE_DIALOG_WIFIENTRY_KEY);
-
-            if (!TextUtils.isEmpty(mDialogWifiEntryKey)) {
-                List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
-                Optional<WifiEntry> matchedWifiEntry = wifiEntries.stream().filter(wifiEntry ->
-                        TextUtils.equals(wifiEntry.getKey(), mDialogWifiEntryKey)).findAny();
-                if (matchedWifiEntry.isPresent()) {
-                    mDialogWifiEntry = matchedWifiEntry.get();
-                } else {
-                    throw new IllegalStateException("Failed to restore WifiEntry of key: "
-                            + mDialogWifiEntryKey);
-                }
-            }
         }
 
         // If we're supposed to enable/disable the Next button based on our current connection
