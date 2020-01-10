@@ -66,7 +66,7 @@ public class WifiTetherPasswordPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
         mConfig = new SoftApConfiguration.Builder().setSsid("test_1234")
-                .setWpa2Passphrase("test_password").build();
+                .setPassphrase("test_password", SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
@@ -83,8 +83,8 @@ public class WifiTetherPasswordPreferenceControllerTest {
     public void displayPreference_shouldStylePreference() {
         mController.displayPreference(mScreen);
 
-        assertThat(mPreference.getText()).isEqualTo(mConfig.getWpa2Passphrase());
-        assertThat(mPreference.getSummary()).isEqualTo(mConfig.getWpa2Passphrase());
+        assertThat(mPreference.getText()).isEqualTo(mConfig.getPassphrase());
+        assertThat(mPreference.getSummary()).isEqualTo(mConfig.getPassphrase());
     }
 
     @Test
@@ -111,14 +111,14 @@ public class WifiTetherPasswordPreferenceControllerTest {
 
         // Create a new config using different password
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
-                .setWpa2Passphrase(VALID_PASS2).build();
+                .setPassphrase(VALID_PASS2, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         // Call updateDisplay and verify it's changed.
         mController.updateDisplay();
         assertThat(mController.getPasswordValidated(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK))
-                .isEqualTo(config.getWpa2Passphrase());
-        assertThat(mPreference.getSummary()).isEqualTo(config.getWpa2Passphrase());
+                .isEqualTo(config.getPassphrase());
+        assertThat(mPreference.getSummary()).isEqualTo(config.getPassphrase());
     }
 
     @Test
@@ -131,7 +131,7 @@ public class WifiTetherPasswordPreferenceControllerTest {
 
         // Create a new config using different password
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
-                .setWpa2Passphrase(VALID_PASS2).build();
+                .setPassphrase(VALID_PASS2, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         // Call updateDisplay and verify it's changed.

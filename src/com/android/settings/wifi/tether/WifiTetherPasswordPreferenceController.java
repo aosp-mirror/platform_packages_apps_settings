@@ -51,10 +51,10 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
         if (config == null
                 || (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
-                && TextUtils.isEmpty(config.getWpa2Passphrase()))) {
+                && TextUtils.isEmpty(config.getPassphrase()))) {
             mPassword = generateRandomPassword();
         } else {
-            mPassword = config.getWpa2Passphrase();
+            mPassword = config.getPassphrase();
         }
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
