@@ -60,6 +60,8 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     @Override
     protected void onStop() {
+        super.onStop();
+
         if (mSidecar != null) {
             mSidecar.setListener(null);
         }
@@ -75,6 +77,12 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
             }
             finish();
         }
+    }
+
+    @Override
+    protected boolean shouldFinishWhenBackgrounded() {
+        // Prevent super.onStop() from finishing, since we handle this in our onStop().
+        return false;
     }
 
     @Override

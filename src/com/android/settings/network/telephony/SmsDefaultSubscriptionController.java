@@ -28,7 +28,7 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
 
     @Override
     protected SubscriptionInfo getDefaultSubscriptionInfo() {
-        return mManager.getDefaultSmsSubscriptionInfo();
+        return mManager.getActiveSubscriptionInfo(getDefaultSubscriptionId());
     }
 
     @Override

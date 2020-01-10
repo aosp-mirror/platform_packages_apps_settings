@@ -170,13 +170,13 @@ public class ResetNetwork extends InstrumentedFragment {
         if (mSubscriptions != null && mSubscriptions.size() > 0) {
             // Get the default subscription in the order of data, voice, sms, first up.
             int defaultSubscription = SubscriptionManager.getDefaultDataSubscriptionId();
-            if (!SubscriptionManager.isUsableSubIdValue(defaultSubscription)) {
+            if (!SubscriptionManager.isUsableSubscriptionId(defaultSubscription)) {
                 defaultSubscription = SubscriptionManager.getDefaultVoiceSubscriptionId();
             }
-            if (!SubscriptionManager.isUsableSubIdValue(defaultSubscription)) {
+            if (!SubscriptionManager.isUsableSubscriptionId(defaultSubscription)) {
                 defaultSubscription = SubscriptionManager.getDefaultSmsSubscriptionId();
             }
-            if (!SubscriptionManager.isUsableSubIdValue(defaultSubscription)) {
+            if (!SubscriptionManager.isUsableSubscriptionId(defaultSubscription)) {
                 defaultSubscription = SubscriptionManager.getDefaultSubscriptionId();
             }
 

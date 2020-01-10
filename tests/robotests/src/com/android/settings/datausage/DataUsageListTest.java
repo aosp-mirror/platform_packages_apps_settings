@@ -93,7 +93,7 @@ public class DataUsageListTest {
     }
 
     @Test
-    public void resumePause_shouldListenUnlistenDataStateChange() {
+    public void resume_shouldListenDataStateChange() {
         ReflectionHelpers.setField(
                 mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
         ReflectionHelpers.setField(
@@ -103,6 +103,17 @@ public class DataUsageListTest {
 
         verify(mMobileDataEnabledListener).start(anyInt());
 
+        mDataUsageList.onPause();
+    }
+
+    @Test
+    public void pause_shouldUnlistenDataStateChange() {
+        ReflectionHelpers.setField(
+                mDataUsageList, "mVisibilityLoggerMixin", mock(VisibilityLoggerMixin.class));
+        ReflectionHelpers.setField(
+                mDataUsageList, "mPreferenceManager", mock(PreferenceManager.class));
+
+        mDataUsageList.onResume();
         mDataUsageList.onPause();
 
         verify(mMobileDataEnabledListener).stop();
