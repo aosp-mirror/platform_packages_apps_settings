@@ -41,6 +41,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 
+import com.google.android.setupcompat.template.FooterButton;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -88,8 +90,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 Log.d(TAG, sb.toString());
             }
 
-            showErrorUi(code, ssid, channelListArray, operatingClassArray,
-                    /* isConfigurationChange */ false);
+            showErrorUi(code, getResultIntent(code, ssid, channelListArray,
+                    operatingClassArray), /* isConfigurationChange */ false);
         }
 
         @Override
@@ -120,8 +122,53 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         }
     }
 
-    private void showErrorUi(int code, String ssid, SparseArray<int[]> channelListArray,
-            int[] operatingClassArray, boolean isConfigurationChange) {
+    private Intent getResultIntent(int code, String ssid, SparseArray<int[]> channelListArray,
+            int[] operatingClassArray) {
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_EASY_CONNECT_ERROR_CODE, code);
+
+        if (!TextUtils.isEmpty(ssid)) {
+            intent.putExtra(EXTRA_EASY_CONNECT_ATTEMPTED_SSID, ssid);
+        }
+        if (channelListArray != null && channelListArray.size() != 0) {
+            int key;
+            int index = 0;
+            JSONObject formattedChannelList = new JSONObject();
+
+            // Build a JSON array of operating classes, with an array of channels for each
+            // operating class.
+            do {
+                try {
+                    key = channelListArray.keyAt(index);
+                } catch (java.lang.ArrayIndexOutOfBoundsException e) {
+                    break;
+                }
+                JSONArray channelsInClassArray = new JSONArray();
+
+                int[] output = channelListArray.get(key);
+                for (int i = 0; i < output.length; i++) {
+                    channelsInClassArray.put(output[i]);
+                }
+                try {
+                    formattedChannelList.put(Integer.toString(key), channelsInClassArray);
+                } catch (org.json.JSONException e) {
+                    formattedChannelList = new JSONObject();
+                    break;
+                }
+                index++;
+            } while (true);
+
+            intent.putExtra(EXTRA_EASY_CONNECT_CHANNEL_LIST,
+                    formattedChannelList.toString());
+        }
+        if (operatingClassArray != null && operatingClassArray.length != 0) {
+            intent.putExtra(EXTRA_EASY_CONNECT_BAND_LIST, operatingClassArray);
+        }
+
+        return intent;
+    }
+
+    private void showErrorUi(int code, Intent resultIntent, boolean isConfigurationChange) {
         CharSequence summaryCharSequence;
         switch (code) {
             case EasyConnectStatusCallback.EASY_CONNECT_EVENT_FAILURE_INVALID_URI:
@@ -198,56 +245,18 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
         mSummary.setText(summaryCharSequence);
         mWifiApPictureView.setImageResource(R.drawable.wifi_dpp_error);
         mChooseDifferentNetwork.setVisibility(View.INVISIBLE);
+        FooterButton finishingButton = mLeftButton;
         if (hasRetryButton(code)) {
             mRightButton.setText(getContext(), R.string.retry);
         } else {
             mRightButton.setText(getContext(), R.string.done);
-            mRightButton.setOnClickListener(v -> {
-                final Activity activity = getActivity();
-                final Intent intent = activity.getIntent();
-                intent.putExtra(EXTRA_EASY_CONNECT_ERROR_CODE, code);
-
-                if (!TextUtils.isEmpty(ssid)) {
-                    intent.putExtra(EXTRA_EASY_CONNECT_ATTEMPTED_SSID, ssid);
-                }
-                if (channelListArray != null && channelListArray.size() != 0) {
-                    int key;
-                    int index = 0;
-                    JSONObject formattedChannelList = new JSONObject();
-
-                    // Build a JSON array of operating classes, with an array of channels for each
-                    // operating class.
-                    do {
-                        try {
-                            key = channelListArray.keyAt(index);
-                        } catch (java.lang.ArrayIndexOutOfBoundsException e) {
-                            break;
-                        }
-                        JSONArray channelsInClassArray = new JSONArray();
-
-                        int[] output = channelListArray.get(key);
-                        for (int i = 0; i < output.length; i++) {
-                            channelsInClassArray.put(output[i]);
-                        }
-                        try {
-                            formattedChannelList.put(Integer.toString(key), channelsInClassArray);
-                        } catch (org.json.JSONException e) {
-                            formattedChannelList = new JSONObject();
-                            break;
-                        }
-                        index++;
-                    } while (true);
-
-                    intent.putExtra(EXTRA_EASY_CONNECT_CHANNEL_LIST,
-                            formattedChannelList.toString());
-                }
-                if (operatingClassArray != null && operatingClassArray.length != 0) {
-                    intent.putExtra(EXTRA_EASY_CONNECT_BAND_LIST, operatingClassArray);
-                }
-                activity.finish();
-            });
+            finishingButton = mRightButton;
             mLeftButton.setVisibility(View.INVISIBLE);
         }
+        finishingButton.setOnClickListener(v -> {
+            getActivity().setResult(Activity.RESULT_CANCELED, resultIntent);
+            getActivity().finish();
+        });
 
         if (isEasyConnectHandshaking()) {
             mSummary.setText(R.string.wifi_dpp_sharing_wifi_with_this_device);
@@ -356,8 +365,8 @@ public class WifiDppAddDeviceFragment extends WifiDppQrCodeBaseFragment {
                 mRightButton.setVisibility(isEasyConnectHandshaking() ?
                         View.INVISIBLE : View.VISIBLE);
             } else {
-                showErrorUi(mLatestStatusCode, /*ssid */null, /* channelListArray */
-                        null, /* operatingClassArray */ null, /* isConfigurationChange */ true);
+                showErrorUi(mLatestStatusCode, /* reslutIntent */ null, /* isConfigurationChange */
+                        true);
             }
         }
     }
