@@ -277,7 +277,7 @@ public class ZenModeBackend {
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
             return R.string.zen_mode_from_none_calls;
         }
-        return 0;
+        return R.string.zen_mode_from_none;
     }
 
     protected int getContactsSummary(int category) {

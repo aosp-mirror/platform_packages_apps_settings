@@ -19,7 +19,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingVertical="@dimen/zen_mode_button_padding_vertical">
+
+    <TextView
+        android:text="@string/zen_mode_settings_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_margin_sides"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+    <TextView
+        android:text="@string/zen_mode_settings_summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_margin_sides"
+        android:paddingTop="@dimen/zen_mode_button_padding_vertical"
+        android:paddingBottom="@dimen/zen_mode_button_padding_vertical"/>
 
     <Button
         android:id="@+id/zen_mode_settings_turn_on_button"
@@ -29,6 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:gravity="center"
+        android:paddingTop="@dimen/zen_mode_button_padding_vertical"
         android:text="@string/zen_mode_button_turn_on"/>
 
     <Button
@@ -39,6 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:gravity="center"
+        android:paddingTop="@dimen/zen_mode_button_padding_vertical"
         android:text="@string/zen_mode_button_turn_off" />
 
 </LinearLayout>

@@ -36,27 +36,32 @@
         <!-- Alarms -->
         <SwitchPreference
             android:key="zen_rule_alarms"
-            android:title="@string/zen_mode_alarms"/>
+            android:title="@string/zen_mode_alarms"
+            android:summary="@string/zen_mode_alarms_summary"/>
 
         <!-- Media -->
         <SwitchPreference
             android:key="zen_rule_media"
-            android:title="@string/zen_mode_media"/>
+            android:title="@string/zen_mode_media"
+            android:summary="@string/zen_mode_media_summary"/>
 
         <!-- System -->
         <SwitchPreference
             android:key="zen_rule_system"
-            android:title="@string/zen_mode_system"/>
+            android:title="@string/zen_mode_system"
+            android:summary="@string/zen_mode_system_summary"/>
 
         <!-- Reminders -->
         <SwitchPreference
             android:key="zen_rule_reminders"
-            android:title="@string/zen_mode_reminders"/>
+            android:title="@string/zen_mode_reminders"
+            android:summary="@string/zen_mode_reminders_summary"/>
 
         <!-- Events -->
         <SwitchPreference
             android:key="zen_rule_events"
-            android:title="@string/zen_mode_events"/>
+            android:title="@string/zen_mode_events"
+            android:summary="@string/zen_mode_events_summary"/>
     </PreferenceCategory>
 
     <Preference
