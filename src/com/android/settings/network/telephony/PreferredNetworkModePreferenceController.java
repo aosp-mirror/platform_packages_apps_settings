@@ -50,8 +50,6 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        final TelephonyManager telephonyManager = TelephonyManager
-                .from(mContext).createForSubscriptionId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -82,12 +80,13 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object object) {
-        final int settingsMode = Integer.parseInt((String) object);
+        final int newPreferredNetworkMode = Integer.parseInt((String) object);
 
-        if (mTelephonyManager.setPreferredNetworkType(mSubId, settingsMode)) {
+        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
+                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    settingsMode);
+                    newPreferredNetworkMode);
             return true;
         }
 
@@ -156,7 +155,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             case TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                 return R.string.preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA:
-                if (mTelephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA
+                if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                         || mIsGlobalCdma
                         || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                     return R.string.preferred_network_mode_global_summary;

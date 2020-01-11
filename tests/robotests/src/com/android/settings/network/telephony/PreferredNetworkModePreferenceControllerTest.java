@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFromNetworkType;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -140,8 +141,8 @@ public class PreferredNetworkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_updateSuccess() {
-        doReturn(true).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
+        doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
+                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
@@ -153,8 +154,8 @@ public class PreferredNetworkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_updateFail() {
-        doReturn(false).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
+        doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
+                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));
 
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA));

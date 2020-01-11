@@ -124,7 +124,8 @@ public class WifiTetherSSIDPreferenceControllerTest {
     public void displayPreference_wifiApDisabled_shouldHideQrCodeIcon() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(false);
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
-                .setSsid("test_1234").setWpa2Passphrase("test_password").build();
+                .setSsid("test_1234").setPassphrase("test_password",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);
@@ -135,7 +136,8 @@ public class WifiTetherSSIDPreferenceControllerTest {
     public void displayPreference_wifiApEnabled_shouldShowQrCodeIcon() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
         final SoftApConfiguration config = new SoftApConfiguration.Builder()
-                .setSsid("test_1234").setWpa2Passphrase("test_password").build();
+                .setSsid("test_1234").setPassphrase("test_password",
+                SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
 
         mController.displayPreference(mScreen);

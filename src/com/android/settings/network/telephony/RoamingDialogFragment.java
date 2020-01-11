@@ -54,7 +54,7 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
         super.onAttach(context);
         final Bundle args = getArguments();
         mSubId = args.getInt(SUB_ID_KEY);
-        mCarrierConfigManager = new CarrierConfigManager(context);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
     }
 
     @Override

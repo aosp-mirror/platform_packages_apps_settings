@@ -147,11 +147,11 @@ public class NetworkRequestDialogFragmentTest {
         final String ssidAp1 = "Test AP 1";
         final String ssidAp2 = "Test AP 2";
         List<ScanResult> scanResults = new ArrayList<>();
-        ScanResult scanResult = new ScanResult();
+        ScanResult scanResult = mock(ScanResult.class);
         scanResult.SSID = ssidAp1;
         scanResult.capabilities = "WEP";
         scanResults.add(scanResult);
-        scanResult = new ScanResult();
+        scanResult = mock(ScanResult.class);
         scanResult.SSID = ssidAp2;
         scanResult.capabilities = "WEP";
         scanResults.add(scanResult);
@@ -181,7 +181,7 @@ public class NetworkRequestDialogFragmentTest {
 
         final String ssidAp1 = "Test AP 1";
         List<ScanResult> scanResults = new ArrayList<>();
-        ScanResult scanResult = new ScanResult();
+        ScanResult scanResult = mock(ScanResult.class);
         scanResult.SSID = ssidAp1;
         scanResult.capabilities = "WEP";
         scanResults.add(scanResult);
@@ -253,7 +253,7 @@ public class NetworkRequestDialogFragmentTest {
         final String ssidAp = "Test AP ";
         final List<ScanResult> scanResults = new ArrayList<>();
         for (int i = 0; i < 7 ; i ++) {
-            ScanResult scanResult = new ScanResult();
+            ScanResult scanResult = mock(ScanResult.class);
             scanResult.SSID = ssidAp + i;
             scanResult.capabilities = "WEP";
             scanResults.add(scanResult);
@@ -273,7 +273,7 @@ public class NetworkRequestDialogFragmentTest {
         final String ssidAp = "Test AP ";
         final List<ScanResult> scanResults = new ArrayList<>();
         for (int i = 0; i < 6 ; i ++) {
-            ScanResult scanResult = new ScanResult();
+            ScanResult scanResult = mock(ScanResult.class);
             scanResult.SSID = ssidAp + i;
             scanResult.capabilities = "WEP";
             scanResults.add(scanResult);

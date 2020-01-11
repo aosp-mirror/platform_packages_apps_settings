@@ -326,18 +326,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         if (savedInstanceState != null) {
             mDialogMode = savedInstanceState.getInt(SAVE_DIALOG_MODE);
             mDialogWifiEntryKey = savedInstanceState.getString(SAVE_DIALOG_WIFIENTRY_KEY);
-
-            if (!TextUtils.isEmpty(mDialogWifiEntryKey)) {
-                List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
-                Optional<WifiEntry> matchedWifiEntry = wifiEntries.stream().filter(wifiEntry ->
-                        TextUtils.equals(wifiEntry.getKey(), mDialogWifiEntryKey)).findAny();
-                if (matchedWifiEntry.isPresent()) {
-                    mDialogWifiEntry = matchedWifiEntry.get();
-                } else {
-                    throw new IllegalStateException("Failed to restore WifiEntry of key: "
-                            + mDialogWifiEntryKey);
-                }
-            }
         }
 
         // If we're supposed to enable/disable the Next button based on our current connection
@@ -405,21 +393,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
 
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
-
-        // Edit the Wi-Fi network of specified SSID.
-        if (mOpenSsid != null) {
-            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
-                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
-                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
-                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
-                    .filter(wifiEntry -> !wifiEntry.isSaved()
-                            || isDisabledByWrongPassword(wifiEntry))
-                    .findFirst();
-            if (matchedWifiEntry.isPresent()) {
-                mOpenSsid = null;
-                launchConfigNewNetworkFragment(matchedWifiEntry.get());
-            }
-        }
     }
 
     @Override
@@ -682,6 +655,21 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     public void onWifiEntriesChanged() {
         updateWifiEntryPreferencesDelayed();
         changeNextButtonState(mWifiPickerTracker.getConnectedWifiEntry() != null);
+
+        // Edit the Wi-Fi network of specified SSID.
+        if (mOpenSsid != null) {
+            Optional<WifiEntry> matchedWifiEntry = mWifiPickerTracker.getWifiEntries().stream()
+                    .filter(wifiEntry -> TextUtils.equals(mOpenSsid, wifiEntry.getSsid()))
+                    .filter(wifiEntry -> wifiEntry.getSecurity() != WifiEntry.SECURITY_NONE
+                            && wifiEntry.getSecurity() != WifiEntry.SECURITY_OWE)
+                    .filter(wifiEntry -> !wifiEntry.isSaved()
+                            || isDisabledByWrongPassword(wifiEntry))
+                    .findFirst();
+            if (matchedWifiEntry.isPresent()) {
+                mOpenSsid = null;
+                launchConfigNewNetworkFragment(matchedWifiEntry.get());
+            }
+        }
     }
 
     @Override

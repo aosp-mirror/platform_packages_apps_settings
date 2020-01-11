@@ -30,6 +30,7 @@ import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,6 +62,7 @@ public class TetherServiceTest {
     }
 
     @Test
+    @Ignore
     public void scheduleAlarm_shouldRegisterReceiver() {
         mService.setHotspotOffReceiver(new HotspotOffReceiver(mAppContext));
 
@@ -78,6 +80,7 @@ public class TetherServiceTest {
     }
 
     @Test
+    @Ignore
     public void cancelAlarmIfNecessary_hasActiveTethers_shouldNotUnregisterReceiver() {
         mService.scheduleAlarm();
         final ArrayList<Integer> tethers = new ArrayList<>();
@@ -89,6 +92,7 @@ public class TetherServiceTest {
     }
 
     @Test
+    @Ignore
     public void cancelAlarmIfNecessary_noActiveTethers_shouldUnregisterReceiver() {
         final ArrayList<Integer> tethers = new ArrayList<>();
         ReflectionHelpers.setField(mService, "mCurrentTethers", tethers);

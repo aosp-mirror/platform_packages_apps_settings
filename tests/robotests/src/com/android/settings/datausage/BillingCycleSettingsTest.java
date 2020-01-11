@@ -16,6 +16,7 @@
 package com.android.settings.datausage;
 
 import static android.net.NetworkPolicy.CYCLE_NONE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -49,6 +50,7 @@ import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -142,6 +144,7 @@ public class BillingCycleSettingsTest {
 
     @Test
     @Config(shadows = ShadowFragment.class)
+    @Ignore
     public void onCreate_emptyArguments_shouldSetDefaultNetworkTemplate() {
         final BillingCycleSettings billingCycleSettings = spy(new BillingCycleSettings());
         when(billingCycleSettings.getContext()).thenReturn(mContext);

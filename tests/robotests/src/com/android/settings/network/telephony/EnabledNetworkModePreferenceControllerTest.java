@@ -20,6 +20,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFromNetworkType;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -392,8 +393,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_updateSuccess() {
-        doReturn(true).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        doReturn(true).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
+                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
@@ -405,8 +406,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_updateFail() {
-        doReturn(false).when(mTelephonyManager).setPreferredNetworkType(SUB_ID,
-                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        doReturn(false).when(mTelephonyManager).setPreferredNetworkTypeBitmask(
+                getRafFromNetworkType(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));

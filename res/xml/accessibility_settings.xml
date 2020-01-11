@@ -182,6 +182,12 @@
             settings:controller="com.android.settings.accessibility.AccessibilityHearingAidPreferenceController"/>
 
         <Preference
+            android:key="rtt_setting"
+            android:summary="@string/summary_placeholder"
+            android:title="@string/rtt_settings_title"
+            settings:controller="com.android.settings.accessibility.RTTSettingPreferenceController"/>
+
+        <Preference
             android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
             android:key="captioning_preference_screen"
             android:persistent="false"
