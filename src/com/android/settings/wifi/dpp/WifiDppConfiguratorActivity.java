@@ -78,6 +78,16 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
     /** The Wi-Fi DPP QR code from intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI */
     private WifiQrCode mWifiDppQrCode;
 
+    /**
+     * The remote device's band support obtained as an (optional) extra
+     * EXTRA_EASY_CONNECT_BAND_LIST from the intent ACTION_PROCESS_WIFI_EASY_CONNECT_URI.
+     *
+     * The band support is provided as IEEE 802.11 Global Operating Classes. There may be a single
+     * or multiple operating classes specified. The array may also be a null if the extra wasn't
+     * specified.
+     */
+    private int[] mWifiDppRemoteBandSupport;
+
     /** Secret extra that allows fake networks to show in UI for testing purposes */
     private boolean mIsTest;
 
@@ -141,9 +151,16 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
                 final String uriString = (uri == null) ? null : uri.toString();
                 mIsTest = intent.getBooleanExtra(WifiDppUtils.EXTRA_TEST, false);
                 mWifiDppQrCode = WifiQrCode.getValidWifiDppQrCodeOrNull(uriString);
+                mWifiDppRemoteBandSupport = intent.getIntArrayExtra(
+                        Settings.EXTRA_EASY_CONNECT_BAND_LIST); // returns null if none
                 final boolean isDppSupported = WifiDppUtils.isWifiDppEnabled(this);
                 if (!isDppSupported) {
-                    Log.d(TAG, "Device doesn't support Wifi DPP");
+                    Log.e(TAG,
+                            "ACTION_PROCESS_WIFI_EASY_CONNECT_URI for a device that doesn't "
+                                    + "support Wifi DPP - use WifiManager#isEasyConnectSupported");
+                }
+                if (mWifiDppQrCode == null) {
+                    Log.e(TAG, "ACTION_PROCESS_WIFI_EASY_CONNECT_URI with null URI!");
                 }
                 if (mWifiDppQrCode == null || !isDppSupported) {
                     cancelActivity = true;
