@@ -564,8 +564,9 @@
         <item name="android:showDividers">middle</item>
     </style>
 
-    <style name="TextAppearance.Tab" parent="@android:style/TextAppearance.DeviceDefault">
+    <style name="TextAppearance.Tab" parent="@android:style/TextAppearance.DeviceDefault.Medium">
         <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
     </style>
 
     <style name="AccessibilityDialogServiceIcon">
