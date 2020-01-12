@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,14 +28,15 @@ import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.apppreference.AppPreference;
@@ -44,29 +45,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Adds a preference to the PreferenceScreen for each notification channel that can bypass DND.
+ * Adds a preference to the PreferenceScreen for each conversation notification channel that can
+ * bypass DND.
  */
-public class ZenModeAllBypassingAppsPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class ZenModeAllBypassingConversationsPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin {
 
-    private final String KEY = "zen_mode_bypassing_apps_category";
+    private final String KEY = "zen_mode_settings_category_conversations";
 
     @VisibleForTesting ApplicationsState mApplicationsState;
-    @VisibleForTesting PreferenceScreen mPreferenceScreen;
+    @VisibleForTesting PreferenceCategory mCategory;
     @VisibleForTesting Context mPrefContext;
 
     private ApplicationsState.Session mAppSession;
     private NotificationBackend mNotificationBackend = new NotificationBackend();
     private Fragment mHostFragment;
 
-    public ZenModeAllBypassingAppsPreferenceController(Context context, Application app,
+    public ZenModeAllBypassingConversationsPreferenceController(Context context, Application app,
             Fragment host) {
 
         this(context, app == null ? null : ApplicationsState.getInstance(app), host);
     }
 
-    private ZenModeAllBypassingAppsPreferenceController(Context context, ApplicationsState appState,
-            Fragment host) {
+    private ZenModeAllBypassingConversationsPreferenceController(Context context,
+            ApplicationsState appState, Fragment host) {
         super(context);
         mApplicationsState = appState;
         mHostFragment = host;
@@ -78,8 +80,8 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPreferenceScreen = screen;
-        mPrefContext = mPreferenceScreen.getContext();
+        mCategory = screen.findPreference(KEY);
+        mPrefContext = screen.getContext();
         updateNotificationChannelList();
         super.displayPreference(screen);
     }
@@ -112,7 +114,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
     @VisibleForTesting
     void updateNotificationChannelList(List<ApplicationsState.AppEntry> apps) {
-        if (mPreferenceScreen == null || apps == null) {
+        if (mCategory == null || apps == null) {
             return;
         }
 
@@ -122,13 +124,14 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
             mApplicationsState.ensureIcon(entry);
             for (NotificationChannel channel : mNotificationBackend
                     .getNotificationChannelsBypassingDnd(pkg, entry.info.uid).getList()) {
-                if (!TextUtils.isEmpty(channel.getConversationId())) {
-                    // conversation channels that bypass dnd will be shown on the People page
+                if (TextUtils.isEmpty(channel.getConversationId())) {
+                    // only conversation channels
                     continue;
                 }
                 Preference pref = new AppPreference(mPrefContext);
                 pref.setKey(pkg + "|" + channel.getId());
                 pref.setTitle(BidiFormatter.getInstance().unicodeWrap(entry.label));
+                // TODO: use badged shortcut icon instead of app icon
                 pref.setIcon(entry.icon);
                 pref.setSummary(BidiFormatter.getInstance().unicodeWrap(channel.getName()));
 
@@ -150,11 +153,14 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                 channelsBypassingDnd.add(pref);
             }
 
-            mPreferenceScreen.removeAll();
+            mCategory.removeAll();
             if (channelsBypassingDnd.size() > 0) {
+                mCategory.setVisible(true);
                 for (Preference prefToAdd : channelsBypassingDnd) {
-                    mPreferenceScreen.addPreference(prefToAdd);
+                    mCategory.addPreference(prefToAdd);
                 }
+            } else {
+                mCategory.setVisible(false);
             }
         }
     }
@@ -197,6 +203,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
                 @Override
                 public void onLoadEntriesCompleted() {
+                    // Add shortcut info
                     updateNotificationChannelList();
                 }
             };

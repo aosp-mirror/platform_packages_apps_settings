@@ -77,7 +77,7 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mContentResolver;
-    private int mTitleResId = R.string.zen_sound_title;
+    private int mTitleResId = R.string.zen_mode_settings_title;
 
     @Before
     public void setup() {
