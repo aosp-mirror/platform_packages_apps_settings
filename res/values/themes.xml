@@ -253,4 +253,8 @@
         <item name="android:colorPrimaryDark">@android:color/white</item>
         <item name="android:colorAccent">@color/material_blue_700</item>
     </style>
+    <!-- Material theme for the pages containing TabLayout and ViewPager -->
+    <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@*android:color/edge_effect_device_default_light</item>
+    </style>
 </resources>
