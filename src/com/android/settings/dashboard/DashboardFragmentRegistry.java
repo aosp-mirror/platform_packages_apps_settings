@@ -31,6 +31,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.fuelgauge.SmartBatterySettings;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.gestures.GestureSettings;
 import com.android.settings.homepage.TopLevelSettings;
@@ -116,6 +117,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_MY_DEVICE_INFO);
         PARENT_TO_CATEGORY_KEY_MAP.put(BatterySaverSettings.class.getName(),
                 CategoryKey.CATEGORY_BATTERY_SAVER_SETTINGS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(SmartBatterySettings.class.getName(),
+                CategoryKey.CATEGORY_SMART_BATTERY_SETTINGS);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 
