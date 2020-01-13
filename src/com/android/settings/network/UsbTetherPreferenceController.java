@@ -49,8 +49,7 @@ public final class UsbTetherPreferenceController extends AbstractPreferenceContr
 
     private static final String TAG = "UsbTetherPrefController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    @VisibleForTesting
-    static final String PREF_KEY = "enable_usb_tethering";
+    public static final String PREF_KEY = "enable_usb_tethering";
 
     private final ConnectivityManager mCm;
     private boolean mUsbConnected;

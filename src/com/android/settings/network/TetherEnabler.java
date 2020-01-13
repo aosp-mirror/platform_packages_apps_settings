@@ -42,6 +42,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.widget.SwitchWidgetController;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -78,14 +79,7 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
     private final Context mContext;
 
     @VisibleForTesting
-    final ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback =
-            new ConnectivityManager.OnStartTetheringCallback() {
-                @Override
-                public void onTetheringFailed() {
-                    super.onTetheringFailed();
-                    mSwitchWidgetController.setChecked(false);
-                }
-            };
+    ConnectivityManager.OnStartTetheringCallback mOnStartTetheringCallback;
     private final AtomicReference<BluetoothPan> mBluetoothPan;
     private final SharedPreferences mSharedPreferences;
     private boolean mBluetoothEnableForTether;
@@ -110,11 +104,15 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
         mDataSaverBackend.addListener(this);
         mSwitchWidgetController.setListener(this);
         mSwitchWidgetController.startListening();
-        IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+
+        final IntentFilter filter = new IntentFilter(
+                ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+        filter.addAction(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mContext.registerReceiver(mTetherChangeReceiver, filter);
-        mSwitchWidgetController.setChecked(isTethering());
-        setSwitchWidgetEnabled(true);
+
+        mOnStartTetheringCallback = new OnStartTetheringCallback(this);
+        updateState();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
@@ -134,8 +132,14 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
         mContext.unregisterReceiver(mTetherChangeReceiver);
     }
 
-    private void setSwitchWidgetEnabled(boolean enabled) {
-        mSwitchWidgetController.setEnabled(enabled && !mDataSaverEnabled);
+    private void updateState() {
+        mSwitchWidgetController.setChecked(isTethering());
+        mSwitchWidgetController.setEnabled(!mDataSaverEnabled);
+    }
+
+    private void updateState(String[] tethered) {
+        mSwitchWidgetController.setChecked(isTethering(tethered));
+        mSwitchWidgetController.setEnabled(!mDataSaverEnabled);
     }
 
     private boolean isTethering() {
@@ -148,6 +152,10 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
             return true;
         }
 
+        if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
+            return true;
+        }
+
         final BluetoothPan pan = mBluetoothPan.get();
 
         return pan != null && pan.isTetheringOn();
@@ -155,29 +163,39 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
 
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
-        if (isChecked) {
+        if (isChecked && !isTethering()) {
             startTether();
-        } else {
+        }
+
+        if (!isChecked && isTethering()) {
             stopTether();
         }
         return true;
     }
 
-    @VisibleForTesting
-    void stopTether() {
+    private void stopTether() {
 
         // Wi-Fi tether is selected by default.
         if (mSharedPreferences.getBoolean(WIFI_TETHER_KEY, true)) {
-            mConnectivityManager.stopTethering(TETHERING_WIFI);
+            stopTethering(TETHERING_WIFI);
         }
 
         if (mSharedPreferences.getBoolean(USB_TETHER_KEY, false)) {
-            mConnectivityManager.stopTethering(TETHERING_USB);
+            stopTethering(TETHERING_USB);
         }
 
         if (mSharedPreferences.getBoolean(BLUETOOTH_TETHER_KEY, false)) {
-            mConnectivityManager.stopTethering(TETHERING_BLUETOOTH);
+            stopTethering(TETHERING_BLUETOOTH);
         }
+    }
+
+    /**
+     * Use this method to stop a single choice of tethering.
+     *
+     * @param choice The choice of tethering to stop.
+     */
+    public void stopTethering(int choice) {
+        mConnectivityManager.stopTethering(choice);
     }
 
     @VisibleForTesting
@@ -197,8 +215,16 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
         }
     }
 
-    @VisibleForTesting
-    void startTethering(int choice) {
+    /**
+     * Use this method to start a single choice of tethering.
+     * For bluetooth tethering, it will first turn on bluetooth if bluetooth is off.
+     * For Wi-Fi tethering, it will be no-op if Wi-Fi tethering already active.
+     *
+     * @param choice The choice of tethering to start.
+     */
+    public void startTethering(int choice) {
+        mSwitchWidgetController.setEnabled(false);
+
         if (choice == TETHERING_WIFI && mWifiManager.isWifiApEnabled()) {
             if (DEBUG) {
                 Log.d(TAG, "Wifi tether already active!");
@@ -224,36 +250,67 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
     private final BroadcastReceiver mTetherChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
+            final String action = intent.getAction();
+            ArrayList<String> active = null;
+            boolean shouldUpdateState = false;
             if (TextUtils.equals(ConnectivityManager.ACTION_TETHER_STATE_CHANGED, action)) {
-                ArrayList<String> active = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_ACTIVE_TETHER);
-                mSwitchWidgetController.setChecked(
-                        isTethering(active.toArray(new String[active.size()])));
+                active = intent.getStringArrayListExtra(ConnectivityManager.EXTRA_ACTIVE_TETHER);
+                shouldUpdateState = true;
+            } else if (TextUtils.equals(WifiManager.WIFI_AP_STATE_CHANGED_ACTION, action)) {
+                shouldUpdateState = handleWifiApStateChanged(intent.getIntExtra(
+                        WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED));
             } else if (TextUtils.equals(BluetoothAdapter.ACTION_STATE_CHANGED, action)) {
-                switch (intent
-                        .getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)) {
-                    case BluetoothAdapter.STATE_ON:
-                        if (mBluetoothEnableForTether) {
-                            startTethering(TETHERING_BLUETOOTH);
-                        }
-                        // Fall through.
-                    case BluetoothAdapter.STATE_OFF:
-                        // Fall through.
-                    case BluetoothAdapter.ERROR:
-                        mBluetoothEnableForTether = false;
-                        break;
-                    default:
-                        // ignore transition states
+                shouldUpdateState = handleBluetoothStateChanged(intent
+                        .getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR));
+            }
+
+            if (shouldUpdateState) {
+                if (active != null) {
+                    updateState(active.toArray(new String[0]));
+                } else {
+                    updateState();
                 }
             }
         }
     };
 
+    private boolean handleBluetoothStateChanged(int state) {
+        switch (state) {
+            case BluetoothAdapter.STATE_ON:
+                if (mBluetoothEnableForTether) {
+                    startTethering(TETHERING_BLUETOOTH);
+                }
+                // Fall through.
+            case BluetoothAdapter.STATE_OFF:
+                // Fall through.
+            case BluetoothAdapter.ERROR:
+                mBluetoothEnableForTether = false;
+                return true;
+            default:
+                // Return false for transition states.
+                return false;
+        }
+    }
+
+    private boolean handleWifiApStateChanged(int state) {
+        switch (state) {
+            case WifiManager.WIFI_AP_STATE_FAILED:
+                Log.e(TAG, "Wifi AP is failed!");
+                // fall through
+            case WifiManager.WIFI_AP_STATE_ENABLED:
+                // fall through
+            case WifiManager.WIFI_AP_STATE_DISABLED:
+                return true;
+            default:
+                // return false for transition state
+                return false;
+        }
+    }
+
     @Override
     public void onDataSaverChanged(boolean isDataSaving) {
         mDataSaverEnabled = isDataSaving;
-        setSwitchWidgetEnabled(!isDataSaving);
+        mSwitchWidgetController.setEnabled(!isDataSaving);
     }
 
     @Override
@@ -288,6 +345,32 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
                 startTethering(TETHERING_BLUETOOTH);
             } else {
                 mConnectivityManager.stopTethering(TETHERING_BLUETOOTH);
+            }
+        }
+    }
+
+    private static final class OnStartTetheringCallback extends
+            ConnectivityManager.OnStartTetheringCallback {
+        final WeakReference<TetherEnabler> mTetherEnabler;
+
+        OnStartTetheringCallback(TetherEnabler enabler) {
+            mTetherEnabler = new WeakReference<>(enabler);
+        }
+
+        @Override
+        public void onTetheringStarted() {
+            update();
+        }
+
+        @Override
+        public void onTetheringFailed() {
+            update();
+        }
+
+        private void update() {
+            TetherEnabler enabler = mTetherEnabler.get();
+            if (enabler != null) {
+                enabler.updateState();
             }
         }
     }

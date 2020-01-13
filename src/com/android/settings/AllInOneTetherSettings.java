@@ -20,21 +20,20 @@ import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.ConnectivityManager.TETHERING_WIFI;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
-import static com.android.settings.network.WifiTetherDisablePreferenceController
-        .KEY_ENABLE_WIFI_TETHERING;
+import static com.android.settings.network.WifiTetherDisablePreferenceController.KEY_ENABLE_WIFI_TETHERING;
 
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,6 +46,8 @@ import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.network.TetherEnabler;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.tether.WifiTetherApBandPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherBasePreferenceController;
@@ -59,10 +60,10 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Displays preferences for Tethering.
- * TODO(b/147322704): Use TetherEnabler in this fragment to manage tethering switch on/off.
+ * Displays preferences for all Tethering options.
  * TODO(b/147323306): Add tether option preferences into this fragment after controllers created.
  */
 @SearchIndexable
@@ -96,6 +97,7 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
+    private final AtomicReference<BluetoothPan> mBluetoothPan = new AtomicReference<>();
 
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
@@ -103,8 +105,8 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     private PreferenceGroup mWifiTetherGroup;
     private SharedPreferences mSharedPreferences;
-    private ConnectivityManager mConnectivityManager;
     private boolean mWifiTetherChosen;
+    private TetherEnabler mTetherEnabler;
 
     private final BroadcastReceiver mTetherChangeReceiver = new BroadcastReceiver() {
         @Override
@@ -118,18 +120,29 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                 if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     mRestartWifiApAfterConfigChange = false;
-                    startTether();
+                    mTetherEnabler.startTethering(TETHERING_WIFI);
                 }
             } else if (TextUtils.equals(action, WIFI_AP_STATE_CHANGED_ACTION)) {
                 int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     mRestartWifiApAfterConfigChange = false;
-                    startTether();
+                    mTetherEnabler.startTethering(TETHERING_WIFI);
                 }
             }
         }
     };
+
+    private final BluetoothProfile.ServiceListener mProfileServiceListener =
+            new BluetoothProfile.ServiceListener() {
+                public void onServiceConnected(int profile, BluetoothProfile proxy) {
+                    mBluetoothPan.set((BluetoothPan) proxy);
+                }
+
+                public void onServiceDisconnected(int profile) {
+                    mBluetoothPan.set(null);
+                }
+            };
 
     @Override
     public int getMetricsCategory() {
@@ -144,8 +157,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mConnectivityManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mSharedPreferences =
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
 
@@ -179,6 +190,27 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         onSharedPreferenceChanged(mSharedPreferences, KEY_ENABLE_WIFI_TETHERING);
 
         // TODO(b/147325229): Hide advanced settings like security and ap band.
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (mUnavailable) {
+            return;
+        }
+        // Assume we are in a SettingsActivity. This is only safe because we currently use
+        // SettingsActivity as base for all preference fragments.
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.getProfileProxy(activity.getApplicationContext(), mProfileServiceListener,
+                    BluetoothProfile.PAN);
+        }
+        final SwitchBar switchBar = activity.getSwitchBar();
+        mTetherEnabler = new TetherEnabler(activity,
+                new SwitchBarController(switchBar), mBluetoothPan);
+        getSettingsLifecycle().addObserver(mTetherEnabler);
+        switchBar.show();
     }
 
     @Override
@@ -297,8 +329,7 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                 Log.d(TAG, "Wifi AP config changed while enabled, stop and restart");
             }
             mRestartWifiApAfterConfigChange = true;
-            // TODO(b/147322704): Use TethetEnabler to stop tethering.
-            mConnectivityManager.stopTethering(TETHERING_WIFI);
+            mTetherEnabler.stopTethering(TETHERING_WIFI);
         }
 
         if (controller instanceof WifiTetherSecurityPreferenceController) {
@@ -333,23 +364,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
             mWifiTetherGroup.setVisible(mWifiTetherChosen);
             reConfigInitialExpandedChildCount();
         }
-    }
-
-    private void startTether() {
-        // TODO(b/147322704): Use TetherEnabler to start tethering.
-        if (mWifiManager.isWifiApEnabled()) {
-            return;
-        }
-        mConnectivityManager.startTethering(ConnectivityManager.TETHERING_WIFI,
-                true /*showProvisioningUi*/,
-                new ConnectivityManager.OnStartTetheringCallback() {
-                    @Override
-                    public void onTetheringFailed() {
-                        super.onTetheringFailed();
-                        // Do nothing. There is no UI to update at this point.
-                    }
-                },
-                new Handler(Looper.getMainLooper()));
     }
 
     private void reConfigInitialExpandedChildCount() {
