@@ -439,10 +439,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
         if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE)) {
-            final Bundle args = new Bundle(2 + additionalCapacity);
+            final Bundle args = new Bundle(1 + additionalCapacity);
             args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
                     mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
-            args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
             return args;
         } else {
             final Bundle args = new Bundle(2 + additionalCapacity);
