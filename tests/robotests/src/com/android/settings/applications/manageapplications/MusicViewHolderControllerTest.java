@@ -61,7 +61,7 @@ public class MusicViewHolderControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final String fsUuid = new VolumeInfo("id", 0, null, "id").fsUuid;
-        mController = new MusicViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
+        mController = new MusicViewHolderController(mContext, mSource, fsUuid, UserHandle.of(-1));
 
         View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
         mHolder = new ApplicationViewHolder(view);

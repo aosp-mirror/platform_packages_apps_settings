@@ -53,6 +53,7 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
@@ -65,6 +66,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class StorageItemPreferenceControllerTest {
@@ -276,6 +278,7 @@ public class StorageItemPreferenceControllerTest {
     }
 
     @Test
+    @Config(shadows = ShadowUserManager.class)
     public void testMeasurementCompletedUpdatesPreferences() {
         final StorageItemPreference audio = new StorageItemPreference(mContext);
         final StorageItemPreference image = new StorageItemPreference(mContext);
