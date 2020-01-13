@@ -316,7 +316,7 @@
     <string name="security_settings_summary" msgid="1627059516127354233">"Setați Locația mea, deblocarea ecranului, blocarea cardului SIM, blocarea stocării acreditărilor"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Setați Locația mea, deblocarea ecranului, blocarea stocării acreditărilor"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Confidențialitate"</string>
-    <string name="disabled_by_administrator_summary" msgid="4181894719300350343">"Dezactivat de administrator"</string>
+    <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Indisponibil"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Starea de securitate"</string>
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Blocarea ecranului, deblocare facială"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Blocarea ecranului, amprentă"</string>
@@ -374,7 +374,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Când folosiți deblocarea facială în aplicații, solicitați întotdeauna confirmarea"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Ștergeți datele faciale"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configurați deblocarea facială"</string>
-    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Folosiți deblocarea facială ca să deblocați dispozitivul, să vă conectați la aplicații și să confirmați plăți.\n\nRețineți:\ndacă vă uitați la telefon, îl puteți debloca când nu doriți.\n\nTelefonul poate fi deblocat de altcineva dacă este ținut în dreptul feței dvs., când aveți ochii deschiși.\n\nTelefonul poate fi deblocat de cineva are seamănă mult cu dvs., cum ar fi un frate sau o soră geamănă."</string>
+    <!-- no translation found for security_settings_face_settings_footer (5545455769328594736) -->
+    <skip />
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Folosiți deblocarea facială ca să deblocați dispozitivul, să vă conectați la aplicații și să confirmați plăți.\n\nRețineți:\ndacă vă uitați la telefon, îl puteți debloca când nu doriți.\n\nTelefonul poate fi deblocat de altcineva dacă este ținut în dreptul feței dvs., chiar dacă aveți ochii închiși.\n\nTelefonul poate fi deblocat de cineva are seamănă mult cu dvs., cum ar fi un frate sau o soră geamănă."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Ștergeți datele faciale?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Datele faciale folosite de deblocarea facială vor fi șterse definitiv și în siguranță. După eliminare, veți avea nevoie de codul PIN, de model sau de parolă ca să deblocați telefonul, să vă conectați la aplicații și să confirmați plățile."</string>
@@ -894,7 +895,6 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identitate"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Identitate anonimă"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Parolă"</string>
-    <string name="wifi_sae_password_id" msgid="129826381089135796">"Identificatorul de parole SAE"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Afișați parola"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Selectați banda AP"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Automat"</string>
@@ -935,9 +935,11 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Se permite accesul la Wi-Fi pentru acest dispozitiv…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Se conectează…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Permiteți accesul la hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Confirmați că sunteți dvs."</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Confirmați-vă identitatea"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Parola rețelei Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Parolă hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conectare automată"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permiteți conectarea la această rețea când se află în aria de acoperire"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Adăugați un dispozitiv"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Folosiți un cod QR pentru a adăuga un dispozitiv la această rețea"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Codul QR nu are un format valid"</string>
@@ -1246,7 +1248,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Activată/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nu se va dezactiva niciodată automat"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Se va dezactiva automat la răsărit"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"Tema întunecată folosește negru real pentru a conserva autonomia bateriei. Programele cu Tema întunecată se activează când se dezactivează ecranul."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Tema întunecată folosește un fundal negru pentru a conserva autonomia bateriei pentru unele ecrane. Programele cu Tema întunecată se activează când se dezactivează ecranul."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Durată până la dezactivarea ecranului"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ecranul se dezactivează"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"După <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1736,8 +1738,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Pentru a utiliza amprenta, setați codul PIN"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Din motive de securitate, setați un model"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Reintroduceți parola"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Introduceți parola de la serviciu"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmați modelul"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Introduceți modelul pentru serviciu"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Reintroduceți codul PIN"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Introduceți codul PIN pentru serviciu"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Parolele nu corespund"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Codurile PIN nu corespund"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Desenați modelul din nou"</string>
@@ -2074,7 +2079,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Cititor de ecran destinat în principal utilizatorilor nevăzători și cu deficiențe de vedere"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Atingeți elementele de pe ecran pentru a le auzi cititte cu voce tare"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferințe pentru subtitrări"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Mărire"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Măriți"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Zona de mărire"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Alegeți zonele pe care doriți să le măriți atunci când măriți ecranul"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ecran complet"</string>
@@ -2084,10 +2089,12 @@
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Măriți o parte a ecranului"</string>
     <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Afișați controlerul pentru mutare"</string>
     <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Afișați un controler asemănător unui joystick pentru a muta zona de mărire"</string>
-    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Setările pentru mărire"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Setări pentru mărire"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Măriți atingând de trei ori"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Măriți folosind scurtătura"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Măriți folosind scurtătura și atingând de trei ori"</string>
+    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Despre Măriți"</string>
+    <string name="accessibility_screen_option" msgid="8465307075278878145">"Opțiuni"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Măriți pe ecran"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Atingeți de 3 ori pentru zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Atingeți un buton pentru a micșora/mări"</string>
@@ -3126,6 +3133,7 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"Selectați cardul SIM"</string>
     <string name="color_orange" msgid="216547825489739010">"Portocaliu"</string>
     <string name="color_purple" msgid="6603701972079904843">"Violet"</string>
+    <string name="color_pink" msgid="8596872110888626708">"Roz"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Nu a fost introdus niciun card SIM"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Starea cardului SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Stare card SIM (slot pentru SIM %1$d)"</string>
@@ -3290,6 +3298,8 @@
       <item quantity="one">O regulă activată</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Nu deranja"</string>
+    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limitați întreruperile"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activați Nu deranja"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Excepții"</string>
@@ -3316,7 +3326,8 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blocați întreruperile vizuale"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permiteți semnale vizuale"</string>
-    <string name="zen_mode_settings_category" msgid="3531156898689133018">"Când funcția „Nu deranja” este activată"</string>
+    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Restricționați notificările"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Fără sunet de la notificări"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Veți vedea notificările pe ecran"</string>
@@ -3379,10 +3390,18 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> de programe se pot activa automat</item>
       <item quantity="one">Un program se poate activa automat</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="4456460102057665854">"Dezactivați sunetul dispozitivului, dar permiteți excepții"</string>
-    <string name="zen_category_exceptions" msgid="6329803391764042865">"Excepții"</string>
-    <string name="zen_category_schedule" msgid="6117378495178187519">"Program"</string>
-    <string name="zen_sound_title" msgid="7345256674791165630">"Vedeți toate excepțiile"</string>
+    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
+    <skip />
+    <!-- no translation found for zen_category_people (8252926021894933047) -->
+    <skip />
+    <!-- no translation found for zen_category_apps (1167374545618451925) -->
+    <skip />
+    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
+    <skip />
+    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
+    <skip />
+    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
+    <skip />
     <string name="zen_sound_footer" msgid="4090291351903631977">"Când este activată funcția Nu deranja, sunetele și vibrațiile vor fi dezactivate, cu excepția elementelor pe care le permiteți mai sus."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Dezactivați sunetul pentru toate, cu excepția"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Sunet dezactivat"</string>
@@ -3649,6 +3668,8 @@
       <item quantity="other">încă <xliff:g id="NUM_PEOPLE">%d</xliff:g> de persoane</item>
       <item quantity="one">încă o persoană</item>
     </plurals>
+    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
+    <skip />
     <string name="zen_mode_messages" msgid="7835537207069585861">"Permiteți mesaje"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Pentru a vă asigura că mesajele permise emit sunete, verificați dacă dispozitivul este setat să sune, să vibreze sau este în modul silențios."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Pentru „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”, mesajele primite sunt blocate. Puteți să modificați setările ca să le permiteți prietenilor, familiei sau altor persoane de contact să ia legătura cu dumneavoastră."</string>
@@ -3662,15 +3683,26 @@
     <string name="zen_mode_from_none" msgid="8456745188276131873">"Niciunul"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Nu permiteți niciun apel"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Nu permiteți mesaje"</string>
-    <string name="zen_mode_alarms" msgid="1111047002365378012">"Permiteți alarme"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarme"</string>
+    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
+    <skip />
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarme"</string>
-    <string name="zen_mode_media" msgid="3470940840136036522">"Redați sunete media"</string>
+    <!-- no translation found for zen_mode_media (885017672250984735) -->
+    <skip />
+    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
+    <skip />
     <string name="zen_mode_media_list" msgid="2006413476596092020">"media"</string>
-    <string name="zen_mode_system" msgid="4996563074066075171">"Permiteți sunetele de atingere"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"Sunete la atingere"</string>
+    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
+    <skip />
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sunete la atingere"</string>
-    <string name="zen_mode_reminders" msgid="1957379696610030851">"Permiteți mementouri"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"Mementouri"</string>
+    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
+    <skip />
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"mementouri"</string>
-    <string name="zen_mode_events" msgid="5695716091022098055">"Permiteți evenimente"</string>
+    <string name="zen_mode_events" msgid="7455308377739125312">"Evenimente"</string>
+    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permiteți aplicațiilor să ignore"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Excepțiile aplicației"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -3977,6 +4009,10 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Afișare peste alte aplicații"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Permiteți afișarea peste alte aplicații"</string>
     <string name="allow_overlay_description" msgid="2266886438777971131">"Permiteți acestei aplicații să se afișeze peste alte aplicații pe care le folosiți. Aceasta poate interfera cu folosirea acelor aplicații sau poate schimba modul în care acestea apar sau se comportă."</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"Acces la toate fișierele"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permiteți gestionarea fișierelor"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permiteți aplicației să citească, să modifice și să șteargă toate fișierele de pe dispozitiv sau din spațiile de stocare conectate. Dacă îi permiteți, aplicația poate accesa fișierele fără consimțământul dvs. explicit."</string>
+    <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poate accesa toate fișierele"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realitate virtuală instrument de ascultare stereo serviciu de ajutor"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Afișare peste alte aplicații"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> din <xliff:g id="COUNT_1">%2$d</xliff:g> aplicații au voie să afișeze peste alte aplicații"</string>

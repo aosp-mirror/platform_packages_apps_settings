@@ -319,7 +319,7 @@
     <string name="security_settings_summary" msgid="1627059516127354233">"‏הגדרת \'המיקום שלי\', ביטול נעילת מסך, נעילת כרטיס SIM, נעילת אחסון אישורים"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"הגדרת \'המיקום שלי\', ביטול נעילת מסך, נעילת אחסון אישורים"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"פרטיות"</string>
-    <string name="disabled_by_administrator_summary" msgid="4181894719300350343">"הושבת על ידי מנהל המכשיר"</string>
+    <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"לא זמינה"</string>
     <string name="security_status_title" msgid="6958004275337618656">"סטטוס אבטחה"</string>
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"נעילת מסך, שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"נעילת מסך, טביעת אצבע"</string>
@@ -377,7 +377,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"כשמשתמשים בשחרור נעילה על ידי זיהוי פנים באפליקציות, יש לדרוש תמיד שלב אימות"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"מחיקת נתוני הפנים"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
-    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"אפשר להשתמש בשחרור נעילה על ידי זיהוי פנים כדי לשחרר את נעילת המכשיר, להיכנס לחשבון באפליקציות ולאשר תשלומים.\n\nחשוב לזכור:\nמבט לטלפון עשוי לבטל נעילה בלי כוונה.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו אחר, אם הטלפון מוחזק אל מול הפנים שלך ועיניך פקוחות.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו למשל אח/ות זהה."</string>
+    <!-- no translation found for security_settings_face_settings_footer (5545455769328594736) -->
+    <skip />
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"אפשר להשתמש בשחרור נעילה על ידי זיהוי פנים כדי לשחרר את נעילת המכשיר, להיכנס לחשבון באפליקציות ולאשר תשלומים.\n\nחשוב לזכור:\nמבט לטלפון עשוי לבטל נעילה בלי כוונה.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו אחר אם הוא יפנה את הטלפון לפנים שלך, גם אם עיניך עצומות.\n\nנעילת הטלפון עשויה להתבטל על ידי מישהו שדומה לך מאוד, כמו למשל אח/ות זהה."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"למחוק נתוני פנים?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"נתוני הפנים שמשמשים את התכונה \'שחרור נעילה על ידי זיהוי פנים\' יימחקו לתמיד ובאופן מאובטח. אחרי ההסרה יהיה צורך בקוד האימות, קו ביטול הנעילה או הסיסמה כדי לבטל את נעילת הטלפון, להיכנס לאפליקציות ולאשר תשלומים."</string>
@@ -911,7 +912,6 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"זהות"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"זהות אנונימית"</string>
     <string name="wifi_password" msgid="1458802324849513755">"סיסמה"</string>
-    <string name="wifi_sae_password_id" msgid="129826381089135796">"‏מזהה סיסמה מסוג SAE"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"הצגת סיסמה"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"‏בחר תדר AP"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"אוטומטי"</string>
@@ -952,9 +952,11 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"‏מתבצע שיתוף Wi‑Fi עם מכשיר זה…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"בתהליך התחברות…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"שיתוף של נקודה לשיתוף אינטרנט"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"אימות הזהות שלך"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"אימות זהותך"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמה של Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"חיבור אוטומטי"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"יש להפעיל את החיבור לרשת זו כשנמצאים בטווח"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"הוספת מכשיר"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏אפשר להשתמש בקוד QR כדי להוסיף מכשיר לרשת זו"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏קוד QR אינו בפורמט חוקי"</string>
@@ -1266,7 +1268,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"פועל / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ללא כיבוי אוטומטי"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"כיבוי אוטומטי בזריחה"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"העיצוב הכהה משתמש בגוון שחור כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה מתוזמנת להתחיל לאחר שהמסך נכבה."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"העיצוב הכהה משתמש ברקע שחור במסכים מסוימים כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה מתוזמנת להתחיל לאחר שהמסך נכבה."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"כיבוי מסך"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"לאחר <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> של חוסר פעילות"</string>
@@ -1758,8 +1760,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"כדי להשתמש בטביעת אצבע, יש להגדיר קוד גישה"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"לשיפור האבטחה, מומלץ להגדיר קו ביטול נעילה"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"יש להזין את הסיסמה שוב"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"הזנת הסיסמה של פרופיל העבודה"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"אשר את הקו לביטול נעילה"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"הזנת קו ביטול הנעילה לעבודה"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"יש להזין שוב את קוד הגישה"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"הזנת קוד הגישה לפרופיל העבודה"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"הסיסמאות לא תואמות"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"קודי הגישה אינם תואמים"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"יש לשרטט שוב את קו ביטול הנעילה"</string>
@@ -2097,7 +2102,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"קורא מסך המיועד בעיקר לעיוורים או לבעלי ראייה לקויה"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"הקש על פריטים במסך כדי לשמוע הקראה שלהם"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"כתוביות"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"הגדלה"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"הגדלה"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"אזור ההגדלה"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"יש לבחור את אזורי ההגדלה שישמשו אותך בזמן הגדלת המסך"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"מסך מלא"</string>
@@ -2107,10 +2112,12 @@
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"הגדלת חלק מהמסך"</string>
     <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"הצגת בקר להזזה"</string>
     <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"הצגה של בקר דמוי ג\'ויסטיק להזזת אזור ההגדלה"</string>
-    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"הגדרות ההגדלה"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"הגדרות ההגדלה"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"הגדלה על-ידי הקשה שלוש פעמים"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"הגדלה בעזרת קיצור דרך"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"הגדלה בעזרת קיצור דרך והקשה שלוש פעמים"</string>
+    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"מידע על הגדלה"</string>
+    <string name="accessibility_screen_option" msgid="8465307075278878145">"אפשרויות"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"שינוי מרחק התצוגה (זום)"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"הקש שלוש פעמים כדי לשנות את המרחק מהתצוגה"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"הקש על לחצן כדי לשנות את מרחק התצוגה"</string>
@@ -3170,6 +3177,7 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"‏בחר כרטיס SIM"</string>
     <string name="color_orange" msgid="216547825489739010">"כתום"</string>
     <string name="color_purple" msgid="6603701972079904843">"סגול"</string>
+    <string name="color_pink" msgid="8596872110888626708">"ורוד"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"‏לא הוכנסו כרטיסי SIM"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"‏סטטוס SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"‏סטטוס SIM (חריץ SIM ‏%1$d)"</string>
@@ -3336,6 +3344,8 @@
       <item quantity="one">אחד מופעל</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"נא לא להפריע"</string>
+    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"הגבלת הפרעות"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"הפעלת מצב נא לא להפריע"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"חריגים"</string>
@@ -3362,7 +3372,8 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"חסימת הפרעות חזותיות"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"הפעלת אותות חזותיים"</string>
-    <string name="zen_mode_settings_category" msgid="3531156898689133018">"כשמצב \'נא לא להפריע\' פועל"</string>
+    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"הגבלת ההתראות"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ללא צליל מהתראות"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"יוצגו התראות על המסך"</string>
@@ -3427,10 +3438,18 @@
       <item quantity="other">ניתן להפעיל <xliff:g id="ON_COUNT">%d</xliff:g> לוחות זמנים באופן אוטומטי</item>
       <item quantity="one">ניתן להפעיל לוח זמנים אחד באופן אוטומטי</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="4456460102057665854">"השתקת המכשיר עם התרת חריגים"</string>
-    <string name="zen_category_exceptions" msgid="6329803391764042865">"חריגים"</string>
-    <string name="zen_category_schedule" msgid="6117378495178187519">"לוח זמנים"</string>
-    <string name="zen_sound_title" msgid="7345256674791165630">"הצגת כל החריגות"</string>
+    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
+    <skip />
+    <!-- no translation found for zen_category_people (8252926021894933047) -->
+    <skip />
+    <!-- no translation found for zen_category_apps (1167374545618451925) -->
+    <skip />
+    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
+    <skip />
+    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
+    <skip />
+    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
+    <skip />
     <string name="zen_sound_footer" msgid="4090291351903631977">"כשמצב \'נא לא להפריע\' פועל, צלילים ורטט מושתקים, חוץ מהפריטים שאפשרת למעלה."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"אני רוצה להשתיק את הכל, חוץ מ-"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"הושתקו"</string>
@@ -3704,6 +3723,8 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
       <item quantity="one">1 נוסף</item>
     </plurals>
+    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
+    <skip />
     <string name="zen_mode_messages" msgid="7835537207069585861">"אני רוצה לאפשר הודעות"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"כדי לוודא שהודעות מורשות יישמעו, יש לבדוק אם המכשיר שלך מוגדר לצלצול, לרטט או למצב שקט."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
@@ -3717,15 +3738,26 @@
     <string name="zen_mode_from_none" msgid="8456745188276131873">"ללא"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"ללא התרת שיחות כלל"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"ללא התרת הודעות כלל"</string>
-    <string name="zen_mode_alarms" msgid="1111047002365378012">"אני רוצה לאפשר התראות"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"התראות"</string>
+    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
+    <skip />
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"התראות"</string>
-    <string name="zen_mode_media" msgid="3470940840136036522">"השמעת צלילי מדיה"</string>
+    <!-- no translation found for zen_mode_media (885017672250984735) -->
+    <skip />
+    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
+    <skip />
     <string name="zen_mode_media_list" msgid="2006413476596092020">"מדיה"</string>
-    <string name="zen_mode_system" msgid="4996563074066075171">"אני רוצה לאפשר צלילי מגע"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"צלילי מגע"</string>
+    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
+    <skip />
     <string name="zen_mode_system_list" msgid="2256218792042306434">"צלילי מגע"</string>
-    <string name="zen_mode_reminders" msgid="1957379696610030851">"אני רוצה לאפשר תזכורות"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"תזכורות"</string>
+    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
+    <skip />
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"תזכורות"</string>
-    <string name="zen_mode_events" msgid="5695716091022098055">"אני רוצה לאפשר אירועים"</string>
+    <string name="zen_mode_events" msgid="7455308377739125312">"אירועים"</string>
+    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"הוספת חריגים"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -4043,6 +4075,10 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"תצוגה מעל אפליקציות אחרות"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"הצגה מעל אפליקציות אחרות"</string>
     <string name="allow_overlay_description" msgid="2266886438777971131">"הגדרה זו מתירה לאפליקציה להופיע מעל אפליקציות אחרות שנמצאות בשימוש. הפעולה הזאת עשויה להפריע לשימוש שלך באפליקציות האלה או לשנות את האופן שבו הן מוצגות או מתנהגות."</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"גישה לכל הקבצים"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"הרשאת גישה לניהול כל הקבצים"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"לאפליקציה הזו תהיה הרשאה לקרוא, לשנות ולמחוק את כל הקבצים במכשיר זה או בכל נפח אחסון שמחובר אליו. אם ההרשאה תינתן, האפליקציה תורשה לגשת לקבצים מבלי ליידע אותך במפורש."</string>
+    <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"‏שירות מסייע של מציאות מדומה VR להאזנה סטריאופונית"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"תצוגה מעל אפליקציות אחרות"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> מתוך <xliff:g id="COUNT_1">%2$d</xliff:g> אפליקציות מורשות להופיע מעל אפליקציות אחרות"</string>
