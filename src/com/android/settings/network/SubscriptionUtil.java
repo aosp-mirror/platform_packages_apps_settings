@@ -278,12 +278,11 @@ public class SubscriptionUtil {
      * Get phoneId or logical slot index for a subId if active, or INVALID_PHONE_INDEX if inactive.
      */
     public static int getPhoneId(Context context, int subId) {
-        SubscriptionManager subManager = (SubscriptionManager)
-                context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+        final SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
         if (subManager == null) {
             return INVALID_SIM_SLOT_INDEX;
         }
-        SubscriptionInfo info = subManager.getActiveSubscriptionInfo(subId);
+        final SubscriptionInfo info = subManager.getActiveSubscriptionInfo(subId);
         if (info == null) {
             return INVALID_SIM_SLOT_INDEX;
         }
