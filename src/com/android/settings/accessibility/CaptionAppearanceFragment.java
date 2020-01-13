@@ -122,14 +122,7 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
         refreshPreviewText();
     }
 
-    private void setPreferenceViewEnabled(boolean enabled) {
-        for (Preference preference : mPreferenceList) {
-            preference.setEnabled(enabled);
-        }
-    }
-
     private void refreshPreferenceViewEnabled(boolean enabled) {
-        setPreferenceViewEnabled(enabled);
         mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
     }
 
