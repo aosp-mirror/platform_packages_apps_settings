@@ -252,11 +252,6 @@ public class WifiDppUtils {
         final WifiConfiguration wifiConfiguration = wifiEntry.getWifiConfiguration();
         setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
 
-        // For a transition mode Wi-Fi AP, creates a QR code that's compatible with more devices
-        if (wifiEntry.getSecurity() == WifiEntry.SECURITY_PSK_SAE_TRANSITION) {
-            intent.putExtra(EXTRA_WIFI_SECURITY, WifiQrCode.SECURITY_WPA_PSK);
-        }
-
         return intent;
     }
 
