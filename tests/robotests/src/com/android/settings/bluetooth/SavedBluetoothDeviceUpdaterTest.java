@@ -121,6 +121,6 @@ public class SavedBluetoothDeviceUpdaterTest {
     public void onClick_Preference_setConnect() {
         mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
 
-        verify(mCachedBluetoothDevice).connect(true);
+        verify(mCachedBluetoothDevice).connect();
     }
 }
