@@ -372,6 +372,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         updateUserShortcutType(/* saveChanges= */ true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+        if (mShortcutPreference.getChecked()) {
+            optInAllMagnificationValuesToSettings(getContext(), mUserShortcutType);
+            optOutAllMagnificationValuesFromSettings(getContext(), ~mUserShortcutType);
+        }
     }
 
     private String getComponentName() {
@@ -435,38 +439,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
+        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            optInMagnificationValueToSettings(getContext(), UserShortcutType.SOFTWARE);
-
-            // TODO(b/142531156): ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED need to be treated
-            //  as special case in this file.
-            if ((mUserShortcutType & UserShortcutType.SOFTWARE)
-                    == UserShortcutType.SOFTWARE) {
-                MagnificationPreferenceFragment.setChecked(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
-                        /* isChecked= */ true);
-            }
-            if ((mUserShortcutType & UserShortcutType.TRIPLETAP)
-                    == UserShortcutType.TRIPLETAP) {
-                MagnificationPreferenceFragment.setChecked(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                        /* isChecked= */ true);
-            }
+            optInAllMagnificationValuesToSettings(getContext(), shortcutTypes);
         } else {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            optOutMagnificationValueFromSettings(getContext(), UserShortcutType.SOFTWARE);
-
-            // TODO(b/142531156): ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED need to be treated
-            //  as special case in this file.
-            MagnificationPreferenceFragment.setChecked(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
-                    /* isChecked= */ false);
-            MagnificationPreferenceFragment.setChecked(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED,
-                    /* isChecked= */ false);
+            optOutAllMagnificationValuesFromSettings(getContext(), shortcutTypes);
         }
     }
 
@@ -505,11 +482,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 getShortcutPreferenceKey());
 
         if (shortcutPreference != null) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
+            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
             shortcutPreference.setChecked(
-                    hasMagnificationValueInSettings(getContext(),
-                            UserShortcutType.SOFTWARE));
+                    hasMagnificationValuesInSettings(getContext(), shortcutTypes));
         }
     }
 
@@ -534,26 +509,48 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         int EDIT_SHORTCUT = 3;
     }
 
+    private static void optInAllMagnificationValuesToSettings(Context context, int shortcutTypes) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optInMagnificationValueToSettings(context, UserShortcutType.SOFTWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optInMagnificationValueToSettings(context, UserShortcutType.HARDWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
+            optInMagnificationValueToSettings(context, UserShortcutType.TRIPLETAP);
+        }
+    }
+
     private static void optInMagnificationValueToSettings(Context context,
             @UserShortcutType int shortcutType) {
         final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
                 targetKey);
 
-        if (TextUtils.isEmpty(targetString)) {
-            return;
-        }
-
         if (hasMagnificationValueInSettings(context, shortcutType)) {
             return;
         }
 
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-
-        joiner.add(Settings.Secure.getString(context.getContentResolver(), targetKey));
+        if (TextUtils.isEmpty(targetString)) {
+            joiner.add(targetString);
+        }
         joiner.add(MAGNIFICATION_CONTROLLER_NAME);
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+    }
+
+    private static void optOutAllMagnificationValuesFromSettings(Context context,
+            int shortcutTypes) {
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            optOutMagnificationValueFromSettings(context, UserShortcutType.SOFTWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            optOutMagnificationValueFromSettings(context, UserShortcutType.HARDWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
+            optOutMagnificationValueFromSettings(context, UserShortcutType.TRIPLETAP);
+        }
     }
 
     private static void optOutMagnificationValueFromSettings(Context context,
@@ -577,6 +574,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
+    }
+
+    private static boolean hasMagnificationValuesInSettings(Context context, int shortcutTypes) {
+        boolean exist = false;
+
+        if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
+            exist = hasMagnificationValueInSettings(context, UserShortcutType.SOFTWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE)) {
+            exist |= hasMagnificationValueInSettings(context, UserShortcutType.HARDWARE);
+        }
+        if (((shortcutTypes & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP)) {
+            exist |= hasMagnificationValueInSettings(context, UserShortcutType.TRIPLETAP);
+        }
+        return exist;
     }
 
     private static boolean hasMagnificationValueInSettings(Context context,

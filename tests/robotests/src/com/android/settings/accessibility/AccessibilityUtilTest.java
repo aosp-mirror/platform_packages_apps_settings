@@ -53,6 +53,8 @@ public final class AccessibilityUtilTest {
             DUMMY_CLASS_NAME2);
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
+    private static final String HARDWARE_SHORTCUT_KEY =
+            Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 
     private Context mContext;
 
@@ -133,7 +135,7 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void hasValueInSettings_dummyComponentName_hasValue() {
+    public void hasValueInSettings_putValue_hasValue() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
 
         assertThat(AccessibilityUtil.hasValueInSettings(mContext, UserShortcutType.SOFTWARE,
@@ -141,7 +143,20 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void optInValueToSettings_optInDummyComponentName2_haveDummyComponentName2String() {
+    public void optInAllValuesToSettings_optInValue_haveMatchString() {
+        int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE;
+
+        AccessibilityUtil.optInAllValuesToSettings(mContext, shortcutTypes, DUMMY_COMPONENT_NAME);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
+                DUMMY_COMPONENT_NAME.flattenToString());
+        assertThat(getStringFromSettings(HARDWARE_SHORTCUT_KEY)).isEqualTo(
+                DUMMY_COMPONENT_NAME.flattenToString());
+
+    }
+
+    @Test
+    public void optInValueToSettings_optInValue_haveMatchString() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
         AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
@@ -152,7 +167,7 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void optInValueToSettings_optInTwoDummyComponentName_haveOneDummyComponentName2String() {
+    public void optInValueToSettings_optInTwoValues_haveMatchString() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
         AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
@@ -165,7 +180,21 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void optOutValueFromSettings_optOutDummyComponentName_emptyValue() {
+    public void optOutAllValuesToSettings_optOutValue_emptyString() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        putStringIntoSettings(HARDWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        int shortcutTypes =
+                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP;
+
+        AccessibilityUtil.optOutAllValuesFromSettings(mContext, shortcutTypes,
+                DUMMY_COMPONENT_NAME);
+
+        assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEmpty();
+        assertThat(getStringFromSettings(HARDWARE_SHORTCUT_KEY)).isEmpty();
+    }
+
+    @Test
+    public void optOutValueFromSettings_optOutValue_emptyString() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
         AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME);
@@ -174,7 +203,7 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void optOutValueFromSettings_optOutDummyComponentName2_haveDummyComponentName() {
+    public void optOutValueFromSettings_optOutValue_haveMatchString() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString() + ":"
                 + DUMMY_COMPONENT_NAME2.flattenToString());
         AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
