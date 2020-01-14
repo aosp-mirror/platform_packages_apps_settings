@@ -53,7 +53,10 @@ public class ShortcutPreference extends Preference {
     }
     private OnClickListener mListener = null;
 
+    private static final float DISABLED_ALPHA = 0.5f;
+    private static final float ENABLED_ALPHA = 1.0f;
     private int mSettingsVisibility = View.VISIBLE;
+    private boolean mAutoEnabledSettings;
     private boolean mChecked = false;
 
     ShortcutPreference(Context context, AttributeSet attrs) {
@@ -65,24 +68,41 @@ public class ShortcutPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final CheckBox checkBox = holder.itemView.findViewById(R.id.checkbox);
         final LinearLayout mainFrame = holder.itemView.findViewById(R.id.main_frame);
-        if (mainFrame != null && checkBox != null) {
+        if (mainFrame != null) {
             mainFrame.setOnClickListener(view -> callOnCheckboxClicked());
+        }
+
+        final CheckBox checkBox = holder.itemView.findViewById(R.id.checkbox);
+        if (checkBox != null) {
             checkBox.setChecked(mChecked);
         }
 
+
         final View settings = holder.itemView.findViewById(android.R.id.widget_frame);
-        final View divider = holder.itemView.findViewById(R.id.divider);
-        if (settings != null && divider != null) {
+        if (settings != null) {
             settings.setOnClickListener(view -> callOnSettingsClicked());
+            settings.setEnabled(mAutoEnabledSettings ? mChecked : /* enabled */ true);
+
+            float alpha;
+            if (mAutoEnabledSettings) {
+                alpha = mChecked ? ENABLED_ALPHA : DISABLED_ALPHA;
+            } else {
+                alpha = ENABLED_ALPHA;
+            }
+
+            settings.setAlpha(alpha);
             settings.setVisibility(mSettingsVisibility);
+        }
+
+        final View divider = holder.itemView.findViewById(R.id.divider);
+        if (divider != null) {
             divider.setVisibility(mSettingsVisibility);
         }
     }
 
     /**
-     * Set the shortcut checkbox according to checked value.
+     * Sets the shortcut checkbox according to checked value.
      *
      * @param checked the state value of shortcut checkbox
      */
@@ -94,7 +114,7 @@ public class ShortcutPreference extends Preference {
     }
 
     /**
-     * Get the checked value of shortcut checkbox.
+     * Gets the checked value of shortcut checkbox.
      *
      * @return the checked value of shortcut checkbox
      */
@@ -102,7 +122,22 @@ public class ShortcutPreference extends Preference {
         return mChecked;
     }
 
-
+    /**
+     * Automatically/Manually enable settings according to checkbox click status.
+     *
+     * Automatically enable settings means settings view enabled when checkbox is clicked, and
+     * disabled when checkbox is not clicked.
+     * Manually enable settings means settings view always enabled.
+     *
+     * @param autoEnabled True will automatically enable settings, false will let settings view
+     *                    always enabled.
+     */
+    public void setAutoEnabledSettings(boolean autoEnabled) {
+        if (mAutoEnabledSettings != autoEnabled) {
+            mAutoEnabledSettings = autoEnabled;
+            notifyChanged();
+        }
+    }
 
     /**
      * Sets the visibility state of Settings view.
@@ -129,6 +164,7 @@ public class ShortcutPreference extends Preference {
         setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
         setWidgetLayoutResource(R.layout.preference_widget_settings);
         setIconSpaceReserved(false);
+        mAutoEnabledSettings = true;
     }
 
     private void callOnSettingsClicked() {
