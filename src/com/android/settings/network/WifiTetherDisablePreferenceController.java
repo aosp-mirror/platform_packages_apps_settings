@@ -49,8 +49,11 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
 
     private static final String TAG = "WifiTetherDisablePreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    @VisibleForTesting
-    static final String PREF_KEY = "enable_wifi_tethering";
+    public static final String PREF_KEY = "disable_wifi_tethering";
+
+    // This KEY is used for a shared preference value, not for any displayed preferences.
+    public static final String KEY_ENABLE_WIFI_TETHERING = "enable_wifi_tethering";
+
     private final ConnectivityManager mCm;
     private boolean mBluetoothTetherEnabled;
     private boolean mUSBTetherEnabled;
@@ -111,7 +114,7 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
         mPreference = screen.findPreference(PREF_KEY);
         if (mPreference != null && mPreference instanceof SwitchPreference) {
             ((SwitchPreference) mPreference)
-                    .setChecked(!mSharedPreferences.getBoolean(PREF_KEY, true));
+                    .setChecked(!mSharedPreferences.getBoolean(KEY_ENABLE_WIFI_TETHERING, true));
             mPreference.setOnPreferenceChangeListener(this);
         }
         updateState(mPreference);
@@ -155,11 +158,11 @@ public final class WifiTetherDisablePreferenceController extends AbstractPrefere
     public boolean onPreferenceChange(Preference preference, Object o) {
         // The shared preference's value is in the opposite of this preference's value.
         final boolean enableWifi = !(boolean) o;
-        if (true) {
+        if (DEBUG) {
             Log.d(TAG, "check state changing to " + o);
         }
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(PREF_KEY, enableWifi);
+        editor.putBoolean(KEY_ENABLE_WIFI_TETHERING, enableWifi);
         editor.apply();
         return true;
     }

@@ -61,7 +61,8 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
     public static final String SHARED_PREF = "tether_options";
 
     @VisibleForTesting
-    static final String WIFI_TETHER_KEY = WifiTetherDisablePreferenceController.PREF_KEY;
+    static final String WIFI_TETHER_KEY =
+            WifiTetherDisablePreferenceController.KEY_ENABLE_WIFI_TETHERING;
     @VisibleForTesting
     static final String USB_TETHER_KEY = UsbTetherPreferenceController.PREF_KEY;
     @VisibleForTesting
