@@ -565,7 +565,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mDialog.dismiss();
     }
 
-    private void onDialogButtonFromShortcutClicked(View view) {
+    void onDialogButtonFromShortcutClicked(View view) {
         if (view.getId() == R.id.permission_enable_allow_button) {
             onAllowButtonFromShortcutClicked();
         } else if (view.getId() == R.id.permission_enable_deny_button) {
