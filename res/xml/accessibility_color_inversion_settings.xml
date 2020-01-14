@@ -32,11 +32,17 @@
         settings:allowDividerBelow="true"
         settings:searchable="false" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="color_inversion_footer"
-        android:persistent="false"
-        android:selectable="false"
-        android:title="@string/accessibility_display_inversion_preference_subtitle"
-        settings:allowDividerAbove="true"
-        settings:searchable="false" />
+    <PreferenceCategory
+        android:key="color_inversion_footer_category">
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="color_inversion_footer"
+            android:persistent="false"
+            android:selectable="false"
+            settings:allowDividerAbove="false"
+            android:title="@string/accessibility_display_inversion_preference_subtitle"
+            settings:searchable="false" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
