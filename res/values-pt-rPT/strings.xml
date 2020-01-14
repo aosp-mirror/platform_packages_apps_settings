@@ -313,7 +313,7 @@
     <string name="security_settings_summary" msgid="1627059516127354233">"Definir A minha localização, desbloqueio do ecrã, bloqueio do cartão SIM, bloqueio do armazenamento de credenciais"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Definir O meu local, desbloqueio do ecrã, bloqueio do armazenamento de credenciais"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privacidade"</string>
-    <string name="disabled_by_administrator_summary" msgid="4181894719300350343">"Desativada pelo gestor"</string>
+    <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Não disponível."</string>
     <string name="security_status_title" msgid="6958004275337618656">"Estado de segurança"</string>
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Bloqueio de ecrã, Desbloqueio Através do Rosto"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Bloqueio de ecrã, impressão digital"</string>
@@ -371,7 +371,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Ao utilizar Desbl. Através Rosto em apl., solicitar sempre confirmação"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Elim. dados faciais"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configure o Desbloqueio através do rosto"</string>
-    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Utilize o Desbloqueio Através do Rosto para desbloquear o dispositivo, iniciar sessão em aplicações e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto com os olhos abertos.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
+    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Utilize o Desbloqueio através do rosto para desbloquear o dispositivo, iniciar sessão em apps e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Utilize o Desbloqueio através do rosto para desbloquear o dispositivo, iniciar sessão em aplicações e confirmar pagamentos.\n\nTenha em atenção:\nPode desbloquear o telemóvel involuntariamente ao olhar para o mesmo.\n\nAlguém pode desbloquear o telemóvel se o segurar junto ao seu rosto, mesmo com os olhos fechados.\n\nAlguém muito parecido consigo, como um irmão com traços semelhantes, pode desbloquear o telemóvel."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Eliminar os dados do rosto?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Os dados do rosto utilizados pelo Desbloqueio através do rosto serão eliminados permanentemente e em segurança. Após a remoção, precisará do PIN, do padrão ou da palavra-passe para desbloquear o telemóvel, iniciar sessão nas aplicações e confirmar pagamentos."</string>
@@ -877,7 +877,6 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identidade"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Identidade anónima"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Palavra-passe"</string>
-    <string name="wifi_sae_password_id" msgid="129826381089135796">"Identificador palavra-passe SAE"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Mostrar palavra-passe"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Selecionar banda do PA"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Automático"</string>
@@ -918,9 +917,11 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"A partilhar o Wi‑Fi com este dispositivo…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"A ligar…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Partilhar zona Wi-Fi"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Confirme a sua identidade"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Valide a sua identidade"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Palavra-passe de Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Palavra-passe da zona Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ligação automática"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permita a ligação a esta rede quando estiver ao alcance."</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Adicionar dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilize um código QR para adicionar um dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O código QR não é um formato válido."</string>
@@ -1226,7 +1227,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Ativado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nunca se desativa automaticamente"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Desativa-se automaticamente ao nascer do sol"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"O tema escuro utiliza o preto real para ajudar a prolongar a duração da bateria. Os horários do tema escuro só são ativados quando o ecrã está desligado."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"O tema escuro utiliza um fundo preto para ajudar a prolongar a duração da bateria em alguns ecrãs. Os horários do tema escuro só são ativados quando o ecrã está desligado."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Limite de tempo do ecrã"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"O ecrã desliga-se"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Depois de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inatividade"</string>
@@ -1714,8 +1715,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Defina PIN para usar impressão digital"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Por motivos de segurança, defina um padrão."</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Reintroduzir a palavra-passe"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Introduza a palavra-passe de trabalho"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmar o padrão"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Introduza o padrão de trabalho"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Reintroduza o PIN"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Introduza o PIN de trabalho"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"As palavras-passe não correspondem"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Os PINs não correspondem"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Desenhe o padrão novamente"</string>
@@ -2051,7 +2055,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Leitor de ecrã principalmente para pessoas invisuais ou com visão reduzida"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toque nos itens no ecrã para que sejam lidos em voz alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferências de legendas"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliação"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Ampliar"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Área de ampliação"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Escolha a(s) área(s) de ampliação que pretende utilizar ao ampliar o ecrã."</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ecrã inteiro"</string>
@@ -2061,10 +2065,12 @@
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Ampliar parte do ecrã"</string>
     <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Mostrar controlador de movimento"</string>
     <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Mostrar um controlador tipo joystick para mover a área de ampliação"</string>
-    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Definições de ampliação"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Definições de ampliação"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Ampliar com três toques"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Amplie com um atalho"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplie com um atalho e três toques"</string>
+    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Acerca da Ampliação"</string>
+    <string name="accessibility_screen_option" msgid="8465307075278878145">"Opções"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Aumentar zoom no ecrã"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tocar três vezes para aumentar/diminuir o zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tocar num botão para utilizar o zoom"</string>
@@ -2078,7 +2084,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"Para ativar ou desativar este serviço, deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre serviços, deslize rapidamente com três dedos para cima sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Para ativar ou desativar um serviço de acessibilidade, deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre serviços, deslize rapidamente com dois dedos para cima sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Para ativar ou desativar um serviço de acessibilidade, deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre serviços, deslize rapidamente com três dedos para cima sem soltar."</string>
-    <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Compreendi"</string>
+    <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Utilize o atalho para abrir"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Utilize o atalho para ampliar"</string>
     <string name="accessibility_shortcut_edit_dialog_title" msgid="4922086411442295974">"Atalho para abrir <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
@@ -2999,7 +3005,7 @@
     <string name="nfc_payment_pay_with" msgid="10107565447713526">"Num terminal Tocar e pagar, pagar com:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Pagar num terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configure uma aplicação de pagamento. Em seguida, basta aproximar a parte de trás do telemóvel a um terminal com o símbolo de pagamento sem contacto."</string>
-    <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Compreendi"</string>
+    <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Mais..."</string>
     <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"Definir como preferência?"</string>
     <string name="nfc_payment_set_default" msgid="499518459418302061">"Pretende utilizar sempre <xliff:g id="APP">%1$s</xliff:g> com a funcionalidade Tocar e pagar?"</string>
@@ -3084,6 +3090,7 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"Selecionar cartão SIM"</string>
     <string name="color_orange" msgid="216547825489739010">"Cor de laranja"</string>
     <string name="color_purple" msgid="6603701972079904843">"Roxo"</string>
+    <string name="color_pink" msgid="8596872110888626708">"Rosa"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Nenhum cartão SIM inserido"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Estado do SIM"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"Estado do SIM (ranhura para SIM %1$d)"</string>
@@ -3246,6 +3253,8 @@
       <item quantity="one">1 ativado.</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não incomodar"</string>
+    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limite as interrupções"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Ativar o modo Não incomodar"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Exceções"</string>
@@ -3272,7 +3281,8 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear perturbações visuais"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir sinais visuais"</string>
-    <string name="zen_mode_settings_category" msgid="3531156898689133018">"Quando o modo Não incomodar está ativado"</string>
+    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Restringir notificações"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Sem som de notificações"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vê as notificações no ecrã."</string>
@@ -3333,10 +3343,18 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horários podem ser ativados automaticamente</item>
       <item quantity="one">1 horário pode ser ativado automaticamente</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="4456460102057665854">"Desativar som do dispositivo, mas permitir exceções"</string>
-    <string name="zen_category_exceptions" msgid="6329803391764042865">"Exceções"</string>
-    <string name="zen_category_schedule" msgid="6117378495178187519">"Horário"</string>
-    <string name="zen_sound_title" msgid="7345256674791165630">"Ver todas as exceções"</string>
+    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
+    <skip />
+    <!-- no translation found for zen_category_people (8252926021894933047) -->
+    <skip />
+    <!-- no translation found for zen_category_apps (1167374545618451925) -->
+    <skip />
+    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
+    <skip />
+    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
+    <skip />
+    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
+    <skip />
     <string name="zen_sound_footer" msgid="4090291351903631977">"Quando o modo Não incomodar está ativo, o som e a vibração são desativados, exceto para os itens que permitir acima."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Desativar tudo exceto"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Desativados"</string>
@@ -3346,7 +3364,7 @@
     <string name="zen_sound_three_allowed" msgid="3770279281597307824">"Desativado, mas permitir <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> e <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g>."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Definições personalizadas"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Rever horário"</string>
-    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Compreendi"</string>
+    <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"OK"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Notificações"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Duração"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Mensagens, eventos e lembretes"</string>
@@ -3596,6 +3614,8 @@
       <item quantity="other">Mais <xliff:g id="NUM_PEOPLE">%d</xliff:g> pessoas</item>
       <item quantity="one">Mais 1 pessoa</item>
     </plurals>
+    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
+    <skip />
     <string name="zen_mode_messages" msgid="7835537207069585861">"Permitir mensagens"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Para se certificar de que as mensagens permitidas emitem som, verifique se o dispositivo está definido para tocar, para vibrar ou para o modo silencioso."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Para \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\", as mensagens recebidas estão bloqueadas. Pode ajustar as definições para permitir que os seus amigos, família ou outras pessoas o contactem."</string>
@@ -3609,15 +3629,26 @@
     <string name="zen_mode_from_none" msgid="8456745188276131873">"Nenhuma"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Não permitir quaisquer chamadas"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Não permitir quaisquer mensagens"</string>
-    <string name="zen_mode_alarms" msgid="1111047002365378012">"Permitir alarmes"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmes"</string>
+    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
+    <skip />
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmes"</string>
-    <string name="zen_mode_media" msgid="3470940840136036522">"Reproduzir sons multimédia"</string>
+    <!-- no translation found for zen_mode_media (885017672250984735) -->
+    <skip />
+    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
+    <skip />
     <string name="zen_mode_media_list" msgid="2006413476596092020">"multimédia"</string>
-    <string name="zen_mode_system" msgid="4996563074066075171">"Permitir sons de toque"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"Sons de toque"</string>
+    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
+    <skip />
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sons de toque"</string>
-    <string name="zen_mode_reminders" msgid="1957379696610030851">"Permitir lembretes"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"Lembretes"</string>
+    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
+    <skip />
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"lembretes"</string>
-    <string name="zen_mode_events" msgid="5695716091022098055">"Permitir eventos"</string>
+    <string name="zen_mode_events" msgid="7455308377739125312">"Eventos"</string>
+    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que as aplicações substituam"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Exceções de aplicações"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -3913,6 +3944,10 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Sobrepor a outras aplicações"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Permitir sobreposição a outras aplicações"</string>
     <string name="allow_overlay_description" msgid="2266886438777971131">"Permita que esta aplicação se sobreponha a outras aplicações que esteja a utilizar. Pode interferir com a sua utilização dessas aplicações ou alterar a forma como estas aparecem ou se comportam."</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"Acesso a todos os ficheiros"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Permitir acesso para gerir todos os ficheiros"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permita que esta app leia, modifique e elimine todos os ficheiros neste dispositivo ou em qualquer volume de armazenamento ligado. Se a autorização for concedida, a app poderá aceder aos ficheiros sem o seu conhecimento explícito."</string>
+    <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode aceder a todos os ficheiros"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidade virtual serviço de escuta estéreo serviço assistente"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Sobrepor a outras aplicações"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicações autorizadas a sobreporem-se a outras aplicações"</string>
@@ -4179,7 +4214,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Ativado/Temporariamente desativado devido à Poupança de bateria"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporariamente ativado devido à Poupança de bateria"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"As aplicações suportadas também mudam para o tema escuro"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Compreendi"</string>
+    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Experimente o tema escuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ajuda a aumentar a autonomia da bateria."</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mosaicos de definições rápidas do programador"</string>

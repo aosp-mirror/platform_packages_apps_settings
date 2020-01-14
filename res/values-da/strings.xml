@@ -313,7 +313,7 @@
     <string name="security_settings_summary" msgid="1627059516127354233">"Angiv Min placering, oplåsning af skærmen, låst SIM-kort og lager for loginoplysninger"</string>
     <string name="cdma_security_settings_summary" msgid="2455517905101186330">"Angiv Min placering, oplåsning af skærmen, lager for loginoplysninger"</string>
     <string name="security_passwords_title" msgid="4154420930973818581">"Privatliv"</string>
-    <string name="disabled_by_administrator_summary" msgid="4181894719300350343">"Deaktiveret af administratoren"</string>
+    <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ikke tilgængelig"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Sikkerhedsstatus"</string>
     <string name="security_dashboard_summary_face" msgid="4198949293847206382">"Skærmlås, Ansigtslås"</string>
     <string name="security_dashboard_summary" msgid="8750183806533140464">"Skærmlås, fingeraftryk"</string>
@@ -371,7 +371,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Kræv altid et bekræftelsestrin ved brug af ansigtslås i apps"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Slet ansigtsdata"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Konfigurer ansigtslås"</string>
-    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Brug ansigtslås til at låse din enhed op, logge ind på apps og bekræfte betalinger.\n\nBemærk!\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, mens dine øjne er åbne.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvilling."</string>
+    <!-- no translation found for security_settings_face_settings_footer (5545455769328594736) -->
+    <skip />
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Brug ansigtslås til at låse din enhed op, logge ind på apps og bekræfte betalinger.\n\nBemærk!\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en tvilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Vil du slette ansigtsdata?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"De ansigtsdata, der anvendes af ansigtslåsen, slettes perment og forsvarligt. Efter fjernelsen skal du bruge din pinkode, dit mønster eller din adgangskode til at låse telefonen op, logge ind i apps og bekræfte betalinger."</string>
@@ -877,7 +878,6 @@
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identitet"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Anonym identitet"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Adgangskode"</string>
-    <string name="wifi_sae_password_id" msgid="129826381089135796">"Adgangskode-id til SAE"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Vis adgangskode"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Vælg AP-bånd"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Automatisk"</string>
@@ -918,9 +918,11 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Deler Wi-Fi med denne enhed…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Opretter forbindelse…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Del hotspot"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="5246641326066972419">"Bekræft, at det er dig"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Bekræft, at det er dig"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Adgangskode til Wi-Fi-netværk: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Adgangskode til hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Opret automatisk forbindelse"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Tillad forbindelse til dette netværk, når det er inden for rækkevidde"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Tilføj enhed"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Brug en QR-kode til at føje en enhed til dette netværk"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-koden har ikke et gyldigt format"</string>
@@ -1226,7 +1228,7 @@
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Til/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Deaktiveres aldrig automatisk"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Deaktiveres automatisk ved solopgang"</string>
-    <string name="dark_ui_text" msgid="3691323174656626778">"Mørkt tema bruger ægte sort for at spare på batteriet. Tidsplaner for Mørkt tema aktiveres først, når din skærm er slukket."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Mørkt tema bruger en sort baggrund på nogle skærme for at spare på batteriet. Tidsplaner for Mørkt tema aktiveres først, når din skærm er slukket."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout for skærmen"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Skærmen slukker"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
@@ -1714,8 +1716,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Angiv pinkode for at bruge fingeraftryk"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Angiv et mønster af hensyn til sikkerheden"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Angiv din adgangskode igen"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Angiv adgangskoden til din arbejdsprofil"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Bekræft dit mønster"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Angiv mønsteret til din arbejdsprofil"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Angiv din pinkode igen"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Angiv pinkoden til din arbejdsprofil"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Adgangskoderne matcher ikke"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Pinkoderne matcher ikke"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Tegn dit mønster igen"</string>
@@ -2051,7 +2056,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Skærmlæseren er primært til blinde og svagtseende brugere"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tryk på elementer på din skærm for at få dem læst op"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Præferencer for undertekster"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørrelse"</string>
+    <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Forstør"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Forstørrelsesområde"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Vælg de områder, du vil bruge, når du forstørrer skærmen"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Fuld skærm"</string>
@@ -2061,10 +2066,12 @@
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Forstør en del af skærmen"</string>
     <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Vis controller til flytning"</string>
     <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Vis en joystick-lignende controller til flytning af forstørrelsesområdet"</string>
-    <string name="accessibility_magnification_service_settings_title" msgid="7357466386783992094">"Indstillinger for forstørrelse"</string>
+    <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Forstørrelsesindstillinger"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Tryk tre gange for at forstørre"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Brug en genvej til forstørrelse"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Brug en genvej til forstørrelse med tre tryk"</string>
+    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Om Forstør"</string>
+    <string name="accessibility_screen_option" msgid="8465307075278878145">"Valgmuligheder"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom ind på skærmen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tryk tre gange for at zoome ind"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryk på en knap for at zoome"</string>
@@ -2390,7 +2397,7 @@
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Blev begrænset <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Disse apps har brugt batteri i baggrunden. Begrænsede apps fungerer muligvis ikke korrekt, og notifikationer kan være forsinkede."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Brug batteriadministration"</string>
-    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Registrer, nå apps dræner batteriet"</string>
+    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Registrer, når apps dræner batteriet"</string>
     <string name="battery_manager_on" msgid="3197525907390349054">"Til – Registrerer, når apps dræner batteriet"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Fra"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
@@ -2474,7 +2481,7 @@
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Denne app har muligvis indstillinger, der kan reducere batteriforbruget"</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"Brugerens batteriforbrug"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Strømforbrug, diverse"</string>
-    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Batteriforbrug er en tilnærmet beregning af strømforbruget og omfatter ikke alle årsager til afladning af batteriet. \"Diverse\" er forskellen mellem den tilnærmede beregning af strømforbruget og det faktiske forbrug, der er registreret for batteriet."</string>
+    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Batteriforbrug er en tilnærmet beregning af strømforbruget og omfatter ikke alle årsager til, at batteriet drænes. \"Diverse\" er forskellen mellem den tilnærmede beregning af strømforbruget og det faktiske forbrug, der er registreret for batteriet."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Overvurderet strømforbrug"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Har været aktiv i <xliff:g id="TIME">^1</xliff:g>"</string>
@@ -3084,6 +3091,7 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"Vælg SIM-kort"</string>
     <string name="color_orange" msgid="216547825489739010">"Orange"</string>
     <string name="color_purple" msgid="6603701972079904843">"Lilla"</string>
+    <string name="color_pink" msgid="8596872110888626708">"Lyserød"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Der er ikke isat et SIM-kort"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM-status"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM-status (SIM-kortrille %1$d)"</string>
@@ -3246,6 +3254,8 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> er aktiveret</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
+    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
+    <skip />
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begræns antallet af afbrydelser"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivér Forstyr ikke"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Undtagelser"</string>
@@ -3272,7 +3282,8 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloker visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillad visuelle signaler"</string>
-    <string name="zen_mode_settings_category" msgid="3531156898689133018">"Når Forstyr ikke er aktiveret"</string>
+    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Begræns notifikationer"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra notifikationer"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Notifikationer vises på skærmen"</string>
@@ -3333,10 +3344,18 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplan kan starte automatisk</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> tidsplaner kan starte automatisk</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="4456460102057665854">"Sæt enheden på lydløs, men tillad undtagelser"</string>
-    <string name="zen_category_exceptions" msgid="6329803391764042865">"Undtagelser"</string>
-    <string name="zen_category_schedule" msgid="6117378495178187519">"Tidsplan"</string>
-    <string name="zen_sound_title" msgid="7345256674791165630">"Se alle undtagelser"</string>
+    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
+    <skip />
+    <!-- no translation found for zen_category_people (8252926021894933047) -->
+    <skip />
+    <!-- no translation found for zen_category_apps (1167374545618451925) -->
+    <skip />
+    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
+    <skip />
+    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
+    <skip />
+    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
+    <skip />
     <string name="zen_sound_footer" msgid="4090291351903631977">"Når Forstyr ikke er aktiveret, er der kun lyd eller vibration ved de elementer, du tillader ovenfor."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Slå lyden fra for alle med undtagelse af"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Lyden er slået fra"</string>
@@ -3596,6 +3615,8 @@
       <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> anden</item>
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> andre</item>
     </plurals>
+    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
+    <skip />
     <string name="zen_mode_messages" msgid="7835537207069585861">"Tillad beskeder"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Hvis du vil være sikker på, at tilladte beskeder kan høres, kan du tjekke, om din enhed er indstillet til at ringe eller vibrere, eller om lyden er slået fra."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Indgående beskeder er blokeret for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
@@ -3609,15 +3630,26 @@
     <string name="zen_mode_from_none" msgid="8456745188276131873">"Ingen"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Tillad ingen opkald"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Tillad ingen beskeder"</string>
-    <string name="zen_mode_alarms" msgid="1111047002365378012">"Tillad alarmer"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmer"</string>
+    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
+    <skip />
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmer"</string>
-    <string name="zen_mode_media" msgid="3470940840136036522">"Afspil medielyde"</string>
+    <!-- no translation found for zen_mode_media (885017672250984735) -->
+    <skip />
+    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
+    <skip />
     <string name="zen_mode_media_list" msgid="2006413476596092020">"medier"</string>
-    <string name="zen_mode_system" msgid="4996563074066075171">"Tillad lyd ved berøring"</string>
+    <string name="zen_mode_system" msgid="7301665021634204942">"Lyd ved berøring"</string>
+    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
+    <skip />
     <string name="zen_mode_system_list" msgid="2256218792042306434">"lyd ved berøring"</string>
-    <string name="zen_mode_reminders" msgid="1957379696610030851">"Tillad påmindelser"</string>
+    <string name="zen_mode_reminders" msgid="1970224691551417906">"Påmindelser"</string>
+    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
+    <skip />
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"påmindelser"</string>
-    <string name="zen_mode_events" msgid="5695716091022098055">"Tillad begivenheder"</string>
+    <string name="zen_mode_events" msgid="7455308377739125312">"Begivenheder"</string>
+    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tillad, at apps tilsidesætter"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Appundtagelser"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -3818,7 +3850,7 @@
     <string name="high_power_on" msgid="8778058701270819268">"Ikke-optimeret"</string>
     <string name="high_power_off" msgid="317000444619279018">"Optimerer batteriforbruget"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Batterioptimering er ikke tilgængelig"</string>
-    <string name="high_power_desc" msgid="2753076899835765338">"Undlad at anvende batterioptimering. Batteriet aflades muligvis hurtigere."</string>
+    <string name="high_power_desc" msgid="2753076899835765338">"Undlad at anvende batterioptimering. Dette kan dræne batteriet hurtigere."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Vil du give appen tilladelse til altid at køre i baggrunden?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Hvis du giver <xliff:g id="APP_NAME">%1$s</xliff:g> tilladelse til altid at køre i baggrunden, kan det reducere batteritiden. \n\nDu kan ændre dette senere under Indstillinger &gt; Apps og notifikationer."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> brugt siden sidste fulde opladning"</string>
@@ -3901,7 +3933,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Forstyr ikke-regler, der er oprettet af denne app, fjernes."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Undlad at optimere"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimer"</string>
-    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Kan medføre, at batteriet aflades hurtigere. Appen forhindres ikke længere i at bruge batteri i baggrunden."</string>
+    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Dette kan dræne batteriet hurtigere. Appen forhindres ikke længere i at bruge batteri i baggrunden."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Anbefales for længere batteritid"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Vil du tillade, at <xliff:g id="APP">%s</xliff:g> ignorerer batterioptimeringer?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Ingen"</string>
@@ -3913,6 +3945,10 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Vis oven på andre apps"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Tillad visning over andre apps"</string>
     <string name="allow_overlay_description" msgid="2266886438777971131">"Tillad, at denne app vises oven på andre apps, du bruger. Dette kan forstyrre din brug af disse apps eller ændre deres udseende eller adfærd."</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"Adgang til alle filer"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Tillad administrationsadgang til alle filer"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Giv denne app tilladelse til at læse, ændre og slette alle filer på denne enhed eller andre tilsluttede lagringsløsninger. Hvis du giver tilladelse til dette, kan appen få adgang til dine filer, uden du specifikt bliver gjort opmærksom på det."</string>
+    <string name="filter_manage_external_storage" msgid="6751640571715343804">"Kan få adgang til alle filer"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr virtual reality lyttefunktion stereo hjælpetjeneste"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Vis oven på andre apps"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> af <xliff:g id="COUNT_1">%2$d</xliff:g> apps må vises oven på andre apps"</string>
