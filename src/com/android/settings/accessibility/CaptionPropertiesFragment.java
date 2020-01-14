@@ -70,16 +70,6 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         installUpdateListeners();
     }
 
-    private void setPreferenceViewEnabled(boolean enabled) {
-        for (Preference preference : mPreferenceList) {
-            preference.setEnabled(enabled);
-        }
-    }
-
-    private void refreshPreferenceViewEnabled(boolean enabled) {
-        setPreferenceViewEnabled(enabled);
-    }
-
     private void initializeAllPreferences() {
         mSwitch = (SwitchPreference) findPreference(PREF_SWITCH);
         mTextAppearance = (Preference) findPreference(PREF_TEXT);
@@ -87,8 +77,6 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
         mPreferenceList.add(mTextAppearance);
         mPreferenceList.add(mMoreOptions);
-
-        refreshPreferenceViewEnabled(mCaptioningManager.isEnabled());
     }
 
     private void installUpdateListeners() {
@@ -105,7 +93,6 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         if (mSwitch == preference) {
             Settings.Secure.putInt(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, (boolean) value ? 1 : 0);
-            refreshPreferenceViewEnabled((boolean) value);
         }
 
         return true;

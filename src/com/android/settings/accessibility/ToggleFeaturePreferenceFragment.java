@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,6 +39,7 @@ import com.android.settings.widget.ToggleSwitch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 
@@ -226,5 +228,50 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mImageGetterCacheView.setImageURI(null);
         mImageGetterCacheView.setImageDrawable(null);
         return drawable;
+    }
+
+    static final class AccessibilityUserShortcutType {
+        private static final char COMPONENT_NAME_SEPARATOR = ':';
+        private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
+                new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
+
+        private String mComponentName;
+        private int mUserShortcutType;
+
+        AccessibilityUserShortcutType(String componentName, int userShortcutType) {
+            this.mComponentName = componentName;
+            this.mUserShortcutType = userShortcutType;
+        }
+
+        AccessibilityUserShortcutType(String flattenedString) {
+            sStringColonSplitter.setString(flattenedString);
+            if (sStringColonSplitter.hasNext()) {
+                this.mComponentName = sStringColonSplitter.next();
+                this.mUserShortcutType = Integer.parseInt(sStringColonSplitter.next());
+            }
+        }
+
+        String getComponentName() {
+            return mComponentName;
+        }
+
+        void setComponentName(String componentName) {
+            this.mComponentName = componentName;
+        }
+
+        int getUserShortcutType() {
+            return mUserShortcutType;
+        }
+
+        void setUserShortcutType(int userShortcutType) {
+            this.mUserShortcutType = userShortcutType;
+        }
+
+        String flattenToString() {
+            final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+            joiner.add(mComponentName);
+            joiner.add(String.valueOf(mUserShortcutType));
+            return joiner.toString();
+        }
     }
 }

@@ -67,7 +67,7 @@ final class AccessibilityUtil {
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
     /**
-     * Annotation for different shortcut type UI type.
+     * Annotation for different user shortcut type UI type.
      *
      * {@code DEFAULT} for displaying default value.
      * {@code SOFTWARE} for displaying specifying the accessibility services or features which
@@ -79,14 +79,14 @@ final class AccessibilityUtil {
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            PreferredShortcutType.DEFAULT,
-            PreferredShortcutType.SOFTWARE,
-            PreferredShortcutType.HARDWARE,
-            PreferredShortcutType.TRIPLETAP,
+            UserShortcutType.DEFAULT,
+            UserShortcutType.SOFTWARE,
+            UserShortcutType.HARDWARE,
+            UserShortcutType.TRIPLETAP,
     })
 
-    /** Denotes the shortcut type. */
-    public @interface PreferredShortcutType {
+    /** Denotes the user shortcut type. */
+    public @interface UserShortcutType {
         int DEFAULT = 0;
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
@@ -166,7 +166,7 @@ final class AccessibilityUtil {
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted in Settings.
      */
-    static void optInValueToSettings(Context context, @PreferredShortcutType int shortcutType,
+    static void optInValueToSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final String targetKey = convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
@@ -195,7 +195,7 @@ final class AccessibilityUtil {
      * @param shortcutType The preferred shortcut type user selected.
      * @param componentName The component name that need to be opted out from Settings.
      */
-    static void optOutValueFromSettings(Context context, @PreferredShortcutType int shortcutType,
+    static void optOutValueFromSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
         final String targetKey = convertKeyFromSettings(shortcutType);
@@ -226,7 +226,7 @@ final class AccessibilityUtil {
      * @param componentName The component name that need to be checked existed in Settings.
      * @return {@code true} if componentName existed in Settings.
      */
-    static boolean hasValueInSettings(Context context, @PreferredShortcutType int shortcutType,
+    static boolean hasValueInSettings(Context context, @UserShortcutType int shortcutType,
             @NonNull ComponentName componentName) {
         final String targetKey = convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
@@ -248,22 +248,22 @@ final class AccessibilityUtil {
     }
 
     /**
-     * Converts {@link PreferredShortcutType} to key in Settings.
+     * Converts {@link UserShortcutType} to key in Settings.
      *
      * @param shortcutType The shortcut type.
      * @return Mapping key in Settings.
      */
-    static String convertKeyFromSettings(@PreferredShortcutType int shortcutType) {
+    static String convertKeyFromSettings(@UserShortcutType int shortcutType) {
         switch (shortcutType) {
-            case PreferredShortcutType.SOFTWARE:
+            case UserShortcutType.SOFTWARE:
                 return Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
-            case PreferredShortcutType.HARDWARE:
+            case UserShortcutType.HARDWARE:
                 return Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
-            case PreferredShortcutType.TRIPLETAP:
+            case UserShortcutType.TRIPLETAP:
                 return Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED;
             default:
                 throw new IllegalArgumentException(
-                        "Unsupported preferredShortcutType " + shortcutType);
+                        "Unsupported userShortcutType " + shortcutType);
         }
     }
 }

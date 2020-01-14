@@ -28,7 +28,7 @@ import android.os.Build;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityUtil.PreferredShortcutType;
+import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -136,14 +136,14 @@ public final class AccessibilityUtilTest {
     public void hasValueInSettings_dummyComponentName_hasValue() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
 
-        assertThat(AccessibilityUtil.hasValueInSettings(mContext, PreferredShortcutType.SOFTWARE,
+        assertThat(AccessibilityUtil.hasValueInSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME)).isTrue();
     }
 
     @Test
     public void optInValueToSettings_optInDummyComponentName2_haveDummyComponentName2String() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
-        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
@@ -154,9 +154,9 @@ public final class AccessibilityUtilTest {
     @Test
     public void optInValueToSettings_optInTwoDummyComponentName_haveOneDummyComponentName2String() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
-        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
-        AccessibilityUtil.optInValueToSettings(mContext, PreferredShortcutType.SOFTWARE,
+        AccessibilityUtil.optInValueToSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
@@ -167,7 +167,7 @@ public final class AccessibilityUtilTest {
     @Test
     public void optOutValueFromSettings_optOutDummyComponentName_emptyValue() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
-        AccessibilityUtil.optOutValueFromSettings(mContext, PreferredShortcutType.SOFTWARE,
+        AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEmpty();
@@ -177,7 +177,7 @@ public final class AccessibilityUtilTest {
     public void optOutValueFromSettings_optOutDummyComponentName2_haveDummyComponentName() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString() + ":"
                 + DUMMY_COMPONENT_NAME2.flattenToString());
-        AccessibilityUtil.optOutValueFromSettings(mContext, PreferredShortcutType.SOFTWARE,
+        AccessibilityUtil.optOutValueFromSettings(mContext, UserShortcutType.SOFTWARE,
                 DUMMY_COMPONENT_NAME2);
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(

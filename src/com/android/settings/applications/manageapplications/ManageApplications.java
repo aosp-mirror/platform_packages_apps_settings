@@ -88,10 +88,10 @@ import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateNotificationBridge.NotificationsSentState;
 import com.android.settings.applications.AppStateOverlayBridge;
@@ -101,10 +101,10 @@ import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.UsageAccessDetails;
-import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
+import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
@@ -262,6 +262,7 @@ public class ManageApplications extends InstrumentedFragment
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         final Activity activity = getActivity();
+        mUserManager = activity.getSystemService(UserManager.class);
         mApplicationsState = ApplicationsState.getInstance(activity.getApplication());
 
         Intent intent = activity.getIntent();
@@ -321,7 +322,6 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
-            mUserManager = UserManager.get(getContext());
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
             screenTitle = R.string.app_notifications_title;
@@ -337,7 +337,11 @@ public class ManageApplications extends InstrumentedFragment
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         mIsWorkOnly = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
+        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : UserHandle.myUserId();
+        if (mIsWorkOnly && mWorkUserId == UserHandle.myUserId()) {
+            mWorkUserId = Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
+        }
+
         mExpandSearch = activity.getIntent().getBooleanExtra(EXTRA_EXPAND_SEARCH_VIEW, false);
 
         if (savedInstanceState != null) {
