@@ -30,13 +30,11 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.util.FeatureFlagUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -67,8 +65,6 @@ public class SettingsActivityTest {
 
         mContext = RuntimeEnvironment.application;
         mActivity = spy(new SettingsActivity());
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, false);
-
     }
 
     @Test

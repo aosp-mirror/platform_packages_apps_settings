@@ -29,14 +29,12 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.SparseArray;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
@@ -81,7 +79,6 @@ public class SecondaryUserControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mGroup);
         when(mGroup.getKey()).thenReturn(TARGET_PREFERENCE_GROUP_KEY);
 
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, false);
     }
 
     @Test
@@ -124,7 +121,6 @@ public class SecondaryUserControllerTest {
 
     @Test
     public void getSecondaryUserControllers_notWorkProfile_addSecondaryUserController() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, false);
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
@@ -142,7 +138,6 @@ public class SecondaryUserControllerTest {
 
     @Test
     public void getSecondaryUserControllers_workProfile_addNoSecondaryUserController() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE, true);
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
@@ -155,12 +150,11 @@ public class SecondaryUserControllerTest {
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(
-                0) instanceof SecondaryUserController.NoSecondaryUserController).isTrue();
+        assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
     }
 
     @Test
-    public void profilesOfPrimaryUserAreNotIgnored() {
+    public void profilesOfPrimaryUserAreIgnored() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = mPrimaryUser.id;
@@ -172,9 +166,8 @@ public class SecondaryUserControllerTest {
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
-        assertThat(controllers).hasSize(2);
-        assertThat(controllers.get(0) instanceof UserProfileController).isTrue();
-        assertThat(controllers.get(1) instanceof SecondaryUserController).isFalse();
+        assertThat(controllers).hasSize(1);
+        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
     }
 
     @Test
