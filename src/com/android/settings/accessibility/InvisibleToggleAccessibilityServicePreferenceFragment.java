@@ -45,13 +45,16 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
     /**
      * {@inheritDoc}
      *
-     * Enables accessibility service only when user had allowed permission.
+     * Enables accessibility service only when user had allowed permission. Disables
+     * accessibility service when shortcutPreference is unchecked.
      */
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
         super.onCheckboxClicked(preference);
-        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
-                getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED));
+        boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)
+                && preference.getChecked();
+
+        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, enabled);
     }
 
     /**
