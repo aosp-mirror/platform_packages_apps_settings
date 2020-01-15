@@ -257,6 +257,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         updateAlertDialogCheckState();
         updateAlertDialogEnableState();
 
+        // Window magnification mode doesn't support advancedView.
+        if (isWindowMagnification(getPrefContext())) {
+            advancedView.setVisibility(View.GONE);
+            return;
+        }
         // Shows the triple tap checkbox directly if clicked.
         if (mTripleTapTypeCheckBox.isChecked()) {
             advancedView.setVisibility(View.GONE);
@@ -613,5 +618,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             }
         }
         return false;
+    }
+
+    private boolean isWindowMagnification(Context context) {
+        final int mode = Settings.Secure.getIntForUser(
+                context.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN,
+                context.getContentResolver().getUserId());
+        return mode == Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW;
     }
 }
