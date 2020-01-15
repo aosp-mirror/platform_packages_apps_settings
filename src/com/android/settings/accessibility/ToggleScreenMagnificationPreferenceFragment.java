@@ -46,6 +46,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
@@ -509,7 +510,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         int EDIT_SHORTCUT = 3;
     }
 
-    private static void optInAllMagnificationValuesToSettings(Context context, int shortcutTypes) {
+    @VisibleForTesting
+    static void optInAllMagnificationValuesToSettings(Context context, int shortcutTypes) {
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
             optInMagnificationValueToSettings(context, UserShortcutType.SOFTWARE);
         }
@@ -532,7 +534,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-        if (TextUtils.isEmpty(targetString)) {
+        if (!TextUtils.isEmpty(targetString)) {
             joiner.add(targetString);
         }
         joiner.add(MAGNIFICATION_CONTROLLER_NAME);
@@ -540,7 +542,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
     }
 
-    private static void optOutAllMagnificationValuesFromSettings(Context context,
+    @VisibleForTesting
+    static void optOutAllMagnificationValuesFromSettings(Context context,
             int shortcutTypes) {
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
             optOutMagnificationValueFromSettings(context, UserShortcutType.SOFTWARE);
@@ -576,7 +579,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         Settings.Secure.putString(context.getContentResolver(), targetKey, joiner.toString());
     }
 
-    private static boolean hasMagnificationValuesInSettings(Context context, int shortcutTypes) {
+    @VisibleForTesting
+    static boolean hasMagnificationValuesInSettings(Context context, int shortcutTypes) {
         boolean exist = false;
 
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
