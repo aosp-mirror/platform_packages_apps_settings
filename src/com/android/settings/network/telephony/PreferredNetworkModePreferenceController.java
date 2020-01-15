@@ -26,7 +26,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
@@ -98,9 +97,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
-        final boolean isLteOnCdma =
-                mTelephonyManager.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
-        mIsGlobalCdma = isLteOnCdma
+        mIsGlobalCdma = mTelephonyManager.isGlobalModeEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
     }
 
@@ -127,12 +124,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             case TelephonyManagerConstants.NETWORK_MODE_GSM_UMTS:
                 return R.string.preferred_network_mode_gsm_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_CDMA_EVDO:
-                switch (mTelephonyManager.getLteOnCdmaMode()) {
-                    case PhoneConstants.LTE_ON_CDMA_TRUE:
-                        return R.string.preferred_network_mode_cdma_summary;
-                    default:
-                        return R.string.preferred_network_mode_cdma_evdo_summary;
-                }
+                return mTelephonyManager.isGlobalModeEnabled()
+                        ? R.string.preferred_network_mode_cdma_summary
+                        : R.string.preferred_network_mode_cdma_evdo_summary;
             case TelephonyManagerConstants.NETWORK_MODE_CDMA_NO_EVDO:
                 return R.string.preferred_network_mode_cdma_only_summary;
             case TelephonyManagerConstants.NETWORK_MODE_EVDO_NO_CDMA:
