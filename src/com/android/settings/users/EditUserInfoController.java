@@ -20,10 +20,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -39,7 +37,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.io.File;
@@ -59,9 +56,24 @@ public class EditUserInfoController {
     private UserManager mUserManager;
     private boolean mWaitingForActivityResult = false;
 
+    /**
+     * Callback made when either the username text or photo choice changes.
+     */
     public interface OnContentChangedCallback {
-        public void onPhotoChanged(Drawable photo);
-        public void onLabelChanged(CharSequence label);
+        /** Photo updated. */
+        void onPhotoChanged(UserHandle user, Drawable photo);
+        /** Username updated. */
+        void onLabelChanged(UserHandle user, CharSequence label);
+    }
+
+    /**
+     * Callback made when the dialog finishes.
+     */
+    public interface OnDialogCompleteCallback {
+        /** Dialog closed with positive button. */
+        void onPositive();
+        /** Dialog closed with negative button or cancelled. */
+        void onNegativeOrCancel();
     }
 
     public void clear() {
@@ -111,7 +123,8 @@ public class EditUserInfoController {
 
     public Dialog createDialog(final Fragment fragment, final Drawable currentUserIcon,
             final CharSequence currentUserName,
-            int titleResId, final OnContentChangedCallback callback, UserHandle user) {
+            String title, final OnContentChangedCallback callback, UserHandle user,
+            OnDialogCompleteCallback completeCallback) {
         Activity activity = fragment.getActivity();
         mUser = user;
         if (mUserManager == null) {
@@ -120,10 +133,8 @@ public class EditUserInfoController {
         LayoutInflater inflater = activity.getLayoutInflater();
         View content = inflater.inflate(R.layout.edit_user_info_dialog_content, null);
 
-        UserInfo info = mUserManager.getUserInfo(mUser.getIdentifier());
-
         final EditText userNameView = (EditText) content.findViewById(R.id.user_name);
-        userNameView.setText(info.name);
+        userNameView.setText(currentUserName);
 
         final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
         Drawable drawable = null;
@@ -131,14 +142,11 @@ public class EditUserInfoController {
             drawable = CircleFramedDrawable.getInstance(activity, mSavedPhoto);
         } else {
             drawable = currentUserIcon;
-            if (drawable == null) {
-                drawable = Utils.getUserIcon(activity, mUserManager, info);
-            }
         }
         userPhotoView.setImageDrawable(drawable);
         mEditUserPhotoController = createEditUserPhotoController(fragment, userPhotoView, drawable);
         mEditUserInfoDialog = new AlertDialog.Builder(activity)
-                .setTitle(R.string.profile_info_settings_title)
+                .setTitle(title)
                 .setView(content)
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -149,41 +157,45 @@ public class EditUserInfoController {
                             CharSequence userName = userNameView.getText();
                             if (!TextUtils.isEmpty(userName)) {
                                 if (currentUserName == null
-                                        || !userName.toString().equals(currentUserName.toString())) {
+                                        || !userName.toString().equals(
+                                                currentUserName.toString())) {
                                     if (callback != null) {
-                                        callback.onLabelChanged(userName.toString());
+                                        callback.onLabelChanged(mUser, userName.toString());
                                     }
-                                    mUserManager.setUserName(mUser.getIdentifier(),
-                                            userName.toString());
                                 }
                             }
                             // Update the photo if changed.
                             Drawable drawable = mEditUserPhotoController.getNewUserPhotoDrawable();
-                            Bitmap bitmap = mEditUserPhotoController.getNewUserPhotoBitmap();
-                            if (drawable != null && bitmap != null
-                                    && !drawable.equals(currentUserIcon)) {
+                            if (drawable != null && !drawable.equals(currentUserIcon)) {
                                 if (callback != null) {
-                                    callback.onPhotoChanged(drawable);
+                                        callback.onPhotoChanged(mUser, drawable);
                                 }
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void... params) {
-                                        mUserManager.setUserIcon(mUser.getIdentifier(),
-                                                mEditUserPhotoController.getNewUserPhotoBitmap());
-                                        return null;
-                                    }
-                                }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
                             }
                             fragment.getActivity().removeDialog(
                                     RestrictedProfileSettings.DIALOG_ID_EDIT_USER_INFO);
                         }
                         clear();
+                        if (completeCallback != null) {
+                            completeCallback.onPositive();
+                        }
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         clear();
+                        if (completeCallback != null) {
+                            completeCallback.onNegativeOrCancel();
+                        }
+                    }
+                })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        clear();
+                        if (completeCallback != null) {
+                            completeCallback.onNegativeOrCancel();
+                        }
                     }
                 })
                 .create();
