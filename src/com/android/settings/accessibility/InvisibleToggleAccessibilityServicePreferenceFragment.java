@@ -18,9 +18,12 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.os.Bundle;
+import android.view.View;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.accessibility.AccessibilityUtils;
 
 /**
  * For accessibility services that target SDK > Q, and
@@ -28,7 +31,7 @@ import com.android.settings.widget.SwitchBar;
  * is set.
  */
 public class InvisibleToggleAccessibilityServicePreferenceFragment extends
-        ToggleAccessibilityServicePreferenceFragment {
+        ToggleAccessibilityServicePreferenceFragment implements ShortcutPreference.OnClickListener{
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -37,5 +40,31 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar mSwitchBar = activity.getSwitchBar();
         mSwitchBar.hide();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Enables accessibility service only when user had allowed permission.
+     */
+    @Override
+    public void onCheckboxClicked(ShortcutPreference preference) {
+        super.onCheckboxClicked(preference);
+        AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
+                getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Enables accessibility service when user clicks permission allow button.
+     */
+    @Override
+    void onDialogButtonFromShortcutClicked(View view) {
+        super.onDialogButtonFromShortcutClicked(view);
+        if (view.getId() == R.id.permission_enable_allow_button) {
+            AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
+                    true);
+        }
     }
 }

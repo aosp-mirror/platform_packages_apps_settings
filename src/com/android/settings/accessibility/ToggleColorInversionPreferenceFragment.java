@@ -273,6 +273,12 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         updateUserShortcutType(/* saveChanges= */ true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+        if (mShortcutPreference.getChecked()) {
+            AccessibilityUtil.optInAllValuesToSettings(getContext(), mUserShortcutType,
+                    getComponentName());
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
+                    getComponentName());
+        }
     }
 
     @Override
@@ -315,11 +321,9 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                 getShortcutPreferenceKey());
 
         if (shortcutPreference != null) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
+            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
             shortcutPreference.setChecked(
-                    AccessibilityUtil.hasValueInSettings(getContext(),
-                            UserShortcutType.SOFTWARE,
+                    AccessibilityUtil.hasValuesInSettings(getContext(), shortcutTypes,
                             getComponentName()));
         }
     }
@@ -334,15 +338,12 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
+        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            AccessibilityUtil.optInValueToSettings(getContext(), UserShortcutType.SOFTWARE,
+            AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes,
                     getComponentName());
         } else {
-            // TODO(b/142531156): Replace UserShortcutType.SOFTWARE value with dialog shortcut
-            //  preferred key.
-            AccessibilityUtil.optOutValueFromSettings(getContext(), UserShortcutType.SOFTWARE,
+            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
                     getComponentName());
         }
     }

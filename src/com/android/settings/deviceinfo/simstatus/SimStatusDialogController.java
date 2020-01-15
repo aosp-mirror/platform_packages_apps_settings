@@ -43,7 +43,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
@@ -93,6 +92,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     final static int IMS_REGISTRATION_STATE_LABEL_ID = R.id.ims_reg_state_label;
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
+
+    @VisibleForTesting
+    static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
 
     private final static String CB_AREA_INFO_RECEIVED_ACTION =
             "com.android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
@@ -411,7 +413,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         boolean shouldHaveEid = false;
         String eid = null;
 
-        if (mTelephonyManager.getPhoneCount() > PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM) {
+        if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
             // Get EID per-SIM in multi-SIM mode
             Map<Integer, Integer> mapping = mTelephonyManager.getLogicalToPhysicalSlotMapping();
             int pSlotId = mapping.getOrDefault(mSlotIndex,
