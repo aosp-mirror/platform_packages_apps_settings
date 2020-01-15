@@ -174,9 +174,6 @@ public class ApnSettings extends RestrictedSettingsFragment
 
         final TelephonyManager updatedTelephonyManager =
                 mTelephonyManager.createForSubscriptionId(subId);
-        if (updatedTelephonyManager == null) {
-            return;
-        }
 
         // restart monitoring when subscription has been changed
         mTelephonyManager.listen(mPhoneStateListener,
