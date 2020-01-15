@@ -57,7 +57,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         mMetricsFeatureProvider.logClickedPreference(preference, mFragment.getMetricsCategory());
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
-        device.connect(true);
+        device.connect();
         return true;
     }
 
