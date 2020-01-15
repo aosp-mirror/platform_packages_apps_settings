@@ -143,6 +143,29 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
+    public void getUserShortcutTypeFromSettings_putOneValue_hasValue() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+
+        final int shortcutType = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
+                DUMMY_COMPONENT_NAME);
+        assertThat(
+                (shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE).isTrue();
+    }
+
+    @Test
+    public void getUserShortcutTypeFromSettings_putTwoValues_hasValue() {
+        putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+        putStringIntoSettings(HARDWARE_SHORTCUT_KEY, DUMMY_COMPONENT_NAME.flattenToString());
+
+        final int shortcutType = AccessibilityUtil.getUserShortcutTypesFromSettings(mContext,
+                DUMMY_COMPONENT_NAME);
+        assertThat(
+                (shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE).isTrue();
+        assertThat(
+                (shortcutType & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE).isTrue();
+    }
+
+    @Test
     public void optInAllValuesToSettings_optInValue_haveMatchString() {
         int shortcutTypes = UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE;
 
