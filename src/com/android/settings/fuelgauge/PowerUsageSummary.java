@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -27,7 +26,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.text.format.Formatter;
 import android.view.Menu;
@@ -162,7 +160,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         final TextView percentRemaining =
                 mBatteryLayoutPref.findViewById(R.id.battery_percent);
         final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
-        final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
         BatteryInfo oldInfo = batteryInfos.get(0);
         BatteryInfo newInfo = batteryInfos.get(1);
         percentRemaining.setText(Utils.formatPercentage(oldInfo.batteryLevel));
@@ -170,14 +167,13 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         // set the text to the old estimate (copied from battery info). Note that this
         // can sometimes say 0 time remaining because battery stats requires the phone
         // be unplugged for a period of time before being willing ot make an estimate.
-        summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
+        final String OldEstimateString = mPowerFeatureProvider.getOldEstimateDebugString(
                 Formatter.formatShortElapsedTime(getContext(),
-                        PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
-
-        // for this one we can just set the string directly
-        summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
+                        PowerUtil.convertUsToMs(oldInfo.remainingTimeUs)));
+        final String NewEstimateString = mPowerFeatureProvider.getEnhancedEstimateDebugString(
                 Formatter.formatShortElapsedTime(getContext(),
-                        PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
+                        PowerUtil.convertUsToMs(newInfo.remainingTimeUs)));
+        summary1.setText(OldEstimateString + "\n" + NewEstimateString);
 
         batteryView.setBatteryLevel(oldInfo.batteryLevel);
         batteryView.setCharging(!oldInfo.discharging);

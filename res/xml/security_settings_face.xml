@@ -52,12 +52,23 @@
         android:key="security_settings_face_manage_category"
         android:title="@string/security_settings_face_settings_require_category">
         <SwitchPreference
+            android:key="security_settings_face_require_attention"
+            android:title="@string/security_settings_face_settings_require_attention"
+            android:summary="@string/security_settings_face_settings_require_attention_details"
+            app:keywords="@string/keywords_face_unlock"
+            app:controller="com.android.settings.biometrics.face.FaceSettingsAttentionPreferenceController"/>
+
+        <SwitchPreference
             android:key="security_settings_face_require_confirmation"
             android:title="@string/security_settings_face_settings_require_confirmation"
             android:summary="@string/security_settings_face_settings_require_confirmation_details"
             app:keywords="@string/keywords_face_unlock"
             app:controller="com.android.settings.biometrics.face.FaceSettingsConfirmPreferenceController"/>
+    </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="security_settings_face_button_category"
+        android:title="@string/security_settings_face_preference_title">
         <com.android.settingslib.widget.LayoutPreference
             android:key="security_settings_face_delete_faces_container"
             android:selectable="false"
@@ -66,7 +77,7 @@
         <com.android.settingslib.widget.LayoutPreference
             android:key="security_settings_face_enroll_faces_container"
             android:selectable="false"
-            android:layout="@layout/face_enroll_button " />
+            android:layout="@layout/face_enroll_button" />
     </PreferenceCategory>
 
     <PreferenceCategory
