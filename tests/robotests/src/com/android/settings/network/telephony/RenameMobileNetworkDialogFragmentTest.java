@@ -48,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -99,6 +100,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void dialog_cancelButtonClicked_setDisplayNameAndIconTintNotCalled() {
         when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
                 mSubscriptionInfo);
@@ -114,6 +116,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void dialog_saveButtonClicked_setDisplayNameAndIconTint() {
         when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
                 mSubscriptionInfo);
@@ -137,6 +140,7 @@ public class RenameMobileNetworkDialogFragmentTest {
     }
 
     @Test
+    @Ignore
     public void populateView_infoIsOpportunistic_hideNumberLabel() {
         final View view = LayoutInflater.from(mActivity).inflate(
                 R.layout.dialog_mobile_network_rename, null);
