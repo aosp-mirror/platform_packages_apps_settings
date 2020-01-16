@@ -377,7 +377,7 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Просити підтвердження під час використання Фейсконтролю в додатках"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Видалити дані про обличчя"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Налаштувати Фейсконтроль"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Використовуйте фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nЗверніть увагу.\nПоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя.\n\nТелефон може розблокувати людина, схожа на вас, наприклад ваш близнюк."</string>
+    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Використовуйте фейсконтроль, щоб розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nУвага!\nВи можете випадково розблокувати телефон у недоречний момент, ненароком поглянувши на нього.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя.\n\nТелефон може розблокувати людина, схожа на вас, наприклад ваш близнюк."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"З функцією фейсконтролю можна розблоковувати пристрій, входити в додатки й підтверджувати платежі.\n\nЗверніть увагу:\nпоглянувши на телефон, ви можете випадково розблокувати його в недоречний момент.\n\nБудь-хто може розблокувати телефон, якщо піднесе його до вашого обличчя, навіть коли у вас закриті очі.\n\nТелефон може розблокувати людина, схожа на вас, наприклад, ваш близнюк."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Видалити дані про обличчя?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Дані про обличчя, потрібні для фейсконтролю, буде остаточно видалено без можливості відновлення. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
@@ -2103,14 +2103,14 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Налаштування субтитрів"</string>
     <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Збільшення"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Область збільшення"</string>
+    <!-- no translation found for accessibility_magnification_enable_mode_title (4390488034396824276) -->
+    <skip />
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Виберіть області для збільшення масштабу екрана"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"На весь екран"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Частина екрана"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Повноекранний і напівекранний режим"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Збільшити весь екран"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Збільшити частину екрана"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Показати інструмент для переміщення"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Показати джойстик для переміщення області збільшення"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налаштування збільшення"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Збільшувати потрійним торканням"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
@@ -3341,8 +3341,7 @@
       <item quantity="other">Увімкнено: <xliff:g id="ON_COUNT">%d</xliff:g></item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбувати"</string>
-    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
-    <skip />
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Отримуйте сповіщення лише від важливих людей і додатків"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Обмеження сповіщень"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Увімкнути режим \"Не турбувати\""</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Винятки"</string>
@@ -3369,8 +3368,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блокувати візуальні сповіщення"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволити візуальні сигнали"</string>
-    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
-    <skip />
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дозволити сповіщення зі звуком"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Обмежити сповіщення"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Вимкнути звук сповіщень"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Ви бачитимете сповіщення на екрані"</string>
@@ -3435,18 +3433,12 @@
       <item quantity="many"><xliff:g id="ON_COUNT">%d</xliff:g> розкладів можуть вмикатись автоматично</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> розкладу можуть вмикатись автоматично</item>
     </plurals>
-    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
-    <skip />
-    <!-- no translation found for zen_category_people (8252926021894933047) -->
-    <skip />
-    <!-- no translation found for zen_category_apps (1167374545618451925) -->
-    <skip />
-    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
-    <skip />
-    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
-    <skip />
-    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
-    <skip />
+    <string name="zen_category_behavior" msgid="9188445582469977640">"Винятки під час роботи режиму \"Не турбувати\""</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Люди"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Додатки"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Будильники й інші сповіщення"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Графіки"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"Сповіщення, для яких вимкнено звук"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"У режимі \"Не турбувати\" звук і вібрація вимикатиметься для всіх сигналів, окрім дозволених вище."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Вимкнути звук для всього, винятки:"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Без звуку"</string>
@@ -3720,8 +3712,7 @@
       <item quantity="many">Ще <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
       <item quantity="other">Ще <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
     </plurals>
-    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
-    <skip />
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Чати"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"Дозволити повідомлення"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Те, чи надходитимуть дозволені повідомлення зі звуком, залежить від вибраного на телефоні режиму (дзвінок, вібрація чи без звуку)."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>: вхідні повідомлення блокуються. Ви можете змінити налаштування, щоб друзі, члени сім’ї й інші контакти зв’язувалися з вами."</string>
@@ -3736,25 +3727,19 @@
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Заборонити дзвінки"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Заборонити повідомлення"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Будильник"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"З таймерів, будильників, систем безпеки й інших додатків"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"сигнали будильників"</string>
-    <!-- no translation found for zen_mode_media (885017672250984735) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
-    <skip />
+    <string name="zen_mode_media" msgid="885017672250984735">"Звуки з відео"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"З відео, ігор та інших медіафайлів"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"медіа-вміст"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Звуки під час дотику"</string>
-    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"З клавіатури й інших кнопок"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"звуки під час дотику"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Нагадування"</string>
-    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
-    <skip />
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Із завдань і нагадувань"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"нагадування"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"Події"</string>
-    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
-    <skip />
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"З майбутніх подій календаря"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дозволити додаткам замінювати режим \"Не турбувати\""</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Винятки для додатків"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">

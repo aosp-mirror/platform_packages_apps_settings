@@ -2057,14 +2057,14 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Caption preferences"</string>
     <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Magnify"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Magnification area"</string>
+    <!-- no translation found for accessibility_magnification_enable_mode_title (4390488034396824276) -->
+    <skip />
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Choose the magnification area(s) that you want to use when magnifying the screen"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Full screen"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Part of screen"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Full screen &amp; part of screen"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Magnify entire screen"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Magnify part of screen"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Show move controller"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Show a joystick-like controller to move the magnification area"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Magnification settings"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Magnify with triple-tap"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
@@ -3253,8 +3253,7 @@
       <item quantity="one">1 enabled</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do not disturb"</string>
-    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
-    <skip />
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Only get notified by important people and apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limit interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Turn on Do Not Disturb"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Exceptions"</string>
@@ -3281,8 +3280,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Block visual disturbances"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Allow visual signals"</string>
-    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
-    <skip />
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Allow interruptions that make sound"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Restrict notifications"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"No sound from notifications"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"You will see notifications on your screen"</string>
@@ -3343,18 +3341,12 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> schedules can turn on automatically</item>
       <item quantity="one">1 schedule can turn on automatically</item>
     </plurals>
-    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
-    <skip />
-    <!-- no translation found for zen_category_people (8252926021894933047) -->
-    <skip />
-    <!-- no translation found for zen_category_apps (1167374545618451925) -->
-    <skip />
-    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
-    <skip />
-    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
-    <skip />
-    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
-    <skip />
+    <string name="zen_category_behavior" msgid="9188445582469977640">"Exceptions when Do Not Disturb is on"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"People"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarms and other interruptions"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Schedules"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"Silenced notifications"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"When Do Not Disturb is on, sound and vibration will be muted, except for the items that you allow above."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Mute all except"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Muted"</string>
@@ -3614,8 +3606,7 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> others</item>
       <item quantity="one">1 other</item>
     </plurals>
-    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
-    <skip />
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversations"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"Allow messages"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"To make sure that allowed messages make sound, check whether your device is set to ring, vibrate or silent."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"For ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, incoming messages are blocked. You can adjust settings to allow your friends, family or other contacts to reach you."</string>
@@ -3630,25 +3621,19 @@
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Don’t allow any calls"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Don’t allow any messages"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarms"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"From timers, alarms, security systems and other apps"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarms"</string>
-    <!-- no translation found for zen_mode_media (885017672250984735) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
-    <skip />
+    <string name="zen_mode_media" msgid="885017672250984735">"Media sounds"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"From videos, games and other media"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"media"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Touch sounds"</string>
-    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"From your keyboard and other buttons"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"touch sounds"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Reminders"</string>
-    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
-    <skip />
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"From tasks and reminders"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"reminders"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"Events"</string>
-    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
-    <skip />
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"From upcoming calendar events"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Allow apps to override"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"App exceptions"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">

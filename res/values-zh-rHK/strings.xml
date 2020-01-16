@@ -2058,14 +2058,14 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"字幕偏好設定"</string>
     <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"放大"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"放大範圍"</string>
+    <!-- no translation found for accessibility_magnification_enable_mode_title (4390488034396824276) -->
+    <skip />
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"選擇在放大螢幕時要使用的放大範圍"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"全螢幕"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"部分螢幕畫面"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"全螢幕及部分螢幕"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"放大整個螢幕畫面"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"放大部分螢幕畫面"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"顯示移動控制器"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"顯示類似搖桿的控制器，以移動放大範圍"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"放大設定"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"輕按三下來放大"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速鍵來放大"</string>
@@ -3254,8 +3254,7 @@
       <item quantity="one">已啟用 1 個日程表</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"請勿騷擾"</string>
-    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
-    <skip />
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"只接收重要聯絡人和應用程式的通知"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"減少干擾"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"開啟「請勿騷擾」模式"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"例外情況"</string>
@@ -3282,8 +3281,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允許視覺訊號"</string>
-    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
-    <skip />
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"允許發出音效的干擾"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"限制通知"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"無音效通知"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"您會在螢幕上看到通知"</string>
@@ -3344,18 +3342,12 @@
       <item quantity="other">系統已自動啟用 <xliff:g id="ON_COUNT">%d</xliff:g> 個日程表</item>
       <item quantity="one">系統已自動啟用 1 個日程表</item>
     </plurals>
-    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
-    <skip />
-    <!-- no translation found for zen_category_people (8252926021894933047) -->
-    <skip />
-    <!-- no translation found for zen_category_apps (1167374545618451925) -->
-    <skip />
-    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
-    <skip />
-    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
-    <skip />
-    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
-    <skip />
+    <string name="zen_category_behavior" msgid="9188445582469977640">"開啟「請勿騷擾」模式時的例外情況"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"人物"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"應用程式"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"鬧鐘和其他干擾"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"時間表"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"設為靜音的通知"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"開啟「請勿騷擾」模式時，除了您在上方允許的項目外，所有音效和震動會設為靜音。"</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"全部設為靜音，除了"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"已設為靜音"</string>
@@ -3615,8 +3607,7 @@
       <item quantity="other">另外 <xliff:g id="NUM_PEOPLE">%d</xliff:g> 人</item>
       <item quantity="one">另外 1 人</item>
     </plurals>
-    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
-    <skip />
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"對話"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"允許訊息"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"如要確保允許的訊息發出音效，請檢查您的裝置目前設為發出鈴聲、震動還是靜音。"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」中，收到的訊息會被封鎖。您可以調整設定，讓好友、家人或其他聯絡人聯絡您。"</string>
@@ -3631,25 +3622,19 @@
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"不允許任何通話"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"不允許任何訊息"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"鬧鐘"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"來自計時器、鬧鐘、保安系統和其他應用程式"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"鬧鐘"</string>
-    <!-- no translation found for zen_mode_media (885017672250984735) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
-    <skip />
+    <string name="zen_mode_media" msgid="885017672250984735">"媒體音效"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"來自影片、遊戲和其他媒體"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"媒體"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"觸控音效"</string>
-    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"來自鍵盤和其他按鈕"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"觸控音效"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"提醒"</string>
-    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
-    <skip />
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"來自工作和提醒"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"提醒"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"活動"</string>
-    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
-    <skip />
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"來自即將開始的日曆活動"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允許應用程式取代「請勿騷擾」"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"應用程式例外情況"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">

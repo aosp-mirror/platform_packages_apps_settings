@@ -374,8 +374,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Kod otključavanja licem za aplikacije, uvijek tražite potvrdu"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Izbriši podatke o licu"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Postavite otključavanje licem"</string>
-    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Značajkom otključavanja licem otključajte uređaj, prijavite se u aplikacije i potvrdite plaćanja.\n\nNe zaboravite:\ngledajući telefon možete ga otključati i kad to ne namjeravate.\n\nVaš telefon može otključati i netko drugi ako ga prinese vašem licu.\n\nVaš bi telefon možda mogao otključati i netko tko vam je vrlo sličan, na primjer blizanac."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati čak i kada vam to nije namjera ako pogledate u njega.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu čak i dok su vam oči zatvorene.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
+    <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati ako pogledate u njega čak i kada vam to nije namjera.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Otključavanje licem možete koristiti za otključavanje uređaja, prijavu u aplikacije i potvrđivanje plaćanja.\n\nNapomena:\nTelefon možete otključati ako pogledate u njega čak i kada vam to nije namjera.\n\nVaš telefon je moguće otključati ako ga neko prinese vašem licu čak i dok su vam oči zatvorene.\n\nVaš telefon može otključati osoba koja mnogo liči na vas, kao što je naprimjer identični blizanac."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Izbrisati podatke o licu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Podaci o licu koje je koristila funkcija otključavanja licem će se trajno i sigurno izbrisati. Nakon uklanjanja, trebat će vam PIN, uzorak ili lozinka za otključavanje telefona, prijavu u aplikacije i potvrdu plaćanja."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Otključajte telefon pomoću funkcije Otključavanje licem"</string>
@@ -2080,14 +2080,14 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Postavke titlova"</string>
     <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Uvećavanje"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Područje uvećavanja"</string>
+    <!-- no translation found for accessibility_magnification_enable_mode_title (4390488034396824276) -->
+    <skip />
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Odabir područja uvećavanja koja želite koristiti prilikom uvećavanja ekrana"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Cijeli ekran"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Dio ekrana"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Cijeli ekran i dio ekrana"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Povećavanje cijelog ekrana"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Uvećavanje dijela ekrana"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Prikaz kontrolera za pomjeranje"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Prikaz kontrolera nalik džojstiku za pomjeranje područja uvećavanja"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Postavke uvećavanja"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Uvećavanje trostrukim dodirom"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Uvećavanje pomoću prečice"</string>
@@ -3297,8 +3297,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> pravila je omogućeno</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne ometaj"</string>
-    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
-    <skip />
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primajte obavještenja samo od važnih osoba i aplikacija"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ograničite ometanja"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Uključi način rada Ne ometaj"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Izuzeci"</string>
@@ -3325,8 +3324,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokiranje vizuelnih ometanja"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Dozvolite vizualnu signalizaciju"</string>
-    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
-    <skip />
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Dozvoli ometanja koja proizvode zvuk"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Ograničite obavještenja"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Obavještenja bez zvuka"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Obavještenja ćete vidjeti na ekranu"</string>
@@ -3389,18 +3387,12 @@
       <item quantity="few"><xliff:g id="ON_COUNT">%d</xliff:g> rasporeda se mogu automatski uključiti</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> rasporeda se može automatski uključiti</item>
     </plurals>
-    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
-    <skip />
-    <!-- no translation found for zen_category_people (8252926021894933047) -->
-    <skip />
-    <!-- no translation found for zen_category_apps (1167374545618451925) -->
-    <skip />
-    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
-    <skip />
-    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
-    <skip />
-    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
-    <skip />
+    <string name="zen_category_behavior" msgid="9188445582469977640">"Izuzeci kada je uključen način rada Ne ometaj"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Osobe"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi i druga ometanja"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Rasporedi"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"Utišana obavještenja"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Kada je uključen način rada Ne ometaj, zvuk i vibracija će biti isključeni, osim za stavke koje omogućite iznad."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Isključi zvuk za sve osim"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Isključen zvuk"</string>
@@ -3667,8 +3659,7 @@
       <item quantity="few">Još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osobe</item>
       <item quantity="other">Još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osoba</item>
     </plurals>
-    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
-    <skip />
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Razgovori"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"Dozvoli poruke"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Da budete sigurni da čujete dozvoljene dolazne poruke, provjerite je li vaš uređaj postavljen da zvoni, vibrira ili je u tihom načinu."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Dolazne poruke su blokirane za raspored \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Postavke možete podesiti da prijateljima, porodici ili drugim kontaktima dozvolite da vas kontaktiraju."</string>
@@ -3683,25 +3674,19 @@
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Zabrani sve pozive"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Zabrani sve poruke"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmi"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Obavještenja tajmera, alarma, sigurnosnih sistema i drugih aplikacija"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmi"</string>
-    <!-- no translation found for zen_mode_media (885017672250984735) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
-    <skip />
+    <string name="zen_mode_media" msgid="885017672250984735">"Zvukovi medija"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Obavještenja videozapisa, igara i drugih medija"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"mediji"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Zvuci dodira"</string>
-    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Obavještenja tastature i drugih dugmadi"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"zvuci dodira"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Podsjetnici"</string>
-    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
-    <skip />
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Obavještenja o zadacima i podsjetnicima"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"podsjetnici"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"Događaji"</string>
-    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
-    <skip />
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Obavještenja nadolazećih događaja iz kalendara"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dozvolite aplikacijama da zanemaruju"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Izuzeci za aplikacije"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
@@ -3792,7 +3777,7 @@
     <string name="app_launch_open_domain_urls_summary" msgid="3609156836041234957">"Otvori bez pitanja"</string>
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Podržani linkovi"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Ostale zadane vrijednosti"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> se koristi u memoriji <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>: iskorišteno <xliff:g id="SIZE">%1$s</xliff:g>"</string>
     <string name="storage_type_internal" msgid="8072987826282477558">"Unutrašnja pohrana"</string>
     <string name="storage_type_external" msgid="8258689891893683905">"Vanjska pohrana"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"Iskorišt.: <xliff:g id="SIZE">%1$s</xliff:g> od <xliff:g id="DATE">%2$s</xliff:g>"</string>
