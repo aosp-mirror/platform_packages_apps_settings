@@ -48,7 +48,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -141,6 +140,55 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
     private Uri mCarrierUri;
+
+    /**
+     * APN types for data connections.  These are usage categories for an APN
+     * entry.  One APN entry may support multiple APN types, eg, a single APN
+     * may service regular internet traffic ("default") as well as MMS-specific
+     * connections.<br/>
+     * APN_TYPE_ALL is a special type to indicate that this APN entry can
+     * service all data connections.
+     */
+    public static final String APN_TYPE_ALL = "*";
+    /** APN type for default data traffic */
+    public static final String APN_TYPE_DEFAULT = "default";
+    /** APN type for MMS traffic */
+    public static final String APN_TYPE_MMS = "mms";
+    /** APN type for SUPL assisted GPS */
+    public static final String APN_TYPE_SUPL = "supl";
+    /** APN type for DUN traffic */
+    public static final String APN_TYPE_DUN = "dun";
+    /** APN type for HiPri traffic */
+    public static final String APN_TYPE_HIPRI = "hipri";
+    /** APN type for FOTA */
+    public static final String APN_TYPE_FOTA = "fota";
+    /** APN type for IMS */
+    public static final String APN_TYPE_IMS = "ims";
+    /** APN type for CBS */
+    public static final String APN_TYPE_CBS = "cbs";
+    /** APN type for IA Initial Attach APN */
+    public static final String APN_TYPE_IA = "ia";
+    /** APN type for Emergency PDN. This is not an IA apn, but is used
+     * for access to carrier services in an emergency call situation. */
+    public static final String APN_TYPE_EMERGENCY = "emergency";
+    /** APN type for Mission Critical Services */
+    public static final String APN_TYPE_MCX = "mcx";
+    /** APN type for XCAP */
+    public static final String APN_TYPE_XCAP = "xcap";
+    /** Array of all APN types */
+    public static final String[] APN_TYPES = {APN_TYPE_DEFAULT,
+            APN_TYPE_MMS,
+            APN_TYPE_SUPL,
+            APN_TYPE_DUN,
+            APN_TYPE_HIPRI,
+            APN_TYPE_FOTA,
+            APN_TYPE_IMS,
+            APN_TYPE_CBS,
+            APN_TYPE_IA,
+            APN_TYPE_EMERGENCY,
+            APN_TYPE_MCX,
+            APN_TYPE_XCAP,
+    };
 
     /**
      * Standard projection for the interesting columns of a normal note.
@@ -356,11 +404,11 @@ public class ApnEditor extends SettingsPreferenceFragment
         }
 
         final List apnList = Arrays.asList(apnTypes);
-        if (apnList.contains(PhoneConstants.APN_TYPE_ALL)) {
-            Log.d(TAG, "hasAllApns: true because apnList.contains(PhoneConstants.APN_TYPE_ALL)");
+        if (apnList.contains(APN_TYPE_ALL)) {
+            Log.d(TAG, "hasAllApns: true because apnList.contains(APN_TYPE_ALL)");
             return true;
         }
-        for (String apn : PhoneConstants.APN_TYPES) {
+        for (String apn : APN_TYPES) {
             if (!apnList.contains(apn)) {
                 return false;
             }
@@ -516,7 +564,7 @@ public class ApnEditor extends SettingsPreferenceFragment
             mApnType.setText(mApnData.getString(TYPE_INDEX));
             if (mNewApn) {
                 final SubscriptionInfo subInfo =
-                        mProxySubscriptionMgr.getActiveSubscriptionInfo(mSubId);
+                        mProxySubscriptionMgr.getAccessibleSubscriptionInfo(mSubId);
 
                 // Country code
                 final String mcc = (subInfo == null) ? null : subInfo.getMccString();
@@ -1190,9 +1238,9 @@ public class ApnEditor extends SettingsPreferenceFragment
         String userEnteredApnType = mApnType.getText();
         if (userEnteredApnType != null) userEnteredApnType = userEnteredApnType.trim();
         if ((TextUtils.isEmpty(userEnteredApnType)
-                || PhoneConstants.APN_TYPE_ALL.equals(userEnteredApnType))
+                || APN_TYPE_ALL.equals(userEnteredApnType))
                 && !ArrayUtils.isEmpty(mReadOnlyApnTypes)) {
-            String[] apnTypeList = PhoneConstants.APN_TYPES;
+            String[] apnTypeList = APN_TYPES;
             if (TextUtils.isEmpty(userEnteredApnType) && !ArrayUtils.isEmpty(mDefaultApnTypes)) {
                 apnTypeList = mDefaultApnTypes;
             }
@@ -1203,9 +1251,9 @@ public class ApnEditor extends SettingsPreferenceFragment
             for (String apnType : apnTypeList) {
                 // add APN type if it is not read-only and is not wild-cardable
                 if (!readOnlyApnTypes.contains(apnType)
-                        && !apnType.equals(PhoneConstants.APN_TYPE_IA)
-                        && !apnType.equals(PhoneConstants.APN_TYPE_EMERGENCY)
-                        && !apnType.equals(PhoneConstants.APN_TYPE_MCX)) {
+                        && !apnType.equals(APN_TYPE_IA)
+                        && !apnType.equals(APN_TYPE_EMERGENCY)
+                        && !apnType.equals(APN_TYPE_MCX)) {
                     if (first) {
                         first = false;
                     } else {
