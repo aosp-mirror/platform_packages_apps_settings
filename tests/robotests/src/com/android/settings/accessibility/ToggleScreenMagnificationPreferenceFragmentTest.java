@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -55,7 +57,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Test
     public void hasValueInSettings_putValue_hasValue() {
-        putStringIntoSettings(TRIPLETAP_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
+        setMagnificationTripleTapEnabled(/* enabled= */ true);
 
         assertThat(ToggleScreenMagnificationPreferenceFragment.hasMagnificationValuesInSettings(
                 mContext, UserShortcutType.TRIPLETAP)).isTrue();
@@ -70,8 +72,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEqualTo(
                 MAGNIFICATION_CONTROLLER_NAME);
-        assertThat(getStringFromSettings(TRIPLETAP_SHORTCUT_KEY)).isEqualTo(
-                MAGNIFICATION_CONTROLLER_NAME);
+        assertThat(getMagnificationTripleTapStatus()).isTrue();
 
     }
 
@@ -91,7 +92,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     public void optOutAllValuesToSettings_optOutValue_emptyString() {
         putStringIntoSettings(SOFTWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
         putStringIntoSettings(HARDWARE_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
-        putStringIntoSettings(TRIPLETAP_SHORTCUT_KEY, MAGNIFICATION_CONTROLLER_NAME);
+        setMagnificationTripleTapEnabled(/* enabled= */ true);
         int shortcutTypes =
                 UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE | UserShortcutType.TRIPLETAP;
 
@@ -100,7 +101,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
         assertThat(getStringFromSettings(SOFTWARE_SHORTCUT_KEY)).isEmpty();
         assertThat(getStringFromSettings(HARDWARE_SHORTCUT_KEY)).isEmpty();
-        assertThat(getStringFromSettings(TRIPLETAP_SHORTCUT_KEY)).isEmpty();
+        assertThat(getMagnificationTripleTapStatus()).isFalse();
     }
 
     @Test
@@ -124,7 +125,17 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         Settings.Secure.putString(mContext.getContentResolver(), key, componentName);
     }
 
+    private void setMagnificationTripleTapEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, enabled ? ON : OFF);
+    }
+
     private String getStringFromSettings(String key) {
         return Settings.Secure.getString(mContext.getContentResolver(), key);
+    }
+
+    private boolean getMagnificationTripleTapStatus() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
     }
 }
