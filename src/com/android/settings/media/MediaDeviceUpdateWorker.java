@@ -31,12 +31,15 @@ import android.text.TextUtils;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.Utils;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * SliceBackgroundWorker for get MediaDevice list and handle MediaDevice state change event.
@@ -45,9 +48,12 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
 
     private final Context mContext;
-    private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+    private final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
+
+    private boolean mIsTouched;
+    private MediaDevice mTopDevice;
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -62,6 +68,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     @Override
     protected void onSlicePinned() {
         mMediaDevices.clear();
+        mIsTouched = false;
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
@@ -100,8 +107,13 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         notifySliceChange();
     }
 
-    public List<MediaDevice> getMediaDevices() {
-        return new ArrayList<>(mMediaDevices);
+    @Override
+    public void onDeviceAttributesChanged() {
+        notifySliceChange();
+    }
+
+    public Collection<MediaDevice> getMediaDevices() {
+        return mMediaDevices;
     }
 
     public void connectDevice(MediaDevice device) {
@@ -111,18 +123,35 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     public MediaDevice getMediaDeviceById(String id) {
-        return mLocalMediaManager.getMediaDeviceById(mMediaDevices, id);
+        return mLocalMediaManager.getMediaDeviceById(new ArrayList<>(mMediaDevices), id);
     }
 
     public MediaDevice getCurrentConnectedMediaDevice() {
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 
+    void setIsTouched(boolean isTouched) {
+        mIsTouched = isTouched;
+    }
+
+    boolean getIsTouched() {
+        return mIsTouched;
+    }
+
+    void setTopDevice(MediaDevice device) {
+        mTopDevice = device;
+    }
+
+    MediaDevice getTopDevice() {
+        return mTopDevice;
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)) {
+            if (TextUtils.equals(AudioManager.STREAM_DEVICES_CHANGED_ACTION, action)
+                    && Utils.isAudioModeOngoingCall(mContext)) {
                 notifySliceChange();
             }
         }

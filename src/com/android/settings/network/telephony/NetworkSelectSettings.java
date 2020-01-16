@@ -93,8 +93,6 @@ public class NetworkSelectSettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mUseNewApi = getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID);
 
         mPreferenceCategory = findPreference(PREF_KEY_NETWORK_OPERATORS);
@@ -468,10 +466,7 @@ public class NetworkSelectSettings extends DashboardFragment {
         if (mNetworkScanHelper != null) {
             mRequestIdManualNetworkScan = getNewRequestId();
             mWaitingForNumberOfScanResults = MIN_NUMBER_OF_SCAN_REQUIRED;
-            mNetworkScanHelper.startNetworkScan(
-                    mUseNewApi
-                            ? NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS
-                            : NetworkScanHelper.NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS);
+            mNetworkScanHelper.startNetworkScan();
         }
     }
 

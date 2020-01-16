@@ -16,26 +16,18 @@
 
 package com.android.settings.network.telephony;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.telephony.CellInfo;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class NetworkOperatorPreferenceTest {
@@ -43,8 +35,6 @@ public class NetworkOperatorPreferenceTest {
 
     @Mock
     private Resources mResources;
-    @Mock
-    private CellInfo mCellInfo;
     private Context mContext;
 
     @Before
@@ -55,16 +45,5 @@ public class NetworkOperatorPreferenceTest {
         when(mContext.getResources()).thenReturn(mResources);
     }
 
-    @Test
-    public void setIcon_useOldApi_doNothing() {
-        when(mResources.getBoolean(com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI))
-                .thenReturn(false);
-        final NetworkOperatorPreference preference = spy(
-                new NetworkOperatorPreference(mContext, mCellInfo,
-                        new ArrayList<>() /* forbiddenPlmns */, false /* show4GForLTE */));
-
-        preference.setIcon(LEVEL);
-
-        verify(preference, never()).setIcon(any(Drawable.class));
-    }
+    //TODO: add test cases.
 }

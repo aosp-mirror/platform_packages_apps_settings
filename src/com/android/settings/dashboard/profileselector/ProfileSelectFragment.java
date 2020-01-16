@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Locale;
 
 /**
  * Base fragment class for profile settings.
@@ -93,6 +95,9 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
      */
     public static final int WORK_TAB = 1;
+    private static final int[] LABEL = {
+            R.string.category_personal, R.string.category_work
+    };
 
     private ViewGroup mContentView;
 
@@ -101,7 +106,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         final Activity activity = getActivity();
-        final int selectedTab = getTabId(activity, getArguments());
+        final int selectedTab = convertPosition(getTabId(activity, getArguments()));
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
         final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
@@ -180,7 +185,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
         @Override
         public Fragment getItem(int position) {
-            return mChildFragments[position];
+            return mChildFragments[convertPosition(position)];
         }
 
         @Override
@@ -190,11 +195,15 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return mContext.getString(R.string.category_personal);
-            } else {
-                return mContext.getString(R.string.category_work);
-            }
+            return mContext.getString(LABEL[convertPosition(position)]);
         }
+    }
+
+    private static int convertPosition(int index) {
+        if (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())
+                == View.LAYOUT_DIRECTION_RTL) {
+            return LABEL.length - 1 - index;
+        }
+        return index;
     }
 }
