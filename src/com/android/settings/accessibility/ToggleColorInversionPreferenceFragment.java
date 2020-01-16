@@ -60,8 +60,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private static final String PREVIEW_PREFERENCE_KEY = "color_inversion_preview";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
-    private static final String DISPLAY_INVERSION_ENABLED =
-            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private final Handler mHandler = new Handler();
     private ShortcutPreference mShortcutPreference;
@@ -129,7 +127,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
             Bundle savedInstanceState) {
         initShortcutPreference(savedInstanceState);
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(DISPLAY_INVERSION_ENABLED);
+        enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {

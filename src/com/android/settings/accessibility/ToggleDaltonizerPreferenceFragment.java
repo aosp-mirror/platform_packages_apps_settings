@@ -24,7 +24,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -64,7 +66,9 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
+    private final Handler mHandler = new Handler();
     private ShortcutPreference mShortcutPreference;
+    private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
@@ -95,6 +99,16 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         initShortcutPreference(savedInstanceState);
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                mSwitchBar.setCheckedInternal(
+                        Settings.Secure.getInt(getContentResolver(), ENABLED, State.OFF)
+                                == State.ON);
+            }
+        };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -251,6 +265,18 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
             AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
                     getComponentName());
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mSettingsContentObserver.register(getContentResolver());
+    }
+
+    @Override
+    public void onStop() {
+        mSettingsContentObserver.unregister(getContentResolver());
+        super.onStop();
     }
 
     @Override
