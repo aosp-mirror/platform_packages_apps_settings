@@ -31,6 +31,9 @@ import com.android.settingslib.widget.R;
 /** Preference that easier preview by matching name to color. */
 public class PaletteListPreference extends Preference {
 
+    private ListView mListView;
+    private ViewTreeObserver.OnPreDrawListener mPreDrawListener;
+
     /**
      * Constructs a new PaletteListPreference with the given context's theme and the supplied
      * attribute set.
@@ -58,6 +61,7 @@ public class PaletteListPreference extends Preference {
     public PaletteListPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutResource(R.layout.daltonizer_preview);
+        initPreDrawListener();
     }
 
     @Override
@@ -65,24 +69,39 @@ public class PaletteListPreference extends Preference {
         super.onBindViewHolder(holder);
 
         final View rootView = holder.itemView;
-        final ListView listView = rootView.findViewById(R.id.palette_listView);
-        listView.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        final int listViewHeight = listView.getMeasuredHeight();
-                        final int listViewWidth = listView.getMeasuredWidth();
-                        // Removes the callback after get result of measure view.
-                        listView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        mListView = rootView.findViewById(R.id.palette_listView);
+        if (mPreDrawListener != null) {
+            mListView.getViewTreeObserver().addOnPreDrawListener(mPreDrawListener);
+        }
+    }
 
-                        // Resets layout parameters to display whole items from listView.
-                        final FrameLayout.LayoutParams layoutParams =
-                                (FrameLayout.LayoutParams) listView.getLayoutParams();
-                        layoutParams.height = listViewHeight * listView.getAdapter().getCount();
-                        layoutParams.width = listViewWidth;
-                        listView.setLayoutParams(layoutParams);
-                        listView.invalidateViews();
-                    }
-                });
+    private void initPreDrawListener() {
+        mPreDrawListener = new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                if (mListView == null) {
+                    return false;
+                }
+
+                final int listViewHeight = mListView.getMeasuredHeight();
+                final int listViewWidth = mListView.getMeasuredWidth();
+
+                // Removes the callback after get result of measure view.
+                final ViewTreeObserver viewTreeObserver = mListView.getViewTreeObserver();
+                if (viewTreeObserver.isAlive()) {
+                    viewTreeObserver.removeOnPreDrawListener(this);
+                }
+                mPreDrawListener = null;
+
+                // Resets layout parameters to display whole items from listView.
+                final FrameLayout.LayoutParams layoutParams =
+                        (FrameLayout.LayoutParams) mListView.getLayoutParams();
+                layoutParams.height = listViewHeight * mListView.getAdapter().getCount();
+                layoutParams.width = listViewWidth;
+                mListView.setLayoutParams(layoutParams);
+
+                return true;
+            }
+        };
     }
 }
