@@ -37,15 +37,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
-import com.android.settingslib.search.SearchIndexable;
 
-/**
- * Settings screen for spell checker
- */
-@SearchIndexable
 public class SpellCheckersSettings extends SettingsPreferenceFragment
         implements OnSwitchChangeListener, OnPreferenceClickListener, OnPreferenceChangeListener {
     private static final String TAG = SpellCheckersSettings.class.getSimpleName();
@@ -280,7 +274,4 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         }
         updatePreferenceScreen();
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.spellchecker_prefs);
 }

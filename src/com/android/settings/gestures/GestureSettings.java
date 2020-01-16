@@ -75,5 +75,12 @@ public class GestureSettings extends DashboardFragment {
                     sir.xmlResId = R.xml.gestures;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // All rows in this screen can lead to a different page, so suppress everything
+                    // from this page to remove duplicates.
+                    return false;
+                }
             };
 }

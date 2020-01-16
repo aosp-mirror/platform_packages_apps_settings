@@ -16,9 +16,8 @@
 
 package com.android.settings.development.compat;
 
-import static com.android.settings.development.AppPicker.EXTRA_DEBUGGABLE;
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_COMPAT_CHANGE_APP;
 import static com.android.internal.compat.OverrideAllowedState.ALLOWED;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_COMPAT_CHANGE_APP;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -27,9 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -45,13 +42,9 @@ import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.CompatibilityChangeConfig;
 import com.android.internal.compat.CompatibilityChangeInfo;
 import com.android.internal.compat.IPlatformCompat;
-import com.android.internal.compat.IOverrideValidator;
-import com.android.internal.compat.OverrideAllowedState;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.development.AppPicker;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +55,6 @@ import java.util.TreeMap;
 /**
  * Dashboard for Platform Compat preferences.
  */
-@SearchIndexable
 public class PlatformCompatDashboard extends DashboardFragment {
     private static final String TAG = "PlatformCompatDashboard";
     private static final String COMPAT_APP = "compat_app";
@@ -299,7 +291,4 @@ public class PlatformCompatDashboard extends DashboardFragment {
             return true;
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.platform_compat_settings);
 }

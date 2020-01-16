@@ -23,18 +23,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Settings picker screen to what display preferences are applied when device is in VR mode
- */
-@SearchIndexable
 public class VrDisplayPreferencePicker extends RadioButtonPickerFragment {
 
     static final String PREF_KEY_PREFIX = "vr_display_pref_";
@@ -108,7 +102,4 @@ public class VrDisplayPreferencePicker extends RadioButtonPickerFragment {
             return PREF_KEY_PREFIX + value;
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.vr_display_settings);
 }

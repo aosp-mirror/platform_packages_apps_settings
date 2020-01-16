@@ -35,10 +35,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
-import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -47,7 +45,6 @@ import java.util.List;
 /**
  * Picker for BugReportHandler.
  */
-@SearchIndexable
 public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     private static final String TAG = "BugReportHandlerPicker";
 
@@ -214,7 +211,4 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
             return super.loadLabel();
         }
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.bug_report_handler_settings);
 }

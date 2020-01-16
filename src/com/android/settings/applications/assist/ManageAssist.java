@@ -37,6 +37,7 @@ import java.util.List;
 public class ManageAssist extends DashboardFragment {
 
     private static final String TAG = "ManageAssist";
+    private static final String KEY_ASSIST = "gesture_assist_application";
 
     @Override
     protected String getLogTag() {
@@ -83,6 +84,13 @@ public class ManageAssist extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_ASSIST);
+                    return keys;
                 }
             };
 }

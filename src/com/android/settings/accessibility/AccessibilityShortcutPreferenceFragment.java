@@ -201,5 +201,11 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_shortcut_settings);
+            new BaseSearchIndexProvider() {
+                // This fragment is for details of the shortcut. Only the shortcut itself needs
+                // to be indexed.
+                protected boolean isPageSearchEnabled(Context context) {
+                    return false;
+                }
+            };
 }
