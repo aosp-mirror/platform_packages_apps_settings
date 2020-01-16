@@ -30,7 +30,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -44,10 +43,8 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
@@ -438,19 +435,10 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.PERSONAL_WORK_PROFILE)) {
-            final Bundle args = new Bundle(1 + additionalCapacity);
-            args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
-                    mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
-            return args;
-        } else {
-            final Bundle args = new Bundle(2 + additionalCapacity);
-            args.putInt(ProfileSelectFragment.EXTRA_PROFILE,
-                    mIsWorkProfile ? ProfileSelectFragment.ProfileType.WORK
-                            : ProfileSelectFragment.ProfileType.ALL);
-            args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
-            return args;
-        }
+        final Bundle args = new Bundle(1 + additionalCapacity);
+        args.putInt(SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB,
+                mIsWorkProfile ? WORK_TAB : PERSONAL_TAB);
+        return args;
     }
 
     private Intent getFilesIntent() {
