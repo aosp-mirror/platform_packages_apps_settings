@@ -32,6 +32,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -87,6 +88,7 @@ public class SubscriptionUtilTest {
     }
 
     @Test
+    @Ignore
     public void getAvailableSubscriptions_oneSelectableTwoDisabledPSimsOneAbsent_twoResults() {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
