@@ -16,7 +16,6 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.telephony.SmsManager;
 
-import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -70,7 +69,7 @@ public class AppStateSmsPremBridge extends AppStateBaseBridge {
         public int smsState;
 
         public boolean isGranted() {
-            return smsState == SmsUsageMonitor.PREMIUM_SMS_PERMISSION_ALWAYS_ALLOW;
+            return smsState == SmsManager.PREMIUM_SMS_CONSENT_ALWAYS_ALLOW;
         }
     }
 
@@ -82,7 +81,7 @@ public class AppStateSmsPremBridge extends AppStateBaseBridge {
         @Override
         public boolean filterApp(AppEntry info) {
             return info.extraInfo instanceof SmsState && ((SmsState) info.extraInfo).smsState
-                    != SmsUsageMonitor.PREMIUM_SMS_PERMISSION_UNKNOWN;
+                    != SmsManager.PREMIUM_SMS_CONSENT_UNKNOWN;
         }
     };
 }
