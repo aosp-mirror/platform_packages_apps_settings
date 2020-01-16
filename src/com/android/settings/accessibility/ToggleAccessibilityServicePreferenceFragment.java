@@ -487,6 +487,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
                     mComponentName);
+            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
         }
     }
 
