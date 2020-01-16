@@ -50,7 +50,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
-import com.android.internal.telephony.Phone;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -311,7 +310,7 @@ public class MobileNetworkUtils {
             final int settingsNetworkMode = android.provider.Settings.Global.getInt(
                     context.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                    Phone.PREFERRED_NT_MODE);
+                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
             if (settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA
                     || settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return true;
@@ -338,7 +337,7 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
         if (isWorldMode(context, subId)) {
             if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                     || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
@@ -403,7 +402,7 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
@@ -517,7 +516,7 @@ public class MobileNetworkUtils {
         final int networkMode = android.provider.Settings.Global.getInt(
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
         if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
                 || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
