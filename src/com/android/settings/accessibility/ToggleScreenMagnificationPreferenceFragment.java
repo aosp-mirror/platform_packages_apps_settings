@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -64,12 +66,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
+    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private ShortcutPreference mShortcutPreference;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
     private CheckBox mTripleTapTypeCheckBox;
-    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
 
     // TODO(b/147021230): Will move common functions and variables to
     //  android/internal/accessibility folder. For now, magnification need to be treated
@@ -530,15 +532,21 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static void optInMagnificationValueToSettings(Context context,
             @UserShortcutType int shortcutType) {
-        final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
-        final String targetString = Settings.Secure.getString(context.getContentResolver(),
-                targetKey);
+        if (shortcutType == UserShortcutType.TRIPLETAP) {
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, ON);
+            return;
+        }
 
         if (hasMagnificationValueInSettings(context, shortcutType)) {
             return;
         }
 
+        final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
+        final String targetString = Settings.Secure.getString(context.getContentResolver(),
+                targetKey);
         final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+
         if (!TextUtils.isEmpty(targetString)) {
             joiner.add(targetString);
         }
@@ -563,7 +571,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static void optOutMagnificationValueFromSettings(Context context,
             @UserShortcutType int shortcutType) {
-        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
+        if (shortcutType == UserShortcutType.TRIPLETAP) {
+            Settings.Secure.putInt(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF);
+            return;
+        }
+
         final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
                 targetKey);
@@ -571,6 +584,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (TextUtils.isEmpty(targetString)) {
             return;
         }
+
+        final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
 
         sStringColonSplitter.setString(targetString);
         while (sStringColonSplitter.hasNext()) {
@@ -602,6 +617,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private static boolean hasMagnificationValueInSettings(Context context,
             @UserShortcutType int shortcutType) {
+        if (shortcutType == UserShortcutType.TRIPLETAP) {
+            return Settings.Secure.getInt(context.getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, OFF) == ON;
+        }
+
         final String targetKey = AccessibilityUtil.convertKeyFromSettings(shortcutType);
         final String targetString = Settings.Secure.getString(context.getContentResolver(),
                 targetKey);
