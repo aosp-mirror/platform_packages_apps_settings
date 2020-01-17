@@ -119,6 +119,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (mStaticDescription != null) {
             final StaticTextPreference staticTextPreference = new StaticTextPreference(
                     preferenceScreen.getContext());
+            staticTextPreference.setSelectable(/* selectable= */ false);
             staticTextPreference.setSummary(mStaticDescription);
             preferenceScreen.addPreference(staticTextPreference);
         }
@@ -130,6 +131,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
             final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
                     preferenceScreen.getContext());
+            htmlTextPreference.setSelectable(/* selectable= */ false);
             htmlTextPreference.setSummary(mHtmlDescription);
             htmlTextPreference.setImageGetter(mImageGetter);
             htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
