@@ -16,6 +16,9 @@
 
 package com.android.settings.panel;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
@@ -35,9 +38,15 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.media.InfoMediaDevice;
+import com.android.settingslib.media.LocalMediaManager;
+import com.android.settingslib.media.MediaDevice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +58,19 @@ import java.util.List;
  * Displays Media output item
  * </p>
  */
-public class MediaOutputPanel implements PanelContent {
+public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceCallback,
+        LifecycleObserver {
 
     private static final String TAG = "MediaOutputPanel";
 
     private final Context mContext;
     private final String mPackageName;
+
+    private PanelCustomizedButtonCallback mCallback;
+    private boolean mIsCustomizedButtonUsed = true;
+
+    @VisibleForTesting
+    LocalMediaManager mLocalMediaManager;
 
     private MediaSessionManager mMediaSessionManager;
     private MediaController mMediaController;
@@ -65,8 +81,9 @@ public class MediaOutputPanel implements PanelContent {
 
     private MediaOutputPanel(Context context, String packageName) {
         mContext = context.getApplicationContext();
-        mPackageName = packageName;
-        if (mPackageName != null) {
+        mPackageName = TextUtils.isEmpty(packageName) ? "" : packageName;
+
+        if (!TextUtils.isEmpty(mPackageName)) {
             mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
             for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
                 if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
@@ -75,6 +92,7 @@ public class MediaOutputPanel implements PanelContent {
                 }
             }
         }
+
         if (mMediaController == null) {
             Log.e(TAG, "Unable to find " + mPackageName + " media controller");
         }
@@ -157,7 +175,68 @@ public class MediaOutputPanel implements PanelContent {
     }
 
     @Override
+    public boolean isCustomizedButtonUsed() {
+        return mIsCustomizedButtonUsed;
+    }
+
+    @Override
+    public CharSequence getCustomButtonTitle() {
+        return mContext.getText(R.string.media_output_panel_stop_casting_button);
+    }
+
+    @Override
+    public void onClickCustomizedButton() {
+    }
+
+    @Override
+    public void registerCallback(PanelCustomizedButtonCallback callback) {
+        mCallback = callback;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.PANEL_MEDIA_OUTPUT;
+    }
+
+    @Override
+    public void onSelectedDeviceStateChanged(MediaDevice device, int state) {
+        dispatchCustomButtonStateChanged();
+    }
+
+    @Override
+    public void onDeviceListUpdate(List<MediaDevice> devices) {
+        dispatchCustomButtonStateChanged();
+    }
+
+    @Override
+    public void onDeviceAttributesChanged() {
+        dispatchCustomButtonStateChanged();
+    }
+
+    private void dispatchCustomButtonStateChanged() {
+        hideCustomButtonIfNecessary();
+        if (mCallback != null) {
+            mCallback.onCustomizedButtonStateChanged();
+        }
+    }
+
+    private void hideCustomButtonIfNecessary() {
+        final MediaDevice device = mLocalMediaManager.getCurrentConnectedDevice();
+        mIsCustomizedButtonUsed = device instanceof InfoMediaDevice;
+    }
+
+    @OnLifecycleEvent(ON_START)
+    public void onStart() {
+        if (mLocalMediaManager == null) {
+            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
+        }
+        mLocalMediaManager.registerCallback(this);
+        mLocalMediaManager.startScan();
+    }
+
+    @OnLifecycleEvent(ON_STOP)
+    public void onStop() {
+        mLocalMediaManager.unregisterCallback(this);
+        mLocalMediaManager.stopScan();
     }
 }
