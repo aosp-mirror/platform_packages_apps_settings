@@ -16,22 +16,20 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MAX_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MIN_AUTOCLICK_DELAY_MS;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Bundle;
-import android.provider.SearchIndexableResource;
-import android.provider.Settings;
-import android.view.accessibility.AccessibilityManager;
-import android.widget.Switch;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
-import com.android.settings.widget.SeekBarPreference;
-import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -42,18 +40,11 @@ import java.util.List;
  * feature.
  */
 @SearchIndexable
-public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, Preference.OnPreferenceChangeListener {
+public class ToggleAutoclickPreferenceFragment extends DashboardFragment
+        implements ToggleAutoclickPreferenceController.OnChangeListener {
 
-    /** Min allowed autoclick delay value. */
-    private static final int MIN_AUTOCLICK_DELAY = 200;
-    /** Max allowed autoclick delay value. */
-    private static final int MAX_AUTOCLICK_DELAY = 1000;
-    /**
-     * Allowed autoclick delay values are discrete. This is the difference between two allowed
-     * values.
-     */
-    private static final int AUTOCLICK_DELAY_STEP = 100;
+    private static final String TAG = "AutoclickPrefFragment";
+    private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
     /**
      * Resource ids from which autoclick preference summaries should be derived. The strings have
@@ -66,13 +57,6 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
             R.plurals.accessibilty_autoclick_preference_subtitle_long_delay,
             R.plurals.accessibilty_autoclick_preference_subtitle_very_long_delay
     };
-
-    /**
-     * Seek bar preference for autoclick delay value. The seek bar has values between 0 and
-     * number of possible discrete autoclick delay values. These will have to be converted to actual
-     * delay values before saving them in settings.
-     */
-    private SeekBarPreference mDelay;
 
     /**
      * Gets string that should be used as a autoclick preference summary for provided autoclick
@@ -91,21 +75,15 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
      * Finds index of the summary that should be used for the provided autoclick delay.
      */
     private static int getAutoclickPreferenceSummaryIndex(int delay) {
-        if (delay <= MIN_AUTOCLICK_DELAY) {
+        if (delay <= MIN_AUTOCLICK_DELAY_MS) {
             return 0;
         }
-        if (delay >= MAX_AUTOCLICK_DELAY) {
+        if (delay >= MAX_AUTOCLICK_DELAY_MS) {
             return mAutoclickPreferenceSummaries.length - 1;
         }
-        int rangeSize = (MAX_AUTOCLICK_DELAY - MIN_AUTOCLICK_DELAY) /
-                (mAutoclickPreferenceSummaries.length - 1);
-        return (delay - MIN_AUTOCLICK_DELAY) / rangeSize;
-    }
-
-    @Override
-    protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? 1 : 0);
-        mDelay.setEnabled(enabled);
+        int delayRange = MAX_AUTOCLICK_DELAY_MS - MIN_AUTOCLICK_DELAY_MS;
+        int rangeSize = (delayRange) / (mAutoclickPreferenceSummaries.length - 1);
+        return (delay - MIN_AUTOCLICK_DELAY_MS) / rangeSize;
     }
 
     @Override
@@ -119,81 +97,67 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.accessibility_autoclick_settings;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
 
-        int delay = Settings.Secure.getInt(
-                getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
-
-        // Initialize seek bar preference. Sets seek bar size to the number of possible delay
-        // values.
-        mDelay = (SeekBarPreference) findPreference("autoclick_delay");
-        mDelay.setMax(delayToSeekBarProgress(MAX_AUTOCLICK_DELAY));
-        mDelay.setProgress(delayToSeekBarProgress(delay));
-        mDelay.setOnPreferenceChangeListener(this);
-    }
-
-    @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-
-        int value = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0);
-        mSwitchBar.setCheckedInternal(value == 1);
-        mSwitchBar.addOnSwitchChangeListener(this);
-        mDelay.setEnabled(value == 1);
-    }
-
-    @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mSwitchBar.removeOnSwitchChangeListener(this);
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        onPreferenceToggled(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, isChecked);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mDelay && newValue instanceof Integer) {
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
-                    seekBarProgressToDelay((int) newValue));
-            return true;
+        for (AbstractPreferenceController controller : sControllers) {
+            ((ToggleAutoclickPreferenceController) controller).setOnChangeListener(this);
         }
-        return false;
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
-                getString(R.string.accessibility_autoclick_preference_title));
-        switchBar.setSwitchBarText(switchBarText, switchBarText);
+    public void onPause() {
+        super.onPause();
+
+        for (AbstractPreferenceController controller : sControllers) {
+            ((ToggleAutoclickPreferenceController) controller).setOnChangeListener(null);
+        }
     }
 
-    /**
-     * Converts seek bar preference progress value to autoclick delay associated with it.
-     */
-    private int seekBarProgressToDelay(int progress) {
-        return progress * AUTOCLICK_DELAY_STEP + MIN_AUTOCLICK_DELAY;
+    @Override
+    public void onCheckedChanged(Preference preference) {
+        for (AbstractPreferenceController controller : sControllers) {
+            controller.updateState(preference);
+        }
     }
 
-    /**
-     * Converts autoclick delay value to seek bar preference progress values that represents said
-     * delay.
-     */
-    private int delayToSeekBarProgress(int delay) {
-        return (delay - MIN_AUTOCLICK_DELAY) / AUTOCLICK_DELAY_STEP;
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        Resources resources = context.getResources();
+
+        String[] autoclickKeys = resources.getStringArray(
+                R.array.accessibility_autoclick_control_selector_keys);
+
+        final int length = autoclickKeys.length;
+        for (int i = 0; i < length; i++) {
+            sControllers.add(new ToggleAutoclickPreferenceController(
+                    context, lifecycle, autoclickKeys[i]));
+        }
+        return sControllers;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings);
+            new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings) {
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, null);
+                }
+            };
 }
