@@ -181,10 +181,10 @@ public class ManageApplications extends InstrumentedFragment
     private static final int NO_USER_SPECIFIED = -1;
 
     /**
-     * Intents with action {@link android.provider.Settings#ACTION_MANAGE_APP_OVERLAY_PERMISSION}
-     * and data URI scheme "package" don't go to the app-specific screen for managing the permission
-     * anymore. Instead, they redirect to this screen for managing all the apps that have requested
-     * such permission.
+     * Intents with action {@code android.settings.MANAGE_APP_OVERLAY_PERMISSION}
+     * and data URI scheme {@code package} don't go to the app-specific screen for managing the
+     * permission anymore. Instead, they redirect to this screen for managing all the apps that have
+     * requested such permission.
      */
     @ChangeId
     private static final long CHANGE_RESTRICT_SAW_INTENT = 135920175L;
