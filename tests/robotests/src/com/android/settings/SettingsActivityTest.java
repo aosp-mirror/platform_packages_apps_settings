@@ -43,6 +43,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -64,7 +65,7 @@ public class SettingsActivityTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mActivity = spy(new SettingsActivity());
+        mActivity = spy(Robolectric.buildActivity(SettingsActivity.class).create().get());
     }
 
     @Test
@@ -72,7 +73,6 @@ public class SettingsActivityTest {
         when(mActivity.getSupportFragmentManager()).thenReturn(mFragmentManager);
         doReturn(mContext.getContentResolver()).when(mActivity).getContentResolver();
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
-
         doReturn(RuntimeEnvironment.application.getClassLoader()).when(mActivity).getClassLoader();
 
         mActivity.launchSettingFragment(null, mock(Intent.class));
