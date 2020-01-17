@@ -27,6 +27,8 @@ import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiNetworkSuggestion;
+import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -65,8 +67,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     // Possible result values in each item of the returned result list, which is used
     // to inform the caller APP the processed result of each specified network.
     @VisibleForTesting
-    static final int RESULT_NETWORK_INITIAL = -1;  //initial value
-    private static final int RESULT_NETWORK_SUCCESS = 0;
+    static final int RESULT_NETWORK_SUCCESS = 0;
     private static final int RESULT_NETWORK_ADD_ERROR = 1;
     @VisibleForTesting
     static final int RESULT_NETWORK_ALREADY_EXISTS = 2;
@@ -97,7 +98,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     @VisibleForTesting
     String mCallingPackageName;
     @VisibleForTesting
-    List<WifiConfiguration> mAllSpecifiedNetworksList;
+    List<WifiNetworkSuggestion> mAllSpecifiedNetworksList;
     @VisibleForTesting
     List<UiConfigurationItem> mUiToRequestedList;
     @VisibleForTesting
@@ -121,7 +122,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
                 case MESSAGE_START_SAVING_NETWORK:
                     mSaveButton.setEnabled(false);
                     // Save the proposed networks, start from first one.
-                    saveNetwork(0);
+                    mSavingIndex = 0;
+                    saveNetwork(mSavingIndex);
                     break;
 
                 case MESSAGE_SHOW_SAVED_AND_CONNECT_NETWORK:
@@ -192,7 +194,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         }
 
         mAllSpecifiedNetworksList =
-                bundle.getParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST);
+                bundle.getParcelableArrayList(Settings.EXTRA_WIFI_NETWORK_LIST);
 
         // If there is no network in the request intent or the requested networks exceed the
         // maximum limit, then just finish activity.
@@ -224,7 +226,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             setSingleNetworkSignalIcon();
             // Show the SSID of the proposed network.
             ((TextView) mLayoutView.findViewById(R.id.single_ssid)).setText(
-                    mAllSpecifiedNetworksList.get(0).SSID);
+                    mUiToRequestedList.get(0).mDisplayedSsid);
             // Set the status view as gone when UI is initialized.
             mSingleNetworkProcessingStatusView.setVisibility(View.GONE);
         } else {
@@ -259,13 +261,60 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         mResultCodeArrayList = new ArrayList<>();
 
         for (int i = 0; i < networksSize; i++) {
-            mResultCodeArrayList.add(RESULT_NETWORK_INITIAL);
+            mResultCodeArrayList.add(RESULT_NETWORK_SUCCESS);
         }
     }
 
     private String getWepKey(WifiConfiguration config) {
         return (config.wepTxKeyIndex >= 0 && config.wepTxKeyIndex < config.wepKeys.length)
                 ? config.wepKeys[config.wepTxKeyIndex] : null;
+    }
+
+    private boolean isSavedPasspointConfiguration(
+            PasspointConfiguration specifiecPassPointConfiguration) {
+        return mWifiManager.getPasspointConfigurations().stream()
+                .filter(config -> config.equals(specifiecPassPointConfiguration))
+                .findFirst()
+                .isPresent();
+    }
+
+    private boolean isSavedWifiConfiguration(WifiConfiguration specifiedConfig,
+            List<WifiConfiguration> savedWifiConfigurations) {
+        final String ssidWithQuotation = addQuotationIfNeeded(specifiedConfig.SSID);
+        final int authType = specifiedConfig.getAuthType();
+        // TODO: reformat to use lambda
+        for (WifiConfiguration privilegedWifiConfiguration : savedWifiConfigurations) {
+            // If SSID or security type is different, should be new network or need to be
+            // updated network, continue to check others.
+            if (!ssidWithQuotation.equals(privilegedWifiConfiguration.SSID)
+                    || authType != privilegedWifiConfiguration.getAuthType()) {
+                continue;
+            }
+
+            //  If specified network and saved network have same security types, we'll check
+            //  more information according to their security type to judge if they are same.
+            switch (authType) {
+                case KeyMgmt.NONE:
+                    final String wep = getWepKey(specifiedConfig);
+                    final String savedWep = getWepKey(privilegedWifiConfiguration);
+                    return TextUtils.equals(wep, savedWep);
+                case KeyMgmt.OWE:
+                    return true;
+                case KeyMgmt.WPA_PSK:
+                case KeyMgmt.WPA2_PSK:
+                case KeyMgmt.SAE:
+                    if (specifiedConfig.preSharedKey.equals(
+                            privilegedWifiConfiguration.preSharedKey)) {
+                        return true;
+                    }
+                    break;
+                // TODO: Check how to judge enterprise type.
+                default:
+                    break;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -283,54 +332,42 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         }
 
         boolean foundInSavedList;
+        boolean foundError;
+        String displayedName = null;
         int networkPositionInBundle = 0;
-        for (WifiConfiguration specifiedConfig : mAllSpecifiedNetworksList) {
+        for (WifiNetworkSuggestion suggestion : mAllSpecifiedNetworksList) {
             foundInSavedList = false;
-            final String displayedSsid = removeDoubleQuotes(specifiedConfig.SSID);
-            final String ssidWithQuotation = addQuotationIfNeeded(specifiedConfig.SSID);
-            final int authType = specifiedConfig.getAuthType();
+            foundError = false;
 
-            for (WifiConfiguration privilegedWifiConfiguration : savedWifiConfigurations) {
-                // If SSID or security type is different, should be new network or need to be
-                // updated network.
-                if (!ssidWithQuotation.equals(privilegedWifiConfiguration.SSID)
-                        || authType != privilegedWifiConfiguration.getAuthType()) {
-                    continue;
+            /**
+             * If specified is passpoint network, need to check with the existing passpoint
+             * networks.
+             */
+            if (suggestion.passpointConfiguration != null) {
+                if (!suggestion.passpointConfiguration.validate()) {
+                    foundError = true;
+                } else {
+                    foundInSavedList = isSavedPasspointConfiguration(
+                            suggestion.passpointConfiguration);
+                    displayedName = suggestion.passpointConfiguration.getHomeSp().getFriendlyName();
                 }
-
-                //  If specified network and saved network have same security types, we'll check
-                //  more information according to their security type to judge if they are same.
-                switch (authType) {
-                    case KeyMgmt.NONE:
-                        final String wep = getWepKey(specifiedConfig);
-                        final String savedWep = getWepKey(privilegedWifiConfiguration);
-                        foundInSavedList = TextUtils.equals(wep, savedWep);
-                        break;
-                    case KeyMgmt.OWE:
-                        foundInSavedList = true;
-                        break;
-                    case KeyMgmt.WPA_PSK:
-                    case KeyMgmt.WPA2_PSK:
-                    case KeyMgmt.SAE:
-                        if (specifiedConfig.preSharedKey.equals(
-                                privilegedWifiConfiguration.preSharedKey)) {
-                            foundInSavedList = true;
-                        }
-                        break;
-                    // TODO: Check how to judge enterprise type.
-                    default:
-                        break;
-                }
+            } else {
+                final WifiConfiguration specifiedConfig = suggestion.wifiConfiguration;
+                displayedName = removeDoubleQuotes(specifiedConfig.SSID);
+                foundInSavedList = isSavedWifiConfiguration(specifiedConfig,
+                        savedWifiConfigurations);
             }
 
-            if (foundInSavedList) {
+            if (foundError) {
+                mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ADD_ERROR);
+            } else if (foundInSavedList) {
                 // If this requested network already in the saved networks, mark this item in the
                 // result code list as existed.
                 mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ALREADY_EXISTS);
             } else {
                 // Prepare to add to UI list to show to user
-                UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedSsid,
-                        specifiedConfig, networkPositionInBundle);
+                UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedName,
+                        suggestion, networkPositionInBundle);
                 mUiToRequestedList.add(uiConfigurationIcon);
             }
             networkPositionInBundle++;
@@ -433,12 +470,13 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     @VisibleForTesting
     static class UiConfigurationItem {
         public final String mDisplayedSsid;
-        public final WifiConfiguration mWifiConfiguration;
+        public final WifiNetworkSuggestion mWifiNetworkSuggestion;
         public final int mIndex;
 
-        UiConfigurationItem(String displayedSsid, WifiConfiguration wifiConfiguration, int index) {
+        UiConfigurationItem(String displayedSsid, WifiNetworkSuggestion wifiNetworkSuggestion,
+                int index) {
             mDisplayedSsid = displayedSsid;
-            mWifiConfiguration = wifiConfiguration;
+            mWifiNetworkSuggestion = wifiNetworkSuggestion;
             mIndex = index;
         }
     }
@@ -497,9 +535,6 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         mSaveListener = new WifiManager.ActionListener() {
             @Override
             public void onSuccess() {
-                // Set success into result list.
-                mResultCodeArrayList.set(mUiToRequestedList.get(mSavingIndex).mIndex,
-                        RESULT_NETWORK_SUCCESS);
                 mAnyNetworkSavedSuccess = true;
 
                 if (saveNextNetwork()) {
@@ -561,16 +596,34 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
      * Call framework API to save single network.
      */
     private void saveNetwork(int index) {
-        final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
-                index).mWifiConfiguration;
-        wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
-        mSavingIndex = index;
-        mWifiManager.save(wifiConfiguration, mSaveListener);
+        if (mUiToRequestedList.get(index).mWifiNetworkSuggestion.passpointConfiguration != null) {
+            // Save passpoint, if no IllegalArgumentException, then treat it as success.
+            try {
+                mWifiManager.addOrUpdatePasspointConfiguration(mUiToRequestedList.get(
+                        index).mWifiNetworkSuggestion.passpointConfiguration);
+                mAnyNetworkSavedSuccess = true;
+            } catch (IllegalArgumentException e) {
+                mResultCodeArrayList.set(mUiToRequestedList.get(index).mIndex,
+                        RESULT_NETWORK_ADD_ERROR);
+            }
+
+            if (saveNextNetwork()) {
+                return;
+            }
+            // Show saved or failed according to all results.
+            showSavedOrFail();
+            return;
+        } else {
+            final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
+                    index).mWifiNetworkSuggestion.wifiConfiguration;
+            wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
+            mWifiManager.save(wifiConfiguration, mSaveListener);
+        }
     }
 
     private void connectNetwork(int index) {
         final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
-                index).mWifiConfiguration;
+                index).mWifiNetworkSuggestion.wifiConfiguration;
         mWifiManager.connect(wifiConfiguration, null /* ActionListener */);
     }
 
@@ -581,7 +634,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
 
         if (resultArrayList != null) {
             Intent intent = new Intent();
-            intent.putIntegerArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_RESULT_LIST,
+            intent.putIntegerArrayListExtra(Settings.EXTRA_WIFI_NETWORK_RESULT_LIST,
                     (ArrayList<Integer>) resultArrayList);
             mActivity.setResult(resultCode, intent);
         }
