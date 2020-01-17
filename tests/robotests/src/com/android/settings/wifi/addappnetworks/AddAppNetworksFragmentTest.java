@@ -138,7 +138,7 @@ public class AddAppNetworksFragmentTest {
         assertThat(mAddAppNetworksFragment.mResultCodeArrayList.get(0)).isEqualTo(
                 mAddAppNetworksFragment.RESULT_NETWORK_ALREADY_EXISTS);
         assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(
-                0).mWifiNetworkSuggestion.wifiConfiguration.SSID).isEqualTo(
+                0).mWifiNetworkSuggestion.getWifiConfiguration().SSID).isEqualTo(
                 FAKE_NEW_OPEN_SSID_WITH_QUOTE);
     }
 
