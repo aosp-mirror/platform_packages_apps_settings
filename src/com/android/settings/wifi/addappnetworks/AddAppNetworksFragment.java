@@ -53,15 +53,20 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The Fragment list those networks, which is proposed by other app, to user, and handle user's
  * choose on either saving those networks or rejecting the request.
  */
-public class AddAppNetworksFragment extends InstrumentedFragment {
+public class AddAppNetworksFragment extends InstrumentedFragment implements
+        WifiTracker.WifiListener {
     public static final String TAG = "AddAppNetworksFragment";
 
     // Possible result values in each item of the returned result list, which is used
@@ -78,8 +83,9 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     private static final int MESSAGE_SHOW_SAVE_FAILED = 3;
     private static final int MESSAGE_FINISH = 4;
 
-    // Signal level for the constant signal icon.
-    private static final int MAX_RSSI_SIGNAL_LEVEL = 4;
+    // Signal level for the initial signal icon.
+    @VisibleForTesting
+    static final int INITIAL_RSSI_SIGNAL_LEVEL = 0;
     // Max networks count within one request
     private static final int MAX_SPECIFIC_NETWORKS_COUNT = 5;
 
@@ -103,6 +109,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
     List<UiConfigurationItem> mUiToRequestedList;
     @VisibleForTesting
     List<Integer> mResultCodeArrayList;
+    @VisibleForTesting
+    WifiTracker mWifiTracker;
 
     private boolean mIsSingleNetwork;
     private boolean mAnyNetworkSavedSuccess;
@@ -156,6 +164,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             @Nullable Bundle savedInstanceState) {
         mActivity = getActivity();
         mWifiManager = mActivity.getSystemService(WifiManager.class);
+        mWifiTracker = WifiTrackerFactory.create(mActivity.getApplication(), this,
+                getSettingsLifecycle(), true /* includeSaved */, true /* includeScans */);
 
         return inflater.inflate(R.layout.wifi_add_app_networks, container, false);
     }
@@ -223,7 +233,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             mLayoutView.findViewById(R.id.single_network).setVisibility(View.VISIBLE);
 
             // Show signal icon for single network case.
-            setSingleNetworkSignalIcon();
+            updateSingleNetworkSignalIcon(INITIAL_RSSI_SIGNAL_LEVEL);
             // Show the SSID of the proposed network.
             ((TextView) mLayoutView.findViewById(R.id.single_ssid)).setText(
                     mUiToRequestedList.get(0).mDisplayedSsid);
@@ -366,18 +376,18 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
                 mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ALREADY_EXISTS);
             } else {
                 // Prepare to add to UI list to show to user
-                UiConfigurationItem uiConfigurationIcon = new UiConfigurationItem(displayedName,
-                        suggestion, networkPositionInBundle);
-                mUiToRequestedList.add(uiConfigurationIcon);
+                UiConfigurationItem uiConfigurationItem = new UiConfigurationItem(displayedName,
+                        suggestion, networkPositionInBundle, INITIAL_RSSI_SIGNAL_LEVEL);
+                mUiToRequestedList.add(uiConfigurationItem);
             }
             networkPositionInBundle++;
         }
     }
 
-    private void setSingleNetworkSignalIcon() {
+    private void updateSingleNetworkSignalIcon(int level) {
         // TODO: Check level of the network to show signal icon.
         final Drawable wifiIcon = mActivity.getDrawable(
-                Utils.getWifiIconResource(MAX_RSSI_SIGNAL_LEVEL)).mutate();
+                Utils.getWifiIconResource(level)).mutate();
         final Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(
                 Utils.getColorAttr(mActivity, android.R.attr.colorControlNormal));
@@ -472,12 +482,14 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
         public final String mDisplayedSsid;
         public final WifiNetworkSuggestion mWifiNetworkSuggestion;
         public final int mIndex;
+        public int mLevel;
 
         UiConfigurationItem(String displayedSsid, WifiNetworkSuggestion wifiNetworkSuggestion,
-                int index) {
+                int index, int level) {
             mDisplayedSsid = displayedSsid;
             mWifiNetworkSuggestion = wifiNetworkSuggestion;
             mIndex = index;
+            mLevel = level;
         }
     }
 
@@ -515,7 +527,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
-                        com.android.settingslib.Utils.getWifiIconResource(MAX_RSSI_SIGNAL_LEVEL));
+                        com.android.settingslib.Utils.getWifiIconResource(
+                                uiConfigurationItem.mLevel));
                 drawable.setTintList(
                         com.android.settingslib.Utils.getColorAttr(getContext(),
                                 android.R.attr.colorControlNormal));
@@ -699,5 +712,47 @@ public class AddAppNetworksFragment extends InstrumentedFragment {
                 // Do nothing.
                 break;
         }
+    }
+
+    @Override
+    public void onWifiStateChanged(int state) {
+        // Do nothing
+    }
+
+    @Override
+    public void onConnectedChanged() {
+        // Do nothing
+    }
+
+    @VisibleForTesting
+    void updateScanResults(List<AccessPoint> allAccessPoints) {
+        if (mUiToRequestedList == null) {
+            // Nothing need to be updated.
+            return;
+        }
+
+        // Update the signal level of the UI networks.
+        for (UiConfigurationItem uiConfigurationItem : mUiToRequestedList) {
+            final Optional<AccessPoint> matchedAccessPoint = allAccessPoints
+                    .stream()
+                    .filter(accesspoint -> accesspoint.matches(
+                            uiConfigurationItem.mWifiNetworkSuggestion.wifiConfiguration))
+                    .findFirst();
+            uiConfigurationItem.mLevel =
+                    matchedAccessPoint.isPresent() ? matchedAccessPoint.get().getLevel() : 0;
+        }
+
+        if (mIsSingleNetwork) {
+            updateSingleNetworkSignalIcon(mUiToRequestedList.get(0).mLevel);
+        } else {
+            if (mUiConfigurationItemAdapter != null) {
+                mUiConfigurationItemAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
+    public void onAccessPointsChanged() {
+        updateScanResults(mWifiTracker.getAccessPoints());
     }
 }
