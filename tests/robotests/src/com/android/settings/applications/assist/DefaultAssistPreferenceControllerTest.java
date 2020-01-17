@@ -44,6 +44,7 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -94,6 +95,7 @@ public class DefaultAssistPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {ShadowSecureSettings.class})
     public void getDefaultAppInfo_hasDefaultAssist_shouldReturnKey() {
         final String flattenKey = "com.android.settings/assist";
