@@ -451,6 +451,12 @@ public class TetherSettings extends RestrictedSettingsFragment
                 }
 
                 @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !context.getResources().getBoolean(
+                            R.bool.config_show_all_in_one_tether_settings);
+                }
+
+                @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     final ConnectivityManager cm =

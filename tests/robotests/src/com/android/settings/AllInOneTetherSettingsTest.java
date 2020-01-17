@@ -69,18 +69,21 @@ public class AllInOneTetherSettingsTest {
     }
 
     @Test
-    public void getNonIndexableKeys_tetherAvailable_keysNotReturned() {
+    public void getNonIndexableKeys_tetherAvailable_keysReturned() {
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
         final List<String> niks =
                 AllInOneTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
-        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_TETHER_PREFS_SCREEN);
+        // TODO(b/147675042) Should revert these assertions, after switching to new UI.
+        // Because of the config check, we are not indexing these keys. Once we enable the config
+        // these assert would also need to change.
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_TETHER_PREFS_SCREEN);
     }
 
     @Test

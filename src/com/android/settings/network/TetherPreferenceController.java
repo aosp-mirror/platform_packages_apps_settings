@@ -109,6 +109,10 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
             // Grey out if provisioning is not available.
             mPreference.setEnabled(!TetherSettings.isProvisioningNeededButUnavailable(mContext));
+
+            if (mContext.getResources().getBoolean(R.bool.config_show_all_in_one_tether_settings)) {
+                mPreference.setFragment("com.android.settings.AllInOneTetherSettings");
+            }
         }
     }
 
