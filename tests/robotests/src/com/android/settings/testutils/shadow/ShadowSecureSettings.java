@@ -36,7 +36,7 @@ public class ShadowSecureSettings {
 
     @Implementation
     public static boolean putStringForUser(ContentResolver resolver, String name, String value,
-        String tag, boolean makeDefault, int userHandle) {
+        String tag, boolean makeDefault, int userHandle, boolean overrideableByRestore) {
         final Table<Integer, String, Object> userTable = getUserTable(resolver);
         synchronized (userTable) {
             if (value != null) {
