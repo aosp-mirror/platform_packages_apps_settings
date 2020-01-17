@@ -53,9 +53,12 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
     protected static final int[] CHANNEL_MODES = {BluetoothCodecConfig.CHANNEL_MODE_STEREO,
             BluetoothCodecConfig.CHANNEL_MODE_MONO};
 
+    protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+
     public AbstractBluetoothDialogPreferenceController(Context context, Lifecycle lifecycle,
                                                        BluetoothA2dpConfigStore store) {
         super(context, lifecycle, store);
+        mBluetoothA2dpConfigStore = store;
     }
 
     @Override
@@ -90,6 +93,25 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             return getDefaultIndex();
         }
         return getCurrentIndexByConfig(codecConfig);
+    }
+
+    @Override
+    public void onBluetoothServiceConnected(BluetoothA2dp bluetoothA2dp) {
+        super.onBluetoothServiceConnected(bluetoothA2dp);
+        initConfigStore();
+    }
+
+    private void initConfigStore() {
+        final BluetoothCodecConfig config = getCurrentCodecConfig();
+        if (config == null) {
+            return;
+        }
+        mBluetoothA2dpConfigStore.setCodecType(config.getCodecType());
+        mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
+        mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
+        mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());
+        mBluetoothA2dpConfigStore.setCodecPriority(config.getCodecPriority());
+        mBluetoothA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
     }
 
     /**
@@ -174,7 +196,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      *
      * @param enabled Is {@code true} when the setting is enabled.
      */
-    public void onHDAudioEnabled(boolean enabled) {};
+    public void onHDAudioEnabled(boolean enabled) {}
 
     static int getHighestCodec(BluetoothCodecConfig[] configs) {
         if (configs == null) {
