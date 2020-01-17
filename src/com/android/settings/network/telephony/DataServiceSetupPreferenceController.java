@@ -28,8 +28,6 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.PhoneConstants;
-
 /**
  * Preference controller for "Data service setup"
  */
@@ -49,14 +47,12 @@ public class DataServiceSetupPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final boolean isLteOnCdma = mTelephonyManager.getLteOnCdmaMode()
-                == PhoneConstants.LTE_ON_CDMA_TRUE;
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
-                && isLteOnCdma && !TextUtils.isEmpty(mSetupUrl)
+                && mTelephonyManager.isGlobalModeEnabled() && !TextUtils.isEmpty(mSetupUrl)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
