@@ -411,7 +411,7 @@ public class WifiConfigController2 implements TextWatcher,
                     }
 
                     addRow(group, R.string.wifi_security,
-                            WifiEntryShell.getSecurityString(mWifiEntry, false));
+                            mWifiEntry.getSecurityString(false /* concise */));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
                 if (mWifiEntry.isSaved()
