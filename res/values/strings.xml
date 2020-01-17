@@ -144,8 +144,6 @@
     <string name="bluetooth_lock_voice_dialing_summary">
       Prevent use of the bluetooth dialer when the screen is locked
     </string>
-    <!-- Bluetooth settings screen, heading above the list of nearby bluetooth devices -->
-    <string name="bluetooth_devices">Bluetooth devices</string>
     <!-- Bluetooth settings screen, title for the current bluetooth name setting -->
     <string name="bluetooth_device_name">Device name</string>
     <!-- Bluetooth settings screen, image description for device details button. This opens the screen to rename, unpair, etc. a single device. -->
@@ -11300,14 +11298,6 @@
     <string name="network_connection_searching_message">Searching for device\u2026</string>
     <!-- Message for Network connection connecting progress Dialog. Try to connect to wifi ap.[CHAR LIMIT=40] -->
     <string name="network_connection_connecting_message">Connecting to device\u2026</string>
-
-    <!-- Summary for bluetooth devices count in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
-    <plurals name="show_bluetooth_devices">
-        <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> device connected</item>
-        <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> devices connected</item>
-    </plurals>
-    <!-- Title for no bluetooth devices in Bluetooth devices slice. [CHAR LIMIT=NONE] -->
-    <string name="no_bluetooth_devices">No Bluetooth devices</string>
 
     <!-- Title for left bluetooth device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_left_name">Left</string>

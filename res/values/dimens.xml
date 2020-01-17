@@ -400,6 +400,8 @@
     <!-- Maximum height for SliceView, override on slices/view/src/main/res/values/dimens.xml -->
     <!-- A single Row Slice height is 60dp -->
     <dimen name="abc_slice_large_height">1200dp</dimen>
+    <!-- Min height of slice row view, override on slices/view/src/main/res/values/dimens.xml -->
+    <dimen name="abc_slice_row_min_height">@dimen/abc_slice_row_max_height</dimen>
 
     <!-- System navigation settings illustration height -->
     <dimen name="system_navigation_illustration_height">320dp</dimen>
