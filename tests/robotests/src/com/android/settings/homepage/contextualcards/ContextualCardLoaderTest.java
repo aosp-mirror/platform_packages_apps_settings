@@ -31,6 +31,7 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.Uri;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -108,6 +109,20 @@ public class ContextualCardLoaderTest {
 
         verify(mFakeFeatureFactory.metricsFeatureProvider, never()).action(any(),
                 eq(SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW), any(String.class));
+    }
+
+    @Test
+    public void getCardCount_noConfiguredCardCount_returnDefaultCardCount() {
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(DEFAULT_CARD_COUNT);
+    }
+
+    @Test
+    public void getCardCount_hasConfiguredCardCount_returnConfiguredCardCount() {
+        int configCount = 4;
+        Settings.Global.putLong(mContext.getContentResolver(),
+                ContextualCardLoader.CONTEXTUAL_CARD_COUNT, configCount);
+
+        assertThat(mContextualCardLoader.getCardCount()).isEqualTo(configCount);
     }
 
     private List<ContextualCard> getContextualCardList() {

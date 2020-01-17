@@ -305,6 +305,26 @@ final class AccessibilityUtil {
     }
 
     /**
+     * Gets the corresponding user shortcut type of a given accessibility service.
+     *
+     * @param context The current context.
+     * @param componentName The component name that need to be checked existed in Settings.
+     * @return The user shortcut type if component name existed in {@code UserShortcutType} string
+     * Settings.
+     */
+    static int getUserShortcutTypesFromSettings(Context context,
+            @NonNull ComponentName componentName) {
+        int shortcutTypes = UserShortcutType.DEFAULT;
+        if (hasValuesInSettings(context, UserShortcutType.SOFTWARE, componentName)) {
+            shortcutTypes |= UserShortcutType.SOFTWARE;
+        }
+        if (hasValuesInSettings(context, UserShortcutType.HARDWARE, componentName)) {
+            shortcutTypes |= UserShortcutType.HARDWARE;
+        }
+        return shortcutTypes;
+    }
+
+    /**
      * Converts {@link UserShortcutType} to key in Settings.
      *
      * @param shortcutType The shortcut type.

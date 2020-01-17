@@ -60,13 +60,13 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private static final String PREVIEW_PREFERENCE_KEY = "color_inversion_preview";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
-    private static final String DISPLAY_INVERSION_ENABLED =
-            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private final Handler mHandler = new Handler();
     private ShortcutPreference mShortcutPreference;
     private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
+    // Used to restore the edit dialog status.
+    private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
@@ -127,9 +127,15 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        initShortcutPreference(savedInstanceState);
+        // Restore the user shortcut type.
+        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
+            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
+                    UserShortcutType.DEFAULT);
+        }
+        initShortcutPreference();
+
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(DISPLAY_INVERSION_ENABLED);
+        enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -143,13 +149,14 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutType);
+        outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutTypeCache);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        updateShortcutPreferenceData();
         updateShortcutPreference();
     }
 
@@ -193,7 +200,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
-        checkBox.setChecked((mUserShortcutType & type) == type);
+        checkBox.setChecked((mUserShortcutTypeCache & type) == type);
         checkBox.setOnClickListener(v -> {
             updateUserShortcutType(/* saveChanges= */ false);
             updateAlertDialogEnableState();
@@ -201,14 +208,15 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
-        mUserShortcutType = UserShortcutType.DEFAULT;
+        mUserShortcutTypeCache = UserShortcutType.DEFAULT;
         if (mSoftwareTypeCheckBox.isChecked()) {
-            mUserShortcutType |= UserShortcutType.SOFTWARE;
+            mUserShortcutTypeCache |= UserShortcutType.SOFTWARE;
         }
         if (mHardwareTypeCheckBox.isChecked()) {
-            mUserShortcutType |= UserShortcutType.HARDWARE;
+            mUserShortcutTypeCache |= UserShortcutType.HARDWARE;
         }
         if (saveChanges) {
+            mUserShortcutType = mUserShortcutTypeCache;
             setUserShortcutType(getPrefContext(), mUserShortcutType);
         }
     }
@@ -271,14 +279,14 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateUserShortcutType(/* saveChanges= */ true);
-        mShortcutPreference.setSummary(
-                getShortcutTypeSummary(getPrefContext()));
         if (mShortcutPreference.getChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getContext(), mUserShortcutType,
                     getComponentName());
             AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
                     getComponentName());
         }
+        mShortcutPreference.setSummary(
+                getShortcutTypeSummary(getPrefContext()));
     }
 
     @Override
@@ -289,17 +297,19 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         return 0;
     }
 
-    private void initShortcutPreference(Bundle savedInstanceState) {
-        mUserShortcutType = getUserShortcutType(getPrefContext(),
-                UserShortcutType.SOFTWARE);
-
-        // Restore the user shortcut type
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutType = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.SOFTWARE);
+    private void updateShortcutPreferenceData() {
+        // Get the user shortcut type from settings provider.
+        mUserShortcutType = AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                getComponentName());
+        if (mUserShortcutType != UserShortcutType.DEFAULT) {
+            setUserShortcutType(getPrefContext(), mUserShortcutType);
+        } else {
+            //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
+            mUserShortcutType = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
         }
+    }
 
-        // Initial ShortcutPreference widget
+    private void initShortcutPreference() {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         mShortcutPreference = new ShortcutPreference(
                 preferenceScreen.getContext(), null);
@@ -307,11 +317,9 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
-        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
         // Put the shortcutPreference before previewPreference.
         mShortcutPreference.setOrder(previewPreference.getOrder() - 1);
-        // TODO(b/142530063): Check the new key to decide whether checkbox should be checked.
         preferenceScreen.addPreference(mShortcutPreference);
     }
 
@@ -325,6 +333,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
             shortcutPreference.setChecked(
                     AccessibilityUtil.hasValuesInSettings(getContext(), shortcutTypes,
                             getComponentName()));
+            shortcutPreference.setSummary(getShortcutTypeSummary(getContext()));
         }
     }
 
@@ -350,8 +359,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        mUserShortcutType = getUserShortcutType(getPrefContext(),
-                UserShortcutType.SOFTWARE);
+        mUserShortcutTypeCache = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
         showDialog(DIALOG_ID_EDIT_SHORTCUT);
     }
 

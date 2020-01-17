@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.util.FeatureFlagUtils;
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -70,10 +68,6 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             Context context, UserManager userManager) {
 
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.PERSONAL_WORK_PROFILE)) {
-            controllers.add(new NoSecondaryUserController(context));
-            return controllers;
-        }
         UserInfo primaryUser = userManager.getPrimaryUser();
         boolean addedUser = false;
         List<UserInfo> infos = userManager.getUsers();
@@ -84,8 +78,6 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             }
 
             if (info == null || Utils.isProfileOf(primaryUser, info)) {
-                controllers.add(
-                        new UserProfileController(context, info, USER_PROFILE_INSERTION_LOCATION));
                 continue;
             }
 

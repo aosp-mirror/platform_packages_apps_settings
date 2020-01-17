@@ -89,7 +89,6 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_APPEND = 1 << 10;
         int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
         int FLAG_FOR_WORK = 1 << 12;
-        int FLAG_NEED_FRAGMENT = 1 << 13;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -103,7 +102,6 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_APPEND = "staticPreferenceLocation";
     public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
     public static final String METADATA_FOR_WORK = "for_work";
-    public static final String METADATA_FRAGMENT = "fragment";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -252,10 +250,6 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_FOR_WORK,
                         isForWork(preferenceAttributes));
             }
-            if (hasFlag(flags, MetadataFlag.FLAG_NEED_FRAGMENT)) {
-                preferenceMetadata.putString(METADATA_FRAGMENT,
-                        getFragment(preferenceAttributes));
-            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -345,10 +339,5 @@ public class PreferenceXmlParserUtils {
     private static boolean isForWork(TypedArray styledAttributes) {
         return styledAttributes.getBoolean(
                 R.styleable.Preference_forWork, false);
-    }
-
-    private static String getFragment(TypedArray styledAttributes) {
-        return styledAttributes.getString(
-                com.android.internal.R.styleable.Preference_fragment);
     }
 }

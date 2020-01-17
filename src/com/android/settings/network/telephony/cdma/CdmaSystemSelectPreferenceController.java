@@ -23,7 +23,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.Phone;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
@@ -53,7 +52,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
         final int settingsNetworkMode = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
         listPreference.setEnabled(
                 settingsNetworkMode != TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
     }

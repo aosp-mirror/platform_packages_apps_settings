@@ -81,7 +81,6 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,7 +100,6 @@ import androidx.preference.PreferenceGroup;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.profileselector.ProfileFragmentBridge;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -1051,8 +1049,7 @@ public final class Utils extends com.android.settingslib.Utils {
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        if (FeatureFlagUtils.isEnabled(activity, FeatureFlags.PERSONAL_WORK_PROFILE)
-                && activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+        if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
                 && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
                 && !isWork && !isPersonal) {
             f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),

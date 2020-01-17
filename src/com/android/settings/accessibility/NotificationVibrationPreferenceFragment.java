@@ -21,13 +21,10 @@ import android.os.Vibrator;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 /**
  * Fragment for picking accessibility shortcut service
  */
-@SearchIndexable
 public class NotificationVibrationPreferenceFragment extends VibrationPreferenceFragment {
     @Override
     public int getMetricsCategory() {
@@ -62,7 +59,4 @@ public class NotificationVibrationPreferenceFragment extends VibrationPreference
         Vibrator vibrator = getContext().getSystemService(Vibrator.class);
         return vibrator.getDefaultNotificationVibrationIntensity();
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_notification_vibration_settings);
 }

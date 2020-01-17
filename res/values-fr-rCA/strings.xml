@@ -2057,14 +2057,14 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Préférences de sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="7749786933314473224">"Agrandissement"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Région d\'agrandissement"</string>
+    <!-- no translation found for accessibility_magnification_enable_mode_title (4390488034396824276) -->
+    <skip />
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Choisir la ou les régions d\'agrandissement que vous voulez utiliser quand vous agrandissez l\'écran"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Plein écran"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Partie de l\'écran"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="5139954486886669293">"Plein écran et partie de l\'écran"</string>
     <string name="accessibility_magnification_area_settings_full_screen" msgid="4189574224079433280">"Agrandir l\'écran entier"</string>
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Agrandir une partie de l\'écran"</string>
-    <string name="accessibility_magnification_window_control_switch_title" msgid="4926933143910288191">"Afficher l\'outil de déplacement"</string>
-    <string name="accessibility_magnification_window_control_switch_summary" msgid="7628270839775330328">"Montre un outil de contrôle semblable à une manette de jeu pour déplacer la région d\'agrandissement"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Agrandir en touchant 3 fois"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
@@ -3253,8 +3253,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> règles activées</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
-    <!-- no translation found for zen_mode_settings_summary (6040862775514495191) -->
-    <skip />
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des gens et des applications importants"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer la fonction « Ne pas déranger »"</string>
     <string name="zen_mode_behavior_settings_title" msgid="2511039563690605227">"Exceptions"</string>
@@ -3281,8 +3280,7 @@
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquer dérangements visuels"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Autoriser les signaux visuels"</string>
-    <!-- no translation found for zen_mode_settings_category (3794956668816783447) -->
-    <skip />
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Autoriser les interruptions qui émettent des sons"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Restreindre les notifications"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Aucun son des notifications"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vous verrez des notifications sur l\'écran"</string>
@@ -3343,18 +3341,12 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> horaire peut s\'activer automatiquement</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horaires peuvent s\'activer automatiquement</item>
     </plurals>
-    <!-- no translation found for zen_category_behavior (9188445582469977640) -->
-    <skip />
-    <!-- no translation found for zen_category_people (8252926021894933047) -->
-    <skip />
-    <!-- no translation found for zen_category_apps (1167374545618451925) -->
-    <skip />
-    <!-- no translation found for zen_category_exceptions (1316097981052752811) -->
-    <skip />
-    <!-- no translation found for zen_category_schedule (2003707171924226212) -->
-    <skip />
-    <!-- no translation found for zen_category_visuals (2875037337125038831) -->
-    <skip />
+    <string name="zen_category_behavior" msgid="9188445582469977640">"Exceptions quand la fonction Ne pas déranger est activée"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Personnes"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Applications"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes et autres interruptions"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Horaires"</string>
+    <string name="zen_category_visuals" msgid="2875037337125038831">"Notifications désactivées"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Lorsque le mode Ne pas déranger est activé, le son et les vibrations sont désactivés, sauf pour les éléments autorisés ci-dessus."</string>
     <string name="zen_sound_category_title" msgid="3092475944624375238">"Tout désactiver sauf"</string>
     <string name="zen_sound_all_muted" msgid="1134675098348493443">"Désactivés"</string>
@@ -3614,8 +3606,7 @@
       <item quantity="one"><xliff:g id="NUM_PEOPLE">%d</xliff:g> autre personne</item>
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> autres personnes</item>
     </plurals>
-    <!-- no translation found for zen_mode_conversations_title (5491912973456026379) -->
-    <skip />
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversations"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"Autoriser les messages"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Pour vous assurer que les messages autorisés émettent un son, vérifiez si votre appareil est réglé pour sonner, vibrer ou rester silencieux."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Pendant « <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> », les messages entrants sont bloqués. Vous pouvez régler les paramètres pour permettre à vos amis, à votre famille ou à d\'autres contacts de vous joindre."</string>
@@ -3630,25 +3621,19 @@
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Ne pas autoriser les appels"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Ne pas autoriser les messages"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmes"</string>
-    <!-- no translation found for zen_mode_alarms_summary (3388679177457223967) -->
-    <skip />
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Des minuteries, des alarmes, des systèmes de sécurité et d\'autres applications"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmes"</string>
-    <!-- no translation found for zen_mode_media (885017672250984735) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_summary (3052407079117545815) -->
-    <skip />
+    <string name="zen_mode_media" msgid="885017672250984735">"Sons des éléments multimédias"</string>
+    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Des vidéos, des jeux et d\'autres éléments multimédias"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"média"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Sons des touches"</string>
-    <!-- no translation found for zen_mode_system_summary (7905531918458452765) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7905531918458452765">"De votre clavier et des autres boutons"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sons des touches"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Rappels"</string>
-    <!-- no translation found for zen_mode_reminders_summary (3961627037429412382) -->
-    <skip />
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Des tâches et des rappels"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"rappels"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"Événements"</string>
-    <!-- no translation found for zen_mode_events_summary (3241903481309766428) -->
-    <skip />
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Des événements de l\'agenda à venir"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser les applications à ignorer le mode Ne pas déranger"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Exceptions des applications"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
