@@ -74,8 +74,8 @@ public class AddAppNetworksActivity extends FragmentActivity {
     void showAddNetworksFragment() {
         // TODO: Check the new intent status.
         mBundle.putString(KEY_CALLING_PACKAGE_NAME, getCallingPackage());
-        mBundle.putParcelableArrayList(Settings.EXTRA_WIFI_CONFIGURATION_LIST,
-                getIntent().getParcelableArrayListExtra(Settings.EXTRA_WIFI_CONFIGURATION_LIST));
+        mBundle.putParcelableArrayList(Settings.EXTRA_WIFI_NETWORK_LIST,
+                getIntent().getParcelableArrayListExtra(Settings.EXTRA_WIFI_NETWORK_LIST));
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(TAG);

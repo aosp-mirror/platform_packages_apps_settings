@@ -33,13 +33,11 @@ public abstract class AbstractBluetoothPreferenceController extends
         DeveloperOptionsPreferenceController implements BluetoothServiceConnectionListener,
         LifecycleObserver, OnDestroy {
 
-    protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
     protected volatile BluetoothA2dp mBluetoothA2dp;
 
     public AbstractBluetoothPreferenceController(Context context, Lifecycle lifecycle,
                                                  BluetoothA2dpConfigStore store) {
         super(context);
-        mBluetoothA2dpConfigStore = store;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }

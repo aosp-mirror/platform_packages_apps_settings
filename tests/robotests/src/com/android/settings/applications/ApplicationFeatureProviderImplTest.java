@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -37,12 +38,10 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.internal.telephony.euicc.EuiccConnector;
 import com.android.settings.testutils.ApplicationTestUtils;
 import com.android.settingslib.testutils.shadow.ShadowDefaultDialerManager;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,8 +50,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -107,12 +104,6 @@ public final class ApplicationFeatureProviderImplTest {
 
         mProvider = new ApplicationFeatureProviderImpl(mContext, mPackageManager,
                 mPackageManagerService, mDevicePolicyManager);
-    }
-
-    @After
-    @Config(shadows = {ShadowEuiccConnector.class})
-    public void tearDown() {
-        ShadowEuiccConnector.reset();
     }
 
     private void verifyCalculateNumberOfPolicyInstalledApps(boolean async) {
@@ -293,8 +284,7 @@ public final class ApplicationFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class,
-            ShadowEuiccConnector.class})
+    @Config(shadows = {ShadowSmsApplication.class, ShadowDefaultDialerManager.class})
     public void getKeepEnabledPackages_hasEuiccComponent_shouldContainEuiccPackage() {
         final String testDialer = "com.android.test.defaultdialer";
         final String testSms = "com.android.test.defaultsms";
@@ -305,7 +295,10 @@ public final class ApplicationFeatureProviderImplTest {
         ShadowDefaultDialerManager.setDefaultDialerApplication(testDialer);
         final ComponentInfo componentInfo = new ComponentInfo();
         componentInfo.packageName = testEuicc;
-        ShadowEuiccConnector.setBestComponent(componentInfo);
+
+        ApplicationFeatureProviderImpl spyProvider = spy(new ApplicationFeatureProviderImpl(
+                mContext, mPackageManager, mPackageManagerService, mDevicePolicyManager));
+        doReturn(componentInfo).when(spyProvider).findEuiccService(mPackageManager);
 
         // Spy the real context to mock LocationManager.
         Context spyContext = spy(RuntimeEnvironment.application);
@@ -314,7 +307,7 @@ public final class ApplicationFeatureProviderImplTest {
 
         ReflectionHelpers.setField(mProvider, "mContext", spyContext);
 
-        final Set<String> keepEnabledPackages = mProvider.getKeepEnabledPackages();
+        final Set<String> keepEnabledPackages = spyProvider.getKeepEnabledPackages();
 
         assertThat(keepEnabledPackages).contains(testEuicc);
     }
@@ -390,24 +383,5 @@ public final class ApplicationFeatureProviderImplTest {
         final ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.activityInfo = activityInfo;
         return resolveInfo;
-    }
-
-    @Implements(EuiccConnector.class)
-    public static class ShadowEuiccConnector {
-
-        private static ComponentInfo sBestComponent;
-
-        @Implementation
-        protected static ComponentInfo findBestComponent(PackageManager packageManager) {
-            return sBestComponent;
-        }
-
-        public static void setBestComponent(ComponentInfo componentInfo) {
-            sBestComponent = componentInfo;
-        }
-
-        public static void reset() {
-            sBestComponent = null;
-        }
     }
 }

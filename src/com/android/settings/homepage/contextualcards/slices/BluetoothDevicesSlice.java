@@ -19,6 +19,7 @@ package com.android.settings.homepage.contextualcards.slices;
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -184,7 +185,8 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
         // Get all connected devices and sort them.
         return cachedDevices.stream()
-                .filter(device -> device.getDevice().isConnected())
+                .filter(device -> device.getDevice().getBondState() == BluetoothDevice.BOND_BONDED
+                        && device.getDevice().isConnected())
                 .sorted(COMPARATOR).collect(Collectors.toList());
     }
 

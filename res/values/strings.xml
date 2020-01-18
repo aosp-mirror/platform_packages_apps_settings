@@ -4918,11 +4918,25 @@
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">Turn light screens dark so people who are sensitive to bright light can have a better viewing experience.\n\nNote: dark colors will turn light. Images will also be inverted.</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Dwell timing</string>
+    <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
-    <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_default_title">None</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_short_title">Short</string>
+    <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_short_summary">0.2 seconds</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its medium level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_medium_title">Medium</string>
+    <!-- Option summary text for the auto click delay 0.6 seconds radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_medium_summary">0.6 seconds</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its long level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_long_title">Long</string>
+    <!-- Option summary text for the auto click delay 1 second radio button. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_long_summary">1 second</string>
+    <!-- Option heading to leave the auto click requirement for accessibility users at its custom level. [CHAR LIMIT=35] -->
+    <string name="accessibility_autoclick_custom_title">Custom</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->

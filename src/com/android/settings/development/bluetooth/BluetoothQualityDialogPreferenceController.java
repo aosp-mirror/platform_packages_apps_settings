@@ -57,7 +57,7 @@ public class BluetoothQualityDialogPreferenceController extends
 
     @Override
     protected void writeConfigurationValues(final int index) {
-        int codecSpecific1Value = 0; // default
+        long codecSpecific1Value = 0; // default
         switch (index) {
             case 0:
             case 1:
