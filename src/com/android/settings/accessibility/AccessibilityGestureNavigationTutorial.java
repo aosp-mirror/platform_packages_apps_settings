@@ -27,7 +27,6 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.Window;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -117,13 +116,13 @@ public class AccessibilityGestureNavigationTutorial {
                         R.id.gesture_tutorial_video);
                 final TextView gestureTutorialMessage = content.findViewById(
                         R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, isTouchExploreOn(context)
+                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
                                 ? R.raw.illustration_accessibility_gesture_three_finger
                                 : R.raw.illustration_accessibility_gesture_two_finger,
                         gestureTutorialVideo);
-                gestureTutorialMessage.setText(isTouchExploreOn(context)
-                        ? R.string.accessibility_tutorial_dialog_message_gesture_with_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture_without_talkback);
+                gestureTutorialMessage.setText(AccessibilityUtil.isTouchExploreEnabled(context)
+                        ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
+                        : R.string.accessibility_tutorial_dialog_message_gesture);
                 break;
             case DialogType.GESTURE_NAVIGATION_SETTINGS:
                 content = inflater.inflate(
@@ -132,14 +131,14 @@ public class AccessibilityGestureNavigationTutorial {
                         R.id.gesture_tutorial_video);
                 final TextView gestureSettingsTutorialMessage = content.findViewById(
                         R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, isTouchExploreOn(context)
+                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
                                 ? R.raw.illustration_accessibility_gesture_three_finger
                                 : R.raw.illustration_accessibility_gesture_two_finger,
                         gestureSettingsTutorialVideo);
-                gestureSettingsTutorialMessage.setText(isTouchExploreOn(context)
-                        ?
-                        R.string.accessibility_tutorial_dialog_message_gesture_settings_with_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture_settings_without_talkback);
+                final int stringResId = AccessibilityUtil.isTouchExploreEnabled(context)
+                        ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
+                        : R.string.accessibility_tutorial_dialog_message_gesture_settings;
+                gestureSettingsTutorialMessage.setText(stringResId);
                 break;
         }
 
@@ -202,10 +201,5 @@ public class AccessibilityGestureNavigationTutorial {
         final int colorResId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
         return colorResId;
-    }
-
-    private static boolean isTouchExploreOn(Context context) {
-        return ((AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE))
-                .isTouchExplorationEnabled();
     }
 }

@@ -35,10 +35,13 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 
 import androidx.preference.PreferenceCategory;
@@ -67,6 +70,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
     private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
@@ -115,6 +119,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            removeDialog(DialogType.EDIT_SHORTCUT);
+            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+        };
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Restore the user shortcut type.
         if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
@@ -122,6 +136,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     UserShortcutType.DEFAULT);
         }
         initShortcutPreference();
+
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -134,7 +149,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onResume() {
         super.onResume();
+
         mSettingsContentObserver.register(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         updateSwitchBarToggleSwitch();
         updateShortcutPreferenceData();
         updateShortcutPreference();
@@ -143,6 +163,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         super.onPause();
     }
 
@@ -284,10 +308,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
-        final CharSequence softwareTitle =
-                context.getText(AccessibilityUtil.isGestureNavigateEnabled(context)
-                ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
-                : R.string.accessibility_shortcut_edit_dialog_title_software);
+        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
+        }
+        final CharSequence softwareTitle = context.getText(resId);
 
         List<CharSequence> list = new ArrayList<>();
         if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {

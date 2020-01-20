@@ -33,8 +33,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
@@ -65,6 +69,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
     private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
@@ -165,6 +170,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            removeDialog(DialogType.EDIT_SHORTCUT);
+            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+        };
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         mVideoPreference = new VideoPreference(getPrefContext());
@@ -174,6 +189,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         preferenceScreen.addPreference(mVideoPreference);
 
         initShortcutPreference();
+
         mSettingsPreference = new Preference(getPrefContext());
         mSettingsPreference.setTitle(R.string.accessibility_magnification_service_settings_title);
         mSettingsPreference.setKey(SETTINGS_KEY);
@@ -206,6 +222,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     public void onResume() {
         super.onResume();
 
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         VideoView videoView = (VideoView) getView().findViewById(R.id.video);
         if (videoView != null) {
             videoView.start();
@@ -214,6 +234,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         updateConfigurationWarningIfNeeded();
         updateShortcutPreferenceData();
         updateShortcutPreference();
+    }
+
+    @Override
+    public void onPause() {
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
+        super.onPause();
     }
 
     @Override
@@ -226,7 +255,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return AccessibilityGestureNavigationTutorial
                         .showAccessibilityButtonTutorialDialog(getActivity());
             case DialogType.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getActivity().getString(
+                final CharSequence dialogTitle = getActivity().getText(
                         R.string.accessibility_shortcut_edit_dialog_title_magnification);
                 final AlertDialog dialog =
                         AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
@@ -323,10 +352,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.DEFAULT);
-        final CharSequence softwareTitle =
-                context.getText(AccessibilityUtil.isGestureNavigateEnabled(context)
-                        ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
-                        : R.string.accessibility_shortcut_edit_dialog_title_software);
+        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
+        }
+        final CharSequence softwareTitle = context.getText(resId);
 
         List<CharSequence> list = new ArrayList<>();
         if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
