@@ -32,6 +32,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -77,15 +79,19 @@ public class PanelFragment extends Fragment {
      */
     private static final int DURATION_SLICE_BINDING_TIMEOUT_MS = 250;
 
-    private View mLayoutView;
+    @VisibleForTesting
+    View mLayoutView;
     private TextView mTitleView;
     private Button mSeeMoreButton;
     private Button mDoneButton;
     private RecyclerView mPanelSlices;
-
     private PanelContent mPanel;
     private MetricsFeatureProvider mMetricsProvider;
     private String mPanelClosedKey;
+    private LinearLayout mPanelHeader;
+    private ImageView mTitleIcon;
+    private TextView mHeaderTitle;
+    private TextView mHeaderSubtitle;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -155,6 +161,10 @@ public class PanelFragment extends Fragment {
         mSeeMoreButton = mLayoutView.findViewById(R.id.see_more);
         mDoneButton = mLayoutView.findViewById(R.id.done);
         mTitleView = mLayoutView.findViewById(R.id.panel_title);
+        mPanelHeader = mLayoutView.findViewById(R.id.panel_header);
+        mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
+        mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
+        mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -182,7 +192,16 @@ public class PanelFragment extends Fragment {
         // Start loading Slices. When finished, the Panel will animate in.
         loadAllSlices();
 
-        mTitleView.setText(mPanel.getTitle());
+        final int iconRes = mPanel.getIcon();
+        if (iconRes == -1) {
+            mTitleView.setText(mPanel.getTitle());
+        } else {
+            mTitleView.setVisibility(View.GONE);
+            mPanelHeader.setVisibility(View.VISIBLE);
+            mTitleIcon.setImageResource(iconRes);
+            mHeaderTitle.setText(mPanel.getTitle());
+            mHeaderSubtitle.setText(mPanel.getSubTitle());
+        }
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 

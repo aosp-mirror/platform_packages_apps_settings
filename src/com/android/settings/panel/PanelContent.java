@@ -29,6 +29,20 @@ import java.util.List;
 public interface PanelContent extends Instrumentable {
 
     /**
+     * @return a icon resource for the title of the Panel.
+     */
+    default int getIcon() {
+        return -1;
+    }
+
+    /**
+     * @return a string for the subtitle of the Panel.
+     */
+    default CharSequence getSubTitle() {
+        return null;
+    }
+
+    /**
      * @return a string for the title of the Panel.
      */
     CharSequence getTitle();
