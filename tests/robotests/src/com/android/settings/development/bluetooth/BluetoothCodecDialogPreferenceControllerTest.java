@@ -18,6 +18,7 @@ package com.android.settings.development.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -114,9 +115,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(1);
-        //TODO(b/147861843): mark this test to fix build break first.
-        /*verify(mBluetoothA2dpConfigStore)
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC);*/
+        verify(mBluetoothA2dpConfigStore, atLeastOnce()).setCodecType(
+                BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC);
 
         mController.writeConfigurationValues(2);
         verify(mBluetoothA2dpConfigStore).setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC);
@@ -142,14 +142,14 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.writeConfigurationValues(2);
 
-        //TODO(b/147861843): mark this test to fix build break first.
-        /*verify(mBluetoothA2dpConfigStore).setCodecPriority(
-                BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);*/
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_88200);
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
-        //TODO(b/147861843): mark this test to fix build break first.
-        /*verify(mBluetoothA2dpConfigStore)
-                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO);*/
+        verify(mBluetoothA2dpConfigStore, atLeastOnce()).setCodecPriority(
+                BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        verify(mBluetoothA2dpConfigStore, atLeastOnce()).setSampleRate(
+                BluetoothCodecConfig.SAMPLE_RATE_88200);
+        verify(mBluetoothA2dpConfigStore, atLeastOnce()).setBitsPerSample(
+                BluetoothCodecConfig.BITS_PER_SAMPLE_24);
+        verify(mBluetoothA2dpConfigStore, atLeastOnce()).setChannelMode(
+                BluetoothCodecConfig.CHANNEL_MODE_STEREO);
     }
 
     @Test
