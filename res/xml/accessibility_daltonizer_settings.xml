@@ -26,31 +26,43 @@
         android:persistent="false"
         android:selectable="false"
         android:title="@string/summary_placeholder"
+        settings:allowDividerBelow="true"
         settings:searchable="false"/>
 
-    <com.android.settingslib.widget.RadioButtonPreference
-        android:key="daltonizer_mode_deuteranomaly"
-        android:persistent="false"
-        android:summary="@string/daltonizer_mode_deuteranomaly_summary"
-        android:title="@string/daltonizer_mode_deuteranomaly_title"
-        settings:allowDividerAbove="true" />
+    <PreferenceCategory
+        android:title="@string/daltonizer_type"
+        android:key="daltonizer_mode_category" >
 
-    <com.android.settingslib.widget.RadioButtonPreference
-        android:key="daltonizer_mode_protanomaly"
-        android:persistent="false"
-        android:summary="@string/daltonizer_mode_protanomaly_summary"
-        android:title="@string/daltonizer_mode_protanomaly_title" />
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_deuteranomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_deuteranomaly_summary"
+            android:title="@string/daltonizer_mode_deuteranomaly_title" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
-        android:key="daltonizer_mode_tritanomaly"
-        android:persistent="false"
-        android:summary="@string/daltonizer_mode_tritanomaly_summary"
-        android:title="@string/daltonizer_mode_tritanomaly_title" />
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_protanomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_protanomaly_summary"
+            android:title="@string/daltonizer_mode_protanomaly_title" />
 
-    <com.android.settingslib.widget.FooterPreference
-        android:key="daltonizer_footer"
-        android:persistent="false"
-        android:selectable="false"
-        android:title="@string/accessibility_display_daltonizer_preference_subtitle"
-        settings:searchable="false" />
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="daltonizer_mode_tritanomaly"
+            android:persistent="false"
+            android:summary="@string/daltonizer_mode_tritanomaly_summary"
+            android:title="@string/daltonizer_mode_tritanomaly_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="daltonizer_footer_category" >
+
+        <com.android.settingslib.widget.FooterPreference
+            android:key="daltonizer_footer"
+            android:persistent="false"
+            android:selectable="false"
+            settings:allowDividerAbove="false"
+            android:title="@string/accessibility_display_daltonizer_preference_subtitle"
+            settings:searchable="false" />
+
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -33,9 +33,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -67,7 +65,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
-    private ShortcutPreference mShortcutPreference;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
     private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
@@ -84,6 +81,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     protected Preference mConfigWarningPreference;
     protected VideoPreference mVideoPreference;
+
     protected class VideoPreference extends Preference {
         private ImageView mVideoBackgroundView;
         private OnGlobalLayoutListener mLayoutListener;
@@ -167,52 +165,35 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         mVideoPreference = new VideoPreference(getPrefContext());
         mVideoPreference.setSelectable(false);
         mVideoPreference.setPersistent(false);
         mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
+        preferenceScreen.addPreference(mVideoPreference);
 
-        final PreferenceCategory optionCategory = new PreferenceCategory(getPrefContext());
-        optionCategory.setTitle(R.string.accessibility_screen_option);
-
-        // Restore the user shortcut type.
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.DEFAULT);
-        }
         initShortcutPreference();
+        mSettingsPreference = new Preference(getPrefContext());
+        mSettingsPreference.setTitle(R.string.accessibility_magnification_service_settings_title);
+        mSettingsPreference.setKey(SETTINGS_KEY);
+        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        mSettingsPreference.setPersistent(false);
 
-        final Preference settingsPreference = new Preference(getPrefContext());
-        settingsPreference.setTitle(R.string.accessibility_magnification_service_settings_title);
-        settingsPreference.setKey(SETTINGS_KEY);
-        settingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
-        settingsPreference.setPersistent(false);
-
-        final PreferenceCategory aboutCategory = new PreferenceCategory(getPrefContext());
-        aboutCategory.setTitle(R.string.accessibility_screen_magnification_about);
+        super.onViewCreated(view, savedInstanceState);
 
         mConfigWarningPreference = new Preference(getPrefContext());
         mConfigWarningPreference.setSelectable(false);
         mConfigWarningPreference.setPersistent(false);
         mConfigWarningPreference.setVisible(false);
-        mConfigWarningPreference.setIcon(R.drawable.ic_warning_24dp);
+        preferenceScreen.addPreference(mConfigWarningPreference);
+    }
 
-        final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
-        preferenceScreen.setOrderingAsAdded(false);
-        mVideoPreference.setOrder(0);
-        optionCategory.setOrder(1);
-        aboutCategory.setOrder(2);
-        preferenceScreen.addPreference(mVideoPreference);
-        preferenceScreen.addPreference(optionCategory);
-        optionCategory.addPreference(mShortcutPreference);
-        optionCategory.addPreference(settingsPreference);
-        preferenceScreen.addPreference(aboutCategory);
-        aboutCategory.addPreference(mConfigWarningPreference);
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+    @Override
+    protected void updateFooterTitle(PreferenceCategory category) {
+        final String titleText = getString(R.string.accessibility_footer_title,
+                getString(R.string.accessibility_screen_magnification_title));
+        category.setTitle(titleText);
     }
 
     @Override

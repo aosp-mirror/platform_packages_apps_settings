@@ -36,6 +36,7 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -58,11 +59,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
     private static final String PREVIEW_PREFERENCE_KEY = "color_inversion_preview";
+    private static final String CATEGORY_FOOTER_KEY = "color_inversion_footer_category";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private final Handler mHandler = new Handler();
-    private ShortcutPreference mShortcutPreference;
     private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
@@ -110,6 +111,13 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
+    protected void updateFooterTitle(PreferenceCategory category) {
+        final String titleText = getString(R.string.accessibility_footer_title,
+                getString(R.string.accessibility_display_inversion_preference_title));
+        category.setTitle(titleText);
+    }
+
+    @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         Settings.Secure.putInt(getContentResolver(), ENABLED, isChecked ? State.ON : State.OFF);
     }
@@ -125,13 +133,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Restore the user shortcut type.
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.DEFAULT);
-        }
-        initShortcutPreference();
-
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -143,6 +144,25 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
             }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        // Restore the user shortcut type.
+        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
+            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
+                    UserShortcutType.DEFAULT);
+        }
+        initShortcutPreference();
+
+        super.onViewCreated(view, savedInstanceState);
+
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.setOrderingAsAdded(false);
+        final PreferenceCategory footerCategory = preferenceScreen.findPreference(
+                CATEGORY_FOOTER_KEY);
+        updateFooterTitle(footerCategory);
+        footerCategory.setOrder(Integer.MAX_VALUE);
     }
 
     @Override
@@ -316,9 +336,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
         mShortcutPreference.setOnClickListener(this);
-        // Put the shortcutPreference before previewPreference.
-        mShortcutPreference.setOrder(previewPreference.getOrder() - 1);
-        preferenceScreen.addPreference(mShortcutPreference);
     }
 
     private void updateShortcutPreference() {

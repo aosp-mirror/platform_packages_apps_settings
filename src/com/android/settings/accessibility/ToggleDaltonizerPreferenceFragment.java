@@ -37,6 +37,7 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -47,7 +48,6 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -61,13 +61,12 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         SwitchBar.OnSwitchChangeListener, ShortcutPreference.OnClickListener {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
-    private static final String PREFERENCE_KEY = "daltonizer_mode_deuteranomaly";
+    private static final String CATEGORY_FOOTER_KEY = "daltonizer_footer_category";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private final Handler mHandler = new Handler();
-    private ShortcutPreference mShortcutPreference;
     private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
@@ -100,13 +99,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Restore the user shortcut type.
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.DEFAULT);
-        }
-        initShortcutPreference();
-
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -118,6 +110,25 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
             }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        // Restore the user shortcut type.
+        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
+            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
+                    UserShortcutType.DEFAULT);
+        }
+        initShortcutPreference();
+
+        super.onViewCreated(view, savedInstanceState);
+
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.setOrderingAsAdded(false);
+        final PreferenceCategory footerCategory = preferenceScreen.findPreference(
+                CATEGORY_FOOTER_KEY);
+        updateFooterTitle(footerCategory);
+        footerCategory.setOrder(Integer.MAX_VALUE);
     }
 
     @Override
@@ -330,6 +341,13 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
+    protected void updateFooterTitle(PreferenceCategory category) {
+        final String titleText = getString(R.string.accessibility_footer_title,
+                        getString(R.string.accessibility_display_daltonizer_preference_title));
+        category.setTitle(titleText);
+    }
+
+    @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         Settings.Secure.putInt(getContentResolver(), ENABLED, isChecked ? State.ON : State.OFF);
     }
@@ -369,10 +387,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
-        final RadioButtonPreference radioButtonPreference = findPreference(PREFERENCE_KEY);
-        // Put the shortcutPreference before radioButtonPreference.
-        mShortcutPreference.setOrder(radioButtonPreference.getOrder() - 1);
-        preferenceScreen.addPreference(mShortcutPreference);
     }
 
     private void updateShortcutPreferenceData() {
