@@ -54,7 +54,6 @@ import java.util.Set;
 public class SliceContextualCardRenderer implements ContextualCardRenderer, LifecycleObserver {
     public static final int VIEW_TYPE_FULL_WIDTH = R.layout.contextual_slice_full_tile;
     public static final int VIEW_TYPE_HALF_WIDTH = R.layout.contextual_slice_half_tile;
-    public static final int VIEW_TYPE_DEFERRED_SETUP = R.layout.contextual_slice_deferred_setup;
 
     private static final String TAG = "SliceCardRenderer";
 
@@ -66,7 +65,6 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
     private final Context mContext;
     private final LifecycleOwner mLifecycleOwner;
     private final ControllerRendererPool mControllerRendererPool;
-    private final SliceDeferredSetupCardRendererHelper mDeferredSetupCardHelper;
     private final SliceFullCardRendererHelper mFullCardHelper;
     private final SliceHalfCardRendererHelper mHalfCardHelper;
 
@@ -80,14 +78,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         mLifecycleOwner.getLifecycle().addObserver(this);
         mFullCardHelper = new SliceFullCardRendererHelper(context);
         mHalfCardHelper = new SliceHalfCardRendererHelper(context);
-        mDeferredSetupCardHelper = new SliceDeferredSetupCardRendererHelper(context);
     }
 
     @Override
     public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
-        if (viewType == VIEW_TYPE_DEFERRED_SETUP) {
-            return mDeferredSetupCardHelper.createViewHolder(view);
-        } else if (viewType == VIEW_TYPE_HALF_WIDTH) {
+        if (viewType == VIEW_TYPE_HALF_WIDTH) {
             return mHalfCardHelper.createViewHolder(view);
         }
         return mFullCardHelper.createViewHolder(view);
@@ -132,9 +127,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 return;
             }
 
-            if (holder.getItemViewType() == VIEW_TYPE_DEFERRED_SETUP) {
-                mDeferredSetupCardHelper.bindView(holder, card, slice);
-            } else if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
+            if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
                 mHalfCardHelper.bindView(holder, card, slice);
             } else {
                 mFullCardHelper.bindView(holder, card, slice);
@@ -144,13 +137,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             }
         });
 
-        if (holder.getItemViewType()
-                == VIEW_TYPE_DEFERRED_SETUP) {// Deferred setup is never dismissible.
-        } else if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
-            initDismissalActions(holder, card);
-        } else {
-            initDismissalActions(holder, card);
-        }
+        initDismissalActions(holder, card);
 
         if (card.isPendingDismiss()) {
             showDismissalView(holder);

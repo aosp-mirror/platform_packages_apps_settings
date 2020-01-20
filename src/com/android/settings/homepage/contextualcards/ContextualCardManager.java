@@ -17,7 +17,6 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
-import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -309,9 +308,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         if (cards.isEmpty()) {
             return cards;
         }
-
-        final List<ContextualCard> result = getCardsWithDeferredSetupViewType(cards);
-        return getCardsWithSuggestionViewType(result);
+        return getCardsWithSuggestionViewType(cards);
     }
 
     @VisibleForTesting
@@ -336,22 +333,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
                 result.set(index, current.mutate().setViewType(
                         SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH).build());
                 index++;
-            }
-        }
-        return result;
-    }
-
-    private List<ContextualCard> getCardsWithDeferredSetupViewType(List<ContextualCard> cards) {
-        // Find the deferred setup card and assign it with proper view type.
-        // Reason: The returned card list will mix deferred setup card and other suggestion cards
-        // after device running 1 days.
-        final List<ContextualCard> result = new ArrayList<>(cards);
-        for (int index = 0; index < result.size(); index++) {
-            final ContextualCard card = cards.get(index);
-            if (card.getCategory() == DEFERRED_SETUP_VALUE) {
-                result.set(index, card.mutate().setViewType(
-                        SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP).build());
-                return result;
             }
         }
         return result;
