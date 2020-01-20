@@ -10598,13 +10598,15 @@
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
     <string name="platform_compat_dashboard_title">App Compatibility Changes</string>
     <!-- Summary for App Compatibility Changes dashboard [CHAR LIMIT=NONE] -->
-    <string name="platform_compat_dashboard_summary">Modify app compatibility change overrides</string>
+    <string name="platform_compat_dashboard_summary">Toggle app compatibility changes</string>
+    <!-- Summary for selected app [DO NOT TRANSLATE] -->
+    <string name="platform_compat_selected_app_summary" translatable="false"><xliff:g id="app_name" example="com.google.android.chrome">%1$s</xliff:g> targetSdkVersion <xliff:g id="number" example="29">%2$d</xliff:g></string>
     <!-- Title for default enabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_enabled_title">Default enabled changes</string>
     <!-- Title for default disabled app compat changes category [CHAR LIMIT=50] -->
     <string name="platform_compat_default_disabled_title">Default disabled changes</string>
-    <!-- Title for target SDK gated app compat changes category [CHAR LIMIT=50] -->
-    <string name="platform_compat_target_sdk_title">Enabled after SDK <xliff:g id="number" example="29">%d</xliff:g></string>
+    <!-- Title for target SDK gated app compat changes category (do not translate 'targetSdkVersion') [CHAR LIMIT=50] -->
+    <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt; <xliff:g id="number" example="29">%d</xliff:g></string>
 
     <!-- Slices Strings -->
 
