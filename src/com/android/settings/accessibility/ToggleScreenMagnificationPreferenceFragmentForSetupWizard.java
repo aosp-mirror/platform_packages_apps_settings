@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         extends ToggleScreenMagnificationPreferenceFragment {
@@ -40,5 +41,13 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
             }
         }
         super.onStop();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Hide the setting from the vision settings.
+        mSettingsPreference.setVisible(false);
     }
 }
