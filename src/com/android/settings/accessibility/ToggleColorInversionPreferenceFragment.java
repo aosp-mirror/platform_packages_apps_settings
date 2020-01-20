@@ -105,10 +105,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void updateSwitchBarText(SwitchBar switchBar) {
-        final String switchBarText = getString(
-                R.string.accessibility_display_inversion_switch_title,
-                getString(R.string.accessibility_display_inversion_switch_title));
-        switchBar.setSwitchBarText(switchBarText, switchBarText);
+        switchBar.setSwitchBarText(R.string.accessibility_display_inversion_switch_title,
+                R.string.accessibility_display_inversion_switch_title);
     }
 
     @Override
