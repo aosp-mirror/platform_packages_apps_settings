@@ -54,6 +54,7 @@ import java.util.Set;
 public class SliceContextualCardRenderer implements ContextualCardRenderer, LifecycleObserver {
     public static final int VIEW_TYPE_FULL_WIDTH = R.layout.contextual_slice_full_tile;
     public static final int VIEW_TYPE_HALF_WIDTH = R.layout.contextual_slice_half_tile;
+    public static final int VIEW_TYPE_STICKY = R.layout.contextual_slice_sticky_tile;
 
     private static final String TAG = "SliceCardRenderer";
 
@@ -137,7 +138,9 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             }
         });
 
-        initDismissalActions(holder, card);
+        if (holder.getItemViewType() != VIEW_TYPE_STICKY) {
+            initDismissalActions(holder, card);
+        }
 
         if (card.isPendingDismiss()) {
             showDismissalView(holder);

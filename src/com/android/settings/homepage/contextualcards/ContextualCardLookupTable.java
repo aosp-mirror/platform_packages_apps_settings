@@ -87,6 +87,10 @@ public class ContextualCardLookupTable {
                         SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH,
                         SliceContextualCardController.class,
                         SliceContextualCardRenderer.class));
+                add(new ControllerRendererMapping(CardType.SLICE,
+                        SliceContextualCardRenderer.VIEW_TYPE_STICKY,
+                        SliceContextualCardController.class,
+                        SliceContextualCardRenderer.class));
                 add(new ControllerRendererMapping(CardType.CONDITIONAL_FOOTER,
                         ConditionFooterContextualCardRenderer.VIEW_TYPE,
                         ConditionContextualCardController.class,
