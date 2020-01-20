@@ -193,7 +193,7 @@ public class PanelFragment extends Fragment {
         loadAllSlices();
 
         final int iconRes = mPanel.getIcon();
-        if (iconRes == -1) {
+        if (iconRes == PanelContent.ICON_UNAVAILABLE) {
             mTitleView.setText(mPanel.getTitle());
         } else {
             mTitleView.setVisibility(View.GONE);
