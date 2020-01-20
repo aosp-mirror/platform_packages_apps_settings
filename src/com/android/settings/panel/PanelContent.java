@@ -28,11 +28,13 @@ import java.util.List;
  */
 public interface PanelContent extends Instrumentable {
 
+    int ICON_UNAVAILABLE = -1;
+
     /**
      * @return a icon resource for the title of the Panel.
      */
     default int getIcon() {
-        return -1;
+        return ICON_UNAVAILABLE;
     }
 
     /**
