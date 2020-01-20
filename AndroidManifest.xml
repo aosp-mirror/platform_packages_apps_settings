@@ -2858,8 +2858,7 @@
 
         <activity
             android:name="Settings$AppManageExternalStorageActivity"
-            android:label="@string/manage_external_storage_title"
-            android:permission="android.permission.MANAGE_EXTERNAL_STORAGE">
+            android:label="@string/manage_external_storage_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION" />
                 <category android:name="android.intent.category.DEFAULT" />
