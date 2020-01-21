@@ -105,7 +105,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         switchPreference.setVisible(videoCallEnabled);
         if (videoCallEnabled) {
             final boolean videoCallEditable = queryVoLteState(mSubId).isEnabledByUser()
-                    && mImsManager.isNonTtyOrTtyOnVolteEnabled();
+                    && queryImsState(mSubId).isAllowUserControl();
             preference.setEnabled(videoCallEditable
                     && mCallState == TelephonyManager.CALL_STATE_IDLE);
             switchPreference.setChecked(videoCallEditable && isChecked());

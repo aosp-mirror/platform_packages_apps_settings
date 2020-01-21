@@ -19,13 +19,12 @@ package com.android.settings.network.ims;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Controller class for querying VT status
  */
-public class VtQueryImsState {
+public class VtQueryImsState extends ImsQueryController {
 
     private Context mContext;
     private int mSubId;
@@ -42,6 +41,27 @@ public class VtQueryImsState {
     }
 
     /**
+     * Implementation of ImsQueryController#isEnabledByUser(int subId)
+     */
+    @VisibleForTesting
+    ImsDirectQuery isEnabledByUser(int subId) {
+        return new ImsQueryVtUserSetting(subId);
+    }
+
+    /**
+     * Get allowance status for user to alter configuration
+     *
+     * @return true when changing configuration by user is allowed.
+     */
+    public boolean isAllowUserControl() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        return ((!isSystemTtyEnabled(mContext).directQuery())
+                || (isTtyOnVolteEnabled(mSubId).directQuery()));
+    }
+
+    /**
      * Get user's configuration
      *
      * @return true when user's configuration is ON otherwise false.
@@ -50,8 +70,6 @@ public class VtQueryImsState {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        ImsManager imsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
-                    mContext, mSubId));
-        return imsManager.isVtEnabledByUser();
+        return isEnabledByUser(mSubId).directQuery();
     }
 }
