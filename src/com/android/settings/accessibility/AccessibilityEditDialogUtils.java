@@ -171,7 +171,7 @@ public class AccessibilityEditDialogUtils {
 
     private static void initMagnifyFullScreen(Context context, View view) {
         final View dialogView = view.findViewById(R.id.magnify_full_screen);
-        final String title = context.getString(
+        final CharSequence title = context.getText(
                 R.string.accessibility_magnification_area_settings_full_screen);
         // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
         setupShortcutWidget(dialogView, title, R.drawable.accessibility_magnification_full_screen);
@@ -179,7 +179,7 @@ public class AccessibilityEditDialogUtils {
 
     private static void initMagnifyWindowScreen(Context context, View view) {
         final View dialogView = view.findViewById(R.id.magnify_window_screen);
-        final String title = context.getString(
+        final CharSequence title = context.getText(
                 R.string.accessibility_magnification_area_settings_window_screen);
         // TODO(b/146019459): Use vector drawable instead of temporal png file to avoid distorted.
         setupShortcutWidget(dialogView, title,
@@ -214,9 +214,9 @@ public class AccessibilityEditDialogUtils {
 
     private static void initHardwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.hardware_shortcut);
-        final String title = context.getString(
+        final CharSequence title = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_title_hardware);
-        final String summary = context.getString(
+        final CharSequence summary = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
                 R.drawable.accessibility_shortcut_type_hardware);
@@ -225,9 +225,9 @@ public class AccessibilityEditDialogUtils {
 
     private static void initMagnifyShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.triple_tap_shortcut);
-        final String title = context.getString(
+        final CharSequence title = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_title_triple_tap);
-        final String summary = context.getString(
+        final CharSequence summary = context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_triple_tap);
         setupShortcutWidget(dialogView, title, summary,
                 R.drawable.accessibility_shortcut_type_triple_tap);
@@ -244,23 +244,34 @@ public class AccessibilityEditDialogUtils {
     }
 
     private static CharSequence retrieveTitle(Context context) {
-        return context.getString(AccessibilityUtil.isGestureNavigateEnabled(context)
-                ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
-                : R.string.accessibility_shortcut_edit_dialog_title_software);
+        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
+        }
+        return context.getText(resId);
     }
 
     private static CharSequence retrieveSummary(Context context, int lineHeight) {
-        return AccessibilityUtil.isGestureNavigateEnabled(context)
-                ? context.getString(
-                R.string.accessibility_shortcut_edit_dialog_summary_software_gesture)
-                : getSummaryStringWithIcon(context, lineHeight);
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
+            return context.getText(resId);
+        }
+        return getSummaryStringWithIcon(context, lineHeight);
     }
 
     private static int retrieveImageResId(Context context) {
-        return AccessibilityUtil.isGestureNavigateEnabled(context)
-                ? R.drawable.accessibility_shortcut_type_software_gesture
-                : R.drawable.accessibility_shortcut_type_software;
         // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
+        int resId = R.drawable.accessibility_shortcut_type_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
+                    : R.drawable.accessibility_shortcut_type_software_gesture;
+        }
+        return resId;
     }
 
     private static SpannableString getSummaryStringWithIcon(Context context, int lineHeight) {
