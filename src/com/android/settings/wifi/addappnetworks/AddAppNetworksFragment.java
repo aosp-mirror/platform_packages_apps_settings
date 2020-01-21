@@ -726,7 +726,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             final Optional<AccessPoint> matchedAccessPoint = allAccessPoints
                     .stream()
                     .filter(accesspoint -> accesspoint.matches(
-                            uiConfigurationItem.mWifiNetworkSuggestion.wifiConfiguration))
+                            uiConfigurationItem.mWifiNetworkSuggestion.getWifiConfiguration()))
                     .findFirst();
             uiConfigurationItem.mLevel =
                     matchedAccessPoint.isPresent() ? matchedAccessPoint.get().getLevel() : 0;
