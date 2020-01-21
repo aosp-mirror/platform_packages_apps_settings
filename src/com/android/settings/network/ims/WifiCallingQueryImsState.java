@@ -25,7 +25,7 @@ import com.android.settings.network.SubscriptionUtil;
 /**
  * Controller class for querying Wifi calling status
  */
-public class WifiCallingQueryImsState {
+public class WifiCallingQueryImsState extends ImsQueryController  {
 
     private Context mContext;
     private int mSubId;
@@ -39,6 +39,20 @@ public class WifiCallingQueryImsState {
     public WifiCallingQueryImsState(Context context, int subId) {
         mContext = context;
         mSubId = subId;
+    }
+
+    /**
+     * Get allowance status for user to alter configuration
+     *
+     * @return true when changing configuration by user is allowed.
+     */
+    public boolean isAllowUserControl() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+
+        return ((!isSystemTtyEnabled(mContext).directQuery())
+                || (isTtyOnVolteEnabled(mSubId).directQuery()));
     }
 
     /**

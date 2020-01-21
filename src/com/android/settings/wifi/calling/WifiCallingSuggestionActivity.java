@@ -21,17 +21,20 @@ import android.telephony.SubscriptionManager;
 
 import com.android.ims.ImsManager;
 import com.android.settings.SettingsActivity;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 
 public class WifiCallingSuggestionActivity extends SettingsActivity {
 
     public static boolean isSuggestionComplete(Context context) {
+        final WifiCallingQueryImsState queryState =
+                new WifiCallingQueryImsState(context,
+                SubscriptionManager.getDefaultVoiceSubscriptionId());
         if (!ImsManager.isWfcEnabledByPlatform(context) ||
                 !MobileNetworkUtils.isWfcProvisionedOnDevice(
                         SubscriptionManager.getDefaultVoiceSubscriptionId())) {
             return true;
         }
-        return ImsManager.isWfcEnabledByUser(context)
-                && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
+        return queryState.isEnabledByUser() && queryState.isAllowUserControl();
     }
 }
