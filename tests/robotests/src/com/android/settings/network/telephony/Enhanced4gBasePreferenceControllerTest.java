@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -34,6 +35,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -61,6 +63,8 @@ public class Enhanced4gBasePreferenceControllerTest {
     @Mock
     private ProvisioningManager mProvisioningManager;
 
+    private VolteQueryImsState mQueryImsState;
+
     private Enhanced4gLtePreferenceController mController;
     private SwitchPreference mPreference;
     private PersistableBundle mCarrierConfig;
@@ -81,15 +85,18 @@ public class Enhanced4gBasePreferenceControllerTest {
         mCarrierConfig = new PersistableBundle();
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
+        mQueryImsState = spy(new VolteQueryImsState(mContext, SUB_ID));
+
         mPreference = new RestrictedSwitchPreference(mContext);
-        mController = new Enhanced4gLtePreferenceController(mContext, "roaming") {
+        mController = spy(new Enhanced4gLtePreferenceController(mContext, "roaming") {
             @Override
             ProvisioningManager getProvisioningManager(int subId) {
                 return mProvisioningManager;
             }
-        };
+        });
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
+        doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -114,6 +121,7 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void updateState_configEnabled_prefEnabled() {
+        doReturn(true).when(mQueryImsState).isEnabledByUser();
         mPreference.setEnabled(false);
         mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -127,6 +135,7 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void updateState_configOn_prefChecked() {
+        doReturn(true).when(mQueryImsState).isEnabledByUser();
         mPreference.setChecked(false);
         doReturn(true).when(mImsManager).isEnhanced4gLteModeSettingEnabledByUser();
         doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
