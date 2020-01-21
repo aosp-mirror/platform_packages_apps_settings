@@ -67,21 +67,22 @@ public class LocationForWorkPreferenceController extends LocationBasePreferenceC
         final RestrictedLockUtils.EnforcedAdmin admin =
                 mLocationEnabler.getShareLocationEnforcedAdmin(
                         Utils.getManagedProfile(mUserManager).getIdentifier());
-        final boolean isRestrictedByBase = mLocationEnabler.isManagedProfileRestrictedByBase();
-        if (!isRestrictedByBase && admin != null) {
+        if (admin != null) {
             mPreference.setDisabledByAdmin(admin);
-            mPreference.setChecked(false);
         } else {
             final boolean enabled = mLocationEnabler.isEnabled(mode);
             mPreference.setEnabled(enabled);
+            int summaryResId;
 
-            int summaryResId = R.string.switch_off_text;
-            if (!enabled) {
+            final boolean isRestrictedByBase =
+                    mLocationEnabler.isManagedProfileRestrictedByBase();
+            if (isRestrictedByBase || !enabled) {
                 mPreference.setChecked(false);
+                summaryResId = enabled ? R.string.switch_off_text
+                        : R.string.location_app_permission_summary_location_off;
             } else {
-                mPreference.setChecked(!isRestrictedByBase);
-                summaryResId = (isRestrictedByBase ?
-                        R.string.switch_off_text : R.string.switch_on_text);
+                mPreference.setChecked(true);
+                summaryResId = R.string.switch_on_text;
             }
             mPreference.setSummary(summaryResId);
         }
