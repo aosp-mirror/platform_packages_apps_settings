@@ -333,44 +333,34 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
      * networks, for creating UI to user.
      */
     @VisibleForTesting
-    void filterSavedNetworks(
-            List<WifiConfiguration> savedWifiConfigurations) {
+    void filterSavedNetworks(List<WifiConfiguration> savedWifiConfigurations) {
         if (mUiToRequestedList == null) {
             mUiToRequestedList = new ArrayList<>();
         } else {
             mUiToRequestedList.clear();
         }
 
-        boolean foundInSavedList;
-        boolean foundError;
-        String displayedName = null;
         int networkPositionInBundle = 0;
         for (WifiNetworkSuggestion suggestion : mAllSpecifiedNetworksList) {
-            foundInSavedList = false;
-            foundError = false;
+            String displayedName = null;
+            boolean foundInSavedList = false;
 
-            /**
+            /*
              * If specified is passpoint network, need to check with the existing passpoint
              * networks.
              */
-            if (suggestion.passpointConfiguration != null) {
-                if (!suggestion.passpointConfiguration.validate()) {
-                    foundError = true;
-                } else {
-                    foundInSavedList = isSavedPasspointConfiguration(
-                            suggestion.passpointConfiguration);
-                    displayedName = suggestion.passpointConfiguration.getHomeSp().getFriendlyName();
-                }
+            final PasspointConfiguration passpointConfig = suggestion.getPasspointConfiguration();
+            if (passpointConfig != null) {
+                foundInSavedList = isSavedPasspointConfiguration(passpointConfig);
+                displayedName = passpointConfig.getHomeSp().getFriendlyName();
             } else {
-                final WifiConfiguration specifiedConfig = suggestion.wifiConfiguration;
+                final WifiConfiguration specifiedConfig = suggestion.getWifiConfiguration();
                 displayedName = removeDoubleQuotes(specifiedConfig.SSID);
                 foundInSavedList = isSavedWifiConfiguration(specifiedConfig,
                         savedWifiConfigurations);
             }
 
-            if (foundError) {
-                mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ADD_ERROR);
-            } else if (foundInSavedList) {
+            if (foundInSavedList) {
                 // If this requested network already in the saved networks, mark this item in the
                 // result code list as existed.
                 mResultCodeArrayList.set(networkPositionInBundle, RESULT_NETWORK_ALREADY_EXISTS);
@@ -609,11 +599,12 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
      * Call framework API to save single network.
      */
     private void saveNetwork(int index) {
-        if (mUiToRequestedList.get(index).mWifiNetworkSuggestion.passpointConfiguration != null) {
+        final PasspointConfiguration passpointConfig =
+                mUiToRequestedList.get(index).mWifiNetworkSuggestion.getPasspointConfiguration();
+        if (passpointConfig != null) {
             // Save passpoint, if no IllegalArgumentException, then treat it as success.
             try {
-                mWifiManager.addOrUpdatePasspointConfiguration(mUiToRequestedList.get(
-                        index).mWifiNetworkSuggestion.passpointConfiguration);
+                mWifiManager.addOrUpdatePasspointConfiguration(passpointConfig);
                 mAnyNetworkSavedSuccess = true;
             } catch (IllegalArgumentException e) {
                 mResultCodeArrayList.set(mUiToRequestedList.get(index).mIndex,
@@ -625,18 +616,17 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             }
             // Show saved or failed according to all results.
             showSavedOrFail();
-            return;
         } else {
-            final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
-                    index).mWifiNetworkSuggestion.wifiConfiguration;
+            final WifiConfiguration wifiConfiguration =
+                    mUiToRequestedList.get(index).mWifiNetworkSuggestion.getWifiConfiguration();
             wifiConfiguration.SSID = addQuotationIfNeeded(wifiConfiguration.SSID);
             mWifiManager.save(wifiConfiguration, mSaveListener);
         }
     }
 
     private void connectNetwork(int index) {
-        final WifiConfiguration wifiConfiguration = mUiToRequestedList.get(
-                index).mWifiNetworkSuggestion.wifiConfiguration;
+        final WifiConfiguration wifiConfiguration =
+                mUiToRequestedList.get(index).mWifiNetworkSuggestion.getWifiConfiguration();
         mWifiManager.connect(wifiConfiguration, null /* ActionListener */);
     }
 
