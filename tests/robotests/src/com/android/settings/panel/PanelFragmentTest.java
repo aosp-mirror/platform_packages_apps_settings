@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -41,9 +42,14 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.android.controller.ActivityController;
+
+import java.util.Objects;
 
 @RunWith(RobolectricTestRunner.class)
 public class PanelFragmentTest {
+
+    private static final String SUBTITLE = "subtitle";
 
     private Context mContext;
     private PanelFragment mPanelFragment;
@@ -140,5 +146,39 @@ public class PanelFragmentTest {
                 PanelLoggingContract.PanelClosedKeys.KEY_DONE,
                 0
         );
+    }
+
+    @Test
+    public void supportIcon_displayIconHeaderLayout() {
+        mFakePanelContent.setIcon(R.drawable.ic_android);
+        mFakePanelContent.setSubTitle(SUBTITLE);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+        final View titleView = panelFragment.mLayoutView.findViewById(R.id.panel_title);
+        final LinearLayout panelHeader = panelFragment.mLayoutView.findViewById(R.id.panel_header);
+        final TextView headerTitle = panelFragment.mLayoutView.findViewById(R.id.header_title);
+        final TextView headerSubtitle = panelFragment.mLayoutView.findViewById(
+                R.id.header_subtitle);
+        // Check visibility
+        assertThat(panelHeader.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(titleView.getVisibility()).isEqualTo(View.GONE);
+        // Check content
+        assertThat(headerTitle.getText()).isEqualTo(FakePanelContent.TITLE);
+        assertThat(headerSubtitle.getText()).isEqualTo(SUBTITLE);
+    }
+
+    @Test
+    public void notSupportIcon_displayDefaultHeaderLayout() {
+        final View titleView = mPanelFragment.mLayoutView.findViewById(R.id.panel_title);
+        final View panelHeader = mPanelFragment.mLayoutView.findViewById(R.id.panel_header);
+
+        assertThat(panelHeader.getVisibility()).isEqualTo(View.GONE);
+        assertThat(titleView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 }

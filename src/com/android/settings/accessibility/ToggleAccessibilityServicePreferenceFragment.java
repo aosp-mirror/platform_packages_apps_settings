@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.CheckBox;
 
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -66,7 +67,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
-    private ShortcutPreference mShortcutPreference;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
     private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
@@ -116,13 +116,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         // Restore the user shortcut type.
         if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
             mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
                     UserShortcutType.DEFAULT);
         }
         initShortcutPreference();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -372,6 +372,15 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         }
     }
 
+    @Override
+    protected void updateFooterTitle(PreferenceCategory category) {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        final String titleText = (info == null) ? "" :
+                getString(R.string.accessibility_footer_title,
+                        info.getResolveInfo().loadLabel(getPackageManager()));
+        category.setTitle(titleText);
+    }
+
     private void initShortcutPreference() {
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         mShortcutPreference = new ShortcutPreference(
@@ -380,9 +389,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
         mShortcutPreference.setOnClickListener(this);
-        // Put the shortcutPreference before settingsPreference.
-        mShortcutPreference.setOrder(-1);
-        preferenceScreen.addPreference(mShortcutPreference);
     }
 
     private void updateShortcutPreference() {

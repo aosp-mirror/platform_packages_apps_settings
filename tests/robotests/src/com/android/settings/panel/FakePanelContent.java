@@ -40,6 +40,27 @@ public class FakePanelContent implements PanelContent {
 
     public static final Intent INTENT = new Intent();
 
+    private CharSequence mSubTitle;
+    private int mIconRes = -1;
+
+    @Override
+    public int getIcon() {
+        return mIconRes;
+    }
+
+    @Override
+    public CharSequence getSubTitle() {
+        return mSubTitle;
+    }
+
+    public void setIcon(int iconRes) {
+        mIconRes = iconRes;
+    }
+
+    public void setSubTitle(CharSequence subTitle) {
+        mSubTitle = subTitle;
+    }
+
     @Override
     public CharSequence getTitle() {
         return TITLE;

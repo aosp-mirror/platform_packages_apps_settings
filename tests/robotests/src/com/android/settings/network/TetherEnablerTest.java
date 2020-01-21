@@ -109,8 +109,10 @@ public class TetherEnablerTest {
     @Test
     public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
-
+        mEnabler.onStart();
         mEnabler.startTether();
+
+        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
         mEnabler.mOnStartTetheringCallback.onTetheringFailed();
 
         assertThat(mSwitchBar.isChecked()).isFalse();

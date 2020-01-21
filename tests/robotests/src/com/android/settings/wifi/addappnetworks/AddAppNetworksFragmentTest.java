@@ -18,8 +18,11 @@ package com.android.settings.wifi.addappnetworks;
 
 import static com.google.common.truth.Truth.assertThat;
 
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.net.wifi.WifiConfiguration;
@@ -32,10 +35,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
@@ -49,6 +57,9 @@ public class AddAppNetworksFragmentTest {
     private static final String FAKE_NEW_OPEN_SSID = "fake_new_open_ssid";
     private static final String FAKE_NEW_OPEN_SSID_WITH_QUOTE = "\"fake_new_open_ssid\"";
     private static final String FAKE_NEW_SAVED_WPA_SSID = "\"fake_new_wpa_ssid\"";
+    private static final String KEY_SSID = "key_ssid";
+    private static final String KEY_SECURITY = "key_security";
+    private static final int SCANED_LEVEL = 4;
 
     private AddAppNetworksFragment mAddAppNetworksFragment;
     private List<WifiNetworkSuggestion> mFakedSpecifiedNetworksList;
@@ -59,8 +70,15 @@ public class AddAppNetworksFragmentTest {
     private Bundle mBundle;
     private ArrayList<Integer> mFakedResultArrayList = new ArrayList<>();
 
+    @Mock
+    private AccessPoint mMockAccessPoint;
+
+    @Mock
+    private WifiTracker mMockWifiTracker;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mAddAppNetworksFragment = spy(new AddAppNetworksFragment());
         mNewWpaSuggestionEntry = generateRegularWifiSuggestion(FAKE_NEW_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "1234567890");
@@ -68,6 +86,10 @@ public class AddAppNetworksFragmentTest {
                 WifiConfiguration.KeyMgmt.NONE, null);
         mSavedWpaConfigurationEntry = generateRegularWifiConfiguration(FAKE_NEW_SAVED_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\"");
+        mAddAppNetworksFragment.mWifiTracker = mMockWifiTracker;
+        WifiTrackerFactory.setTestingWifiTracker(mMockWifiTracker);
+
+        setUpOneScannedNetworkWithScanedLevel();
     }
 
     @Test
@@ -163,6 +185,52 @@ public class AddAppNetworksFragmentTest {
 
         // Ui list should contain 3 networks.
         assertThat(mAddAppNetworksFragment.mUiToRequestedList).hasSize(3);
+    }
+
+    @Test
+    public void withOneSuggestion_uiElementShouldHaveInitLevel() {
+        // Arrange
+        // Setup a fake saved network list and assign to fragment.
+        addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
+        // Setup one specified networks and its results and assign to fragment.
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        mAddAppNetworksFragment.mAllSpecifiedNetworksList = mFakedSpecifiedNetworksList;
+
+        // Act
+        mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
+
+        // Assert
+        assertThat(mAddAppNetworksFragment.mUiToRequestedList).hasSize(1);
+        assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
+                mAddAppNetworksFragment.INITIAL_RSSI_SIGNAL_LEVEL);
+    }
+
+    @Test
+    public void withOneSuggestion_whenScanResultChanged_uiListShouldHaveNewLevel() {
+        // Arrange
+        // Setup a fake saved network list and assign to fragment.
+        addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
+        // Setup one specified networks and its results and assign to fragment.
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        mAddAppNetworksFragment.mAllSpecifiedNetworksList = mFakedSpecifiedNetworksList;
+        // Call filterSavedNetworks to generate necessary objects.
+        mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
+
+        // Act
+        mAddAppNetworksFragment.onAccessPointsChanged();
+
+        // Assert
+        assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
+                SCANED_LEVEL);
+    }
+
+    private void setUpOneScannedNetworkWithScanedLevel() {
+        final ArrayList list = new ArrayList<>();
+        list.add(mMockAccessPoint);
+        when(mMockWifiTracker.getAccessPoints()).thenReturn(list);
+        when(mMockAccessPoint.getSsidStr()).thenReturn(FAKE_NEW_OPEN_SSID);
+        when(mMockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
+        when(mMockAccessPoint.getLevel()).thenReturn(SCANED_LEVEL);
     }
 
     private void addOneSavedNetworkConfiguration(@NonNull WifiConfiguration wifiConfiguration) {
