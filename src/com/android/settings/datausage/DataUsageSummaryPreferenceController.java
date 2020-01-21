@@ -272,7 +272,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
         SubscriptionInfo subInfo = mSubscriptionManager.getActiveSubscriptionInfo(mSubscriptionId);
         if (subInfo == null) {
-            subInfo = mSubscriptionManager.getAllSubscriptionInfoList().stream().filter(
+            subInfo = mSubscriptionManager.getAvailableSubscriptionInfoList().stream().filter(
                     i -> i.getSubscriptionId() == mSubscriptionId).findFirst().orElse(null);
         }
         if (subInfo != null && mHasMobileData) {
