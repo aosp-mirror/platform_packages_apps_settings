@@ -20,7 +20,7 @@ import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
 public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
-        extends ToggleAccessibilityServicePreferenceFragment {
+        extends InvisibleToggleAccessibilityServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
 
