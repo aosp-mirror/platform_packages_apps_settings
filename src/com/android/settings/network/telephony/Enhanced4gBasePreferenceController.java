@@ -108,6 +108,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             return CONDITIONALLY_UNAVAILABLE;
         }
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final VolteQueryImsState queryState = queryImsState(subId);
         final boolean isVisible = SubscriptionManager.isValidSubscriptionId(subId)
                 && mImsManager != null && carrierConfig != null
                 && mImsManager.isVolteEnabledByPlatform()
@@ -115,7 +116,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
                 && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
         return isVisible
-                ? (isPrefEnabled() ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
+                ? (isUserControlAllowed() && queryState.isAllowUserControl()
+                ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -141,9 +143,10 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         final SwitchPreference switchPreference = (SwitchPreference) preference;
 
         final VolteQueryImsState queryState = queryImsState(mSubId);
-        switchPreference.setEnabled(isPrefEnabled());
+        switchPreference.setEnabled(isUserControlAllowed()
+                && queryState.isAllowUserControl());
         switchPreference.setChecked(queryState.isEnabledByUser()
-                && mImsManager.isNonTtyOrTtyOnVolteEnabled());
+                && queryState.isAllowUserControl());
     }
 
     @Override
@@ -189,13 +192,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     @VisibleForTesting
     VolteQueryImsState queryImsState(int subId) {
         return new VolteQueryImsState(mContext, subId);
-    }
-
-    private boolean isPrefEnabled() {
-        return SubscriptionManager.isValidSubscriptionId(mSubId)
-                && isUserControlAllowed()
-                && mImsManager != null
-                && mImsManager.isNonTtyOrTtyOnVolteEnabled();
     }
 
     private boolean isUserControlAllowed() {

@@ -48,7 +48,6 @@ import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
 
-
 /**
  * Helper class to control slices for enhanced 4g LTE settings.
  */
@@ -69,11 +68,6 @@ public class Enhanced4gLteSliceHelper {
      */
     public static final String ACTION_MOBILE_NETWORK_SETTINGS_ACTIVITY =
             "android.settings.NETWORK_OPERATOR_SETTINGS";
-
-    /**
-     * Timeout for querying enhanced 4g lte setting from ims manager.
-     */
-    private static final int TIMEOUT_MILLIS = 2000;
 
     private final Context mContext;
 
@@ -193,7 +187,7 @@ public class Enhanced4gLteSliceHelper {
             if (imsManager.isVolteEnabledByPlatform() && isVolteProvisionedOnDevice(subId)) {
                 final VolteQueryImsState queryState = queryImsState(subId);
                 final boolean currentValue = queryState.isEnabledByUser()
-                        && imsManager.isNonTtyOrTtyOnVolteEnabled();
+                        && queryState.isAllowUserControl();
                 final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
                         currentValue);
                 if (newValue != currentValue) {
