@@ -111,15 +111,20 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
         final List<AccessPoint> resultList = new ArrayList<>();
+        final int apRowCount = getApRowCount();
         for (AccessPoint ap : accessPoints) {
             if (ap.isReachable()) {
                 resultList.add(clone(ap));
-                if (resultList.size() >= DEFAULT_EXPANDED_ROW_COUNT) {
+                if (resultList.size() >= apRowCount) {
                     break;
                 }
             }
         }
         updateResults(resultList);
+    }
+
+    protected int getApRowCount() {
+        return DEFAULT_EXPANDED_ROW_COUNT;
     }
 
     private AccessPoint clone(AccessPoint accessPoint) {

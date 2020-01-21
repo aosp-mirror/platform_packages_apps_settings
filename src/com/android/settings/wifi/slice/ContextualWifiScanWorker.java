@@ -62,4 +62,9 @@ public class ContextualWifiScanWorker extends WifiScanWorker {
         }
         return true;
     }
+
+    @Override
+    protected int getApRowCount() {
+        return ContextualWifiSlice.getApRowCount();
+    }
 }
