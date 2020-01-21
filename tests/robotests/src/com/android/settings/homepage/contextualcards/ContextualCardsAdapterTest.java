@@ -16,9 +16,6 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
-import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
@@ -39,7 +36,6 @@ import com.android.settings.homepage.contextualcards.slices.SliceContextualCardR
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
@@ -156,7 +152,7 @@ public class ContextualCardsAdapterTest {
                 .setName("test_name")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(TEST_SLICE_URI)
-                .setViewType(VIEW_TYPE_DEFERRED_SETUP)
+                .setViewType(SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
                 .setName("test_name_1")
@@ -172,7 +168,7 @@ public class ContextualCardsAdapterTest {
                 .setName(TEST_SLICE_NAME)
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(sliceUri)
-                .setViewType(VIEW_TYPE_FULL_WIDTH)
+                .setViewType(SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH)
                 .build();
     }
 

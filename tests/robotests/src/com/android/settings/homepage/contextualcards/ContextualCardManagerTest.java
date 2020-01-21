@@ -17,7 +17,6 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardManager.KEY_CONTEXTUAL_CARDS;
-import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH;
 
@@ -542,55 +541,6 @@ public class ContextualCardManagerTest {
     }
 
     @Test
-    public void getCardsWithViewType_onlyDeferredSetupCard_shouldHaveDeferredSetupCard() {
-        final List<ContextualCard> oneDeferredSetupCards = getDeferredSetupCardList();
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(oneDeferredSetupCards);
-
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_DEFERRED_SETUP);
-    }
-
-    @Test
-    public void getCardsWithViewType_hasDeferredSetupCard_shouldHaveDeferredSetupCard() {
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE,
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cards = buildCategoriedCards(getContextualCardList(),
-                categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cards);
-
-        assertThat(result).hasSize(5);
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_DEFERRED_SETUP);
-    }
-
-    @Test
-    public void getCardsWithViewType_noDeferredSetupCard_shouldNotHaveDeferredSetupCard() {
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cards = buildCategoriedCards(
-                getContextualCardList(), categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cards);
-
-        assertThat(result).hasSize(5);
-        for (int i = 0; i < result.size(); i++) {
-            assertThat(result.get(i).getViewType()).isNotEqualTo(
-                    ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE);
-        }
-    }
-
-    @Test
     public void getCardsToKeep_hasSavedCard_shouldResetSavedCards() {
         final List<String> savedCardNames = new ArrayList<>();
         savedCardNames.add(TEST_SLICE_NAME);
@@ -651,18 +601,6 @@ public class ContextualCardManagerTest {
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI)
-                .setViewType(VIEW_TYPE_FULL_WIDTH)
-                .build());
-        return cards;
-    }
-
-    private List<ContextualCard> getDeferredSetupCardList() {
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(new ContextualCard.Builder()
-                .setName("deferred_setup")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setCategory(ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE)
-                .setSliceUri(new Uri.Builder().appendPath("test_deferred_setup_path").build())
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;
