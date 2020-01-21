@@ -65,6 +65,7 @@ public class DarkModeScheduleSelectorControllerTest {
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
         when(mContext.getString(R.string.dark_ui_auto_mode_never)).thenReturn("never");
         when(mContext.getString(R.string.dark_ui_auto_mode_auto)).thenReturn("auto");
+        when(mContext.getString(R.string.dark_ui_auto_mode_custom)).thenReturn("custom");
         mPreference = spy(new DropDownPreference(mContext));
         mPreference.setEntryValues(new CharSequence[]{
                 mContext.getString(R.string.dark_ui_auto_mode_never),

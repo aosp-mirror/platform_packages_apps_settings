@@ -1,8 +1,9 @@
 /*
  * Copyright (C) 2019 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -26,6 +27,8 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.LayoutPreference;
 
+import java.time.LocalTime;
+
 /**
  * Controller for activate/deactivate night mode button
  */
@@ -34,12 +37,20 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     private PowerManager mPowerManager;
     private Button mTurnOffButton;
     private Button mTurnOnButton;
+    private TimeFormatter mFormat;
 
     public DarkModeActivationPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
         mPowerManager = context.getSystemService(PowerManager.class);
         mUiModeManager = context.getSystemService(UiModeManager.class);
+        mFormat = new TimeFormatter(context);
+    }
+
+    public DarkModeActivationPreferenceController(Context context,
+                                                  String preferenceKey, TimeFormatter f) {
+        this(context, preferenceKey);
+        mFormat = f;
     }
 
     @Override
@@ -58,13 +69,21 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     }
 
     private void updateNightMode(boolean active) {
-        final int autoMode = mUiModeManager.getNightMode();
+        final int mode = mUiModeManager.getNightMode();
         String buttonText;
 
-        if (autoMode == UiModeManager.MODE_NIGHT_AUTO) {
+        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
             buttonText = mContext.getString(active
                     ? R.string.dark_ui_activation_off_auto
                     : R.string.dark_ui_activation_on_auto);
+        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            final LocalTime time = active
+                    ? mUiModeManager.getCustomNightModeStart()
+                    : mUiModeManager.getCustomNightModeEnd();
+            final String timeStr = mFormat.of(time);
+            buttonText = mContext.getString(active
+                    ? R.string.dark_ui_activation_off_custom
+                    : R.string.dark_ui_activation_on_custom, timeStr);
         } else {
             buttonText = mContext.getString(active
                     ? R.string.dark_ui_activation_off_manual
@@ -85,11 +104,20 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     public CharSequence getSummary() {
         final boolean isActivated = (mContext.getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_YES) != 0;
-        final int autoMode = mUiModeManager.getNightMode();
-        if (autoMode == UiModeManager.MODE_NIGHT_AUTO) {
+        final int mode = mUiModeManager.getNightMode();
+        if (mode == UiModeManager.MODE_NIGHT_AUTO) {
             return mContext.getString(isActivated
                     ? R.string.dark_ui_summary_on_auto_mode_auto
                     : R.string.dark_ui_summary_off_auto_mode_auto);
+        } else if (mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            final LocalTime time = isActivated
+                    ? mUiModeManager.getCustomNightModeEnd()
+                    : mUiModeManager.getCustomNightModeStart();
+            final String timeStr = mFormat.of(time);
+
+            return mContext.getString(isActivated
+                    ? R.string.dark_ui_summary_on_auto_mode_custom
+                    : R.string.dark_ui_summary_off_auto_mode_custom, timeStr);
         } else {
             return mContext.getString(isActivated
                     ? R.string.dark_ui_summary_on_auto_mode_never

@@ -63,8 +63,17 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
     }
 
     private int getCurrentMode() {
-        final int resId = mUiModeManager.getNightMode() == UiModeManager.MODE_NIGHT_AUTO
-                ? R.string.dark_ui_auto_mode_auto : R.string.dark_ui_auto_mode_never;
+        int resId;
+        switch (mUiModeManager.getNightMode()) {
+            case UiModeManager.MODE_NIGHT_AUTO:
+                resId = R.string.dark_ui_auto_mode_auto;
+                break;
+            case UiModeManager.MODE_NIGHT_CUSTOM:
+                resId = R.string.dark_ui_auto_mode_custom;
+                break;
+            default:
+                resId = R.string.dark_ui_auto_mode_never;
+        }
         return mPreference.findIndexOfValue(mContext.getString(resId));
     }
 
@@ -85,6 +94,9 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
         } else if (mCurrentMode == mPreference.findIndexOfValue(
                 mContext.getString(R.string.dark_ui_auto_mode_auto))) {
             mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_AUTO);
+        } else if (mCurrentMode == mPreference.findIndexOfValue(
+                mContext.getString(R.string.dark_ui_auto_mode_custom))) {
+            mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_CUSTOM);
         }
         return true;
     }
