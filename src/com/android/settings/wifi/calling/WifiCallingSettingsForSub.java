@@ -115,7 +115,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
-            final boolean isNonTtyOrTtyOnVolteEnabled = mImsManager.isNonTtyOrTtyOnVolteEnabled();
+            final boolean isNonTtyOrTtyOnVolteEnabled =
+                    queryImsState(WifiCallingSettingsForSub.this.mSubId).isAllowUserControl();
             final boolean isWfcEnabled = mSwitchBar.isChecked()
                     && isNonTtyOrTtyOnVolteEnabled;
             boolean isCallStateIdle =
@@ -403,7 +404,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
         final WifiCallingQueryImsState queryIms = queryImsState(mSubId);
         final boolean wfcEnabled = queryIms.isEnabledByUser()
-                && mImsManager.isNonTtyOrTtyOnVolteEnabled();
+                && queryIms.isAllowUserControl();
         mSwitch.setChecked(wfcEnabled);
         final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
         final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();

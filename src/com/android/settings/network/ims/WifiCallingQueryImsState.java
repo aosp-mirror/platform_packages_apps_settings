@@ -19,8 +19,7 @@ package com.android.settings.network.ims;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
+import androidx.annotation.VisibleForTesting;
 
 /**
  * Controller class for querying Wifi calling status
@@ -39,6 +38,14 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
     public WifiCallingQueryImsState(Context context, int subId) {
         mContext = context;
         mSubId = subId;
+    }
+
+    /**
+     * Implementation of ImsQueryController#isEnabledByUser(int subId)
+     */
+    @VisibleForTesting
+    ImsDirectQuery isEnabledByUser(int subId) {
+        return new ImsQueryWfcUserSetting(subId);
     }
 
     /**
@@ -64,8 +71,6 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        ImsManager imsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
-                    mContext, mSubId));
-        return imsManager.isWfcEnabledByUser();
+        return isEnabledByUser(mSubId).directQuery();
     }
 }
