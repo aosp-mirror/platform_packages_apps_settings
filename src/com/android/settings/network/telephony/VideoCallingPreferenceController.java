@@ -22,9 +22,11 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -34,6 +36,8 @@ import androidx.preference.SwitchPreference;
 import com.android.ims.ImsManager;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.VolteQueryImsState;
+import com.android.settings.network.ims.VtQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -45,6 +49,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         LifecycleObserver, OnStart, OnStop,
         MobileDataEnabledListener.Client,
         Enhanced4gBasePreferenceController.On4gLteUpdateListener {
+
+    private static final String TAG = "VideoCallingPreference";
 
     private Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
@@ -64,7 +70,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        return SubscriptionManager.isValidSubscriptionId(subId)
                 && isVideoCallEnabled(subId)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
@@ -98,28 +104,41 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         final boolean videoCallEnabled = isVideoCallEnabled(mSubId, mImsManager);
         switchPreference.setVisible(videoCallEnabled);
         if (videoCallEnabled) {
-            final boolean is4gLteEnabled = mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
+            final boolean videoCallEditable = queryVoLteState(mSubId).isEnabledByUser()
                     && mImsManager.isNonTtyOrTtyOnVolteEnabled();
-            preference.setEnabled(is4gLteEnabled &&
-                    mCallState == TelephonyManager.CALL_STATE_IDLE);
-            switchPreference.setChecked(is4gLteEnabled && mImsManager.isVtEnabledByUser());
+            preference.setEnabled(videoCallEditable
+                    && mCallState == TelephonyManager.CALL_STATE_IDLE);
+            switchPreference.setChecked(videoCallEditable && isChecked());
         }
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mImsManager.setVtSetting(isChecked);
-        return true;
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
+        if (imsMmTelManager == null) {
+            return false;
+        }
+        try {
+            imsMmTelManager.setVtSettingEnabled(isChecked);
+            return true;
+        } catch (IllegalArgumentException exception) {
+            Log.w(TAG, "Unable to set VT status " + isChecked + ". subId=" + mSubId,
+                    exception);
+        }
+        return false;
     }
 
     @Override
     public boolean isChecked() {
-        return mImsManager.isVtEnabledByUser();
+        return queryImsState(mSubId).isEnabledByUser();
     }
 
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             mImsManager = ImsManager.getInstance(mContext,
                     SubscriptionUtil.getPhoneId(mContext, mSubId));
         }
@@ -128,7 +147,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     }
 
     private boolean isVideoCallEnabled(int subId) {
-        final ImsManager imsManager = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        final ImsManager imsManager = SubscriptionManager.isValidSubscriptionId(subId)
                 ? ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId))
                 : null;
         return isVideoCallEnabled(subId, imsManager);
@@ -156,7 +175,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     boolean isVideoCallEnabled(int subId, ImsManager imsManager) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
-        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(subId)) {
             telephonyManager = telephonyManager.createForSubscriptionId(subId);
         }
         return carrierConfig != null && imsManager != null
@@ -189,7 +208,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
         public void register(Context context, int subId) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class);
-            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
             }
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
@@ -206,5 +225,15 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
      */
     public void onMobileDataEnabledChange() {
         updateState(mPreference);
+    }
+
+    @VisibleForTesting
+    VtQueryImsState queryImsState(int subId) {
+        return new VtQueryImsState(mContext, subId);
+    }
+
+    @VisibleForTesting
+    VolteQueryImsState queryVoLteState(int subId) {
+        return new VolteQueryImsState(mContext, subId);
     }
 }
