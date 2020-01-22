@@ -51,7 +51,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.network.ProxySubscriptionManager;
 
 import java.util.List;
@@ -143,7 +142,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (TelephonyIntents.ACTION_SIM_STATE_CHANGED.equals(action)) {
+            if (Intent.ACTION_SIM_STATE_CHANGED.equals(action)) {
                 mHandler.sendMessage(mHandler.obtainMessage(MSG_SIM_STATE_CHANGED));
             }
         }
@@ -293,7 +292,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         // ACTION_SIM_STATE_CHANGED is sticky, so we'll receive current state after this call,
         // which will call updatePreferences().
-        final IntentFilter filter = new IntentFilter(TelephonyIntents.ACTION_SIM_STATE_CHANGED);
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SIM_STATE_CHANGED);
         getContext().registerReceiver(mSimStateReceiver, filter);
 
         if (mDialogState != OFF_MODE) {
