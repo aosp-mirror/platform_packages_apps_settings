@@ -23,9 +23,6 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.MmTelFeature;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -33,8 +30,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -55,8 +50,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
     private PersistableBundle mCarrierConfig;
-    @VisibleForTesting
-    ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     @VisibleForTesting
     Integer mCallState;
@@ -81,10 +74,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         }
         mSubId = subId;
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
-            mImsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
-                    mContext, mSubId));
-        }
 
         final boolean show4GForLTE = mCarrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
@@ -96,29 +85,26 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return this;
     }
 
-    @VisibleForTesting
-    ProvisioningManager getProvisioningManager(int subId) {
-        return ProvisioningManager.createForSubscriptionId(subId);
-    }
-
     @Override
     public int getAvailabilityStatus(int subId) {
         init(subId);
         if (!isModeMatched()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        if ((carrierConfig == null)
+                || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         final VolteQueryImsState queryState = queryImsState(subId);
-        final boolean isVisible = SubscriptionManager.isValidSubscriptionId(subId)
-                && mImsManager != null && carrierConfig != null
-                && mImsManager.isVolteEnabledByPlatform()
-                && isVolteProvisionedOnDevice(mSubId)
-                && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
-                && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
-        return isVisible
-                ? (isUserControlAllowed() && queryState.isAllowUserControl()
-                ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
-                : CONDITIONALLY_UNAVAILABLE;
+        if (!queryState.isReadyToVoLte()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return (isUserControlAllowed() && queryState.isAllowUserControl())
+                ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
@@ -198,19 +184,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
                 && mCarrierConfig.getBoolean(
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
-    }
-
-    private boolean isVolteProvisionedOnDevice(int subId) {
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            return true;
-        }
-        final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
-        if (provisioningMgr == null) {
-            return true;
-        }
-        return provisioningMgr.getProvisioningStatusForCapability(
-                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-                ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
     }
 
     private class PhoneCallStateListener extends PhoneStateListener {
