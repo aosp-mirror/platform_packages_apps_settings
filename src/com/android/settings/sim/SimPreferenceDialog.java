@@ -65,7 +65,7 @@ public class SimPreferenceDialog extends Activity {
         mSlotId = extras.getInt(SimSettings.EXTRA_SLOT_ID, -1);
         mSubscriptionManager = SubscriptionManager.from(mContext);
         mSubInfoRecord = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(mSlotId);
-        mTintArr = mContext.getResources().getIntArray(com.android.internal.R.array.sim_colors);
+        mTintArr = mContext.getResources().getIntArray(android.R.array.simColors);
         mColorStrings = mContext.getResources().getStringArray(R.array.color_picker);
         mTintSelectorPos = 0;
 
