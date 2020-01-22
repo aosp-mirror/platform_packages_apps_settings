@@ -31,6 +31,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 import android.widget.Switch;
 
@@ -64,24 +66,13 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private final Handler mHandler = new Handler();
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
     private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mSettingsContentObserver.register(getContentResolver());
-    }
-
-    @Override
-    public void onStop() {
-        mSettingsContentObserver.unregister(getContentResolver());
-        super.onStop();
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -143,6 +134,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                                 == State.ON);
             }
         };
+
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            removeDialog(DIALOG_ID_EDIT_SHORTCUT);
+            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+        };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -174,14 +170,30 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     public void onResume() {
         super.onResume();
+
+        mSettingsContentObserver.register(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         updateShortcutPreferenceData();
         updateShortcutPreference();
     }
 
     @Override
+    public void onPause() {
+        mSettingsContentObserver.unregister(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
+        super.onPause();
+    }
+
+    @Override
     public Dialog onCreateDialog(int dialogId) {
         if (dialogId == DIALOG_ID_EDIT_SHORTCUT) {
-            final CharSequence dialogTitle = getActivity().getString(
+            final CharSequence dialogTitle = getActivity().getText(
                     R.string.accessibility_shortcut_edit_dialog_title_daltonizer);
             final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
                     getActivity(),
@@ -257,10 +269,13 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
-        final CharSequence softwareTitle =
-                context.getText(AccessibilityUtil.isGestureNavigateEnabled(context)
-                        ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
-                        : R.string.accessibility_shortcut_edit_dialog_title_software);
+        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
+        }
+        final CharSequence softwareTitle = context.getText(resId);
 
         List<CharSequence> list = new ArrayList<>();
         if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {

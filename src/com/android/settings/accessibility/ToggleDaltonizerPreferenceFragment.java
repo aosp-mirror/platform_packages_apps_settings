@@ -32,6 +32,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 import android.widget.Switch;
 
@@ -67,6 +69,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private final Handler mHandler = new Handler();
+    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private SettingsContentObserver mSettingsContentObserver;
     private int mUserShortcutType = UserShortcutType.DEFAULT;
     // Used to restore the edit dialog status.
@@ -109,6 +112,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                                 == State.ON);
             }
         };
+
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            removeDialog(DIALOG_ID_EDIT_SHORTCUT);
+            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+        };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -140,6 +148,12 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public void onResume() {
         super.onResume();
+
+        mSettingsContentObserver.register(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
             ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(this);
@@ -152,17 +166,23 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     public void onPause() {
-        super.onPause();
+        mSettingsContentObserver.unregister(getContentResolver());
+        final AccessibilityManager am = getPrefContext().getSystemService(
+                AccessibilityManager.class);
+        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         for (AbstractPreferenceController controller :
                 buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
             ((DaltonizerRadioButtonPreferenceController) controller).setOnChangeListener(null);
         }
+
+        super.onPause();
     }
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
         if (dialogId == DIALOG_ID_EDIT_SHORTCUT) {
-            final CharSequence dialogTitle = getActivity().getString(
+            final CharSequence dialogTitle = getActivity().getText(
                     R.string.accessibility_shortcut_edit_dialog_title_daltonizer);
             final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
                     getActivity(),
@@ -238,10 +258,13 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
-        final CharSequence softwareTitle =
-                context.getText(AccessibilityUtil.isGestureNavigateEnabled(context)
-                        ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture
-                        : R.string.accessibility_shortcut_edit_dialog_title_software);
+        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
+                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
+        }
+        final CharSequence softwareTitle = context.getText(resId);
 
         List<CharSequence> list = new ArrayList<>();
         if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
@@ -286,18 +309,6 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         }
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mSettingsContentObserver.register(getContentResolver());
-    }
-
-    @Override
-    public void onStop() {
-        mSettingsContentObserver.unregister(getContentResolver());
-        super.onStop();
     }
 
     @Override

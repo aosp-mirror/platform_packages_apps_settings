@@ -567,8 +567,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 return "TD_SCDMA";
             case TelephonyManager.NETWORK_TYPE_IWLAN:
                 return "IWLAN";
-            case TelephonyManager.NETWORK_TYPE_LTE_CA:
-                return "LTE_CA";
+//          case TelephonyManager.NETWORK_TYPE_LTE_CA:
+//              return "LTE_CA";
             case TelephonyManager.NETWORK_TYPE_NR:
                 return "NR";
             default:

@@ -17,9 +17,9 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardManager.KEY_CONTEXTUAL_CARDS;
-import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_DEFERRED_SETUP;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH;
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_STICKY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -110,8 +110,8 @@ public class ContextualCardManagerTest {
         mManager = new ContextualCardManager(mContext, mLifecycle, outState);
 
         final List<String> actualCards = mManager.mSavedCards.stream().collect(Collectors.toList());
-        final List<String> expectedCards = Arrays.asList("test_wifi", "test_flashlight",
-                "test_connected", "test_gesture", "test_battery");
+        final List<String> expectedCards = Arrays.asList("test_low_storage", "test_flashlight",
+                "test_dark_theme", "test_gesture", "test_battery");
         assertThat(actualCards).containsExactlyElementsIn(expectedCards);
     }
 
@@ -348,8 +348,9 @@ public class ContextualCardManagerTest {
         final ConditionContextualCardController conditionController =
                 pool.getController(mContext,
                         ContextualCard.CardType.CONDITIONAL);
-        final OnStart controller = spy((OnStart)conditionController);
-        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+        final OnStart controller = spy((OnStart) conditionController);
+        doReturn(controller).when(pool).getController(mContext,
+                ContextualCard.CardType.CONDITIONAL);
 
         manager.onWindowFocusChanged(true /* hasWindowFocus */);
 
@@ -366,8 +367,9 @@ public class ContextualCardManagerTest {
         final ConditionContextualCardController conditionController =
                 pool.getController(mContext,
                         ContextualCard.CardType.CONDITIONAL);
-        final OnStart controller = spy((OnStart)conditionController);
-        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+        final OnStart controller = spy((OnStart) conditionController);
+        doReturn(controller).when(pool).getController(mContext,
+                ContextualCard.CardType.CONDITIONAL);
 
         manager.onWindowFocusChanged(true /* hasWindowFocus */);
 
@@ -385,7 +387,8 @@ public class ContextualCardManagerTest {
                 pool.getController(mContext,
                         ContextualCard.CardType.CONDITIONAL);
         final OnStop controller = spy((OnStop) conditionController);
-        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+        doReturn(controller).when(pool).getController(mContext,
+                ContextualCard.CardType.CONDITIONAL);
 
         manager.onWindowFocusChanged(false /* hasWindowFocus */);
 
@@ -401,7 +404,8 @@ public class ContextualCardManagerTest {
                 pool.getController(mContext,
                         ContextualCard.CardType.CONDITIONAL);
         final OnStop controller = spy((OnStop) conditionController);
-        doReturn(controller).when(pool).getController(mContext, ContextualCard.CardType.CONDITIONAL);
+        doReturn(controller).when(pool).getController(mContext,
+                ContextualCard.CardType.CONDITIONAL);
 
         manager.onWindowFocusChanged(false /* hasWindowFocus */);
 
@@ -542,52 +546,82 @@ public class ContextualCardManagerTest {
     }
 
     @Test
-    public void getCardsWithViewType_onlyDeferredSetupCard_shouldHaveDeferredSetupCard() {
-        final List<ContextualCard> oneDeferredSetupCards = getDeferredSetupCardList();
+    public void getCardsWithViewType_hasWifiSlice_shouldHaveOneStickyCard() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> cardListWithWifi = buildCategoriedCards(cards, categories);
 
-        final List<ContextualCard> result = mManager.getCardsWithViewType(oneDeferredSetupCards);
+        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithWifi);
 
-        assertThat(result).hasSize(1);
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_DEFERRED_SETUP);
+        assertThat(result).hasSize(cards.size());
+        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
+        assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
     }
 
     @Test
-    public void getCardsWithViewType_hasDeferredSetupCard_shouldHaveDeferredSetupCard() {
+    public void getCardsWithViewType_hasBluetoothDeviceSlice_shouldHaveOneStickyCard() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
         final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> cardListWithBT = buildCategoriedCards(cards, categories);
+
+        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithBT);
+
+        assertThat(result).hasSize(cards.size());
+        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
+        assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
+    }
+
+    @Test
+    public void getCardsWithViewType_hasWifiAndBtDeviceSlice_shouldHaveTwoStickyCards() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> cardListWithWifiBT = buildCategoriedCards(cards, categories);
+
+        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithWifiBT);
+
+        assertThat(result).hasSize(cards.size());
+        assertThat(result.stream()
+                .filter(card -> card.getViewType() == VIEW_TYPE_STICKY)
+                .count())
+                .isEqualTo(2);
+    }
+
+    @Test
+    public void getCardsWithViewType_noWifiOrBtDeviceSlice_shouldNotHaveStickyCard() {
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
                 ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
                 ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
                 ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
                 ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
         );
-        final List<ContextualCard> cards = buildCategoriedCards(getContextualCardList(),
-                categories);
+        final List<ContextualCard> cardListWithoutWifiBT =
+                buildCategoriedCards(getContextualCardList(), categories);
 
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cards);
+        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithoutWifiBT);
 
-        assertThat(result).hasSize(5);
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_DEFERRED_SETUP);
-    }
-
-    @Test
-    public void getCardsWithViewType_noDeferredSetupCard_shouldNotHaveDeferredSetupCard() {
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cards = buildCategoriedCards(
-                getContextualCardList(), categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cards);
-
-        assertThat(result).hasSize(5);
-        for (int i = 0; i < result.size(); i++) {
-            assertThat(result.get(i).getViewType()).isNotEqualTo(
-                    ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE);
-        }
+        assertThat(result).hasSize(cardListWithoutWifiBT.size());
+        assertThat(result.stream()
+                .filter(card -> card.getViewType() == VIEW_TYPE_STICKY)
+                .count())
+                .isEqualTo(0);
     }
 
     @Test
@@ -622,9 +656,9 @@ public class ContextualCardManagerTest {
     private List<ContextualCard> getContextualCardList() {
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(new ContextualCard.Builder()
-                .setName("test_wifi")
+                .setName("test_low_storage")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.LOW_STORAGE_SLICE_URI)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
@@ -635,9 +669,9 @@ public class ContextualCardManagerTest {
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
-                .setName("test_connected")
+                .setName("test_dark_theme")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI)
+                .setSliceUri(CustomSliceRegistry.DARK_THEME_SLICE_URI)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()
@@ -651,18 +685,6 @@ public class ContextualCardManagerTest {
                 .setName("test_battery")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(CustomSliceRegistry.BATTERY_FIX_SLICE_URI)
-                .setViewType(VIEW_TYPE_FULL_WIDTH)
-                .build());
-        return cards;
-    }
-
-    private List<ContextualCard> getDeferredSetupCardList() {
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(new ContextualCard.Builder()
-                .setName("deferred_setup")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setCategory(ContextualCardProto.ContextualCard.Category.DEFERRED_SETUP_VALUE)
-                .setSliceUri(new Uri.Builder().appendPath("test_deferred_setup_path").build())
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         return cards;

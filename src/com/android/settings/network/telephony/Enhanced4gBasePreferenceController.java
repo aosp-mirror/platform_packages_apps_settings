@@ -22,9 +22,11 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -33,6 +35,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -46,7 +49,10 @@ import java.util.List;
 public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
-    private Preference mPreference;
+    private static final String TAG = "Enhanced4g";
+
+    @VisibleForTesting
+    Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
     private PersistableBundle mCarrierConfig;
     @VisibleForTesting
@@ -70,12 +76,12 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     }
 
     public Enhanced4gBasePreferenceController init(int subId) {
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID && mSubId == subId) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId) && mSubId == subId) {
             return this;
         }
         mSubId = subId;
         mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             mImsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
                     mContext, mSubId));
         }
@@ -102,14 +108,16 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
             return CONDITIONALLY_UNAVAILABLE;
         }
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        final boolean isVisible = subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        final VolteQueryImsState queryState = queryImsState(subId);
+        final boolean isVisible = SubscriptionManager.isValidSubscriptionId(subId)
                 && mImsManager != null && carrierConfig != null
                 && mImsManager.isVolteEnabledByPlatform()
                 && isVolteProvisionedOnDevice(mSubId)
                 && MobileNetworkUtils.isImsServiceStateReady(mImsManager)
                 && !carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL);
         return isVisible
-                ? (isPrefEnabled() ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
+                ? (isUserControlAllowed() && queryState.isAllowUserControl()
+                ? AVAILABLE : AVAILABLE_UNSEARCHABLE)
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -134,14 +142,28 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         super.updateState(preference);
         final SwitchPreference switchPreference = (SwitchPreference) preference;
 
-        switchPreference.setEnabled(isPrefEnabled());
-        switchPreference.setChecked(mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
-                && mImsManager.isNonTtyOrTtyOnVolteEnabled());
+        final VolteQueryImsState queryState = queryImsState(mSubId);
+        switchPreference.setEnabled(isUserControlAllowed()
+                && queryState.isAllowUserControl());
+        switchPreference.setChecked(queryState.isEnabledByUser()
+                && queryState.isAllowUserControl());
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mImsManager.setEnhanced4gLteModeSetting(isChecked);
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
+        if (imsMmTelManager == null) {
+            return false;
+        }
+        try {
+            imsMmTelManager.setAdvancedCallingSettingEnabled(isChecked);
+        } catch (IllegalArgumentException exception) {
+            Log.w(TAG, "fail to set VoLTE=" + isChecked + ". subId=" + mSubId, exception);
+            return false;
+        }
         for (final On4gLteUpdateListener lsn : m4gLteListeners) {
             lsn.on4gLteUpdated();
         }
@@ -150,7 +172,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public boolean isChecked() {
-        return mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
+        final VolteQueryImsState queryState = queryImsState(mSubId);
+        return queryState.isEnabledByUser();
     }
 
     public Enhanced4gBasePreferenceController addListener(On4gLteUpdateListener lsn) {
@@ -166,17 +189,19 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return m4gCurrentMode == getMode();
     }
 
-    private boolean isPrefEnabled() {
-        return mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                && (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
-                && mImsManager != null
-                && mImsManager.isNonTtyOrTtyOnVolteEnabled()
+    @VisibleForTesting
+    VolteQueryImsState queryImsState(int subId) {
+        return new VolteQueryImsState(mContext, subId);
+    }
+
+    private boolean isUserControlAllowed() {
+        return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
                 && mCarrierConfig.getBoolean(
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
     }
 
     private boolean isVolteProvisionedOnDevice(int subId) {
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             return true;
         }
         final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
@@ -204,7 +229,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         public void register(Context context, int subId) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class);
-            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
             }
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);

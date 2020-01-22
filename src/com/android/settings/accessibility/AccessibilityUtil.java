@@ -24,6 +24,7 @@ import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
@@ -137,6 +138,12 @@ final class AccessibilityUtil {
         return context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode)
                 == NAV_BAR_MODE_GESTURAL;
+    }
+
+    /** Determines if a touch explore is being used. */
+    public static boolean isTouchExploreEnabled(Context context) {
+        final AccessibilityManager am = context.getSystemService(AccessibilityManager.class);
+        return am.isTouchExplorationEnabled();
     }
 
     /**

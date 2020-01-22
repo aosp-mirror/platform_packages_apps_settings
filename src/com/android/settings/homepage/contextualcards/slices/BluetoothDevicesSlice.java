@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
+
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
@@ -38,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -64,16 +67,17 @@ public class BluetoothDevicesSlice implements CustomSliceable {
      * than {@link #DEFAULT_EXPANDED_ROW_COUNT}.
      */
     @VisibleForTesting
-    static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+    static final int DEFAULT_EXPANDED_ROW_COUNT = 2;
 
     /**
      * Refer {@link com.android.settings.bluetooth.BluetoothDevicePreference#compareTo} to sort the
      * Bluetooth devices by {@link CachedBluetoothDevice}.
      */
-    private static final Comparator<CachedBluetoothDevice> COMPARATOR
-            = Comparator.naturalOrder();
+    private static final Comparator<CachedBluetoothDevice> COMPARATOR = Comparator.naturalOrder();
 
     private static final String TAG = "BluetoothDevicesSlice";
+
+    private static int sToggledState;
 
     private final Context mContext;
 
@@ -88,42 +92,51 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (btAdapter == null) {
+            Log.i(TAG, "Bluetooth is not supported on this hardware platform");
+            return null;
+        }
+
         // Reload theme for switching dark mode on/off
         mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
 
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
-        final CharSequence title = mContext.getText(R.string.bluetooth_devices);
-        final CharSequence titleNoBluetoothDevices = mContext.getText(
-                R.string.no_bluetooth_devices);
+        final CharSequence title = mContext.getText(R.string.bluetooth_settings_title);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,
                 getIntent(), 0);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
                 ListBuilder.ICON_IMAGE, title);
-        final ListBuilder listBuilder =
-                new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
-                        .setAccentColor(COLOR_NOT_TINTED);
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
+                .setAccentColor(COLOR_NOT_TINTED)
+                .setHeader(new ListBuilder.HeaderBuilder()
+                        .setTitle(title)
+                        .setPrimaryAction(primarySliceAction));
+
+        // Only show a toggle when Bluetooth is off and not turning on.
+        if ((!isBluetoothEnabled(btAdapter) && sToggledState != BluetoothAdapter.STATE_TURNING_ON)
+                || sToggledState == BluetoothAdapter.STATE_TURNING_OFF) {
+            sToggledState = 0;
+            final PendingIntent toggleAction = getBroadcastIntent(mContext);
+            final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                    null /* actionTitle */, false /* isChecked */);
+            return listBuilder
+                    .addAction(toggleSliceAction)
+                    .build();
+        }
+        sToggledState = 0;
 
         // Get row builders by Bluetooth devices.
         final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder();
-
-        // Return a header with IsError flag, if no Bluetooth devices.
         if (rows.isEmpty()) {
-            return listBuilder.setHeader(new ListBuilder.HeaderBuilder()
-                    .setTitle(titleNoBluetoothDevices)
-                    .setPrimaryAction(primarySliceAction))
-                    .setIsError(true)
+            return listBuilder
+                    .addRow(getPairNewDeviceRow())
                     .build();
         }
 
         // Get displayable device count.
         final int deviceCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
-
-        // According to the displayable device count to set sub title of header.
-        listBuilder.setHeader(new ListBuilder.HeaderBuilder()
-                .setTitle(title)
-                .setSubtitle(getSubTitle(deviceCount))
-                .setPrimaryAction(primarySliceAction));
 
         // According to the displayable device count to add bluetooth device rows.
         for (int i = 0; i < deviceCount; i++) {
@@ -148,6 +161,20 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     @Override
     public void onNotifyChange(Intent intent) {
+        final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+        final boolean currentState = isBluetoothEnabled(btAdapter);
+        final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, currentState);
+        if (newState != currentState) {
+            if (newState) {
+                sToggledState = BluetoothAdapter.STATE_TURNING_ON;
+                btAdapter.enable();
+            } else {
+                sToggledState = BluetoothAdapter.STATE_TURNING_OFF;
+                btAdapter.disable();
+            }
+            mContext.getContentResolver().notifyChange(getUri(), null);
+        }
+
         // Activate available media device.
         final int bluetoothDeviceHashCode = intent.getIntExtra(BLUETOOTH_DEVICE_HASH_CODE, -1);
         for (CachedBluetoothDevice cachedBluetoothDevice : getConnectedBluetoothDevices()) {
@@ -203,7 +230,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
         // The requestCode should be unique, use the hashcode of device as request code.
         return PendingIntent
-                .getActivity(mContext, device.hashCode()  /* requestCode */,
+                .getActivity(mContext, device.hashCode() /* requestCode */,
                         subSettingLauncher.toIntent(),
                         0  /* flags */);
     }
@@ -221,6 +248,23 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         }
 
         return Utils.createIconWithDrawable(drawable);
+    }
+
+    private ListBuilder.RowBuilder getPairNewDeviceRow() {
+        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_add_24dp);
+        final String title = mContext.getString(R.string.bluetooth_pairing_pref_title);
+        final Intent intent = new SubSettingLauncher(mContext)
+                .setDestination(BluetoothPairingDetail.class.getName())
+                .setTitleRes(R.string.bluetooth_pairing_page_title)
+                .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_PAIRING)
+                .toIntent();
+        final PendingIntent pi = PendingIntent.getActivity(mContext, intent.hashCode(), intent,
+                0 /* flags */);
+        final SliceAction action = SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE,
+                title);
+        return new ListBuilder.RowBuilder()
+                .setTitleItem(action)
+                .setTitle(title);
     }
 
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilder() {
@@ -272,8 +316,13 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 bluetoothDevice.getName());
     }
 
-    private CharSequence getSubTitle(int deviceCount) {
-        return mContext.getResources().getQuantityString(R.plurals.show_bluetooth_devices,
-                deviceCount, deviceCount);
+    private boolean isBluetoothEnabled(BluetoothAdapter btAdapter) {
+        switch (btAdapter.getState()) {
+            case BluetoothAdapter.STATE_ON:
+            case BluetoothAdapter.STATE_TURNING_ON:
+                return true;
+            default:
+                return false;
+        }
     }
 }

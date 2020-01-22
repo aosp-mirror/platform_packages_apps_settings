@@ -243,6 +243,16 @@ public class SliceTester {
     }
 
     /**
+     * Assert no slice item contains title.
+     *
+     * @param sliceItems All slice items of a Slice.
+     * @param title Title for asserting.
+     */
+    public static void assertNoSliceItemContainsTitle(List<SliceItem> sliceItems, String title) {
+        assertThat(hasText(sliceItems, title, HINT_TITLE)).isFalse();
+    }
+
+    /**
      * Assert any slice item contains subtitle.
      *
      * @param sliceItems All slice items of a Slice.

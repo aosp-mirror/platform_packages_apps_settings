@@ -17,30 +17,42 @@
 package com.android.settings.wifi.slice;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.DetailedState;
+import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
+import androidx.slice.builders.ListBuilder;
 
+import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
+import com.android.settingslib.wifi.AccessPoint;
 
 /**
  * {@link CustomSliceable} for Wi-Fi, used by contextual homepage.
  */
 public class ContextualWifiSlice extends WifiSlice {
 
-    private static final String TAG = "ContextualWifiSlice";
+    @VisibleForTesting
+    static final int COLLAPSED_ROW_COUNT = 0;
+
     @VisibleForTesting
     static long sActiveUiSession = -1000;
     @VisibleForTesting
-    static boolean sPreviouslyDisplayed;
+    static boolean sToggleNeeded = true;
 
     public ContextualWifiSlice(Context context) {
         super(context);
@@ -57,17 +69,75 @@ public class ContextualWifiSlice extends WifiSlice {
                 .getSlicesFeatureProvider().getUiSessionToken();
         if (currentUiSession != sActiveUiSession) {
             sActiveUiSession = currentUiSession;
-            sPreviouslyDisplayed = false;
+            sToggleNeeded = !hasWorkingNetwork();
+        } else if (!mWifiManager.isWifiEnabled()) {
+            sToggleNeeded = true;
         }
-        if (!sPreviouslyDisplayed && hasWorkingNetwork()) {
-            Log.d(TAG, "Wifi is connected, no point showing any suggestion.");
-            return null;
-        }
-        // Set sPreviouslyDisplayed to true - we will show *something* on the screen. So we should
-        // keep showing this card to keep UI stable, even if wifi connects to a network later.
-        sPreviouslyDisplayed = true;
-
         return super.getSlice();
+    }
+
+    static int getApRowCount() {
+        return sToggleNeeded ? DEFAULT_EXPANDED_ROW_COUNT : COLLAPSED_ROW_COUNT;
+    }
+
+    @Override
+    protected boolean isToggleNeeded() {
+        return sToggleNeeded;
+    }
+
+    @Override
+    protected ListBuilder.RowBuilder getHeaderRow(AccessPoint accessPoint) {
+        final ListBuilder.RowBuilder builder = super.getHeaderRow(accessPoint);
+        if (!sToggleNeeded) {
+            builder.setTitleItem(getLevelIcon(accessPoint), ListBuilder.ICON_IMAGE)
+                    .setSubtitle(getSubtitle(accessPoint));
+        }
+        return builder;
+    }
+
+    private IconCompat getLevelIcon(AccessPoint accessPoint) {
+        if (accessPoint != null) {
+            return getAccessPointLevelIcon(accessPoint);
+        }
+
+        final Drawable drawable = mContext.getDrawable(
+                com.android.settingslib.Utils.getWifiIconResource(0));
+        final int color = Utils.getColorAttrDefaultColor(mContext,
+                android.R.attr.colorControlNormal);
+        drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+        return Utils.createIconWithDrawable(drawable);
+    }
+
+    private CharSequence getSubtitle(AccessPoint accessPoint) {
+        if (isCaptivePortal()) {
+            final int id = mContext.getResources()
+                    .getIdentifier("network_available_sign_in", "string", "android");
+            return mContext.getText(id);
+        }
+
+        if (accessPoint == null) {
+            return mContext.getText(R.string.disconnected);
+        }
+
+        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
+        if (networkInfo == null) {
+            return mContext.getText(R.string.disconnected);
+        }
+
+        final State state = networkInfo.getState();
+        DetailedState detailedState;
+        if (state == State.CONNECTING) {
+            detailedState = DetailedState.CONNECTING;
+        } else if (state == State.CONNECTED) {
+            detailedState = DetailedState.CONNECTED;
+        } else {
+            detailedState = networkInfo.getDetailedState();
+        }
+
+        final String[] formats = mContext.getResources().getStringArray(
+                R.array.wifi_status_with_ssid);
+        final int index = detailedState.ordinal();
+        return String.format(formats[index], accessPoint.getTitle());
     }
 
     private boolean hasWorkingNetwork() {

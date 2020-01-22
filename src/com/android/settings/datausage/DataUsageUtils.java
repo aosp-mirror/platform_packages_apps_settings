@@ -166,7 +166,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
         SubscriptionInfo subscriptionInfo =
                 subManager.getActiveSubscriptionInfo(subManager.getDefaultDataSubscriptionId());
         if (subscriptionInfo == null) {
-            List<SubscriptionInfo> list = subManager.getAllSubscriptionInfoList();
+            List<SubscriptionInfo> list = subManager.getAvailableSubscriptionInfoList();
             if (list.size() == 0) {
                 return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
             }
