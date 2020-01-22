@@ -18,13 +18,16 @@ package com.android.settings.network.ims;
 
 import android.content.Context;
 import android.telecom.TelecomManager;
+import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
 import com.android.settings.network.SubscriptionUtil;
-
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Controller class for querying Volte status
@@ -41,8 +44,50 @@ public class VolteQueryImsState extends ImsQueryController {
      * @param subId subscription's id
      */
     public VolteQueryImsState(Context context, int subId) {
+        super(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
         mContext = context;
         mSubId = subId;
+    }
+
+    /**
+     * Implementation of ImsQueryController#isEnabledByUser(int subId)
+     */
+    @VisibleForTesting
+    ImsQuery isEnabledByUser(int subId) {
+        return new ImsQueryEnhanced4gLteModeUserSetting(subId);
+    }
+
+    @VisibleForTesting
+    ImsManager getImsManager(int subId) {
+        return ImsManager.getInstance(mContext,
+                SubscriptionUtil.getPhoneId(mContext, subId));
+    }
+
+    /**
+     * Check whether VoLTE has been provisioned or not on this subscription
+     *
+     * @return true when VoLTE has been enabled, otherwise false
+     */
+    public boolean isVoLteProvisioned() {
+        final ImsManager imsManager = getImsManager(mSubId);
+        if (imsManager == null) {
+            return false;
+        }
+
+        return imsManager.isVolteEnabledByPlatform()
+                && isProvisionedOnDevice(mSubId).query();
+    }
+
+    /**
+     * Check whether VoLTE can be perform or not on this subscription
+     *
+     * @return true when VoLTE can be performed, otherwise false
+     */
+    public boolean isReadyToVoLte() {
+        return isVoLteProvisioned()
+                && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
     }
 
     /**
@@ -74,8 +119,6 @@ public class VolteQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        ImsManager imsManager = ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(
-                    mContext, mSubId));
-        return imsManager.isEnhanced4gLteModeSettingEnabledByUser();
+        return isEnabledByUser(mSubId).query();
     }
 }

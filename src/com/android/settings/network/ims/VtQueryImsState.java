@@ -18,9 +18,16 @@ package com.android.settings.network.ims;
 
 import android.content.Context;
 import android.telecom.TelecomManager;
+import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.android.ims.ImsManager;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Controller class for querying VT status
@@ -37,6 +44,9 @@ public class VtQueryImsState extends ImsQueryController {
      * @param subId subscription's id
      */
     public VtQueryImsState(Context context, int subId) {
+        super(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO,
+                ImsRegistrationImplBase.REGISTRATION_TECH_LTE,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
         mContext = context;
         mSubId = subId;
     }
@@ -47,6 +57,28 @@ public class VtQueryImsState extends ImsQueryController {
     @VisibleForTesting
     ImsQuery isEnabledByUser(int subId) {
         return new ImsQueryVtUserSetting(subId);
+    }
+
+    @VisibleForTesting
+    ImsManager getImsManager(int subId) {
+        return ImsManager.getInstance(mContext,
+                SubscriptionUtil.getPhoneId(mContext, subId));
+    }
+
+    /**
+     * Check whether Video Call can be perform or not on this subscription
+     *
+     * @return true when Video Call can be performed, otherwise false
+     */
+    public boolean isReadyToVideoCall() {
+        final ImsManager imsManager = getImsManager(mSubId);
+        if (imsManager == null) {
+            return false;
+        }
+
+        return imsManager.isVtEnabledByPlatform()
+                && isProvisionedOnDevice(mSubId).query()
+                && MobileNetworkUtils.isImsServiceStateReady(imsManager);
     }
 
     /**

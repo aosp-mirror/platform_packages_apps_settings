@@ -37,6 +37,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @param subId subscription's id
      */
     public WifiCallingQueryImsState(Context context, int subId) {
+        super();
         mContext = context;
         mSubId = subId;
     }

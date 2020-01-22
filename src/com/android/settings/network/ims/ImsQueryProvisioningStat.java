@@ -16,49 +16,42 @@
 
 package com.android.settings.network.ims;
 
-import android.telephony.AccessNetworkConstants;
+import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 
-import androidx.annotation.VisibleForTesting;
 
 /**
- * Controller class for querying IMS status
+ * An {@code ImsQuery} for accessing IMS provision stat
  */
-abstract class ImsQueryController {
+public class ImsQueryProvisioningStat implements ImsQuery {
 
+    private volatile int mSubId;
     private volatile int mCapability;
     private volatile int mTech;
-    private volatile int mTransportType;
 
     /**
-     * Constructor for query IMS status
-     */
-    ImsQueryController() {}
-
-    /**
-     * Constructor for query IMS status
-     *
+     * Constructor
+     * @param subId subscription id
      * @param capability {@code MmTelFeature.MmTelCapabilities.MmTelCapability}
      * @param tech {@code @ImsRegistrationImplBase.ImsRegistrationTech}
-     * @param transportType {@code @AccessNetworkConstants.TransportType}
      */
-    ImsQueryController(
+    public ImsQueryProvisioningStat(int subId,
             @MmTelFeature.MmTelCapabilities.MmTelCapability int capability,
-            @ImsRegistrationImplBase.ImsRegistrationTech int tech,
-            @AccessNetworkConstants.TransportType int transportType) {
+            @ImsRegistrationImplBase.ImsRegistrationTech int tech) {
+        mSubId = subId;
         mCapability = capability;
         mTech = tech;
-        mTransportType = transportType;
     }
 
-    @VisibleForTesting
-    ImsQuery isTtyOnVolteEnabled(int subId) {
-        return new ImsQueryTtyOnVolteStat(subId);
-    }
-
-    @VisibleForTesting
-    ImsQuery isProvisionedOnDevice(int subId) {
-        return new ImsQueryProvisioningStat(subId, mCapability, mTech);
+    /**
+     * Implementation of interface {@code ImsQuery}
+     *
+     * @return result of query
+     */
+    public boolean query() {
+        final ProvisioningManager privisionManager =
+                ProvisioningManager.createForSubscriptionId(mSubId);
+        return privisionManager.getProvisioningStatusForCapability(mCapability, mTech);
     }
 }
