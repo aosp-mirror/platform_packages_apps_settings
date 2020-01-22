@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
@@ -175,8 +176,8 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
         if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(handlerApp)) {
             return context.getString(R.string.system_default_app_subtext);
         }
-        final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
-        if (managedProfile != null && managedProfile.getIdentifier() == handlerUser) {
+        final UserInfo userInfo = mUserManager.getUserInfo(handlerUser);
+        if (userInfo != null && userInfo.isManagedProfile()) {
             return context.getString(R.string.work_profile_app_subtext);
         }
         return context.getString(R.string.personal_profile_app_subtext);
