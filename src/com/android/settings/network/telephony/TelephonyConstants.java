@@ -32,139 +32,222 @@ public class TelephonyConstants {
         // Network modes are in turn copied from RILConstants
         // with one difference: NETWORK_MODE_CDMA is named NETWORK_MODE_CDMA_EVDO
 
-        /** GSM, WCDMA (WCDMA preferred) */
+        public static final int NETWORK_MODE_UNKNOWN = -1;
+
+        /**
+         * GSM, WCDMA (WCDMA preferred)
+         */
         public static final int NETWORK_MODE_WCDMA_PREF = 0;
 
-        /** GSM only */
+        /**
+         * GSM only
+         */
         public static final int NETWORK_MODE_GSM_ONLY = 1;
 
-        /** WCDMA only */
+        /**
+         * WCDMA only
+         */
         public static final int NETWORK_MODE_WCDMA_ONLY = 2;
 
-        /** GSM, WCDMA (auto mode, according to PRL) */
+        /**
+         * GSM, WCDMA (auto mode, according to PRL)
+         */
         public static final int NETWORK_MODE_GSM_UMTS = 3;
 
-        /** CDMA and EvDo (auto mode, according to PRL)
+        /**
+         * CDMA and EvDo (auto mode, according to PRL)
          * this is NETWORK_MODE_CDMA in RILConstants.java
          */
         public static final int NETWORK_MODE_CDMA_EVDO = 4;
 
-        /** CDMA only */
+        /**
+         * CDMA only
+         */
         public static final int NETWORK_MODE_CDMA_NO_EVDO = 5;
 
-        /** EvDo only */
+        /**
+         * EvDo only
+         */
         public static final int NETWORK_MODE_EVDO_NO_CDMA = 6;
 
-        /** GSM, WCDMA, CDMA, and EvDo (auto mode, according to PRL) */
+        /**
+         * GSM, WCDMA, CDMA, and EvDo (auto mode, according to PRL)
+         */
         public static final int NETWORK_MODE_GLOBAL = 7;
 
-        /** LTE, CDMA and EvDo */
+        /**
+         * LTE, CDMA and EvDo
+         */
         public static final int NETWORK_MODE_LTE_CDMA_EVDO = 8;
 
-        /** LTE, GSM and WCDMA */
+        /**
+         * LTE, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_GSM_WCDMA = 9;
 
-        /** LTE, CDMA, EvDo, GSM, and WCDMA */
+        /**
+         * LTE, CDMA, EvDo, GSM, and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA = 10;
 
-        /** LTE only mode. */
+        /**
+         * LTE only mode.
+         */
         public static final int NETWORK_MODE_LTE_ONLY = 11;
 
-        /** LTE and WCDMA */
+        /**
+         * LTE and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_WCDMA = 12;
 
-        /** TD-SCDMA only */
+        /**
+         * TD-SCDMA only
+         */
         public static final int NETWORK_MODE_TDSCDMA_ONLY = 13;
 
-        /** TD-SCDMA and WCDMA */
+        /**
+         * TD-SCDMA and WCDMA
+         */
         public static final int NETWORK_MODE_TDSCDMA_WCDMA = 14;
 
-        /** LTE and TD-SCDMA*/
+        /**
+         * LTE and TD-SCDMA
+         */
         public static final int NETWORK_MODE_LTE_TDSCDMA = 15;
 
-        /** TD-SCDMA and GSM */
+        /**
+         * TD-SCDMA and GSM
+         */
         public static final int NETWORK_MODE_TDSCDMA_GSM = 16;
 
-        /** TD-SCDMA, GSM and LTE */
+        /**
+         * TD-SCDMA, GSM and LTE
+         */
         public static final int NETWORK_MODE_LTE_TDSCDMA_GSM = 17;
 
-        /** TD-SCDMA, GSM and WCDMA */
+        /**
+         * TD-SCDMA, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_TDSCDMA_GSM_WCDMA = 18;
 
-        /** LTE, TD-SCDMA and WCDMA */
+        /**
+         * LTE, TD-SCDMA and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_TDSCDMA_WCDMA = 19;
 
-        /** LTE, TD-SCDMA, GSM, and WCDMA */
+        /**
+         * LTE, TD-SCDMA, GSM, and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA = 20;
 
-        /** TD-SCDMA, CDMA, EVDO, GSM and WCDMA */
+        /**
+         * TD-SCDMA, CDMA, EVDO, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 21;
 
-        /** LTE, TDCSDMA, CDMA, EVDO, GSM and WCDMA */
+        /**
+         * LTE, TDCSDMA, CDMA, EVDO, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 22;
 
-        /** NR 5G only mode */
+        /**
+         * NR 5G only mode
+         */
         public static final int NETWORK_MODE_NR_ONLY = 23;
 
-        /** NR 5G, LTE */
+        /**
+         * NR 5G, LTE
+         */
         public static final int NETWORK_MODE_NR_LTE = 24;
 
-        /** NR 5G, LTE, CDMA and EvDo */
+        /**
+         * NR 5G, LTE, CDMA and EvDo
+         */
         public static final int NETWORK_MODE_NR_LTE_CDMA_EVDO = 25;
 
-        /** NR 5G, LTE, GSM and WCDMA */
+        /**
+         * NR 5G, LTE, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_GSM_WCDMA = 26;
 
-        /** NR 5G, LTE, CDMA, EvDo, GSM and WCDMA */
+        /**
+         * NR 5G, LTE, CDMA, EvDo, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA = 27;
 
-        /** NR 5G, LTE and WCDMA */
+        /**
+         * NR 5G, LTE and WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_WCDMA = 28;
 
-        /** NR 5G, LTE and TDSCDMA */
+        /**
+         * NR 5G, LTE and TDSCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA = 29;
 
-        /** NR 5G, LTE, TD-SCDMA and GSM */
+        /**
+         * NR 5G, LTE, TD-SCDMA and GSM
+         */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA_GSM = 30;
 
-        /** NR 5G, LTE, TD-SCDMA, WCDMA */
+        /**
+         * NR 5G, LTE, TD-SCDMA, WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA_WCDMA = 31;
 
-        /** NR 5G, LTE, TD-SCDMA, GSM and WCDMA */
+        /**
+         * NR 5G, LTE, TD-SCDMA, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA = 32;
 
-        /** NR 5G, LTE, TD-SCDMA, CDMA, EVDO, GSM and WCDMA */
+        /**
+         * NR 5G, LTE, TD-SCDMA, CDMA, EVDO, GSM and WCDMA
+         */
         public static final int NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA = 33;
-
-
-        // Grouping of RAFs
-        // imported from {@link android.telephony.RadioAccessFamily}
-        // 2G
-        public static final long GSM = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
-                | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
-                | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE;
-        public static final long CDMA = TelephonyManager.NETWORK_TYPE_BITMASK_CDMA
-                | TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
-
-        // 3G
-        public static final long EVDO = TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_0
-                | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_A
-                | TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_B
-                | TelephonyManager.NETWORK_TYPE_BITMASK_EHRPD;
-        public static final long HS = TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA
-                | TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA
-                | TelephonyManager.NETWORK_TYPE_BITMASK_HSPA
-                | TelephonyManager.NETWORK_TYPE_BITMASK_HSPAP;
-        public static final long WCDMA = HS | TelephonyManager.NETWORK_TYPE_BITMASK_UMTS;
-
-        // 4G
-        public static final long LTE = TelephonyManager.NETWORK_TYPE_BITMASK_LTE
-                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE_CA;
-
-        // 5G
-        public static final long NR = TelephonyManager.NETWORK_TYPE_BITMASK_NR;
-
     }
 
+    /**
+     * Copied from {@link android.telephony.RadioAccessFamily}
+     */
+    public static class RadioAccessFamily {
+        // 2G
+        public static final int RAF_UNKNOWN = (int) TelephonyManager.NETWORK_TYPE_BITMASK_UNKNOWN;
+        public static final int RAF_GSM = (int) TelephonyManager.NETWORK_TYPE_BITMASK_GSM;
+        public static final int RAF_GPRS = (int) TelephonyManager.NETWORK_TYPE_BITMASK_GPRS;
+        public static final int RAF_EDGE = (int) TelephonyManager.NETWORK_TYPE_BITMASK_EDGE;
+        public static final int RAF_IS95A = (int) TelephonyManager.NETWORK_TYPE_BITMASK_CDMA;
+        public static final int RAF_IS95B = (int) TelephonyManager.NETWORK_TYPE_BITMASK_CDMA;
+        public static final int RAF_1xRTT = (int) TelephonyManager.NETWORK_TYPE_BITMASK_1xRTT;
+        // 3G
+        public static final int RAF_EVDO_0 = (int) TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_0;
+        public static final int RAF_EVDO_A = (int) TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_A;
+        public static final int RAF_EVDO_B = (int) TelephonyManager.NETWORK_TYPE_BITMASK_EVDO_B;
+        public static final int RAF_EHRPD = (int) TelephonyManager.NETWORK_TYPE_BITMASK_EHRPD;
+        public static final int RAF_HSUPA = (int) TelephonyManager.NETWORK_TYPE_BITMASK_HSUPA;
+        public static final int RAF_HSDPA = (int) TelephonyManager.NETWORK_TYPE_BITMASK_HSDPA;
+        public static final int RAF_HSPA = (int) TelephonyManager.NETWORK_TYPE_BITMASK_HSPA;
+        public static final int RAF_HSPAP = (int) TelephonyManager.NETWORK_TYPE_BITMASK_HSPAP;
+        public static final int RAF_UMTS = (int) TelephonyManager.NETWORK_TYPE_BITMASK_UMTS;
+        public static final int RAF_TD_SCDMA = (int) TelephonyManager.NETWORK_TYPE_BITMASK_TD_SCDMA;
+        // 4G
+        public static final int RAF_LTE = (int) TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+        public static final int RAF_LTE_CA = (int) TelephonyManager.NETWORK_TYPE_BITMASK_LTE_CA;
+        // 5G
+        public static final int RAF_NR = (int) TelephonyManager.NETWORK_TYPE_BITMASK_NR;
 
+        // Grouping of RAFs
+        // 2G
+        public static final int GSM = RAF_GSM | RAF_GPRS | RAF_EDGE;
+        public static final int CDMA = RAF_IS95A | RAF_IS95B | RAF_1xRTT;
+        // 3G
+        public static final int EVDO = RAF_EVDO_0 | RAF_EVDO_A | RAF_EVDO_B | RAF_EHRPD;
+        public static final int HS = RAF_HSUPA | RAF_HSDPA | RAF_HSPA | RAF_HSPAP;
+        public static final int WCDMA = HS | RAF_UMTS;
+        // 4G
+        public static final int LTE = RAF_LTE | RAF_LTE_CA;
+
+        // 5G
+        public static final int NR = RAF_NR;
+
+    }
 }
