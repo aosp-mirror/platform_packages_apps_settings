@@ -240,7 +240,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
 
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
-                activity, KEY_ADD_USER_WHEN_LOCKED);
+                activity, KEY_ADD_USER_WHEN_LOCKED, new LockPatternUtils(getPrefContext()));
         mMultiUserFooterPreferenceController = new MultiUserFooterPreferenceController(activity,
                 KEY_MULTIUSER_FOOTER);
 
@@ -1290,7 +1290,8 @@ public class UserSettings extends SettingsPreferenceFragment
                         boolean suppressAllPage) {
                     final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId,
                             suppressAllPage);
-                    new AddUserWhenLockedPreferenceController(context, KEY_ADD_USER_WHEN_LOCKED)
+                    new AddUserWhenLockedPreferenceController(
+                            context, KEY_ADD_USER_WHEN_LOCKED, new LockPatternUtils(context))
                             .updateNonIndexableKeys(niks);
                     new AutoSyncDataPreferenceController(context, null /* parent */)
                             .updateNonIndexableKeys(niks);
