@@ -258,6 +258,12 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 }
 
                 @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !context.getResources().getBoolean(
+                            R.bool.config_show_all_in_one_tether_settings);
+                }
+
+                @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /* listener */);
