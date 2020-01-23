@@ -54,7 +54,9 @@ public class RecentLocationRequestSeeAllFragment extends DashboardFragment {
 
         mController = use(RecentLocationRequestSeeAllPreferenceController.class);
         mController.init(this);
-        mController.setProfileType(profileType);
+        if (profileType != 0) {
+            mController.setProfileType(profileType);
+        }
     }
 
     @Override
