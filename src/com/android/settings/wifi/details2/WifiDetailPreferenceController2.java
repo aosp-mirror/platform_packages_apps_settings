@@ -330,7 +330,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
-        mSecurityPref.setSummary(WifiEntryShell.getSecurityString(mWifiEntry, /* concise */ false));
+        mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
