@@ -21,6 +21,7 @@ import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_EXEMPTED;
 import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_FREQUENT;
 import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_NEVER;
 import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_RARE;
+import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_RESTRICTED;
 import static android.app.usage.UsageStatsManager.STANDBY_BUCKET_WORKING_SET;
 
 import android.app.settings.SettingsEnums;
@@ -46,13 +47,14 @@ public class InactiveApps extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final CharSequence[] SETTABLE_BUCKETS_NAMES =
-            {"ACTIVE", "WORKING_SET", "FREQUENT", "RARE"};
+            {"ACTIVE", "WORKING_SET", "FREQUENT", "RARE", "RESTRICTED"};
 
     private static final CharSequence[] SETTABLE_BUCKETS_VALUES = {
             Integer.toString(STANDBY_BUCKET_ACTIVE),
             Integer.toString(STANDBY_BUCKET_WORKING_SET),
             Integer.toString(STANDBY_BUCKET_FREQUENT),
-            Integer.toString(STANDBY_BUCKET_RARE)
+            Integer.toString(STANDBY_BUCKET_RARE),
+            Integer.toString(STANDBY_BUCKET_RESTRICTED)
     };
 
     private UsageStatsManager mUsageStats;
@@ -83,7 +85,6 @@ public class InactiveApps extends SettingsPreferenceFragment
         screen.setOrderingAsAdded(false);
         final Context context = getActivity();
         final PackageManager pm = context.getPackageManager();
-        final UsageStatsManager usm = context.getSystemService(UsageStatsManager.class);
         final String settingsPackage = context.getPackageName();
 
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
@@ -115,6 +116,7 @@ public class InactiveApps extends SettingsPreferenceFragment
             case STANDBY_BUCKET_WORKING_SET: return "WORKING_SET";
             case STANDBY_BUCKET_FREQUENT: return "FREQUENT";
             case STANDBY_BUCKET_RARE: return "RARE";
+            case STANDBY_BUCKET_RESTRICTED: return "RESTRICTED";
             case STANDBY_BUCKET_NEVER: return "NEVER";
         }
         return "";
@@ -129,7 +131,7 @@ public class InactiveApps extends SettingsPreferenceFragment
         // purposes and can either not be changed out of, or might have undesirable
         // side-effects in combination with other assumptions.
         final boolean changeable = appBucket >= STANDBY_BUCKET_ACTIVE
-                && appBucket <= STANDBY_BUCKET_RARE;
+                && appBucket <= STANDBY_BUCKET_RESTRICTED;
         if (changeable) {
             p.setValue(Integer.toString(appBucket));
         }
