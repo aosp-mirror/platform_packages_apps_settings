@@ -119,7 +119,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
         }
         mNetworkName = nc.getSSID();
         if (mNetworkName != null) {
-            mNetworkName = WifiInfo.removeDoubleQuotes(mNetworkName);
+            mNetworkName = WifiInfo.sanitizeSsid(mNetworkName);
         }
 
         createDialog();
