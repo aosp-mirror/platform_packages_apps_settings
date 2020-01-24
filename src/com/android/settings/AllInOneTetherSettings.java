@@ -201,7 +201,7 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         // Assume we are in a SettingsActivity. This is only safe because we currently use
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null) {
             adapter.getProfileProxy(activity.getApplicationContext(), mProfileServiceListener,
                     BluetoothProfile.PAN);
@@ -402,6 +402,12 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                     }
 
                     return keys;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources().getBoolean(
+                            R.bool.config_show_all_in_one_tether_settings);
                 }
 
                 @Override

@@ -276,7 +276,7 @@ public class WifiConfigController2 implements TextWatcher,
                 mHiddenSettingsSpinner.getSelectedItemPosition() == NOT_HIDDEN_NETWORK
                         ? View.GONE
                         : View.VISIBLE);
-        mSecurityInPosition = new Integer[WifiEntry.SECURITY_MAX_VAL];
+        mSecurityInPosition = new Integer[WifiEntry.NUM_SECURITY_TYPES];
 
         if (mWifiEntry == null) { // new network
             configureSecuritySpinner();
@@ -411,7 +411,7 @@ public class WifiConfigController2 implements TextWatcher,
                     }
 
                     addRow(group, R.string.wifi_security,
-                            WifiEntryShell.getSecurityString(mWifiEntry, false));
+                            mWifiEntry.getSecurityString(false /* concise */));
                     mView.findViewById(R.id.ip_fields).setVisibility(View.GONE);
                 }
                 if (mWifiEntry.isSaved()

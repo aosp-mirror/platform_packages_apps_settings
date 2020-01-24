@@ -48,13 +48,6 @@ public class WifiEntryShell {
      */
     public static final int HIGHER_FREQ_5GHZ = 5900;
 
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static String getSecurityString(WifiEntry wifiEntry, boolean concise) {
-        return "None";
-    }
-
     // Passpoint methods
 
     /**

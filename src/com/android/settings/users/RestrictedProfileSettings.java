@@ -23,12 +23,15 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.util.UserIcons;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.utils.ThreadUtils;
 
 public class RestrictedProfileSettings extends AppRestrictionsFragment
         implements EditUserInfoController.OnContentChangedCallback {
@@ -117,8 +120,8 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     public Dialog onCreateDialog(int dialogId) {
         if (dialogId == DIALOG_ID_EDIT_USER_INFO) {
             return mEditUserInfoController.createDialog(this, mUserIconView.getDrawable(),
-                    mUserNameView.getText(), R.string.profile_info_settings_title,
-                    this, mUser);
+                    mUserNameView.getText(), getString(R.string.profile_info_settings_title),
+                    this, mUser, null);
         } else if (dialogId == DIALOG_CONFIRM_REMOVE) {
             Dialog dlg =
                     UserDialogs.createRemoveDialog(getActivity(), mUser.getIdentifier(),
@@ -156,12 +159,19 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     }
 
     @Override
-    public void onPhotoChanged(Drawable photo) {
+    public void onPhotoChanged(UserHandle user, Drawable photo) {
         mUserIconView.setImageDrawable(photo);
+        ThreadUtils.postOnBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                mUserManager.setUserIcon(user.getIdentifier(), UserIcons.convertToBitmap(photo));
+            }
+        });
     }
 
     @Override
-    public void onLabelChanged(CharSequence label) {
+    public void onLabelChanged(UserHandle user, CharSequence label) {
         mUserNameView.setText(label);
+        mUserManager.setUserName(user.getIdentifier(), label.toString());
     }
 }

@@ -137,6 +137,10 @@ public class ApnEditor extends SettingsPreferenceFragment
     String[] mReadOnlyApnTypes;
     @VisibleForTesting
     String[] mDefaultApnTypes;
+    @VisibleForTesting
+    String mDefaultApnProtocol;
+    @VisibleForTesting
+    String mDefaultApnRoamingProtocol;
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
     private Uri mCarrierUri;
@@ -241,12 +245,14 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int AUTH_TYPE_INDEX = 14;
     @VisibleForTesting
     static final int TYPE_INDEX = 15;
-    private static final int PROTOCOL_INDEX = 16;
+    @VisibleForTesting
+    static final int PROTOCOL_INDEX = 16;
     @VisibleForTesting
     static final int CARRIER_ENABLED_INDEX = 17;
     private static final int BEARER_INDEX = 18;
     private static final int BEARER_BITMASK_INDEX = 19;
-    private static final int ROAMING_PROTOCOL_INDEX = 20;
+    @VisibleForTesting
+    static final int ROAMING_PROTOCOL_INDEX = 20;
     private static final int MVNO_TYPE_INDEX = 21;
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
@@ -316,6 +322,19 @@ public class ApnEditor extends SettingsPreferenceFragment
                         CarrierConfigManager.KEY_APN_SETTINGS_DEFAULT_APN_TYPES_STRING_ARRAY);
                 if (!ArrayUtils.isEmpty(mDefaultApnTypes)) {
                     Log.d(TAG, "onCreate: default apn types: " + Arrays.toString(mDefaultApnTypes));
+                }
+
+                mDefaultApnProtocol = b.getString(
+                        CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_PROTOCOL_STRING);
+                if (!TextUtils.isEmpty(mDefaultApnProtocol)) {
+                    Log.d(TAG, "onCreate: default apn protocol: " + mDefaultApnProtocol);
+                }
+
+                mDefaultApnRoamingProtocol = b.getString(
+                        CarrierConfigManager.Apn.KEY_SETTINGS_DEFAULT_ROAMING_PROTOCOL_STRING);
+                if (!TextUtils.isEmpty(mDefaultApnRoamingProtocol)) {
+                    Log.d(TAG, "onCreate: default apn roaming protocol: "
+                            + mDefaultApnRoamingProtocol);
                 }
             }
         }
@@ -1029,13 +1048,13 @@ public class ApnEditor extends SettingsPreferenceFragment
 
         callUpdate = setStringValueAndCheckIfDiff(values,
                 Telephony.Carriers.PROTOCOL,
-                checkNotSet(mProtocol.getValue()),
+                getUserEnteredApnProtocol(mProtocol, mDefaultApnProtocol),
                 callUpdate,
                 PROTOCOL_INDEX);
 
         callUpdate = setStringValueAndCheckIfDiff(values,
                 Telephony.Carriers.ROAMING_PROTOCOL,
-                checkNotSet(mRoamingProtocol.getValue()),
+                getUserEnteredApnProtocol(mRoamingProtocol, mDefaultApnRoamingProtocol),
                 callUpdate,
                 ROAMING_PROTOCOL_INDEX);
 
@@ -1229,6 +1248,17 @@ public class ApnEditor extends SettingsPreferenceFragment
      */
     private String checkNotSet(String value) {
         return sNotSet.equals(value) ? null : value;
+    }
+
+    @VisibleForTesting
+    String getUserEnteredApnProtocol(ListPreference preference, String defaultApnProtocol) {
+        // if user has not specified a protocol or enter empty type, map it just for default
+        final String userEnteredApnProtocol = checkNotSet(
+                ((preference == null) ? null : preference.getValue()));
+        if (TextUtils.isEmpty(userEnteredApnProtocol)) {
+            return defaultApnProtocol;
+        }
+        return userEnteredApnProtocol.trim();
     }
 
     @VisibleForTesting
