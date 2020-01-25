@@ -126,8 +126,8 @@ public class OverlayCategoryPreferenceController extends DeveloperOptionsPrefere
                         return mOverlayManager.setEnabledExclusiveInCategory(packageName,
                                 USER_SYSTEM);
                     }
-                } catch (RemoteException re) {
-                    Log.w(TAG, "Error enabling overlay.", re);
+                } catch (SecurityException | IllegalStateException | RemoteException e) {
+                    Log.w(TAG, "Error enabling overlay.", e);
                     return false;
                 }
             }
