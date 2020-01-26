@@ -22,6 +22,11 @@ import static org.mockito.Mockito.when;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.UidDetail;
@@ -37,6 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppDataUsagePreferenceTest {
+    private static final String FIFTY_PERCENT = "50%";
 
     @Mock
     private UidDetailProvider mUidDetailProvider;
@@ -76,5 +82,23 @@ public class AppDataUsagePreferenceTest {
 
         assertThat(mPreference.getTitle()).isEqualTo(mUidDetail.label);
         assertThat(mPreference.getIcon()).isEqualTo(mUidDetail.icon);
+    }
+
+    @Test
+    public void createPref_progressBarShouldSetPercentageContentDescription() {
+        when(mUidDetailProvider.getUidDetail(mAppItem.key, true /* blocking */))
+                .thenReturn(mUidDetail);
+        mPreference = new AppDataUsagePreference(RuntimeEnvironment.application, mAppItem,
+                50 /* percent */, mUidDetailProvider);
+        final View view = LayoutInflater.from(RuntimeEnvironment.application).inflate(
+                com.android.settingslib.R.layout.preference_app, null);
+        final PreferenceViewHolder preferenceViewHolder =
+                PreferenceViewHolder.createInstanceForTests(view);
+        final ProgressBar progressBar = (ProgressBar) preferenceViewHolder.findViewById(
+                android.R.id.progress);
+
+        mPreference.onBindViewHolder(preferenceViewHolder);
+
+        assertThat(progressBar.getContentDescription()).isEqualTo(FIFTY_PERCENT);
     }
 }
