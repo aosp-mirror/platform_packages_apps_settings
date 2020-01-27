@@ -66,7 +66,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
         }
 
-        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final ConnectivityManager conn = context.getSystemService(ConnectivityManager.class);
         if (!conn.isNetworkSupported(ConnectivityManager.TYPE_ETHERNET)) {
             return false;
         }
@@ -93,7 +93,8 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      * TODO: This is the opposite to Utils.isWifiOnly(), it should be refactored into 1 method.
      */
     public static boolean hasMobileData(Context context) {
-        ConnectivityManager connectivityManager = ConnectivityManager.from(context);
+        final ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
         return connectivityManager != null && connectivityManager
                 .isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
     }
@@ -106,7 +107,8 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-                SubscriptionManager.from(context).getActiveSubscriptionInfoList();
+                context.getSystemService(SubscriptionManager.class)
+                .getActiveSubscriptionInfoList();
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {
@@ -123,7 +125,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
                 Log.d(TAG, "hasReadyMobileRadio: subInfo=" + subInfo);
             }
         }
-        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final ConnectivityManager conn = context.getSystemService(ConnectivityManager.class);
         final boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
         if (LOGD) {
             Log.d(TAG, "hasReadyMobileRadio:"
@@ -142,7 +144,8 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(TEST_RADIOS_PROP).contains("wifi");
         }
 
-        final ConnectivityManager connectivityManager = ConnectivityManager.from(context);
+        final ConnectivityManager connectivityManager =
+                context.getSystemService(ConnectivityManager.class);
         return connectivityManager != null && connectivityManager.isNetworkSupported(TYPE_WIFI);
     }
 
@@ -159,20 +162,25 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      * SubscriptionManager#INVALID_SUBSCRIPTION_ID
      */
     public static int getDefaultSubscriptionId(Context context) {
-        SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        if (subManager == null) {
+        final SubscriptionManager subscriptionMgr =
+                context.getSystemService(SubscriptionManager.class);
+
+        // default data subscription is first choice
+        final int dataSubId = subscriptionMgr.getDefaultDataSubscriptionId();
+        if (SubscriptionManager.isValidSubscriptionId(dataSubId)) {
+            return dataSubId;
+        }
+
+        // any active subscription is second choice
+        List<SubscriptionInfo> subList = subscriptionMgr.getActiveSubscriptionInfoList();
+        if ((subList == null) || (subList.size() <= 0)) {
+            // any subscription is third choice
+            subList = subscriptionMgr.getAvailableSubscriptionInfoList();
+        }
+        if ((subList == null) || (subList.size() <= 0)) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         }
-        SubscriptionInfo subscriptionInfo =
-                subManager.getActiveSubscriptionInfo(subManager.getDefaultDataSubscriptionId());
-        if (subscriptionInfo == null) {
-            List<SubscriptionInfo> list = subManager.getAvailableSubscriptionInfoList();
-            if (list.size() == 0) {
-                return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-            }
-            subscriptionInfo = list.get(0);
-        }
-        return subscriptionInfo.getSubscriptionId();
+        return subList.get(0).getSubscriptionId();
     }
 
     /**
@@ -180,7 +188,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      * ethernet template if both mobile data and Wifi are not available.
      */
     public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
-        if (hasMobileData(context) && defaultSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(defaultSubId) && hasMobileData(context)) {
             return getMobileTemplate(context, defaultSubId);
         } else if (hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
