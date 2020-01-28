@@ -52,13 +52,13 @@ public class WifiVerboseLoggingPreferenceController extends DeveloperOptionsPref
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        mWifiManager.enableVerboseLogging(isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        mWifiManager.setVerboseLoggingEnabled(isEnabled);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean enabled = mWifiManager.getVerboseLoggingLevel() > 0;
+        final boolean enabled = mWifiManager.isVerboseLoggingEnabled();
         ((SwitchPreference) mPreference).setChecked(enabled);
 
     }
@@ -66,7 +66,7 @@ public class WifiVerboseLoggingPreferenceController extends DeveloperOptionsPref
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        mWifiManager.enableVerboseLogging(SETTING_VALUE_OFF);
+        mWifiManager.setVerboseLoggingEnabled(false);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }
