@@ -88,6 +88,11 @@
         settings:initialExpandedChildrenCount="0">
 
         <SwitchPreference
+            android:key="silent_icons"
+            android:title="@string/silent_notifications_status_bar"
+            settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
+
+        <SwitchPreference
             android:key="show_snooze_options"
             android:title="@string/snooze_options_title"
             settings:controller="com.android.settings.notification.SnoozeNotificationPreferenceController" />
