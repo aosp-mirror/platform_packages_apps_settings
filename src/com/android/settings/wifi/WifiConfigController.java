@@ -665,7 +665,7 @@ public class WifiConfigController implements TextWatcher,
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
                     config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
-                    config.requirePMF = true;
+                    config.requirePmf = true;
                     config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
                     config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
@@ -805,7 +805,7 @@ public class WifiConfigController implements TextWatcher,
                 break;
             case AccessPoint.SECURITY_SAE:
                 config.allowedKeyManagement.set(KeyMgmt.SAE);
-                config.requirePMF = true;
+                config.requirePmf = true;
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
@@ -814,7 +814,7 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_OWE:
                 config.allowedKeyManagement.set(KeyMgmt.OWE);
-                config.requirePMF = true;
+                config.requirePmf = true;
                 break;
 
             default:
