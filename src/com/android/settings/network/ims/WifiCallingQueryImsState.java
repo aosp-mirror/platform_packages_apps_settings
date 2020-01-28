@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,7 +33,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
     /**
      * Constructor
      *
-     * @param context {@code Context}
+     * @param context {@link Context}
      * @param subId subscription's id
      */
     public WifiCallingQueryImsState(Context context, int subId) {
@@ -44,7 +45,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsDirectQuery isEnabledByUser(int subId) {
+    ImsQuery isEnabledByUser(int subId) {
         return new ImsQueryWfcUserSetting(subId);
     }
 
@@ -58,8 +59,14 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
             return false;
         }
 
-        return ((!isSystemTtyEnabled(mContext).directQuery())
-                || (isTtyOnVolteEnabled(mSubId).directQuery()));
+        return ((!isTtyEnabled(mContext))
+                || (isTtyOnVolteEnabled(mSubId).query()));
+    }
+
+    @VisibleForTesting
+    boolean isTtyEnabled(Context context) {
+        final TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+        return (telecomManager.getCurrentTtyMode() != TelecomManager.TTY_MODE_OFF);
     }
 
     /**
@@ -71,6 +78,6 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).directQuery();
+        return isEnabledByUser(mSubId).query();
     }
 }
