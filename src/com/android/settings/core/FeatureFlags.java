@@ -28,4 +28,5 @@ public class FeatureFlags {
             "settings_wifi_details_datausage_header";
     public static final String CONTROLLER_ENHANCEMENT = "settings_controller_loading_enhancement";
     public static final String CONDITIONAL_CARDS = "settings_conditionals";
+    public static final String TETHER_ALL_IN_ONE = "settings_tether_all_in_one";
 }
