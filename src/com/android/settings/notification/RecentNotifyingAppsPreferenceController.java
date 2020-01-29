@@ -38,7 +38,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.app.AppNotificationSettings;
-import com.android.settings.notification.app.NotificationAppPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -228,13 +228,13 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
         // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
         // Build a cached preference pool
-        final Map<String, NotificationAppPreference> appPreferences = new ArrayMap<>();
+        final Map<String, MasterSwitchPreference> appPreferences = new ArrayMap<>();
         int prefCount = mCategory.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = mCategory.getPreference(i);
             final String key = pref.getKey();
             if (!TextUtils.equals(key, KEY_SEE_ALL)) {
-                appPreferences.put(key, (NotificationAppPreference) pref);
+                appPreferences.put(key, (MasterSwitchPreference) pref);
             }
         }
         final int recentAppsCount = recentApps.size();
@@ -249,10 +249,10 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             }
 
             boolean rebindPref = true;
-            NotificationAppPreference pref = appPreferences.remove(getKey(app.getUserId(),
+            MasterSwitchPreference pref = appPreferences.remove(getKey(app.getUserId(),
                     pkgName));
             if (pref == null) {
-                pref = new NotificationAppPreference(prefContext);
+                pref = new MasterSwitchPreference(prefContext);
                 rebindPref = false;
             }
             pref.setKey(getKey(app.getUserId(), pkgName));
@@ -278,9 +278,8 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             });
             pref.setSwitchEnabled(mNotificationBackend.isBlockable(mContext, appEntry.info));
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
-                boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(
-                        pkgName, appEntry.info.uid, !blocked);
+                        pkgName, appEntry.info.uid, (Boolean) newValue);
                 return true;
             });
             pref.setChecked(
