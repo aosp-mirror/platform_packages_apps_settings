@@ -81,7 +81,7 @@ public class WifiTetherApBandPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(
                 new SoftApConfiguration.Builder().build());
-        when(mWifiManager.isDualModeSupported()).thenReturn(false);
+        when(mWifiManager.isStaApConcurrencySupported()).thenReturn(false);
 
         mController = new WifiTetherApBandPreferenceController(mContext, mListener);
     }
@@ -90,7 +90,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     public void display_5GhzSupported_shouldDisplayFullList() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
-        when(mWifiManager.isDualModeSupported()).thenReturn(true);
+        when(mWifiManager.isStaApConcurrencySupported()).thenReturn(true);
 
         // Create a new instance to pick the proper value of isDualModeSupported()
         mController = new WifiTetherApBandPreferenceController(mContext, mListener);
@@ -156,7 +156,7 @@ public class WifiTetherApBandPreferenceControllerTest {
     public void changePreference_dualModeWith5G_shouldUpdateValue() {
         when(mWifiManager.getCountryCode()).thenReturn("US");
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
-        when(mWifiManager.isDualModeSupported()).thenReturn(true);
+        when(mWifiManager.isStaApConcurrencySupported()).thenReturn(true);
 
         // Create a new instance to pick the proper value of isDualModeSupported()
         mController = new WifiTetherApBandPreferenceController(mContext, mListener);

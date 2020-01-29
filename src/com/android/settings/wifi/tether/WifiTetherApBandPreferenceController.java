@@ -40,7 +40,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     public WifiTetherApBandPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
-        isDualMode = mWifiManager.isDualModeSupported();
+        isDualMode = mWifiManager.isStaApConcurrencySupported();
         updatePreferenceEntries();
     }
 
