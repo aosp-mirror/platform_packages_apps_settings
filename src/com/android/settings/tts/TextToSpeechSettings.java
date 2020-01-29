@@ -38,6 +38,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -205,13 +206,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             mLocalePreference.setEnabled(entries.length > 0);
         }
 
-        mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
+        final TextToSpeechViewModel ttsViewModel =
+                ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
+        Pair<TextToSpeech, Boolean> ttsAndNew = ttsViewModel.getTtsAndWhetherNew(mInitListener);
+        mTts = ttsAndNew.first;
+        // If the TTS object is not newly created, we need to run the setup on the settings side to
+        // ensure that we can use the TTS object.
+        if (!ttsAndNew.second) {
+            successSetup();
+        }
 
         setTtsUtteranceProgressListener();
         initSettings();
-
-        // Prevent restarting the TTS connection on rotation
-        setRetainInstance(true);
     }
 
     @Override
@@ -227,13 +233,21 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             return;
         }
         if (!mTts.getDefaultEngine().equals(mTts.getCurrentEngine())) {
+            final TextToSpeechViewModel ttsViewModel =
+                    ViewModelProviders.of(this).get(TextToSpeechViewModel.class);
             try {
-                mTts.shutdown();
-                mTts = null;
+                // If the current engine isn't the default engine shut down the current engine in
+                // preparation for creating the new engine.
+                ttsViewModel.shutdownTts();
             } catch (Exception e) {
                 Log.e(TAG, "Error shutting down TTS engine" + e);
             }
-            mTts = new TextToSpeech(getActivity().getApplicationContext(), mInitListener);
+            final Pair<TextToSpeech, Boolean> ttsAndNew =
+                    ttsViewModel.getTtsAndWhetherNew(mInitListener);
+            mTts = ttsAndNew.first;
+            if (!ttsAndNew.second) {
+                successSetup();
+            }
             setTtsUtteranceProgressListener();
             initSettings();
         } else {
@@ -274,15 +288,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
                 updateWidgetState(true);
             }
         });
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mTts != null) {
-            mTts.shutdown();
-            mTts = null;
-        }
     }
 
     @Override
@@ -375,8 +380,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     public void onInitEngine(int status) {
         if (status == TextToSpeech.SUCCESS) {
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
-            checkDefaultLocale();
-            getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
+            successSetup();
         } else {
             if (DBG) {
                 Log.d(TAG,
@@ -384,6 +388,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             }
             updateWidgetState(false);
         }
+    }
+
+    /** Initialize TTS Settings on successful engine init. */
+    private void successSetup() {
+        checkDefaultLocale();
+        getActivity().runOnUiThread(() -> mLocalePreference.setEnabled(true));
     }
 
     private void checkDefaultLocale() {
