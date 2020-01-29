@@ -239,7 +239,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 return R.string.lockpassword_confirm_your_pattern_details_frp;
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
-            if (UserManager.get(getActivity()).isManagedProfile(mEffectiveUserId)) {
+            if (mIsManagedProfile) {
                 return isStrongAuthRequired
                         ? R.string.lockpassword_strong_auth_required_work_pattern
                         : R.string.lockpassword_confirm_your_pattern_generic_profile;

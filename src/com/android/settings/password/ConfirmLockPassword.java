@@ -56,12 +56,16 @@ import java.util.ArrayList;
 
 public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
-    // The index of the array is isStrongAuth << 1 + isAlpha.
+    // The index of the array is isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
     private static final int[] DETAIL_TEXTS = new int[] {
         R.string.lockpassword_confirm_your_pin_generic,
         R.string.lockpassword_confirm_your_password_generic,
+        R.string.lockpassword_confirm_your_pin_generic_profile,
+        R.string.lockpassword_confirm_your_password_generic_profile,
         R.string.lockpassword_strong_auth_required_device_pin,
-        R.string.lockpassword_strong_auth_required_device_password
+        R.string.lockpassword_strong_auth_required_device_password,
+        R.string.lockpassword_strong_auth_required_work_pin,
+        R.string.lockpassword_strong_auth_required_work_password
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
@@ -218,8 +222,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         : R.string.lockpassword_confirm_your_pin_details_frp;
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
-            // Map boolean flags to an index by isStrongAuth << 1 + isAlpha.
-            int index = ((isStrongAuthRequired ? 1 : 0) << 1) + (mIsAlpha ? 1 : 0);
+            // Map boolean flags to an index by isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
+            int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((mIsManagedProfile ? 1 : 0) << 1)
+                    + (mIsAlpha ? 1 : 0);
             return DETAIL_TEXTS[index];
         }
 
