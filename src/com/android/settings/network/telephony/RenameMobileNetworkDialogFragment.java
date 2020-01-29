@@ -200,7 +200,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     private Color[] getColors() {
         final Resources res = getContext().getResources();
-        final int[] colorInts = res.getIntArray(com.android.internal.R.array.sim_colors);
+        final int[] colorInts = res.getIntArray(android.R.array.simColors);
         final String[] colorStrings = res.getStringArray(R.array.color_picker);
         final int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
         final int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);
