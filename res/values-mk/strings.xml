@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Времето за видливост истече"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Заклучи гласовно бирање"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Спречи употреба на бирач со Bluetooth кога екранот е заклучен"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Уреди со Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Име на уред"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Поставки за уред"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Поставки на профил"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Распоред"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Нема"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Од зајдисонце до изгрејсонце"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Се вклучува во одредено време"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Статус"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Исклучено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Никогаш нема да се вклучи автоматски"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Ќе се вклучи автоматски на зајдисонце"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Ќе се вклучи автоматски во <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Вклучено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Никогаш нема да се исклучи автоматски"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Ќе се исклучи автоматски на изгрејсонце"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Ќе се исклучи автоматски во <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Вклучи до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Исклучи до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Темната тема користи црна заднина за подолго траење на батеријата на некои екрани. Распоредите за темната тема не се вклучуваат додека не се исклучи екранот."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Исклучување на екранот"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Екранот се исклучува"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Зголеми со троен допир"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Зголемување со кратенка"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Зголемете со кратенка и троен допир"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"За зголемување"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"За <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Опции"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Зумирање на екранот"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Допрете три пати за да зумирате"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Користете движење за да отворите"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Користете го новото движење за пристапност"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"За да ја вклучите или исклучите услугава, допрете на копчето за пристапност <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> најдолу на екранот.\n\nЗа да се префрлате помеѓу услуги, допрете и задржете го копчето за пристапност."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"За да ја вклучите или исклучите услугава, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлате помеѓу услуги, лизгајте нагоре со два прста и задржете."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"За да ја вклучите или исклучите услугава, повлечете нагоре од дното на екранот со три прста.\n\nЗа да се префрлате помеѓу услуги, лизгајте нагоре со три прста и задржете."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"За да ја вклучите или исклучите услугата за пристапност, повлечете нагоре од дното на екранот со два прста.\n\nЗа да се префрлате помеѓу услуги, лизгајте нагоре со два прста и задржете."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"За да ја вклучите или исклучите услугата за пристапност, повлечете нагоре од дното на екранот со три прста.\n\nЗа да се префрлате помеѓу услуги, лизгајте нагоре со три прста и задржете."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"За да ја вклучите или исклучите услугава, повлечете нагоре од дното на екранот со два прста.\n\nЗа префрлање помеѓу услугите, повлечете нагоре со два прста и задржете."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"За да ја вклучите или исклучите услугава, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу услугите, повлечете нагоре со три прста и задржете."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"За да ја вклучите или исклучите услугата за пристапност, повлечете нагоре од дното на екранот со два прста.\n\nЗа префрлање помеѓу услугите, повлечете нагоре со два прста и задржете."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"За да ја вклучите или исклучите услугата за пристапност, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу услугите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Сфатив"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Користете кратенка за отворање"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Користете кратенка за зголемување"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Кратенка за отворање „Корекција на бои“"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Копче за пристапност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Повлечете нагоре од дното со 2 прста"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Повлекување нагоре со три прста од дното"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Допрете го копчето <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> на дното на екранот"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Повлечете нагоре со два прста од работ на екранот"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"Повлечете нагоре со три прста од работ на екранот"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Задржете ги копчињата за јачина на звук"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Притиснете и задржете ги двете копчиња за јачина на звук 1 секунда"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Троен допир на екранот"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибрации при ѕвонење"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Повратни информации со допир"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Користете <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Користи корекција на боите"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Поправка на боите"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Покажи титли"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Изглед на титлите"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Големина на текстот, стил на титлите"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Другите опции се оневозможени од администраторот"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"Повеќе детали"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Дневник за известувања"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Историја на известувањата"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Денес"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Одложено"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Неодамна отфрлено"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Мелодија на повик и вибрации"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Детали за мрежа"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Синхронизација е овозможена"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> апликација отвора поддржани линкови</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апликации отвораат поддржани линкови</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Отвори во апликацијава"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Дозволете апликацијата да отвора поддржани линкови"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Секогаш прашувај"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Не отворај во апликацијава"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Не дозволувајте апликацијата да отвора линкови"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="one">Апликацијата тврди дека може да отвори <xliff:g id="COUNT_1">%d</xliff:g> линк</item>
+      <item quantity="other">Апликацијата тврди дека може да отвори <xliff:g id="COUNT_1">%d</xliff:g> линкови</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"Апликацијата тврди дека може да ги отвора следниве линкови:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Стандардно"</string>
     <string name="default_for_work" msgid="537558180548617528">"Стандардно за работа"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Помош и гласовен запис"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Промени на компатибилноста на апликацијата"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Изменете ги отфрлањата на промената на компатибилноста на апликацијата"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Префрлете ги измените за компатибилност на апликацијата"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Стандардно овозможени промени"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Стандардно оневозможени промени"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Овозможено по SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Поставката не е поддржана на телефонов"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Поставката не е поддржана на таблетов"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Поставката не е поддржана на уредов"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Прикажи ги сите"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Се бара уредот…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Се поврзува со уредот…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> поврзан уред</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> поврзани уреди</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Нема уреди со Bluetooth"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Лева"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Десна"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Футрола за полнење"</string>

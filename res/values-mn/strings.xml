@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Харагдалтын завсарлага"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Дуугаа залгахыг түгжих"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Дэлгэц түгжигдсэн үед блютүүт залгагчийг ашиглахаас сэргийлэх"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth төхөөрөмж"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Төхөөрөмжийн нэр"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Төхөөрөмжийн тохиргоо"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Профайлын тохиргоо"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Хуваарь"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Аль нь ч биш"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Нар мандахаас жаргах хүртэл асна"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Тохируулсан хугацаанд асна"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Төлөв"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Унтраалттай / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Автоматаар хэзээ ч асахгүй"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Нар жаргахад автоматаар асна"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g>-д автоматаар асна"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Асаалттай / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Автоматаар хэзээ ч унтрахгүй"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Нар мандахад автоматаар унтарна"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g>-д автоматаар унтарна"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> хүртэл асаах"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> хүртэл унтраах"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Бараан загвар нь таны батарейн ашиглалтын хугацааг зарим сайт дээр уртасгахад туслахын тулд хар өнгийн дэвсгэр ашигладаг. Бараан загварын хуваарьт төлөв нь таны дэлгэц унтрах хүртэл хүлээж байгаад асна."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Дэлгэцийн завсарлага"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Дэлгэц унтарна"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Гурван удаа товшиж томруулах"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Товчлолоор томруулах"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Товчлол болон гурав товшилтоор томруулах"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Томруулах тухай"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"<xliff:g id="SERVICE">%1$s</xliff:g>-н тухай"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Сонголтууд"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Дэлгэцэд томруулах"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Томруулахын тулд 3 удаа дар"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Нээхийн тулд зангааг ашиглах"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Хандалтын шинэ зангаа ашиглах"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"Энэ үйлчилгээг асаах эсвэл унтраахын тулд дэлгэцийнхээ доод хэсэгт байрлах хандалтын товчлуур <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>-г товшино уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд хандалтын товчлуур дээр удаан дарна уу."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"Энэ үйлчилгээг асаах эсвэл унтраахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд хоёр хуруугаараа дээш шудраад удаан дарна уу."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"Энэ үйлчилгээг асаах эсвэл унтраахын тулд гурван хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд гурван хуруугаараа дээш шудраад удаан дарна уу."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Хандалтын үйлчилгээг асаах эсвэл унтраахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд хоёр хуруугаараа дээш шудраад удаан дарна уу."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Хандалтын үйлчилгээг асаах эсвэл унтраахын тулд гурван хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд гурван хуруугаараа дээш шудраад удаан дарна уу."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"Энэ үйлчилгээг асаах эсвэл унтраахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд хоёр хуруугаараа дээш шудраад удаан дарна уу."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"Энэ үйлчилгээг асаах эсвэл унтраахын тулд гурван хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд гурван хуруугаараа дээш шудраад удаан дарна уу."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"Хандалтын үйлчилгээг асаах эсвэл унтраахын тулд хоёр хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд хоёр хуруугаараа дээш шудраад удаан дарна уу."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"Хандалтын үйлчилгээг асаах эсвэл унтраахын тулд гурван хуруугаараа дэлгэцийн доороос дээш шударна уу.\n\nҮйлчилгээнүүд хооронд сэлгэхийн тулд гурван хуруугаараа дээш шудраад удаан дарна уу."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ойлголоо"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Нээхийн тулд товчлол ашиглах"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Томруулахын тулд товчлол ашиглах"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Өнгө залруулгыг нээхэд товчлол ашиглах"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Хандалтын товчлуур"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Доод талаас нь 2 хуруугаар дээш шудрах"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Доод талаас нь 3 хуруугаар дээш шудрах"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Дэлгэцийнхээ доод хэсэгт байгаа <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> товчлуур дээр товшино уу"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Дэлгэцийн ирмэгээс 2 хуруугаар дээш шударна уу"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"Дэлгэцийн ирмэгээс 3 хуруугаар дээш шударна уу"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Дууны түвшний түлхүүрийг удаан дарах"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Дууны түвшнийг ихэсгэх, багасгах түлхүүрийг 1 секундийн турш зэрэг дарна уу"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Дэлгэцийг гурав товших"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Хонхны чичиргээ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Санал хүсэлтэд хүрэх"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-г ашиглах"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Өнгө тохируулагчийг ашиглах"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Өнгийг засах"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Хадмалыг харуулах"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Хадмалын харагдах байдал"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Текстийн хэмжээ, хадмалын загвар"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Бусад сонголтыг таны админ идэвхгүй болгосон байна"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"Дэлгэрэнгүй мэдээлэл"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Мэдэгдлийн лог"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Мэдэгдлийн түүх"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Өнөөдөр"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Түр хойшлуулсан"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Саяхан хаасан"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Дуудлагын хонхны ая &amp; чичиргээ"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Сүлжээний мэдээлэл"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Синк идэвхжсэн"</string>
@@ -3787,9 +3797,14 @@
       <item quantity="other">Дэмжсэн холбоосыг нээх <xliff:g id="COUNT">%d</xliff:g> апп</item>
       <item quantity="one">Дэмжсэн холбоосыг нээх нэг ап</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Энэ апп-д нээх"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Дэмжсэн холбоосуудыг нээхийг аппад зөвшөөрөх"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Тухай бүрд асуух"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Энэ апп-д нээхгүй"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Холбоосуудыг нээхийг аппад бүү зөвшөөр"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="other">Апп нь <xliff:g id="COUNT_1">%d</xliff:g> холбоосыг удирддаг гэж мэдэгдсэн</item>
+      <item quantity="one">Апп нь <xliff:g id="COUNT_0">%d</xliff:g> холбоосыг удирддаг гэж мэдэгдсэн</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"Апп нь дараах холбоосуудыг удирддаг гэж мэдэгдсэн:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Өгөгдмөл"</string>
     <string name="default_for_work" msgid="537558180548617528">"Ажлын өгөгдмөл"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Туслах &amp; дууны оролт"</string>
@@ -4445,10 +4460,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Аппын тохирох байдлын өөрчлөлт"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Аппын тохирох байдлын өөрчлөлтийг хүчингүй болгосныг өөрчлөх"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Аппын тохирох байдлын өөрчлөлтийг идэвхгүй болгох/идэвхжүүлэх"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Өгөгдмөл тохиргоогоор идэвхжүүлсэн өөрчлөлт"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Өгөгдмөл тохиргоогоор идэвхгүй болгосон өөрчлөлт"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g>-н дараа идэвхжүүлсэн"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Энэ утсанд тохиргоог дэмждэггүй"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Энэ таблетад тохиргоог дэмждэггүй"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Энэ төхөөрөмжид тохиргоог дэмждэггүй"</string>
@@ -4622,11 +4636,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Бүгдийг харуулах"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Төхөөрөмж хайж байна…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Төхөөрөмжид холбогдож байна…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> төхөөрөмж холбогдсон</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> төхөөрөмж холбогдсон</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Bluetooth төхөөрөмж алга"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Зүүн"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Баруун"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Гэр"</string>

@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Visibility timeout"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Lock voice dialling"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Prevent use of the Bluetooth dialler when the screen is locked"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth devices"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Device name"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Device settings"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profile settings"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Schedule"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"None"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Turns on from sunset to sunrise"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Turns on at custom time"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Off/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Will never turn on automatically"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Will turn on automatically at sunset"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Will turn on automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"On/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Will never turn off automatically"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Will turn off automatically at sunrise"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Will turn off automatically at <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Turn on until <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Turn off until <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Screen timeout"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Screen turns off"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Magnify with triple-tap"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Magnify with shortcut &amp; triple-tap"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"About Magnify"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"About <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Options"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom in on screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tap 3 times to zoom"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Use gesture to open"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Use new accessibility gesture"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"To turn this service on or off, tap the accessibility button <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> on the bottom of your screen.\n\nTo switch between services, touch and hold the accessibility button."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"To turn this service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"To turn this service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"To turn an accessibility service on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between services, swipe up with two fingers and hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"To turn an accessibility service on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between services, swipe up with three fingers and hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Use shortcut to open"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Use shortcut to magnify"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Shortcut to open colour correction"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Accessibility button"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Two-finger swipe up from bottom"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Three-finger swipe up from bottom"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Tap the <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> button at the bottom of your screen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Swipe up with two fingers from edge of screen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"Swipe up with three fingers from edge of screen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hold volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Press and hold both volume keys for one second"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Triple-tap screen"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ring vibration"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Touch feedback"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Use <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Use colour correction"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Correct colours"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Show captions"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Caption appearance"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Text size, caption style"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Other options are disabled by your admin"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"More details"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Notification log"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Notification history"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Today"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Snoozed"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Recently dismissed"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Call ringtone &amp; vibrate"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Network details"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sync enabled"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps opening supported links</item>
       <item quantity="one">One app opening supported links</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Open in this app"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Allow app to open supported links"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Ask every time"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Don’t open in this app"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Don’t allow app to open links"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="other">App claims to handle <xliff:g id="COUNT_1">%d</xliff:g> links</item>
+      <item quantity="one">App claims to handle <xliff:g id="COUNT_0">%d</xliff:g> link</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"App claims to handle following links:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Default"</string>
     <string name="default_for_work" msgid="537558180548617528">"Default for work"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assist and voice input"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"App compatibility changes"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Modify app compatibility change overrides"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Default enabled changes"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Default disabled changes"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Enabled after SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Setting isn’t supported on this phone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Setting isn’t supported on this tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Setting isn’t supported on this device"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Show all"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Searching for device…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connecting to device…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> devices connected</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> device connected</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"No Bluetooth devices"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Left"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Right"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>

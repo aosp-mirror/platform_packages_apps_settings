@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"ब्लूटूथ में खोजने का टाइम आउट"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"ध्‍वनि डायलिंग लॉक करें"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"जब स्‍क्रीन लॉक हो, तो bluetooth डायलर के उपयोग को रोकें"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"ब्लूटूथ डिवाइस"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"डिवाइस का नाम"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"डिवाइस सेटिंग"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"प्रोफ़ाइल सेटिंग"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"शेड्यूल करें"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"कभी नहीं"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"शाम से सुबह तक चालू रहती है"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"अपने मुताबिक तय समय पर चालू करें"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"स्थिति"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"बंद है / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"कभी भी अपने-आप चालू नहीं होगी"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"शाम होने पर अपने-आप चालू हो जाएगा"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g> पर अपने-आप चालू हो जाएगा"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"चालू है / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"कभी भी अपने-आप बंद नहीं होगा"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"सुबह होने पर अपने-आप बंद हो जाएगा"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g> पर अपने-आप बंद हो जाएगा"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> तक चालू रखें"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> तक बंद रखें"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"गहरे रंग वाली थीम चालू हाेने पर, स्क्रीन का बैकग्राउंड काला हो जाता है. इससे कुछ डिवाइस पर बैटरी ज़्यादा देर तक चलती है. यह थीम तब चालू होती है, जब स्क्रीन की लाइट बंद हो जाती है."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रीन इतनी देर में बंद हो जाएगी"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"स्क्रीन बंद हो जाती है"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"तीन बार टैप करके आकार बढ़ाएं"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"शॉर्टकट की मदद से बड़ा करके देखें"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"तीन बार टैप और शॉर्टकट की मदद से बड़ा करके देखें"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"स्क्रीन बड़ी करने के बारे में जानें"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"<xliff:g id="SERVICE">%1$s</xliff:g> के बारे में जानकारी"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"विकल्प"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"स्क्रीन पर ज़ूम इन करें"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"ज़ूम करने के लिए तीन बार टैप करें"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"इसे खोलने के लिए हाथ के जेस्चर का इस्तेमाल करें"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"सुलभता वाले नए जेस्चर इस्तेमाल करें"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"इस सेवा को चालू या बंद करने के लिए स्क्रीन पर सबसे नीचे सुलभता बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>पर टैप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए सुलभता बटन दबाकर रखें."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"यह सुविधा चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन पर उंगली बनाए रखें."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"यह सुविधा चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन पर उंगली बनाए रखें."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"किसी सुलभता सेवा को चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन पर उंगली बनाए रखें."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"किसी सुलभता सेवा को चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन पर उंगली बनाए रखें."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"यह सुविधा चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन को दबाए रखें."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"यह सुविधा चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन को दबाए रखें."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"किसी सुलभता सेवा को चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन को दबाए रखें."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"किसी सुलभता सेवा को चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सेवा से दूसरी सेवा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन को दबाए रखें."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"समझ लिया"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"खोलने के लिए शॉर्टकट का इस्तेमाल करें"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"बड़ा करने के लिए शॉर्टकट का इस्तेमाल करें"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"\'रंग में सुधार\' चालू करने का शॉर्टकट"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"सुलभता बटन"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"नीचे से ऊपर की ओर दो उंगलियों से स्वाइप करें"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"स्क्रीन पर सबसे नीचे मौजूद <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> बटन पर टैप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"स्क्रीन के किनारे से ऊपर की ओर दो उंगलियों से स्वाइप करें"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"स्क्रीन के किनारे से ऊपर की ओर तीन उंगलियों से स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"आवाज़ कम-ज़्यादा करने वाले बटन दबाकर रखें"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"आवाज़ कम-ज़्यादा करने वाले दोनों बटन एक सेकंड तक दबाकर रखें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"स्क्रीन पर तीन बार टैप करें"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"घंटी के लिए वाइब्रेशन"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच फ़ीडबैक"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> का इस्तेमाल करें"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"रंग में सुधार करने की सुविधा इस्तेमाल करें"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"रंग सही करें"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"कैप्शन दिखाएं"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"कैप्शन ऐसा दिखेगा"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"टेक्स्ट का साइज़, कैप्शन की शैली"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"आपके व्यवस्थापक ने दूसरे विकल्पों को अक्षम किया हुआ है"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"ज़्यादा विवरण"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"सूचना लॉग"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"सूचनाओं का इतिहास"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"आज"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"स्नूज़ (अलार्म थोड़ी देर के लिए चुप करना) किया गया"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"हाल ही में खारिज किया गया"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"रिंगटोन और कंपन (वाइब्रेशन)"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"नेटवर्क की जानकारी"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"समन्वयन सक्षम"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> ऐप्लिकेशन समर्थित लिंक खोल रहे हैं</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ऐप्लिकेशन समर्थित लिंक खोल रहे हैं</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"इस ऐप में खोलें"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"ऐप्लिकेशन को वे लिंक खोलने की अनुमति दें जो उस पर काम कर सकते हैं"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"हर बार पूछें"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"इस ऐप में ना खोलें"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"ऐप्लिकेशन को लिंक खोलने की अनुमति न दें"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="one">ऐप्लिकेशन <xliff:g id="COUNT_1">%d</xliff:g> लिंक हैंडल करने का दावा करता है</item>
+      <item quantity="other">ऐप्लिकेशन <xliff:g id="COUNT_1">%d</xliff:g> लिंक हैंडल करने का दावा करता है</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"ऐप्लिकेशन इन लिंक को हैंडल करने का दावा करता है:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"डिफ़ॉल्ट"</string>
     <string name="default_for_work" msgid="537558180548617528">"काम के लिए डिफ़ॉल्ट"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"सहायक और बोलकर निर्देश देना"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"काम करने के लिए ऐप्लिकेशन में किए गए बदलाव"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"काम करने के लिए ऐप्लिकेशन में किए गए बदलावों में बदलाव करें"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"काम करने के लिए ऐप्लिकेशन में किए गए बदलावों को टॉगल करें"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"डिफ़ॉल्ट रूप से चालू किए गए बदलाव"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"डिफ़ॉल्ट रूप से बंद किए गए बदलाव"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g> के बाद चालू किया गया"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"इस फ़ोन पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"इस टैबलेट पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"इस डिवाइस पर सेटिंग नहीं की जा सकती"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"सभी दिखाएं"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"डिवाइस खोजा जा रहा है…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"डिवाइस से कनेक्ट किया जा रहा है…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस कनेक्ट हैं</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"कोई ब्लूटूथ डिवाइस नहीं"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"बायां"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"दायां"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"चार्ज करने वाला डिब्बा"</string>
