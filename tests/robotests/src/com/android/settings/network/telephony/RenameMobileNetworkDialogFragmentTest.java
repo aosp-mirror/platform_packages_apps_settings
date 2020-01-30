@@ -23,12 +23,12 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.telephony.ServiceState;
@@ -55,7 +55,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowTelephonyManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -64,6 +70,8 @@ public class RenameMobileNetworkDialogFragmentTest {
     @Mock
     private TelephonyManager mTelephonyMgr;
     @Mock
+    private ServiceState mServiceState;
+    @Mock
     private SubscriptionManager mSubscriptionMgr;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
@@ -71,23 +79,35 @@ public class RenameMobileNetworkDialogFragmentTest {
     private FragmentActivity mActivity;
     private RenameMobileNetworkDialogFragment mFragment;
     private int mSubscriptionId = 1234;
+    private List<SubscriptionInfo> mSubscriptionInfoList;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).setup().get());
+
+        Context context = spy(RuntimeEnvironment.application);
+
+        final ShadowTelephonyManager stm = Shadow.extract(context.getSystemService(
+                TelephonyManager.class));
+        stm.setTelephonyManagerForSubscriptionId(mSubscriptionId, mTelephonyMgr);
+        when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
+
+        when(mTelephonyMgr.getServiceState()).thenReturn(mServiceState);
+        when(mServiceState.getOperatorAlphaLong()).thenReturn("fake carrier name");
 
         when(mSubscriptionInfo.getSubscriptionId()).thenReturn(mSubscriptionId);
         when(mSubscriptionInfo.getDisplayName()).thenReturn("test");
+        when(mSubscriptionMgr.setDisplayName(any(), anyInt(), anyInt())).thenReturn(0);
+
+        mActivity = spy(Robolectric.buildActivity(FragmentActivity.class).setup().get());
 
         mFragment = spy(RenameMobileNetworkDialogFragment.newInstance(mSubscriptionId));
-        doReturn(mTelephonyMgr).when(mFragment).getTelephonyManager(any());
         doReturn(mSubscriptionMgr).when(mFragment).getSubscriptionManager(any());
 
-        final ServiceState serviceState = mock(ServiceState.class);
-        when(serviceState.getOperatorAlphaLong()).thenReturn("fake carrier name");
-        when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
-        when(mTelephonyMgr.getServiceState()).thenReturn(serviceState);
+        mSubscriptionInfoList = new ArrayList<SubscriptionInfo>();
+        mSubscriptionInfoList.add(mSubscriptionInfo);
+        when(mSubscriptionMgr.getAvailableSubscriptionInfoList()).thenReturn(
+                mSubscriptionInfoList);
     }
 
     @Test
@@ -100,8 +120,6 @@ public class RenameMobileNetworkDialogFragmentTest {
 
     @Test
     public void dialog_cancelButtonClicked_setDisplayNameAndIconTintNotCalled() {
-        when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
-                mSubscriptionInfo);
         final AlertDialog dialog = startDialog();
         final EditText nameView = mFragment.getNameView();
         nameView.setText("test2");
@@ -115,9 +133,6 @@ public class RenameMobileNetworkDialogFragmentTest {
 
     @Test
     public void dialog_saveButtonClicked_setDisplayNameAndIconTint() {
-        when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
-                mSubscriptionInfo);
-
         final AlertDialog dialog = startDialog();
         final EditText nameView = mFragment.getNameView();
         nameView.setText("test2");
@@ -140,8 +155,6 @@ public class RenameMobileNetworkDialogFragmentTest {
     public void populateView_infoIsOpportunistic_hideNumberLabel() {
         final View view = LayoutInflater.from(mActivity).inflate(
                 R.layout.dialog_mobile_network_rename, null);
-        when(mSubscriptionMgr.getActiveSubscriptionInfo(mSubscriptionId)).thenReturn(
-                mSubscriptionInfo);
         when(mSubscriptionInfo.isOpportunistic()).thenReturn(true);
 
         startDialog();
