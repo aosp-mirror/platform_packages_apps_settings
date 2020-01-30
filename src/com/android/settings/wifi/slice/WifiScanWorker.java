@@ -158,7 +158,7 @@ public class WifiScanWorker extends SliceBackgroundWorker<AccessPoint> implement
     }
 
     static boolean isWifiClicked(WifiInfo info) {
-        final String ssid = WifiInfo.removeDoubleQuotes(info.getSSID());
+        final String ssid = WifiInfo.sanitizeSsid(info.getSSID());
         return !TextUtils.isEmpty(ssid) && TextUtils.equals(ssid, sClickedWifiSsid);
     }
 
