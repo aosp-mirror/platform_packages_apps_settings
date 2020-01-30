@@ -26,7 +26,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
 
@@ -69,21 +71,27 @@ public class AllInOneTetherSettingsTest {
     }
 
     @Test
-    public void getNonIndexableKeys_tetherAvailable_keysReturned() {
+    public void getNonIndexableKeys_tetherAvailable_keysNotReturned() {
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
         final List<String> niks =
                 AllInOneTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        // TODO(b/147675042) Should revert these assertions, after switching to new UI.
-        // Because of the config check, we are not indexing these keys. Once we enable the config
-        // these assert would also need to change.
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_TETHER_PREFS_SCREEN);
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)) {
+            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+            assertThat(niks).doesNotContain(
+                    AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        } else {
+            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        }
     }
 
     @Test
@@ -98,7 +106,7 @@ public class AllInOneTetherSettingsTest {
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
-        assertThat(niks).contains(AllInOneTetherSettings.KEY_TETHER_PREFS_SCREEN);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
     }
 
     @Test
