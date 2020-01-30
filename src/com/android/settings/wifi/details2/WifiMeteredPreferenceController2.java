@@ -106,14 +106,12 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     private int getWifiEntryMeteredChoice(WifiConfiguration wifiConfiguration) {
         switch (wifiConfiguration.meteredOverride) {
-            case WifiConfiguration.METERED_OVERRIDE_NONE:
-                return WifiEntry.METERED_CHOICE_AUTO;
             case WifiConfiguration.METERED_OVERRIDE_METERED:
                 return WifiEntry.METERED_CHOICE_METERED;
             case WifiConfiguration.METERED_OVERRIDE_NOT_METERED:
                 return WifiEntry.METERED_CHOICE_UNMETERED;
             default:
-                return WifiEntry.METERED_CHOICE_UNKNOWN;
+                return WifiEntry.METERED_CHOICE_AUTO;
         }
     }
 }
