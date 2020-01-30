@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"偵測時限設定"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"鎖定語音撥號"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"螢幕鎖定時不要使用藍牙撥號"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"藍牙裝置"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"裝置名稱"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"裝置設定"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"個人資料設定"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"排程"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"無"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"在日落到日出之間開啟"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"在自訂時間開啟"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"狀態"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"一律不自動開啟"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"將於日落時自動開啟"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"將於<xliff:g id="ID_1">%1$s</xliff:g> 自動開啟"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"一律不自動關閉"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"將於日出時自動關閉"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"將於<xliff:g id="ID_1">%1$s</xliff:g> 自動關閉"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"保持開啟狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"保持關閉狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"深色主題可針對某些畫面套用黑色背景，藉此延長電池續航力。這項功能會保持開啟狀態，直到螢幕關閉為止。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕自動關閉"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"螢幕關閉時"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"輕觸螢幕三下進行放大"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快速手勢放大畫面"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"使用快速手勢並輕觸三下即可放大畫面"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"關於放大功能"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"關於「<xliff:g id="SERVICE">%1$s</xliff:g>」"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"選項"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"放大畫面內容"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"輕觸三下即可縮放畫面"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢啟用無障礙服務"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"使用全新的無障礙手勢"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"如要開啟或關閉這項服務，請輕觸畫面底部的無障礙工具按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如要切換不同的服務，請輕觸並按住無障礙工具按鈕。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"如要啟用或停用這項服務，請用兩指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用兩指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"如要啟用或停用這項服務，請用三指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用三指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"如要啟用或停用無障礙服務，請用兩指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用兩指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"如要啟用或停用無障礙服務，請用三指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用三指向上滑動並按住。"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"如要開啟或關閉這項服務，請用兩指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用兩指向上滑動並按住。"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"如要開啟或關閉這項服務，請用三指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用三指向上滑動並按住。"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"如要開啟或關閉無障礙服務，請用兩指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用兩指向上滑動並按住。"</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"如要開啟或關閉無障礙服務，請用三指從螢幕底部向上滑動。\n\n如要切換不同的服務，請用三指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"我知道了"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"使用快速鍵開啟"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"使用快速鍵放大畫面"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"開啟色彩校正的快速鍵"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"無障礙工具按鈕"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"以兩指從底部向上滑動"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"以 3 指從底部向上滑動"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"輕觸螢幕底部的 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> 按鈕"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"以兩指從螢幕邊緣向上滑動"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"以 3 指從螢幕邊緣向上滑動"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量鍵"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"同時按住調低及調高音量鍵 1 秒"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"輕觸螢幕三下"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"響鈴震動"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"觸覺回饋"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"使用「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"使用色彩校正"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"校正顏色"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"顯示字幕"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"字幕外觀"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"文字大小、字幕樣式"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"其他選項已由你的管理員停用"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"其他詳細資訊"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"通知記錄"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"通知記錄"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"今天"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"已延後的通知"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"最近關閉的通知"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"來電鈴聲與震動"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"網路詳細資料"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"同步處理已啟用"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 個應用程式可開啟支援的連結</item>
       <item quantity="one">1 個應用程式可開啟支援的連結</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"在這個應用程式中開啟"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"允許應用程式開啟支援的連結"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"每次都詢問"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"不要在這個應用程式中開啟"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"不允許應用程式開啟連結"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="other">應用程式要求處理 <xliff:g id="COUNT_1">%d</xliff:g> 個連結</item>
+      <item quantity="one">應用程式要求處理 <xliff:g id="COUNT_0">%d</xliff:g> 個連結</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"應用程式要求處理以下連結："</string>
     <string name="default_apps_title" msgid="6943471331817718664">"預設"</string>
     <string name="default_for_work" msgid="537558180548617528">"Work 預設值"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"小幫手和語音輸入"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"應用程式相容性異動"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"修改應用程式相容性異動覆寫設定"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"切換應用程式相容性變更"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"預設啟用的應用程式有相容性異動"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"預設停用的應用程式有相容性異動"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"在 SDK <xliff:g id="NUMBER">%d</xliff:g> 之後啟用"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"這支手機不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"這台平板電腦不支援這項設定"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"這個裝置不支援這項設定"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"全部顯示"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"正在搜尋裝置…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"正在連線到裝置…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> 個已連線的裝置</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 個已連線的裝置</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"沒有任何藍牙裝置"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"左耳機"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"右耳機"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"充電盒"</string>

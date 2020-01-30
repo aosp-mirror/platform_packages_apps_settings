@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"ദൃശ്യപരത കാലഹരണപ്പെട്ടു"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"വോയ്‌സ് ഡയലിംഗ് ലോക്കുചെയ്യുക"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"സ്‌ക്രീൻ ലോക്കുചെ‌യ്തിരിക്കുമ്പോൾ ബ്ലൂടൂത്ത് ഡയലറിന്റെ ഉപയോഗം തടയുക"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"ബ്ലൂടൂത്ത് ഉപകരണങ്ങൾ"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"ഉപകരണത്തിന്റെ പേര്"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"ഉപകരണ ക്രമീകരണങ്ങൾ"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"പ്രൊഫൈൽ ക്രമീകരണങ്ങൾ"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"ഷെഡ്യൂൾ ചെയ്യുക"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"ഒന്നും ചെയ്യേണ്ട"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"അസ്തമയം മുതൽ ഉദയം വരെ ഓണാക്കുന്നു"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"ഇഷ്ടാനുസൃത സമയത്ത് ഓണാക്കുന്നു"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"നില"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"ഓഫാക്കുക / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"ഒരിക്കലും സ്വയമേവ ഓണാകില്ല"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"സൂര്യാസ്തമയ സമയത്ത് സ്വയമേവ ഓണാക്കും"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g>-ന് സ്വയമേവ ഓണാകും"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"ഓണാക്കുക / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ഒരിക്കലും സ്വയമേവ ഓഫാകില്ല"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"സൂര്യോദയ സമയത്ത് സ്വമേധയാ ഓഫാകും"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g>-ന് സ്വയമേവ ഓഫാകും"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓണാക്കുക"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> വരെ ഓഫാക്കുക"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"ചില സ്ക്രീനുകളിൽ ബാറ്ററി കൂടുതൽ നേരം നിലനിൽക്കുന്നതിന് ഡാർക്ക് തീം ഒരു ബ്ലാക്ക് പശ്ചാത്തലം ഉപയോഗിക്കുന്നു. സ്ക്രീൻ ഓഫാകുന്നത് വരെ ഓണാകുന്നതിന് കാത്തിരിക്കാൻ ഡാർക്ക് തീം ഷെഡ്യൂൾ ചെയ്യുന്നു."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"സ്ക്രീൻ ടൈംഔട്ട്"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"3 തവണ ടാപ്പ് ചെയ്‌ത് മാഗ്നിഫൈചെയ്യൂ"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"കുറുക്കുവഴിയിലൂടെ മാഗ്നിഫൈ ചെയ്യൂ"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"കുറുക്കുവഴി, മൂന്ന് തവണ ടാപ്പ് എന്നിവയിലൂടെ മാഗ്നിഫൈ ചെയ്യൂ"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"മാഗ്നിഫിക്കേഷനെ കുറിച്ച്"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"ഏകദേശം <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"ഓപ്ഷനുകൾ"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"സ്ക്രീനിൽ സൂം ഇൻ ചെയ്യുക"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"സൂം ചെയ്യാൻ 3 തവണ ടാപ്പ് ചെയ്യുക"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"തുറക്കാൻ വിരൽചലനം ഉപയോഗിക്കുക"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"പുതിയ ഉപയോഗസഹായി വിരൽചലനം ഉപയോഗിക്കുക"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"ഈ സേവനം ഓണാക്കാനോ ഒഫാക്കാനോ, നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവടെയുള്ള ഉപയോഗസഹായി ബട്ടൺ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ടാപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ ഉപയോഗസഹായി ബട്ടൺ സ്‌പർശിച്ച് പിടിക്കുക."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"ഈ സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"ഈ സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"ഉപയോഗസഹായി സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"ഉപയോഗസഹായി സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"ഈ സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"ഈ സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"ഉപയോഗസഹായി സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ രണ്ട് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"ഉപയോഗസഹായി സേവനം ഓണാക്കാനോ ഓഫാക്കാനോ നിങ്ങളുടെ സ്‌ക്രീനിന്റെ ചുവട്ടിൽ നിന്ന് മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക.\n\nസേവനങ്ങൾക്കിടയിൽ മാറാൻ മൂന്ന് വിരലുകൾ കൊണ്ട് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്‌ത് പിടിക്കുക."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"മനസിലായി"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"തുറക്കാൻ കുറുക്കുവഴി ഉപയോഗിക്കൂ"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"മാഗ്നിഫൈ ചെയ്യാൻ കുറുക്കുവഴി ഉപയോഗിക്കൂ"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"വർണ്ണം ശരിയാക്കൽ തുറക്കാനുള്ള കുറുക്കുവഴി"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"ഉപയോഗസഹായി ബട്ടൺ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"ചുവടെ നിന്ന് 2-വിരൽ സ്വൈപ്പ്"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"ചുവടെ നിന്ന് 3-വിരൽ സ്വൈപ്പ്"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"നിങ്ങളുടെ സ്ക്രീനിന്റെ ചുവടെയുള്ള <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ബട്ടൺ ടാപ്പ് ചെയ്യുക"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"സ്ക്രീനിന്റെ അരികിൽ നിന്നും 2-വിരൽ മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"സ്‌ക്രീനിന്റെ അരികിൽ നിന്നും 3 വിരലുകൾ ഉപയോഗിച്ച് മുകളിലേക്ക് സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"വോളിയം കീകൾ ഹോൾഡ് ചെയ്യുക"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"വോളിയം കീകൾ ഒരു സെക്കൻഡ് നേരത്തേക്ക് അമർത്തിപ്പിടിക്കുക"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"സ്ക്രീൻ മൂന്ന് തവണ ടാപ്പ് ചെയ്യുക"</string>
@@ -2127,31 +2133,22 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"വർണ്ണവൈപരീത്യം"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="1306705652558953204">"നെഗറ്റീവ് ലുക്ക്"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="3302345676503045665">"കൂടുതൽ തെളിച്ചമുള്ള പ്രകാശം കാണാൻ ബുദ്ധിമുട്ടുള്ള ആളുകൾക്ക് മികച്ച കാഴ്ചാനുഭവം ലഭിക്കുന്നതിന് ലെെറ്റ് സ്ക്രീനുകൾ ഡാർക്ക് ആക്കുക.\n\nശ്രദ്ധിക്കുക: ഡാർക്ക് നിറങ്ങൾ ലെെറ്റ് നിറങ്ങളാകും. ചിത്രങ്ങളും ഇൻവേർട്ട് ചെയ്യപ്പെടും."</string>
-    <!-- no translation found for accessibility_autoclick_preference_title (3189216839673212851) -->
-    <skip />
+    <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"സ്വയമേവ ക്ലിക്ക് ചെയ്യുക (കർസർ വെച്ച് ചിലവഴിച്ച സമയം)"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"നിങ്ങളുടെ മൗസ് ഉപയോഗിക്കുകയാണെങ്കിൽ, ചലിക്കുന്നത് ഒരു നിശ്ചിത സമയത്തേക്ക് നിലയ്ക്കുമ്പോൾ, സ്വമേധയാ നടപടി എടുക്കുന്ന തരത്തിൽ നിങ്ങൾക്ക് കഴ്സർ സജ്ജമാക്കാവുന്നതാണ്."</string>
-    <!-- no translation found for accessibility_autoclick_default_title (6255651700052201350) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_short_title (7938302504358912984) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_short_summary (4106953930081213514) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_medium_title (3134175117576834320) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_medium_summary (1343390686514222871) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_long_title (6799311820641687735) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_long_summary (3747153151313563637) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_custom_title (4597792235546232038) -->
-    <skip />
+    <string name="accessibility_autoclick_default_title" msgid="6255651700052201350">"ഒന്നുമില്ല"</string>
+    <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"ഹ്രസ്വം"</string>
+    <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 സെക്കൻഡ്"</string>
+    <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"ഇടത്തരം"</string>
+    <string name="accessibility_autoclick_medium_summary" msgid="1343390686514222871">"0.6 സെക്കൻഡ്"</string>
+    <string name="accessibility_autoclick_long_title" msgid="6799311820641687735">"ദൈർഘ്യമുള്ളത്"</string>
+    <string name="accessibility_autoclick_long_summary" msgid="3747153151313563637">"ഒരു സെക്കൻഡ്"</string>
+    <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"ഇഷ്ടാനുസൃതം"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"വൈബ്രേഷനും സ്‌പർശന ശക്‌തിയും"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"അറിയിപ്പ് വൈബ്രേഷൻ"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"റിംഗ് വൈബ്രേഷൻ"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"സ്‌പർശന ഫീഡ്ബാക്ക്"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ഉപയോഗിക്കുക"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"നിറം ക്രമീകരിക്കൽ ഉപയോഗിക്കുക"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"നിറം ശരിയാക്കുക"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"അടിക്കുറിപ്പുകൾ കാണിക്കുക"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"അടിക്കുറിപ്പിന്റെ രൂപം"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"ടെക്‌സ്റ്റ് വലുപ്പം, അടിക്കുറിപ്പ് ശൈലി"</string>
@@ -2672,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"നിങ്ങളുടെ അഡ്‌മിൻ മറ്റ് ഓപ്ഷനുകൾ പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"കൂടുതൽ വിശദാംശങ്ങൾ"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"അറിയിപ്പ് ലോഗ്"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"അറിയിപ്പ് ചരിത്രം"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"ഇന്ന്"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"സ്‌നൂസ് ചെയ്‌തു"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"സമീപകാലത്ത് ഡിസ്‌മിസ് ചെയ്തത്"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"കോൾ റിംഗ്‌ടോണും വൈബ്രേറ്റും"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"നെറ്റ്‌വർക്ക് വിശദാംശങ്ങൾ"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"സമന്വയം പ്രവർത്തനക്ഷമമാക്കി"</string>
@@ -3798,9 +3799,14 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> ആപ്പുകൾ പിന്തുണയ്ക്കുന്ന ലിങ്കുകൾ തുറക്കുന്നു</item>
       <item quantity="one">ഒരു ആപ്പ് പിന്തുണയ്ക്കുന്ന ലിങ്കുകൾ തുറക്കുന്നു</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"ഈ ആപ്പിൽ തുറക്കുക"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"പിന്തുണയ്ക്കുന്ന ലിങ്കുകൾ തുറക്കാൻ ആപ്പിനെ അനുവദിക്കുക"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"എപ്പോഴും ചോദിക്കുക"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"ഈ ആപ്പിൽ തുറക്കരുത്"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"ലിങ്കുകൾ തുറക്കാൻ ആപ്പിനെ അനുവദിക്കരുത്"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ലിങ്കുകൾ കൈകാര്യം ചെയ്യുന്നതിനുള്ള ആപ്പ് ക്ലെയിമുകൾ</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ലിങ്ക് കൈകാര്യം ചെയ്യുന്നതിനുള്ള ആപ്പ് ക്ലെയിമുകൾ</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"ഇനിപ്പറയുന്ന ലിങ്കുകൾ കൈകാര്യം ചെയ്യുന്നതിനുള്ള ആപ്പ് ക്ലെയിമുകൾ:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"ഡിഫോൾട്ട്"</string>
     <string name="default_for_work" msgid="537558180548617528">"ഔദ്യോഗികാവശ്യങ്ങൾക്ക് ഡിഫോൾട്ട്"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"അസിസ്റ്റ്, ശബ്ദ ഇൻപുട്ട്"</string>
@@ -4456,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"ആപ്പ് അനുയോജ്യമാക്കുന്നതിനുള്ള മാറ്റങ്ങൾ"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"ആപ്പ് അനുയോജ്യമാക്കുന്നതിന് വരുത്തിയ മാറ്റങ്ങളിലെ ആധിക്യം പരിഷ്‌കരിക്കുക"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"ആപ്പ് അനുയോജ്യതാ മാറ്റങ്ങൾ മാറ്റുക"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനക്ഷമമാക്കിയ മാറ്റങ്ങൾ"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനരഹിതമാക്കിയ മാറ്റങ്ങൾ"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"SDK <xliff:g id="NUMBER">%d</xliff:g>-ന് ശേഷം പ്രവർത്തനക്ഷമമാക്കിയത്"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ക്രമീകരണം ഈ ഫോണിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ക്രമീകരണം ഈ ടാബ്‌ലെറ്റിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ഈ ഉപകരണത്തിൽ ക്രമീകരണം പിന്തുണയ്‌ക്കുന്നില്ല"</string>
@@ -4633,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"എല്ലാം കാണിക്കുക"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"ഉപകരണത്തിനായി തിരയുന്നു…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"ഉപകരണത്തിലേക്ക് കണക്റ്റ് ചെയ്യുന്നു…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> ഉപകരണങ്ങൾ കണക്‌റ്റ് ചെയ്‌തിരിക്കുന്നു</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> ഉപകരണം കണക്‌റ്റ് ചെയ്‌തിരിക്കുന്നു</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Bluetooth ഉപകരണങ്ങളൊന്നുമില്ല"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"ഇടത്"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"വലത്"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"കെയ്‌സ്"</string>

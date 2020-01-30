@@ -68,7 +68,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"זמן קצוב לחשיפה"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"נעילת חיוג קולי"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"‏לא ניתן להשתמש בחייגן Bluetooth כאשר המסך נעול"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"‏מכשירי Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"שם המכשיר"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"הגדרות המכשיר"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"הגדרות פרופיל"</string>
@@ -1260,13 +1259,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"לוח זמנים"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"אין"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"הפעלה מהשקיעה עד הזריחה"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"הפעלה בשעה שאני אקבע"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"סטטוס"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"כבוי / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"ללא הפעלה אוטומטית"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"הפעלה אוטומטית בשקיעה"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"הפעלה אוטומטית בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"פועל / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"ללא כיבוי אוטומטי"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"כיבוי אוטומטי בזריחה"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"כיבוי אוטומטי בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"הפעלה עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"כיבוי עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"העיצוב הכהה משתמש ברקע שחור במסכים מסוימים כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה מתוזמנת להתחיל לאחר שהמסך נכבה."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"כיבוי מסך"</string>
@@ -2114,7 +2118,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"הגדלה על-ידי הקשה שלוש פעמים"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"הגדלה בעזרת קיצור דרך"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"הגדלה בעזרת קיצור דרך והקשה שלוש פעמים"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"מידע על הגדלה"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"מידע על <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"אפשרויות"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"שינוי מרחק התצוגה (זום)"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"הקש שלוש פעמים כדי לשנות את המרחק מהתצוגה"</string>
@@ -2125,10 +2129,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"שימוש בתנועה לצורך פתיחה"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"שימוש בתנועת נגישות חדשה"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"כדי להפעיל או לכבות את השירות הזה, יש להקיש על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך.\n\nכדי לעבור בין השירותים השונים, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"כדי להפעיל או לכבות את השירות הזה, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"כדי להפעיל או לכבות שירות נגישות, יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין שירותים, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"הבנתי"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"שימוש במקש קיצור לפתיחה"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"שימוש במקש הקיצור להגדלה"</string>
@@ -2137,8 +2141,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"מקש קיצור לפתיחה של תיקון הצבעים"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"לחצן הנגישות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"החלקה בשתי אצבעות כלפי מעלה מהחלק התחתון"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"החלקה בשלוש אצבעות כלפי מעלה מהחלק התחתון"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"יש להקיש על הלחצן <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"מחליקים למעלה באמצעות שתי אצבעות מקצה המסך"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"צריך להחליק למעלה באמצעות שלוש אצבעות מקצה המסך"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"החזקה של לחצני עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול למשך שנייה אחת"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"מסך של הקשה שלוש פעמים"</string>
@@ -2188,7 +2194,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"שימוש באפליקציה <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"שימוש בתיקון צבע"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"תיקון צבעים"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"הצגת הכתוביות"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"מראה הכתוביות"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"גודל הטקסט, סגנון הכתוביות"</string>
@@ -2712,7 +2718,7 @@
     <string name="backup_data_management_title" msgid="6596830198441939702">"ניהול של חשבון גיבוי"</string>
     <string name="include_app_data_title" msgid="2969603876620594523">"עם נתוני אפליקציה"</string>
     <string name="auto_restore_title" msgid="4124345897936637561">"שחזור אוטומטי"</string>
-    <string name="auto_restore_summary" msgid="6830198851045584001">"לאחר התקנה מחדש של אפליקציה, שחזר את ההגדרות והנתונים המגובים"</string>
+    <string name="auto_restore_summary" msgid="6830198851045584001">"לאחר התקנה מחדש של אפליקציה, יש לשחזר את ההגדרות והנתונים המגובים"</string>
     <string name="backup_inactive_title" msgid="6753265378043349277">"שירות הגיבוי לא פעיל"</string>
     <string name="backup_configure_account_default_summary" msgid="5323225330966306690">"אף חשבון אינו מאחסן כרגע נתונים מגובים"</string>
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
@@ -2739,6 +2745,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"אפשרויות אחרות מושבתות על ידי מנהל המכשיר."</string>
     <string name="admin_more_details" msgid="6698424974827333973">"פרטים נוספים"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"יומן התראות"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"היסטוריית התראות"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"היום"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"במצב נודניק"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"נסגרו לאחרונה"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"צלצול ורטט שיחה"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"פרטי רשת"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"הסינכרון מופעל"</string>
@@ -3269,7 +3279,7 @@
     <string name="keywords_lockscreen" msgid="3656926961043485797">"החלק כדי לבטל נעילה, סיסמה, קו ביטול נעילה, קוד גישה"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"אתגר בעבודה, עבודה, פרופיל"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
-    <string name="keywords_gesture" msgid="3456930847450080520">"תנועות"</string>
+    <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="707735920706667685">"‏גיבוי, לגבות, backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"תנועה"</string>
@@ -3913,9 +3923,16 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> אפליקציות פותחות קישורים נתמכים</item>
       <item quantity="one">אפליקציה אחת פותחת קישורים נתמכים</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"פתח באפליקציה זו"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"לתת לאפליקציה הרשאה לפתוח קישורים שיש להם תמיכה"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"שאל בכל פעם"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"אל תפתח באפליקציה זו"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"לא לתת לאפליקציה הרשאה לפתוח קישורים"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="two">יש דרישה של האפליקציה לטפל ב-<xliff:g id="COUNT_1">%d</xliff:g> קישורים</item>
+      <item quantity="many">יש דרישה של האפליקציה לטפל ב-<xliff:g id="COUNT_1">%d</xliff:g> קישורים</item>
+      <item quantity="other">יש דרישה של האפליקציה לטפל ב-<xliff:g id="COUNT_1">%d</xliff:g> קישורים</item>
+      <item quantity="one">יש דרישה של האפליקציה לטפל בקישור אחד (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"יש דרישה מצד האפליקציה לטפל בקישורים הבאים:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"ברירת מחדל"</string>
     <string name="default_for_work" msgid="537558180548617528">"ברירת מחדל לעבודה"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"קלט לעזרה וקלט קולי"</string>
@@ -4387,7 +4404,7 @@
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"באופן אוטומטי"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"ידני"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"פינוי שטח אחסון עכשיו"</string>
-    <string name="gesture_preference_title" msgid="8291899281322647187">"תנועות"</string>
+    <string name="gesture_preference_title" msgid="8291899281322647187">"תנועות לביצוע פעולות"</string>
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"תנועות מהירות לשליטה בטלפון"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"תנועות מהירות לשליטה בטאבלט"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"תנועות מהירות לשליטה במכשיר"</string>
@@ -4611,10 +4628,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"שינויים בתאימות האפליקציה"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"חלופות לביטולים של שינויים בתאימות האפליקציה"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת מצב השינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"השינויים מופעלים כברירת מחדל"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"השינויים מושבתים כברירת מחדל"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"‏הופעלה לאחר SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ההגדרה אינה נתמכת בטלפון זה"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ההגדרה אינה נתמכת בטאבלט זה"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ההגדרה אינה נתמכת במכשיר זה"</string>
@@ -4790,13 +4806,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"הצגת הכול"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"מתבצע חיפוש אחר מכשיר…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"מתבצעת התחברות למכשיר…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="two"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירים מחוברים</item>
-      <item quantity="many"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירים מחוברים</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> מכשירים מחוברים</item>
-      <item quantity="one">מכשיר <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> מחובר</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"‏אין מכשירי Bluetooth"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"שמאל"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"ימין"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"נרתיק"</string>

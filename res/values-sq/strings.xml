@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Koha e veprimit mbi dukshmërinë skadoi pa sukses"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Kyç formimin e numrit me zë"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Parandalo përdorimin e formuesit të numrit me Bluetooth kur ekrani është i kyçur."</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Pajisjet me Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Emri i pajisjes"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Cilësimet e pajisjes"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Cilësimet e profilit"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Orari"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Asnjëra"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Aktivizohet nga perëndimi deri në agim"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Aktivizohet në kohë të personalizuar"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Statusi"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Joaktiv / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Nuk do të aktivizohet asnjëherë automatikisht"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Do të aktivizohet automatikisht kur të perëndojë dielli"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Do të aktivizohet automatikisht në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Aktiv / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nuk do të çaktivizohet asnjëherë automatikisht"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Do të çaktivizohet automatikisht në agim"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Do të çaktivizohet automatikisht në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Çaktivizo deri në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Çaktivizo deri në <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"\"Tema e errët\" përdor një sfond të zi për të të ndihmuar ta mbash baterinë të karikuar për më shumë kohë në disa ekrane. Oraret e \"Temës së errët\" presin që të aktivizohen kur ekrani është joaktiv."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Koha e pritjes së ekranit"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ekrani çaktivizohet"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Zmadho me tre trokitje"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Zmadho me shkurtore"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Zmadho me shkurtore dhe tri trokitje"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Rreth \"Zmadhimit\""</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"Rreth <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opsionet"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zmadho ekranin"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Trokit 3 herë për ta zmadhuar"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Përdor gjestin për të hapur"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Përdor gjestin e ri të qasshmërisë"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"Për të aktivizuar ose çaktivizuar këtë shërbim, trokit mbi butonin e qasshmërisë <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit.\n\nPër të kaluar mes shërbimeve, prek dhe mbaj prekur butonin e qasshmërisë."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar nga një shërbim te tjetri, rrëshqit shpejt lart me dy gishta dhe mbaje të shtypur."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me dy gishta dhe mbaje prekur."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar nga një shërbim te tjetri, rrëshqit shpejt lart me dy gishta dhe mbaje të shtypur."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"Për të aktivizuar ose çaktivizuar këtë shërbim, rrëshqit lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me dy gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me dy gishta dhe mbaje prekur."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"Për të aktivizuar ose çaktivizuar një shërbim qasshmërie, rrëshqit shpejt lart nga fundi i ekranit me tre gishta.\n\nPër të kaluar mes pajisjeve, rrëshqit shpejt lart me tre gishta dhe mbaje prekur."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"E kuptova"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Përdor shkurtoren për ta hapur"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Përdor shkurtoren për të zmadhuar"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Shkurtorja për të hapur \"Korrigjimin e ngjyrave\""</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Butoni i qasshmërisë"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Rrëshqitja shpejt lart me 2 gishta nga poshtë"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Rrëshqitja shpejt lart me 3 gishta nga poshtë"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Trokit te butoni <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> në fund të ekranit"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Rrëshqit shpejt lart me 2 gishta nga skaji i ekranit"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"Rrëshqit shpejt lart me 3 gishta nga skaji i ekranit"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mbaj butonat e volumit"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Shtyp dhe mbaj shtypur të dy butonat e volumit për 1 sekondë"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Trokit tri herë tek ekrani"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Dridhjet e ziles"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reagimi me prekje"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Përdor <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Përdor korrigjimin e ngjyrave"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Korrigjo ngjyrat"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Shfaq titrat"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Paraqitja e titrave"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Madhësia e tekstit, stili i titrave"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Opsionet e tjera janë çaktivizuar nga administratori yt"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"Më shumë detaje"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Regjistri i njoftimeve"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Historiku i njoftimeve"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Sot"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Shtyrë"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Hequr së fundi"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Zilja dhe dridhja e telefonit."</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Detajet e rrjetit"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sinkronizimi u aktivizua"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacione që hapin lidhjet e mbështetura</item>
       <item quantity="one">Një aplikacion që hap lidhjet e mbështetura</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Hap në këtë aplikacion"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Lejo që aplikacioni të hapë lidhjet e mbështetura"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Pyet çdo herë"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Mos e hap në këtë aplikacion"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Mos lejo që aplikacioni të hapë lidhjet"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="other">Aplikacioni kërkon të administrojë <xliff:g id="COUNT_1">%d</xliff:g> lidhje</item>
+      <item quantity="one">Aplikacioni kërkon të administrojë <xliff:g id="COUNT_0">%d</xliff:g> lidhje</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"Aplikacioni kërkon të administrojë lidhjet e mëposhtme:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Të parazgjedhura"</string>
     <string name="default_for_work" msgid="537558180548617528">"Të parazgjedhura për punën"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Asistenti dhe hyrja zanore"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Ndryshimet e pajtueshmërisë së aplikacionit"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Modifiko anulimet e ndryshimeve të përputhshmërisë së aplikacionit"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Aktivizo ose çaktivizo ndryshimet e përputhshmërisë së aplikacionit"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Ndryshimet të aktivizuara si parazgjedhje"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Ndryshimet të çaktivizuara si parazgjedhje"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Aktivizuar pas SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Cilësimi nuk mbështetet në këtë telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Cilësimi nuk mbështetet në këtë tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Cilësimi nuk mbështetet në këtë pajisje"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Shfaq të gjitha"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Po kërkohet për pajisjen…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Po lidhet me pajisjen…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> pajisje të lidhura</item>
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> pajisje e lidhur</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Nuk ka asnjë pajisje me Bluetooth"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Majtas"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Djathtas"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Kasa"</string>
