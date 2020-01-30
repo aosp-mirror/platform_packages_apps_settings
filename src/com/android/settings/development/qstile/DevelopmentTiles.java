@@ -233,9 +233,22 @@ public abstract class DevelopmentTiles extends TileService {
             return layerTraceEnabled;
         }
 
+        private boolean isSystemUiTracingEnabled() {
+            try {
+                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
+                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
+                if (statusBarService != null) {
+                    return statusBarService.isTracing();
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not get system ui tracing status." + e.toString());
+            }
+            return false;
+        }
+
         @Override
         protected boolean isEnabled() {
-            return isWindowTraceEnabled() || isLayerTraceEnabled();
+            return isWindowTraceEnabled() || isLayerTraceEnabled() || isSystemUiTracingEnabled();
         }
 
         private void setWindowTraceEnabled(boolean isEnabled) {
@@ -269,10 +282,27 @@ public abstract class DevelopmentTiles extends TileService {
             }
         }
 
+        private void setSystemUiTracing(boolean isEnabled) {
+            try {
+                final IStatusBarService statusBarService = IStatusBarService.Stub.asInterface(
+                        ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
+                if (statusBarService != null) {
+                    if (isEnabled) {
+                        statusBarService.startTracing();
+                    } else {
+                        statusBarService.stopTracing();
+                    }
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not set system ui tracing." + e.toString());
+            }
+        }
+
         @Override
         protected void setIsEnabled(boolean isEnabled) {
             setWindowTraceEnabled(isEnabled);
             setLayerTraceEnabled(isEnabled);
+            setSystemUiTracing(isEnabled);
             if (!isEnabled) {
                 mToast.show();
             }
