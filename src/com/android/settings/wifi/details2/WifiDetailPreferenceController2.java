@@ -537,7 +537,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshSsid() {
-        if (mWifiEntry.isSubscription() || WifiEntryShell.isOsuProvider(mWifiEntry)) {
+        if (mWifiEntry.isSubscription()) {
             mSsidPref.setVisible(true);
             mSsidPref.setSummary(mWifiEntry.getTitle());
         } else {
@@ -743,8 +743,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                     try {
                         mWifiEntry.forget(this);
                     } catch (RuntimeException e) {
-                        Log.e(TAG, "Failed to remove Passpoint configuration for "
-                                + WifiEntryShell.getPasspointFqdn(mWifiEntry));
+                        Log.e(TAG, "Failed to remove Passpoint configuration: " + e);
                     }
                     mMetricsFeatureProvider.action(
                             mFragment.getActivity(), SettingsEnums.ACTION_WIFI_FORGET);

@@ -23,7 +23,6 @@ import com.android.wifitrackerlib.WifiEntry;
  * all the unavalable {@link AccessPoint} methods & constants.
  *
  * TODO(b/143326832): Replace all methods & constants with WifiEntry version when it's available.
- * TODO(b/143326832): How about AccessPoint#getSettingsSummary(boolean convertSavedAsDisconnected)?
  */
 public class WifiEntryShell {
     public WifiEntryShell(){};
@@ -47,41 +46,4 @@ public class WifiEntryShell {
      * Upper bound on the 5.0 GHz (802.11a/h/j/n/ac) WLAN channels
      */
     public static final int HIGHER_FREQ_5GHZ = 5900;
-
-    // Passpoint methods
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static boolean isExpired(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static boolean isPasspointConfigurationR1(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static boolean isPasspointConfigurationOsuProvisioned(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static boolean isOsuProvider(WifiEntry wifiEntry) {
-        return false;
-    }
-
-    /**
-     * Mapping of the corresponding {@link AccessPoint} method
-     */
-    public static String getPasspointFqdn(WifiEntry wifiEntry) {
-        return "Fake passpoint FQDN";
-    }
 }
