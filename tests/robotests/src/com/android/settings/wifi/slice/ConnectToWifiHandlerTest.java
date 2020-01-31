@@ -100,7 +100,7 @@ public class ConnectToWifiHandlerTest {
         when(mAccessPoint.isSaved()).thenReturn(true);
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_PSK);
         final NetworkSelectionStatus status = mock(NetworkSelectionStatus.class);
-        when(status.getHasEverConnected()).thenReturn(true);
+        when(status.hasEverConnected()).thenReturn(true);
         when(mWifiConfig.getNetworkSelectionStatus()).thenReturn(status);
 
         mHandler.connect(mContext, mAccessPoint);

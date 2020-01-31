@@ -77,7 +77,6 @@ import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectCallback.ConnectStatus;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
@@ -540,7 +539,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
             if (selectedEntry.isSaved()) {
                 if (!selectedEntry.getWifiConfiguration().getNetworkSelectionStatus()
-                        .getHasEverConnected()) {
+                        .hasEverConnected()) {
                     launchConfigNewNetworkFragment(selectedEntry);
                     return true;
                 }
