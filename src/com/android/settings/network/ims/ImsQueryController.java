@@ -16,8 +16,6 @@
 
 package com.android.settings.network.ims;
 
-import android.content.Context;
-
 import androidx.annotation.VisibleForTesting;
 
 /**
@@ -26,12 +24,7 @@ import androidx.annotation.VisibleForTesting;
 abstract class ImsQueryController {
 
     @VisibleForTesting
-    ImsDirectQuery isSystemTtyEnabled(Context context) {
-        return new ImsQuerySystemTtyStat(context);
-    }
-
-    @VisibleForTesting
-    ImsDirectQuery isTtyOnVolteEnabled(int subId) {
+    ImsQuery isTtyOnVolteEnabled(int subId) {
         return new ImsQueryTtyOnVolteStat(subId);
     }
 }

@@ -20,9 +20,9 @@ import android.telephony.ims.ImsMmTelManager;
 
 
 /**
- * An {@code ImsQuery} for accessing IMS VT enabled settings from user
+ * An {@link ImsQuery} for accessing IMS VT enabled settings from user
  */
-public class ImsQueryVtUserSetting extends ImsDirectQueryImpl {
+public class ImsQueryVtUserSetting implements ImsQuery {
 
     /**
      * Constructor
@@ -35,11 +35,11 @@ public class ImsQueryVtUserSetting extends ImsDirectQueryImpl {
     private volatile int mSubId;
 
     /**
-     * Query running within a {@code Callable}
+     * Implementation of interface {@link ImsQuery#query()}
      *
      * @return result of query
      */
-    public Boolean call() {
+    public boolean query() {
         final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
         return imsMmTelManager.isVtSettingEnabled();
     }
