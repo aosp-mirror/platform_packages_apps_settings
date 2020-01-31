@@ -19,7 +19,6 @@ package com.android.settings.core.instrumentation;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.util.Pair;
-import android.util.StatsLog;
 
 import com.android.settingslib.core.instrumentation.LogWriter;
 
@@ -27,7 +26,7 @@ public class StatsLogWriter implements LogWriter {
 
     @Override
     public void visible(Context context, int attribution, int pageId, int latency) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
                 attribution, /* from pageId */
                 SettingsEnums.PAGE_VISIBLE /* action */,
                 pageId, /* target pageId */
@@ -37,7 +36,7 @@ public class StatsLogWriter implements LogWriter {
 
     @Override
     public void hidden(Context context, int pageId, int visibleTime) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* Atom name */,
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* Atom name */,
                 SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
@@ -83,7 +82,7 @@ public class StatsLogWriter implements LogWriter {
 
     @Override
     public void action(int attribution, int action, int pageId, String key, int value) {
-        StatsLog.write(StatsLog.SETTINGS_UI_CHANGED /* atomName */,
+        SettingsStatsLog.write(SettingsStatsLog.SETTINGS_UI_CHANGED /* atomName */,
                 attribution,
                 action,
                 pageId,

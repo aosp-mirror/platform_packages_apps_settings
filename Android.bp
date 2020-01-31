@@ -4,6 +4,21 @@ java_library {
     static_libs: ["WifiTrackerLib"],
 }
 
+genrule {
+    name: "statslog-settings-java-gen",
+    tools: ["stats-log-api-gen"],
+    cmd: "$(location stats-log-api-gen) --java $(out) --module settings"
+        + " --javaPackage com.android.settings.core.instrumentation --javaClass SettingsStatsLog",
+    out: ["com/android/settings/core/instrumentation/SettingsStatsLog.java"],
+}
+
+java_library {
+    name: "statslog-settings",
+    srcs: [
+        ":statslog-settings-java-gen",
+    ],
+}
+
 // Build the Settings APK
 android_library {
     name: "Settings-core",
@@ -37,6 +52,7 @@ android_library {
         "settings-log-bridge-protos-lite",
         "contextualcards",
         "settings-logtags",
+        "statslog-settings",
         "zxing-core-1.7",
     ],
 
