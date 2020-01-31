@@ -60,7 +60,7 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (mWifiEntry.isSaved()) {
+        if (mWifiEntry.isSaved() || mWifiEntry.isSubscription()) {
             mWifiEntry.setMeteredChoice(Integer.parseInt((String) newValue));
         }
 
@@ -72,7 +72,7 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @VisibleForTesting
     int getMeteredOverride() {
-        if (mWifiEntry.isSaved()) {
+        if (mWifiEntry.isSaved() || mWifiEntry.isSubscription()) {
             // Wrap the meteredOverride since robolectric cannot recognize it
             return mWifiEntry.getMeteredChoice();
         }
@@ -91,13 +91,13 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @Override
     public void onSubmit(WifiDialog2 dialog) {
-        if (dialog.getController() != null) {
+        if (dialog.getController() != null && mWifiEntry.canSetMeteredChoice()) {
             final WifiConfiguration newConfig = dialog.getController().getConfig();
-            if (newConfig == null || !mWifiEntry.isSaved()) {
+            if (newConfig == null) {
                 return;
             }
 
-            if (newConfig.meteredOverride != mWifiEntry.getWifiConfiguration().meteredOverride) {
+            if (getWifiEntryMeteredChoice(newConfig) != mWifiEntry.getMeteredChoice()) {
                 mWifiEntry.setMeteredChoice(getWifiEntryMeteredChoice(newConfig));
                 onPreferenceChange(mPreference, String.valueOf(newConfig.meteredOverride));
             }
