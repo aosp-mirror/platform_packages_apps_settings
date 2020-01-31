@@ -66,7 +66,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Timeout ng visibility"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"I-lock ang pag-dial gamit ang boses"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Iwasan ang paggamit ng taga-dial ng bluetooth kapag naka-lock ang screen"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Mga device ng bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Pangalan ng device"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Mga setting ng device"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Mga setting ng profile"</string>
@@ -1220,13 +1219,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Iskedyul"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Wala"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ma-on sa sunset hanggang sunrise"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Ino-on sa custom na oras"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Naka-off / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Hindi awtomatikong mao-on kailanman"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Awtomatikong mao-on sa sunset"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Awtomatikong mag-o-on nang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Naka-on / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Hindi awtomatikong mao-off kailanman"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Awtomatikong mao-off sa sunrise"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Awtomatikong mag-o-off nang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"I-on hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"I-off hanggang <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Gumagamit ng itim na background sa madilim na tema para makatulong na mas tumagal ang baterya sa ilang screen. Naghihintay ang mga iskedyul ng madilim na tema na ma-off ang iyong screen bago ma-on ang mga ito."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Timeout ng screen"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Pag-off ng screen"</string>
@@ -2068,7 +2072,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Mag-magnify gamit ang triple-tap"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mag-magnify gamit ang shortcut"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mag-magnify gamit ang shortcut at pag-triple tap"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"Tungkol sa I-magnify"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"Tungkol sa <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Mga Opsyon"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Mag-zoom in sa screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Mag-tap nang 3 beses upang mag-zoom"</string>
@@ -2079,10 +2083,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gumamit ng galaw para buksan"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Gamitin ang bagong galaw sa pagiging accessible"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"Para i-on o i-off ang serbisyong ito, i-tap ang button ng accessibility <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng iyong screen.\n\nPara magpalipat-lipat sa mga serbisyo, pindutin nang matagal ang button ng accessibility."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"Para i-on o i-off ang serbisyong ito, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang dalawang daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang dalawang daliri at i-hold."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"Para i-on o i-off ang isang serbisyo sa pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang tatlong daliri.\n\nPara magpalipat-lipat sa mga serbisyo, mag-swipe pataas gamit ang tatlong daliri at i-hold."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Gumamit ng shortcut para buksan"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Gumamit ng shortcut para mag-magnify"</string>
@@ -2091,8 +2095,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Shortcut para sa Correction ng kulay"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Button ng Accessibility"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Pag-swipe pataas gamit ang 2 daliri mula sa ibaba"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Pag-swipe pataas gamit ang 3 daliri mula sa ibaba"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"I-tap ang button ng <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng iyong screen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"Mag-swipe pataas gamit ang 2 daliri mula sa dulo ng screen"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"Mag-swipe pataas gamit ang 3 daliri mula sa dulo ng screen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"I-hold ang mga volume key"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Pindutin nang matagal ang parehong volume key sa loob ng 1 segundo"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"I-triple tap ang screen"</string>
@@ -2142,7 +2148,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Pag-vibrate kapag nag-ring"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback sa pagpindot"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Gamitin ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Gumamit ng pagwawasto ng kulay"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Iwasto ang mga kulay"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Ipakita ang mga caption"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Hitsura ng caption"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Laki ng text size, istilo ng caption"</string>
@@ -2663,6 +2669,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Na-disable ng iyong admin ang iba pang opsyon"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"Higit pang mga detalye"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Log ng notification"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"History ng notification"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Ngayon"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Naka-snooze"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Na-dismiss kamakailan"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Ringtone at pag-vibrate ng tawag"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Detalye ng network"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Pinapagana ang sync"</string>
@@ -3789,9 +3799,14 @@
       <item quantity="one">Binubuksan ng <xliff:g id="COUNT">%d</xliff:g> app ang mga sinusuportahang link</item>
       <item quantity="other">Binubuksan ng <xliff:g id="COUNT">%d</xliff:g> na app ang mga sinusuportahang link</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Buksan sa app na ito"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Payagan ang app na buksan ang mga sinusuportahang link"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Magtanong palagi"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Huwag buksan sa app na ito"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Huwag payagan ang app na magbukas ng mga link"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="one">Papangasiwaan ng mga claim sa app ang <xliff:g id="COUNT_1">%d</xliff:g> link</item>
+      <item quantity="other">Papangasiwaan ng mga claim sa app ang <xliff:g id="COUNT_1">%d</xliff:g> na link</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"Papangasiwaan ng mga claim sa app ang mga sumusunod na link:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Default"</string>
     <string name="default_for_work" msgid="537558180548617528">"Default para sa trabaho"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Tulong at voice input"</string>
@@ -4447,10 +4462,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Mga Pagbabago sa Compatibility ng App"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Baguhin ang mga pag-override sa pagbabago ng compatibility ng app"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"I-toggle ang mga pagbabago sa compatibility ng app"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Mga default na naka-enable na pagbabago"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Mga default na naka-disable na pagbabago"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Naka-enable pagkatapos ng SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Hindi sinusuportahan ang setting sa teleponong ito"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Hindi sinusuportahan ang setting sa tablet na ito"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Hindi sinusuportahan ang setting sa device na ito"</string>
@@ -4624,11 +4638,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Ipakita lahat"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Naghahanap ng device…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Kumokonekta sa device…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> (na) device ang nakakonekta</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> (na) device ang nakakonekta</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Walang Bluetooth device"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Kaliwa"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Kanan"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Case"</string>

@@ -67,7 +67,6 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Istek vremena za vidljivost"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Zaključaj glasovno biranje"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Spriječi korištenje bluetooth birača kada je ekran zaključan"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth uređaji"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Naziv uređaja"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Postavke uređaja"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Postavke profila"</string>
@@ -1240,13 +1239,18 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Zakaži"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nikada"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Uključeno od sumraka do svitanja"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Uključuje se u zadano vrijeme"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off" msgid="3897438633224959099">"Isključeno / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Neće se nikada automatski uključiti"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Automatski će se uključiti u sumrak"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Automatski će se uključiti u <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on" msgid="3886998135388176000">"Uključeno / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Neće se nikada automatski isključiti"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Automatski će se isključiti u svitanje"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Automatski će se isključiti u <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Uključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Isključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Tamna tema koristi crnu pozadinu da bi se trajanje baterije produžilo na nekim ekranima. Tamna tema zakazuje čekanje uključivanja dok se ekran ne isključi."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Istek vremena ekrana"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Ekran se isključuje"</string>
@@ -2091,7 +2095,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Uvećavanje trostrukim dodirom"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Uvećavanje pomoću prečice"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Uvećajte pomoću prečice i trostrukog dodira"</string>
-    <string name="accessibility_screen_magnification_about" msgid="7084391040140715321">"O funkciji Uvećavanje"</string>
+    <string name="accessibility_footer_title" msgid="3024546125528459982">"O usluzi <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opcije"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Uvećajte prikaz na ekranu"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Dodirnite tri puta da zumirate"</string>
@@ -2102,10 +2106,10 @@
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Otvorite pokretom"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Koristite novi pokret za pristupačnost"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"Da uključite ili isključite ovu uslugu, dodirnite dugme za pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu ekrana.\n\nDa prebacujete između usluga, dodirnite i zadržite dugme za pristupačnost."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_without_talkback" msgid="7784184645746558289">"Da uključite ili isključite ovu uslugu, s dva prsta prevucite prema gore s dna ekrana.\n\nZa prebacivanje između usluga s dva prsta prevucite prema gore i zadržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_with_talkback" msgid="7405718459133831431">"Da uključite ili isključite ovu uslugu, s tri prsta prevucite prema gore s dna ekrana.\n\nZa prebacivanje između usluga s tri prsta prevucite prema gore i zadržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_without_talkback" msgid="8744979550867005938">"Da uključite ili isključite uslugu za pristupačnost, s dva prsta prevucite prema gore s dna ekrana.\n\nZa prebacivanje između usluga s dva prsta prevucite prema gore i zadržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_with_talkback" msgid="9124610711696596426">"Da uključite ili isključite uslugu za pristupačnost, s tri prsta prevucite prema gore s dna ekrana.\n\nZa prebacivanje između usluga s tri prsta prevucite prema gore i zadržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"Da uključite ili isključite ovu uslugu, s dva prsta prevucite prema gore s dna ekrana.\n\nDa prebacujete između usluga, s dva prsta prevucite prema gore i zadržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"Da uključite ili isključite ovu uslugu, s tri prsta prevucite prema gore s dna ekrana.\n\nDa prebacujete između usluga, s tri prsta prevucite prema gore i zadržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"Da uključite ili isključite uslugu za pristupačnost, s dva prsta prevucite prema gore s dna ekrana.\n\nDa prebacujete između usluga, s dva prsta prevucite prema gore i zadržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"Da uključite ili isključite uslugu za pristupačnost, s tri prsta prevucite prema gore s dna ekrana.\n\nDa prebacujete između usluga, s tri prsta prevucite prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Razumijem"</string>
     <string name="accessibility_shortcut_title" msgid="7219851818023989864">"Koristite prečicu da otvorite"</string>
     <string name="accessibility_magnification_shortcut_title" msgid="3850925633238639131">"Koristite prečicu da uvećate"</string>
@@ -2114,8 +2118,10 @@
     <string name="accessibility_shortcut_edit_dialog_title_daltonizer" msgid="2875485140645140606">"Prečica za otvaranje Korekcije boja"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="2920806427635233043">"Dugme Pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="6906653331086992721">"Prevlačenje pomoću 2 prsta s dna ekrana prema gore"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="4974520974234798178">"Prevlačenje pomoću 3 prsta s dna ekrana prema gore"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="3917444742336634202">"Dodirnite dugme <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu ekrana"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="391987875251799972">"S ruba ekrana prevucite prema gore s 2 prsta"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="8841943307137541478">"S ruba ekrana prevucite prema gore s 3 prsta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Držite tipke za jačinu zvuka"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="6508972075712224951">"Pritisnite obje tipke za jačinu zvuka i držite ih 1 sekundu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6543084611445441109">"Trostruki dodir ekrana"</string>
@@ -2165,7 +2171,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibracija pri zvonu"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Povratne informacije na dodir"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Koristi <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Koristi ispravku boje"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="1730529507450115192">"Popravljanje boja"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Prikaži titlove"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Izgled titlova"</string>
     <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"Veličina teksta, stil titlova"</string>
@@ -2701,6 +2707,10 @@
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"Administrator je onemogućio ostale opcije"</string>
     <string name="admin_more_details" msgid="6698424974827333973">"Više detalja"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Zapisnik obavještenja"</string>
+    <string name="notification_history_title" msgid="8821060912502593309">"Historija obavještenja"</string>
+    <string name="notification_history_today" msgid="8776595977526590103">"Danas"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"Odgođeno"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Nedavno odbačeno"</string>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Melodija zvona telefona i vibracija"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"Detalji o mreži"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"Sinhronizacija omogućena"</string>
@@ -3850,9 +3860,15 @@
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacije koje otvaraju podržane linkove</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aplikacija koje otvaraju podržane linkove</item>
     </plurals>
-    <string name="app_link_open_always" msgid="7734202520425781182">"Otvori u ovoj aplikaciji"</string>
+    <string name="app_link_open_always" msgid="9167065494930657503">"Dozvoli aplikaciji da otvara podržane linkove"</string>
     <string name="app_link_open_ask" msgid="2422450109908936371">"Pitaj svaki put"</string>
-    <string name="app_link_open_never" msgid="4324624654943778291">"Nemoj otvarati u ovoj aplikaciji"</string>
+    <string name="app_link_open_never" msgid="5299808605386052350">"Nemoj dozvoliti aplikaciji da otvara linkove"</string>
+    <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
+      <item quantity="one">Aplikacija polaže pravo da obrađuje <xliff:g id="COUNT_1">%d</xliff:g> link</item>
+      <item quantity="few">Aplikacija polaže pravo da obrađuje <xliff:g id="COUNT_1">%d</xliff:g> linka</item>
+      <item quantity="other">Aplikacija polaže pravo da obrađuje <xliff:g id="COUNT_1">%d</xliff:g> linkova</item>
+    </plurals>
+    <string name="open_supported_links_footer" msgid="3188808142432787933">"Aplikacija polaže pravo da obrađuje sljedeće linkove:"</string>
     <string name="default_apps_title" msgid="6943471331817718664">"Zadano"</string>
     <string name="default_for_work" msgid="537558180548617528">"Uobičajeno za rad"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Pomoć i glasovni unos"</string>
@@ -4528,10 +4544,9 @@
     <!-- no translation found for game_driver_app_preference_values:1 (398843973192851256) -->
     <!-- no translation found for game_driver_app_preference_values:2 (8840726898745627072) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Izmjene kompatibilnosti aplikacije"</string>
-    <string name="platform_compat_dashboard_summary" msgid="5404164112519218656">"Modificiranje postavke zanemarivanja izmjene kompatibilnosti aplikacije"</string>
+    <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključivanje/isključivanje izmjena kompatibilnosti aplikacije"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Zadano omogućene izmjene"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Zadano onemogućene izmjene"</string>
-    <string name="platform_compat_target_sdk_title" msgid="7283590244564929926">"Omogućeno nakon SDK <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Postavka nije podržana na ovom telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Postavka nije podržana na ovom tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Postavka nije podržana na ovom uređaju"</string>
@@ -4706,12 +4721,6 @@
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Prikaži sve"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Traženje uređaja…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Povezivanje s uređajem…"</string>
-    <plurals name="show_bluetooth_devices" formatted="false" msgid="5247313302567705452">
-      <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> povezan uređaj</item>
-      <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> povezana uređaja</item>
-      <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> povezanih uređaja</item>
-    </plurals>
-    <string name="no_bluetooth_devices" msgid="6310025908614933116">"Nema Bluetooth uređaja"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Lijeva"</string>
     <string name="bluetooth_right_name" msgid="7588088072444124949">"Desni"</string>
     <string name="bluetooth_middle_name" msgid="3909371955137442319">"Maska"</string>

@@ -148,7 +148,7 @@ public class ContextualWifiSlice extends WifiSlice {
         if (mWifiManager.getWifiState() != WifiManager.WIFI_STATE_ENABLED) {
             return WifiManager.UNKNOWN_SSID;
         }
-        return WifiInfo.removeDoubleQuotes(mWifiManager.getConnectionInfo().getSSID());
+        return WifiInfo.sanitizeSsid(mWifiManager.getConnectionInfo().getSSID());
     }
 
     private boolean hasInternetAccess() {

@@ -26,6 +26,8 @@ import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
+import java.text.NumberFormat;
+
 public class AppDataUsagePreference extends AppPreference {
 
     private final AppItem mItem;
@@ -66,6 +68,8 @@ public class AppDataUsagePreference extends AppPreference {
             progress.setVisibility(View.VISIBLE);
         }
         progress.setProgress(mPercent);
+        progress.setContentDescription(
+                NumberFormat.getPercentInstance().format((double) mPercent / 100));
     }
 
     private void setAppInfo() {

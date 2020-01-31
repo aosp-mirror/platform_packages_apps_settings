@@ -196,7 +196,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
                 mMatchedConfig = WifiUtils.getWifiConfig(
                     null /* accesspoint */, scanResults.get(0), null /* password */);
                 showSingleSsidRequestDialog(
-                    WifiInfo.removeDoubleQuotes(mMatchedConfig.SSID), false /* isTryAgain */);
+                        WifiInfo.sanitizeSsid(mMatchedConfig.SSID), false /* isTryAgain */);
             }
             return;
         }
@@ -207,8 +207,8 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     @Override
     public void onUserSelectionConnectSuccess(WifiConfiguration wificonfiguration) {
         if (!isFinishing()) {
-            Toast.makeText(this, R.string.network_connection_connect_successful,
-                Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.network_connection_connect_successful, Toast.LENGTH_SHORT)
+                    .show();
             setResult(RESULT_OK);
             finish();
         }
@@ -218,7 +218,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
         if (mIsSpecifiedSsid) {
             showSingleSsidRequestDialog(
-                WifiInfo.removeDoubleQuotes(mMatchedConfig.SSID), true /* isTryAgain */);
+                    WifiInfo.sanitizeSsid(mMatchedConfig.SSID), true /* isTryAgain */);
             return;
         }
 
