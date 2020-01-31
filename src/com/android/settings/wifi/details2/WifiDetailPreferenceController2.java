@@ -596,7 +596,17 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         mButtonsPref.setButton1Visible(canForgetNetwork);
         mButtonsPref.setButton2Visible(canSignIntoNetwork);
-        mButtonsPref.setButton3Visible(mWifiEntry.getLevel() != WifiEntry.WIFI_LEVEL_UNREACHABLE);
+        // If it's expired and connected, shows Disconnect button for users to disconnect it.
+        // If it's expired and not connected, hides the button and users are not able to connect it.
+        //
+        // expired connected    visibility
+        // false   false        true    show (Connect) button
+        // false   true         true    show (Disconnect) button
+        // true    false        false   hide button
+        // true    true         true    show (Disconnect) button
+        mButtonsPref.setButton3Visible(mWifiEntry.getLevel() != WifiEntry.WIFI_LEVEL_UNREACHABLE
+                && (!mWifiEntry.isExpired()
+                        || mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED));
         mButtonsPref.setButton3Enabled(canConnectDisconnectNetwork);
         mButtonsPref.setButton3Text(getConnectDisconnectButtonTextResource());
         mButtonsPref.setButton3Icon(getConnectDisconnectButtonIconResource());
