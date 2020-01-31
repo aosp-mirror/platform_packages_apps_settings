@@ -28,7 +28,6 @@ import com.android.settings.R;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -85,14 +84,5 @@ public class WifiMeteredPreferenceController2Test {
         mPreferenceController.updateState(mDropDownPreference);
 
         assertThat(mDropDownPreference.getEntry()).isEqualTo("Detect automatically");
-    }
-
-    @Test
-    @Ignore
-    public void testController_resilientToNullConfig() {
-        mPreferenceController = spy(new WifiMeteredPreferenceController2(mContext, null));
-
-        mPreferenceController.getMeteredOverride();
-        mPreferenceController.onPreferenceChange(mDropDownPreference, 1);
     }
 }
