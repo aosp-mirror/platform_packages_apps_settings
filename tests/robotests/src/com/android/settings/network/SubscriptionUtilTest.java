@@ -96,15 +96,12 @@ public class SubscriptionUtilTest {
 
         when(info1.getSubscriptionId()).thenReturn(111);
         when(info1.getSimSlotIndex()).thenReturn(-1);
-        when(info1.getCardString()).thenReturn("info1_cardid");
 
         when(info2.getSubscriptionId()).thenReturn(222);
         when(info2.getSimSlotIndex()).thenReturn(-1);
-        when(info2.getCardString()).thenReturn("info2_cardid");
 
         when(info3.getSubscriptionId()).thenReturn(333);
         when(info3.getSimSlotIndex()).thenReturn(0);
-        when(info3.getCardString()).thenReturn("info3_cardid");
 
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
         when(mSubMgr.getAllSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2, info3));
@@ -114,11 +111,9 @@ public class SubscriptionUtilTest {
 
         when(info2slot.getLogicalSlotIdx()).thenReturn(-1);
         when(info2slot.getCardStateInfo()).thenReturn(CARD_STATE_INFO_ABSENT);
-        when(info2slot.getCardId()).thenReturn("info2_cardid");
 
         when(info3slot.getLogicalSlotIdx()).thenReturn(0);
         when(info3slot.getCardStateInfo()).thenReturn(CARD_STATE_INFO_PRESENT);
-        when(info3slot.getCardId()).thenReturn("info3_cardid");
 
         final UiccSlotInfo[] slotInfos = {info2slot, info3slot};
         when(mTelMgr.getUiccSlotsInfo()).thenReturn(slotInfos);
