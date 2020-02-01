@@ -118,6 +118,9 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mProxySubscriptionMgr == null) {
+            return;
+        }
         mProxySubscriptionMgr.removeActiveSubscriptionsListener(this);
     }
 
