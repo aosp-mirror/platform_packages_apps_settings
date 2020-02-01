@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,7 +33,7 @@ public class VtQueryImsState extends ImsQueryController {
     /**
      * Constructor
      *
-     * @param context {@code Context}
+     * @param context {@link Context}
      * @param subId subscription's id
      */
     public VtQueryImsState(Context context, int subId) {
@@ -44,7 +45,7 @@ public class VtQueryImsState extends ImsQueryController {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsDirectQuery isEnabledByUser(int subId) {
+    ImsQuery isEnabledByUser(int subId) {
         return new ImsQueryVtUserSetting(subId);
     }
 
@@ -57,8 +58,14 @@ public class VtQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return ((!isSystemTtyEnabled(mContext).directQuery())
-                || (isTtyOnVolteEnabled(mSubId).directQuery()));
+        return ((!isTtyEnabled(mContext))
+                || (isTtyOnVolteEnabled(mSubId).query()));
+    }
+
+    @VisibleForTesting
+    boolean isTtyEnabled(Context context) {
+        final TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+        return (telecomManager.getCurrentTtyMode() != TelecomManager.TTY_MODE_OFF);
     }
 
     /**
@@ -70,6 +77,6 @@ public class VtQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).directQuery();
+        return isEnabledByUser(mSubId).query();
     }
 }

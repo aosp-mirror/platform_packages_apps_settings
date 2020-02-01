@@ -16,23 +16,17 @@
 
 package com.android.settings.network.ims;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
-
 
 /**
- * An interface for querying IMS, and return {@code Future<Boolean>}
+ * An interface for direct querying IMS, and return {@link boolean}
  */
 public interface ImsQuery {
 
     /**
-     * Interface for performing IMS status/configuration query through ExecutorService
+     * Interface for performing IMS status/configuration query through public APIs
      *
-     * @param executors {@code ExecutorService} which allows to submit {@code ImsQuery} when
-     * required
-     * @return result of query in format of {@code Future<Boolean>}
+     * @return result of query in boolean
      */
-    Future<Boolean> query(ExecutorService executors) throws RejectedExecutionException;
+    boolean query();
 
 }

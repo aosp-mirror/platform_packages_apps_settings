@@ -20,9 +20,9 @@ import android.telephony.ims.ImsMmTelManager;
 
 
 /**
- * An {@code ImsQuery} for accessing IMS tty on VoLte stat
+ * An {@link ImsQuery} for accessing IMS tty on VoLte stat
  */
-public class ImsQueryTtyOnVolteStat extends ImsDirectQueryImpl {
+public class ImsQueryTtyOnVolteStat implements ImsQuery {
 
     /**
      * Constructor
@@ -35,11 +35,11 @@ public class ImsQueryTtyOnVolteStat extends ImsDirectQueryImpl {
     private volatile int mSubId;
 
     /**
-     * Query running within a {@code Callable}
+     * Implementation of interface {@link ImsQuery#query()}
      *
      * @return result of query
      */
-    public Boolean call() {
+    public boolean query() {
         final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
         return imsMmTelManager.isTtyOverVolteEnabled();
     }

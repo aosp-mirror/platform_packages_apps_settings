@@ -48,9 +48,10 @@ public class FilteredCountryTimeZones {
         mCountryTimeZones = countryTimeZones;
         List<String> timeZoneIds = countryTimeZones.getTimeZoneMappings().stream()
                 .filter(timeZoneMapping ->
-                        timeZoneMapping.showInPicker && (timeZoneMapping.notUsedAfter == null
-                                || timeZoneMapping.notUsedAfter >= MIN_USE_DATE_OF_TIMEZONE))
-                .map(timeZoneMapping -> timeZoneMapping.timeZoneId)
+                        timeZoneMapping.isShownInPicker()
+                                && (timeZoneMapping.getNotUsedAfter() == null
+                                || timeZoneMapping.getNotUsedAfter() >= MIN_USE_DATE_OF_TIMEZONE))
+                .map(timeZoneMapping -> timeZoneMapping.getTimeZoneId())
                 .collect(Collectors.toList());
         mTimeZoneIds = Collections.unmodifiableList(timeZoneIds);
     }

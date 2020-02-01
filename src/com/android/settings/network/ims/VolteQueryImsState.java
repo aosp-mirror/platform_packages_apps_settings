@@ -17,7 +17,10 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
 import com.android.settings.network.SubscriptionUtil;
@@ -34,7 +37,7 @@ public class VolteQueryImsState extends ImsQueryController {
     /**
      * Constructor
      *
-     * @param context {@code Context}
+     * @param context {@link Context}
      * @param subId subscription's id
      */
     public VolteQueryImsState(Context context, int subId) {
@@ -52,8 +55,14 @@ public class VolteQueryImsState extends ImsQueryController {
             return false;
         }
 
-        return ((!isSystemTtyEnabled(mContext).directQuery())
-                || (isTtyOnVolteEnabled(mSubId).directQuery()));
+        return ((!isTtyEnabled(mContext))
+                || (isTtyOnVolteEnabled(mSubId).query()));
+    }
+
+    @VisibleForTesting
+    boolean isTtyEnabled(Context context) {
+        final TelecomManager telecomManager = context.getSystemService(TelecomManager.class);
+        return (telecomManager.getCurrentTtyMode() != TelecomManager.TTY_MODE_OFF);
     }
 
     /**
