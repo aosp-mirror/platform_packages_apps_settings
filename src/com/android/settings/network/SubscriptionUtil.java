@@ -27,7 +27,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -159,9 +158,7 @@ public class SubscriptionUtil {
             // verify if subscription is inserted within slot
             for (UiccSlotInfo slotInfo : slotsInfo) {
                 if ((slotInfo != null) && (!slotInfo.getIsEuicc())
-                        && (slotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT)
-                        && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())
-                        && TextUtils.equals(slotInfo.getCardId(), subInfo.getCardString())) {
+                        && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())) {
                     return true;
                 }
             }

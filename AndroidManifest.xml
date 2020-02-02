@@ -3159,8 +3159,7 @@
                   android:theme="@style/Theme.Panel"
                   android:launchMode="singleInstance"
                   android:excludeFromRecents="true"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:permission="android.permission.CHANGE_WIFI_STATE">
+                  android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.settings.WIFI_ADD_NETWORKS" />
                 <category android:name="android.intent.category.DEFAULT" />
