@@ -17,6 +17,7 @@
 
 package com.android.settings.media;
 
+import static android.app.slice.Slice.EXTRA_RANGE_VALUE;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
@@ -144,6 +145,7 @@ public class MediaOutputSliceTest {
         final MediaDevice device = mock(MediaDevice.class);
         when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
         when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
         when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
 
         final Slice mediaSlice = mMediaOutputSlice.getSlice();
@@ -187,5 +189,24 @@ public class MediaOutputSliceTest {
         mMediaOutputSlice.onNotifyChange(intent);
 
         verify(mLocalMediaManager, never()).connectDevice(device);
+    }
+
+    @Test
+    public void onNotifyChange_adjustVolume() {
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        when(mLocalMediaManager.getMediaDeviceById(mDevices, TEST_DEVICE_1_ID)).thenReturn(device);
+        mDevices.add(device);
+
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Intent intent = new Intent();
+        intent.putExtra("media_device_id", TEST_DEVICE_1_ID);
+        intent.putExtra(EXTRA_RANGE_VALUE, 30);
+
+        mMediaOutputSlice.onNotifyChange(intent);
+
+        verify(device).requestSetVolume(30);
     }
 }
