@@ -76,4 +76,14 @@ public class DefaultPaymentSettingsPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isFalse();
     }
+
+    @Test
+    public void getAvailabilityStatus_NfcIsDisabled_shouldReturnDisabled() {
+        when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        when(mNfcAdapter.isEnabled()).thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                DefaultPaymentSettingsPreferenceController.DISABLED_DEPENDENT_SETTING);
+    }
 }
