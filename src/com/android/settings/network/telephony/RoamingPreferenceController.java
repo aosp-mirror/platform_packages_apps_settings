@@ -22,7 +22,6 @@ import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -111,20 +110,10 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            if (isDialogNeeded()) {
-                showDialog();
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
     public boolean setChecked(boolean isChecked) {
-        if (!isDialogNeeded()) {
+        if (isDialogNeeded()) {
+            showDialog();
+        } else {
             // Update data directly if we don't need dialog
             mTelephonyManager.setDataRoamingEnabled(isChecked);
             return true;
