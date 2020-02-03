@@ -241,16 +241,17 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityGestureNavigationTutorial
-                        .showGestureNavigationTutorialDialog(getActivity());
+                        .showGestureNavigationTutorialDialog(getPrefContext());
             case DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL:
                 return AccessibilityGestureNavigationTutorial
-                        .showAccessibilityButtonTutorialDialog(getActivity());
+                        .showAccessibilityButtonTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getActivity().getText(
+                final CharSequence dialogTitle = getPrefContext().getText(
                         R.string.accessibility_shortcut_edit_dialog_title_magnification);
                 final AlertDialog dialog =
                         AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
-                                getActivity(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
+                                getPrefContext(), dialogTitle,
+                                this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
                 return dialog;
         }
@@ -425,7 +426,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
                 preferenceKey)) {
-            showDialog(AccessibilityUtil.isGestureNavigateEnabled(getContext())
+            showDialog(AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
                     ? DialogEnums.GESTURE_NAVIGATION_TUTORIAL
                     : DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL);
         }
@@ -457,11 +458,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
-            optInAllMagnificationValuesToSettings(getContext(), shortcutTypes);
+            optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
         } else {
-            optOutAllMagnificationValuesFromSettings(getContext(), shortcutTypes);
+            optOutAllMagnificationValuesFromSettings(getPrefContext(), shortcutTypes);
         }
     }
 
@@ -483,31 +484,19 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void initShortcutPreference() {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        mShortcutPreference = new ShortcutPreference(
-                preferenceScreen.getContext(), null);
+        mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
-        mShortcutPreference.setKey(getShortcutPreferenceKey());
+        mShortcutPreference.setKey(KEY_SHORTCUT_PREFERENCE);
         mShortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
     }
 
     private void updateShortcutPreference() {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        final ShortcutPreference shortcutPreference = preferenceScreen.findPreference(
-                getShortcutPreferenceKey());
-
-        if (shortcutPreference != null) {
-            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
-            shortcutPreference.setChecked(
-                    hasMagnificationValuesInSettings(getContext(), shortcutTypes));
-            shortcutPreference.setSummary(getShortcutTypeSummary(getContext()));
-        }
-    }
-
-    private String getShortcutPreferenceKey() {
-        return KEY_SHORTCUT_PREFERENCE;
+        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        mShortcutPreference.setChecked(
+                hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
+        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
     private void updateConfigurationWarningIfNeeded() {

@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -60,10 +59,17 @@ public class AccessibilityServiceWarning {
         return false;
     };
 
-    public static Dialog createCapabilitiesDialog(Activity parentActivity,
+    /**
+     * Gets a content View for a dialog to confirm that they want to enable a service.
+     *
+     * @param context A valid context
+     * @param info The info about a service
+     * @return A content view suitable for viewing
+     */
+    public static Dialog createCapabilitiesDialog(Context context,
             AccessibilityServiceInfo info, View.OnClickListener listener) {
-        final AlertDialog ad = new AlertDialog.Builder(parentActivity)
-                .setView(createEnableDialogContentView(parentActivity, info, listener))
+        final AlertDialog ad = new AlertDialog.Builder(context)
+                .setView(createEnableDialogContentView(context, info, listener))
                 .create();
 
         Window window = ad.getWindow();
@@ -77,7 +83,7 @@ public class AccessibilityServiceWarning {
     }
 
     /**
-     * Return whether the device is encrypted with legacy full disk encryption. Newer devices
+     * Returns whether the device is encrypted with legacy full disk encryption. Newer devices
      * should be using File Based Encryption.
      *
      * @return true if device is encrypted
@@ -86,13 +92,6 @@ public class AccessibilityServiceWarning {
         return StorageManager.isNonDefaultBlockEncrypted();
     }
 
-    /**
-     * Get a content View for a dialog to confirm that they want to enable a service.
-     *
-     * @param context A valid context
-     * @param info The info about a service
-     * @return A content view suitable for viewing
-     */
     private static View createEnableDialogContentView(Context context,
             AccessibilityServiceInfo info, View.OnClickListener listener) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(

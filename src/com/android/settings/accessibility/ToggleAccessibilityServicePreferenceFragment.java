@@ -23,7 +23,6 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -98,7 +97,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
-        AccessibilityUtils.setAccessibilityServiceState(getActivity(), toggledService, enabled);
+        AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
     // IMPORTANT: Refresh the info since there are dynamically changing
@@ -129,7 +128,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     return null;
                 }
                 mDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getActivity(), info,
+                        .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromToggleClicked);
                 break;
             }
@@ -139,17 +138,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                     return null;
                 }
                 mDialog = AccessibilityServiceWarning
-                        .createCapabilitiesDialog(getActivity(), info,
+                        .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutClicked);
                 break;
             }
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL: {
-                if (AccessibilityUtil.isGestureNavigateEnabled(getContext())) {
+                if (AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())) {
                     mDialog = AccessibilityGestureNavigationTutorial
-                            .showGestureNavigationTutorialDialog(getActivity());
+                            .showGestureNavigationTutorialDialog(getPrefContext());
                 } else {
                     mDialog = AccessibilityGestureNavigationTutorial
-                            .showAccessibilityButtonTutorialDialog(getActivity());
+                            .showAccessibilityButtonTutorialDialog(getPrefContext());
                 }
                 break;
             }
@@ -185,7 +184,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void updateSwitchBarToggleSwitch() {
-        final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getActivity())
+        final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
                 .contains(mComponentName);
         mSwitchBar.setCheckedInternal(checked);
     }
@@ -220,8 +219,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private boolean isServiceSupportAccessibilityButton() {
-        final AccessibilityManager ams = (AccessibilityManager) getContext().getSystemService(
-                Context.ACCESSIBILITY_SERVICE);
+        final AccessibilityManager ams = getPrefContext().getSystemService(
+                AccessibilityManager.class);
         final List<AccessibilityServiceInfo> services = ams.getInstalledAccessibilityServiceList();
 
         for (AccessibilityServiceInfo info : services) {
@@ -268,17 +267,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onCheckboxClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.getChecked()) {
             if (!getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)) {
                 preference.setChecked(false);
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
             } else {
-                AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes,
+                AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                         mComponentName);
             }
         } else {
-            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
+            AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
         }
@@ -370,8 +369,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
-        AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes, mComponentName);
+        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mDialog.dismiss();
     }
