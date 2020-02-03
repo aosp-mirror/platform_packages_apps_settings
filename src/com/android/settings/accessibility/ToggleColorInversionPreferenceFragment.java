@@ -31,10 +31,10 @@ import android.view.ViewGroup;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -66,22 +66,22 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+    protected void onRemoveSwitchPreferenceToggleSwitch() {
+        super.onRemoveSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_display_inversion_switch_title,
-                R.string.accessibility_display_inversion_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_display_inversion_switch_title);
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
         updateSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            boolean checked = ((SwitchPreference) preference).isChecked();
             onPreferenceToggled(mPreferenceKey, checked);
             return false;
         });
@@ -135,10 +135,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
-        if (mSwitchBar.isChecked() == checked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
             return;
         }
-        mSwitchBar.setCheckedInternal(checked);
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -34,10 +34,10 @@ import android.view.ViewGroup;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -51,6 +51,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String CATEGORY_FOOTER_KEY = "daltonizer_footer_category";
+    private static final String CATEGORY_MODE_KEY = "daltonizer_mode_category";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
@@ -98,6 +99,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         super.onViewCreated(view, savedInstanceState);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
+
+        final PreferenceCategory modeCategory = preferenceScreen.findPreference(
+                CATEGORY_MODE_KEY);
+        modeCategory.setOrder(Integer.MAX_VALUE - 1);
+
         final PreferenceCategory footerCategory = preferenceScreen.findPreference(
                 CATEGORY_FOOTER_KEY);
         footerCategory.setOrder(Integer.MAX_VALUE);
@@ -148,22 +154,22 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+    protected void onRemoveSwitchPreferenceToggleSwitch() {
+        super.onRemoveSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_daltonizer_master_switch_title,
-                R.string.accessibility_daltonizer_master_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_daltonizer_master_switch_title);
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
         updateSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            boolean checked = ((SwitchPreference) preference).isChecked();
             onPreferenceToggled(mPreferenceKey, checked);
             return false;
         });
@@ -177,10 +183,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
-        if (mSwitchBar.isChecked() == checked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
             return;
         }
-        mSwitchBar.setCheckedInternal(checked);
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

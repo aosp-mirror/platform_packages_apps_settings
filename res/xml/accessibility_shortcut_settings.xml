@@ -14,21 +14,22 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/accessibility_global_gesture_preference_title" >
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/accessibility_global_gesture_preference_title">
 
     <Preference
-            android:key="accessibility_shortcut_service"
-            android:title="@string/accessibility_shortcut_service_title"
-            android:fragment="com.android.settings.accessibility.ShortcutServicePickerFragment"/>
+        android:fragment="com.android.settings.accessibility.ShortcutServicePickerFragment"
+        android:key="accessibility_shortcut_service"
+        android:title="@string/accessibility_shortcut_service_title" />
 
     <SwitchPreference
-            android:key="accessibility_shortcut_on_lock_screen"
-            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"/>
+        android:key="accessibility_shortcut_on_lock_screen"
+        android:title="@string/accessibility_shortcut_service_on_lock_screen_title" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="accessibility_shortcut_footer"
-        android:title="@string/accessibility_shortcut_description"
         android:selectable="false"
-        settings:searchable="false"/>
+        android:title="@string/accessibility_shortcut_description"
+        settings:searchable="false" />
+
 </PreferenceScreen>

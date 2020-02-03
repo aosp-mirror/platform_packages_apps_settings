@@ -39,12 +39,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.List;
@@ -186,21 +187,21 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final String switchBarText = (info == null) ? "" :
                 getString(R.string.accessibility_service_master_switch_title,
                 info.getResolveInfo().loadLabel(getPackageManager()));
-        switchBar.setSwitchBarText(switchBarText, switchBarText);
+        switchPreference.setTitle(switchBarText);
     }
 
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
                 .contains(mComponentName);
-        if (mSwitchBar.isChecked() == checked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
             return;
         }
-        mSwitchBar.setCheckedInternal(checked);
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     /**
@@ -251,7 +252,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void handleConfirmServiceEnabled(boolean confirmed) {
-        mSwitchBar.setCheckedInternal(confirmed);
+        mToggleServiceDividerSwitchPreference.setChecked(confirmed);
         getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, confirmed);
         onPreferenceToggled(mPreferenceKey, confirmed);
     }
@@ -274,9 +275,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(this::onBeforeCheckedChanged);
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(this::onPreferenceClick);
     }
 
     @Override
@@ -410,9 +411,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mDialog.dismiss();
     }
 
-    private boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
+    private boolean onPreferenceClick(Preference preference) {
+        boolean checked = ((DividerSwitchPreference) preference).isChecked();
         if (checked) {
-            mSwitchBar.setCheckedInternal(false);
+            mToggleServiceDividerSwitchPreference.setChecked(false);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     /* disableService */ false);
             if (!mShortcutPreference.getChecked()) {
@@ -424,7 +426,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
             }
         } else {
-            mSwitchBar.setCheckedInternal(true);
+            mToggleServiceDividerSwitchPreference.setChecked(true);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     /* enableService */ true);
             showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
