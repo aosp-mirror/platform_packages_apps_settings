@@ -16,14 +16,18 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
+
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
 
@@ -43,7 +47,8 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)
+                ? PREF_KEY + DEDUP_POSTFIX : PREF_KEY;
     }
 
     @Override

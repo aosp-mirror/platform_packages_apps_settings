@@ -36,11 +36,13 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
@@ -452,8 +454,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !context.getResources().getBoolean(
-                            R.bool.config_show_all_in_one_tether_settings);
+                    return !FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
                 }
 
                 @Override
