@@ -114,7 +114,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
             PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
-                    getActivity());
+                    getPrefContext());
             setPreferenceScreen(preferenceScreen);
         }
     }
@@ -143,7 +143,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (mImageUri != null) {
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
-                    preferenceScreen.getContext());
+                    getPrefContext());
             animatedImagePreference.setImageUri(mImageUri);
             animatedImagePreference.setDividerAllowedAbove(true);
             preferenceScreen.addPreference(animatedImagePreference);
@@ -158,7 +158,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         // Show the "Settings" menu as if it were a preference screen.
         if (mSettingsTitle != null && mSettingsIntent != null) {
-            mSettingsPreference = new Preference(preferenceScreen.getContext());
+            mSettingsPreference = new Preference(getPrefContext());
             mSettingsPreference.setTitle(mSettingsTitle);
             mSettingsPreference.setIconSpaceReserved(true);
             mSettingsPreference.setIntent(mSettingsIntent);
@@ -177,7 +177,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
             if (mStaticDescription != null) {
                 final StaticTextPreference staticTextPreference = new StaticTextPreference(
-                        preferenceScreen.getContext());
+                        getPrefContext());
                 staticTextPreference.setSummary(mStaticDescription);
                 staticTextPreference.setSelectable(/* selectable= */ false);
                 footerCategory.addPreference(staticTextPreference);
@@ -189,7 +189,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 unsupportedTagList.add(ANCHOR_TAG);
 
                 final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
-                        preferenceScreen.getContext());
+                        getPrefContext());
                 htmlTextPreference.setSummary(mHtmlDescription);
                 htmlTextPreference.setImageGetter(mImageGetter);
                 htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
@@ -234,10 +234,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getActivity().getString(
+                final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_edit_dialog_title, mPackageName);
-                Dialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(getActivity(),
-                        dialogTitle, this::callOnAlertDialogCheckboxClicked);
+                Dialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                        getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
                 return dialog;
             default:
@@ -258,37 +258,35 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Denotes the dialog emuns for show dialog */
     @Retention(RetentionPolicy.SOURCE)
     protected @interface DialogEnums {
-        int UNKNOWN = 0;
-
         /** OPEN: Settings > Accessibility > Any toggle service > Shortcut > Settings. */
         int EDIT_SHORTCUT = 1;
 
         /** OPEN: Settings > Accessibility > Magnification > Shortcut > Settings. */
-        int MAGNIFICATION_EDIT_SHORTCUT = 2;
+        int MAGNIFICATION_EDIT_SHORTCUT = 1001;
 
         /**
          * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
          * navigation.
          */
-        int GESTURE_NAVIGATION_TUTORIAL = 1001;
+        int GESTURE_NAVIGATION_TUTORIAL = 1002;
 
         /**
          * OPEN: Settings > Accessibility > Magnification > Toggle user service in button
          * navigation.
          */
-        int ACCESSIBILITY_BUTTON_TUTORIAL = 1002;
+        int ACCESSIBILITY_BUTTON_TUTORIAL = 1003;
 
         /** OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service. */
-        int ENABLE_WARNING_FROM_TOGGLE = 1003;
+        int ENABLE_WARNING_FROM_TOGGLE = 1004;
 
         /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
-        int ENABLE_WARNING_FROM_SHORTCUT = 1004;
+        int ENABLE_WARNING_FROM_SHORTCUT = 1005;
 
         /**
          * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service > Show
          * launch tutorial.
          */
-        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1005;
+        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1006;
     }
 
     @Override
@@ -364,7 +362,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     private Drawable getDrawableFromUri(Uri imageUri) {
         if (mImageGetterCacheView == null) {
-            mImageGetterCacheView = new ImageView(getContext());
+            mImageGetterCacheView = new ImageView(getPrefContext());
         }
 
         mImageGetterCacheView.setAdjustViewBounds(true);
