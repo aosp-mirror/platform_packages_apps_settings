@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.tests.pref;
+package com.android.settings.tests.perf;
 
 import android.app.Instrumentation;
 import android.os.Bundle;
