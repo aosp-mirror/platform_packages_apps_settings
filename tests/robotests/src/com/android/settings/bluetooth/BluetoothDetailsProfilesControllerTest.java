@@ -115,18 +115,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         }
 
         @Override
-        public boolean connect(BluetoothDevice device) {
-            mConnectedDevices.add(device);
-            return true;
-        }
-
-        @Override
-        public boolean disconnect(BluetoothDevice device) {
-            mConnectedDevices.remove(device);
-            return false;
-        }
-
-        @Override
         public int getConnectionStatus(BluetoothDevice device) {
             if (mConnectedDevices.contains(device)) {
                 return BluetoothProfile.STATE_CONNECTED;
@@ -136,20 +124,21 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         }
 
         @Override
-        public boolean isPreferred(BluetoothDevice device) {
+        public boolean isEnabled(BluetoothDevice device) {
             return mPreferred.getOrDefault(device, false);
         }
 
         @Override
-        public int getPreferred(BluetoothDevice device) {
-            return isPreferred(device) ?
-                    BluetoothProfile.CONNECTION_POLICY_ALLOWED
+        public int getConnectionPolicy(BluetoothDevice device) {
+            return isEnabled(device)
+                    ? BluetoothProfile.CONNECTION_POLICY_ALLOWED
                     : BluetoothProfile.CONNECTION_POLICY_FORBIDDEN;
         }
 
         @Override
-        public void setPreferred(BluetoothDevice device, boolean preferred) {
-            mPreferred.put(device, preferred);
+        public boolean setEnabled(BluetoothDevice device, boolean enabled) {
+            mPreferred.put(device, enabled);
+            return true;
         }
 
         @Override
@@ -192,7 +181,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     private LocalBluetoothProfile addFakeProfile(int profileNameResId,
             boolean deviceIsPreferred) {
         LocalBluetoothProfile profile = new FakeBluetoothProfile(mContext, profileNameResId);
-        profile.setPreferred(mDevice, deviceIsPreferred);
+        profile.setEnabled(mDevice, deviceIsPreferred);
         mConnectableProfiles.add(profile);
         when(mProfileManager.getProfileByName(eq(profile.toString()))).thenReturn(profile);
         return profile;
@@ -266,7 +255,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         assertThat(pref.isChecked()).isTrue();
         pref.performClick();
         assertThat(pref.isChecked()).isFalse();
-        assertThat(mConnectableProfiles.get(0).isPreferred(mDevice)).isFalse();
+        assertThat(mConnectableProfiles.get(0).isEnabled(mDevice)).isFalse();
 
         // Make sure no new preferences were added.
         assertThat(mProfiles.getPreferenceCount()).isEqualTo(2);
@@ -274,7 +263,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         // Clicking the pref again should make the profile once again preferred.
         pref.performClick();
         assertThat(pref.isChecked()).isTrue();
-        assertThat(mConnectableProfiles.get(0).isPreferred(mDevice)).isTrue();
+        assertThat(mConnectableProfiles.get(0).isEnabled(mDevice)).isTrue();
 
         // Make sure we still haven't gotten any new preferences added.
         assertThat(mProfiles.getPreferenceCount()).isEqualTo(2);
@@ -364,7 +353,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
             mContext.getString(R.string.bluetooth_profile_a2dp_high_quality_unknown_codec));
         when(profile.supportsHighQualityAudio(mDevice)).thenReturn(supportsHighQualityAudio);
         when(profile.isHighQualityAudioEnabled(mDevice)).thenReturn(highQualityAudioEnabled);
-        when(profile.isPreferred(mDevice)).thenReturn(preferred);
+        when(profile.isEnabled(mDevice)).thenReturn(preferred);
         when(profile.isProfileReady()).thenReturn(true);
         mConnectableProfiles.add(profile);
         return profile;
@@ -426,8 +415,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         SwitchPreference audioPref =
             (SwitchPreference) mScreen.findPreference(audioProfile.toString());
         audioPref.performClick();
-        verify(audioProfile).setPreferred(mDevice, false);
-        when(audioProfile.isPreferred(mDevice)).thenReturn(false);
+        verify(audioProfile).setEnabled(mDevice, false);
+        when(audioProfile.isEnabled(mDevice)).thenReturn(false);
         mController.onDeviceAttributesChanged();
         assertThat(audioPref.isVisible()).isTrue();
         SwitchPreference highQualityAudioPref = getHighQualityAudioPref();
@@ -435,8 +424,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
         // And re-enabling media audio should make high quality switch to reappear.
         audioPref.performClick();
-        verify(audioProfile).setPreferred(mDevice, true);
-        when(audioProfile.isPreferred(mDevice)).thenReturn(true);
+        verify(audioProfile).setEnabled(mDevice, true);
+        when(audioProfile.isEnabled(mDevice)).thenReturn(true);
         mController.onDeviceAttributesChanged();
         highQualityAudioPref = getHighQualityAudioPref();
         assertThat(highQualityAudioPref.isVisible()).isTrue();
