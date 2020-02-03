@@ -23,6 +23,7 @@ import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -129,7 +130,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
-                                this::onDialogButtonFromToggleClicked);
+                                this::onDialogButtonFromEnableToggleClicked);
                 break;
             }
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT: {
@@ -140,6 +141,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 mDialog = AccessibilityServiceWarning
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutClicked);
+                break;
+            }
+            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE: {
+                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
+                mDialog = AccessibilityServiceWarning
+                        .createDisableDialog(getPrefContext(), info,
+                                this::onDialogButtonFromDisableToggleClicked);
                 break;
             }
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL: {
@@ -165,6 +176,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             case DialogEnums.ENABLE_WARNING_FROM_TOGGLE:
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
+            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 return AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
                         ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
@@ -203,7 +216,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ACTIVITY_REQUEST_CONFIRM_CREDENTIAL_FOR_WEAKER_ENCRYPTION) {
             if (resultCode == Activity.RESULT_OK) {
-                handleConfirmServiceEnabled(true);
+                handleConfirmServiceEnabled(/* confirmed= */ true);
                 // The user confirmed that they accept weaker encryption when
                 // enabling the accessibility service, so change encryption.
                 // Since we came here asynchronously, check encryption again.
@@ -213,7 +226,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                             Settings.Global.REQUIRE_PASSWORD_TO_DECRYPT, 0);
                 }
             } else {
-                handleConfirmServiceEnabled(false);
+                handleConfirmServiceEnabled(/* confirmed= */ false);
             }
         }
     }
@@ -323,17 +336,31 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 getPackageManager());
     }
 
-    private void onDialogButtonFromToggleClicked(View view) {
-        if (view.getId() == R.id.permission_enable_allow_button) {
-            onAllowButtonFromToggleClicked();
-        } else if (view.getId() == R.id.permission_enable_deny_button) {
-            onDenyButtonFromToggleClicked();
+    private void onDialogButtonFromDisableToggleClicked(DialogInterface dialog, int which) {
+        switch (which) {
+            case DialogInterface.BUTTON_POSITIVE:
+                handleConfirmServiceEnabled(/* confirmed= */ false);
+                break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                handleConfirmServiceEnabled(/* confirmed= */ true);
+                break;
+            default:
+                throw new IllegalArgumentException("Unexpected button identifier");
+        }
+    }
+
+    private void onDialogButtonFromEnableToggleClicked(View view) {
+        final int viewId = view.getId();
+        if (viewId == R.id.permission_enable_allow_button) {
+            onAllowButtonFromEnableToggleClicked();
+        } else if (viewId == R.id.permission_enable_deny_button) {
+            onDenyButtonFromEnableToggleClicked();
         } else {
             throw new IllegalArgumentException("Unexpected view id");
         }
     }
 
-    private void onAllowButtonFromToggleClicked() {
+    private void onAllowButtonFromEnableToggleClicked() {
         if (isFullDiskEncrypted()) {
             final String title = createConfirmCredentialReasonMessage();
             final Intent intent = ConfirmDeviceCredentialActivity.createIntent(title, /* details= */
@@ -351,15 +378,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mDialog.dismiss();
     }
 
-    private void onDenyButtonFromToggleClicked() {
+    private void onDenyButtonFromEnableToggleClicked() {
         handleConfirmServiceEnabled(/* confirmed= */ false);
         mDialog.dismiss();
     }
 
     void onDialogButtonFromShortcutClicked(View view) {
-        if (view.getId() == R.id.permission_enable_allow_button) {
+        final int viewId = view.getId();
+        if (viewId == R.id.permission_enable_allow_button) {
             onAllowButtonFromShortcutClicked();
-        } else if (view.getId() == R.id.permission_enable_deny_button) {
+        } else if (viewId == R.id.permission_enable_deny_button) {
             onDenyButtonFromShortcutClicked();
         } else {
             throw new IllegalArgumentException("Unexpected view id");
@@ -384,7 +412,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
         if (checked) {
             mSwitchBar.setCheckedInternal(false);
-            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
+            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
+                    /* disableService */ false);
             if (!mShortcutPreference.getChecked()) {
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
@@ -394,7 +423,10 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 }
             }
         } else {
-            handleConfirmServiceEnabled(/* confirmed= */ false);
+            mSwitchBar.setCheckedInternal(true);
+            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
+                    /* enableService */ true);
+            showDialog(DialogEnums.DISABLE_WARNING_FROM_TOGGLE);
         }
         return true;
     }

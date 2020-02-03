@@ -258,6 +258,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Denotes the dialog emuns for show dialog */
     @Retention(RetentionPolicy.SOURCE)
     protected @interface DialogEnums {
+
         /** OPEN: Settings > Accessibility > Any toggle service > Shortcut > Settings. */
         int EDIT_SHORTCUT = 1;
 
@@ -265,28 +266,38 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         int MAGNIFICATION_EDIT_SHORTCUT = 1001;
 
         /**
-         * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
-         * navigation.
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
+         * enable service.
          */
-        int GESTURE_NAVIGATION_TUTORIAL = 1002;
+        int ENABLE_WARNING_FROM_TOGGLE = 1002;
+
+
+        /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
+        int ENABLE_WARNING_FROM_SHORTCUT = 1003;
+
+        /**
+         * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle use service to
+         * disable service.
+         */
+        int DISABLE_WARNING_FROM_TOGGLE = 1004;
 
         /**
          * OPEN: Settings > Accessibility > Magnification > Toggle user service in button
          * navigation.
          */
-        int ACCESSIBILITY_BUTTON_TUTORIAL = 1003;
+        int ACCESSIBILITY_BUTTON_TUTORIAL = 1005;
 
-        /** OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service. */
-        int ENABLE_WARNING_FROM_TOGGLE = 1004;
-
-        /** OPEN: Settings > Accessibility > Downloaded toggle service > Shortcut checkbox. */
-        int ENABLE_WARNING_FROM_SHORTCUT = 1005;
+        /**
+         * OPEN: Settings > Accessibility > Magnification > Toggle user service in gesture
+         * navigation.
+         */
+        int GESTURE_NAVIGATION_TUTORIAL = 1006;
 
         /**
          * OPEN: Settings > Accessibility > Downloaded toggle service > Toggle user service > Show
          * launch tutorial.
          */
-        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1006;
+        int LAUNCH_ACCESSIBILITY_TUTORIAL = 1007;
     }
 
     @Override

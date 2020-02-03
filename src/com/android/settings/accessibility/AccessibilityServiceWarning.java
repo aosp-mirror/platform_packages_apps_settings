@@ -21,6 +21,7 @@ import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTE
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
@@ -59,13 +60,7 @@ public class AccessibilityServiceWarning {
         return false;
     };
 
-    /**
-     * Gets a content View for a dialog to confirm that they want to enable a service.
-     *
-     * @param context A valid context
-     * @param info The info about a service
-     * @return A content view suitable for viewing
-     */
+    /** Returns a {@link Dialog} to be shown to confirm that they want to enable a service. */
     public static Dialog createCapabilitiesDialog(Context context,
             AccessibilityServiceInfo info, View.OnClickListener listener) {
         final AlertDialog ad = new AlertDialog.Builder(context)
@@ -135,6 +130,23 @@ public class AccessibilityServiceWarning {
         permissionDenyButton.setOnClickListener(listener);
 
         return content;
+    }
+
+    /** Returns a {@link Dialog} to be shown to confirm that they want to disable a service. */
+    public static Dialog createDisableDialog(Context context,
+            AccessibilityServiceInfo info, DialogInterface.OnClickListener listener) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(context.getString(R.string.disable_service_title,
+                        info.getResolveInfo().loadLabel(context.getPackageManager())))
+                .setMessage(context.getString(R.string.disable_service_message,
+                        context.getString(R.string.accessibility_dialog_button_stop),
+                        getServiceName(context, info)))
+                .setCancelable(true)
+                .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
+                .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
+                .create();
+
+        return dialog;
     }
 
     // Get the service name and bidi wrap it to protect from bidi side effects.
