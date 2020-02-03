@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -59,7 +60,8 @@ public class AddAppNetworksFragmentTest {
     private static final String FAKE_NEW_SAVED_WPA_SSID = "\"fake_new_wpa_ssid\"";
     private static final String KEY_SSID = "key_ssid";
     private static final String KEY_SECURITY = "key_security";
-    private static final int SCANED_LEVEL = 4;
+    private static final int SCANED_LEVEL0 = 0;
+    private static final int SCANED_LEVEL4 = 4;
 
     private AddAppNetworksFragment mAddAppNetworksFragment;
     private List<WifiNetworkSuggestion> mFakedSpecifiedNetworksList;
@@ -76,6 +78,9 @@ public class AddAppNetworksFragmentTest {
     @Mock
     private WifiTracker mMockWifiTracker;
 
+    @Mock
+    private WifiManager mMockWifiManager;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -86,10 +91,13 @@ public class AddAppNetworksFragmentTest {
                 WifiConfiguration.KeyMgmt.NONE, null);
         mSavedWpaConfigurationEntry = generateRegularWifiConfiguration(FAKE_NEW_SAVED_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\"");
+        when(mMockWifiTracker.getManager()).thenReturn(mMockWifiManager);
+        when(mMockWifiManager.isWifiEnabled()).thenReturn(true);
+
         mAddAppNetworksFragment.mWifiTracker = mMockWifiTracker;
         WifiTrackerFactory.setTestingWifiTracker(mMockWifiTracker);
 
-        setUpOneScannedNetworkWithScanedLevel();
+        setUpOneScannedNetworkWithScanedLevel4();
     }
 
     @Test
@@ -208,6 +216,7 @@ public class AddAppNetworksFragmentTest {
     @Test
     public void withOneSuggestion_whenScanResultChanged_uiListShouldHaveNewLevel() {
         // Arrange
+        when(mAddAppNetworksFragment.mWifiTracker.getManager().isWifiEnabled()).thenReturn(true);
         // Setup a fake saved network list and assign to fragment.
         addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
         // Setup one specified networks and its results and assign to fragment.
@@ -221,16 +230,36 @@ public class AddAppNetworksFragmentTest {
 
         // Assert
         assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
-                SCANED_LEVEL);
+                SCANED_LEVEL4);
     }
 
-    private void setUpOneScannedNetworkWithScanedLevel() {
+    @Test
+    public void withOneSuggestion_whenScanResultChangedButWifiOff_uiListShouldHaveZeroLevel() {
+        // Arrange
+        when(mAddAppNetworksFragment.mWifiTracker.getManager().isWifiEnabled()).thenReturn(false);
+        // Setup a fake saved network list and assign to fragment.
+        addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
+        // Setup one specified networks and its results and assign to fragment.
+        addOneSpecifiedRegularNetworkSuggestion(mNewOpenSuggestionEntry);
+        mAddAppNetworksFragment.mAllSpecifiedNetworksList = mFakedSpecifiedNetworksList;
+        // Call filterSavedNetworks to generate necessary objects.
+        mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
+
+        // Act
+        mAddAppNetworksFragment.onAccessPointsChanged();
+
+        // Assert
+        assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
+                SCANED_LEVEL0);
+    }
+
+    private void setUpOneScannedNetworkWithScanedLevel4() {
         final ArrayList list = new ArrayList<>();
         list.add(mMockAccessPoint);
         when(mMockWifiTracker.getAccessPoints()).thenReturn(list);
         when(mMockAccessPoint.getSsidStr()).thenReturn(FAKE_NEW_OPEN_SSID);
         when(mMockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
-        when(mMockAccessPoint.getLevel()).thenReturn(SCANED_LEVEL);
+        when(mMockAccessPoint.getLevel()).thenReturn(SCANED_LEVEL4);
     }
 
     private void addOneSavedNetworkConfiguration(@NonNull WifiConfiguration wifiConfiguration) {
