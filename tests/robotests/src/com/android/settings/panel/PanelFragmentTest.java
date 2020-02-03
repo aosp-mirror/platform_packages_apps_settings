@@ -33,6 +33,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.graphics.drawable.IconCompat;
+
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
@@ -150,7 +152,8 @@ public class PanelFragmentTest {
 
     @Test
     public void supportIcon_displayIconHeaderLayout() {
-        mFakePanelContent.setIcon(R.drawable.ic_android);
+        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_android);
+        mFakePanelContent.setIcon(icon);
         mFakePanelContent.setSubTitle(SUBTITLE);
         final ActivityController<FakeSettingsPanelActivity> activityController =
                 Robolectric.buildActivity(FakeSettingsPanelActivity.class);
