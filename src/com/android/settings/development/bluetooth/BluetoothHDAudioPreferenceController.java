@@ -58,11 +58,11 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             mPreference.setEnabled(false);
             return;
         }
-        final boolean supported = (bluetoothA2dp.supportsOptionalCodecs(activeDevice)
+        final boolean supported = (bluetoothA2dp.isOptionalCodecsSupported(activeDevice)
                 == BluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mPreference.setEnabled(supported);
         if (supported) {
-            final boolean isEnabled = bluetoothA2dp.getOptionalCodecsEnabled(activeDevice)
+            final boolean isEnabled = bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
                     == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED;
             ((SwitchPreference) mPreference).setChecked(isEnabled);
         }

@@ -80,7 +80,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         }
         writeConfigurationValues(index);
         final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
-        bluetoothA2dp.setCodecConfigPreference(null, codecConfig);
+        bluetoothA2dp.setCodecConfigPreference(bluetoothA2dp.getActiveDevice(), codecConfig);
         mPreference.setSummary(((BaseBluetoothDialogPreference) mPreference).generateSummary(
                 index));
     }
@@ -146,7 +146,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return null;
         }
-        final BluetoothCodecStatus codecStatus = bluetoothA2dp.getCodecStatus(null);
+        final BluetoothCodecStatus codecStatus =
+                bluetoothA2dp.getCodecStatus(bluetoothA2dp.getActiveDevice());
         if (codecStatus == null) {
             Log.d(TAG, "Unable to get current codec config. Codec status is null");
             return null;
@@ -177,7 +178,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      * @return {@link BluetoothCodecConfig}.
      */
     protected BluetoothCodecConfig getSelectableByCodecType(int codecTypeValue) {
-        final BluetoothCodecConfig[] configs = getSelectableConfigs(null);
+        final BluetoothCodecConfig[] configs = getSelectableConfigs(
+            mBluetoothA2dp.getActiveDevice());
         if (configs == null) {
             Log.d(TAG, "Unable to get selectable config. Selectable configs is empty.");
             return null;
