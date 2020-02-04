@@ -286,7 +286,7 @@ public class SliceBuilderUtils {
         final PendingIntent actionIntent = getSliderAction(context, sliceData);
         final PendingIntent contentIntent = getContentPendingIntent(context, sliceData);
         final IconCompat icon = getSafeIcon(context, sliceData);
-        @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
+        @ColorInt int color = Utils.getColorAccentDefaultColor(context);
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         final SliceAction primaryAction = SliceAction.createDeeplink(contentIntent, icon,
                 ListBuilder.ICON_IMAGE, sliceData.getTitle());
@@ -299,17 +299,22 @@ public class SliceBuilderUtils {
         if (cur > sliderController.getMax()) {
             cur = sliderController.getMax();
         }
+        final InputRangeBuilder inputRangeBuilder = new InputRangeBuilder()
+                .setTitle(sliceData.getTitle())
+                .setSubtitle(subtitleText)
+                .setPrimaryAction(primaryAction)
+                .setMax(sliderController.getMax())
+                .setMin(sliderController.getMin())
+                .setValue(cur)
+                .setInputAction(actionIntent);
+        if (sliceData.getIconResource() != 0) {
+            inputRangeBuilder.setTitleItem(icon, ListBuilder.ICON_IMAGE);
+            color = CustomSliceable.COLOR_NOT_TINTED;
+        }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addInputRange(new InputRangeBuilder()
-                        .setTitle(sliceData.getTitle())
-                        .setSubtitle(subtitleText)
-                        .setPrimaryAction(primaryAction)
-                        .setMax(sliderController.getMax())
-                        .setMin(sliderController.getMin())
-                        .setValue(cur)
-                        .setInputAction(actionIntent))
+                .addInputRange(inputRangeBuilder)
                 .setKeywords(keywords)
                 .build();
     }
