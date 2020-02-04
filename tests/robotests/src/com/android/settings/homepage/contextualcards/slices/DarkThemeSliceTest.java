@@ -25,6 +25,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.UiModeManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -54,6 +55,8 @@ public class DarkThemeSliceTest {
     private BatteryManager mBatteryManager;
     @Mock
     private PowerManager mPowerManager;
+    @Mock
+    private UiModeManager mUiModeManager;
 
     private Context mContext;
     private DarkThemeSlice mDarkThemeSlice;
@@ -68,6 +71,7 @@ public class DarkThemeSliceTest {
         mFeatureFactory.slicesFeatureProvider.newUiSession();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
+        doReturn(mUiModeManager).when(mContext).getSystemService(UiModeManager.class);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -90,8 +94,25 @@ public class DarkThemeSliceTest {
     }
 
     @Test
+    public void isAvailable_nonDarkTheme_autoNightMode_returnFalse() {
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
+        setNightMode(UiModeManager.MODE_NIGHT_AUTO);
+
+        assertThat(mDarkThemeSlice.isAvailable(mContext)).isFalse();
+    }
+
+    @Test
+    public void isAvailable_nonDarkTheme_customNightMode_returnFalse() {
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
+        setNightMode(UiModeManager.MODE_NIGHT_CUSTOM);
+
+        assertThat(mDarkThemeSlice.isAvailable(mContext)).isFalse();
+    }
+
+    @Test
     public void isAvailable_nonDarkThemeBatteryCapacityEq100_returnFalse() {
         setBatteryCapacityLevel(100);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         assertThat(mDarkThemeSlice.isAvailable(mContext)).isFalse();
     }
@@ -99,6 +120,7 @@ public class DarkThemeSliceTest {
     @Test
     public void isAvailable_nonDarkThemeBatteryCapacityLt50_returnTrue() {
         setBatteryCapacityLevel(40);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         assertThat(mDarkThemeSlice.isAvailable(mContext)).isTrue();
     }
@@ -142,6 +164,7 @@ public class DarkThemeSliceTest {
                 mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
         mDarkThemeSlice.sKeepSliceShow = true;
         setBatteryCapacityLevel(40);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         assertThat(mDarkThemeSlice.getSlice()).isNotNull();
     }
@@ -162,6 +185,7 @@ public class DarkThemeSliceTest {
         mDarkThemeSlice.sSliceClicked = true;
 
         setBatteryCapacityLevel(40);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         assertThat(mDarkThemeSlice.getSlice()).isNotNull();
     }
@@ -169,6 +193,7 @@ public class DarkThemeSliceTest {
     @Test
     public void getSlice_isAvailable_returnSlice() {
         setBatteryCapacityLevel(40);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         assertThat(mDarkThemeSlice.getSlice()).isNotNull();
     }
@@ -176,6 +201,7 @@ public class DarkThemeSliceTest {
     @Test
     public void getSlice_isAvailable_showTitleSubtitle() {
         setBatteryCapacityLevel(40);
+        setNightMode(UiModeManager.MODE_NIGHT_NO);
 
         final Slice slice = mDarkThemeSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
@@ -190,5 +216,9 @@ public class DarkThemeSliceTest {
         doReturn(mBatteryManager).when(mContext).getSystemService(BatteryManager.class);
         when(mBatteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY))
                 .thenReturn(power_level);
+    }
+
+    private void setNightMode(int mode) {
+        when(mUiModeManager.getNightMode()).thenReturn(mode);
     }
 }

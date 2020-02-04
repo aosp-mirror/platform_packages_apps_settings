@@ -162,11 +162,10 @@ public class DarkThemeSlice implements CustomSliceable {
 
     @VisibleForTesting
     boolean isAvailable(Context context) {
-        // checking dark theme mode.
-        if (isDarkThemeMode(context)) {
+        // check if dark theme mode is enabled or if dark theme scheduling is on.
+        if (isDarkThemeMode(context) || isNightModeScheduled()) {
             return false;
         }
-
         // checking the current battery level
         final BatteryManager batteryManager = context.getSystemService(BatteryManager.class);
         final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
@@ -184,6 +183,18 @@ public class DarkThemeSlice implements CustomSliceable {
     private void resetValue(boolean preChecked, boolean clicked) {
         sPreChecked = preChecked;
         sSliceClicked = clicked;
+    }
+
+    private boolean isNightModeScheduled() {
+        final int mode = mUiModeManager.getNightMode();
+        if (DEBUG) {
+            Log.d(TAG, "night mode : " + mode);
+        }
+        // Turn on from sunset to sunrise or turn on at custom time
+        if (mode == UiModeManager.MODE_NIGHT_AUTO || mode == UiModeManager.MODE_NIGHT_CUSTOM) {
+            return true;
+        }
+        return false;
     }
 
     public static class DarkThemeWorker extends SliceBackgroundWorker<Void> {
