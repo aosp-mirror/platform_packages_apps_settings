@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.IpConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
@@ -389,6 +390,7 @@ public class WifiConfigControllerTest {
     private void checkSavedMacRandomizedValue(int macRandomizedValue) {
         when(mAccessPoint.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         mockWifiConfig.macRandomizationSetting = macRandomizedValue;
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
@@ -503,6 +505,7 @@ public class WifiConfigControllerTest {
         when(mAccessPoint.isSaved()).thenReturn(true);
         when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
         final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
         when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
         mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig ;

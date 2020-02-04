@@ -21,8 +21,6 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 
 import com.google.common.collect.ImmutableSet;
@@ -35,22 +33,18 @@ public class LegacyAccessibilityServicePreferenceFragment extends
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        final ShortcutPreference shortcutPreference = preferenceScreen.findPreference(
-                getShortcutPreferenceKey());
-        if (shortcutPreference != null) {
-            final CharSequence hardwareTitle = getPrefContext().getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_hardware);
-            shortcutPreference.setSummary(hardwareTitle);
-            shortcutPreference.setSettingsVisibility(View.GONE);
-        }
+        final CharSequence hardwareTitle = getPrefContext().getText(
+                R.string.accessibility_shortcut_edit_dialog_title_hardware);
+        mShortcutPreference.setSummary(hardwareTitle);
+        mShortcutPreference.setSettingsVisibility(View.GONE);
+
         // Only allowed hardware PreferredShortcutType in this fragment.
         setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
     }
 
     private void setAllowedPreferredShortcutType(int type) {
         final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                getComponentName().flattenToString(), type);
+                mComponentName.flattenToString(), type);
 
         SharedPreferenceUtils.setUserShortcutType(getPrefContext(),
                 ImmutableSet.of(shortcut.flattenToString()));

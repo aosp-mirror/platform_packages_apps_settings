@@ -272,7 +272,7 @@ public class WifiUtils {
             return CONNECT_TYPE_OPEN_NETWORK;
         } else if (accessPoint.isSaved() && config != null
                 && config.getNetworkSelectionStatus() != null
-                && config.getNetworkSelectionStatus().getHasEverConnected()) {
+                && config.getNetworkSelectionStatus().hasEverConnected()) {
             return CONNECT_TYPE_SAVED_NETWORK;
         } else if (accessPoint.isPasspoint()) {
             // Access point provided by an installed Passpoint provider, connect using

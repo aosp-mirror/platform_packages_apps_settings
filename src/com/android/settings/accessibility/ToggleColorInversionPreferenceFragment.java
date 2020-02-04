@@ -18,61 +18,38 @@ package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
 
-import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
-import android.widget.CheckBox;
 import android.widget.Switch;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.State;
-import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Settings page for color inversion. */
 @SearchIndexable
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, ShortcutPreference.OnClickListener {
+        implements SwitchBar.OnSwitchChangeListener {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private static final String PREVIEW_PREFERENCE_KEY = "color_inversion_preview";
     private static final String CATEGORY_FOOTER_KEY = "color_inversion_footer_category";
-    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
-    private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private final Handler mHandler = new Handler();
-    private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private SettingsContentObserver mSettingsContentObserver;
-    private int mUserShortcutType = UserShortcutType.DEFAULT;
-    // Used to restore the edit dialog status.
-    private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
-    private CheckBox mSoftwareTypeCheckBox;
-    private CheckBox mHardwareTypeCheckBox;
 
     @Override
     public int getMetricsCategory() {
@@ -102,13 +79,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void updateFooterTitle(PreferenceCategory category) {
-        final String titleText = getString(R.string.accessibility_footer_title,
-                getString(R.string.accessibility_display_inversion_preference_title));
-        category.setTitle(titleText);
-    }
-
-    @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         Settings.Secure.putInt(getContentResolver(), ENABLED, isChecked ? State.ON : State.OFF);
     }
@@ -124,6 +94,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        mComponentName = COLOR_INVERSION_COMPONENT_NAME;
+        mPackageName = getString(R.string.accessibility_display_inversion_preference_title);
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -134,262 +106,35 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
                                 == State.ON);
             }
         };
-
-        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
-            removeDialog(DIALOG_ID_EDIT_SHORTCUT);
-            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-        };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // Restore the user shortcut type.
-        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_SHORTCUT_TYPE)) {
-            mUserShortcutTypeCache = savedInstanceState.getInt(EXTRA_SHORTCUT_TYPE,
-                    UserShortcutType.DEFAULT);
-        }
-        initShortcutPreference();
-
         super.onViewCreated(view, savedInstanceState);
 
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
         final PreferenceCategory footerCategory = preferenceScreen.findPreference(
                 CATEGORY_FOOTER_KEY);
-        updateFooterTitle(footerCategory);
         footerCategory.setOrder(Integer.MAX_VALUE);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutTypeCache);
-        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         mSettingsContentObserver.register(getContentResolver());
-        final AccessibilityManager am = getPrefContext().getSystemService(
-                AccessibilityManager.class);
-        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-
-        updateShortcutPreferenceData();
-        updateShortcutPreference();
     }
 
     @Override
     public void onPause() {
         mSettingsContentObserver.unregister(getContentResolver());
-        final AccessibilityManager am = getPrefContext().getSystemService(
-                AccessibilityManager.class);
-        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-
         super.onPause();
     }
 
     @Override
-    public Dialog onCreateDialog(int dialogId) {
-        if (dialogId == DIALOG_ID_EDIT_SHORTCUT) {
-            final CharSequence dialogTitle = getActivity().getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_daltonizer);
-            final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
-                    getActivity(),
-                    dialogTitle, this::callOnAlertDialogCheckboxClicked);
-            initializeDialogCheckBox(dialog);
-            return dialog;
-        }
-        throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
-    }
-
-    private void initializeDialogCheckBox(AlertDialog dialog) {
-        final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
-        mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
-        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
-        mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
-        updateAlertDialogCheckState();
-        updateAlertDialogEnableState();
-    }
-
-    private void updateAlertDialogCheckState() {
-        updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
-        updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
-    }
-
-    private void updateAlertDialogEnableState() {
-        if (!mSoftwareTypeCheckBox.isChecked()) {
-            mHardwareTypeCheckBox.setEnabled(false);
-        } else if (!mHardwareTypeCheckBox.isChecked()) {
-            mSoftwareTypeCheckBox.setEnabled(false);
-        } else {
-            mSoftwareTypeCheckBox.setEnabled(true);
-            mHardwareTypeCheckBox.setEnabled(true);
-        }
-    }
-
-    private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
-        checkBox.setChecked((mUserShortcutTypeCache & type) == type);
-        checkBox.setOnClickListener(v -> {
-            updateUserShortcutType(/* saveChanges= */ false);
-            updateAlertDialogEnableState();
-        });
-    }
-
-    private void updateUserShortcutType(boolean saveChanges) {
-        mUserShortcutTypeCache = UserShortcutType.DEFAULT;
-        if (mSoftwareTypeCheckBox.isChecked()) {
-            mUserShortcutTypeCache |= UserShortcutType.SOFTWARE;
-        }
-        if (mHardwareTypeCheckBox.isChecked()) {
-            mUserShortcutTypeCache |= UserShortcutType.HARDWARE;
-        }
-        if (saveChanges) {
-            mUserShortcutType = mUserShortcutTypeCache;
-            setUserShortcutType(getPrefContext(), mUserShortcutType);
-        }
-    }
-
-    private void setUserShortcutType(Context context, int type) {
-        Set<String> info = SharedPreferenceUtils.getUserShortcutType(context);
-        if (info.isEmpty()) {
-            info = new HashSet<>();
-        } else {
-            final Set<String> filtered = info.stream().filter(
-                    str -> str.contains(getComponentName().flattenToString())).collect(
-                    Collectors.toSet());
-            info.removeAll(filtered);
-        }
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                getComponentName().flattenToString(), type);
-        info.add(shortcut.flattenToString());
-        SharedPreferenceUtils.setUserShortcutType(context, info);
-    }
-
-    private String getShortcutTypeSummary(Context context) {
-        final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
-        if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_title_software_gesture;
-        }
-        final CharSequence softwareTitle = context.getText(resId);
-
-        List<CharSequence> list = new ArrayList<>();
-        if ((shortcutType & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
-            list.add(softwareTitle);
-        }
-        if ((shortcutType & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
-            final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_hardware);
-            list.add(hardwareTitle);
-        }
-
-        // Show software shortcut if first time to use.
-        if (list.isEmpty()) {
-            list.add(softwareTitle);
-        }
-        final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
-        return AccessibilityUtil.capitalize(joinStrings);
-    }
-
-    private int getUserShortcutType(Context context, @UserShortcutType int defaultValue) {
-        final Set<String> info = SharedPreferenceUtils.getUserShortcutType(context);
-        final String componentName = getComponentName().flattenToString();
-        final Set<String> filtered = info.stream().filter(
-                str -> str.contains(componentName)).collect(
-                Collectors.toSet());
-        if (filtered.isEmpty()) {
-            return defaultValue;
-        }
-
-        final String str = (String) filtered.toArray()[0];
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
-        return shortcut.getUserShortcutType();
-    }
-
-    private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        updateUserShortcutType(/* saveChanges= */ true);
-        if (mShortcutPreference.getChecked()) {
-            AccessibilityUtil.optInAllValuesToSettings(getContext(), mUserShortcutType,
-                    getComponentName());
-            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), ~mUserShortcutType,
-                    getComponentName());
-        }
-        mShortcutPreference.setSummary(
-                getShortcutTypeSummary(getPrefContext()));
-    }
-
-    @Override
-    public int getDialogMetricsCategory(int dialogId) {
-        if (dialogId == DIALOG_ID_EDIT_SHORTCUT) {
-            return SettingsEnums.DIALOG_COLOR_INVERSION_EDIT_SHORTCUT;
-        }
-        return 0;
-    }
-
-    private void updateShortcutPreferenceData() {
-        // Get the user shortcut type from settings provider.
-        mUserShortcutType = AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
-                getComponentName());
-        if (mUserShortcutType != UserShortcutType.DEFAULT) {
-            setUserShortcutType(getPrefContext(), mUserShortcutType);
-        } else {
-            //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
-            mUserShortcutType = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
-        }
-    }
-
-    private void initShortcutPreference() {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        mShortcutPreference = new ShortcutPreference(
-                preferenceScreen.getContext(), null);
-        final Preference previewPreference = findPreference(PREVIEW_PREFERENCE_KEY);
-        mShortcutPreference.setPersistent(false);
-        mShortcutPreference.setKey(getShortcutPreferenceKey());
-        mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
-        mShortcutPreference.setOnClickListener(this);
-    }
-
-    private void updateShortcutPreference() {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        final ShortcutPreference shortcutPreference = preferenceScreen.findPreference(
-                getShortcutPreferenceKey());
-
-        if (shortcutPreference != null) {
-            final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
-            shortcutPreference.setChecked(
-                    AccessibilityUtil.hasValuesInSettings(getContext(), shortcutTypes,
-                            getComponentName()));
-            shortcutPreference.setSummary(getShortcutTypeSummary(getContext()));
-        }
-    }
-
-    private String getShortcutPreferenceKey() {
-        return KEY_SHORTCUT_PREFERENCE;
-    }
-
-    private ComponentName getComponentName() {
-        return COLOR_INVERSION_COMPONENT_NAME;
-    }
-
-    @Override
-    public void onCheckboxClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getContext(), UserShortcutType.SOFTWARE);
-        if (preference.getChecked()) {
-            AccessibilityUtil.optInAllValuesToSettings(getContext(), shortcutTypes,
-                    getComponentName());
-        } else {
-            AccessibilityUtil.optOutAllValuesFromSettings(getContext(), shortcutTypes,
-                    getComponentName());
-        }
-    }
-
-    @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        mUserShortcutTypeCache = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        super.onSettingsClicked(preference);
         showDialog(DIALOG_ID_EDIT_SHORTCUT);
     }
 

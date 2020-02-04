@@ -36,12 +36,14 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.network.TetherEnabler;
@@ -72,19 +74,24 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         WifiTetherBasePreferenceController.OnTetherConfigUpdateListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
-    @VisibleForTesting
-    static final String KEY_TETHER_PREFS_SCREEN = "tether_prefs_screen";
-    @VisibleForTesting
-    static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
-    @VisibleForTesting
-    static final String KEY_WIFI_TETHER_NETWORK_PASSWORD = "wifi_tether_network_password";
-    @VisibleForTesting
-    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
-    @VisibleForTesting
-    static final String KEY_WIFI_TETHER_NETWORK_AP_BAND = "wifi_tether_network_ap_band";
+    // TODO(b/148622133): Should clean up the postfix once this fragment replaced TetherSettings.
+    public static final String DEDUP_POSTFIX = "_2";
 
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name" + DEDUP_POSTFIX;
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_PASSWORD =
+            "wifi_tether_network_password" + DEDUP_POSTFIX;
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off" + DEDUP_POSTFIX;
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_NETWORK_AP_BAND =
+            "wifi_tether_network_ap_band" + DEDUP_POSTFIX;
+    @VisibleForTesting
+    static final String KEY_WIFI_TETHER_SECURITY = "wifi_tether_security" + DEDUP_POSTFIX;
+
+    private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver" + DEDUP_POSTFIX;
     private static final String KEY_WIFI_TETHER_GROUP = "wifi_tether_settings_group";
-    private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver";
     private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
     private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
     private static final String TAG = "AllInOneTetherSettings";
@@ -394,20 +401,18 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                     final List<String> keys = super.getNonIndexableKeys(context);
 
                     if (!TetherUtil.isTetherAvailable(context)) {
-                        keys.add(KEY_TETHER_PREFS_SCREEN);
                         keys.add(KEY_WIFI_TETHER_NETWORK_NAME);
                         keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                         keys.add(KEY_WIFI_TETHER_AUTO_OFF);
                         keys.add(KEY_WIFI_TETHER_NETWORK_AP_BAND);
+                        keys.add(KEY_WIFI_TETHER_SECURITY);
                     }
-
                     return keys;
                 }
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return context.getResources().getBoolean(
-                            R.bool.config_show_all_in_one_tether_settings);
+                    return FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE);
                 }
 
                 @Override
