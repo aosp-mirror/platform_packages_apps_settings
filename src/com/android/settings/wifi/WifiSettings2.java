@@ -708,10 +708,10 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         boolean hasAvailableWifiEntries = false;
         mStatusMessagePreference.setVisible(false);
-        mConnectedWifiEntryPreferenceCategory.setVisible(true);
         mWifiEntryPreferenceCategory.setVisible(true);
 
         final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
+        mConnectedWifiEntryPreferenceCategory.setVisible(connectedEntry != null);
         if (connectedEntry != null) {
             final LongPressWifiEntryPreference connectedPref =
                     mConnectedWifiEntryPreferenceCategory.findPreference(connectedEntry.getKey());
