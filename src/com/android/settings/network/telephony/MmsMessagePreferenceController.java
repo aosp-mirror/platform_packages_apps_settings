@@ -97,7 +97,7 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return mSubscriptionManager.setAlwaysAllowMmsData(mSubId, isChecked);
+        return mTelephonyManager.setAlwaysAllowMmsData(isChecked);
     }
 
     @Override
