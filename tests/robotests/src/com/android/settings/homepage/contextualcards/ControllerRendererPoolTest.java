@@ -18,7 +18,13 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
+
 import android.content.Context;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.LifecycleOwner;
 
@@ -27,11 +33,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowSubscriptionManager;
+import org.robolectric.shadows.ShadowTelephonyManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class ControllerRendererPoolTest {
+    private static final int SUB_ID = 1;
 
     private static final int UNSUPPORTED_CARD_TYPE = -99999;
     private static final int UNSUPPORTED_VIEW_TYPE = -99999;
@@ -41,11 +53,26 @@ public class ControllerRendererPoolTest {
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
 
+    @Mock
+    private TelephonyManager mTelephonyMgr;
+
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
+
+        // SubscriptionManager and TelephonyManager for CellularDataConditionController
+        ShadowSubscriptionManager shadowSubscriptionMgr = shadowOf(
+                mContext.getSystemService(SubscriptionManager.class));
+        shadowSubscriptionMgr.setDefaultDataSubscriptionId(SUB_ID);
+
+        ShadowTelephonyManager shadowTelephonyMgr = Shadow.extract(
+                mContext.getSystemService(TelephonyManager.class));
+        shadowTelephonyMgr.setTelephonyManagerForSubscriptionId(SUB_ID, mTelephonyMgr);
+        when(mTelephonyMgr.createForSubscriptionId(anyInt())).thenReturn(mTelephonyMgr);
 
         mPool = new ControllerRendererPool();
     }
