@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Switch;
@@ -80,6 +81,11 @@ public class MasterSwitchPreference extends RestrictedPreference {
                         persistBoolean(mChecked);
                     }
                 }
+            });
+
+            // Consumes move events to ignore drag actions.
+            switchWidget.setOnTouchListener((v, event) -> {
+                return event.getActionMasked() == MotionEvent.ACTION_MOVE;
             });
         }
 
