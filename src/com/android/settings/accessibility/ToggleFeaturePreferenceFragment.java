@@ -47,6 +47,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -75,7 +76,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected ComponentName mComponentName;
     protected CharSequence mPackageName;
     protected Uri mImageUri;
-    protected CharSequence mStaticDescription;
     protected CharSequence mHtmlDescription;
     private static final String ANCHOR_TAG = "a";
     private static final String DRAWABLE_FOLDER = "drawable";
@@ -141,7 +141,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
                     getPrefContext());
             animatedImagePreference.setImageUri(mImageUri);
-            animatedImagePreference.setDividerAllowedAbove(true);
+            animatedImagePreference.setSelectable(false);
             preferenceScreen.addPreference(animatedImagePreference);
         }
 
@@ -172,34 +172,24 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             groupCategory.addPreference(mSettingsPreference);
         }
 
-        if (mStaticDescription != null ||  mHtmlDescription != null) {
-            final PreferenceCategory footerCategory = new PreferenceCategory(getPrefContext());
-            final CharSequence title = getString(R.string.accessibility_footer_title, mPackageName);
-            footerCategory.setTitle(title);
-            preferenceScreen.addPreference(footerCategory);
+        if (mHtmlDescription != null) {
+            final PreferenceCategory introductionCategory = new PreferenceCategory(
+                    getPrefContext());
+            final CharSequence title = getString(R.string.accessibility_introduction_title,
+                    mPackageName);
+            introductionCategory.setTitle(title);
+            preferenceScreen.addPreference(introductionCategory);
 
-            if (mStaticDescription != null) {
-                final StaticTextPreference staticTextPreference = new StaticTextPreference(
-                        getPrefContext());
-                staticTextPreference.setSummary(mStaticDescription);
-                staticTextPreference.setSelectable(/* selectable= */ false);
-                footerCategory.addPreference(staticTextPreference);
-            }
+            // For accessibility service, avoid malicious links made by third party developer.
+            final List<String> unsupportedTagList = new ArrayList<>();
+            unsupportedTagList.add(ANCHOR_TAG);
 
-            if (mHtmlDescription != null) {
-                // For accessibility service, avoid malicious links made by third party developer.
-                final List<String> unsupportedTagList = new ArrayList<>();
-                unsupportedTagList.add(ANCHOR_TAG);
-
-                final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(
-                        getPrefContext());
-                htmlTextPreference.setSummary(mHtmlDescription);
-                htmlTextPreference.setImageGetter(mImageGetter);
-                htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
-                htmlTextPreference.setDividerAllowedAbove(true);
-                htmlTextPreference.setSelectable(/* selectable= */ false);
-                footerCategory.addPreference(htmlTextPreference);
-            }
+            final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
+            htmlTextPreference.setSummary(mHtmlDescription);
+            htmlTextPreference.setImageGetter(mImageGetter);
+            htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
+            htmlTextPreference.setSelectable(false);
+            introductionCategory.addPreference(htmlTextPreference);
         }
     }
 
@@ -362,11 +352,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         // Summary.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY_RES)) {
             final int summary = arguments.getInt(AccessibilitySettings.EXTRA_SUMMARY_RES);
-            mStaticDescription = getText(summary);
+            createFooterPreference(getText(summary));
         } else if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
-            mStaticDescription = summary;
+            createFooterPreference(summary);
         }
     }
 
@@ -634,5 +624,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         mUserShortcutTypeCache = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+    }
+
+    private void createFooterPreference(CharSequence title) {
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.addPreference(new FooterPreference.Builder(getActivity()).setTitle(
+                title).build());
     }
 }

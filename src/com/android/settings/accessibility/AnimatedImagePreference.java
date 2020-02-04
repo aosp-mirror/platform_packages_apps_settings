@@ -33,7 +33,6 @@ import com.android.settings.R;
  */
 public class AnimatedImagePreference extends Preference {
 
-    private boolean mDividerAllowedAbove = false;
     private Uri mImageUri;
 
     AnimatedImagePreference(Context context) {
@@ -44,7 +43,6 @@ public class AnimatedImagePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(mDividerAllowedAbove);
 
         final ImageView imageView = holder.itemView.findViewById(R.id.animated_img);
         if (imageView != null && mImageUri != null) {
@@ -56,18 +54,6 @@ public class AnimatedImagePreference extends Preference {
                     ((AnimatedImageDrawable) drawable).start();
                 }
             }
-        }
-    }
-
-    /**
-     * Sets divider whether to show in preference above.
-     *
-     * @param allowed true will be drawn on above this item
-     */
-    public void setDividerAllowedAbove(boolean allowed) {
-        if (allowed != mDividerAllowedAbove) {
-            mDividerAllowedAbove = allowed;
-            notifyChanged();
         }
     }
 
