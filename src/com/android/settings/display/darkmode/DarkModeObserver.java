@@ -49,12 +49,7 @@ public class DarkModeObserver {
                 super.onChange(selfChange, uri);
                 final String setting = uri == null ? null : uri.getLastPathSegment();
                 if (setting != null && mCallback != null) {
-                    switch (setting) {
-                        case Settings.Secure.UI_NIGHT_MODE:
-                            mCallback.run();
-                            break;
-                        default:
-                    }
+                    mCallback.run();
                 }
             }
         };
@@ -69,7 +64,16 @@ public class DarkModeObserver {
         callback.run();
         mCallback = callback;
         final Uri uri = Settings.Secure.getUriFor(Settings.Secure.UI_NIGHT_MODE);
-        mContext.getContentResolver().registerContentObserver(uri, false, mContentObserver);
+        final Uri customStart =
+                Settings.Secure.getUriFor(Settings.Secure.DARK_THEME_CUSTOM_START_TIME);
+        final Uri customEnd =
+                Settings.Secure.getUriFor(Settings.Secure.DARK_THEME_CUSTOM_END_TIME);
+        mContext.getContentResolver()
+                .registerContentObserver(uri, false, mContentObserver);
+        mContext.getContentResolver()
+                .registerContentObserver(customStart, false, mContentObserver);
+        mContext.getContentResolver()
+                .registerContentObserver(customEnd, false, mContentObserver);
         final IntentFilter batteryFilter = new IntentFilter();
         batteryFilter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
         mContext.registerReceiver(
