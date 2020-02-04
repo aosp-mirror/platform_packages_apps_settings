@@ -147,6 +147,17 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     /**
+     * Find the active MediaDevice.
+     *
+     * @param type the media device type.
+     * @return MediaDevice list
+     *
+     */
+    public List<MediaDevice> getActiveMediaDevice(@MediaDevice.MediaDeviceType int type) {
+        return mLocalMediaManager.getActiveMediaDevice(type);
+    }
+
+    /**
      * Request to set volume.
      *
      * @param device for the targeted device.
