@@ -38,6 +38,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -113,6 +114,7 @@ public class LocationForWorkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onLocationModeChanged_disabledByAdmin_shouldDisablePreference() {
         mController.displayPreference(mScreen);
         final EnforcedAdmin admin = mock(EnforcedAdmin.class);
@@ -126,6 +128,7 @@ public class LocationForWorkPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onLocationModeChanged_locationOff_shouldDisablePreference() {
         mController.displayPreference(mScreen);
         doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
