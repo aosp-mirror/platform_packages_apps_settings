@@ -17,18 +17,17 @@
 package com.android.settings.homepage.contextualcards.conditional;
 
 import android.app.settings.SettingsEnums;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.telephony.PhoneStateListener;
-import android.telephony.PreciseDataConnectionState;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.homepage.contextualcards.ContextualCard;
-import com.android.settings.network.GlobalSettingsChangeListener;
 
 import java.util.Objects;
 
@@ -36,35 +35,22 @@ public class CellularDataConditionController implements ConditionalCardControlle
 
     static final int ID = Objects.hash("CellularDataConditionController");
 
+    private static final IntentFilter DATA_CONNECTION_FILTER =
+            new IntentFilter(TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
+
     private final Context mAppContext;
     private final ConditionManager mConditionManager;
-    private final GlobalSettingsChangeListener mDefaultDataSubscriptionIdListener;
+    private final Receiver mReceiver;
+    private final TelephonyManager mTelephonyManager;
     private final ConnectivityManager mConnectivityManager;
-
-    private int mSubId;
-    private TelephonyManager mTelephonyManager;
-    private boolean mIsListeningConnectionChange;
 
     public CellularDataConditionController(Context appContext, ConditionManager conditionManager) {
         mAppContext = appContext;
         mConditionManager = conditionManager;
-        mSubId = getDefaultDataSubscriptionId(appContext);
-        mTelephonyManager = getTelephonyManager(appContext, mSubId);
-        mDefaultDataSubscriptionIdListener = new GlobalSettingsChangeListener(appContext,
-                android.provider.Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION) {
-            public void onChanged(String field) {
-                final int subId = getDefaultDataSubscriptionId(mAppContext);
-                if (subId == mSubId) {
-                    return;
-                }
-                mSubId = subId;
-                if (mIsListeningConnectionChange) {
-                    restartPhoneStateListener(mAppContext, subId);
-                }
-            }
-        };
+        mReceiver = new Receiver();
         mConnectivityManager = appContext.getSystemService(
                 ConnectivityManager.class);
+        mTelephonyManager = appContext.getSystemService(TelephonyManager.class);
     }
 
     @Override
@@ -109,50 +95,21 @@ public class CellularDataConditionController implements ConditionalCardControlle
 
     @Override
     public void startMonitoringStateChange() {
-        restartPhoneStateListener(mAppContext, mSubId);
+        mAppContext.registerReceiver(mReceiver, DATA_CONNECTION_FILTER);
     }
 
     @Override
     public void stopMonitoringStateChange() {
-        stopPhoneStateListener();
+        mAppContext.unregisterReceiver(mReceiver);
     }
 
-    private int getDefaultDataSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionManager =
-                context.getSystemService(SubscriptionManager.class);
-        return subscriptionManager.getDefaultDataSubscriptionId();
-    }
-
-    private TelephonyManager getTelephonyManager(Context context, int subId) {
-        final TelephonyManager telephonyManager =
-                context.getSystemService(TelephonyManager.class);
-        return telephonyManager.createForSubscriptionId(subId);
-    }
-
-    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
+    public class Receiver extends BroadcastReceiver {
         @Override
-        public void onPreciseDataConnectionStateChanged(
-                PreciseDataConnectionState dataConnectionState) {
-            mConditionManager.onConditionChanged();
+        public void onReceive(Context context, Intent intent) {
+            if (TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED.equals(
+                    intent.getAction())) {
+                mConditionManager.onConditionChanged();
+            }
         }
-    };
-
-    private void stopPhoneStateListener() {
-        mIsListeningConnectionChange = false;
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
-    }
-
-    // restart monitoring when subscription has been changed
-    private void restartPhoneStateListener(Context context, int subId) {
-        stopPhoneStateListener();
-        mIsListeningConnectionChange = true;
-
-        // switch mTelephonyManager only when subscription been updated to valid ones
-        if (SubscriptionManager.isValidSubscriptionId(subId)) {
-            mTelephonyManager = getTelephonyManager(context, subId);
-        }
-
-        mTelephonyManager.listen(mPhoneStateListener,
-                PhoneStateListener.LISTEN_PRECISE_DATA_CONNECTION_STATE);
     }
 }
