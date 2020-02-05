@@ -23,9 +23,6 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.MmTelFeature;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -33,9 +30,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.ims.ImsManager;
 import com.android.settings.network.MobileDataEnabledListener;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settings.network.ims.VtQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -54,8 +49,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     private Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
-    @VisibleForTesting
-    ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
     @VisibleForTesting
     Integer mCallState;
@@ -101,7 +94,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             return;
         }
         final SwitchPreference switchPreference = (SwitchPreference) preference;
-        final boolean videoCallEnabled = isVideoCallEnabled(mSubId, mImsManager);
+        final boolean videoCallEnabled = isVideoCallEnabled(mSubId);
         switchPreference.setVisible(videoCallEnabled);
         if (videoCallEnabled) {
             final boolean videoCallEditable = queryVoLteState(mSubId).isEnabledByUser()
@@ -138,53 +131,29 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
-        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
-            mImsManager = ImsManager.getInstance(mContext,
-                    SubscriptionUtil.getPhoneId(mContext, mSubId));
-        }
 
         return this;
     }
 
-    private boolean isVideoCallEnabled(int subId) {
-        final ImsManager imsManager = SubscriptionManager.isValidSubscriptionId(subId)
-                ? ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId))
-                : null;
-        return isVideoCallEnabled(subId, imsManager);
-    }
-
     @VisibleForTesting
-    ProvisioningManager getProvisioningManager(int subId) {
-        return ProvisioningManager.createForSubscriptionId(subId);
-    }
-
-    private boolean isVtProvisionedOnDevice(int subId) {
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return true;
+    boolean isVideoCallEnabled(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
         }
-        final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
-        if (provisioningMgr == null) {
-            return true;
-        }
-        return provisioningMgr.getProvisioningStatusForCapability(
-                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO,
-                ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
-    }
 
-    @VisibleForTesting
-    boolean isVideoCallEnabled(int subId, ImsManager imsManager) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
-        if (SubscriptionManager.isValidSubscriptionId(subId)) {
-            telephonyManager = telephonyManager.createForSubscriptionId(subId);
+        if (carrierConfig == null) {
+            return false;
         }
-        return carrierConfig != null && imsManager != null
-                && imsManager.isVtEnabledByPlatform()
-                && isVtProvisionedOnDevice(subId)
-                && MobileNetworkUtils.isImsServiceStateReady(imsManager)
-                && (carrierConfig.getBoolean(
+
+        if (!carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS)
-                || telephonyManager.isDataEnabled());
+                && (!mContext.getSystemService(TelephonyManager.class)
+                    .createForSubscriptionId(subId).isDataEnabled())) {
+            return false;
+        }
+
+        return queryImsState(subId).isReadyToVideoCall();
     }
 
     @Override

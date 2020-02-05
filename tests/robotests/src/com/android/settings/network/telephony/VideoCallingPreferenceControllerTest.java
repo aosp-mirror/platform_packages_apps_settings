@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -29,14 +28,13 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.ImsFeature;
-import android.telephony.ims.feature.MmTelFeature;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
+import com.android.settings.network.ims.MockVtQueryImsState;
 import com.android.settings.network.ims.VolteQueryImsState;
-import com.android.settings.network.ims.VtQueryImsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +59,7 @@ public class VideoCallingPreferenceControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
-    private VtQueryImsState mQueryImsState;
+    private MockVtQueryImsState mQueryImsState;
     private VolteQueryImsState mQueryVoLteState;
 
     private VideoCallingPreferenceController mController;
@@ -74,7 +72,6 @@ public class VideoCallingPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
         doReturn(mCarrierConfigManager).when(mContext)
                 .getSystemService(CarrierConfigManager.class);
@@ -85,29 +82,22 @@ public class VideoCallingPreferenceControllerTest {
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, true);
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
-        mQueryImsState = spy(new VtQueryImsState(mContext, SUB_ID));
+        mQueryImsState = spy(new MockVtQueryImsState(mContext, SUB_ID));
         doReturn(true).when(mQueryImsState).isEnabledByUser();
+        doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
 
         mQueryVoLteState = spy(new VolteQueryImsState(mContext, SUB_ID));
         doReturn(true).when(mQueryVoLteState).isEnabledByUser();
 
         mPreference = new SwitchPreference(mContext);
-        mController = spy(new VideoCallingPreferenceController(mContext, "wifi_calling") {
-            @Override
-            ProvisioningManager getProvisioningManager(int subId) {
-                return mProvisioningManager;
-            }
-        });
+        mController = spy(new VideoCallingPreferenceController(mContext, "wifi_calling"));
         mController.init(SUB_ID);
-        mController.mImsManager = mImsManager;
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         doReturn(mQueryVoLteState).when(mController).queryVoLteState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
 
         doReturn(true).when(mImsManager).isVtEnabledByPlatform();
-        doReturn(true).when(mProvisioningManager)
-                .getProvisioningStatusForCapability(
-                eq(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VIDEO), anyInt());
+        mQueryImsState.setIsProvisionedOnDevice(true);
         doReturn(ImsFeature.STATE_READY).when(mImsManager).getImsServiceState();
         doReturn(true).when(mTelephonyManager).isDataEnabled();
 
@@ -116,14 +106,15 @@ public class VideoCallingPreferenceControllerTest {
 
     @Test
     public void isVideoCallEnabled_allFlagsOn_returnTrue() {
-        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isTrue();
+        assertThat(mController.isVideoCallEnabled(SUB_ID)).isTrue();
     }
 
     @Test
     public void isVideoCallEnabled_disabledByPlatform_returnFalse() {
+        mQueryImsState.setIsProvisionedOnDevice(false);
         doReturn(false).when(mImsManager).isVtEnabledByPlatform();
 
-        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isFalse();
+        assertThat(mController.isVideoCallEnabled(SUB_ID)).isFalse();
     }
 
     @Test
@@ -132,7 +123,7 @@ public class VideoCallingPreferenceControllerTest {
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, false);
         doReturn(false).when(mTelephonyManager).isDataEnabled();
 
-        assertThat(mController.isVideoCallEnabled(SUB_ID, mImsManager)).isFalse();
+        assertThat(mController.isVideoCallEnabled(SUB_ID)).isFalse();
     }
 
     @Test

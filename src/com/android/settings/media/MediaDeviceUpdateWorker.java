@@ -146,6 +146,19 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mTopDevice;
     }
 
+    /**
+     * Request to set volume.
+     *
+     * @param device for the targeted device.
+     * @param volume for the new value.
+     *
+     */
+    public void adjustVolume(MediaDevice device, int volume) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            device.requestSetVolume(volume);
+        });
+    }
+
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

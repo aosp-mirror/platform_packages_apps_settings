@@ -688,6 +688,15 @@ public final class Utils extends com.android.settingslib.Utils {
         return um.getCredentialOwnerProfile(userId);
     }
 
+    /**
+     * Returns the credential type of the given user id.
+     */
+    public static @LockPatternUtils.CredentialType int getCredentialType(Context context,
+            int userId) {
+        final LockPatternUtils lpu = new LockPatternUtils(context);
+        return lpu.getCredentialTypeForUser(userId);
+    }
+
     private static final StringBuilder sBuilder = new StringBuilder(50);
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());

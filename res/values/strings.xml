@@ -2091,7 +2091,9 @@
          when signal of the Wi-Fi network is reachable [CHAR LIMIT=50]  -->
     <string name="wifi_auto_connect_title">Auto\u2011connect</string>
     <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
-    <string name="wifi_auto_connect_summary">Allow connection to this network when in range</string>
+    <string name="wifi_auto_connect_summary" product="default">Allow phone to automatically connect near this network</string>
+    <!-- Hint for Wi-Fi Auto-connect [CHAR LIMIT=NONE]  -->
+    <string name="wifi_auto_connect_summary" product="tablet">Allow tablet to automatically connect near this network</string>
     <!-- Label for "Use a QR code to add a device to this network" [CHAR LIMIT=50]  -->
     <string name="wifi_dpp_add_device">Add device</string>
     <!-- Hint for "Add device" [CHAR LIMIT=NONE]  -->
@@ -2352,7 +2354,7 @@
     <!-- Title for the panel of add Wi-Fi network from APP [CHAR LIMIT=50] -->
     <string name="wifi_add_app_single_network_title">Save this network?</string>
     <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
-    <string name="wifi_add_app_single_network_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> would like to save a network to your phone</string>
+    <string name="wifi_add_app_single_network_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your phone</string>
     <!-- Summary for saving status when saving single network [CHAR LIMIT=30] -->
     <string name="wifi_add_app_single_network_saving_summary">Saving\u2026</string>
     <!-- Summary for saved status when saving single network   [CHAR LIMIT=30] -->
@@ -2362,7 +2364,7 @@
     <!--  Title for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=50] -->
     <string name="wifi_add_app_networks_title">Save networks?</string>
     <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
-    <string name="wifi_add_app_networks_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> would like to save these networks to your phone</string>
+    <string name="wifi_add_app_networks_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your phone</string>
     <!-- Summary for the panel of add Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
     <string name="wifi_add_app_networks_saving_summary">Saving <xliff:g id="number" example="3">%d</xliff:g> networks\u2026</string>
     <!-- Summary for saved status when saving multiple networks   [CHAR LIMIT=NONE] -->
@@ -5530,13 +5532,9 @@
     <!-- Title for the smart battery toggle [CHAR LIMIT=NONE] -->
     <string name="smart_battery_title">Manage apps automatically</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_summary">Limit battery for apps that you don\u2019t use often</string>
+    <string name="smart_battery_summary" product="default">Limit battery for apps that you don\u2019t use often</string>
     <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="default">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="tablet">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="device">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
+    <string name="smart_battery_footer">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
@@ -5557,7 +5555,8 @@
     <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on">On / Detecting when apps drain battery</string>
+    <string name="battery_manager_on" product="default">On / Detecting when apps drain battery</string>
+
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
     <!-- Summary for battery manager, showing app restricted -->
@@ -7571,6 +7570,15 @@
 
     <!-- Sound: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
     <string name="vibrate_when_ringing_title">Vibrate for calls</string>
+
+    <!-- Sound: Option for vibrate when ringing setting: Never vibrate. [CHAR LIMIT=40] -->
+    <string name="vibrate_when_ringing_option_never_vibrate">Never vibrate</string>
+
+    <!-- Sound: Option for vibrate when ringing setting: Always vibrate. [CHAR LIMIT=40] -->
+    <string name="vibrate_when_ringing_option_always_vibrate">Always vibrate</string>
+
+    <!-- Sound: Option for vibrate when ringing setting: Ramping ringer. [CHAR LIMIT=80] -->
+    <string name="vibrate_when_ringing_option_ramping_ringer">Vibrate first then ring gradually</string>
 
     <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
     <string name="other_sound_settings">Other sounds</string>

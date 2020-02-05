@@ -28,14 +28,13 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class ListWithEntrySummaryPreferenceTest {
 
     private Context mContext;
@@ -55,6 +54,7 @@ public class ListWithEntrySummaryPreferenceTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContext.setTheme(R.style.Theme_Settings_Home);
+        ShadowLooper.pauseMainLooper();
         mPreference = new ListWithEntrySummaryPreference(mContext, null);
         mPreference.setEntries(mDefaultEntries);
         mPreference.setEntryValues(mDefaultEntryValues);
@@ -62,7 +62,7 @@ public class ListWithEntrySummaryPreferenceTest {
     }
 
     @Test
-    public void initialize_defaultEntries_shouldDisplayDefalutEntries() {
+    public void initialize_defaultEntries_shouldDisplayDefaultEntries() {
         AlertDialog dialog = showDialog(mPreference);
         ListAdapter adapter = dialog.getListView().getAdapter();
 

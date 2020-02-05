@@ -88,11 +88,12 @@
         settings:controller="com.android.settings.notification.NotificationVolumePreferenceController"/>
 
     <!-- Also vibrate for calls -->
-    <SwitchPreference
-        android:key="vibrate_when_ringing"
+    <Preference
+        android:fragment="com.android.settings.sound.VibrateForCallsPreferenceFragment"
+        android:key="vibrate_for_calls"
         android:title="@string/vibrate_when_ringing_title"
-        settings:controller="com.android.settings.notification.VibrateWhenRingPreferenceController"
-        android:order="-130"/>
+        android:order="-130"
+        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
