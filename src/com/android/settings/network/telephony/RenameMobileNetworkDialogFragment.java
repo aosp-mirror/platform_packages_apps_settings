@@ -48,8 +48,6 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.DeviceInfoUtils;
 
-import java.util.List;
-
 /**
  * A dialog allowing the display name of a mobile network subscription to be changed
  */
@@ -117,9 +115,9 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
                 .setPositiveButton(R.string.mobile_network_sim_name_rename, (dialog, which) -> {
                     mSubscriptionManager.setDisplayName(mNameView.getText().toString(), mSubId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    final Color color = (mColorSpinner == null) ? mColors[0]
-                            : mColors[mColorSpinner.getSelectedItemPosition()];
-                    mSubscriptionManager.setIconTint(color.getColor(), mSubId);
+                    mSubscriptionManager.setIconTint(
+                            mColors[mColorSpinner.getSelectedItemPosition()].getColor(),
+                            mSubId);
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         return builder.create();
@@ -128,17 +126,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     @VisibleForTesting
     protected void populateView(View view) {
         mNameView = view.findViewById(R.id.name_edittext);
-        SubscriptionInfo info = null;
-        final List<SubscriptionInfo> infoList = mSubscriptionManager
-                .getAvailableSubscriptionInfoList();
-        if (infoList != null) {
-            for (SubscriptionInfo subInfo : infoList) {
-                if (subInfo.getSubscriptionId() == mSubId) {
-                    info = subInfo;
-                    break;
-                }
-            }
-        }
+        final SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
         if (info == null) {
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
             return;
