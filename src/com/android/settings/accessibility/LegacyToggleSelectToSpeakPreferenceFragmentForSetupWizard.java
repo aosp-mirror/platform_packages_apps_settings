@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,9 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
-public class ToggleScreenReaderPreferenceFragmentForSetupWizard
-        extends ToggleAccessibilityServicePreferenceFragment {
+/** For accessibility services that target SDK <= Q in setup wizard. */
+public class LegacyToggleSelectToSpeakPreferenceFragmentForSetupWizard
+        extends LegacyAccessibilityServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
 
@@ -40,7 +41,8 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
-                    SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER, mToggleSwitch.isChecked());
+                    SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK,
+                    mToggleSwitch.isChecked());
         }
 
         super.onStop();
