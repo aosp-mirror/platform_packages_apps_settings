@@ -39,6 +39,12 @@
         android:summary="@string/bluetooth_tethering_subtext"
         settings:keywords="@string/keywords_hotspot_tethering" />
 
+    <SwitchPreference
+        android:key="enable_ethernet_tethering"
+        android:title="@string/ethernet_tether_checkbox_text"
+        android:summary="@string/ethernet_tethering_subtext"
+        settings:keywords="@string/keywords_hotspot_tethering" />
+
     <Preference
         android:key="disabled_on_data_saver"
         android:summary="@string/tether_settings_disabled_on_data_saver"
