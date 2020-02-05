@@ -232,12 +232,21 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
      * Add the {@link Preference} that represents the {@code cachedDevice}
      */
     protected void addPreference(CachedBluetoothDevice cachedDevice) {
+        addPreference(cachedDevice, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+    }
+
+    /**
+     * Add the {@link Preference} with {@link BluetoothDevicePreference.SortType} that
+     * represents the {@code cachedDevice}
+     */
+    protected void addPreference(CachedBluetoothDevice cachedDevice,
+            @BluetoothDevicePreference.SortType int type) {
         final BluetoothDevice device = cachedDevice.getDevice();
         if (!mPreferenceMap.containsKey(device)) {
             BluetoothDevicePreference btPreference =
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
                             true /* showDeviceWithoutNames */,
-                            BluetoothDevicePreference.SortType.TYPE_DEFAULT);
+                            type);
             btPreference.setKey(getPreferenceKey());
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
             if (this instanceof Preference.OnPreferenceClickListener) {
