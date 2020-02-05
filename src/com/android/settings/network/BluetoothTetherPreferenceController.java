@@ -33,34 +33,29 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
 /**
  * This controller helps to manage the switch state and visibility of bluetooth tether switch
  * preference. It stores preference value when preference changed.
- * TODO(b/147272749): Extend BasePreferenceController.java instead.
  */
-public final class BluetoothTetherPreferenceController extends AbstractPreferenceController
+public final class BluetoothTetherPreferenceController extends BasePreferenceController
         implements LifecycleObserver, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "BluetoothTetherPreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    public static final String PREF_KEY = "enable_bluetooth_tethering";
     private final ConnectivityManager mCm;
     private int mBluetoothState;
     private Preference mPreference;
     private final SharedPreferences mSharedPreferences;
 
-    public BluetoothTetherPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public BluetoothTetherPreferenceController(Context context, String prefKey) {
+        super(context, prefKey);
         mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mSharedPreferences =
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -76,18 +71,12 @@ public final class BluetoothTetherPreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public boolean isAvailable() {
-        final String[] bluetoothRegexs = mCm.getTetherableBluetoothRegexs();
-        return bluetoothRegexs != null && bluetoothRegexs.length > 0;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(mPreferenceKey);
         if (mPreference != null && mPreference instanceof SwitchPreference) {
             ((SwitchPreference) mPreference)
-                    .setChecked(mSharedPreferences.getBoolean(PREF_KEY, false));
+                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
         }
     }
 
@@ -110,8 +99,13 @@ public final class BluetoothTetherPreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
+    public int getAvailabilityStatus() {
+        final String[] bluetoothRegexs = mCm.getTetherableBluetoothRegexs();
+        if (bluetoothRegexs == null || bluetoothRegexs.length == 0) {
+            return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 
     @VisibleForTesting
@@ -133,7 +127,7 @@ public final class BluetoothTetherPreferenceController extends AbstractPreferenc
             Log.d(TAG, "preference changing to " + o);
         }
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(PREF_KEY, (Boolean) o);
+        editor.putBoolean(mPreferenceKey, (Boolean) o);
         editor.apply();
         return true;
     }
