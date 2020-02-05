@@ -39,9 +39,9 @@ abstract class ImsQueryController {
     /**
      * Constructor for query IMS status
      *
-     * @param capability {@code MmTelFeature.MmTelCapabilities.MmTelCapability}
-     * @param tech {@code @ImsRegistrationImplBase.ImsRegistrationTech}
-     * @param transportType {@code @AccessNetworkConstants.TransportType}
+     * @param capability {@link MmTelFeature.MmTelCapabilities#MmTelCapability}
+     * @param tech {@link ImsRegistrationImplBase#ImsRegistrationTech}
+     * @param transportType {@link AccessNetworkConstants#TransportType}
      */
     ImsQueryController(
             @MmTelFeature.MmTelCapabilities.MmTelCapability int capability,

@@ -21,10 +21,11 @@ import android.content.Context;
 import com.android.ims.ImsManager;
 
 
+
 /**
- * Controller class for mock VT status
+ * Controller class for mock VoLte status
  */
-public class MockVtQueryImsState extends VtQueryImsState {
+public class MockVolteQueryImsState extends VolteQueryImsState {
 
     private ImsQuery mIsTtyOnVolteEnabled;
     private ImsQuery mIsProvisionedOnDevice;
@@ -36,7 +37,7 @@ public class MockVtQueryImsState extends VtQueryImsState {
      * @param context {@link Context}
      * @param subId subscription's id
      */
-    public MockVtQueryImsState(Context context, int subId) {
+    public MockVolteQueryImsState(Context context, int subId) {
         super(context, subId);
     }
 
@@ -79,4 +80,5 @@ public class MockVtQueryImsState extends VtQueryImsState {
         }
         return super.isEnabledByUser(subId);
     }
+
 }
