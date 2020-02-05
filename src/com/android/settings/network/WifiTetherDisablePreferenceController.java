@@ -31,6 +31,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.TetherUtil;
 
 /**
  * This controller helps to manage the switch state and visibility of wifi tether disable switch
@@ -84,7 +85,8 @@ public final class WifiTetherDisablePreferenceController extends BasePreferenceC
     @Override
     public int getAvailabilityStatus() {
         final String[] wifiRegexs = mCm.getTetherableWifiRegexs();
-        if (wifiRegexs == null || wifiRegexs.length == 0 || !shouldShow()) {
+        if (wifiRegexs == null || wifiRegexs.length == 0 || !shouldShow()
+                || !TetherUtil.isTetherAvailable(mContext)) {
             return CONDITIONALLY_UNAVAILABLE;
         } else {
             return AVAILABLE;

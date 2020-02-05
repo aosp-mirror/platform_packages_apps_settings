@@ -16,9 +16,14 @@
 
 package com.android.settings;
 
+import static com.android.settings.network.TetherEnabler.BLUETOOTH_TETHER_KEY;
+import static com.android.settings.network.TetherEnabler.USB_TETHER_KEY;
+import static com.android.settings.network.TetherEnabler.WIFI_TETHER_DISABLE_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +36,7 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +46,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +55,8 @@ import java.util.List;
 @Config(shadows = {ShadowWifiManager.class})
 public class AllInOneTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
+    private static final String[] USB_REGEXS = {"usb_regexs"};
+    private static final String[] BT_REGEXS = {"bt_regexs"};
 
     private Context mContext;
     private AllInOneTetherSettings mAllInOneTetherSettings;
@@ -65,33 +74,54 @@ public class AllInOneTetherSettingsTest {
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
+        doReturn(USB_REGEXS).when(mConnectivityManager).getTetherableUsbRegexs();
+        doReturn(BT_REGEXS).when(mConnectivityManager).getTetherableBluetoothRegexs();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        // Assume the feature is enabled for most test cases.
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, true);
 
         mAllInOneTetherSettings = new AllInOneTetherSettings();
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mLifecycle", mock(Lifecycle.class));
     }
 
     @Test
-    public void getNonIndexableKeys_tetherAvailable_keysNotReturned() {
+    public void getNonIndexableKeys_tetherAvailable_featureEnabled_keysReturnedCorrectly() {
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
+
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, true);
+        final List<String> niks =
+                AllInOneTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+
+        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(niks).doesNotContain(
+                AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+        assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(niks).doesNotContain(BLUETOOTH_TETHER_KEY);
+        assertThat(niks).doesNotContain(USB_TETHER_KEY);
+
+        // This key should be returned because it's not visible by default.
+        assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
+    }
+
+    @Test
+    public void getNonIndexableKeys_tetherAvailable_featureDisabled_keysReturned() {
+        setupIsTetherAvailable(true);
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
 
         final List<String> niks =
                 AllInOneTetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)) {
-            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-            assertThat(niks).doesNotContain(
-                    AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
-            assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        } else {
-            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
-            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
-            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
-            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
-            assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
-        }
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_NAME);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_PASSWORD);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
+        assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
+        assertThat(niks).contains(BLUETOOTH_TETHER_KEY);
+        assertThat(niks).contains(USB_TETHER_KEY);
     }
 
     @Test
@@ -107,6 +137,9 @@ public class AllInOneTetherSettingsTest {
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_NETWORK_AP_BAND);
         assertThat(niks).contains(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
+        assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
+        assertThat(niks).doesNotContain(BLUETOOTH_TETHER_KEY);
+        assertThat(niks).doesNotContain(USB_TETHER_KEY);
     }
 
     @Test

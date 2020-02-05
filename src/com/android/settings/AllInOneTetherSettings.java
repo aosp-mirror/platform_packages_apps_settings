@@ -120,22 +120,23 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "updating display config due to receiving broadcast action " + action);
+                Log.d(TAG,
+                        "updating display config due to receiving broadcast action " + action);
             }
             updateDisplayWithNewConfig();
             if (TextUtils.equals(action, ACTION_TETHER_STATE_CHANGED)) {
-                if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    mTetherEnabler.startTethering(TETHERING_WIFI);
-                }
+                restartWifiTetherIfNeed(mWifiManager.getWifiApState());
             } else if (TextUtils.equals(action, WIFI_AP_STATE_CHANGED_ACTION)) {
-                int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
-                if (state == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    mTetherEnabler.startTethering(TETHERING_WIFI);
-                }
+                restartWifiTetherIfNeed(intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0));
+            }
+        }
+
+        private void restartWifiTetherIfNeed(int state) {
+            if (state == WifiManager.WIFI_AP_STATE_DISABLED
+                    && mWifiTetherChosen
+                    && mRestartWifiApAfterConfigChange) {
+                mRestartWifiApAfterConfigChange = false;
+                mTetherEnabler.startTethering(TETHERING_WIFI);
             }
         }
     };
@@ -418,7 +419,7 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /* AllTetherSettings */);
+                    return buildPreferenceControllers(context, null /*listener*/);
                 }
             };
 }
