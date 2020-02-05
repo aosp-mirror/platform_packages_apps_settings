@@ -40,6 +40,13 @@
     </Preference>
 
     <Preference
+        android:key="interact_across_profiles"
+        android:title="@string/interact_across_profiles_title"
+        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+        settings:keywords="@string/interact_across_profiles_keywords"
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
+
+    <Preference
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
@@ -145,13 +152,6 @@
             android:name="classname"
             android:value="com.android.settings.Settings$ChangeWifiStateActivity" />
     </Preference>
-
-    <Preference
-        android:key="interact_across_profiles"
-        android:title="@string/interact_across_profiles_title"
-        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
-        settings:keywords="@string/interact_across_profiles_keywords"
-        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController"/>
 
     <Preference
         android:key="special_access_more"

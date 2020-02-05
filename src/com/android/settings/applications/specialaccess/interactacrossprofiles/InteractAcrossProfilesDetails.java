@@ -22,13 +22,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.PermissionChecker;
 import android.content.pm.CrossProfileApps;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.IconDrawableFactory;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -51,6 +53,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private UserManager mUserManager;
     private SwitchPreference mSwitchPref;
     private LayoutPreference mHeader;
+    private PackageManager mPackageManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mContext = getContext();
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
         mUserManager = mContext.getSystemService(UserManager.class);
+        mPackageManager = mContext.getPackageManager();
 
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
         mSwitchPref = findPreference(INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH);
@@ -72,10 +76,17 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
         final UserHandle workProfile = getWorkProfile();
         final UserHandle personalProfile = mUserManager.getProfileParent(workProfile);
-        addAppIcons(personalProfile, workProfile);
+        addAppTitleAndIcons(personalProfile, workProfile);
     }
 
-    private void addAppIcons(UserHandle personalProfile, UserHandle workProfile) {
+    private void addAppTitleAndIcons(UserHandle personalProfile, UserHandle workProfile) {
+        final TextView title = mHeader.findViewById(R.id.entity_header_title);
+        if (title != null) {
+            final String appLabel = mPackageInfo.applicationInfo.loadLabel(
+                    mPackageManager).toString();
+            title.setText(appLabel);
+        }
+
         final ImageView personalIconView = mHeader.findViewById(R.id.entity_header_icon_personal);
         if (personalIconView != null) {
             personalIconView.setImageDrawable(IconDrawableFactory.newInstance(mContext)
@@ -114,27 +125,49 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return true;
         }
         if (!isInteractAcrossProfilesEnabled()) {
-            // TODO(b/148594054): Create a proper dialogue.
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.interact_across_profiles_consent_dialog_title)
-                    .setMessage(R.string.interact_across_profiles_consent_dialog_summary)
-                    .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            enableInteractAcrossProfiles(true);
-                            refreshUi();
-                        }
-                    })
-                    .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            refreshUi();
-                        }
-                    })
-                    .create().show();
-        } else {
-            enableInteractAcrossProfiles(false);
-            refreshUi();
+            showConsentDialog();
         }
         return true;
+    }
+
+    private void showConsentDialog() {
+        final String appLabel = mPackageInfo.applicationInfo.loadLabel(mPackageManager).toString();
+
+        final View dialogView = getLayoutInflater().inflate(
+                R.layout.interact_across_profiles_consent_dialog, null);
+
+        final TextView dialogTitle = dialogView.findViewById(
+                R.id.interact_across_profiles_consent_dialog_title);
+        dialogTitle.setText(
+                getString(R.string.interact_across_profiles_consent_dialog_title, appLabel));
+
+        final TextView dialogSummary = dialogView.findViewById(
+                R.id.interact_across_profiles_consent_dialog_summary);
+        dialogSummary.setText(
+                getString(R.string.interact_across_profiles_consent_dialog_summary, appLabel));
+
+        final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
+        appDataSummary.setText(getString(
+                R.string.interact_across_profiles_consent_dialog_app_data_summary, appLabel));
+
+        final TextView permissionsSummary = dialogView.findViewById(R.id.permissions_summary);
+        permissionsSummary.setText(getString(
+                R.string.interact_across_profiles_consent_dialog_permissions_summary, appLabel));
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(dialogView)
+                .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        enableInteractAcrossProfiles(true);
+                        refreshUi();
+                    }
+                })
+                .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        refreshUi();
+                    }
+                })
+                .create().show();
     }
 
     private boolean isInteractAcrossProfilesEnabled() {
@@ -142,7 +175,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 mContext, mPackageName, mPackageInfo.applicationInfo.uid);
     }
 
-    private static boolean isInteractAcrossProfilesEnabled(Context context, String packageName, int uid) {
+    static boolean isInteractAcrossProfilesEnabled(Context context, String packageName, int uid) {
         return PermissionChecker.PERMISSION_GRANTED
                 == PermissionChecker.checkPermissionForPreflight(
                         context,
@@ -178,13 +211,21 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return false;
         }
 
-        mSwitchPref.setChecked(isInteractAcrossProfilesEnabled());
         final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
-        if (horizontalArrowIcon != null) {
-            final Drawable icon = mSwitchPref.isChecked()
-                    ? mContext.getDrawable(R.drawable.ic_swap_horiz_blue)
-                    : mContext.getDrawable(R.drawable.ic_swap_horiz_grey);
-            horizontalArrowIcon.setImageDrawable(icon);
+        if (isInteractAcrossProfilesEnabled()) {
+            mSwitchPref.setChecked(true);
+            mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
+            if (horizontalArrowIcon != null) {
+                horizontalArrowIcon.setImageDrawable(
+                        mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
+            }
+        } else {
+            mSwitchPref.setChecked(false);
+            mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
+            if (horizontalArrowIcon != null) {
+                horizontalArrowIcon.setImageDrawable(
+                        mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
+            }
         }
         return true;
     }

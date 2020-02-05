@@ -637,4 +637,49 @@
         <item name="android:clipChildren">true</item>
     </style>
 
+    <style name="CrossProfileConsentDialogTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">google-sans-medium</item>
+        <item name="android:paddingTop">36dp</item>
+        <item name="android:paddingBottom">16dp</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">36dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogIcon">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:antialias">true</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogSubTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CrossProfileConsentDialogSubDescription">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:gravity">start</item>
+    </style>
 </resources>

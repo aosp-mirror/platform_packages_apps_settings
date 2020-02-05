@@ -8422,33 +8422,55 @@
 
     <!-- Special access > Title for managing the settings where users opt-in to connect a work app
     to its personal equivalent, allowing cross-profile communication. [CHAR LIMIT=50] -->
-    <string name="interact_across_profiles_title" translatable="false">Connected work and personal apps</string>
+    <string name="interact_across_profiles_title" translatable="false">Connected personal and work apps</string>
 
-    <!-- Special access > Connected work and personal apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <!-- Special access > Connected personal and work apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_empty_text" translatable="false">No connected apps</string>
 
-    <!-- Special access > Connected work and personal apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
+    <!-- Special access > Connected personal and work apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_keywords" translatable="false">cross profile connected app apps work and personal</string>
 
     <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected work and personal apps</string>
+    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected personal and work apps</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Switch title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_app_detail_switch" translatable="false">Connect these apps</string>
+    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_enabled" translatable="false">Connected</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <!-- Apps > App Details > Connected personal and work apps > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_switch_disabled" translatable="false">Connect these apps</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
 
-    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
 
-    <!-- TODO(b/148594054): Replace calendar with actual app name -->
-    <!-- Apps > App Details > Connected work and personal apps > Consent dialog title. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work Calendar with your personal data?</string>
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
 
-    <!-- TODO(b/148594054): Replace calendar with actual app name -->
-    <!-- Apps > App Details > Connected work and personal apps > Consent dialog description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">Calendar may expose your personal data to your IT admin</string>
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">%1$s may expose your personal data to your IT admin.</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_title" translatable="false">App data</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog App data description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" translatable="false">It can access data in your personal %1$s app.</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_title" translatable="false">Permissions</string>
+
+    <!-- Apps > App Details > Connected personal and work apps > Consent dialog Permissions description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" translatable="false">It can use your personal %1$s app\u2019s permissions, like access to location, storage, or contacts.</string>
+
+    <!-- Summary of preference to manage connected personal and work apps, informing the user that currently no apps are connected -->
+    <string name="interact_across_profiles_number_of_connected_apps_none" translatable="false">No apps connected</string>
+
+    <!-- Summary of preference to manage connected personal and work apps, informing the user how many apps are connected -->
+    <plurals name="interact_across_profiles_number_of_connected_apps" translatable="false">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
+    </plurals>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>

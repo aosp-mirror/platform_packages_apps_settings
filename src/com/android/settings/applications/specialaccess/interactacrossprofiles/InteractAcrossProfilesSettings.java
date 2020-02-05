@@ -73,7 +73,7 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
         screen.removeAll();
 
         final ArrayList<Pair<ApplicationInfo, UserHandle>> crossProfileApps =
-                collectConfigurableApps();
+                collectConfigurableApps(mPackageManager, mUserManager, mCrossProfileApps);
 
         final Context prefContext = getPrefContext();
         for (final Pair<ApplicationInfo, UserHandle> appData : crossProfileApps) {
@@ -124,21 +124,37 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
      * @return the list of applications for the personal profile in the calling user's profile group
      * that can configure interact across profiles.
      */
-    ArrayList<Pair<ApplicationInfo, UserHandle>> collectConfigurableApps() {
-        final UserHandle personalProfile = getPersonalProfileForCallingUser();
+    static ArrayList<Pair<ApplicationInfo, UserHandle>> collectConfigurableApps(
+            PackageManager packageManager, UserManager userManager,
+            CrossProfileApps crossProfileApps) {
+        final UserHandle personalProfile = getPersonalProfileForCallingUser(userManager);
         if (personalProfile == null) {
             return new ArrayList<>();
         }
 
-        final ArrayList<Pair<ApplicationInfo, UserHandle>> crossProfileApps = new ArrayList<>();
-        final List<PackageInfo> installedPackages = mPackageManager.getInstalledPackagesAsUser(
+        final ArrayList<Pair<ApplicationInfo, UserHandle>> apps = new ArrayList<>();
+        final List<PackageInfo> installedPackages = packageManager.getInstalledPackagesAsUser(
                 GET_ACTIVITIES, personalProfile.getIdentifier());
         for (PackageInfo packageInfo : installedPackages) {
-            if (mCrossProfileApps.canConfigureInteractAcrossProfiles(packageInfo.packageName)) {
-                crossProfileApps.add(new Pair<>(packageInfo.applicationInfo, personalProfile));
+            if (crossProfileApps.canConfigureInteractAcrossProfiles(packageInfo.packageName)) {
+                apps.add(new Pair<>(packageInfo.applicationInfo, personalProfile));
             }
         }
-        return crossProfileApps;
+        return apps;
+    }
+
+    /**
+     * @return the number of applications that can interact across profiles.
+     */
+    static int getNumberOfEnabledApps(
+            Context context, PackageManager packageManager, UserManager userManager,
+            CrossProfileApps crossProfileApps) {
+        final ArrayList<Pair<ApplicationInfo, UserHandle>> apps =
+                collectConfigurableApps(packageManager, userManager, crossProfileApps);
+        apps.removeIf(
+                app -> !InteractAcrossProfilesDetails.isInteractAcrossProfilesEnabled(
+                        context, app.first.packageName, app.first.uid));
+        return apps.size();
     }
 
     /**
@@ -146,12 +162,12 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
      * Returns null if user is not in a profile group.
      */
     @Nullable
-    private UserHandle getPersonalProfileForCallingUser() {
+    private static UserHandle getPersonalProfileForCallingUser(UserManager userManager) {
         final int callingUser = UserHandle.myUserId();
-        if (mUserManager.getProfiles(callingUser).isEmpty()) {
+        if (userManager.getProfiles(callingUser).isEmpty()) {
             return null;
         }
-        final UserInfo parentProfile = mUserManager.getProfileParent(callingUser);
+        final UserInfo parentProfile = userManager.getProfileParent(callingUser);
         return parentProfile == null
                 ? UserHandle.of(callingUser) : parentProfile.getUserHandle();
     }
