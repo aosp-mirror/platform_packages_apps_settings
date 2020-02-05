@@ -56,7 +56,7 @@ public class ZenModeCallsPreferenceController extends
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
             case Settings.Global.ZEN_MODE_ALARMS:
                 preference.setEnabled(false);
-                preference.setSummary(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+                preference.setSummary(mBackend.getAlarmsTotalSilencePeopleSummary(
                         NotificationManager.Policy.PRIORITY_CATEGORY_CALLS));
                 break;
             default:

@@ -16,8 +16,12 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OFF;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
+import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
 
 import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
@@ -147,25 +151,35 @@ public class ZenModeBackend {
         return SOURCE_NONE;
     }
 
+    protected int getPriorityConversationSenders() {
+        if (isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)) {
+            return mPolicy.priorityConversationSenders;
+        }
+        return CONVERSATION_SENDERS_NONE;
+    }
+
     protected void saveVisualEffectsPolicy(int category, boolean suppress) {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ZEN_SETTINGS_UPDATED, 1);
 
         int suppressedEffects = getNewSuppressedEffects(suppress, category);
         savePolicy(mPolicy.priorityCategories, mPolicy.priorityCallSenders,
-                mPolicy.priorityMessageSenders, suppressedEffects);
+                mPolicy.priorityMessageSenders, suppressedEffects,
+                mPolicy.priorityConversationSenders);
     }
 
     protected void saveSoundPolicy(int category, boolean allow) {
         int priorityCategories = getNewDefaultPriorityCategories(allow, category);
         savePolicy(priorityCategories, mPolicy.priorityCallSenders,
-                mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects);
+                mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects,
+                mPolicy.priorityConversationSenders);
     }
 
     protected void savePolicy(int priorityCategories, int priorityCallSenders,
-            int priorityMessageSenders, int suppressedVisualEffects) {
+            int priorityMessageSenders, int suppressedVisualEffects,
+            int priorityConversationSenders) {
         mPolicy = new NotificationManager.Policy(priorityCategories, priorityCallSenders,
-                priorityMessageSenders, suppressedVisualEffects);
+                priorityMessageSenders, suppressedVisualEffects, priorityConversationSenders);
         mNotificationManager.setNotificationPolicy(mPolicy);
     }
 
@@ -210,23 +224,21 @@ public class ZenModeBackend {
         }
 
         savePolicy(getNewDefaultPriorityCategories(allowSenders, category),
-            priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects);
+            priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects,
+                mPolicy.priorityConversationSenders);
 
         if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allow" +
                 stringCategory + "=" + allowSenders + " allow" + stringCategory + "From="
                 + ZenModeConfig.sourceToString(allowSendersFrom));
     }
 
-    protected String getSendersKey(int category) {
-        switch (getZenMode()) {
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-            case Settings.Global.ZEN_MODE_ALARMS:
-                return getKeyFromSetting(SOURCE_NONE);
-            default:
-                int prioritySenders = getPrioritySenders(category);
-                return getKeyFromSetting(isPriorityCategoryEnabled(category)
-                        ? prioritySenders : SOURCE_NONE);
-            }
+    protected void saveConversationSenders(int val) {
+        final boolean allowSenders = val != CONVERSATION_SENDERS_NONE;
+
+        savePolicy(getNewDefaultPriorityCategories(allowSenders, PRIORITY_CATEGORY_CONVERSATIONS),
+                mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                mPolicy.suppressedVisualEffects, val);
+
     }
 
     private int getPrioritySenders(int category) {
@@ -238,6 +250,10 @@ public class ZenModeBackend {
 
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
             return getPriorityMessageSenders();
+        }
+
+        if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
+            return getPriorityConversationSenders();
         }
 
         return categorySenders;
@@ -271,11 +287,13 @@ public class ZenModeBackend {
         }
     }
 
-    protected int getAlarmsTotalSilenceCallsMessagesSummary(int category) {
+    protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
             return R.string.zen_mode_from_none_messages;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
             return R.string.zen_mode_from_none_calls;
+        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
+            return R.string.zen_mode_from_no_conversations;
         }
         return R.string.zen_mode_from_none;
     }
@@ -306,6 +324,21 @@ public class ZenModeBackend {
                 } else {
                     return R.string.zen_mode_from_none_calls;
                 }
+        }
+    }
+
+    protected int getConversationSummary() {
+        int conversationType = getPriorityConversationSenders();
+
+        switch (conversationType) {
+            case NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE:
+                return R.string.zen_mode_from_all_conversations;
+            case NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT:
+                return R.string.zen_mode_from_important_conversations;
+            case NotificationManager.Policy.CONVERSATION_SENDERS_NONE:
+                return R.string.zen_mode_from_no_conversations;
+            default:
+                return R.string.zen_mode_from_no_conversations;
         }
     }
 
@@ -398,12 +431,21 @@ public class ZenModeBackend {
             messages = ZenPolicy.PEOPLE_TYPE_NONE;
         }
 
+        int conversations;
+        if (mPolicy.allowConversations()) {
+            // unlike the above, no mapping is needed because the values are the same
+            conversations = mPolicy.allowConversationsFrom();
+        } else {
+            conversations = CONVERSATION_SENDERS_NONE;
+        }
+
         return new ZenPolicy.Builder(zenPolicy)
                 .allowAlarms(mPolicy.allowAlarms())
                 .allowCalls(calls)
                 .allowEvents(mPolicy.allowEvents())
                 .allowMedia(mPolicy.allowMedia())
                 .allowMessages(messages)
+                .allowConversations(conversations)
                 .allowReminders(mPolicy.allowReminders())
                 .allowRepeatCallers(mPolicy.allowRepeatCallers())
                 .allowSystem(mPolicy.allowSystem())
