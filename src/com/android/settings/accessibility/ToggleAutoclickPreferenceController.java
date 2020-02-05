@@ -24,7 +24,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.provider.Settings;
 import android.util.ArrayMap;
-import android.view.accessibility.AccessibilityManager;
 
 import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
@@ -33,8 +32,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.Map;
@@ -43,23 +42,13 @@ import java.util.Map;
  * Controller class that controls accessibility autoclick settings.
  */
 public class ToggleAutoclickPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin,
-        Preference.OnPreferenceChangeListener {
-    // Min allowed autoclick delay value.
-    static final int MIN_AUTOCLICK_DELAY_MS = 200;
-
-    // Max allowed autoclick delay value.
-    static final int MAX_AUTOCLICK_DELAY_MS = 1000;
+        LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
 
     private static final String CONTROL_AUTOCLICK_DELAY_SECURE =
             Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;
-    private static final String KEY_AUTOCLICK_DELA = "autoclick_delay";
-    private static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
-    private static final String KEY_DELAY_MODE = "delay_mode";
+    private static final String KEY_AUTOCLICK_CUSTOM_SEEKBAR = "autoclick_custom_seekbar";
+    static final String KEY_DELAY_MODE = "delay_mode";
 
-    // Allowed autoclick delay values are discrete.
-    // This is the difference between two allowed values.
-    private static final int AUTOCLICK_DELAY_STEP = 100;
     private static final int AUTOCLICK_OFF_MODE = 0;
     private static final int AUTOCLICK_CUSTOM_MODE = 2000;
 
@@ -77,7 +66,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
      * number of possible discrete autoclick delay values. These will have to be converted to actual
      * delay values before saving them in settings.
      */
-    private SeekBarPreference mCustomDelayPref;
+    private LayoutPreference mSeekBerPreference;
     private int mCurrentUiAutoClickMode;
 
     public ToggleAutoclickPreferenceController(Context context, String preferenceKey) {
@@ -121,16 +110,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
         mDelayModePref = (RadioButtonPreference)
                 screen.findPreference(getPreferenceKey());
         mDelayModePref.setOnClickListener(this);
-
-        int delay = getSharedPreferenceForDelayValue();
-
-        // Initialize seek bar preference. Sets seek bar size to the number of possible delay
-        // values.
-        mCustomDelayPref = (SeekBarPreference) screen.findPreference(KEY_AUTOCLICK_DELA);
-        mCustomDelayPref.setMax(delayToSeekBarProgress(MAX_AUTOCLICK_DELAY_MS));
-        mCustomDelayPref.setProgress(delayToSeekBarProgress(delay));
-        mCustomDelayPref.setOnPreferenceChangeListener(this);
-
+        mSeekBerPreference = (LayoutPreference) screen.findPreference(KEY_AUTOCLICK_CUSTOM_SEEKBAR);
         updateState((Preference) mDelayModePref);
     }
 
@@ -150,14 +130,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     }
 
     private void updatePreferenceVisibleState(int mode) {
-        mCustomDelayPref.setVisible(mCurrentUiAutoClickMode == mode);
-    }
-
-    private void updateSeekBarProgressState() {
-        if (mCurrentUiAutoClickMode == AUTOCLICK_CUSTOM_MODE) {
-            int delay = getSharedPreferenceForDelayValue();
-            mCustomDelayPref.setProgress(delayToSeekBarProgress(delay));
-        }
+        mSeekBerPreference.setVisible(mCurrentUiAutoClickMode == mode);
     }
 
     @Override
@@ -169,20 +142,8 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
         // Reset RadioButton.
         mDelayModePref.setChecked(false);
         int mode = mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey());
-        updateSeekBarProgressState();
         updatePreferenceCheckedState(mode);
         updatePreferenceVisibleState(mode);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mCustomDelayPref && newValue instanceof Integer) {
-            putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, seekBarProgressToDelay((int) newValue));
-            mSharedPreferences.edit().putInt(KEY_CUSTOM_DELAY_VALUE,
-                    seekBarProgressToDelay((int) newValue)).apply();
-            return true;
-        }
-        return false;
     }
 
     /** Listener interface handles checked event. */
@@ -216,35 +177,14 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
         mSharedPreferences.edit().putInt(KEY_DELAY_MODE, preference).apply();
 
         if (preference == AUTOCLICK_CUSTOM_MODE) {
-            putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, getSharedPreferenceForDelayValue());
-        } else {
-            putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, preference);
+            return;
         }
-    }
 
-    /** Converts seek bar preference progress value to autoclick delay associated with it. */
-    private int seekBarProgressToDelay(int progress) {
-        return progress * AUTOCLICK_DELAY_STEP + MIN_AUTOCLICK_DELAY_MS;
-    }
-
-    /**
-     * Converts autoclick delay value to seek bar preference progress values that represents said
-     * delay.
-     */
-    private int delayToSeekBarProgress(int delay) {
-        return (delay - MIN_AUTOCLICK_DELAY_MS) / AUTOCLICK_DELAY_STEP;
+        putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, preference);
     }
 
     private void putSecureInt(String name, int value) {
         Settings.Secure.putInt(mContentResolver, name, value);
-    }
-
-    private int getSharedPreferenceForDelayValue() {
-        int mode = mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_OFF_MODE);
-        int delay = mSharedPreferences.getInt(KEY_CUSTOM_DELAY_VALUE,
-                AccessibilityManager.AUTOCLICK_DELAY_DEFAULT);
-
-        return mode == AUTOCLICK_CUSTOM_MODE ? delay : mode;
     }
 
     private int getSharedPreferenceForAutoClickMode() {

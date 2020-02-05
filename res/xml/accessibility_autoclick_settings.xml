@@ -44,13 +44,17 @@
         android:key="accessibility_control_autoclick_custom"
         android:title="@string/accessibility_autoclick_custom_title" />
 
-    <com.android.settings.widget.SeekBarPreference
-        android:key="autoclick_delay" />
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="autoclick_custom_seekbar"
+        android:layout="@layout/accessibility_autoclick_custom_seekbar"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController" />
 
     <com.android.settingslib.widget.FooterPreference
         android:key="autoclick_footer"
         android:title="@string/accessibility_autoclick_description"
         android:selectable="false"
-        settings:searchable="false"/>
+        settings:searchable="false" />
 
 </PreferenceScreen>

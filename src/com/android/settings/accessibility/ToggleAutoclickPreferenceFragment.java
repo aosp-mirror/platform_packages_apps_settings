@@ -16,8 +16,8 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MAX_AUTOCLICK_DELAY_MS;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MIN_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController.MAX_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController.MIN_AUTOCLICK_DELAY_MS;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
