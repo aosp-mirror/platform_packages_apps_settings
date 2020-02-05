@@ -35,7 +35,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.DeletedChannelsPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,42 +79,43 @@ public class DeletedChannelsPreferenceControllerTest {
     public void isAvailable_appScreen_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
     public void isAvailable_groupScreen_never() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null);
+        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
     public void isAvailable_channelScreen_never() {
         mController.onResume(
-                new NotificationBackend.AppRow(), mock(NotificationChannel.class), null, null);
+                new NotificationBackend.AppRow(), mock(NotificationChannel.class), null, null, null,
+                null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
     public void isAvailable_appScreen_notIfNoDeletedChannels() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(0);
-        mController.onResume(new NotificationBackend.AppRow(), null, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
     public void isAvailable_appScreen() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
-        mController.onResume(new NotificationBackend.AppRow(), null, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), null, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
     @Test
     public void updateState() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
-        mController.onResume(new NotificationBackend.AppRow(), null, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), null, null, null, null, null);
 
         Preference pref = mock(Preference.class);
         mController.updateState(pref);

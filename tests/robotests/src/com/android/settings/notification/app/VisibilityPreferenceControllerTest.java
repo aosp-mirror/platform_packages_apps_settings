@@ -48,7 +48,6 @@ import android.provider.Settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.VisibilityPreferenceController;
 import com.android.settings.testutils.shadow.ShadowRestrictionUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -122,7 +121,7 @@ public class VisibilityPreferenceControllerTest {
         when(mLockUtils.isSecure(anyInt())).thenReturn(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -130,7 +129,7 @@ public class VisibilityPreferenceControllerTest {
     public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_MIN);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -139,11 +138,11 @@ public class VisibilityPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
 
         channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -160,7 +159,7 @@ public class VisibilityPreferenceControllerTest {
 
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
@@ -182,7 +181,7 @@ public class VisibilityPreferenceControllerTest {
 
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
@@ -198,7 +197,7 @@ public class VisibilityPreferenceControllerTest {
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -223,7 +222,7 @@ public class VisibilityPreferenceControllerTest {
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -246,7 +245,7 @@ public class VisibilityPreferenceControllerTest {
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -263,7 +262,7 @@ public class VisibilityPreferenceControllerTest {
     public void testUpdateState_noGlobalRestriction() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -294,7 +293,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getLockscreenVisibility()).thenReturn(VISIBILITY_NO_OVERRIDE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -313,7 +312,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getLockscreenVisibility()).thenReturn(Notification.VISIBILITY_SECRET);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -332,7 +331,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", 4);
         channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
@@ -351,7 +350,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", 4);
         channel.setLockscreenVisibility(VISIBILITY_NO_OVERRIDE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);

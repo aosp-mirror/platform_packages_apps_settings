@@ -29,6 +29,14 @@
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc" />
 
+    <!-- Conversations added here -->
+    <PreferenceCategory
+        android:title="@string/conversations_category_title"
+        android:key="conversations"
+        android:visibility="gone"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false" />
+
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"

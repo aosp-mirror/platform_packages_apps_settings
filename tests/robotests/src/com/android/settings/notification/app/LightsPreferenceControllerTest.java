@@ -42,7 +42,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.LightsPreferenceController;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -108,7 +107,7 @@ public class LightsPreferenceControllerTest {
                 com.android.internal.R.bool.config_intrusiveNotificationLed, false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -117,7 +116,7 @@ public class LightsPreferenceControllerTest {
         Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -125,7 +124,7 @@ public class LightsPreferenceControllerTest {
     public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -134,7 +133,7 @@ public class LightsPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -142,7 +141,7 @@ public class LightsPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -151,7 +150,7 @@ public class LightsPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null,
-            mock(RestrictedLockUtils.EnforcedAdmin.class));
+                null, null, mock(RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -164,7 +163,7 @@ public class LightsPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -176,7 +175,7 @@ public class LightsPreferenceControllerTest {
     public void testUpdateState_lightsOn() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldShowLights()).thenReturn(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -187,7 +186,7 @@ public class LightsPreferenceControllerTest {
     public void testUpdateState_lightsOff() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldShowLights()).thenReturn(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -198,7 +197,7 @@ public class LightsPreferenceControllerTest {
     public void testOnPreferenceChange_on() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -215,7 +214,7 @@ public class LightsPreferenceControllerTest {
     public void testOnPreferenceChange_off() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(mContext);

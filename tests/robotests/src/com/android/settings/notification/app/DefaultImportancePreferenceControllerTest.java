@@ -20,12 +20,11 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_NONE;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -36,7 +35,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.os.Vibrator;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -56,21 +54,21 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-public class VibrationPreferenceControllerTest {
+public class DefaultImportancePreferenceControllerTest {
 
     private Context mContext;
     @Mock
-    private NotificationBackend mBackend;
-    @Mock
     private NotificationManager mNm;
     @Mock
-    private Vibrator mVibrator;
+    private NotificationBackend mBackend;
+    @Mock
+    private NotificationSettings.ImportanceListener mImportanceListener;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
 
-    private VibrationPreferenceController mController;
+    private DefaultImportancePreferenceController mController;
 
     @Before
     public void setUp() {
@@ -78,43 +76,46 @@ public class VibrationPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        shadowApplication.setSystemService(Context.VIBRATOR_SERVICE, mVibrator);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new VibrationPreferenceController(mContext, mBackend));
-
-        // by default allow vibration
-        when(mVibrator.hasVibrator()).thenReturn(true);
+        mController = spy(new DefaultImportancePreferenceController(
+                mContext, mImportanceListener, mBackend));
     }
 
     @Test
     public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
-        mController.updateState(mock(RestrictedSwitchPreference.class));
-        mController.onPreferenceChange(mock(RestrictedSwitchPreference.class), true);
+        mController.updateState(mock(Preference.class));
     }
 
     @Test
-    public void testIsAvailable_notSystemDoesNotHave() {
-        when(mVibrator.hasVibrator()).thenReturn(false);
+    public void testIsAvailable_notIfNull() {
+        mController.onResume(null, null, null, null, null, null);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_ifAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        appRow.banned = true;
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void testIsAvailable_notIfChannelBlocked() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void testIsAvailable_notIfNotImportant() {
+    public void testIsAvailable_notForDefaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null);
-        assertFalse(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_notIfDefaultChannel() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel =
-                new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
         mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
@@ -122,7 +123,8 @@ public class VibrationPreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        NotificationChannel channel = mock(NotificationChannel.class);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
         mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
@@ -130,97 +132,115 @@ public class VibrationPreferenceControllerTest {
     @Test
     public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn("something");
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_notBlockable() {
+    public void testUpdateState_notConfigurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
 
-        assertTrue(pref.isEnabled());
+        assertFalse(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_configurable() {
+    public void testUpdateState_systemButConfigurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn("something");
+        when(channel.isImportanceLockedByOEM()).thenReturn(false);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
 
         assertTrue(pref.isEnabled());
     }
 
     @Test
-    public void testUpdateState_vibrateOn() {
+    public void testUpdateState_defaultApp() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.shouldVibrate()).thenReturn(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
+        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
+        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
+        mController.onResume(appRow, channel, null, null, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
+
+        assertTrue(pref.isEnabled());
+    }
+
+    @Test
+    public void testUpdateState_default() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        mController.onResume(appRow, channel, null, null, null, null);
+
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
+        mController.updateState(pref);
+
         assertTrue(pref.isChecked());
     }
 
     @Test
-    public void testUpdateState_vibrateOff() {
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.shouldVibrate()).thenReturn(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
+    public void testUpdateState_low() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
+        mController.onResume(appRow, channel, null, null, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
+
         assertFalse(pref.isChecked());
     }
-
+    
     @Test
-    public void testOnPreferenceChange_on() {
-        NotificationChannel channel =
-                new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
-
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
-        mController.updateState(pref);
-
-        mController.onPreferenceChange(pref, true);
-
-        assertTrue(channel.shouldVibrate());
-        verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
-    }
-
-    @Test
-    public void testOnPreferenceChange_off() {
+    public void onPreferenceChange_onToOff() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);
 
         mController.onPreferenceChange(pref, false);
 
-        assertFalse(channel.shouldVibrate());
-        verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
+        assertEquals(IMPORTANCE_LOW, channel.getImportance());
+        verify(mImportanceListener, times(1)).onImportanceChanged();
+    }
+
+    @Test
+    public void onPreferenceChange_offToOn() {
+        NotificationChannel channel =
+                new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
+
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext, null);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
+        mController.displayPreference(mScreen);
+        mController.updateState(pref);
+
+        mController.onPreferenceChange(pref, true);
+
+        assertEquals(IMPORTANCE_DEFAULT, channel.getImportance());
+        verify(mImportanceListener, times(1)).onImportanceChanged();
     }
 }

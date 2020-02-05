@@ -8051,6 +8051,8 @@
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
     <string name="bubbles_app_toggle_title">Bubbles</string>
+    <!-- Summary for bubbles option on the conversation level screen -->
+    <string name="bubbles_conversation_toggle_summary">New messages will appear on screen</string>
     <!-- Description for the toggle shown on the app-level bubbles page  [CHAR LIMIT=NONE] -->
     <string name="bubbles_app_toggle_summary">Allow <xliff:g id="app_name" example="YouTube">%1$s</xliff:g> to show some notifications as bubbles</string>
     <!-- Title of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
@@ -8204,6 +8206,27 @@
 
     <!-- [CHAR LIMIT=100] Notification Importance template for the channel importance summary -->
     <string name="notification_importance_divider" translatable="false"><xliff:g id="importance_title">%1$s</xliff:g>: <xliff:g id="importance_summary">%2$s</xliff:g></string>
+
+    <!-- [CHAR LIMIT=100] Header for a grouping on conversations-->
+    <string name="conversations_category_title">Conversations</string>
+
+    <!-- [CHAR LIMIT=100] Header for an individual conversation-->
+    <string name="conversation_category_title">Conversation</string>
+
+    <!-- [CHAR LIMIT=NONE] Conversation preference summary, the parent channel this conversation was spawned from (separator) the parent channel group (e.g. an account name)-->
+    <string name="notification_conversation_summary" translatable="false">"<xliff:g id="parent_category_name">%1$s</xliff:g> • <xliff:g id="parent_category_group_name">%2$s</xliff:g>"</string>
+
+    <!-- [CHAR LIMIT=100] Field on conversation settings page -->
+    <string name="demote_conversation_title">Not a conversation</string>
+
+    <!-- [CHAR LIMIT=NONE] Summary for demote_conversation_title on conversation settings page -->
+    <string name="demote_conversation_summary">Remove from the conversation section</string>
+
+    <!-- [CHAR LIMIT=100] Field on notification channel settings page -->
+    <string name="promote_conversation_title">This is a conversation</string>
+
+    <!-- [CHAR LIMIT=NONE] Summary for promote_conversation_title on notifications settings page -->
+    <string name="promote_conversation_summary">Add to the conversation section</string>
 
     <!-- Importance title strings for the Importance page. Also the second part of the importance
      summary on the channel page-->
@@ -8526,10 +8549,16 @@
     <string name="notification_show_lights_title">Blink light</string>
 
     <!-- [CHAR LIMIT=180] Notification settings: vibration -->
-    <string name="notification_vibrate_title">Vibrate</string>
+    <string name="notification_vibrate_title">Vibration</string>
 
     <!-- [CHAR LIMIT=180] Notification settings: sound -->
     <string name="notification_channel_sound_title">Sound</string>
+
+    <!-- [CHAR LIMIT=180] Notification conversation: important -->
+    <string name="notification_conversation_important">Important</string>
+
+    <!-- [CHAR LIMIT=180] Notification conversation: add to home screen -->
+    <string name="notification_conversation_add_to_home">Add to home</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Rule delete button -->
     <string name="zen_mode_rule_delete_button">Delete</string>
