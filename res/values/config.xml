@@ -416,9 +416,11 @@
     <string-array name="config_suppress_injected_tile_keys" translatable="false"/>
 
     <!-- Reset application package name -->
-    <string-array name="config_reset_app_package_name" translatable="false">
-        <item>com.android.systemui</item>
+    <string-array name="config_skip_reset_apps_package_name" translatable="false">
         <item>android</item>
+        <item>com.android.providers.downloads</item>
+        <item>com.android.systemui</item>
+        <item>com.android.vending</item>
     </string-array>
 
     <!-- Settings panel keeps observe this uri -->
