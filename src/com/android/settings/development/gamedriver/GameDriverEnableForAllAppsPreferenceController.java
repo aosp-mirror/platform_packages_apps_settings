@@ -64,11 +64,11 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
         mContentResolver = context.getContentResolver();
 
         final Resources resources = context.getResources();
-        mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
+        mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
         mPreferenceGameDriver =
-                resources.getString(R.string.game_driver_app_preference_game_driver);
+                resources.getString(R.string.graphics_driver_app_preference_game_driver);
         mPreferencePrereleaseDriver =
-                resources.getString(R.string.game_driver_app_preference_prerelease_driver);
+                resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
         mGameDriverContentObserver =
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
     }

@@ -71,11 +71,11 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         mResolver = mContext.getContentResolver();
 
         final Resources resources = mContext.getResources();
-        mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
+        mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
         mPreferenceGameDriver =
-                resources.getString(R.string.game_driver_app_preference_game_driver);
+                resources.getString(R.string.graphics_driver_app_preference_game_driver);
         mPreferencePrereleaseDriver =
-                resources.getString(R.string.game_driver_app_preference_prerelease_driver);
+                resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
 
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
         Settings.Global.putInt(

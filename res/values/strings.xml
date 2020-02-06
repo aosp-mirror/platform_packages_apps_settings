@@ -10793,34 +10793,34 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- Title for Game Driver dashboard where developers can configure apps to use game driver or not [CHAR LIMIT=50] -->
-    <string name="game_driver_dashboard_title">Game Driver Preferences</string>
-    <!-- Summary for Game Driver dashboard [CHAR LIMIT=50] -->
-    <string name="game_driver_dashboard_summary">Modify Game Driver settings</string>
-    <!-- Footer text for Game Driver dashboard [CHAR LIMIT=NONE] -->
-    <string name="game_driver_footer_text">When Game Driver is turned on, you can pick to use the updated graphics driver for Apps installed on the device.</string>
-    <!-- Title for Game Driver all apps preference [CHAR LIMIT=50] -->
-    <string name="game_driver_all_apps_preference_title">Enable for all apps</string>
-    <!-- Title for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_title">Select Graphics Driver</string>
-    <!-- The default value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_default">Default</string>
+    <!-- Title for graphics driver dashboard where developers can configure apps to choose graphics driver [CHAR LIMIT=50] -->
+    <string name="graphics_driver_dashboard_title">Graphics Driver Preferences</string>
+    <!-- Summary for graphics driver dashboard [CHAR LIMIT=50] -->
+    <string name="graphics_driver_dashboard_summary">Modify graphics driver settings</string>
+    <!-- Footer text for graphics driver dashboard [CHAR LIMIT=NONE] -->
+    <string name="graphics_driver_footer_text">When there are multiple graphics drivers, you can pick to use the updated graphics driver for Apps installed on the device.</string>
+    <!-- Title for graphics Driver all apps preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_all_apps_preference_title">Enable for all apps</string>
+    <!-- Title for graphics driver preference for app [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value of graphics driver preference for app [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_default">Default</string>
     <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_game_driver">Game Driver</string>
-    <!-- The game driver value for Prerelease Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_prerelease_driver">Prerelease Driver</string>
-    <!-- The system value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_system">System Graphics Driver</string>
-    <!-- All the values for Game Driver all apps preference [CHAR LIMIT=50] -->
-    <string-array name="game_driver_all_apps_preference_values">
-        <item>@string/game_driver_app_preference_default</item>
-        <item>@string/game_driver_app_preference_game_driver</item>
+    <string name="graphics_driver_app_preference_game_driver">Game Driver</string>
+    <!-- The prerelase driver value for Prerelease Driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_prerelease_driver">Prerelease Driver</string>
+    <!-- The system driver value for system graphics driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_system">System Graphics Driver</string>
+    <!-- All the graphics driver preference values for all apps globally [CHAR LIMIT=50] -->
+    <string-array name="graphics_driver_all_apps_preference_values">
+        <item>@string/graphics_driver_app_preference_default</item>
+        <item>@string/graphics_driver_app_preference_game_driver</item>
     </string-array>
-    <!-- All the values for Game Driver app preference [CHAR LIMIT=50] -->
-    <string-array name="game_driver_app_preference_values">
-        <item>@string/game_driver_app_preference_default</item>
-        <item>@string/game_driver_app_preference_game_driver</item>
-        <item>@string/game_driver_app_preference_system</item>
+    <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
+    <string-array name="graphics_driver_app_preference_values">
+        <item>@string/graphics_driver_app_preference_default</item>
+        <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_system</item>
     </string-array>
 
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
