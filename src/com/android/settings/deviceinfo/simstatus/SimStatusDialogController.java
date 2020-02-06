@@ -16,22 +16,26 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import android.Manifest;
+import android.annotation.Nullable;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.res.Resources;
-import android.os.Bundle;
+import android.os.IBinder;
 import android.os.PersistableBundle;
-import android.os.UserHandle;
+import android.os.RemoteException;
 import android.telephony.Annotation;
 import android.telephony.CarrierConfigManager;
+import android.telephony.CellBroadcastIntents;
+import android.telephony.CellBroadcastService;
 import android.telephony.CellSignalStrength;
+import android.telephony.ICellBroadcastService;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
-import android.telephony.SmsCbMessage;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
@@ -39,6 +43,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -58,6 +63,8 @@ import java.util.Map;
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
     private final static String TAG = "SimStatusDialogCtrl";
+
+    private static final String CELL_BROADCAST_SERVICE_PACKAGE = "com.android.cellbroadcastservice";
 
     @VisibleForTesting
     final static int NETWORK_PROVIDER_VALUE_ID = R.id.operator_name_value;
@@ -94,12 +101,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
 
-    private final static String CB_AREA_INFO_RECEIVED_ACTION =
-            "com.android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
-    private final static String GET_LATEST_CB_AREA_INFO_ACTION =
-            "com.android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
-    private final static String CELL_BROADCAST_RECEIVER_APP = "com.android.cellbroadcastreceiver";
-
     private final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
             new OnSubscriptionsChangedListener() {
                 @Override
@@ -129,22 +130,47 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (TextUtils.equals(action, CB_AREA_INFO_RECEIVED_ACTION)) {
-                final Bundle extras = intent.getExtras();
-                if (extras == null) {
-                    return;
-                }
-                final SmsCbMessage cbMessage = (SmsCbMessage) extras.get("message");
-                if (cbMessage != null && mSlotIndex == cbMessage.getSlotIndex()) {
-                    final String latestAreaInfo = cbMessage.getMessageBody();
-                    mDialog.setText(OPERATOR_INFO_VALUE_ID, latestAreaInfo);
-                }
-            }
+            updateAreaInfoText();
         }
     };
 
     private PhoneStateListener mPhoneStateListener;
+
+    private CellBroadcastServiceConnection mCellBroadcastServiceConnection;
+
+    private class CellBroadcastServiceConnection implements ServiceConnection {
+        private IBinder mService;
+
+        @Nullable
+        public IBinder getService() {
+            return mService;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            Log.d(TAG, "connected to CellBroadcastService");
+            this.mService = service;
+            updateAreaInfoText();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName className) {
+            this.mService = null;
+            Log.d(TAG, "mICellBroadcastService has disconnected unexpectedly");
+        }
+
+        @Override
+        public void onBindingDied(ComponentName name) {
+            this.mService = null;
+            Log.d(TAG, "Binding died");
+        }
+
+        @Override
+        public void onNullBinding(ComponentName name) {
+            this.mService = null;
+            Log.d(TAG, "Null binding");
+        }
+    }
 
     public SimStatusDialogController(@NonNull SimStatusDialogFragment dialog, Lifecycle lifecycle,
             int slotId) {
@@ -188,6 +214,19 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         updateImsRegistrationState();
     }
 
+    /**
+     * Deinitialization works
+     */
+    public void deinitialize() {
+        if (mShowLatestAreaInfo) {
+            if (mCellBroadcastServiceConnection != null
+                    && mCellBroadcastServiceConnection.getService() != null) {
+                mContext.unbindService(mCellBroadcastServiceConnection);
+            }
+            mCellBroadcastServiceConnection = null;
+        }
+    }
+
     @Override
     public void onResume() {
         if (mSubscriptionInfo == null) {
@@ -202,14 +241,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
 
         if (mShowLatestAreaInfo) {
+            updateAreaInfoText();
             mContext.registerReceiver(mAreaInfoReceiver,
-                    new IntentFilter(CB_AREA_INFO_RECEIVED_ACTION),
-                    Manifest.permission.RECEIVE_EMERGENCY_BROADCAST, null /* scheduler */);
-            // Ask CellBroadcastReceiver to broadcast the latest area info received
-            final Intent getLatestIntent = new Intent(GET_LATEST_CB_AREA_INFO_ACTION);
-            getLatestIntent.setPackage(CELL_BROADCAST_RECEIVER_APP);
-            mContext.sendBroadcastAsUser(getLatestIntent, UserHandle.ALL,
-                    Manifest.permission.RECEIVE_EMERGENCY_BROADCAST);
+                    new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
         }
     }
 
@@ -263,13 +297,54 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mDialog.setText(CELLULAR_NETWORK_STATE, networkStateValue);
     }
 
+    /**
+     * Update area info text retrieved from
+     * {@link CellBroadcastService#getCellBroadcastAreaInfo(int)}
+     */
+    private void updateAreaInfoText() {
+        if (!mShowLatestAreaInfo || mCellBroadcastServiceConnection == null) return;
+        ICellBroadcastService cellBroadcastService =
+                ICellBroadcastService.Stub.asInterface(
+                        mCellBroadcastServiceConnection.getService());
+        if (cellBroadcastService == null) return;
+        try {
+            mDialog.setText(OPERATOR_INFO_VALUE_ID,
+                    cellBroadcastService.getCellBroadcastAreaInfo(
+                            SimStatusDialogController.this.mSlotIndex));
+
+        } catch (RemoteException e) {
+            Log.d(TAG, "Can't get area info. e=" + e);
+        }
+    }
+
+    /**
+     * Bind cell broadcast service.
+     */
+    private void bindCellBroadcastService() {
+        mCellBroadcastServiceConnection = new CellBroadcastServiceConnection();
+        Intent intent = new Intent(CellBroadcastService.CELL_BROADCAST_SERVICE_INTERFACE);
+        intent.setPackage(CELL_BROADCAST_SERVICE_PACKAGE);
+        if (mCellBroadcastServiceConnection != null
+                && mCellBroadcastServiceConnection.getService() == null) {
+            if (!mContext.bindService(intent, mCellBroadcastServiceConnection,
+                    Context.BIND_AUTO_CREATE)) {
+                Log.e(TAG, "Unable to bind to service");
+            }
+        } else {
+            Log.d(TAG, "skipping bindService because connection already exists");
+        }
+    }
 
     private void updateLatestAreaInfo() {
         mShowLatestAreaInfo = Resources.getSystem().getBoolean(
                 com.android.internal.R.bool.config_showAreaUpdateInfoSettings)
                 && mTelephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA;
 
-        if (!mShowLatestAreaInfo) {
+        if (mShowLatestAreaInfo) {
+            // Bind cell broadcast service to get the area info. The info will be updated once
+            // the service is connected.
+            bindCellBroadcastService();
+        } else {
             mDialog.removeSettingFromScreen(OPERATOR_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(OPERATOR_INFO_VALUE_ID);
         }
