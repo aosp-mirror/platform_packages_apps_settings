@@ -136,7 +136,8 @@ public class TetherEnablerTest {
 
     @Test
     public void onSwitchToggled_onlyStartsWifiTetherWhenNeeded() {
-        when(mSharedPreferences.getBoolean(TetherEnabler.WIFI_TETHER_KEY, true)).thenReturn(true);
+        when(mSharedPreferences.getBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true))
+                .thenReturn(true);
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
         mEnabler.onSwitchToggled(true);
         verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
@@ -150,7 +151,8 @@ public class TetherEnablerTest {
     public void onSwitchToggled_shouldStartUSBTetherWhenSelected() {
         SharedPreferences preference = mock(SharedPreferences.class);
         ReflectionHelpers.setField(mEnabler, "mSharedPreferences", preference);
-        when(preference.getBoolean(TetherEnabler.WIFI_TETHER_KEY, true)).thenReturn(false);
+        when(preference.getBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true))
+                .thenReturn(false);
         when(preference.getBoolean(TetherEnabler.USB_TETHER_KEY, false)).thenReturn(true);
         when(preference.getBoolean(TetherEnabler.BLUETOOTH_TETHER_KEY, true)).thenReturn(false);
 

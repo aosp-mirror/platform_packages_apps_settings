@@ -61,13 +61,14 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
 
     public static final String SHARED_PREF = "tether_options";
 
+    // This KEY is used for a shared preference value, not for any displayed preferences.
+    public static final String KEY_ENABLE_WIFI_TETHERING = "enable_wifi_tethering";
     @VisibleForTesting
-    static final String WIFI_TETHER_KEY =
-            WifiTetherDisablePreferenceController.KEY_ENABLE_WIFI_TETHERING;
+    static final String WIFI_TETHER_DISABLE_KEY = "disable_wifi_tethering";
     @VisibleForTesting
-    static final String USB_TETHER_KEY = UsbTetherPreferenceController.PREF_KEY;
+    static final String USB_TETHER_KEY = "enable_usb_tethering";
     @VisibleForTesting
-    static final String BLUETOOTH_TETHER_KEY = BluetoothTetherPreferenceController.PREF_KEY;
+    static final String BLUETOOTH_TETHER_KEY = "enable_bluetooth_tethering";
 
     private final SwitchWidgetController mSwitchWidgetController;
     private final WifiManager mWifiManager;
@@ -176,7 +177,7 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
     private void stopTether() {
 
         // Wi-Fi tether is selected by default.
-        if (mSharedPreferences.getBoolean(WIFI_TETHER_KEY, true)) {
+        if (mSharedPreferences.getBoolean(KEY_ENABLE_WIFI_TETHERING, true)) {
             stopTethering(TETHERING_WIFI);
         }
 
@@ -202,7 +203,7 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
     void startTether() {
 
         // Wi-Fi tether is selected by default.
-        if (mSharedPreferences.getBoolean(WIFI_TETHER_KEY, true)) {
+        if (mSharedPreferences.getBoolean(KEY_ENABLE_WIFI_TETHERING, true)) {
             startTethering(TETHERING_WIFI);
         }
 
@@ -328,7 +329,7 @@ public final class TetherEnabler implements SwitchWidgetController.OnSwitchChang
         if (!mSwitchWidgetController.isChecked()) {
             return;
         }
-        if (TextUtils.equals(WIFI_TETHER_KEY, key)) {
+        if (TextUtils.equals(KEY_ENABLE_WIFI_TETHERING, key)) {
             if (sharedPreferences.getBoolean(key, true)) {
                 startTethering(TETHERING_WIFI);
             } else {
