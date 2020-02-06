@@ -141,7 +141,8 @@ public class SimLockPreferenceControllerTest {
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
-        when(mTelephonyManager.hasIccCard(anyInt())).thenReturn(true);
+        when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.hasIccCard()).thenReturn(true);
         when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true)))
                 .thenReturn(subscriptionInfoList);
     }
