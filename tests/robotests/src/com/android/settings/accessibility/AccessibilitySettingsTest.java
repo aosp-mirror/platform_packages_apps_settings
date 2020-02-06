@@ -22,7 +22,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
@@ -72,11 +71,9 @@ public class AccessibilitySettingsTest {
 
     @Test
     @Config(shadows = {ShadowDeviceConfig.class})
-    public void testIsRampingRingerEnabled_bothFlagsOn_Enabled() {
+    public void testIsRampingRingerEnabled_settingsFlagOn_Enabled() {
         Settings.Global.putInt(
                 mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 1 /* ON */);
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                AccessibilitySettings.RAMPING_RINGER_ENABLED, "true", false /* makeDefault*/);
         assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
     }
 
@@ -85,14 +82,6 @@ public class AccessibilitySettingsTest {
     public void testIsRampingRingerEnabled_settingsFlagOff_Disabled() {
         Settings.Global.putInt(
                 mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0 /* OFF */);
-        assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
-    }
-
-    @Test
-    @Config(shadows = {ShadowDeviceConfig.class})
-    public void testIsRampingRingerEnabled_deviceConfigFlagOff_Disabled() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_TELEPHONY,
-                AccessibilitySettings.RAMPING_RINGER_ENABLED, "false", false /* makeDefault*/);
         assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 }
