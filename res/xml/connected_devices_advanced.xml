@@ -28,21 +28,13 @@
         android:order="-9"
         settings:searchable="false"/>
 
-    <SwitchPreference
-        android:key="toggle_nfc"
+    <Preference
+        android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
+        android:key="nfc_and_payment_settings"
         android:title="@string/nfc_quick_toggle_title"
         android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_quick_toggle_summary"
-        settings:controller="com.android.settings.nfc.NfcPreferenceController"
-        android:order="-7"/>
-
-    <SwitchPreference
-        android:key="nfc_secure_settings"
-        android:title="@string/nfc_secure_settings_title"
-        settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
-        android:icon="@drawable/ic_nfc"
-        android:summary="@string/nfc_secure_toggle_summary"
-        android:order="-7"/>
+        android:order="-7"
+        settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"/>
 
     <Preference
         android:fragment="com.android.settings.wfd.WifiDisplaySettings"
