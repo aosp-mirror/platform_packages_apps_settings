@@ -176,6 +176,9 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
         if (BugReportHandlerUtil.SHELL_APP_PACKAGE.equals(handlerApp)) {
             return context.getString(R.string.system_default_app_subtext);
         }
+        if (mUserManager.getUserProfiles().size() < 2) {
+            return "";
+        }
         final UserInfo userInfo = mUserManager.getUserInfo(handlerUser);
         if (userInfo != null && userInfo.isManagedProfile()) {
             return context.getString(R.string.work_profile_app_subtext);
