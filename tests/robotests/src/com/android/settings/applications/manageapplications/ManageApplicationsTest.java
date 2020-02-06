@@ -366,6 +366,7 @@ public class ManageApplicationsTest {
         appEntry.extraInfo = mock(AppFilterItem.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         // no crash? yay!
@@ -387,6 +388,7 @@ public class ManageApplicationsTest {
         appEntry.info = mock(ApplicationInfo.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         verify(holder).updateSwitch(any(), anyBoolean(), anyBoolean());
@@ -406,6 +408,7 @@ public class ManageApplicationsTest {
         appEntry.info = mock(ApplicationInfo.class);
         appList.add(appEntry);
         ReflectionHelpers.setField(adapter, "mEntries", appList);
+        ReflectionHelpers.setField(adapter, "mContext", mContext);
 
         adapter.onBindViewHolder(holder, 0);
         verify(holder, never()).updateSwitch(any(), anyBoolean(), anyBoolean());
