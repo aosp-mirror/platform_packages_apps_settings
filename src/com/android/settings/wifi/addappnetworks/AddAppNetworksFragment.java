@@ -715,7 +715,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     }
 
     @VisibleForTesting
-    void updateScanResults(List<AccessPoint> allAccessPoints) {
+    void updateScanResultsToUi(List<AccessPoint> allAccessPoints) {
         if (mUiToRequestedList == null) {
             // Nothing need to be updated.
             return;
@@ -723,13 +723,16 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
         // Update the signal level of the UI networks.
         for (UiConfigurationItem uiConfigurationItem : mUiToRequestedList) {
-            final Optional<AccessPoint> matchedAccessPoint = allAccessPoints
-                    .stream()
-                    .filter(accesspoint -> accesspoint.matches(
-                            uiConfigurationItem.mWifiNetworkSuggestion.getWifiConfiguration()))
-                    .findFirst();
-            uiConfigurationItem.mLevel =
-                    matchedAccessPoint.isPresent() ? matchedAccessPoint.get().getLevel() : 0;
+            uiConfigurationItem.mLevel = 0;
+            if (allAccessPoints != null) {
+                final Optional<AccessPoint> matchedAccessPoint = allAccessPoints
+                        .stream()
+                        .filter(accesspoint -> accesspoint.matches(
+                                uiConfigurationItem.mWifiNetworkSuggestion.getWifiConfiguration()))
+                        .findFirst();
+                uiConfigurationItem.mLevel =
+                        matchedAccessPoint.isPresent() ? matchedAccessPoint.get().getLevel() : 0;
+            }
         }
 
         if (mIsSingleNetwork) {
@@ -742,7 +745,17 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        onAccessPointsChanged();
+    }
+
+    /**
+     * Update the results when data changes
+     */
+    @Override
     public void onAccessPointsChanged() {
-        updateScanResults(mWifiTracker.getAccessPoints());
+        updateScanResultsToUi(
+                mWifiTracker.getManager().isWifiEnabled() ? mWifiTracker.getAccessPoints() : null);
     }
 }

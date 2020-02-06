@@ -437,7 +437,8 @@ public class AccessibilitySettings extends DashboardFragment {
             final String settingsClassName = info.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {
                 extras.putString(EXTRA_SETTINGS_TITLE,
-                        getString(R.string.accessibility_menu_item_settings));
+                        getString(R.string.accessibility_service_menu_item_settings,
+                                resolveInfo.loadLabel(getPackageManager())));
                 extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
                         new ComponentName(packageName, settingsClassName).flattenToString());
             }

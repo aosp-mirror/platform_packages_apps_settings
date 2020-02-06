@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,17 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_NONE;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
 import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,9 +52,9 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class ZenModePriorityMessagesPreferenceControllerTest {
+public class ZenModePriorityConversationsPreferenceControllerTest {
 
-    private ZenModePriorityMessagesPreferenceController mController;
+    private ZenModePriorityConversationsPreferenceController mController;
 
     @Mock
     private ZenModeBackend mBackend;
@@ -64,15 +69,6 @@ public class ZenModePriorityMessagesPreferenceControllerTest {
     private ContentResolver mContentResolver;
     private Context mContext;
 
-    /**
-     * Array Values Key
-     * 0: anyone
-     * 1: contacts
-     * 2: starred
-     * 3: none
-     */
-    private String[] mValues;
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -80,18 +76,17 @@ public class ZenModePriorityMessagesPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
         mContext = RuntimeEnvironment.application;
-        mValues = mContext.getResources().getStringArray(R.array.zen_mode_contacts_values);
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
-        when(mBackend.getPriorityMessageSenders())
-            .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
-        when(mBackend.getAlarmsTotalSilencePeopleSummary(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)).thenCallRealMethod();
-        when(mBackend.getContactsSummary(NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES))
+        when(mBackend.getPriorityConversationSenders())
+            .thenReturn(CONVERSATION_SENDERS_IMPORTANT);
+        when(mBackend.getAlarmsTotalSilencePeopleSummary(PRIORITY_CATEGORY_CONVERSATIONS))
                 .thenCallRealMethod();
+        when(mBackend.getConversationSummary()).thenCallRealMethod();
 
-        mController = new ZenModePriorityMessagesPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModePriorityConversationsPreferenceController(
+                mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
@@ -102,14 +97,12 @@ public class ZenModePriorityMessagesPreferenceControllerTest {
     public void updateState_TotalSilence() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_NO_INTERRUPTIONS);
 
-        when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES))
-                .thenReturn(false);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
         final ListPreference mockPref = mock(ListPreference.class);
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_none_messages);
+        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
     }
 
     @Test
@@ -120,59 +113,79 @@ public class ZenModePriorityMessagesPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_none_messages);
+        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
     }
 
     @Test
-    public void updateState_Priority() {
+    public void updateState_Priority_important() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-
-        when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES))
-                .thenReturn(true);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
 
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(true);
-        verify(mockPref).setSummary(R.string.zen_mode_from_starred);
+        verify(mockPref).setSummary(R.string.zen_mode_from_important_conversations);
+        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
     }
 
     @Test
-    public void onPreferenceChange_setSelectedContacts_any() {
+    public void updateState_Priority_all() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityMessageSenders()).thenReturn(
-                NotificationManager.Policy.PRIORITY_SENDERS_ANY);
+        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_ANYONE);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
+
+
         mController.updateState(mockPref);
-        verify(mockPref).setValue(mValues[mController.getIndexOfSendersValue(
-                ZenModeBackend.ZEN_MODE_FROM_ANYONE)]);
+
+        verify(mockPref).setEnabled(true);
+        verify(mockPref).setSummary(R.string.zen_mode_from_all_conversations);
+        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_ANYONE));
     }
 
     @Test
-    public void onPreferenceChange_setSelectedContacts_none() {
+    public void updateState_Priority_none() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityMessageSenders()).thenReturn(ZenModeBackend.SOURCE_NONE);
+        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(false);
+
         mController.updateState(mockPref);
-        verify(mockPref).setValue(mValues[mController.getIndexOfSendersValue(
-                ZenModeBackend.ZEN_MODE_FROM_NONE)]);
+
+        verify(mockPref).setEnabled(true);
+        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
+        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
     }
 
     @Test
-    public void onPreferenceChange_setSelectedContacts_starred() {
+    public void onPreferenceChange_noneToImportant() {
+        // start with none
+
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityMessageSenders()).thenReturn(
-                NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
+        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(false);
+
         mController.updateState(mockPref);
-        verify(mockPref).setValue(mValues[mController.getIndexOfSendersValue(
-                ZenModeBackend.ZEN_MODE_FROM_STARRED)]);
+        reset(mBackend);
+
+        mController.onPreferenceChange(mockPref, String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
+
+        verify(mBackend).saveConversationSenders(CONVERSATION_SENDERS_IMPORTANT);
+        verify(mBackend).getPriorityConversationSenders();
     }
 
     @Test
-    public void onPreferenceChange_setSelectedContacts_contacts() {
+    public void onPreferenceChange_allToNone() {
+        // start with none
+
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityMessageSenders()).thenReturn(
-                NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS);
+        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_ANYONE);
+        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
+
         mController.updateState(mockPref);
-        verify(mockPref).setValue(mValues[mController.getIndexOfSendersValue(
-                ZenModeBackend.ZEN_MODE_FROM_CONTACTS)]);
+        reset(mBackend);
+
+        mController.onPreferenceChange(mockPref, String.valueOf(CONVERSATION_SENDERS_NONE));
+
+        verify(mBackend).saveConversationSenders(CONVERSATION_SENDERS_NONE);
+        verify(mBackend).getPriorityConversationSenders();
     }
 }

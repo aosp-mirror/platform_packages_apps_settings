@@ -60,10 +60,12 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({SortType.TYPE_DEFAULT,
-            SortType.TYPE_FIFO})
+            SortType.TYPE_FIFO,
+            SortType.TYPE_NO_SORT})
     public @interface SortType {
         int TYPE_DEFAULT = 1;
         int TYPE_FIFO = 2;
+        int TYPE_NO_SORT = 3;
     }
 
     private final CachedBluetoothDevice mCachedDevice;

@@ -65,8 +65,7 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                         .config_zen_repeat_callers_threshold)));
-        controllers.add(
-                new ZenModeAllBypassingConversationsPreferenceController(context, app, host));
+        controllers.add(new ZenModePriorityConversationsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
                 fragmentManager));
         return controllers;

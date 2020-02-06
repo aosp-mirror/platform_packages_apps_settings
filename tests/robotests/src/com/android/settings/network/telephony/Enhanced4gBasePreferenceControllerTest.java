@@ -35,7 +35,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.ims.VolteQueryImsState;
+import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
@@ -63,7 +63,7 @@ public class Enhanced4gBasePreferenceControllerTest {
     @Mock
     private ProvisioningManager mProvisioningManager;
 
-    private VolteQueryImsState mQueryImsState;
+    private MockVolteQueryImsState mQueryImsState;
 
     private Enhanced4gLtePreferenceController mController;
     private SwitchPreference mPreference;
@@ -85,17 +85,13 @@ public class Enhanced4gBasePreferenceControllerTest {
         mCarrierConfig = new PersistableBundle();
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
-        mQueryImsState = spy(new VolteQueryImsState(mContext, SUB_ID));
+        mQueryImsState = spy(new MockVolteQueryImsState(mContext, SUB_ID));
+        doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
+        mQueryImsState.setIsProvisionedOnDevice(true);
 
         mPreference = new RestrictedSwitchPreference(mContext);
-        mController = spy(new Enhanced4gLtePreferenceController(mContext, "roaming") {
-            @Override
-            ProvisioningManager getProvisioningManager(int subId) {
-                return mProvisioningManager;
-            }
-        });
+        mController = spy(new Enhanced4gLtePreferenceController(mContext, "VoLTE"));
         mController.init(SUB_ID);
-        mController.mImsManager = mImsManager;
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
     }

@@ -5079,8 +5079,11 @@
     <!-- Label describing a high intensity vibration option. [CHAR LIMIT=15] -->
     <string name="accessibility_vibration_intensity_high">High</string>
 
-    <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
+    <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
+
+    <!-- Title for accessibility menu item to launch a settings activity with app name. [CHAR LIMIT=30] -->
+    <string name="accessibility_service_menu_item_settings"><xliff:g example="TalkBack" id="accessibility_app_name">%1$s</xliff:g> settings</string>
 
     <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_on">On</string>
@@ -7790,7 +7793,7 @@
     <!-- Do not disturb: what to block summary, all effects -->
     <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
 
-    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden</string>
+    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden.</string>
 
     <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
     <string name="zen_mode_no_exceptions">None</string>
@@ -8645,6 +8648,9 @@
     </plurals>
 
     <string name="zen_mode_conversations_title">Conversations</string>
+    <string name="zen_mode_from_all_conversations">From all conversations</string>
+    <string name="zen_mode_from_important_conversations">From important conversations</string>
+    <string name="zen_mode_from_no_conversations">Don\u2019t allow any conversations</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow messages</string>
