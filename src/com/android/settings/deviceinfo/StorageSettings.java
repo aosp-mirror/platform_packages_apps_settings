@@ -50,13 +50,13 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
+import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -550,13 +550,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     final List<SearchIndexableRaw> result = new ArrayList<>();
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.storage_settings);
-                    data.key = "storage_settings";
-                    data.screenTitle = context.getString(R.string.storage_settings);
-                    data.keywords = context.getString(R.string.keywords_storage_settings);
-                    result.add(data);
-
-                    data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.internal_storage);
                     data.key = "storage_settings_internal_storage";
                     data.screenTitle = context.getString(R.string.storage_settings);

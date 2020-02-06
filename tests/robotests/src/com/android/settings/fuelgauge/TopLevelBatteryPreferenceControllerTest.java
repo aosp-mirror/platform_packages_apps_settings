@@ -16,7 +16,7 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 import static com.android.settings.fuelgauge.TopLevelBatteryPreferenceController.getDashboardLabel;
 
@@ -27,9 +27,9 @@ import android.content.Context;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class TopLevelBatteryPreferenceControllerTest {
@@ -44,7 +44,7 @@ public class TopLevelBatteryPreferenceControllerTest {
 
     @Test
     public void getAvailibilityStatus_availableByDefault() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

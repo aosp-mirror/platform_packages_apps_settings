@@ -21,7 +21,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED
 
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -90,7 +90,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(PASSWORD_QUALITY_ALPHABETIC);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class LockScreenPreferenceControllerTest {
         when(mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(PASSWORD_QUALITY_UNSPECIFIED);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

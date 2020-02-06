@@ -27,7 +27,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -73,7 +72,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -81,7 +79,6 @@ import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -192,9 +189,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
     private LinkablePreference mStatusMessagePreference;
-
-    // For Search
-    public static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
 
     /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
@@ -1243,24 +1237,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_settings) {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-                    final Resources res = context.getResources();
-
-                    // Add fragment title if we are showing this fragment
-                    if (res.getBoolean(R.bool.config_show_wifi_settings)) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.wifi_settings);
-                        data.screenTitle = res.getString(R.string.wifi_settings);
-                        data.keywords = res.getString(R.string.keywords_wifi);
-                        data.key = DATA_KEY_REFERENCE;
-                        result.add(data);
-                    }
-                    return result;
-                }
-
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);

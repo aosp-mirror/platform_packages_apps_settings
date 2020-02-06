@@ -50,7 +50,7 @@ public class LockScreenPreferenceController extends BasePreferenceController imp
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override

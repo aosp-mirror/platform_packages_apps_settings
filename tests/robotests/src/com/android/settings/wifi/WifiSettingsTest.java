@@ -52,7 +52,6 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 
@@ -97,26 +96,6 @@ public class WifiSettingsTest {
         mWifiSettings.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings.mWifiTracker = mWifiTracker;
         mWifiSettings.mWifiManager = mWifiManager;
-    }
-
-    @Test
-    public void testSearchIndexProvider_shouldIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isNotNull();
-        assertThat(indexRes.get(0).key).isEqualTo(WifiSettings.DATA_KEY_REFERENCE);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testSearchIndexProvider_ifWifiSettingsNotVisible_shouldNotIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isEmpty();
     }
 
     @Test

@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="connected_devices_advanced_screen"
     android:title="@string/connected_device_connections_title">
 
     <Preference
@@ -25,8 +24,7 @@
         android:key="bluetooth_settings"
         android:title="@string/bluetooth_settings_title"
         android:icon="@*android:drawable/ic_settings_bluetooth"
-        android:order="-9"
-        settings:searchable="false"/>
+        android:order="-9"/>
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
@@ -42,7 +40,6 @@
         android:title="@string/wifi_display_settings_title"
         android:icon="@drawable/ic_cast_24dp"
         android:order="-6"
-        settings:searchable="false"
         settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"/>
 
     <com.android.settingslib.RestrictedPreference
@@ -59,8 +56,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@*android:drawable/ic_settings_print"
         android:fragment="com.android.settings.print.PrintSettingsFragment"
-        android:order="-3"
-        settings:searchable="false"/>
+        android:order="-3"/>
 
     <Preference
         android:key="bt_received_files"

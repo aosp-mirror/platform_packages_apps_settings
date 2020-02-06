@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
     <com.android.settings.slices.SlicePreference
@@ -57,6 +56,7 @@
             android:title="@string/previous_connected_see_all"
             android:icon="@drawable/ic_chevron_right_24dp"
             android:order="10"
+            settings:searchable="false"
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
     </PreferenceCategory>
 

@@ -125,8 +125,7 @@
         <Preference
             android:key="quick_settings_tiles"
             android:title="@string/quick_settings_developer_tiles"
-            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment"
-            settings:searchable="false" />
+            android:fragment="com.android.settings.development.qstile.DevelopmentTileConfigFragment" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -208,8 +207,7 @@
         <Preference
             android:key="feature_flags_dashboard"
             android:title="@string/feature_flags_dashboard_title"
-            android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard"
-            settings:searchable="false" />
+            android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard" />
 
         <SwitchPreference
             android:key="enable_gpu_debug_layers"
@@ -220,8 +218,7 @@
             android:key="graphics_driver_dashboard"
             android:title="@string/graphics_driver_dashboard_title"
             android:summary="@string/graphics_driver_dashboard_summary"
-            android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard"
-            settings:searchable="false" />
+            android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard" />
 
         <Preference
             android:key="platform_compat_dashboard"
