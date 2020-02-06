@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.app.Activity;
@@ -1100,7 +1101,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         }
         WifiConfiguration.NetworkSelectionStatus networkStatus =
                 config.getNetworkSelectionStatus();
-        if (networkStatus == null || networkStatus.isNetworkEnabled()) {
+        if (networkStatus == null
+                || networkStatus.getNetworkSelectionStatus() == NETWORK_SELECTION_ENABLED) {
             return false;
         }
         int reason = networkStatus.getNetworkSelectionDisableReason();
