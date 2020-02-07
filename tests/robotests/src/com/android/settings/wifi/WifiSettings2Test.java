@@ -49,7 +49,6 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -63,8 +62,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiSettings2Test {
@@ -92,26 +89,6 @@ public class WifiSettings2Test {
         mWifiSettings2.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings2.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings2.mWifiPickerTracker = mMockWifiPickerTracker;
-    }
-
-    @Test
-    public void testSearchIndexProvider_shouldIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isNotNull();
-        assertThat(indexRes.get(0).key).isEqualTo(WifiSettings.DATA_KEY_REFERENCE);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testSearchIndexProvider_ifWifiSettingsNotVisible_shouldNotIndexFragmentTitle() {
-        final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
-
-        assertThat(indexRes).isEmpty();
     }
 
     @Test

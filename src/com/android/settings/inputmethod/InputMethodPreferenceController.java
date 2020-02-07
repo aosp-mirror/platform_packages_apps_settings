@@ -30,10 +30,11 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.common.annotations.VisibleForTesting;
 
 public class InputMethodPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart {
@@ -52,7 +53,7 @@ public class InputMethodPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override

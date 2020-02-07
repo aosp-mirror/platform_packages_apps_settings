@@ -16,6 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -23,6 +24,7 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
@@ -85,6 +87,6 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
                 AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(context);
 
-        assertThat(niks).contains(AdvancedConnectedDeviceDashboardFragment.KEY_BLUETOOTH);
+        assertThat(niks).contains(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
     }
 }

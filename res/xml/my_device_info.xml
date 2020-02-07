@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="my_device_info_pref_screen"
     android:title="@string/about_settings">
 
     <com.android.settingslib.widget.LayoutPreference
@@ -68,8 +67,7 @@
         android:order="15"
         android:title="@string/legal_information"
         android:fragment="com.android.settings.LegalSettings"
-        settings:allowDividerAbove="true"
-        settings:searchable="false"/>
+        settings:allowDividerAbove="true"/>
 
     <!-- Regulatory labels -->
     <Preference

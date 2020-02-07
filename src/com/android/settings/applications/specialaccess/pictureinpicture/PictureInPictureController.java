@@ -32,7 +32,6 @@ public class PictureInPictureController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return !ActivityManager.isLowRamDeviceStatic()
                 && mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_PICTURE_IN_PICTURE) ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+                PackageManager.FEATURE_PICTURE_IN_PICTURE) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
