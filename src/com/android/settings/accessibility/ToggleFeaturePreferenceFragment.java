@@ -40,13 +40,13 @@ import android.widget.ImageView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.ToggleSwitch;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -64,8 +64,7 @@ import java.util.stream.Collectors;
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment
         implements ShortcutPreference.OnClickListener {
 
-    protected SwitchBar mSwitchBar;
-    protected ToggleSwitch mToggleSwitch;
+    protected DividerSwitchPreference mToggleServiceDividerSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
     protected String mPreferenceKey;
@@ -80,7 +79,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected CharSequence mHtmlDescription;
     private static final String ANCHOR_TAG = "a";
     private static final String DRAWABLE_FOLDER = "drawable";
-
+    protected static final String KEY_GENERAL_CATEGORY = "categories";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -133,12 +132,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SettingsActivity activity = (SettingsActivity) getActivity();
-        mSwitchBar = activity.getSwitchBar();
-        mToggleSwitch = mSwitchBar.getSwitch();
-
-        onProcessArguments(getArguments());
-        updateSwitchBarText(mSwitchBar);
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        final SwitchBar switchBar = activity.getSwitchBar();
+        switchBar.hide();
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (mImageUri != null) {
@@ -149,12 +145,19 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             preferenceScreen.addPreference(animatedImagePreference);
         }
 
-        final PreferenceCategory category = new PreferenceCategory(getPrefContext());
-        category.setTitle(R.string.accessibility_screen_option);
-        preferenceScreen.addPreference(category);
+        mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
+        preferenceScreen.addPreference(mToggleServiceDividerSwitchPreference);
+
+        onProcessArguments(getArguments());
+        updateToggleServiceTitle(mToggleServiceDividerSwitchPreference);
+
+        final PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
+        groupCategory.setKey(KEY_GENERAL_CATEGORY);
+        groupCategory.setTitle(R.string.accessibility_screen_option);
+        preferenceScreen.addPreference(groupCategory);
 
         initShortcutPreference(savedInstanceState);
-        category.addPreference(mShortcutPreference);
+        groupCategory.addPreference(mShortcutPreference);
 
         // Show the "Settings" menu as if it were a preference screen.
         if (mSettingsTitle != null && mSettingsIntent != null) {
@@ -166,7 +169,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         // The downloaded app may not show Settings. The framework app has Settings.
         if (mSettingsPreference != null) {
-            category.addPreference(mSettingsPreference);
+            groupCategory.addPreference(mSettingsPreference);
         }
 
         if (mStaticDescription != null ||  mHtmlDescription != null) {
@@ -311,31 +314,27 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         removeActionBarToggleSwitch();
     }
 
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        // Implement this to provide meaningful text in switch bar.
-        switchBar.setSwitchBarText(R.string.accessibility_service_master_switch_title,
-                R.string.accessibility_service_master_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_service_master_switch_title);
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
 
-    protected void onInstallSwitchBarToggleSwitch() {
+    protected void onInstallSwitchPreferenceToggleSwitch() {
         // Implement this to set a checked listener.
     }
 
-    protected void onRemoveSwitchBarToggleSwitch() {
+    protected void onRemoveSwitchPreferenceToggleSwitch() {
         // Implement this to reset a checked listener.
     }
 
     private void installActionBarToggleSwitch() {
-        mSwitchBar.show();
-        onInstallSwitchBarToggleSwitch();
+        onInstallSwitchPreferenceToggleSwitch();
     }
 
     private void removeActionBarToggleSwitch() {
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
-        onRemoveSwitchBarToggleSwitch();
-        mSwitchBar.hide();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
+        onRemoveSwitchPreferenceToggleSwitch();
     }
 
     public void setTitle(String title) {
@@ -349,7 +348,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         // Enabled.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
             final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mSwitchBar.setCheckedInternal(enabled);
+            mToggleServiceDividerSwitchPreference.setChecked(enabled);
         }
 
         // Title.
@@ -493,8 +492,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (info.isEmpty()) {
             info = new HashSet<>();
         } else {
-            final Set<String> filtered = info.stream().filter(
-                    str -> str.contains(componentName)).collect(Collectors.toSet());
+            final Set<String> filtered = info.stream()
+                    .filter(str -> str.contains(componentName))
+                    .collect(Collectors.toSet());
             info.removeAll(filtered);
         }
         final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
@@ -538,9 +538,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         final Set<String> info = SharedPreferenceUtils.getUserShortcutType(context);
         final String componentName = mComponentName.flattenToString();
-        final Set<String> filtered = info.stream().filter(
-                str -> str.contains(componentName)).collect(
-                Collectors.toSet());
+        final Set<String> filtered = info.stream()
+                .filter(str -> str.contains(componentName))
+                .collect(Collectors.toSet());
         if (filtered.isEmpty()) {
             return defaultValue;
         }

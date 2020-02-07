@@ -60,10 +60,13 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+/**
+ * Fragment that shows the actual UI for providing basic magnification accessibility service setup
+ * and does not have toggle bar to turn on service to use.
+ */
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment {
 
-    private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -429,11 +432,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-
-        // Magnify is temporary-use app which uses shortcut to magnify screen, not by toggle.
-        mSwitchBar.hide();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setVisible(false);
     }
 
     @Override
