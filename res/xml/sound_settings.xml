@@ -21,13 +21,14 @@
     settings:keywords="@string/keywords_sounds"
     settings:initialExpandedChildrenCount="9">
 
-    <!-- Remote volume -->
-    <com.android.settings.notification.RemoteVolumeSeekBarPreference
-        android:key="remote_volume"
-        android:icon="@drawable/ic_volume_remote"
-        android:title="@string/remote_media_volume_option_title"
+    <!-- Remote volume group -->
+    <PreferenceCategory
+        android:key="remote_media_group"
+        android:title=""
         android:order="-185"
-        settings:controller="com.android.settings.notification.RemoteVolumePreferenceController"/>
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.notification.RemoteVolumeGroupController">
+    </PreferenceCategory>
 
     <!-- Media volume -->
     <com.android.settings.notification.VolumeSeekBarPreference
