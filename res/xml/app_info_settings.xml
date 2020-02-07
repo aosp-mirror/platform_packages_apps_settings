@@ -150,6 +150,12 @@
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.applications.appinfo.ExternalSourceDetailPreferenceController" />
 
+        <Preference
+            android:key="interact_across_profiles"
+            android:title="@string/interact_across_profiles_title"
+            android:summary="@string/summary_placeholder"
+            settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController" />
+
     </PreferenceCategory>
 
     <!-- App installer info -->

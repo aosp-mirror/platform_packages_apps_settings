@@ -2472,6 +2472,28 @@
         </activity>
 
         <activity
+            android:name="Settings$InteractAcrossProfilesSettingsActivity"
+            android:label="@string/interact_across_profiles_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MANAGE_CROSS_PROFILE_ACCESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings" />
+        </activity>
+
+        <activity android:name="Settings$AppInteractAcrossProfilesSettingsActivity"
+                  android:label="@string/interact_across_profiles_title">
+            <intent-filter>
+                <action android:name="android.settings.MANAGE_CROSS_PROFILE_ACCESS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails" />
+        </activity>
+
+        <activity
             android:name="Settings$ZenAccessDetailSettingsActivity"
             android:label="@string/manage_zen_access_title"
             android:excludeFromRecents="true">

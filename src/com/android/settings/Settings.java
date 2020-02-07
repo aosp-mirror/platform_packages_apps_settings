@@ -132,6 +132,12 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
+    public static class AppInteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
 
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
@@ -150,6 +156,7 @@ public class Settings extends SettingsActivity {
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
+
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }
