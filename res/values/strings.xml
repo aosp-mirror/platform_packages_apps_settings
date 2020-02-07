@@ -4932,7 +4932,7 @@
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
-    <string name="accessibility_autoclick_default_title">None</string>
+    <string name="accessibility_autoclick_default_title">Don\u2019t use auto click (default)</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -4947,6 +4947,10 @@
     <string name="accessibility_autoclick_long_summary">1 second</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its custom level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_custom_title">Custom</string>
+    <!-- Description for the button that shorter delay time. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_autoclick_shorter_desc">Shorter</string>
+    <!-- Description for the button that longer time. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
@@ -5046,6 +5050,12 @@
     <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay">
         <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+    </plurals>
+
+    <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
+    <plurals name="accessibilty_autoclick_delay_unit_second">
+        <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
+        <item quantity="other"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
     </plurals>
 
     <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
