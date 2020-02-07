@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -38,28 +39,39 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private static final String PREF_KEY = "saved_bt";
 
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
+
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
         super(context, fragment, devicePreferenceCallback);
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
     public void forceUpdate() {
-        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+        if (mBluetoothAdapter.isEnabled()) {
             final CachedBluetoothDeviceManager cachedManager =
                     mLocalManager.getCachedDeviceManager();
-            for (BluetoothDevice device
-                    : BluetoothAdapter.getDefaultAdapter().getMostRecentlyConnectedDevices()) {
+            for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
                 final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
-                if (isFilterMatched(cachedDevice)) {
-                    // Add the preference if it is new one
-                    addPreference(cachedDevice, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
-                } else {
-                    removePreference(cachedDevice);
+                if (cachedDevice != null) {
+                    update(cachedDevice);
                 }
             }
         } else {
             removeAllDevicesFromPreference();
+        }
+    }
+
+    @Override
+    public void update(CachedBluetoothDevice cachedDevice) {
+        if (isFilterMatched(cachedDevice)) {
+            // Add the preference if it is new one
+            addPreference(cachedDevice, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        } else {
+            removePreference(cachedDevice);
         }
     }
 
