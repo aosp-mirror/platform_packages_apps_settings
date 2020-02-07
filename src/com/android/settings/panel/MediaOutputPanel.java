@@ -22,9 +22,22 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.MediaMetadata;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
 import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +51,13 @@ import java.util.List;
  */
 public class MediaOutputPanel implements PanelContent {
 
+    private static final String TAG = "MediaOutputPanel";
+
     private final Context mContext;
     private final String mPackageName;
+
+    private MediaSessionManager mMediaSessionManager;
+    private MediaController mMediaController;
 
     public static MediaOutputPanel create(Context context, String packageName) {
         return new MediaOutputPanel(context, packageName);
@@ -48,11 +66,76 @@ public class MediaOutputPanel implements PanelContent {
     private MediaOutputPanel(Context context, String packageName) {
         mContext = context.getApplicationContext();
         mPackageName = packageName;
+        if (mPackageName != null) {
+            mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
+            for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+                if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
+                    mMediaController = controller;
+                    break;
+                }
+            }
+        }
+        if (mMediaController == null) {
+            Log.e(TAG, "Unable to find " + mPackageName + " media controller");
+        }
     }
 
     @Override
     public CharSequence getTitle() {
+        if (mMediaController != null) {
+            final MediaMetadata metadata = mMediaController.getMetadata();
+            if (metadata != null) {
+                return metadata.getString(MediaMetadata.METADATA_KEY_ARTIST);
+            }
+        }
+        return mContext.getText(R.string.media_volume_title);
+    }
+
+    @Override
+    public CharSequence getSubTitle() {
+        if (mMediaController != null) {
+            final MediaMetadata metadata = mMediaController.getMetadata();
+            if (metadata != null) {
+                return metadata.getString(MediaMetadata.METADATA_KEY_ALBUM);
+            }
+        }
         return mContext.getText(R.string.media_output_panel_title);
+    }
+
+    @Override
+    public IconCompat getIcon() {
+        if (mMediaController == null) {
+            return IconCompat.createWithResource(mContext, R.drawable.ic_media_stream).setTint(
+                    Utils.getColorAccentDefaultColor(mContext));
+        }
+        final MediaMetadata metadata = mMediaController.getMetadata();
+        if (metadata != null) {
+            final Bitmap bitmap = metadata.getDescription().getIconBitmap();
+            if (bitmap != null) {
+                return IconCompat.createWithBitmap(bitmap);
+            }
+        }
+        Log.d(TAG, "Media meta data does not contain icon information");
+        return getPackageIcon();
+    }
+
+    private IconCompat getPackageIcon() {
+        try {
+            final Drawable drawable = mContext.getPackageManager().getApplicationIcon(mPackageName);
+            if (drawable instanceof BitmapDrawable) {
+                return IconCompat.createWithBitmap(((BitmapDrawable) drawable).getBitmap());
+            }
+            final Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                    drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+
+            return IconCompat.createWithBitmap(bitmap);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Package is not found. Unable to get package icon.");
+        }
+        return null;
     }
 
     @Override

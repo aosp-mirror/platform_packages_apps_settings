@@ -22,6 +22,8 @@ import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.net.Uri;
 
+import androidx.core.graphics.drawable.IconCompat;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,11 +43,11 @@ public class FakePanelContent implements PanelContent {
     public static final Intent INTENT = new Intent();
 
     private CharSequence mSubTitle;
-    private int mIconRes = -1;
+    private IconCompat mIcon;
 
     @Override
-    public int getIcon() {
-        return mIconRes;
+    public IconCompat getIcon() {
+        return mIcon;
     }
 
     @Override
@@ -53,8 +55,8 @@ public class FakePanelContent implements PanelContent {
         return mSubTitle;
     }
 
-    public void setIcon(int iconRes) {
-        mIconRes = iconRes;
+    public void setIcon(IconCompat icon) {
+        mIcon = icon;
     }
 
     public void setSubTitle(CharSequence subTitle) {
