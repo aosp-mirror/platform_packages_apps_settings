@@ -18,27 +18,27 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="game_driver_settings"
-    android:title="@string/game_driver_dashboard_title">
+    android:key="graphics_driver_settings"
+    android:title="@string/graphics_driver_dashboard_title">
 
     <ListPreference
-        android:key="game_driver_all_apps_preference"
-        android:title="@string/game_driver_all_apps_preference_title"
-        android:dialogTitle="@string/game_driver_all_apps_preference_title"
-        android:entries="@array/game_driver_all_apps_preference_values"
-        android:entryValues="@array/game_driver_all_apps_preference_values"
+        android:key="graphics_driver_all_apps_preference"
+        android:title="@string/graphics_driver_all_apps_preference_title"
+        android:dialogTitle="@string/graphics_driver_all_apps_preference_title"
+        android:entries="@array/graphics_driver_all_apps_preference_values"
+        android:entryValues="@array/graphics_driver_all_apps_preference_values"
         settings:controller="com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController">
     </ListPreference>
 
     <PreferenceCategory
-        android:key="game_driver_category"
-        android:title="@string/game_driver_app_preference_title"
+        android:key="graphics_driver_category"
+        android:title="@string/graphics_driver_app_preference_title"
         settings:controller="com.android.settings.development.gamedriver.GameDriverAppPreferenceController">
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
-        android:key="game_driver_footer"
-        android:title="@string/game_driver_footer_text"
+        android:key="graphics_driver_footer"
+        android:title="@string/graphics_driver_footer_text"
         android:selectable="false"
         settings:controller="com.android.settings.development.gamedriver.GameDriverFooterPreferenceController">
     </com.android.settingslib.widget.FooterPreference>

@@ -50,6 +50,6 @@ public class GameDriverDashboardTest {
 
     @Test
     public void getPreferenceScreen_shouldReturnGameDriverSettings() {
-        assertThat(mDashboard.getPreferenceScreenResId()).isEqualTo(R.xml.game_driver_settings);
+        assertThat(mDashboard.getPreferenceScreenResId()).isEqualTo(R.xml.graphics_driver_settings);
     }
 }

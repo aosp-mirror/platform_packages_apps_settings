@@ -20,7 +20,7 @@ import android.telephony.ims.ImsMmTelManager;
 
 
 /**
- * An {@code ImsQuery} for accessing IMS user setting for enhanced 4G LTE
+ * An {@link ImsQuery} for accessing IMS user setting for enhanced 4G LTE
  */
 public class ImsQueryEnhanced4gLteModeUserSetting implements ImsQuery {
 
@@ -35,7 +35,7 @@ public class ImsQueryEnhanced4gLteModeUserSetting implements ImsQuery {
     private volatile int mSubId;
 
     /**
-     * Implementation of interface {@code ImsQuery}
+     * Implementation of interface {@link ImsQuery#query()}
      *
      * @return result of query
      */
