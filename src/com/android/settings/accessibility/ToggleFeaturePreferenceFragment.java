@@ -235,7 +235,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_edit_dialog_title, mPackageName);
+                        R.string.accessibility_shortcut_title, mPackageName);
                 Dialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
@@ -505,7 +505,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.SOFTWARE);
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
                     ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
@@ -593,8 +593,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
-        mShortcutPreference.setTitle(R.string.accessibility_shortcut_title);
         mShortcutPreference.setOnClickListener(this);
+
+        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
+        mShortcutPreference.setTitle(title);
     }
 
     private void updateShortcutPreference() {

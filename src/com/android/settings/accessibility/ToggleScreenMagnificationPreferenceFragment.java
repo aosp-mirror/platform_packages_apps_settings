@@ -240,8 +240,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return AccessibilityGestureNavigationTutorial
                         .showAccessibilityButtonTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getText(
-                        R.string.accessibility_shortcut_edit_dialog_title_magnification);
+                final CharSequence dialogTitle = getPrefContext().getString(
+                        R.string.accessibility_shortcut_title, mPackageName);
                 final AlertDialog dialog =
                         AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
                                 getPrefContext(), dialogTitle,
@@ -338,7 +338,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.DEFAULT);
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
                     ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
@@ -481,9 +481,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(KEY_SHORTCUT_PREFERENCE);
-        mShortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
+
+        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
+        mShortcutPreference.setTitle(title);
     }
 
     private void updateShortcutPreference() {
