@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ShortcutInfo;
 import android.os.UserManager;
 import android.view.View;
 
@@ -49,7 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-public class HeaderPreferenceControllerTest {
+public class ConversationHeaderPreferenceControllerTest {
 
     private Context mContext;
     @Mock
@@ -57,7 +58,7 @@ public class HeaderPreferenceControllerTest {
     @Mock
     private UserManager mUm;
 
-    private HeaderPreferenceController mController;
+    private ConversationHeaderPreferenceController mController;
     @Mock
     private LayoutPreference mPreference;
     @Mock
@@ -75,7 +76,7 @@ public class HeaderPreferenceControllerTest {
         FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
         when(fragment.getActivity()).thenReturn(activity);
-        mController = spy(new HeaderPreferenceController(mContext, fragment));
+        mController = spy(new ConversationHeaderPreferenceController(mContext, fragment));
         when(mPreference.findViewById(anyInt())).thenReturn(mView);
     }
 
@@ -101,23 +102,15 @@ public class HeaderPreferenceControllerTest {
 
     @Test
     public void testGetLabel() {
+        ShortcutInfo si = mock(ShortcutInfo.class);
+        when(si.getShortLabel()).thenReturn("hello");
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.label = "bananas";
-        mController.onResume(appRow, null, null, null, null, null);
-        assertEquals(appRow.label, mController.getLabel());
-
-        NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null, null, null);
-        assertEquals(group.getName(), mController.getLabel());
+        mController.onResume(appRow, null, null, null, si, null);
+        assertEquals(si.getShortLabel(), mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, group, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertEquals(channel.getName(), mController.getLabel());
-
-        NotificationChannel defaultChannel = new NotificationChannel(
-                NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
-        mController.onResume(appRow, defaultChannel, null, null, null, null);
-        assertEquals(appRow.label, mController.getLabel());
     }
 
     @Test

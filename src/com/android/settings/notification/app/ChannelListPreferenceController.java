@@ -31,6 +31,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -132,9 +133,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             groupCategory.setOrderingAsAdded(true);
             mPreference.addPreference(groupCategory);
             if (group.getId() == null) {
-                if (mChannelGroupList.size() > 1) {
-                    groupCategory.setTitle(R.string.notification_channels_other);
-                }
+                groupCategory.setTitle(R.string.notification_channels_other);
                 groupCategory.setKey(KEY_GENERAL_CATEGORY);
             } else {
                 groupCategory.setTitle(group.getName());
@@ -147,7 +146,10 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 int N = channels.size();
                 for (int i = 0; i < N; i++) {
                     final NotificationChannel channel = channels.get(i);
-                    populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
+                    // conversations get their own section
+                    if (TextUtils.isEmpty(channel.getConversationId()) || channel.isDemoted()) {
+                        populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
+                    }
                 }
             }
         }

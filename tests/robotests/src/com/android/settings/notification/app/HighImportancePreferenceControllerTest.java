@@ -36,8 +36,6 @@ import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.HighImportancePreferenceController;
-import com.android.settings.notification.app.NotificationSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -90,7 +88,7 @@ public class HighImportancePreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -98,7 +96,7 @@ public class HighImportancePreferenceControllerTest {
     public void testIsAvailable_ifAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -107,7 +105,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -117,7 +115,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -126,7 +124,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -134,7 +132,7 @@ public class HighImportancePreferenceControllerTest {
     public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(mContext, null);
@@ -149,7 +147,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
@@ -164,7 +162,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(false);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
@@ -179,7 +177,7 @@ public class HighImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext, null);
         mController.updateState(pref);
@@ -191,7 +189,7 @@ public class HighImportancePreferenceControllerTest {
     public void testUpdateState_high() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -203,7 +201,7 @@ public class HighImportancePreferenceControllerTest {
     public void testUpdateState_default() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -215,7 +213,7 @@ public class HighImportancePreferenceControllerTest {
     public void onPreferenceChange() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

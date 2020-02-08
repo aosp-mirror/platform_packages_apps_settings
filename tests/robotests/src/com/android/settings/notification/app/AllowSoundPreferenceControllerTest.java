@@ -92,10 +92,10 @@ public class AllowSoundPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, mock(NotificationChannel.class), null, null);
+        mController.onResume(null, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
 
-        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null);
+        mController.onResume(mock(NotificationBackend.AppRow.class), null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -103,7 +103,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -112,7 +112,7 @@ public class AllowSoundPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something new");
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -122,7 +122,7 @@ public class AllowSoundPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -130,7 +130,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(mContext);
@@ -145,7 +145,7 @@ public class AllowSoundPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("");
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -158,7 +158,7 @@ public class AllowSoundPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -170,7 +170,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testUpdateState_checkedForHighImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -181,7 +181,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testUpdateState_checkedForUnspecifiedImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_UNSPECIFIED);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -192,7 +192,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testUpdateState_notCheckedForLowImportanceChannel() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -203,7 +203,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testOnPreferenceChange_on() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -220,7 +220,7 @@ public class AllowSoundPreferenceControllerTest {
     public void testOnPreferenceChange_off() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

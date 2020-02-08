@@ -33,7 +33,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.NotificationsOffPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -73,7 +72,7 @@ public class NotificationsOffPreferenceControllerTest {
     public void testIsAvailable_yesIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -82,7 +81,7 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -91,7 +90,7 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -100,7 +99,7 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -114,7 +113,7 @@ public class NotificationsOffPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -127,7 +126,7 @@ public class NotificationsOffPreferenceControllerTest {
     public void testUpdateState_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);

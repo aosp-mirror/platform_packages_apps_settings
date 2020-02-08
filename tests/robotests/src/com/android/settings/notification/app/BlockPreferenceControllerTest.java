@@ -45,8 +45,6 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.BlockPreferenceController;
-import com.android.settings.notification.app.NotificationSettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -99,7 +97,7 @@ public class BlockPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -109,7 +107,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -119,7 +117,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -129,7 +127,7 @@ public class BlockPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -137,7 +135,7 @@ public class BlockPreferenceControllerTest {
     public void testIsAvailable_GroupNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null);
+        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -145,7 +143,7 @@ public class BlockPreferenceControllerTest {
     public void testIsAvailable_AppNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -155,7 +153,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -165,7 +163,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = false;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -174,7 +172,7 @@ public class BlockPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedImportance = true;
         appRow.systemApp = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mSwitch.isEnabled());
     }
@@ -183,7 +181,7 @@ public class BlockPreferenceControllerTest {
     public void testIsEnabled_GroupNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null);
+        mController.onResume(appRow, null, mock(NotificationChannelGroup.class), null, null, null);
         mController.updateState(mPreference);
         assertFalse(mSwitch.isEnabled());
     }
@@ -192,7 +190,7 @@ public class BlockPreferenceControllerTest {
     public void testIsEnabled_systemAppNotBlockable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
         assertFalse(mSwitch.isEnabled());
     }
@@ -203,7 +201,7 @@ public class BlockPreferenceControllerTest {
         appRow.systemApp = true;
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         channel.setBlockableSystem(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
         assertTrue(mSwitch.isEnabled());
     }
@@ -214,7 +212,7 @@ public class BlockPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         mController.updateState(mPreference);
 
@@ -227,7 +225,7 @@ public class BlockPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         mController.updateState(mPreference);
 
@@ -239,7 +237,7 @@ public class BlockPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         mController.updateState(mPreference);
 
@@ -249,7 +247,7 @@ public class BlockPreferenceControllerTest {
     @Test
     public void testIsEnabled_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         mController.updateState(mPreference);
 
@@ -260,7 +258,7 @@ public class BlockPreferenceControllerTest {
     public void testUpdateState_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
 
         assertNotNull(mPreference.findViewById(R.id.switch_bar));
@@ -268,7 +266,7 @@ public class BlockPreferenceControllerTest {
         assertFalse(mSwitch.isChecked());
 
         appRow.banned = false;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         mController.updateState(mPreference);
 
         assertTrue(mSwitch.isChecked());
@@ -279,20 +277,20 @@ public class BlockPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         mController.updateState(mPreference);
 
         assertFalse(mSwitch.isChecked());
 
         appRow.banned = true;
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         when(group.isBlocked()).thenReturn(true);
         mController.updateState(mPreference);
 
         assertFalse(mSwitch.isChecked());
 
         appRow.banned = false;
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         when(group.isBlocked()).thenReturn(false);
         mController.updateState(mPreference);
 
@@ -303,21 +301,21 @@ public class BlockPreferenceControllerTest {
     public void testUpdateState_channelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("a", "a", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         assertFalse(mSwitch.isChecked());
 
         appRow.banned = true;
         channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         assertFalse(mSwitch.isChecked());
 
         appRow.banned = false;
         channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         assertTrue(mSwitch.isChecked());
@@ -327,7 +325,7 @@ public class BlockPreferenceControllerTest {
     public void testUpdateState_noCrashIfCalledTwice() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("a", "a", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
         mController.updateState(mPreference);
     }
@@ -336,7 +334,7 @@ public class BlockPreferenceControllerTest {
     public void testUpdateState_doesNotResetImportance() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("a", "a", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         assertEquals(IMPORTANCE_LOW, channel.getImportance());
@@ -349,7 +347,7 @@ public class BlockPreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_UNSPECIFIED);
         when(mBackend.onlyHasDefaultChannel(anyString(), anyInt())).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         mController.onSwitchChanged(null, false);
@@ -370,7 +368,7 @@ public class BlockPreferenceControllerTest {
     public void testOnSwitchChanged_channel_nonDefault() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("a", "a", IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
 
         mController.onSwitchChanged(null, false);

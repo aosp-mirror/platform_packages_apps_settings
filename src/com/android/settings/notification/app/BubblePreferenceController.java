@@ -22,14 +22,14 @@ import android.annotation.Nullable;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
 
 public class BubblePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
