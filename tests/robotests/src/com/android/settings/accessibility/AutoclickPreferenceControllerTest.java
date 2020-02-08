@@ -46,7 +46,7 @@ public class AutoclickPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_shouldReturnAvailableUnsearchable() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

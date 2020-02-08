@@ -60,10 +60,13 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+/**
+ * Fragment that shows the actual UI for providing basic magnification accessibility service setup
+ * and does not have toggle bar to turn on service to use.
+ */
 public class ToggleScreenMagnificationPreferenceFragment extends
         ToggleFeaturePreferenceFragment {
 
-    private static final String SETTINGS_KEY = "screen_magnification_settings";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -240,8 +243,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 return AccessibilityGestureNavigationTutorial
                         .showAccessibilityButtonTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getText(
-                        R.string.accessibility_shortcut_edit_dialog_title_magnification);
+                final CharSequence dialogTitle = getPrefContext().getString(
+                        R.string.accessibility_shortcut_title, mPackageName);
                 final AlertDialog dialog =
                         AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
                                 getPrefContext(), dialogTitle,
@@ -338,7 +341,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private String getShortcutTypeSummary(Context context) {
         final int shortcutType = getUserShortcutType(context, UserShortcutType.DEFAULT);
-        int resId = R.string.accessibility_shortcut_edit_dialog_title_software;
+        int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
                     ? R.string.accessibility_shortcut_edit_dialog_title_software_gesture_talkback
@@ -429,11 +432,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-
-        // Magnify is temporary-use app which uses shortcut to magnify screen, not by toggle.
-        mSwitchBar.hide();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setVisible(false);
     }
 
     @Override
@@ -481,9 +482,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference = new ShortcutPreference(getPrefContext(), null);
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(KEY_SHORTCUT_PREFERENCE);
-        mShortcutPreference.setTitle(R.string.accessibility_magnification_shortcut_title);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         mShortcutPreference.setOnClickListener(this);
+
+        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
+        mShortcutPreference.setTitle(title);
     }
 
     private void updateShortcutPreference() {

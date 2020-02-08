@@ -31,9 +31,7 @@ public class NotificationAccessController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return !ActivityManager.isLowRamDeviceStatic()
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     public static boolean hasAccess(Context context, ComponentName cn) {

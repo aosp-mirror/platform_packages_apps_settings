@@ -16,7 +16,7 @@
 
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -48,7 +48,7 @@ public class TopLevelConnectedDevicesPreferenceControllerTest {
 
     @Test
     public void getAvailibilityStatus_availableByDefault() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

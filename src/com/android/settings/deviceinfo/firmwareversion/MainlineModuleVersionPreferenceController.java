@@ -86,8 +86,11 @@ public class MainlineModuleVersionPreferenceController extends BasePreferenceCon
                 mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0 /* flags */);
         if (resolved != null) {
             preference.setIntent(MODULE_UPDATE_INTENT);
+            preference.setSelectable(true);
         } else {
+            Log.d(TAG, "The ResolveInfo of the update intent is null.");
             preference.setIntent(null);
+            preference.setSelectable(false);
         }
     }
 

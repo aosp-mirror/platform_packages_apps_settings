@@ -31,7 +31,7 @@ public class AutoclickPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override

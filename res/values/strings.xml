@@ -1791,7 +1791,7 @@
     <string name="nfc_disclaimer_content">NFC exchanges data between this device and other nearby devices or targets, such as payment terminals, access readers, and interactive ads or tags.</string>
 
     <!-- Used in the settings screen to secure NFC [CHAR LIMIT=NONE] -->
-    <string name="nfc_secure_settings_title">Secure NFC</string>
+    <string name="nfc_secure_settings_title">Require device unlock for NFC</string>
     <!-- Description of Secure NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
     <string name="nfc_secure_toggle_summary" product="default">Allow NFC Payment and Transit use only when screen is unlocked</string>
 
@@ -4780,7 +4780,7 @@
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_title">Magnify</string>
+    <string name="accessibility_screen_magnification_title">Magnification</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification area</string>
     <!-- Title for the accessibility preference screen to edit magnification enable mode. [CHAR LIMIT=35] -->
@@ -4816,7 +4816,7 @@
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary"><b>To zoom</b>, quickly tap the screen 3 times.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, quickly tap the screen 3 times and hold down your finger on the third tap.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can\'t zoom in on the keyboard and navigation bar.</string>
+    <string name="accessibility_screen_magnification_summary">Quickly zoom in on the screen to see content more clearly.\n\n<b>To zoom in:</b>\n\t1. Use shortcut to start magnification\n\t2. Tap the screen\n\t3. Drag 2 fingers to move around screen\n\t4. Pinch with 2 fingers to adjust zoom\n\t5. Use shortcut to stop magnification</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, you can zoom in on your screen.\n\n<b>To zoom</b>, start magnification, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, start magnification, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Title for the Accessibility tutorial dialog in Accessibility service with button. [CHAR LIMIT=50] -->
@@ -4838,35 +4838,29 @@
     <!-- Button for the Accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
-    <string name="accessibility_shortcut_title">Use shortcut to open</string>
-    <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=40] -->
-    <string name="accessibility_magnification_shortcut_title">Use shortcut to magnify</string>
-    <!-- Title for Accessibility edit shortcut dialog. [CHAR LIMIT=40] -->
-    <string name="accessibility_shortcut_edit_dialog_title">Shortcut to open <xliff:g id="service" example="Select to Speak">%1$s</xliff:g></string>
-    <!-- Title for Accessibility edit shortcut dialog in Magnify. [CHAR LIMIT=40] -->
-    <string name="accessibility_shortcut_edit_dialog_title_magnification">Shortcut to magnify</string>
-    <!-- Title for Accessibility edit shortcut dialog in Color correction. [CHAR LIMIT=40] -->
-    <string name="accessibility_shortcut_edit_dialog_title_daltonizer">Shortcut to open Color correction</string>
+    <string name="accessibility_shortcut_title"><xliff:g id="service" example="Select to Speak">%1$s</xliff:g> shortcut</string>
     <!-- Title for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_title_software">Accessibility Button</string>
+    <string name="accessibility_shortcut_edit_summary_software">Accessibility Button</string>
     <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_title_software_gesture">2-finger swipe up from bottom</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture">Swipe up with 2 fingers</string>
     <!-- Title for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback">3-finger swipe up from bottom</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback">Swipe up with 3 fingers</string>
+    <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_title_software">Tap accessibility button</string>
     <!-- Summary for software shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> button at the bottom of your screen</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen</string>
     <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up with 2 fingers from edge of screen</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers</string>
     <!-- Summary for software shortcut in gesture mode in Accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up with 3 fingers from edge of screen</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers</string>
     <!-- Title for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Summary for hardware shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press and hold both volume keys for 1 second</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys for 1 second</string>
     <!-- Title for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple tap screen</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Summary for triple tap shortcut in Accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times (this can slow down your device)</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap">Quickly tap screen 3 times. This shortcut may slow down your device.</string>
     <!-- Title for the Accessibility edit shortcut dialog to save the preference when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_shortcut_edit_dialog_title_advance">Advanced</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
@@ -4930,15 +4924,15 @@
     <!-- Title for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_switch_title">Invert colors</string>
+    <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle">Turn light screens dark so people who are sensitive to bright light can have a better viewing experience.\n\nNote: dark colors will turn light. Images will also be inverted.</string>
+    <string name="accessibility_display_inversion_preference_subtitle">Color inversion turns light screens dark. This helps people who are sensitive to bright light see the screen more easily.\n\nNote: Dark colors will turn light. Colors will change in media and images. You can also use Dark theme (Settings > Display).</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
-    <string name="accessibility_autoclick_default_title">None</string>
+    <string name="accessibility_autoclick_default_title">Don\u2019t use auto click (default)</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -4953,6 +4947,10 @@
     <string name="accessibility_autoclick_long_summary">1 second</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its custom level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_custom_title">Custom</string>
+    <!-- Description for the button that shorter delay time. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_autoclick_shorter_desc">Shorter</string>
+    <!-- Description for the button that longer time. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_autoclick_longer_desc">Longer</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
@@ -4964,7 +4962,7 @@
     <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
-    <string name="accessibility_daltonizer_master_switch_title">Correct colors</string>
+    <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Show captions</string>
     <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
@@ -5054,6 +5052,12 @@
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
 
+    <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
+    <plurals name="accessibilty_autoclick_delay_unit_second">
+        <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
+        <item quantity="other"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
+    </plurals>
+
     <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
     <string name="accessibility_vibration_summary">Ring <xliff:g id="summary_ring" example="Medium">%1$s</xliff:g>, notification <xliff:g id="summary_notification" example="Low">%2$s</xliff:g>, touch <xliff:g id="summary_touch" example="High">%3$s</xliff:g></string>
 
@@ -5083,9 +5087,6 @@
 
     <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
-
-    <!-- Title for accessibility menu item to launch a settings activity with app name. [CHAR LIMIT=30] -->
-    <string name="accessibility_service_menu_item_settings"><xliff:g example="TalkBack" id="accessibility_app_name">%1$s</xliff:g> settings</string>
 
     <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_on">On</string>
@@ -8389,6 +8390,36 @@
 
     <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
     <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you\'re using.</string>
+
+    <!-- Special access > Title for managing the settings where users opt-in to connect a work app
+    to its personal equivalent, allowing cross-profile communication. [CHAR LIMIT=50] -->
+    <string name="interact_across_profiles_title" translatable="false">Connected work and personal apps</string>
+
+    <!-- Special access > Connected work and personal apps > Text to display when the list is empty. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_empty_text" translatable="false">No connected apps</string>
+
+    <!-- Special access > Connected work and personal apps > Additional keywords to search for. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_keywords" translatable="false">cross profile connected app apps work and personal</string>
+
+    <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_app_detail_title" translatable="false">Connected work and personal apps</string>
+
+    <!-- Apps > App Details > Connected work and personal apps > Switch title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_app_detail_switch" translatable="false">Connect these apps</string>
+
+    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
+
+    <!-- Apps > App Details > Connected work and personal apps > Description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
+
+    <!-- TODO(b/148594054): Replace calendar with actual app name -->
+    <!-- Apps > App Details > Connected work and personal apps > Consent dialog title. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work Calendar with your personal data?</string>
+
+    <!-- TODO(b/148594054): Replace calendar with actual app name -->
+    <!-- Apps > App Details > Connected work and personal apps > Consent dialog description. [CHAR LIMIT=NONE] -->
+    <string name="interact_across_profiles_consent_dialog_summary" translatable="false">Calendar may expose your personal data to your IT admin</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>

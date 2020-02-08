@@ -18,9 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="wifi_tether_settings_screen"
-    android:title="@string/wifi_hotspot_checkbox_text"
-    settings:searchable="false">
+    android:title="@string/wifi_hotspot_checkbox_text">
 
     <com.android.settings.wifi.tether.WifiTetherSsidPreference
         android:key="wifi_tether_network_name"

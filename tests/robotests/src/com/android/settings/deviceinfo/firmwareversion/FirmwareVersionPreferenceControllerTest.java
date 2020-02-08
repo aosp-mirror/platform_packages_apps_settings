@@ -58,7 +58,7 @@ public class FirmwareVersionPreferenceControllerTest {
     @Test
     public void firmwareVersion_shouldAlwaysBeShown() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test

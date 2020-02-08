@@ -100,12 +100,5 @@ public class TopLevelSettings extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.top_level_settings) {
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    // Never searchable, all entries in this page are already indexed elsewhere.
-                    return false;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.top_level_settings);
 }

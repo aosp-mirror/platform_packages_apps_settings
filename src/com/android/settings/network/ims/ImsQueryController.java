@@ -33,11 +33,6 @@ abstract class ImsQueryController {
 
     /**
      * Constructor for query IMS status
-     */
-    ImsQueryController() {}
-
-    /**
-     * Constructor for query IMS status
      *
      * @param capability {@link MmTelFeature.MmTelCapabilities#MmTelCapability}
      * @param tech {@link ImsRegistrationImplBase#ImsRegistrationTech}

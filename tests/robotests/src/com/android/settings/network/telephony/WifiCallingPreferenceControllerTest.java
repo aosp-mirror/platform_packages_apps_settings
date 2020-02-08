@@ -40,7 +40,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.ims.ImsManager;
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.ims.WifiCallingQueryImsState;
+import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -66,7 +66,7 @@ public class WifiCallingPreferenceControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
-    private WifiCallingQueryImsState mQueryImsState;
+    private MockWifiCallingQueryImsState mQueryImsState;
 
     private WifiCallingPreferenceController mController;
     private Preference mPreference;
@@ -79,8 +79,10 @@ public class WifiCallingPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
-        mQueryImsState = spy(new WifiCallingQueryImsState(mContext, SUB_ID));
+        mQueryImsState = spy(new MockWifiCallingQueryImsState(mContext, SUB_ID));
         doReturn(true).when(mQueryImsState).isEnabledByUser();
+        doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
+        mQueryImsState.setIsProvisionedOnDevice(true);
 
         mPreference = new Preference(mContext);
         mController = spy(new WifiCallingPreferenceController(mContext, "wifi_calling") {
@@ -91,7 +93,6 @@ public class WifiCallingPreferenceControllerTest {
         });
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mController.init(SUB_ID);
-        mController.mImsManager = mImsManager;
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         mPreference.setKey(mController.getPreferenceKey());
@@ -143,7 +144,6 @@ public class WifiCallingPreferenceControllerTest {
         mCarrierConfig.putBoolean(
                 CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
         mController.init(SUB_ID);
-        mController.mImsManager = mImsManager;
 
         when(mImsMmTelManager.getVoWiFiRoamingModeSetting()).thenReturn(
                 ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED);
