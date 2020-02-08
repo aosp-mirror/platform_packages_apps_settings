@@ -36,20 +36,18 @@ import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 /**
  * This controller helps to manage the switch state and visibility of USB tether switch
  * preference. It stores preference values when preference changed.
- * TODO(b/147272749): Extend BasePreferenceController.java instead.
  *
  */
-public final class UsbTetherPreferenceController extends AbstractPreferenceController implements
+public final class UsbTetherPreferenceController extends BasePreferenceController implements
         LifecycleObserver, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "UsbTetherPrefController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    public static final String PREF_KEY = "enable_usb_tethering";
 
     private final ConnectivityManager mCm;
     private boolean mUsbConnected;
@@ -57,14 +55,11 @@ public final class UsbTetherPreferenceController extends AbstractPreferenceContr
     private Preference mPreference;
     private final SharedPreferences mSharedPreferences;
 
-    public UsbTetherPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public UsbTetherPreferenceController(Context context, String prefKey) {
+        super(context, prefKey);
         mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mSharedPreferences =
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -82,23 +77,22 @@ public final class UsbTetherPreferenceController extends AbstractPreferenceContr
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         String[] usbRegexs = mCm.getTetherableUsbRegexs();
-        return usbRegexs != null && usbRegexs.length > 0 && !Utils.isMonkeyRunning();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
+        if (usbRegexs == null || usbRegexs.length == 0 || Utils.isMonkeyRunning()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(PREF_KEY);
+        mPreference = screen.findPreference(mPreferenceKey);
         if (mPreference != null && mPreference instanceof SwitchPreference) {
             ((SwitchPreference) mPreference)
-                    .setChecked(mSharedPreferences.getBoolean(PREF_KEY, false));
+                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
         }
     }
 
@@ -136,7 +130,7 @@ public final class UsbTetherPreferenceController extends AbstractPreferenceContr
             Log.d(TAG, "preference changing to " + o);
         }
         final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(PREF_KEY, (Boolean) o);
+        editor.putBoolean(mPreferenceKey, (Boolean) o);
         editor.apply();
         return true;
     }

@@ -188,12 +188,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         initShortcutPreference();
 
-        mSettingsPreference = new Preference(getPrefContext());
-        mSettingsPreference.setTitle(R.string.accessibility_magnification_service_settings_title);
-        mSettingsPreference.setKey(SETTINGS_KEY);
-        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
-        mSettingsPreference.setPersistent(false);
-
         super.onViewCreated(view, savedInstanceState);
 
         mConfigWarningPreference = new Preference(getPrefContext());

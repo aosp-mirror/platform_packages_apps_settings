@@ -22,7 +22,7 @@ import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 
 /**
- * An {@code ImsQuery} for accessing IMS provision stat
+ * An {@link ImsQuery} for accessing IMS provision stat
  */
 public class ImsQueryProvisioningStat implements ImsQuery {
 
@@ -33,8 +33,8 @@ public class ImsQueryProvisioningStat implements ImsQuery {
     /**
      * Constructor
      * @param subId subscription id
-     * @param capability {@code MmTelFeature.MmTelCapabilities.MmTelCapability}
-     * @param tech {@code @ImsRegistrationImplBase.ImsRegistrationTech}
+     * @param capability {@link MmTelFeature.MmTelCapabilities#MmTelCapability}
+     * @param tech {@link ImsRegistrationImplBase#ImsRegistrationTech}
      */
     public ImsQueryProvisioningStat(int subId,
             @MmTelFeature.MmTelCapabilities.MmTelCapability int capability,
@@ -45,7 +45,7 @@ public class ImsQueryProvisioningStat implements ImsQuery {
     }
 
     /**
-     * Implementation of interface {@code ImsQuery}
+     * Implementation of interface {@link ImsQuery}
      *
      * @return result of query
      */

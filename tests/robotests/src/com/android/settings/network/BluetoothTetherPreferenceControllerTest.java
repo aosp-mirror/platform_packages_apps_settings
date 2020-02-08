@@ -16,11 +16,12 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.TetherEnabler.BLUETOOTH_TETHER_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,7 +29,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
@@ -55,7 +55,7 @@ public class BluetoothTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
         when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
-        mController = new BluetoothTetherPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new BluetoothTetherPreferenceController(mContext, BLUETOOTH_TETHER_KEY);
     }
 
     @Test

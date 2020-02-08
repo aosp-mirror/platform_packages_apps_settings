@@ -28,9 +28,6 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsMmTelManager;
-import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.MmTelFeature;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -40,10 +37,8 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -112,14 +107,6 @@ public class Enhanced4gLteSliceHelper {
             return null;
         }
 
-        final ImsManager imsManager = getImsManager(subId);
-
-        if (!imsManager.isVolteEnabledByPlatform()
-                || !isVolteProvisionedOnDevice(subId)) {
-            Log.d(TAG, "Setting is either not provisioned or not enabled by Platform");
-            return null;
-        }
-
         if (isCarrierConfigManagerKeyEnabled(
                 CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, subId, false)
                 || !isCarrierConfigManagerKeyEnabled(
@@ -130,6 +117,11 @@ public class Enhanced4gLteSliceHelper {
         }
 
         final VolteQueryImsState queryState = queryImsState(subId);
+        if (!queryState.isVoLteProvisioned()) {
+            Log.d(TAG, "Setting is either not provisioned or not enabled by Platform");
+            return null;
+        }
+
         try {
             return getEnhanced4gLteSlice(sliceUri,
                     queryState.isEnabledByUser(), subId);
@@ -164,15 +156,6 @@ public class Enhanced4gLteSliceHelper {
                 .build();
     }
 
-    protected ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext, SubscriptionUtil.getPhoneId(mContext, subId));
-    }
-
-    @VisibleForTesting
-    ProvisioningManager getProvisioningManager(int subId) {
-        return ProvisioningManager.createForSubscriptionId(subId);
-    }
-
     /**
      * Handles Enhanced 4G LTE mode setting change from Enhanced 4G LTE slice and posts
      * notification. Should be called when intent action is ACTION_ENHANCED_4G_LTE_CHANGED
@@ -183,9 +166,8 @@ public class Enhanced4gLteSliceHelper {
         final int subId = getDefaultVoiceSubId();
 
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
-            final ImsManager imsManager = getImsManager(subId);
-            if (imsManager.isVolteEnabledByPlatform() && isVolteProvisionedOnDevice(subId)) {
-                final VolteQueryImsState queryState = queryImsState(subId);
+            final VolteQueryImsState queryState = queryImsState(subId);
+            if (queryState.isVoLteProvisioned()) {
                 final boolean currentValue = queryState.isEnabledByUser()
                         && queryState.isAllowUserControl();
                 final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
@@ -283,16 +265,6 @@ public class Enhanced4gLteSliceHelper {
         final Intent intent = new Intent(action);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
-    }
-
-    private boolean isVolteProvisionedOnDevice(int subId) {
-        final ProvisioningManager provisioningMgr = getProvisioningManager(subId);
-        if (provisioningMgr == null) {
-            return true;
-        }
-        return provisioningMgr.getProvisioningStatusForCapability(
-                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-                ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
     }
 
     @VisibleForTesting

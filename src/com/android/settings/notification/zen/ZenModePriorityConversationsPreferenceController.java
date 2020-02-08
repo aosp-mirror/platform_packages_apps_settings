@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package com.android.settings.notification.zen;
 
+import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
+import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
+import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
+
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
-import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -29,18 +31,17 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModePriorityMessagesPreferenceController extends AbstractZenModePreferenceController
+public class ZenModePriorityConversationsPreferenceController
+        extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    protected static final String KEY = "zen_mode_messages";
+    protected static final String KEY = "zen_mode_conversations";
     private final ZenModeBackend mBackend;
     private ListPreference mPreference;
-    private final String[] mListValues;
 
-    public ZenModePriorityMessagesPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModePriorityConversationsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
         mBackend = ZenModeBackend.getInstance(context);
-        mListValues = context.getResources().getStringArray(R.array.zen_mode_contacts_values);
     }
 
     @Override
@@ -62,47 +63,42 @@ public class ZenModePriorityMessagesPreferenceController extends AbstractZenMode
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        updateFromContactsValue(preference);
+        updateValue(preference);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object selectedContactsFrom) {
-        mBackend.saveSenders(NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES,
-                ZenModeBackend.getSettingFromPrefKey(selectedContactsFrom.toString()));
-        updateFromContactsValue(preference);
+        mBackend.saveConversationSenders(Integer.parseInt(selectedContactsFrom.toString()));
+        updateValue(preference);
         return true;
     }
 
-    private void updateFromContactsValue(Preference preference) {
+    private void updateValue(Preference preference) {
         mPreference = (ListPreference) preference;
         switch (getZenMode()) {
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
             case Settings.Global.ZEN_MODE_ALARMS:
                 mPreference.setEnabled(false);
-                mPreference.setValue(ZenModeBackend.ZEN_MODE_FROM_NONE);
+                mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
                 mPreference.setSummary(mBackend.getAlarmsTotalSilencePeopleSummary(
-                        NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES));
+                        NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS));
                 break;
             default:
                 preference.setEnabled(true);
-                preference.setSummary(mBackend.getContactsSummary(
-                        NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES));
+                preference.setSummary(mBackend.getConversationSummary());
+                int senders = mBackend.getPriorityConversationSenders();
 
-                final String currentVal = ZenModeBackend.getKeyFromSetting(
-                        mBackend.getPriorityMessageSenders());
-                mPreference.setValue(mListValues[getIndexOfSendersValue(currentVal)]);
+                switch (senders) {
+                    case CONVERSATION_SENDERS_NONE:
+                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
+                        break;
+                    case CONVERSATION_SENDERS_IMPORTANT:
+                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
+                        break;
+                    default:
+                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_ANYONE));
+                        break;
+                }
         }
-    }
-
-    @VisibleForTesting
-    protected int getIndexOfSendersValue(String currentVal) {
-        int index = 3; // defaults to "none" based on R.array.zen_mode_contacts_values
-        for (int i = 0; i < mListValues.length; i++) {
-            if (TextUtils.equals(currentVal, mListValues[i])) {
-                return i;
-            }
-        }
-
-        return index;
     }
 }

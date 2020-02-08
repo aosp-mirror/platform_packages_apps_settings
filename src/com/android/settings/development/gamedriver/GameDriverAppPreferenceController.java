@@ -85,14 +85,14 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
                 new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
 
         final Resources resources = context.getResources();
-        mEntryList = resources.getStringArray(R.array.game_driver_app_preference_values);
-        mPreferenceTitle = resources.getString(R.string.game_driver_app_preference_title);
-        mPreferenceDefault = resources.getString(R.string.game_driver_app_preference_default);
+        mEntryList = resources.getStringArray(R.array.graphics_driver_app_preference_values);
+        mPreferenceTitle = resources.getString(R.string.graphics_driver_app_preference_title);
+        mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
         mPreferenceGameDriver =
-                resources.getString(R.string.game_driver_app_preference_game_driver);
+                resources.getString(R.string.graphics_driver_app_preference_game_driver);
         mPreferencePrereleaseDriver =
-                resources.getString(R.string.game_driver_app_preference_prerelease_driver);
-        mPreferenceSystem = resources.getString(R.string.game_driver_app_preference_system);
+                resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
+        mPreferenceSystem = resources.getString(R.string.graphics_driver_app_preference_system);
 
         // TODO: Move this task to background if there's potential ANR/Jank.
         // Update the UI when all the app infos are ready.
