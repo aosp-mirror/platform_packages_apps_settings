@@ -32,7 +32,6 @@ import java.util.regex.Pattern;
  */
 public final class HtmlTextPreference extends StaticTextPreference {
 
-    private boolean mDividerAllowedAbove = false;
     private int mFlag = Html.FROM_HTML_MODE_COMPACT;
     private Html.ImageGetter mImageGetter;
     private Html.TagHandler mTagHandler;
@@ -45,24 +44,11 @@ public final class HtmlTextPreference extends StaticTextPreference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(mDividerAllowedAbove);
 
         final TextView summaryView = holder.itemView.findViewById(android.R.id.summary);
         if (summaryView != null && !TextUtils.isEmpty(getSummary())) {
             final String filteredText = getFilteredText(getSummary().toString());
             summaryView.setText(Html.fromHtml(filteredText, mFlag, mImageGetter, mTagHandler));
-        }
-    }
-
-    /**
-     * Sets divider whether to show in preference above.
-     *
-     * @param allowed true will be drawn on above this item
-     */
-    public void setDividerAllowedAbove(boolean allowed) {
-        if (allowed != mDividerAllowedAbove) {
-            mDividerAllowedAbove = allowed;
-            notifyChanged();
         }
     }
 
