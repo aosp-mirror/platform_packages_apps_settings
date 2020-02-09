@@ -18,6 +18,15 @@ package com.android.settings.network.telephony;
 
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.EVDO;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_UNKNOWN;
+import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -54,21 +63,13 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.CDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.EVDO;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.GSM;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.NR;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_UNKNOWN;
-import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
 
 public class MobileNetworkUtils {
 
@@ -152,10 +153,10 @@ public class MobileNetworkUtils {
 
             isWifiCallingEnabled = intent != null;
         } else {
+            final WifiCallingQueryImsState queryState =
+                    new WifiCallingQueryImsState(context, subId);
             final ImsManager imsMgr = ImsManager.getInstance(context, phoneId);
-            isWifiCallingEnabled = imsMgr != null
-                    && imsMgr.isWfcEnabledByPlatform()
-                    && isWfcProvisionedOnDevice(subId)
+            isWifiCallingEnabled = queryState.isWifiCallingProvisioned()
                     && isImsServiceStateReady(imsMgr);
         }
 
