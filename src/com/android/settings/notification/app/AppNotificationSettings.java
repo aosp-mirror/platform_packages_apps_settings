@@ -80,7 +80,7 @@ public class AppNotificationSettings extends NotificationSettings {
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
@@ -123,6 +123,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new ChannelListPreferenceController(context, mBackend));
+        mControllers.add(new ConversationListPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

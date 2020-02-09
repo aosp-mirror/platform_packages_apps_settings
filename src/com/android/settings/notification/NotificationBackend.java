@@ -17,6 +17,8 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -29,13 +31,17 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.NotifyingApp;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
@@ -48,6 +54,7 @@ import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,7 +161,7 @@ public class NotificationBackend {
         try {
             if (onlyHasDefaultChannel(pkg, uid)) {
                 NotificationChannel defaultChannel =
-                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID);
+                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID, null);
                 defaultChannel.setImportance(enabled ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_NONE);
                 updateChannel(pkg, uid, defaultChannel);
             }
@@ -204,13 +211,17 @@ public class NotificationBackend {
         }
     }
 
-
     public NotificationChannel getChannel(String pkg, int uid, String channelId) {
+        return getChannel(pkg, uid, channelId, null);
+    }
+
+    public NotificationChannel getChannel(String pkg, int uid, String channelId,
+            String conversationId) {
         if (channelId == null) {
             return null;
         }
         try {
-            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, true);
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, conversationId, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return null;
@@ -232,6 +243,15 @@ public class NotificationBackend {
     public ParceledListSlice<NotificationChannelGroup> getGroups(String pkg, int uid) {
         try {
             return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public ParceledListSlice<ConversationChannelWrapper> getConversations(String pkg, int uid) {
+        try {
+            return sINM.getConversationsForPackage(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return ParceledListSlice.emptyList();
@@ -472,6 +492,32 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
         }
+    }
+
+    public ShortcutInfo getConversationInfo(Context context, String pkg, int uid, String id) {
+        LauncherApps la = context.getSystemService(LauncherApps.class);
+
+        LauncherApps.ShortcutQuery query = new LauncherApps.ShortcutQuery()
+                .setPackage(pkg)
+                .setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_PINNED)
+                .setShortcutIds(Arrays.asList(id));
+        List<ShortcutInfo> shortcuts = la.getShortcuts(
+                query, UserHandle.of(UserHandle.getUserId(uid)));
+        if (shortcuts != null && !shortcuts.isEmpty()) {
+           return shortcuts.get(0);
+        }
+        return null;
+    }
+
+    public Drawable getConversationDrawable(Context context, ShortcutInfo info) {
+        LauncherApps la = context.getSystemService(LauncherApps.class);
+        return la.getShortcutBadgedIconDrawable(info,
+                context.getResources().getDisplayMetrics().densityDpi);
+    }
+
+    public void requestPinShortcut(Context context, ShortcutInfo shortcutInfo) {
+        ShortcutManager sm = context.getSystemService(ShortcutManager.class);
+        sm.requestPinShortcut(shortcutInfo, null);
     }
 
     /**
