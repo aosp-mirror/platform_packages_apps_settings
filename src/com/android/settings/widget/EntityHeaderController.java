@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,7 +146,7 @@ public class EntityHeaderController {
      * accessibility purposes.
      */
     public EntityHeaderController setIcon(ApplicationsState.AppEntry appEntry) {
-        mIcon = IconDrawableFactory.newInstance(mAppContext).getBadgedIcon(appEntry.info);
+        mIcon = Utils.getBadgedIcon(mAppContext, appEntry.info);
         return this;
     }
 

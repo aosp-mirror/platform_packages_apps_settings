@@ -21,11 +21,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.IconDrawableFactory;
 
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.EntityHeaderController;
@@ -94,8 +94,7 @@ public class AppHeaderPreferenceController extends BasePreferenceController impl
         EntityHeaderController
                 .newInstance(activity, mParent, mHeaderPreference.findViewById(R.id.entity_header))
                 .setRecyclerView(mParent.getListView(), mLifecycle)
-                .setIcon(IconDrawableFactory.newInstance(activity).getBadgedIcon(
-                        mPackageInfo.applicationInfo))
+                .setIcon(Utils.getBadgedIcon(mParent.getContext(), mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(packageManager))
                 .setSummary(mPackageInfo)
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
