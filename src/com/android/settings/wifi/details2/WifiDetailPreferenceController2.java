@@ -904,7 +904,14 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      */
     @Override
     public void onDisconnectResult(@DisconnectStatus int status) {
-        if (status != DisconnectCallback.DISCONNECT_STATUS_SUCCESS) {
+        if (status == DisconnectCallback.DISCONNECT_STATUS_SUCCESS) {
+            final Activity activity = mFragment.getActivity();
+            if (activity != null) {
+                Toast.makeText(activity,
+                        activity.getString(R.string.wifi_disconnected_from, mWifiEntry.getTitle()),
+                        Toast.LENGTH_SHORT).show();
+            }
+        } else {
             Log.e(TAG, "Disconnect Wi-Fi network failed");
         }
     }

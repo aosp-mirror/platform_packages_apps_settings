@@ -2126,7 +2126,7 @@
     <!-- Warning message displayed if user does not specify a user certification for
          WPA3-Enterprise 192-bit. Only displayed if the user does not specify user certificate
          for WPA3-Enterprise 192-bit [CHAR LIMIT=80]-->
-    <string name="wifi_no_user_cert_warning">This option requires a user certificate.</string>
+    <string name="wifi_no_user_cert_warning">Certificate required.</string>
     <!-- Substring of status line when Wi-Fi Protected Setup (WPS) is available and
          string is listed first [CHAR LIMIT=20]-->
     <string name="wifi_wps_available_first_item">WPS available</string>
@@ -2333,7 +2333,7 @@
     <!-- Title for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
     <string name="wifi_hotspot_auto_off_title">Turn off hotspot automatically</string>
     <!-- Summary for the toggle to turn off hotspot automatically [CHAR LIMIT=NONE]-->
-    <string name="wifi_hotspot_auto_off_summary">Wi\u2011Fi hotspot will turn off if no devices are connected</string>
+    <string name="wifi_hotspot_auto_off_summary">When no devices are connected</string>
 
     <!-- Summary text when turning hotspot on -->
     <string name="wifi_tether_starting">Turning hotspot on\u2026</string>
@@ -2354,17 +2354,21 @@
     <!-- Title for the panel of add Wi-Fi network from APP [CHAR LIMIT=50] -->
     <string name="wifi_add_app_single_network_title">Save this network?</string>
     <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
-    <string name="wifi_add_app_single_network_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your phone</string>
+    <string name="wifi_add_app_single_network_summary" product="default"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your phone</string>
+    <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_single_network_summary" product="tablet"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your tablet</string>
     <!-- Summary for saving status when saving single network [CHAR LIMIT=30] -->
     <string name="wifi_add_app_single_network_saving_summary">Saving\u2026</string>
     <!-- Summary for saved status when saving single network   [CHAR LIMIT=30] -->
     <string name="wifi_add_app_single_network_saved_summary">Saved</string>
     <!-- Summary for save failed status when saving single network [CHAR LIMIT=50] -->
-    <string name="wifi_add_app_network_save_failed_summary">Couldn\u2019t save. Try again.</string>
+    <string name="wifi_add_app_network_save_failed_summary">Can\u2019t save. Try again.</string>
     <!--  Title for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=50] -->
     <string name="wifi_add_app_networks_title">Save networks?</string>
     <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
-    <string name="wifi_add_app_networks_summary"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your phone</string>
+    <string name="wifi_add_app_networks_summary" product="default"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your phone</string>
+    <!-- Summary for the panel of add multiple Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
+    <string name="wifi_add_app_networks_summary" product="tablet"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save these networks to your tablet</string>
     <!-- Summary for the panel of add Wi-Fi networks from APP [CHAR LIMIT=NONE] -->
     <string name="wifi_add_app_networks_saving_summary">Saving <xliff:g id="number" example="3">%d</xliff:g> networks\u2026</string>
     <!-- Summary for saved status when saving multiple networks   [CHAR LIMIT=NONE] -->
@@ -2529,6 +2533,8 @@
     <!-- Message to display when carrier does not support wifi calling or doesn't want the user
          to modify the settings [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_not_supported">Wi\u2011Fi calling is not supported for %1$s</string>
+    <!-- Hint for a Wi-Fi network is disconnected successfully [CHAR LIMIT=NONE] -->
+    <string name="wifi_disconnected_from">Disconnected from <xliff:g id="ssid" example="OfficeWifi">%1$s</xliff:g></string>
     <!-- Carrier string to use in other messages -->
     <string name="carrier">Carrier</string>
     <!-- Sound and alerts settings -->
