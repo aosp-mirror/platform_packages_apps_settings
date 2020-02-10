@@ -18,14 +18,21 @@ package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.provider.Settings;
+import android.net.wifi.SoftApConfiguration;
+import android.net.wifi.WifiManager;
 
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -34,17 +41,23 @@ import org.robolectric.RuntimeEnvironment;
 public class WifiTetherAutoOffPreferenceControllerTest {
 
     private static final String KEY_PREF = "wifi_tether_auto_off";
-    private static final int ON = 1;
-    private static final int OFF = 0;
     private Context mContext;
     private WifiTetherAutoOffPreferenceController mController;
     private SwitchPreference mSwitchPreference;
+    @Mock
+    private WifiManager mWifiManager;
+    private SoftApConfiguration mSoftApConfiguration;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mSoftApConfiguration = new SoftApConfiguration.Builder().build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
+
         mController = new WifiTetherAutoOffPreferenceController(mContext, KEY_PREF);
         mSwitchPreference = new SwitchPreference(mContext);
     }
@@ -53,19 +66,19 @@ public class WifiTetherAutoOffPreferenceControllerTest {
     public void testOnPreferenceChange_toggleOn_settingsOn() {
         mController.onPreferenceChange(null, true);
 
-        assertThat(getAutoOffSetting()).isEqualTo(ON);
+        assertThat(getAutoOffSetting()).isEqualTo(true);
     }
 
     @Test
     public void testOnPreferenceChange_toggleOff_settingsOff() {
         mController.onPreferenceChange(null, false);
 
-        assertThat(getAutoOffSetting()).isEqualTo(OFF);
+        assertThat(getAutoOffSetting()).isEqualTo(false);
     }
 
     @Test
     public void testUpdateState_settingsOn_toggleOn() {
-        setAutoOffSetting(ON);
+        setAutoOffSetting(true);
 
         mController.updateState(mSwitchPreference);
 
@@ -74,7 +87,7 @@ public class WifiTetherAutoOffPreferenceControllerTest {
 
     @Test
     public void testUpdateState_settingsOff_toggleOff() {
-        setAutoOffSetting(OFF);
+        setAutoOffSetting(false);
 
         mController.updateState(mSwitchPreference);
 
@@ -88,13 +101,18 @@ public class WifiTetherAutoOffPreferenceControllerTest {
         assertThat(mSwitchPreference.isChecked()).isTrue();
     }
 
-    private int getAutoOffSetting() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.SOFT_AP_TIMEOUT_ENABLED, OFF);
+    private boolean getAutoOffSetting() {
+        ArgumentCaptor<SoftApConfiguration> softApConfigCaptor =
+                ArgumentCaptor.forClass(SoftApConfiguration.class);
+        verify(mWifiManager).setSoftApConfiguration(softApConfigCaptor.capture());
+        return softApConfigCaptor.getValue().isAutoShutdownEnabled();
     }
 
-    private void setAutoOffSetting(int config) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.SOFT_AP_TIMEOUT_ENABLED, config);
+    private void setAutoOffSetting(boolean config) {
+        mSoftApConfiguration =
+                new SoftApConfiguration.Builder(mSoftApConfiguration)
+                        .setAutoShutdownEnabled(config)
+                        .build();
+        when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
     }
 }
