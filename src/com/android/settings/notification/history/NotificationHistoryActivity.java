@@ -16,15 +16,22 @@
 
 package com.android.settings.notification.history;
 
+import static android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
@@ -36,11 +43,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.Arrays;
 
@@ -48,9 +57,13 @@ public class NotificationHistoryActivity extends Activity {
 
     private static String TAG = "NotifHistory";
 
+    private ViewGroup mHistoryOn;
+    private ViewGroup mHistoryOff;
     private ViewGroup mTodayView;
     private ViewGroup mSnoozeView;
     private ViewGroup mDismissView;
+
+    private SettingsObserver mSettingsObserver = new SettingsObserver();
     private HistoryLoader mHistoryLoader;
     private INotificationManager mNm;
     private PackageManager mPm;
@@ -77,9 +90,17 @@ public class NotificationHistoryActivity extends Activity {
             ImageView icon = viewForPackage.findViewById(R.id.icon);
             icon.setImageDrawable(nhp.icon);
 
+            TextView count = viewForPackage.findViewById(R.id.count);
+            count.setText(getResources().getQuantityString(R.plurals.notification_history_count,
+                    nhp.notifications.size(), nhp.notifications.size()));
+
             RecyclerView rv = viewForPackage.findViewById(R.id.notification_list);
-            rv.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager lm = new LinearLayoutManager(this);
+            rv.setLayoutManager(lm);
             rv.setAdapter(new NotificationHistoryAdapter());
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                    rv.getContext(), lm.getOrientation());
+            rv.addItemDecoration(dividerItemDecoration);
             ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(nhp.notifications);
             mTodayView.addView(viewForPackage);
         }
@@ -92,6 +113,8 @@ public class NotificationHistoryActivity extends Activity {
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
         mDismissView = findViewById(R.id.recently_dismissed_list);
+        mHistoryOff = findViewById(R.id.history_off);
+        mHistoryOn = findViewById(R.id.history_on);
     }
 
     @Override
@@ -111,6 +134,9 @@ public class NotificationHistoryActivity extends Activity {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot register listener", e);
         }
+        mSettingsObserver.observe();
+
+        bindSwitch();
     }
 
     @Override
@@ -120,8 +146,86 @@ public class NotificationHistoryActivity extends Activity {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot unregister listener", e);
         }
+        mSettingsObserver.stopObserving();
         super.onPause();
     }
+
+    private void bindSwitch() {
+        SwitchBar bar = findViewById(R.id.switch_bar);
+        if (bar != null) {
+            bar.setSwitchBarText(R.string.notification_history_turn_off,
+                    R.string.notification_history_turn_on);
+            bar.show();
+            try {
+                bar.addOnSwitchChangeListener(mOnSwitchClickListener);
+            } catch (IllegalStateException e) {
+                // an exception is thrown if you try to add the listener twice
+            }
+            bar.setChecked(Settings.Secure.getInt(getContentResolver(),
+                    NOTIFICATION_HISTORY_ENABLED, 0) == 1);
+            toggleViews(bar.isChecked());
+        }
+    }
+
+    private void toggleViews(boolean isChecked) {
+        if (isChecked) {
+            mHistoryOff.setVisibility(View.GONE);
+            mHistoryOn.setVisibility(View.VISIBLE);
+        } else {
+            mHistoryOn.setVisibility(View.GONE);
+            mHistoryOff.setVisibility(View.VISIBLE);
+            mTodayView.removeAllViews();
+        }
+    }
+
+    private void onHistoryEnabledChanged(boolean enabled) {
+        if (enabled) {
+            mHistoryLoader.load(mOnHistoryLoaderListener);
+        }
+    }
+
+    final class SettingsObserver extends ContentObserver {
+        private final Uri NOTIFICATION_HISTORY_URI
+                = Settings.Secure.getUriFor(Settings.Secure.NOTIFICATION_HISTORY_ENABLED);
+
+        SettingsObserver() {
+            super(null);
+        }
+
+        void observe() {
+            ContentResolver resolver = getContentResolver();
+            resolver.registerContentObserver(NOTIFICATION_HISTORY_URI,
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        void stopObserving() {
+            ContentResolver resolver = getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update(uri);
+        }
+
+        public void update(Uri uri) {
+            ContentResolver resolver = getContentResolver();
+            if (uri == null || NOTIFICATION_HISTORY_URI.equals(uri)) {
+                boolean historyEnabled = Settings.Secure.getInt(resolver,
+                        Settings.Secure.NOTIFICATION_HISTORY_ENABLED, 0)
+                        != 0;
+                onHistoryEnabledChanged(historyEnabled);
+            }
+        }
+    }
+
+    private final SwitchBar.OnSwitchChangeListener mOnSwitchClickListener =
+            (switchView, isChecked) -> {
+                Settings.Secure.putInt(getContentResolver(),
+                        NOTIFICATION_HISTORY_ENABLED,
+                        isChecked ? 1 : 0);
+                toggleViews(isChecked);
+            };
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
 
@@ -132,18 +236,26 @@ public class NotificationHistoryActivity extends Activity {
                 mSnoozeView.setVisibility(View.GONE);
             } else {
                 RecyclerView rv = mSnoozeView.findViewById(R.id.notification_list);
-                rv.setLayoutManager(new LinearLayoutManager(NotificationHistoryActivity.this));
+                LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
+                rv.setLayoutManager(lm);
                 rv.setAdapter(new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
                 ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
                         Arrays.asList(snoozed));
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                        rv.getContext(), lm.getOrientation());
+                rv.addItemDecoration(dividerItemDecoration);
             }
 
             try {
                 StatusBarNotification[] dismissed = mNm.getHistoricalNotifications(
-                        NotificationHistoryActivity.this.getPackageName(), 10);
+                        NotificationHistoryActivity.this.getPackageName(), 10, false);
                 RecyclerView rv = mDismissView.findViewById(R.id.notification_list);
-                rv.setLayoutManager(new LinearLayoutManager(NotificationHistoryActivity.this));
+                LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
+                rv.setLayoutManager(lm);
                 rv.setAdapter(new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                        rv.getContext(), lm.getOrientation());
+                rv.addItemDecoration(dividerItemDecoration);
                 ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
                         Arrays.asList(dismissed));
                 mDismissView.setVisibility(View.VISIBLE);
