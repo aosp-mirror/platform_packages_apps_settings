@@ -79,7 +79,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected CharSequence mHtmlDescription;
     private static final String ANCHOR_TAG = "a";
     private static final String DRAWABLE_FOLDER = "drawable";
-    protected static final String KEY_GENERAL_CATEGORY = "categories";
+    protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
+    protected static final String KEY_GENERAL_CATEGORY = "general_categories";
+    protected static final String KEY_INTRODUCTION_CATEGORY = "introduction_categories";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -146,6 +148,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
+        mToggleServiceDividerSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
         preferenceScreen.addPreference(mToggleServiceDividerSwitchPreference);
 
         onProcessArguments(getArguments());
@@ -177,6 +180,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                     getPrefContext());
             final CharSequence title = getString(R.string.accessibility_introduction_title,
                     mPackageName);
+            introductionCategory.setKey(KEY_INTRODUCTION_CATEGORY);
             introductionCategory.setTitle(title);
             preferenceScreen.addPreference(introductionCategory);
 
@@ -357,6 +361,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
             createFooterPreference(summary);
+        }
+
+        // Settings html description.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_HTML_DESCRIPTION)) {
+            mHtmlDescription = arguments.getCharSequence(
+                    AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
         }
     }
 

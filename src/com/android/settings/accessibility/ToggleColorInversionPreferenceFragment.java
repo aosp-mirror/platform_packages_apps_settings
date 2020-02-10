@@ -29,8 +29,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -45,7 +43,6 @@ import java.util.List;
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private static final String CATEGORY_FOOTER_KEY = "color_inversion_footer_category";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
@@ -91,7 +88,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
-        mPackageName = getString(R.string.accessibility_display_inversion_preference_title);
+        mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
+        mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -101,17 +99,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
             }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.setOrderingAsAdded(false);
-        final PreferenceCategory footerCategory = preferenceScreen.findPreference(
-                CATEGORY_FOOTER_KEY);
-        footerCategory.setOrder(Integer.MAX_VALUE);
     }
 
     @Override

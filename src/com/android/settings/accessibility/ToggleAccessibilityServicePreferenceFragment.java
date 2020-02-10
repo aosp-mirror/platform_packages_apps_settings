@@ -330,9 +330,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                 .appendPath(String.valueOf(animatedImageRes))
                 .build();
 
-        // Settings html description.
-        mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
-
         // Get Accessibility service name.
         mPackageName = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
                 getPackageManager());
