@@ -33,6 +33,8 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
+import com.android.settings.network.ProxySubscriptionManager;
+
 import java.util.List;
 
 /**
@@ -107,8 +109,8 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
             return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
         final List<SubscriptionInfo> subInfoList =
-                context.getSystemService(SubscriptionManager.class)
-                .getActiveSubscriptionInfoList();
+                ProxySubscriptionManager.getInstance(context)
+                .getActiveSubscriptionsInfo();
         // No activated Subscriptions
         if (subInfoList == null) {
             if (LOGD) {
@@ -150,6 +152,14 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
     }
 
     public static boolean hasSim(Context context) {
+        // Access cache within ProxySubscriptionManager to speed up
+        final List<SubscriptionInfo> subInfoList =
+                ProxySubscriptionManager.getInstance(context)
+                .getActiveSubscriptionsInfo();
+        if ((subInfoList != null) && (subInfoList.size() > 0)) {
+            return true;
+        }
+
         TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
         final int simState = telephonyManager.getSimState();
         // Note that pulling the SIM card returns UNKNOWN, not ABSENT.
@@ -162,20 +172,20 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      * SubscriptionManager#INVALID_SUBSCRIPTION_ID
      */
     public static int getDefaultSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionMgr =
-                context.getSystemService(SubscriptionManager.class);
-
         // default data subscription is first choice
-        final int dataSubId = subscriptionMgr.getDefaultDataSubscriptionId();
+        final int dataSubId = SubscriptionManager.getDefaultDataSubscriptionId();
         if (SubscriptionManager.isValidSubscriptionId(dataSubId)) {
             return dataSubId;
         }
 
+        final ProxySubscriptionManager proxySubscriptionMgr =
+                ProxySubscriptionManager.getInstance(context);
+
         // any active subscription is second choice
-        List<SubscriptionInfo> subList = subscriptionMgr.getActiveSubscriptionInfoList();
+        List<SubscriptionInfo> subList = proxySubscriptionMgr.getActiveSubscriptionsInfo();
         if ((subList == null) || (subList.size() <= 0)) {
             // any subscription is third choice
-            subList = subscriptionMgr.getAvailableSubscriptionInfoList();
+            subList = proxySubscriptionMgr.getAccessibleSubscriptionsInfo();
         }
         if ((subList == null) || (subList.size() <= 0)) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
