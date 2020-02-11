@@ -6189,6 +6189,12 @@
     <string name="notification_history_snooze">Snoozed</string>
     <string name="notification_history_dismiss">Recently dismissed</string>
 
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <plurals name="notification_history_count">
+        <item quantity="one"><xliff:g id="number">%d</xliff:g> notification</item>
+        <item quantity="other"><xliff:g id="number">%d</xliff:g> notifications</item>
+    </plurals>
+
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
     <string name="sound_category_call_ringtone_vibrate_title">Call ringtone &amp; vibrate</string>
@@ -8039,6 +8045,15 @@
 
     <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
     <string name="notification_history">Notification history</string>
+
+    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
+    <string name="notification_history_turn_on">Turn on history</string>
+
+    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
+    <string name="notification_history_turn_off">Turn off history</string>
+
+    <!-- Notification history screen; summary when history is off [CHAR LIMIT=200] -->
+    <string name="notification_history_off_title_extended">Notification history is turned off</string>
 
     <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
     <string name="snooze_options_title">Allow notification snoozing</string>
