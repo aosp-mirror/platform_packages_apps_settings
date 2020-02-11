@@ -28,6 +28,9 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Maintain and update saved bluetooth devices(bonded but not connected)
  */
@@ -54,7 +57,10 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         if (mBluetoothAdapter.isEnabled()) {
             final CachedBluetoothDeviceManager cachedManager =
                     mLocalManager.getCachedDeviceManager();
-            for (BluetoothDevice device : mBluetoothAdapter.getMostRecentlyConnectedDevices()) {
+            final List<BluetoothDevice> bluetoothDevices =
+                    mBluetoothAdapter.getMostRecentlyConnectedDevices();
+            removePreferenceIfNecessary(bluetoothDevices, cachedManager);
+            for (BluetoothDevice device : bluetoothDevices) {
                 final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
                 if (cachedDevice != null) {
                     update(cachedDevice);
@@ -62,6 +68,18 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
             }
         } else {
             removeAllDevicesFromPreference();
+        }
+    }
+
+    private void removePreferenceIfNecessary(List<BluetoothDevice> bluetoothDevices,
+            CachedBluetoothDeviceManager cachedManager) {
+        for (BluetoothDevice device : new ArrayList<>(mPreferenceMap.keySet())) {
+            if (!bluetoothDevices.contains(device)) {
+                final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
+                if (cachedDevice != null) {
+                    removePreference(cachedDevice);
+                }
+            }
         }
     }
 

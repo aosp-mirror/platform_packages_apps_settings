@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -207,5 +208,31 @@ public class SavedBluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater.forceUpdate();
 
         verify(mBluetoothDeviceUpdater).removeAllDevicesFromPreference();
+    }
+
+    @Test
+    public void forceUpdate_deviceNotContain_removePreference() {
+        final List<BluetoothDevice> bluetoothDevices = new ArrayList<>();
+        bluetoothDevices.add(mBluetoothDevice);
+        final BluetoothDevice device2 = mock(BluetoothDevice.class);
+        final CachedBluetoothDevice cachedDevice2 = mock(CachedBluetoothDevice.class);
+
+        mBluetoothDeviceUpdater.mPreferenceMap.put(device2, mPreference);
+
+        when(cachedDevice2.getDevice()).thenReturn(device2);
+        when(cachedDevice2.getAddress()).thenReturn("04:52:C7:0B:D8:3S");
+        when(mDeviceManager.findDevice(device2)).thenReturn(cachedDevice2);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
+        when(mBluetoothAdapter.getMostRecentlyConnectedDevices()).thenReturn(bluetoothDevices);
+        when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
+        when(mDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
+        when(mBluetoothDevice.getBondState()).thenReturn(BluetoothDevice.BOND_BONDED);
+        when(mBluetoothDevice.isConnected()).thenReturn(false);
+
+        mBluetoothDeviceUpdater.forceUpdate();
+
+        verify(mBluetoothDeviceUpdater).removePreference(cachedDevice2);
+        verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice,
+                BluetoothDevicePreference.SortType.TYPE_NO_SORT);
     }
 }
