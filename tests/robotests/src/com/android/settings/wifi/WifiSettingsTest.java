@@ -195,7 +195,7 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 1);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
@@ -209,7 +209,7 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupDisabled_displayOff() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 0);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
 
         mWifiSettings.setAdditionalSettingsSummaries();
 

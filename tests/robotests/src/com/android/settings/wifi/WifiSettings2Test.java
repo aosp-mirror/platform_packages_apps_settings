@@ -33,6 +33,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
@@ -71,6 +72,8 @@ public class WifiSettings2Test {
     @Mock
     private PowerManager mPowerManager;
     @Mock
+    private WifiManager mWifiManager;
+    @Mock
     private DataUsagePreference mDataUsagePreference;
     private Context mContext;
     private WifiSettings2 mWifiSettings2;
@@ -85,10 +88,12 @@ public class WifiSettings2Test {
         mWifiSettings2 = spy(new WifiSettings2());
         doReturn(mContext).when(mWifiSettings2).getContext();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
+        doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         mWifiSettings2.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings2.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings2.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings2.mWifiPickerTracker = mMockWifiPickerTracker;
+        mWifiSettings2.mWifiManager = mWifiManager;
     }
 
     @Test
@@ -157,7 +162,7 @@ public class WifiSettings2Test {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 1);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
@@ -171,7 +176,7 @@ public class WifiSettings2Test {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupDisabled_displayOff() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 0);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
 
         mWifiSettings2.setAdditionalSettingsSummaries();
 

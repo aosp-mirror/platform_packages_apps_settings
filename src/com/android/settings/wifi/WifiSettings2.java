@@ -851,8 +851,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         final Context context = getContext();
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final ContentResolver contentResolver = context.getContentResolver();
-        return Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1
+        return mWifiManager.isAutoWakeupEnabled()
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
                 && Settings.Global.getInt(contentResolver,
