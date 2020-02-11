@@ -40,8 +40,7 @@
                 android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:fontFamily="sans-serif-medium"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
                 android:textAlignment="viewStart"/>
 
             <ImageView
@@ -65,8 +64,7 @@
                 android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
                 android:textAlignment="viewEnd"
                 />
         </RelativeLayout>
@@ -79,8 +77,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:paddingTop="3dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:textAlignment="viewStart" />
 
     </LinearLayout>

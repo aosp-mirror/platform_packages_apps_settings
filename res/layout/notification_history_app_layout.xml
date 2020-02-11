@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
+                    android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
                     android:paddingStart="8dp" />
             </LinearLayout>
             <TextView
@@ -56,9 +56,8 @@
                 android:layout_width="wrap_content"
                 android:paddingStart="6dp"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="sans-serif-medium"
                 android:paddingTop="8dp"
-                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"/>
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"/>
         </LinearLayout>
         <ImageButton
             android:id="@+id/expand"
