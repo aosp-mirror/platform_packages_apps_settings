@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo.firmwareversion;
+package com.android.settings.testutils.shadow;
 
 import android.content.Context;
-import android.os.Build;
+import android.content.pm.ApplicationInfo;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.Utils;
 
-public class FirmwareVersionPreferenceController extends BasePreferenceController {
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    public FirmwareVersionPreferenceController(Context context, String key) {
-        super(context, key);
-    }
+@Implements(Utils.class)
+public class ShadowSettingsLibUtils {
 
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return Build.VERSION.RELEASE_OR_CODENAME;
+    @Implementation
+    protected static Drawable getBadgedIcon(Context context, ApplicationInfo appInfo) {
+        return new ColorDrawable(0);
     }
 }

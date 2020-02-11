@@ -32,9 +32,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.wifi.EAPConstants;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -124,6 +126,13 @@ public class WifiSettingsTest {
             sp.setFqdn("fqdn");
             final PasspointConfiguration config = new PasspointConfiguration();
             config.setHomeSp(sp);
+            Credential.SimCredential simCredential = new Credential.SimCredential();
+            Credential credential = new Credential();
+            credential.setRealm("test.example.com");
+            simCredential.setImsi("12345*");
+            simCredential.setEapType(EAPConstants.EAP_SIM);
+            credential.setSimCredential(simCredential);
+            config.setCredential(credential);
             mockConfigs.add(config);
         }
         return mockConfigs;
@@ -186,7 +195,7 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 1);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
@@ -200,7 +209,7 @@ public class WifiSettingsTest {
     @Test
     public void setAdditionalSettingsSummaries_wifiWakeupDisabled_displayOff() {
         final ContentResolver contentResolver = mContext.getContentResolver();
-        Settings.Global.putInt(contentResolver, Settings.Global.WIFI_WAKEUP_ENABLED, 0);
+        when(mWifiManager.isAutoWakeupEnabled()).thenReturn(false);
 
         mWifiSettings.setAdditionalSettingsSummaries();
 

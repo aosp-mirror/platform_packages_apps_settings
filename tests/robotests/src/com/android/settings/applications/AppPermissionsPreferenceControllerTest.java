@@ -16,8 +16,6 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.applications.AppPermissionsPreferenceController.NUM_PERMISSIONS_TO_SHOW;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -75,7 +73,7 @@ public class AppPermissionsPreferenceControllerTest {
     public void updateSummary_noGrantedPermission_shouldSetNoPermissionGrantedSummary() {
         doNothing().when(mController).queryPermissionSummary();
         mController.updateState(mPreference);
-        mController.mNumPackageChecked = 2;
+        mController.mNumPackageChecked = 3;
 
         mController.updateSummary(new ArrayList<>());
 
@@ -84,17 +82,52 @@ public class AppPermissionsPreferenceControllerTest {
     }
 
     @Test
-    public void updateSummary_hasPermissionGroups_shouldSetPermissionAsSummary() {
+    public void updateSummary_hasOnePermission_shouldSetPermissionAsSummary() {
         doNothing().when(mController).queryPermissionSummary();
         mController.updateState(mPreference);
         final String permission = "location";
         final ArrayList<CharSequence> labels = new ArrayList<>();
         labels.add(permission);
         final String summary = "Apps using " + permission;
-        mController.mNumPackageChecked = 2;
+        mController.mNumPackageChecked = 3;
 
         mController.updateSummary(labels);
 
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
+    }
+
+    @Test
+    public void updateSummary_hasThreePermissions_shouldShowThreePermissionAsSummary() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        mController.mNumPackageChecked = 3;
+        final List<CharSequence> labels = new ArrayList<>();
+        labels.add("Phone");
+        labels.add("SMS");
+        labels.add("Microphone");
+
+        mController.updateSummary(labels);
+
+        final String summary = "Apps using microphone, sms, and phone";
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
+    }
+
+    @Test
+    public void updateSummary_hasFivePermissions_shouldShowThreePermissionsAndMoreAsSummary() {
+        doNothing().when(mController).queryPermissionSummary();
+        mController.updateState(mPreference);
+        mController.mNumPackageChecked = 3;
+        final List<CharSequence> labels = new ArrayList<>();
+        labels.add("Phone");
+        labels.add("SMS");
+        labels.add("Microphone");
+        labels.add("Contacts");
+        labels.add("Camera");
+        labels.add("Location");
+
+        mController.updateSummary(labels);
+
+        final String summary = "Apps using microphone, contacts, and sms, and more";
         assertThat(mPreference.getSummary()).isEqualTo(summary);
     }
 
@@ -109,30 +142,5 @@ public class AppPermissionsPreferenceControllerTest {
         mController.updateSummary(labels);
 
         verify(mPreference, never()).setSummary(anyString());
-    }
-
-    @Test
-    public void updateSummary_hasFiveItems_shouldShowCertainNumItems() {
-        doNothing().when(mController).queryPermissionSummary();
-        mController.updateState(mPreference);
-        mController.mNumPackageChecked = 2;
-
-        mController.updateSummary(getPermissionGroupsSet());
-
-        final CharSequence summary = mPreference.getSummary();
-        final int items = summary.toString().split(",").length;
-        assertThat(items).isEqualTo(NUM_PERMISSIONS_TO_SHOW);
-    }
-
-    private List<CharSequence> getPermissionGroupsSet() {
-        final List<CharSequence> labels = new ArrayList<>();
-        labels.add("Phone");
-        labels.add("SMS");
-        labels.add("Microphone");
-        labels.add("Contacts");
-        labels.add("Camera");
-        labels.add("Location");
-
-        return labels;
     }
 }
