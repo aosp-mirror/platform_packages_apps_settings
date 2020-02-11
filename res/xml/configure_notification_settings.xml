@@ -87,6 +87,12 @@
         settings:initialExpandedChildrenCount="0">
 
         <SwitchPreference
+            android:key="notification_history"
+            android:title="@string/notification_history"
+            android:summary="@string/notification_history_summary"
+            settings:controller="com.android.settings.notification.NotificationHistoryPreferenceController"/>
+
+        <SwitchPreference
             android:key="silent_icons"
             android:title="@string/silent_notifications_status_bar"
             settings:controller="com.android.settings.notification.SilentStatusBarPreferenceController"/>
