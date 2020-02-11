@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import android.content.ContentResolver;
 import android.database.ContentObserver;
@@ -24,18 +24,19 @@ import android.provider.Settings;
 import androidx.annotation.VisibleForTesting;
 
 /**
- * Helper class to observe Game Driver settings global change.
+ * Helper class to observe Graphics Driver settings global change.
  */
-public class GameDriverContentObserver extends ContentObserver {
+public class GraphicsDriverContentObserver extends ContentObserver {
 
-    interface OnGameDriverContentChangedListener {
-        void onGameDriverContentChanged();
+    interface OnGraphicsDriverContentChangedListener {
+        void onGraphicsDriverContentChanged();
     }
 
     @VisibleForTesting
-    OnGameDriverContentChangedListener mListener;
+    OnGraphicsDriverContentChangedListener mListener;
 
-    public GameDriverContentObserver(Handler handler, OnGameDriverContentChangedListener listener) {
+    public GraphicsDriverContentObserver(Handler handler,
+            OnGraphicsDriverContentChangedListener listener) {
         super(handler);
         mListener = listener;
     }
@@ -43,14 +44,20 @@ public class GameDriverContentObserver extends ContentObserver {
     @Override
     public void onChange(boolean selfChange) {
         super.onChange(selfChange);
-        mListener.onGameDriverContentChanged();
+        mListener.onGraphicsDriverContentChanged();
     }
 
+    /**
+     * Register GraphicsDriverContentObserver to ContentResolver.
+     */
     public void register(ContentResolver contentResolver) {
         contentResolver.registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false, this);
     }
 
+    /**
+     * Unregister GraphicsDriverContentObserver.
+     */
     public void unregister(ContentResolver contentResolver) {
         contentResolver.unregisterContentObserver(this);
     }

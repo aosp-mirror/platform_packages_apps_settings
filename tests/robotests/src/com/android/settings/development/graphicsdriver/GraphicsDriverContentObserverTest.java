@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,45 +28,44 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GameDriverContentObserverTest {
+public class GraphicsDriverContentObserverTest {
 
     @Mock
     private ContentResolver mResolver;
     @Mock
-    private GameDriverContentObserver.OnGameDriverContentChangedListener mListener;
+    private GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener mListener;
 
-    private GameDriverContentObserver mGameDriverContentObserver;
+    private GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mGameDriverContentObserver = spy(new GameDriverContentObserver(null, null));
+        mGraphicsDriverContentObserver = spy(new GraphicsDriverContentObserver(null, null));
     }
 
     @Test
     public void onChange_shouldCallListener() {
-        mGameDriverContentObserver.mListener = mListener;
-        mGameDriverContentObserver.onChange(true);
+        mGraphicsDriverContentObserver.mListener = mListener;
+        mGraphicsDriverContentObserver.onChange(true);
 
-        verify(mListener).onGameDriverContentChanged();
+        verify(mListener).onGraphicsDriverContentChanged();
     }
 
     @Test
     public void register_shouldRegisterContentObserver() {
-        mGameDriverContentObserver.register(mResolver);
+        mGraphicsDriverContentObserver.register(mResolver);
 
         verify(mResolver).registerContentObserver(
                 Settings.Global.getUriFor(Settings.Global.GAME_DRIVER_ALL_APPS), false,
-                mGameDriverContentObserver);
+                mGraphicsDriverContentObserver);
     }
 
     @Test
     public void unregister_shouldUnregisterContentObserver() {
-        mGameDriverContentObserver.unregister(mResolver);
+        mGraphicsDriverContentObserver.unregister(mResolver);
 
-        verify(mResolver).unregisterContentObserver(mGameDriverContentObserver);
+        verify(mResolver).unregisterContentObserver(mGraphicsDriverContentObserver);
     }
 }

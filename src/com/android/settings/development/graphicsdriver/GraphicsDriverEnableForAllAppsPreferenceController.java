@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,10 +38,10 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 /**
  * Controller of global switch to enable Game Driver for all Apps.
  */
-public class GameDriverEnableForAllAppsPreferenceController extends BasePreferenceController
+public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener,
-                   GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
-                   OnStart, OnStop {
+                   GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
+                   LifecycleObserver, OnStart, OnStop {
 
     public static final int GAME_DRIVER_DEFAULT = 0;
     public static final int GAME_DRIVER_ALL_APPS = 1;
@@ -54,11 +54,11 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
     private final String mPreferenceGameDriver;
     private final String mPreferencePrereleaseDriver;
     @VisibleForTesting
-    GameDriverContentObserver mGameDriverContentObserver;
+    GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private ListPreference mPreference;
 
-    public GameDriverEnableForAllAppsPreferenceController(Context context, String key) {
+    public GraphicsDriverEnableForAllAppsPreferenceController(Context context, String key) {
         super(context, key);
         mContext = context;
         mContentResolver = context.getContentResolver();
@@ -69,8 +69,8 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
                 resources.getString(R.string.graphics_driver_app_preference_game_driver);
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
-        mGameDriverContentObserver =
-                new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
+        mGraphicsDriverContentObserver =
+                new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
     }
 
     @Override
@@ -92,12 +92,12 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
 
     @Override
     public void onStart() {
-        mGameDriverContentObserver.register(mContentResolver);
+        mGraphicsDriverContentObserver.register(mContentResolver);
     }
 
     @Override
     public void onStop() {
-        mGameDriverContentObserver.unregister(mContentResolver);
+        mGraphicsDriverContentObserver.unregister(mContentResolver);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class GameDriverEnableForAllAppsPreferenceController extends BasePreferen
     }
 
     @Override
-    public void onGameDriverContentChanged() {
+    public void onGraphicsDriverContentChanged() {
         updateState(mPreference);
     }
 }

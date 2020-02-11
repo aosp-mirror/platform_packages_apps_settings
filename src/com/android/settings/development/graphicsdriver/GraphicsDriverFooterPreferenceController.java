@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -35,23 +35,23 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.FooterPreference;
 
 /**
- * Controller of footer preference for Game Driver.
+ * Controller of footer preference for Graphics Driver Preferences dashboard.
  */
-public class GameDriverFooterPreferenceController extends BasePreferenceController
-        implements GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
-        OnStart, OnStop {
+public class GraphicsDriverFooterPreferenceController extends BasePreferenceController
+        implements GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
+        LifecycleObserver, OnStart, OnStop {
 
     private final ContentResolver mContentResolver;
     @VisibleForTesting
-    GameDriverContentObserver mGameDriverContentObserver;
+    GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private FooterPreference mPreference;
 
-    public GameDriverFooterPreferenceController(Context context, String key) {
+    public GraphicsDriverFooterPreferenceController(Context context, String key) {
         super(context, key);
         mContentResolver = context.getContentResolver();
-        mGameDriverContentObserver =
-                new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
+        mGraphicsDriverContentObserver =
+                new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
     }
 
     @Override
@@ -71,16 +71,16 @@ public class GameDriverFooterPreferenceController extends BasePreferenceControll
 
     @Override
     public void onStart() {
-        mGameDriverContentObserver.register(mContentResolver);
+        mGraphicsDriverContentObserver.register(mContentResolver);
     }
 
     @Override
     public void onStop() {
-        mGameDriverContentObserver.unregister(mContentResolver);
+        mGraphicsDriverContentObserver.unregister(mContentResolver);
     }
 
     @Override
-    public void onGameDriverContentChanged() {
+    public void onGraphicsDriverContentChanged() {
         updateState(mPreference);
     }
 }
