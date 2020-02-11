@@ -24,8 +24,6 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.text.BidiFormatter;
-import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -119,7 +117,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     private CharSequence getFirstPhoneNumber() {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList == null || subscriptionInfoList.isEmpty()) {
             return mContext.getText(R.string.device_info_default);
         }
@@ -146,7 +144,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @VisibleForTesting
     SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList(true);
+                mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
@@ -159,10 +157,10 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
-        final String phoneNumber = DeviceInfoUtils.getFormattedPhoneNumber(mContext,
+        final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
-                : BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
+                : phoneNumber;
     }
 
     @VisibleForTesting

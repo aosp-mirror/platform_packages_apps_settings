@@ -20,8 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -41,6 +41,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,10 @@ public class MobileNetworkUtilsTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int SUB_ID_1 = 1;
     private static final int SUB_ID_2 = 2;
+    private static final int SUB_ID_INVALID = -1;
+    private static final String PLMN_FROM_TELEPHONY_MANAGER_API = "testPlmn";
+    private static final String PLMN_FROM_SUB_ID_1 = "testPlmnSub1";
+    private static final String PLMN_FROM_SUB_ID_2 = "testPlmnSub2";
 
     @Mock
     private TelephonyManager mTelephonyManager;
@@ -89,6 +94,7 @@ public class MobileNetworkUtilsTest {
 
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_1)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
@@ -102,10 +108,17 @@ public class MobileNetworkUtilsTest {
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
 
         when(mSubscriptionInfo1.getSubscriptionId()).thenReturn(SUB_ID_1);
+        when(mSubscriptionInfo1.getCarrierName()).thenReturn(PLMN_FROM_SUB_ID_1);
         when(mSubscriptionInfo2.getSubscriptionId()).thenReturn(SUB_ID_2);
+        when(mSubscriptionInfo2.getCarrierName()).thenReturn(PLMN_FROM_SUB_ID_2);
 
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true))).thenReturn(
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+        when(mSubscriptionManager.getAccessibleSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1, mSubscriptionInfo2));
+
+        when(mTelephonyManager.getNetworkOperatorName()).thenReturn(
+                PLMN_FROM_TELEPHONY_MANAGER_API);
     }
 
     @Test
@@ -169,7 +182,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
 
         assertThat(MobileNetworkUtils.isCdmaOptions(mContext, SUB_ID_1)).isTrue();
     }
@@ -243,7 +256,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
 
@@ -254,7 +267,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
 
@@ -265,7 +278,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
 
@@ -276,7 +289,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
 
@@ -287,7 +300,7 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
     }
 
@@ -298,7 +311,27 @@ public class MobileNetworkUtilsTest {
 
         Settings.Global.putInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID_1,
-                TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
         assertThat(MobileNetworkUtils.shouldSpeciallyUpdateGsmCdma(mContext, SUB_ID_1)).isTrue();
+    }
+
+    @Test
+    public void getCurrentCarrierNameForDisplay_withoutValidSubId_returnNetworkOperatorName() {
+        assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
+                mContext, SUB_ID_INVALID)).isEqualTo(PLMN_FROM_TELEPHONY_MANAGER_API);
+    }
+
+    @Test
+    public void getCurrentCarrierNameForDisplay_withValidSubId_returnCurrentCarrierName() {
+        assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
+                mContext, SUB_ID_1)).isEqualTo(PLMN_FROM_SUB_ID_1);
+        assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
+                mContext, SUB_ID_2)).isEqualTo(PLMN_FROM_SUB_ID_2);
+    }
+
+    @Test
+    public void getCurrentCarrierNameForDisplay_withoutSubId_returnNotNull() {
+        assertThat(MobileNetworkUtils.getCurrentCarrierNameForDisplay(
+                mContext)).isNotNull();
     }
 }

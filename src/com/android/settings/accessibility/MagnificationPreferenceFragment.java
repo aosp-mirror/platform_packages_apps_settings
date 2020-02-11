@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -132,9 +134,10 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
                 if (info.getComponentName().equals(assignedComponentName)) {
                     final CharSequence assignedServiceName = info.getResolveInfo().loadLabel(
                             context.getPackageManager());
-                    return context.getString(
-                            R.string.accessibility_screen_magnification_navbar_configuration_warning,
-                            assignedServiceName);
+                    final int messageId = isGestureNavigateEnabled(context)
+                            ? R.string.accessibility_screen_magnification_gesture_navigation_warning
+                            : R.string.accessibility_screen_magnification_navbar_configuration_warning;
+                    return context.getString(messageId, assignedServiceName);
                 }
             }
         }
@@ -156,6 +159,12 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
      */
     static boolean isApplicable(Resources res) {
         return res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+    }
+
+    private static boolean isGestureNavigateEnabled(Context context) {
+        return context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode)
+                == NAV_BAR_MODE_GESTURAL;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

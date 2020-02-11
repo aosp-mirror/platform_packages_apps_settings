@@ -75,6 +75,8 @@ public class SliceBuilderUtils {
      * {@param sliceData} is an inline controller.
      */
     public static Slice buildSlice(Context context, SliceData sliceData) {
+        // Reload theme for switching dark mode on/off
+        context.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
         Log.d(TAG, "Creating slice for: " + sliceData.getPreferenceController());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
@@ -238,6 +240,8 @@ public class SliceBuilderUtils {
         searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
                 .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
                 .setComponent(null);
+        searchDestination.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
         return searchDestination;
     }
 

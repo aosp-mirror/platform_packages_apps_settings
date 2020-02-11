@@ -17,8 +17,9 @@
 package com.android.settings.datetime.timezone;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.settings.SettingsEnums;
+import android.app.timezonedetector.ManualTimeZoneSuggestion;
+import android.app.timezonedetector.TimeZoneDetector;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -270,7 +271,10 @@ public class TimeZoneSettings extends DashboardFragment {
             editor.putString(PREF_KEY_REGION, regionId);
         }
         editor.apply();
-        getActivity().getSystemService(AlarmManager.class).setTimeZone(tzId);
+        ManualTimeZoneSuggestion manualTimeZoneSuggestion =
+                TimeZoneDetector.createManualTimeZoneSuggestion(tzId, "Settings: Set time zone");
+        TimeZoneDetector timeZoneDetector = getActivity().getSystemService(TimeZoneDetector.class);
+        timeZoneDetector.suggestManualTimeZone(manualTimeZoneSuggestion);
     }
 
     @Override

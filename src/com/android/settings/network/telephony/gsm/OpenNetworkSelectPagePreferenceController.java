@@ -29,7 +29,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
@@ -75,7 +74,7 @@ public class OpenNetworkSelectPagePreferenceController extends
     public CharSequence getSummary() {
         final ServiceState ss = mTelephonyManager.getServiceState();
         if (ss != null && ss.getState() == ServiceState.STATE_IN_SERVICE) {
-            return mTelephonyManager.getNetworkOperatorName();
+            return MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId);
         } else {
             return mContext.getString(R.string.network_disconnected);
         }
@@ -100,7 +99,8 @@ public class OpenNetworkSelectPagePreferenceController extends
 
     public OpenNetworkSelectPagePreferenceController init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
         return this;
     }
 

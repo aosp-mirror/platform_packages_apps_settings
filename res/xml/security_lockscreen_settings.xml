@@ -30,6 +30,13 @@
             android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_lock_screen_notif"/>
 
+        <SwitchPreference
+            android:key="security_dispaly_lockscreen_bypass"
+            android:title="@string/lockscreen_bypass_title"
+            android:summary="@string/lockscreen_bypass_summary"
+            settings:searchable="false"
+            settings:controller="com.android.settings.biometrics.face.FaceSettingsLockscreenBypassPreferenceController" />
+
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_lockscreen_add_users_when_locked"
             android:title="@string/user_add_on_lockscreen_menu"
@@ -53,11 +60,12 @@
         android:title="@string/ambient_display_category_triggers"
         android:order="1000">
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
             android:summary="@string/doze_always_on_summary"
-            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController" />
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
+            settings:userRestriction="no_ambient_display" />
 
         <Preference
             android:key="ambient_display_tap"

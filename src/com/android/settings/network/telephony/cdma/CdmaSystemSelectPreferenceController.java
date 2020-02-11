@@ -24,6 +24,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.internal.telephony.Phone;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
  * Preference controller for "System Select"
@@ -54,7 +55,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                 Phone.PREFERRED_NT_MODE);
         listPreference.setEnabled(
-                settingsNetworkMode != TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                settingsNetworkMode != TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
     }
 
     @Override

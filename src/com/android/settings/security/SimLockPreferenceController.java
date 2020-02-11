@@ -38,7 +38,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
     private final CarrierConfigManager mCarrierConfigManager;
     private final UserManager mUserManager;
     private final SubscriptionManager mSubscriptionManager;
-    private final TelephonyManager mTelephonyManager;
+    private TelephonyManager mTelephonyManager;
 
     public SimLockPreferenceController(Context context) {
         super(context, KEY_SIM_LOCK);
@@ -99,7 +99,9 @@ public class SimLockPreferenceController extends BasePreferenceController {
 
         if (subInfoList != null) {
             for (SubscriptionInfo subInfo : subInfoList) {
-                if (mTelephonyManager.hasIccCard(subInfo.getSimSlotIndex())) {
+                mTelephonyManager = mTelephonyManager
+                        .createForSubscriptionId(subInfo.getSimSlotIndex());
+                if (mTelephonyManager.hasIccCard()) {
                     return true;
                 }
             }

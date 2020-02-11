@@ -155,7 +155,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         if (!FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2)) {
             use(EuiccPreferenceController.class).init(mSubId);
         }
-        use(WifiCallingPreferenceController.class).init(mSubId);
+        final WifiCallingPreferenceController wifiCallingPreferenceController =
+                use(WifiCallingPreferenceController.class).init(mSubId);
 
         final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =
                 use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
@@ -173,6 +174,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
+        use(CallingPreferenceCategoryController.class).setChildren(
+                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController));
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
     }
@@ -184,7 +187,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         final Context context = getContext();
 
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mTelephonyManager = TelephonyManager.from(context).createForSubscriptionId(mSubId);
+        mTelephonyManager = context.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
 
         onRestoreInstance(icicle);
     }

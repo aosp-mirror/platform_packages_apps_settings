@@ -91,12 +91,13 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     public void init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return mSubscriptionManager.setAlwaysAllowMmsData(mSubId, isChecked);
+        return mTelephonyManager.setAlwaysAllowMmsData(isChecked);
     }
 
     @Override

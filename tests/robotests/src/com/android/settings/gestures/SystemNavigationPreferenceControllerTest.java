@@ -24,7 +24,6 @@ import static com.android.settings.gestures.SystemNavigationPreferenceController
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
@@ -180,47 +179,5 @@ public class SystemNavigationPreferenceControllerTest {
                 NAV_BAR_MODE_2BUTTON);
         assertThat(TextUtils.equals(mController.getSummary(), mContext.getText(
                 com.android.settings.R.string.swipe_up_to_switch_apps_title))).isTrue();
-    }
-
-    @Test
-    public void testIsGestureNavSupportedByDefaultLauncher_noDefaultLauncher() {
-        when(mMockPackageManager.getHomeActivities(any())).thenReturn(null);
-        assertThat(SystemNavigationPreferenceController
-                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isTrue();
-    }
-
-    @Test
-    public void testIsGestureNavSupportedByDefaultLauncher_supported() {
-        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
-                ComponentName.unflattenFromString(TEST_RECENTS_COMPONENT_NAME));
-        assertThat(SystemNavigationPreferenceController
-                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isTrue();
-    }
-
-    @Test
-    public void testIsGestureNavSupportedByDefaultLauncher_notSupported() {
-        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
-                new ComponentName("unsupported", "launcher"));
-        assertThat(SystemNavigationPreferenceController
-                .isGestureNavSupportedByDefaultLauncher(mMockContext)).isFalse();
-    }
-
-    @Test
-    public void testGetDefaultHomeAppName_noDefaultLauncher() {
-        when(mMockPackageManager.getHomeActivities(any())).thenReturn(null);
-        assertThat(SystemNavigationPreferenceController
-                .getDefaultHomeAppName(mMockContext)).isEqualTo("");
-    }
-
-    @Test
-    public void testGetDefaultHomeAppName_defaultLauncherExists() throws Exception {
-        when(mMockPackageManager.getHomeActivities(any())).thenReturn(
-                new ComponentName("supported", "launcher"));
-        ApplicationInfo info = new ApplicationInfo();
-        when(mMockPackageManager.getApplicationInfo("supported", 0)).thenReturn(info);
-        when(mMockPackageManager.getApplicationLabel(info)).thenReturn("Test Home App");
-
-        assertThat(SystemNavigationPreferenceController
-                .getDefaultHomeAppName(mMockContext)).isEqualTo("Test Home App");
     }
 }

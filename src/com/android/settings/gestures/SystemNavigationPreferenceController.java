@@ -22,13 +22,10 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-
-import java.util.ArrayList;
 
 public class SystemNavigationPreferenceController extends BasePreferenceController {
 
@@ -100,32 +97,5 @@ public class SystemNavigationPreferenceController extends BasePreferenceControll
     static boolean isEdgeToEdgeEnabled(Context context) {
         return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
-    }
-
-    static boolean isGestureNavSupportedByDefaultLauncher(Context context) {
-        final ComponentName cn = context.getPackageManager().getHomeActivities(new ArrayList<>());
-        if (cn == null) {
-            // There is no default home app set for the current user, don't make any changes yet.
-            return true;
-        }
-        ComponentName recentsComponentName = ComponentName.unflattenFromString(context.getString(
-                com.android.internal.R.string.config_recentsComponentName));
-        return recentsComponentName.getPackageName().equals(cn.getPackageName());
-    }
-
-    static String getDefaultHomeAppName(Context context) {
-        final PackageManager pm = context.getPackageManager();
-        final ComponentName cn = pm.getHomeActivities(new ArrayList<>());
-        if (cn != null) {
-            try {
-                ApplicationInfo ai = pm.getApplicationInfo(cn.getPackageName(), 0);
-                if (ai != null) {
-                    return pm.getApplicationLabel(ai).toString();
-                }
-            } catch (final PackageManager.NameNotFoundException e) {
-                // Do nothing
-            }
-        }
-        return "";
     }
 }

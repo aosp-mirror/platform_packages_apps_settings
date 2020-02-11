@@ -39,6 +39,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -71,7 +72,7 @@
     <uses-permission android:name="android.permission.CONFIGURE_WIFI_DISPLAY" />
     <uses-permission android:name="android.permission.CONFIGURE_DISPLAY_COLOR_MODE" />
     <uses-permission android:name="android.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS" />
-    <uses-permission android:name="android.permission.SET_TIME" />
+    <uses-permission android:name="android.permission.SUGGEST_MANUAL_TIME_AND_ZONE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.REBOOT" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -101,6 +102,7 @@
     <uses-permission android:name="android.permission.MANAGE_SCOPED_ACCESS_DIRECTORY_PERMISSIONS" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.BIND_CELL_BROADCAST_SERVICE" />
 
     <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
@@ -481,6 +483,7 @@
             android:parentActivityName="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
@@ -2109,26 +2112,6 @@
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
         </activity>
 
-        <activity
-            android:name="RadioInfo"
-            android:label="@string/phone_info_label"
-            android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="BandMode"
-                  android:label="@string/band_mode_title"
-                  android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TestingSettings" />
@@ -2594,13 +2577,6 @@
                 android:value="com.android.settings.notification.AppNotificationSettings" />
         </activity>
 
-        <!-- Show channel group-level notification settings (group passed in as extras) -->
-        <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
-                  android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ChannelGroupNotificationSettings" />
-        </activity>
-
         <!-- Show channel-level notification settings (channel passed in as extras) -->
         <activity android:name="Settings$ChannelNotificationSettingsActivity"
                   android:label="@string/notification_channel_title"
@@ -2714,7 +2690,7 @@
 
         <activity
             android:name=".wifi.NetworkRequestDialogActivity"
-            android:theme="@style/Transparent"
+            android:theme="@style/Theme.AlertDialog"
             android:excludeFromRecents="true"
             android:launchMode="singleTop"
             android:taskAffinity=".wifi.NetworkRequestDialogActivity"
@@ -3239,6 +3215,9 @@
         </activity>
 
         <activity android:name=".homepage.contextualcards.ContextualCardFeedbackDialog"
+                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+
+        <activity android:name=".homepage.contextualcards.FaceReEnrollDialog"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
 
         <activity

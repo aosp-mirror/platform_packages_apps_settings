@@ -37,6 +37,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
+import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.conditional.ConditionalCardController;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
@@ -119,6 +120,10 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     }
 
     void loadContextualCards(LoaderManager loaderManager) {
+        if (mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion)) {
+            Log.w(TAG, "Legacy suggestion contextual card enabled, skipping contextual cards.");
+            return;
+        }
         mStartTime = System.currentTimeMillis();
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);

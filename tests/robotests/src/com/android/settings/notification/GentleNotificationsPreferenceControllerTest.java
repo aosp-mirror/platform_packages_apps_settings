@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
-
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
 import static com.android.settings.notification.BadgingNotificationPreferenceController.ON;
 

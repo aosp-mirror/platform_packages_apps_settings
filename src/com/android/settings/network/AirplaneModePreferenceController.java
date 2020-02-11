@@ -20,7 +20,6 @@ import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.SystemProperties;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -28,12 +27,9 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -47,14 +43,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private SwitchPreference mAirplaneModePreference;
 
     public AirplaneModePreferenceController(Context context, String key) {
         super(context, key);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, mMetricsFeatureProvider, this);
+
+        if (isAvailable(mContext)) {
+            mAirplaneModeEnabler = new AirplaneModeEnabler(mContext, this);
+        }
     }
 
     public void setFragment(Fragment hostFragment) {
@@ -63,8 +60,8 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_AIRPLANE_MODE.equals(preference.getKey()) && Boolean.parseBoolean(
-                SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
+        if (KEY_AIRPLANE_MODE.equals(preference.getKey())
+                && mAirplaneModeEnabler.isInEcmMode()) {
             // In ECM mode launch ECM app dialog
             if (mFragment != null) {
                 mFragment.startActivityForResult(
@@ -80,9 +77,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mAirplaneModePreference = screen.findPreference(getPreferenceKey());
-        }
+        mAirplaneModePreference = screen.findPreference(getPreferenceKey());
     }
 
     public static boolean isAvailable(Context context) {
@@ -117,7 +112,7 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
-            Boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
+            final boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());

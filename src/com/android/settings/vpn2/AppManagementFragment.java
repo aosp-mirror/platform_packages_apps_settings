@@ -15,6 +15,7 @@
  */
 package com.android.settings.vpn2;
 
+import static android.app.AppOpsManager.OP_ACTIVATE_PLATFORM_VPN;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 import android.annotation.NonNull;
@@ -312,7 +313,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         final AppOpsManager service =
                 (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         final List<AppOpsManager.PackageOps> ops = service.getOpsForPackage(application.uid,
-                application.packageName, new int[]{OP_ACTIVATE_VPN});
+                application.packageName, new int[]{OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         return !ArrayUtils.isEmpty(ops);
     }
 
