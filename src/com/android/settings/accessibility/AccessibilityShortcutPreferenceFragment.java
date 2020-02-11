@@ -50,10 +50,8 @@ import com.android.settingslib.search.SearchIndexable;
 public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements Indexable {
 
-    public static final String SHORTCUT_SERVICE_KEY = "accessibility_shortcut_service";
     public static final String ON_LOCK_SCREEN_KEY = "accessibility_shortcut_on_lock_screen";
 
-    private Preference mServicePreference;
     private SwitchPreference mOnLockScreenSwitchPreference;
     private final ContentObserver mContentObserver = new ContentObserver(new Handler()) {
         @Override
@@ -75,8 +73,6 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mServicePreference = findPreference(SHORTCUT_SERVICE_KEY);
         mOnLockScreenSwitchPreference = (SwitchPreference) findPreference(ON_LOCK_SCREEN_KEY);
         mOnLockScreenSwitchPreference.setOnPreferenceChangeListener((Preference p, Object o) -> {
             Settings.Secure.putInt(getContentResolver(),
@@ -94,7 +90,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         preferenceScreen.findPreference(KEY_GENERAL_CATEGORY).setVisible(false);
 
         preferenceScreen.setOrderingAsAdded(false);
-        mToggleServiceDividerSwitchPreference.setOrder(mServicePreference.getOrder() - 1);
+        mToggleServiceDividerSwitchPreference.setVisible(false);
     }
 
     @Override
@@ -118,56 +114,13 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     }
 
     @Override
-    protected void onRemoveSwitchPreferenceToggleSwitch() {
-        super.onRemoveSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
-    }
-
-    @Override
-    protected void onInstallSwitchPreferenceToggleSwitch() {
-        super.onInstallSwitchPreferenceToggleSwitch();
-        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
-            boolean enabled = ((SwitchPreference) preference).isChecked();
-            Context context = getContext();
-            if (enabled && !shortcutFeatureAvailable(context)) {
-                // If no service is configured, we'll disable the shortcut shortly. Give the user
-                // a chance to select a service. We'll update the preferences when we resume.
-                Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, ON);
-                mServicePreference.setEnabled(true);
-                mServicePreference.performClick();
-            } else {
-                onPreferenceToggled(Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, enabled);
-            }
-            return true;
-        });
-    }
-
-    @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? ON : OFF);
         updatePreferences();
     }
 
-    @Override
-    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
-        final String switchBarText = getString(R.string.accessibility_service_master_switch_title,
-                getString(R.string.accessibility_global_gesture_preference_title));
-        switchPreference.setTitle(switchBarText);
-    }
-
     private void updatePreferences() {
         ContentResolver cr = getContentResolver();
-        Context context = getContext();
-        mServicePreference.setSummary(getServiceName(context));
-        if (!shortcutFeatureAvailable(context)) {
-            // If no service is configured, make sure the overall shortcut is turned off
-            Settings.Secure.putInt(
-                    getContentResolver(), Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, OFF);
-        }
-        boolean isEnabled = Settings.Secure
-                .getInt(cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, ON) == ON;
-        mToggleServiceDividerSwitchPreference.setChecked(isEnabled);
         // The shortcut is enabled by default on the lock screen as long as the user has
         // enabled the shortcut with the warning dialog
         final int dialogShown = Settings.Secure.getInt(
@@ -175,9 +128,6 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         final boolean enabledFromLockScreen = Settings.Secure.getInt(
                 cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown) == ON;
         mOnLockScreenSwitchPreference.setChecked(enabledFromLockScreen);
-        // Only enable changing the service and lock screen behavior if the shortcut is on
-        mServicePreference.setEnabled(mToggleServiceDividerSwitchPreference.isChecked());
-        mOnLockScreenSwitchPreference.setEnabled(mToggleServiceDividerSwitchPreference.isChecked());
     }
 
     /**
@@ -214,8 +164,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         return getServiceInfo(context) != null;
     }
 
-    private static @Nullable
-    ComponentName getShortcutComponent(Context context) {
+    private static @Nullable ComponentName getShortcutComponent(Context context) {
         String componentNameString = AccessibilityUtils.getShortcutTargetServiceComponentNameString(
                 context, UserHandle.myUserId());
         if (componentNameString == null) return null;
