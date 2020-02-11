@@ -16,7 +16,6 @@
 
 package com.android.settings.sound;
 
-import static android.media.AudioSystem.DEVICE_OUT_ALL_SCO;
 import static android.media.AudioSystem.DEVICE_OUT_BLUETOOTH_SCO_HEADSET;
 import static android.media.AudioSystem.STREAM_MUSIC;
 
@@ -45,7 +44,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
@@ -66,7 +64,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowBluetoothDevice;
@@ -246,7 +243,8 @@ public class AudioOutputSwitchPreferenceControllerTest {
     public void isStreamFromOutputDevice_outputDeviceIsBtScoHeadset_shouldReturnTrue() {
         mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_SCO_HEADSET);
 
-        assertThat(mController.isStreamFromOutputDevice(STREAM_MUSIC, DEVICE_OUT_ALL_SCO)).isTrue();
+        assertThat(mController.isStreamFromOutputDevice(
+                STREAM_MUSIC, DEVICE_OUT_BLUETOOTH_SCO_HEADSET)).isTrue();
     }
 
     /**

@@ -17,22 +17,20 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.network.GlobalSettingsChangeListener;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -44,31 +42,59 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class RoamingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    private static final String TAG = "RoamingController";
     private static final String DIALOG_TAG = "MobileDataDialog";
 
     private RestrictedSwitchPreference mSwitchPreference;
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
-    private DataContentObserver mDataContentObserver;
-    @VisibleForTesting
-    boolean mNeedDialog;
+
+    /**
+     * There're 2 listeners both activated at the same time.
+     * For project that access DATA_ROAMING, only first listener is functional.
+     * For project that access "DATA_ROAMING + subId", first listener will be stopped when receiving
+     * any onChange from second listener.
+     */
+    private GlobalSettingsChangeListener mListener;
+    private GlobalSettingsChangeListener mListenerForSubId;
+
     @VisibleForTesting
     FragmentManager mFragmentManager;
 
     public RoamingPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
     }
 
     @Override
     public void onStart() {
-        mDataContentObserver.register(mContext, mSubId);
+        if (mListener == null) {
+            mListener = new GlobalSettingsChangeListener(mContext,
+                    Settings.Global.DATA_ROAMING) {
+                public void onChanged(String field) {
+                    updateState(mSwitchPreference);
+                }
+            };
+        }
+        stopMonitorSubIdSpecific();
+
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+
+        mListenerForSubId = new GlobalSettingsChangeListener(mContext,
+                Settings.Global.DATA_ROAMING + mSubId) {
+            public void onChanged(String field) {
+                stopMonitor();
+                updateState(mSwitchPreference);
+            }
+        };
     }
 
     @Override
     public void onStop() {
-        mDataContentObserver.unRegister(mContext);
+        stopMonitor();
+        stopMonitorSubIdSpecific();
     }
 
     @Override
@@ -87,7 +113,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            if (mNeedDialog) {
+            if (isDialogNeeded()) {
                 showDialog();
             }
             return true;
@@ -98,9 +124,7 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mNeedDialog = isDialogNeeded();
-
-        if (!mNeedDialog) {
+        if (!isDialogNeeded()) {
             // Update data directly if we don't need dialog
             mTelephonyManager.setDataRoamingEnabled(isChecked);
             return true;
@@ -141,7 +165,18 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
     public void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            return;
+        }
+        final TelephonyManager telephonyManager = mTelephonyManager
+                .createForSubscriptionId(mSubId);
+        if (telephonyManager == null) {
+            Log.w(TAG, "fail to init in sub" + mSubId);
+            mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+            return;
+        }
+        mTelephonyManager = telephonyManager;
     }
 
     private void showDialog() {
@@ -150,32 +185,17 @@ public class RoamingPreferenceController extends TelephonyTogglePreferenceContro
         dialogFragment.show(mFragmentManager, DIALOG_TAG);
     }
 
-    /**
-     * Listener that listens data roaming change
-     */
-    public class DataContentObserver extends ContentObserver {
-
-        public DataContentObserver(Handler handler) {
-            super(handler);
+    private void stopMonitor() {
+        if (mListener != null) {
+            mListener.close();
+            mListener = null;
         }
+    }
 
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            updateState(mSwitchPreference);
-        }
-
-        public void register(Context context, int subId) {
-            Uri uri = Settings.Global.getUriFor(Settings.Global.DATA_ROAMING);
-            if (TelephonyManager.getDefault().getSimCount() != 1) {
-                uri = Settings.Global.getUriFor(Settings.Global.DATA_ROAMING + subId);
-            }
-            context.getContentResolver().registerContentObserver(uri, false, this);
-
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
+    private void stopMonitorSubIdSpecific() {
+        if (mListenerForSubId != null) {
+            mListenerForSubId.close();
+            mListenerForSubId = null;
         }
     }
 }

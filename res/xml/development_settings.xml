@@ -226,6 +226,13 @@
             android:fragment="com.android.settings.development.gamedriver.GameDriverDashboard"
             settings:searchable="false" />
 
+        <Preference
+            android:key="platform_compat_dashboard"
+            android:title="@string/platform_compat_dashboard_title"
+            android:summary="@string/platform_compat_dashboard_summary"
+            android:fragment="com.android.settings.development.compat.PlatformCompatDashboard"
+            />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -288,6 +295,13 @@
             android:dialogTitle="@string/bluetooth_select_avrcp_version_dialog_title"
             android:entries="@array/bluetooth_avrcp_versions"
             android:entryValues="@array/bluetooth_avrcp_version_values" />
+
+        <ListPreference
+            android:key="bluetooth_select_map_version"
+            android:title="@string/bluetooth_select_map_version_string"
+            android:dialogTitle="@string/bluetooth_select_map_version_dialog_title"
+            android:entries="@array/bluetooth_map_versions"
+            android:entryValues="@array/bluetooth_map_version_values" />
 
         <ListPreference
             android:key="bluetooth_select_a2dp_codec"
@@ -571,7 +585,7 @@
     <com.android.settings.development.autofill.AutofillPreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
-        android:order="1100">
+        android:order="1100"> <!-- Incremented by 100 from last order (i.e. 1000) -->
 
         <ListPreference
             android:key="autofill_logging_level"
@@ -592,20 +606,4 @@
             android:title="@string/autofill_reset_developer_options" />
 
     </com.android.settings.development.autofill.AutofillPreferenceCategory>
-
-    <PreferenceCategory
-        android:key="theme_customization_category"
-        android:title="@string/theme_customization_category"
-        android:order="1200"> <!-- Incremented by 100 from last order (i.e. 1100) -->
-
-        <ListPreference
-            android:key="android.theme.customization.accent_color"
-            android:title="@string/theme_customization_accent_color_title"/>
-        <ListPreference
-            android:key="android.theme.customization.font"
-            android:title="@string/theme_customization_font_title"/>
-        <ListPreference
-            android:key="android.theme.customization.adaptive_icon_shape"
-            android:title="@string/theme_customization_icon_shape_title"/>
-    </PreferenceCategory>
 </PreferenceScreen>

@@ -42,6 +42,7 @@ import android.text.TextUtils;
 
 import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.widget.AddPreference;
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -372,5 +373,13 @@ public class MobileNetworkSummaryControllerTest {
         verify(mPreference, atLeastOnce()).setAddWidgetEnabled(eq(false));
         verify(mPreference, atLeastOnce()).setAddWidgetEnabled(captor.capture());
         assertThat(captor.getValue()).isTrue();
+    }
+
+    @Test
+    public void onResume_disabledByAdmin_prefStaysDisabled() {
+        mPreference.setDisabledByAdmin(new RestrictedLockUtils.EnforcedAdmin());
+        mController.displayPreference(mPreferenceScreen);
+        mController.onResume();
+        verify(mPreference, never()).setEnabled(eq(true));
     }
 }

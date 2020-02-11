@@ -172,11 +172,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         if (mUserId == UserHandle.USER_NULL) {
             launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(titleResId),
-                    null, null, challenge);
+                    null, null, challenge, true /* foregroundOnly */);
         } else {
             launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(titleResId),
-                    null, null, challenge, mUserId);
+                    null, null, challenge, mUserId, true /* foregroundOnly */);
         }
         if (!launchedConfirmationActivity) {
             // This shouldn't happen, as we should only end up at this step if a lock thingy is

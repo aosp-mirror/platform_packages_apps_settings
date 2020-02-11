@@ -390,7 +390,7 @@ public class WifiDppConfiguratorActivity extends InstrumentedActivity implements
                     WifiDppUtils.getSecurityString(wifiConfiguration),
                     wifiConfiguration.getPrintableSsid(),
                     wifiConfiguration.preSharedKey,
-                    /* hiddenSsid */ false,
+                    wifiConfiguration.hiddenSSID,
                     wifiConfiguration.networkId,
                     /* isHotspot */ false);
             }

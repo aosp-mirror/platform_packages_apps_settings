@@ -16,14 +16,11 @@
 
 package com.android.settings.wifi.tether;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiClient;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.provider.Settings;
 import android.text.BidiFormatter;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,6 +35,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+
+import java.util.List;
 
 public class WifiTetherPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
@@ -128,13 +127,13 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                     }
 
                     @Override
-                    public void onNumClientsChanged(int numClients) {
+                    public void onConnectedClientsChanged(List<WifiClient> clients) {
                         if (mPreference != null
                                 && mSoftApState == WifiManager.WIFI_AP_STATE_ENABLED) {
                             // Only show the number of clients when state is on
                             mPreference.setSummary(mContext.getResources().getQuantityString(
-                                    R.plurals.wifi_tether_connected_summary, numClients,
-                                    numClients));
+                                    R.plurals.wifi_tether_connected_summary, clients.size(),
+                                    clients.size()));
                         }
                     }
                 });

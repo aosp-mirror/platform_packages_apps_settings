@@ -31,11 +31,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
-
-import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -91,7 +88,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasMainlineModulePackageInfo_available() throws Exception {
-        setupModulePackage();
+        setupModulePackage("test version 123");
 
         final MainlineModuleVersionPreferenceController controller =
                 new MainlineModuleVersionPreferenceController(mContext, "key");
@@ -101,7 +98,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
 
     @Test
     public void updateStates_canHandleIntent_setIntentToPreference() throws Exception {
-        setupModulePackage();
+        setupModulePackage("test version 123");
         when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
                 .thenReturn(new ResolveInfo());
 
@@ -115,7 +112,7 @@ public class MainlineModuleVersionPreferenceControllerTest {
 
     @Test
     public void updateStates_cannotHandleIntent_setNullToPreference() throws Exception {
-        setupModulePackage();
+        setupModulePackage("test version 123");
         when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
                 .thenReturn(null);
 
@@ -127,9 +124,38 @@ public class MainlineModuleVersionPreferenceControllerTest {
         assertThat(mPreference.getIntent()).isNull();
     }
 
-    private void setupModulePackage() throws Exception {
+    @Test
+    public void getSummary_versionIsNull_returnNull() throws Exception {
+        setupModulePackage(null);
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        assertThat(controller.getSummary()).isNull();
+    }
+
+    @Test
+    public void getSummary_versionIsMonth_returnMonth() throws Exception {
+        setupModulePackage("2019-05");
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        assertThat(controller.getSummary()).isEqualTo("May 01, 2019");
+    }
+
+    @Test
+    public void getSummary_versionIsDate_returnDate() throws Exception {
+        setupModulePackage("2019-05-13");
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        assertThat(controller.getSummary()).isEqualTo("May 13, 2019");
+    }
+
+    private void setupModulePackage(String version) throws Exception {
         final String provider = "test.provider";
-        final String version = "test version 123";
         final PackageInfo info = new PackageInfo();
         info.versionName = version;
         when(mContext.getString(

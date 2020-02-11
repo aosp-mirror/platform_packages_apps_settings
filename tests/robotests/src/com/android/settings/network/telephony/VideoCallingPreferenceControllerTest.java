@@ -27,6 +27,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.feature.ImsFeature;
 
+import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
@@ -49,6 +50,8 @@ public class VideoCallingPreferenceControllerTest {
     private ImsManager mImsManager;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
 
     private VideoCallingPreferenceController mController;
     private PersistableBundle mCarrierConfig;
@@ -125,4 +128,15 @@ public class VideoCallingPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.isChecked()).isTrue();
     }
+
+
+    @Test
+    public void displayPreference_notAvailable_setPreferenceInvisible() {
+        doReturn(false).when(mImsManager).isVtEnabledByPlatform();
+
+        mController.displayPreference(mPreferenceScreen);
+
+        assertThat(mPreferenceScreen.isVisible()).isFalse();
+    }
+
 }

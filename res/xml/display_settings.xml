@@ -93,6 +93,7 @@
     <SwitchPreference
         android:key="display_white_balance"
         android:title="@string/display_white_balance_title"
+        android:summary="@string/display_white_balance_summary"
         settings:controller="com.android.settings.display.DisplayWhiteBalancePreferenceController" />
 
     <Preference
@@ -118,12 +119,11 @@
         android:fragment="com.android.settings.dream.DreamSettings"
         settings:searchable="false" />
 
-    <com.android.settingslib.RestrictedPreference
+    <Preference
         android:key="lockscreen_from_display_settings"
         android:title="@string/lockscreen_settings_title"
         android:fragment="com.android.settings.security.LockscreenDashboardFragment"
-        settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController"
-        settings:userRestriction="no_ambient_display" />
+        settings:controller="com.android.settings.security.screenlock.LockScreenPreferenceController" />
 
     <SwitchPreference
         android:key="camera_gesture"

@@ -23,6 +23,7 @@ import android.content.Context;
 import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
 import android.os.RemoteException;
+import android.telephony.SubscriptionPlan;
 import android.util.SparseIntArray;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -200,6 +201,10 @@ public class DataSaverBackend {
 
         @Override
         public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue) {
+        }
+
+        @Override
+        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {
         }
     };
 

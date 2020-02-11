@@ -458,7 +458,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         }
 
         @Override
-        int getDefaultDataSubscriptionId() {
+        int getActiveDataSubscriptionId() {
             return INVALID_SUBSCRIPTION_ID;
         }
     }

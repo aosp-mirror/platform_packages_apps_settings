@@ -17,11 +17,12 @@
 package com.android.settings.wifi.calling;
 
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static junit.framework.Assert.assertEquals;
+
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -42,6 +43,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.view.View;
 import android.widget.TextView;
@@ -53,8 +55,7 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
@@ -66,8 +67,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+@Config(shadows = ShadowFragment.class)
 @RunWith(RobolectricTestRunner.class)
 public class WifiCallingSettingsForSubTest {
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
@@ -83,6 +86,7 @@ public class WifiCallingSettingsForSubTest {
     @Mock private static CarrierConfigManager sCarrierConfigManager;
     @Mock private CarrierConfigManager mMockConfigManager;
     @Mock private ImsManager mImsManager;
+    @Mock private ImsMmTelManager mImsMmTelManager;
     @Mock private TelephonyManager mTelephonyManager;
     @Mock private PreferenceScreen mPreferenceScreen;
     @Mock private SettingsActivity mActivity;
@@ -124,12 +128,15 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mSwitchBar).when(mView).findViewById(R.id.switch_bar);
 
         doReturn(mImsManager).when(mFragment).getImsManager();
+        doReturn(mImsMmTelManager).when(mFragment).getImsMmTelManager();
         doReturn(mImsConfig).when(mImsManager).getConfigInterface();
-        doReturn(true).when(mImsManager).isWfcProvisionedOnDevice();
+        doReturn(true).when(mFragment).isWfcProvisionedOnDevice();
         doReturn(true).when(mImsManager).isWfcEnabledByUser();
         doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();
-        doReturn(ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED)
-                .when(mImsManager).getWfcMode(anyBoolean());
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager).getVoWiFiModeSetting();
+        doReturn(ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED)
+                .when(mImsMmTelManager).getVoWiFiRoamingModeSetting();
 
         doReturn(mBundle).when(sCarrierConfigManager).getConfigForSubId(anyInt());
         setDefaultCarrierConfigValues();
@@ -171,7 +178,7 @@ public class WifiCallingSettingsForSubTest {
     @Test
     public void onResume_provisioningDisallowed_shouldFinish() {
         // Call onResume while provisioning is disallowed.
-        doReturn(false).when(mImsManager).isWfcProvisionedOnDevice();
+        doReturn(false).when(mFragment).isWfcProvisionedOnDevice();
         mFragment.onResume();
 
         // Verify that finish() is called
@@ -248,15 +255,13 @@ public class WifiCallingSettingsForSubTest {
 
         // Set the WFC home mode.
         mFragment.onPreferenceChange(mButtonWfcMode,
-                String.valueOf(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED));
+                String.valueOf(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
 
         // Check that only WFC home mode is set.
-        verify(mImsManager, times(1)).setWfcMode(
-                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
-                eq(false));
-        verify(mImsManager, never()).setWfcMode(
-                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
-                eq(true));
+        verify(mImsMmTelManager, times(1)).setVoWiFiModeSetting(
+                eq(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
+        verify(mImsMmTelManager, never()).setVoWiFiRoamingModeSetting(
+                eq(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
     }
 
     @Test
@@ -269,34 +274,32 @@ public class WifiCallingSettingsForSubTest {
 
         // Set the WFC home mode.
         mFragment.onPreferenceChange(mButtonWfcMode,
-                String.valueOf(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED));
+                String.valueOf(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
 
         // Check that both WFC home mode and roaming mode are set.
-        verify(mImsManager, times(1)).setWfcMode(
-                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
-                eq(false));
-        verify(mImsManager, times(1)).setWfcMode(
-                eq(ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED),
-                eq(true));
+        verify(mImsMmTelManager, times(1)).setVoWiFiModeSetting(
+                eq(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
+        verify(mImsMmTelManager, times(1)).setVoWiFiRoamingModeSetting(
+                eq(ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED));
     }
 
     @Test
     public void onSwitchChanged_enableSetting_shouldLaunchWfcDisclaimerFragment() {
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         mFragment.onSwitchChanged(null, true);
 
         // Check the WFC disclaimer fragment is launched.
         verify(mFragment).startActivityForResult(intentCaptor.capture(),
                 eq(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_DISCLAIMER));
-        Intent intent = intentCaptor.getValue();
+        final Intent intent = intentCaptor.getValue();
         assertThat(intent.getStringExtra(EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(WifiCallingDisclaimerFragment.class.getName());
     }
 
     @Test
     public void onActivityResult_finishWfcDisclaimerFragment_shouldLaunchCarrierActivity() {
-        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         // Emulate the WfcDisclaimerActivity finish.
         mFragment.onActivityResult(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_DISCLAIMER,
@@ -305,7 +308,7 @@ public class WifiCallingSettingsForSubTest {
         // Check the WFC emergency address activity is launched.
         verify(mFragment).startActivityForResult(intentCaptor.capture(),
                 eq(WifiCallingSettingsForSub.REQUEST_CHECK_WFC_EMERGENCY_ADDRESS));
-        Intent intent = intentCaptor.getValue();
+        final Intent intent = intentCaptor.getValue();
         assertEquals(intent.getComponent(), ComponentName.unflattenFromString(
                 TEST_EMERGENCY_ADDRESS_CARRIER_APP));
     }

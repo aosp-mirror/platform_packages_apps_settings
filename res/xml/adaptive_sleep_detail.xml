@@ -28,6 +28,14 @@
         settings:preview="@drawable/adaptive_sleep"
         settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
+    <Preference
+        android:key="adaptive_sleep_permission"
+        android:title="@string/adaptive_sleep_title_no_permission"
+        android:summary="@string/adaptive_sleep_summary_no_permission"
+        android:icon="@drawable/ic_info_outline_24"
+        settings:controller="com.android.settings.display.AdaptiveSleepPermissionPreferenceController"
+    />
+
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="adaptive_sleep"
         android:title="@string/adaptive_sleep_title"

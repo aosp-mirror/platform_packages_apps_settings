@@ -19,7 +19,6 @@ package com.android.settings.network.telephony;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertNull;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -31,12 +30,11 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsMmTelManager;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
@@ -60,11 +58,12 @@ public class WifiCallingPreferenceControllerTest {
     @Mock
     private ImsManager mImsManager;
     @Mock
+    private ImsMmTelManager mImsMmTelManager;
+    @Mock
     private PreferenceScreen mPreferenceScreen;
 
     private WifiCallingPreferenceController mController;
     private Preference mPreference;
-    private PreferenceCategory mPreferenceCategory;
     private Context mContext;
     private PersistableBundle mCarrierConfig;
 
@@ -73,24 +72,25 @@ public class WifiCallingPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
         mPreference = new Preference(mContext);
-        mController = new WifiCallingPreferenceController(mContext, "wifi_calling");
+        mController = spy(new WifiCallingPreferenceController(mContext, "wifi_calling") {
+            @Override
+            protected ImsMmTelManager getImsMmTelManager(int subId) {
+                return mImsMmTelManager;
+            }
+        });
         mController.mCarrierConfigManager = mCarrierConfigManager;
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
+        mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
         mPreference.setKey(mController.getPreferenceKey());
+
+        when(mController.getTelephonyManager(mContext, SUB_ID)).thenReturn(mTelephonyManager);
 
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
-        mPreferenceCategory = new PreferenceCategory(mContext);
-        when(mPreferenceScreen.findPreference(
-                WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
-                mPreferenceCategory);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);
     }
@@ -99,8 +99,10 @@ public class WifiCallingPreferenceControllerTest {
     public void updateState_noSimCallManager_setCorrectSummary() {
         mController.mSimCallManager = null;
         when(mImsManager.isWfcEnabledByUser()).thenReturn(true);
-        when(mImsManager.getWfcMode(anyBoolean())).thenReturn(
-                ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY);
+        when(mImsMmTelManager.getVoWiFiRoamingModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_WIFI_ONLY);
+        when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_WIFI_ONLY);
 
         mController.updateState(mPreference);
 
@@ -110,8 +112,7 @@ public class WifiCallingPreferenceControllerTest {
 
     @Test
     public void updateState_notCallIdle_disable() {
-        when(mTelephonyManager.getCallState(SUB_ID)).thenReturn(
-                TelephonyManager.CALL_STATE_RINGING);
+        mController.mCallState = TelephonyManager.CALL_STATE_RINGING;
 
         mController.updateState(mPreference);
 
@@ -127,17 +128,17 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcNonRoaming() {
+    public void updateState_nonRoaming_wfcCellularPreferred() {
         assertNull(mController.mSimCallManager);
-        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_WFC_ROAMING_MODE_BOOL, false);
-        // update the config value by calling init again.
+        mCarrierConfig.putBoolean(
+                CarrierConfigManager.KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL, true);
         mController.init(SUB_ID);
         mController.mImsManager = mImsManager;
 
-        when(mImsManager.getWfcMode(true)).thenReturn(
-                ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED);
-        when(mImsManager.getWfcMode(false)).thenReturn(
-                ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED);
+        when(mImsMmTelManager.getVoWiFiRoamingModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED);
+        when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED);
         when(mImsManager.isWfcEnabledByUser()).thenReturn(true);
         when(mTelephonyManager.isNetworkRoaming()).thenReturn(true);
 
@@ -147,13 +148,14 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_wfcRoaming() {
+    public void updateState_roaming_wfcWifiPreferred() {
         assertNull(mController.mSimCallManager);
-
-        when(mImsManager.getWfcMode(true)).thenReturn(
-                ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED);
-        when(mImsManager.getWfcMode(false)).thenReturn(
-                ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED);
+        // useWfcHomeModeForRoaming is false by default. In order to check wfc in roaming mode. We
+        // need the device roaming, and not using home mode in roaming network.
+        when(mImsMmTelManager.getVoWiFiRoamingModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED);
+        when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
+                ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED);
         when(mImsManager.isWfcEnabledByUser()).thenReturn(true);
         when(mTelephonyManager.isNetworkRoaming()).thenReturn(true);
 
@@ -163,17 +165,17 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_notAvailable_setCategoryInvisible() {
+    public void displayPreference_notAvailable_setPreferenceInvisible() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceCategory.isVisible()).isFalse();
+        assertThat(mPreferenceScreen.isVisible()).isFalse();
     }
 
     @Test
     public void displayPreference_available_setsSubscriptionIdOnIntent() {
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         mPreference.setIntent(intent);
         mController.displayPreference(mPreferenceScreen);
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,

@@ -64,7 +64,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
 
             builder.setTitle(R.string.security_settings_face_settings_remove_dialog_title)
                     .setMessage(R.string.security_settings_face_settings_remove_dialog_details)
-                    .setPositiveButton(R.string.okay, mOnClickListener)
+                    .setPositiveButton(R.string.delete, mOnClickListener)
                     .setNegativeButton(R.string.cancel, mOnClickListener);
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);

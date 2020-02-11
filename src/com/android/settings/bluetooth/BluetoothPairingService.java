@@ -85,7 +85,7 @@ public final class BluetoothPairingService extends Service {
             } else if (action.equals(ACTION_DISMISS_PAIRING)) {
                 Log.d(TAG, "Notification cancel " + mDevice.getAddress() + " (" +
                         mDevice.getName() + ")");
-                mDevice.cancelPairingUserInput();
+                mDevice.cancelPairing();
             } else {
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                         BluetoothDevice.ERROR);
@@ -141,7 +141,7 @@ public final class BluetoothPairingService extends Service {
         String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
         if (TextUtils.isEmpty(name)) {
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            name = device != null ? device.getAliasName() : res.getString(android.R.string.unknownName);
+            name = device != null ? device.getAlias() : res.getString(android.R.string.unknownName);
         }
 
         Log.d(TAG, "Show pairing notification for " + mDevice.getAddress() + " (" + name + ")");
