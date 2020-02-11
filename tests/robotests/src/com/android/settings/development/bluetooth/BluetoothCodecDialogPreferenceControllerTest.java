@@ -99,7 +99,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
     public void writeConfigurationValues_selectDefault_setHighest() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(
+            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
@@ -111,7 +112,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC, mCodecConfigAPTX,
                 mCodecConfigAPTXHD, mCodecConfigLDAC, mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigSBC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(
+            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(1);
@@ -138,7 +140,8 @@ public class BluetoothCodecDialogPreferenceControllerTest {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC, mCodecConfigAPTX,
                 mCodecConfigAPTXHD, mCodecConfigLDAC, mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(
+            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.writeConfigurationValues(2);
 
