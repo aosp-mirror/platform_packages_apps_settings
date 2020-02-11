@@ -39,7 +39,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
 import com.android.settings.core.FeatureFlags;
@@ -112,16 +111,13 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
 
             // Grey out if provisioning is not available.
             mPreference.setEnabled(!TetherSettings.isProvisioningNeededButUnavailable(mContext));
-
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE)) {
-                mPreference.setFragment(AllInOneTetherSettings.class.getName());
-            }
         }
     }
 
     @Override
     public boolean isAvailable() {
-        return TetherUtil.isTetherAvailable(mContext);
+        return TetherUtil.isTetherAvailable(mContext)
+                && !FeatureFlagUtils.isEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE);
     }
 
     @Override
