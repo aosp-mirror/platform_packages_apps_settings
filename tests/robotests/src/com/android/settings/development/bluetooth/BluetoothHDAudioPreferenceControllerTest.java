@@ -91,7 +91,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
     @Test
     public void updateState_codecSupported_setEnable() {
         when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.supportsOptionalCodecs(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
@@ -102,7 +102,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
     @Test
     public void updateState_codecNotSupported_setDisable() {
         when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.supportsOptionalCodecs(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_NOT_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
@@ -113,9 +113,9 @@ public class BluetoothHDAudioPreferenceControllerTest {
     @Test
     public void updateState_codecSupportedAndEnabled_checked() {
         when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.supportsOptionalCodecs(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
-        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.getOptionalCodecsEnabled(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
@@ -126,9 +126,9 @@ public class BluetoothHDAudioPreferenceControllerTest {
     @Test
     public void updateState_codecSupportedAndDisabled_notChecked() {
         when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.supportsOptionalCodecs(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
-        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
+        when(mBluetoothA2dp.getOptionalCodecsEnabled(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
