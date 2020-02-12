@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.TetherUtil;
 
@@ -95,8 +96,14 @@ public final class WifiTetherDisablePreferenceController extends BasePreferenceC
 
     @Override
     public CharSequence getSummary() {
-        // TODO(b/146818850): Update summary accordingly.
-        return super.getSummary();
+        if (mUSBTetherEnabled && mBluetoothTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_usb_and_bluetooth_on);
+        } else if (mUSBTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_usb_on);
+        } else if (mBluetoothTetherEnabled) {
+            return mContext.getString(R.string.disable_wifi_hotspot_when_bluetooth_on);
+        }
+        return mContext.getString(R.string.summary_placeholder);
     }
 
     @Override
