@@ -104,7 +104,7 @@ public class MediaOutputSlice implements CustomSliceable {
     }
 
     private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
-        if (TextUtils.equals(device.getId(), connectedDevice.getId())) {
+        if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
             listBuilder.addInputRange(getActiveDeviceHeaderRow(device));
         } else {
             listBuilder.addRow(getMediaDeviceRow(device));
