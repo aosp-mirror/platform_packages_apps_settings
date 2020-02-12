@@ -83,9 +83,9 @@ public class BluetoothCodecDialogPreferenceController extends
             return index;
         }
         // Check HD audio is enabled, display the available list.
-        if (bluetoothA2dp.getOptionalCodecsEnabled(activeDevice)
+        if (bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
                 == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED) {
-            BluetoothCodecConfig[] configs = getSelectableConfigs(null);
+            BluetoothCodecConfig[] configs = getSelectableConfigs(bluetoothA2dp.getActiveDevice());
             if (configs != null) {
                 return getIndexFromConfig(configs);
             }
@@ -101,7 +101,8 @@ public class BluetoothCodecDialogPreferenceController extends
         int codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
         switch (index) {
             case 0:
-                codecTypeValue = getHighestCodec(getSelectableConfigs(null));
+                codecTypeValue = getHighestCodec(getSelectableConfigs(
+                    mBluetoothA2dp.getActiveDevice()));
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
             case 1:

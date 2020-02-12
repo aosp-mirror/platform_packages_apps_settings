@@ -5034,28 +5034,28 @@
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay">
-        <item quantity="one">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
-        <item quantity="other">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+        <item quantity="one">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay">
-        <item quantity="one">Very short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
-        <item quantity="other">Very short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+        <item quantity="one">Very short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Very short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
-        <item quantity="one">Short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
-        <item quantity="other">Short delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+        <item quantity="one">Short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_long_delay">
-        <item quantity="one">Long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
-        <item quantity="other">Long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+        <item quantity="one">Long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay">
-        <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
-        <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
+        <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
@@ -6188,6 +6188,12 @@
     <string name="notification_history_today">Today</string>
     <string name="notification_history_snooze">Snoozed</string>
     <string name="notification_history_dismiss">Recently dismissed</string>
+
+    <!-- app summary of notification app list screen [CHAR LIMIT=100] -->
+    <plurals name="notification_history_count">
+        <item quantity="one"><xliff:g id="number">%d</xliff:g> notification</item>
+        <item quantity="other"><xliff:g id="number">%d</xliff:g> notifications</item>
+    </plurals>
 
     <!-- Category title for phone call's ringtone and vibration settings in the Sound Setting.
          [CHAR LIMIT=40] -->
@@ -8033,6 +8039,21 @@
 
     <!-- Configure Notifications: setting summary [CHAR LIMIT=200] -->
     <string name="asst_capabilities_actions_replies_summary">Automatically show suggested actions &amp; replies</string>
+
+    <!-- Configure notifications: settings summary [CHAR LIMIT=NONE] -->
+    <string name="notification_history_summary">Turn on notification history to keep track of past notifications and snoozed notifications</string>
+
+    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
+    <string name="notification_history">Notification history</string>
+
+    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
+    <string name="notification_history_turn_on">Turn on history</string>
+
+    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
+    <string name="notification_history_turn_off">Turn off history</string>
+
+    <!-- Notification history screen; summary when history is off [CHAR LIMIT=200] -->
+    <string name="notification_history_off_title_extended">Notification history is turned off</string>
 
     <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
     <string name="snooze_options_title">Allow notification snoozing</string>

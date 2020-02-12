@@ -19,10 +19,8 @@ package com.android.settings.accessibility;
 import static android.content.Context.MODE_PRIVATE;
 
 import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.KEY_DELAY_MODE;
+import static com.android.settings.accessibility.ToggleAutoclickPreferenceFragment.Quantity;
 
-import static java.lang.annotation.RetentionPolicy.SOURCE;
-
-import android.annotation.IntDef;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -42,24 +40,12 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.widget.LayoutPreference;
 
-import java.lang.annotation.Retention;
-
 /**
  * Controller class that controls accessibility autoclick seekbar settings.
  */
 public class ToggleAutoclickCustomSeekbarController extends BasePreferenceController
         implements LifecycleObserver, OnResume, OnPause,
         SharedPreferences.OnSharedPreferenceChangeListener {
-
-    @Retention(SOURCE)
-    @IntDef({
-            Quantity.OTHER,
-            Quantity.ONE
-    })
-    @interface Quantity {
-        int OTHER = 0;
-        int ONE = 1;
-    }
 
     private static final String CONTROL_AUTOCLICK_DELAY_SECURE =
             Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;

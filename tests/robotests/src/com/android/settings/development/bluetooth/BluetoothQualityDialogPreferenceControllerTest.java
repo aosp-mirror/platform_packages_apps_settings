@@ -110,7 +110,8 @@ public class BluetoothQualityDialogPreferenceControllerTest {
     public void updateState_codeTypeIsLDAC_enablePreference() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigLDAC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigLDAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(
+            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -121,7 +122,8 @@ public class BluetoothQualityDialogPreferenceControllerTest {
     public void updateState_codeTypeAAC_disablePreference() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigLDAC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(
+            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
