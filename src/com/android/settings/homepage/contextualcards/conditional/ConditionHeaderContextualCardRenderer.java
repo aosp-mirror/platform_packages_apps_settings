@@ -59,7 +59,7 @@ public class ConditionHeaderContextualCardRenderer implements ContextualCardRend
         final MetricsFeatureProvider metricsFeatureProvider = FeatureFactory.getFactory(
                 mContext).getMetricsFeatureProvider();
         view.icons.removeAllViews();
-        headerCard.getConditionalCards().stream().forEach(card -> {
+        headerCard.getConditionalCards().forEach(card -> {
             final ImageView icon = (ImageView) LayoutInflater.from(mContext).inflate(
                     R.layout.conditional_card_header_icon, view.icons, false);
             icon.setImageDrawable(card.getIconDrawable());

@@ -423,6 +423,12 @@
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
     </style>
 
+    <style name="StickyCardStyle">
+        <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
+    </style>
+
     <style name="SearchBarStyle">
         <item name="android:layout_margin">@dimen/search_bar_margin</item>
         <item name="cardCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
