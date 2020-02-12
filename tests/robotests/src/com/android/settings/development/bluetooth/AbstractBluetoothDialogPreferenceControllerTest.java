@@ -103,15 +103,13 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     @Test
     public void onIndexUpdated_checkFlow() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, null);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mCodecConfigAAC);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.onIndexUpdated(mCurrentConfig);
 
         verify(mController).writeConfigurationValues(mCurrentConfig);
-        verify(mBluetoothA2dp).setCodecConfigPreference(
-                mBluetoothA2dp.getActiveDevice(), mCodecConfigAAC);
+        verify(mBluetoothA2dp).setCodecConfigPreference(null, mCodecConfigAAC);
         assertThat(mPreference.getSummary()).isEqualTo(SUMMARY);
     }
 
@@ -136,15 +134,14 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
         assertThat(mController.getCurrentCodecConfig()).isNull();
 
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
-        when(mBluetoothA2dp.getCodecStatus(mBluetoothA2dp.getActiveDevice())).thenReturn(null);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(null);
         assertThat(mController.getCurrentCodecConfig()).isNull();
     }
 
     @Test
     public void getCurrentCodecConfig_verifyConfig() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, null);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         assertThat(mController.getCurrentCodecConfig()).isEqualTo(mCodecConfigAAC);
@@ -153,8 +150,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     @Test
     public void getSelectableConfigs_verifyConfig() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         assertThat(mController.getSelectableConfigs(null)).isEqualTo(mCodecConfigs);
@@ -163,8 +159,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     @Test
     public void getSelectableByCodecType_verifyConfig() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         assertThat(mController.getSelectableByCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC))
@@ -174,8 +169,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     @Test
     public void getSelectableByCodecType_unavailable() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         assertThat(mController.getSelectableByCodecType(
@@ -185,8 +179,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     @Test
     public void onBluetoothServiceConnected_verifyBluetoothA2dpConfigStore() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(
-            mBluetoothA2dp.getActiveDevice())).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         verify(mBluetoothA2dpConfigStore).setCodecType(mCodecConfigAAC.getCodecType());
