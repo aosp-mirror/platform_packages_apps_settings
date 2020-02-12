@@ -23,8 +23,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -69,8 +69,7 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
         ContentResolver contentResolver = context.getContentResolver();
         switch(which) {
             case DialogInterface.BUTTON_POSITIVE:
-                Settings.Global.putInt(contentResolver,
-                        Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+                context.getSystemService(WifiManager.class).setScanAlwaysAvailable(true);
                 Toast.makeText(
                         context,
                         context.getString(R.string.wifi_settings_scanning_required_enabled),
