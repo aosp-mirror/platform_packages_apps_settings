@@ -46,7 +46,10 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
+import com.android.settings.network.BluetoothTetherPreferenceController;
 import com.android.settings.network.TetherEnabler;
+import com.android.settings.network.UsbTetherPreferenceController;
+import com.android.settings.network.WifiTetherDisablePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
@@ -66,7 +69,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Displays preferences for all Tethering options.
- * TODO(b/147323306): Add tether option preferences into this fragment after controllers created.
  */
 @SearchIndexable
 public final class AllInOneTetherSettings extends RestrictedDashboardFragment
@@ -172,6 +174,9 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
+        getSettingsLifecycle().addObserver(use(UsbTetherPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(BluetoothTetherPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(WifiTetherDisablePreferenceController.class));
     }
 
     @Override
