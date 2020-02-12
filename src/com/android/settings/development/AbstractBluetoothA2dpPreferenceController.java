@@ -83,7 +83,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
         synchronized (mBluetoothA2dpConfigStore) {
             if (mBluetoothA2dp != null) {
-                setCodecConfigPreference(mBluetoothA2dp.getActiveDevice(), codecConfig);
+                setCodecConfigPreference(null, codecConfig);    // Use current active device
             }
         }
         // Because the setting is not persisted into permanent storage, we cannot call update state
@@ -102,14 +102,13 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
-        BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
-        if (getCodecConfig(activeDevice) == null || mPreference == null) {
+        if (getCodecConfig(null) == null || mPreference == null) { // Use current active device
             return;
         }
 
         BluetoothCodecConfig codecConfig;
         synchronized (mBluetoothA2dpConfigStore) {
-            codecConfig = getCodecConfig(activeDevice);
+            codecConfig = getCodecConfig(null);         // Use current active device
         }
 
         final int index = getCurrentA2dpSettingIndex(codecConfig);
