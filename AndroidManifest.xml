@@ -1199,6 +1199,10 @@
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
             android:label="@string/notification_history_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.NOTIFICATION_HISTORY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
