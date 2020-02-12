@@ -160,7 +160,7 @@ public class WifiTetherApBandPreferenceControllerTest {
         // Set controller band index to 5GHz and verify is set.
         mController.displayPreference(mScreen);
         mController.onPreferenceChange(mPreference, VAL_5GHZ_STR);
-        assertThat(mController.getBandIndex()).isEqualTo(VAL_5GHZ_INT);
+        assertThat(mController.getBandIndex()).isEqualTo(VAL_2_5_GHZ_INT);
 
         // Disable 5Ghz band
         when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
