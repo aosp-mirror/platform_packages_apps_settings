@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -38,24 +38,24 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 /**
  * Controller of global switch bar used to fully turn off Game Driver.
  */
-public class GameDriverGlobalSwitchBarController
+public class GraphicsDriverGlobalSwitchBarController
         implements SwitchWidgetController.OnSwitchChangeListener,
-                   GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
-                   OnStart, OnStop {
+                   GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener,
+                   LifecycleObserver, OnStart, OnStop {
 
     private final Context mContext;
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     SwitchWidgetController mSwitchWidgetController;
     @VisibleForTesting
-    GameDriverContentObserver mGameDriverContentObserver;
+    GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
-    GameDriverGlobalSwitchBarController(
+    GraphicsDriverGlobalSwitchBarController(
             Context context, SwitchWidgetController switchWidgetController) {
         mContext = context;
         mContentResolver = context.getContentResolver();
-        mGameDriverContentObserver =
-                new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
+        mGraphicsDriverContentObserver =
+                new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
         mSwitchWidgetController = switchWidgetController;
         mSwitchWidgetController.setEnabled(
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context));
@@ -69,27 +69,28 @@ public class GameDriverGlobalSwitchBarController
     @Override
     public void onStart() {
         mSwitchWidgetController.startListening();
-        mGameDriverContentObserver.register(mContentResolver);
+        mGraphicsDriverContentObserver.register(mContentResolver);
     }
 
     @Override
     public void onStop() {
         mSwitchWidgetController.stopListening();
-        mGameDriverContentObserver.unregister(mContentResolver);
+        mGraphicsDriverContentObserver.unregister(mContentResolver);
     }
 
     @Override
     public boolean onSwitchToggled(boolean isChecked) {
-        final int gameDriver = Settings.Global.getInt(
+        final int graphicsDriverGlobalOption = Settings.Global.getInt(
                 mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
         if (isChecked
-                && (gameDriver == GAME_DRIVER_DEFAULT || gameDriver == GAME_DRIVER_ALL_APPS
-                        || gameDriver == GAME_DRIVER_PRERELEASE_ALL_APPS)) {
+                && (graphicsDriverGlobalOption == GAME_DRIVER_DEFAULT
+                        || graphicsDriverGlobalOption == GAME_DRIVER_ALL_APPS
+                        || graphicsDriverGlobalOption == GAME_DRIVER_PRERELEASE_ALL_APPS)) {
             return true;
         }
 
-        if (!isChecked && gameDriver == GAME_DRIVER_OFF) {
+        if (!isChecked && graphicsDriverGlobalOption == GAME_DRIVER_OFF) {
             return true;
         }
 
@@ -100,7 +101,7 @@ public class GameDriverGlobalSwitchBarController
     }
 
     @Override
-    public void onGameDriverContentChanged() {
+    public void onGraphicsDriverContentChanged() {
         mSwitchWidgetController.setChecked(
                 Settings.Global.getInt(
                         mContentResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT)

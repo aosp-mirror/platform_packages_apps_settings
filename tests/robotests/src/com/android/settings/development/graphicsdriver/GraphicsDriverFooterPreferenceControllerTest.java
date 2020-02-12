@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -45,25 +45,25 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GameDriverFooterPreferenceControllerTest {
+public class GraphicsDriverFooterPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private FooterPreference mPreference;
     @Mock
-    private GameDriverContentObserver mGameDriverContentObserver;
+    private GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GameDriverFooterPreferenceController mController;
+    private GraphicsDriverFooterPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mResolver = mContext.getContentResolver();
-        mController = spy(new GameDriverFooterPreferenceController(mContext, "key"));
+        mController = spy(new GraphicsDriverFooterPreferenceController(mContext, "key"));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
@@ -92,17 +92,17 @@ public class GameDriverFooterPreferenceControllerTest {
 
     @Test
     public void onStart_shouldRegister() {
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStart();
 
-        verify(mGameDriverContentObserver).register(mResolver);
+        verify(mGraphicsDriverContentObserver).register(mResolver);
     }
 
     @Test
     public void onStop_shouldUnregister() {
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStop();
 
-        verify(mGameDriverContentObserver).unregister(mResolver);
+        verify(mGraphicsDriverContentObserver).unregister(mResolver);
     }
 }
