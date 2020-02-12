@@ -61,6 +61,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         this(context, appState, callback, appOpsOpCode, permissions,
                 AppGlobals.getPackageManager());
     }
+
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int[] appOpsOpCodes, String[] permissions) {
         this(context, appState, callback, appOpsOpCodes, permissions,
@@ -70,9 +71,10 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
     @VisibleForTesting
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions, IPackageManager packageManager) {
-        this(context, appState, callback, new int[] {appOpsOpCode}, permissions,
+        this(context, appState, callback, new int[]{appOpsOpCode}, permissions,
                 packageManager);
     }
+
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int[] appOpsOpCodes, String[] permissions, IPackageManager packageManager) {
         super(appState, callback);
@@ -155,8 +157,12 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         for (int i = 0; i < N; i++) {
             AppEntry app = apps.get(i);
             int userId = UserHandle.getUserId(app.info.uid);
-            ArrayMap<String, PermissionState> userMap = entries.get(userId);
-            app.extraInfo = userMap != null ? userMap.get(app.info.packageName) : null;
+            if (entries != null) {
+                ArrayMap<String, PermissionState> userMap = entries.get(userId);
+                app.extraInfo = userMap != null ? userMap.get(app.info.packageName) : null;
+            } else {
+                app.extraInfo = null;
+            }
         }
     }
 
@@ -247,6 +253,10 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      * a particular package.
      */
     private void loadAppOpsStates(SparseArray<ArrayMap<String, PermissionState>> entries) {
+        if (entries == null) {
+            return;
+        }
+
         // Find out which packages have been granted permission from AppOps.
         final List<AppOpsManager.PackageOps> packageOps = mAppOpsManager.getPackagesForOps(
                 mAppOpsOpCodes);
