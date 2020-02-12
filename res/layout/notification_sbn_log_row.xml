@@ -95,8 +95,7 @@
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:textAlignment="viewEnd"
             />
     </RelativeLayout>
@@ -116,7 +115,7 @@
             android:layout_gravity="left|center_vertical"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
             android:textAlignment="viewStart"
         />
 
@@ -127,8 +126,7 @@
             android:layout_gravity="left|center_vertical"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:textAlignment="viewStart"
         />
 
