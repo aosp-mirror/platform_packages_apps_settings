@@ -20,12 +20,6 @@
     android:persistent="false"
     android:title="@string/accessibility_settings">
 
-    <Preference
-        android:fragment="com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment"
-        android:key="accessibility_shortcut_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_global_gesture_preference_title" />
-
     <PreferenceCategory
         android:key="user_installed_services_category"
         android:persistent="false"
@@ -198,6 +192,13 @@
         android:key="experimental_category"
         android:persistent="false"
         android:title="@string/experimental_category_title">
+
+        <SwitchPreference
+            android:key="accessibility_shortcut_preference"
+            android:persistent="false"
+            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
+            android:summary="@string/accessibility_shortcut_description"
+            settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
 
         <SwitchPreference
             android:key="toggle_high_text_contrast_preference"
