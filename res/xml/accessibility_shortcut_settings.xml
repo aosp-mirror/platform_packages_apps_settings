@@ -17,11 +17,6 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accessibility_global_gesture_preference_title">
 
-    <Preference
-        android:fragment="com.android.settings.accessibility.ShortcutServicePickerFragment"
-        android:key="accessibility_shortcut_service"
-        android:title="@string/accessibility_shortcut_service_title" />
-
     <SwitchPreference
         android:key="accessibility_shortcut_on_lock_screen"
         android:title="@string/accessibility_shortcut_service_on_lock_screen_title" />
