@@ -19,8 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@*android:color/material_grey_50">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -100,17 +99,13 @@
                     android:layout_height="wrap_content"
                     android:clipChildren="true"
                     android:elevation="3dp"
-                    android:background="@drawable/rounded_bg"
-                    settings:layout_constraintHeight_max="200dp"
-                    settings:layout_constrainedHeight="true">
+                    android:background="@drawable/rounded_bg">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:clipChildren="true"
-                        settings:layout_constraintHeight_max="300dp"
-                        settings:layout_constrainedHeight="true"
                         settings:fastScrollEnabled="true"
                         settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
                         settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
@@ -144,10 +139,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:clipChildren="true"
-                        settings:layout_constraintHeight_max="300dp"
-                        settings:layout_constrainedHeight="true"
                         settings:fastScrollEnabled="true"
                         settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
                         settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"

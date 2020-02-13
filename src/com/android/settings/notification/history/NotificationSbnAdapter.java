@@ -94,6 +94,13 @@ public class NotificationSbnAdapter extends
     }
 
     public void onRebuildComplete(List<StatusBarNotification> notifications) {
+        // summaries are low content; don't bother showing them
+        for (int i = notifications.size() - 1; i >= 0; i--) {
+            StatusBarNotification sbn = notifications.get(i);
+            if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+                notifications.remove(i);
+            }
+        }
         mValues = notifications;
         notifyDataSetChanged();
     }

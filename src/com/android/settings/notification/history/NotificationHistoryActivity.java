@@ -129,6 +129,7 @@ public class NotificationHistoryActivity extends Activity {
 
         mPm = getPackageManager();
 
+        mTodayView.removeAllViews();
         mHistoryLoader = new HistoryLoader(this, new NotificationBackend(), mPm);
         mHistoryLoader.load(mOnHistoryLoaderListener);
 
@@ -245,16 +246,18 @@ public class NotificationHistoryActivity extends Activity {
                 LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
                 rv.setLayoutManager(lm);
                 rv.setAdapter(new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-                ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
-                        Arrays.asList(snoozed));
                 DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                         rv.getContext(), lm.getOrientation());
                 rv.addItemDecoration(dividerItemDecoration);
+                rv.setNestedScrollingEnabled(false);
+
+                ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
+                        Arrays.asList(snoozed));
             }
 
             try {
                 StatusBarNotification[] dismissed = mNm.getHistoricalNotifications(
-                        NotificationHistoryActivity.this.getPackageName(), 10, false);
+                        NotificationHistoryActivity.this.getPackageName(), 6, false);
                 RecyclerView rv = mDismissView.findViewById(R.id.notification_list);
                 LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
                 rv.setLayoutManager(lm);
@@ -262,6 +265,8 @@ public class NotificationHistoryActivity extends Activity {
                 DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
                         rv.getContext(), lm.getOrientation());
                 rv.addItemDecoration(dividerItemDecoration);
+                rv.setNestedScrollingEnabled(false);
+
                 ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
                         Arrays.asList(dismissed));
                 mDismissView.setVisibility(View.VISIBLE);
