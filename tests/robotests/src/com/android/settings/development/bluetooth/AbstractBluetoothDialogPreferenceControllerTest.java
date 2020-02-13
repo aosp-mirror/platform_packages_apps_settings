@@ -35,6 +35,7 @@ import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -101,6 +102,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void onIndexUpdated_checkFlow() {
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, null);
         when(mBluetoothA2dp.getCodecStatus(
