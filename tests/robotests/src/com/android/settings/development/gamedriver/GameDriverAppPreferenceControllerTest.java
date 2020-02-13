@@ -21,6 +21,7 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
 import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
@@ -41,8 +42,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 
-import java.util.Arrays;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +49,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 public class GameDriverAppPreferenceControllerTest {
@@ -87,10 +88,13 @@ public class GameDriverAppPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mResolver = mContext.getContentResolver();
         mValueList =
-                mContext.getResources().getStringArray(R.array.game_driver_app_preference_values);
-        mDialogTitle = mContext.getResources().getString(R.string.game_driver_app_preference_title);
+                mContext.getResources().getStringArray(
+                        R.array.graphics_driver_app_preference_values);
+        mDialogTitle = mContext.getResources().getString(
+                R.string.graphics_driver_app_preference_title);
         mPreferencePrereleaseDriver =
-                mContext.getResources().getString(R.string.game_driver_app_preference_prerelease_driver);
+                mContext.getResources().getString(
+                        R.string.graphics_driver_app_preference_prerelease_driver);
     }
 
     @Test

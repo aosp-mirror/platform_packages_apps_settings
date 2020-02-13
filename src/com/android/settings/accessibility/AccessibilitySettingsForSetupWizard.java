@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.LEGACY;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -99,9 +101,11 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public void onResume() {
         super.onResume();
         updateAccessibilityServicePreference(mScreenReaderPreference,
-                findService(SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME));
+                SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME,
+                LegacyToggleScreenReaderPreferenceFragmentForSetupWizard.class.getName());
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
-                findService(SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME));
+                SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME,
+                LegacyToggleSelectToSpeakPreferenceFragmentForSetupWizard.class.getName());
         configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
@@ -143,7 +147,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     }
 
     private void updateAccessibilityServicePreference(Preference preference,
-            AccessibilityServiceInfo info) {
+            String packageName, String serviceName, String targetLegacyFragment) {
+        final AccessibilityServiceInfo info = findService(packageName, serviceName);
         if (info == null) {
             getPreferenceScreen().removePreference(preference);
             return;
@@ -154,6 +159,9 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         preference.setTitle(title);
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
         preference.setKey(componentName.flattenToString());
+        if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == LEGACY) {
+            preference.setFragment(targetLegacyFragment);
+        }
 
         // Update the extras.
         Bundle extras = preference.getExtras();

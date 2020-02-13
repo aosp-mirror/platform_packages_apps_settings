@@ -49,7 +49,7 @@ public class GameDriverDashboard extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.game_driver_settings;
+        return R.xml.graphics_driver_settings;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class GameDriverDashboard extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.game_driver_settings) {
+            new BaseSearchIndexProvider(R.xml.graphics_driver_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {

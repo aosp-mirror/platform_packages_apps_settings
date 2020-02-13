@@ -38,7 +38,6 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -114,7 +113,6 @@ public class LocationForWorkPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onLocationModeChanged_disabledByAdmin_shouldDisablePreference() {
         mController.displayPreference(mScreen);
         final EnforcedAdmin admin = mock(EnforcedAdmin.class);
@@ -124,11 +122,9 @@ public class LocationForWorkPreferenceControllerTest {
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
         verify(mPreference).setDisabledByAdmin(any());
-        verify(mPreference).setChecked(false);
     }
 
     @Test
-    @Ignore
     public void onLocationModeChanged_locationOff_shouldDisablePreference() {
         mController.displayPreference(mScreen);
         doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
@@ -138,7 +134,7 @@ public class LocationForWorkPreferenceControllerTest {
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
-        verify(mPreference).setSummary(R.string.switch_off_text);
+        verify(mPreference).setSummary(R.string.location_app_permission_summary_location_off);
     }
 
     @Test

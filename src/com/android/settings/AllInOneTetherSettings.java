@@ -20,7 +20,7 @@ import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.ConnectivityManager.TETHERING_WIFI;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
-import static com.android.settings.network.WifiTetherDisablePreferenceController.KEY_ENABLE_WIFI_TETHERING;
+import static com.android.settings.network.TetherEnabler.KEY_ENABLE_WIFI_TETHERING;
 
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;

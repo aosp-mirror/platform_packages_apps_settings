@@ -34,8 +34,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.notification.zen.ZenModeBackend;
-import com.android.settings.notification.zen.ZenModePriorityMessagesPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -88,7 +86,7 @@ public class ZenModePriorityMessagesPreferenceControllerTest {
 
         when(mBackend.getPriorityMessageSenders())
             .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
-        when(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+        when(mBackend.getAlarmsTotalSilencePeopleSummary(
                 NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)).thenCallRealMethod();
         when(mBackend.getContactsSummary(NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES))
                 .thenCallRealMethod();

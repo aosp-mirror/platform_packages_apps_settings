@@ -4877,6 +4877,8 @@
     <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
     <!-- Title for the preference to choose the service that is turned on and off by the accessibility shortcut. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_title">Shortcut service</string>
+    <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_settings">Shortcut settings</string>
     <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_on_lock_screen_title">Allow from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
@@ -5079,8 +5081,11 @@
     <!-- Label describing a high intensity vibration option. [CHAR LIMIT=15] -->
     <string name="accessibility_vibration_intensity_high">High</string>
 
-    <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
+    <!-- Title for accessibility menu item to launch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
+
+    <!-- Title for accessibility menu item to launch a settings activity with app name. [CHAR LIMIT=30] -->
+    <string name="accessibility_service_menu_item_settings"><xliff:g example="TalkBack" id="accessibility_app_name">%1$s</xliff:g> settings</string>
 
     <!-- Summary for the enabled state of an accessibility feature. [CHAR LIMIT=10] -->
     <string name="accessibility_feature_state_on">On</string>
@@ -7105,6 +7110,8 @@
     <string name="help_uri_bluetooth_screen" translatable="false"></string>
     <!-- url for the SIM combination warning required dialog help page -->
     <string name="help_uri_sim_combination_warning" translatable="false"></string>
+    <!-- url for the NFC and payment settings page -->
+    <string name="help_uri_nfc_and_payment_settings" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -7335,6 +7342,8 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary">Bluetooth, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary">Bluetooth</string>
+    <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary">Unavailable because NFC is off</string>
     <!-- Title for setting tile leading to Apps & Notification settings [CHAR LIMIT=40]-->
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
@@ -7790,7 +7799,7 @@
     <!-- Do not disturb: what to block summary, all effects -->
     <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
 
-    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden</string>
+    <string name="zen_mode_blocked_effects_footer">Notifications needed for basic phone activity and status will never be hidden.</string>
 
     <!--  Do not disturb: Zen mode no sounds are exceptions to bypass do not disturb-->
     <string name="zen_mode_no_exceptions">None</string>
@@ -8645,6 +8654,9 @@
     </plurals>
 
     <string name="zen_mode_conversations_title">Conversations</string>
+    <string name="zen_mode_from_all_conversations">From all conversations</string>
+    <string name="zen_mode_from_important_conversations">From important conversations</string>
+    <string name="zen_mode_from_no_conversations">Don\u2019t allow any conversations</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow messages</string>
@@ -10801,34 +10813,34 @@
     <!-- UI debug setting: ANGLE enabled app has been set [CHAR LIMIT=NONE] -->
     <string name="angle_enabled_app_set">ANGLE enabled application: <xliff:g id="app_name" example="com.company.app">%1$s</xliff:g></string>
 
-    <!-- Title for Game Driver dashboard where developers can configure apps to use game driver or not [CHAR LIMIT=50] -->
-    <string name="game_driver_dashboard_title">Game Driver Preferences</string>
-    <!-- Summary for Game Driver dashboard [CHAR LIMIT=50] -->
-    <string name="game_driver_dashboard_summary">Modify Game Driver settings</string>
-    <!-- Footer text for Game Driver dashboard [CHAR LIMIT=NONE] -->
-    <string name="game_driver_footer_text">When Game Driver is turned on, you can pick to use the updated graphics driver for Apps installed on the device.</string>
-    <!-- Title for Game Driver all apps preference [CHAR LIMIT=50] -->
-    <string name="game_driver_all_apps_preference_title">Enable for all apps</string>
-    <!-- Title for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_title">Select Graphics Driver</string>
-    <!-- The default value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_default">Default</string>
+    <!-- Title for graphics driver dashboard where developers can configure apps to choose graphics driver [CHAR LIMIT=50] -->
+    <string name="graphics_driver_dashboard_title">Graphics Driver Preferences</string>
+    <!-- Summary for graphics driver dashboard [CHAR LIMIT=50] -->
+    <string name="graphics_driver_dashboard_summary">Modify graphics driver settings</string>
+    <!-- Footer text for graphics driver dashboard [CHAR LIMIT=NONE] -->
+    <string name="graphics_driver_footer_text">When there are multiple graphics drivers, you can pick to use the updated graphics driver for Apps installed on the device.</string>
+    <!-- Title for graphics Driver all apps preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_all_apps_preference_title">Enable for all apps</string>
+    <!-- Title for graphics driver preference for app [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_title">Select Graphics Driver</string>
+    <!-- The default value of graphics driver preference for app [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_default">Default</string>
     <!-- The game driver value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_game_driver">Game Driver</string>
-    <!-- The game driver value for Prerelease Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_prerelease_driver">Prerelease Driver</string>
-    <!-- The system value for Game Driver app preference [CHAR LIMIT=50] -->
-    <string name="game_driver_app_preference_system">System Graphics Driver</string>
-    <!-- All the values for Game Driver all apps preference [CHAR LIMIT=50] -->
-    <string-array name="game_driver_all_apps_preference_values">
-        <item>@string/game_driver_app_preference_default</item>
-        <item>@string/game_driver_app_preference_game_driver</item>
+    <string name="graphics_driver_app_preference_game_driver">Game Driver</string>
+    <!-- The prerelase driver value for Prerelease Driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_prerelease_driver">Prerelease Driver</string>
+    <!-- The system driver value for system graphics driver app preference [CHAR LIMIT=50] -->
+    <string name="graphics_driver_app_preference_system">System Graphics Driver</string>
+    <!-- All the graphics driver preference values for all apps globally [CHAR LIMIT=50] -->
+    <string-array name="graphics_driver_all_apps_preference_values">
+        <item>@string/graphics_driver_app_preference_default</item>
+        <item>@string/graphics_driver_app_preference_game_driver</item>
     </string-array>
-    <!-- All the values for Game Driver app preference [CHAR LIMIT=50] -->
-    <string-array name="game_driver_app_preference_values">
-        <item>@string/game_driver_app_preference_default</item>
-        <item>@string/game_driver_app_preference_game_driver</item>
-        <item>@string/game_driver_app_preference_system</item>
+    <!-- All the values of graphics driver for app preference [CHAR LIMIT=50] -->
+    <string-array name="graphics_driver_app_preference_values">
+        <item>@string/graphics_driver_app_preference_default</item>
+        <item>@string/graphics_driver_app_preference_game_driver</item>
+        <item>@string/graphics_driver_app_preference_system</item>
     </string-array>
 
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->

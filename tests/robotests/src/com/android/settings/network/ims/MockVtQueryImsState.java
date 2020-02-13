@@ -33,7 +33,7 @@ public class MockVtQueryImsState extends VtQueryImsState {
     /**
      * Constructor
      *
-     * @param context {@code Context}
+     * @param context {@link Context}
      * @param subId subscription's id
      */
     public MockVtQueryImsState(Context context, int subId) {

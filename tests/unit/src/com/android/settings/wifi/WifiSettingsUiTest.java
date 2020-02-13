@@ -316,7 +316,8 @@ public class WifiSettingsUiTest {
         assertThat(accessPoint.getConfig()).isNotNull();
         NetworkSelectionStatus networkStatus = accessPoint.getConfig().getNetworkSelectionStatus();
         assertThat(networkStatus).isNotNull();
-        assertThat(networkStatus.isNetworkEnabled()).isFalse();
+        assertThat(networkStatus.getNetworkSelectionStatus())
+                .isEqualTo(NetworkSelectionStatus.NETWORK_SELECTION_TEMPORARY_DISABLED);
         assertThat(networkStatus.getNetworkSelectionDisableReason()).isEqualTo(
                 NetworkSelectionStatus.DISABLED_BY_WRONG_PASSWORD);
 

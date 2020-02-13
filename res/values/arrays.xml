@@ -1175,6 +1175,19 @@
         <item>zen_mode_from_none</item>
     </string-array>
 
+    <string-array name="zen_mode_conversations_entries" translatable="false">
+        <item>@string/zen_mode_from_all_conversations</item>
+        <item>@string/zen_mode_from_important_conversations</item>
+        <item>@string/zen_mode_from_no_conversations</item>
+    </string-array>
+
+    <!-- these values correspond with ZenPolicy.ConversationSenders -->
+    <string-array name="zen_mode_conversations_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <!--String arrays for notification swipe direction -->
     <string-array name="swipe_direction_titles">
         <item>@string/swipe_direction_rtl</item>

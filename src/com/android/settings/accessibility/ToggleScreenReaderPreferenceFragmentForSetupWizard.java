@@ -46,4 +46,3 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         super.onStop();
     }
 }
-

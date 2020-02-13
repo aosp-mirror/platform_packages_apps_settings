@@ -38,6 +38,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LiveData;
@@ -185,20 +186,19 @@ public class PanelFragment extends Fragment {
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
-
         // Add predraw listener to remove the animation and while we wait for Slices to load.
         mLayoutView.getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListener);
 
         // Start loading Slices. When finished, the Panel will animate in.
         loadAllSlices();
 
-        final int iconRes = mPanel.getIcon();
-        if (iconRes == PanelContent.ICON_UNAVAILABLE) {
+        final IconCompat icon = mPanel.getIcon();
+        if (icon == null) {
             mTitleView.setText(mPanel.getTitle());
         } else {
             mTitleView.setVisibility(View.GONE);
             mPanelHeader.setVisibility(View.VISIBLE);
-            mTitleIcon.setImageResource(iconRes);
+            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
             mHeaderTitle.setText(mPanel.getTitle());
             mHeaderSubtitle.setText(mPanel.getSubTitle());
         }

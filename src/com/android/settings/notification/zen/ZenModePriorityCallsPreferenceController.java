@@ -80,7 +80,7 @@ public class ZenModePriorityCallsPreferenceController extends AbstractZenModePre
             case Settings.Global.ZEN_MODE_ALARMS:
                 mPreference.setEnabled(false);
                 mPreference.setValue(ZenModeBackend.ZEN_MODE_FROM_NONE);
-                mPreference.setSummary(mBackend.getAlarmsTotalSilenceCallsMessagesSummary(
+                mPreference.setSummary(mBackend.getAlarmsTotalSilencePeopleSummary(
                         NotificationManager.Policy.PRIORITY_CATEGORY_CALLS));
                 break;
             default:

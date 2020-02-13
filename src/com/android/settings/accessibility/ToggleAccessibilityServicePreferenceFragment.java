@@ -89,10 +89,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onResume() {
         super.onResume();
-
-        mSettingsContentObserver.register(getContentResolver());
-
         updateSwitchBarToggleSwitch();
+        mSettingsContentObserver.register(getContentResolver());
     }
 
     @Override
@@ -199,6 +197,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = AccessibilityUtils.getEnabledServicesFromSettings(getPrefContext())
                 .contains(mComponentName);
+        if (mSwitchBar.isChecked() == checked) {
+            return;
+        }
         mSwitchBar.setCheckedInternal(checked);
     }
 

@@ -22,7 +22,6 @@ import android.app.usage.UsageStats;
 import android.content.Context;
 import android.icu.text.RelativeDateTimeFormatter;
 import android.os.UserHandle;
-import android.util.IconDrawableFactory;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -37,6 +36,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
@@ -65,7 +65,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
 
     private final ApplicationsState mApplicationsState;
     private final int mUserId;
-    private final IconDrawableFactory mIconDrawableFactory;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private Fragment mHost;
@@ -76,7 +75,6 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) mContext.getApplicationContext());
         mUserId = UserHandle.myUserId();
-        mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mMetricsFeatureProvider = FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
     }
 
@@ -161,7 +159,7 @@ public class RecentAppsPreferenceController extends BasePreferenceController
         }
 
         return new AppEntityInfo.Builder()
-                .setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info))
+                .setIcon(Utils.getBadgedIcon(mContext, appEntry.info))
                 .setTitle(appEntry.label)
                 .setSummary(StringUtil.formatRelativeTime(mContext,
                         System.currentTimeMillis() - stat.getLastTimeUsed(), false,

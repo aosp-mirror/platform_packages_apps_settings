@@ -19,6 +19,8 @@ package com.android.settings.panel;
 import android.content.Intent;
 import android.net.Uri;
 
+import androidx.core.graphics.drawable.IconCompat;
+
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.List;
@@ -28,13 +30,11 @@ import java.util.List;
  */
 public interface PanelContent extends Instrumentable {
 
-    int ICON_UNAVAILABLE = -1;
-
     /**
-     * @return a icon resource for the title of the Panel.
+     * @return a icon for the title of the Panel.
      */
-    default int getIcon() {
-        return ICON_UNAVAILABLE;
+    default IconCompat getIcon() {
+        return null;
     }
 
     /**
