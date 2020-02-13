@@ -274,7 +274,7 @@
         <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
-    <style name="TextAppearance.ConditionCardTitle"
+    <style name="TextAppearance.HomepageCardTitle"
            parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
         <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textSize">16sp</item>
@@ -421,6 +421,12 @@
         <item name="strokeColor">@color/contextual_card_stroke_color</item>
         <item name="strokeWidth">1dp</item>
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
+    </style>
+
+    <style name="StickyCardStyle">
+        <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
+        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
+        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
     </style>
 
     <style name="SearchBarStyle">

@@ -61,17 +61,27 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         this(context, appState, callback, appOpsOpCode, permissions,
                 AppGlobals.getPackageManager());
     }
+    AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
+            int[] appOpsOpCodes, String[] permissions) {
+        this(context, appState, callback, appOpsOpCodes, permissions,
+                AppGlobals.getPackageManager());
+    }
 
     @VisibleForTesting
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions, IPackageManager packageManager) {
+        this(context, appState, callback, new int[] {appOpsOpCode}, permissions,
+                packageManager);
+    }
+    AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
+            int[] appOpsOpCodes, String[] permissions, IPackageManager packageManager) {
         super(appState, callback);
         mContext = context;
         mIPackageManager = packageManager;
         mUserManager = UserManager.get(context);
         mProfiles = mUserManager.getUserProfiles();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mAppOpsOpCodes = new int[] {appOpsOpCode};
+        mAppOpsOpCodes = appOpsOpCodes;
         mPermissions = permissions;
     }
 

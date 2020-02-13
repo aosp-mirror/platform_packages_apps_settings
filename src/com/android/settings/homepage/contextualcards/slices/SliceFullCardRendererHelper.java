@@ -16,6 +16,8 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_STICKY;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.view.View;
@@ -75,7 +77,9 @@ class SliceFullCardRendererHelper {
         // Customize slice view for Settings
         cardHolder.sliceView.setShowTitleItems(true);
         if (card.isLargeCard()) {
-            cardHolder.sliceView.setShowHeaderDivider(true);
+            if (holder.getItemViewType() != VIEW_TYPE_STICKY) {
+                cardHolder.sliceView.setShowHeaderDivider(true);
+            }
             cardHolder.sliceView.setShowActionDividers(true);
         }
     }

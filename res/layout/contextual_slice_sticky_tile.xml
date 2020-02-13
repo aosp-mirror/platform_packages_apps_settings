@@ -15,18 +15,22 @@
      limitations under the License.
 -->
 
-<com.google.android.material.card.MaterialCardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/ContextualCardStyle">
+    android:orientation="vertical"
+    style="@style/StickyCardStyle">
 
     <androidx.slice.widget.SliceView
         android:id="@+id/slice_view"
+        android:theme="@style/Theme.Settings.ContextualCard"
         style="@style/ContextualCardSliceViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="@dimen/contextual_card_vertical_margin"
         android:importantForAccessibility="no"/>
 
-</com.google.android.material.card.MaterialCardView>
+    <include layout="@layout/horizontal_divider"/>
+
+</LinearLayout>

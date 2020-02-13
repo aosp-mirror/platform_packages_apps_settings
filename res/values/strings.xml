@@ -3750,6 +3750,14 @@
     <!-- Tethering controls, footer note displayed when tethering is disabled because Data Saver mode is on [CHAR LIMIT=none]-->
     <string name="tether_settings_disabled_on_data_saver">"Can\u2019t tether or use portable hotspots while Data Saver is on"</string>
 
+    <!-- Disable Wifi Hotspot option-->
+    <!-- Don't use Wi-Fi hotspot summary when USB tethering is chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_usb_on">Only share internet via USB</string>
+    <!-- Don't use Wi-Fi hotspot summary when Bluetooth tethering is chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_bluetooth_on">Only share internet via Bluetooth</string>
+    <!-- Don't use Wi-Fi hotspot summary when USB tethering and Bluetooth tethering are chosen [CHAR LIMIT=NONE]-->
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on">Only share internet via USB and Bluetooth</string>
+
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
     <string name="usb_tethering_button_text">USB tethering</string>
@@ -4953,10 +4961,12 @@
     <string name="accessibility_autoclick_long_summary">1 second</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its custom level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_custom_title">Custom</string>
-    <!-- Description for the button that shorter delay time. [CHAR_LIMIT=NONE] -->
+    <!-- Description for the button that shorter auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_shorter_desc">Shorter</string>
-    <!-- Description for the button that longer time. [CHAR_LIMIT=NONE] -->
+    <!-- Description for the button that longer auto click time. [CHAR_LIMIT=NONE] -->
     <string name="accessibility_autoclick_longer_desc">Longer</string>
+    <!-- Description for the seekbar that adjust auto click time. [CHAR_LIMIT=NONE] -->
+    <string name="accessibility_autoclick_seekbar_desc">auto click time</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptic strength</string>
     <!-- Title for accessibility preference for configuring notification vibrations. -->
@@ -8054,6 +8064,9 @@
 
     <!-- Notification history screen; summary when history is off [CHAR LIMIT=200] -->
     <string name="notification_history_off_title_extended">Notification history is turned off</string>
+
+    <!-- Notification history screen; content description describing what happens when you tap on a notification history entry [CHAR LIMIT=NONE] -->
+    <string name="notification_history_view_settings">view notification settings</string>
 
     <!-- Configure Notifications: setting title, whether the snooze menu is shown on notifications [CHAR LIMIT=80] -->
     <string name="snooze_options_title">Allow notification snoozing</string>

@@ -41,6 +41,7 @@ import com.android.settings.homepage.contextualcards.slices.NotificationChannelS
 import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
 import com.android.settings.media.MediaOutputSlice;
+import com.android.settings.media.RemoteMediaSlice;
 import com.android.settings.network.telephony.MobileDataSlice;
 import com.android.settings.notification.zen.ZenModeButtonPreferenceController;
 import com.android.settings.wifi.calling.WifiCallingSliceHelper;
@@ -225,16 +226,6 @@ public class CustomSliceRegistry {
             .build();
 
     /**
-     * Full {@link Uri} for the Remote Media Volume Slice.
-     */
-    public static final Uri VOLUME_REMOTE_MEDIA_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("remote_volume")
-            .build();
-
-    /**
      * Full {@link Uri} for the Ringer volume Slice.
      */
     public static final Uri VOLUME_RINGER_URI = new Uri.Builder()
@@ -312,6 +303,16 @@ public class CustomSliceRegistry {
             .appendPath("dark_theme")
             .build();
 
+    /**
+     * Backing Uri for the Remote Media Slice.
+     */
+    public static Uri REMOTE_MEDIA_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath(MediaOutputSliceConstants.KEY_REMOTE_MEDIA)
+            .build();
+
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
@@ -335,6 +336,7 @@ public class CustomSliceRegistry {
         sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
+        sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {

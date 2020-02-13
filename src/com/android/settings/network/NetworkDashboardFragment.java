@@ -150,13 +150,5 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                             null /* metricsFeatureProvider */, null /* fragment */,
                             null /* mobilePlanHost */);
                 }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Remove master switch as a result
-                    keys.add(WifiMasterSwitchPreferenceController.KEY_TOGGLE_WIFI);
-                    return keys;
-                }
             };
 }

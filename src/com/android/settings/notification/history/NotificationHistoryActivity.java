@@ -77,12 +77,18 @@ public class NotificationHistoryActivity extends Activity {
             final View container = viewForPackage.findViewById(R.id.list_container);
             container.setVisibility(View.GONE);
             ImageButton expand = viewForPackage.findViewById(R.id.expand);
+            expand.setContentDescription(container.getVisibility() == View.VISIBLE
+                    ? getString(R.string.condition_expand_hide)
+                    : getString(R.string.condition_expand_show));
             expand.setOnClickListener(v -> {
                     container.setVisibility(container.getVisibility() == View.VISIBLE
                             ? View.GONE : View.VISIBLE);
                     expand.setImageResource(container.getVisibility() == View.VISIBLE
                             ? R.drawable.ic_expand_less
                             : com.android.internal.R.drawable.ic_expand_more);
+                    expand.setContentDescription(container.getVisibility() == View.VISIBLE
+                            ? getString(R.string.condition_expand_hide)
+                            : getString(R.string.condition_expand_show));
             });
 
             TextView label = viewForPackage.findViewById(R.id.label);

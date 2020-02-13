@@ -28,6 +28,7 @@ import android.os.UserHandle;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,17 +71,21 @@ public class NotificationSbnAdapter extends
     public void onBindViewHolder(final @NonNull NotificationSbnViewHolder holder,
             int position) {
         final StatusBarNotification sbn = mValues.get(position);
-        holder.setIcon(loadIcon(sbn));
-        holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
-        holder.setTitle(getTitleString(sbn.getNotification()));
-        holder.setSummary(getTextString(mContext, sbn.getNotification()));
-        holder.setPostedTime(sbn.getPostTime());
-        if (!mUserBadgeCache.containsKey(sbn.getUserId())) {
-            Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
-                    UserHandle.of(sbn.getUserId()), -1);
-            mUserBadgeCache.put(sbn.getUserId(), profile);
+        if (sbn != null) {
+            holder.setIcon(loadIcon(sbn));
+            holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
+            holder.setTitle(getTitleString(sbn.getNotification()));
+            holder.setSummary(getTextString(mContext, sbn.getNotification()));
+            holder.setPostedTime(sbn.getPostTime());
+            if (!mUserBadgeCache.containsKey(sbn.getUserId())) {
+                Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
+                        UserHandle.of(sbn.getUserId()), -1);
+                mUserBadgeCache.put(sbn.getUserId(), profile);
+            }
+            holder.setProfileBadge(mUserBadgeCache.get(sbn.getUserId()));
+        } else {
+            Slog.w(TAG, "null entry in list at position " + position);
         }
-        holder.setProfileBadge(mUserBadgeCache.get(sbn.getUserId()));
     }
 
     @Override

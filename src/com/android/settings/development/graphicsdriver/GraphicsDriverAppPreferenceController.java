@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -53,9 +53,9 @@ import java.util.Set;
 /**
  * Controller of all the per App based list preferences.
  */
-public class GameDriverAppPreferenceController extends BasePreferenceController
+public class GraphicsDriverAppPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener,
-        GameDriverContentObserver.OnGameDriverContentChangedListener, LifecycleObserver,
+        GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener, LifecycleObserver,
         OnStart, OnStop {
 
     private final Context mContext;
@@ -67,7 +67,7 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
     private final String mPreferencePrereleaseDriver;
     private final String mPreferenceSystem;
     @VisibleForTesting
-    GameDriverContentObserver mGameDriverContentObserver;
+    GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private final List<AppInfo> mAppInfos;
     private final Set<String> mDevOptInApps;
@@ -76,13 +76,13 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
 
     private PreferenceGroup mPreferenceGroup;
 
-    public GameDriverAppPreferenceController(Context context, String key) {
+    public GraphicsDriverAppPreferenceController(Context context, String key) {
         super(context, key);
 
         mContext = context;
         mContentResolver = context.getContentResolver();
-        mGameDriverContentObserver =
-                new GameDriverContentObserver(new Handler(Looper.getMainLooper()), this);
+        mGraphicsDriverContentObserver =
+                new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
 
         final Resources resources = context.getResources();
         mEntryList = resources.getStringArray(R.array.graphics_driver_app_preference_values);
@@ -130,12 +130,12 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
 
     @Override
     public void onStart() {
-        mGameDriverContentObserver.register(mContentResolver);
+        mGraphicsDriverContentObserver.register(mContentResolver);
     }
 
     @Override
     public void onStop() {
-        mGameDriverContentObserver.unregister(mContentResolver);
+        mGraphicsDriverContentObserver.unregister(mContentResolver);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void onGameDriverContentChanged() {
+    public void onGraphicsDriverContentChanged() {
         updateState(mPreferenceGroup);
     }
 
@@ -196,8 +196,8 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
             label = packageManager.getApplicationLabel(applicationInfo).toString();
         }
 
-        final ApplicationInfo info;
-        final String label;
+        public final ApplicationInfo info;
+        public final String label;
     }
 
     // List of non-system packages that are installed for the current user.
@@ -213,7 +213,7 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
             }
         }
 
-        Collections.sort(appInfos, appInfoComparator);
+        Collections.sort(appInfos, mAppInfoComparator);
 
         return appInfos;
     }
@@ -231,8 +231,8 @@ public class GameDriverAppPreferenceController extends BasePreferenceController
         return valueSet;
     }
 
-    private final Comparator<AppInfo> appInfoComparator = new Comparator<AppInfo>() {
-        public final int compare(AppInfo a, AppInfo b) {
+    private final Comparator<AppInfo> mAppInfoComparator = new Comparator<AppInfo>() {
+        public int compare(AppInfo a, AppInfo b) {
             return Collator.getInstance().compare(a.label, b.label);
         }
     };

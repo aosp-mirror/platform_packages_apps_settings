@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -39,18 +40,18 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GameDriverGlobalSwitchBarControllerTest {
+public class GraphicsDriverGlobalSwitchBarControllerTest {
 
     @Mock
     private SwitchBar mSwitchBar;
     @Mock
     private SwitchWidgetController mSwitchWidgetController;
     @Mock
-    private GameDriverContentObserver mGameDriverContentObserver;
+    private GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GameDriverGlobalSwitchBarController mController;
+    private GraphicsDriverGlobalSwitchBarController mController;
 
     @Before
     public void setUp() {
@@ -63,7 +64,7 @@ public class GameDriverGlobalSwitchBarControllerTest {
     public void constructor_gameDriverOn_shouldCheckSwitchBar() {
         Settings.Global.putInt(
                 mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
         verify(mSwitchBar).setChecked(true);
@@ -72,7 +73,7 @@ public class GameDriverGlobalSwitchBarControllerTest {
     @Test
     public void constructor_gameDriverOff_shouldUncheckSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
         verify(mSwitchBar).setChecked(false);
@@ -81,7 +82,7 @@ public class GameDriverGlobalSwitchBarControllerTest {
     @Test
     public void constructor_developmentSettingsEnabled_shouldEnableSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
         verify(mSwitchBar).setEnabled(true);
@@ -90,7 +91,7 @@ public class GameDriverGlobalSwitchBarControllerTest {
     @Test
     public void constructor_developmentSettingsDisabled_shouldDisableSwitchBar() {
         Settings.Global.putInt(mResolver, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
 
         verify(mSwitchBar).setEnabled(false);
@@ -98,32 +99,32 @@ public class GameDriverGlobalSwitchBarControllerTest {
 
     @Test
     public void onStart_shouldStartListeningAndRegister() {
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.mSwitchWidgetController = mSwitchWidgetController;
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStart();
 
         verify(mSwitchWidgetController).startListening();
-        verify(mGameDriverContentObserver).register(mResolver);
+        verify(mGraphicsDriverContentObserver).register(mResolver);
     }
 
     @Test
     public void onStop_shouldStopListeningAndUnregister() {
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.mSwitchWidgetController = mSwitchWidgetController;
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStop();
 
         verify(mSwitchWidgetController).stopListening();
-        verify(mGameDriverContentObserver).unregister(mResolver);
+        verify(mGraphicsDriverContentObserver).unregister(mResolver);
     }
 
     @Test
     public void onSwitchToggled_checked_shouldTurnOnGameDriver() {
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.onSwitchToggled(true);
 
@@ -136,7 +137,7 @@ public class GameDriverGlobalSwitchBarControllerTest {
     public void onSwitchToggled_unchecked_shouldTurnOffGameDriver() {
         Settings.Global.putInt(
                 mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
-        mController = new GameDriverGlobalSwitchBarController(
+        mController = new GraphicsDriverGlobalSwitchBarController(
                 mContext, new SwitchBarController(mSwitchBar));
         mController.onSwitchToggled(false);
 

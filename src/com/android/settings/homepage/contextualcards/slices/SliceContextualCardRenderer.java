@@ -166,7 +166,7 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
-        mFlippedCardSet.stream().forEach(holder -> resetCardView(holder));
+        mFlippedCardSet.forEach(holder -> resetCardView(holder));
         mFlippedCardSet.clear();
     }
 

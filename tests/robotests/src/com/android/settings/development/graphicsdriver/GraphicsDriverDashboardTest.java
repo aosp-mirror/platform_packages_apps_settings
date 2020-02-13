@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,13 +28,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-public class GameDriverDashboardTest {
+public class GraphicsDriverDashboardTest {
 
-    private GameDriverDashboard mDashboard;
+    private GraphicsDriverDashboard mDashboard;
 
     @Before
     public void setUp() {
-        mDashboard = new GameDriverDashboard();
+        mDashboard = new GraphicsDriverDashboard();
     }
 
     @Test
@@ -43,13 +43,13 @@ public class GameDriverDashboardTest {
     }
 
     @Test
-    public void getMetricesCategory_shouldReturnGameDriverDashboard() {
+    public void getMetricesCategory_shouldReturnGraphicsDriverDashboard() {
         assertThat(mDashboard.getMetricsCategory())
                 .isEqualTo(SettingsEnums.SETTINGS_GAME_DRIVER_DASHBOARD);
     }
 
     @Test
-    public void getPreferenceScreen_shouldReturnGameDriverSettings() {
+    public void getPreferenceScreen_shouldReturnGraphicsDriverSettings() {
         assertThat(mDashboard.getPreferenceScreenResId()).isEqualTo(R.xml.graphics_driver_settings);
     }
 }

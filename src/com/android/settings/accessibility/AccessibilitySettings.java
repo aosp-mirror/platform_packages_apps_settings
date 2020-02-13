@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -120,8 +119,6 @@ public class AccessibilitySettings extends DashboardFragment {
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
-
-    static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Handler mHandler = new Handler();
 
@@ -273,11 +270,8 @@ public class AccessibilitySettings extends DashboardFragment {
 
     @VisibleForTesting
     static boolean isRampingRingerEnabled(final Context context) {
-        return (Settings.Global.getInt(
-                        context.getContentResolver(),
-                        Settings.Global.APPLY_RAMPING_RINGER, 0) == 1)
-                && DeviceConfig.getBoolean(
-                        DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
+        return Settings.Global.getInt(
+                context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
     private void initializeAllPreferences() {

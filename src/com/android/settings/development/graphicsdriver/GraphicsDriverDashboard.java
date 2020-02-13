@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -33,9 +33,9 @@ import com.android.settingslib.search.SearchIndexable;
  * Dashboard for Game Driver preferences.
  */
 @SearchIndexable
-public class GameDriverDashboard extends DashboardFragment {
+public class GraphicsDriverDashboard extends DashboardFragment {
 
-    private static final String TAG = "GameDriverDashboard";
+    private static final String TAG = "GraphicsDriverDashboard";
 
     @Override
     public int getMetricsCategory() {
@@ -63,8 +63,8 @@ public class GameDriverDashboard extends DashboardFragment {
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
-        final GameDriverGlobalSwitchBarController switchBarController =
-                new GameDriverGlobalSwitchBarController(
+        final GraphicsDriverGlobalSwitchBarController switchBarController =
+                new GraphicsDriverGlobalSwitchBarController(
                         activity, new SwitchBarController(switchBar));
         getSettingsLifecycle().addObserver(switchBarController);
         switchBar.show();

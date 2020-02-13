@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.settings.development.gamedriver;
+package com.android.settings.development.graphicsdriver;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
-import static com.android.settings.development.gamedriver.GameDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_ALL_APPS;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_DEFAULT;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_OFF;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableForAllAppsPreferenceController.GAME_DRIVER_PRERELEASE_ALL_APPS;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -48,18 +48,18 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class GameDriverEnableForAllAppsPreferenceControllerTest {
+public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
     @Mock
     private ListPreference mPreference;
     @Mock
-    private GameDriverContentObserver mGameDriverContentObserver;
+    private GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
     private Context mContext;
     private ContentResolver mResolver;
-    private GameDriverEnableForAllAppsPreferenceController mController;
+    private GraphicsDriverEnableForAllAppsPreferenceController mController;
     private String mPreferenceDefault;
     private String mPreferenceGameDriver;
     private String mPreferencePrereleaseDriver;
@@ -81,7 +81,7 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
         Settings.Global.putInt(
                 mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
-        mController = new GameDriverEnableForAllAppsPreferenceController(mContext, "testKey");
+        mController = new GraphicsDriverEnableForAllAppsPreferenceController(mContext, "testKey");
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
@@ -120,18 +120,18 @@ public class GameDriverEnableForAllAppsPreferenceControllerTest {
 
     @Test
     public void onStart_shouldRegister() {
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStart();
 
-        verify(mGameDriverContentObserver).register(mResolver);
+        verify(mGraphicsDriverContentObserver).register(mResolver);
     }
 
     @Test
     public void onStop_shouldUnregister() {
-        mController.mGameDriverContentObserver = mGameDriverContentObserver;
+        mController.mGraphicsDriverContentObserver = mGraphicsDriverContentObserver;
         mController.onStop();
 
-        verify(mGameDriverContentObserver).unregister(mResolver);
+        verify(mGraphicsDriverContentObserver).unregister(mResolver);
     }
 
     @Test
