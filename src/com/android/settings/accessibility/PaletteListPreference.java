@@ -26,7 +26,7 @@ import android.widget.ListView;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settingslib.widget.R;
+import com.android.settings.R;
 
 /** Preference that easier preview by matching name to color. */
 public class PaletteListPreference extends Preference {
