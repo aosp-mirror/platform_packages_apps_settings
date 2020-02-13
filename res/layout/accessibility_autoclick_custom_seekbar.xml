@@ -31,12 +31,12 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/smaller"
+            android:id="@+id/shorter"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -49,12 +49,13 @@
 
         <SeekBar
             android:id="@+id/autoclick_delay"
-            android:layout_width="260dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
+            android:layout_weight="1"
             android:contentDescription="@string/accessibility_autoclick_seekbar_desc" />
 
         <ImageView
-            android:id="@+id/larger"
+            android:id="@+id/longer"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
