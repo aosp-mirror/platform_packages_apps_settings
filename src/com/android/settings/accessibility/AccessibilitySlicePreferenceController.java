@@ -16,6 +16,10 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.AccessibilityUtil.State.UNKNOWN;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -23,6 +27,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -39,8 +44,7 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
 
     private final ComponentName mComponentName;
 
-    private final int ON = 1;
-    private final int OFF = 0;
+    private static final String EMPTY_STRING = "";
 
     public AccessibilitySlicePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -55,8 +59,13 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
     @Override
     public CharSequence getSummary() {
         final AccessibilityServiceInfo serviceInfo = getAccessibilityServiceInfo();
-        return serviceInfo == null
-                ? "" : AccessibilitySettings.getServiceSummary(mContext, serviceInfo, isChecked());
+        int serviceState = isChecked() ? ON : OFF;
+        if (AccessibilityUtil.getAccessibilityServiceFragmentType(serviceInfo)
+                == AccessibilityServiceFragmentType.INVISIBLE) {
+            serviceState = UNKNOWN;
+        }
+        return serviceInfo == null ? EMPTY_STRING : AccessibilitySettings.getServiceSummary(
+                mContext, serviceInfo, serviceState);
     }
 
     @Override
