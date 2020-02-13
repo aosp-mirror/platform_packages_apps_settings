@@ -105,4 +105,20 @@ public class GraphicsDriverFooterPreferenceControllerTest {
 
         verify(mGraphicsDriverContentObserver).unregister(mResolver);
     }
+
+    @Test
+    public void updateState_available_visible() {
+        when(mController.getAvailabilityStatus()).thenReturn(AVAILABLE_UNSEARCHABLE);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setVisible(true);
+    }
+
+    @Test
+    public void updateState_unavailable_invisible() {
+        when(mController.getAvailabilityStatus()).thenReturn(CONDITIONALLY_UNAVAILABLE);
+        mController.updateState(mPreference);
+
+        verify(mPreference).setVisible(false);
+    }
 }

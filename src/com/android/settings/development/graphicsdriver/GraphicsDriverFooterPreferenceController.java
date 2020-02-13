@@ -26,6 +26,7 @@ import android.os.Looper;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
@@ -77,6 +78,12 @@ public class GraphicsDriverFooterPreferenceController extends BasePreferenceCont
     @Override
     public void onStop() {
         mGraphicsDriverContentObserver.unregister(mContentResolver);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        final FooterPreference footerPref = (FooterPreference) preference;
+        footerPref.setVisible(isAvailable());
     }
 
     @Override
