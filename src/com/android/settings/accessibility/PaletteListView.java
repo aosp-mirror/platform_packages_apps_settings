@@ -35,7 +35,7 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.settingslib.widget.R;
+import com.android.settings.R;
 
 import com.google.common.collect.Iterables;
 
@@ -55,13 +55,13 @@ import java.util.List;
  * display also the view background shows the color beside the text variable end point.
  */
 public class PaletteListView extends ListView {
-    private static final float VIEW_PITCH = 0.05f;
     private final Context mContext;
     private final DisplayAdapter mDisplayAdapter;
     private final LayoutInflater mLayoutInflater;
     private final String mDefaultGradientColorCodeString;
     private final int mDefaultGradientColor;
     private float mTextBound;
+    private static final float LANDSCAPE_MAX_WIDTH_PERCENTAGE = 100f;
 
     public PaletteListView(Context context) {
         this(context, null);
@@ -206,8 +206,17 @@ public class PaletteListView extends ListView {
         final float textWidth = textView.getPaint().measureText(textView.getText().toString());
         // Computes rate of text width compare to screen width, and measures the round the double
         // to two decimal places manually.
-        final float textBound = Math.round(textWidth / getScreenWidth(windowManager) * 100) / 100f;
-        mTextBound = textBound + VIEW_PITCH;
+        final float textBound = Math.round(
+                textWidth / getScreenWidth(windowManager) * LANDSCAPE_MAX_WIDTH_PERCENTAGE)
+                / LANDSCAPE_MAX_WIDTH_PERCENTAGE;
+
+        // Left padding and right padding with color preview.
+        final float paddingPixel = getResources().getDimension(
+                R.dimen.accessibility_layout_margin_start_end);
+        final float paddingWidth =
+                Math.round(paddingPixel / getScreenWidth(windowManager)
+                        * LANDSCAPE_MAX_WIDTH_PERCENTAGE) / LANDSCAPE_MAX_WIDTH_PERCENTAGE;
+        mTextBound = textBound + paddingWidth + paddingWidth;
     }
 
     private static class ViewHolder {

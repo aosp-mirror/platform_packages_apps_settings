@@ -20,7 +20,6 @@ import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.mock;
@@ -120,7 +119,7 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mActivity).startActivityForResultAsUser(argumentCaptor.capture(), anyInt(),
+        verify(mActivity).startActivityAsUser(argumentCaptor.capture(),
                 nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
@@ -138,8 +137,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
         final Intent intent = argumentCaptor.getValue();
 
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -165,8 +164,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         final Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -184,8 +183,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -221,8 +220,8 @@ public class StorageItemPreferenceControllerTest {
             .isTrue();
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         Intent browseIntent = mVolume.buildBrowseIntent();
@@ -238,8 +237,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);
@@ -256,8 +255,8 @@ public class StorageItemPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> argumentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mFragment.getActivity()).startActivityForResultAsUser(argumentCaptor.capture(),
-                anyInt(), nullable(UserHandle.class));
+        verify(mFragment.getActivity()).startActivityAsUser(argumentCaptor.capture(),
+                nullable(UserHandle.class));
 
         Intent intent = argumentCaptor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_MAIN);

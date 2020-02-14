@@ -130,8 +130,12 @@ public class BiometricFragment extends InstrumentedFragment {
                 .setDeviceCredentialAllowed(true)
                 .setSubtitle(mBundle.getString(BiometricPrompt.KEY_SUBTITLE))
                 .setDescription(mBundle.getString(BiometricPrompt.KEY_DESCRIPTION))
-                .setConfirmationRequired(
-                        mBundle.getBoolean(BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true))
+                .setTextForDeviceCredential(
+                        mBundle.getCharSequence(BiometricPrompt.KEY_DEVICE_CREDENTIAL_TITLE),
+                        mBundle.getCharSequence(BiometricPrompt.KEY_DEVICE_CREDENTIAL_SUBTITLE),
+                        mBundle.getCharSequence(BiometricPrompt.KEY_DEVICE_CREDENTIAL_DESCRIPTION))
+                .setConfirmationRequired(mBundle.getBoolean(
+                        BiometricPrompt.KEY_REQUIRE_CONFIRMATION, true))
                 .setDisallowBiometricsIfPolicyExists(mBundle.getBoolean(
                         BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false));
 

@@ -410,7 +410,7 @@ public class ManageApplications extends InstrumentedFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
-            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.getUserId(mCurrentUid);
+            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.myUserId();
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 Context context = getContext();
                 mApplications.setExtraViewController(

@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -41,22 +40,8 @@ public class MagnificationPreferenceController extends BasePreferenceController 
 
     @Override
     public CharSequence getSummary() {
-        final boolean tripleTapEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1;
-        final boolean buttonEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED, 0) == 1;
-
-        int summaryResId = 0;
-        if (!tripleTapEnabled && !buttonEnabled) {
-            summaryResId = R.string.accessibility_feature_state_off;
-        } else if (!tripleTapEnabled && buttonEnabled) {
-            summaryResId = R.string.accessibility_screen_magnification_navbar_title;
-        } else if (tripleTapEnabled && !buttonEnabled) {
-            summaryResId = R.string.accessibility_screen_magnification_gestures_title;
-        } else {
-            summaryResId = R.string.accessibility_screen_magnification_state_navbar_gesture;
-        }
-        return mContext.getResources().getText(summaryResId);
+        return mContext.getResources().getText(
+                R.string.accessibility_screen_magnification_navbar_title);
     }
 
     @Override
