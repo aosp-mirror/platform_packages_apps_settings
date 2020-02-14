@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.cdma;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -57,7 +58,7 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
         listPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.CDMA_SUBSCRIPTION_MODE, Phone.PREFERRED_CDMA_SUBSCRIPTION);
-        if (mode != Phone.CDMA_SUBSCRIPTION_UNKNOWN) {
+        if (mode != TelephonyManager.CDMA_SUBSCRIPTION_UNKNOWN) {
             listPreference.setValue(Integer.toString(mode));
         }
     }
