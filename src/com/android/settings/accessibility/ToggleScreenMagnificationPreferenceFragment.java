@@ -83,8 +83,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
-
-    protected Preference mConfigWarningPreference;
     protected VideoPreference mVideoPreference;
 
     protected class VideoPreference extends Preference {
@@ -192,12 +190,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         initShortcutPreference();
 
         super.onViewCreated(view, savedInstanceState);
-
-        mConfigWarningPreference = new Preference(getPrefContext());
-        mConfigWarningPreference.setSelectable(false);
-        mConfigWarningPreference.setPersistent(false);
-        mConfigWarningPreference.setVisible(false);
-        preferenceScreen.addPreference(mConfigWarningPreference);
     }
 
     @Override
@@ -219,7 +211,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             videoView.start();
         }
 
-        updateConfigurationWarningIfNeeded();
         updateShortcutPreferenceData();
         updateShortcutPreference();
     }
@@ -428,7 +419,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     : DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL);
         }
         MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
-        updateConfigurationWarningIfNeeded();
     }
 
     @Override
@@ -494,16 +484,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-    }
-
-    private void updateConfigurationWarningIfNeeded() {
-        final CharSequence warningMessage =
-                MagnificationPreferenceFragment.getConfigurationWarningStringForSecureSettingsKey(
-                        mPreferenceKey, getPrefContext());
-        if (warningMessage != null) {
-            mConfigWarningPreference.setSummary(warningMessage);
-        }
-        mConfigWarningPreference.setVisible(warningMessage != null);
     }
 
     @VisibleForTesting

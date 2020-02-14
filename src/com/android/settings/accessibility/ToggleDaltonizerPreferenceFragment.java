@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -50,8 +49,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
-    private static final String CATEGORY_FOOTER_KEY = "daltonizer_footer_category";
-    private static final String CATEGORY_MODE_KEY = "daltonizer_mode_category";
+    private static final String KEY_PREVIEW = "daltonizer_preview";
+    private static final String KEY_CATEGORY_MODE = "daltonizer_mode_category";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
@@ -82,7 +81,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = DALTONIZER_COMPONENT_NAME;
-        mPackageName = getString(R.string.accessibility_display_daltonizer_preference_title);
+        mPackageName = getText(R.string.accessibility_display_daltonizer_preference_title);
+        mHtmlDescription = getText(R.string.accessibility_display_daltonizer_preference_subtitle);
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -97,16 +97,32 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        updatePreferenceOrder();
+    }
+
+    /** Customizes the order by preference key. */
+    private List<String> getPreferenceOrderList() {
+        List<String> lists = new ArrayList<>();
+        lists.add(KEY_PREVIEW);
+        lists.add(KEY_USE_SERVICE_PREFERENCE);
+        lists.add(KEY_CATEGORY_MODE);
+        lists.add(KEY_GENERAL_CATEGORY);
+        lists.add(KEY_INTRODUCTION_CATEGORY);
+        return lists;
+    }
+
+    private void updatePreferenceOrder() {
+        List<String> lists = getPreferenceOrderList();
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
 
-        final PreferenceCategory modeCategory = preferenceScreen.findPreference(
-                CATEGORY_MODE_KEY);
-        modeCategory.setOrder(Integer.MAX_VALUE - 1);
-
-        final PreferenceCategory footerCategory = preferenceScreen.findPreference(
-                CATEGORY_FOOTER_KEY);
-        footerCategory.setOrder(Integer.MAX_VALUE);
+        final int size = lists.size();
+        for (int i = 0; i < size; i++) {
+            final Preference preference = preferenceScreen.findPreference(lists.get(i));
+            if (preference != null) {
+                preference.setOrder(i);
+            }
+        }
     }
 
     @Override
