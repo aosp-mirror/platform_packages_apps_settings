@@ -16,17 +16,22 @@
 
 package com.android.settings.display;
 
-import static android.provider.Settings.System.ADAPTIVE_SLEEP;
+import static android.provider.Settings.Secure.ADAPTIVE_SLEEP;
+
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 
@@ -73,6 +78,14 @@ public class AdaptiveSleepPreferenceControllerTest {
 
         mController = new AdaptiveSleepPreferenceController(mContext, PREFERENCE_KEY);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+    }
+
+    @Test
+    public void isControllerAvailable_ServiceUnavailable_returnUnsupported() {
+        doReturn(null).when(mPackageManager).resolveService(isA(Intent.class), anyInt());
+
+        assertThat(AdaptiveSleepPreferenceController.isControllerAvailable(mContext)).isEqualTo(
+                UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
