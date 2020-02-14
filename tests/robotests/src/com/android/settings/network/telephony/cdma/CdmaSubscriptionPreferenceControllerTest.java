@@ -34,8 +34,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 
-import com.android.internal.telephony.Phone;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -90,33 +88,37 @@ public class CdmaSubscriptionPreferenceControllerTest {
     public void onPreferenceChange_selectNV_returnNVMode() {
         doReturn(true).when(mTelephonyManager).setCdmaSubscriptionMode(anyInt());
 
-        mController.onPreferenceChange(mPreference, Integer.toString(Phone.CDMA_SUBSCRIPTION_NV));
+        mController.onPreferenceChange(mPreference, Integer.toString(
+                TelephonyManager.CDMA_SUBSCRIPTION_NV));
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.CDMA_SUBSCRIPTION_MODE,
-                Phone.CDMA_SUBSCRIPTION_RUIM_SIM)).isEqualTo(Phone.CDMA_SUBSCRIPTION_NV);
+                TelephonyManager.CDMA_SUBSCRIPTION_RUIM_SIM)).isEqualTo(
+                        TelephonyManager.CDMA_SUBSCRIPTION_NV);
     }
 
     @Test
     public void updateState_stateRUIM_displayRUIM() {
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.CDMA_SUBSCRIPTION_MODE, Phone.CDMA_SUBSCRIPTION_NV);
+                Settings.Global.CDMA_SUBSCRIPTION_MODE, TelephonyManager.CDMA_SUBSCRIPTION_NV);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getValue()).isEqualTo(Integer.toString(Phone.CDMA_SUBSCRIPTION_NV));
+        assertThat(mPreference.getValue()).isEqualTo(Integer.toString(
+                TelephonyManager.CDMA_SUBSCRIPTION_NV));
     }
 
     @Test
     public void updateState_stateUnknown_doNothing() {
-        mPreference.setValue(Integer.toString(Phone.CDMA_SUBSCRIPTION_NV));
+        mPreference.setValue(Integer.toString(TelephonyManager.CDMA_SUBSCRIPTION_NV));
         Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.CDMA_SUBSCRIPTION_MODE, Phone.CDMA_SUBSCRIPTION_UNKNOWN);
+                Settings.Global.CDMA_SUBSCRIPTION_MODE, TelephonyManager.CDMA_SUBSCRIPTION_UNKNOWN);
 
         mController.updateState(mPreference);
 
         // Still NV mode
-        assertThat(mPreference.getValue()).isEqualTo(Integer.toString(Phone.CDMA_SUBSCRIPTION_NV));
+        assertThat(mPreference.getValue()).isEqualTo(Integer.toString(
+                TelephonyManager.CDMA_SUBSCRIPTION_NV));
     }
 
     @Test
