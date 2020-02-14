@@ -191,14 +191,8 @@
     <PreferenceCategory
         android:key="experimental_category"
         android:persistent="false"
-        android:title="@string/experimental_category_title">
-
-        <SwitchPreference
-            android:key="accessibility_shortcut_preference"
-            android:persistent="false"
-            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
-            android:summary="@string/accessibility_shortcut_description"
-            settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
+        android:title="@string/experimental_category_title"
+        settings:initialExpandedChildrenCount="1">
 
         <SwitchPreference
             android:key="toggle_high_text_contrast_preference"
@@ -221,5 +215,14 @@
             android:persistent="false"
             android:title="@string/accessibility_display_inversion_preference_title"
             settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
+
+        <SwitchPreference
+            android:key="accessibility_shortcut_preference"
+            android:persistent="false"
+            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
+            android:summary="@string/accessibility_shortcut_description"
+            settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
+
     </PreferenceCategory>
+
 </PreferenceScreen>
