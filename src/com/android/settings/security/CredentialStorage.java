@@ -44,7 +44,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.RebootDialog;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
 
@@ -131,10 +130,10 @@ public final class CredentialStorage extends FragmentActivity {
         if (uid != KeyStore.UID_SELF && !UserHandle.isSameUser(uid, Process.myUid())) {
             final int dstUserId = UserHandle.getUserId(uid);
 
-            // Restrict install target to the known uid.
-            if (uid != Process.WIFI_UID && uid != Process.FSVERITY_CERT_UID) {
+            // Restrict install target to the wifi uid.
+            if (uid != Process.WIFI_UID) {
                 Log.e(TAG, "Failed to install credentials as uid " + uid + ": cross-user installs"
-                        + " may only target known uids");
+                        + " may only target wifi uids");
                 return true;
             }
 
@@ -309,16 +308,6 @@ public final class CredentialStorage extends FragmentActivity {
 
         Log.i(TAG, String.format("Successfully installed alias %s to uid %d.",
                 alias, uid));
-
-        if (uid == Process.FSVERITY_CERT_UID) {
-            new RebootDialog(
-                    this,
-                    R.string.app_src_cert_reboot_dialog_install_title,
-                    R.string.app_src_cert_reboot_dialog_install_message,
-                    "Reboot to make new fsverity cert effective").show();
-            setResult(RESULT_OK);
-            return;
-        }
 
         // Send the broadcast.
         final Intent broadcast = new Intent(KeyChain.ACTION_KEYCHAIN_CHANGED);
