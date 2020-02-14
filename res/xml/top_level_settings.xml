@@ -53,7 +53,6 @@
         android:icon="@drawable/ic_homepage_battery"
         android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
         android:order="-90"
-        settings:keywords="@string/keywords_battery"
         settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
     <Preference
@@ -80,7 +79,6 @@
         android:icon="@drawable/ic_homepage_storage"
         android:order="-60"
         android:fragment="com.android.settings.deviceinfo.StorageSettings"
-        settings:keywords="@string/keywords_display"
         settings:controller="com.android.settings.deviceinfo.TopLevelStoragePreferenceController"/>
 
     <Preference
@@ -98,7 +96,6 @@
         android:icon="@drawable/ic_homepage_location"
         android:order="-50"
         android:fragment="com.android.settings.location.LocationSettings"
-        settings:keywords="@string/keywords_location"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"/>
 
     <Preference
@@ -117,7 +114,6 @@
         android:icon="@drawable/ic_homepage_accounts"
         android:order="-30"
         android:fragment="com.android.settings.accounts.AccountDashboardFragment"
-        settings:keywords="@string/keywords_accounts"
         settings:controller="com.android.settings.accounts.TopLevelAccountEntryPreferenceController"/>
 
     <Preference
