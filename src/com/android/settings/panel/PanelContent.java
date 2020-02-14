@@ -55,7 +55,6 @@ public interface PanelContent extends Instrumentable {
      */
     List<Uri> getSlices();
 
-
     /**
      * @return an {@link Intent} to the full content in Settings that is summarized by the Panel.
      *
@@ -64,4 +63,15 @@ public interface PanelContent extends Instrumentable {
      * </p>
      */
     Intent getSeeMoreIntent();
+
+    /**
+     * @return an {@link Intent} to the go to the target activity.
+     *
+     * <p>
+     *     A common usage is to go back to previous panel.
+     * </p>
+     */
+    default Intent getHeaderIconIntent() {
+        return null;
+    }
 }
