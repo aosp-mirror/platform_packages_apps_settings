@@ -47,13 +47,15 @@ abstract class ImsQueryController {
         mTransportType = transportType;
     }
 
+    abstract boolean isEnabledByUser(int subId);
+
     @VisibleForTesting
-    ImsQuery isTtyOnVolteEnabled(int subId) {
-        return new ImsQueryTtyOnVolteStat(subId);
+    boolean isTtyOnVolteEnabled(int subId) {
+        return (new ImsQueryTtyOnVolteStat(subId)).query();
     }
 
     @VisibleForTesting
-    ImsQuery isProvisionedOnDevice(int subId) {
-        return new ImsQueryProvisioningStat(subId, mCapability, mTech);
+    boolean isProvisionedOnDevice(int subId) {
+        return (new ImsQueryProvisioningStat(subId, mCapability, mTech)).query();
     }
 }
