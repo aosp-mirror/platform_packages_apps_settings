@@ -123,7 +123,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new ChannelListPreferenceController(context, mBackend));
-        mControllers.add(new ConversationListPreferenceController(context, mBackend));
+        mControllers.add(new AppConversationListPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }
