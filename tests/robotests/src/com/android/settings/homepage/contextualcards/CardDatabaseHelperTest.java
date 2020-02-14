@@ -67,18 +67,8 @@ public class CardDatabaseHelperTest {
                 CardDatabaseHelper.CardColumns.SCORE,
                 CardDatabaseHelper.CardColumns.SLICE_URI,
                 CardDatabaseHelper.CardColumns.CATEGORY,
-                CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE,
                 CardDatabaseHelper.CardColumns.PACKAGE_NAME,
                 CardDatabaseHelper.CardColumns.APP_VERSION,
-                CardDatabaseHelper.CardColumns.TITLE_RES_NAME,
-                CardDatabaseHelper.CardColumns.TITLE_TEXT,
-                CardDatabaseHelper.CardColumns.SUMMARY_RES_NAME,
-                CardDatabaseHelper.CardColumns.SUMMARY_TEXT,
-                CardDatabaseHelper.CardColumns.ICON_RES_NAME,
-                CardDatabaseHelper.CardColumns.ICON_RES_ID,
-                CardDatabaseHelper.CardColumns.CARD_ACTION,
-                CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS,
-                CardDatabaseHelper.CardColumns.SUPPORT_HALF_WIDTH,
                 CardDatabaseHelper.CardColumns.CARD_DISMISSED,
         };
 
