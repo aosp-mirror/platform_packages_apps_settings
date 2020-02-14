@@ -138,12 +138,12 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
             mDelayLabel = preference.findViewById(R.id.current_label);
             mDelayLabel.setText(delayTimeToString(delayMillis));
 
-            mShorter = preference.findViewById(R.id.smaller);
+            mShorter = preference.findViewById(R.id.shorter);
             mShorter.setOnClickListener(v -> {
                 minusDelayByImageView();
             });
 
-            mLonger = preference.findViewById(R.id.larger);
+            mLonger = preference.findViewById(R.id.longer);
             mLonger.setOnClickListener(v -> {
                 plusDelayByImageView();
             });
