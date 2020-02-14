@@ -38,7 +38,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -99,7 +98,6 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_option2Set_shouldUpdateToOption2() {
         when(mBluetoothCodecConfig.getSampleRate()).thenReturn(
                 BluetoothCodecConfig.SAMPLE_RATE_48000);
