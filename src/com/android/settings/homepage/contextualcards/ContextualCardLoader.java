@@ -112,9 +112,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                     final ContextualCard card = new ContextualCard(cursor);
-                    if (card.isCustomCard()) {
-                        //TODO(b/114688391): Load and generate custom card,then add into list
-                    } else if (isLargeCard(card)) {
+                    if (isLargeCard(card)) {
                         result.add(card.mutate().setIsLargeCard(true).build());
                     } else {
                         result.add(card);
