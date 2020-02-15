@@ -48,7 +48,6 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
-import com.android.settings.accessibility.AccessibilityUtil.State;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -74,6 +73,8 @@ public class AccessibilitySettings extends DashboardFragment {
 
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
+
+    private static final String EMPTY_STRING = "";
 
     // Preference categories
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
@@ -255,22 +256,22 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,
-            @State int state) {
+            boolean serviceEnabled) {
         final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
-        if (state == State.UNKNOWN) {
-            return serviceSummary;
+        final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
+
+        if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
+            return TextUtils.isEmpty(serviceSummary) ? EMPTY_STRING : serviceSummary;
         }
 
-        final String serviceState = (state == State.ON)
+        final String serviceState = serviceEnabled
                 ? context.getString(R.string.accessibility_summary_state_enabled)
                 : context.getString(R.string.accessibility_summary_state_disabled);
         final String stateSummaryCombo = context.getString(
                 R.string.preference_summary_default_combination,
                 serviceState, serviceSummary);
 
-        return (TextUtils.isEmpty(serviceSummary))
-                ? serviceState
-                : stateSummaryCombo;
+        return (TextUtils.isEmpty(serviceSummary)) ? serviceState : stateSummaryCombo;
 
     }
 
@@ -377,18 +378,13 @@ public class AccessibilitySettings extends DashboardFragment {
                 description = getString(R.string.accessibility_service_default_description);
             }
 
-            final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
             if (serviceEnabled && info.crashed) {
                 // Update the summaries for services that have crashed.
                 preference.setSummary(R.string.accessibility_summary_state_stopped);
                 description = getString(R.string.accessibility_description_state_stopped);
             } else {
-                int serviceState = serviceEnabled ? State.ON : State.OFF;
-                if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
-                    serviceState = State.UNKNOWN;
-                }
                 final CharSequence serviceSummary = getServiceSummary(getContext(), info,
-                        serviceState);
+                        serviceEnabled);
                 preference.setSummary(serviceSummary);
             }
 
@@ -408,6 +404,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 preference.setEnabled(true);
             }
 
+            final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
             switch (fragmentType) {
                 case AccessibilityServiceFragmentType.LEGACY:
                     preference.setFragment(

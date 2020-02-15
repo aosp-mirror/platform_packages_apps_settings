@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.AccessibilityUtil.State.UNKNOWN;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
@@ -27,7 +26,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -59,13 +57,9 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
     @Override
     public CharSequence getSummary() {
         final AccessibilityServiceInfo serviceInfo = getAccessibilityServiceInfo();
-        int serviceState = isChecked() ? ON : OFF;
-        if (AccessibilityUtil.getAccessibilityServiceFragmentType(serviceInfo)
-                == AccessibilityServiceFragmentType.INVISIBLE) {
-            serviceState = UNKNOWN;
-        }
+
         return serviceInfo == null ? EMPTY_STRING : AccessibilitySettings.getServiceSummary(
-                mContext, serviceInfo, serviceState);
+                mContext, serviceInfo, isChecked());
     }
 
     @Override
