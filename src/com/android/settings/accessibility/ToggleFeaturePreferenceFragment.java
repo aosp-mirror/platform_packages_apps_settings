@@ -138,6 +138,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final SwitchBar switchBar = activity.getSwitchBar();
         switchBar.hide();
 
+        // Need to be called as early as possible. Protected variables will be assigned here.
+        onProcessArguments(getArguments());
+
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (mImageUri != null) {
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
@@ -149,9 +152,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         mToggleServiceDividerSwitchPreference = new DividerSwitchPreference(getPrefContext());
         mToggleServiceDividerSwitchPreference.setKey(KEY_USE_SERVICE_PREFERENCE);
+        if (getArguments().containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
+            final boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
+            mToggleServiceDividerSwitchPreference.setChecked(enabled);
+        }
+
         preferenceScreen.addPreference(mToggleServiceDividerSwitchPreference);
 
-        onProcessArguments(getArguments());
         updateToggleServiceTitle(mToggleServiceDividerSwitchPreference);
 
         final PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
@@ -338,12 +345,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected void onProcessArguments(Bundle arguments) {
         // Key.
         mPreferenceKey = arguments.getString(AccessibilitySettings.EXTRA_PREFERENCE_KEY);
-
-        // Enabled.
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
-            final boolean enabled = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
-            mToggleServiceDividerSwitchPreference.setChecked(enabled);
-        }
 
         // Title.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_RESOLVE_INFO)) {
