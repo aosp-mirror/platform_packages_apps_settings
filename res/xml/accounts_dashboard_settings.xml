@@ -17,7 +17,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/account_dashboard_title">
+    android:key="user_and_account_settings_screen"
+    android:title="@string/account_dashboard_title"
+    settings:keywords="@string/keywords_accounts">
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

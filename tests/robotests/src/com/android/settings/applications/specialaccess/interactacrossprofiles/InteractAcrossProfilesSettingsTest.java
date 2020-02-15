@@ -20,10 +20,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.CrossProfileApps;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Pair;
@@ -32,12 +34,10 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.collect.ImmutableList;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowProcess;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -47,6 +47,7 @@ public class InteractAcrossProfilesSettingsTest {
     private static final int PERSONAL_PROFILE_ID = 0;
     private static final int WORK_PROFILE_ID = 10;
     private static final int WORK_UID = UserHandle.PER_USER_RANGE * WORK_PROFILE_ID;
+    private static final int PACKAGE_UID = 0;
 
     private static final String PERSONAL_CROSS_PROFILE_PACKAGE = "personalCrossProfilePackage";
     private static final String PERSONAL_NON_CROSS_PROFILE_PACKAGE =
@@ -58,20 +59,16 @@ public class InteractAcrossProfilesSettingsTest {
             ImmutableList.of(PERSONAL_CROSS_PROFILE_PACKAGE, PERSONAL_NON_CROSS_PROFILE_PACKAGE);
     private static final List<String> WORK_PROFILE_INSTALLED_PACKAGES =
             ImmutableList.of(WORK_CROSS_PROFILE_PACKAGE, WORK_NON_CROSS_PROFILE_PACKAGE);
+    public static final String INTERACT_ACROSS_PROFILES_PERMISSION =
+            "android.permission.INTERACT_ACROSS_PROFILES";
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private final PackageManager mPackageManager = mContext.getPackageManager();
     private final UserManager mUserManager = mContext.getSystemService(UserManager.class);
     private final CrossProfileApps mCrossProfileApps =
             mContext.getSystemService(CrossProfileApps.class);
+    private final AppOpsManager mAppOpsManager = mContext.getSystemService(AppOpsManager.class);
     private final InteractAcrossProfilesSettings mFragment = new InteractAcrossProfilesSettings();
-
-    @Before
-    public void setup() {
-        ReflectionHelpers.setField(mFragment, "mPackageManager", mPackageManager);
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mCrossProfileApps", mCrossProfileApps);
-    }
 
     @Test
     public void collectConfigurableApps_fromPersonal_returnsPersonalPackages() {
@@ -87,7 +84,8 @@ public class InteractAcrossProfilesSettingsTest {
         shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         shadowOf(mCrossProfileApps).addCrossProfilePackage(WORK_CROSS_PROFILE_PACKAGE);
 
-        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps();
+        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps(
+                mPackageManager, mUserManager, mCrossProfileApps);
 
         assertThat(apps.size()).isEqualTo(1);
         assertThat(apps.get(0).first.packageName).isEqualTo(PERSONAL_CROSS_PROFILE_PACKAGE);
@@ -108,7 +106,8 @@ public class InteractAcrossProfilesSettingsTest {
         shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
         shadowOf(mCrossProfileApps).addCrossProfilePackage(WORK_CROSS_PROFILE_PACKAGE);
 
-        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps();
+        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps(
+                mPackageManager, mUserManager, mCrossProfileApps);
 
         assertThat(apps.size()).isEqualTo(1);
         assertThat(apps.get(0).first.packageName).isEqualTo(PERSONAL_CROSS_PROFILE_PACKAGE);
@@ -122,8 +121,40 @@ public class InteractAcrossProfilesSettingsTest {
                 PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
         shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
 
-        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps();
+        List<Pair<ApplicationInfo, UserHandle>> apps = mFragment.collectConfigurableApps(
+                mPackageManager, mUserManager, mCrossProfileApps);
 
         assertThat(apps).isEmpty();
+    }
+
+    @Test
+    public void getNumberOfEnabledApps_returnsNumberOfEnabledApps() {
+        shadowOf(mUserManager).addUser(
+                PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
+        shadowOf(mUserManager).addProfile(
+                PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
+                "work-profile"/* profileName */, 0/* profileFlags */);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PERSONAL_PROFILE_ID, PERSONAL_PROFILE_INSTALLED_PACKAGES);
+        shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_CROSS_PROFILE_PACKAGE);
+        shadowOf(mCrossProfileApps).addCrossProfilePackage(PERSONAL_NON_CROSS_PROFILE_PACKAGE);
+        String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
+        shadowOf(mAppOpsManager).setMode(
+                appOp, PACKAGE_UID, PERSONAL_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_ALLOWED);
+        shadowOf(mAppOpsManager).setMode(
+                appOp, PACKAGE_UID, PERSONAL_CROSS_PROFILE_PACKAGE, AppOpsManager.MODE_IGNORED);
+        shadowOf(mPackageManager).addPermissionInfo(createCrossProfilesPermissionInfo());
+
+        int numOfApps = mFragment.getNumberOfEnabledApps(
+                mContext, mPackageManager, mUserManager, mCrossProfileApps);
+
+        assertThat(numOfApps).isEqualTo(1);
+    }
+
+    private PermissionInfo createCrossProfilesPermissionInfo() {
+        PermissionInfo permissionInfo = new PermissionInfo();
+        permissionInfo.name = INTERACT_ACROSS_PROFILES_PERMISSION;
+        permissionInfo.protectionLevel = PermissionInfo.PROTECTION_FLAG_APPOP;
+        return permissionInfo;
     }
 }

@@ -26,9 +26,9 @@ import com.android.ims.ImsManager;
  */
 public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
 
-    private ImsQuery mIsTtyOnVolteEnabled;
-    private ImsQuery mIsProvisionedOnDevice;
-    private ImsQuery mIsEnabledByUser;
+    private Boolean mIsTtyOnVolteEnabled;
+    private Boolean mIsProvisionedOnDevice;
+    private Boolean mIsEnabledByUser;
 
     /**
      * Constructor
@@ -45,11 +45,11 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
     }
 
     public void setIsTtyOnVolteEnabled(boolean enabled) {
-        mIsTtyOnVolteEnabled = new MockImsQueryResult.BooleanResult(enabled);
+        mIsTtyOnVolteEnabled = enabled;
     }
 
     @Override
-    ImsQuery isTtyOnVolteEnabled(int subId) {
+    boolean isTtyOnVolteEnabled(int subId) {
         if (mIsTtyOnVolteEnabled != null) {
             return mIsTtyOnVolteEnabled;
         }
@@ -57,11 +57,11 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
     }
 
     public void setIsProvisionedOnDevice(boolean isProvisioned) {
-        mIsProvisionedOnDevice = new MockImsQueryResult.BooleanResult(isProvisioned);
+        mIsProvisionedOnDevice = isProvisioned;
     }
 
     @Override
-    ImsQuery isProvisionedOnDevice(int subId) {
+    boolean isProvisionedOnDevice(int subId) {
         if (mIsProvisionedOnDevice != null) {
             return mIsProvisionedOnDevice;
         }
@@ -69,11 +69,11 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
     }
 
     public void setIsEnabledByUser(boolean enabled) {
-        mIsEnabledByUser = new MockImsQueryResult.BooleanResult(enabled);
+        mIsEnabledByUser = enabled;
     }
 
     @Override
-    ImsQuery isEnabledByUser(int subId) {
+    boolean isEnabledByUser(int subId) {
         if (mIsEnabledByUser != null) {
             return mIsEnabledByUser;
         }

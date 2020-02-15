@@ -17,14 +17,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="accessibility_settings_screen"
     android:persistent="false"
     android:title="@string/accessibility_settings">
-
-    <Preference
-        android:fragment="com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment"
-        android:key="accessibility_shortcut_preference"
-        android:persistent="false"
-        android:title="@string/accessibility_global_gesture_preference_title" />
 
     <PreferenceCategory
         android:key="user_installed_services_category"
@@ -197,7 +192,8 @@
     <PreferenceCategory
         android:key="experimental_category"
         android:persistent="false"
-        android:title="@string/experimental_category_title">
+        android:title="@string/experimental_category_title"
+        settings:initialExpandedChildrenCount="1">
 
         <SwitchPreference
             android:key="toggle_high_text_contrast_preference"
@@ -220,5 +216,14 @@
             android:persistent="false"
             android:title="@string/accessibility_display_inversion_preference_title"
             settings:controller="com.android.settings.accessibility.ColorInversionPreferenceController"/>
+
+        <SwitchPreference
+            android:key="accessibility_shortcut_preference"
+            android:persistent="false"
+            android:title="@string/accessibility_shortcut_service_on_lock_screen_title"
+            android:summary="@string/accessibility_shortcut_description"
+            settings:controller="com.android.settings.accessibility.AccessibilityShortcutPreferenceController"/>
+
     </PreferenceCategory>
+
 </PreferenceScreen>

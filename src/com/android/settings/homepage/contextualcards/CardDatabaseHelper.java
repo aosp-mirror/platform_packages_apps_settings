@@ -31,7 +31,7 @@ import androidx.annotation.VisibleForTesting;
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     public static final String CARD_TABLE = "cards";
 
@@ -62,11 +62,6 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         String CATEGORY = "category";
 
         /**
-         * Keep the card last display's locale.
-         */
-        String LOCALIZED_TO_LOCALE = "localized_to_locale";
-
-        /**
          * Package name for all card candidates.
          */
         String PACKAGE_NAME = "package_name";
@@ -75,51 +70,6 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
          * Application version of the package.
          */
         String APP_VERSION = "app_version";
-
-        /**
-         * Title resource name of the package.
-         */
-        String TITLE_RES_NAME = "title_res_name";
-
-        /**
-         * Title of the package to be shown.
-         */
-        String TITLE_TEXT = "title_text";
-
-        /**
-         * Summary resource name of the package.
-         */
-        String SUMMARY_RES_NAME = "summary_res_name";
-
-        /**
-         * Summary of the package to be shown.
-         */
-        String SUMMARY_TEXT = "summary_text";
-
-        /**
-         * Icon resource name of the package.
-         */
-        String ICON_RES_NAME = "icon_res_name";
-
-        /**
-         * Icon resource id of the package.
-         */
-        String ICON_RES_ID = "icon_res_id";
-
-        /**
-         * Key value mapping to Intent in Settings. Do action when user presses card.
-         */
-        String CARD_ACTION = "card_action";
-
-        /**
-         * Expire time of the card. The unit of the value is mini-second.
-         */
-        String EXPIRE_TIME_MS = "expire_time_ms";
-
-        /**
-         * Decide the card display full-length width or half-width in screen.
-         */
-        String SUPPORT_HALF_WIDTH = "support_half_width";
 
         /**
          * Decide the card is dismissed or not.
@@ -140,30 +90,10 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
                     " TEXT, " +
                     CardColumns.CATEGORY +
                     " INTEGER DEFAULT 0, " +
-                    CardColumns.LOCALIZED_TO_LOCALE +
-                    " TEXT, " +
                     CardColumns.PACKAGE_NAME +
                     " TEXT NOT NULL, " +
                     CardColumns.APP_VERSION +
                     " INTEGER NOT NULL, " +
-                    CardColumns.TITLE_RES_NAME +
-                    " TEXT, " +
-                    CardColumns.TITLE_TEXT +
-                    " TEXT, " +
-                    CardColumns.SUMMARY_RES_NAME +
-                    " TEXT, " +
-                    CardColumns.SUMMARY_TEXT +
-                    " TEXT, " +
-                    CardColumns.ICON_RES_NAME +
-                    " TEXT, " +
-                    CardColumns.ICON_RES_ID +
-                    " INTEGER DEFAULT 0, " +
-                    CardColumns.CARD_ACTION +
-                    " INTEGER, " +
-                    CardColumns.EXPIRE_TIME_MS +
-                    " INTEGER, " +
-                    CardColumns.SUPPORT_HALF_WIDTH +
-                    " INTEGER DEFAULT 0, " +
                     CardColumns.CARD_DISMISSED +
                     " INTEGER DEFAULT 0 " +
                     ");";

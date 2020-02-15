@@ -17,7 +17,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="display_settings_screen"
     android:title="@string/display_settings"
+    settings:keywords="@string/keywords_display"
     settings:initialExpandedChildrenCount="5">
 
     <com.android.settingslib.RestrictedPreference

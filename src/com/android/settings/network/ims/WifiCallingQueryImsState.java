@@ -55,8 +55,8 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsQuery isEnabledByUser(int subId) {
-        return new ImsQueryWfcUserSetting(subId);
+    boolean isEnabledByUser(int subId) {
+        return (new ImsQueryWfcUserSetting(subId)).query();
     }
 
     @VisibleForTesting
@@ -77,7 +77,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         }
 
         return imsManager.isWfcEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId).query();
+                && isProvisionedOnDevice(mSubId);
     }
 
     /**
@@ -101,7 +101,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         }
 
         return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId).query()));
+                || (isTtyOnVolteEnabled(mSubId)));
     }
 
     @VisibleForTesting
@@ -119,6 +119,6 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).query();
+        return isEnabledByUser(mSubId);
     }
 }

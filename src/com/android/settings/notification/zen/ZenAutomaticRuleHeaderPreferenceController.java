@@ -25,7 +25,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.service.notification.ZenModeConfig;
 import android.util.Slog;
-import android.view.View;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -61,31 +60,21 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
         return mRule != null;
     }
 
+    @Override
     public void updateState(Preference preference) {
-        if (mRule == null) {
+        if (mRule == null || mFragment == null) {
             return;
         }
 
-        if (mFragment != null) {
-            LayoutPreference pref = (LayoutPreference) preference;
-
-            if (mController == null) {
-                mController = EntityHeaderController
-                        .newInstance(mFragment.getActivity(), mFragment,
-                                pref.findViewById(R.id.entity_header));
-            }
-
-            pref = mController.setIcon(getIcon())
-                    .setLabel(mRule.getName())
-                    .setPackageName(mRule.getOwner().getPackageName())
-                    .setUid(mContext.getUserId())
-                    .setHasAppInfoLink(false)
-                    .setButtonActions(EntityHeaderController.ActionType.ACTION_EDIT_PREFERENCE,
-                            EntityHeaderController.ActionType.ACTION_NONE)
-                    .done(mFragment.getActivity(), mContext);
-
-            pref.findViewById(R.id.entity_header).setVisibility(View.VISIBLE);
+        if (mController == null) {
+            final LayoutPreference pref = (LayoutPreference) preference;
+            mController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
+                    pref.findViewById(R.id.entity_header));
         }
+
+        mController.setIcon(getIcon())
+                .setLabel(mRule.getName())
+                .done(mFragment.getActivity(), false /* rebindActions */);
     }
 
     private Drawable getIcon() {
