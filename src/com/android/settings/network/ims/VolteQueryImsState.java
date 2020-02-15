@@ -55,8 +55,8 @@ public class VolteQueryImsState extends ImsQueryController {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsQuery isEnabledByUser(int subId) {
-        return new ImsQueryEnhanced4gLteModeUserSetting(subId);
+    boolean isEnabledByUser(int subId) {
+        return (new ImsQueryEnhanced4gLteModeUserSetting(subId)).query();
     }
 
     @VisibleForTesting
@@ -77,7 +77,7 @@ public class VolteQueryImsState extends ImsQueryController {
         }
 
         return imsManager.isVolteEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId).query();
+                && isProvisionedOnDevice(mSubId);
     }
 
     /**
@@ -101,7 +101,7 @@ public class VolteQueryImsState extends ImsQueryController {
         }
 
         return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId).query()));
+                || (isTtyOnVolteEnabled(mSubId)));
     }
 
     @VisibleForTesting
@@ -119,6 +119,6 @@ public class VolteQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).query();
+        return isEnabledByUser(mSubId);
     }
 }

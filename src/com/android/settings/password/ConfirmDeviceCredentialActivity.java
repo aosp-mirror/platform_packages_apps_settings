@@ -182,14 +182,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         if ((mTitle == null) && isManagedProfile) {
             mTitle = getTitleFromOrganizationName(mUserId);
         }
-        final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
-                mContext, effectiveUserId);
-        if (mTitle == null) {
-            mTitle = getTitleFromCredentialType(credentialType, isManagedProfile);
-        }
-        if (mDetails == null) {
-            mDetails = getDetailsFromCredentialType(credentialType, isManagedProfile);
-        }
+
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
@@ -199,6 +192,17 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
         bpBundle.putBoolean(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS,
                 mCheckDevicePolicyManager);
+
+        final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
+                mContext, effectiveUserId);
+        if (mTitle == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_TITLE,
+                    getTitleFromCredentialType(credentialType, isManagedProfile));
+        }
+        if (mDetails == null) {
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_DESCRIPTION,
+                    getDetailsFromCredentialType(credentialType, isManagedProfile));
+        }
 
         boolean launchedBiometric = false;
         boolean launchedCDC = false;

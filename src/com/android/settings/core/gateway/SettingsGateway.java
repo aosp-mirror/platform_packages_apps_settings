@@ -46,6 +46,8 @@ import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.managedomainurls.ManageDomainUrls;
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings;
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails;
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings;
 import com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
@@ -293,7 +295,9 @@ public class SettingsGateway {
             GlobalActionsPanelSettings.class.getName(),
             DarkModeSettingsFragment.class.getName(),
             BugReportHandlerPicker.class.getName(),
-            GestureNavigationSettingsFragment.class.getName()
+            GestureNavigationSettingsFragment.class.getName(),
+            InteractAcrossProfilesSettings.class.getName(),
+            InteractAcrossProfilesDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

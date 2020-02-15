@@ -13,7 +13,7 @@
  */
 package com.android.settings.display;
 
-import static android.provider.Settings.System.ADAPTIVE_SLEEP;
+import static android.provider.Settings.Secure.ADAPTIVE_SLEEP;
 
 import android.Manifest;
 import android.content.Context;

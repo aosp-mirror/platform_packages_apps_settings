@@ -53,7 +53,7 @@ public class ShortcutPreference extends Preference {
     }
     private OnClickListener mListener = null;
 
-    private static final float DISABLED_ALPHA = 0.5f;
+    private static final float DISABLED_ALPHA = 0.77f;
     private static final float ENABLED_ALPHA = 1.0f;
     private int mSettingsVisibility = View.VISIBLE;
     private boolean mAutoEnabledSettings;

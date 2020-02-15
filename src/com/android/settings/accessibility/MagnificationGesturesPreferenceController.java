@@ -92,8 +92,8 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
         extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                 R.string.accessibility_screen_magnification_gestures_title);
-        extras.putInt(AccessibilitySettings.EXTRA_SUMMARY_RES,
-                R.string.accessibility_screen_magnification_summary);
+        extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION,
+                context.getText(R.string.accessibility_screen_magnification_summary));
         extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
                 R.raw.accessibility_screen_magnification);
     }

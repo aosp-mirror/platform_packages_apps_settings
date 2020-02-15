@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="special_app_access_screen"
     android:title="@string/special_access">
 
     <Preference
@@ -39,6 +38,13 @@
             android:name="classname"
             android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
     </Preference>
+
+    <Preference
+        android:key="interact_across_profiles"
+        android:title="@string/interact_across_profiles_title"
+        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+        settings:keywords="@string/interact_across_profiles_keywords"
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
 
     <Preference
         android:key="device_administrators"

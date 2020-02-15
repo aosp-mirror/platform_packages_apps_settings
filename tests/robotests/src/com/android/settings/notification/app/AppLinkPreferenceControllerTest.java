@@ -36,7 +36,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.AppLinkPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +75,7 @@ public class AppLinkPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -84,7 +83,7 @@ public class AppLinkPreferenceControllerTest {
     public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -93,7 +92,7 @@ public class AppLinkPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -103,7 +102,7 @@ public class AppLinkPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -114,7 +113,7 @@ public class AppLinkPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -123,7 +122,7 @@ public class AppLinkPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         Intent intent = new Intent("action");
         appRow.settingsIntent = intent;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);

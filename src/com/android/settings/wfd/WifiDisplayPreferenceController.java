@@ -69,8 +69,7 @@ public class WifiDisplayPreferenceController extends BasePreferenceController im
 
     @Override
     public int getAvailabilityStatus() {
-        return WifiDisplaySettings.isAvailable(mContext) ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return WifiDisplaySettings.isAvailable(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

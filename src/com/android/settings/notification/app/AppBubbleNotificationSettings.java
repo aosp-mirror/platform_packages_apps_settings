@@ -84,7 +84,7 @@ public class AppBubbleNotificationSettings extends NotificationSettings implemen
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();

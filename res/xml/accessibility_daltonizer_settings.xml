@@ -17,7 +17,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="daltonizer_preference_screen"
     android:persistent="false"
     android:title="@string/accessibility_display_daltonizer_preference_title">
 
@@ -53,16 +52,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="daltonizer_footer_category" >
-
-        <com.android.settingslib.widget.FooterPreference
-            android:key="daltonizer_footer"
-            android:persistent="false"
-            android:selectable="false"
-            settings:allowDividerAbove="false"
-            android:title="@string/accessibility_display_daltonizer_preference_subtitle"
-            settings:searchable="false" />
-
-    </PreferenceCategory>
 </PreferenceScreen>

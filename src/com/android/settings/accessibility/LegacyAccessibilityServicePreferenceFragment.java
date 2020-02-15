@@ -25,7 +25,14 @@ import com.android.settings.R;
 
 import com.google.common.collect.ImmutableSet;
 
-/** For accessibility services that target SDK <= Q. */
+/**
+ * Fragment that only allowed hardware {@link UserShortcutType} for shortcut to open.
+ *
+ * <p>The child {@link ToggleAccessibilityServicePreferenceFragment} shows the actual UI for
+ * providing basic accessibility service setup.
+ *
+ * <p>For accessibility services that target SDK <= Q.
+ */
 public class LegacyAccessibilityServicePreferenceFragment extends
         ToggleAccessibilityServicePreferenceFragment {
 
@@ -38,7 +45,6 @@ public class LegacyAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setSummary(hardwareTitle);
         mShortcutPreference.setSettingsVisibility(View.GONE);
 
-        // Only allowed hardware PreferredShortcutType in this fragment.
         setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
     }
 

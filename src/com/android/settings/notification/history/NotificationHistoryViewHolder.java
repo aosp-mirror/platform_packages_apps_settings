@@ -26,6 +26,9 @@ import android.view.View;
 import android.widget.DateTimeView;
 import android.widget.TextView;
 
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -65,6 +68,19 @@ public class NotificationHistoryViewHolder extends RecyclerView.ViewHolder {
                     .putExtra(EXTRA_CHANNEL_ID, channelId);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             itemView.getContext().startActivityAsUser(intent, UserHandle.of(userId));
+        });
+        ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host,
+                    AccessibilityNodeInfoCompat info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                CharSequence description =
+                        host.getResources().getText(R.string.notification_history_view_settings);
+                AccessibilityNodeInfoCompat.AccessibilityActionCompat customClick =
+                        new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                                AccessibilityNodeInfoCompat.ACTION_CLICK, description);
+                info.addAction(customClick);
+            }
         });
     }
 }

@@ -17,29 +17,27 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
-import android.os.Bundle;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 /**
- * For accessibility services that target SDK > Q, and
- * {@link AccessibilityServiceInfo#FLAG_REQUEST_ACCESSIBILITY_BUTTON}
- * is set.
+ * Fragment that does not have toggle bar to turn on service to use.
+ *
+ * <p>The child {@link ToggleAccessibilityServicePreferenceFragment} shows the actual UI for
+ * providing basic accessibility service setup.
+ *
+ * <p>For accessibility services that target SDK > Q, and
+ * {@link AccessibilityServiceInfo#FLAG_REQUEST_ACCESSIBILITY_BUTTON} is set.
  */
 public class InvisibleToggleAccessibilityServicePreferenceFragment extends
         ToggleAccessibilityServicePreferenceFragment implements ShortcutPreference.OnClickListener{
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        final SwitchBar mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.hide();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setVisible(false);
     }
 
     /**

@@ -276,24 +276,14 @@
         <item>Require all non-trusted certificate statuses</item>
     </string-array>
 
-    <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
+    <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz prefer. -->
     <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
-    <string-array translatable="false" name="wifi_ap_band_config_full">
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_summary_full">
-        <item>@string/wifi_ap_choose_2G</item>
-        <item>@string/wifi_ap_choose_5G</item>
-    </string-array>
-
-    <string-array translatable="false" name="wifi_ap_band_dual_mode">
+    <string-array translatable="false" name="wifi_ap_band">
         <item>1</item>
         <item>3</item>
     </string-array>
 
-    <string-array translatable="false" name="wifi_ap_band_dual_mode_summary">
+    <string-array translatable="false" name="wifi_ap_band_summary">
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_prefer_5G</item>
     </string-array>

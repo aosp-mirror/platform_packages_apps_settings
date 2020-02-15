@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -65,8 +66,20 @@ public class ChannelNotificationSettings extends NotificationSettings {
             return;
         }
 
+        if (mChannel != null && !TextUtils.isEmpty(mChannel.getConversationId())
+            && !mChannel.isDemoted()) {
+            startActivity(new SubSettingLauncher(mContext)
+                    .setDestination(ConversationNotificationSettings.class.getName())
+                    .setArguments(getArguments())
+                    .setExtras(getIntent() != null ? getIntent().getExtras(): null)
+                    .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_TOPIC_NOTIFICATION)
+                    .toIntent());
+            finish();
+            return;
+        }
+
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
@@ -118,6 +131,7 @@ public class ChannelNotificationSettings extends NotificationSettings {
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new BubblePreferenceController(context, getChildFragmentManager(),
                 mBackend, false /* isAppPage */));
+        mControllers.add(new ConversationPromotePreferenceController(context, this, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

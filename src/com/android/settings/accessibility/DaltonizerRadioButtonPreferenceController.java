@@ -20,6 +20,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.provider.Settings;
+import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.lifecycle.LifecycleObserver;
@@ -122,6 +123,7 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
         mPreference = (RadioButtonPreference)
                 screen.findPreference(getPreferenceKey());
         mPreference.setOnClickListener(this);
+        mPreference.setAppendixVisibility(View.GONE);
         updateState(mPreference);
     }
 

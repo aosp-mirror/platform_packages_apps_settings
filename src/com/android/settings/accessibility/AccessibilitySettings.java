@@ -31,7 +31,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -49,6 +48,7 @@ import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType;
+import com.android.settings.accessibility.AccessibilityUtil.State;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -120,8 +120,6 @@ public class AccessibilitySettings extends DashboardFragment {
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
-
-    static final String RAMPING_RINGER_ENABLED = "ramping_ringer_enabled";
 
     private final Handler mHandler = new Handler();
 
@@ -257,11 +255,15 @@ public class AccessibilitySettings extends DashboardFragment {
     }
 
     public static CharSequence getServiceSummary(Context context, AccessibilityServiceInfo info,
-            boolean serviceEnabled) {
-        final String serviceState = serviceEnabled
+            @State int state) {
+        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
+        if (state == State.UNKNOWN) {
+            return serviceSummary;
+        }
+
+        final String serviceState = (state == State.ON)
                 ? context.getString(R.string.accessibility_summary_state_enabled)
                 : context.getString(R.string.accessibility_summary_state_disabled);
-        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
         final String stateSummaryCombo = context.getString(
                 R.string.preference_summary_default_combination,
                 serviceState, serviceSummary);
@@ -269,15 +271,13 @@ public class AccessibilitySettings extends DashboardFragment {
         return (TextUtils.isEmpty(serviceSummary))
                 ? serviceState
                 : stateSummaryCombo;
+
     }
 
     @VisibleForTesting
     static boolean isRampingRingerEnabled(final Context context) {
-        return (Settings.Global.getInt(
-                        context.getContentResolver(),
-                        Settings.Global.APPLY_RAMPING_RINGER, 0) == 1)
-                && DeviceConfig.getBoolean(
-                        DeviceConfig.NAMESPACE_TELEPHONY, RAMPING_RINGER_ENABLED, false);
+        return Settings.Global.getInt(
+                context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
     private void initializeAllPreferences() {
@@ -377,13 +377,18 @@ public class AccessibilitySettings extends DashboardFragment {
                 description = getString(R.string.accessibility_service_default_description);
             }
 
+            final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
             if (serviceEnabled && info.crashed) {
                 // Update the summaries for services that have crashed.
                 preference.setSummary(R.string.accessibility_summary_state_stopped);
                 description = getString(R.string.accessibility_description_state_stopped);
             } else {
+                int serviceState = serviceEnabled ? State.ON : State.OFF;
+                if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
+                    serviceState = State.UNKNOWN;
+                }
                 final CharSequence serviceSummary = getServiceSummary(getContext(), info,
-                        serviceEnabled);
+                        serviceState);
                 preference.setSummary(serviceSummary);
             }
 
@@ -403,7 +408,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 preference.setEnabled(true);
             }
 
-            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(info)) {
+            switch (fragmentType) {
                 case AccessibilityServiceFragmentType.LEGACY:
                     preference.setFragment(
                             LegacyAccessibilityServicePreferenceFragment.class.getName());
@@ -437,8 +442,7 @@ public class AccessibilitySettings extends DashboardFragment {
             final String settingsClassName = info.getSettingsActivityName();
             if (!TextUtils.isEmpty(settingsClassName)) {
                 extras.putString(EXTRA_SETTINGS_TITLE,
-                        getString(R.string.accessibility_service_menu_item_settings,
-                                resolveInfo.loadLabel(getPackageManager())));
+                        getString(R.string.accessibility_menu_item_settings));
                 extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
                         new ComponentName(packageName, settingsClassName).flattenToString());
             }
@@ -515,6 +519,8 @@ public class AccessibilitySettings extends DashboardFragment {
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
             mDisplayDaltonizerPreferenceScreen.setOrder(
                     mDisplayMagnificationPreferenceScreen.getOrder() + 1);
+            mDisplayDaltonizerPreferenceScreen.setSummary(AccessibilityUtil.getSummary(
+                    getContext(), Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED));
             mToggleInversionPreference.setOrder(
                     mDisplayDaltonizerPreferenceScreen.getOrder() + 1);
             mToggleLargePointerIconPreference.setOrder(

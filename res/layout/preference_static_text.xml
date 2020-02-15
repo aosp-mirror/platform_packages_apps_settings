@@ -34,7 +34,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="4dp">
         <ImageView
-            android:id="@+android:id/icon"
+            android:id="@android:id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </FrameLayout>
@@ -45,11 +45,11 @@
         android:paddingBottom="16dp"
         android:paddingTop="16dp">
 
-        <TextView android:id="@+android:id/title"
+        <TextView android:id="@android:id/title"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"/>
 
-        <TextView android:id="@+android:id/summary"
+        <TextView android:id="@android:id/summary"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_below="@android:id/title"
@@ -57,9 +57,10 @@
                   android:textColor="?android:attr/textColorSecondary"/>
     </RelativeLayout>
 
-    <LinearLayout android:id="@+android:id/widget_frame"
+    <LinearLayout android:id="@android:id/widget_frame"
                   android:layout_width="wrap_content"
                   android:layout_height="match_parent"
                   android:gravity="center_vertical"
                   android:orientation="vertical" />
+
 </LinearLayout>

@@ -41,6 +41,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
+import com.android.settings.widget.SwitchWidgetController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,6 +68,7 @@ public class TetherEnablerTest {
 
     private SwitchBar mSwitchBar;
     private TetherEnabler mEnabler;
+    private SwitchWidgetController mSwitchWidgetController;
 
     @Before
     public void setUp() {
@@ -74,7 +76,8 @@ public class TetherEnablerTest {
 
         Context context = spy(ApplicationProvider.getApplicationContext());
         AtomicReference<BluetoothPan> panReference = spy(AtomicReference.class);
-        mSwitchBar = new SwitchBar(context);
+        mSwitchBar = spy(new SwitchBar(context));
+        mSwitchWidgetController = spy(new SwitchBarController(mSwitchBar));
         when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
@@ -84,7 +87,7 @@ public class TetherEnablerTest {
         panReference.set(mBluetoothPan);
         when(context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
                 .thenReturn(mSharedPreferences);
-        mEnabler = new TetherEnabler(context, new SwitchBarController(mSwitchBar), panReference);
+        mEnabler = spy(new TetherEnabler(context, mSwitchWidgetController, panReference));
     }
 
     @Test
@@ -121,7 +124,7 @@ public class TetherEnablerTest {
 
     @Test
     public void onDataSaverChanged_setsEnabledCorrectly() {
-        assertThat(mSwitchBar.isEnabled()).isTrue();
+        mSwitchBar.setEnabled(true);
 
         // try to turn data saver on
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(true);
@@ -178,5 +181,34 @@ public class TetherEnablerTest {
         mEnabler.startTethering(ConnectivityManager.TETHERING_BLUETOOTH);
         verify(mConnectivityManager).startTethering(
                 eq(ConnectivityManager.TETHERING_BLUETOOTH), anyBoolean(), any(), any());
+    }
+
+    @Test
+    public void updateState_onSwitchToggleNeverCalled() {
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+
+        mEnabler.updateState(null/*tethered*/);
+        verify(mEnabler, never()).onSwitchToggled(anyBoolean());
+    }
+
+    @Test
+    public void updateState_shouldEnableSwitchBarNotTethering() {
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+
+        ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
+        mEnabler.updateState(null/*tethered*/);
+        verify(mSwitchBar).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_shouldEnableSwitchBarTethering() {
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+
+        ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
+        mEnabler.updateState(new String[]{""});
+        verify(mSwitchBar).setEnabled(true);
     }
 }

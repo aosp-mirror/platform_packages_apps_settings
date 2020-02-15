@@ -27,7 +27,7 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     protected void onProcessArguments(Bundle arguments) {
         super.onProcessArguments(arguments);
-        mToggleSwitchWasInitiallyChecked = mToggleSwitch.isChecked();
+        mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 
     @Override
@@ -38,10 +38,10 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK,
-                    mToggleSwitch.isChecked());
+                    mToggleServiceDividerSwitchPreference.isChecked());
         }
 
         super.onStop();

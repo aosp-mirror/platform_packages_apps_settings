@@ -193,7 +193,7 @@ public class WifiUtils {
                 config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.IEEE8021X);
                 if (security == AccessPoint.SECURITY_EAP_SUITE_B) {
                     config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.SUITE_B_192);
-                    config.requirePMF = true;
+                    config.requirePmf = true;
                     config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
                     config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
                     config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
@@ -207,7 +207,7 @@ public class WifiUtils {
                 break;
             case AccessPoint.SECURITY_SAE:
                 config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.SAE);
-                config.requirePMF = true;
+                config.requirePmf = true;
                 if (!TextUtils.isEmpty(password)) {
                     config.preSharedKey = '"' + password + '"';
                 }
@@ -215,7 +215,7 @@ public class WifiUtils {
 
             case AccessPoint.SECURITY_OWE:
                 config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.OWE);
-                config.requirePMF = true;
+                config.requirePmf = true;
                 break;
 
             default:

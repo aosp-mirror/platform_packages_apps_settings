@@ -18,9 +18,16 @@ package com.android.settings.network.ims;
 
 import android.content.Context;
 import android.telecom.TelecomManager;
+import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.feature.MmTelFeature;
+import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
+
+import com.android.ims.ImsManager;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Controller class for querying Wifi calling status
@@ -37,7 +44,9 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @param subId subscription's id
      */
     public WifiCallingQueryImsState(Context context, int subId) {
-        super();
+        super(MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
+                ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN,
+                AccessNetworkConstants.TRANSPORT_TYPE_WLAN);
         mContext = context;
         mSubId = subId;
     }
@@ -46,8 +55,39 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsQuery isEnabledByUser(int subId) {
-        return new ImsQueryWfcUserSetting(subId);
+    boolean isEnabledByUser(int subId) {
+        return (new ImsQueryWfcUserSetting(subId)).query();
+    }
+
+    @VisibleForTesting
+    ImsManager getImsManager(int subId) {
+        return ImsManager.getInstance(mContext,
+                SubscriptionUtil.getPhoneId(mContext, subId));
+    }
+
+    /**
+     * Check whether Wifi Calling has been provisioned or not on this subscription
+     *
+     * @return true when Wifi Calling has been enabled, otherwise false
+     */
+    public boolean isWifiCallingProvisioned() {
+        final ImsManager imsManager = getImsManager(mSubId);
+        if (imsManager == null) {
+            return false;
+        }
+
+        return imsManager.isWfcEnabledByPlatform()
+                && isProvisionedOnDevice(mSubId);
+    }
+
+    /**
+     * Check whether Wifi Calling can be perform or not on this subscription
+     *
+     * @return true when Wifi Calling can be performed, otherwise false
+     */
+    public boolean isReadyToWifiCalling() {
+        return isWifiCallingProvisioned()
+                && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
     }
 
     /**
@@ -61,7 +101,7 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         }
 
         return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId).query()));
+                || (isTtyOnVolteEnabled(mSubId)));
     }
 
     @VisibleForTesting
@@ -79,6 +119,6 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).query();
+        return isEnabledByUser(mSubId);
     }
 }

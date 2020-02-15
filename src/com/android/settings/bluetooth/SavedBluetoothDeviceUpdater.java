@@ -20,12 +20,16 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Maintain and update saved bluetooth devices(bonded but not connected)
@@ -38,28 +42,54 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
 
     private static final String PREF_KEY = "saved_bt";
 
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
+
     public SavedBluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
         super(context, fragment, devicePreferenceCallback);
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     }
 
     @Override
     public void forceUpdate() {
-        if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+        if (mBluetoothAdapter.isEnabled()) {
             final CachedBluetoothDeviceManager cachedManager =
                     mLocalManager.getCachedDeviceManager();
-            for (BluetoothDevice device
-                    : BluetoothAdapter.getDefaultAdapter().getMostRecentlyConnectedDevices()) {
+            final List<BluetoothDevice> bluetoothDevices =
+                    mBluetoothAdapter.getMostRecentlyConnectedDevices();
+            removePreferenceIfNecessary(bluetoothDevices, cachedManager);
+            for (BluetoothDevice device : bluetoothDevices) {
                 final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
-                if (isFilterMatched(cachedDevice)) {
-                    // Add the preference if it is new one
-                    addPreference(cachedDevice, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
-                } else {
-                    removePreference(cachedDevice);
+                if (cachedDevice != null) {
+                    update(cachedDevice);
                 }
             }
         } else {
             removeAllDevicesFromPreference();
+        }
+    }
+
+    private void removePreferenceIfNecessary(List<BluetoothDevice> bluetoothDevices,
+            CachedBluetoothDeviceManager cachedManager) {
+        for (BluetoothDevice device : new ArrayList<>(mPreferenceMap.keySet())) {
+            if (!bluetoothDevices.contains(device)) {
+                final CachedBluetoothDevice cachedDevice = cachedManager.findDevice(device);
+                if (cachedDevice != null) {
+                    removePreference(cachedDevice);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void update(CachedBluetoothDevice cachedDevice) {
+        if (isFilterMatched(cachedDevice)) {
+            // Add the preference if it is new one
+            addPreference(cachedDevice, BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+        } else {
+            removePreference(cachedDevice);
         }
     }
 

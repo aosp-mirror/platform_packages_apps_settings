@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.LocationManager;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -57,6 +58,9 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     @VisibleForTesting
     LocationManager mLocationManager;
 
+    @VisibleForTesting
+    WifiManager mWifiManager;
+
     private final BroadcastReceiver mLocationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -70,6 +74,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     public WifiWakeupPreferenceController(Context context) {
         super(context, KEY_ENABLE_WIFI_WAKEUP);
         mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
+        mWifiManager = context.getSystemService(WifiManager.class);
     }
 
     public void setFragment(Fragment hostFragment) {
@@ -160,13 +165,11 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     }
 
     private boolean getWifiWakeupEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
+        return mWifiManager.isAutoWakeupEnabled();
     }
 
     private void setWifiWakeupEnabled(boolean enabled) {
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED,
-                enabled ? 1 : 0);
+        mWifiManager.setAutoWakeupEnabled(enabled);
     }
 
     @Override

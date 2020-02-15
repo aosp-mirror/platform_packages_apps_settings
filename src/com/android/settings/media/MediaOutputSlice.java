@@ -89,18 +89,26 @@ public class MediaOutputSlice implements CustomSliceable {
         final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
         if (topDevice != null) {
-            listBuilder.addInputRange(getActiveDeviceHeaderRow(topDevice));
+            addRow(topDevice, connectedDevice, listBuilder);
             worker.setTopDevice(topDevice);
         }
 
         for (MediaDevice device : devices) {
             if (topDevice == null
                     || !TextUtils.equals(topDevice.getId(), device.getId())) {
-                listBuilder.addRow(getMediaDeviceRow(device));
+                addRow(device, connectedDevice, listBuilder);
             }
         }
 
         return listBuilder.build();
+    }
+
+    private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
+        if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
+            listBuilder.addInputRange(getActiveDeviceHeaderRow(device));
+        } else {
+            listBuilder.addRow(getMediaDeviceRow(device));
+        }
     }
 
     private ListBuilder.InputRangeBuilder getActiveDeviceHeaderRow(MediaDevice device) {

@@ -163,19 +163,30 @@ public class Enhanced4gLteSliceHelper {
      * @param intent action performed
      */
     public void handleEnhanced4gLteChanged(Intent intent) {
-        final int subId = getDefaultVoiceSubId();
+        // skip checking when no toggle state update contained within Intent
+        final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, false);
+        if (newValue != intent.getBooleanExtra(EXTRA_TOGGLE_STATE, true)) {
+            notifyEnhanced4gLteUpdate();
+            return;
+        }
 
-        if (SubscriptionManager.isValidSubscriptionId(subId)) {
-            final VolteQueryImsState queryState = queryImsState(subId);
-            if (queryState.isVoLteProvisioned()) {
-                final boolean currentValue = queryState.isEnabledByUser()
-                        && queryState.isAllowUserControl();
-                final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
-                        currentValue);
-                if (newValue != currentValue) {
-                    setEnhanced4gLteModeSetting(subId, newValue);
-                }
-            }
+        final int subId = getDefaultVoiceSubId();
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            notifyEnhanced4gLteUpdate();
+            return;
+        }
+
+        final VolteQueryImsState queryState = queryImsState(subId);
+        final boolean currentValue = queryState.isEnabledByUser()
+                && queryState.isAllowUserControl();
+        if (newValue == currentValue) {
+            notifyEnhanced4gLteUpdate();
+            return;
+        }
+
+        // isVoLteProvisioned() is the last item to check since it might block the main thread
+        if (queryState.isVoLteProvisioned()) {
+            setEnhanced4gLteModeSetting(subId, newValue);
         }
         notifyEnhanced4gLteUpdate();
     }

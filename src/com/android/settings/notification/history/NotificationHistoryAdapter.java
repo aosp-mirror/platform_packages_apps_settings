@@ -73,6 +73,7 @@ public class NotificationHistoryAdapter extends
 
     public void onRebuildComplete(List<HistoricalNotification> notifications) {
         mValues = notifications;
+        mValues.sort((o1, o2) -> Long.compare(o2.getPostedTimeMs(), o1.getPostedTimeMs()));
         notifyDataSetChanged();
     }
 }

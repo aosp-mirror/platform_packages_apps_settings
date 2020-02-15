@@ -1,7 +1,6 @@
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_MOCK_LOCATION_APP;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_MOCK_LOCATION_APP;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -20,7 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.util.Pair;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -143,6 +141,15 @@ public class MockLocationAppPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn("SomeRandomKey");
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
+    }
+
+    @Test
+    public void onDeveloperOptionsDisabled_currentMockLocationApp_shouldBeNull() {
+        mController.onDeveloperOptionsDisabled();
+
+        final String appName = mController.getCurrentMockLocationApp();
+
+        assertThat(appName).isNull();
     }
 
     private AppOpsManager.OpEntry createOpEntry(int opMode) {

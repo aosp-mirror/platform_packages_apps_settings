@@ -34,7 +34,6 @@ public class DaltonizerPreferenceControllerTest {
     private static final String PREF_KEY = "daltonizer_preference";
     private static final int ON = 1;
     private static final int OFF = 0;
-    private static final String DALTONIZER_VALUE = "11";
 
     private Context mContext;
     private DaltonizerPreferenceController mController;
@@ -61,14 +60,5 @@ public class DaltonizerPreferenceControllerTest {
 
         assertThat(mController.getSummary().toString().contains(
                 mContext.getText(R.string.accessibility_feature_state_off))).isTrue();
-    }
-
-    @Test
-    public void getSummary_selectProtanomaly_shouldReturnProtanomalySummary() {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER, DALTONIZER_VALUE);
-
-        assertThat(mController.getSummary().toString().contains(
-                mContext.getText(R.string.daltonizer_mode_protanomaly))).isTrue();
     }
 }

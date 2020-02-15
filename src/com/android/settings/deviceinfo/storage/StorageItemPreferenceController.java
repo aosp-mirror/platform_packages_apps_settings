@@ -20,7 +20,6 @@ import static com.android.settings.dashboard.profileselector.ProfileSelectFragme
 import static com.android.settings.dashboard.profileselector.ProfileSelectFragment.WORK_TAB;
 
 import android.app.settings.SettingsEnums;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -173,7 +172,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (intent != null) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
 
-            launchIntent(intent);
+            Utils.launchIntent(mFragment, intent);
             return true;
         }
 
@@ -464,24 +463,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                     - data.externalStats.videoBytes
                     - data.externalStats.imageBytes
                     - data.externalStats.appBytes;
-        }
-    }
-
-    private void launchIntent(Intent intent) {
-        try {
-            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
-
-            // b/33117269: Note that launchIntent may launch activity in different task which set
-            // different launchMode (e.g. Files), using startActivityForesult to set task as
-            // source task, and set requestCode as 0 means don't care about returnCode currently.
-            if (userId == -1) {
-                mFragment.startActivityForResult(intent, 0 /* requestCode not used */);
-            } else {
-                mFragment.getActivity().startActivityForResultAsUser(intent,
-                        0 /* requestCode not used */, new UserHandle(userId));
-            }
-        } catch (ActivityNotFoundException e) {
-            Log.w(TAG, "No activity found for " + intent);
         }
     }
 

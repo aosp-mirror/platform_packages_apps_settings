@@ -44,7 +44,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.BadgePreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -94,7 +93,7 @@ public class BadgePreferenceControllerTest {
     public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -103,7 +102,7 @@ public class BadgePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -113,7 +112,7 @@ public class BadgePreferenceControllerTest {
         appRow.showBadge = false;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         assertFalse(mController.isAvailable());
     }
@@ -123,7 +122,7 @@ public class BadgePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 0);
 
         assertFalse(mController.isAvailable());
@@ -132,7 +131,7 @@ public class BadgePreferenceControllerTest {
     @Test
     public void testIsAvailable_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
 
         assertTrue(mController.isAvailable());
@@ -145,7 +144,7 @@ public class BadgePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
 
         assertTrue(mController.isAvailable());
@@ -157,7 +156,7 @@ public class BadgePreferenceControllerTest {
         appRow.showBadge = true;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
 
         assertTrue(mController.isAvailable());
@@ -169,7 +168,7 @@ public class BadgePreferenceControllerTest {
         appRow.showBadge = false;
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BADGING, 1);
 
         assertFalse(mController.isAvailable());
@@ -180,7 +179,7 @@ public class BadgePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null,
-                mock(RestrictedLockUtils.EnforcedAdmin.class));
+                null, null, mock(RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -194,7 +193,7 @@ public class BadgePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("");
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -207,7 +206,7 @@ public class BadgePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canShowBadge()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -215,7 +214,7 @@ public class BadgePreferenceControllerTest {
         assertTrue(pref.isChecked());
 
         when(channel.canShowBadge()).thenReturn(false);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(pref);
 
         assertFalse(pref.isChecked());
@@ -225,14 +224,14 @@ public class BadgePreferenceControllerTest {
     public void testUpdateState_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
         assertTrue(pref.isChecked());
 
         appRow.showBadge = false;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         mController.updateState(pref);
         assertFalse(pref.isChecked());
@@ -245,7 +244,7 @@ public class BadgePreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         channel.setShowBadge(false);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -264,7 +263,7 @@ public class BadgePreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         channel.setShowBadge(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -280,7 +279,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_on_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = false;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -297,7 +296,7 @@ public class BadgePreferenceControllerTest {
     public void testOnPreferenceChange_off_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.showBadge = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

@@ -28,7 +28,7 @@ public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     protected void onProcessArguments(Bundle arguments) {
         super.onProcessArguments(arguments);
-        mToggleSwitchWasInitiallyChecked = mToggleSwitch.isChecked();
+        mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 
     @Override
@@ -39,10 +39,10 @@ public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER,
-                    mToggleSwitch.isChecked());
+                    mToggleServiceDividerSwitchPreference.isChecked());
         }
 
         super.onStop();

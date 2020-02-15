@@ -37,7 +37,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.HeaderPreferenceController;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -88,7 +87,7 @@ public class HeaderPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -96,7 +95,7 @@ public class HeaderPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -104,20 +103,20 @@ public class HeaderPreferenceControllerTest {
     public void testGetLabel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertEquals(appRow.label, mController.getLabel());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertEquals(group.getName(), mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, group, null);
+        mController.onResume(appRow, channel, group, null, null, null);
         assertEquals(channel.getName(), mController.getLabel());
 
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
-        mController.onResume(appRow, defaultChannel, null, null);
+        mController.onResume(appRow, defaultChannel, null, null, null, null);
         assertEquals(appRow.label, mController.getLabel());
     }
 
@@ -125,25 +124,25 @@ public class HeaderPreferenceControllerTest {
     public void testGetSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertEquals("", mController.getSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertEquals(appRow.label, mController.getSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, group, null);
+        mController.onResume(appRow, channel, group, null, null, null);
         assertTrue(mController.getSummary().toString().contains(group.getName()));
         assertTrue(mController.getSummary().toString().contains(appRow.label));
 
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.getSummary().toString().contains(group.getName()));
         assertTrue(mController.getSummary().toString().contains(appRow.label));
 
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
-        mController.onResume(appRow, defaultChannel, null, null);
+        mController.onResume(appRow, defaultChannel, null, null, null, null);
         assertEquals("", mController.getSummary());
     }
 }
