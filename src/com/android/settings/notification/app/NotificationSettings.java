@@ -33,6 +33,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -203,7 +204,8 @@ abstract public class NotificationSettings extends DashboardFragment {
         mConversationInfo = mBackend.getConversationInfo(
                 mContext, mPkg, mUid, mChannel.getConversationId());
         if (mConversationInfo != null) {
-            mConversationDrawable = mBackend.getConversationDrawable(mContext, mConversationInfo);
+            mConversationDrawable = mBackend.getConversationDrawable(
+                    mContext, mConversationInfo, mAppRow.pkg, mAppRow.uid);
         }
     }
 
