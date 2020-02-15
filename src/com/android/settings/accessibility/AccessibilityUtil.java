@@ -98,7 +98,6 @@ final class AccessibilityUtil {
     /** Denotes the accessibility enabled status */
     @Retention(RetentionPolicy.SOURCE)
     public @interface State {
-        int UNKNOWN = -1;
         int OFF = 0;
         int ON = 1;
     }
