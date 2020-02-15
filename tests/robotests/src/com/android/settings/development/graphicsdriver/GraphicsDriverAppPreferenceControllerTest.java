@@ -56,8 +56,9 @@ import java.util.Arrays;
 public class GraphicsDriverAppPreferenceControllerTest {
 
     private static final int DEFAULT = 0;
-    private static final int GAME_DRIVER = 1;
-    private static final int SYSTEM = 2;
+    private static final int PRERELEASE_DRIVER = 1;
+    private static final int GAME_DRIVER = 2;
+    private static final int SYSTEM = 3;
     private static final String TEST_APP_NAME = "testApp";
     private static final String TEST_PKG_NAME = "testPkg";
 
@@ -116,7 +117,7 @@ public class GraphicsDriverAppPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_gameDriverOff_conditionallyUnavailable() {
+    public void getAvailability_graphicsDriverOff_conditionallyUnavailable() {
         loadDefaultConfig();
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
 
@@ -163,7 +164,7 @@ public class GraphicsDriverAppPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_gameDriverOff_notVisible() {
+    public void updateState_graphicsDriverOff_notVisible() {
         Settings.Global.putInt(mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_OFF);
         loadDefaultConfig();
 
@@ -213,6 +214,8 @@ public class GraphicsDriverAppPreferenceControllerTest {
         assertThat(preference.getDialogTitle()).isEqualTo(mDialogTitle);
         assertThat(preference.getEntries()).isEqualTo(mValueList);
         assertThat(preference.getEntryValues()).isEqualTo(mValueList);
+        assertThat(preference.getEntry()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
         assertThat(preference.getSummary()).isEqualTo(mPreferencePrereleaseDriver);
     }
 
@@ -244,6 +247,23 @@ public class GraphicsDriverAppPreferenceControllerTest {
         assertThat(preference.getSummary()).isEqualTo(mValueList[DEFAULT]);
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_IN_APPS))
                 .isEqualTo("");
+        assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS))
+                .isEqualTo("");
+    }
+
+    @Test
+    public void onPreferenceChange_selectPRERELEASE_DRIVER_shouldUpdateAttrAndSettingsGlobal() {
+        loadDefaultConfig();
+        final ListPreference preference =
+                mController.createListPreference(mContext, TEST_PKG_NAME, TEST_APP_NAME);
+        mController.onPreferenceChange(preference, mValueList[PRERELEASE_DRIVER]);
+
+        assertThat(preference.getEntry()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getValue()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(preference.getSummary()).isEqualTo(mValueList[PRERELEASE_DRIVER]);
+        assertThat(Settings.Global.getString(mResolver,
+                Settings.Global.GAME_DRIVER_PRERELEASE_OPT_IN_APPS))
+                .isEqualTo(TEST_PKG_NAME);
         assertThat(Settings.Global.getString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS))
                 .isEqualTo("");
     }
@@ -306,6 +326,8 @@ public class GraphicsDriverAppPreferenceControllerTest {
         Settings.Global.putString(mResolver, Settings.Global.GAME_DRIVER_OPT_OUT_APPS, optOut);
 
         mController = new GraphicsDriverAppPreferenceController(mContext, "testKey");
+        mController.mEntryList = mContext.getResources().getStringArray(
+                R.array.graphics_driver_app_preference_values);
         mGroup = spy(new PreferenceCategory(mContext));
         final PreferenceManager preferenceManager = new PreferenceManager(mContext);
         when(mGroup.getContext()).thenReturn(mContext);
