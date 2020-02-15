@@ -88,9 +88,6 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
         if (card.getRankingScore() < 0) {
             return false;
         }
-        if (card.isCustomCard()) {
-            return true;
-        }
 
         final Uri uri = card.getSliceUri();
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
