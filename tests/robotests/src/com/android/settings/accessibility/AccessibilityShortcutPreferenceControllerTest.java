@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.AccessibilityUtil.State.UNKNOWN;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -77,7 +76,7 @@ public class AccessibilityShortcutPreferenceControllerTest {
         mController.setChecked(true);
 
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, UNKNOWN,
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, OFF,
                 UserHandle.USER_CURRENT)).isEqualTo(ON);
     }
 
@@ -86,7 +85,7 @@ public class AccessibilityShortcutPreferenceControllerTest {
         mController.setChecked(false);
 
         assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, UNKNOWN,
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, ON,
                 UserHandle.USER_CURRENT)).isEqualTo(OFF);
     }
 }

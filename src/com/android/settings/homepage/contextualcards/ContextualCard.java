@@ -115,10 +115,6 @@ public class ContextualCard {
         return mIsLargeCard;
     }
 
-    boolean isCustomCard() {
-        return TextUtils.isEmpty(mSliceUri);
-    }
-
     public int getViewType() {
         return mViewType;
     }
