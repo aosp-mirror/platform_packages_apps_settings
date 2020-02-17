@@ -201,8 +201,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
 
         // Set initial state based on SharedPreferences value.
         onSharedPreferenceChanged(mSharedPreferences, KEY_ENABLE_WIFI_TETHERING);
-
-        // TODO(b/147325229): Hide advanced settings like security and ap band.
     }
 
     @Override
@@ -318,12 +316,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    public void onExpandButtonClick() {
-        super.onExpandButtonClick();
-        // TODO(b/147325229): Display hidden advanced settings like security and ap band.
     }
 
     @Override
