@@ -61,6 +61,20 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         DataSaverBackend.Listener, LifecycleObserver,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private OnTetherStateUpdateListener mListener;
+
+    /**
+     * Interface definition for a callback to be invoked when the tethering has been updated.
+     */
+    public interface OnTetherStateUpdateListener {
+        /**
+         * Called when the tethering state has changed.
+         *
+         * @param isTethering The new tethering state.
+         */
+        void onTetherStateUpdated(boolean isTethering);
+    }
+
     private static final String TAG = "TetherEnabler";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -135,6 +149,10 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         mContext.unregisterReceiver(mTetherChangeReceiver);
     }
 
+    public void setListener(@Nullable OnTetherStateUpdateListener listener) {
+        mListener = listener;
+    }
+
     @VisibleForTesting
     void updateState(@Nullable String[] tethered) {
         boolean isTethering = tethered == null ? isTethering() : isTethering(tethered);
@@ -143,6 +161,9 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         }
         setSwitchCheckedInternal(isTethering);
         mSwitchWidgetController.setEnabled(!mDataSaverEnabled);
+        if (mListener != null) {
+            mListener.onTetherStateUpdated(isTethering);
+        }
     }
 
     private void setSwitchCheckedInternal(boolean checked) {
