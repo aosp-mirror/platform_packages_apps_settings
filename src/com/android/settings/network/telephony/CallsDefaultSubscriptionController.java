@@ -28,7 +28,7 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     protected SubscriptionInfo getDefaultSubscriptionInfo() {
-        return mManager.getDefaultVoiceSubscriptionInfo();
+        return mManager.getActiveSubscriptionInfo(getDefaultSubscriptionId());
     }
 
     @Override

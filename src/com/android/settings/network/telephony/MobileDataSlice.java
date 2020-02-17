@@ -147,8 +147,8 @@ public class MobileDataSlice implements CustomSliceable {
     }
 
     protected static int getDefaultSubscriptionId(SubscriptionManager subscriptionManager) {
-        final SubscriptionInfo defaultSubscription =
-                subscriptionManager.getDefaultDataSubscriptionInfo();
+        final SubscriptionInfo defaultSubscription = subscriptionManager.getActiveSubscriptionInfo(
+                subscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription == null) {
             return SubscriptionManager.INVALID_SUBSCRIPTION_ID; // No default subscription
         }
@@ -157,8 +157,8 @@ public class MobileDataSlice implements CustomSliceable {
     }
 
     private CharSequence getSummary() {
-        final SubscriptionInfo defaultSubscription =
-                mSubscriptionManager.getDefaultDataSubscriptionInfo();
+        final SubscriptionInfo defaultSubscription = mSubscriptionManager.getActiveSubscriptionInfo(
+                mSubscriptionManager.getDefaultDataSubscriptionId());
         if (defaultSubscription == null) {
             return null; // no summary text
         }
