@@ -63,7 +63,8 @@ public class NotificationHistoryAdapter extends
         holder.setTitle(hn.getTitle());
         holder.setSummary(hn.getText());
         holder.setPostedTime(hn.getPostedTimeMs());
-        holder.addOnClick(hn.getPackage(), hn.getUserId(), hn.getChannelId());
+        holder.addOnClick(hn.getPackage(), hn.getUserId(), hn.getChannelId(),
+                hn.getConversationId());
     }
 
     @Override

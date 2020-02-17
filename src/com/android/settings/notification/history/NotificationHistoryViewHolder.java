@@ -18,6 +18,7 @@ package com.android.settings.notification.history;
 
 import static android.provider.Settings.EXTRA_APP_PACKAGE;
 import static android.provider.Settings.EXTRA_CHANNEL_ID;
+import static android.provider.Settings.EXTRA_CONVERSATION_ID;
 
 import android.content.Intent;
 import android.os.UserHandle;
@@ -61,11 +62,12 @@ public class NotificationHistoryViewHolder extends RecyclerView.ViewHolder {
         mTime.setTime(postedTime);
     }
 
-    void addOnClick(String pkg, int userId, String channelId) {
+    void addOnClick(String pkg, int userId, String channelId, String conversationId) {
         itemView.setOnClickListener(v -> {
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                     .putExtra(EXTRA_APP_PACKAGE, pkg)
-                    .putExtra(EXTRA_CHANNEL_ID, channelId);
+                    .putExtra(EXTRA_CHANNEL_ID, channelId)
+                    .putExtra(EXTRA_CONVERSATION_ID, conversationId);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             itemView.getContext().startActivityAsUser(intent, UserHandle.of(userId));
         });
