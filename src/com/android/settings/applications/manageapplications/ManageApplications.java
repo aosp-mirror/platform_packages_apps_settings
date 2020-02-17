@@ -43,6 +43,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -143,7 +144,7 @@ public class ManageApplications extends InstrumentedFragment
         implements View.OnClickListener, OnItemSelectedListener, SearchView.OnQueryTextListener {
 
     static final String TAG = "ManageApplications";
-    static final boolean DEBUG = false;
+    static final boolean DEBUG = Build.IS_DEBUGGABLE;
 
     // Intent extras.
     public static final String EXTRA_CLASSNAME = "classname";
@@ -177,8 +178,6 @@ public class ManageApplications extends InstrumentedFragment
     public static final int STORAGE_TYPE_MUSIC = 1;
     public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
     public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
-
-    private static final int NO_USER_SPECIFIED = -1;
 
     /**
      * Intents with action {@code android.settings.MANAGE_APP_OVERLAY_PERMISSION}
@@ -461,19 +460,8 @@ public class ManageApplications extends InstrumentedFragment
         pinnedHeader.addView(mSpinnerHeader, 0);
 
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
-        mFilterAdapter.enableFilter(appFilterRegistry.getDefaultFilterType(mListType));
-
-        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
-        if (mIsWorkOnly) {
-            compositeFilter = new CompoundFilter(compositeFilter, ApplicationsState.FILTER_WORK);
-        }
-        if (mIsPersonalOnly) {
-            compositeFilter = new CompoundFilter(compositeFilter,
-                    ApplicationsState.FILTER_PERSONAL);
-        }
-        if (compositeFilter != null) {
-            mApplications.setCompositeFilter(compositeFilter);
-        }
+        final int filterType = appFilterRegistry.getDefaultFilterType(mListType);
+        mFilterAdapter.enableFilter(filterType);
 
         if (mListType == LIST_TYPE_MAIN) {
             if (UserManager.get(getActivity()).getUserProfiles().size() > 1 && !mIsWorkOnly
@@ -491,6 +479,8 @@ public class ManageApplications extends InstrumentedFragment
         if (mListType == LIST_TYPE_HIGH_POWER) {
             mFilterAdapter.enableFilter(FILTER_APPS_POWER_WHITELIST_ALL);
         }
+
+        setCompositeFilter();
     }
 
     @VisibleForTesting
@@ -511,11 +501,8 @@ public class ManageApplications extends InstrumentedFragment
             return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
         } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
             return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
-        } else {
-            final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
-            return appFilterRegistry.get(
-                    appFilterRegistry.getDefaultFilterType(listType)).getFilter();
         }
+        return null;
     }
 
     @Override
@@ -613,6 +600,21 @@ public class ManageApplications extends InstrumentedFragment
                 mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
             }
         }
+    }
+
+    private void setCompositeFilter() {
+        AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (compositeFilter == null) {
+            compositeFilter = mFilter.getFilter();
+        }
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, ApplicationsState.FILTER_WORK);
+        }
+        if (mIsPersonalOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter,
+                    ApplicationsState.FILTER_PERSONAL);
+        }
+        mApplications.setCompositeFilter(compositeFilter);
     }
 
     // utility method used to start sub activity
@@ -823,6 +825,7 @@ public class ManageApplications extends InstrumentedFragment
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mFilter = mFilterAdapter.getFilter(position);
+        setCompositeFilter();
         mApplications.setFilter(mFilter);
 
         if (DEBUG) {
@@ -1227,14 +1230,10 @@ public class ManageApplications extends InstrumentedFragment
                 comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
             }
 
-            filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
-            AppFilter finalFilterObj = filterObj;
+            final AppFilter finalFilterObj = new CompoundFilter(filterObj,
+                    ApplicationsState.FILTER_NOT_HIDE);
             ThreadUtils.postOnBackgroundThread(() -> {
-                final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
-                        comparatorObj, false);
-                if (entries != null) {
-                    ThreadUtils.postOnMainThread(() -> onRebuildComplete(entries));
-                }
+                mSession.rebuild(finalFilterObj, comparatorObj, false);
             });
         }
 
@@ -1284,7 +1283,7 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> entries) {
             if (DEBUG) {
-                Log.d(TAG, "onRebuildComplete");
+                Log.d(TAG, "onRebuildComplete size=" + entries.size());
             }
             final int filterType = mAppFilter.getFilterType();
             if (filterType == FILTER_APPS_POWER_WHITELIST ||
