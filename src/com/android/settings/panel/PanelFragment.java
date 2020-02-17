@@ -201,6 +201,9 @@ public class PanelFragment extends Fragment {
             mTitleIcon.setImageIcon(icon.toIcon(getContext()));
             mHeaderTitle.setText(mPanel.getTitle());
             mHeaderSubtitle.setText(mPanel.getSubTitle());
+            if (mPanel.getHeaderIconIntent() != null) {
+                mTitleIcon.setOnClickListener(getHeaderIconListener());
+            }
         }
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
@@ -379,6 +382,14 @@ public class PanelFragment extends Fragment {
         return (v) -> {
             mPanelClosedKey = PanelClosedKeys.KEY_DONE;
             getActivity().finish();
+        };
+    }
+
+    @VisibleForTesting
+    View.OnClickListener getHeaderIconListener() {
+        return (v) -> {
+            final FragmentActivity activity = getActivity();
+            activity.startActivity(mPanel.getHeaderIconIntent());
         };
     }
 }
