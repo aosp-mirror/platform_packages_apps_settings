@@ -59,6 +59,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private LockPatternUtils mLockPatternUtils;
     private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
+    private static final String EMPTY_STRING = "";
+
     private final SettingsContentObserver mSettingsContentObserver =
             new SettingsContentObserver(new Handler()) {
                 @Override
@@ -84,7 +86,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLockPatternUtils = new LockPatternUtils(getActivity());
+        mLockPatternUtils = new LockPatternUtils(getPrefContext());
     }
 
     @Override
@@ -105,11 +107,11 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     // example, before JellyBean MR2 the user was granting the explore by touch
     // one.
     private AccessibilityServiceInfo getAccessibilityServiceInfo() {
-        List<AccessibilityServiceInfo> serviceInfos = AccessibilityManager.getInstance(
-                getActivity()).getInstalledAccessibilityServiceList();
-        final int serviceInfoCount = serviceInfos.size();
-        for (int i = 0; i < serviceInfoCount; i++) {
-            AccessibilityServiceInfo serviceInfo = serviceInfos.get(i);
+        final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
+                getPrefContext()).getInstalledAccessibilityServiceList();
+
+        for (int i = 0, count = infos.size(); i < count; i++) {
+            AccessibilityServiceInfo serviceInfo = infos.get(i);
             ResolveInfo resolveInfo = serviceInfo.getResolveInfo();
             if (mComponentName.getPackageName().equals(resolveInfo.serviceInfo.packageName)
                     && mComponentName.getClassName().equals(resolveInfo.serviceInfo.name)) {
@@ -191,7 +193,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final String switchBarText = (info == null) ? "" :
                 getString(R.string.accessibility_service_master_switch_title,
-                info.getResolveInfo().loadLabel(getPackageManager()));
+                        info.getResolveInfo().loadLabel(getPackageManager()));
         switchPreference.setTitle(switchBarText);
     }
 

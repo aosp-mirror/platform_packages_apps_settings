@@ -16,12 +16,119 @@
 
 package com.android.settings.accessibility;
 
+import android.accessibilityservice.AccessibilityShortcutInfo;
+import android.app.ActivityOptions;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.UserHandle;
+import android.util.Log;
+import android.view.View;
+import android.view.accessibility.AccessibilityManager;
+
+import androidx.preference.SwitchPreference;
+
+import com.android.settings.R;
+
+import java.util.List;
+
 /** Fragment for providing open activity button. */
 public class LaunchAccessibilityActivityPreferenceFragment extends
         ToggleFeaturePreferenceFragment {
+    private static final String TAG = "LaunchA11yActivity";
+    private static final String EMPTY_STRING = "";
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mToggleServiceDividerSwitchPreference.setSwitchVisibility(View.GONE);
+    }
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        // TODO(b/142531433): Added in next CL.
+        launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
+    }
+
+    @Override
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            final boolean checked = ((DividerSwitchPreference) preference).isChecked();
+            onPreferenceToggled(mPreferenceKey, checked);
+            return false;
+        });
+    }
+
+    @Override
+    protected void onProcessArguments(Bundle arguments) {
+        super.onProcessArguments(arguments);
+
+        mComponentName = arguments.getParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME);
+        final ActivityInfo info = getAccessibilityShortcutInfo().getActivityInfo();
+        mPackageName = info.loadLabel(getPackageManager()).toString();
+
+        // Settings animated image.
+        final int animatedImageRes = arguments.getInt(
+                AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(mComponentName.getPackageName())
+                .appendPath(String.valueOf(animatedImageRes))
+                .build();
+
+        // Settings html description.
+        mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
+    }
+
+    @Override
+    public void onSettingsClicked(ShortcutPreference preference) {
+        super.onSettingsClicked(preference);
+        showDialog(DialogEnums.EDIT_SHORTCUT);
+    }
+
+    @Override
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        final AccessibilityShortcutInfo info = getAccessibilityShortcutInfo();
+        final String switchBarText = (info == null) ? EMPTY_STRING : getString(
+                R.string.accessibility_service_master_open_title,
+                info.getActivityInfo().loadLabel(getPackageManager()));
+
+        switchPreference.setTitle(switchBarText);
+    }
+
+    // IMPORTANT: Refresh the info since there are dynamically changing capabilities.
+    private AccessibilityShortcutInfo getAccessibilityShortcutInfo() {
+        final List<AccessibilityShortcutInfo> infos = AccessibilityManager.getInstance(
+                getPrefContext()).getInstalledAccessibilityShortcutListAsUser(getPrefContext(),
+                UserHandle.myUserId());
+
+        for (int i = 0, count = infos.size(); i < count; i++) {
+            AccessibilityShortcutInfo shortcutInfo = infos.get(i);
+            ActivityInfo activityInfo = shortcutInfo.getActivityInfo();
+            if (mComponentName.getPackageName().equals(activityInfo.packageName)
+                    && mComponentName.getClassName().equals(activityInfo.name)) {
+                return shortcutInfo;
+            }
+        }
+        return null;
+    }
+
+    private void launchShortcutTargetActivity(int displayId, ComponentName name) {
+        final Intent intent = new Intent();
+        final Bundle bundle = ActivityOptions.makeBasic().setLaunchDisplayId(displayId).toBundle();
+
+        intent.setComponent(name);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        try {
+            final int userId = UserHandle.myUserId();
+            getPrefContext().startActivityAsUser(intent, bundle, UserHandle.of(userId));
+        } catch (ActivityNotFoundException ignore) {
+            // ignore the exception
+            Log.w(TAG, "Target activity not found.");
+        }
     }
 }
