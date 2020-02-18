@@ -147,4 +147,11 @@
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings" />
 
+    <SwitchPreference
+        android:order="90"
+        android:key="confirm_sim_deletion"
+        android:title="@string/confirm_sim_deletion_title"
+        android:summary="@string/confirm_sim_deletion_description"
+        settings:controller="com.android.settings.security.ConfirmSimDeletionPreferenceController"/>
+
 </PreferenceScreen>
