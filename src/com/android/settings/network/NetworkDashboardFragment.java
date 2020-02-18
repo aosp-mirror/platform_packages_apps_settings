@@ -66,7 +66,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
         use(AirplaneModePreferenceController.class).setFragment(this);
-        use(AllInOneTetherPreferenceController.class).init(getSettingsLifecycle());
+        getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
     }
 
     @Override

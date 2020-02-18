@@ -17,6 +17,7 @@
 package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
@@ -346,16 +347,23 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         return result;
     }
 
-    // TODO(b/143055685):use category to determine whether they are sticky.
     private List<ContextualCard> getCardsWithStickyViewType(List<ContextualCard> cards) {
         final List<ContextualCard> result = new ArrayList<>(cards);
         int replaceCount = 0;
         for (int index = 0; index < result.size(); index++) {
+            final ContextualCard card = cards.get(index);
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2)) {
+                if (card.getCategory() == STICKY_VALUE) {
+                    result.set(index, card.mutate().setViewType(
+                            SliceContextualCardRenderer.VIEW_TYPE_STICKY).build());
+                }
+                continue;
+            }
+
             if (replaceCount > STICKY_CARDS.size() - 1) {
                 break;
             }
 
-            final ContextualCard card = cards.get(index);
             if (card.getCardType() != ContextualCard.CardType.SLICE) {
                 continue;
             }
