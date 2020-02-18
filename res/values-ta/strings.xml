@@ -127,7 +127,7 @@
     <string name="bluetooth_map_request" msgid="8664081227240707479">"செய்திக்கான அணுகல் கோரிக்கை"</string>
     <string name="bluetooth_map_acceptance_dialog_text" msgid="2647611490952377156">"உங்கள் செய்திகளை %1$s அணுக விரும்புகிறது. %2$s க்கு அணுகலை வழங்கவா?"</string>
     <string name="bluetooth_sap_request" msgid="473439406287008397">"SIM அணுகல் கோரிக்கை"</string>
-    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> உங்கள் சிம் கார்டை அணுக விரும்புகிறது. சிம் கார்டிற்கு அணுகல் வழங்குவது இணைப்பின் போது, உங்கள் சாதனத்தின் தரவு இணைப்பை முடக்கும். <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>க்கு அணுகல் வழங்கவும்"</string>
+    <string name="bluetooth_sap_acceptance_dialog_text" msgid="2849083276356078655">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> உங்கள் சிம் கார்டை அணுக விரும்புகிறது. சிம் கார்டிற்கு அணுகல் வழங்குவது இணைப்பின் போது, உங்கள் சாதனத்தின் டேட்டா இணைப்பை முடக்கும். <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>க்கு அணுகல் வழங்கவும்"</string>
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"பிற சாதனங்களில் “<xliff:g id="DEVICE_NAME">^1</xliff:g>” எனத் தெரியும்"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"பிற சாதனங்களுடன் இணைக்க, புளூடூத்தை ஆன் செய்யவும்."</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"உங்கள் சாதனங்கள்"</string>
@@ -238,7 +238,7 @@
     <string name="roaming" msgid="3055365654530847985">"ரோமிங்"</string>
     <string name="roaming_enable" msgid="7845716016861535340">"ரோமிங்கின் போது டேட்டா சேவைகளுடன் இணை"</string>
     <string name="roaming_disable" msgid="729512894708689604">"ரோமிங்கின் போது டேட்டா சேவைகளுடன் இணை"</string>
-    <string name="roaming_reenable_message" msgid="5150423860521673540">"உங்களுடைய உள்ளூர் நெட்வொர்க்கில் தரவு ரோமிங்கை முடக்கியுள்ளதால் உங்கள் தரவு இணைப்பை இழந்துவிட்டீர்கள்."</string>
+    <string name="roaming_reenable_message" msgid="5150423860521673540">"உங்களுடைய உள்ளூர் நெட்வொர்க்கில் தரவு ரோமிங்கை முடக்கியுள்ளதால் உங்கள் டேட்டா இணைப்பை இழந்துவிட்டீர்கள்."</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"இதை இயக்கவும்"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ரோமிங் கட்டணங்கள் விதிக்கப்படக்கூடும்."</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="5629953315019604726">"டேட்டா ரோமிங்கை அனுமதிக்கும்போது ரோமிங் கட்டணங்கள் விதிக்கப்படக்கூடும்.\n\nஇந்த டேப்லெட்டில் அனைத்துப் பயனர்களுக்கும் இந்த அமைப்பு பொருந்தும்."</string>
@@ -921,10 +921,8 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"வைஃபை கடவுச்சொல்: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ஹாட்ஸ்பாட் கடவுச்சொல்: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"தானாக இணைத்தல்"</string>
-    <!-- no translation found for wifi_auto_connect_summary (5383749408911542382) -->
-    <skip />
-    <!-- no translation found for wifi_auto_connect_summary (5209799194164396401) -->
-    <skip />
+    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"இந்த நெட்வொர்க்கின் அருகில் இருக்கும்போது மொபலைத் தானாக இணைவதற்கு அனுமதிக்கும்"</string>
+    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"இந்த நெட்வொர்க்கின் அருகில் இருக்கும்போது டேப்லெட்டைத் தானாக இணைவதற்கு அனுமதிக்கும்"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"சாதனத்தைச் சேர்க்கவும்"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"நெட்வொர்க்கில் சாதனத்தைச் சேர்க்க QR குறியீட்டைப் பயன்படுத்தவும்"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR குறியீடு சரியான வடிவமில்லை"</string>
@@ -1056,8 +1054,7 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK ஹாட்ஸ்பாட்"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"இந்த நெட்வொர்க்கை சேமிக்க வேண்டுமா?"</string>
-    <!-- no translation found for wifi_add_app_single_network_summary (6881712878537666626) -->
-    <skip />
+    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"உங்கள் மொபைலில் ஒரு நெட்வொர்க்கை <xliff:g id="APPNAME">%1$s</xliff:g> சேமிக்க விரும்புகிறது"</string>
     <!-- no translation found for wifi_add_app_single_network_summary (8455616967601552440) -->
     <skip />
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"சேமிக்கிறது…"</string>
@@ -1065,8 +1062,7 @@
     <!-- no translation found for wifi_add_app_network_save_failed_summary (7223817782309294652) -->
     <skip />
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"நெட்வொர்க்குகளைச் சேமிக்கவா?"</string>
-    <!-- no translation found for wifi_add_app_networks_summary (2670215712788515167) -->
-    <skip />
+    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"உங்கள் மொபைலில் இந்த நெட்வொர்க்குகளை <xliff:g id="APPNAME">%1$s</xliff:g> சேமிக்க விரும்புகிறது"</string>
     <!-- no translation found for wifi_add_app_networks_summary (2088967184512169910) -->
     <skip />
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> நெட்வொர்க்குகள் சேமிக்கப்படுகின்றன…"</string>
@@ -1253,9 +1249,9 @@
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"வால்பேப்பர்"</string>
     <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"ஸ்டைல்கள் &amp; வால்பேப்பர்கள்"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"இயல்பு"</string>
-    <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"தனிப்பயன்"</string>
+    <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"பிரத்தியேகம்"</string>
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"வால்பேப்பரை மாற்று"</string>
-    <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"திரையைத் தனிப்பயனாக்கு"</string>
+    <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"திரையைப் பிரத்தியேகமாக்கு"</string>
     <string name="wallpaper_settings_fragment_title" msgid="8445963841717633149">"வால்பேப்பர் தேர்வு"</string>
     <!-- no translation found for style_suggestion_title (1213747484782364775) -->
     <skip />
@@ -1637,6 +1633,12 @@
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"ஹாட்ஸ்பாட் இயக்கத்திலுள்ளது"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"இணைப்பு முறை"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"டேட்டா சேமிப்பான் இயக்கப்பட்டிருக்கும் போது, இணைக்கவோ போர்ட்டபிள் ஹாட்ஸ்பாட்டுகளைப் பயன்படுத்தவோ முடியாது"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_usb_on (220439059794714583) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_on (4711723299880116345) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_on (5258774769658150180) -->
+    <skip />
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB டெதெரிங்"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"USB மூலம் ஃபோனின் இண்டர்நெட்டைப் பகிரவும்"</string>
@@ -2094,7 +2096,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"திரையில் பெரிதாக்குவதை இயக்கும்"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"அளவை மாற்ற, 3 முறை தட்டவும்"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"திரையைப் பெரிதாக்க, பட்டனைத் தட்டவும்"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary (344859130549374147) -->
+    <!-- no translation found for accessibility_screen_magnification_summary (7617931632990040045) -->
     <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"’பெரிதாக்கல்’ அம்சம் ஆன் செய்யப்பட்டுள்ளபோது திரையைப் பெரிதாக்கிப் பார்க்கலாம்.\n\n"<b>"அதற்கு "</b>", இந்த அம்சத்தைத் தொடங்கி திரையில் எங்கு வேண்டுமானாலும் தட்டவும்.\n"<ul><li>"ஸ்க்ரோல் செய்ய இரண்டு அல்லது மேற்பட்ட விரல்களில் இழுக்கவும்"</li>\n<li>"அளவை மாற்ற இரண்டு அல்லது மேற்பட்ட விரல்களில் பின்ச் செய்யவும்"</li></ul>\n\n<b>"தற்காலிகமாகப் பெரிதாக்க"</b>", இந்த அம்சத்தைத் தொடங்கி திரையில் எங்கு வேண்டுமானாலும் தொட்டுப் பிடிக்கவும்.\n"<ul><li>"திரையில் எங்கு வேண்டுமானாலும் செல்ல இழுக்கவும்"</li>\n<li>"சிறிதாக்க விரல்களால் பின்ச் செய்து மேலே இழுக்கவும்"</li></ul>\n\n"கீபோர்டிலோ வழிசெலுத்தல் பட்டியையோ பெரிதாக்க இயலாது."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"திறக்க அணுகல்தன்மை பட்டனைப் பயன்படுத்துதல்"</string>
@@ -2161,7 +2163,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"வண்ணத்தின் நேர்மாறான முறை"</string>
     <!-- no translation found for accessibility_display_inversion_switch_title (7458595722552743503) -->
     <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (9175555611774009143) -->
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (7230891925207955620) -->
     <skip />
     <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"தானியக்க கிளிக் (இருப்பு நேரம்)"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"நீங்கள் மவுஸைப் பயன்படுத்துகிறீர்கள் எனில், ஒரு குறிப்பிட்ட நேரத்திற்குக் கர்சர் நகராமல் இருக்கும்போது, அது தானாகவே என்ன செய்யவேண்டுமென அமைத்துக்கொள்ளலாம்."</string>
@@ -2177,6 +2179,8 @@
     <!-- no translation found for accessibility_autoclick_shorter_desc (7631013255724544348) -->
     <skip />
     <!-- no translation found for accessibility_autoclick_longer_desc (2566025502981487443) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_seekbar_desc (2370077188725433271) -->
     <skip />
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"அதிர்வு &amp; ஹாப்டிக் வலிமை"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"அறிவிப்பு அதிர்வுகள்"</string>
@@ -2215,26 +2219,11 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"டியூட்டரானோமலி"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"பிரோடனோமலி"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ட்ரைடானோமலி"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
-      <item quantity="other">மிகவும் குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
-      <item quantity="one">மிகவும் குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5067805618144149445">
-      <item quantity="other">மிக குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
-      <item quantity="one">மிக குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="416055324409474880">
-      <item quantity="other">குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
-      <item quantity="one">குறுகிய தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="556424440912669213">
-      <item quantity="other">அதிக தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
-      <item quantity="one">அதிக தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="4474904810885802549">
-      <item quantity="other">மிக அதிக தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> மிவி)</item>
-      <item quantity="one">மிக அதிக தாமதம் (<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> மிவி)</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (8226135362782015387) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (4440667435012753839) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (1627969745093865560) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (1126608261854734991) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (6624972454933133135) -->
     <!-- no translation found for accessibilty_autoclick_delay_unit_second (8132935106204075064) -->
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"ரிங்: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, அறிவிப்பு: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, தொடுதல்: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"ஒலி &amp; அறிவிப்பு அதிர்வு ஆஃப் செய்யப்பட்டது"</string>
@@ -2253,7 +2242,7 @@
     <string name="captioning_locale" msgid="5533303294290661590">"மொழி"</string>
     <string name="captioning_text_size" msgid="8039448543171463017">"உரையின் அளவு"</string>
     <string name="captioning_preset" msgid="4174276086501638524">"தலைப்பின் நடை"</string>
-    <string name="captioning_custom_options_title" msgid="3858866498893566351">"தனிப்பயன் விருப்பங்கள்"</string>
+    <string name="captioning_custom_options_title" msgid="3858866498893566351">"பிரத்தியேக விருப்பங்கள்"</string>
     <string name="captioning_background_color" msgid="5231412761368883107">"பின்புல வண்ணம்"</string>
     <string name="captioning_background_opacity" msgid="6453738649182382614">"பின்னணி ஒளிபுகாத்தன்மை"</string>
     <string name="captioning_window_color" msgid="1406167274530183119">"தலைப்பு சாளரத்தின் வண்ணம்"</string>
@@ -2707,6 +2696,7 @@
     <string name="notification_history_today" msgid="8776595977526590103">"இன்று"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"ஒத்திவைக்கப்பட்டவை"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"சமீபத்தில் நிராகரிக்கப்பட்டது"</string>
+    <!-- no translation found for notification_history_count (1859304685071321991) -->
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"அழைப்பின் ரிங்டோன் &amp; அதிர்வு"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"நெட்வொர்க் விவரங்கள்"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"ஒத்திசைவு இயக்கப்பட்டது"</string>
@@ -3026,9 +3016,9 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"புதிய பயனரைச் சேர்க்கிறது…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"பயனரை நீக்கு"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"நீக்கு"</string>
-    <string name="user_guest" msgid="4545590092001460388">"வேறொருவர்"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"அழைக்கப்பட்டவரை அகற்று"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"அழைக்கப்பட்டவரை அகற்றவா?"</string>
+    <string name="user_guest" msgid="4545590092001460388">"கெஸ்ட்"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"கெஸ்ட்டை அகற்று"</string>
+    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"கெஸ்ட்டை அகற்றவா?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"இந்த அமர்வின் எல்லா பயன்பாடுகளும், தரவும் நீக்கப்படும்."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"அகற்று"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ஃபோன் அழைப்புகளை இயக்கு"</string>
@@ -3198,7 +3188,7 @@
     <string name="keywords_display" msgid="874738809280751745">"திரை, டச்ஸ்கிரீன்"</string>
     <string name="keywords_display_brightness_level" msgid="850742707616318056">"ஒளிமங்கல் திரை, டச்ஸ்கிரீன், பேட்டரி, பிரகாசம்"</string>
     <string name="keywords_display_night_display" msgid="4711054330804250058">"ஒளிமங்கல் திரை, இரவு, மென்னிறம், இரவு ஷிஃப்ட், ஒளிர்வு, திரை வண்ணம், நிறம், வண்ணம்"</string>
-    <string name="keywords_display_wallpaper" msgid="8478137541939526564">"பின்னணி, தனிப்படுத்து, தனிப்பயனாக்கு திரை"</string>
+    <string name="keywords_display_wallpaper" msgid="8478137541939526564">"பின்னணி, தனிப்படுத்து, பிரத்தியேகமாக்கு திரை"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"உரை அளவு"</string>
     <string name="keywords_display_cast_screen" msgid="2572331770299149370">"திரையில் காட்டு, அலைபரப்பு, திரையை மிரரிங் செய், திரையைக் காட்டு, திரையைப் பகிர், திரைப் பகிர்தல், மிரரிங், திரையை அலைபரப்பு, திரை அலைபரப்புதல்"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"இடம், டிஸ்க், வட்டு இயக்ககம், சாதனப் பயன்பாடு"</string>
@@ -3282,12 +3272,9 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"இயல்பு அறிவிப்பு ஒலி"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"இயல்பு அலார ஒலி"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"அழைப்புகளுக்கு அதிர்வு"</string>
-    <!-- no translation found for vibrate_when_ringing_option_never_vibrate (6518980907289156517) -->
-    <skip />
-    <!-- no translation found for vibrate_when_ringing_option_always_vibrate (968652667232075466) -->
-    <skip />
-    <!-- no translation found for vibrate_when_ringing_option_ramping_ringer (2798848945803840348) -->
-    <skip />
+    <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"அதிர வேண்டாம்"</string>
+    <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"எப்போதும் அதிர்வுறு"</string>
+    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"முதலில் அதிர்ந்து படிப்படியாக ஒலிக்கும்"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"பிற ஒலிகள்"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"டயல்பேடு டோன்கள்"</string>
     <string name="screen_locking_sounds_title" msgid="1502654020775767536">"திரையைப் பூட்டும் போது"</string>
@@ -3347,8 +3334,8 @@
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"அறிவிப்புகளைப் பார்க்கவோ கேட்கவோ மாட்டீர்கள்"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"புதிய அல்லது ஏற்கனவே இருக்கும் அறிவிப்புகளை உங்கள் மொபைல் காட்டாது, அதிர்வுறாது அல்லது ஒலி எழுப்பாது. உங்கள் மொபைலின் செயல்பாடு மற்றும் நிலை தொடர்பான முக்கிய அறிவிப்புகள் தொடர்ந்து தோன்றும் என்பதை நினைவில்கொள்ளவும்.\n\nதொந்தரவு செய்ய வேண்டாம் என்பதை நீங்கள் முடக்கும் போது, உங்கள் திரையின் மேலிருந்து கீழாக ஸ்வைப் செய்வதன் மூலம் தவறிய அழைப்புகள் எவை என்பதைப் பார்க்கலாம்."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"பிரத்தியேகமானது"</string>
-    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"தனிப்பயன் அமைப்பை இயக்கு"</string>
-    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"தனிப்பயன் அமைப்பை அகற்று"</string>
+    <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"பிரத்தியேக அமைப்பை இயக்கு"</string>
+    <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"பிரத்தியேக அமைப்பை அகற்று"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"அறிவிப்புகள் வரும்போது ஒலியெழுப்ப வேண்டாம்"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"பகுதியளவு மறைக்கப்பட்டவை"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"அறிவிப்புகள் வரும்போது காட்டவோ ஒலியெழுப்பவோ வேண்டாம்"</string>
@@ -3358,7 +3345,7 @@
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"ஒலியையும் அதிர்வையும் முடக்கு"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"திரையை ஆன் செய்யாதே"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"ஒளியை மிளிரச் செய்யாதே"</string>
-    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"திரையில் அறிவிப்புகளைப் பாப் அப் செய்யாதே"</string>
+    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"திரையில் அறிவிப்புகளைப் பாப்-அப் செய்யாதே"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"திரையின் மேற்பகுதியில் \'நிலைப் பட்டி\' ஐகான்களை மறை"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"ஆப்ஸ் ஐகான்களில் அறிவிப்புப் புள்ளிகளை மறை"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"அறிவிப்புகள் வரும்போது சாதனத்தை எழுப்ப வேண்டாம்"</string>
@@ -3369,8 +3356,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"ஒலி மற்றும் அதிர்வு"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"ஒலி, அதிர்வு மற்றும் அறிவிப்புகளின் சில காட்சித் தோற்றங்கள்"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"ஒலி, அதிர்வு மற்றும் அறிவிப்புகளின் காட்சித் தோற்றங்கள்"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (1115914818435434668) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"அடிப்படை மொபைல் செயல்பாடு மற்றும் நிலைக்குத் தேவைப்படும் அறிவிப்புகள் இனி ஒருபோதும் மறைக்கப்படாது."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"ஏதுமில்லை"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"பிற விருப்பங்கள்"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"சேர்"</string>
@@ -3382,7 +3368,7 @@
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"திட்ட அட்டவணையின் (<xliff:g id="RULE_NAME">%s</xliff:g>) மூலம் ‘தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது"</string>
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"(<xliff:g id="APP_NAME">%s</xliff:g>) ஆப்ஸின் மூலம், ‘தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"பிரத்தியேக அமைப்புகளுடன் <xliff:g id="RULE_NAMES">%s</xliff:g> என்பதற்குத் \'தொந்தரவு செய்ய வேண்டாம்’ ஆன் நிலையில் உள்ளது."</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="2310353944697868606"><annotation id="link">" தனிப்பயன் அமைப்புகளைக் காட்டு"</annotation></string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="2310353944697868606"><annotation id="link">" பிரத்தியேக அமைப்புகளைக் காட்டு"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"முக்கியமானவை மட்டும்"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"ஆன் / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3413,7 +3399,7 @@
     <string name="zen_sound_one_allowed" msgid="1050955613144532512">"ஒலியடக்கப்பட்டது, ஆனால் <xliff:g id="SOUND_TYPE">%1$s</xliff:g> அனுமதிக்கப்பட்டுள்ளது"</string>
     <string name="zen_sound_two_allowed" msgid="5150857817893521696">"ஒலியடக்கப்பட்டது, ஆனால் <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g> மற்றும் <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> அனுமதிக்கப்பட்டுள்ளன"</string>
     <string name="zen_sound_three_allowed" msgid="3770279281597307824">"ஒலியடக்கப்பட்டது, ஆனால் <xliff:g id="SOUND_TYPE_0">%1$s</xliff:g>, <xliff:g id="SOUND_TYPE_1">%2$s</xliff:g> மற்றும் <xliff:g id="SOUND_TYPE_2">%3$s</xliff:g> அனுமதிக்கப்பட்டுள்ளன"</string>
-    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"தனிப்பயன் அமைப்புகள்"</string>
+    <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"பிரத்தியேக அமைப்புகள்"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"திட்ட அட்டவணையைச் சரிபார்"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"புரிந்தது"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"அறிவிப்புகள்"</string>
@@ -3437,7 +3423,7 @@
     <string name="work_sync_dialog_title" msgid="2359563902332046231">"ஒலிகளை மாற்றியமைக்கவா?"</string>
     <string name="work_sync_dialog_yes" msgid="9161415252411868574">"மாற்று"</string>
     <string name="work_sync_dialog_message" msgid="1328692374812258546">"உங்கள் தனிப்பட்ட சுயவிவர ஒலிகள், உங்கள் பணி விவரத்திற்குப் பயன்படுத்தப்படும்"</string>
-    <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"தனிப்பயன் ஒலியைச் சேர்க்கவா?"</string>
+    <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"பிரத்தியேக ஒலியைச் சேர்க்கவா?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"இந்தக் கோப்பு, <xliff:g id="FOLDER_NAME">%s</xliff:g> கோப்புறைக்கு நகலெடுக்கப்படும்"</string>
     <string name="ringtones_category_preference_title" msgid="26680768777533727">"ரிங்டோன்கள்"</string>
     <string name="other_sound_category_preference_title" msgid="8182757473602586634">"பிற ஒலிகள் மற்றும் அதிர்வுகள்"</string>
@@ -3453,6 +3439,18 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"தொடர்பின் அடிப்படையில் அறிவிப்புக்களைத் தானாக வரிசைப்படுத்தும்"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"பரிந்துரைக்கப்படும் செயல்களும் பதில்களும்"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"பரிந்துரைக்கப்படும் செயல்கள் &amp; பதில்களைத் தானாகவே காட்டு"</string>
+    <!-- no translation found for notification_history_summary (6821337322742231789) -->
+    <skip />
+    <!-- no translation found for notification_history (8663811361243456201) -->
+    <skip />
+    <!-- no translation found for notification_history_turn_on (3298178949776249681) -->
+    <skip />
+    <!-- no translation found for notification_history_turn_off (3141050596252009528) -->
+    <skip />
+    <!-- no translation found for notification_history_off_title_extended (2174043349602912717) -->
+    <skip />
+    <!-- no translation found for notification_history_view_settings (5269317798670449002) -->
+    <skip />
     <string name="snooze_options_title" msgid="2109795569568344617">"அறிவிப்புகளை ஸ்னூஸ் செய்ய அனுமதி"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"ஜென்டில் அறிவிப்புகளைச் சேர்ந்த ஐகான்களை மறை"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"ஜென்டில் அறிவிப்புகளைச் சேர்ந்த ஐகான்கள் நிலைப்பட்டியில் காட்டப்படாது"</string>
@@ -3528,7 +3526,7 @@
     <string name="notification_importance_low" msgid="7562535765919565273">"ஒலிக்காமல் காட்டும்"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"ஒலியெழுப்பும்"</string>
     <string name="notification_importance_high" msgid="8453789143477210550">"ஒலியெழுப்பி, திரையில் காட்டும்"</string>
-    <string name="notification_importance_high_silent" msgid="8977232884004607985">"திரையில் பாப் அப் செய்யும்"</string>
+    <string name="notification_importance_high_silent" msgid="8977232884004607985">"திரையில் பாப்-அப் செய்யும்"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"சிறிதாக்கு"</string>
     <string name="notification_importance_low_title" msgid="658158049378796947">"நடுத்தர முக்கியத்துவம்"</string>
     <string name="notification_importance_default_title" msgid="8875198696330289686">"அதிக முக்கியத்துவம்"</string>
@@ -3645,9 +3643,9 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"\"<xliff:g id="RULE">%1$s</xliff:g>\" விதியை நீக்கவா?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"நீக்கு"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"தெரியாதது"</string>
-    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. தனிப்பயன் செயல்பாட்டின் அடிப்படையில், ஆப்ஸின் (<xliff:g id="APP_NAME">%1$s</xliff:g>) மூலம் ’தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது."</string>
-    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. தனிப்பயன் செயல்பாட்டின் அடிப்படையில், ஆப்ஸின் மூலம் ’தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது."</string>
-    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. தனிப்பயன் செயல்பாட்டின் அடிப்படையில் ’தொந்தரவு செய்ய வேண்டாம்’ கைமுறையாக ஆன் செய்யப்பட்டது."</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. பிரத்தியேக செயல்பாட்டின் அடிப்படையில், ஆப்ஸின் (<xliff:g id="APP_NAME">%1$s</xliff:g>) மூலம் ’தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. பிரத்தியேக செயல்பாட்டின் அடிப்படையில், ஆப்ஸின் மூலம் ’தொந்தரவு செய்ய வேண்டாம்’ தானாக ஆன் செய்யப்பட்டது."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"இந்த அமைப்புகளை இப்போது மாற்ற முடியாது. பிரத்தியேக செயல்பாட்டின் அடிப்படையில் ’தொந்தரவு செய்ய வேண்டாம்’ கைமுறையாக ஆன் செய்யப்பட்டது."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"நேரம்"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"குறிப்பிட்ட நேரங்களில் தொந்தரவு செய்ய வேண்டாம் என்பதை இயக்கும் தானியங்கு விதி"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"நிகழ்வு"</string>
@@ -3686,12 +3684,9 @@
       <item quantity="one">ஒருவர்</item>
     </plurals>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"உரையாடல்கள்"</string>
-    <!-- no translation found for zen_mode_from_all_conversations (4646332080225579376) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_important_conversations (5249278652331540929) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_no_conversations (2525336494889055022) -->
-    <skip />
+    <string name="zen_mode_from_all_conversations" msgid="4646332080225579376">"அனைத்து உரையாடல்களிலிருந்தும்"</string>
+    <string name="zen_mode_from_important_conversations" msgid="5249278652331540929">"முக்கியமான உரையாடல்களிலிருந்து"</string>
+    <string name="zen_mode_from_no_conversations" msgid="2525336494889055022">"எந்த உரையாடல்களையும் அனுமதிக்காதே"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"மெசேஜ்களை அனுமதி"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"அனுமதிக்கப்படும் செய்திகள் ஒலி எழுப்புமா என்பதை உறுதிப்படுத்த, உங்கள் சாதனம் ஒலி எழுப்பும்படி, அதிர்வுறும்படி அல்லது நிசப்தத்தில் உள்ளதா என்பதைச் சரிபார்க்கவும்."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ என்பதற்கு உள்வரும் மெசேஜ்கள் தடுக்கப்பட்டுள்ளன. உங்களைத் தொடர்புகொள்ள நண்பர்களையோ குடும்பத்தினரையோ வேறு தொடர்புகளையோ அனுமதிக்குமாறு அமைப்புகளை மாற்றிக்கொள்ளலாம்."</string>
@@ -3719,7 +3714,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"நினைவூட்டல்கள்"</string>
     <string name="zen_mode_events" msgid="7455308377739125312">"நிகழ்வுகள்"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"வரவிருக்கும் கேலேண்டர்கள் நிகழ்வுகளிலிருந்து வருபவை"</string>
-    <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ஆப்ஸை மேலெழுத அனுமதிக்கின்றன"</string>
+    <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ஆப்ஸை மீறிச் செயல்பட அனுமதிக்கின்றன"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"ஆப்ஸ் விதிவிலக்குகள்"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
       <item quantity="other">‘தொந்தரவு செய்ய வேண்டாம்’ அம்சம் ஆன் செய்யப்பட்டிருந்தாலும் <xliff:g id="NUMBER">%1$d</xliff:g> ஆப்ஸில் இருந்து அறிவிப்புகள் வரும்</item>
@@ -3755,7 +3750,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g> வரை அலாரங்கள் மட்டும் என மாற்று"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"எப்போதும் குறுக்கிடு என மாற்று"</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"திரை ஆன் செய்யப்பட்டிருக்கும்போது"</string>
-    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"\'தொந்தரவு செய்ய வேண்டாம்\' மூலம் ஒலியடக்கப்பட்ட அறிவிப்புகள் வரும்போது, திரையில் பாப் அப் ஆவதுடன், நிலைப்பட்டி ஐகானைக் காட்டும்"</string>
+    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"\'தொந்தரவு செய்ய வேண்டாம்\' மூலம் ஒலியடக்கப்பட்ட அறிவிப்புகள் வரும்போது, திரையில் பாப்-அப் ஆவதுடன், நிலைப்பட்டி ஐகானைக் காட்டும்"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"திரை ஆஃப் செய்யப்பட்டிருக்கும்போது"</string>
     <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"’தொந்தரவு செய்ய வேண்டாம்’ அம்சத்தின் மூலம் ஒலியடக்கப்பட்ட அறிவிப்புகள் வரும்போது, திரை ஆன் செய்யப்பட்டு, ஒளியை மிளிரச் செய்யட்டும்"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"’தொந்தரவு செய்ய வேண்டாம்’ அம்சத்தின் மூலம் ஒலியடக்கப்பட்ட அறிவிப்புகள் வரும்போது, திரையை ஆன் செய்யட்டும்."</string>
@@ -4250,7 +4245,7 @@
     <string name="notification_log_details_actions" msgid="2269605330470905236">"செயல்கள்"</string>
     <string name="notification_log_details_title" msgid="8365761340979164197">"தலைப்பு"</string>
     <string name="notification_log_details_remoteinput" msgid="264204203044885921">"ரிமோட் இன்புட்கள்"</string>
-    <string name="notification_log_details_content_view" msgid="7193602999512479112">"தனிப்பயன் காட்சி"</string>
+    <string name="notification_log_details_content_view" msgid="7193602999512479112">"பிரத்தியேகக் காட்சி"</string>
     <string name="notification_log_details_extras" msgid="8602887256103970989">"மற்றவை"</string>
     <string name="notification_log_details_icon" msgid="6728710746466389675">"ஐகான்"</string>
     <string name="notification_log_details_parcel" msgid="2098454650154230531">"பார்சல் அளவு"</string>
@@ -4729,7 +4724,7 @@
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"இரண்டாம்நிலை திரைகளில் \'கட்டாயப் பரிசோதனை டெஸ்க்டாப்\' பயன்முறை"</string>
     <string name="enable_sizecompat_freeform" msgid="3799755160777404309">"குறிப்பிட்ட வடிவமற்ற sizecompat ஆப்ஸை இயக்கும்"</string>
     <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"sizecompat ஆப்ஸ் குறிப்பிட்ட வடிவமற்று இருப்பதை அனுமதிக்கும்"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark அம்சத்தை மேலெழுதுதல்"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"force-dark அம்சத்தை மீறிச் செயல்படுதல்"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"எப்போதும் இயக்கத்தில் இருக்குமாறு force-dark அம்சத்தை மேலெழுதுகிறது"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"தனியுரிமை"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"அனுமதிகள், கணக்குச் செயல்பாடு, தனிப்பட்ட தரவு"</string>
