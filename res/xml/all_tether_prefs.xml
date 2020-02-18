@@ -55,7 +55,7 @@
 
     <PreferenceCategory
         android:key="tethering_options_group"
-        android:title="Tethering"
+        android:title="@string/tethering_interface_options"
         settings:searchable="false">
         <SwitchPreference
             android:key="enable_usb_tethering"
@@ -73,7 +73,7 @@
 
         <SwitchPreference
             android:key="disable_wifi_tethering"
-            android:title="Don't use Wi-Fi hotspot"
+            android:title="@string/disable_wifi_hotspot_title"
             android:summary="@string/summary_placeholder"
             settings:controller="com.android.settings.network.WifiTetherDisablePreferenceController"
             settings:keywords="@string/keywords_hotspot_tethering" />
