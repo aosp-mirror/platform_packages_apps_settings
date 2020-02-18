@@ -330,7 +330,12 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         SharedPreferenceUtils.setUserShortcutType(context, info);
     }
 
-    private String getShortcutTypeSummary(Context context) {
+    @Override
+    protected CharSequence getShortcutTypeSummary(Context context) {
+        if (!mShortcutPreference.isChecked()) {
+            return context.getText(R.string.switch_off_text);
+        }
+
         final int shortcutType = getUserShortcutType(context, UserShortcutType.DEFAULT);
         int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
@@ -381,10 +386,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateUserShortcutType(/* saveChanges= */ true);
-        if (mShortcutPreference.getChecked()) {
+        if (mShortcutPreference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutType);
             optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutType);
         }
+        mShortcutPreference.setChecked(true);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
     }
@@ -442,13 +448,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    public void onCheckboxClicked(ShortcutPreference preference) {
+    public void onToggleClicked(ShortcutPreference preference) {
         final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
-        if (preference.getChecked()) {
+        if (preference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
         } else {
             optOutAllMagnificationValuesFromSettings(getPrefContext(), shortcutTypes);
         }
+        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
     @Override
@@ -473,7 +480,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(KEY_SHORTCUT_PREFERENCE);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-        mShortcutPreference.setOnClickListener(this);
+        mShortcutPreference.setOnClickCallback(this);
 
         final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
         mShortcutPreference.setTitle(title);
