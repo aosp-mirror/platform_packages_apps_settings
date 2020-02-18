@@ -16,7 +16,10 @@
 
 package com.android.settings.notification.app;
 
+import static android.provider.Settings.Secure.BUBBLE_IMPORTANT_CONVERSATIONS;
+
 import android.content.Context;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 
@@ -29,10 +32,12 @@ public class ConversationImportantPreferenceController extends NotificationPrefe
 
     private static final String TAG = "ConvoImpPC";
     private static final String KEY = "important";
+    private final NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public ConversationImportantPreferenceController(Context context,
-            NotificationBackend backend) {
+            NotificationBackend backend, NotificationSettings.DependentFieldListener listener) {
         super(context, backend);
+        mDependentFieldListener = listener;
     }
 
     @Override
@@ -67,8 +72,17 @@ public class ConversationImportantPreferenceController extends NotificationPrefe
         }
         final boolean value = (Boolean) newValue;
         mChannel.setImportantConversation(value);
+        if (value && bubbleImportantConversations()) {
+            mChannel.setAllowBubbles(true);
+            mDependentFieldListener.onFieldValueChanged();
+        }
         saveChannel();
 
         return true;
+    }
+
+    private boolean bubbleImportantConversations() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                BUBBLE_IMPORTANT_CONVERSATIONS, 1) == 1;
     }
 }

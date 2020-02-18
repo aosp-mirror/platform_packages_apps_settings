@@ -35,13 +35,13 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
 
     private static final String TAG = "AllowSoundPrefContr";
     private static final String KEY_IMPORTANCE = "allow_sound";
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public AllowSoundPreferenceController(Context context,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
-        mImportanceListener = importanceListener;
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
             mChannel.setImportance(importance);
             mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
             saveChannel();
-            mImportanceListener.onImportanceChanged();
+            mDependentFieldListener.onFieldValueChanged();
         }
         return true;
     }

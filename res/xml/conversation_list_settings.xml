@@ -27,6 +27,11 @@
         <Preference
             android:key="behavior"
             android:summary="@string/important_conversation_behavior_summary"/>
+        <SwitchPreference
+            android:key="important_bubble"
+            android:title="@string/important_bubble"
+            android:icon="@drawable/ic_create_bubble"
+            settings:controller="com.android.settings.notification.app.ImportantConversationBubblePreferenceController"/>
         <!-- Important conversations added here -->
         <PreferenceCategory
             android:key="important_conversations_list"

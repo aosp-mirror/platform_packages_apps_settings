@@ -40,7 +40,7 @@ public class ConversationListSettings extends DashboardFragment {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     NotificationBackend mBackend = new NotificationBackend();
-    protected List<ConversationListPreferenceController> mControllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> mControllers = new ArrayList<>();
 
     @Override
     public int getMetricsCategory() {

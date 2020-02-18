@@ -36,13 +36,13 @@ public class BlockPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
 
     private static final String KEY_BLOCK = "block";
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public BlockPreferenceController(Context context,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
-        mImportanceListener = importanceListener;
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
@@ -124,7 +124,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
             mAppRow.banned = blocked;
             mBackend.setNotificationsEnabledForPackage(mAppRow.pkg, mAppRow.uid, !blocked);
         }
-        mImportanceListener.onImportanceChanged();
+        mDependentFieldListener.onFieldValueChanged();
     }
 
     String getSwitchBarText() {

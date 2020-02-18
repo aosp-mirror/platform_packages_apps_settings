@@ -68,7 +68,7 @@ public class AllowSoundPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     private AllowSoundPreferenceController mController;
 
@@ -80,7 +80,7 @@ public class AllowSoundPreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         mController =
-                spy(new AllowSoundPreferenceController(mContext, mImportanceListener, mBackend));
+                spy(new AllowSoundPreferenceController(mContext, mDependentFieldListener, mBackend));
     }
 
     @Test
@@ -213,7 +213,7 @@ public class AllowSoundPreferenceControllerTest {
         mController.onPreferenceChange(pref, true);
 
         assertEquals(IMPORTANCE_UNSPECIFIED, mController.mChannel.getImportance());
-        verify(mImportanceListener, times(1)).onImportanceChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 
     @Test
@@ -232,6 +232,6 @@ public class AllowSoundPreferenceControllerTest {
 
         verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
         assertEquals(IMPORTANCE_LOW, mController.mChannel.getImportance());
-        verify(mImportanceListener, times(1)).onImportanceChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 }

@@ -67,7 +67,7 @@ public class ImportancePreferenceControllerTest {
     @Mock
     private NotificationBackend mBackend;
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -83,7 +83,7 @@ public class ImportancePreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         mController = spy(new ImportancePreferenceController(
-                mContext, mImportanceListener, mBackend));
+                mContext, mDependentFieldListener, mBackend));
     }
 
     @Test

@@ -32,13 +32,13 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY_IMPORTANCE = "min_importance";
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public MinImportancePreferenceController(Context context,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
-        mImportanceListener = importanceListener;
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
             mChannel.setImportance(checked ? IMPORTANCE_MIN : IMPORTANCE_LOW);
             mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
             saveChannel();
-            mImportanceListener.onImportanceChanged();
+            mDependentFieldListener.onFieldValueChanged();
         }
         return true;
     }
