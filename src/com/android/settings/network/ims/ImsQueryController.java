@@ -17,15 +17,23 @@
 package com.android.settings.network.ims;
 
 import android.telephony.AccessNetworkConstants;
+import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
+import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 
 import androidx.annotation.VisibleForTesting;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * Controller class for querying IMS status
  */
 abstract class ImsQueryController {
+
+    private static final long TIMEOUT_MILLIS = 2000;
 
     private volatile int mCapability;
     private volatile int mTech;
@@ -52,6 +60,24 @@ abstract class ImsQueryController {
     @VisibleForTesting
     boolean isTtyOnVolteEnabled(int subId) {
         return (new ImsQueryTtyOnVolteStat(subId)).query();
+    }
+
+    @VisibleForTesting
+    boolean isEnabledByPlatform(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
+
+        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(subId);
+        // TODO: have a shared thread pool instead of create ExecutorService
+        //       everytime to improve performance.
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        final BooleanConsumer booleanResult = new BooleanConsumer();
+        imsMmTelManager.isSupported(mCapability, mTransportType, executor, booleanResult);
+        // get() will be blocked until end of execution(isSupported()) within thread(executor)
+        // or timeout after TIMEOUT_MILLIS milliseconds
+        return booleanResult.get(TIMEOUT_MILLIS);
     }
 
     @VisibleForTesting
