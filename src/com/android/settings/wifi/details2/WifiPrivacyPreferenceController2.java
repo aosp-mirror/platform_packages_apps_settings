@@ -55,8 +55,11 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
-        return mWifiManager.isConnectedMacRandomizationSupported()
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        if (!mWifiManager.isConnectedMacRandomizationSupported()
+                || mWifiEntry.canManageSubscription()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+        return AVAILABLE;
     }
 
     @Override
