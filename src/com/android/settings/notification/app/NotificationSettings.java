@@ -33,7 +33,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -79,7 +78,7 @@ abstract public class NotificationSettings extends DashboardFragment {
     protected boolean mListeningToPackageRemove;
 
     protected List<NotificationPreferenceController> mControllers = new ArrayList<>();
-    protected ImportanceListener mImportanceListener = new ImportanceListener();
+    protected DependentFieldListener mDependentFieldListener = new DependentFieldListener();
 
     protected Intent mIntent;
     protected Bundle mArgs;
@@ -328,8 +327,8 @@ abstract public class NotificationSettings extends DashboardFragment {
         }
     };
 
-    protected class ImportanceListener {
-        protected void onImportanceChanged() {
+    protected class DependentFieldListener {
+        protected void onFieldValueChanged() {
             final PreferenceScreen screen = getPreferenceScreen();
             for (NotificationPreferenceController controller : mControllers) {
                 controller.displayPreference(screen);

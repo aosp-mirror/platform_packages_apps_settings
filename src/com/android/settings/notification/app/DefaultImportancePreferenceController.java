@@ -32,13 +32,13 @@ public class DefaultImportancePreferenceController extends NotificationPreferenc
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY = "alerting";
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public DefaultImportancePreferenceController(Context context,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
-        mImportanceListener = importanceListener;
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class DefaultImportancePreferenceController extends NotificationPreferenc
             mChannel.setImportance(checked ? IMPORTANCE_DEFAULT : IMPORTANCE_LOW);
             mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
             saveChannel();
-            mImportanceListener.onImportanceChanged();
+            mDependentFieldListener.onFieldValueChanged();
         }
         return true;
     }

@@ -19,12 +19,14 @@ package com.android.settings.notification.app;
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
+import static android.provider.Settings.Secure.BUBBLE_IMPORTANT_CONVERSATIONS;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -34,6 +36,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -64,6 +67,8 @@ public class ConversationImportantPreferenceControllerTest {
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
+    @Mock
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     private ConversationImportantPreferenceController mController;
 
@@ -74,7 +79,8 @@ public class ConversationImportantPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new ConversationImportantPreferenceController(mContext, mBackend));
+        mController = spy(new ConversationImportantPreferenceController(
+                mContext, mBackend, mDependentFieldListener));
     }
 
     @Test
@@ -133,9 +139,12 @@ public class ConversationImportantPreferenceControllerTest {
 
     @Test
     public void testOnPreferenceChange_on() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BUBBLE_IMPORTANT_CONVERSATIONS, 0);
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
         channel.setImportantConversation(false);
+        channel.setAllowBubbles(false);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
@@ -145,14 +154,41 @@ public class ConversationImportantPreferenceControllerTest {
         mController.onPreferenceChange(pref, true);
 
         assertTrue(channel.isImportantConversation());
+        assertFalse(channel.canBubble());
         verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
+        verify(mDependentFieldListener, never()).onFieldValueChanged();
+    }
+
+    @Test
+    public void testOnPreferenceChange_on_bubble() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BUBBLE_IMPORTANT_CONVERSATIONS, 1);
+        NotificationChannel channel =
+                new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
+        channel.setImportantConversation(false);
+        channel.setAllowBubbles(false);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
+
+        RestrictedSwitchPreference pref =
+                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        mController.updateState(pref);
+
+        mController.onPreferenceChange(pref, true);
+
+        assertTrue(channel.isImportantConversation());
+        assertTrue(channel.canBubble());
+        verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
+        verify(mDependentFieldListener).onFieldValueChanged();
     }
 
     @Test
     public void testOnPreferenceChange_off() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                BUBBLE_IMPORTANT_CONVERSATIONS, 1);
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         channel.setImportantConversation(true);
+        channel.setAllowBubbles(false);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
@@ -164,6 +200,8 @@ public class ConversationImportantPreferenceControllerTest {
         mController.onPreferenceChange(pref, false);
 
         assertFalse(channel.isImportantConversation());
+        assertFalse(channel.canBubble());
         verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
+        verify(mDependentFieldListener, never()).onFieldValueChanged();
     }
 }

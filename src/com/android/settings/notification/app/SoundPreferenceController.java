@@ -40,16 +40,16 @@ public class SoundPreferenceController extends NotificationPreferenceController
 
     private static final String KEY_SOUND = "ringtone";
     private final SettingsPreferenceFragment mFragment;
-    private final NotificationSettings.ImportanceListener mListener;
+    private final NotificationSettings.DependentFieldListener mListener;
     private NotificationSoundPreference mPreference;
     protected static final int CODE = 200;
 
     public SoundPreferenceController(Context context, SettingsPreferenceFragment hostFragment,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
         mFragment = hostFragment;
-        mListener = importanceListener;
+        mListener = dependentFieldListener;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class SoundPreferenceController extends NotificationPreferenceController
             }
             // the importance hasn't changed, but the importance description might as a result of
             // user's selection.
-            mListener.onImportanceChanged();
+            mListener.onFieldValueChanged();
             return true;
         }
         return false;
