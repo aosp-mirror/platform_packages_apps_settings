@@ -74,8 +74,8 @@ public class ConversationImportantPreferenceController extends NotificationPrefe
         mChannel.setImportantConversation(value);
         if (value && bubbleImportantConversations()) {
             mChannel.setAllowBubbles(true);
-            mDependentFieldListener.onFieldValueChanged();
         }
+        mDependentFieldListener.onFieldValueChanged();
         saveChannel();
 
         return true;
