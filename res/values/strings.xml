@@ -6096,8 +6096,6 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi-Fi</string>
-    <!-- Sub-heading for a user credential installed to be used by kernel for fs-verity verification [CHAR LIMIT=NONE]. -->
-    <string name="credential_for_fsverity">Installed for app install source verification</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -6112,8 +6110,6 @@
     <string name="user_certificate">VPN &amp; app user certificate</string>
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
-    <!-- Title of App Source certificate [CHAR LIMIT=40] -->
-    <string name="app_src_certificate">App Source certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_title">Your privacy is at risk</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
@@ -6122,10 +6118,6 @@
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_install_anyway">Install anyways</string>
-    <!-- Title of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=60] -->
-    <string name="app_src_certificate_warning_title">Install this certificate at your own risk</string>
-    <!-- Description of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=NONE] -->
-    <string name="app_src_certificate_warning_description">App source certificates verify that apps are safe for your device. Only install certificates from organizations you trust.</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
@@ -6757,28 +6749,14 @@
     <string name="one_usercrt">one user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
     <string name="one_cacrt">one CA certificate</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
+    <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_appsrccrt">one App Source certificate</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
     <string name="user_credential_title">Credential details</string>
     <!-- Announcement to confirm a user credential being removed. [CHAR LIMIT=NONE] -->
     <string name="user_credential_removed">Removed credential: <xliff:g id="credential_name" example="signing key">%s</xliff:g></string>
     <!-- Placeholder for the list of installed user credentials (private keys) when the list is empty. [CHAR LIMIT=120] -->
     <string name="user_credential_none_installed">No user credentials installed</string>
-    <!-- Title of alert dialog after an app source certificate is installed. [CHAR LIMIT=50] -->
-    <string name="app_src_cert_reboot_dialog_install_title">Restart to use certificate</string>
-    <!-- Message of alert dialog after an app source certificate is installed. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_install_message">To use this app source certificate, you need to restart your device</string>
-    <!-- Title of alert dialog after an app source certificate is deleted. [CHAR LIMIT=55] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_title">Restart to finish uninstalling</string>
-    <!-- Message of alert dialog after an app source certificate is deleted. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_message">To uninstall this app source certificate, you need to restart your device</string>
-    <!-- Button to restart the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_restart">Restart</string>
-    <!-- Button to skip restarting the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_not_now">Not now</string>
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
