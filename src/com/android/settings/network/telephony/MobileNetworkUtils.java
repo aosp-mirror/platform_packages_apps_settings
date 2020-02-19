@@ -226,33 +226,11 @@ public class MobileNetworkUtils {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
+            Log.w(TAG, "EuiccManager is not enabled.");
             return false;
         }
 
         final ContentResolver cr = context.getContentResolver();
-
-        final TelephonyManager tm =
-                (TelephonyManager) context.getSystemService(TelephonyManager.class);
-        final String currentCountry = tm.getNetworkCountryIso().toLowerCase();
-        final String supportedCountries =
-                Settings.Global.getString(cr, Settings.Global.EUICC_SUPPORTED_COUNTRIES);
-        final String unsupportedCountries =
-                Settings.Global.getString(cr, Settings.Global.EUICC_UNSUPPORTED_COUNTRIES);
-
-        boolean inEsimSupportedCountries = false;
-
-        if (TextUtils.isEmpty(supportedCountries)) {
-            // White list is empty, use blacklist.
-            Log.d(TAG, "Using blacklist unsupportedCountries=" + unsupportedCountries);
-            inEsimSupportedCountries = !isEsimUnsupportedCountry(currentCountry,
-                    unsupportedCountries);
-        } else {
-            Log.d(TAG, "Using whitelist supportedCountries=" + supportedCountries);
-            inEsimSupportedCountries = isEsimSupportedCountry(currentCountry, supportedCountries);
-        }
-
-        Log.d(TAG, "inEsimSupportedCountries=" + inEsimSupportedCountries);
-
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
                         .contains(SystemProperties.get(KEY_CID, null));
@@ -262,9 +240,13 @@ public class MobileNetworkUtils {
                 Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
         final boolean inDeveloperMode =
                 DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(context);
-
+        Log.i(TAG,
+                String.format("showEuiccSettings: esimIgnoredDevice: %b, enabledEsimUiByDefault: "
+                        + "%b, euiccProvisioned: %b, inDeveloperMode: %b.",
+                esimIgnoredDevice, enabledEsimUiByDefault, euiccProvisioned, inDeveloperMode));
         return (inDeveloperMode || euiccProvisioned
-                || (!esimIgnoredDevice && enabledEsimUiByDefault && inEsimSupportedCountries));
+                || (!esimIgnoredDevice && enabledEsimUiByDefault
+                        && isCurrentCountrySupported(context)));
     }
 
     /**
@@ -625,26 +607,6 @@ public class MobileNetworkUtils {
         return tm.getNetworkOperatorName();
     }
 
-    private static boolean isEsimSupportedCountry(String country, String countriesListString) {
-        if (TextUtils.isEmpty(country)) {
-            return true;
-        } else if (TextUtils.isEmpty(countriesListString)) {
-            return false;
-        }
-        final List<String> supportedCountries =
-                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
-        return supportedCountries.contains(country);
-    }
-
-    private static boolean isEsimUnsupportedCountry(String country, String countriesListString) {
-        if (TextUtils.isEmpty(country) || TextUtils.isEmpty(countriesListString)) {
-            return false;
-        }
-        final List<String> unsupportedCountries =
-                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
-        return unsupportedCountries.contains(country);
-    }
-
     private static int[] getActiveSubscriptionIdList(Context context) {
         final SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class);
@@ -660,6 +622,26 @@ public class MobileNetworkUtils {
             i++;
         }
         return activeSubIds;
+    }
+
+    /**
+     * Loop through all the device logical slots to check whether the user's current country
+     * supports eSIM.
+     */
+    private static boolean isCurrentCountrySupported(Context context) {
+        final EuiccManager em = (EuiccManager) context.getSystemService(EuiccManager.class);
+        final TelephonyManager tm =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
+
+        for (int i = 0; i < tm.getPhoneCount(); i++) {
+            String countryCode = tm.getNetworkCountryIso(i);
+            if (em.isSupportedCountry(countryCode)) {
+                Log.i(TAG, "isCurrentCountrySupported: eSIM is supported in " + countryCode);
+                return true;
+            }
+        }
+        Log.i(TAG, "isCurrentCountrySupported: eSIM is not supported in the current country.");
+        return false;
     }
 
     /**
