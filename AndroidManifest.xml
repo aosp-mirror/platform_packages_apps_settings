@@ -1612,6 +1612,10 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
 
+        <activity android:name=".password.ForgotPasswordActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false"/>
+
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
             android:exported="false"
             android:screenOrientation="portrait"/>
