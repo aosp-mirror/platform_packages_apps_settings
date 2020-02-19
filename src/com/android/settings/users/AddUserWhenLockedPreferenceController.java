@@ -28,15 +28,12 @@ import com.android.settingslib.RestrictedSwitchPreference;
 public class AddUserWhenLockedPreferenceController extends TogglePreferenceController {
 
     private final UserCapabilities mUserCaps;
-    private LockPatternUtils mLockPatternUtils;
+    private final LockPatternUtils mLockPatternUtils;
 
     public AddUserWhenLockedPreferenceController(Context context, String key) {
         super(context, key);
         mUserCaps = UserCapabilities.create(context);
-    }
-
-    void setLockPatternUtils(LockPatternUtils lockPatternUtils) {
-        mLockPatternUtils = lockPatternUtils;
+        mLockPatternUtils = new LockPatternUtils(context);
     }
 
     @Override

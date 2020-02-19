@@ -165,6 +165,9 @@ public class ShortcutPreference extends Preference {
         setWidgetLayoutResource(R.layout.preference_widget_settings);
         setIconSpaceReserved(false);
         mAutoEnabledSettings = true;
+
+        // Disable whole component to let each child component can be addressed.
+        setSelectable(false);
     }
 
     private void callOnSettingsClicked() {

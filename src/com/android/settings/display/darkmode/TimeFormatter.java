@@ -25,13 +25,14 @@ import java.time.format.DateTimeFormatter;
 */
 public class TimeFormatter {
     private final Context mContext;
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+    private final DateTimeFormatter mFormatter;
     public TimeFormatter(Context context) {
         mContext = context;
+        mFormatter = DateTimeFormatter.ofPattern("hh:mm a");
     }
 
     public String of(LocalTime time) {
-        return is24HourFormat() ? time.toString() : formatter.format(time);
+        return is24HourFormat() ? time.toString() : mFormatter.format(time);
     }
 
     public boolean is24HourFormat() {

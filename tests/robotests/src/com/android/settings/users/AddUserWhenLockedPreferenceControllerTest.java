@@ -42,6 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class})
@@ -63,7 +64,7 @@ public class AddUserWhenLockedPreferenceControllerTest {
         mLockPatternUtils = mock(LockPatternUtils.class);
         mUserManager = ShadowUserManager.getShadow();
         mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
-        mController.setLockPatternUtils(mLockPatternUtils);
+        ReflectionHelpers.setField(mController, "mLockPatternUtils", mLockPatternUtils);
         mUserManager.setSupportsMultipleUsers(true);
     }
 
@@ -104,7 +105,7 @@ public class AddUserWhenLockedPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         final AddUserWhenLockedPreferenceController controller =
                 new AddUserWhenLockedPreferenceController(mContext, "fake_key");
-        controller.setLockPatternUtils(mLockPatternUtils);
+        ReflectionHelpers.setField(controller, "mLockPatternUtils", mLockPatternUtils);
         final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
 
         controller.updateState(preference);
@@ -162,7 +163,7 @@ public class AddUserWhenLockedPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
         final AddUserWhenLockedPreferenceController controller =
                 new AddUserWhenLockedPreferenceController(mContext, "fake_key");
-        controller.setLockPatternUtils(mLockPatternUtils);
+        ReflectionHelpers.setField(controller, "mLockPatternUtils", mLockPatternUtils);
         final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
 
         controller.updateState(preference);
@@ -180,7 +181,7 @@ public class AddUserWhenLockedPreferenceControllerTest {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         final AddUserWhenLockedPreferenceController controller =
                 new AddUserWhenLockedPreferenceController(mContext, "fake_key");
-        controller.setLockPatternUtils(mLockPatternUtils);
+        ReflectionHelpers.setField(controller, "mLockPatternUtils", mLockPatternUtils);
         final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
 
         controller.updateState(preference);

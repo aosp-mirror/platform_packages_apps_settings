@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.euicc.EuiccManager;
@@ -34,6 +35,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.security.ConfirmSimDeletionPreferenceController;
 
 import org.junit.After;
 import org.junit.Before;
@@ -118,7 +120,11 @@ public class DeleteSimProfilePreferenceControllerTest {
     public void onPreferenceClick_startsIntent() {
         mController.init(SUB_ID, mFragment, REQUEST_CODE);
         mController.displayPreference(mScreen);
-        mPreference.performClick();
+        // turn off confirmation before click
+        Settings.Global.putInt(mContext.getContentResolver(),
+                ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION, 0);
+
+        mController.handlePreferenceTreeClick(mPreference);
 
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mFragment).startActivityForResult(intentCaptor.capture(), eq(REQUEST_CODE));
