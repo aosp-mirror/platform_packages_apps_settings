@@ -324,7 +324,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mComponentName = arguments.getParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME);
 
         // Settings animated image.
-        int animatedImageRes = arguments.getInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
+        final int animatedImageRes = arguments.getInt(
+                AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(mComponentName.getPackageName())
                 .appendPath(String.valueOf(animatedImageRes))
