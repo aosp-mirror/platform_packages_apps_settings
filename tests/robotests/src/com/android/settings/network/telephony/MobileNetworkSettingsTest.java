@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.net.NetworkPolicyManager;
@@ -111,12 +112,12 @@ public class MobileNetworkSettingsTest {
     public void onActivityResult_noActivity_noCrash() {
         when(mFragment.getActivity()).thenReturn(null);
         // this should not crash
-        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, Activity.RESULT_OK, null);
     }
 
     @Test
     public void onActivityResult_deleteSubscription_activityFinishes() {
-        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, 0, null);
+        mFragment.onActivityResult(REQUEST_CODE_DELETE_SUBSCRIPTION, Activity.RESULT_OK, null);
         verify(mActivity).finish();
     }
 

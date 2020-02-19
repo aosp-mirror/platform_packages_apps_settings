@@ -274,9 +274,11 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 break;
 
             case REQUEST_CODE_DELETE_SUBSCRIPTION:
-                final Activity activity = getActivity();
-                if (activity != null && !activity.isFinishing()) {
-                    activity.finish();
+                if (resultCode != Activity.RESULT_CANCELED) {
+                    final Activity activity = getActivity();
+                    if (activity != null && !activity.isFinishing()) {
+                        activity.finish();
+                    }
                 }
                 break;
 

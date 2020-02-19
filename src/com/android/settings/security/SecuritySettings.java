@@ -20,7 +20,6 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.face.FaceProfileStatusPreferenceController;

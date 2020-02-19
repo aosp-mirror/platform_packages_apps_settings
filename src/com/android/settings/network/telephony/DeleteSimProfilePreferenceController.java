@@ -18,15 +18,18 @@ package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.euicc.EuiccManager;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.security.ConfirmSimDeletionPreferenceController;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 
 /** This controls a preference allowing the user to delete the profile for an eSIM. */
 public class DeleteSimProfilePreferenceController extends BasePreferenceController {
@@ -34,16 +37,19 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
     private SubscriptionInfo mSubscriptionInfo;
     private Fragment mParentFragment;
     private int mRequestCode;
+    private boolean mConfirmationDefaultOn;
 
     public DeleteSimProfilePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mConfirmationDefaultOn =
+                context.getResources()
+                        .getBoolean(R.bool.config_sim_deletion_confirmation_default_on);
     }
 
     public void init(int subscriptionId, Fragment parentFragment, int requestCode) {
         mParentFragment = parentFragment;
 
-        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(
-                mContext)) {
+        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
             if (info.getSubscriptionId() == subscriptionId && info.isEmbedded()) {
                 mSubscriptionInfo = info;
                 break;
@@ -53,16 +59,27 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference pref = screen.findPreference(getPreferenceKey());
-        pref.setOnPreferenceClickListener(p -> {
-            final Intent intent = new Intent(EuiccManager.ACTION_DELETE_SUBSCRIPTION_PRIVILEGED);
-            intent.putExtra(EuiccManager.EXTRA_SUBSCRIPTION_ID,
-                    mSubscriptionInfo.getSubscriptionId());
-            mParentFragment.startActivityForResult(intent, mRequestCode);
-            return true;
-        });
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        boolean confirmDeletion =
+                Settings.Global.getInt(
+                                mContext.getContentResolver(),
+                                ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION,
+                                mConfirmationDefaultOn ? 1 : 0)
+                        == 1;
+        if (confirmDeletion) {
+            WifiDppUtils.showLockScreen(mContext, () -> deleteSim());
+        } else {
+            deleteSim();
+        }
+
+        return true;
+    }
+
+    private void deleteSim() {
+        final Intent intent = new Intent(EuiccManager.ACTION_DELETE_SUBSCRIPTION_PRIVILEGED);
+        intent.putExtra(EuiccManager.EXTRA_SUBSCRIPTION_ID, mSubscriptionInfo.getSubscriptionId());
+        mParentFragment.startActivityForResult(intent, mRequestCode);
+        // result handled in MobileNetworkSettings
     }
 
     @Override
@@ -73,5 +90,4 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
             return CONDITIONALLY_UNAVAILABLE;
         }
     }
-
 }
