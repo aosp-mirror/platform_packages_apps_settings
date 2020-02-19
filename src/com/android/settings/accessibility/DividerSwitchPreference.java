@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreference;
@@ -29,11 +30,25 @@ public final class DividerSwitchPreference extends SwitchPreference {
 
     private Boolean mDividerAllowedAbove;
     private Boolean mDividerAllowBelow;
+    private int mSwitchVisibility;
 
     public DividerSwitchPreference(Context context) {
         super(context);
         mDividerAllowedAbove = true;
         mDividerAllowBelow = true;
+        mSwitchVisibility = View.VISIBLE;
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        holder.setDividerAllowedAbove(mDividerAllowedAbove);
+        holder.setDividerAllowedBelow(mDividerAllowBelow);
+
+        final View switchView = holder.itemView.findViewById(android.R.id.widget_frame);
+        if (switchView != null) {
+            switchView.setVisibility(mSwitchVisibility);
+        }
     }
 
     /**
@@ -60,10 +75,15 @@ public final class DividerSwitchPreference extends SwitchPreference {
         }
     }
 
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(mDividerAllowedAbove);
-        holder.setDividerAllowedBelow(mDividerAllowBelow);
+    /**
+     * Sets the visibility state of Settings view.
+     *
+     * @param visibility one of {@link View#VISIBLE}, {@link View#INVISIBLE}, or {@link View#GONE}.
+     */
+    public void setSwitchVisibility(@View.Visibility int visibility) {
+        if (mSwitchVisibility != visibility) {
+            mSwitchVisibility = visibility;
+            notifyChanged();
+        }
     }
 }
