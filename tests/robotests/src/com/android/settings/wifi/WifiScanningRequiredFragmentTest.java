@@ -15,8 +15,6 @@
  */
 package com.android.settings.wifi;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -27,10 +25,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.wifi.WifiManager;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
@@ -53,6 +53,8 @@ public class WifiScanningRequiredFragmentTest {
     private Context mContext;
     private ContentResolver mResolver;
     @Mock
+    private WifiManager mWifiManager;
+    @Mock
     private Fragment mCallbackFragment;
     @Mock
     private AlertDialog.Builder mBuilder;
@@ -61,12 +63,13 @@ public class WifiScanningRequiredFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFragment = spy(WifiScanningRequiredFragment.newInstance());
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mResolver = mContext.getContentResolver();
 
         doReturn(mContext).when(mFragment).getContext();
         mFragment.setTargetFragment(mCallbackFragment, 1000);
-        Settings.Global.putInt(mResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
     }
 
     @Test
@@ -74,8 +77,7 @@ public class WifiScanningRequiredFragmentTest {
             throws Settings.SettingNotFoundException {
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
 
-        assertThat(Settings.Global.getInt(mResolver, Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE))
-                .isEqualTo(1);
+        verify(mWifiManager).setScanAlwaysAvailable(false);
     }
 
     @Test
