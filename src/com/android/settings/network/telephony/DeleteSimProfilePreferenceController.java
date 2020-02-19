@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -60,19 +61,23 @@ public class DeleteSimProfilePreferenceController extends BasePreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        boolean confirmDeletion =
-                Settings.Global.getInt(
-                                mContext.getContentResolver(),
-                                ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION,
-                                mConfirmationDefaultOn ? 1 : 0)
-                        == 1;
-        if (confirmDeletion) {
-            WifiDppUtils.showLockScreen(mContext, () -> deleteSim());
-        } else {
-            deleteSim();
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            boolean confirmDeletion =
+                    Settings.Global.getInt(
+                            mContext.getContentResolver(),
+                            ConfirmSimDeletionPreferenceController.KEY_CONFIRM_SIM_DELETION,
+                            mConfirmationDefaultOn ? 1 : 0)
+                            == 1;
+            if (confirmDeletion) {
+                WifiDppUtils.showLockScreen(mContext, () -> deleteSim());
+            } else {
+                deleteSim();
+            }
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void deleteSim() {
