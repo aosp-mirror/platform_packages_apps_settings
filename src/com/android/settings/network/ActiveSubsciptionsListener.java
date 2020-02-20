@@ -46,6 +46,26 @@ public abstract class ActiveSubsciptionsListener
     private static final String TAG = "ActiveSubsciptions";
     private static final boolean DEBUG = false;
 
+    private Looper mLooper;
+    private Context mContext;
+
+    private static final int STATE_NOT_LISTENING = 0;
+    private static final int STATE_STOPPING      = 1;
+    private static final int STATE_PREPARING     = 2;
+    private static final int STATE_LISTENING     = 3;
+    private static final int STATE_DATA_CACHED   = 4;
+
+    private AtomicInteger mCacheState;
+    private SubscriptionManager mSubscriptionManager;
+
+    private IntentFilter mSubscriptionChangeIntentFilter;
+    private BroadcastReceiver mSubscriptionChangeReceiver;
+
+    private static final int MAX_SUBSCRIPTION_UNKNOWN = -1;
+
+    private AtomicInteger mMaxActiveSubscriptionInfos;
+    private List<SubscriptionInfo> mCachedActiveSubscriptionInfo;
+
     /**
      * Constructor
      *
@@ -92,26 +112,6 @@ public abstract class ActiveSubsciptionsListener
             }
         };
     }
-
-    private Looper mLooper;
-    private Context mContext;
-
-    private static final int STATE_NOT_LISTENING = 0;
-    private static final int STATE_STOPPING      = 1;
-    private static final int STATE_PREPARING     = 2;
-    private static final int STATE_LISTENING     = 3;
-    private static final int STATE_DATA_CACHED   = 4;
-
-    private AtomicInteger mCacheState;
-    private SubscriptionManager mSubscriptionManager;
-
-    private IntentFilter mSubscriptionChangeIntentFilter;
-    private BroadcastReceiver mSubscriptionChangeReceiver;
-
-    private static final int MAX_SUBSCRIPTION_UNKNOWN = -1;
-
-    private AtomicInteger mMaxActiveSubscriptionInfos;
-    private List<SubscriptionInfo> mCachedActiveSubscriptionInfo;
 
     /**
      * Active subscriptions got changed

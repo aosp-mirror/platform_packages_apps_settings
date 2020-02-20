@@ -115,6 +115,10 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mNetworkDetailsTracker.getWifiEntry().canManageSubscription()) {
+            return;
+        }
+
         MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
         item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -173,6 +177,12 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 new WifiPrivacyPreferenceController2(context);
         privacyController2.setWifiEntry(wifiEntry);
         controllers.add(privacyController2);
+
+        final WifiSubscriptionDetailPreferenceController2
+                wifiSubscriptionDetailPreferenceController2 =
+                new WifiSubscriptionDetailPreferenceController2(context);
+        wifiSubscriptionDetailPreferenceController2.setWifiEntry(wifiEntry);
+        controllers.add(wifiSubscriptionDetailPreferenceController2);
 
         // Sets callback listener for wifi dialog.
         mWifiDialogListeners.add(mWifiDetailPreferenceController2);

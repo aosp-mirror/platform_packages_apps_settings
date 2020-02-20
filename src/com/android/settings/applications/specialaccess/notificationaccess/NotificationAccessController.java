@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.notificationaccess;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,7 +30,7 @@ public class NotificationAccessController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return !ActivityManager.isLowRamDeviceStatic() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     public static boolean hasAccess(Context context, ComponentName cn) {

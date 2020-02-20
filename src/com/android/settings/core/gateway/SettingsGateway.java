@@ -16,6 +16,7 @@
 
 package com.android.settings.core.gateway;
 
+import com.android.settings.AllInOneTetherSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
@@ -169,6 +170,7 @@ public class SettingsGateway {
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings2.class.getName(),
+            AllInOneTetherSettings.class.getName(),
             TetherSettings.class.getName(),
             WifiP2pSettings.class.getName(),
             WifiTetherSettings.class.getName(),

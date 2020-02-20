@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
 
 /** For accessibility services that target SDK <= Q in setup wizard. */
 public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
@@ -26,8 +27,8 @@ public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
     private boolean mToggleSwitchWasInitiallyChecked;
 
     @Override
-    protected void onProcessArguments(Bundle arguments) {
-        super.onProcessArguments(arguments);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 

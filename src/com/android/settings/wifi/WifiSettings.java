@@ -1048,8 +1048,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final ContentResolver contentResolver = context.getContentResolver();
         return mWifiManager.isAutoWakeupEnabled()
-                && Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
+                && mWifiManager.isScanAlwaysAvailable()
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 0
                 && !powerManager.isPowerSaveMode();
@@ -1060,8 +1059,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        final boolean wifiScanningMode = Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        // TODO(b/149421497): Fix this?
+        final boolean wifiScanningMode = mWifiManager.isScanAlwaysAvailable();
         final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
                 : getText(R.string.wifi_scan_notify_text_scanning_off);
         final LinkifyUtils.OnClickListener clickListener =

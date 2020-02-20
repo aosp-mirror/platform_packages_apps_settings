@@ -69,7 +69,7 @@ public class BlockPreferenceControllerTest {
     private UserManager mUm;
 
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     private BlockPreferenceController mController;
     @Mock
@@ -83,7 +83,7 @@ public class BlockPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new BlockPreferenceController(mContext, mImportanceListener, mBackend));
+        mController = spy(new BlockPreferenceController(mContext, mDependentFieldListener, mBackend));
         mSwitch = new SwitchBar(mContext);
         when(mPreference.findViewById(R.id.switch_bar)).thenReturn(mSwitch);
     }

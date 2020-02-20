@@ -16,37 +16,38 @@
 
 package com.android.settings.notification.app;
 
-import android.app.NotificationChannel;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ShortcutInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.util.Collections;
+import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
 
-public class ConversationListPreferenceController extends NotificationPreferenceController {
+public abstract class ConversationListPreferenceController extends AbstractPreferenceController {
 
-    private static final String KEY = "conversations";
-    public static final String ARG_FROM_SETTINGS = "fromSettings";
+    private static final String KEY = "all_conversations";
 
-    private List<ConversationChannelWrapper> mConversations;
-    private PreferenceCategory mPreference;
+    protected final NotificationBackend mBackend;
 
-    public ConversationListPreferenceController(Context context, NotificationBackend backend) {
-        super(context, backend);
+    public ConversationListPreferenceController(Context context,
+            NotificationBackend backend) {
+        super(context);
+        mBackend = backend;
     }
 
     @Override
@@ -56,108 +57,93 @@ public class ConversationListPreferenceController extends NotificationPreference
 
     @Override
     public boolean isAvailable() {
-        if (mAppRow == null) {
-            return false;
-        }
-        if (mAppRow.banned) {
-            return false;
-        }
-        if (mChannel != null) {
-            if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)
-                    || NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId())) {
-                return false;
-            }
-        }
         return true;
     }
 
-    @Override
-    public void updateState(Preference preference) {
-        mPreference = (PreferenceCategory) preference;
-        // Load channel settings
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... unused) {
-                mConversations = mBackend.getConversations(mAppRow.pkg, mAppRow.uid).getList();
-                Collections.sort(mConversations, mConversationComparator);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void unused) {
-                if (mContext == null) {
-                    return;
-                }
-                populateList();
-            }
-        }.execute();
-    }
-
-    private void populateList() {
+    protected void populateList(List<ConversationChannelWrapper> conversations,
+            PreferenceGroup outerContainer, PreferenceGroup innerContainer) {
         // TODO: if preference has children, compare with newly loaded list
-        mPreference.removeAll();
-        mPreference.setTitle(R.string.conversations_category_title);
-
-        if (mConversations.isEmpty()) {
-            mPreference.setVisible(false);
+        if (conversations.isEmpty()) {
+            outerContainer.setVisible(false);
         } else {
-            mPreference.setVisible(true);
-            populateConversations();
+            outerContainer.setVisible(true);
+            populateConversations(conversations, innerContainer);
         }
     }
 
-    private void populateConversations() {
-        for (ConversationChannelWrapper conversation : mConversations) {
+    protected void populateConversations(List<ConversationChannelWrapper> conversations,
+            PreferenceGroup containerGroup) {
+        containerGroup.removeAll();
+        for (ConversationChannelWrapper conversation : conversations) {
             if (conversation.getNotificationChannel().isDemoted()) {
                 continue;
             }
-            mPreference.addPreference(createConversationPref(conversation));
+            containerGroup.addPreference(createConversationPref(conversation));
         }
     }
 
     protected Preference createConversationPref(final ConversationChannelWrapper conversation) {
         Preference pref = new Preference(mContext);
-        ShortcutInfo si = conversation.getShortcutInfo();
 
-        pref.setTitle(si != null
-                ? si.getShortLabel()
-                : conversation.getNotificationChannel().getName());
-        pref.setSummary(conversation.getNotificationChannel().getGroup() != null
-                ? mContext.getString(R.string.notification_conversation_summary,
-                conversation.getParentChannelLabel(), conversation.getGroupLabel())
-                : conversation.getParentChannelLabel());
-        if (si != null) {
-            pref.setIcon(mBackend.getConversationDrawable(mContext, si, mAppRow.pkg, mAppRow.uid));
-        }
+        pref.setTitle(getTitle(conversation));
+        pref.setSummary(getSummary(conversation));
+        pref.setIcon(mBackend.getConversationDrawable(mContext, conversation.getShortcutInfo(),
+                conversation.getPkg(), conversation.getUid()));
         pref.setKey(conversation.getNotificationChannel().getId());
+        pref.setIntent(getIntent(conversation, pref.getTitle()));
 
-        Bundle channelArgs = new Bundle();
-        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mAppRow.uid);
-        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mAppRow.pkg);
-        channelArgs.putString(Settings.EXTRA_CHANNEL_ID,
-                conversation.getNotificationChannel().getParentChannelId());
-        channelArgs.putString(Settings.EXTRA_CONVERSATION_ID,
-                conversation.getNotificationChannel().getConversationId());
-        channelArgs.putBoolean(ARG_FROM_SETTINGS, true);
-        pref.setIntent(new SubSettingLauncher(mContext)
-                .setDestination(ChannelNotificationSettings.class.getName())
-                .setArguments(channelArgs)
-                .setExtras(channelArgs)
-                .setTitleText(pref.getTitle())
-                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_APP_NOTIFICATION)
-                .toIntent());
         return pref;
     }
 
+    CharSequence getSummary(ConversationChannelWrapper conversation) {
+        return TextUtils.isEmpty(conversation.getGroupLabel())
+                ? conversation.getParentChannelLabel()
+                : mContext.getString(R.string.notification_conversation_summary,
+                conversation.getParentChannelLabel(), conversation.getGroupLabel());
+    }
+
+    CharSequence getTitle(ConversationChannelWrapper conversation) {
+        ShortcutInfo si = conversation.getShortcutInfo();
+        return si != null
+                ? si.getShortLabel()
+                : conversation.getNotificationChannel().getName();
+    }
+
+    Intent getIntent(ConversationChannelWrapper conversation, CharSequence title) {
+        Bundle channelArgs = new Bundle();
+        channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, conversation.getUid());
+        channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, conversation.getPkg());
+        channelArgs.putString(Settings.EXTRA_CHANNEL_ID,
+                conversation.getNotificationChannel().getId());
+        channelArgs.putString(Settings.EXTRA_CONVERSATION_ID,
+                conversation.getNotificationChannel().getConversationId());
+
+        return new SubSettingLauncher(mContext)
+                .setDestination(ChannelNotificationSettings.class.getName())
+                .setArguments(channelArgs)
+                .setExtras(channelArgs)
+                .setTitleText(title)
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS)
+                .toIntent();
+    }
+
     protected Comparator<ConversationChannelWrapper> mConversationComparator =
-            (left, right) -> {
-                if (left.getNotificationChannel().isImportantConversation()
-                        != right.getNotificationChannel().isImportantConversation()) {
-                    // important first
-                    return Boolean.compare(right.getNotificationChannel().isImportantConversation(),
-                            left.getNotificationChannel().isImportantConversation());
+            new Comparator<ConversationChannelWrapper>() {
+                private final Collator sCollator = Collator.getInstance();
+                @Override
+                public int compare(ConversationChannelWrapper o1, ConversationChannelWrapper o2) {
+                    if (o1.getShortcutInfo() != null && o2.getShortcutInfo() == null) {
+                        return -1;
+                    }
+                    if (o1.getShortcutInfo() == null && o2.getShortcutInfo() != null) {
+                        return 1;
+                    }
+                    if (o1.getShortcutInfo() == null && o2.getShortcutInfo() == null) {
+                        return o1.getNotificationChannel().getId().compareTo(
+                                o2.getNotificationChannel().getId());
+                    }
+                    return sCollator.compare(o1.getShortcutInfo().getShortLabel(),
+                            o2.getShortcutInfo().getShortLabel());
                 }
-                return left.getNotificationChannel().getId().compareTo(
-                        right.getNotificationChannel().getId());
             };
 }

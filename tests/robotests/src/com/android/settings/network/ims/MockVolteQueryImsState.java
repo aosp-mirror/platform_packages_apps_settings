@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telephony.ims.ImsException;
 
 import com.android.ims.ImsManager;
 
@@ -28,6 +29,7 @@ import com.android.ims.ImsManager;
 public class MockVolteQueryImsState extends VolteQueryImsState {
 
     private Boolean mIsTtyOnVolteEnabled;
+    private Boolean mIsSupported;
     private Boolean mIsProvisionedOnDevice;
     private Boolean mIsEnabledByUser;
 
@@ -55,6 +57,19 @@ public class MockVolteQueryImsState extends VolteQueryImsState {
             return mIsTtyOnVolteEnabled;
         }
         return super.isTtyOnVolteEnabled(subId);
+    }
+
+    public void setEnabledByPlatform(boolean isSupported) {
+        mIsSupported = isSupported;
+    }
+
+    @Override
+    boolean isEnabledByPlatform(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsSupported != null) {
+            return mIsSupported;
+        }
+        return super.isEnabledByPlatform(subId);
     }
 
     public void setIsProvisionedOnDevice(boolean isProvisioned) {

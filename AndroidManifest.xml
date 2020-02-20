@@ -1348,11 +1348,6 @@
                   android:exported="false">
         </activity>
 
-        <activity android:name=".security.InstallAppSourceCertificateWarning"
-                  android:theme="@style/GlifV3Theme.Light"
-                  android:exported="false">
-        </activity>
-
         <activity
             android:name="Settings$DeviceAdminSettingsActivity"
             android:label="@string/device_admin_settings_title">
@@ -1616,6 +1611,10 @@
         <activity android:name=".password.ConfirmLockPassword"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/GlifTheme.Light"/>
+
+        <activity android:name=".password.ForgotPasswordActivity"
+            android:theme="@style/GlifV3Theme.Light"
+            android:exported="false"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
             android:exported="false"

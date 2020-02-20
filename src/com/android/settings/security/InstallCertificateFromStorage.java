@@ -60,7 +60,6 @@ public class InstallCertificateFromStorage extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
-        // TODO(eranm,victorhsieh): use "settings:controller" in xml and remove the following.
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new InstallCaCertificatePreferenceController(context));
         controllers.add(new InstallUserCertificatePreferenceController(context));

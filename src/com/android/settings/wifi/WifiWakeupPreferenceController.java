@@ -153,8 +153,7 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
     }
 
     private boolean getWifiScanningEnabled() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        return mWifiManager.isScanAlwaysAvailable();
     }
 
     private void showScanningDialog() {
