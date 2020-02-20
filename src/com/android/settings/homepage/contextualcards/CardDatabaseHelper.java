@@ -16,9 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -31,7 +29,7 @@ import androidx.annotation.VisibleForTesting;
 public class CardDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "CardDatabaseHelper";
     private static final String DATABASE_NAME = "homepage_cards.db";
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
     public static final String CARD_TABLE = "cards";
 
@@ -72,31 +70,32 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
         String APP_VERSION = "app_version";
 
         /**
-         * Decide the card is dismissed or not.
+         * Timestamp of card being dismissed.
          */
-        String CARD_DISMISSED = "card_dismissed";
+        String DISMISSED_TIMESTAMP = "dismissed_timestamp";
     }
 
     private static final String CREATE_CARD_TABLE =
-            "CREATE TABLE " + CARD_TABLE +
-                    "(" +
-                    CardColumns.NAME +
-                    " TEXT NOT NULL PRIMARY KEY, " +
-                    CardColumns.TYPE +
-                    " INTEGER NOT NULL, " +
-                    CardColumns.SCORE +
-                    " DOUBLE NOT NULL, " +
-                    CardColumns.SLICE_URI +
-                    " TEXT, " +
-                    CardColumns.CATEGORY +
-                    " INTEGER DEFAULT 0, " +
-                    CardColumns.PACKAGE_NAME +
-                    " TEXT NOT NULL, " +
-                    CardColumns.APP_VERSION +
-                    " INTEGER NOT NULL, " +
-                    CardColumns.CARD_DISMISSED +
-                    " INTEGER DEFAULT 0 " +
-                    ");";
+            "CREATE TABLE "
+                    + CARD_TABLE
+                    + "("
+                    + CardColumns.NAME
+                    + " TEXT NOT NULL PRIMARY KEY, "
+                    + CardColumns.TYPE
+                    + " INTEGER NOT NULL, "
+                    + CardColumns.SCORE
+                    + " DOUBLE NOT NULL, "
+                    + CardColumns.SLICE_URI
+                    + " TEXT, "
+                    + CardColumns.CATEGORY
+                    + " INTEGER DEFAULT 0, "
+                    + CardColumns.PACKAGE_NAME
+                    + " TEXT NOT NULL, "
+                    + CardColumns.APP_VERSION
+                    + " INTEGER NOT NULL, "
+                    + CardColumns.DISMISSED_TIMESTAMP
+                    + " INTEGER"
+                    + ");";
 
     public CardDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -124,33 +123,5 @@ public class CardDatabaseHelper extends SQLiteOpenHelper {
             sCardDatabaseHelper = new CardDatabaseHelper(context.getApplicationContext());
         }
         return sCardDatabaseHelper;
-    }
-
-    Cursor getContextualCards() {
-        final SQLiteDatabase db = getReadableDatabase();
-        final String selection = CardColumns.CARD_DISMISSED + "=0";
-        return db.query(CARD_TABLE, null /* columns */, selection,
-                null /* selectionArgs */, null /* groupBy */, null /* having */,
-                CardColumns.SCORE + " DESC" /* orderBy */);
-    }
-
-    /**
-     * Mark a specific ContextualCard with dismissal flag in the database to indicate that the
-     * card has been dismissed.
-     *
-     * @param context  Context
-     * @param cardName The card name of the ContextualCard which is dismissed by user.
-     * @return The number of rows updated
-     */
-    public int markContextualCardAsDismissed(Context context, String cardName) {
-        final SQLiteDatabase database = getWritableDatabase();
-        final ContentValues values = new ContentValues();
-        values.put(CardColumns.CARD_DISMISSED, 1);
-        final String selection = CardColumns.NAME + "=?";
-        final String[] selectionArgs = {cardName};
-        final int rowsUpdated = database.update(CARD_TABLE, values, selection, selectionArgs);
-        database.close();
-        context.getContentResolver().notifyChange(CardContentProvider.DELETE_CARD_URI, null);
-        return rowsUpdated;
     }
 }

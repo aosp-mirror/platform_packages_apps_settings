@@ -178,7 +178,9 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     Cursor getContextualCardsFromProvider() {
-        return CardDatabaseHelper.getInstance(mContext).getContextualCards();
+        final ContextualCardFeatureProvider cardFeatureProvider =
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+        return cardFeatureProvider.getContextualCards();
     }
 
     @VisibleForTesting
