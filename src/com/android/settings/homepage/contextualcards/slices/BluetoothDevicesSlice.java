@@ -16,14 +16,14 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
-
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -77,8 +77,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     private static final String TAG = "BluetoothDevicesSlice";
 
-    private static int sToggledState;
-
     private final Context mContext;
 
     public BluetoothDevicesSlice(Context context) {
@@ -103,37 +101,26 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
-        final CharSequence title = mContext.getText(R.string.bluetooth_settings_title);
+        final CharSequence title = mContext.getText(R.string.bluetooth_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext, 0,
                 getIntent(), 0);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
                 ListBuilder.ICON_IMAGE, title);
+        final SliceAction pairNewDeviceAction = getPairNewDeviceAction();
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
+                .addAction(pairNewDeviceAction)
                 .setHeader(new ListBuilder.HeaderBuilder()
                         .setTitle(title)
                         .setPrimaryAction(primarySliceAction));
 
-        // Only show a toggle when Bluetooth is off and not turning on.
-        if ((!isBluetoothEnabled(btAdapter) && sToggledState != BluetoothAdapter.STATE_TURNING_ON)
-                || sToggledState == BluetoothAdapter.STATE_TURNING_OFF) {
-            sToggledState = 0;
-            final PendingIntent toggleAction = getBroadcastIntent(mContext);
-            final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
-                    null /* actionTitle */, false /* isChecked */);
-            return listBuilder
-                    .addAction(toggleSliceAction)
-                    .build();
+        // Only show a header when Bluetooth is off.
+        if (!isBluetoothEnabled(btAdapter)) {
+            return listBuilder.build();
         }
-        sToggledState = 0;
 
         // Get row builders by Bluetooth devices.
         final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder();
-        if (rows.isEmpty()) {
-            return listBuilder
-                    .addRow(getPairNewDeviceRow())
-                    .build();
-        }
 
         // Get displayable device count.
         final int deviceCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
@@ -161,20 +148,6 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     @Override
     public void onNotifyChange(Intent intent) {
-        final BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
-        final boolean currentState = isBluetoothEnabled(btAdapter);
-        final boolean newState = intent.getBooleanExtra(EXTRA_TOGGLE_STATE, currentState);
-        if (newState != currentState) {
-            if (newState) {
-                sToggledState = BluetoothAdapter.STATE_TURNING_ON;
-                btAdapter.enable();
-            } else {
-                sToggledState = BluetoothAdapter.STATE_TURNING_OFF;
-                btAdapter.disable();
-            }
-            mContext.getContentResolver().notifyChange(getUri(), null);
-        }
-
         // Activate available media device.
         final int bluetoothDeviceHashCode = intent.getIntExtra(BLUETOOTH_DEVICE_HASH_CODE, -1);
         for (CachedBluetoothDevice cachedBluetoothDevice : getConnectedBluetoothDevices()) {
@@ -250,8 +223,11 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         return Utils.createIconWithDrawable(drawable);
     }
 
-    private ListBuilder.RowBuilder getPairNewDeviceRow() {
-        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.ic_add_24dp);
+    private SliceAction getPairNewDeviceAction() {
+        final Drawable d = mContext.getDrawable(R.drawable.ic_add_24dp);
+        d.setColorFilter(new PorterDuffColorFilter(Utils.getColorAccentDefaultColor(mContext),
+                PorterDuff.Mode.SRC_IN));
+        final IconCompat icon = Utils.createIconWithDrawable(d);
         final String title = mContext.getString(R.string.bluetooth_pairing_pref_title);
         final Intent intent = new SubSettingLauncher(mContext)
                 .setDestination(BluetoothPairingDetail.class.getName())
@@ -260,11 +236,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .toIntent();
         final PendingIntent pi = PendingIntent.getActivity(mContext, intent.hashCode(), intent,
                 0 /* flags */);
-        final SliceAction action = SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE,
-                title);
-        return new ListBuilder.RowBuilder()
-                .setTitleItem(action)
-                .setTitle(title);
+        return SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE, title);
     }
 
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilder() {
