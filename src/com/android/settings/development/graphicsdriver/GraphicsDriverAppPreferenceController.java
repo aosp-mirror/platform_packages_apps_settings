@@ -26,7 +26,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -58,14 +60,18 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         GraphicsDriverContentObserver.OnGraphicsDriverContentChangedListener, LifecycleObserver,
         OnStart, OnStop {
 
+    private static final String PROPERTY_GFX_DRIVER_GAME = "ro.gfx.driver.0";
+    private static final String PROPERTY_GFX_DRIVER_PRERELEASE = "ro.gfx.driver.1";
+
     private final Context mContext;
     private final ContentResolver mContentResolver;
-    private final CharSequence[] mEntryList;
     private final String mPreferenceTitle;
     private final String mPreferenceDefault;
     private final String mPreferenceGameDriver;
     private final String mPreferencePrereleaseDriver;
     private final String mPreferenceSystem;
+    @VisibleForTesting
+    CharSequence[] mEntryList;
     @VisibleForTesting
     GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
@@ -85,7 +91,6 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
                 new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
 
         final Resources resources = context.getResources();
-        mEntryList = resources.getStringArray(R.array.graphics_driver_app_preference_values);
         mPreferenceTitle = resources.getString(R.string.graphics_driver_app_preference_title);
         mPreferenceDefault = resources.getString(R.string.graphics_driver_app_preference_default);
         mPreferenceGameDriver =
@@ -93,6 +98,7 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
         mPreferenceSystem = resources.getString(R.string.graphics_driver_app_preference_system);
+        mEntryList = constructEntryList();
 
         // TODO: Move this task to background if there's potential ANR/Jank.
         // Update the UI when all the app infos are ready.
@@ -187,6 +193,28 @@ public class GraphicsDriverAppPreferenceController extends BasePreferenceControl
     @Override
     public void onGraphicsDriverContentChanged() {
         updateState(mPreferenceGroup);
+    }
+
+    /**
+     * Constructs and returns a list of graphics driver choices.
+     */
+    public CharSequence[] constructEntryList() {
+        final String prereleaseDriverPackageName =
+                SystemProperties.get(PROPERTY_GFX_DRIVER_PRERELEASE);
+        final String gameDriverPackageName = SystemProperties.get(PROPERTY_GFX_DRIVER_GAME);
+
+        List<CharSequence> entryList = new ArrayList<>();
+        entryList.add(mPreferenceDefault);
+        if (!TextUtils.isEmpty(prereleaseDriverPackageName)) {
+            entryList.add(mPreferencePrereleaseDriver);
+        }
+        if (!TextUtils.isEmpty(gameDriverPackageName)) {
+            entryList.add(mPreferenceGameDriver);
+        }
+        entryList.add(mPreferenceSystem);
+        CharSequence[] filteredEntryList = new CharSequence[entryList.size()];
+        filteredEntryList = entryList.toArray(filteredEntryList);
+        return filteredEntryList;
     }
 
     // AppInfo class to achieve loading the application label only once
