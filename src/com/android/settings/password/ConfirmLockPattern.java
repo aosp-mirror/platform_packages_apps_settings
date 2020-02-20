@@ -240,7 +240,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.prepareEnterAnimation();
             mHeaderTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
-            mForgotButton.setAlpha(0f);
+            if (mForgotButton != null) {
+                mForgotButton.setAlpha(0f);
+            }
             mLockPatternView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
         }
@@ -268,7 +270,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(new ArrayList<>(Collections.singletonList(mCancelButton)));
             }
-            if (mForgotButton.getVisibility() == View.VISIBLE) {
+            if (mForgotButton != null) {
                 result.add(new ArrayList<>(Collections.singletonList(mForgotButton)));
             }
             LockPatternView.CellState[][] cellStates = mLockPatternView.getCellStates();
