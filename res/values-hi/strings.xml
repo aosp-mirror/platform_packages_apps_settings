@@ -921,10 +921,8 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"वाई-फ़ाई पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"हॉटस्पॉट का पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"अपने-आप कनेक्ट हो जाए"</string>
-    <!-- no translation found for wifi_auto_connect_summary (5383749408911542382) -->
-    <skip />
-    <!-- no translation found for wifi_auto_connect_summary (5209799194164396401) -->
-    <skip />
+    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"अनुमति दें कि इस वाई-फ़ाई नेटवर्क के पास आते ही आपका फ़ोन अपने-आप इससे कनेक्ट हो जाए"</string>
+    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"अनुमति दें कि इस वाई-फ़ाई नेटवर्क के पास आते ही आपका टैबलेट अपने-आप इससे कनेक्ट हो जाए"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"डिवाइस जोड़ें"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"इस नेटवर्क से किसी डिवाइस को जोड़ने के लिए एक QR कोड का इस्तेमाल करें"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोड का फ़ॉर्मैट गलत है"</string>
@@ -1056,8 +1054,7 @@
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="1445157424926935178">"AndroidAP WPA2 PSK हॉटस्पॉट"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"AndroidHotspot"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"क्या आप यह नेटवर्क सेव करना चाहते हैं?"</string>
-    <!-- no translation found for wifi_add_app_single_network_summary (6881712878537666626) -->
-    <skip />
+    <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g> आपके फ़ोन पर वाई-फ़ाई नेटवर्क को जोड़ना चाहता है"</string>
     <!-- no translation found for wifi_add_app_single_network_summary (8455616967601552440) -->
     <skip />
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"सेव किया जा रहा है…"</string>
@@ -1065,8 +1062,7 @@
     <!-- no translation found for wifi_add_app_network_save_failed_summary (7223817782309294652) -->
     <skip />
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"नेटवर्क सेव करें?"</string>
-    <!-- no translation found for wifi_add_app_networks_summary (2670215712788515167) -->
-    <skip />
+    <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> आपके फ़ोन पर इन वाई-फ़ाई नेटवर्क को जोड़ना चाहता है"</string>
     <!-- no translation found for wifi_add_app_networks_summary (2088967184512169910) -->
     <skip />
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"<xliff:g id="NUMBER">%d</xliff:g> नेटवर्क सेव किए जा रहे हैं…"</string>
@@ -1637,6 +1633,9 @@
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"हॉटस्पॉट चालू है"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"टेदर हो रहा है"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"डेटा बचाने की सेटिंग चालू होने पर इंटरनेट शेयर नहीं किया जा सकता या पोर्टेबल हॉटस्पॉट का इस्तेमाल नहीं किया जा सकता"</string>
+    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"सिर्फ़ यूएसबी के ज़रिए इंटरनेट शेयर करें"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"सिर्फ़ ब्लूटूथ के ज़रिए इंटरनेट शेयर करें"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"सिर्फ़ ब्लूटूथ और यूएसबी के ज़रिए इंटरनेट शेयर करें"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"यूएसबी से टेदरिंग"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"यूएसबी के ज़रिए फ़ोन का इंटरनेट कनेक्‍शन शेयर करें"</string>
@@ -2094,8 +2093,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"स्क्रीन पर ज़ूम इन करें"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"ज़ूम करने के लिए तीन बार टैप करें"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ज़ूम करने के लिए किसी बटन पर टैप करें"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary (344859130549374147) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary" msgid="7617931632990040045">"स्क्रीन पर मौजूद सामग्री साफ़-साफ़ देखने के लिए तेज़ी से ज़ूम इन करें.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;ज़ूम इन करने के लिए:&lt;/b&gt;&lt;br/&gt;	1. ज़ूम करने की सुविधा को शुरू करने के लिए शॉर्टकट का इस्तेमाल करें&lt;br/&gt;	2. स्क्रीन पर टैप करें&lt;br/&gt;	3. स्क्रीन पर इधर-उधर देखने के लिए दो उंगलियों से खींचें और छोड़ें&lt;br/&gt;	4. ज़ूम काे कम या ज़्यादा करने के लिए दो उंगलियों से पिंच करें&lt;br/&gt;	5. ज़ूम करने की सुविधा को बंद करने के लिए शॉर्टकट का इस्तेमाल करें&lt;br/&gt;&lt;br/&gt;&lt;b&gt;कुछ समय के लिए ज़ूम इन करना है, ताे:&lt;/b&gt;&lt;br/&gt;	1. ज़ूम करने की सुविधा को शुरू करने के लिए शॉर्टकट का इस्तेमाल करें&lt;br/&gt;	2. स्क्रीन पर कहीं भी उंगली से दबाकर रखें&lt;br/&gt;	3. स्क्रीन पर इधर-उधर देखने के लिए उंगली से खींचें और छोड़ें&lt;br/&gt;	4. ज़ूम करने की सुविधा को रोकने के लिए अपनी उंगली स्क्रीन से हटाएं"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"बड़ा करके देखने की सुविधा चालू होने पर, आप स्क्रीन को ज़ूम इन कर सकते हैं.\n\n"<b>"ज़ूम करने के लिए"</b>", बड़ा करके देखने की सुविधा चालू करें और फिर स्क्रीन पर कहीं भी टैप करें.\n"<ul><li>"स्क्रोल करने के लिए दो या ज़्यादा उंगलियों से खींचें और छोड़ें"</li>\n<li>"ज़ूम नियंत्रित करने के लिए दो या ज़्यादा उंगलियों से पिंच करें"</li></ul>\n\n<b>"थोड़ी देर तक ज़ूम करने के लिए"</b>", बड़ा करके देखने की सुविधा चालू करें, फिर स्क्रीन पर कहीं भी दबाकर रखें.\n"<ul><li>"स्क्रीन के दूसरे हिस्सों पर जाने के लिए, उंगलियों से खींचें और छोड़ें"</li>\n<li>"ज़ूम घटाने के लिए उंगलियों को स्क्रीन से हटाएं"</li></ul>\n\n"आप कीबोर्ड या नेविगेशन बार को ज़ूम इन नहीं कर सकते."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"इसे खोलने के लिए सुलभता बटन का इस्तेमाल करें"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"इसे खोलने के लिए हाथ के जेस्चर का इस्तेमाल करें"</string>
@@ -2161,8 +2159,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"रंग बदलें"</string>
     <!-- no translation found for accessibility_display_inversion_switch_title (7458595722552743503) -->
     <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (9175555611774009143) -->
-    <skip />
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="7230891925207955620">"रंग बदलने की सुविधा से, हल्के रंग की स्क्रीन गहरे रंग में बदल जाती हैं. इससे उन लोगों को आसानी होती है जिन्हें तेज़ रोशनी से दिक्कत होती है.&lt;br/&gt;&lt;br/&gt;ध्यान दें: गहरे रंग थोड़े हल्के हो जाएंगे. मीडिया और इमेज में रंग बदल जाएंगे. आप गहरे रंग वाली थीम (सेटिंग &gt; डिसप्ले) का भी इस्तेमाल कर सकते हैं."</string>
     <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"ऑटो क्लिक (ड्वेल टाइम)"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"अगर आप माउस इस्तेमाल कर रहे हैं तो, सेट कर सकते हैं कि किसी जगह पर एक तय समय तक रुकने के बाद कर्सर अपने आप कार्रवाई करे."</string>
     <!-- no translation found for accessibility_autoclick_default_title (2060909980831267041) -->
@@ -2177,6 +2174,8 @@
     <!-- no translation found for accessibility_autoclick_shorter_desc (7631013255724544348) -->
     <skip />
     <!-- no translation found for accessibility_autoclick_longer_desc (2566025502981487443) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_seekbar_desc (2370077188725433271) -->
     <skip />
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"वाइब्रेशन और हैप्टिक तीव्रता"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"सूचना के लिए वाइब्रेशन"</string>
@@ -2215,26 +2214,11 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"लाल-हरे रंग की पहचान न कर पाने की समस्या"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"हरा-लाल रंग पहचान न पाने की समस्या"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"नीले-पीले रंग की पहचान न कर पाने की समस्या"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
-      <item quantity="one">अत्यंत कम समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-      <item quantity="other">अत्यंत कम समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5067805618144149445">
-      <item quantity="one">बहुत कम समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-      <item quantity="other">बहुत कम समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="416055324409474880">
-      <item quantity="one">थोड़े समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-      <item quantity="other">थोड़े समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="556424440912669213">
-      <item quantity="one">ज़्यादा समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-      <item quantity="other">ज़्यादा समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="4474904810885802549">
-      <item quantity="one">अत्यधिक समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-      <item quantity="other">अत्यधिक समय का विलंब (<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> मिसे)</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_extremely_short_delay (8226135362782015387) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_short_delay (4440667435012753839) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (1627969745093865560) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (1126608261854734991) -->
+    <!-- no translation found for accessibilty_autoclick_preference_subtitle_very_long_delay (6624972454933133135) -->
     <!-- no translation found for accessibilty_autoclick_delay_unit_second (8132935106204075064) -->
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"घंटी <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, सूचना <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>,  छूना (टच) <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"घंटी बजने और सूचना आने के लिए वाइब्रेशन, बंद पर सेट है"</string>
@@ -2707,6 +2691,7 @@
     <string name="notification_history_today" msgid="8776595977526590103">"आज"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"स्नूज़ (अलार्म थोड़ी देर के लिए चुप करना) किया गया"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"हाल ही में खारिज किया गया"</string>
+    <!-- no translation found for notification_history_count (1859304685071321991) -->
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"रिंगटोन और कंपन (वाइब्रेशन)"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"नेटवर्क की जानकारी"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"समन्वयन सक्षम"</string>
@@ -3282,12 +3267,9 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना की डिफ़ॉल्ट टोन"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्म की डिफ़ॉल्ट आवाज़"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"कॉल आने पर वाइब्रेट होना"</string>
-    <!-- no translation found for vibrate_when_ringing_option_never_vibrate (6518980907289156517) -->
-    <skip />
-    <!-- no translation found for vibrate_when_ringing_option_always_vibrate (968652667232075466) -->
-    <skip />
-    <!-- no translation found for vibrate_when_ringing_option_ramping_ringer (2798848945803840348) -->
-    <skip />
+    <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"वाइब्रेट न हो"</string>
+    <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"वाइब्रेट हो"</string>
+    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"पहले वाइब्रेट हो, फिर धीरे-धीरे घंटी बजे"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"अन्य आवाज़ें"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"डायल पैड टोन"</string>
     <string name="screen_locking_sounds_title" msgid="1502654020775767536">"स्क्रीन लॉक करने की आवाज़ें"</string>
@@ -3369,8 +3351,7 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1559968890497946901">"आवाज़ और वाइब्रेशन"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"आवाज़, कंपन (वाइब्रेशन) और सूचनाएं आने पर दिखाई देने वाले कुछ संकेत"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"आवाज़, कंपन (वाइब्रेशन) और सूचनाएं आने पर दिखाई देने वाले संकेत"</string>
-    <!-- no translation found for zen_mode_blocked_effects_footer (1115914818435434668) -->
-    <skip />
+    <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"फ़ोन की सामान्य गतिविधि और स्थिति की सूचनाओं को कभी छिपाया नहीं जाएगा."</string>
     <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"कोई आवाज़ नहीं"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"दूसरे विकल्प"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"जोड़ें"</string>
@@ -3453,6 +3434,18 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"कोई सूचना कितने काम की है, इस हिसाब से उसे अपने-आप रैंक करें"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुझाई गई कार्रवाइयां और जवाब"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुझाई गई कार्रवाइयां और जवाब अपने आप दिखाएं"</string>
+    <!-- no translation found for notification_history_summary (6821337322742231789) -->
+    <skip />
+    <!-- no translation found for notification_history (8663811361243456201) -->
+    <skip />
+    <!-- no translation found for notification_history_turn_on (3298178949776249681) -->
+    <skip />
+    <!-- no translation found for notification_history_turn_off (3141050596252009528) -->
+    <skip />
+    <!-- no translation found for notification_history_off_title_extended (2174043349602912717) -->
+    <skip />
+    <!-- no translation found for notification_history_view_settings (5269317798670449002) -->
+    <skip />
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूज़ करने की अनुमति दें"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"बिना आवाज़ वाली सूचनाओं से आइकॉन छिपाएं"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"स्टेटस बार में बिना आवाज़ वाली सूचनाओं के आइकॉन नहीं दिखाए जाते हैं"</string>
@@ -3686,12 +3679,9 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> और संपर्क</item>
     </plurals>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"बातचीत"</string>
-    <!-- no translation found for zen_mode_from_all_conversations (4646332080225579376) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_important_conversations (5249278652331540929) -->
-    <skip />
-    <!-- no translation found for zen_mode_from_no_conversations (2525336494889055022) -->
-    <skip />
+    <string name="zen_mode_from_all_conversations" msgid="4646332080225579376">"सभी बातचीत से"</string>
+    <string name="zen_mode_from_important_conversations" msgid="5249278652331540929">"अहम बातचीत से"</string>
+    <string name="zen_mode_from_no_conversations" msgid="2525336494889055022">"किसी भी बातचीत को अनुमति न दें"</string>
     <string name="zen_mode_messages" msgid="7835537207069585861">"मैसेज दिखाने की मंज़ूरी दें"</string>
     <string name="zen_mode_messages_footer" msgid="6996375319078720643">"जिन मैसेज के आने की अनुमति है, उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने, वाइब्रेट करने या मौन रहने में से किस मोड पर सेट है."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले मैसेज ब्लॉक कर दिए गए हैं. आप सेटिंग में अपने हिसाब से बदलाव करके दोस्तों, परिवार के सदस्यों या दूसरे लोगों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>

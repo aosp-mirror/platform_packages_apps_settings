@@ -109,17 +109,17 @@ public class ChannelNotificationSettings extends NotificationSettings {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
-        mControllers.add(new BlockPreferenceController(context, mImportanceListener, mBackend));
+        mControllers.add(new BlockPreferenceController(context, mDependentFieldListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new MinImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new HighImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
-                mImportanceListener, mBackend));
+                mDependentFieldListener, mBackend));
         mControllers.add(new VibrationPreferenceController(context, mBackend));
         mControllers.add(new AppLinkPreferenceController(context));
         mControllers.add(new DescriptionPreferenceController(context));

@@ -1755,6 +1755,12 @@
     <string name="wifi_band_5ghz">5 GHz</string>
     <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
     <string name="wifi_sign_in_button_text">Sign in</string>
+    <!-- Text for button to go to Wifi venue information webpage when Wifi is a captive portal [CHAR LIMIT=40]-->
+    <string name="wifi_venue_website_button_text">Open site</string>
+    <!-- Text shown in wifi settings indicating how much time is left on an internet access point that has a time limit for the session [CHAR LIMIT=40] -->
+    <string name="wifi_time_remaining"><xliff:g id="Remaining time" example="1 day, 2 hours, 3 minutes">%1$s</xliff:g> left</string>
+    <!-- Text shown in wifi settings indicating at what time the connection will expire on an internet access point that has a time limit for the session [CHAR LIMIT=40] -->
+    <string name="wifi_expiry_time">Expires on <xliff:g id="Expiry time" example="2020/01/02 12:34PM">%1$s</xliff:g></string>
     <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
     <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
     <!-- Transmit Link speed on Wifi Status screen [CHAR LIMIT=32] -->
@@ -2023,6 +2029,8 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
+    <!-- Label for the subscription detail preference. [CHAR LIMIT=32] -->
+    <string name="wifi_subscription_detail">Subscription details</string>
     <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
@@ -4044,6 +4052,12 @@
     <string name="lockpassword_choose_your_pattern_header_for_face">To use face unlock, set pattern</string>
     <!-- Header on first screen of choose password/PIN as backup for face unlock flow. If this string cannot be translated in under 40 characters, please translate "Set face unlock backup" [CHAR LIMIT=40] -->
     <string name="lockpassword_choose_your_pin_header_for_face">To use face unlock, set PIN</string>
+    <!-- Text for button that the user should tap when they forgot their work profile password [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_password">Forgot your password?</string>
+    <!-- Text for button that the user should tap when they forgot their work profile pattern [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_pattern">Forgot your pattern?</string>
+    <!-- Text for button that the user should tap when they forgot their work profile PIN [CHAR LIMIT=40] -->
+    <string name="lockpassword_forgot_pin">Forgot your PIN?</string>
 
     <!-- Message to be used to explain the user that he needs to enter his pattern to continue a
          particular operation. [CHAR LIMIT=70]-->
@@ -4214,6 +4228,11 @@
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="see_all_apps_title">See all <xliff:g id="count" example="3">%1$d</xliff:g> apps</string>
+
+    <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
+    <string name="forgot_password_title">Contact your IT admin</string>
+    <!-- Content of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=100] -->
+    <string name="forgot_password_text">They can help you reset your PIN, pattern, or password</string>
 
     <!-- Warning that appears below the unknown sources switch in settings -->
     <string name="install_all_warning" product="tablet">
@@ -4999,6 +5018,8 @@
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
     <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
@@ -6086,8 +6107,6 @@
     <string name="credential_for_vpn_and_apps">Installed for VPN and apps</string>
     <!-- Sub-heading for a user credential installed to be used as part of a Wi-Fi configuration. [CHAR LIMIT=NONE]. -->
     <string name="credential_for_wifi">Installed for Wi-Fi</string>
-    <!-- Sub-heading for a user credential installed to be used by kernel for fs-verity verification [CHAR LIMIT=NONE]. -->
-    <string name="credential_for_fsverity">Installed for app install source verification</string>
     <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_hint">Remove all the contents?</string>
     <!-- Toast message [CHAR LIMIT=30] -->
@@ -6102,8 +6121,6 @@
     <string name="user_certificate">VPN &amp; app user certificate</string>
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
-    <!-- Title of App Source certificate [CHAR LIMIT=40] -->
-    <string name="app_src_certificate">App Source certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
     <string name="ca_certificate_warning_title">Your privacy is at risk</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
@@ -6112,10 +6129,6 @@
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_install_anyway">Install anyways</string>
-    <!-- Title of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=60] -->
-    <string name="app_src_certificate_warning_title">Install this certificate at your own risk</string>
-    <!-- Description of warning shown to the user before they can install an App Source certificate [CHAR LIMIT=NONE] -->
-    <string name="app_src_certificate_warning_description">App source certificates verify that apps are safe for your device. Only install certificates from organizations you trust.</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
@@ -6747,28 +6760,14 @@
     <string name="one_usercrt">one user certificate</string>
     <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
     <string name="one_cacrt">one CA certificate</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
+    <!-- Item found in thee PKCS12 keystore being investigated [CHAR LIMIT=NONE]-->
     <string name="n_cacrts">%d CA certificates</string>
-    <!-- Item found in the PKCS12 keystore being investigated [CHAR LIMIT=NONE] -->
-    <string name="one_appsrccrt">one App Source certificate</string>
     <!-- Alert dialog when viewing a set of user credentials. -->
     <string name="user_credential_title">Credential details</string>
     <!-- Announcement to confirm a user credential being removed. [CHAR LIMIT=NONE] -->
     <string name="user_credential_removed">Removed credential: <xliff:g id="credential_name" example="signing key">%s</xliff:g></string>
     <!-- Placeholder for the list of installed user credentials (private keys) when the list is empty. [CHAR LIMIT=120] -->
     <string name="user_credential_none_installed">No user credentials installed</string>
-    <!-- Title of alert dialog after an app source certificate is installed. [CHAR LIMIT=50] -->
-    <string name="app_src_cert_reboot_dialog_install_title">Restart to use certificate</string>
-    <!-- Message of alert dialog after an app source certificate is installed. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_install_message">To use this app source certificate, you need to restart your device</string>
-    <!-- Title of alert dialog after an app source certificate is deleted. [CHAR LIMIT=55] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_title">Restart to finish uninstalling</string>
-    <!-- Message of alert dialog after an app source certificate is deleted. [CHAR LIMIT=NONE] -->
-    <string name="app_src_cert_reboot_dialog_uninstall_message">To uninstall this app source certificate, you need to restart your device</string>
-    <!-- Button to restart the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_restart">Restart</string>
-    <!-- Button to skip restarting the device. [CHAR LIMIT=25] -->
-    <string name="app_src_cert_reboot_dialog_button_not_now">Not now</string>
 
     <!--  Title for spell checker settings -->
     <string name="spellcheckers_settings_title">Spell checker</string>
@@ -8289,6 +8288,21 @@
 
     <!-- [CHAR LIMIT=NONE] Summary for promote_conversation_title on notifications settings page -->
     <string name="promote_conversation_summary">Add to the conversation section</string>
+
+    <!-- [CHAR LIMIT=100] link to page listing all conversations -->
+    <string name="manage_conversations">Manage conversations</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="important_conversations">Important conversations</string>
+
+    <!-- [CHAR LIMIT=100] preference category title -->
+    <string name="all_conversations">All conversations</string>
+
+    <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
+    <string name="important_bubble">Bubble important conversations</string>
+
+    <!-- [CHAR LIMIT=NONE] description of how notifications from important conversations behave -->
+    <string name="important_conversation_behavior_summary">Important conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
 
     <!-- Importance title strings for the Importance page. Also the second part of the importance
      summary on the channel page-->
@@ -10940,8 +10954,6 @@
     <!-- The divider symbol between different parts of the notification header including spaces. not translatable [CHAR LIMIT=3] -->
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>
 
-    <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
-    <string name="disabled_low_ram_device">This feature is not available on this device</string>
     <!-- Title of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
     <string name="disabled_feature">Feature not available</string>
     <!-- Part of a message for an empty state screen. A user will see this message if they try to use a certain feature, but the feature was turned off so it won't slow down their phone. [CHAR LIMIT=NONE] -->
@@ -11728,4 +11740,6 @@
     <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_always_visible"></string>
 
+    <!-- Button label to stop casting on media device. [CHAR LIMIT=40 -->
+    <string name="media_output_panel_stop_casting_button">Stop casting</string>
 </resources>

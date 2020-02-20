@@ -66,7 +66,6 @@ public class InstallCertificateFromStorageTest {
         mTestKeys.add("install_ca_certificate");
         mTestKeys.add("install_user_certificate");
         mTestKeys.add("install_wifi_certificate");
-        mTestKeys.add("install_app_src_certificate");
     }
 
     @Test

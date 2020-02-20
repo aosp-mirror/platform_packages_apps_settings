@@ -61,7 +61,7 @@ public class MinImportancePreferenceControllerTest {
     @Mock
     private NotificationBackend mBackend;
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -77,7 +77,7 @@ public class MinImportancePreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         mController = spy(new MinImportancePreferenceController(
-                mContext, mImportanceListener, mBackend));
+                mContext, mDependentFieldListener, mBackend));
     }
 
     @Test
@@ -223,6 +223,6 @@ public class MinImportancePreferenceControllerTest {
         mController.onPreferenceChange(pref, true);
 
         assertEquals(IMPORTANCE_MIN, channel.getImportance());
-        verify(mImportanceListener, times(1)).onImportanceChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 }

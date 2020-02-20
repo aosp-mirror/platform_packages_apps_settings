@@ -87,7 +87,9 @@ public class Enhanced4gBasePreferenceControllerTest {
 
         mQueryImsState = spy(new MockVolteQueryImsState(mContext, SUB_ID));
         doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
+        mQueryImsState.setEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
+        mQueryImsState.setIsEnabledByUser(true);
 
         mPreference = new RestrictedSwitchPreference(mContext);
         mController = spy(new Enhanced4gLtePreferenceController(mContext, "VoLTE"));
@@ -106,7 +108,7 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_volteDisabled_returnUnavailable() {
-        doReturn(false).when(mImsManager).isVolteEnabledByPlatform();
+        mQueryImsState.setEnabledByPlatform(false);
         doReturn(true).when(mProvisioningManager).getProvisioningStatusForCapability(
                 MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
                 ImsRegistrationImplBase.REGISTRATION_TECH_LTE);
@@ -117,7 +119,7 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void updateState_configEnabled_prefEnabled() {
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(true);
         mPreference.setEnabled(false);
         mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -131,7 +133,7 @@ public class Enhanced4gBasePreferenceControllerTest {
 
     @Test
     public void updateState_configOn_prefChecked() {
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(true);
         mPreference.setChecked(false);
         doReturn(true).when(mImsManager).isEnhanced4gLteModeSettingEnabledByUser();
         doReturn(true).when(mImsManager).isNonTtyOrTtyOnVolteEnabled();

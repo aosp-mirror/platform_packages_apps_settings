@@ -37,9 +37,6 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowUserManager.class)
 public class RestrictedEncryptionPreferenceControllerTest {
 
-    private static final String APK_VERITY_PROPERTY = "ro.apk_verity.mode";
-    private static final int APK_VERITY_MODE_ENABLED = 2;
-
     private Context mContext;
     private ShadowUserManager mUserManager;
     private CredentialStoragePreferenceController mCredentialStoragePreferenceController;
@@ -49,8 +46,6 @@ public class RestrictedEncryptionPreferenceControllerTest {
     private InstallCaCertificatePreferenceController mInstallCaCertificatePreferenceController;
     private InstallUserCertificatePreferenceController mInstallUserCertificatePreferenceController;
     private InstallWifiCertificatePreferenceController mInstallWifiCertificatePreferenceController;
-    private InstallAppSourceCertificatePreferenceController
-            mInstallAppSourceCertificatePreferenceController;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
 
@@ -69,9 +64,6 @@ public class RestrictedEncryptionPreferenceControllerTest {
                 new UserCredentialsPreferenceController(mContext);
         mInstallCaCertificatePreferenceController =
                 new InstallCaCertificatePreferenceController(mContext);
-        mInstallAppSourceCertificatePreferenceController =
-                new InstallAppSourceCertificatePreferenceController(
-                        mContext, "install_app_src_certificate");
         mInstallUserCertificatePreferenceController =
                 new InstallUserCertificatePreferenceController(mContext);
         mInstallWifiCertificatePreferenceController =
@@ -88,8 +80,6 @@ public class RestrictedEncryptionPreferenceControllerTest {
         assertThat(mInstallCaCertificatePreferenceController.isAvailable()).isTrue();
         assertThat(mInstallUserCertificatePreferenceController.isAvailable()).isTrue();
         assertThat(mInstallWifiCertificatePreferenceController.isAvailable()).isTrue();
-        assertThat(mInstallAppSourceCertificatePreferenceController.isAvailable())
-                .isEqualTo(InstallAppSourceCertificatePreferenceController.isApkVerityEnabled());
     }
 
     @Test

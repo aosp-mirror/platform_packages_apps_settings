@@ -50,6 +50,16 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="5">
+        <Preference
+            android:key="manage_conversations"
+            android:title="@string/manage_conversations"
+            android:fragment="com.android.settings.notification.app.ConversationListSettings"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="configure_notifications_lock"
         android:title="@string/lock_screen_notifications_title"
         android:order="10">

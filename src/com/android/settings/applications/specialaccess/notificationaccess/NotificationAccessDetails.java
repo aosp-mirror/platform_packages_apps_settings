@@ -17,7 +17,6 @@
 package com.android.settings.applications.specialaccess.notificationaccess;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -116,10 +115,6 @@ public class NotificationAccessDetails extends AppInfoBase {
     @Override
     protected boolean refreshUi() {
         final Context context = getContext();
-        if (context.getSystemService(ActivityManager.class).isLowRamDeviceStatic()) {
-            Slog.d(TAG, "not available on low ram devices");
-            return false;
-        }
         if (mComponentName == null) {
             // No service given
             Slog.d(TAG, "No component name provided");

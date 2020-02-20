@@ -261,6 +261,15 @@ public class NotificationBackend {
         }
     }
 
+    public ParceledListSlice<ConversationChannelWrapper> getConversations(boolean onlyImportant) {
+        try {
+            return sINM.getConversations(onlyImportant);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
     /**
      * Returns all notification channels associated with the package and uid that will bypass DND
      */
@@ -514,6 +523,9 @@ public class NotificationBackend {
 
     public Drawable getConversationDrawable(Context context, ShortcutInfo info, String pkg,
             int uid) {
+        if (info == null) {
+            return null;
+        }
         ConversationIconFactory iconFactory = new ConversationIconFactory(context,
                 context.getSystemService(LauncherApps.class),
                 context.getPackageManager(), IconDrawableFactory.newInstance(context),

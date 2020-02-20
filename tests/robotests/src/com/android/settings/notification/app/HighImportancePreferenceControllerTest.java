@@ -61,7 +61,7 @@ public class HighImportancePreferenceControllerTest {
     @Mock
     private NotificationBackend mBackend;
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -77,7 +77,7 @@ public class HighImportancePreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         mController = spy(new HighImportancePreferenceController(
-                mContext, mImportanceListener, mBackend));
+                mContext, mDependentFieldListener, mBackend));
     }
 
     @Test
@@ -223,6 +223,6 @@ public class HighImportancePreferenceControllerTest {
         mController.onPreferenceChange(pref, false);
 
         assertEquals(IMPORTANCE_DEFAULT, channel.getImportance());
-        verify(mImportanceListener, times(1)).onImportanceChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 }

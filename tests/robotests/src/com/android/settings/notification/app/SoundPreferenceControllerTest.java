@@ -80,7 +80,7 @@ public class SoundPreferenceControllerTest {
     @Mock
     private SettingsPreferenceFragment mFragment;
     @Mock
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     private SoundPreferenceController mController;
 
@@ -92,7 +92,7 @@ public class SoundPreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         mContext = RuntimeEnvironment.application;
         mController = spy(new SoundPreferenceController(
-                mContext, mFragment, mImportanceListener, mBackend));
+                mContext, mFragment, mDependentFieldListener, mBackend));
     }
 
     @Test
@@ -303,7 +303,7 @@ public class SoundPreferenceControllerTest {
 
         mController.onActivityResult(SoundPreferenceController.CODE, 1, new Intent("hi"));
         verify(pref, times(1)).onActivityResult(anyInt(), anyInt(), any());
-        verify(mImportanceListener, times(1)).onImportanceChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 
     @Test

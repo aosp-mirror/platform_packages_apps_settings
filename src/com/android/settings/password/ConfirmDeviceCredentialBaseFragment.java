@@ -34,6 +34,7 @@ import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -77,6 +78,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     protected boolean mReturnCredentials = false;
     protected Button mCancelButton;
+    protected Button mForgotButton;
     protected int mEffectiveUserId;
     protected int mUserId;
     protected UserManager mUserManager;
@@ -116,8 +118,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mCancelButton = (Button) view.findViewById(R.id.cancelButton);
-
+        mCancelButton = view.findViewById(R.id.cancelButton);
         boolean showCancelButton = getActivity().getIntent().getBooleanExtra(
                 SHOW_CANCEL_BUTTON, false);
         boolean hasAlternateButton = mFrp && !TextUtils.isEmpty(mFrpAlternateButtonText);
@@ -126,20 +127,27 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         if (hasAlternateButton) {
             mCancelButton.setText(mFrpAlternateButtonText);
         }
-        mCancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (hasAlternateButton) {
-                    getActivity().setResult(KeyguardManager.RESULT_ALTERNATE);
-                }
-                getActivity().finish();
+        mCancelButton.setOnClickListener(v -> {
+            if (hasAlternateButton) {
+                getActivity().setResult(KeyguardManager.RESULT_ALTERNATE);
             }
+            getActivity().finish();
         });
-        int credentialOwnerUserId = Utils.getCredentialOwnerUserId(
-                getActivity(),
-                Utils.getUserIdFromBundle(
-                        getActivity(),
-                        getActivity().getIntent().getExtras(), isInternalActivity()));
+        mForgotButton = view.findViewById(R.id.forgotButton);
+        if (mUserManager.isManagedProfile(mUserId)
+                && mUserManager.isQuietModeEnabled(UserHandle.of(mUserId))
+                && mDevicePolicyManager.canProfileOwnerResetPasswordWhenLocked(mUserId)) {
+            mForgotButton.setVisibility(View.VISIBLE);
+            mForgotButton.setOnClickListener(v -> {
+                final Intent intent = new Intent();
+                intent.setClassName(SETTINGS_PACKAGE_NAME, ForgotPasswordActivity.class.getName());
+                intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
+                getActivity().startActivity(intent);
+                getActivity().finish();
+            });
+        } else {
+            mForgotButton.setVisibility(View.GONE);
+        }
     }
 
     // User could be locked while Effective user is unlocked even though the effective owns the

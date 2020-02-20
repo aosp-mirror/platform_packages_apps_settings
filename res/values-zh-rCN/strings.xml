@@ -777,8 +777,7 @@
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"允许手机在与 NFC 设备触碰时交换数据"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"开启 NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC 可让此设备和附近的其他设备或目标（例如付款终端、门禁读卡器和互动式广告或标签）交换数据。"</string>
-    <!-- no translation found for nfc_secure_settings_title (4906958426927741485) -->
-    <skip />
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"必须解锁设备才能使用 NFC"</string>
     <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"只有屏幕处于解锁状态时，才允许通过 NFC 进行付款以及使用公共交通服务"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"已准备好通过 NFC 传输应用内容"</string>
@@ -937,8 +936,7 @@
     <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"未指定任何证书。您的网络连接将不是私密连接。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"网络名称太长。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必须指定域名。"</string>
-    <!-- no translation found for wifi_no_user_cert_warning (8466376918835248956) -->
-    <skip />
+    <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要指定证书。"</string>
     <string name="wifi_wps_available_first_item" msgid="5780501151792036589">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="1717024103303480804">" （可使用 WPS）"</string>
     <string name="wifi_carrier_connect" msgid="4511538300946413213">"运营商 WLAN 网络"</string>
@@ -1043,8 +1041,7 @@
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"使用热点创建 WLAN 网络供其他设备使用。热点会使用您的移动数据连接提供互联网连接。这可能会产生额外的移动数据流量费用。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"应用可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"自动关闭热点"</string>
-    <!-- no translation found for wifi_hotspot_auto_off_summary (8283656069997871354) -->
-    <skip />
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"未连接任何设备时"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"正在关闭热点..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> 已连接"</string>
@@ -1055,16 +1052,13 @@
     <string name="wifi_tether_configure_ssid_default" msgid="1709397571393179300">"Android热点"</string>
     <string name="wifi_add_app_single_network_title" msgid="8911612806204065225">"要保存此网络吗？"</string>
     <string name="wifi_add_app_single_network_summary" product="default" msgid="6881712878537666626">"<xliff:g id="APPNAME">%1$s</xliff:g>想将 1 个网络保存到您的手机"</string>
-    <!-- no translation found for wifi_add_app_single_network_summary (8455616967601552440) -->
-    <skip />
+    <string name="wifi_add_app_single_network_summary" product="tablet" msgid="8455616967601552440">"<xliff:g id="APPNAME">%1$s</xliff:g>想将 1 个网络保存到您的平板电脑"</string>
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"正在保存…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"已保存"</string>
-    <!-- no translation found for wifi_add_app_network_save_failed_summary (7223817782309294652) -->
-    <skip />
+    <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"无法保存，请重试。"</string>
     <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"要保存网络吗？"</string>
     <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g>想将这些网络保存到您的手机"</string>
-    <!-- no translation found for wifi_add_app_networks_summary (2088967184512169910) -->
-    <skip />
+    <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g>想将这些网络保存到您的平板电脑"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"正在保存 <xliff:g id="NUMBER">%d</xliff:g> 个网络…"</string>
     <string name="wifi_add_app_networks_saved_summary" msgid="1648417628665152905">"网络已保存"</string>
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"WLAN 通话"</string>
@@ -1098,8 +1092,7 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"请启用 WLAN 通话功能"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"请开启 WLAN 通话功能"</string>
     <string name="wifi_calling_not_supported" msgid="3303917737849393175">"%1$s不支持 WLAN 通话功能"</string>
-    <!-- no translation found for wifi_disconnected_from (5249576734324159708) -->
-    <skip />
+    <string name="wifi_disconnected_from" msgid="5249576734324159708">"已断开与 <xliff:g id="SSID">%1$s</xliff:g> 的连接"</string>
     <string name="carrier" msgid="1755020806290963951">"运营商"</string>
     <string name="display_settings_title" msgid="626835071804834218">"显示"</string>
     <string name="sound_settings" msgid="5514582720435174014">"声音"</string>
@@ -1253,8 +1246,7 @@
     <string name="wallpaper_suggestion_title" msgid="3812842717939877330">"更换壁纸"</string>
     <string name="wallpaper_suggestion_summary" msgid="9077061486716754784">"对屏幕进行个性化设置"</string>
     <string name="wallpaper_settings_fragment_title" msgid="8445963841717633149">"选择壁纸来源"</string>
-    <!-- no translation found for style_suggestion_title (1213747484782364775) -->
-    <skip />
+    <string name="style_suggestion_title" msgid="1213747484782364775">"自定义您的手机"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"尝试不同的样式、壁纸等"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充电或插入基座时"</string>
@@ -1633,6 +1625,9 @@
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"已开启热点"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"网络共享"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"当流量节省程序开启时，无法使用网络共享功能或便携式热点"</string>
+    <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"仅通过 USB 共享互联网连接"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"仅通过蓝牙共享互联网连接"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"仅通过 USB 和蓝牙共享互联网连接"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB 网络共享"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"通过 USB 共享手机的互联网连接"</string>
@@ -2084,14 +2079,12 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"点按屏幕三次进行放大"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"使用快捷手势进行放大"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"通过“快捷手势”和“点按屏幕三次”进行放大"</string>
-    <!-- no translation found for accessibility_introduction_title (8834950581512452348) -->
-    <skip />
+    <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>简介"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"选项"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"在屏幕上放大"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"点按三次即可放大屏幕"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"点按按钮即可放大"</string>
-    <!-- no translation found for accessibility_screen_magnification_summary (344859130549374147) -->
-    <skip />
+    <string name="accessibility_screen_magnification_summary" msgid="7617931632990040045">"您可以快速放大屏幕以便更清晰地查看内容。&lt;br/&gt;&lt;br/&gt;&lt;b&gt;要放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;	1. 使用快捷方式启动放大功能&lt;br/&gt;	2. 点按屏幕&lt;br/&gt;	3. 用两根手指拖动以在屏幕上移动&lt;br/&gt;	4. 双指张合以调整缩放级别&lt;br/&gt;	5. 使用快捷方式停止放大功能&lt;br/&gt;&lt;br/&gt;&lt;b&gt;要暂时放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;	1. 使用快捷方式启动放大功能&lt;br/&gt;	2. 轻触并按住屏幕上的任意位置&lt;br/&gt;	3. 用一根手指拖动以在屏幕上移动&lt;br/&gt;	4. 抬起手指以停止放大功能"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"开启放大功能后，您就可以放大屏幕上的内容。\n\n"<b>"要放大内容"</b>"，请先启动放大功能，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性放大内容"</b>"，请先启动放大功能，然后轻触并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您无法针对键盘或导航栏使用放大功能。"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用“无障碍”按钮打开"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手势打开"</string>
@@ -2102,36 +2095,24 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"要开启或关闭无障碍服务，请用双指从屏幕底部向上滑动。\n\n要在多项服务之间切换，请用双指向上滑动并按住。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"要开启或关闭无障碍服务，请用三指从屏幕底部向上滑动。\n\n要在多项服务之间切换，请用三指向上滑动并按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
-    <!-- no translation found for accessibility_shortcut_title (8125867833704517463) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_summary_software (2820923641553461297) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_gesture (8078659880723370597) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software_gesture_talkback (7422753388389160524) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_software (4796192466943479849) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (8922102767509399352) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (7019216141092205215) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (5967787136477866253) -->
-    <skip />
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>快捷方式"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"“无障碍”按钮"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"用两根手指向上滑动"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"用三根手指向上滑动"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"点按“无障碍”按钮"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"点按屏幕底部的“无障碍”按钮 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"用两根手指从屏幕底部向上滑动"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"用三根手指从屏幕底部向上滑动"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量键"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_hardware (7318273124091000632) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_title_triple_tap (6672798007229795841) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_triple_tap (3081710523998838305) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="7318273124091000632">"同时按住两个音量键 1 秒钟"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"点按屏幕三次"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"快速点按屏幕 3 次。此快捷方式可能会减慢设备的运行速度。"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"高级"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"“无障碍”按钮已设为“<xliff:g id="SERVICE">%1$s</xliff:g>”。要使用放大功能，请触摸并按住“无障碍”按钮，然后选择“放大功能”。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"无障碍手势已设为<xliff:g id="SERVICE">%1$s</xliff:g>。要使用放大功能，请用两指从屏幕底部向上滑动并按住，然后选择放大功能。"</string>
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"音量键快捷方式"</string>
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"快捷方式服务"</string>
-    <!-- no translation found for accessibility_shortcut_settings (836783442658447995) -->
-    <skip />
+    <string name="accessibility_shortcut_settings" msgid="836783442658447995">"快捷方式设置"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5918442016264847021">"屏幕锁定时也可以用"</string>
     <string name="accessibility_shortcut_description" msgid="9051481607998911585">"启用这项快捷方式后，同时按下两个音量键 3 秒钟即可启动无障碍功能。"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高对比度文字"</string>
@@ -2155,14 +2136,11 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"请选择提示您执行操作的消息的显示时间（只会暂时显示）。\n\n部分应用可能不支持这项设置。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"触摸和按住延迟"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"颜色反转"</string>
-    <!-- no translation found for accessibility_display_inversion_switch_title (7458595722552743503) -->
-    <skip />
-    <!-- no translation found for accessibility_display_inversion_preference_subtitle (9175555611774009143) -->
-    <skip />
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用颜色反转"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="7230891925207955620">"颜色反转功能可将亮屏幕调成暗屏幕，让对强光敏感的用户更容易看清屏幕。&lt;br/&gt;&lt;br/&gt;注意：深色将变浅。多媒体和图片中的颜色会发生变化。您也可以使用深色主题（依次转到“设置”&gt;“显示”）。"</string>
     <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"自动点击（停留时间）"</string>
     <string name="accessibility_autoclick_description" msgid="1824668430472936549">"如果您使用鼠标，则可以将光标设置为停止移动一段时间后自动点击。"</string>
-    <!-- no translation found for accessibility_autoclick_default_title (2060909980831267041) -->
-    <skip />
+    <string name="accessibility_autoclick_default_title" msgid="2060909980831267041">"不使用自动点击（默认）"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 秒"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"中"</string>
@@ -2170,10 +2148,9 @@
     <string name="accessibility_autoclick_long_title" msgid="6799311820641687735">"长"</string>
     <string name="accessibility_autoclick_long_summary" msgid="3747153151313563637">"1 秒"</string>
     <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"自定义"</string>
-    <!-- no translation found for accessibility_autoclick_shorter_desc (7631013255724544348) -->
-    <skip />
-    <!-- no translation found for accessibility_autoclick_longer_desc (2566025502981487443) -->
-    <skip />
+    <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"较短"</string>
+    <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"较长"</string>
+    <string name="accessibility_autoclick_seekbar_desc" msgid="2370077188725433271">"自动点击时间"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"震动和触感强度"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"通知振动"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"响铃振动"</string>
@@ -2211,27 +2188,30 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"绿色弱视"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"红色弱视"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"蓝色弱视"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8532203878881473608">
-      <item quantity="other">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
-      <item quantity="one">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8226135362782015387">
+      <item quantity="other">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">延迟时间极短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="5067805618144149445">
-      <item quantity="other">延迟时间很短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
-      <item quantity="one">延迟时间很短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="4440667435012753839">
+      <item quantity="other">延迟时间很短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">延迟时间很短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="416055324409474880">
-      <item quantity="other">延迟时间短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
-      <item quantity="one">延迟时间短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="1627969745093865560">
+      <item quantity="other">延迟时间短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">延迟时间短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="556424440912669213">
-      <item quantity="other">延迟时间长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
-      <item quantity="one">延迟时间长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="1126608261854734991">
+      <item quantity="other">延迟时间长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">延迟时间长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="4474904810885802549">
-      <item quantity="other">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$d</xliff:g> 毫秒）</item>
-      <item quantity="one">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$d</xliff:g> 毫秒）</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="6624972454933133135">
+      <item quantity="other">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">延迟时间很长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
     </plurals>
-    <!-- no translation found for accessibilty_autoclick_delay_unit_second (8132935106204075064) -->
+    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
+      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒</item>
+      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
+    </plurals>
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"响铃：<xliff:g id="SUMMARY_RING">%1$s</xliff:g>，通知：<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>，按触：<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"将响铃和通知振动设为关闭"</string>
     <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"将响铃和通知振动设为低"</string>
@@ -2703,6 +2683,10 @@
     <string name="notification_history_today" msgid="8776595977526590103">"今天"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"已延后"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"最近关闭"</string>
+    <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
+      <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 条通知</item>
+      <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 条通知</item>
+    </plurals>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"来电铃声和振动"</string>
     <string name="wifi_setup_detail" msgid="2012898800571616422">"网络详情"</string>
     <string name="accessibility_sync_enabled" msgid="5308864640407050209">"同步功能已启用"</string>
@@ -3167,8 +3151,7 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"蓝牙、驾车模式"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"蓝牙、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"蓝牙"</string>
-    <!-- no translation found for nfc_and_payment_settings_payment_off_nfc_off_summary (7132040463607801625) -->
-    <skip />
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"应用和通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"工作资料中的应用无法访问通知。"</string>
@@ -3445,6 +3428,12 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"按相关性自动排列通知"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"建议的操作和回复"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"自动显示建议的操作和回复"</string>
+    <string name="notification_history_summary" msgid="6821337322742231789">"要跟踪过往通知和已暂停通知，请开启通知历史记录"</string>
+    <string name="notification_history" msgid="8663811361243456201">"通知历史记录"</string>
+    <string name="notification_history_turn_on" msgid="3298178949776249681">"开启历史记录"</string>
+    <string name="notification_history_turn_off" msgid="3141050596252009528">"关闭历史记录"</string>
+    <string name="notification_history_off_title_extended" msgid="2174043349602912717">"通知历史记录已关闭"</string>
+    <string name="notification_history_view_settings" msgid="5269317798670449002">"查看通知设置"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"允许通知暂停"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"隐藏无声通知的图标"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"无声通知的图标不会显示在状态栏中"</string>
@@ -3454,8 +3443,7 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能会以气泡形式显示在屏幕上"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知及其他内容可以在屏幕上以气泡的形式显示。点按气泡即可将其打开，将气泡向屏幕下方拖动即可将其关闭。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"气泡"</string>
-    <!-- no translation found for bubbles_conversation_toggle_summary (7518341992582158610) -->
-    <skip />
+    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"屏幕将会显示新消息"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允许<xliff:g id="APP_NAME">%1$s</xliff:g>以气泡的形式显示部分通知"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"开启气泡功能"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"您需要先为设备开启气泡功能，然后才能为此应用开启气泡功能。这会影响您之前已开启气泡功能的其他应用。"</string>
@@ -3504,18 +3492,12 @@
     <string name="notification_importance_title" msgid="1545158655988342703">"行为"</string>
     <string name="notification_importance_unspecified" msgid="1543165530748339700">"允许发出提示音"</string>
     <string name="notification_importance_blocked" msgid="4933285639639899394">"一律不显示通知"</string>
-    <!-- no translation found for conversations_category_title (5586541340846847798) -->
-    <skip />
-    <!-- no translation found for conversation_category_title (6777135786004214149) -->
-    <skip />
-    <!-- no translation found for demote_conversation_title (6355383023376508485) -->
-    <skip />
-    <!-- no translation found for demote_conversation_summary (4319929331165604112) -->
-    <skip />
-    <!-- no translation found for promote_conversation_title (4731148769888238722) -->
-    <skip />
-    <!-- no translation found for promote_conversation_summary (3890724115743515035) -->
-    <skip />
+    <string name="conversations_category_title" msgid="5586541340846847798">"对话"</string>
+    <string name="conversation_category_title" msgid="6777135786004214149">"对话"</string>
+    <string name="demote_conversation_title" msgid="6355383023376508485">"非对话"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"从对话部分中移除"</string>
+    <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
+    <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"无声显示并将重要性级别最小化"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"显示通知但不发出提示音"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"发出提示音"</string>
@@ -3617,13 +3599,10 @@
     <string name="app_notifications_dialog_done" msgid="573716608705273004">"完成"</string>
     <string name="app_notification_importance_title" msgid="8293193440040799998">"重要程度"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"闪烁指示灯"</string>
-    <!-- no translation found for notification_vibrate_title (1422330728336623351) -->
-    <skip />
+    <string name="notification_vibrate_title" msgid="1422330728336623351">"振动"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"提示音"</string>
-    <!-- no translation found for notification_conversation_important (3502749563429704283) -->
-    <skip />
-    <!-- no translation found for notification_conversation_add_to_home (8136269431130231389) -->
-    <skip />
+    <string name="notification_conversation_important" msgid="3502749563429704283">"重要"</string>
+    <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"添加到主屏幕"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"删除"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"重命名"</string>
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"时间表名称"</string>
@@ -3846,8 +3825,7 @@
     <string name="unknown_app" msgid="2027248925719898714">"未知应用"</string>
     <string name="app_permissions" msgid="8666537659217653626">"权限管理器"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"目前使用<xliff:g id="APPS">%1$s</xliff:g>的应用"</string>
-    <!-- no translation found for app_permissions_summary_more (6247952473615352350) -->
-    <skip />
+    <string name="app_permissions_summary_more" msgid="6247952473615352350">"目前使用<xliff:g id="APPS">%1$s</xliff:g>等的应用"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"点按唤醒"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"在屏幕上的任意位置点按两次即可唤醒设备"</string>
     <string name="domain_urls_title" msgid="7012209752049678876">"打开链接"</string>
@@ -4507,24 +4485,15 @@
     <string name="angle_enabled_app" msgid="6044941043384239076">"选择已启用 ANGLE 的应用"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"未设置已启用 ANGLE 的应用"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"已启用 ANGLE 的应用：<xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for graphics_driver_dashboard_title (5661084817492587796) -->
-    <skip />
-    <!-- no translation found for graphics_driver_dashboard_summary (6348759885315793654) -->
-    <skip />
-    <!-- no translation found for graphics_driver_footer_text (5123754522284046790) -->
-    <skip />
-    <!-- no translation found for graphics_driver_all_apps_preference_title (1343065382898127360) -->
-    <skip />
-    <!-- no translation found for graphics_driver_app_preference_title (3133255818657706857) -->
-    <skip />
-    <!-- no translation found for graphics_driver_app_preference_default (764432460281859855) -->
-    <skip />
-    <!-- no translation found for graphics_driver_app_preference_game_driver (3115277644656023504) -->
-    <skip />
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (5389656885733341448) -->
-    <skip />
-    <!-- no translation found for graphics_driver_app_preference_system (3754748149113184126) -->
-    <skip />
+    <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"图形驱动程序偏好设置"</string>
+    <string name="graphics_driver_dashboard_summary" msgid="6348759885315793654">"修改图形驱动程序设置"</string>
+    <string name="graphics_driver_footer_text" msgid="5123754522284046790">"如果有多个图形驱动程序，您可以为设备上已安装的应用选择使用更新的图形驱动程序。"</string>
+    <string name="graphics_driver_all_apps_preference_title" msgid="1343065382898127360">"针对所有应用启用"</string>
+    <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"选择图形驱动程序"</string>
+    <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"默认"</string>
+    <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"游戏驱动程序"</string>
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="5389656885733341448">"预发布驱动程序"</string>
+    <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系统图形驱动程序"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->

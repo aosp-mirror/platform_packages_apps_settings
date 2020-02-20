@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -113,12 +112,8 @@ public class NotificationAccessSettings extends EmptyTextSettings {
     @Override
     public void onResume() {
         super.onResume();
-        if (!ActivityManager.isLowRamDeviceStatic()) {
-            mServiceListing.reload();
-            mServiceListing.setListening(true);
-        } else {
-            setEmptyText(R.string.disabled_low_ram_device);
-        }
+        mServiceListing.reload();
+        mServiceListing.setListening(true);
     }
 
     @Override

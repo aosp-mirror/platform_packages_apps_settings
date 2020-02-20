@@ -55,7 +55,7 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mWifiEntry.canManageSubscription() ? CONDITIONALLY_UNAVAILABLE : AVAILABLE;
     }
 
     @Override
