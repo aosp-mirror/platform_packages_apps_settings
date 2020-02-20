@@ -87,8 +87,7 @@ public class ContextualWifiSliceTest {
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        assertTitleAndIcon(wifiSlice);
-        assertNoToggle(wifiSlice);
+        assertWifiHeader(wifiSlice);
         assertThat(ContextualWifiSlice.getApRowCount()).isEqualTo(COLLAPSED_ROW_COUNT);
     }
 
@@ -98,61 +97,32 @@ public class ContextualWifiSliceTest {
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        assertTitleAndIcon(wifiSlice);
-        assertToggle(wifiSlice);
+        assertWifiHeader(wifiSlice);
         assertThat(ContextualWifiSlice.getApRowCount()).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT);
     }
 
     @Test
     public void getWifiSlice_previousExpanded_hasActiveConnection_shouldExpandSlice() {
         mWifiSlice.sActiveUiSession = mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
-        mWifiSlice.sToggleNeeded = true;
+        mWifiSlice.sApRowCollapsed = false;
         connectToWifi(makeValidatedNetworkCapabilities());
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        assertTitleAndIcon(wifiSlice);
-        assertToggle(wifiSlice);
+        assertWifiHeader(wifiSlice);
         assertThat(ContextualWifiSlice.getApRowCount()).isEqualTo(DEFAULT_EXPANDED_ROW_COUNT);
-    }
-
-    @Test
-    public void getWifiSlice_previousExpanded_disableWifi_shouldHaveToggle() {
-        mWifiSlice.sActiveUiSession = mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
-        mWifiSlice.sToggleNeeded = true;
-        connectToWifi(makeValidatedNetworkCapabilities());
-
-        mWifiManager.setWifiEnabled(false);
-        final Slice wifiSlice = mWifiSlice.getSlice();
-
-        assertTitleAndIcon(wifiSlice);
-        assertToggle(wifiSlice);
-    }
-
-    @Test
-    public void getWifiSlice_previousCollapsed_disableWifi_shouldHaveToggle() {
-        mWifiSlice.sActiveUiSession = mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
-        mWifiSlice.sToggleNeeded = false;
-        connectToWifi(makeValidatedNetworkCapabilities());
-
-        mWifiManager.setWifiEnabled(false);
-        final Slice wifiSlice = mWifiSlice.getSlice();
-
-        assertTitleAndIcon(wifiSlice);
-        assertToggle(wifiSlice);
     }
 
     @Test
     public void getWifiSlice_previousCollapsed_connectionLoss_shouldCollapseSlice() {
         mWifiSlice.sActiveUiSession = mFeatureFactory.slicesFeatureProvider.getUiSessionToken();
-        mWifiSlice.sToggleNeeded = false;
+        mWifiSlice.sApRowCollapsed = true;
         connectToWifi(makeValidatedNetworkCapabilities());
 
         mWifiManager.disconnect();
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        assertTitleAndIcon(wifiSlice);
-        assertNoToggle(wifiSlice);
+        assertWifiHeader(wifiSlice);
         assertThat(ContextualWifiSlice.getApRowCount()).isEqualTo(COLLAPSED_ROW_COUNT);
     }
 
@@ -181,7 +151,7 @@ public class ContextualWifiSliceTest {
         return nc;
     }
 
-    private void assertTitleAndIcon(Slice slice) {
+    private void assertWifiHeader(Slice slice) {
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.wifi_settings));
 
@@ -189,17 +159,8 @@ public class ContextualWifiSliceTest {
         final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
-    }
 
-    private void assertToggle(Slice slice) {
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         final List<SliceAction> toggles = metadata.getToggles();
         assertThat(toggles).hasSize(1);
-    }
-
-    private void assertNoToggle(Slice slice) {
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).isEmpty();
     }
 }

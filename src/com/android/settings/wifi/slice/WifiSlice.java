@@ -107,7 +107,7 @@ public class WifiSlice implements CustomSliceable {
         final boolean isFirstApActive = apCount > 0 && apList.get(0).isActive();
         handleNetworkCallback(worker, isFirstApActive);
 
-        if (!isToggleNeeded()) {
+        if (isApRowCollapsed()) {
             if (isFirstApActive) {
                 // refresh header subtext
                 listBuilder = getListBuilder(true /* isWifiEnabled */, apList.get(0));
@@ -142,8 +142,8 @@ public class WifiSlice implements CustomSliceable {
         }
     }
 
-    protected boolean isToggleNeeded() {
-        return true;
+    protected boolean isApRowCollapsed() {
+        return false;
     }
 
     protected ListBuilder.RowBuilder getHeaderRow(AccessPoint accessPoint) {
@@ -160,15 +160,14 @@ public class WifiSlice implements CustomSliceable {
     }
 
     private ListBuilder getListBuilder(boolean isWifiEnabled, AccessPoint accessPoint) {
+        final PendingIntent toggleAction = getBroadcastIntent(mContext);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */, isWifiEnabled);
         final ListBuilder builder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
                 .setKeywords(getKeywords())
-                .addRow(getHeaderRow(accessPoint));
-        if (isToggleNeeded()) {
-            final PendingIntent toggleAction = getBroadcastIntent(mContext);
-            builder.addAction(SliceAction.createToggle(toggleAction, null /* actionTitle */,
-                    isWifiEnabled));
-        }
+                .addRow(getHeaderRow(accessPoint))
+                .addAction(toggleSliceAction);
         return builder;
     }
 

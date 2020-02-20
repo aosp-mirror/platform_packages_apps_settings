@@ -52,7 +52,7 @@ public class ContextualWifiSlice extends WifiSlice {
     @VisibleForTesting
     static long sActiveUiSession = -1000;
     @VisibleForTesting
-    static boolean sToggleNeeded = true;
+    static boolean sApRowCollapsed;
 
     public ContextualWifiSlice(Context context) {
         super(context);
@@ -69,26 +69,26 @@ public class ContextualWifiSlice extends WifiSlice {
                 .getSlicesFeatureProvider().getUiSessionToken();
         if (currentUiSession != sActiveUiSession) {
             sActiveUiSession = currentUiSession;
-            sToggleNeeded = !hasWorkingNetwork();
+            sApRowCollapsed = hasWorkingNetwork();
         } else if (!mWifiManager.isWifiEnabled()) {
-            sToggleNeeded = true;
+            sApRowCollapsed = false;
         }
         return super.getSlice();
     }
 
     static int getApRowCount() {
-        return sToggleNeeded ? DEFAULT_EXPANDED_ROW_COUNT : COLLAPSED_ROW_COUNT;
+        return sApRowCollapsed ? COLLAPSED_ROW_COUNT : DEFAULT_EXPANDED_ROW_COUNT;
     }
 
     @Override
-    protected boolean isToggleNeeded() {
-        return sToggleNeeded;
+    protected boolean isApRowCollapsed() {
+        return sApRowCollapsed;
     }
 
     @Override
     protected ListBuilder.RowBuilder getHeaderRow(AccessPoint accessPoint) {
         final ListBuilder.RowBuilder builder = super.getHeaderRow(accessPoint);
-        if (!sToggleNeeded) {
+        if (sApRowCollapsed) {
             builder.setTitleItem(getLevelIcon(accessPoint), ListBuilder.ICON_IMAGE)
                     .setSubtitle(getSubtitle(accessPoint));
         }
