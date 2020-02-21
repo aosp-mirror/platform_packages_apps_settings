@@ -48,7 +48,7 @@ public class CardContentProvider extends ContentProvider {
     public static final Uri DELETE_CARD_URI = new Uri.Builder()
             .scheme(ContentResolver.SCHEME_CONTENT)
             .authority(CardContentProvider.CARD_AUTHORITY)
-            .appendPath(CardDatabaseHelper.CardColumns.CARD_DISMISSED)
+            .appendPath(CardDatabaseHelper.CardColumns.DISMISSED_TIMESTAMP)
             .build();
 
     private static final String TAG = "CardContentProvider";

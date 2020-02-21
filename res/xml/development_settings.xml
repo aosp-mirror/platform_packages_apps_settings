@@ -152,6 +152,12 @@
             android:summary="@string/bugreport_in_power_summary" />
 
         <SwitchPreference
+            android:key="enable_verbose_vendor_logging"
+            android:title="@string/enable_verbose_vendor_logging"
+            android:summary="@string/enable_verbose_vendor_logging_summary"
+            />
+
+        <SwitchPreference
             android:key="automatic_system_server_heap_dumps"
             android:title="@string/automatic_system_heap_dump_title"
             android:summary="@string/automatic_system_heap_dump_summary" />
