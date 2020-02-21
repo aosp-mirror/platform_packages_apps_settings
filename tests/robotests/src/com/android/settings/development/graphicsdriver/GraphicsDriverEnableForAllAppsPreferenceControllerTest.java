@@ -82,6 +82,8 @@ public class GraphicsDriverEnableForAllAppsPreferenceControllerTest {
                 mResolver, Settings.Global.GAME_DRIVER_ALL_APPS, GAME_DRIVER_DEFAULT);
 
         mController = new GraphicsDriverEnableForAllAppsPreferenceController(mContext, "testKey");
+        mController.mEntryList = mContext.getResources().getStringArray(
+                R.array.graphics_driver_all_apps_preference_values);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
