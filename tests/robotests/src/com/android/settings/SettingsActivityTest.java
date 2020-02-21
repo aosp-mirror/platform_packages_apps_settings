@@ -20,7 +20,7 @@ import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -82,7 +82,7 @@ public class SettingsActivityTest {
     public void setTaskDescription_shouldUpdateIcon() {
         mActivity.setTaskDescription(mTaskDescription);
 
-        verify(mTaskDescription).setIcon(anyInt());
+        verify(mTaskDescription).setIcon(any());
     }
 
     @Test
