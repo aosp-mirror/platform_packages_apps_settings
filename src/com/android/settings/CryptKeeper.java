@@ -60,7 +60,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
@@ -916,9 +915,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      *    phone that has no encryption.
      */
     private final void setAirplaneModeIfNecessary() {
-        final boolean isLteDevice =
-                getTelephonyManager().getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
-        if (!isLteDevice) {
+        if (!getTelephonyManager().isGlobalModeEnabled()) {
             Log.d(TAG, "Going into airplane mode.");
             Settings.Global.putInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
             final Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
