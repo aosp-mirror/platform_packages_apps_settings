@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
+        android:title="@string/adb_wireless_settings">
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category_no_label">
+        <!-- ADB device name -->
+        <Preference
+            android:key="adb_device_name_pref"
+            android:title="@string/my_device_info_device_name_preference_title"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"
+            settings:controller="com.android.settings.development.AdbDeviceNamePreferenceController"
+            settings:enableCopying="true"/>
+
+        <!-- IP address & port -->
+        <Preference
+            android:key="adb_ip_addr_pref"
+            android:title="@string/adb_wireless_ip_addr_preference_title"
+            android:summary="@string/summary_placeholder"
+            android:selectable="false"/>
+    </PreferenceCategory>
+
+    <!-- Pairing methods category -->
+    <PreferenceCategory
+        android:key="adb_pairing_methods_category"
+        android:layout="@layout/preference_category_no_label">
+        <!-- qrcode scanner -->
+        <Preference
+            android:key="adb_pair_method_qrcode_pref"
+            android:icon="@drawable/ic_scan_24dp"
+            android:title="@string/adb_pair_method_qrcode_title"
+            android:summary="@string/adb_pair_method_qrcode_summary"/>
+        <Preference
+            android:key="adb_pair_method_code_pref"
+            android:title="@string/adb_pair_method_code_title"
+            android:summary="@string/adb_pair_method_code_summary"/>
+    </PreferenceCategory>
+
+    <!-- Paired devices list -->
+    <PreferenceCategory
+        android:key="adb_paired_devices_category"
+        android:title="@string/adb_paired_devices_title"/>
+
+    <!-- Off message: Shown only in the off state -->
+    <PreferenceCategory
+        android:key="adb_wireless_footer_category"
+        android:layout="@layout/preference_category_no_label"
+        settings:allowDividerAbove="false"/>
+
+</PreferenceScreen>
