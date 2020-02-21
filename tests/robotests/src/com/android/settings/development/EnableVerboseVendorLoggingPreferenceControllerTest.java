@@ -18,10 +18,13 @@ package com.android.settings.development;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.hardware.dumpstate.V1_1.IDumpstateDevice;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -34,24 +37,32 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.lang.reflect.Field;
+
 @RunWith(RobolectricTestRunner.class)
 public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    IDumpstateDevice mIDumpstateDevice;
 
     private Context mContext;
     private EnableVerboseVendorLoggingPreferenceController mController;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new EnableVerboseVendorLoggingPreferenceController(mContext);
+        mController = spy(new EnableVerboseVendorLoggingPreferenceController(mContext));
+        doReturn(mIDumpstateDevice).when(mController).getDumpstateDeviceService();
 
-        // bypass if IDumpstateDevice service not avalaible at all
-        org.junit.Assume.assumeTrue(mController.isIDumpstateDeviceV1_1ServiceAvailable());
+        // mock with Dumpstate HAL v1.1
+        Field f = EnableVerboseVendorLoggingPreferenceController.class
+                .getDeclaredField("mDumpstateHalVersion");
+        f.setAccessible(true);
+        f.setInt(mController, 1 /* DUMPSTATE_HAL_VERSION_1_1 */);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
                 .thenReturn(mPreference);
@@ -59,7 +70,9 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_settingEnable_enableVendorLoggingShouldBeOn() {
+    public void onPreferenceChange_settingEnable_enableVendorLoggingShouldBeOn() throws Exception {
+        doReturn(true).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         final boolean enabled = mController.getVerboseLoggingEnabled();
@@ -67,7 +80,10 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_settingDisable_enableVendorLoggingShouldBeOff() {
+    public void onPreferenceChange_settingDisable_enableVendorLoggingShouldBeOff()
+            throws Exception {
+        doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
         mController.onPreferenceChange(mPreference,  false /* new value */);
 
         final boolean enabled = mController.getVerboseLoggingEnabled();
@@ -75,7 +91,9 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
+    public void updateState_settingDisabled_preferenceShouldNotBeChecked() throws Exception {
+        doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
         mController.setVerboseLoggingEnabled(false);
         mController.updateState(mPreference);
 
@@ -83,7 +101,9 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_settingEnabled_preferenceShouldBeChecked() {
+    public void updateState_settingEnabled_preferenceShouldBeChecked() throws Exception {
+        doReturn(true).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
         mController.setVerboseLoggingEnabled(true);
         mController.updateState(mPreference);
 
@@ -91,7 +111,9 @@ public final class EnableVerboseVendorLoggingPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionDisabled_shouldDisablePreference() {
+    public void onDeveloperOptionDisabled_shouldDisablePreference() throws Exception {
+        doReturn(false).when(mIDumpstateDevice).getVerboseLoggingEnabled();
+
         mController.onDeveloperOptionsSwitchDisabled();
 
         final boolean enabled = mController.getVerboseLoggingEnabled();
