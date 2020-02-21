@@ -267,7 +267,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mHeaderTextView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
-            mForgotButton.setAlpha(0f);
+            if (mForgotButton != null) {
+                mForgotButton.setAlpha(0f);
+            }
             mPasswordEntry.setAlpha(0f);
             mErrorTextView.setAlpha(0f);
         }
@@ -279,7 +281,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(mCancelButton);
             }
-            if (mForgotButton.getVisibility() == View.VISIBLE) {
+            if (mForgotButton != null) {
                 result.add(mForgotButton);
             }
             result.add(mPasswordEntry);

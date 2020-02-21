@@ -16,10 +16,25 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import android.content.Context;
+import android.database.Cursor;
+
 import androidx.slice.Slice;
 
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
+    /** Get contextual cards from the card provider */
+    Cursor getContextualCards();
+
+    /**
+     * Mark a specific {@link ContextualCard} as dismissed with dismissal signal in the database
+     * to indicate that the card has been dismissed.
+     *
+     * @param context  Context
+     * @param cardName The card name of the ContextualCard which is dismissed by user.
+     * @return The number of rows updated
+     */
+    int markCardAsDismissed(Context context, String cardName);
 
     /** Log package when user clicks contextual notification channel card. */
     void logNotificationPackage(Slice slice);
