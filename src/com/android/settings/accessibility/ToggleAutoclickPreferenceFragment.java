@@ -64,12 +64,10 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
      * Resource ids from which autoclick preference summaries should be derived. The strings have
      * placeholder for integer delay value.
      */
-    private static final int[] mAutoclickPreferenceSummaries = {
-            R.plurals.accessibilty_autoclick_preference_subtitle_extremely_short_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_very_short_delay,
+    private static final int[] AUTOCLICK_PREFERENCE_SUMMARIES = {
             R.plurals.accessibilty_autoclick_preference_subtitle_short_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_long_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_very_long_delay
+            R.plurals.accessibilty_autoclick_preference_subtitle_medium_delay,
+            R.plurals.accessibilty_autoclick_preference_subtitle_long_delay
     };
 
     /**
@@ -86,7 +84,7 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
         // Only show integer when delay time is 1.
         final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
 
-        return resources.getQuantityString(mAutoclickPreferenceSummaries[summaryIndex],
+        return resources.getQuantityString(AUTOCLICK_PREFERENCE_SUMMARIES[summaryIndex],
                 quantity, String.format(decimalFormat, delaySecond));
     }
 
@@ -98,10 +96,10 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
             return 0;
         }
         if (delay >= MAX_AUTOCLICK_DELAY_MS) {
-            return mAutoclickPreferenceSummaries.length - 1;
+            return AUTOCLICK_PREFERENCE_SUMMARIES.length - 1;
         }
         int delayRange = MAX_AUTOCLICK_DELAY_MS - MIN_AUTOCLICK_DELAY_MS;
-        int rangeSize = (delayRange) / (mAutoclickPreferenceSummaries.length - 1);
+        int rangeSize = (delayRange) / (AUTOCLICK_PREFERENCE_SUMMARIES.length - 1);
         return (delay - MIN_AUTOCLICK_DELAY_MS) / rangeSize;
     }
 
