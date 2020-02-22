@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2020 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/GlifV3Theme.Light"
+    android:icon="@drawable/ic_scan_32dp">
+
+    <LinearLayout
+        style="@style/SudContentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:id="@+id/camera_layout">
+
+            <TextView
+                android:id="@android:id/summary"
+                style="@style/TextAppearance.SudGlifBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/sudMarginSides"
+                android:layout_marginEnd="?attr/sudMarginSides"
+                android:textAlignment="center"
+                android:accessibilityLiveRegion="polite"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="true">
+                    <TextureView
+                        android:id="@+id/preview_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/qrcode_preview_size"/>
+                    <com.android.settings.wifi.qrcode.QrDecorateView
+                        android:id="@+id/decorate_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/qrcode_preview_size"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/error_message"
+                    style="@style/TextAppearance.ErrorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:textAlignment="center"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--
+             The spinner indicating that the device is waiting for pairing
+             after getting valid QR code
+        -->
+        <LinearLayout
+            android:id="@+id/verifying_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/verifying_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/adb_wireless_item_progress_text"
+                android:text="@string/adb_wireless_verifying_qrcode_text"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.setupdesign.GlifLayout>

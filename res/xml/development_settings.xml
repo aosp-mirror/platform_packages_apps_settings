@@ -141,6 +141,13 @@
         <Preference android:key="clear_adb_keys"
                     android:title="@string/clear_adb_keys" />
 
+        <com.android.settings.widget.MasterSwitchPreference
+            android:fragment="com.android.settings.development.WirelessDebuggingFragment"
+            android:key="toggle_adb_wireless"
+            android:title="@string/enable_adb_wireless"
+            android:summary="@string/enable_adb_wireless_summary"
+            settings:keywords="@string/keywords_adb_wireless" />
+
         <SwitchPreference
             android:key="enable_terminal"
             android:title="@string/enable_terminal_title"
@@ -154,8 +161,7 @@
         <SwitchPreference
             android:key="enable_verbose_vendor_logging"
             android:title="@string/enable_verbose_vendor_logging"
-            android:summary="@string/enable_verbose_vendor_logging_summary"
-            />
+            android:summary="@string/enable_verbose_vendor_logging_summary" />
 
         <SwitchPreference
             android:key="automatic_system_server_heap_dumps"
