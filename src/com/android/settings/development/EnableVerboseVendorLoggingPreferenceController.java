@@ -133,7 +133,8 @@ public class EnableVerboseVendorLoggingPreferenceController
     }
 
     /** Return a {@IDumpstateDevice} instance or null if service is not available. */
-    private @Nullable IDumpstateDevice getDumpstateDeviceService() {
+    @VisibleForTesting
+    @Nullable IDumpstateDevice getDumpstateDeviceService() {
         IDumpstateDevice service = null;
         try {
             service = android.hardware.dumpstate.V1_1.IDumpstateDevice

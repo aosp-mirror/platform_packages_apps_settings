@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SwitchBar;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NotificationHistoryActivity extends Activity {
@@ -252,7 +253,7 @@ public class NotificationHistoryActivity extends Activity {
                 rv.setNestedScrollingEnabled(false);
 
                 ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
-                        Arrays.asList(snoozed));
+                        new ArrayList<>(Arrays.asList(snoozed)));
             }
 
             try {
@@ -268,7 +269,7 @@ public class NotificationHistoryActivity extends Activity {
                 rv.setNestedScrollingEnabled(false);
 
                 ((NotificationSbnAdapter) rv.getAdapter()).onRebuildComplete(
-                        Arrays.asList(dismissed));
+                        new ArrayList<>(Arrays.asList(dismissed)));
                 mDismissView.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 Slog.e(TAG, "Cannot load recently dismissed", e);
