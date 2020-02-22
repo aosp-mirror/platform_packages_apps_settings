@@ -23,9 +23,6 @@ import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 /**
  * A custom {@link android.widget.TextView} preference that shows html text with a custom tag
  * filter.
@@ -35,7 +32,6 @@ public final class HtmlTextPreference extends StaticTextPreference {
     private int mFlag = Html.FROM_HTML_MODE_COMPACT;
     private Html.ImageGetter mImageGetter;
     private Html.TagHandler mTagHandler;
-    private List<String> mUnsupportedTagList;
 
     HtmlTextPreference(Context context) {
         super(context);
@@ -47,8 +43,8 @@ public final class HtmlTextPreference extends StaticTextPreference {
 
         final TextView summaryView = holder.itemView.findViewById(android.R.id.summary);
         if (summaryView != null && !TextUtils.isEmpty(getSummary())) {
-            final String filteredText = getFilteredText(getSummary().toString());
-            summaryView.setText(Html.fromHtml(filteredText, mFlag, mImageGetter, mTagHandler));
+            summaryView.setText(
+                    Html.fromHtml(getSummary().toString(), mFlag, mImageGetter, mTagHandler));
         }
     }
 
@@ -86,40 +82,5 @@ public final class HtmlTextPreference extends StaticTextPreference {
             mTagHandler = tagHandler;
             notifyChanged();
         }
-    }
-
-    /**
-     * Sets unsupported tag list, the text will be filtered though this list in advanced.
-     *
-     * @param unsupportedTagList the list of unsupported tags
-     */
-    public void setUnsupportedTagList(List<String> unsupportedTagList) {
-        if (unsupportedTagList != null && !unsupportedTagList.equals(mUnsupportedTagList)) {
-            mUnsupportedTagList = unsupportedTagList;
-            notifyChanged();
-        }
-    }
-
-    private String getFilteredText(String text) {
-        if (mUnsupportedTagList == null) {
-            return text;
-        }
-
-        int i = 1;
-        for (String tag : mUnsupportedTagList) {
-            if (!TextUtils.isEmpty(text)) {
-                final String index = String.valueOf(i++);
-                final String targetStart1 = "(?i)<" + tag + " ";
-                final String targetStart2 = "(?i)<" + tag + ">";
-                final String replacementStart1 = "<unsupportedtag" + index + " ";
-                final String replacementStart2 = "<unsupportedtag" + index + ">";
-                final String targetEnd = "(?i)</" + tag + ">";
-                final String replacementEnd = "</unsupportedtag" + index + ">";
-                text = Pattern.compile(targetStart1).matcher(text).replaceAll(replacementStart1);
-                text = Pattern.compile(targetStart2).matcher(text).replaceAll(replacementStart2);
-                text = Pattern.compile(targetEnd).matcher(text).replaceAll(replacementEnd);
-            }
-        }
-        return text;
     }
 }
