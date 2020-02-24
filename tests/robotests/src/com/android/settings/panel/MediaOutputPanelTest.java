@@ -66,7 +66,7 @@ public class MediaOutputPanelTest {
     @Mock
     private LocalMediaManager mLocalMediaManager;
     @Mock
-    private PanelCustomizedButtonCallback mCallback;
+    private PanelContentCallback mCallback;
 
     private MediaOutputPanel mPanel;
     private Context mContext;
