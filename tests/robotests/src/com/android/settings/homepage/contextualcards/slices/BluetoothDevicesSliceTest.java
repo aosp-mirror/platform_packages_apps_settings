@@ -16,7 +16,6 @@
 
 package com.android.settings.homepage.contextualcards.slices;
 
-import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
@@ -38,7 +37,6 @@ import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
-import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
@@ -117,88 +115,14 @@ public class BluetoothDevicesSliceTest {
 
     @Test
     @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_bluetoothOff_shouldHaveToggle() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_OFF);
-
+    public void getSlice_hasBluetoothHardware_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertTitleAndIcon(metadata);
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(1);
-    }
-
-    @Test
-    @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_bluetoothOn_shouldNotHaveToggle() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_ON);
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertTitleAndIcon(metadata);
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).isEmpty();
-    }
-
-    @Test
-    @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_bluetoothTurningOff_shouldHaveToggle() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_ON);
-        final Intent intent = new Intent().putExtra(EXTRA_TOGGLE_STATE, false);
-
-        mBluetoothDevicesSlice.onNotifyChange(intent);
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(1);
-    }
-
-    @Test
-    @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_bluetoothTurningOn_shouldHaveToggle() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_OFF);
-        final Intent intent = new Intent().putExtra(EXTRA_TOGGLE_STATE, true);
-
-        mBluetoothDevicesSlice.onNotifyChange(intent);
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).isEmpty();
-    }
-
-    @Test
-    @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_noBluetoothDevice_shouldHavePairNewDeviceRow() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_ON);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_devices));
 
         final List<SliceItem> sliceItems = slice.getItems();
         SliceTester.assertAnySliceItemContainsTitle(sliceItems, mContext.getString(
-                R.string.bluetooth_pairing_pref_title));
-    }
-
-    @Test
-    @Config(shadows = ShadowBluetoothAdapter.class)
-    public void getSlice_hasBluetoothDevices_shouldNotHavePairNewDeviceRow() {
-        final ShadowBluetoothAdapter adapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
-        adapter.setState(BluetoothAdapter.STATE_ON);
-        mockBluetoothDeviceList(1);
-        doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getConnectedBluetoothDevices();
-
-        final Slice slice = mBluetoothDevicesSlice.getSlice();
-
-        final List<SliceItem> sliceItems = slice.getItems();
-        SliceTester.assertNoSliceItemContainsTitle(sliceItems, mContext.getString(
                 R.string.bluetooth_pairing_pref_title));
     }
 
@@ -278,16 +202,6 @@ public class BluetoothDevicesSliceTest {
         for (int i = 0; i < deviceCount; i++) {
             mBluetoothDeviceList.add(mCachedBluetoothDevice);
         }
-    }
-
-    private void assertTitleAndIcon(SliceMetadata metadata) {
-        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(
-                R.string.bluetooth_settings_title));
-
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
-                com.android.internal.R.drawable.ic_settings_bluetooth);
-        assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
     }
 
     @Implements(BluetoothAdapter.class)
