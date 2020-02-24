@@ -176,7 +176,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     private void dismissProgressBar() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
+            try {
+                mProgressDialog.dismiss();
+            } catch (IllegalArgumentException e) {
+                // Ignore exception since the dialog will be gone anyway.
+            }
         }
     }
 
