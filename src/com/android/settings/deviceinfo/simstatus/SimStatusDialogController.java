@@ -152,7 +152,11 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateAreaInfoText();
+            if (CellBroadcastIntents.ACTION_AREA_INFO_UPDATED.equals(intent.getAction())
+                    && intent.getIntExtra(SubscriptionManager.EXTRA_SLOT_INDEX, 0)
+                    == mSlotIndex) {
+                updateAreaInfoText();
+            }
         }
     };
 
@@ -337,8 +341,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (cellBroadcastService == null) return;
         try {
             mDialog.setText(OPERATOR_INFO_VALUE_ID,
-                    cellBroadcastService.getCellBroadcastAreaInfo(
-                            SimStatusDialogController.this.mSlotIndex));
+                    cellBroadcastService.getCellBroadcastAreaInfo(mSlotIndex));
 
         } catch (RemoteException e) {
             Log.d(TAG, "Can't get area info. e=" + e);
