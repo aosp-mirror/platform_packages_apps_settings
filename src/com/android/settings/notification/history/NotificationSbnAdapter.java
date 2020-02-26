@@ -108,6 +108,14 @@ public class NotificationSbnAdapter extends
         notifyDataSetChanged();
     }
 
+    public void addSbn(StatusBarNotification sbn) {
+        if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+            return;
+        }
+        mValues.add(0, sbn);
+        notifyDataSetChanged();
+    }
+
     private @NonNull CharSequence loadPackageName(String pkg) {
         try {
             ApplicationInfo info = mPm.getApplicationInfo(pkg,
