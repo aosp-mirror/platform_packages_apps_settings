@@ -42,7 +42,8 @@ import com.google.common.annotations.VisibleForTesting;
  * preference. It stores preference value when preference changed.
  */
 public final class BluetoothTetherPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, Preference.OnPreferenceChangeListener {
+        implements LifecycleObserver, Preference.OnPreferenceChangeListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "BluetoothTetherPreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -65,6 +66,16 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
         mContext.unregisterReceiver(mBluetoothChangeReceiver);
@@ -74,15 +85,15 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
-        if (mPreference != null && mPreference instanceof SwitchPreference) {
-            ((SwitchPreference) mPreference)
-                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
-        }
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (preference == null) {
+            return;
+        }
+
         switch (mBluetoothState) {
             case BluetoothAdapter.STATE_ON:
             case BluetoothAdapter.STATE_OFF:
@@ -95,6 +106,11 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
                 // fall through.
             default:
                 preference.setEnabled(false);
+        }
+
+        if (preference instanceof SwitchPreference) {
+            ((SwitchPreference) preference)
+                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
         }
     }
 
@@ -130,5 +146,12 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
         editor.putBoolean(mPreferenceKey, (Boolean) o);
         editor.apply();
         return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (TextUtils.equals(mPreferenceKey, key)) {
+            updateState(mPreference);
+        }
     }
 }

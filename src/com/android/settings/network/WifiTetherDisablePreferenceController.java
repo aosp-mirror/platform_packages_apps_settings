@@ -111,33 +111,45 @@ public final class WifiTetherDisablePreferenceController extends BasePreferenceC
         super.displayPreference(screen);
         mScreen = screen;
         mPreference = screen.findPreference(mPreferenceKey);
-        if (mPreference != null && mPreference instanceof SwitchPreference) {
-            ((SwitchPreference) mPreference)
-                    .setChecked(!mSharedPreferences.getBoolean(
-                            TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true));
+        if (mPreference != null) {
             mPreference.setOnPreferenceChangeListener(this);
         }
-        updateState(mPreference);
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
+        if (preference instanceof SwitchPreference) {
+            ((SwitchPreference) preference)
+                    .setChecked(!mSharedPreferences.getBoolean(
+                            TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true));
+        }
         setVisible(mScreen, mPreferenceKey, shouldShow());
     }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
             String key) {
-        if (TextUtils.equals(TetherEnabler.USB_TETHER_KEY, key)) {
-            mUSBTetherEnabled = sharedPreferences.getBoolean(key, false);
-        } else if (TextUtils.equals(TetherEnabler.BLUETOOTH_TETHER_KEY, key)) {
-            mBluetoothTetherEnabled = sharedPreferences.getBoolean(key, false);
+        final boolean shouldShowBefore = shouldShow();
+        if (TextUtils.equals(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, key) && shouldShowBefore) {
+            updateState(mPreference);
+            return;
         }
 
-        // Check if we are hiding this preference. If so,  make sure the preference is set to
+        boolean shouldUpdateState = false;
+        if (TextUtils.equals(TetherEnabler.USB_TETHER_KEY, key)) {
+            mUSBTetherEnabled = sharedPreferences.getBoolean(key, false);
+            shouldUpdateState = true;
+        } else if (TextUtils.equals(TetherEnabler.BLUETOOTH_TETHER_KEY, key)) {
+            mBluetoothTetherEnabled = sharedPreferences.getBoolean(key, false);
+            shouldUpdateState = true;
+        }
+
+        // Check if we are hiding this preference. If so, make sure the preference is set to
         // unchecked to enable wifi tether.
-        if (mPreference != null && mPreference instanceof SwitchPreference && !shouldShow()) {
+        if (mPreference != null && mPreference instanceof SwitchPreference
+                && shouldShowBefore && !shouldShow()) {
             final SwitchPreference switchPreference = (SwitchPreference) mPreference;
             if (switchPreference.isChecked()) {
                 if (DEBUG) {
@@ -151,7 +163,9 @@ public final class WifiTetherDisablePreferenceController extends BasePreferenceC
             }
         }
 
-        updateState(mPreference);
+        if (shouldUpdateState) {
+            updateState(mPreference);
+        }
     }
 
     @Override

@@ -44,7 +44,8 @@ import com.android.settings.core.BasePreferenceController;
  *
  */
 public final class UsbTetherPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, Preference.OnPreferenceChangeListener {
+        LifecycleObserver, Preference.OnPreferenceChangeListener,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "UsbTetherPrefController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -71,6 +72,17 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
         mContext.registerReceiver(mUsbChangeReceiver, filter);
     }
 
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
         mContext.unregisterReceiver(mUsbChangeReceiver);
@@ -90,22 +102,20 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
-        if (mPreference != null && mPreference instanceof SwitchPreference) {
-            ((SwitchPreference) mPreference)
-                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
-        }
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference != null) {
-            if (mUsbConnected && !mMassStorageActive) {
-                preference.setEnabled(true);
-            } else {
-                preference.setEnabled(false);
-            }
+        if (preference == null) {
+            return;
         }
+
+        if (preference instanceof SwitchPreference) {
+            ((SwitchPreference) preference)
+                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
+        }
+        preference.setEnabled(mUsbConnected && !mMassStorageActive);
     }
 
     @VisibleForTesting
@@ -133,5 +143,12 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
         editor.putBoolean(mPreferenceKey, (Boolean) o);
         editor.apply();
         return true;
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (TextUtils.equals(mPreferenceKey, key)) {
+            updateState(mPreference);
+        }
     }
 }
