@@ -23,7 +23,6 @@ import android.text.Editable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.preference.PreferenceViewHolder;
 
@@ -35,9 +34,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.xml.sax.XMLReader;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /** Tests for {@link HtmlTextPreference} */
 @RunWith(RobolectricTestRunner.class)
@@ -65,21 +61,13 @@ public final class HtmlTextPreferenceTest {
     }
 
     @Test
-    public void testUnsupportedTagList_keepRealContentWithoutTag() {
-        final List<String> testUnsupportedTagList = new ArrayList<>();
-        testUnsupportedTagList.add("testTag");
+    public void testTagHandler() {
         final String testStr = "<testTag>Real description</testTag>";
-        final String expectedStr = "Real description";
-        final String expectedTag = "unsupportedtag1";
 
-        mHtmlTextPreference.setUnsupportedTagList(testUnsupportedTagList);
         mHtmlTextPreference.setSummary(testStr);
         mHtmlTextPreference.setTagHandler(mTagHandler);
         mHtmlTextPreference.onBindViewHolder(mPreferenceViewHolder);
 
-        final TextView summaryView = mPreferenceViewHolder.itemView.findViewById(
-                android.R.id.summary);
-        assertThat(summaryView.getText().toString()).isEqualTo(expectedStr);
-        assertThat(mHandledTag).isEqualTo(expectedTag);
+        assertThat(mHandledTag).isEqualTo("testTag");
     }
 }
