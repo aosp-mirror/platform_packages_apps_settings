@@ -20,9 +20,11 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -121,5 +123,21 @@ public class ConversationPromotePreferenceControllerTest {
         assertFalse(captor.getValue().isDemoted());
 
         verify(mFragment).getActivity();
+    }
+
+    @Test
+    public void testHandlePreferenceClick_wrongKey() {
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
+        channel.setConversationId("a", "a");
+        channel.setDemoted(true);
+        mController.onResume(appRow, channel, null, null, null, null);
+
+        Preference pref = mock(Preference.class);
+        when(pref.getKey()).thenReturn("wrong");
+        assertFalse(mController.handlePreferenceTreeClick(pref));
+
+        verify(mBackend, never()).updateChannel(eq(null), anyInt(), any());
+        verify(mFragment, never()).getActivity();
     }
 }
