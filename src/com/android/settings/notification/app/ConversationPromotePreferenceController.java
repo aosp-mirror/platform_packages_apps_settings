@@ -62,7 +62,7 @@ public class ConversationPromotePreferenceController extends NotificationPrefere
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (mChannel == null) {
+        if (mChannel == null || !KEY.equals(preference.getKey())) {
             return false;
         }
         mChannel.setDemoted(false);
