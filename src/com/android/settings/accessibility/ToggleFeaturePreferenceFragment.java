@@ -16,6 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenHeightPixels;
+import static com.android.settings.accessibility.AccessibilityUtil.getScreenWidthPixels;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -80,7 +83,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected CharSequence mPackageName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
-    private static final String ANCHOR_TAG = "a";
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_GENERAL_CATEGORY = "general_categories";
@@ -94,9 +96,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
-    // For html description of accessibility service, third party developer must follow the rule,
-    // such as <img src="R.drawable.fileName"/>, a11y settings will get third party resources
-    // by this.
+    // For html description of accessibility service, must follow the rule, such as
+    // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
     private static final String IMG_PREFIX = "R.drawable.";
 
     private ImageView mImageGetterCacheView;
@@ -147,10 +148,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         PreferenceScreen preferenceScreen = getPreferenceScreen();
         if (mImageUri != null) {
+            final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
             final AnimatedImagePreference animatedImagePreference = new AnimatedImagePreference(
                     getPrefContext());
             animatedImagePreference.setImageUri(mImageUri);
             animatedImagePreference.setSelectable(false);
+            animatedImagePreference.setMaxHeight(screenHalfHeight);
             preferenceScreen.addPreference(animatedImagePreference);
         }
 
@@ -195,14 +198,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             introductionCategory.setTitle(title);
             preferenceScreen.addPreference(introductionCategory);
 
-            // For accessibility service, avoid malicious links made by third party developer.
-            final List<String> unsupportedTagList = new ArrayList<>();
-            unsupportedTagList.add(ANCHOR_TAG);
-
             final HtmlTextPreference htmlTextPreference = new HtmlTextPreference(getPrefContext());
             htmlTextPreference.setSummary(mHtmlDescription);
             htmlTextPreference.setImageGetter(mImageGetter);
-            htmlTextPreference.setUnsupportedTagList(unsupportedTagList);
             htmlTextPreference.setSelectable(false);
             introductionCategory.addPreference(htmlTextPreference);
         }
@@ -383,14 +381,24 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mImageGetterCacheView.setAdjustViewBounds(true);
         mImageGetterCacheView.setImageURI(imageUri);
 
-        final Drawable drawable = mImageGetterCacheView.getDrawable().mutate();
-        if (drawable != null) {
-            drawable.setBounds(/* left= */0, /* top= */0, drawable.getIntrinsicWidth(),
-                    drawable.getIntrinsicHeight());
+        if (mImageGetterCacheView.getDrawable() == null) {
+            return null;
         }
 
+        final Drawable drawable =
+                mImageGetterCacheView.getDrawable().mutate().getConstantState().newDrawable();
         mImageGetterCacheView.setImageURI(null);
-        mImageGetterCacheView.setImageDrawable(null);
+        final int imageWidth = drawable.getIntrinsicWidth();
+        final int imageHeight = drawable.getIntrinsicHeight();
+        final int screenHalfHeight = getScreenHeightPixels(getPrefContext()) / /* half */ 2;
+        if ((imageWidth > getScreenWidthPixels(getPrefContext()))
+                || (imageHeight > screenHalfHeight)) {
+            return null;
+        }
+
+        drawable.setBounds(/* left= */0, /* top= */0, drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight());
+
         return drawable;
     }
 
