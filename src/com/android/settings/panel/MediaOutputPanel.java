@@ -186,6 +186,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @Override
     public void onClickCustomizedButton() {
+        mLocalMediaManager.releaseSession();
     }
 
     @Override
