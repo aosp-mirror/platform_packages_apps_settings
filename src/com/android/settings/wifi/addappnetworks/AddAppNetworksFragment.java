@@ -349,7 +349,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
              * If specified is passpoint network, need to check with the existing passpoint
              * networks.
              */
-            final PasspointConfiguration passpointConfig = suggestion.getPasspointConfiguration();
+            final PasspointConfiguration passpointConfig = suggestion.getPasspointConfig();
             if (passpointConfig != null) {
                 foundInSavedList = isSavedPasspointConfiguration(passpointConfig);
                 displayedName = passpointConfig.getHomeSp().getFriendlyName();
@@ -600,7 +600,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
      */
     private void saveNetwork(int index) {
         final PasspointConfiguration passpointConfig =
-                mUiToRequestedList.get(index).mWifiNetworkSuggestion.getPasspointConfiguration();
+                mUiToRequestedList.get(index).mWifiNetworkSuggestion.getPasspointConfig();
         if (passpointConfig != null) {
             // Save passpoint, if no IllegalArgumentException, then treat it as success.
             try {
