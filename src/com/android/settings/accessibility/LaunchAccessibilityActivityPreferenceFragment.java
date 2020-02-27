@@ -27,6 +27,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
@@ -88,6 +90,13 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
         showDialog(DialogEnums.EDIT_SHORTCUT);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do not call super. We don't want to see the "Help & feedback" option on this page so as
+        // not to confuse users who think they might be able to send feedback about a specific
+        // accessibility service from this page.
     }
 
     @Override
