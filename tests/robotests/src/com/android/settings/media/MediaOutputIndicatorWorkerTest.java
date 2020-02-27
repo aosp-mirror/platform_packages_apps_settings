@@ -16,6 +16,8 @@
 
 package com.android.settings.media;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -28,7 +30,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.VolumeProvider;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -45,6 +52,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothUtils.class})
 public class MediaOutputIndicatorWorkerTest {
@@ -54,10 +64,18 @@ public class MediaOutputIndicatorWorkerTest {
     private BluetoothEventManager mBluetoothEventManager;
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private MediaSessionManager mMediaSessionManager;
+    @Mock
+    private MediaController mMediaController;
+
     private Context mContext;
-    private MediaOutputIndicatorWorker mMediaDeviceUpdateWorker;
+    private MediaOutputIndicatorWorker mMediaOutputIndicatorWorker;
     private ShadowApplication mShadowApplication;
     private ContentResolver mResolver;
+    private List<MediaController> mMediaControllers = new ArrayList<>();
+    private PlaybackState mPlaybackState;
+    private MediaController.PlaybackInfo mPlaybackInfo;
 
     @Before
     public void setUp() {
@@ -66,7 +84,10 @@ public class MediaOutputIndicatorWorkerTest {
         mContext = spy(RuntimeEnvironment.application);
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
-        mMediaDeviceUpdateWorker = new MediaOutputIndicatorWorker(mContext, URI);
+        mMediaOutputIndicatorWorker = new MediaOutputIndicatorWorker(mContext, URI);
+        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        mMediaControllers.add(mMediaController);
+        when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
 
         mResolver = mock(ContentResolver.class);
         doReturn(mResolver).when(mContext).getContentResolver();
@@ -74,22 +95,22 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void onSlicePinned_registerCallback() {
-        mMediaDeviceUpdateWorker.onSlicePinned();
-        verify(mBluetoothEventManager).registerCallback(mMediaDeviceUpdateWorker);
+        mMediaOutputIndicatorWorker.onSlicePinned();
+        verify(mBluetoothEventManager).registerCallback(mMediaOutputIndicatorWorker);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
     public void onSliceUnpinned_unRegisterCallback() {
-        mMediaDeviceUpdateWorker.onSlicePinned();
-        mMediaDeviceUpdateWorker.onSliceUnpinned();
-        verify(mBluetoothEventManager).unregisterCallback(mMediaDeviceUpdateWorker);
+        mMediaOutputIndicatorWorker.onSlicePinned();
+        mMediaOutputIndicatorWorker.onSliceUnpinned();
+        verify(mBluetoothEventManager).unregisterCallback(mMediaOutputIndicatorWorker);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 
     @Test
     public void onReceive_shouldNotifyChange() {
-        mMediaDeviceUpdateWorker.onSlicePinned();
+        mMediaOutputIndicatorWorker.onSlicePinned();
 
         final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
         for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
@@ -97,5 +118,63 @@ public class MediaOutputIndicatorWorkerTest {
         }
 
         verify(mResolver).notifyChange(URI, null);
+    }
+
+    @Test
+    public void getActiveLocalMediaController_localMediaPlaying_returnController() {
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .build();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isEqualTo(
+                mMediaController);
+    }
+
+    @Test
+    public void getActiveLocalMediaController_remoteMediaPlaying_returnNull() {
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_REMOTE,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .build();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
+    }
+
+    @Test
+    public void getActiveLocalMediaController_localMediaStopped_returnNull() {
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_STOPPED, 0, 1)
+                .build();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isNull();
     }
 }
