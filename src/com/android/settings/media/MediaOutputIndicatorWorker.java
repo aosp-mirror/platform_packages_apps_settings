@@ -24,17 +24,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import java.io.IOException;
 
 /**
  * Listener for background change from {@code BluetoothCallback} to update media output indicator.
@@ -100,6 +103,27 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         notifySliceChange();
     }
 
+    @Nullable
+    MediaController getActiveLocalMediaController() {
+        final MediaSessionManager mMediaSessionManager = mContext.getSystemService(
+                MediaSessionManager.class);
+
+        for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+            final MediaController.PlaybackInfo pi = controller.getPlaybackInfo();
+            if (pi == null) {
+                return null;
+            }
+            final PlaybackState playbackState = controller.getPlaybackState();
+            if (playbackState == null) {
+                return null;
+            }
+            if (pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL
+                    && playbackState.getState() == PlaybackState.STATE_PLAYING) {
+                return controller;
+            }
+        }
+        return null;
+    }
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
