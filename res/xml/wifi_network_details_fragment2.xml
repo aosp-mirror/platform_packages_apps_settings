@@ -69,6 +69,12 @@
         android:entries="@array/wifi_privacy_entries"
         android:entryValues="@array/wifi_privacy_values"/>
 
+    <Preference
+        android:key="subscription_detail"
+        android:title="@string/wifi_subscription"
+        android:summary="@string/wifi_subscription_summary"
+        settings:allowDividerAbove="true"/>
+
     <SwitchPreference
         android:key="auto_connect"
         android:title="@string/wifi_auto_connect_title"
@@ -138,10 +144,5 @@
                 android:selectable="false"
                 settings:enableCopying="true"/>
     </PreferenceCategory>
-
-    <Preference
-        android:key="subscription_detail"
-        android:title="@string/wifi_subscription_detail"
-        settings:allowDividerAbove="true"/>
 
 </PreferenceScreen>
