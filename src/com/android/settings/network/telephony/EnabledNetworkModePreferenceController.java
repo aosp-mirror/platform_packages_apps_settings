@@ -151,7 +151,7 @@ public class EnabledNetworkModePreferenceController extends
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
-        mIsGlobalCdma = mTelephonyManager.isGlobalModeEnabled()
+        mIsGlobalCdma = mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_CDMA_CHOICES_BOOL);
         mShow4GForLTE = carrierConfig != null
                 ? carrierConfig.getBoolean(
@@ -183,7 +183,7 @@ public class EnabledNetworkModePreferenceController extends
                     mContext.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                     Phone.PREFERRED_NT_MODE);
-            if (mTelephonyManager.isGlobalModeEnabled()) {
+            if (mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()) {
                 if (lteForced == 0) {
                     preference.setEntries(
                             R.array.enabled_networks_cdma_choices);
