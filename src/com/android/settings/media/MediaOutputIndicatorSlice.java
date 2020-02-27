@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.session.MediaController;
 import android.net.Uri;
 import android.util.Log;
 
@@ -36,6 +37,8 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceable;
+import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -52,6 +55,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     private Context mContext;
     private LocalBluetoothManager mLocalBluetoothManager;
     private LocalBluetoothProfileManager mProfileManager;
+    private MediaOutputIndicatorWorker mWorker;
 
     public MediaOutputIndicatorSlice(Context context) {
         mContext = context;
@@ -66,22 +70,18 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         if (!isVisible()) {
-            return new ListBuilder(mContext, MEDIA_OUTPUT_INDICATOR_SLICE_URI, ListBuilder.INFINITY)
+            return new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                     .setIsError(true)
                     .build();
         }
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
         final CharSequence title = mContext.getText(R.string.media_output_title);
-        final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                0 /* requestCode */, getMediaOutputSliceIntent(), 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
-                primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
+                getBroadcastIntent(), icon, ListBuilder.ICON_IMAGE, title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
         // To set an empty icon to indent the row
-        final ListBuilder listBuilder = new ListBuilder(mContext,
-                MEDIA_OUTPUT_INDICATOR_SLICE_URI,
-                ListBuilder.INFINITY)
+        final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
@@ -96,11 +96,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         return IconCompat.createWithBitmap(bitmap);
     }
 
-    private Intent getMediaOutputSliceIntent() {
-        final Intent intent = new Intent()
-                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
+    private PendingIntent getBroadcastIntent() {
+        final Intent intent = new Intent(getUri().toString());
+        intent.setClass(mContext, SliceBroadcastReceiver.class);
+        return PendingIntent.getBroadcast(mContext, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override
@@ -118,6 +118,28 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     @Override
     public Class getBackgroundWorkerClass() {
         return MediaOutputIndicatorWorker.class;
+    }
+
+    @Override
+    public void onNotifyChange(Intent i) {
+        final MediaController mediaController = getWorker().getActiveLocalMediaController();
+        final Intent intent = new Intent()
+                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (mediaController != null) {
+            intent.putExtra(MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN,
+                    mediaController.getSessionToken());
+            intent.putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                    mediaController.getPackageName());
+        }
+        mContext.startActivity(intent);
+    }
+
+    private MediaOutputIndicatorWorker getWorker() {
+        if (mWorker == null) {
+            mWorker = SliceBackgroundWorker.getInstance(getUri());
+        }
+        return mWorker;
     }
 
     private boolean isVisible() {
