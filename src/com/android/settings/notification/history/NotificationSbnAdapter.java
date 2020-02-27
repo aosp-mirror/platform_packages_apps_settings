@@ -17,6 +17,8 @@
 package com.android.settings.notification.history;
 
 import static android.content.pm.PackageManager.*;
+import static android.os.UserHandle.USER_ALL;
+import static android.os.UserHandle.USER_CURRENT;
 
 import android.app.Notification;
 import android.content.Context;
@@ -28,6 +30,7 @@ import android.os.UserHandle;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,17 +73,22 @@ public class NotificationSbnAdapter extends
     public void onBindViewHolder(final @NonNull NotificationSbnViewHolder holder,
             int position) {
         final StatusBarNotification sbn = mValues.get(position);
-        holder.setIcon(loadIcon(sbn));
-        holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
-        holder.setTitle(getTitleString(sbn.getNotification()));
-        holder.setSummary(getTextString(mContext, sbn.getNotification()));
-        holder.setPostedTime(sbn.getPostTime());
-        if (!mUserBadgeCache.containsKey(sbn.getUserId())) {
-            Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
-                    UserHandle.of(sbn.getUserId()), -1);
-            mUserBadgeCache.put(sbn.getUserId(), profile);
+        if (sbn != null) {
+            holder.setIcon(loadIcon(sbn));
+            holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
+            holder.setTitle(getTitleString(sbn.getNotification()));
+            holder.setSummary(getTextString(mContext, sbn.getNotification()));
+            holder.setPostedTime(sbn.getPostTime());
+            int userId = normalizeUserId(sbn);
+            if (!mUserBadgeCache.containsKey(userId)) {
+                Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
+                        UserHandle.of(userId), -1);
+                mUserBadgeCache.put(userId, profile);
+            }
+            holder.setProfileBadge(mUserBadgeCache.get(userId));
+        } else {
+            Slog.w(TAG, "null entry in list at position " + position);
         }
-        holder.setProfileBadge(mUserBadgeCache.get(sbn.getUserId()));
     }
 
     @Override
@@ -89,7 +97,22 @@ public class NotificationSbnAdapter extends
     }
 
     public void onRebuildComplete(List<StatusBarNotification> notifications) {
+        // summaries are low content; don't bother showing them
+        for (int i = notifications.size() - 1; i >= 0; i--) {
+            StatusBarNotification sbn = notifications.get(i);
+            if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+                notifications.remove(i);
+            }
+        }
         mValues = notifications;
+        notifyDataSetChanged();
+    }
+
+    public void addSbn(StatusBarNotification sbn) {
+        if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+            return;
+        }
+        mValues.add(0, sbn);
         notifyDataSetChanged();
     }
 
@@ -141,12 +164,20 @@ public class NotificationSbnAdapter extends
 
     private Drawable loadIcon(StatusBarNotification sbn) {
         Drawable draw = sbn.getNotification().getSmallIcon().loadDrawableAsUser(
-                sbn.getPackageContext(mContext), sbn.getUserId());
+                sbn.getPackageContext(mContext), normalizeUserId(sbn));
         if (draw == null) {
             return null;
         }
         draw.mutate();
         draw.setColorFilter(sbn.getNotification().color, PorterDuff.Mode.SRC_ATOP);
         return draw;
+    }
+
+    private int normalizeUserId(StatusBarNotification sbn) {
+        int userId = sbn.getUserId();
+        if (userId == USER_ALL) {
+            userId = USER_CURRENT;
+        }
+        return userId;
     }
 }

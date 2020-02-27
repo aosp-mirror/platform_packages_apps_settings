@@ -76,18 +76,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    public void isCardEligibleToDisplay_customCard_returnTrue() {
-        final ContextualCard customCard = new ContextualCard.Builder()
-                .setName("custom_card")
-                .setCardType(ContextualCard.CardType.DEFAULT)
-                .setTitleText("custom_title")
-                .setSummaryText("custom_summary")
-                .build();
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(customCard)).isTrue();
-    }
-
-    @Test
     public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
         final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
 

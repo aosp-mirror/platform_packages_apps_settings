@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -203,6 +204,16 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             return view;
         }
 
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            if (mForgotButton != null) {
+                mForgotButton.setText(mIsAlpha
+                        ? R.string.lockpassword_forgot_password
+                        : R.string.lockpassword_forgot_pin);
+            }
+        }
+
         private int getDefaultHeader() {
             if (mFrp) {
                 return mIsAlpha ? R.string.lockpassword_confirm_your_password_header_frp
@@ -256,6 +267,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             mHeaderTextView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
+            if (mForgotButton != null) {
+                mForgotButton.setAlpha(0f);
+            }
             mPasswordEntry.setAlpha(0f);
             mErrorTextView.setAlpha(0f);
         }
@@ -266,6 +280,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             result.add(mDetailsTextView);
             if (mCancelButton.getVisibility() == View.VISIBLE) {
                 result.add(mCancelButton);
+            }
+            if (mForgotButton != null) {
+                result.add(mForgotButton);
             }
             result.add(mPasswordEntry);
             result.add(mErrorTextView);

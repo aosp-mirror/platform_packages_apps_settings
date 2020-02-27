@@ -26,7 +26,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkScoreManager;
 import android.net.NetworkTemplate;
@@ -74,7 +73,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -82,7 +80,6 @@ import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.time.Clock;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -198,9 +195,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     @VisibleForTesting
     DataUsagePreference mDataUsagePreference;
     private LinkablePreference mStatusMessagePreference;
-
-    // For Search
-    public static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
 
     /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
@@ -857,10 +851,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         final Context context = getContext();
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final ContentResolver contentResolver = context.getContentResolver();
-        return Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1
-                && Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
+        return mWifiManager.isAutoWakeupEnabled()
+                && mWifiManager.isScanAlwaysAvailable()
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 0
                 && !powerManager.isPowerSaveMode();
@@ -871,8 +863,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        final boolean wifiScanningMode = Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        // TODO(b/149421497): Fix this?
+        final boolean wifiScanningMode = mWifiManager.isScanAlwaysAvailable();
         final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
                 : getText(R.string.wifi_scan_notify_text_scanning_off);
         final LinkifyUtils.OnClickListener clickListener =
@@ -1020,26 +1012,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     };
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-                    final Resources res = context.getResources();
-
-                    // Add fragment title if we are showing this fragment
-                    if (res.getBoolean(R.bool.config_show_wifi_settings)) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.wifi_settings);
-                        data.screenTitle = res.getString(R.string.wifi_settings);
-                        data.keywords = res.getString(R.string.keywords_wifi);
-                        data.key = DATA_KEY_REFERENCE;
-                        result.add(data);
-                    }
-
-                    return result;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.wifi_settings2);
 
     private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;

@@ -111,6 +111,20 @@ public class MainlineModuleVersionPreferenceControllerTest {
     }
 
     @Test
+    public void updateStates_canHandleIntent_preferenceShouldBeSelectable() throws Exception {
+        setupModulePackage("test version 123");
+        when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))
+                .thenReturn(new ResolveInfo());
+
+        final MainlineModuleVersionPreferenceController controller =
+                new MainlineModuleVersionPreferenceController(mContext, "key");
+
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.isSelectable()).isTrue();
+    }
+
+    @Test
     public void updateStates_cannotHandleIntent_setNullToPreference() throws Exception {
         setupModulePackage("test version 123");
         when(mPackageManager.resolveActivity(MODULE_UPDATE_INTENT, 0))

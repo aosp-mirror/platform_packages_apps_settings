@@ -21,7 +21,7 @@ import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -64,7 +64,7 @@ public class PreventRingingParentPreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_volumeHushGestureEnabled)).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test

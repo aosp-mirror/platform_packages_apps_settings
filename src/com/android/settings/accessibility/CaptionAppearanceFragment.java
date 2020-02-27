@@ -105,7 +105,7 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_CAPTION_PROPERTIES;
+        return SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE;
     }
 
     @Override
@@ -120,10 +120,6 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
         refreshShowingCustom();
         installUpdateListeners();
         refreshPreviewText();
-    }
-
-    private void refreshPreferenceViewEnabled(boolean enabled) {
-        mPreviewText.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void refreshPreviewText() {
@@ -216,8 +212,6 @@ public class CaptionAppearanceFragment extends SettingsPreferenceFragment
         // Initialize the preference list
         mPreferenceList.add(mFontSize);
         mPreferenceList.add(mPreset);
-
-        refreshPreferenceViewEnabled(mCaptioningManager.isEnabled());
 
         mCustom = (PreferenceCategory) findPreference(PREF_CUSTOM);
         mShowingCustom = true;

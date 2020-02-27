@@ -565,7 +565,27 @@ public class ContextualCardManagerTest {
     }
 
     @Test
+    public void getCardsWithViewType_hasOneStickySlice_shouldHaveOneStickyCard() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, true);
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
+        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
+        final List<Integer> categories = Arrays.asList(
+                ContextualCardProto.ContextualCard.Category.STICKY_VALUE,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
+        );
+        final List<ContextualCard> cardListWithWifi = buildCategoriedCards(cards, categories);
+
+        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithWifi);
+
+        assertThat(result).hasSize(cards.size());
+        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
+        assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
+    }
+
+    @Test
     public void getCardsWithViewType_hasWifiSlice_shouldHaveOneStickyCard() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
@@ -584,6 +604,7 @@ public class ContextualCardManagerTest {
 
     @Test
     public void getCardsWithViewType_hasBluetoothDeviceSlice_shouldHaveOneStickyCard() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
@@ -602,6 +623,7 @@ public class ContextualCardManagerTest {
 
     @Test
     public void getCardsWithViewType_hasWifiAndBtDeviceSlice_shouldHaveTwoStickyCards() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
@@ -624,6 +646,7 @@ public class ContextualCardManagerTest {
 
     @Test
     public void getCardsWithViewType_noWifiOrBtDeviceSlice_shouldNotHaveStickyCard() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
         final List<Integer> categories = Arrays.asList(
                 ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
                 ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
@@ -683,8 +706,8 @@ public class ContextualCardManagerTest {
         cards.add(new ContextualCard.Builder()
                 .setName("test_flashlight")
                 .setCardType(ContextualCard.CardType.SLICE)
-                .setSliceUri(
-                        Uri.parse("content://com.android.settings.test.slices/action/flashlight"))
+                .setSliceUri(Uri.parse(
+                        "content://com.android.settings.test.slices/action/flashlight"))
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .build());
         cards.add(new ContextualCard.Builder()

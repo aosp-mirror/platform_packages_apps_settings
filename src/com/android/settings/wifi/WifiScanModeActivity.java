@@ -24,7 +24,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
@@ -80,8 +79,7 @@ public class WifiScanModeActivity extends FragmentActivity {
     }
 
     private void doPositiveClick() {
-        Settings.Global.putInt(getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 1);
+        getApplicationContext().getSystemService(WifiManager.class).setScanAlwaysAvailable(true);
         setResult(RESULT_OK);
         finish();
     }

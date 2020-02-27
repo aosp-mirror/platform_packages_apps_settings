@@ -38,8 +38,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.panel.PanelLoggingContract.PanelClosedKeys;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.android.setupdesign.DividerItemDecoration;
 
@@ -182,31 +185,45 @@ public class PanelFragment extends Fragment {
             activity.finish();
         }
 
+        mPanel.registerCallback(new LocalPanelCallback());
+        if (mPanel instanceof LifecycleObserver) {
+            getLifecycle().addObserver((LifecycleObserver) mPanel);
+        }
+
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
-
         // Add predraw listener to remove the animation and while we wait for Slices to load.
         mLayoutView.getViewTreeObserver().addOnPreDrawListener(mOnPreDrawListener);
 
         // Start loading Slices. When finished, the Panel will animate in.
         loadAllSlices();
 
-        final int iconRes = mPanel.getIcon();
-        if (iconRes == PanelContent.ICON_UNAVAILABLE) {
+        final IconCompat icon = mPanel.getIcon();
+        if (icon == null) {
             mTitleView.setText(mPanel.getTitle());
         } else {
             mTitleView.setVisibility(View.GONE);
             mPanelHeader.setVisibility(View.VISIBLE);
-            mTitleIcon.setImageResource(iconRes);
+            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
             mHeaderTitle.setText(mPanel.getTitle());
             mHeaderSubtitle.setText(mPanel.getSubTitle());
+            if (mPanel.getHeaderIconIntent() != null) {
+                mTitleIcon.setOnClickListener(getHeaderIconListener());
+            }
         }
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 
-        // If getSeeMoreIntent() is null, hide the mSeeMoreButton.
-        if (mPanel.getSeeMoreIntent() == null) {
+        if (mPanel.isCustomizedButtonUsed()) {
+            final CharSequence customTitle = mPanel.getCustomButtonTitle();
+            if (TextUtils.isEmpty(customTitle)) {
+                mSeeMoreButton.setVisibility(View.GONE);
+            } else {
+                mSeeMoreButton.setText(customTitle);
+            }
+        } else if (mPanel.getSeeMoreIntent() == null) {
+            // If getSeeMoreIntent() is null hide the mSeeMoreButton.
             mSeeMoreButton.setVisibility(View.GONE);
         }
 
@@ -368,9 +385,13 @@ public class PanelFragment extends Fragment {
     View.OnClickListener getSeeMoreListener() {
         return (v) -> {
             mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
-            final FragmentActivity activity = getActivity();
-            activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
-            activity.finish();
+            if (mPanel.isCustomizedButtonUsed()) {
+                mPanel.onClickCustomizedButton();
+            } else {
+                final FragmentActivity activity = getActivity();
+                activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
+                activity.finish();
+            }
         };
     }
 
@@ -380,5 +401,24 @@ public class PanelFragment extends Fragment {
             mPanelClosedKey = PanelClosedKeys.KEY_DONE;
             getActivity().finish();
         };
+    }
+
+    @VisibleForTesting
+    View.OnClickListener getHeaderIconListener() {
+        return (v) -> {
+            final FragmentActivity activity = getActivity();
+            activity.startActivity(mPanel.getHeaderIconIntent());
+        };
+    }
+
+    class LocalPanelCallback implements PanelCustomizedButtonCallback {
+
+        @Override
+        public void onCustomizedButtonStateChanged() {
+            ThreadUtils.postOnMainThread(() -> {
+                mSeeMoreButton.setVisibility(
+                        mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+            });
+        }
     }
 }

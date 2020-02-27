@@ -18,7 +18,6 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="firmware_version_screen"
     android:title="@string/firmware_version"
     settings:keywords="@string/keywords_android_version">
 
@@ -27,7 +26,6 @@
         android:key="os_firmware_version"
         android:title="@string/firmware_version"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>
 
@@ -43,7 +41,6 @@
         android:key="module_version"
         android:title="@string/module_version"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.MainlineModuleVersionPreferenceController"/>
 

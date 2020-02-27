@@ -16,8 +16,12 @@
 
 package com.android.settings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 
 /**
@@ -33,8 +37,43 @@ public class Settings extends SettingsActivity {
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class WifiTetherSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class TetherSettingsActivity extends SettingsActivity {
+        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
+        @Override
+        public Intent getIntent() {
+            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
+                    getApplicationContext(), super.getIntent());
+        }
+    }
+    public static class WifiTetherSettingsActivity extends SettingsActivity {
+        // TODO(b/147675042): Clean the override up when we enable the new Fragment persistently.
+        @Override
+        public Intent getIntent() {
+            return wrapIntentWithAllInOneTetherSettingsIfNeeded(
+                    getApplicationContext(), super.getIntent());
+        }
+    }
+
+    private static Intent wrapIntentWithAllInOneTetherSettingsIfNeeded(
+            Context context, Intent superIntent) {
+        if (!FeatureFlagUtils.isEnabled(context, FeatureFlags.TETHER_ALL_IN_ONE)) {
+            return superIntent;
+        }
+
+        final Intent modIntent = new Intent(superIntent);
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT,
+                AllInOneTetherSettings.class.getCanonicalName());
+        Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        if (args != null) {
+            args = new Bundle(args);
+        } else {
+            args = new Bundle();
+        }
+        args.putParcelable("intent", superIntent);
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
+        return modIntent;
+    }
+
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -132,6 +171,12 @@ public class Settings extends SettingsActivity {
         /* empty */
     }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
+    public static class AppInteractAcrossProfilesSettingsActivity extends SettingsActivity {
+        /* empty */
+    }
 
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingSettingsActivity extends SettingsActivity { /* empty */ }
@@ -150,6 +195,7 @@ public class Settings extends SettingsActivity {
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
+
 
     public static class ApnEditorActivity extends SettingsActivity { /* empty */ }
     public static class ChooseAccountActivity extends SettingsActivity { /* empty */ }

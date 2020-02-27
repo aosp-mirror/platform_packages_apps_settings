@@ -24,12 +24,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
@@ -105,6 +109,12 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         if (!refreshRuleOrFinish()) {
             updateControls();
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Utils.setActionBarShadowAnimation(getActivity(), getSettingsLifecycle(), getListView());
     }
 
     @Override

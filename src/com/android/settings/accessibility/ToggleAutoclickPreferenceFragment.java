@@ -16,9 +16,12 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MAX_AUTOCLICK_DELAY_MS;
-import static com.android.settings.accessibility.ToggleAutoclickPreferenceController.MIN_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController.MAX_AUTOCLICK_DELAY_MS;
+import static com.android.settings.accessibility.ToggleAutoclickCustomSeekbarController.MIN_AUTOCLICK_DELAY_MS;
 
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
+import android.annotation.IntDef;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
@@ -32,6 +35,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,16 +50,24 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
     private static final String TAG = "AutoclickPrefFragment";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
+    @Retention(SOURCE)
+    @IntDef({
+            Quantity.OTHER,
+            Quantity.ONE
+    })
+    @interface Quantity {
+        int OTHER = 0;
+        int ONE = 1;
+    }
+
     /**
      * Resource ids from which autoclick preference summaries should be derived. The strings have
      * placeholder for integer delay value.
      */
-    private static final int[] mAutoclickPreferenceSummaries = {
-            R.plurals.accessibilty_autoclick_preference_subtitle_extremely_short_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_very_short_delay,
+    private static final int[] AUTOCLICK_PREFERENCE_SUMMARIES = {
             R.plurals.accessibilty_autoclick_preference_subtitle_short_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_long_delay,
-            R.plurals.accessibilty_autoclick_preference_subtitle_very_long_delay
+            R.plurals.accessibilty_autoclick_preference_subtitle_medium_delay,
+            R.plurals.accessibilty_autoclick_preference_subtitle_long_delay
     };
 
     /**
@@ -63,12 +75,17 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
      * delay.
      *
      * @param resources Resources from which string should be retrieved.
-     * @param delay     Delay for whose value summary should be retrieved.
+     * @param delayMillis Delay for whose value summary should be retrieved.
      */
-    static CharSequence getAutoclickPreferenceSummary(Resources resources, int delay) {
-        int summaryIndex = getAutoclickPreferenceSummaryIndex(delay);
-        return resources.getQuantityString(
-                mAutoclickPreferenceSummaries[summaryIndex], delay, delay);
+    static CharSequence getAutoclickPreferenceSummary(Resources resources, int delayMillis) {
+        final int summaryIndex = getAutoclickPreferenceSummaryIndex(delayMillis);
+        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.OTHER;
+        final float delaySecond =  (float) delayMillis / 1000;
+        // Only show integer when delay time is 1.
+        final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
+
+        return resources.getQuantityString(AUTOCLICK_PREFERENCE_SUMMARIES[summaryIndex],
+                quantity, String.format(decimalFormat, delaySecond));
     }
 
     /**
@@ -79,10 +96,10 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
             return 0;
         }
         if (delay >= MAX_AUTOCLICK_DELAY_MS) {
-            return mAutoclickPreferenceSummaries.length - 1;
+            return AUTOCLICK_PREFERENCE_SUMMARIES.length - 1;
         }
         int delayRange = MAX_AUTOCLICK_DELAY_MS - MIN_AUTOCLICK_DELAY_MS;
-        int rangeSize = (delayRange) / (mAutoclickPreferenceSummaries.length - 1);
+        int rangeSize = (delayRange) / (AUTOCLICK_PREFERENCE_SUMMARIES.length - 1);
         return (delay - MIN_AUTOCLICK_DELAY_MS) / rangeSize;
     }
 

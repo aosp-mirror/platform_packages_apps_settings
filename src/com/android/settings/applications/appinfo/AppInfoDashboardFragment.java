@@ -46,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetailsPreferenceController;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetailPreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -168,13 +169,19 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 use(PictureInPictureDetailPreferenceController.class);
         pip.setPackageName(packageName);
         pip.setParentFragment(this);
+
         final ExternalSourceDetailPreferenceController externalSource =
                 use(ExternalSourceDetailPreferenceController.class);
         externalSource.setPackageName(packageName);
         externalSource.setParentFragment(this);
 
+        final InteractAcrossProfilesDetailsPreferenceController acrossProfiles =
+                use(InteractAcrossProfilesDetailsPreferenceController.class);
+        acrossProfiles.setPackageName(packageName);
+        acrossProfiles.setParentFragment(this);
+
         use(AdvancedAppInfoPreferenceCategoryController.class).setChildren(Arrays.asList(
-                writeSystemSettings, drawOverlay, pip, externalSource));
+                writeSystemSettings, drawOverlay, pip, externalSource, acrossProfiles));
     }
 
     @Override

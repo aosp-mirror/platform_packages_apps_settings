@@ -22,10 +22,12 @@
     <TextView
         android:id="@+id/item_textview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:textSize="20dp"
+        android:layout_height="42dp"
+        android:fontFamily="roboto-bold"
+        android:gravity="center_vertical"
         android:maxLength="20"
-        android:singleLine="true"/>
+        android:paddingLeft="@dimen/accessibility_layout_margin_start_end"
+        android:singleLine="true"
+        android:textSize="14dp" />
 
 </FrameLayout>

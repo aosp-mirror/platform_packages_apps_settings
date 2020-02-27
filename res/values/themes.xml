@@ -210,6 +210,10 @@
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 
+    <style name="Theme.Settings.ContextualCard" parent="Theme.Settings.Home">
+        <item name="android:textAppearanceListItem">@style/TextAppearance.HomepageCardTitle</item>
+    </style>
+
     <!-- Note that Dialog themes do not set list dividers -->
     <style name="Theme.Panel" parent="@*android:style/Theme.DeviceDefault.Settings.Dialog">
         <item name="android:windowBackground">@null</item>

@@ -16,6 +16,7 @@
 
 package com.android.settings.homepage.contextualcards;
 
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
@@ -112,9 +113,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                     final ContextualCard card = new ContextualCard(cursor);
-                    if (card.isCustomCard()) {
-                        //TODO(b/114688391): Load and generate custom card,then add into list
-                    } else if (isLargeCard(card)) {
+                    if (isLargeCard(card)) {
                         result.add(card.mutate().setIsLargeCard(true).build());
                     } else {
                         result.add(card);
@@ -129,18 +128,34 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     @VisibleForTesting
     List<ContextualCard> getDisplayableCards(List<ContextualCard> candidates) {
         final List<ContextualCard> eligibleCards = filterEligibleCards(candidates);
+        final List<ContextualCard> stickyCards = new ArrayList<>();
         final List<ContextualCard> visibleCards = new ArrayList<>();
         final List<ContextualCard> hiddenCards = new ArrayList<>();
 
-        final int size = eligibleCards.size();
-        final int cardCount = getCardCount();
-        for (int i = 0; i < size; i++) {
-            if (i < cardCount) {
-                visibleCards.add(eligibleCards.get(i));
-            } else {
-                hiddenCards.add(eligibleCards.get(i));
+        final int maxCardCount = getCardCount();
+        eligibleCards.forEach(card -> {
+            if (card.getCategory() != STICKY_VALUE) {
+                return;
             }
-        }
+            if (stickyCards.size() < maxCardCount) {
+                stickyCards.add(card);
+            } else {
+                hiddenCards.add(card);
+            }
+        });
+
+        final int nonStickyCardCount = maxCardCount - stickyCards.size();
+        eligibleCards.forEach(card -> {
+            if (card.getCategory() == STICKY_VALUE) {
+                return;
+            }
+            if (visibleCards.size() < nonStickyCardCount) {
+                visibleCards.add(card);
+            } else {
+                hiddenCards.add(card);
+            }
+        });
+        visibleCards.addAll(stickyCards);
 
         if (!CardContentProvider.DELETE_CARD_URI.equals(mNotifyUri)) {
             final MetricsFeatureProvider metricsFeatureProvider =
@@ -163,7 +178,9 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     Cursor getContextualCardsFromProvider() {
-        return CardDatabaseHelper.getInstance(mContext).getContextualCards();
+        final ContextualCardFeatureProvider cardFeatureProvider =
+                FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+        return cardFeatureProvider.getContextualCards();
     }
 
     @VisibleForTesting

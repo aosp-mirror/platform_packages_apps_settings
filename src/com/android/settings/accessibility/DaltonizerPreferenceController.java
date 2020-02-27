@@ -19,15 +19,10 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-
-import com.google.common.primitives.Ints;
 
 /** Controller that shows and updates the color correction summary. */
 public class DaltonizerPreferenceController extends BasePreferenceController {
-
-    private static final String DALTONIZER_TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
     private static final String DALTONIZER_ENABLED =
             Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
 
@@ -42,21 +37,6 @@ public class DaltonizerPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        final String[] daltonizerSummaries = mContext.getResources().getStringArray(
-                R.array.daltonizer_mode_summaries);
-        final int[] daltonizerValues = mContext.getResources().getIntArray(
-                R.array.daltonizer_type_values);
-        final int timeoutValue =
-                DaltonizerRadioButtonPreferenceController.getSecureAccessibilityDaltonizerValue(
-                        mContext.getContentResolver(), DALTONIZER_TYPE);
-        final int idx = Ints.indexOf(daltonizerValues, timeoutValue);
-        final String serviceSummary = daltonizerSummaries[idx == -1 ? 0 : idx];
-
-        final CharSequence serviceState = AccessibilityUtil.getSummary(mContext,
-                DALTONIZER_ENABLED);
-
-        return mContext.getString(
-                R.string.preference_summary_default_combination,
-                serviceState, serviceSummary);
+        return AccessibilityUtil.getSummary(mContext, DALTONIZER_ENABLED);
     }
 }

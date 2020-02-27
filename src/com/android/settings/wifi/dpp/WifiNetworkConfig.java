@@ -253,7 +253,7 @@ public class WifiNetworkConfig {
             final WifiConfiguration enhancedOpenNetworkWifiConfiguration =
                     getBasicWifiConfiguration();
             enhancedOpenNetworkWifiConfiguration.allowedKeyManagement.set(KeyMgmt.OWE);
-            enhancedOpenNetworkWifiConfiguration.requirePMF = true;
+            enhancedOpenNetworkWifiConfiguration.requirePmf = true;
             wifiConfigurations.add(enhancedOpenNetworkWifiConfiguration);
             return wifiConfigurations;
         }
@@ -282,7 +282,7 @@ public class WifiNetworkConfig {
             }
         } else if (mSecurity.startsWith(SECURITY_SAE)) {
             wifiConfiguration.allowedKeyManagement.set(KeyMgmt.SAE);
-            wifiConfiguration.requirePMF = true;
+            wifiConfiguration.requirePmf = true;
             if (mPreSharedKey.length() != 0) {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }

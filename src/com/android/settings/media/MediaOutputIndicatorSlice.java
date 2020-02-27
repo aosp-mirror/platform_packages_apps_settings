@@ -23,6 +23,7 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
 
@@ -77,16 +78,22 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
-
+        // To set an empty icon to indent the row
         final ListBuilder listBuilder = new ListBuilder(mContext,
                 MEDIA_OUTPUT_INDICATOR_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
+                        .setTitleItem(createEmptyIcon(), ListBuilder.ICON_IMAGE)
                         .setSubtitle(findActiveDeviceName())
                         .setPrimaryAction(primarySliceAction));
         return listBuilder.build();
+    }
+
+    private IconCompat createEmptyIcon() {
+        final Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        return IconCompat.createWithBitmap(bitmap);
     }
 
     private Intent getMediaOutputSliceIntent() {

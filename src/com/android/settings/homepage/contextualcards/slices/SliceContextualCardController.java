@@ -25,9 +25,9 @@ import android.text.TextUtils;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.homepage.contextualcards.CardDatabaseHelper;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardController;
+import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeedbackDialog;
 import com.android.settings.homepage.contextualcards.ContextualCardUpdateListener;
 import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUtils;
@@ -68,8 +68,9 @@ public class SliceContextualCardController implements ContextualCardController {
     @Override
     public void onDismissed(ContextualCard card) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            final CardDatabaseHelper dbHelper = CardDatabaseHelper.getInstance(mContext);
-            dbHelper.markContextualCardAsDismissed(mContext, card.getName());
+            final ContextualCardFeatureProvider cardFeatureProvider =
+                    FeatureFactory.getFactory(mContext).getContextualCardFeatureProvider(mContext);
+            cardFeatureProvider.markCardAsDismissed(mContext, card.getName());
         });
         showFeedbackDialog(card);
 

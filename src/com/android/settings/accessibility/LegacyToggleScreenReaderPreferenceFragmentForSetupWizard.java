@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
+import android.view.View;
 
 /** For accessibility services that target SDK <= Q in setup wizard. */
 public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
@@ -26,9 +27,9 @@ public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
     private boolean mToggleSwitchWasInitiallyChecked;
 
     @Override
-    protected void onProcessArguments(Bundle arguments) {
-        super.onProcessArguments(arguments);
-        mToggleSwitchWasInitiallyChecked = mToggleSwitch.isChecked();
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 
     @Override
@@ -39,10 +40,10 @@ public class LegacyToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleSwitch.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER,
-                    mToggleSwitch.isChecked());
+                    mToggleServiceDividerSwitchPreference.isChecked());
         }
 
         super.onStop();

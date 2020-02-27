@@ -17,7 +17,6 @@
 package com.android.settings.notification.zen;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -84,11 +83,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     @Override
     public void onResume() {
         super.onResume();
-        if (!ActivityManager.isLowRamDeviceStatic()) {
-            reloadList();
-        } else {
-            setEmptyText(R.string.disabled_low_ram_device);
-        }
+        reloadList();
     }
 
     @Override

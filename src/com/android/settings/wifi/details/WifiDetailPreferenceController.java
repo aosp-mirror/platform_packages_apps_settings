@@ -31,6 +31,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.net.CaptivePortalData;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
 import android.net.LinkAddress;
@@ -41,6 +42,7 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.NetworkUtils;
 import android.net.RouteInfo;
+import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -75,6 +77,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.wifi.AccessPoint;
@@ -86,6 +89,10 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
@@ -189,6 +196,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     WifiDataUsageSummaryPreferenceController mSummaryHeaderController;
 
     private final IconInjector mIconInjector;
+    private final Clock mClock;
     private final IntentFilter mFilter;
 
     // Passpoint information - cache it in case of losing these information after
@@ -229,6 +237,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         public void onLinkPropertiesChanged(Network network, LinkProperties lp) {
             if (network.equals(mNetwork) && !lp.equals(mLinkProperties)) {
                 mLinkProperties = lp;
+                refreshEntityHeader();
+                refreshButtons();
                 refreshIpLayerInfo();
             }
         }
@@ -322,7 +332,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             MetricsFeatureProvider metricsFeatureProvider) {
         return new WifiDetailPreferenceController(
                 accessPoint, connectivityManager, context, fragment, handler, lifecycle,
-                wifiManager, metricsFeatureProvider, new IconInjector(context));
+                wifiManager, metricsFeatureProvider, new IconInjector(context), new Clock());
     }
 
     @VisibleForTesting
@@ -335,7 +345,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
             Lifecycle lifecycle,
             WifiManager wifiManager,
             MetricsFeatureProvider metricsFeatureProvider,
-            IconInjector injector) {
+            IconInjector injector,
+            Clock clock) {
         super(context);
 
         mAccessPoint = accessPoint;
@@ -347,6 +358,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mWifiManager = wifiManager;
         mMetricsFeatureProvider = metricsFeatureProvider;
         mIconInjector = injector;
+        mClock = clock;
 
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
@@ -404,9 +416,6 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton1Text(R.string.forget)
                 .setButton1Icon(R.drawable.ic_settings_delete)
                 .setButton1OnClickListener(view -> forgetNetwork())
-                .setButton2Text(R.string.wifi_sign_in_button_text)
-                .setButton2Icon(R.drawable.ic_settings_sign_in)
-                .setButton2OnClickListener(view -> signIntoNetwork())
                 .setButton3Text(R.string.wifi_connect)
                 .setButton3Icon(R.drawable.ic_settings_wireless)
                 .setButton3OnClickListener(view -> connectNetwork())
@@ -414,6 +423,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton4Text(R.string.share)
                 .setButton4Icon(R.drawable.ic_qrcode_24dp)
                 .setButton4OnClickListener(view -> shareNetwork());
+        updateCaptivePortalButton();
 
         if (isPasspointConfigurationR1Expired()) {
             // Hide Connect button.
@@ -437,6 +447,42 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
         mSecurityPref.setSummary(mAccessPoint.getSecurityString(/* concise */ false));
+    }
+
+    /**
+     * Update text, icon and listener of the captive portal button.
+     * @return True if the button should be shown.
+     */
+    private boolean updateCaptivePortalButton() {
+        final Uri venueInfoUrl = getCaptivePortalVenueInfoUrl();
+        if (venueInfoUrl == null) {
+            mButtonsPref.setButton2Text(R.string.wifi_sign_in_button_text)
+                    .setButton2Icon(R.drawable.ic_settings_sign_in)
+                    .setButton2OnClickListener(view -> signIntoNetwork());
+            return canSignIntoNetwork();
+        }
+
+        mButtonsPref.setButton2Text(R.string.wifi_venue_website_button_text)
+                .setButton2Icon(R.drawable.ic_settings_sign_in)
+                .setButton2OnClickListener(view -> {
+                    final Intent infoIntent = new Intent(Intent.ACTION_VIEW);
+                    infoIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    infoIntent.setData(venueInfoUrl);
+                    mContext.startActivity(infoIntent);
+                });
+        return mAccessPoint.isActive();
+    }
+
+    private Uri getCaptivePortalVenueInfoUrl() {
+        final LinkProperties lp = mLinkProperties;
+        if (lp == null) {
+            return null;
+        }
+        final CaptivePortalData data = lp.getCaptivePortalData();
+        if (data == null) {
+            return null;
+        }
+        return data.getVenueInfoUrl();
     }
 
     private void setupEntityHeader(PreferenceScreen screen) {
@@ -464,6 +510,37 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mEntityHeaderController.setLabel(mAccessPoint.getTitle());
     }
 
+    private String getExpiryTimeSummary() {
+        if (mLinkProperties == null || mLinkProperties.getCaptivePortalData() == null) {
+            return null;
+        }
+
+        final long expiryTimeMillis = mLinkProperties.getCaptivePortalData().getExpiryTimeMillis();
+        if (expiryTimeMillis <= 0) {
+            return null;
+        }
+        final ZonedDateTime now = mClock.now();
+        final ZonedDateTime expiryTime = ZonedDateTime.ofInstant(
+                Instant.ofEpochMilli(expiryTimeMillis),
+                now.getZone());
+
+        if (now.isAfter(expiryTime)) {
+            return null;
+        }
+
+        if (now.plusDays(2).isAfter(expiryTime)) {
+            // Expiration within 2 days: show a duration
+            return mContext.getString(R.string.wifi_time_remaining, StringUtil.formatElapsedTime(
+                    mContext,
+                    Duration.between(now, expiryTime).getSeconds() * 1000,
+                    false /* withSeconds */));
+        }
+
+        // For more than 2 days, show the expiry date
+        return mContext.getString(R.string.wifi_expiry_time,
+                DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(expiryTime));
+    }
+
     private void refreshEntityHeader() {
         if (usingDataUsageHeader(mContext)) {
             mSummaryHeaderController.updateState(mDataUsageSummaryPref);
@@ -480,6 +557,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
             mEntityHeaderController
                     .setSummary(summary)
+                    .setSecondSummary(getExpiryTimeSummary())
                     .setRecyclerView(mFragment.getListView(), mLifecycle)
                     .done(mFragment.getActivity(), true /* rebind */);
         }
@@ -766,16 +844,16 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 mIsEphemeral ? R.string.wifi_disconnect_button_text : R.string.forget);
 
         boolean canForgetNetwork = canForgetNetwork();
-        boolean canSignIntoNetwork = canSignIntoNetwork();
+        boolean showCaptivePortalButton = updateCaptivePortalButton();
         boolean canConnectNetwork = canConnectNetwork() && !isPasspointConfigurationR1Expired();
         boolean canShareNetwork = canShareNetwork();
 
         mButtonsPref.setButton1Visible(canForgetNetwork);
-        mButtonsPref.setButton2Visible(canSignIntoNetwork);
+        mButtonsPref.setButton2Visible(showCaptivePortalButton);
         mButtonsPref.setButton3Visible(canConnectNetwork);
         mButtonsPref.setButton4Visible(canShareNetwork);
         mButtonsPref.setVisible(canForgetNetwork
-                || canSignIntoNetwork
+                || showCaptivePortalButton
                 || canConnectNetwork
                 || canShareNetwork);
     }
@@ -993,6 +1071,13 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
 
         public Drawable getIcon(int level) {
             return mContext.getDrawable(Utils.getWifiIconResource(level)).mutate();
+        }
+    }
+
+    @VisibleForTesting
+    static class Clock {
+        public ZonedDateTime now() {
+            return ZonedDateTime.now();
         }
     }
 

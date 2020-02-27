@@ -33,8 +33,8 @@ import com.android.settings.R;
  */
 public class AnimatedImagePreference extends Preference {
 
-    private boolean mDividerAllowedAbove = false;
     private Uri mImageUri;
+    private int mMaxHeight = -1;
 
     AnimatedImagePreference(Context context) {
         super(context);
@@ -44,41 +44,46 @@ public class AnimatedImagePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-        holder.setDividerAllowedAbove(mDividerAllowedAbove);
 
         final ImageView imageView = holder.itemView.findViewById(R.id.animated_img);
-        if (imageView != null && mImageUri != null) {
+        if (imageView == null) {
+            return;
+        }
+
+        if (mImageUri != null) {
             imageView.setImageURI(mImageUri);
 
             final Drawable drawable = imageView.getDrawable();
-            if (drawable != null) {
-                if (drawable instanceof AnimatedImageDrawable) {
-                    ((AnimatedImageDrawable) drawable).start();
-                }
+            if (drawable instanceof AnimatedImageDrawable) {
+                ((AnimatedImageDrawable) drawable).start();
             }
         }
-    }
 
-    /**
-     * Sets divider whether to show in preference above.
-     *
-     * @param allowed true will be drawn on above this item
-     */
-    public void setDividerAllowedAbove(boolean allowed) {
-        if (allowed != mDividerAllowedAbove) {
-            mDividerAllowedAbove = allowed;
-            notifyChanged();
+        if (mMaxHeight > -1) {
+            imageView.setMaxWidth(mMaxHeight);
         }
     }
 
     /**
-     * Set image uri to display image in {@link ImageView}
+     * Sets image uri to display image in {@link ImageView}
      *
      * @param imageUri the Uri of an image
      */
     public void setImageUri(Uri imageUri) {
         if (imageUri != null && !imageUri.equals(mImageUri)) {
             mImageUri = imageUri;
+            notifyChanged();
+        }
+    }
+
+    /**
+     * Sets the maximum height of the view.
+     *
+     * @param maxHeight the maximum height of ImageView in terms of pixels.
+     */
+    public void setMaxHeight(int maxHeight) {
+        if (maxHeight != mMaxHeight) {
+            mMaxHeight = maxHeight;
             notifyChanged();
         }
     }

@@ -20,6 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/manage_device_admin"
     android:key="device_admin_settings"
+    settings:searchable="false"
     settings:controller="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminListPreferenceController">
 
     <com.android.settingslib.widget.FooterPreference

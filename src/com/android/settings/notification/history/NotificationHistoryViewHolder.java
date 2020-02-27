@@ -18,6 +18,7 @@ package com.android.settings.notification.history;
 
 import static android.provider.Settings.EXTRA_APP_PACKAGE;
 import static android.provider.Settings.EXTRA_CHANNEL_ID;
+import static android.provider.Settings.EXTRA_CONVERSATION_ID;
 
 import android.content.Intent;
 import android.os.UserHandle;
@@ -26,6 +27,9 @@ import android.view.View;
 import android.widget.DateTimeView;
 import android.widget.TextView;
 
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -58,13 +62,27 @@ public class NotificationHistoryViewHolder extends RecyclerView.ViewHolder {
         mTime.setTime(postedTime);
     }
 
-    void addOnClick(String pkg, int userId, String channelId) {
+    void addOnClick(String pkg, int userId, String channelId, String conversationId) {
         itemView.setOnClickListener(v -> {
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                     .putExtra(EXTRA_APP_PACKAGE, pkg)
-                    .putExtra(EXTRA_CHANNEL_ID, channelId);
+                    .putExtra(EXTRA_CHANNEL_ID, channelId)
+                    .putExtra(EXTRA_CONVERSATION_ID, conversationId);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             itemView.getContext().startActivityAsUser(intent, UserHandle.of(userId));
+        });
+        ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host,
+                    AccessibilityNodeInfoCompat info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                CharSequence description =
+                        host.getResources().getText(R.string.notification_history_view_settings);
+                AccessibilityNodeInfoCompat.AccessibilityActionCompat customClick =
+                        new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                                AccessibilityNodeInfoCompat.ACTION_CLICK, description);
+                info.addAction(customClick);
+            }
         });
     }
 }

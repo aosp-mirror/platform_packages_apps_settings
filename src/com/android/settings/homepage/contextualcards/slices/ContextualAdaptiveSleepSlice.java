@@ -129,7 +129,7 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
      */
     private boolean isTurnedOn() {
         return Settings.System.getInt(
-                mContext.getContentResolver(), Settings.System.ADAPTIVE_SLEEP, 0) != 0;
+                mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, 0) != 0;
     }
 
     /**

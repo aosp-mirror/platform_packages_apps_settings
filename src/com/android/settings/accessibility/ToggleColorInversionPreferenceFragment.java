@@ -29,12 +29,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -45,7 +43,6 @@ import java.util.List;
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private static final String CATEGORY_FOOTER_KEY = "color_inversion_footer_category";
     private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
@@ -66,22 +63,22 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void onRemoveSwitchBarToggleSwitch() {
-        super.onRemoveSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
+    protected void onRemoveSwitchPreferenceToggleSwitch() {
+        super.onRemoveSwitchPreferenceToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateSwitchBarText(SwitchBar switchBar) {
-        switchBar.setSwitchBarText(R.string.accessibility_display_inversion_switch_title,
-                R.string.accessibility_display_inversion_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_display_inversion_switch_title);
     }
 
     @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
         updateSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            boolean checked = ((SwitchPreference) preference).isChecked();
             onPreferenceToggled(mPreferenceKey, checked);
             return false;
         });
@@ -91,7 +88,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
-        mPackageName = getString(R.string.accessibility_display_inversion_preference_title);
+        mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
+        mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -101,17 +99,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
             }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.setOrderingAsAdded(false);
-        final PreferenceCategory footerCategory = preferenceScreen.findPreference(
-                CATEGORY_FOOTER_KEY);
-        footerCategory.setOrder(Integer.MAX_VALUE);
     }
 
     @Override
@@ -135,10 +122,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
-        if (mSwitchBar.isChecked() == checked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
             return;
         }
-        mSwitchBar.setCheckedInternal(checked);
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -46,7 +46,7 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return Utils.isDemoUser(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE_UNSEARCHABLE;
+        return Utils.isDemoUser(mContext) ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
     }
 
     @Override

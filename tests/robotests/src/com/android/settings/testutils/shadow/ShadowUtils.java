@@ -18,7 +18,10 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -142,6 +145,11 @@ public class ShadowUtils {
     @Implementation
     protected static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
         return sResultLinks;
+    }
+
+    @Implementation
+    protected static Drawable getBadgedIcon(Context context, ApplicationInfo appInfo) {
+        return new ColorDrawable(0);
     }
 
     public static void setHandledDomains(ArraySet<String> links) {

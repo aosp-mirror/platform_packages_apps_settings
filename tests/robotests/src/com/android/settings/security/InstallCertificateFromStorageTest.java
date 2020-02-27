@@ -62,12 +62,10 @@ public class InstallCertificateFromStorageTest {
 
     private void setUpTestKeys() {
         mTestKeys = new ArrayList<>();
-        mTestKeys.add("install_certificate_from_storage");
         mTestKeys.add("certificate_types");
         mTestKeys.add("install_ca_certificate");
         mTestKeys.add("install_user_certificate");
         mTestKeys.add("install_wifi_certificate");
-        mTestKeys.add("install_app_src_certificate");
     }
 
     @Test

@@ -25,9 +25,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.wifi.EAPConstants;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.hotspot2.PasspointConfiguration;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.net.wifi.hotspot2.pps.HomeSp;
 
 import androidx.preference.PreferenceCategory;
@@ -35,7 +37,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowAccessPoint;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
 import org.junit.Before;
@@ -111,6 +112,13 @@ public class SubscribedAccessPointsPreferenceControllerTest {
         homeSp.setFqdn("FQDN");
         homeSp.setFriendlyName("TESTPASSPOINT");
         config.setHomeSp(homeSp);
+        final Credential.SimCredential simCredential = new Credential.SimCredential();
+        final Credential credential = new Credential();
+        credential.setRealm("test.example.com");
+        simCredential.setImsi("12345*");
+        simCredential.setEapType(EAPConstants.EAP_SIM);
+        credential.setSimCredential(simCredential);
+        config.setCredential(credential);
         return config;
     }
 }

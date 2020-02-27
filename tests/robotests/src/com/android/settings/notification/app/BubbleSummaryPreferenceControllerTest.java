@@ -40,7 +40,6 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.BubbleSummaryPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,7 +79,7 @@ public class BubbleSummaryPreferenceControllerTest {
     public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null);
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -89,7 +88,7 @@ public class BubbleSummaryPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
 
@@ -99,7 +98,7 @@ public class BubbleSummaryPreferenceControllerTest {
     @Test
     public void testIsAvailable_app() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
@@ -108,7 +107,7 @@ public class BubbleSummaryPreferenceControllerTest {
     @Test
     public void testIsNotAvailable_app_globalOff() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
 
@@ -122,7 +121,7 @@ public class BubbleSummaryPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
@@ -132,7 +131,7 @@ public class BubbleSummaryPreferenceControllerTest {
     public void testUpdateState() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         Preference pref = new Preference(mContext);
         mController.updateState(pref);
@@ -144,7 +143,7 @@ public class BubbleSummaryPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = true;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         assertEquals("On", mController.getSummary());
 
@@ -154,7 +153,7 @@ public class BubbleSummaryPreferenceControllerTest {
 
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         appRow.allowBubbles = false;
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         assertEquals("Off", mController.getSummary());
     }

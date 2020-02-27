@@ -20,8 +20,10 @@ import android.content.Context;
 import android.telecom.TelecomManager;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -33,6 +35,8 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
  * Controller class for querying Volte status
  */
 public class VolteQueryImsState extends ImsQueryController {
+
+    private static final String LOG_TAG = "VolteQueryImsState";
 
     private Context mContext;
     private int mSubId;
@@ -55,8 +59,8 @@ public class VolteQueryImsState extends ImsQueryController {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsQuery isEnabledByUser(int subId) {
-        return new ImsQueryEnhanced4gLteModeUserSetting(subId);
+    boolean isEnabledByUser(int subId) {
+        return (new ImsQueryEnhanced4gLteModeUserSetting(subId)).query();
     }
 
     @VisibleForTesting
@@ -71,13 +75,15 @@ public class VolteQueryImsState extends ImsQueryController {
      * @return true when VoLTE has been enabled, otherwise false
      */
     public boolean isVoLteProvisioned() {
-        final ImsManager imsManager = getImsManager(mSubId);
-        if (imsManager == null) {
+        if (!isProvisionedOnDevice(mSubId)) {
             return false;
         }
-
-        return imsManager.isVolteEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId).query();
+        try {
+            return isEnabledByPlatform(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get VoLte supporting status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**
@@ -101,7 +107,7 @@ public class VolteQueryImsState extends ImsQueryController {
         }
 
         return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId).query()));
+                || (isTtyOnVolteEnabled(mSubId)));
     }
 
     @VisibleForTesting
@@ -119,6 +125,6 @@ public class VolteQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).query();
+        return isEnabledByUser(mSubId);
     }
 }

@@ -49,9 +49,7 @@ public class ZenAccessController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return isSupported(mActivityManager)
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return isSupported(mActivityManager) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     public static boolean isSupported(ActivityManager activityManager) {

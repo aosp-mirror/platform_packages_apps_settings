@@ -80,7 +80,7 @@ public class AppNotificationSettings extends NotificationSettings {
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, mSuspendedAppsAdmin);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
@@ -100,18 +100,18 @@ public class AppNotificationSettings extends NotificationSettings {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
-        mControllers.add(new BlockPreferenceController(context, mImportanceListener, mBackend));
+        mControllers.add(new BlockPreferenceController(context, mDependentFieldListener, mBackend));
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new ImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new MinImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new HighImportancePreferenceController(
-                context, mImportanceListener, mBackend));
+                context, mDependentFieldListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
-                mImportanceListener, mBackend));
+                mDependentFieldListener, mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
         mControllers.add(new VibrationPreferenceController(context, mBackend));
         mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
@@ -123,6 +123,7 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
         mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new ChannelListPreferenceController(context, mBackend));
+        mControllers.add(new AppConversationListPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }

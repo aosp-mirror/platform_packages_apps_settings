@@ -258,7 +258,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             preference.setSummary(summary);
         } else if (tile.getMetaData() != null
                 && tile.getMetaData().containsKey(META_DATA_PREFERENCE_SUMMARY_URI)) {
-            // Set a placeholder summary before  starting to fetch real summary, this is necessary
+            // Set a placeholder summary before starting to fetch real summary, this is necessary
             // to avoid preference height change.
             preference.setSummary(R.string.summary_placeholder);
 

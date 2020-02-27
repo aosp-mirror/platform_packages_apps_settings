@@ -66,7 +66,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final UserFeatureProvider userFeatureProvider;
     public final AssistGestureFeatureProvider assistGestureFeatureProvider;
     public final AccountFeatureProvider mAccountFeatureProvider;
-    public final ContextualCardFeatureProvider mContextualCardFeatureProvider;
     public final BluetoothFeatureProvider mBluetoothFeatureProvider;
     public final AwareFeatureProvider mAwareFeatureProvider;
     public final FaceFeatureProvider mFaceFeatureProvider;
@@ -74,6 +73,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public PanelFeatureProvider panelFeatureProvider;
     public SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
+    public ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.

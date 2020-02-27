@@ -30,6 +30,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.text.TextUtils;
@@ -46,7 +47,6 @@ import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.ims.ImsConfig;
-import com.android.ims.ImsManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.Phone;
 import com.android.settings.R;
@@ -100,7 +100,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private boolean mUseWfcHomeModeForRoaming = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    private ImsManager mImsManager;
+    private com.android.ims.ImsManager mImsManager;
     private ImsMmTelManager mImsMmTelManager;
     private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
@@ -222,7 +222,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            if (action.equals(ImsManager.ACTION_IMS_REGISTRATION_ERROR)) {
+            if (action.equals(ImsManager.ACTION_WFC_IMS_REGISTRATION_ERROR)) {
                 // If this fragment is active then we are immediately
                 // showing alert on screen. There is no need to add
                 // notification in this case.
@@ -261,8 +261,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     @VisibleForTesting
-    ImsManager getImsManager() {
-        return ImsManager.getInstance(getActivity(),
+    com.android.ims.ImsManager getImsManager() {
+        return com.android.ims.ImsManager.getInstance(getActivity(),
                 SubscriptionUtil.getPhoneId(getActivity(), mSubId));
     }
 
@@ -305,7 +305,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mUpdateAddress.setOnPreferenceClickListener(mUpdateAddressListener);
 
         mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(ImsManager.ACTION_IMS_REGISTRATION_ERROR);
+        mIntentFilter.addAction(ImsManager.ACTION_WFC_IMS_REGISTRATION_ERROR);
     }
 
     @Override

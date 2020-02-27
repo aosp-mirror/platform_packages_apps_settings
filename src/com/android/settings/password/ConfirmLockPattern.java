@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -181,7 +182,16 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 getFragmentManager().beginTransaction().add(mCredentialCheckResultTracker,
                         FRAGMENT_TAG_CHECK_LOCK_RESULT).commit();
             }
+
             return view;
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            if (mForgotButton != null) {
+                mForgotButton.setText(R.string.lockpassword_forgot_pattern);
+            }
         }
 
         @Override
@@ -230,6 +240,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             super.prepareEnterAnimation();
             mHeaderTextView.setAlpha(0f);
             mCancelButton.setAlpha(0f);
+            if (mForgotButton != null) {
+                mForgotButton.setAlpha(0f);
+            }
             mLockPatternView.setAlpha(0f);
             mDetailsTextView.setAlpha(0f);
         }
@@ -252,10 +265,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         private Object[][] getActiveViews() {
             ArrayList<ArrayList<Object>> result = new ArrayList<>();
-            result.add(new ArrayList<Object>(Collections.singletonList(mHeaderTextView)));
-            result.add(new ArrayList<Object>(Collections.singletonList(mDetailsTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mHeaderTextView)));
+            result.add(new ArrayList<>(Collections.singletonList(mDetailsTextView)));
             if (mCancelButton.getVisibility() == View.VISIBLE) {
-                result.add(new ArrayList<Object>(Collections.singletonList(mCancelButton)));
+                result.add(new ArrayList<>(Collections.singletonList(mCancelButton)));
+            }
+            if (mForgotButton != null) {
+                result.add(new ArrayList<>(Collections.singletonList(mForgotButton)));
             }
             LockPatternView.CellState[][] cellStates = mLockPatternView.getCellStates();
             for (int i = 0; i < cellStates.length; i++) {

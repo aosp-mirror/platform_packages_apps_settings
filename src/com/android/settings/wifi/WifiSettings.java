@@ -28,7 +28,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -51,6 +50,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -74,7 +74,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
@@ -82,7 +81,6 @@ import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -138,12 +136,16 @@ public class WifiSettings extends RestrictedSettingsFragment
         setProgressBarVisible(false);
     };
 
-    protected WifiManager mWifiManager;
-    private ConnectivityManager mConnectivityManager;
+    @VisibleForTesting
+    WifiManager mWifiManager;
+    @VisibleForTesting
+    ConnectivityManager mConnectivityManager;
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
-    private CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
+    @VisibleForTesting
+    CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
+    private Network mLastNetworkCaptivePortalAppStarted;
 
     /**
      * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is neccesary to
@@ -194,14 +196,20 @@ public class WifiSettings extends RestrictedSettingsFragment
     DataUsagePreference mDataUsagePreference;
     private LinkablePreference mStatusMessagePreference;
 
-    // For Search
-    public static final String DATA_KEY_REFERENCE = "main_toggle_wifi";
-
     /**
      * Tracks whether the user initiated a connection via clicking in order to autoscroll to the
      * network once connected.
      */
     private boolean mClickedConnect;
+    @ConnectSource int mConnectSource = CONNECT_SOURCE_UNSPECIFIED;
+
+    private static final int CONNECT_SOURCE_UNSPECIFIED = 0;
+    private static final int CONNECT_SOURCE_NETWORK_MENU_ITEM_CLICK = 1;
+    private static final int CONNECT_SOURCE_NETWORK_LIST_ITEM_CLICK = 2;
+
+    @IntDef({CONNECT_SOURCE_UNSPECIFIED, CONNECT_SOURCE_NETWORK_MENU_ITEM_CLICK,
+        CONNECT_SOURCE_NETWORK_LIST_ITEM_CLICK})
+    private @interface ConnectSource {}
 
     /* End of "used in Wifi Setup context" */
 
@@ -518,12 +526,14 @@ public class WifiSettings extends RestrictedSettingsFragment
             case MENU_ID_CONNECT: {
                 boolean isSavedNetwork = mSelectedAccessPoint.isSaved();
                 if (isSavedNetwork) {
-                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
+                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork,
+                            CONNECT_SOURCE_NETWORK_MENU_ITEM_CLICK);
                 } else if ((mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
                         (mSelectedAccessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
                     /** Bypass dialog for unsecured networks */
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork);
+                    connect(mSelectedAccessPoint.getConfig(), isSavedNetwork,
+                            CONNECT_SOURCE_NETWORK_MENU_ITEM_CLICK);
                 } else {
                     showDialog(mSelectedAccessPoint, WifiConfigUiBase.MODE_CONNECT);
                 }
@@ -569,11 +579,15 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 case WifiUtils.CONNECT_TYPE_OPEN_NETWORK:
                     mSelectedAccessPoint.generateOpenNetworkConfig();
-                    connect(mSelectedAccessPoint.getConfig(), mSelectedAccessPoint.isSaved());
+                    connect(mSelectedAccessPoint.getConfig(),
+                            mSelectedAccessPoint.isSaved(),
+                            CONNECT_SOURCE_NETWORK_LIST_ITEM_CLICK);
                     break;
 
                 case WifiUtils.CONNECT_TYPE_SAVED_NETWORK:
-                    connect(mSelectedAccessPoint.getConfig(), true /* isSavedNetwork */);
+                    connect(mSelectedAccessPoint.getConfig(),
+                            true /* isSavedNetwork */,
+                            CONNECT_SOURCE_NETWORK_LIST_ITEM_CLICK);
                     break;
 
                 default:
@@ -711,6 +725,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 setOffMessage();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
+                mConnectSource = CONNECT_SOURCE_UNSPECIFIED;
+                mClickedConnect = false;
                 break;
         }
     }
@@ -882,7 +898,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     pref.getAccessPoint().saveWifiState(pref.getExtras());
                     if (mCaptivePortalNetworkCallback != null
                             && mCaptivePortalNetworkCallback.isCaptivePortal()) {
-                        mConnectivityManager.startCaptivePortalApp(
+                        startCaptivePortalApp(
                                 mCaptivePortalNetworkCallback.getNetwork());
                     } else {
                         launchNetworkDetailsFragment(pref);
@@ -920,7 +936,12 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         unregisterCaptivePortalNetworkCallback();
 
-        mCaptivePortalNetworkCallback = new CaptivePortalNetworkCallback(wifiNetwork, pref);
+        mCaptivePortalNetworkCallback = new CaptivePortalNetworkCallback(wifiNetwork, pref) {
+            @Override
+            public void onCaptivePortalCapabilityChanged() {
+                checkStartCaptivePortalApp();
+            }
+        };
         mConnectivityManager.registerNetworkCallback(
                 new NetworkRequest.Builder()
                         .clearCapabilities()
@@ -1026,10 +1047,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         final Context context = getContext();
         final PowerManager powerManager = context.getSystemService(PowerManager.class);
         final ContentResolver contentResolver = context.getContentResolver();
-        return Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1
-                && Settings.Global.getInt(contentResolver,
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
+        return mWifiManager.isAutoWakeupEnabled()
+                && mWifiManager.isScanAlwaysAvailable()
                 && Settings.Global.getInt(contentResolver,
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 0
                 && !powerManager.isPowerSaveMode();
@@ -1040,8 +1059,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         // Don't use WifiManager.isScanAlwaysAvailable() to check the Wi-Fi scanning mode. Instead,
         // read the system settings directly. Because when the device is in Airplane mode, even if
         // Wi-Fi scanning mode is on, WifiManager.isScanAlwaysAvailable() still returns "off".
-        final boolean wifiScanningMode = Settings.Global.getInt(getActivity().getContentResolver(),
-                Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
+        // TODO(b/149421497): Fix this?
+        final boolean wifiScanningMode = mWifiManager.isScanAlwaysAvailable();
         final CharSequence description = wifiScanningMode ? getText(R.string.wifi_scan_notify_text)
                 : getText(R.string.wifi_scan_notify_text_scanning_off);
         final LinkifyUtils.OnClickListener clickListener =
@@ -1106,14 +1125,17 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (config == null) {
             if (mSelectedAccessPoint != null
                     && mSelectedAccessPoint.isSaved()) {
-                connect(mSelectedAccessPoint.getConfig(), true /* isSavedNetwork */);
+                connect(mSelectedAccessPoint.getConfig(),
+                        true /* isSavedNetwork */,
+                        CONNECT_SOURCE_UNSPECIFIED);
             }
         } else if (configController.getMode() == WifiConfigUiBase.MODE_MODIFY) {
             mWifiManager.save(config, mSaveListener);
         } else {
             mWifiManager.save(config, mSaveListener);
             if (mSelectedAccessPoint != null) { // Not an "Add network"
-                connect(config, false /* isSavedNetwork */);
+                connect(config, false /* isSavedNetwork */,
+                        CONNECT_SOURCE_UNSPECIFIED);
             }
         }
 
@@ -1150,19 +1172,14 @@ public class WifiSettings extends RestrictedSettingsFragment
         changeNextButtonState(false);
     }
 
-    protected void connect(final WifiConfiguration config, boolean isSavedNetwork) {
+    protected void connect(final WifiConfiguration config,
+            boolean isSavedNetwork, @ConnectSource int connectSource) {
         // Log subtype if configuration is a saved network.
         mMetricsFeatureProvider.action(getContext(), SettingsEnums.ACTION_WIFI_CONNECT,
                 isSavedNetwork);
+        mConnectSource = connectSource;
         mWifiManager.connect(config, mConnectListener);
         mClickedConnect = true;
-    }
-
-    protected void connect(final int networkId, boolean isSavedNetwork) {
-        // Log subtype if configuration is a saved network.
-        mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_CONNECT,
-                isSavedNetwork);
-        mWifiManager.connect(networkId, mConnectListener);
     }
 
     @VisibleForTesting
@@ -1224,7 +1241,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiManager.save(wifiConfiguration, mSaveListener);
 
             if (mSelectedAccessPoint != null) {
-                connect(wifiConfiguration, false /*isSavedNetwork*/);
+                connect(wifiConfiguration, false /*isSavedNetwork*/,
+                        CONNECT_SOURCE_UNSPECIFIED);
             }
             mWifiTracker.resumeScanning();
         }
@@ -1243,26 +1261,44 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .launch();
     }
 
+    /**
+     * Starts the captive portal for current network if it's been clicked from the available
+     * networks (or contextual menu). We only do it *once* for a picked network, to avoid connecting
+     * again on bg/fg or if user dismisses Captive Portal before connecting (otherwise, coming back
+     * to this screen while connected to the same network but not signed in would open CP again).
+     */
+    private void checkStartCaptivePortalApp() {
+        Network currentNetwork = getCurrentWifiNetwork();
+        if (mCaptivePortalNetworkCallback == null || currentNetwork == null
+                || !currentNetwork.equals(mCaptivePortalNetworkCallback.getNetwork())
+                || !mCaptivePortalNetworkCallback.isCaptivePortal()) {
+            return;
+        }
+
+        if (mConnectSource != CONNECT_SOURCE_NETWORK_LIST_ITEM_CLICK
+                && mConnectSource != CONNECT_SOURCE_NETWORK_MENU_ITEM_CLICK) {
+            return;
+        }
+
+        if (mLastNetworkCaptivePortalAppStarted != null
+                && mLastNetworkCaptivePortalAppStarted.equals(currentNetwork)) {
+            // We already auto-opened CP for same network
+            return;
+        }
+
+        startCaptivePortalApp(currentNetwork);
+    }
+
+    private void startCaptivePortalApp(Network network) {
+        if (mConnectivityManager == null || network == null) {
+            return;
+        }
+        mLastNetworkCaptivePortalAppStarted = network;
+        mConnectivityManager.startCaptivePortalApp(network);
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_settings) {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-                    final Resources res = context.getResources();
-
-                    // Add fragment title if we are showing this fragment
-                    if (res.getBoolean(R.bool.config_show_wifi_settings)) {
-                        SearchIndexableRaw data = new SearchIndexableRaw(context);
-                        data.title = res.getString(R.string.wifi_settings);
-                        data.screenTitle = res.getString(R.string.wifi_settings);
-                        data.keywords = res.getString(R.string.keywords_wifi);
-                        data.key = DATA_KEY_REFERENCE;
-                        result.add(data);
-                    }
-                    return result;
-                }
-
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);

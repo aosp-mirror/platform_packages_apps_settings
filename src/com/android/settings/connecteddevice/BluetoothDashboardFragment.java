@@ -16,8 +16,6 @@
 package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -25,18 +23,13 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothDeviceRenamePreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Dedicated screen for allowing the user to toggle bluetooth which displays relevant information to
@@ -47,7 +40,6 @@ public class BluetoothDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "BluetoothDashboardFrag";
     private static final String KEY_BLUETOOTH_SCREEN_FOOTER = "bluetooth_screen_footer";
-    public static final String KEY_BLUETOOTH_SCREEN = "bluetooth_switchbar_screen";
 
     private FooterPreference mFooterPreference;
     private SwitchBar mSwitchBar;
@@ -102,39 +94,5 @@ public class BluetoothDashboardFragment extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-
-                    // Add the activity title
-                    final SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.bluetooth_settings_title);
-                    data.screenTitle = context.getString(R.string.bluetooth_settings_title);
-                    data.keywords = context.getString(R.string.keywords_bluetooth_settings);
-                    data.key = KEY_BLUETOOTH_SCREEN;
-                    result.add(data);
-
-                    return result;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    BluetoothManager manager =
-                            (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-                    if (manager != null) {
-                        BluetoothAdapter adapter = manager.getAdapter();
-                        final int status = adapter != null
-                                ? TogglePreferenceController.AVAILABLE
-                                : TogglePreferenceController.UNSUPPORTED_ON_DEVICE;
-                        if (status != TogglePreferenceController.AVAILABLE) {
-                            keys.add(KEY_BLUETOOTH_SCREEN);
-                        }
-                    }
-
-                    return keys;
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.bluetooth_screen);
 }

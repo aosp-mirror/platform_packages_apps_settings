@@ -55,8 +55,8 @@ public class VtQueryImsState extends ImsQueryController {
      * Implementation of ImsQueryController#isEnabledByUser(int subId)
      */
     @VisibleForTesting
-    ImsQuery isEnabledByUser(int subId) {
-        return new ImsQueryVtUserSetting(subId);
+    boolean isEnabledByUser(int subId) {
+        return (new ImsQueryVtUserSetting(subId)).query();
     }
 
     @VisibleForTesting
@@ -77,7 +77,7 @@ public class VtQueryImsState extends ImsQueryController {
         }
 
         return imsManager.isVtEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId).query()
+                && isProvisionedOnDevice(mSubId)
                 && MobileNetworkUtils.isImsServiceStateReady(imsManager);
     }
 
@@ -91,7 +91,7 @@ public class VtQueryImsState extends ImsQueryController {
             return false;
         }
         return ((!isTtyEnabled(mContext))
-                || (isTtyOnVolteEnabled(mSubId).query()));
+                || (isTtyOnVolteEnabled(mSubId)));
     }
 
     @VisibleForTesting
@@ -109,6 +109,6 @@ public class VtQueryImsState extends ImsQueryController {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isEnabledByUser(mSubId).query();
+        return isEnabledByUser(mSubId);
     }
 }

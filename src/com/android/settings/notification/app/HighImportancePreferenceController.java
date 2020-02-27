@@ -32,13 +32,13 @@ public class HighImportancePreferenceController extends NotificationPreferenceCo
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY_IMPORTANCE = "high_importance";
-    private NotificationSettings.ImportanceListener mImportanceListener;
+    private NotificationSettings.DependentFieldListener mDependentFieldListener;
 
     public HighImportancePreferenceController(Context context,
-            NotificationSettings.ImportanceListener importanceListener,
+            NotificationSettings.DependentFieldListener dependentFieldListener,
             NotificationBackend backend) {
         super(context, backend);
-        mImportanceListener = importanceListener;
+        mDependentFieldListener = dependentFieldListener;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class HighImportancePreferenceController extends NotificationPreferenceCo
             mChannel.setImportance(checked ? IMPORTANCE_HIGH : IMPORTANCE_DEFAULT);
             mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
             saveChannel();
-            mImportanceListener.onImportanceChanged();
+            mDependentFieldListener.onFieldValueChanged();
         }
         return true;
     }

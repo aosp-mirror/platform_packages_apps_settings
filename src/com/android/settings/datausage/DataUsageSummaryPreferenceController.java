@@ -40,6 +40,7 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -117,8 +118,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         NetworkPolicyManager policyManager = activity.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mHasMobileData = DataUsageUtils.hasMobileData(activity)
-                && mSubscriptionId != SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mHasMobileData = SubscriptionManager.isValidSubscriptionId(mSubscriptionId)
+                && DataUsageUtils.hasMobileData(activity);
 
         mDataUsageController = new DataUsageController(activity);
         mDataUsageController.setSubscriptionId(mSubscriptionId);
@@ -270,11 +271,10 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mCycleEnd = info.cycleEnd;
         mSnapshotTime = -1L;
 
-        SubscriptionInfo subInfo = mSubscriptionManager.getActiveSubscriptionInfo(mSubscriptionId);
-        if (subInfo == null) {
-            subInfo = mSubscriptionManager.getAvailableSubscriptionInfoList().stream().filter(
-                    i -> i.getSubscriptionId() == mSubscriptionId).findFirst().orElse(null);
-        }
+        final ProxySubscriptionManager proxySubsciptionMgr =
+                ProxySubscriptionManager.getInstance(mContext);
+        final SubscriptionInfo subInfo = proxySubsciptionMgr
+                .getAccessibleSubscriptionInfo(mSubscriptionId);
         if (subInfo != null && mHasMobileData) {
             mCarrierName = subInfo.getCarrierName();
             List<SubscriptionPlan> plans = mSubscriptionManager.getSubscriptionPlans(

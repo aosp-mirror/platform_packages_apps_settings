@@ -41,7 +41,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.DndPreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -84,7 +83,7 @@ public class DndPreferenceControllerTest {
     public void testIsAvailable_app() {
         when(mNm.getNotificationPolicy()).thenReturn(new NotificationManager.Policy(0, 0, 0, 0));
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -94,7 +93,7 @@ public class DndPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_MIN);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -102,7 +101,7 @@ public class DndPreferenceControllerTest {
     public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -116,7 +115,7 @@ public class DndPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -129,7 +128,7 @@ public class DndPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -141,7 +140,7 @@ public class DndPreferenceControllerTest {
     public void testUpdateState_bypassDnd() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBypassDnd()).thenReturn(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -153,7 +152,7 @@ public class DndPreferenceControllerTest {
     public void testUpdateState_noBypassDnd() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBypassDnd()).thenReturn(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -165,7 +164,7 @@ public class DndPreferenceControllerTest {
     public void testOnPreferenceChange_on() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -183,7 +182,7 @@ public class DndPreferenceControllerTest {
     public void testOnPreferenceChange_off() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);

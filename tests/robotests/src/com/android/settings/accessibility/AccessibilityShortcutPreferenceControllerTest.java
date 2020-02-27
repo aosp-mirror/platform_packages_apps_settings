@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,141 +16,76 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
-import android.accessibilityservice.AccessibilityServiceInfo;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
-import android.content.pm.ServiceInfo;
+import android.os.UserHandle;
 import android.provider.Settings;
-import android.view.accessibility.AccessibilityManager;
 
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowAccessibilityManager;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AccessibilityShortcutPreferenceControllerTest {
-    private final static String PACKAGE_NAME = "com.foo.bar";
-    private final static String CLASS_NAME = PACKAGE_NAME + ".fake_a11y_service";
-    private final static String COMPONENT_NAME = PACKAGE_NAME + "/" + CLASS_NAME;
-    private final static String SERVICE_NAME = "fake_a11y_service";
-    private final static int ON = 1;
-    private final static int OFF = 0;
 
     private Context mContext;
+    private SwitchPreference mPreference;
     private AccessibilityShortcutPreferenceController mController;
-    private ShadowAccessibilityManager mShadowAccessibilityManager;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new AccessibilityShortcutPreferenceController(mContext, "shortcut_key");
-        mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
-        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(getMockServiceList());
+        mPreference = new SwitchPreference(mContext);
+        mController = new AccessibilityShortcutPreferenceController(mContext,
+                "accessibility_shortcut_preference");
     }
 
     @Test
-    public void getAvailabilityStatus_hasInstalledA11yServices_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
+    public void isChecked_enabledShortcutOnLockScreen_shouldReturnTrue() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, ON, UserHandle.USER_CURRENT);
+
+        mController.updateState(mPreference);
+
+        assertThat(mController.isChecked()).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
-    public void getAvailabilityStatus_noInstalledServices_shouldReturnDisabledDependentSetting() {
-        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
+    public void isChecked_disabledShortcutOnLockScreen_shouldReturnFalse() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, OFF,
+                UserHandle.USER_CURRENT);
 
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+        mController.updateState(mPreference);
+
+        assertThat(mController.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    @Config(shadows = {ShadowAccessibilityShortcutPreferenceFragment.class})
-    public void getSummary_enabledAndSelectedA11yServices_shouldReturnSelectedServiceName() {
-        ShadowAccessibilityShortcutPreferenceFragment.setServiceName(SERVICE_NAME);
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, ON);
+    public void setChecked_setTrue_shouldEnableShortcutOnLockScreen() {
+        mController.setChecked(true);
 
-        assertThat(mController.getSummary()).isEqualTo(SERVICE_NAME);
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, OFF,
+                UserHandle.USER_CURRENT)).isEqualTo(ON);
     }
 
     @Test
-    public void getSummary_enabledAndNoA11yServices_shouldReturnNoServiceInstalled() {
-        mShadowAccessibilityManager.setInstalledAccessibilityServiceList(new ArrayList<>());
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, ON);
+    public void setChecked_setFalse_shouldDisableShortcutOnLockScreen() {
+        mController.setChecked(false);
 
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(R.string.accessibility_no_services_installed));
-    }
-
-    @Test
-    public void getSummary_disabledShortcut_shouldReturnOffSummary() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, OFF);
-
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(R.string.accessibility_feature_state_off));
-    }
-
-    @Implements(AccessibilityShortcutPreferenceFragment.class)
-    private static class ShadowAccessibilityShortcutPreferenceFragment {
-        private static String sSelectedServiceName;
-
-        public static void setServiceName(String selectedServiceName) {
-            sSelectedServiceName = selectedServiceName;
-        }
-
-        @Implementation
-        protected static CharSequence getServiceName(Context context) {
-            return sSelectedServiceName;
-        }
-    }
-
-    private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {
-        final ApplicationInfo applicationInfo = new ApplicationInfo();
-        final ServiceInfo serviceInfo = new ServiceInfo();
-        applicationInfo.packageName = PACKAGE_NAME;
-        serviceInfo.packageName = PACKAGE_NAME;
-        serviceInfo.name = CLASS_NAME;
-        serviceInfo.applicationInfo = applicationInfo;
-
-        final ResolveInfo resolveInfo = new ResolveInfo();
-        resolveInfo.serviceInfo = serviceInfo;
-
-        try {
-            final AccessibilityServiceInfo info = new AccessibilityServiceInfo(resolveInfo,
-                    mContext);
-            ComponentName componentName = ComponentName.unflattenFromString(COMPONENT_NAME);
-            info.setComponentName(componentName);
-            return info;
-        } catch (XmlPullParserException | IOException e) {
-            // Do nothing
-        }
-
-        return null;
-    }
-
-    private List<AccessibilityServiceInfo> getMockServiceList() {
-        final List<AccessibilityServiceInfo> infoList = new ArrayList<>();
-        infoList.add(getMockAccessibilityServiceInfo());
-        return infoList;
+        assertThat(Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, ON,
+                UserHandle.USER_CURRENT)).isEqualTo(OFF);
     }
 }

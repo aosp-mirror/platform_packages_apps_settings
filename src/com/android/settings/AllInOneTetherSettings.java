@@ -46,7 +46,10 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
+import com.android.settings.network.BluetoothTetherPreferenceController;
 import com.android.settings.network.TetherEnabler;
+import com.android.settings.network.UsbTetherPreferenceController;
+import com.android.settings.network.WifiTetherDisablePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
@@ -66,7 +69,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Displays preferences for all Tethering options.
- * TODO(b/147323306): Add tether option preferences into this fragment after controllers created.
  */
 @SearchIndexable
 public final class AllInOneTetherSettings extends RestrictedDashboardFragment
@@ -120,22 +122,23 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         public void onReceive(Context content, Intent intent) {
             String action = intent.getAction();
             if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "updating display config due to receiving broadcast action " + action);
+                Log.d(TAG,
+                        "updating display config due to receiving broadcast action " + action);
             }
             updateDisplayWithNewConfig();
             if (TextUtils.equals(action, ACTION_TETHER_STATE_CHANGED)) {
-                if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    mTetherEnabler.startTethering(TETHERING_WIFI);
-                }
+                restartWifiTetherIfNeed(mWifiManager.getWifiApState());
             } else if (TextUtils.equals(action, WIFI_AP_STATE_CHANGED_ACTION)) {
-                int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
-                if (state == WifiManager.WIFI_AP_STATE_DISABLED
-                        && mRestartWifiApAfterConfigChange) {
-                    mRestartWifiApAfterConfigChange = false;
-                    mTetherEnabler.startTethering(TETHERING_WIFI);
-                }
+                restartWifiTetherIfNeed(intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0));
+            }
+        }
+
+        private void restartWifiTetherIfNeed(int state) {
+            if (state == WifiManager.WIFI_AP_STATE_DISABLED
+                    && mWifiTetherChosen
+                    && mRestartWifiApAfterConfigChange) {
+                mRestartWifiApAfterConfigChange = false;
+                mTetherEnabler.startTethering(TETHERING_WIFI);
             }
         }
     };
@@ -171,6 +174,9 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
+        getSettingsLifecycle().addObserver(use(UsbTetherPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(BluetoothTetherPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(WifiTetherDisablePreferenceController.class));
     }
 
     @Override
@@ -195,8 +201,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
 
         // Set initial state based on SharedPreferences value.
         onSharedPreferenceChanged(mSharedPreferences, KEY_ENABLE_WIFI_TETHERING);
-
-        // TODO(b/147325229): Hide advanced settings like security and ap band.
     }
 
     @Override
@@ -315,12 +319,6 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    public void onExpandButtonClick() {
-        super.onExpandButtonClick();
-        // TODO(b/147325229): Display hidden advanced settings like security and ap band.
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_tether;
     }
@@ -418,7 +416,7 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /* AllTetherSettings */);
+                    return buildPreferenceControllers(context, null /*listener*/);
                 }
             };
 }

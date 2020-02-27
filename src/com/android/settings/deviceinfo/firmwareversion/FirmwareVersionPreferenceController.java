@@ -29,11 +29,11 @@ public class FirmwareVersionPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override
     public CharSequence getSummary() {
-        return Build.VERSION.RELEASE;
+        return Build.VERSION.RELEASE_OR_CODENAME;
     }
 }

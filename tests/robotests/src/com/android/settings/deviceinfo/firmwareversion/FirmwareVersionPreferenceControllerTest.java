@@ -58,13 +58,13 @@ public class FirmwareVersionPreferenceControllerTest {
     @Test
     public void firmwareVersion_shouldAlwaysBeShown() {
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE_UNSEARCHABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
     public void updatePreference_shouldSetSummaryToBuildNumber() {
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE);
+        assertThat(mPreference.getSummary()).isEqualTo(Build.VERSION.RELEASE_OR_CODENAME);
     }
 }

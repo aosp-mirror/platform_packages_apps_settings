@@ -35,7 +35,6 @@ import android.os.UserManager;
 import androidx.preference.Preference;
 
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.DescriptionPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -75,7 +74,7 @@ public class DescriptionPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -83,7 +82,7 @@ public class DescriptionPreferenceControllerTest {
     public void testIsAvailable_notIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -92,7 +91,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -101,7 +100,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -109,7 +108,7 @@ public class DescriptionPreferenceControllerTest {
     public void testIsAvailable_notIfNoChannelGroupDesc() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -119,7 +118,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getDescription()).thenReturn("AAA");
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -129,7 +128,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.getDescription()).thenReturn("something");
         when(group.isBlocked()).thenReturn(false);
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -139,7 +138,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getDescription()).thenReturn("AAA");
-        mController.onResume(appRow, channel, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -154,7 +153,7 @@ public class DescriptionPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.getDescription()).thenReturn("something");
-        mController.onResume(appRow, null, group, null);
+        mController.onResume(appRow, null, group, null, null, null);
 
         Preference pref = new Preference(RuntimeEnvironment.application);
         mController.updateState(pref);

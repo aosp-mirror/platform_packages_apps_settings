@@ -16,8 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/configure_notification_settings"
-                  android:key="configure_notification_settings">
+                  android:title="@string/configure_notification_settings">
 
     <com.android.settings.widget.VideoPreference
         android:key="notification_model_illustration"
@@ -48,6 +47,16 @@
                 android:name="classname"
                 android:value="com.android.settings.Settings$NotificationAppListActivity"/>
         </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="5">
+        <Preference
+            android:key="manage_conversations"
+            android:title="@string/manage_conversations"
+            android:fragment="com.android.settings.notification.app.ConversationListSettings"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -86,6 +95,12 @@
         android:key="configure_notifications_advanced"
         android:order="15"
         settings:initialExpandedChildrenCount="0">
+
+        <SwitchPreference
+            android:key="notification_history"
+            android:title="@string/notification_history"
+            android:summary="@string/notification_history_summary"
+            settings:controller="com.android.settings.notification.NotificationHistoryPreferenceController"/>
 
         <SwitchPreference
             android:key="silent_icons"

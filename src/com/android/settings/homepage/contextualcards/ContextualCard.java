@@ -56,17 +56,10 @@ public class ContextualCard {
     private final double mRankingScore;
     private final String mSliceUri;
     private final int mCategory;
-    private final String mLocalizedToLocale;
     private final String mPackageName;
     private final long mAppVersion;
-    private final String mTitleResName;
     private final String mTitleText;
-    private final String mSummaryResName;
     private final String mSummaryText;
-    private final String mIconResName;
-    private final int mIconResId;
-    private final int mCardAction;
-    private final long mExpireTimeMS;
     private final boolean mIsLargeCard;
     private final Drawable mIconDrawable;
     @LayoutRes
@@ -98,10 +91,6 @@ public class ContextualCard {
         return mCategory;
     }
 
-    public String getLocalizedToLocale() {
-        return mLocalizedToLocale;
-    }
-
     public String getPackageName() {
         return mPackageName;
     }
@@ -110,36 +99,12 @@ public class ContextualCard {
         return mAppVersion;
     }
 
-    public String getTitleResName() {
-        return mTitleResName;
-    }
-
     public String getTitleText() {
         return mTitleText;
     }
 
-    public String getSummaryResName() {
-        return mSummaryResName;
-    }
-
     public String getSummaryText() {
         return mSummaryText;
-    }
-
-    public String getIconResName() {
-        return mIconResName;
-    }
-
-    public int getIconResId() {
-        return mIconResId;
-    }
-
-    public int getCardAction() {
-        return mCardAction;
-    }
-
-    public long getExpireTimeMS() {
-        return mExpireTimeMS;
     }
 
     public Drawable getIconDrawable() {
@@ -148,10 +113,6 @@ public class ContextualCard {
 
     public boolean isLargeCard() {
         return mIsLargeCard;
-    }
-
-    boolean isCustomCard() {
-        return TextUtils.isEmpty(mSliceUri);
     }
 
     public int getViewType() {
@@ -177,17 +138,10 @@ public class ContextualCard {
         mRankingScore = builder.mRankingScore;
         mSliceUri = builder.mSliceUri;
         mCategory = builder.mCategory;
-        mLocalizedToLocale = builder.mLocalizedToLocale;
         mPackageName = builder.mPackageName;
         mAppVersion = builder.mAppVersion;
-        mTitleResName = builder.mTitleResName;
         mTitleText = builder.mTitleText;
-        mSummaryResName = builder.mSummaryResName;
         mSummaryText = builder.mSummaryText;
-        mIconResName = builder.mIconResName;
-        mIconResId = builder.mIconResId;
-        mCardAction = builder.mCardAction;
-        mExpireTimeMS = builder.mExpireTimeMS;
         mIconDrawable = builder.mIconDrawable;
         mIsLargeCard = builder.mIsLargeCard;
         mViewType = builder.mViewType;
@@ -207,31 +161,14 @@ public class ContextualCard {
         mBuilder.setSliceUri(Uri.parse(mSliceUri));
         mCategory = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.CATEGORY));
         mBuilder.setCategory(mCategory);
-        mLocalizedToLocale = c.getString(
-                c.getColumnIndex(CardDatabaseHelper.CardColumns.LOCALIZED_TO_LOCALE));
-        mBuilder.setLocalizedToLocale(mLocalizedToLocale);
         mPackageName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.PACKAGE_NAME));
         mBuilder.setPackageName(mPackageName);
         mAppVersion = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.APP_VERSION));
         mBuilder.setAppVersion(mAppVersion);
-        mTitleResName = c.getString(
-                c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_RES_NAME));
-        mBuilder.setTitleResName(mTitleResName);
-        mTitleText = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.TITLE_TEXT));
+        mTitleText = "";
         mBuilder.setTitleText(mTitleText);
-        mSummaryResName = c.getString(
-                c.getColumnIndex(CardDatabaseHelper.CardColumns.SUMMARY_RES_NAME));
-        mBuilder.setSummaryResName(mSummaryResName);
-        mSummaryText = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.SUMMARY_TEXT));
-        mBuilder.setSummaryText(mSummaryText);
-        mIconResName = c.getString(c.getColumnIndex(CardDatabaseHelper.CardColumns.ICON_RES_NAME));
-        mBuilder.setIconResName(mIconResName);
-        mIconResId = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.ICON_RES_ID));
-        mBuilder.setIconResId(mIconResId);
-        mCardAction = c.getInt(c.getColumnIndex(CardDatabaseHelper.CardColumns.CARD_ACTION));
-        mBuilder.setCardAction(mCardAction);
-        mExpireTimeMS = c.getLong(c.getColumnIndex(CardDatabaseHelper.CardColumns.EXPIRE_TIME_MS));
-        mBuilder.setExpireTimeMS(mExpireTimeMS);
+        mSummaryText = "";
+        mBuilder.setTitleText(mSummaryText);
         mIsLargeCard = false;
         mBuilder.setIsLargeCard(mIsLargeCard);
         mIconDrawable = null;
@@ -278,17 +215,10 @@ public class ContextualCard {
         private double mRankingScore;
         private String mSliceUri;
         private int mCategory;
-        private String mLocalizedToLocale;
         private String mPackageName;
         private long mAppVersion;
-        private String mTitleResName;
         private String mTitleText;
-        private String mSummaryResName;
         private String mSummaryText;
-        private String mIconResName;
-        private int mIconResId;
-        private int mCardAction;
-        private long mExpireTimeMS;
         private Drawable mIconDrawable;
         private boolean mIsLargeCard;
         @LayoutRes
@@ -321,11 +251,6 @@ public class ContextualCard {
             return this;
         }
 
-        public Builder setLocalizedToLocale(String localizedToLocale) {
-            mLocalizedToLocale = localizedToLocale;
-            return this;
-        }
-
         public Builder setPackageName(String packageName) {
             mPackageName = packageName;
             return this;
@@ -336,43 +261,13 @@ public class ContextualCard {
             return this;
         }
 
-        public Builder setTitleResName(String titleResName) {
-            mTitleResName = titleResName;
-            return this;
-        }
-
         public Builder setTitleText(String titleText) {
             mTitleText = titleText;
             return this;
         }
 
-        public Builder setSummaryResName(String summaryResName) {
-            mSummaryResName = summaryResName;
-            return this;
-        }
-
         public Builder setSummaryText(String summaryText) {
             mSummaryText = summaryText;
-            return this;
-        }
-
-        public Builder setIconResName(String iconResName) {
-            mIconResName = iconResName;
-            return this;
-        }
-
-        public Builder setIconResId(int iconResId) {
-            mIconResId = iconResId;
-            return this;
-        }
-
-        public Builder setCardAction(int cardAction) {
-            mCardAction = cardAction;
-            return this;
-        }
-
-        public Builder setExpireTimeMS(long expireTimeMS) {
-            mExpireTimeMS = expireTimeMS;
             return this;
         }
 

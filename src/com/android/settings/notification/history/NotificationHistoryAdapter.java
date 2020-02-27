@@ -63,7 +63,8 @@ public class NotificationHistoryAdapter extends
         holder.setTitle(hn.getTitle());
         holder.setSummary(hn.getText());
         holder.setPostedTime(hn.getPostedTimeMs());
-        holder.addOnClick(hn.getPackage(), hn.getUserId(), hn.getChannelId());
+        holder.addOnClick(hn.getPackage(), hn.getUserId(), hn.getChannelId(),
+                hn.getConversationId());
     }
 
     @Override
@@ -73,6 +74,7 @@ public class NotificationHistoryAdapter extends
 
     public void onRebuildComplete(List<HistoricalNotification> notifications) {
         mValues = notifications;
+        mValues.sort((o1, o2) -> Long.compare(o2.getPostedTimeMs(), o1.getPostedTimeMs()));
         notifyDataSetChanged();
     }
 }

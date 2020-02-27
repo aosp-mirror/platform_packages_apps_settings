@@ -57,6 +57,7 @@
             android:title="@string/previous_connected_see_all"
             android:icon="@drawable/ic_chevron_right_24dp"
             android:order="10"
+            settings:searchable="false"
             android:fragment="com.android.settings.connecteddevice.PreviouslyConnectedDeviceDashboardFragment"/>
     </PreferenceCategory>
 

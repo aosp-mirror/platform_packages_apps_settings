@@ -20,6 +20,7 @@ import static com.android.settings.network.MobilePlanPreferenceController.MANAGE
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -65,6 +66,13 @@ public class NetworkDashboardFragment extends DashboardFragment implements
 
         use(MultiNetworkHeaderController.class).init(getSettingsLifecycle());
         use(AirplaneModePreferenceController.class).setFragment(this);
+        getSettingsLifecycle().addObserver(use(AllInOneTetherPreferenceController.class));
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        use(AllInOneTetherPreferenceController.class).initEnabler(getSettingsLifecycle());
     }
 
     @Override
@@ -149,14 +157,6 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* metricsFeatureProvider */, null /* fragment */,
                             null /* mobilePlanHost */);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-                    // Remove master switch as a result
-                    keys.add(WifiMasterSwitchPreferenceController.KEY_TOGGLE_WIFI);
-                    return keys;
                 }
             };
 }

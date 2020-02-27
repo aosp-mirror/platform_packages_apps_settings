@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="?attr/sudMarginSides"
-                    android:layout_marginEnd="?attr/sudMarginSides" />x
+                    android:layout_marginEnd="?attr/sudMarginSides" />
 
                 <Button
                     android:id="@+id/cancelButton"
@@ -69,6 +69,16 @@
                     android:layout_marginStart="?attr/sudMarginSides"
                     android:layout_marginEnd="?attr/sudMarginSides"
                     android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/forgotButton"
+                    style="@style/SudGlifButton.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?attr/sudMarginSides"
+                    android:layout_marginEnd="?attr/sudMarginSides"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
 
                 <Space
                     android:layout_width="match_parent"

@@ -45,7 +45,7 @@ public class ImsQueryProvisioningStat implements ImsQuery {
     }
 
     /**
-     * Implementation of interface {@link ImsQuery}
+     * Implementation of interface {@link ImsQuery#query()}
      *
      * @return result of query
      */

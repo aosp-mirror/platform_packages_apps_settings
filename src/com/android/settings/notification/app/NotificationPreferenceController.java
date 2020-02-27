@@ -24,6 +24,8 @@ import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.pm.ShortcutInfo;
+import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.util.Log;
 
@@ -53,6 +55,10 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     protected final UserManager mUm;
     protected final PackageManager mPm;
     protected Preference mPreference;
+    @Nullable
+    protected Drawable mConversationDrawable;
+    @Nullable
+    protected ShortcutInfo mConversationInfo;
 
     public NotificationPreferenceController(Context context, NotificationBackend backend) {
         super(context);
@@ -87,11 +93,15 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
 
     protected void onResume(NotificationBackend.AppRow appRow,
             @Nullable NotificationChannel channel, @Nullable NotificationChannelGroup group,
+            Drawable conversationDrawable,
+            ShortcutInfo conversationInfo,
             RestrictedLockUtils.EnforcedAdmin admin) {
         mAppRow = appRow;
         mChannel = channel;
         mChannelGroup = group;
         mAdmin = admin;
+        mConversationDrawable = conversationDrawable;
+        mConversationInfo = conversationInfo;
     }
 
     protected boolean checkCanBeVisible(int minImportanceVisible) {
