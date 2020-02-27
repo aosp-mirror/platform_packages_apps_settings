@@ -115,10 +115,6 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (mNetworkDetailsTracker.getWifiEntry().canManageSubscription()) {
-            return;
-        }
-
         MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
         item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
