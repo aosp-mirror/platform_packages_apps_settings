@@ -41,11 +41,7 @@ public class WifiSubscriptionDetailPreferenceController2 extends BasePreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (mWifiEntry.canManageSubscription()) {
-            return AVAILABLE;
-        }
-
-        return CONDITIONALLY_UNAVAILABLE;
+        return mWifiEntry.canManageSubscription() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
