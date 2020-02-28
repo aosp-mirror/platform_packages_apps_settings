@@ -135,7 +135,8 @@ public class EntityHeaderController {
      */
     public EntityHeaderController setIcon(Drawable icon) {
         if (icon != null) {
-            mIcon = icon.getConstantState().newDrawable(mAppContext.getResources());
+            final Drawable.ConstantState state = icon.getConstantState();
+            mIcon = state != null ? state.newDrawable(mAppContext.getResources()) : icon;
         }
         return this;
     }

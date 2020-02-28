@@ -88,7 +88,8 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
         pref.setTitle(getTitle(conversation));
         pref.setSummary(getSummary(conversation));
         pref.setIcon(mBackend.getConversationDrawable(mContext, conversation.getShortcutInfo(),
-                conversation.getPkg(), conversation.getUid()));
+                conversation.getPkg(), conversation.getUid(),
+                conversation.getNotificationChannel().isImportantConversation()));
         pref.setKey(conversation.getNotificationChannel().getId());
         pref.setIntent(getIntent(conversation, pref.getTitle()));
 
