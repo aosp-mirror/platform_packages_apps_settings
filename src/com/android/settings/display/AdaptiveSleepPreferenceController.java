@@ -39,13 +39,13 @@ public class AdaptiveSleepPreferenceController extends TogglePreferenceControlle
 
     @Override
     public boolean isChecked() {
-        return hasSufficientPermission(mContext.getPackageManager()) && Settings.System.getInt(
+        return hasSufficientPermission(mContext.getPackageManager()) && Settings.Secure.getInt(
                 mContext.getContentResolver(), SYSTEM_KEY, DEFAULT_VALUE) != DEFAULT_VALUE;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        Settings.System.putInt(mContext.getContentResolver(), SYSTEM_KEY,
+        Settings.Secure.putInt(mContext.getContentResolver(), SYSTEM_KEY,
                 isChecked ? 1 : DEFAULT_VALUE);
         return true;
     }
