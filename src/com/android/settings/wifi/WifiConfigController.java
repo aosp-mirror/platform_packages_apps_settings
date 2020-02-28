@@ -82,6 +82,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
@@ -132,6 +133,14 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_TTLS_PHASE2_MSCHAP    = 1;
     public static final int WIFI_TTLS_PHASE2_MSCHAPV2  = 2;
     public static final int WIFI_TTLS_PHASE2_GTC       = 3;
+
+    private static final String UNDESIRED_CERTIFICATE_MACRANDSECRET = "MacRandSecret";
+    private static final String UNDESIRED_CERTIFICATE_MACRANDSAPSECRET = "MacRandSapSecret";
+    @VisibleForTesting
+    static final String[] UNDESIRED_CERTIFICATES = {
+        UNDESIRED_CERTIFICATE_MACRANDSECRET,
+        UNDESIRED_CERTIFICATE_MACRANDSAPSECRET
+    };
 
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
@@ -1425,7 +1434,8 @@ public class WifiConfigController implements TextWatcher,
         return KeyStore.getInstance();
     }
 
-    private void loadCertificates(
+    @VisibleForTesting
+    void loadCertificates(
             Spinner spinner,
             String prefix,
             String noCertificateString,
@@ -1441,12 +1451,25 @@ public class WifiConfigController implements TextWatcher,
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
         }
+
+        String[] certificateNames = null;
         try {
-            certs.addAll(
-                Arrays.asList(getKeyStore().list(prefix, android.os.Process.WIFI_UID)));
+            certificateNames = getKeyStore().list(prefix, android.os.Process.WIFI_UID);
         } catch (Exception e) {
             Log.e(TAG, "can't get the certificate list from KeyStore");
         }
+        if (certificateNames != null && certificateNames.length != 0) {
+            certs.addAll(Arrays.stream(certificateNames)
+                    .filter(certificateName -> {
+                        for (String undesired : UNDESIRED_CERTIFICATES) {
+                            if (certificateName.startsWith(undesired)) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }).collect(Collectors.toList()));
+        }
+
         if (mAccessPointSecurity != AccessPoint.SECURITY_EAP_SUITE_B) {
             certs.add(noCertificateString);
         }

@@ -241,6 +241,20 @@ public class WifiConfigController2Test {
     }
 
     @Test
+    public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
+        final Spinner spinner = new Spinner(mContext);
+        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
+
+        mController.loadCertificates(spinner,
+                "prefix",
+                "doNotProvideEapUserCertString",
+                false /* showMultipleCerts */,
+                false /* showUsePreinstalledCertOption */);
+
+        assertThat(spinner.getAdapter().getCount()).isEqualTo(1);   // doNotProvideEapUserCertString
+    }
+
+    @Test
     public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
         mController = new TestWifiConfigController2(mConfigUiBase, mView, null /* wifiEntry */,
                 WifiConfigUiBase2.MODE_CONNECT);
