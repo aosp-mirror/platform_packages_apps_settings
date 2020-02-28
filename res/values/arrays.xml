@@ -368,14 +368,12 @@
 
     <!-- Phase 2 options for PEAP -->
     <string-array name="wifi_peap_phase2_entries">
-        <item>None</item>
         <item>MSCHAPV2</item>
         <item>GTC</item>
     </string-array>
 
     <!-- Type of EAP method when EAP SIM, AKA, AKA' are supported -->
     <string-array name="wifi_peap_phase2_entries_with_sim_auth">
-        <item>None</item>
         <item translatable="false">MSCHAPV2</item>
         <item translatable="false">GTC</item>
         <item translatable="false">SIM</item>
@@ -383,9 +381,8 @@
         <item translatable="false">AKA\'</item>
     </string-array>
 
-    <!-- Phase 2 options for rest of EAP methods -->
-    <string-array name="wifi_phase2_entries">
-        <item>None</item>
+    <!-- Phase 2 options for TTLS -->
+    <string-array name="wifi_ttls_phase2_entries">
         <item>PAP</item>
         <item>MSCHAP</item>
         <item>MSCHAPV2</item>
