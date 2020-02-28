@@ -49,6 +49,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.notification.ConversationIconFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,7 +205,8 @@ abstract public class NotificationSettings extends DashboardFragment {
                 mContext, mPkg, mUid, mChannel.getConversationId());
         if (mConversationInfo != null) {
             mConversationDrawable = mBackend.getConversationDrawable(
-                    mContext, mConversationInfo, mAppRow.pkg, mAppRow.uid);
+                    mContext, mConversationInfo, mAppRow.pkg, mAppRow.uid,
+                    mChannel.isImportantConversation());
         }
     }
 
@@ -329,6 +331,12 @@ abstract public class NotificationSettings extends DashboardFragment {
 
     protected class DependentFieldListener {
         protected void onFieldValueChanged() {
+            // Reload the conversation drawable, which shows some channel/conversation state
+            if (mConversationDrawable != null && mConversationDrawable
+                    instanceof ConversationIconFactory.ConversationIconDrawable) {
+                ((ConversationIconFactory.ConversationIconDrawable) mConversationDrawable)
+                        .setImportant(mChannel.isImportantConversation());
+            }
             final PreferenceScreen screen = getPreferenceScreen();
             for (NotificationPreferenceController controller : mControllers) {
                 controller.displayPreference(screen);

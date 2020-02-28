@@ -127,7 +127,8 @@ public class AppConversationListPreferenceController extends NotificationPrefere
                 conversation.getParentChannelLabel(), conversation.getGroupLabel())
                 : conversation.getParentChannelLabel());
         if (si != null) {
-            pref.setIcon(mBackend.getConversationDrawable(mContext, si, mAppRow.pkg, mAppRow.uid));
+            pref.setIcon(mBackend.getConversationDrawable(mContext, si, mAppRow.pkg, mAppRow.uid,
+                    conversation.getNotificationChannel().isImportantConversation()));
         }
         pref.setKey(conversation.getNotificationChannel().getId());
 
