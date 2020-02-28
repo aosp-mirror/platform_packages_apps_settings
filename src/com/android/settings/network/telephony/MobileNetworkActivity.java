@@ -26,6 +26,8 @@ import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsRcsManager;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 
@@ -72,7 +74,12 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         public void onSubscriptionsChanged() {
             if (!Objects.equals(mSubscriptionInfos,
                     mSubscriptionManager.getActiveSubscriptionInfoList(true))) {
+                int oldSubIndex = mCurSubscriptionId;
                 updateSubscriptions(null);
+                // Remove the dialog if the subscription associated with this activity changes.
+                if (mCurSubscriptionId != oldSubIndex) {
+                    removeContactDiscoveryDialog(oldSubIndex);
+                }
             }
         }
     };
@@ -80,14 +87,33 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        validate(intent);
         setIntent(intent);
+
+        int updateSubscriptionIndex = SUB_ID_NULL;
+        if (intent != null) {
+            updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
+        }
+        int oldSubId = mCurSubscriptionId;
         updateSubscriptions(null);
+
+        // If the subscription has changed or the new intent doesnt contain the opt in action,
+        // remove the old discovery dialog. If the activity is being recreated, we will see
+        // onCreate -> onNewIntent, so the dialog will first be recreated for the old subscription
+        // and then removed.
+        if (updateSubscriptionIndex != oldSubId || !doesIntentContainOptInAction(intent)) {
+            removeContactDiscoveryDialog(oldSubId);
+        }
+        // evaluate showing the new discovery dialog if this intent contains an action to show the
+        // opt-in.
+        if (doesIntentContainOptInAction(intent)) {
+            maybeShowContactDiscoveryDialog(updateSubscriptionIndex);
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
             setContentView(R.layout.mobile_network_settings_container_v2);
         } else {
@@ -109,6 +135,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         });
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
         mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
+        final Intent startIntent = getIntent();
+        validate(startIntent);
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL;
@@ -117,8 +145,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         updateSubscriptions(savedInstanceState);
+        maybeShowContactDiscoveryDialog(mCurSubscriptionId);
     }
 
     @Override
@@ -250,6 +278,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         mCurSubscriptionId = subscriptionId;
     }
 
+    @VisibleForTesting
     private String buildFragmentTag(int subscriptionId) {
         return MOBILE_SETTINGS_TAG + subscriptionId;
     }
@@ -293,6 +322,62 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
                 }
             }
             mClient.onPhoneChange();
+        }
+    }
+
+    private void removeContactDiscoveryDialog(int subId) {
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
+        if (fragment != null) {
+            fragment.dismiss();
+        }
+    }
+
+    private ContactDiscoveryDialogFragment getContactDiscoveryFragment(int subId) {
+        // In the case that we are rebuilding this activity after it has been destroyed and
+        // recreated, look up the dialog in the fragment manager.
+        return (ContactDiscoveryDialogFragment) getSupportFragmentManager()
+                .findFragmentByTag(ContactDiscoveryDialogFragment.getFragmentTag(subId));
+    }
+
+    private void maybeShowContactDiscoveryDialog(int subId) {
+        // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
+        // associated dialog only if the opt-in has not been granted yet.
+        boolean showOptInDialog = doesIntentContainOptInAction(getIntent())
+                // has the carrier config enabled capability discovery?
+                && MobileNetworkUtils.isContactDiscoveryVisible(this, subId)
+                // has the user already enabled this configuration?
+                && !MobileNetworkUtils.isContactDiscoveryEnabled(this, subId);
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
+        if (showOptInDialog) {
+            if (fragment == null) {
+                fragment = ContactDiscoveryDialogFragment.newInstance(subId);
+            }
+            // Only try to show the dialog if it has not already been added, otherwise we may
+            // accidentally add it multiple times, causing multiple dialogs.
+            if (!fragment.isAdded()) {
+                fragment.show(getSupportFragmentManager(),
+                        ContactDiscoveryDialogFragment.getFragmentTag(subId));
+            }
+        }
+    }
+
+    private boolean doesIntentContainOptInAction(Intent intent) {
+        String intentAction = (intent != null ? intent.getAction() : null);
+        return TextUtils.equals(intentAction,
+                ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
+    }
+
+    private void validate(Intent intent) {
+        // Do not allow ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN without a subscription id specified,
+        // since we do not want the user to accidentally turn on capability polling for the wrong
+        // subscription.
+        if (doesIntentContainOptInAction(intent)) {
+            if (SubscriptionManager.INVALID_SUBSCRIPTION_ID == intent.getIntExtra(
+                    Settings.EXTRA_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID)) {
+                throw new IllegalArgumentException("Intent with action "
+                        + "SHOW_CAPABILITY_DISCOVERY_OPT_IN must also include the extra "
+                        + "Settings#EXTRA_SUB_ID");
+            }
         }
     }
 }
