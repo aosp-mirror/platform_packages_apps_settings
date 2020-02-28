@@ -26,7 +26,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -156,7 +155,7 @@ public class ConversationImportantPreferenceControllerTest {
         assertTrue(channel.isImportantConversation());
         assertFalse(channel.canBubble());
         verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
-        verify(mDependentFieldListener, never()).onFieldValueChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 
     @Test
@@ -202,6 +201,6 @@ public class ConversationImportantPreferenceControllerTest {
         assertFalse(channel.isImportantConversation());
         assertFalse(channel.canBubble());
         verify(mBackend, times(1)).updateChannel(any(), anyInt(), any());
-        verify(mDependentFieldListener, never()).onFieldValueChanged();
+        verify(mDependentFieldListener, times(1)).onFieldValueChanged();
     }
 }
