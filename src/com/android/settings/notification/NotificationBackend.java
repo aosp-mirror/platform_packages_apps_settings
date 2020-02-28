@@ -37,14 +37,11 @@ import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.ConversationChannelWrapper;
-import android.service.notification.NotifyingApp;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -522,17 +519,17 @@ public class NotificationBackend {
     }
 
     public Drawable getConversationDrawable(Context context, ShortcutInfo info, String pkg,
-            int uid) {
+            int uid, boolean important) {
         if (info == null) {
             return null;
         }
         ConversationIconFactory iconFactory = new ConversationIconFactory(context,
                 context.getSystemService(LauncherApps.class),
-                context.getPackageManager(), IconDrawableFactory.newInstance(context),
+                context.getPackageManager(),
+                IconDrawableFactory.newInstance(context, false),
                 context.getResources().getDimensionPixelSize(
                         R.dimen.conversation_icon_size));
-        return new BitmapDrawable(context.getResources(),
-                iconFactory.getConversationBitmap(info, pkg, uid));
+        return iconFactory.getConversationDrawable(info, pkg, uid, important);
     }
 
     public void requestPinShortcut(Context context, ShortcutInfo shortcutInfo) {
