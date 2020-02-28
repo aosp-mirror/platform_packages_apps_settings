@@ -145,7 +145,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     static final String KEY_IPV6_CATEGORY = "ipv6_category";
     @VisibleForTesting
     static final String KEY_IPV6_ADDRESSES_PREF = "ipv6_addresses";
-    static final String KEY_IP_DETAILS_CATEGORY = "ip_details_category";
 
     private final WifiEntry mWifiEntry;
     private final ConnectivityManager mConnectivityManager;
@@ -165,7 +164,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     private ActionButtonsPreference mButtonsPref;
     private EntityHeaderController mEntityHeaderController;
     private Preference mSignalStrengthPref;
-    private PreferenceCategory mIpDetailsCategory;
     private Preference mTxLinkSpeedPref;
     private Preference mRxLinkSpeedPref;
     private Preference mFrequencyPref;
@@ -196,9 +194,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 mLinkProperties = lp;
                 refreshEntityHeader();
                 refreshButtons();
-                if (!mWifiEntry.canManageSubscription()) {
-                    refreshIpLayerInfo();
-                }
+                refreshIpLayerInfo();
             }
         }
 
@@ -238,9 +234,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
                 }
                 mNetworkCapabilities = nc;
                 refreshButtons();
-                if (!mWifiEntry.canManageSubscription()) {
-                    refreshIpLayerInfo();
-                }
+                refreshIpLayerInfo();
             }
         }
 
@@ -335,7 +329,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         updateCaptivePortalButton();
 
         mSignalStrengthPref = screen.findPreference(KEY_SIGNAL_STRENGTH_PREF);
-        mIpDetailsCategory = screen.findPreference(KEY_IP_DETAILS_CATEGORY);
         mTxLinkSpeedPref = screen.findPreference(KEY_TX_LINK_SPEED);
         mRxLinkSpeedPref = screen.findPreference(KEY_RX_LINK_SPEED);
         mFrequencyPref = screen.findPreference(KEY_FREQUENCY_PREF);
@@ -351,13 +344,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         mIpv6Category = screen.findPreference(KEY_IPV6_CATEGORY);
         mIpv6AddressPref = screen.findPreference(KEY_IPV6_ADDRESSES_PREF);
 
-        if (mWifiEntry.canManageSubscription()) {
-            mIpDetailsCategory.setVisible(false);
-            mIpv6Category.setVisible(false);
-            mSignalStrengthPref.setVisible(false);
-            mFrequencyPref.setVisible(false);
-            mSecurityPref.setVisible(false);
-        }
         mSecurityPref.setSummary(mWifiEntry.getSecurityString(false /* concise */));
     }
 
@@ -505,15 +491,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         // refresh header
         refreshEntityHeader();
-        refreshEntityHeaderIcon();
+
         // refresh Buttons
         refreshButtons();
-
-        // When support manage subscription, there won't have any detail information, so don't
-        // need to update those detail UIs.
-        if (mWifiEntry.canManageSubscription()) {
-            return;
-        }
 
         // Update Connection Header icon and Signal Strength Preference
         refreshRssiViews();
@@ -531,11 +511,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshMacAddress();
     }
 
-    private void refreshEntityHeaderIcon() {
-        if (mEntityHeaderController == null) {
-            return;
-        }
-
+    private void refreshRssiViews() {
         int signalLevel = mWifiEntry.getLevel();
 
         // Disappears signal view if not in range. e.g. for saved networks.
@@ -550,23 +526,13 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
         mRssiSignalLevel = signalLevel;
         Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
-        mEntityHeaderController
-                .setIcon(redrawIconForHeader(wifiIcon)).done(mFragment.getActivity(),
-                    true /* rebind */);
-    }
 
-    private void refreshRssiViews() {
-        int signalLevel = mWifiEntry.getLevel();
-
-        // Disappears signal view if not in range. e.g. for saved networks.
-        if (signalLevel == WifiEntry.WIFI_LEVEL_UNREACHABLE) {
-            mSignalStrengthPref.setVisible(false);
-            mRssiSignalLevel = -1;
-            return;
+        if (mEntityHeaderController != null) {
+            mEntityHeaderController
+                    .setIcon(redrawIconForHeader(wifiIcon)).done(mFragment.getActivity(),
+                            true /* rebind */);
         }
 
-        mRssiSignalLevel = signalLevel;
-        Drawable wifiIcon = mIconInjector.getIcon(mRssiSignalLevel);
         Drawable wifiIconDark = wifiIcon.getConstantState().newDrawable().mutate();
         wifiIconDark.setTintList(Utils.getColorAttr(mContext, android.R.attr.colorControlNormal));
         mSignalStrengthPref.setIcon(wifiIconDark);

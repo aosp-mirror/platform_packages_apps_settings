@@ -2031,8 +2031,10 @@
     <string name="wifi_ip_settings">IP settings</string>
     <!-- Label for the spinner to show Wifi MAC randomization [CHAR LIMIT=25] -->
     <string name="wifi_privacy_settings">Privacy</string>
-    <!-- Label for the subscription detail preference. [CHAR LIMIT=32] -->
-    <string name="wifi_subscription_detail">Subscription details</string>
+    <!-- Label for the subscription preference. [CHAR LIMIT=32] -->
+    <string name="wifi_subscription">Subscription</string>
+    <!-- Summary text for the subscription preference. [CHAR LIMIT=NONE] -->
+    <string name="wifi_subscription_summary">View or change subscription</string>
     <!-- Summary for Wifi MAC randomization option when it is ephemeral network [CHAR LIMIT=50] -->
     <string name="wifi_privacy_settings_ephemeral_summary">Randomized MAC</string>
     <!-- Title for the fragment to add a device into the wifi network [CHAR LIMIT=50]  -->
@@ -8505,7 +8507,7 @@
     <string name="interact_across_profiles_summary_1" translatable="false">Connected apps share permissions and can access each other\u2019s data.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Description. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data.Your data may be exposed to your IT admin.</string>
+    <string name="interact_across_profiles_summary_2" translatable="false">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
 
     <!-- Apps > App Details > Connected personal and work apps > Consent dialog title. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_consent_dialog_title" translatable="false">Trust work %1$s with your personal data?</string>
