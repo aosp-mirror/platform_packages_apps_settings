@@ -38,6 +38,7 @@ import android.widget.FrameLayout;
 import android.widget.Spinner;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.loader.app.LoaderManager;
 import androidx.preference.PreferenceManager;
 
 import com.android.settings.R;
@@ -71,6 +72,8 @@ public class DataUsageListTest {
     private MobileDataEnabledListener mMobileDataEnabledListener;
     @Mock
     private TemplatePreference.NetworkServices mNetworkServices;
+    @Mock
+    private LoaderManager mLoaderManager;
 
     private Activity mActivity;
     private DataUsageList mDataUsageList;
@@ -90,6 +93,7 @@ public class DataUsageListTest {
         ReflectionHelpers.setField(mDataUsageList, "mDataStateListener",
                 mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
+        doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
     }
 
     @Test
@@ -214,6 +218,14 @@ public class DataUsageListTest {
         mDataUsageList.mNetworkCycleDataCallbacks.onLoadFinished(null, null);
 
         assertThat(spinner.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void onPause_shouldDestroyLoaders() {
+        mDataUsageList.onPause();
+
+        verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_CHART_DATA);
+        verify(mLoaderManager).destroyLoader(DataUsageList.LOADER_SUMMARY);
     }
 
     private View getHeader() {
