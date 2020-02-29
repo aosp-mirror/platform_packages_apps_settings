@@ -241,7 +241,16 @@ public class NotificationHistoryActivity extends Activity {
 
         @Override
         public void onListenerConnected() {
-            StatusBarNotification[] snoozed = getSnoozedNotifications();
+            StatusBarNotification[] snoozed = null;
+            StatusBarNotification[] dismissed = null;
+            try {
+                snoozed = getSnoozedNotifications();
+                dismissed = mNm.getHistoricalNotifications(
+                    NotificationHistoryActivity.this.getPackageName(), 6, false);
+            } catch (SecurityException | RemoteException e) {
+                Log.d(TAG, "OnPaused called while trying to retrieve notifications");
+            }
+
             mSnoozedRv = mSnoozeView.findViewById(R.id.notification_list);
             LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
             mSnoozedRv.setLayoutManager(lm);
@@ -259,26 +268,23 @@ public class NotificationHistoryActivity extends Activity {
                         new ArrayList<>(Arrays.asList(snoozed)));
             }
 
-            try {
-                StatusBarNotification[] dismissed = mNm.getHistoricalNotifications(
-                        NotificationHistoryActivity.this.getPackageName(), 6, false);
-                mDismissedRv = mDismissView.findViewById(R.id.notification_list);
-                LinearLayoutManager dismissLm =
-                        new LinearLayoutManager(NotificationHistoryActivity.this);
-                mDismissedRv.setLayoutManager(dismissLm);
-                mDismissedRv.setAdapter(
-                        new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-                DividerItemDecoration dismissDivider = new DividerItemDecoration(
-                        mDismissedRv.getContext(), dismissLm.getOrientation());
-                mDismissedRv.addItemDecoration(dismissDivider);
-                mDismissedRv.setNestedScrollingEnabled(false);
+            mDismissedRv = mDismissView.findViewById(R.id.notification_list);
+            LinearLayoutManager dismissLm =
+                new LinearLayoutManager(NotificationHistoryActivity.this);
+            mDismissedRv.setLayoutManager(dismissLm);
+            mDismissedRv.setAdapter(
+                new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+            DividerItemDecoration dismissDivider = new DividerItemDecoration(
+                mDismissedRv.getContext(), dismissLm.getOrientation());
+            mDismissedRv.addItemDecoration(dismissDivider);
+            mDismissedRv.setNestedScrollingEnabled(false);
 
-                ((NotificationSbnAdapter) mDismissedRv.getAdapter()).onRebuildComplete(
-                        new ArrayList<>(Arrays.asList(dismissed)));
-                mDismissView.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-                Slog.e(TAG, "Cannot load recently dismissed", e);
+            if (dismissed == null || dismissed.length == 0) {
                 mDismissView.setVisibility(View.GONE);
+            } else {
+                mDismissView.setVisibility(View.VISIBLE);
+                ((NotificationSbnAdapter) mDismissedRv.getAdapter()).onRebuildComplete(
+                    new ArrayList<>(Arrays.asList(dismissed)));
             }
         }
 
