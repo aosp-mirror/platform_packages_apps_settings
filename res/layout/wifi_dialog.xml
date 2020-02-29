@@ -470,7 +470,7 @@
                     <EditText android:id="@+id/proxy_pac"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            style="@style/wifi_item_content"
+                            style="@style/wifi_item_edit_content"
                             android:hint="@string/proxy_url_hint"
                             android:inputType="textNoSuggestions"
                             android:singleLine="true"/>
@@ -556,27 +556,6 @@
                         style="@style/wifi_item_spinner"
                         android:prompt="@string/wifi_ip_settings"
                         android:entries="@array/wifi_ip_settings" />
-
-            </LinearLayout>
-
-            <LinearLayout android:id="@+id/privacy_settings_fields"
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          style="@style/wifi_item"
-                          android:visibility="gone">
-
-                <TextView android:id="@+id/privacy_settings_title"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          style="@style/wifi_item_label"
-                          android:text="@string/wifi_privacy_settings" />
-
-                <Spinner android:id="@+id/privacy_settings"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         style="@style/wifi_item_spinner"
-                         android:prompt="@string/wifi_privacy_settings"
-                         android:entries="@array/wifi_privacy_entries"/>
 
             </LinearLayout>
 
@@ -678,6 +657,26 @@
                             android:hint="@string/wifi_dns2_hint"
                             android:inputType="textNoSuggestions" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/privacy_settings_fields"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item"
+                          android:visibility="gone">
+
+                <TextView android:id="@+id/privacy_settings_title"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item_label"
+                          android:text="@string/wifi_privacy_settings" />
+
+                <Spinner android:id="@+id/privacy_settings"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_spinner"
+                         android:prompt="@string/wifi_privacy_settings"
+                         android:entries="@array/wifi_privacy_entries"/>
             </LinearLayout>
 
             <LinearLayout
