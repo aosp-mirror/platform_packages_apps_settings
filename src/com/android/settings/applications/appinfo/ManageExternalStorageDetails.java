@@ -23,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
@@ -110,8 +109,8 @@ public class ManageExternalStorageDetails extends AppInfoWithHeader implements
      */
     private void setManageExternalStorageState(boolean newState) {
         logSpecialPermissionChange(newState, mPackageName);
-        mAppOpsManager.setMode(AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE,
-                mPackageInfo.applicationInfo.uid, mPackageName, newState
+        mAppOpsManager.setUidMode(AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE,
+                mPackageInfo.applicationInfo.uid, newState
                         ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
     }
 
