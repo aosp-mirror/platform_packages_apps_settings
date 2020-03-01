@@ -18,10 +18,15 @@ package com.android.settings.development.graphicsdriver;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
@@ -35,6 +40,11 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
+import dalvik.system.VMRuntime;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Controller of global switch to enable Game Driver for all Apps.
  */
@@ -47,12 +57,16 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
     public static final int GAME_DRIVER_ALL_APPS = 1;
     public static final int GAME_DRIVER_PRERELEASE_ALL_APPS = 2;
     public static final int GAME_DRIVER_OFF = 3;
+    public static final String PROPERTY_GFX_DRIVER_GAME = "ro.gfx.driver.0";
+    public static final String PROPERTY_GFX_DRIVER_PRERELEASE = "ro.gfx.driver.1";
 
     private final Context mContext;
     private final ContentResolver mContentResolver;
     private final String mPreferenceDefault;
     private final String mPreferenceGameDriver;
     private final String mPreferencePrereleaseDriver;
+    @VisibleForTesting
+    CharSequence[] mEntryList;
     @VisibleForTesting
     GraphicsDriverContentObserver mGraphicsDriverContentObserver;
 
@@ -69,6 +83,7 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
                 resources.getString(R.string.graphics_driver_app_preference_game_driver);
         mPreferencePrereleaseDriver =
                 resources.getString(R.string.graphics_driver_app_preference_prerelease_driver);
+        mEntryList = constructEntryList(mContext, false);
         mGraphicsDriverContentObserver =
                 new GraphicsDriverContentObserver(new Handler(Looper.getMainLooper()), this);
     }
@@ -87,6 +102,8 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setEntries(mEntryList);
+        mPreference.setEntryValues(mEntryList);
         mPreference.setOnPreferenceChangeListener(this);
     }
 
@@ -146,5 +163,65 @@ public class GraphicsDriverEnableForAllAppsPreferenceController extends BasePref
     @Override
     public void onGraphicsDriverContentChanged() {
         updateState(mPreference);
+    }
+
+    /**
+     * Constructs and returns a list of graphics driver choices.
+     */
+    public static CharSequence[] constructEntryList(Context context, boolean withSystem) {
+        final Resources resources = context.getResources();
+        final String prereleaseDriverPackageName =
+                SystemProperties.get(PROPERTY_GFX_DRIVER_PRERELEASE);
+        final String gameDriverPackageName = SystemProperties.get(PROPERTY_GFX_DRIVER_GAME);
+
+        List<CharSequence> entryList = new ArrayList<>();
+        entryList.add(resources.getString(R.string.graphics_driver_app_preference_default));
+        final PackageManager pm = context.getPackageManager();
+        if (!TextUtils.isEmpty(prereleaseDriverPackageName)
+                && hasDriverPackage(pm, prereleaseDriverPackageName)) {
+            entryList.add(resources.getString(
+                    R.string.graphics_driver_app_preference_prerelease_driver));
+        }
+        if (!TextUtils.isEmpty(gameDriverPackageName)
+                && hasDriverPackage(pm, gameDriverPackageName)) {
+            entryList.add(resources.getString(R.string.graphics_driver_app_preference_game_driver));
+        }
+        if (withSystem) {
+            entryList.add(resources.getString(R.string.graphics_driver_app_preference_system));
+        }
+        CharSequence[] filteredEntryList = new CharSequence[entryList.size()];
+        filteredEntryList = entryList.toArray(filteredEntryList);
+        return filteredEntryList;
+    }
+
+    private static boolean hasDriverPackage(PackageManager pm, String driverPackageName) {
+        final ApplicationInfo driverAppInfo;
+        try {
+            driverAppInfo = pm.getApplicationInfo(driverPackageName,
+                    PackageManager.MATCH_SYSTEM_ONLY);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        if (driverAppInfo.targetSdkVersion < Build.VERSION_CODES.O) {
+            return false;
+        }
+        final String abi = chooseAbi(driverAppInfo);
+        if (abi == null) {
+            return false;
+        }
+        return true;
+    }
+
+    private static String chooseAbi(ApplicationInfo ai) {
+        final String isa = VMRuntime.getCurrentInstructionSet();
+        if (ai.primaryCpuAbi != null
+                && isa.equals(VMRuntime.getInstructionSet(ai.primaryCpuAbi))) {
+            return ai.primaryCpuAbi;
+        }
+        if (ai.secondaryCpuAbi != null
+                && isa.equals(VMRuntime.getInstructionSet(ai.secondaryCpuAbi))) {
+            return ai.secondaryCpuAbi;
+        }
+        return null;
     }
 }
