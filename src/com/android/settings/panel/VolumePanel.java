@@ -48,7 +48,7 @@ public class VolumePanel implements PanelContent {
 
     @Override
     public CharSequence getTitle() {
-        return mContext.getText(R.string.volume_connectivity_panel_title);
+        return mContext.getText(R.string.sound_settings);
     }
 
     @Override
