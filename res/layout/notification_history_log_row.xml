@@ -28,19 +28,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="6dp">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@*android:dimen/status_bar_icon_size"
             android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
+                android:layout_toStartOf="@id/alerted_icon"
                 android:textAlignment="viewStart"/>
 
             <ImageView
@@ -51,8 +53,9 @@
                 android:layout_marginStart="6dp"
                 android:paddingTop="1dp"
                 android:scaleType="fitCenter"
-                android:visibility="gone"
+                android:visibility="invisible"
                 android:layout_toEndOf="@id/title"
+                android:layout_toStartOf="@id/timestamp"
                 android:tint="?android:attr/textColorSecondary"
                 android:src="@drawable/ic_notifications_alert"/>
 
@@ -67,7 +70,7 @@
                 android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
                 android:textAlignment="viewEnd"
                 />
-        </RelativeLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/text"
