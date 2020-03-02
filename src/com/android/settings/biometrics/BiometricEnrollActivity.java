@@ -16,9 +16,12 @@
 
 package com.android.settings.biometrics;
 
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -30,6 +33,7 @@ import com.android.settings.biometrics.fingerprint.FingerprintEnrollFindSensor;
 import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.biometrics.fingerprint.SetupFingerprintEnrollIntroduction;
 import com.android.settings.core.InstrumentedActivity;
+import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -43,6 +47,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private static final String TAG = "BiometricEnrollActivity";
+    private static final int REQUEST_ENROLL = 1;
 
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
 
@@ -52,14 +57,33 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, "Min strength: " + getIntent()
-                .getIntExtra(Settings.EXTRA_BIOMETRIC_MINIMUM_STRENGTH_REQUIRED, 0));
+        // Default behavior is to enroll BIOMETRIC_WEAK or above. See ACTION_BIOMETRIC_ENROLL.
+        final int authenticators = getIntent().getIntExtra(
+                Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, Authenticators.BIOMETRIC_WEAK);
 
+        Log.d(TAG, "Authenticators: " + authenticators);
+
+        final BiometricManager bm = getSystemService(BiometricManager.class);
         final PackageManager pm = getApplicationContext().getPackageManager();
         Intent intent = null;
 
-        // This logic may have to be modified on devices with multiple biometrics.
-        if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+        final int result = bm.canAuthenticate(authenticators);
+
+        if (result == BiometricManager.BIOMETRIC_SUCCESS
+                || result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
+            Log.e(TAG, "Unexpected result: " + result);
+            setResult(RESULT_CANCELED);
+            finish();
+            return;
+        }
+
+        if (authenticators == BiometricManager.Authenticators.DEVICE_CREDENTIAL) {
+            // If only device credential was specified, ask the user to only set that up.
+            intent = new Intent(this, ChooseLockGeneric.class);
+            intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                    DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        } else if (pm.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+            // This logic may have to be modified on devices with multiple biometrics.
             // ChooseLockGeneric can request to start fingerprint enroll bypassing the intro screen.
             if (getIntent().getBooleanExtra(EXTRA_SKIP_INTRO, false)
                     && this instanceof InternalActivity) {
@@ -72,8 +96,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
 
         if (intent != null) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-
             if (this instanceof InternalActivity) {
                 // Propagate challenge and user Id from ChooseLockGeneric.
                 final byte[] token = getIntent()
@@ -85,9 +107,20 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 intent.putExtra(Intent.EXTRA_USER_ID, userId);
             }
 
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_ENROLL);
+        } else {
+            Log.e(TAG, "Intent was null, finishing with RESULT_CANCELED");
+            setResult(RESULT_CANCELED);
+            finish();
         }
-        finish();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ENROLL) {
+            setResult(RESULT_OK);
+            finish();
+        }
     }
 
     private Intent getFingerprintFindSensorIntent() {
