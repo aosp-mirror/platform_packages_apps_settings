@@ -15,19 +15,19 @@
 package com.android.settings.display.darkmode;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.app.UiModeManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.app.settings.SettingsEnums;
+import android.os.PowerManager;
+
 import androidx.preference.Preference;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,5 +143,11 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.dark_mode_settings);
+            new BaseSearchIndexProvider(R.xml.dark_mode_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !context.getSystemService(PowerManager.class).isPowerSaveMode();
+                }
+            };
+
 }
