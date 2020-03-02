@@ -35,6 +35,7 @@ import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.net.Uri;
+import android.os.Process;
 import android.text.TextUtils;
 
 import androidx.slice.Slice;
@@ -109,7 +110,7 @@ public class MediaOutputIndicatorSliceTest {
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         sMediaOutputIndicatorWorker = spy(new MediaOutputIndicatorWorker(mContext,
                 MEDIA_OUTPUT_INDICATOR_SLICE_URI));
-        mToken = new MediaSession.Token(null);
+        mToken = new MediaSession.Token(Process.myUid(), null);
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         // Setup Bluetooth environment
