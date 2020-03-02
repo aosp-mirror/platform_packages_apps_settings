@@ -156,8 +156,13 @@ public class PanelFragment extends Fragment {
 
     private void createPanelContent() {
         final FragmentActivity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
         if (mLayoutView == null) {
             activity.finish();
+            return;
         }
 
         mPanelSlices = mLayoutView.findViewById(R.id.panel_parent_layout);
@@ -183,6 +188,7 @@ public class PanelFragment extends Fragment {
 
         if (mPanel == null) {
             activity.finish();
+            return;
         }
 
         mPanel.registerCallback(new LocalPanelCallback());
