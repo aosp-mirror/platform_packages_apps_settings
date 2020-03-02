@@ -44,6 +44,7 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
+import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
@@ -153,6 +154,26 @@ public class MediaOutputSliceTest {
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
         assertThat(primaryAction.getTitle().toString()).isEqualTo(TEST_DEVICE_1_NAME);
+    }
+
+    @Test
+    public void getSlice_disconnectedBluetooth_verifyTitle() {
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(false);
+
+        mDevices.add(device);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
+
+        final SliceAction primaryAction = metadata.getPrimaryAction();
+        assertThat(primaryAction.getTitle().toString()).isEqualTo(TEST_DEVICE_1_NAME + " ("
+                + mContext.getText(R.string.media_output_disconnected_status) + ")");
     }
 
     @Test
