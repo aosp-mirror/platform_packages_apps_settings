@@ -915,7 +915,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
      *    phone that has no encryption.
      */
     private final void setAirplaneModeIfNecessary() {
-        if (!getTelephonyManager().isGlobalModeEnabled()) {
+        if (!getTelephonyManager().isLteCdmaEvdoGsmWcdmaEnabled()) {
             Log.d(TAG, "Going into airplane mode.");
             Settings.Global.putInt(getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
             final Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
