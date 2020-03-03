@@ -31,9 +31,8 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -41,9 +40,8 @@ import com.google.common.annotations.VisibleForTesting;
  * This controller helps to manage the switch state and visibility of bluetooth tether switch
  * preference. It stores preference value when preference changed.
  */
-public final class BluetoothTetherPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, Preference.OnPreferenceChangeListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+public final class BluetoothTetherPreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "BluetoothTetherPreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -57,6 +55,22 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
         mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mSharedPreferences =
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mSharedPreferences.getBoolean(mPreferenceKey, false);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (DEBUG) {
+            Log.d(TAG, "preference changing to " + isChecked);
+        }
+        final SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(mPreferenceKey, isChecked);
+        editor.apply();
+        return true;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -107,11 +121,6 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
             default:
                 preference.setEnabled(false);
         }
-
-        if (preference instanceof SwitchPreference) {
-            ((SwitchPreference) preference)
-                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
-        }
     }
 
     @Override
@@ -135,18 +144,6 @@ public final class BluetoothTetherPreferenceController extends BasePreferenceCon
             }
         }
     };
-
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-        if (DEBUG) {
-            Log.d(TAG, "preference changing to " + o);
-        }
-        final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(mPreferenceKey, (Boolean) o);
-        editor.apply();
-        return true;
-    }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
