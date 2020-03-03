@@ -11422,22 +11422,6 @@
     <!-- Mobile network details page. Label for an option that lets the user delete an eSIM from
          the device. [CHAR LIMIT=60] -->
     <string name="mobile_network_erase_sim">Erase SIM</string>
-    <!-- Title of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=60] -->
-    <string name="mobile_network_erase_sim_dialog_title">Erase this downloaded SIM?</string>
-    <!-- Body text of of a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_body">
-        Erasing this SIM removes <xliff:g id="carrier" example="Verizon">%1$s</xliff:g> service
-        from this device.\n\nService for <xliff:g id="carrier" example="Verizon">%2$s</xliff:g>
-        won\u2019t be canceled.
-    </string>
-    <!-- OK button on a confirmation dialog for deleting an eSIM from the device.
-         [CHAR LIMIT=30] -->
-    <string name="mobile_network_erase_sim_dialog_ok">Erase</string>
-    <!-- Body text of the progress dialog we show while deleting an eSIM from the device.
-         [CHAR LIMIT=NONE] -->
-    <string name="mobile_network_erase_sim_dialog_progress">Erasing SIM\u2026</string>
 
     <!-- Title of a dialog indicating that an error ocurred when deleting an eSIM from the device
          [CHAR LIMIT=60] -->
@@ -11627,6 +11611,8 @@
     <string name="media_output_panel_title">Switch output</string>
     <!-- Summary for represent which device is playing media [CHAR LIMIT=NONE] -->
     <string name="media_output_panel_summary_of_playing_device">Currently playing on <xliff:g id="device_name" example="Bose headphone">%1$s</xliff:g></string>
+    <!-- Summary for disconnected status [CHAR LIMIT=50] -->
+    <string name="media_output_disconnected_status"><xliff:g id="device_name" example="My device">%1$s</xliff:g> (disconnected)</string>
 
     <!-- Label for the title on wfc disclaimer fragment. [CHAR LIMIT=40] -->
     <string name="wfc_disclaimer_title_text">Important information</string>

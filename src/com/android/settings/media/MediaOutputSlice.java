@@ -17,6 +17,7 @@
 package com.android.settings.media;
 
 import static android.app.slice.Slice.EXTRA_RANGE_VALUE;
+import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
@@ -24,9 +25,12 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -162,7 +166,7 @@ public class MediaOutputSlice implements CustomSliceable {
     }
 
     private ListBuilder.RowBuilder getMediaDeviceRow(MediaDevice device) {
-        final String title = device.getName();
+        final String deviceName = device.getName();
         final PendingIntent broadcastAction =
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
         final IconCompat deviceIcon = getDeviceIconCompat(device);
@@ -170,9 +174,22 @@ public class MediaOutputSlice implements CustomSliceable {
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                 .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE)
                 .setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
-                        ListBuilder.ICON_IMAGE, title))
-                .setTitle(title)
-                .setSubtitle(device.isConnected() ? null : device.getSummary());
+                        ListBuilder.ICON_IMAGE, deviceName));
+        // Append status to tile only for the disconnected Bluetooth device.
+        if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE
+                && !device.isConnected()) {
+            final SpannableString spannableTitle = new SpannableString(
+                    mContext.getString(R.string.media_output_disconnected_status, deviceName));
+            spannableTitle.setSpan(new ForegroundColorSpan(Color.GRAY), deviceName.length(),
+                    spannableTitle.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
+            rowBuilder.setTitle(spannableTitle);
+            rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
+                    ListBuilder.ICON_IMAGE, spannableTitle));
+        } else {
+            rowBuilder.setTitle(deviceName);
+            rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
+                    ListBuilder.ICON_IMAGE, deviceName));
+        }
 
         return rowBuilder;
     }
