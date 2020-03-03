@@ -24,6 +24,7 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.IMS_REGISTRATION_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.MAX_PHONE_COUNT_SINGLE_SIM;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.NETWORK_PROVIDER_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
@@ -32,6 +33,7 @@ import static com.android.settings.deviceinfo.simstatus.SimStatusDialogControlle
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_VALUE_ID;
+
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -61,7 +63,6 @@ import android.telephony.euicc.EuiccManager;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDeviceInfoUtils;
 import com.android.settingslib.DeviceInfoUtils;
@@ -125,6 +126,8 @@ public class SimStatusDialogControllerTest {
     private static final String TEST_EID_FROM_CARD = "11111111111111111111111111111111";
     private static final String TEST_EID_FROM_MANAGER = "22222222222222222222222222222222";
 
+    private static final int MAX_PHONE_COUNT_DUAL_SIM = 2;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -152,8 +155,7 @@ public class SimStatusDialogControllerTest {
         ReflectionHelpers.setField(mController, "mEuiccManager", mEuiccManager);
         ReflectionHelpers.setField(mController, "mSubscriptionManager", mSubscriptionManager);
 
-        when(mTelephonyManager.getPhoneCount()).thenReturn(
-                PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
         when(mTelephonyManager.getUiccCardsInfo()).thenReturn(new ArrayList<UiccCardInfo>());
         when(mTelephonyManager.getLogicalToPhysicalSlotMapping()).thenReturn(
                 new HashMap<Integer, Integer>());
@@ -428,7 +430,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldNotSetEid() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_DUAL_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo1 = new UiccCardInfo(
@@ -466,7 +468,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldSetEidFromCard() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_DUAL_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo1 = new UiccCardInfo(
@@ -504,7 +506,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldSetEidFromManager() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_DUAL_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo1 = new UiccCardInfo(
@@ -545,7 +547,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldRemoveEid() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(PhoneConstants.MAX_PHONE_COUNT_DUAL_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_DUAL_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo1 = new UiccCardInfo(
@@ -584,8 +586,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldNotSetEidInSingleSimMode() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(
-                PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo = new UiccCardInfo(
@@ -614,8 +615,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldSetEidInSingleSimModeWithEnabledEuicc() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(
-                PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo = new UiccCardInfo(
@@ -646,8 +646,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldSetEidInSingleSimModeWithDisabledEuicc() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(
-                PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo = new UiccCardInfo(
@@ -678,8 +677,7 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_updateEid_shouldRemoveEidInSingleSimMode() {
-        when(mTelephonyManager.getPhoneCount()).thenReturn(
-                PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM);
+        when(mTelephonyManager.getActiveModemCount()).thenReturn(MAX_PHONE_COUNT_SINGLE_SIM);
 
         ArrayList<UiccCardInfo> uiccCardInfos = new ArrayList<>();
         UiccCardInfo uiccCardInfo = new UiccCardInfo(
