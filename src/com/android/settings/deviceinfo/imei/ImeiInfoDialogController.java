@@ -147,7 +147,7 @@ public class ImeiInfoDialogController {
 
     @VisibleForTesting
     boolean isCdmaLteEnabled() {
-        return mTelephonyManager.isGlobalModeEnabled();
+        return mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled();
     }
 
     boolean isSimPresent(int slotId) {

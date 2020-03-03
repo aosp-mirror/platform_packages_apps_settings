@@ -52,7 +52,7 @@ public class DataServiceSetupPreferenceController extends TelephonyBasePreferenc
                 && carrierConfig != null
                 && !carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
-                && mTelephonyManager.isGlobalModeEnabled() && !TextUtils.isEmpty(mSetupUrl)
+                && mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled() && !TextUtils.isEmpty(mSetupUrl)
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
