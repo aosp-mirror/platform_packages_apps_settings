@@ -27,6 +27,7 @@ import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+import android.telephony.AccessNetworkConstants;
 import android.telephony.Annotation;
 import android.telephony.CarrierConfigManager;
 import android.telephony.CellBroadcastIntents;
@@ -42,13 +43,15 @@ import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
+import android.telephony.ims.ImsException;
+import android.telephony.ims.ImsMmTelManager;
+import android.telephony.ims.ImsReasonInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
@@ -101,15 +104,34 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     @VisibleForTesting
     final static int IMS_REGISTRATION_STATE_VALUE_ID = R.id.ims_reg_state_value;
 
+    @VisibleForTesting
+    static final int MAX_PHONE_COUNT_SINGLE_SIM = 1;
+
     private final OnSubscriptionsChangedListener mOnSubscriptionsChangedListener =
             new OnSubscriptionsChangedListener() {
                 @Override
                 public void onSubscriptionsChanged() {
-                    mSubscriptionInfo = mSubscriptionManager.getActiveSubscriptionInfo(
-                            mSubscriptionInfo.getSubscriptionId());
-                    mTelephonyManager = mTelephonyManager.createForSubscriptionId(
-                            mSubscriptionInfo.getSubscriptionId());
-                    updateNetworkProvider();
+                    final int prevSubId = (mSubscriptionInfo != null)
+                            ? mSubscriptionInfo.getSubscriptionId()
+                            : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
+                    mSubscriptionInfo = getPhoneSubscriptionInfo(mSlotIndex);
+
+                    final int nextSubId = (mSubscriptionInfo != null)
+                            ? mSubscriptionInfo.getSubscriptionId()
+                            : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
+                    if (prevSubId != nextSubId) {
+                        if (SubscriptionManager.isValidSubscriptionId(prevSubId)) {
+                            unregisterImsRegistrationCallback(prevSubId);
+                        }
+                        if (SubscriptionManager.isValidSubscriptionId(nextSubId)) {
+                            mTelephonyManager =
+                                    mTelephonyManager.createForSubscriptionId(nextSubId);
+                            registerImsRegistrationCallback(nextSubId);
+                        }
+                    }
+                    updateSubscriptionStatus();
                 }
             };
 
@@ -199,13 +221,17 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
 
         mPhoneStateListener = getPhoneStateListener();
+        updateLatestAreaInfo();
+        updateSubscriptionStatus();
+    }
+
+    private void updateSubscriptionStatus() {
         updateNetworkProvider();
 
         final ServiceState serviceState = mTelephonyManager.getServiceState();
         final SignalStrength signalStrength = mTelephonyManager.getSignalStrength();
 
         updatePhoneNumber();
-        updateLatestAreaInfo();
         updateServiceState(serviceState);
         updateSignalStrength(signalStrength);
         updateNetworkType();
@@ -239,6 +265,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
         mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
+        registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
 
         if (mShowLatestAreaInfo) {
             updateAreaInfoText();
@@ -253,6 +280,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             return;
         }
 
+        unregisterImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
@@ -486,7 +514,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         boolean shouldHaveEid = false;
         String eid = null;
 
-        if (mTelephonyManager.getPhoneCount() > PhoneConstants.MAX_PHONE_COUNT_SINGLE_SIM) {
+        if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
             // Get EID per-SIM in multi-SIM mode
             Map<Integer, Integer> mapping = mTelephonyManager.getLogicalToPhysicalSlotMapping();
             int pSlotId = mapping.getOrDefault(mSlotIndex,
@@ -523,21 +551,68 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     }
 
-    private void updateImsRegistrationState() {
+    private boolean isImsRegistrationStateShowUp() {
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
                 mCarrierConfigManager.getConfigForSubId(subscriptionId);
-        final boolean showImsRegState = carrierConfig == null ? false :
+        return carrierConfig == null ? false :
                 carrierConfig.getBoolean(
                         CarrierConfigManager.KEY_SHOW_IMS_REGISTRATION_STATUS_BOOL);
-        if (showImsRegState) {
-            final boolean isImsRegistered = mTelephonyManager.isImsRegistered(subscriptionId);
-            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(isImsRegistered ?
-                    R.string.ims_reg_status_registered : R.string.ims_reg_status_not_registered));
-        } else {
-            mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
-            mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
+    private void updateImsRegistrationState() {
+        if (isImsRegistrationStateShowUp()) {
+            return;
         }
+        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_LABEL_ID);
+        mDialog.removeSettingFromScreen(IMS_REGISTRATION_STATE_VALUE_ID);
+    }
+
+    private ImsMmTelManager.RegistrationCallback mImsRegStateCallback =
+            new ImsMmTelManager.RegistrationCallback() {
+        @Override
+        public void onRegistered(@AccessNetworkConstants.TransportType int imsTransportType) {
+            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
+                    R.string.ims_reg_status_registered));
+        }
+        @Override
+        public void onRegistering(@AccessNetworkConstants.TransportType int imsTransportType) {
+            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
+                    R.string.ims_reg_status_not_registered));
+        }
+        @Override
+        public void onUnregistered(@Nullable ImsReasonInfo info) {
+            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
+                    R.string.ims_reg_status_not_registered));
+        }
+        @Override
+        public void onTechnologyChangeFailed(
+                @AccessNetworkConstants.TransportType int imsTransportType,
+                @Nullable ImsReasonInfo info) {
+            mDialog.setText(IMS_REGISTRATION_STATE_VALUE_ID, mRes.getString(
+                    R.string.ims_reg_status_not_registered));
+        }
+    };
+
+    private void registerImsRegistrationCallback(int subId) {
+        if (!isImsRegistrationStateShowUp()) {
+            return;
+        }
+        try {
+            final ImsMmTelManager imsMmTelMgr = ImsMmTelManager.createForSubscriptionId(subId);
+            imsMmTelMgr.registerImsRegistrationCallback(mDialog.getContext().getMainExecutor(),
+                    mImsRegStateCallback);
+        } catch (ImsException exception) {
+            Log.w(TAG, "fail to register IMS status for subId=" + subId, exception);
+        }
+    }
+
+    private void unregisterImsRegistrationCallback(int subId) {
+        if (!isImsRegistrationStateShowUp()) {
+            return;
+        }
+        final ImsMmTelManager imsMmTelMgr = ImsMmTelManager.createForSubscriptionId(subId);
+        imsMmTelMgr.unregisterImsRegistrationCallback(mImsRegStateCallback);
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {
