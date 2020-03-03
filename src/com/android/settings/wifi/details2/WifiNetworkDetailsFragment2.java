@@ -33,6 +33,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase2;
@@ -71,6 +73,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     private HandlerThread mWorkerThread;
     private WifiDetailPreferenceController2 mWifiDetailPreferenceController2;
     private List<WifiDialog2.WifiDialog2Listener> mWifiDialogListeners = new ArrayList<>();
+    private List<AbstractPreferenceController> mControllers;
 
     @Override
     public void onDestroy() {
@@ -139,7 +142,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        mControllers = new ArrayList<>();
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         setupNetworksDetailTracker();
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
@@ -153,39 +156,39 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 getSettingsLifecycle(),
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
-        controllers.add(mWifiDetailPreferenceController2);
+        mControllers.add(mWifiDetailPreferenceController2);
 
         final WifiAutoConnectPreferenceController2 wifiAutoConnectPreferenceController2 =
                 new WifiAutoConnectPreferenceController2(context);
         wifiAutoConnectPreferenceController2.setWifiEntry(wifiEntry);
-        controllers.add(wifiAutoConnectPreferenceController2);
+        mControllers.add(wifiAutoConnectPreferenceController2);
 
         final AddDevicePreferenceController2 addDevicePreferenceController2 =
                 new AddDevicePreferenceController2(context);
         addDevicePreferenceController2.setWifiEntry(wifiEntry);
-        controllers.add(addDevicePreferenceController2);
+        mControllers.add(addDevicePreferenceController2);
 
         final WifiMeteredPreferenceController2 meteredPreferenceController2 =
                 new WifiMeteredPreferenceController2(context, wifiEntry);
-        controllers.add(meteredPreferenceController2);
+        mControllers.add(meteredPreferenceController2);
 
         final WifiPrivacyPreferenceController2 privacyController2 =
                 new WifiPrivacyPreferenceController2(context);
         privacyController2.setWifiEntry(wifiEntry);
-        controllers.add(privacyController2);
+        mControllers.add(privacyController2);
 
         final WifiSubscriptionDetailPreferenceController2
                 wifiSubscriptionDetailPreferenceController2 =
                 new WifiSubscriptionDetailPreferenceController2(context);
         wifiSubscriptionDetailPreferenceController2.setWifiEntry(wifiEntry);
-        controllers.add(wifiSubscriptionDetailPreferenceController2);
+        mControllers.add(wifiSubscriptionDetailPreferenceController2);
 
         // Sets callback listener for wifi dialog.
         mWifiDialogListeners.add(mWifiDetailPreferenceController2);
         mWifiDialogListeners.add(privacyController2);
         mWifiDialogListeners.add(meteredPreferenceController2);
 
-        return controllers;
+        return mControllers;
     }
 
     @Override
@@ -224,5 +227,15 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                 MAX_SCAN_AGE_MILLIS,
                 SCAN_INTERVAL_MILLIS,
                 getArguments().getString(KEY_CHOSEN_WIFIENTRY_KEY));
+    }
+
+    /**
+     * API call for refreshing the preferences in this fragment.
+     */
+    public void refreshPreferences() {
+        final PreferenceScreen screen = getPreferenceScreen();
+        for (AbstractPreferenceController controller : mControllers) {
+            controller.displayPreference(screen);
+        }
     }
 }
