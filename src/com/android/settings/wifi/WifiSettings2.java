@@ -423,8 +423,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 final WifiConfiguration wifiConfiguration = data.getParcelableExtra(
                         ConfigureWifiEntryFragment.NETWORK_CONFIG_KEY);
                 if (wifiConfiguration != null) {
-                    mWifiManager.save(wifiConfiguration,
-                            new WifiSaveThenConnectActionListener(wifiConfiguration));
+                    mWifiManager.connect(wifiConfiguration,
+                            new WifiConnectActionListener());
                 }
             }
             return;
@@ -969,29 +969,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         wifiEntry.connect(new WifiEntryConnectCallback(wifiEntry, editIfNoConfig,
                 fullScreenEdit));
     }
-
-    private class WifiSaveThenConnectActionListener implements WifiManager.ActionListener {
-        final WifiConfiguration mWifiConfiguration;
-
-        WifiSaveThenConnectActionListener(WifiConfiguration wifiConfiguration) {
-            mWifiConfiguration = wifiConfiguration;
-        }
-
-        @Override
-        public void onSuccess() {
-            mWifiManager.connect(mWifiConfiguration, new WifiConnectActionListener());
-        }
-
-        @Override
-        public void onFailure(int reason) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
-                return;
-            }
-
-            Toast.makeText(activity, R.string.wifi_failed_save_message, Toast.LENGTH_SHORT).show();
-        }
-    };
 
     private class WifiConnectActionListener implements WifiManager.ActionListener {
         @Override

@@ -90,7 +90,7 @@ public class DataServiceSetupPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_allConfigOn_returnAvailable() {
-        doReturn(true).when(mTelephonyManager).isGlobalModeEnabled();
+        doReturn(true).when(mTelephonyManager).isLteCdmaEvdoGsmWcdmaEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
@@ -101,7 +101,7 @@ public class DataServiceSetupPreferenceControllerTest {
     public void getAvailabilityStatus_missUrl_returnUnavailable() {
         Settings.Global.putString(mContext.getContentResolver(),
                 Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL, "");
-        doReturn(true).when(mTelephonyManager).isGlobalModeEnabled();
+        doReturn(true).when(mTelephonyManager).isLteCdmaEvdoGsmWcdmaEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
@@ -113,7 +113,7 @@ public class DataServiceSetupPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_notCdma_returnUnavailable() {
-        doReturn(false).when(mTelephonyManager).isGlobalModeEnabled();
+        doReturn(false).when(mTelephonyManager).isLteCdmaEvdoGsmWcdmaEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
