@@ -29,28 +29,23 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="start|center_vertical"
-        android:focusable="true"
-        android:clickable="true"
-        android:background="?android:attr/selectableItemBackground">
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
         <FrameLayout
+            android:id="@+id/icon_frame"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
             android:minWidth="56dp"
-            android:orientation="horizontal"
-            android:focusable="false"
-            android:clickable="false">
+            android:paddingEnd="12dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="4dp">
 
-            <CheckBox
-                android:id="@+id/checkbox"
+            <ImageView
+                android:id="@android:id/icon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:focusable="false"
-                android:clickable="false"
-                android:background="@null"/>
-
+                android:layout_height="wrap_content" />
+            
         </FrameLayout>
 
         <RelativeLayout
@@ -94,7 +89,6 @@
         android:id="@android:id/widget_frame"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:contentDescription="@string/accessibility_shortcut_settings"
         android:gravity="end|center_vertical"
         android:minWidth="58dp"
         android:orientation="vertical" />

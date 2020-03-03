@@ -18,9 +18,11 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
@@ -34,77 +36,84 @@ import com.android.settings.R;
 public class ShortcutPreference extends Preference {
 
     /**
-     * Interface definition for a callback to be invoked when the checkbox or settings has been
+     * Interface definition for a callback to be invoked when the toggle or settings has been
      * clicked.
      */
-    public interface OnClickListener {
-        /**
-         * Called when the checkbox in ShortcutPreference has been clicked.
-         *
-         * @param preference The clicked preference
-         */
-        void onCheckboxClicked(ShortcutPreference preference);
+    public interface OnClickCallback {
         /**
          * Called when the settings view has been clicked.
          *
          * @param preference The clicked preference
          */
         void onSettingsClicked(ShortcutPreference preference);
-    }
-    private OnClickListener mListener = null;
 
-    private static final float DISABLED_ALPHA = 0.77f;
-    private static final float ENABLED_ALPHA = 1.0f;
-    private int mSettingsVisibility = View.VISIBLE;
-    private boolean mAutoEnabledSettings;
+        /**
+         * Called when the toggle in ShortcutPreference has been clicked.
+         *
+         * @param preference The clicked preference
+         */
+        void onToggleClicked(ShortcutPreference preference);
+    }
+
+    private OnClickCallback mClickCallback = null;
     private boolean mChecked = false;
+    private boolean mSettingsEditable = true;
 
     ShortcutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
+        setWidgetLayoutResource(R.layout.preference_widget_master_switch);
+        setIconSpaceReserved(true);
+        setSelectable(false);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
+        final TypedValue outValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
+                outValue, true);
+
         final LinearLayout mainFrame = holder.itemView.findViewById(R.id.main_frame);
         if (mainFrame != null) {
-            mainFrame.setOnClickListener(view -> callOnCheckboxClicked());
+            mainFrame.setOnClickListener(view -> callOnSettingsClicked());
+            mainFrame.setClickable(mSettingsEditable);
+            mainFrame.setFocusable(mSettingsEditable);
+            mainFrame.setBackgroundResource(
+                    mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
         }
 
-        final CheckBox checkBox = holder.itemView.findViewById(R.id.checkbox);
-        if (checkBox != null) {
-            checkBox.setChecked(mChecked);
-        }
-
-
-        final View settings = holder.itemView.findViewById(android.R.id.widget_frame);
-        if (settings != null) {
-            settings.setOnClickListener(view -> callOnSettingsClicked());
-            settings.setEnabled(mAutoEnabledSettings ? mChecked : /* enabled */ true);
-
-            float alpha;
-            if (mAutoEnabledSettings) {
-                alpha = mChecked ? ENABLED_ALPHA : DISABLED_ALPHA;
-            } else {
-                alpha = ENABLED_ALPHA;
-            }
-
-            settings.setAlpha(alpha);
-            settings.setVisibility(mSettingsVisibility);
+        Switch switchWidget = holder.itemView.findViewById(R.id.switchWidget);
+        if (switchWidget != null) {
+            // Consumes move events to ignore drag actions.
+            switchWidget.setOnTouchListener((v, event) -> {
+                return event.getActionMasked() == MotionEvent.ACTION_MOVE;
+            });
+            switchWidget.setContentDescription(
+                    getContext().getText(R.string.accessibility_shortcut_settings));
+            switchWidget.setChecked(mChecked);
+            switchWidget.setOnClickListener(view -> callOnToggleClicked());
+            switchWidget.setClickable(mSettingsEditable);
+            switchWidget.setFocusable(mSettingsEditable);
+            switchWidget.setBackgroundResource(
+                    mSettingsEditable ? outValue.resourceId : /* Remove background */ 0);
         }
 
         final View divider = holder.itemView.findViewById(R.id.divider);
         if (divider != null) {
-            divider.setVisibility(mSettingsVisibility);
+            divider.setVisibility(mSettingsEditable ? View.VISIBLE : View.GONE);
         }
+
+        holder.itemView.setOnClickListener(view -> callOnToggleClicked());
+        holder.itemView.setClickable(!mSettingsEditable);
+        holder.itemView.setFocusable(!mSettingsEditable);
     }
 
     /**
-     * Sets the shortcut checkbox according to checked value.
+     * Sets the shortcut toggle according to checked value.
      *
-     * @param checked the state value of shortcut checkbox
+     * @param checked the state value of shortcut toggle
      */
     public void setChecked(boolean checked) {
         if (mChecked != checked) {
@@ -114,72 +123,50 @@ public class ShortcutPreference extends Preference {
     }
 
     /**
-     * Gets the checked value of shortcut checkbox.
+     * Gets the checked value of shortcut toggle.
      *
-     * @return the checked value of shortcut checkbox
+     * @return the checked value of shortcut toggle
      */
-    public boolean getChecked() {
+    public boolean isChecked() {
         return mChecked;
     }
 
     /**
-     * Automatically/Manually enable settings according to checkbox click status.
-     *
-     * Automatically enable settings means settings view enabled when checkbox is clicked, and
-     * disabled when checkbox is not clicked.
-     * Manually enable settings means settings view always enabled.
-     *
-     * @param autoEnabled True will automatically enable settings, false will let settings view
-     *                    always enabled.
+     * Sets the editable state of Settings view. If the view cannot edited, it makes the settings
+     * and toggle be not touchable. The main ui handles touch event directly by {@link #onClick}.
      */
-    public void setAutoEnabledSettings(boolean autoEnabled) {
-        if (mAutoEnabledSettings != autoEnabled) {
-            mAutoEnabledSettings = autoEnabled;
+    public void setSettingsEditable(boolean enabled) {
+        if (mSettingsEditable != enabled) {
+            mSettingsEditable = enabled;
+            // Disable whole component to let each child component can be addressed.
+            setSelectable(!mSettingsEditable);
             notifyChanged();
         }
     }
 
-    /**
-     * Sets the visibility state of Settings view.
-     *
-     * @param visibility one of {@link View#VISIBLE}, {@link View#INVISIBLE}, or {@link View#GONE}.
-     */
-    public void setSettingsVisibility(@View.Visibility int visibility) {
-        if (mSettingsVisibility != visibility) {
-            mSettingsVisibility = visibility;
-            notifyChanged();
-        }
+    public boolean isSettingsEditable() {
+        return mSettingsEditable;
     }
 
     /**
      * Sets the callback to be invoked when this preference is clicked by the user.
      *
-     * @param listener the callback to be invoked
+     * @param callback the callback to be invoked
      */
-    public void setOnClickListener(OnClickListener listener) {
-        mListener = listener;
-    }
-
-    private void init() {
-        setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
-        setWidgetLayoutResource(R.layout.preference_widget_settings);
-        setIconSpaceReserved(false);
-        mAutoEnabledSettings = true;
-
-        // Disable whole component to let each child component can be addressed.
-        setSelectable(false);
+    public void setOnClickCallback(OnClickCallback callback) {
+        mClickCallback = callback;
     }
 
     private void callOnSettingsClicked() {
-        if (mListener != null) {
-            mListener.onSettingsClicked(this);
+        if (mClickCallback != null) {
+            mClickCallback.onSettingsClicked(this);
         }
     }
 
-    private void callOnCheckboxClicked() {
+    private void callOnToggleClicked() {
         setChecked(!mChecked);
-        if (mListener != null) {
-            mListener.onCheckboxClicked(this);
+        if (mClickCallback != null) {
+            mClickCallback.onToggleClicked(this);
         }
     }
 }
