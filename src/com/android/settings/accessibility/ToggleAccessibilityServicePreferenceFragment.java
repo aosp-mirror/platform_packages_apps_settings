@@ -134,6 +134,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                                 this::onDialogButtonFromEnableToggleClicked);
                 break;
             }
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE: {
+                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                if (info == null) {
+                    return null;
+                }
+                mDialog = AccessibilityServiceWarning
+                        .createCapabilitiesDialog(getPrefContext(), info,
+                                this::onDialogButtonFromShortcutToggleClicked);
+                break;
+            }
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT: {
                 final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
                 if (info == null) {
@@ -176,6 +186,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         switch (dialogId) {
             case DialogEnums.ENABLE_WARNING_FROM_TOGGLE:
             case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_ENABLE;
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
@@ -283,12 +294,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    public void onCheckboxClicked(ShortcutPreference preference) {
+    public void onToggleClicked(ShortcutPreference preference) {
         final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
-        if (preference.getChecked()) {
-            if (!getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)) {
+        if (preference.isChecked()) {
+            if (!mToggleServiceDividerSwitchPreference.isChecked()) {
                 preference.setChecked(false);
-                showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
+                showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE);
             } else {
                 AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                         mComponentName);
@@ -296,14 +307,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
-            getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, false);
         }
+        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
-        showPopupDialog(DialogEnums.EDIT_SHORTCUT);
+        final boolean isServiceOnOrShortcutAdded = mShortcutPreference.isChecked()
+                || mToggleServiceDividerSwitchPreference.isChecked();
+        showPopupDialog(isServiceOnOrShortcutAdded ? DialogEnums.EDIT_SHORTCUT
+                : DialogEnums.ENABLE_WARNING_FROM_SHORTCUT);
     }
 
     @Override
@@ -385,6 +399,32 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mDialog.dismiss();
     }
 
+    void onDialogButtonFromShortcutToggleClicked(View view) {
+        final int viewId = view.getId();
+        if (viewId == R.id.permission_enable_allow_button) {
+            onAllowButtonFromShortcutToggleClicked();
+        } else if (viewId == R.id.permission_enable_deny_button) {
+            onDenyButtonFromShortcutToggleClicked();
+        } else {
+            throw new IllegalArgumentException("Unexpected view id");
+        }
+    }
+
+    private void onAllowButtonFromShortcutToggleClicked() {
+        mShortcutPreference.setChecked(true);
+
+        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
+
+        mDialog.dismiss();
+    }
+
+    private void onDenyButtonFromShortcutToggleClicked() {
+        mShortcutPreference.setChecked(false);
+
+        mDialog.dismiss();
+    }
+
     void onDialogButtonFromShortcutClicked(View view) {
         final int viewId = view.getId();
         if (viewId == R.id.permission_enable_allow_button) {
@@ -397,17 +437,13 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void onAllowButtonFromShortcutClicked() {
-        mShortcutPreference.setChecked(true);
-
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
-        AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
+        mIsDialogShown.set(false);
+        showPopupDialog(DialogEnums.EDIT_SHORTCUT);
 
         mDialog.dismiss();
     }
 
     private void onDenyButtonFromShortcutClicked() {
-        mShortcutPreference.setChecked(false);
-
         mDialog.dismiss();
     }
 
@@ -417,7 +453,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             mToggleServiceDividerSwitchPreference.setChecked(false);
             getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED,
                     /* disableService */ false);
-            if (!mShortcutPreference.getChecked()) {
+            if (!mShortcutPreference.isChecked()) {
                 showPopupDialog(DialogEnums.ENABLE_WARNING_FROM_TOGGLE);
             } else {
                 handleConfirmServiceEnabled(/* confirmed= */ true);

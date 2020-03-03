@@ -32,7 +32,7 @@ import com.android.settingslib.accessibility.AccessibilityUtils;
  * {@link AccessibilityServiceInfo#FLAG_REQUEST_ACCESSIBILITY_BUTTON} is set.
  */
 public class InvisibleToggleAccessibilityServicePreferenceFragment extends
-        ToggleAccessibilityServicePreferenceFragment implements ShortcutPreference.OnClickListener{
+        ToggleAccessibilityServicePreferenceFragment implements ShortcutPreference.OnClickCallback {
 
     @Override
     protected void onInstallSwitchPreferenceToggleSwitch() {
@@ -47,10 +47,10 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
      * accessibility service when shortcutPreference is unchecked.
      */
     @Override
-    public void onCheckboxClicked(ShortcutPreference preference) {
-        super.onCheckboxClicked(preference);
+    public void onToggleClicked(ShortcutPreference preference) {
+        super.onToggleClicked(preference);
         boolean enabled = getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED)
-                && preference.getChecked();
+                && preference.isChecked();
 
         AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName, enabled);
     }
@@ -61,8 +61,8 @@ public class InvisibleToggleAccessibilityServicePreferenceFragment extends
      * Enables accessibility service when user clicks permission allow button.
      */
     @Override
-    void onDialogButtonFromShortcutClicked(View view) {
-        super.onDialogButtonFromShortcutClicked(view);
+    void onDialogButtonFromShortcutToggleClicked(View view) {
+        super.onDialogButtonFromShortcutToggleClicked(view);
         if (view.getId() == R.id.permission_enable_allow_button) {
             AccessibilityUtils.setAccessibilityServiceState(getContext(), mComponentName,
                     true);
