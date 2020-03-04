@@ -543,7 +543,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         params.format = PixelFormat.TRANSLUCENT;
         params.windowAnimations = com.android.internal.R.style.Animation_Toast;
-        params.type = WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL;
+        params.type = WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL;
         params.setFitInsetsTypes(params.getFitInsetsTypes() & ~Type.statusBars());
         params.setTitle(errorMessage);
         params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
