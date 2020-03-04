@@ -47,7 +47,9 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
+import android.telephony.ims.ImsRcsManager;
 import android.telephony.ims.ProvisioningManager;
+import android.telephony.ims.RcsUceAdapter;
 import android.telephony.ims.feature.ImsFeature;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
@@ -161,6 +163,80 @@ public class MobileNetworkUtils {
         }
 
         return isWifiCallingEnabled;
+    }
+
+    /**
+     * @return The current user setting for whether or not contact discovery is enabled for the
+     * subscription id specified.
+     * @see RcsUceAdapter#isUceSettingEnabled()
+     */
+    public static boolean isContactDiscoveryEnabled(Context context, int subId) {
+        android.telephony.ims.ImsManager imsManager =
+                context.getSystemService(android.telephony.ims.ImsManager.class);
+        return isContactDiscoveryEnabled(imsManager, subId);
+    }
+
+    /**
+     * @return The current user setting for whether or not contact discovery is enabled for the
+     * subscription id specified.
+     * @see RcsUceAdapter#isUceSettingEnabled()
+     */
+    public static boolean isContactDiscoveryEnabled(android.telephony.ims.ImsManager imsManager,
+            int subId) {
+        ImsRcsManager manager = getImsRcsManager(imsManager, subId);
+        if (manager == null) return false;
+        RcsUceAdapter adapter = manager.getUceAdapter();
+        try {
+            return adapter.isUceSettingEnabled();
+        } catch (android.telephony.ims.ImsException e) {
+            Log.w(TAG, "UCE service is not available: " + e.getMessage());
+        }
+        return false;
+    }
+
+    /**
+     * Set the new user setting to enable or disable contact discovery through RCS UCE.
+     * @see RcsUceAdapter#setUceSettingEnabled(boolean)
+     */
+    public static void setContactDiscoveryEnabled(android.telephony.ims.ImsManager imsManager,
+            int subId, boolean isEnabled) {
+        ImsRcsManager manager = getImsRcsManager(imsManager, subId);
+        if (manager == null) return;
+        RcsUceAdapter adapter = manager.getUceAdapter();
+        try {
+            adapter.setUceSettingEnabled(isEnabled);
+        } catch (android.telephony.ims.ImsException e) {
+            Log.w(TAG, "UCE service is not available: " + e.getMessage());
+        }
+    }
+
+    /**
+     * @return The ImsRcsManager associated with the subscription specified.
+     */
+    private static ImsRcsManager getImsRcsManager(android.telephony.ims.ImsManager imsManager,
+            int subId) {
+        if (imsManager == null) return null;
+        try {
+            return imsManager.getImsRcsManager(subId);
+        } catch (Exception e) {
+            Log.w(TAG, "Could not resolve ImsRcsManager: " + e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * @return true if contact discovery is available for the subscription specified and the option
+     * should be shown to the user, false if the option should be hidden.
+     */
+    public static boolean isContactDiscoveryVisible(Context context, int subId) {
+        CarrierConfigManager carrierConfigManager = context.getSystemService(
+                CarrierConfigManager.class);
+        if (carrierConfigManager == null) {
+            Log.w(TAG, "isContactDiscoveryVisible: Could not resolve carrier config");
+            return false;
+        }
+        PersistableBundle bundle = carrierConfigManager.getConfigForSubId(subId);
+        return bundle.getBoolean(CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/);
     }
 
     @VisibleForTesting
