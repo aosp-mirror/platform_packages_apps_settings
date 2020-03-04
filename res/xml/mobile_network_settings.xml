@@ -116,6 +116,13 @@
             settings:keywords="@string/keywords_enhance_4g_lte"
             settings:controller="com.android.settings.network.telephony.Enhanced4gAdvancedCallingPreferenceController"/>
 
+        <SwitchPreference
+            android:key="contact_discovery_opt_in"
+            android:title="@string/contact_discovery_opt_in_title"
+            android:persistent="false"
+            android:summary="@string/contact_discovery_opt_in_summary"
+            settings:controller="com.android.settings.network.telephony.ContactDiscoveryPreferenceController"/>
+
         <ListPreference
             android:key="preferred_network_mode_key"
             android:title="@string/preferred_network_mode_title"

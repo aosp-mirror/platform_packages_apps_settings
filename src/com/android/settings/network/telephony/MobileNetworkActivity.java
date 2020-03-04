@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.ims.ImsRcsManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -57,15 +59,29 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        validate(intent);
         setIntent(intent);
 
         int updateSubscriptionIndex = SUB_ID_NULL;
         if (intent != null) {
             updateSubscriptionIndex = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
         }
-
+        int oldSubId = mCurSubscriptionId;
         mCurSubscriptionId = updateSubscriptionIndex;
         updateSubscriptions(getSubscription());
+
+        // If the subscription has changed or the new intent doesnt contain the opt in action,
+        // remove the old discovery dialog. If the activity is being recreated, we will see
+        // onCreate -> onNewIntent, so the dialog will first be recreated for the old subscription
+        // and then removed.
+        if (updateSubscriptionIndex != oldSubId || !doesIntentContainOptInAction(intent)) {
+            removeContactDiscoveryDialog(oldSubId);
+        }
+        // evaluate showing the new discovery dialog if this intent contains an action to show the
+        // opt-in.
+        if (doesIntentContainOptInAction(intent)) {
+            maybeShowContactDiscoveryDialog(updateSubscriptionIndex);
+        }
     }
 
     @Override
@@ -91,6 +107,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
 
         final Intent startIntent = getIntent();
+        validate(startIntent);
         mCurSubscriptionId = savedInstanceState != null
                 ? savedInstanceState.getInt(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : ((startIntent != null)
@@ -99,20 +116,29 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
+        maybeShowContactDiscoveryDialog(mCurSubscriptionId);
     }
 
     /**
      * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
      */
     public void onChanged() {
-        updateSubscriptions(getSubscription());
+        SubscriptionInfo info = getSubscription();
+        int oldSubIndex = mCurSubscriptionId;
+        int subIndex = info.getSubscriptionId();
+        updateSubscriptions(info);
+        // Remove the dialog if the subscription associated with this activity changes.
+        if (subIndex != oldSubIndex) {
+            removeContactDiscoveryDialog(oldSubIndex);
+        }
     }
 
     @Override
     protected void onStart() {
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
         super.onStart();
-        updateSubscriptions(getSubscription());
+        // updateSubscriptions doesn't need to be called, onChanged will always be called after we
+        // register a listener.
     }
 
     @Override
@@ -193,12 +219,63 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         fragmentTransaction.commit();
     }
 
+    private void removeContactDiscoveryDialog(int subId) {
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
+        if (fragment != null) {
+            fragment.dismiss();
+        }
+    }
+
+    private ContactDiscoveryDialogFragment getContactDiscoveryFragment(int subId) {
+        // In the case that we are rebuilding this activity after it has been destroyed and
+        // recreated, look up the dialog in the fragment manager.
+        return (ContactDiscoveryDialogFragment) getSupportFragmentManager()
+                .findFragmentByTag(ContactDiscoveryDialogFragment.getFragmentTag(subId));
+    }
+
+    private void maybeShowContactDiscoveryDialog(int subId) {
+        // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
+        // associated dialog only if the opt-in has not been granted yet.
+        boolean showOptInDialog = doesIntentContainOptInAction(getIntent())
+                // has the carrier config enabled capability discovery?
+                && MobileNetworkUtils.isContactDiscoveryVisible(this, subId)
+                // has the user already enabled this configuration?
+                && !MobileNetworkUtils.isContactDiscoveryEnabled(this, subId);
+        ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
+        if (showOptInDialog) {
+            if (fragment == null) {
+                fragment = ContactDiscoveryDialogFragment.newInstance(subId);
+            }
+            // Only try to show the dialog if it has not already been added, otherwise we may
+            // accidentally add it multiple times, causing multiple dialogs.
+            if (!fragment.isAdded()) {
+                fragment.show(getSupportFragmentManager(),
+                        ContactDiscoveryDialogFragment.getFragmentTag(subId));
+            }
+        }
+    }
+
+    private boolean doesIntentContainOptInAction(Intent intent) {
+        String intentAction = (intent != null ? intent.getAction() : null);
+        return TextUtils.equals(intentAction,
+                ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
+    }
+
+    private void validate(Intent intent) {
+        // Do not allow ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN without a subscription id specified,
+        // since we do not want the user to accidentally turn on capability polling for the wrong
+        // subscription.
+        if (doesIntentContainOptInAction(intent)) {
+            if (SUB_ID_NULL == intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)) {
+                throw new IllegalArgumentException("Intent with action "
+                        + "SHOW_CAPABILITY_DISCOVERY_OPT_IN must also include the extra "
+                        + "Settings#EXTRA_SUB_ID");
+            }
+        }
+    }
+
     @VisibleForTesting
     String buildFragmentTag(int subscriptionId) {
         return MOBILE_SETTINGS_TAG + subscriptionId;
-    }
-
-    private boolean isSubscriptionChanged(int subscriptionId) {
-        return (subscriptionId == SUB_ID_NULL) || (subscriptionId != mCurSubscriptionId);
     }
 }
