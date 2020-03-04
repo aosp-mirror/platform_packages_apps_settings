@@ -146,6 +146,34 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mTopDevice;
     }
 
+    boolean addDeviceToPlayMedia(MediaDevice device) {
+        return mLocalMediaManager.addDeviceToPlayMedia(device);
+    }
+
+    boolean removeDeviceFromPlayMedia(MediaDevice device) {
+        return mLocalMediaManager.removeDeviceFromPlayMedia(device);
+    }
+
+    List<MediaDevice> getSelectableMediaDevice() {
+        return mLocalMediaManager.getSelectableMediaDevice();
+    }
+
+    List<MediaDevice> getSelectedMediaDevice() {
+        return mLocalMediaManager.getSelectedMediaDevice();
+    }
+
+    void adjustSessionVolume(int volume) {
+        mLocalMediaManager.adjustSessionVolume(volume);
+    }
+
+    int getSessionVolumeMax() {
+        return mLocalMediaManager.getSessionVolumeMax();
+    }
+
+    int getSessionVolume() {
+        return mLocalMediaManager.getSessionVolume();
+    }
+
     /**
      * Find the active MediaDevice.
      *
@@ -168,6 +196,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         ThreadUtils.postOnBackgroundThread(() -> {
             device.requestSetVolume(volume);
         });
+    }
+
+    String getPackageName() {
+        return mPackageName;
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
