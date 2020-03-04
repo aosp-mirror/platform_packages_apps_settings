@@ -100,5 +100,5 @@ public interface PanelContent extends Instrumentable {
      *
      * @param callback the callback to add.
      */
-    default void registerCallback(PanelCustomizedButtonCallback callback) {}
+    default void registerCallback(PanelContentCallback callback) {}
 }

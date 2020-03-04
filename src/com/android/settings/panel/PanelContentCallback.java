@@ -16,14 +16,20 @@
 package com.android.settings.panel;
 
 /**
- * PanelCustomizedButtonCallback provides a callback interface for {@link PanelFragment} to receive
+ * PanelContentCallback provides a callback interface for {@link PanelFragment} to receive
  * events from {@link PanelContent}.
  */
-public interface PanelCustomizedButtonCallback {
+public interface PanelContentCallback {
 
     /**
      * It will be called when customized button state is changed. For example, custom button
      * would be hidden for specific behavior.
      */
     void onCustomizedButtonStateChanged();
+
+    /**
+     * It will be called when group content is changed. For example, to add/remove a device into
+     * a group
+     */
+    void onGroupChanged();
 }
