@@ -56,6 +56,7 @@ import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.tether.WifiTetherApBandPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherBasePreferenceController;
+import com.android.settings.wifi.tether.WifiTetherFooterPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherPasswordPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherSSIDPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherSecurityPreferenceController;
@@ -71,7 +72,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Displays preferences for all Tethering options.
  */
 @SearchIndexable
-public final class AllInOneTetherSettings extends RestrictedDashboardFragment
+public class AllInOneTetherSettings extends RestrictedDashboardFragment
         implements DataSaverBackend.Listener,
         WifiTetherBasePreferenceController.OnTetherConfigUpdateListener,
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -304,6 +305,8 @@ public final class AllInOneTetherSettings extends RestrictedDashboardFragment
                 new WifiTetherSecurityPreferenceController(context, listener));
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
+        controllers.add(
+                new WifiTetherFooterPreferenceController(context));
 
         return controllers;
     }
