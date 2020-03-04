@@ -32,19 +32,18 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * This controller helps to manage the switch state and visibility of USB tether switch
  * preference. It stores preference values when preference changed.
  *
  */
-public final class UsbTetherPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, Preference.OnPreferenceChangeListener {
+public final class UsbTetherPreferenceController extends TogglePreferenceController implements
+        LifecycleObserver, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "UsbTetherPrefController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -62,6 +61,22 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
                 context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
     }
 
+    @Override
+    public boolean isChecked() {
+        return mSharedPreferences.getBoolean(mPreferenceKey, false);
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (DEBUG) {
+            Log.d(TAG, "preference changing to " + isChecked);
+        }
+        final SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putBoolean(mPreferenceKey, isChecked);
+        editor.apply();
+        return true;
+    }
+
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
         mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
@@ -69,6 +84,17 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
         filter.addAction(Intent.ACTION_MEDIA_SHARED);
         filter.addAction(Intent.ACTION_MEDIA_UNSHARED);
         mContext.registerReceiver(mUsbChangeReceiver, filter);
+    }
+
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    public void onPause() {
+        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -90,21 +116,13 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
-        if (mPreference != null && mPreference instanceof SwitchPreference) {
-            ((SwitchPreference) mPreference)
-                    .setChecked(mSharedPreferences.getBoolean(mPreferenceKey, false));
-        }
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference != null) {
-            if (mUsbConnected && !mMassStorageActive) {
-                preference.setEnabled(true);
-            } else {
-                preference.setEnabled(false);
-            }
+            preference.setEnabled(mUsbConnected && !mMassStorageActive);
         }
     }
 
@@ -125,13 +143,9 @@ public final class UsbTetherPreferenceController extends BasePreferenceControlle
     };
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object o) {
-        if (DEBUG) {
-            Log.d(TAG, "preference changing to " + o);
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (TextUtils.equals(mPreferenceKey, key)) {
+            updateState(mPreference);
         }
-        final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(mPreferenceKey, (Boolean) o);
-        editor.apply();
-        return true;
     }
 }
