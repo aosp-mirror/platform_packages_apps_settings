@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Λήξη χρονικού ορίου προβολής"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Κλείδωμα της λειτουργίας φωνητικών κλήσεων"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Να μην επιτρέπεται η χρήση του προγράμματος κλήσης bluetooth όταν η οθόνη είναι κλειδωμένη"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Συσκευές Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Όνομα συσκευής"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Ρυθμίσεις συσκευής"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Ρυθμίσεις προφίλ"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Επιλέξτε τουλάχιστον μία ζώνη συχνοτήτων για το σημείο πρόσβασης Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Ρυθμίσεις IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Απόρρητο"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Λεπτομέρειες εγγραφής"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Συνδρομή"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Προβολή ή αλλαγή συνδρομής"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Τυχαίο MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Προσθήκη συσκευής"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Κεντράρετε τον κωδικό QR παρακάτω για να συνδέσετε τη συσκευή στο \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Δευτερανοπία"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Πρωτανοπία"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Τριτανοπία"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Μικρή καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> δευτερόλεπτα)</item>
+      <item quantity="one">Μικρή καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> δευτερόλεπτο)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Μεσαία καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> δευτερόλεπτα)</item>
+      <item quantity="one">Μεσαία καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> δευτερόλεπτο)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Μεγάλη καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> δευτερόλεπτα)</item>
+      <item quantity="one">Μεγάλη καθυστέρηση (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> δευτερόλεπτο)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> δευτερόλεπτα</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> δευτερόλεπτο</item>

@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Харагдалтын завсарлага"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Дуугаа залгахыг түгжих"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Дэлгэц түгжигдсэн үед блютүүт залгагчийг ашиглахаас сэргийлэх"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth төхөөрөмж"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Төхөөрөмжийн нэр"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Төхөөрөмжийн тохиргоо"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Профайлын тохиргоо"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wi-Fi сүлжээний цэгт хамгийн багадаа нэг зурвасыг сонгоно уу:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP тохиргоо"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Нууцлал"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Захиалгын дэлгэрэнгүй"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Захиалга"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Захиалгыг харах эсвэл өөрчлөх"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Санамсаргүй сонгосон MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Төхөөрөмж нэмэх"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Энэ төхөөрөмжийг “<xliff:g id="SSID">%1$s</xliff:g>”-д нэмэхийн тулд доорх хурдан хариу үйлдлийн кодыг голлуулна уу"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Царайгаар тайлахыг ашиглахын тулд нууц үг тохируулна уу"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Царайгаар тайлахыг ашиглахын тулд хээ тохируулна уу"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Царайгаар тайлахыг ашиглахын тулд ПИН тохируулна уу"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Нууц үгээ мартсан уу?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Хээгээ мартсан уу?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"ПИН-ээ мартсан уу?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Үргэлжлүүлэхийн тулд төхөөрөмжийн зурган түгжээг оруулна уу"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Үргэлжлүүлэхийн тулд төхөөрөмжийнхөө ПИН кодыг оруулна уу"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Үргэлжлүүлэхийн тулд төхөөрөмжийн нууц үгээ оруулна уу"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Бүх апп эх үүсвэрийг зөвшөөрөх"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Саяхан нээсэн апп"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Бүх <xliff:g id="COUNT">%1$d</xliff:g> аппыг харах"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"IT админтайгаа холбогдоно уу"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Эдгээр нь танд ПИН, хээ эсвэл нууц үгээ шинэчлэхэд туслах боломжтой"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Таны таблет болон хувийн өгөгдөл тодорхойгүй апп суулгасан тохиолдолд гэмтэж болзошгүй. Энэ эх сурвалжаас апп суулгаснаар та тухайн аппыг ашигласнаас үүдэн таны таблетад гэмтэл гарах, эсвэл өгөгдөл устах зэрэг гарсан эрсдлийг хариуцна гэдгээ зөвшөөрч байна."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Таны утас болон хувийн өгөгдөл тодорхойгүй апп суулгасан тохиолдолд гэмтэж болзошгүй. Энэ эх сурвалжаас апп суулгаснаар та тухайн аппыг ашигласнаас үүдэн таны утсанд гэмтэл гарах, эсвэл өгөгдөл устах зэрэг гарсан эрсдлийг хариуцна гэдгээ зөвшөөрч байна."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Та тодорхойгүй апп суулгасан тохиолдолд таны төхөөрөмж болон хувийн өгөгдөл гэмтэж болзошгүй. Энэ эх сурвалжаас апп суулгаснаар та тухайн аппыг ашигласнаас үүдэн таны төхөөрөмж гэмтэх эсвэл өгөгдөл устах зэрэг гарсан эрсдэлийг хариуцна гэдгээ зөвшөөрч байна."</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Дьютераномаль"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Протаномаль"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомаль"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Богино (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
+      <item quantity="one">Богино (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> секунд)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Дунд (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
+      <item quantity="one">Дунд (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> секунд)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Урт (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд)</item>
+      <item quantity="one">Урт (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> секунд)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунд</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> секунд</item>
@@ -4493,8 +4499,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Графикийн драйверыг сонгох"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Өгөгдмөл"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Тоглоомын драйвер"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Хөгжүүлэгчийн драйвер"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Системийн графикийн драйвер"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

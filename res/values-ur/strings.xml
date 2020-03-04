@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"مرئیت کا ٹائم آؤٹ"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"صوتی ڈائلنگ مقفل کریں"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"اسکرین مقفل ہونے پر بلوٹوتھ ڈائلر کے استعمال کو روکیں"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"بلوٹوتھ آلات"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"آلہ کا نام"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"آلہ کی ترتیبات"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"پروفائل کی ترتیبات"</string>
@@ -890,7 +891,10 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"‏Wi‑Fi ہاٹ اسپاٹ کیلئے کم از کم ایک بینڈ منتخب کریں:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"‏IP ترتیبات"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"رازداری"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"سبسکرپشن کی تفصیلات"</string>
+    <!-- no translation found for wifi_subscription (4432423938285430113) -->
+    <skip />
+    <!-- no translation found for wifi_subscription_summary (18802471063384598) -->
+    <skip />
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"‏بے ترتیب MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"کوئی آلہ منسلک کریں"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"‏آلہ کو \"<xliff:g id="SSID">%1$s</xliff:g>\" سے منسلک کرنے کے لیے مندرجہ ذیل QR کوڈ کو مرکز میں رکھیں"</string>
@@ -1629,22 +1633,14 @@
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"ہاٹ اسپاٹ آن ہے"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"ٹیدرنگ"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"ڈیٹا سیور آن ہوتے ہوئے ربط نہیں بنایا جا سکتا یا پورٹیبل ہاٹ اسپاٹس استعمال نہیں ہو سکتے"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_only (8529008147731140279) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_tethering_only (6351624505239356221) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_tethering_only (1451008625343274930) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb (5999349643653265016) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth (810514646401708557) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth (1355680331767261967) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_bluetooth (2949043525073791732) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_off (2526164899130351968) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"صرف ہاٹ اسپاٹ"</string>
+    <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"‏صرف USB"</string>
+    <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"صرف بلوٹوتھ"</string>
+    <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"‏ہاٹ اسپاٹ، USB"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"ہاٹ اسپاٹ، بلوٹوتھ"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"‏USB، بلوٹوتھ"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"‏ہاٹ اسپاٹ، USB، بلوٹوتھ"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"دیگر آلات کے ساتھ انٹرنیٹ کا اشتراک نہیں ہو رہا ہے"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"ٹیدرنگ"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏Wi-Fi ہاٹ اسپاٹ کا استعمال نہ کریں"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏USB کے ذریعے صرف انٹرٹیٹ کا اشتراک کریں"</string>
@@ -1763,12 +1759,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"فیس انلاک کے لیے، پاس ورڈ سیٹ کریں"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"فیس انلاک استعمال کیلئے، پیٹرن سیٹ کریں"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"‏فیس انلاک کے استعمال کے لیے PIN سیٹ کریں"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"اپنا پاس ورڈ بھول گئے؟"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"اپنا پیٹرن بھول گئے؟"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"‏اپنا PIN بھول گئے؟"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"جاری رکھنے کیلئے اپنے آلہ کا پیٹرن استعمال کریں"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"‏جاری رکھنے کیلئے اپنے آلہ کا PIN درج کریں"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"جاری رکھنے کیلئے اپنے آلہ کا پاسورڈ درج کریں"</string>
@@ -1836,10 +1829,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"ایپ کے سبھی مآخذ کی اجازت دیں"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"حال ہی میں کھولی گئی ایپس"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"سبھی <xliff:g id="COUNT">%1$d</xliff:g> ایپس دیکھیں"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"‏اپنے IT منتظم سے رابطہ کریں"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"‏وہ آپ کو اپنا PIN، پیٹرن یا پاس ورڈ ری سیٹ کرنے میں مدد کرسکتے ہیں"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"آپ کے ٹیبلیٹ اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے ٹیبلیٹ کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"آپ کے فون اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے فون کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"آپ کے آلے اور ذاتی ڈیٹا کو نامعلوم ایپس کی جانب سے حملے کا زیادہ خطرہ ہے۔ اس ذریعے سے ایپس ڈاؤن لوڈ کر کے، آپ اس بات سے اتفاق کرتے ہیں کہ آپ ان ایپس سے اپنے آلے کو ہونے والے کسی بھی نقصان یا ڈیٹا کے نقصان کیلئے تنہا خود ذمہ دار ہوں گے۔"</string>
@@ -2182,8 +2173,7 @@
     <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"حسب ضرورت"</string>
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"خودکار کلک کا محتصر تر وقت"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"خودکار کلک کا طویل تر وقت"</string>
-    <!-- no translation found for accessibility_autoclick_seekbar_desc (8363959277814621118) -->
-    <skip />
+    <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"خودکار کلک کا وقت"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"وائبریشن اور تھپتھپانے کی طاقت"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"اطلاع وائبریشن"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"رنگ وائبریشن"</string>
@@ -2222,9 +2212,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"سرخ اور سبز رنگ دیکھنے کی صلاحیت میں کمی"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"سرخ اور سبز کی بے قاعدہ رنگ بینی"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"نیلے پیلے رنگ کی شناخت کرنے میں دشواری"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">مختصر (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> سیکنڈز)</item>
+      <item quantity="one">مختصر (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> سیکنڈ)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">متوسط (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> سیکنڈز)</item>
+      <item quantity="one">متوسط (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> سیکنڈ)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">طویل (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> سیکنڈز)</item>
+      <item quantity="one">طویل (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> سیکنڈ)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> سیکنڈز</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> سیکنڈ</item>
@@ -4502,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"گرافکس ڈرائیور منتخب کریں"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"ڈیفالٹ"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"گیم ڈرائیور"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ڈیولپر ڈرائیور"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"سسٹم کا گرافکس ڈرائیور"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

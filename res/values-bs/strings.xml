@@ -67,6 +67,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Istek vremena za vidljivost"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Zaključaj glasovno biranje"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Spriječi korištenje bluetooth birača kada je ekran zaključan"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth uređaji"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Naziv uređaja"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Postavke uređaja"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Postavke profila"</string>
@@ -907,7 +908,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Odaberite barem jedan frekvencijski pojas za Wi‑Fi pristupnu tačku:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP postavke"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privatnost"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Detalji pretplate"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Pretplata"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Pregledajte ili promijenite pretplatu"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Nasumično odabrani MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodajte uređaj"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centrirajte QR kôd ispod da uređaj dodate na mrežu “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1777,12 +1779,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Za otključavanje licem postavite lozinku"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Za otključavanje licem, postavite uzorak"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Za otključavanje licem, postavite PIN"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Zaboravili ste lozinku?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Zaboravili ste uzorak?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Zaboravili ste PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Za nastavak, koristite uzorak uređaja."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Za nastavak, unesite PIN uređaja."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Za nastavak, unesite lozinku uređaja."</string>
@@ -1850,10 +1849,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Dopusti sve izvore aplikacija"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedavno otvarane aplikacije"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Prikaži sve aplikacije: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Kontaktirajte IT administratora"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Može vam pomoći s poništavanjem PIN-a, uzorka ili lozinke"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Vaši podaci na tabletu i lični podaci su više izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Vaši podaci na telefonu i lični podaci više su izloženi napadima aplikacija iz nepoznatih izvora. Instaliranjem aplikacija iz takvih izvora, saglasni ste da ste vi odgovorni za bilo kakvu štetu na telefonu ili gubitak podataka koji mogu nastati korištenjem tih aplikacija."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Podaci s vašeg uređaja i vaši lični podaci su izloženiji napadima nepoznatih aplikacija. Instaliranjem aplikacija iz ovog izvora prihvatate odgovornost za bilo kakvu štetu na uređaju ili gubitak podataka uzrokovan njihovim korištenjem."</string>
@@ -2237,9 +2234,21 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalija"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="few">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="few">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Srednje (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="few">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Dugo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda</item>
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde</item>
@@ -4574,8 +4583,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Odabir drajvera za grafiku"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Zadano"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Drajver za igru"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Drajver programera"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Drajver za grafiku sistema"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

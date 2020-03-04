@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Nähtavuse ajalõpp"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Lukusta häälvalimine"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Vältige Bluetoothi valija kasutamist, kui ekraan on lukustatud"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth-seadmed"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Seadme nimi"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Seadme seaded"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profiili seaded"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Valige WiFi-kuumkoha lubamiseks vähemalt üks sagedusriba:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP-seaded"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privaatsus"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Tellimuse üksikasjad"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Tellimus"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Tellimuse vaatamine või muutmine"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Juhuslik MAC-aadress"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Seadme lisamine"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Seadme võrku „<xliff:g id="SSID">%1$s</xliff:g>” lisamiseks paigutage allolev QR-kood aknas keskele"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Face Unlocki kasutamiseks määrake parool"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Face Unlocki kasutamiseks määrake muster"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Face Unlocki kasutamiseks määrake PIN"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Kas unustasite parooli?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Kas unustasite mustri?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Kas unustasite PIN-koodi?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Jätkamiseks kasutage seadme mustrit"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Jätkamiseks sisestage seadme PIN-kood"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Jätkamiseks sisestage seadme parool"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Luba kõik rakenduse allikad"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Hiljuti avatud rakendused"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Kuva kõik <xliff:g id="COUNT">%1$d</xliff:g> rakendust"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Võtke ühendust IT-administraatoriga"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Need aitavad teil lähtestada PIN-koodi, mustri või parooli"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Teie tahvelarvuti ja isiklikud andmed on tundmatute rakenduste rünnakute suhtes haavatavamad. Sellest allikast rakendusi installides nõustute, et vastutate tahvelarvuti kahjude ja andmekao eest, mis võib selliste rakenduste kasutamisest tuleneda."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Teie telefon ja isiklikud andmed on tundmatute rakenduste rünnakute suhtes haavatavamad. Sellest allikast rakendusi installides nõustute, et vastutate telefoni kahjude ja andmekao eest, mis võib selliste rakenduste kasutamisest tuleneda."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Teie seade ja isiklikud andmed on tundmatute rakenduste rünnakute suhtes haavatavamad. Sellest allikast rakendusi installides nõustute, et vastutate seadme kõigi kahjude ja andmekao eest, mis võivad selliste rakenduste kasutamisest tuleneda."</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomaalia"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomaalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomaalia"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Lühike (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit)</item>
+      <item quantity="one">Lühike (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Keskmine (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit)</item>
+      <item quantity="one">Keskmine (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Pikk (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit)</item>
+      <item quantity="one">Pikk (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundit</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund</item>
@@ -4495,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Graafikadraiveri valimine"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Vaikeseade"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Mängudraiver"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Arendaja draiver"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Süsteemi graafikadraiver"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

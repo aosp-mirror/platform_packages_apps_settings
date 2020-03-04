@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Muda wa kuonekana"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Funga sauti ya upigaji simu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Zuia matumizi yakibonyezi cha bluetooth wakati skrini imefungwa"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Vifaa vya Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Jina la kifaa"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Mipangilio ya kifaa"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Mipangilio ya wasifu"</string>
@@ -331,7 +332,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"Ghairi"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Hapana, asante"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"Hapana"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="1822303197642630076">"Kubali"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"Zaidi"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"Fungua ukitumia uso wako"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Chagua angalau bendi moja ya mtandaopepe wa Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Mipangilio ya IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Faragha"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Maelezo ya usajili"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Usajili"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Angalia au ubadilishe usajili"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Anwani ya MAC kwa nasibu"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ongeza kifaa"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Weka katikati msimbo wa QR ulio hapa chini ili uongeze kifaa kwenye “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Weka nenosiri ili utumie kufungua kwa uso"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Ili utumie kufungua kwa uso, weka mchoro"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Weka PIN ili utumie kufungua kwa uso"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Je, umesahau nenosiri lako?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Je, umesahau mchoro wako?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Je, umesahau PIN yako?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Weka mchoro wa kufungua kifaa chako ili uendelee"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Weka PIN ya kifaa chako ili uendelee"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Weka nenosiri la kifaa chako ili uendelee"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Ruhusu vyanzo vyote vya programu"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Programu ulizofungua hivi karibuni"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Angalia programu zote <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Wasiliana na msimamizi wako wa TEHAMA"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Anaweza kukusaidia kubadilisha PIN, mchoro au nenosiri lako"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Data yako ya binafsi na ya kompyuta kibao yako zinaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibika kila wakati kutokana na uharibifu wowote kwenye simu yako au kupotea kwa data kutokana na matumizi yake."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Data yako ya binafsi na ya simu yako zinaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibika kila wakati kutokana na uharibifu wowote kwenye simu yako au kupotea kwa data kutokana na matumizi yake."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Data yako ya binafsi na ya kifaa chako inaweza kuathiriwa na programu ambazo hazijulikani. Kwa kusakinisha programu kutoka chanzo hiki, unakubali kuwajibikia uharibifu wowote kwenye kifaa chako au kupotea kwa data kutokana na matumizi ya programu hizo."</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Upofu rangi wa kutokuona rangi ya kijani"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Upofu rangi wa kutokuona rangi nyekundu"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Upofu rangi wa kutokuona rangi ya bluu"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Muda mfupi (sekunde <xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>)</item>
+      <item quantity="one">Muda mfupi (sekunde <xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Wastani (sekunde <xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>)</item>
+      <item quantity="one">Wastani (sekunde <xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Muda mrefu (sekunde <xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g>)</item>
+      <item quantity="one">Muda mrefu (sekunde <xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g>)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other">Sekunde <xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g></item>
       <item quantity="one">Sekunde <xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g></item>
@@ -4496,8 +4502,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Chagua Kiendeshaji cha Michoro"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Chaguomsingi"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Kiendeshaji cha Michezo"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Kiendeshaji cha Msanidi Programu"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Kiendeshaji cha Michoro cha Mfumo"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4735,7 +4740,7 @@
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Inacheza sasa kwenye <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Maelezo muhimu"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ENDELEA"</string>
-    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAPANA, ASANTE"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"HAPANA"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Eneo"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="2799241640320172899">"Mtoa huduma wako huenda atachukua eneo lako ili atoe huduma hii.\n\n Tafadhali kagua sera ya faragha ya mtoa huduma wako."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Huenda ukapoteza idhini ya kutumia muda au data inayosalia. Wasiliana na mtoa huduma wako kabla hujaondoa."</string>

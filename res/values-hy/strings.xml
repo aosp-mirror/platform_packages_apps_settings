@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Տեսանելիության ժամանակի սպառում"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Կողպել ձայնային համարհավաքումը"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Կանխել Bluetooth համարհավաքչի օգտագործումը, երբ էկրանը կողպված է"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth-ով սարքեր"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Սարքի անունը"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Սարքի կարգավորումներ"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Պրոֆիլի կարգավորումներ"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Ընտրեք նվազագույնը մեկ հաճախականություն Wi‑Fi թեժ կետի համար՝"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP կարգավորումներ"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Գաղտնիություն"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Բաժանորդագրման մանրամասներ"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Բաժանորդագրություն"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Դիտել և փոխել բաժանորդագրությունը"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Պատահական ընտրված MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ավելացնել սարք"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Սարքը «<xliff:g id="SSID">%1$s</xliff:g>» ցանցին ավելացնելու համար տեսախցիկը պահեք QR կոդի վրա"</string>
@@ -1399,7 +1401,7 @@
     <string name="sd_format" product="default" msgid="9085302892248732329">"Ջնջել SD քարտը"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6179784504937189658">"Ջնջել USB կրիչի բոլոր տվյալները, ինչպիսիք են երաժշտությունը և լուսանկարները"</string>
     <string name="sd_format_summary" product="default" msgid="60583152211068164">"SD քարտից ջնջում է ողջ տեղեկատվությունը, ինչպիսիք են երաժշտությունն ու լուսանկարները"</string>
-    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Մաքրե՞լ քեշավորված տվյալները:"</string>
+    <string name="memory_clear_cache_title" msgid="2605096903803953619">"Ջնջե՞լ քեշավորված տվյալները:"</string>
     <string name="memory_clear_cache_message" msgid="4759561226480906588">"Սա կմաքրի բոլոր ծրագրերի քեշավորված տվյալները:"</string>
     <string name="mtp_ptp_mode_summary" msgid="7969656567437639239">"MTP կամ PTP գործառույթը ակտիվ է"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7694112411895701320">"Անջատե՞լ USB կրիչը:"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Դեմքով ապակողպման համար նշեք գաղտնաբառ"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Դեմքով ապակողման համար նշեք նախշ"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Դեմքով ապակողպման համար նշեք PIN կոդ"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Մոռացել եմ գաղտնաբառը"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Մոռացել եմ նախշը"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Մոռացել եմ PIN-ը"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Շարունակելու համար օգտագործեք սարքի նախշը"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Շարունակելու համար մուտքագրեք սարքի PIN կոդը"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Շարունակելու համար մուտքագրեք սարքի գաղտնաբառը"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Թույլ է տալիս ծրագրերի բոլոր աղբյուրները"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Վերջին օգտագործված հավելվածները"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Տեսնել բոլոր հավելվածները (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Դիմեք ձեր ՏՏ ադմինիստրատորին"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Նա կարող է օգնել ձեզ վերակայել PIN-ը, նախշը կամ գաղտնաբառը"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Ձեր պլանշետն ու անձնական տվյալներն առավել խոցելի են անհայտ հավելվածների գրոհների նկատմամբ: Տեղադրելով հավելվածներ այս աղբյուրից՝ դուք ընդունում եք, որ պատասխանատվություն եք կրում ձեր պլանշետին պատճառած ցանկացած վնասի կամ տվյալների կորստի համար, որը կարող է տեղի ունենալ դրանք օգտագործելու արդյունքում:"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Ձեր սարքն ու անձնական տվյալներն առավել խոցելի են անհայտ հավելվածների գրոհների նկատմամբ: Տեղադրելով հավելվածներ այս աղբյուրից՝ դուք ընդունում եք, որ պատասխանատվություն եք կրում ձեր սարքին պատճառած ցանկացած վնասի կամ տվյալների կորստի համար, որը կարող է տեղի ունենալ դրանք օգտագործելու արդյունքում:"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Ձեր սարքն ու անձնական տվյալները առավել խոցելի են անհայտ հավելվածների գրոհների նկատմամբ: Տեղադրելով հավելվածներ այս աղբյուրից՝ դուք ընդունում եք, որ պատասխանատվություն եք կրում ձեր սարքին պատճառած ցանկացած վնասի կամ տվյալների կորստի համար, որը կարող է տեղի ունենալ դրանք օգտագործելու արդյունքում:"</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Դեյտերանոմալիա"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Պրոտանոմալիա"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Տրիտանոմալիա"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Կարճ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+      <item quantity="other">Կարճ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Միջին (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+      <item quantity="other">Միջին (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Երկար (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+      <item quantity="other">Երկար (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> վայրկյան</item>
@@ -4495,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Ընտրեք գրաֆիկական սարքավարը"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Կանխադրված"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Խաղային սարքավար"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Մշակողների համար նախատեսված սարքավար"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Համակարգի գրաֆիկական սարքավար"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4682,7 +4687,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Նորից փորձել"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Սխալ առաջացավ: Հավելվածը չեղարկել է սարք ընտրելու հայտը:"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Կապը հաստատվեց"</string>
-    <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Ցուցադրել բոլորը"</string>
+    <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Ցույց տալ բոլորը"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Սարքի որոնում…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Միացում սարքին…"</string>
     <string name="bluetooth_left_name" msgid="7440064067910080502">"Ձախ"</string>

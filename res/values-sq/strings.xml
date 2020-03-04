@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Koha e veprimit mbi dukshmërinë skadoi pa sukses"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Kyç formimin e numrit me zë"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Parandalo përdorimin e formuesit të numrit me Bluetooth kur ekrani është i kyçur."</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Pajisjet me Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Emri i pajisjes"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Cilësimet e pajisjes"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Cilësimet e profilit"</string>
@@ -223,7 +224,7 @@
     <string name="okay" msgid="4827099303045669054">"Në rregull"</string>
     <string name="forget" msgid="3754013654135912783">"Harro"</string>
     <string name="save" msgid="3125033126936493822">"Ruaj"</string>
-    <string name="done" msgid="7497982645646431310">"U krye!"</string>
+    <string name="done" msgid="7497982645646431310">"U krye"</string>
     <string name="apply" msgid="7834684883190163536">"Zbato"</string>
     <string name="share" msgid="8502235338607613795">"Ndaj"</string>
     <string name="add" msgid="8335206931421683426">"Shto"</string>
@@ -757,7 +758,7 @@
     <string name="wifi_display_details" msgid="2351632307998142920">"Shfaq cilësimet"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Opsionet e shfaqjes së Wi-Fi"</string>
     <string name="wifi_display_options_forget" msgid="3140558691112356024">"Harro"</string>
-    <string name="wifi_display_options_done" msgid="7608851767701954020">"U krye!"</string>
+    <string name="wifi_display_options_done" msgid="7608851767701954020">"U krye"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Emri"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Zgjidh të paktën një brez për zonën e qasjes për internet për Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Cilësimet e IP-së"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privatësia"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Detajet e abonimit"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Abonim"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Shiko ose ndrysho abonimin"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Adresa MAC e rastësishme"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Shto një pajisje"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Vendos në qendër më poshtë kodin QR për ta shtuar pajisjen te “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomali"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomali"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomali"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">E shkurtër (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekonda)</item>
+      <item quantity="one">E shkurtër (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekondë)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Mesatare (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekonda)</item>
+      <item quantity="one">Mesatare (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekondë)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">E gjatë (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekonda)</item>
+      <item quantity="one">E gjatë (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekondë)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekonda</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekondë</item>
@@ -2930,7 +2941,7 @@
     <string name="backup_pw_cancel_button_text" msgid="2244399819018756323">"Anulo"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Përditësime të sistemit"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Rrjeti mund të jetë i monitoruar"</string>
-    <string name="done_button" msgid="6269449526248267">"U krye!"</string>
+    <string name="done_button" msgid="6269449526248267">"U krye"</string>
     <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
       <item quantity="other">Besoji ose hiqi certifikatat</item>
       <item quantity="one">Besoje ose hiqe certifikatën</item>
@@ -3593,7 +3604,7 @@
     <string name="app_notification_row_banned" msgid="4513523107019706924">"I bllokuar"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Me prioritet"</string>
     <string name="app_notification_row_sensitive" msgid="7374688948587174964">"Delikate"</string>
-    <string name="app_notifications_dialog_done" msgid="573716608705273004">"U krye!"</string>
+    <string name="app_notifications_dialog_done" msgid="573716608705273004">"U krye"</string>
     <string name="app_notification_importance_title" msgid="8293193440040799998">"Rëndësia"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Drita me pulsim"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Dridhje"</string>

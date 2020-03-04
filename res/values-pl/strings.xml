@@ -68,6 +68,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Czas widoczności"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Zablokuj wybieranie głosowe"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Zapobiegaj używaniu wybierania Bluetooth, gdy ekran jest zablokowany"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Lista urządzeń"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Nazwa urządzenia"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Ustawienia urządzenia"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Ustawienia profilu"</string>
@@ -924,7 +925,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wybierz co najmniej jedno pasmo dla hotspotu Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Ustawienia IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Prywatność"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Szczegóły subskrypcji"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Subskrypcja"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Wyświetl lub zmień subskrypcję"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Randomizowany adres MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodawanie urządzenia"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wyśrodkuj kod QR poniżej, by podłączyć urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1799,12 +1801,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Aby używać rozpoznawania twarzy, ustaw hasło"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Aby używać rozpoznawania twarzy, ustaw wzór"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Aby używać rozpoznawania twarzy, ustaw kod PIN"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Nie pamiętasz hasła?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Nie pamiętasz wzoru?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Nie pamiętasz kodu PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Podaj wzór używany na urządzeniu, by kontynuować"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Podaj kod PIN używany na urządzeniu, by kontynuować"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Podaj hasło używane na urządzeniu, by kontynuować"</string>
@@ -1872,10 +1871,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Zezwalaj na wszystkie źródła"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Niedawno otwierane aplikacje"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Wyświetl wszystkie aplikacje (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Skontaktuj się z administratorem IT"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Możesz uzyskać pomoc dotyczącą resetowania kodu PIN, wzoru lub hasła"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet i dane osobiste są bardziej narażone na atak nieznanych aplikacji. Instalując aplikacje z tego źródła, przyjmujesz odpowiedzialność za wszelkie uszkodzenia telefonu bądź utratę danych, które mogą być spowodowane używaniem tych aplikacji."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon i dane osobiste są bardziej narażone na atak nieznanych aplikacji. Instalując aplikacje z tego źródła, przyjmujesz odpowiedzialność za wszelkie uszkodzenia telefonu bądź utratę danych, które mogą być spowodowane używaniem tych aplikacji."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Urządzenie i dane osobiste są bardziej narażone na atak nieznanych aplikacji. Instalując aplikacje z tego źródła, przyjmujesz odpowiedzialność za wszelkie uszkodzenia urządzenia bądź przypadki utraty danych, które mogą być spowodowane używaniem tych aplikacji."</string>
@@ -2261,9 +2258,24 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalia"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="few">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Krótkie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="few">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Średnie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="few">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Długie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy</item>
       <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund</item>
@@ -3560,7 +3572,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Poufne powiadomienia z profilu do pracy"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Pokazuj poufne treści z profilu do pracy po zablokowaniu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Pokazuj całą treść powiadomień"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Pokaż poufne treści tylko po odblokowaniu"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Pokazuj poufne treści tylko po odblokowaniu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Nie pokazuj żadnych powiadomień"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Co ma się wyświetlać na ekranie blokady?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Ekran blokady"</string>
@@ -4653,8 +4665,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Wybierz sterownik grafiki"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Domyślny"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Sterownik gry"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Sterownik dewelopera"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Systemowy sterownik grafiki"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

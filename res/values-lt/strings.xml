@@ -68,6 +68,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Baigėsi skirtasis matomumo laikas"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Užrakinti numerio rinkimą balsu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Neleisti naudoti „Bluetooth“ numerio rinkiklio, kai ekranas užrakintas"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"„Bluetooth“ įrenginiai"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Įrenginio pavadinimas"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Įrenginio nustatymai"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profilio nustatymai"</string>
@@ -924,7 +925,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Pasirinkite bent vieną „Wi‑Fi“ viešosios interneto prieigos taško dažnio juostą:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP nustatymai"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privatumas"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Išsami prenumeratos informacija"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Prenumerata"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Prenumeratos peržiūra arba keitimas"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Atsitikt. tv. pasir. MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Įrenginio pridėjimas"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centruokite toliau pateiktą QR kodą, kad galėtumėte pridėti įrenginį prie „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -1799,12 +1801,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"N. naud. Atr. pagal v., nust. slaptaž."</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"N. naud. Atr. pagal v., nust. atr. pieš."</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"N. naud. Atr. pagal v., nust. slaptažodį"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Pamiršote slaptažodį?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Pamiršote atrakinimo piešinį?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Pamiršote PIN kodą?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Jei norite tęsti, naudokite įrenginio atrakinimo piešinį"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Jei norite tęsti, įveskite įrenginio PIN kodą"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Jei norite tęsti, įveskite įrenginio slaptažodį"</string>
@@ -1872,10 +1871,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Leisti visus progr. šaltinius"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Neseniai atidarytos programos"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Žr. visas programas (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Susisiekimas su IT administratoriumi"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Jie gali padėti iš naujo nustatyti PIN kodą, atrakinimo piešinį arba slaptažodį"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Įdiegus nežinomų programų didėja planšetinio kompiuterio ir asmeninių duomenų pažeidimo rizika. Diegdami programas iš šio šaltinio sutinkate, kad esate patys atsakingi už žalą planšetiniam kompiuteriui arba duomenų praradimą dėl jų naudojimo."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Įdiegus nežinomų programų didėja telefono ir asmeninių duomenų pažeidimo rizika. Diegdami programas iš šio šaltinio sutinkate, kad esate patys atsakingi už žalą telefonui arba duomenų praradimą dėl jų naudojimo."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Įdiegus nežinomų programų didėja įrenginio ir asmeninių duomenų pažeidimo rizika. Diegdami programas iš šio šaltinio sutinkate, kad esate patys atsakingi už žalą įrenginiui arba duomenų praradimą dėl programų naudojimo."</string>
@@ -2261,9 +2258,24 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalija"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Trumpa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundė)</item>
+      <item quantity="few">Trumpa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="many">Trumpa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="other">Trumpa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundžių)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Vidutinė (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundė)</item>
+      <item quantity="few">Vidutinė (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="many">Vidutinė (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="other">Vidutinė (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundžių)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Ilga (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundė)</item>
+      <item quantity="few">Ilga (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="many">Ilga (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės)</item>
+      <item quantity="other">Ilga (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundžių)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundė</item>
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundės</item>
@@ -4653,8 +4665,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafikos tvarkyklės pasirinkimas"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Numatytasis"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Žaidimų tvarkyklė"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Kūrėjo tvarkyklė"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Sistemos grafikos tvarkyklė"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

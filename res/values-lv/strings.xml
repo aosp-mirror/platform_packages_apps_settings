@@ -67,6 +67,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Redzamības noildze"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Bloķēt balss iezvani"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Neļaut izmantot Bluetooth iezvanprogrammu, kad ekrāns ir bloķēts"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth ierīces"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Ierīces nosaukums"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Ierīces iestatījumi"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profila iestatījumi"</string>
@@ -907,7 +908,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Izvēlieties vismaz vienu joslu Wi‑Fi tīklājam:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP iestatījumi"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Konfidencialitāte"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Abonementa informācija"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Abonements"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Skatīt vai mainīt abonementu"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Nejauši atlasīta MAC adr."</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ierīces pievienošana"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Lai izveidotu ierīces savienojumu ar <xliff:g id="SSID">%1$s</xliff:g>, centrējiet tālāk norādīto QR kodu."</string>
@@ -1777,12 +1779,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Rezerves metode autorizācijai pēc sejas"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Rezerves metode autorizācijai pēc sejas"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Rezerves metode autorizācijai pēc sejas"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Vai aizmirsāt paroli?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Vai aizmirsāt kombināciju?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Vai aizmirsāt PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Lai turpinātu, izmantojiet ierīces kombināciju."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Lai turpinātu, ievadiet ierīces PIN kodu."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Lai turpinātu, ievadiet savas ierīces paroli."</string>
@@ -1850,10 +1849,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Atļaut visus lietotņu avotus"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nesen atvērtās lietotnes"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Visu lietotņu (<xliff:g id="COUNT">%1$d</xliff:g>) skatīšana"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Sazinieties ar savu IT administratoru"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Administrators var palīdzēt atiestatīt PIN, kombināciju vai paroli."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Jūsu planšetdators un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem planšetdatora bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Jūsu tālrunis un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem tālruņa bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Jūsu ierīce un personas dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem ierīces bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
@@ -2237,9 +2234,21 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deiteranomālija"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomālija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomālija"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="zero">Īsa aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+      <item quantity="one">Īsa aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Īsa aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="zero">Vidēja aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+      <item quantity="one">Vidēja aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Vidēja aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="zero">Ilga aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+      <item quantity="one">Ilga aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Ilga aizkave (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="zero"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundes</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde</item>
@@ -4574,8 +4583,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafikas dziņa atlase"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Noklusējums"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Spēles dzinis"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Grafikas dzinis izstrādātājiem"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Sistēmas grafikas dzinis"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
