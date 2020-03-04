@@ -68,6 +68,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Час видимості"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Заблок. голос. набір"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Запобігає використанню набору bluetooth, коли екран заблоковано"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Пристрої Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Назва пристрою"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Налаштування пристрою"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Налаштування профілю"</string>
@@ -796,6 +797,9 @@
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 ГГц"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 ГГц"</string>
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"Увійти"</string>
+    <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"Відкрити сайт"</string>
+    <string name="wifi_time_remaining" msgid="8503606272869846170">"Залишилося: <xliff:g id="REMAINING_TIME">%1$s</xliff:g>"</string>
+    <string name="wifi_expiry_time" msgid="5419758551129267624">"Діє до <xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Торкніться тут, щоб увійти в мережу"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Мбіт/с"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Мбіт/с"</string>
@@ -921,6 +925,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Виберіть принаймні один діапазон для точки доступу Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Налаштування IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Конфіденційність"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Підписка"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Перегляд або редагування підписки"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Довільна MAC-адреса"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Додати пристрій"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Щоб додати пристрій у мережу \"<xliff:g id="SSID">%1$s</xliff:g>\", наведіть камеру на QR-код нижче"</string>
@@ -1667,6 +1673,16 @@
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Точку доступу ввімкнено"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Телефон використовується в режимі модема"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Коли ввімкнено Заощадження трафіку, неможливо ввімкнути режим модема або використовувати портативні точки доступу"</string>
+    <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Лише точка доступу"</string>
+    <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Лише USB"</string>
+    <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Лише Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Точка доступу, USB"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Точка доступу, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Точка доступу, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Інші пристрої не мають доступу до Інтернету"</string>
+    <string name="tethering_interface_options" msgid="7575535888135143650">"Використання телефона як модема"</string>
+    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Не використовувати точку доступу Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Надавати доступ до Інтернету тільки через USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Надавати доступ до Інтернету тільки через Bluetooth"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Надавати доступ до Інтернету тільки через USB та Bluetooth"</string>
@@ -1785,6 +1801,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Налаштуйте пароль для Фейсконтроля"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Налаштуйте ключ для Фейсконтролю"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Налаштуйте PIN-код для Фейсконтролю"</string>
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Забули пароль?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Забули ключ?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Забули PIN-код?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Щоб продовжити, введіть ключ пристрою"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Щоб продовжити, введіть PIN-код пристрою"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Щоб продовжити, введіть пароль пристрою"</string>
@@ -1852,6 +1871,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Дозволити всі джерела додатків"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Нещодавно відкриті додатки"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Переглянути всі додатки (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <string name="forgot_password_title" msgid="3967873480875239885">"Зверніться до IT-адміністратора"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Він може допомогти вам скинути PIN-код, ключ або пароль"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Ваш планшет і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому планшету, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Ваш телефон і особисті дані більш уразливі до атак із боку додатків із невідомих джерел Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому телефону, чи втрату даних унаслідок використання таких додатків."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Ваш пристрій і особисті дані більш уразливі до атак невідомих додатків. Установлюючи додатки з цього джерела, ви погоджуєтеся, що несете відповідальність за будь-яку шкоду, заподіяну вашому пристрою, чи втрату даних унаслідок використання таких додатків."</string>
@@ -2196,12 +2217,13 @@
     <string name="accessibility_autoclick_custom_title" msgid="4597792235546232038">"Інший"</string>
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Коротше"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Довше"</string>
-    <string name="accessibility_autoclick_seekbar_desc" msgid="2370077188725433271">"Час автоматичного натискання"</string>
+    <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Час автоматичного натискання"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Вібровідгук"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вібрація під час сповіщень"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вібрація під час дзвінків"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Реакція на дотик"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Використовувати <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Відкрити додаток <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Використовувати корекцію кольорів"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Показувати субтитри"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Показ субтитрів"</string>
@@ -2701,7 +2723,6 @@
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Облікові дані недоступні для цього користувача"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Установлено для мережі VPN і додатків"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Установлено для мережі Wi-Fi"</string>
-    <string name="credential_for_fsverity" msgid="8733384639764901293">"Установлено для перевірки джерела завантаження додатків"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Видалити весь вміст?"</string>
     <string name="credentials_erased" msgid="9121052044566053345">"Сховище облік. даних очищено."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Схов.облік.даних неможл.видал."</string>
@@ -2709,13 +2730,10 @@
     <string name="ca_certificate" msgid="3076484307693855611">"Сертифікат ЦС"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN і сертифікат користувача"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Сертифікат Wi‑Fi"</string>
-    <string name="app_src_certificate" msgid="436410009047766408">"Сертифікат джерела додатків"</string>
     <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Ваша конфіденційність під загрозою"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"Сертифікати центру сертифікації (ЦС) використовуються веб-сайтами, додатками й мережами VPN для шифрування. Установлюйте сертифікати ЦС тільки від тих організацій, яким довіряєте. \n\n Якщо ви встановите сертифікат ЦА, то його власник зможе отримувати доступ до вашої інформації (зокрема паролів, повідомлень і даних кредитних карток) з веб-сайтів, які ви відвідуєте, та з додатків, якими користуєтеся, навіть якщо таку інформацію зашифровано."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Не встановлювати"</string>
     <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"Усе одно встановити"</string>
-    <string name="app_src_certificate_warning_title" msgid="3581334802881767289">"Ви встановлюєте цей сертифікат на власний ризик"</string>
-    <string name="app_src_certificate_warning_description" msgid="4891599919584400969">"Сертифікати джерел підтверджуватимуть безпечність додатків для вашого пристрою. Встановлюйте сертифікати лише тих організацій, яким довіряєте."</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Сертифікат не встановлено"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"Сигнал екстреного виклику"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"Устан. поведінку при розміщ. аварійного виклику"</string>
@@ -2999,16 +3017,9 @@
     <string name="one_usercrt" msgid="1865069301105101370">"один сертифікат користувача"</string>
     <string name="one_cacrt" msgid="7467796501404158399">"один сертифікат ЦС"</string>
     <string name="n_cacrts" msgid="5886462550192731627">"сертифікатів ЦС: %d"</string>
-    <string name="one_appsrccrt" msgid="8129657605195214337">"один сертифікат джерела додатків"</string>
     <string name="user_credential_title" msgid="4686178602575567298">"Облікові дані"</string>
     <string name="user_credential_removed" msgid="4087675887725394743">"Вилучені облікові дані: <xliff:g id="CREDENTIAL_NAME">%s</xliff:g>"</string>
     <string name="user_credential_none_installed" msgid="918620912366836994">"Немає встановлених облікових даних користувача"</string>
-    <string name="app_src_cert_reboot_dialog_install_title" msgid="8054342796523969318">"Тепер потрібно перезапустити пристрій"</string>
-    <string name="app_src_cert_reboot_dialog_install_message" msgid="3047145226539355739">"Щоб використовувати цей сертифікат джерела додатків, перезапустіть пристрій"</string>
-    <string name="app_src_cert_reboot_dialog_uninstall_title" msgid="1122954693175643166">"Перезапустіть пристрій, щоб завершити"</string>
-    <string name="app_src_cert_reboot_dialog_uninstall_message" msgid="5733844651545039464">"Щоб видалити цей сертифікат джерела додатків, перезапустіть пристрій"</string>
-    <string name="app_src_cert_reboot_dialog_button_restart" msgid="3222022868040265930">"Перезапустити"</string>
-    <string name="app_src_cert_reboot_dialog_button_not_now" msgid="3582913410301349048">"Не зараз"</string>
     <string name="spellcheckers_settings_title" msgid="2799021700580591443">"Перевірка правопису"</string>
     <string name="spellcheckers_settings_for_work_title" msgid="6471603934176062893">"Перевірка правопису для роботи"</string>
     <string name="current_backup_pw_prompt" msgid="4962276598546381140">"Введіть поточний пароль"</string>
@@ -3111,7 +3122,7 @@
     <string name="application_restrictions" msgid="276179173572729205">"Дозволи для програм і вмісту"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Програми з обмеженнями"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Розгорнути налаштув. програм"</string>
-    <string name="nfc_payment_settings_title" msgid="400718454435230486">"Натиснути й оплатити"</string>
+    <string name="nfc_payment_settings_title" msgid="400718454435230486">"Експрес-платежі"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Як це працює"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Оплачуйте покупки за допомогою телефона"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Додаток для платежів за умовчанням"</string>
@@ -3594,6 +3605,11 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Вилучити з розділу чатів"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Це чат"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Додати в розділ чатів"</string>
+    <string name="manage_conversations" msgid="4440289604887824337">"Керувати чатами"</string>
+    <string name="important_conversations" msgid="8701454279075552555">"Важливі чати"</string>
+    <string name="all_conversations" msgid="7864274972384490939">"Усі чати"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"Надсилати спливаючі сповіщення про важливі чати"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Важливі чати з\'являються у верхній частині розкривної панелі. Ви можете налаштувати надсилання важливих сповіщень про них, навіть коли режим \"Не турбувати\" ввімкнено."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Показувати без звуку та в згорнутому вигляді"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Показувати без звукового сигналу"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Зі звуком"</string>
@@ -3856,6 +3872,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"PIN-код для відкріплення"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запитувати пароль перед відкріпленням"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокувати пристрій після відкріплення"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Підтвердьте видалення SIM-карти"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Перш ніж видалити завантажену SIM-карту, підтвердьте свою особу"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Цим робочим профілем керує додаток"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Керує додаток <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Експериментальна функція)"</string>
@@ -4643,7 +4661,6 @@
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Активатор ініціалізації оператора"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"Оновити режим \"Не турбувати\""</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Призупинити сповіщення, щоб не відволікатися"</string>
-    <string name="disabled_low_ram_device" msgid="5456316412719852286">"Ця функція недоступна на цьому пристрої"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Функція недоступна"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Цю функцію вимкнено, оскільки вона сповільнює роботу телефона"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Увімкнути повне вимірювання GNSS"</string>
@@ -4660,13 +4677,14 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Вибрати графічний драйвер"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"За умовчанням"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Ігровий драйвер"</string>
-    <string name="graphics_driver_app_preference_prerelease_driver" msgid="5389656885733341448">"Попередня версія драйвера"</string>
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Драйвер для розробників"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Системний графічний драйвер"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
+    <!-- no translation found for graphics_driver_app_preference_values:3 (2586045835780389650) -->
     <string name="platform_compat_dashboard_title" msgid="1323980546791790236">"Зміни сумісності додатка"</string>
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Увімкнути або вимкнути зміни сумісності додатка"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Зміни, увімкнені за умовчанням"</string>
@@ -4689,6 +4707,10 @@
     <string name="media_output_summary" product="device" msgid="3598300438694764381">"Пристрій"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Недоступно під час викликів"</string>
     <string name="media_output_summary_unavailable" msgid="2695058965888813093">"Недоступно"</string>
+    <string name="media_output_group_panel_title" msgid="3086245179062913037">"Додати виходи"</string>
+    <string name="media_output_group" msgid="7918231774595274396">"Група"</string>
+    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"Вибрано 1 пристрій"</string>
+    <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"Вибрано пристроїв: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Прийняти виклик на"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"APN не можна змінювати."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Збільште час роботи акумулятора планшета"</string>
@@ -4937,4 +4959,5 @@
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
+    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Припинити трансляцію"</string>
 </resources>
