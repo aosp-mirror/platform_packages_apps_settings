@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Времето за видливост истече"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Заклучи гласовно бирање"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Спречи употреба на бирач со Bluetooth кога екранот е заклучен"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Уреди со Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Име на уред"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Поставки за уред"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Поставки на профил"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Изберете барем еден појас за Wi‑Fi точка на пристап:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Поставки на IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Приватност"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Детали за претплатата"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Претплата"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Прегледајте ја или изменете ја претплатата"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Рандомизирана MAC-адреса"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Додајте уред"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Наместете го QR-кодот во средината на подолниот прозорец за да го додадете уредот на „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Девтераномалија"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Протаномалија"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалија"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Кратко (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="other">Кратко (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Средно (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="other">Средно (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Долго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="other">Долго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди</item>

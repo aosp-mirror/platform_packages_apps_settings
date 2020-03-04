@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Tímamörk sýnileika"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Læsa raddhringingu"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Hindra notkun Bluetooth-hringiforrits þegar skjárinn er læstur"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth-tæki"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Heiti tækis"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Stillingar tækis"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Stillingar sniðs"</string>
@@ -890,7 +891,10 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Veldu a.m.k. eitt svið fyrir heitan Wi‑Fi reit:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP-stillingar"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Persónuvernd"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Áskriftarupplýsingar"</string>
+    <!-- no translation found for wifi_subscription (4432423938285430113) -->
+    <skip />
+    <!-- no translation found for wifi_subscription_summary (18802471063384598) -->
+    <skip />
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"MAC-vistfang af handahófi"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Bæta tæki við"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Færðu QR-kóðann fyrir miðju hér fyrir neðan til að bæta tækinu við „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -1755,12 +1759,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Veldu aðgangsorð til að nota andlitsopn."</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Veldu mynstur til að nota andlitsopnun"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Veldu PIN til að nota andlitsopnun"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Gleymt aðgangsorð?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Gleymdirðu mynstrinu?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Gleymdirðu PIN-númerinu?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Teiknaðu mynstrið þitt fyrir tækið til að halda áfram"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Sláðu inn PIN-númerið þitt fyrir tækið til að halda áfram"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Sláðu inn aðgangsorðið þitt fyrir tækið til að halda áfram"</string>
@@ -1828,10 +1829,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Leyfa forrit frá öllum"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nýlega opnuð forrit"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Sjá öll <xliff:g id="COUNT">%1$d</xliff:g> forritin"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Hafðu samband við kerfisstjóra"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Hann getur hjálpað þér að endurstilla PIN-númerið, mynstrið eða aðgangsorðið"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Síminn þinn og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á símanum eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Tækið og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á tækinu eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
@@ -2213,9 +2212,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Græn litblinda"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Rauð litblinda"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Blágul litblinda"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Stutt (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnda)</item>
+      <item quantity="other">Stutt (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúndur)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Miðlungs (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnda)</item>
+      <item quantity="other">Miðlungs (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúndur)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Langt (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúnda)</item>
+      <item quantity="other">Langt (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekúndur)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sek.</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sek.</item>
@@ -4495,8 +4503,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Velja myndvinnslurekil"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Sjálfgefið"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Leikjarekill"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Rekill þróunaraðila"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Myndvinnslurekill kerfis"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

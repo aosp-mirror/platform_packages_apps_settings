@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"偵測時限設定"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"鎖定語音撥號"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"螢幕鎖定時不要使用藍牙撥號"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"藍牙裝置"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"裝置名稱"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"裝置設定"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"個人資料設定"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"請至少選擇一個用於 Wi‑Fi 無線基地台的頻帶："</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP 設定"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"隱私"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"訂閱詳細資料"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"訂閱"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"查看或變更訂閱"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"已隨機化的 MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"新增裝置"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"將 QR 圖碼置於相機正下方，即可將這個裝置新增至「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"如要使用人臉解鎖功能，請設定密碼"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"如要使用人臉解鎖功能，請設定解鎖圖案"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"如要使用人臉解鎖功能，請設定 PIN 碼"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘記密碼了嗎？"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘記解鎖圖案了嗎？"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘記 PIN 碼了嗎？"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"請畫出你的裝置解鎖圖案以繼續作業"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"輸入裝置 PIN 碼即可繼續"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"請輸入你的裝置密碼以繼續作業"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"允許安裝所有來源的應用程式"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近開啟的應用程式"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"查看全部共 <xliff:g id="COUNT">%1$d</xliff:g> 個應用程式"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"請與 IT 管理員聯絡"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"IT 管理員可協助你重設 PIN 碼、解鎖圖案或密碼"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。安裝這個來源提供的應用程式集表示你同意，如因使用這些應用程式導致你的平板電腦受損或資料遺失，須自行負責。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"來歷不明的應用程式可能會損害你的手機和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的手機受損或資料遺失，須自行負責。"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"來歷不明的應用程式可能會損害你的裝置和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的裝置受損或資料遺失，須自行負責。"</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"綠色弱視"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"紅色弱視"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"藍色弱視"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">短 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒)</item>
+      <item quantity="one">短 (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">中 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒)</item>
+      <item quantity="one">中 (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">長 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒)</item>
+      <item quantity="one">長 (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
@@ -4495,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"選取繪圖驅動程式"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"預設"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"遊戲驅動程式"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"開發人員驅動程式"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系統繪圖驅動程式"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

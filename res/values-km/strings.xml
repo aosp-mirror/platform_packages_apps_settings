@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"អស់​ពេល​មើល​ឃើញ"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"ចាក់សោ​ការ​ហៅជា​សំឡេង"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"ការ​ពារ​​​ការ​ប្រើ​អ្នក​ហៅ​តាម​ប៊្លូធូស ពេល​ចាក់សោ​អេក្រង់"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"ឧបករណ៍​ប៊្លូធូស"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"ឈ្មោះ​ឧបករណ៍"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"ការ​កំណត់​ឧបករណ៍"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"ការ​កំណត់​ប្រវត្តិ​រូប"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"សូម​ជ្រើសរើស​ប៊ែន​យ៉ាង​ហោចណាស់​មួយសម្រាប់​ហតស្ប៉ត Wi‑Fi៖"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"ការ​កំណត់ IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"ឯកជនភាព"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"ព័ត៌មានលម្អិត​អំពី​ការជាវ"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"ការ​ជាវ"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"មើល ឬប្ដូរការជាវ"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"​MAC ចៃដន្យ"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"បញ្ចូលឧបករណ៍"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ដាក់កូដ QR ខាងក្រោមឱ្យ​នៅចំកណ្ដាល ដើម្បីបញ្ចូលឧបករណ៍ទៅ “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"ដើម្បី​ប្រើ​ការដោះសោតាមទម្រង់មុខ សូមកំណត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"ដើម្បី​ប្រើ​ការដោះសោតាមទម្រង់មុខ សូមកំណត់​លំនាំ"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"ដើម្បី​ប្រើ​ការដោះសោតាមទម្រង់មុខ សូមកំណត់​កូដ PIN"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"ភ្លេចពាក្យសម្ងាត់​របស់អ្នកឬ?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"ភ្លេចលំនាំ​របស់អ្នកឬ?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"ភ្លេចកូដ PIN របស់អ្នកឬ?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"ប្រើលំនាំឧបករណ៍របស់អ្នកដើម្បីបន្ត"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"បញ្ចូលកូដ PIN ឧបករណ៍របស់អ្នកដើម្បីបន្ត"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"បញ្ចូលពាក្យសម្ងាត់ឧបករណ៍របស់អ្នកដើម្បីបន្ត"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"អនុញ្ញាតប្រភពកម្មវិធីទាំងអស់"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"កម្មវិធីដែលទើបបើកថ្មីៗ"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"មើលកម្មវិធី​ទាំង <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"ទាក់ទងអ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យារបស់អ្នក"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"អ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យាអាចជួយអ្នកក្នុងការកំណត់កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់របស់អ្នកឡើងវិញ"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"ទូរសព្ទ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកនឹងទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"ឧបករណ៍ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះឧបករណ៍ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"អ្នកមើល​មិនឃើញ​ពណ៌បៃតង"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"អ្នកមើល​មិនឃើញ​ពណ៌ក្រហម"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"អ្នកមើល​មិនឃើញ​ពណ៌ខៀវ"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">ការពន្យារពេល​ខ្លី (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> វិនាទី)</item>
+      <item quantity="one">ការពន្យារពេល​ខ្លី (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> វិនាទី)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">ការពន្យារពេល​មធ្យម (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> វិនាទី)</item>
+      <item quantity="one">ការពន្យារពេល​មធ្យម (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> វិនាទី)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">ការពន្យារពេល​យូរ (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> វិនាទី)</item>
+      <item quantity="one">ការពន្យារពេល​យូរ (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> វិនាទី)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> វិនាទី</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> វិនាទី</item>
@@ -4495,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"ជ្រើសរើសដ្រាយវើ​ក្រាហ្វិក"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"លំនាំដើម"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"ដ្រាយវើ​ហ្គេម"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"ដ្រាយវើរបស់​អ្នកអភិវឌ្ឍន៍"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"ដ្រាយវើ​ក្រាហ្វិកប្រព័ន្ធ"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

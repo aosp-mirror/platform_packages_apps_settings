@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Timeout visibilità"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Blocca composizione vocale"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Impedisci l\'uso del compositore Bluetooth quando lo schermo è bloccato"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Dispositivi Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Nome dispositivo"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Impostazioni dispositivo"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Impostazioni profilo"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Scegli almeno una banda per l\'hotspot Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Impostazioni IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privacy"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Dettagli abbonamento"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Abbonamento"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Visualizza o modifica l\'abbonamento"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Indirizzo MAC casuale"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Aggiungi un dispositivo"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Inquadra il codice QR indicato di seguito per aggiungere il dispositivo alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalia"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalia"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Breve (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> secondi)</item>
+      <item quantity="one">Breve (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> secondo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Medio (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> secondi)</item>
+      <item quantity="one">Medio (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> secondo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Lungo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> secondi)</item>
+      <item quantity="one">Lungo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> secondo)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> secondi</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> secondo</item>
@@ -3493,8 +3504,8 @@
     <string name="manage_conversations" msgid="4440289604887824337">"Gestisci le conversazioni"</string>
     <string name="important_conversations" msgid="8701454279075552555">"Conversazioni importanti"</string>
     <string name="all_conversations" msgid="7864274972384490939">"Tutte le conversazioni"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Conversazioni importanti in fumetti"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Le conversazioni importanti vengono mostrate nella parte superiore dell\'area a discesa. Puoi anche impostarle in modo che vengano visualizzate in fumetti e che interrompano la modalità Non disturbare."</string>
+    <string name="important_bubble" msgid="3820813960404079472">"Mostra le conversazioni importanti come bolle"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Le conversazioni importanti vengono mostrate nella parte superiore dell\'area a discesa. Puoi anche impostarle in modo che vengano visualizzate come bollei e che interrompano la modalità Non disturbare."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostra in modalità silenziosa e riduci a icona"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostra in modalità silenziosa"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Con suoneria"</string>
@@ -3738,7 +3749,7 @@
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Richiedi password prima di sbloccare"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blocca dispositivo per sblocco"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Conferma eliminazione della SIM"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Conferma la tua identità per resettare una SIM scaricata"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Conferma la tua identità prima di resettare una SIM scaricata"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Questo profilo di lavoro è gestito da:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestito da <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Sperimentale)"</string>

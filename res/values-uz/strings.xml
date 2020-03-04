@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Ko‘rinish muddati"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Ovozli raqam terishni qulflash"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Ekran qulfligida bluetooth tergichidan foydalanishni taqiqlash"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth qurilmalar"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Qurilma nomi"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Qurilma sozlamalari"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profil sozlamalari"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wi‑Fi hotspot uchun kamida bitta chastota tanlang:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP sozlamalari"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Maxfiylik"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Obuna tafsilotlari"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Obuna"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Obunani koʻrish yoki oʻzgartirish"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Tasodifiy MAC manzil"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Qurilma kiritish"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Qurilmani “<xliff:g id="SSID">%1$s</xliff:g>” nomli tarmoqqa ulash uchun quyidagi QR kodni kameraga qarating"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Yuz bilan ochish uchun parolni sozlang"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Yuz bilan ochish uchun grafik parolni sozlang"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Yuz bilan ochish uchun PIN kodni sozlang"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Parolni unutdingizmi?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Chizmali kalitni unutdingizmi?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN kodni unutdingizmi?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Davom etish uchun grafik kalitni chizing"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Davom etish uchun qurilmangiz PIN kodini kiriting"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Davom etish uchun qurilmangiz parolini kiriting"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Barcha manbalarga ruxsat"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Yaqinda ochilgan ilovalar"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Barcha ilovalar (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"AT administratoriga murojaat qiling"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Ular sizga PIN kod, grafik kalit yoki parolni tiklashda yordam beradi"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Planshetingiz va shaxsiy ma‘lumotlaringiz notanish ilovalar xujumiga zaif bo‘ladi. Bunday ilovalarni ushbu manbadan o‘rnatish bilan ularning planshetizga yetkazadigan shikast va ma‘lumotlaringizni o‘chirib yuborishiga javobgarlikni o‘z zimmangizga olasiz."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefoningiz va shaxsiy ma‘lumotlaringiz notanish ilovalar xujumiga zaif bo‘ladi. Bunday ilovalarni ushbu manbadan o‘rnatish bilan ularning telefoningizga yetkazadigan shikast va ma‘lumotlaringizni o‘chirib yuborishiga javobgarlikni o‘z zimmangizga olasiz."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Qurilmangiz va shaxsiy ma’lumotlaringiz notanish ilovalar hujumiga qarshilik ko‘rsata olmaydi. Ushbu manbadan ilovalar o‘rnatish orqali siz ulardan foydalanish natijasida qurilmangizga yetkazilgan har qanday zarar yoki o‘chib ketgan ma’lumotlaringiz uchun o‘zingiz javobgar bo‘lasiz."</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deyteranomaliya"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomaliya"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomaliya"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Qisqa (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> soniya)</item>
+      <item quantity="one">Qisqa (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> soniya)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Oʻrtacha (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> soniya)</item>
+      <item quantity="one">Oʻrtacha (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> soniya)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Uzoq (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> soniya)</item>
+      <item quantity="one">Uzoq (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> soniya)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> soniya</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> soniya</item>
@@ -3509,7 +3515,7 @@
     <string name="important_conversations" msgid="8701454279075552555">"Muhim suhbatlar"</string>
     <string name="all_conversations" msgid="7864274972384490939">"Barcha suhbatlar"</string>
     <string name="important_bubble" msgid="3820813960404079472">"Muhim suhbatlar qalqib chiqsin"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Muhim xabarlar bildirishnomalar panelining tepasida chiqadi. Siz ularni qalqib chiqadigan va “Bezovta qilinmasin” rejimida ham bildirishnoma chiqadigan qilishingiz mumkin."</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Muhim xabarlar bildirishnomalar panelining tepasida chiqadi. Siz ularni qalqib chiqadigan va Bezovta qilinmasin rejimida ham bildirishnoma chiqadigan qilishingiz mumkin."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Tovushsiz chiqarish va kichraytirish"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Tovushsiz"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Tovush bilan"</string>
@@ -4509,8 +4515,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafik drayverni tanlang"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Asosiy"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Game Driver"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Ishlab chiquvchilar uchun drayver versiyasi"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Tizim grafik drayveri"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4542,7 +4547,7 @@
     <string name="media_output_summary_unavailable" msgid="2695058965888813093">"Mavjud emas"</string>
     <string name="media_output_group_panel_title" msgid="3086245179062913037">"Chiquvchi qurilmani kiritish"</string>
     <string name="media_output_group" msgid="7918231774595274396">"Guruh"</string>
-    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1ta qurilma tanlandi"</string>
+    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1 ta qurilma tanlandi"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"<xliff:g id="COUNT">%1$d</xliff:g> ta qurilma tanlandi"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Chaqiruv qabul qilish"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Bu APN parametrlarini almashtirish imkonsiz."</string>

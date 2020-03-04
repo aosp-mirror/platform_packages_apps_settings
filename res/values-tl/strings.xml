@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Timeout ng visibility"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"I-lock ang pag-dial gamit ang boses"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Iwasan ang paggamit ng taga-dial ng bluetooth kapag naka-lock ang screen"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Mga device ng bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Pangalan ng device"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Mga setting ng device"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Mga setting ng profile"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Pumili ng kahit isang band para sa Wi‑Fi hotspot:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Mga setting ng IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privacy"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Mga detalye ng subscription"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Subscription"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Tingnan o baguhin ang subscription"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Na-randomize na MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Magdagdag ng device"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Igitna ang QR code sa ibaba para maidagdag ang device sa “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1755,12 +1757,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Para sa face unlock, mag-set ng password"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Para sa face unlock, mag-set ng pattern"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Para sa face unlock, mag-set ng PIN"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Nakalimutan ang iyong password?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Nakalimutan ang iyong pattern?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Nakalimutan ang iyong PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Gamitin ang iyong pattern sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Ilagay ang iyong PIN sa device upang magpatuloy"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Ilagay ang iyong password sa device upang magpatuloy"</string>
@@ -1828,10 +1827,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Payagan lahat ng source ng app"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Mga app na binuksan kamakailan"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Tingnan ang lahat ng <xliff:g id="COUNT">%1$d</xliff:g> (na) app"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Makipag-ugnayan sa iyong IT admin"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Matutulungan ka nilang i-reset ang iyong PIN, pattern, o password"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Mas nanganganib ang iyong tablet at personal na data sa pag-atake ng mga hindi alam na app. Sa pamamagitan ng pag-install ng mga app mula sa pinagmulang ito, sumasang-ayon kang ikaw ang mananagot para sa anumang pinsala sa iyong tablet o pagkawala ng data na maaaring maging resulta ng paggamit sa mga ito."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Mas nanganganib ang iyong telepono at personal na data sa pag-atake ng mga hindi alam na app. Sa pamamagitan ng pag-install ng mga app mula sa pinagmulang ito, sumasang-ayon kang ikaw ang mananagot para sa anumang pinsala sa iyong telepono o pagkawala ng data na maaaring maging resulta ng paggamit sa mga ito."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Mas nanganganib ang iyong device at personal na data sa pag-atake ng mga hindi alam na app. Sa pamamagitan ng pag-install ng mga app mula sa source na ito, sumasang-ayon kang ikaw ang mananagot para sa anumang pinsala sa iyong device o pagkawala ng data na maaaring maging resulta ng paggamit sa mga ito."</string>
@@ -2213,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomaly"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomaly"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomaly"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Maikli (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="other">Maikli (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> na segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Katamtaman (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="other">Katamtaman (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> na segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Matagal (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="other">Matagal (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> na segundo)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> na segundo</item>
@@ -4495,8 +4501,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Pumili ng Graphics Driver"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Default"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Game Driver"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Developer Driver"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Graphics Driver ng System"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

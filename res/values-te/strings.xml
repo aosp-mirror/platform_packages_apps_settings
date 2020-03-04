@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"దృశ్యమానత గడువు సమయం ముగింపు"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"వాయిస్ డయలింగ్‌ను లాక్ చేయి"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"స్కీన్ లాక్ చేయబడినప్పుడు బ్లూటూత్ డయలర్‌‌ను ఉపయోగించకుండా నిరోధించు"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"బ్లూటూత్ పరికరాలు"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"పరికరం పేరు"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"పరికర సెట్టింగ్‌లు"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"ప్రొఫైల్ సెట్టింగ్‌లు"</string>
@@ -762,12 +763,9 @@
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"సైన్ ఇన్ చేయి"</string>
-    <!-- no translation found for wifi_venue_website_button_text (7749360432667175030) -->
-    <skip />
-    <!-- no translation found for wifi_time_remaining (8503606272869846170) -->
-    <skip />
-    <!-- no translation found for wifi_expiry_time (5419758551129267624) -->
-    <skip />
+    <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"సైట్‌ను తెరవండి"</string>
+    <string name="wifi_time_remaining" msgid="8503606272869846170">"<xliff:g id="REMAINING_TIME">%1$s</xliff:g> మిగిలి ఉంది"</string>
+    <string name="wifi_expiry_time" msgid="5419758551129267624">"<xliff:g id="EXPIRY_TIME">%1$s</xliff:g>న గడువు ముగుస్తుంది"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"నెట్‌వర్క్‌కి సైన్ ఇన్ చేయడానికి ఇక్కడ నొక్కండి"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
@@ -893,7 +891,9 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wi-Fi హాట్‌స్పాట్ కోసం కనీసం ఒక బ్యాండ్‌ను ఎంచుకోండి:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP సెట్టింగ్‌లు"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"గోప్యత"</string>
-    <!-- no translation found for wifi_subscription_detail (5039591348290498109) -->
+    <!-- no translation found for wifi_subscription (4432423938285430113) -->
+    <skip />
+    <!-- no translation found for wifi_subscription_summary (18802471063384598) -->
     <skip />
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"యాదృచ్ఛీకరించబడిన MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"పరికరాన్ని జోడించండి"</string>
@@ -1641,10 +1641,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, బ్లూటూత్"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"హాట్‌స్పాట్, USB, బ్లూటూత్"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"ఇంటర్నెట్‌ను ఇతర పరికరాలతో షేర్ చేయడం లేదు"</string>
-    <!-- no translation found for tethering_interface_options (7575535888135143650) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_title (2167985468585290478) -->
-    <skip />
+    <string name="tethering_interface_options" msgid="7575535888135143650">"టెథరింగ్"</string>
+    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi హాట్‌స్పాట్‌ను ఉపయోగించవద్దు"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB ద్వారా మాత్రమే ఇంటర్నెట్‌ను షేర్ చేయండి"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"బ్లూటూత్ ద్వారా మాత్రమే ఇంటర్నెట్‌ను షేర్ చేయండి"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB, బ్లూటూత్ ద్వారా మాత్రమే ఇంటర్నెట్‌ను షేర్ చేయండి"</string>
@@ -1761,12 +1759,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"ముఖంతో అన్‌లాక్ కోసం పాస్‌వర్డ్ పెట్టండి"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"ముఖంతో అన్‌లాక్ కోసం, ఆకృతి సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"ముఖంతో అన్‌లాక్ కోసం, పిన్ సెట్ చేయండి"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"మీ పాస్‌వర్డ్‌ను మరచిపోయారా?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"మీ ఆకృతిని మర్చిపోయారా?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"మీ పిన్‌ను మర్చిపోయారా?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"కొనసాగడానికి మీ పరికరం నమూనాను ఉపయోగించండి"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"కొనసాగడానికి మీ డివైజ్ పిన్‌ను నమోదు చేయండి"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"కొనసాగడానికి మీ పరికర పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
@@ -1834,10 +1829,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"అన్ని అనువ. మూలాలను అనుమతించు"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ఇటీవల తెరిచిన యాప్‌లు"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"మొత్తం <xliff:g id="COUNT">%1$d</xliff:g> యాప్‌లను చూడండి"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"మీ IT నిర్వాహకులను సంప్రదించండి"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"పిన్‌ను, ఆకృతిని, లేదా పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి వారు సహాయపడతారు"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"మీ టాబ్లెట్ మరియు వ్యక్తిగత డేటా తెలియని మూలాల్లోని అనువర్తనాల ద్వారా దాడికి గురి కావడానికి ఎక్కువ అవకాశం ఉంటుంది. ఈ మూలం నుండి అనువర్తనాలను ఇన్‌స్టాల్ చేయడం ద్వారా, ఈ అనువర్తనాలను ఉపయోగించడం ద్వారా మీ టాబ్లెట్‌కు సంభవించే ఏదైనా నష్టానికి లేదా కోల్పోయే డేటాకి బాధ్యత వహించడానికి మీరు అంగీకరిస్తున్నారు."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"మీ ఫోన్ మరియు వ్యక్తిగత డేటా తెలియని మూలాల్లోని అనువర్తనాల ద్వారా దాడికి గురి కావడానికి ఎక్కువ అవకాశం ఉంటుంది. ఈ మూలం నుండి అనువర్తనాలను ఇన్‌స్టాల్ చేయడం ద్వారా, ఈ అనువర్తనాలను ఉపయోగించడం వలన మీ ఫోన్‌కు సంభవించే ఏదైనా నష్టానికి లేదా కోల్పోయే డేటాకి బాధ్యత వహించడానికి మీరు అంగీకరిస్తున్నారు."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"మీ పరికరం మరియు వ్యక్తిగత డేటాపై తెలియని మూలాధారాల నుండి పొందిన యాప్‌లు దాడి చేసే అవకాశం ఎక్కువగా ఉంది. ఈ మూలాధారం నుండి పొందిన యాప్‌లను ఇన్‌స్టాల్ చేయడం ద్వారా, వాటి ఉపయోగం కారణంగా మీ పరికరానికి జరిగే హాని లేదా డేటాని కోల్పోవడం వంటి వాటికి మీరే పూర్తి బాధ్యత వహించడానికి మీరు అంగీకరించాలి."</string>
@@ -2186,8 +2179,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"రింగ్ వైబ్రేషన్"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"స్పర్శ ప్రతిస్పందన"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ను ఉపయోగించు"</string>
-    <!-- no translation found for accessibility_service_master_open_title (7437956750557583681) -->
-    <skip />
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ను తెరువు"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"రంగు సవరణను ఉపయోగించండి"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"శీర్షికలను చూపించు"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"శీర్షిక ప్రదర్శన శైలి"</string>
@@ -2220,9 +2212,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"డ్యూటెరానోమలీ"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"ప్రొటానోమలీ"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ట్రైటనోమలీ"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">తక్కువ ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> సెకన్లు)</item>
+      <item quantity="one">తక్కువ ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> సెకను)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">కాస్త ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> సెకన్లు)</item>
+      <item quantity="one">కాస్త ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> సెకను)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">ఎక్కువ ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> సెకన్లు)</item>
+      <item quantity="one">ఎక్కువ ఆలస్యం (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> సెకను)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> సెకన్లు</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> సెకను</item>
@@ -2900,7 +2901,7 @@
     <string name="vpn_cant_connect_message" msgid="2139148820719163694">"ఈ యాప్ ఎల్లప్పుడూ ఆన్‌లో ఉండే VPNకు మద్దతివ్వదు"</string>
     <string name="vpn_title" msgid="3068868814145870274">"VPN"</string>
     <string name="vpn_create" msgid="7546073242936894638">"VPN ప్రొపైల్‌ను జోడించండి"</string>
-    <string name="vpn_menu_edit" msgid="5100387853773792379">"ప్రొఫైల్‌ని సవరించు"</string>
+    <string name="vpn_menu_edit" msgid="5100387853773792379">"ప్రొఫైల్‌ను ఎడిట్ చేయి"</string>
     <string name="vpn_menu_delete" msgid="4455966182219039928">"ప్రొఫైల్‌ను తొలగించు"</string>
     <string name="vpn_menu_lockdown" msgid="5284041663859541007">"ఎల్లప్పుడూ-ఆన్‌లో ఉండే VPN"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"VPNలు ఏవీ జోడించబడలేదు"</string>
@@ -3502,16 +3503,11 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"సంభాషణ విభాగం నుండి తీసివేయండి"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"ఇది ఒక సంభాషణ"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"సంభాషణ విభాగానికి జోడించండి"</string>
-    <!-- no translation found for manage_conversations (4440289604887824337) -->
-    <skip />
-    <!-- no translation found for important_conversations (8701454279075552555) -->
-    <skip />
-    <!-- no translation found for all_conversations (7864274972384490939) -->
-    <skip />
-    <!-- no translation found for important_bubble (3820813960404079472) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (3813751382595404403) -->
-    <skip />
+    <string name="manage_conversations" msgid="4440289604887824337">"సంభాషణలను మేనేజ్ చేయండి"</string>
+    <string name="important_conversations" msgid="8701454279075552555">"ముఖ్యమైన సంభాషణలు"</string>
+    <string name="all_conversations" msgid="7864274972384490939">"అన్ని సంభాషణలు"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"ముఖ్యమైన సంభాషణలను బబుల్ చేయండి"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"కిందకు-లాగే షేడ్ ఎగువ భాగంలో ముఖ్యమైన సంభాషణలు కనిపిస్తాయి. మీరు వాటిని బబుల్‌గా కూడా సెట్ చేయవచ్చు \'అంతరాయం కలిగించవద్దు\'ను ఆపవచ్చు."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"నిశ్శబ్దంగా చూపించు మరియు కనిష్టీకరించండి"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"నిశ్శబ్దంగా చూపు"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"శబ్దం చేయి"</string>
@@ -3754,10 +3750,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"అన్‌పిన్ చేయడానికి ముందు పిన్‌ను అడుగు"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"అన్‌పిన్ చేయడానికి ముందు పాస్‌వర్డ్ కోసం అడుగు"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"అన్‌పిన్ చేస్తున్నప్పుడు పరికరాన్ని లాక్ చేయి"</string>
-    <!-- no translation found for confirm_sim_deletion_title (9199369003530237871) -->
-    <skip />
-    <!-- no translation found for confirm_sim_deletion_description (8937609409607338516) -->
-    <skip />
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM తొలగింపును నిర్ధారించండి"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"డౌన్‌లోడ్ అయిన SIMను తొలగించేముందు మీరేనని వెరిఫై చేయండి"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"ఈ కార్యాలయ ప్రొఫైల్ వీరి నిర్వహణలో ఉంది:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"నిర్వహిస్తున్నది <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(ప్రయోగాత్మకం)"</string>
@@ -4511,8 +4505,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"గ్రాఫిక్స్ డ్రైవర్‌ను ఎంచుకోండి"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"డిఫాల్ట్"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"గేమ్ డ్రైవర్"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"డెవలపర్ డ్రైవర్"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"సిస్టమ్ గ్రాఫిక్స్ డ్రైవర్"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4542,14 +4535,10 @@
     <string name="media_output_summary" product="device" msgid="3598300438694764381">"పరికరం"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"కాల్‌ల సమయంలో అందుబాటులో ఉండదు"</string>
     <string name="media_output_summary_unavailable" msgid="2695058965888813093">"అందుబాటులో లేదు"</string>
-    <!-- no translation found for media_output_group_panel_title (3086245179062913037) -->
-    <skip />
-    <!-- no translation found for media_output_group (7918231774595274396) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_single_device_summary (5027884071572180516) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_multiple_devices_summary (4838305763151455248) -->
-    <skip />
+    <string name="media_output_group_panel_title" msgid="3086245179062913037">"అవుట్‌పుట్‌లను యాడ్ చేయండి"</string>
+    <string name="media_output_group" msgid="7918231774595274396">"గ్రూప్"</string>
+    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1 పరికరం ఎంచుకోబడింది"</string>
+    <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"<xliff:g id="COUNT">%1$d</xliff:g> పరికరాలు ఎంచుకోబడ్డాయి"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"కాల్ తీసుకోండి"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"ఈ APNని మార్చడానికి సాధ్యం కాదు."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"టాబ్లెట్ బ్యాటరీ జీవితకాలాన్ని మెరుగుపరచండి"</string>
@@ -4790,6 +4779,5 @@
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
-    <!-- no translation found for media_output_panel_stop_casting_button (6094875883164119035) -->
-    <skip />
+    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"ప్రసారాన్ని ఆపివేయండి"</string>
 </resources>

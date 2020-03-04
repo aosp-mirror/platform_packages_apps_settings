@@ -67,6 +67,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Време чекања за видљивост"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Закључај говорно бирање"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Спречи коришћење bluetooth програма за бирање бројева када је екран закључан"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth уређаји"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Назив уређаја"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Подешавања уређаја"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Подешавања профила"</string>
@@ -907,7 +908,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Изаберите барем један опсег за Wi‑Fi хотспот:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP подешавања"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Приватност"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Детаљи претплате"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Претплата"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Прегледајте или промените претплату"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Насумично изабрани MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Додај уређај"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Поставите QR кôд у наставку да бисте додали уређај на мрежу „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -2232,9 +2234,21 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Деутераномалија"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Протаномалија"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалија"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Кратко (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="few">Кратко (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунде)</item>
+      <item quantity="other">Кратко (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Средње (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="few">Средње (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунде)</item>
+      <item quantity="other">Средње (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Дуго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
+      <item quantity="few">Дуго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунде)</item>
+      <item quantity="other">Дуго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда</item>
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунде</item>
