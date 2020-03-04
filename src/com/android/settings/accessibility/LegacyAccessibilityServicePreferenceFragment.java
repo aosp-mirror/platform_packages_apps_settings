@@ -43,7 +43,7 @@ public class LegacyAccessibilityServicePreferenceFragment extends
         final CharSequence hardwareTitle = getPrefContext().getText(
                 R.string.accessibility_shortcut_edit_dialog_title_hardware);
         mShortcutPreference.setSummary(hardwareTitle);
-        mShortcutPreference.setSettingsVisibility(View.GONE);
+        mShortcutPreference.setSettingsEditable(false);
 
         setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
     }
