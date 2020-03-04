@@ -27,8 +27,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
+import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
@@ -37,15 +39,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class UsbTetherPreferenceControllerTest {
 
     @Mock
     private ConnectivityManager mConnectivityManager;
+    @Mock
+    private SharedPreferences mSharedPreferences;
 
     private Context mContext;
     private UsbTetherPreferenceController mController;
+    private SwitchPreference mSwitchPreference;
 
     @Before
     public void setUp() {
@@ -55,7 +61,11 @@ public class UsbTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
+        when(mContext.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
+                .thenReturn(mSharedPreferences);
         mController = new UsbTetherPreferenceController(mContext, USB_TETHER_KEY);
+        mSwitchPreference = spy(SwitchPreference.class);
+        ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
     }
 
     @Test
@@ -80,5 +90,21 @@ public class UsbTetherPreferenceControllerTest {
 
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void switch_shouldCheckedWhenSharedPreferencesIsTrue() {
+        when(mSharedPreferences.getBoolean(USB_TETHER_KEY, false)).thenReturn(true);
+        mController.onSharedPreferenceChanged(mSharedPreferences, USB_TETHER_KEY);
+
+        verify(mSwitchPreference).setChecked(true);
+    }
+
+    @Test
+    public void switch_shouldUnCheckedWhenSharedPreferencesIsFalse() {
+        when(mSharedPreferences.getBoolean(USB_TETHER_KEY, false)).thenReturn(false);
+        mController.onSharedPreferenceChanged(mSharedPreferences, USB_TETHER_KEY);
+
+        verify(mSwitchPreference).setChecked(false);
     }
 }
