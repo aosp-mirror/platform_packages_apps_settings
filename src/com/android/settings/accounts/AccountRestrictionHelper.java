@@ -53,7 +53,7 @@ public class AccountRestrictionHelper {
             return;
         }
         if (hasBaseUserRestriction(userRestriction, userId)) {
-            if (isDisallowRemoveManagedProfileRestriction(userRestriction)
+            if (userRestriction.equals(DISALLOW_REMOVE_MANAGED_PROFILE)
                     && isOrganizationOwnedDevice()) {
                 preference.setDisabledByAdmin(getEnforcedAdmin(userRestriction, userId));
             } else {
@@ -69,10 +69,6 @@ public class AccountRestrictionHelper {
                 userId);
     }
 
-    private boolean isDisallowRemoveManagedProfileRestriction(String userRestriction) {
-        return userRestriction.equals(DISALLOW_REMOVE_MANAGED_PROFILE);
-    }
-
     private boolean isOrganizationOwnedDevice() {
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
@@ -85,7 +81,7 @@ public class AccountRestrictionHelper {
     private EnforcedAdmin getEnforcedAdmin(String userRestriction, int userId) {
         final DevicePolicyManager dpm = (DevicePolicyManager) mContext.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
-        if (dpm != null) {
+        if (dpm == null) {
             return null;
         }
         final int managedUsedId = getManagedUserId(userId);
