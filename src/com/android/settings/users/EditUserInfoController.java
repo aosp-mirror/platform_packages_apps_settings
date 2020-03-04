@@ -83,8 +83,7 @@ public class EditUserInfoController {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-        if (mEditUserInfoDialog != null && mEditUserInfoDialog.isShowing()
-                && mEditUserPhotoController != null) {
+        if (mEditUserInfoDialog != null && mEditUserPhotoController != null) {
             // Bitmap cannot be stored into bundle because it may exceed parcel limit
             // Store it in a temporary file instead
             File file = mEditUserPhotoController.saveNewUserPhotoBitmap();
