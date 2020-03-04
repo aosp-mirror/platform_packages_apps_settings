@@ -98,7 +98,6 @@ public class MobileDataPreferenceControllerTest {
     public void isDialogNeeded_disableSingleSim_returnFalse() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         assertThat(mController.isDialogNeeded()).isFalse();
@@ -130,7 +129,6 @@ public class MobileDataPreferenceControllerTest {
     public void onPreferenceChange_singleSim_On_shouldEnableData() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(1).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
@@ -142,7 +140,6 @@ public class MobileDataPreferenceControllerTest {
     public void onPreferenceChange_multiSim_On_shouldEnableData() {
         doReturn(true).when(mTelephonyManager).isDataEnabled();
         doReturn(mSubscriptionInfo).when(mSubscriptionManager).getActiveSubscriptionInfo(SUB_ID);
-        doReturn(mSubscriptionInfo).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(2).when(mTelephonyManager).getActiveModemCount();
 
         mController.onPreferenceChange(mPreference, true);
