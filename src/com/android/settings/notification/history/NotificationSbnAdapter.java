@@ -16,14 +16,18 @@
 
 package com.android.settings.notification.history;
 
-import static android.content.pm.PackageManager.*;
+import static android.app.Notification.COLOR_DEFAULT;
+import static android.content.pm.PackageManager.MATCH_ANY_USER;
+import static android.content.pm.PackageManager.NameNotFoundException;
 import static android.os.UserHandle.USER_ALL;
 import static android.os.UserHandle.USER_CURRENT;
 
+import android.annotation.ColorInt;
 import android.app.Notification;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -38,6 +42,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -53,12 +58,19 @@ public class NotificationSbnAdapter extends
     private Map<Integer, Drawable> mUserBadgeCache;
     private final Context mContext;
     private PackageManager mPm;
+    private @ColorInt int mBackgroundColor;
+    private boolean mInNightMode;
 
     public NotificationSbnAdapter(Context context, PackageManager pm) {
         mContext = context;
         mPm = pm;
         mUserBadgeCache = new HashMap<>();
         mValues = new ArrayList<>();
+        mBackgroundColor = mContext.getColor(
+                com.android.internal.R.color.notification_material_background_color);
+        Configuration currentConfig = mContext.getResources().getConfiguration();
+        mInNightMode = (currentConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                == Configuration.UI_MODE_NIGHT_YES;
         setHasStableIds(true);
     }
 
@@ -169,7 +181,7 @@ public class NotificationSbnAdapter extends
             return null;
         }
         draw.mutate();
-        draw.setColorFilter(sbn.getNotification().color, PorterDuff.Mode.SRC_ATOP);
+        draw.setColorFilter(getContrastedColor(sbn.getNotification()), PorterDuff.Mode.SRC_ATOP);
         return draw;
     }
 
@@ -179,5 +191,14 @@ public class NotificationSbnAdapter extends
             userId = USER_CURRENT;
         }
         return userId;
+    }
+
+    private int getContrastedColor(Notification n) {
+        int rawColor = n.color;
+        if (rawColor != COLOR_DEFAULT) {
+            rawColor |= 0xFF000000; // no alpha for custom colors
+        }
+        return ContrastColorUtil.resolveContrastColor(
+                mContext, rawColor, mBackgroundColor, mInNightMode);
     }
 }
