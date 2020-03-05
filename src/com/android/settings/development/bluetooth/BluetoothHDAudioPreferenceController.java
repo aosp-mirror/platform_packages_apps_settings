@@ -58,11 +58,11 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             mPreference.setEnabled(false);
             return;
         }
-        final boolean supported = (bluetoothA2dp.supportsOptionalCodecs(activeDevice)
+        final boolean supported = (bluetoothA2dp.isOptionalCodecsSupported(activeDevice)
                 == BluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mPreference.setEnabled(supported);
         if (supported) {
-            final boolean isEnabled = bluetoothA2dp.getOptionalCodecsEnabled(activeDevice)
+            final boolean isEnabled = bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
                     == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED;
             ((SwitchPreference) mPreference).setChecked(isEnabled);
         }
@@ -84,11 +84,16 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
         final int prefValue = enabled
                 ? BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED
                 : BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED;
-        bluetoothA2dp.setOptionalCodecsEnabled(bluetoothA2dp.getActiveDevice(), prefValue);
+        BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
+        if (activeDevice == null) {
+            mPreference.setEnabled(false);
+            return true;
+        }
+        bluetoothA2dp.setOptionalCodecsEnabled(activeDevice, prefValue);
         if (enabled) {
-            bluetoothA2dp.enableOptionalCodecs(null); // Use current active device
+            bluetoothA2dp.enableOptionalCodecs(activeDevice);
         } else {
-            bluetoothA2dp.disableOptionalCodecs(null); // Use current active device
+            bluetoothA2dp.disableOptionalCodecs(activeDevice);
         }
         mCallback.onBluetoothHDAudioEnabled(enabled);
         return true;
