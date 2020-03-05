@@ -967,6 +967,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     @Override
     public void onUpdated() {
         refreshPage();
+
+        // Refresh the Preferences in fragment.
+        ((WifiNetworkDetailsFragment2) mFragment).refreshPreferences();
     }
 
     /**
