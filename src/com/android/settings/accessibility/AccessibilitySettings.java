@@ -635,9 +635,11 @@ public class AccessibilitySettings extends DashboardFragment {
                 final String description = info.loadDescription(mPm);
                 final int imageRes = info.getAnimatedImageRes();
                 final String htmlDescription = info.loadHtmlDescription(mPm);
+                final String settingsClassName = info.getSettingsActivityName();
 
                 putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
                         componentName);
+                putSettingsExtras(preference, packageName, settingsClassName);
 
                 preferenceList.add(preference);
             }
