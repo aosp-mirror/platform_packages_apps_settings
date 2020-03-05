@@ -112,7 +112,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                     .setTitle(outputTitle)
                     .setSubtitle(mediaDevice.getName())
                     .setTitleItem(emptyIcon, ListBuilder.ICON_IMAGE)
-                    .setPrimaryAction(getMediaOutputSliceAction()));
+                    .setPrimaryAction(getMediaOutputSliceAction(
+                            mediaDevice.getClientPackageName())));
         }
         return listBuilder.build();
     }
@@ -144,10 +145,11 @@ public class RemoteMediaSlice implements CustomSliceable {
         return primarySliceAction;
     }
 
-    private SliceAction getMediaOutputSliceAction() {
+    private SliceAction getMediaOutputSliceAction(String packageName) {
         final Intent intent = new Intent()
                 .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME, packageName);
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_volume_remote);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
