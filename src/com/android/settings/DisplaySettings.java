@@ -24,7 +24,6 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.display.BrightnessLevelPreferenceController;
 import com.android.settings.display.CameraGesturePreferenceController;
-import com.android.settings.display.DarkUIPreferenceController;
 import com.android.settings.display.LiftToWakePreferenceController;
 import com.android.settings.display.NightDisplayPreferenceController;
 import com.android.settings.display.NightModePreferenceController;
@@ -67,7 +66,6 @@ public class DisplaySettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        use(DarkUIPreferenceController.class).setParentFragment(this);
     }
 
     @Override
