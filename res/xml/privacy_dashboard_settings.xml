@@ -22,13 +22,6 @@
     android:title="@string/privacy_dashboard_title"
     settings:initialExpandedChildrenCount="4">
 
-    <!-- This preference isn't searchable, and user won't see title in this preference.
-         So, we just set empty text for title. -->
-    <com.android.settingslib.widget.BarChartPreference
-        android:key="permission_bar_chart"
-        android:title="@string/summary_placeholder"
-        settings:controller="com.android.settings.privacy.PermissionBarChartPreferenceController"/>
-
     <!-- Work Policy info -->
     <Preference
         android:key="work_policy_info"
