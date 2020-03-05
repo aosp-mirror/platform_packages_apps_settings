@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Definir visibilidad"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Bloquear marcación por voz"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Impedir el uso de Bluetooth del dispositivo cuando la pantalla esté bloqueada."</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Dispositivos Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Nombre del dispositivo"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Configuración del dispositivo"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Configuración del perfil"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Elige al menos una banda para el hotspot de Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Configuración de IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privacidad"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Detalles de suscripción"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Suscripción"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Ver o cambiar la suscripción"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Dirección MAC aleatoria"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Agregar un dispositivo"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centra el código QR debajo para agregar el dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteronomalía"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalía"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalía"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Breve (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
+      <item quantity="one">Breve (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Medio (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
+      <item quantity="one">Medio (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Largo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
+      <item quantity="one">Largo (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo</item>

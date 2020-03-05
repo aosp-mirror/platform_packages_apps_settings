@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Sichtbarkeit einstellen"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Sprachwahl sperren"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth-Geräte"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Gerätename"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Geräteeinstellungen"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profileinstellungen"</string>
@@ -763,12 +764,9 @@
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"Anmelden"</string>
-    <!-- no translation found for wifi_venue_website_button_text (7749360432667175030) -->
-    <skip />
-    <!-- no translation found for wifi_time_remaining (8503606272869846170) -->
-    <skip />
-    <!-- no translation found for wifi_expiry_time (5419758551129267624) -->
-    <skip />
+    <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"Website öffnen"</string>
+    <string name="wifi_time_remaining" msgid="8503606272869846170">"Noch <xliff:g id="REMAINING_TIME">%1$s</xliff:g>"</string>
+    <string name="wifi_expiry_time" msgid="5419758551129267624">"Läuft am <xliff:g id="EXPIRY_TIME">%1$s</xliff:g> ab"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"Tippe hier, um dich im Netzwerk anzumelden"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbit/s"</string>
@@ -894,8 +892,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Bitte für den WLAN-Hotspot mindestens eine Bandbreite auswählen:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP-Einstellungen"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Datenschutz"</string>
-    <!-- no translation found for wifi_subscription_detail (5039591348290498109) -->
-    <skip />
+    <string name="wifi_subscription" msgid="4432423938285430113">"Abo"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Abo ansehen oder ändern"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Zufällig festgelegte MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Gerät hinzufügen"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wenn du das Gerät zu \"<xliff:g id="SSID">%1$s</xliff:g>\" hinzufügen möchtest, scanne den QR-Code unten"</string>
@@ -1642,10 +1640,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Hotspot, USB, Bluetooth"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetverbindung wird nicht für andere Geräte freigegeben"</string>
-    <!-- no translation found for tethering_interface_options (7575535888135143650) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_title (2167985468585290478) -->
-    <skip />
+    <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
+    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"WLAN-Hotspot nicht verwenden"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Internet nur über USB teilen"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Internet nur über Bluetooth teilen"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Internet nur über USB und Bluetooth teilen"</string>
@@ -1762,12 +1758,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Für Face Unlock Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Für Face Unlock Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Für Face Unlock PIN festlegen"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Passwort vergessen?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Muster vergessen?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"PIN vergessen?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Gib zum Fortfahren das Muster für dein Gerät ein"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Gib zum Fortfahren die PIN für dein Gerät ein"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Gib zum Fortfahren das Passwort für dein Gerät ein"</string>
@@ -1835,10 +1828,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Alle App-Quellen zulassen"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Kürzlich geöffnete Apps"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Alle <xliff:g id="COUNT">%1$d</xliff:g> Apps anzeigen"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"IT-Administrator kontaktieren"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Der IT-Administrator hilft dir beim Zurücksetzen deiner PIN, deines Musters oder Passworts"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Apps mit unbekannter Herkunft können gefährlich für dein Tablet und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Tablet und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Apps mit unbekannter Herkunft können gefährlich für dein Smartphone und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Smartphone und jegliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Apps mit unbekannter Herkunft können gefährlich für dein Gerät und deine personenbezogenen Daten sein. Wenn du Apps aus dieser Quelle installierst, erklärst du dich damit einverstanden, dass du die Verantwortung für alle Schäden an deinem Gerät und sämtliche Datenverluste trägst, die aus der Verwendung dieser Apps entstehen können."</string>
@@ -2187,8 +2178,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration bei Klingeln"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Haptisches Feedback"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> verwenden"</string>
-    <!-- no translation found for accessibility_service_master_open_title (7437956750557583681) -->
-    <skip />
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> öffnen"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Farbkorrektur aktivieren"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Untertitel anzeigen"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"Untertiteldesign"</string>
@@ -2221,9 +2211,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomalie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Kurz (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> Sekunden)</item>
+      <item quantity="one">Kurz (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Mittel (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> Sekunden)</item>
+      <item quantity="one">Mittel (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Lang (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> Sekunden)</item>
+      <item quantity="one">Lang (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> Sekunden</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde</item>
@@ -3503,16 +3502,11 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Aus dem Bereich für Unterhaltungen entfernen"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dies ist eine Unterhaltung"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dem Bereich für Unterhaltungen hinzufügen"</string>
-    <!-- no translation found for manage_conversations (4440289604887824337) -->
-    <skip />
-    <!-- no translation found for important_conversations (8701454279075552555) -->
-    <skip />
-    <!-- no translation found for all_conversations (7864274972384490939) -->
-    <skip />
-    <!-- no translation found for important_bubble (3820813960404079472) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (3813751382595404403) -->
-    <skip />
+    <string name="manage_conversations" msgid="4440289604887824337">"Unterhaltungen verwalten"</string>
+    <string name="important_conversations" msgid="8701454279075552555">"Wichtige Unterhaltungen"</string>
+    <string name="all_conversations" msgid="7864274972384490939">"Alle Unterhaltungen"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"Wichtige Unterhaltungen als Bubble anzeigen"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Wichtige Unterhaltungen werden oben in der Benachrichtigungsleiste angezeigt. Du kannst auch einstellen, dass sie als Bubbles angezeigt werden oder den \"Bitte nicht stören\"-Modus unterbrechen können."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Lautlos anzeigen und minimieren"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Ohne Ton anzeigen"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Akustisches Signal"</string>
@@ -3755,10 +3749,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vor Beenden nach PIN fragen"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vor dem Beenden nach Passwort fragen"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Gerät beim Beenden sperren"</string>
-    <!-- no translation found for confirm_sim_deletion_title (9199369003530237871) -->
-    <skip />
-    <!-- no translation found for confirm_sim_deletion_description (8937609409607338516) -->
-    <skip />
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Löschen der SIM bestätigen"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Bestätige deine Identität, um eine heruntergeladene SIM zu löschen"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Dieses Arbeitsprofil wird verwaltet von:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Verwaltet von <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Experimentell)"</string>
@@ -4510,8 +4502,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Grafiktreiber auswählen"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Standard"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Game Driver"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Entwickler-Treiber"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Grafiktreiber des Systems"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4541,14 +4532,10 @@
     <string name="media_output_summary" product="device" msgid="3598300438694764381">"Gerät"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Während Anrufen nicht verfügbar"</string>
     <string name="media_output_summary_unavailable" msgid="2695058965888813093">"Nicht verfügbar"</string>
-    <!-- no translation found for media_output_group_panel_title (3086245179062913037) -->
-    <skip />
-    <!-- no translation found for media_output_group (7918231774595274396) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_single_device_summary (5027884071572180516) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_multiple_devices_summary (4838305763151455248) -->
-    <skip />
+    <string name="media_output_group_panel_title" msgid="3086245179062913037">"Ausgabegeräte hinzufügen"</string>
+    <string name="media_output_group" msgid="7918231774595274396">"Gruppe"</string>
+    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"Ein Gerät ausgewählt"</string>
+    <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"<xliff:g id="COUNT">%1$d</xliff:g> Geräte ausgewählt"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Anruf annehmen auf"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Dieser APN kann nicht geändert werden."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Akkulaufzeit des Tablets verbessern"</string>
@@ -4789,6 +4776,5 @@
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
-    <!-- no translation found for media_output_panel_stop_casting_button (6094875883164119035) -->
-    <skip />
+    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Streamen beenden"</string>
 </resources>

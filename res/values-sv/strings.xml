@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Tidsgräns för synlighet"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Röstuppringning med låsskärm"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Förhindra att bluetooth-uppringningsfunktionen används när skärmen är låst"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth-enheter"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Enhetens namn"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Enhetsinställningar"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profilinställningar"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Välj minst ett band för Wi‑Fi-surfzon:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP-inställningar"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Sekretess"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Information om prenumerationen"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Prenumeration"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Visa eller ändra prenumeration"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Slumpgenererad MAC-adress"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Lägg till en enhet"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Lägg till enheten i <xliff:g id="SSID">%1$s</xliff:g> genom att centrera QR-koden i fönstret nedan"</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranopi"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanopi"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanopi"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Kort (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
+      <item quantity="one">Kort (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Medel (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
+      <item quantity="one">Medel (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Lång (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder)</item>
+      <item quantity="one">Lång (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunder</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund</item>

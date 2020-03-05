@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Ikusgaitasunaren denbora-muga gainditu da"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Blokeatu ahots bidezko markatzea"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Galarazi Bluetooth telefonoa erabiltzea pantaila blokeatuta dagoenean"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth bidezko gailuak"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Gailuaren izena"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Gailuaren ezarpenak"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Profilaren ezarpenak"</string>
@@ -890,7 +891,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Aukeratu gutxienez banda bat Wi-Fi sare publikorako:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP ezarpenak"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Pribatutasuna"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Harpidetzaren xehetasunak"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Harpidetza"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Ikusi edo aldatu harpidetza"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Ausaz aukeratutako MACa"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Gehitu gailua"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Gailua \"<xliff:g id="SSID">%1$s</xliff:g>\" sarean gehitzeko, erdiratu QR kodea hemen behean"</string>
@@ -2208,9 +2210,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Daltonismoa"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanopia"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanopia"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">Laburra (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="one">Laburra (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">Ertaina (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="one">Ertaina (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">Luzea (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
+      <item quantity="one">Luzea (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo</item>
@@ -3737,7 +3748,7 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Eskatu PIN kodea aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Eskatu pasahitza aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blokeatu gailua aingura kentzean"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Berretsi SIMedko edukia ezabatu nahi duzula"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Berretsi SIMeko edukia ezabatu nahi duzula"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Deskargatutako SIM bateko eduki guztia ezabatu aurretik, egiaztatu zeu zarela"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Laneko profil hau honen bidez kudeatzen da:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Kudeatzailea: <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>

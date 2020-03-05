@@ -68,6 +68,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Časovna omejitev vidnosti"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Zakleni glasovno klicanje"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Prepreči uporabo telefona Bluetooth, kadar je zaslon zaklenjen"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Naprave Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Ime naprave"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Nastavitve naprave"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Nastavitve profila"</string>
@@ -924,7 +925,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Izberite vsaj en pas za dostopno točko Wi‑Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Nastavitve naslova IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Zasebnost"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Podrobnosti o naročnini"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Naročnina"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Ogled ali sprememba naročnine"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Naključno izbran MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodajanje naprave"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Spodnjo kodo QR nastavite na sredino, če želite napravo dodati v omrežje »<xliff:g id="SSID">%1$s</xliff:g>«."</string>
@@ -2256,9 +2258,24 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Devteranomalija"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomalija"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalija"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="one">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="two">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+      <item quantity="few">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Kratko (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="one">Srednje dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="two">Srednje dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+      <item quantity="few">Srednje dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Srednje dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="one">Dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda)</item>
+      <item quantity="two">Dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi)</item>
+      <item quantity="few">Dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde)</item>
+      <item quantity="other">Dolgo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunda</item>
       <item quantity="two"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundi</item>

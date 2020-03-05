@@ -68,6 +68,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"Časový limit viditelnosti"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"Uzamknout hlasové vytáčení"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"Zabránit použití vytáčení Bluetooth při uzamčené obrazovce"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Zařízení Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"Název zařízení"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"Nastavení zařízení"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"Nastavení profilu"</string>
@@ -924,7 +925,8 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Vyberte alespoň jedno pásmo pro hotspot Wi-Fi:"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"Nastavení IP adresy"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Ochrana soukromí"</string>
-    <string name="wifi_subscription_detail" msgid="5039591348290498109">"Podrobnosti předplatného"</string>
+    <string name="wifi_subscription" msgid="4432423938285430113">"Odběr"</string>
+    <string name="wifi_subscription_summary" msgid="18802471063384598">"Zobrazení nebo změna odběru"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Náhodná adresa MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Přidat zařízení"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Chcete-li zařízení přidat do sítě <xliff:g id="SSID">%1$s</xliff:g>, níže vycentrujte QR kód"</string>
@@ -1799,12 +1801,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Nastavte heslo pro odemknutí obličejem"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Nastavte gesto pro odemknutí obličejem"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Nastavte PIN pro odemknutí obličejem"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Zapomněli jste heslo?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Zapomněli jste gesto?"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Zapomněli jste PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Chcete-li pokračovat, zadejte gesto zařízení."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Chcete-li pokračovat, zadejte PIN zařízení."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Chcete-li pokračovat, zadejte heslo zařízení."</string>
@@ -1872,10 +1871,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Povolit všechny zdroje aplikací"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedávno otevřené aplikace"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"Zobrazit všechny aplikace (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"Kontaktujte administrátora IT"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Mohou vám pomoci resetovat PIN, gesto či heslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tablet a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození tabletu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefon a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození telefonu nebo ztrátu dat, které jejich používání může způsobit."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Zařízení a osobní údaje jsou zranitelnější vůči útoku ze strany neznámých aplikací. Instalací aplikací z tohoto zdroje vyjadřujete souhlas s tím, že nesete odpovědnost za případné poškození zařízení nebo ztrátu dat, které jejich používání může způsobit."</string>
@@ -2261,9 +2258,24 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"Deuteranomálie"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"Protanomálie"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomálie"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="few">Krátká (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="many">Krátká (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="other">Krátká (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="one">Krátká (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> s)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="few">Střední (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="many">Střední (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="other">Střední (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="one">Střední (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> s)</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="few">Dlouhá (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="many">Dlouhá (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="other">Dlouhá (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> s)</item>
+      <item quantity="one">Dlouhá (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> s)</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy</item>
       <item quantity="many"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy</item>
@@ -4653,8 +4665,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"Vyberte ovladač grafiky"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"Výchozí"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"Herní ovladač"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"Ovladač pro vývojáře"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Systémový ovladač grafiky"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->

@@ -26,10 +26,14 @@ import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.Nullable;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -82,12 +86,25 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
 
         // Settings html description.
         mHtmlDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
+
+        // Settings title and intent.
+        final String settingsTitle = arguments.getString(
+                AccessibilitySettings.EXTRA_SETTINGS_TITLE);
+        mSettingsIntent = TextUtils.isEmpty(settingsTitle) ? null : getSettingsIntent(arguments);
+        mSettingsTitle = (mSettingsIntent == null) ? null : settingsTitle;
     }
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
         showDialog(DialogEnums.EDIT_SHORTCUT);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Do not call super. We don't want to see the "Help & feedback" option on this page so as
+        // not to confuse users who think they might be able to send feedback about a specific
+        // accessibility service from this page.
     }
 
     @Override
@@ -130,5 +147,22 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
             // ignore the exception
             Log.w(TAG, "Target activity not found.");
         }
+    }
+
+    @Nullable
+    private Intent getSettingsIntent(Bundle arguments) {
+        final String settingsComponentName = arguments.getString(
+                AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME);
+        if (TextUtils.isEmpty(settingsComponentName)) {
+            return null;
+        }
+
+        final Intent settingsIntent = new Intent(Intent.ACTION_MAIN).setComponent(
+                ComponentName.unflattenFromString(settingsComponentName));
+        if (getPackageManager().queryIntentActivities(settingsIntent, /* flags= */ 0).isEmpty()) {
+            return null;
+        }
+
+        return settingsIntent;
     }
 }

@@ -177,6 +177,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gAdvancedCallingPreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
+        use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId,
+                getLifecycle());
     }
 
     @Override

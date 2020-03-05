@@ -66,6 +66,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"检测超时设置"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"锁定语音拨号"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"屏幕锁定时停止使用蓝牙拨号器"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"蓝牙设备"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"设备名称"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"设备设置"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"配置文件设置"</string>
@@ -762,12 +763,9 @@
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8483892122845654850">"登录"</string>
-    <!-- no translation found for wifi_venue_website_button_text (7749360432667175030) -->
-    <skip />
-    <!-- no translation found for wifi_time_remaining (8503606272869846170) -->
-    <skip />
-    <!-- no translation found for wifi_expiry_time (5419758551129267624) -->
-    <skip />
+    <string name="wifi_venue_website_button_text" msgid="7749360432667175030">"打开网站"</string>
+    <string name="wifi_time_remaining" msgid="8503606272869846170">"还剩 <xliff:g id="REMAINING_TIME">%1$s</xliff:g>"</string>
+    <string name="wifi_expiry_time" msgid="5419758551129267624">"到期时间：<xliff:g id="EXPIRY_TIME">%1$s</xliff:g>"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"点按此处即可登录网络"</string>
     <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
@@ -893,7 +891,9 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"请为 WLAN 热点至少选择一个频段："</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP 设置"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"隐私"</string>
-    <!-- no translation found for wifi_subscription_detail (5039591348290498109) -->
+    <!-- no translation found for wifi_subscription (4432423938285430113) -->
+    <skip />
+    <!-- no translation found for wifi_subscription_summary (18802471063384598) -->
     <skip />
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"随机选择的 MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"添加设备"</string>
@@ -1641,10 +1641,8 @@
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB 与蓝牙"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"热点、USB 与蓝牙"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"目前没有与其他设备共享互联网连接"</string>
-    <!-- no translation found for tethering_interface_options (7575535888135143650) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_title (2167985468585290478) -->
-    <skip />
+    <string name="tethering_interface_options" msgid="7575535888135143650">"网络共享"</string>
+    <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"不使用 WLAN 热点"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"仅通过 USB 共享互联网连接"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"仅通过蓝牙共享互联网连接"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"仅通过 USB 和蓝牙共享互联网连接"</string>
@@ -1761,12 +1759,9 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"要使用人脸解锁，请设置密码"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"要使用人脸解锁，请设置图案"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"要使用人脸解锁，请设置 PIN 码"</string>
-    <!-- no translation found for lockpassword_forgot_password (5730587692489737223) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pattern (1196116549051927516) -->
-    <skip />
-    <!-- no translation found for lockpassword_forgot_pin (7164232234705747672) -->
-    <skip />
+    <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘记了密码？"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘记了图案？"</string>
+    <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘记了 PIN 码？"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"请绘制您的设备解锁图案以继续"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"请输入您的设备 PIN 码以继续"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"请输入您的设备密码以继续"</string>
@@ -1834,10 +1829,8 @@
     <string name="install_applications_title" msgid="7890233747559108106">"允许所有应用来源"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近打开的应用"</string>
     <string name="see_all_apps_title" msgid="8363320482315507386">"查看全部 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
-    <!-- no translation found for forgot_password_title (3967873480875239885) -->
-    <skip />
-    <!-- no translation found for forgot_password_text (2583194470767613163) -->
-    <skip />
+    <string name="forgot_password_title" msgid="3967873480875239885">"请联系您的 IT 管理员"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"他们可以帮助您重置 PIN 码、解锁图案或密码"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"您的平板电脑和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的平板电脑损坏或数据丢失承担责任。"</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"您的手机和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的手机损坏或数据丢失承担责任。"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"您的设备和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的设备损坏或数据丢失问题承担责任。"</string>
@@ -2186,8 +2179,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"响铃振动"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"按触反馈"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"使用<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_service_master_open_title (7437956750557583681) -->
-    <skip />
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"打开<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"使用色彩校正"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"显示字幕"</string>
     <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"字幕外观"</string>
@@ -2220,9 +2212,18 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"绿色弱视"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"红色弱视"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"蓝色弱视"</string>
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_short_delay (5354221071353645263) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_medium_delay (1550891909800510628) -->
-    <!-- no translation found for accessibilty_autoclick_preference_subtitle_long_delay (2230755548820485984) -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="other">短（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">短（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="other">中（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">中（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
+    </plurals>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="other">长（<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒）</item>
+      <item quantity="one">长（<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒）</item>
+    </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
@@ -3502,16 +3503,11 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"从对话部分中移除"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
-    <!-- no translation found for manage_conversations (4440289604887824337) -->
-    <skip />
-    <!-- no translation found for important_conversations (8701454279075552555) -->
-    <skip />
-    <!-- no translation found for all_conversations (7864274972384490939) -->
-    <skip />
-    <!-- no translation found for important_bubble (3820813960404079472) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (3813751382595404403) -->
-    <skip />
+    <string name="manage_conversations" msgid="4440289604887824337">"管理对话"</string>
+    <string name="important_conversations" msgid="8701454279075552555">"重要对话"</string>
+    <string name="all_conversations" msgid="7864274972384490939">"所有对话"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"以气泡形式显示重要对话"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"重要对话会显示在下拉通知栏顶部。您也可将此类对话设成以气泡形式显示，并暂停使用“勿扰”模式。"</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"无声显示并将重要性级别最小化"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"显示通知但不发出提示音"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"发出提示音"</string>
@@ -3754,10 +3750,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定屏幕前要求输入 PIN 码"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
-    <!-- no translation found for confirm_sim_deletion_title (9199369003530237871) -->
-    <skip />
-    <!-- no translation found for confirm_sim_deletion_description (8937609409607338516) -->
-    <skip />
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"删除 SIM 卡前需先进行确认"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"先验证是您本人在操作，然后才能清除已下载的 SIM 卡"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"此工作资料由以下应用管理："</string>
     <string name="managing_admin" msgid="2633920317425356619">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="experimental_preference" msgid="869354050717870055">"（实验性）"</string>
@@ -4509,8 +4503,7 @@
     <string name="graphics_driver_app_preference_title" msgid="3133255818657706857">"选择图形驱动程序"</string>
     <string name="graphics_driver_app_preference_default" msgid="764432460281859855">"默认"</string>
     <string name="graphics_driver_app_preference_game_driver" msgid="3115277644656023504">"游戏驱动程序"</string>
-    <!-- no translation found for graphics_driver_app_preference_prerelease_driver (7355929161805829480) -->
-    <skip />
+    <string name="graphics_driver_app_preference_prerelease_driver" msgid="7355929161805829480">"开发者驱动程序"</string>
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系统图形驱动程序"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
@@ -4540,14 +4533,10 @@
     <string name="media_output_summary" product="device" msgid="3598300438694764381">"设备"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"通话期间无法使用"</string>
     <string name="media_output_summary_unavailable" msgid="2695058965888813093">"无法使用"</string>
-    <!-- no translation found for media_output_group_panel_title (3086245179062913037) -->
-    <skip />
-    <!-- no translation found for media_output_group (7918231774595274396) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_single_device_summary (5027884071572180516) -->
-    <skip />
-    <!-- no translation found for media_output_group_panel_multiple_devices_summary (4838305763151455248) -->
-    <skip />
+    <string name="media_output_group_panel_title" msgid="3086245179062913037">"添加输出设备"</string>
+    <string name="media_output_group" msgid="7918231774595274396">"群组"</string>
+    <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"已选择 1 个设备"</string>
+    <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"已选择 <xliff:g id="COUNT">%1$d</xliff:g> 个设备"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"接听来电的设备："</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"此 APN 无法更改。"</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"延长平板电脑的电池续航时间"</string>
@@ -4788,6 +4777,5 @@
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
-    <!-- no translation found for media_output_panel_stop_casting_button (6094875883164119035) -->
-    <skip />
+    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"停止投射"</string>
 </resources>
