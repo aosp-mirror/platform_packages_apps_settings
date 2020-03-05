@@ -23,8 +23,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecConfig;
 import android.bluetooth.BluetoothCodecStatus;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -47,6 +49,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothBitPerSampleDialogPreferenceControllerTest {
 
+    private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
+
     @Mock
     private BluetoothA2dp mBluetoothA2dp;
     @Mock
@@ -58,6 +62,7 @@ public class BluetoothBitPerSampleDialogPreferenceControllerTest {
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigSBC;
+    private BluetoothDevice mActiveDevice;
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -69,6 +74,7 @@ public class BluetoothBitPerSampleDialogPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = spy(new BluetoothBitPerSampleDialogPreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         mPreference = new BluetoothBitPerSampleDialogPreference(mContext);
@@ -86,13 +92,14 @@ public class BluetoothBitPerSampleDialogPreferenceControllerTest {
                 BluetoothCodecConfig.BITS_PER_SAMPLE_24,
                 BluetoothCodecConfig.CHANNEL_MODE_NONE,
                 0, 0, 0, 0);
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
     }
 
     @Test
     public void writeConfigurationValues_selectDefault_setHighest() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
@@ -121,7 +128,7 @@ public class BluetoothBitPerSampleDialogPreferenceControllerTest {
     public void getSelectableIndex_verifyList() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
-        when(mBluetoothA2dp.getCodecStatus(null)).thenReturn(mCodecStatus);
+        when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         List<Integer> indexList = new ArrayList<>();
         indexList.add(mPreference.getDefaultIndex());
