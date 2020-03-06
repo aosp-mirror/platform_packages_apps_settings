@@ -33,6 +33,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telephony.PhoneStateListener;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -46,7 +47,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -63,6 +63,8 @@ public class MobileNetworkPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
+    private SubscriptionManager mSubscriptionManager;
+    @Mock
     private PreferenceScreen mScreen;
 
     private Lifecycle mLifecycle;
@@ -77,6 +79,7 @@ public class MobileNetworkPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         mPreference = new Preference(mContext);
         mPreference.setKey(MobileNetworkPreferenceController.KEY_MOBILE_NETWORK_SETTINGS);
     }
@@ -121,7 +124,6 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void serviceStateChange_shouldUpdatePrefSummary() {
         final String testCarrierName = "test";
         final Preference mPreference = mock(Preference.class);
@@ -138,8 +140,8 @@ public class MobileNetworkPreferenceControllerTest {
         verify(mTelephonyManager).listen(mController.mPhoneStateListener,
                 PhoneStateListener.LISTEN_SERVICE_STATE);
 
-        // Trigger listener update
-        when(mTelephonyManager.getNetworkOperatorName()).thenReturn(testCarrierName);
+        doReturn(testCarrierName).when(mController).getSummary();
+
         mController.mPhoneStateListener.onServiceStateChanged(null);
 
         // Carrier name should be set.
@@ -147,7 +149,6 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void airplaneModeTurnedOn_shouldDisablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 1);
@@ -158,7 +159,6 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void airplaneModeTurnedOffAndNoUserRestriction_shouldEnablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 0);
@@ -170,7 +170,6 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void airplaneModeTurnedOffAndHasUserRestriction_shouldDisablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Global.AIRPLANE_MODE_ON, 0);

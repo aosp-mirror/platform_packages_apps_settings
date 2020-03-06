@@ -25,6 +25,7 @@ import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.telephony.TelephonyManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -68,6 +69,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
 
     public void setFragment(Fragment hostFragment) {
         mFragment = hostFragment;
+    }
+
+    @VisibleForTesting
+    void setAirplaneModeEnabler(AirplaneModeEnabler airplaneModeEnabler) {
+        mAirplaneModeEnabler = airplaneModeEnabler;
     }
 
     @Override

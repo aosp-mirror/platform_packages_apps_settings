@@ -32,13 +32,13 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -55,7 +55,8 @@ public class AirplaneModePreferenceControllerTest {
 
     @Mock
     private PackageManager mPackageManager;
-
+    @Mock
+    private AirplaneModeEnabler mAirplaneModeEnabler;
     private Context mContext;
     private ContentResolver mResolver;
     private PreferenceManager mPreferenceManager;
@@ -126,38 +127,18 @@ public class AirplaneModePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void airplaneModePreference_testSetValue_updatesCorrectly() {
-        // Airplane mode default off
-        Settings.Global.putInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
-
-        mController.displayPreference(mScreen);
-        mController.onResume();
-
-        assertThat(mPreference.isChecked()).isFalse();
-
-        assertThat(mController.isChecked()).isFalse();
 
         // Set airplane mode ON by setChecked
-        boolean updated = mController.setChecked(true);
-        assertThat(updated).isTrue();
+        mController.setAirplaneModeEnabler(mAirplaneModeEnabler);
+        assertThat(mController.setChecked(true)).isTrue();
 
         // Check return value if set same status.
-        updated = mController.setChecked(true);
-        assertThat(updated).isFalse();
-
-        // UI is updated
-        assertThat(mPreference.isChecked()).isTrue();
-
-        // Settings status changed.
-        int updatedValue = Settings.Global.getInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
-        assertThat(updatedValue).isEqualTo(ON);
+        when(mAirplaneModeEnabler.isAirplaneModeOn()).thenReturn(true);
+        assertThat(mController.setChecked(true)).isFalse();
 
         // Set to OFF
         assertThat(mController.setChecked(false)).isTrue();
-        assertThat(mPreference.isChecked()).isFalse();
-        updatedValue = Settings.Global.getInt(mResolver, Settings.Global.AIRPLANE_MODE_ON, OFF);
-        assertThat(updatedValue).isEqualTo(OFF);
     }
 
     @Test
