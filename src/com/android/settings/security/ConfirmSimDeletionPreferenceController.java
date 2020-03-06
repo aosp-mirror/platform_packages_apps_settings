@@ -24,11 +24,13 @@ import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 
 /** Enable/disable user confirmation before deleting an eSim */
-public class ConfirmSimDeletionPreferenceController extends TogglePreferenceController {
+public class ConfirmSimDeletionPreferenceController extends BasePreferenceController implements
+        Preference.OnPreferenceChangeListener{
     public static final String KEY_CONFIRM_SIM_DELETION = "confirm_sim_deletion";
     private boolean mConfirmationDefaultOn;
 
@@ -53,21 +55,39 @@ public class ConfirmSimDeletionPreferenceController extends TogglePreferenceCont
                 == 1;
     }
 
-    @Override
     public boolean isChecked() {
         return getGlobalState();
     }
 
-    @Override
     public boolean setChecked(boolean isChecked) {
         Settings.Global.putInt(
                 mContext.getContentResolver(), KEY_CONFIRM_SIM_DELETION, isChecked ? 1 : 0);
         return true;
     }
 
+    // handle UI change
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (!preference.getKey().equals(getPreferenceKey())) {
+            return false;
+        }
+        if (!isChecked()) {
+            setChecked(true);
+            return true;
+        } else {
+            // prevent disabling the feature until authorized
+            WifiDppUtils.showLockScreen(mContext, () -> {
+                // set data
+                setChecked(false);
+                // set UI
+                ((TwoStatePreference) preference).setChecked(false);
+            });
+            return false;
+        }
+    }
+
     @Override
     public void updateState(Preference preference) {
-
         final KeyguardManager keyguardManager = mContext.getSystemService(KeyguardManager.class);
         if (!keyguardManager.isKeyguardSecure()) {
             preference.setEnabled(false);
