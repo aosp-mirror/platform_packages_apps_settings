@@ -70,6 +70,7 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -294,6 +295,7 @@ public class WifiSettingsTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
         setUpForOnCreate();
@@ -305,6 +307,7 @@ public class WifiSettingsTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
         setUpForOnCreate();
@@ -349,6 +352,7 @@ public class WifiSettingsTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void clickOnWifiNetworkWith_shouldStartCaptivePortalApp() {
         when(mWifiManager.getConfiguredNetworks()).thenReturn(createMockWifiConfigurations(

@@ -160,6 +160,7 @@ public class WifiSettings2Test {
     }
 
     @Test
+    @Ignore
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
         when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
