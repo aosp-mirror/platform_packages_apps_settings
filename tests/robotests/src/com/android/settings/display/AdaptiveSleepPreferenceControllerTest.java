@@ -92,7 +92,7 @@ public class AdaptiveSleepPreferenceControllerTest {
     public void onPreferenceChange_turnOn_returnOn() {
         mController.onPreferenceChange(null, true);
 
-        final int mode = Settings.System.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
+        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 0);
         assertThat(mode).isEqualTo(1);
     }
 
@@ -100,7 +100,7 @@ public class AdaptiveSleepPreferenceControllerTest {
     public void onPreferenceChange_turnOff_returnOff() {
         mController.onPreferenceChange(null, false);
 
-        final int mode = Settings.System.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
+        final int mode = Settings.Secure.getInt(mContentResolver, ADAPTIVE_SLEEP, 1);
         assertThat(mode).isEqualTo(0);
     }
 
@@ -124,7 +124,7 @@ public class AdaptiveSleepPreferenceControllerTest {
 
     @Test
     public void isChecked_yes() {
-        Settings.System.putInt(mContentResolver, ADAPTIVE_SLEEP, 1);
+        Settings.Secure.putInt(mContentResolver, ADAPTIVE_SLEEP, 1);
 
         assertThat(mController.isChecked()).isTrue();
     }
