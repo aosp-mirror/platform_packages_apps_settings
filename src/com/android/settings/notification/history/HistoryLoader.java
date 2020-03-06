@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+import android.util.Slog;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.utils.ThreadUtils;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HistoryLoader {
+    private static final String TAG = "HistoryLoader";
     private final Context mContext;
     private final NotificationBackend mBackend;
     private final PackageManager mPm;
@@ -45,45 +47,48 @@ public class HistoryLoader {
 
     public void load(OnHistoryLoaderListener listener) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            Map<String, NotificationHistoryPackage> historicalNotifications = new HashMap<>();
-            NotificationHistory history =
-                    mBackend.getNotificationHistory(mContext.getPackageName());
+            try {
+                Map<String, NotificationHistoryPackage> historicalNotifications = new HashMap<>();
+                NotificationHistory history =
+                        mBackend.getNotificationHistory(mContext.getPackageName());
+                while (history.hasNextNotification()) {
+                    HistoricalNotification hn = history.getNextNotification();
 
-            while (history.hasNextNotification()) {
-                HistoricalNotification hn = history.getNextNotification();
-
-                String key = hn.getPackage() + "|" + hn.getUid();
-                NotificationHistoryPackage hnsForPackage = historicalNotifications.getOrDefault(
-                        key,
-                        new NotificationHistoryPackage(hn.getPackage(), hn.getUid()));
-                hnsForPackage.notifications.add(hn);
-                historicalNotifications.put(key, hnsForPackage);
-            }
-            List<NotificationHistoryPackage> packages =
-                    new ArrayList<>(historicalNotifications.values());
-            Collections.sort(packages,
-                    (o1, o2) -> -1 * Long.compare(o1.getMostRecent(), o2.getMostRecent()));
-            for (NotificationHistoryPackage nhp : packages) {
-                ApplicationInfo info;
-                try {
-                    info = mPm.getApplicationInfoAsUser(
-                            nhp.pkgName,
-                            PackageManager.MATCH_UNINSTALLED_PACKAGES
-                                    | PackageManager.MATCH_DISABLED_COMPONENTS
-                                    | PackageManager.MATCH_DIRECT_BOOT_UNAWARE
-                                    | PackageManager.MATCH_DIRECT_BOOT_AWARE,
-                            UserHandle.getUserId(nhp.uid));
-                    if (info != null) {
-                        nhp.label = String.valueOf(mPm.getApplicationLabel(info));
-                        nhp.icon = mPm.getUserBadgedIcon(mPm.getApplicationIcon(info),
-                                UserHandle.of(UserHandle.getUserId(nhp.uid)));
-                    }
-                } catch (PackageManager.NameNotFoundException e) {
-                    // app is gone, just show package name and generic icon
-                    nhp.icon = mPm.getDefaultActivityIcon();
+                    String key = hn.getPackage() + "|" + hn.getUid();
+                    NotificationHistoryPackage hnsForPackage = historicalNotifications.getOrDefault(
+                            key,
+                            new NotificationHistoryPackage(hn.getPackage(), hn.getUid()));
+                    hnsForPackage.notifications.add(hn);
+                    historicalNotifications.put(key, hnsForPackage);
                 }
+                List<NotificationHistoryPackage> packages =
+                        new ArrayList<>(historicalNotifications.values());
+                Collections.sort(packages,
+                        (o1, o2) -> -1 * Long.compare(o1.getMostRecent(), o2.getMostRecent()));
+                for (NotificationHistoryPackage nhp : packages) {
+                    ApplicationInfo info;
+                    try {
+                        info = mPm.getApplicationInfoAsUser(
+                                nhp.pkgName,
+                                PackageManager.MATCH_UNINSTALLED_PACKAGES
+                                        | PackageManager.MATCH_DISABLED_COMPONENTS
+                                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE
+                                        | PackageManager.MATCH_DIRECT_BOOT_AWARE,
+                                UserHandle.getUserId(nhp.uid));
+                        if (info != null) {
+                            nhp.label = String.valueOf(mPm.getApplicationLabel(info));
+                            nhp.icon = mPm.getUserBadgedIcon(mPm.getApplicationIcon(info),
+                                    UserHandle.of(UserHandle.getUserId(nhp.uid)));
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // app is gone, just show package name and generic icon
+                        nhp.icon = mPm.getDefaultActivityIcon();
+                    }
+                }
+                ThreadUtils.postOnMainThread(() -> listener.onHistoryLoaded(packages));
+            } catch (Exception e) {
+                Slog.e(TAG, "Error loading history", e);
             }
-            ThreadUtils.postOnMainThread(() -> listener.onHistoryLoaded(packages));
         });
     }
 
