@@ -22,7 +22,6 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
 import android.app.PendingIntent;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -246,11 +245,10 @@ public class MediaOutputSlice implements CustomSliceable {
         // Return true if
         // 1. AudioMode is not in on-going call
         // 2. worker is not null
-        // 3. Bluetooth is enabled
-        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-
-        return adapter.isEnabled()
+        // 3. Available devices are more than 1
+        return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
-                && getWorker() != null;
+                && getWorker().getMediaDevices().size() > 1;
+
     }
 }
