@@ -29,6 +29,7 @@ import android.os.PowerManager;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -39,6 +40,7 @@ import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPowerManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class BatterySaverConditionControllerTest {
     @Mock
     private ConditionManager mConditionManager;
