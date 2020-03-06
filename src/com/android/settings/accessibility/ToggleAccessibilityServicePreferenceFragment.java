@@ -164,16 +164,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                                 this::onDialogButtonFromDisableToggleClicked);
                 break;
             }
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL: {
-                if (AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())) {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showGestureNavigationTutorialDialog(getPrefContext());
-                } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showAccessibilityButtonTutorialDialog(getPrefContext());
-                }
-                break;
-            }
             default: {
                 mDialog = super.onCreateDialog(dialogId);
             }
@@ -307,6 +297,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             } else {
                 AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                         mComponentName);
+                showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
             }
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
@@ -419,6 +410,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
         final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
+
+        mIsDialogShown.set(false);
+        showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
 
         mDialog.dismiss();
 
