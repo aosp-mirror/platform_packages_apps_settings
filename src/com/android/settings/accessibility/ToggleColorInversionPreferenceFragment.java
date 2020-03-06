@@ -43,7 +43,6 @@ import java.util.List;
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private static final int DIALOG_ID_EDIT_SHORTCUT = 1;
     private final Handler mHandler = new Handler();
     private SettingsContentObserver mSettingsContentObserver;
 
@@ -117,7 +116,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
-        showDialog(DIALOG_ID_EDIT_SHORTCUT);
+        showDialog(DialogEnums.EDIT_SHORTCUT);
     }
 
     private void updateSwitchBarToggleSwitch() {

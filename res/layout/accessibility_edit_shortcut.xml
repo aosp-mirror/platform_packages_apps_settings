@@ -22,19 +22,19 @@
     android:scrollbarStyle="outsideOverlay">
 
     <LinearLayout
-        android:theme="@style/Theme.AlertDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="24dp"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp">
+        android:padding="24dp">
 
         <include android:id="@+id/software_shortcut"
-                 layout="@layout/accessibility_edit_shortcut_component"/>
+            layout="@layout/accessibility_edit_shortcut_component"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp" />
 
         <include android:id="@+id/hardware_shortcut"
-                 layout="@layout/accessibility_edit_shortcut_component"/>
+            layout="@layout/accessibility_edit_shortcut_component" />
 
     </LinearLayout>
 
