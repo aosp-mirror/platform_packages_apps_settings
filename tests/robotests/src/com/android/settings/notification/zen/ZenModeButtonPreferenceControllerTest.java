@@ -51,6 +51,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Arrays;
+
 @RunWith(RobolectricTestRunner.class)
 public class ZenModeButtonPreferenceControllerTest {
 
@@ -143,7 +145,8 @@ public class ZenModeButtonPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         final int GUEST_USER_ID = 10;
         mController.mSettingObserver.onChange(false,
-                Settings.Global.getUriFor(Settings.Global.ZEN_MODE), GUEST_USER_ID);
+                Arrays.asList(Settings.Global.getUriFor(Settings.Global.ZEN_MODE)),
+                0, GUEST_USER_ID);
 
         verify(mZenButtonOn).setVisibility(View.GONE);
         verify(mZenButtonOff).setVisibility(View.VISIBLE);
