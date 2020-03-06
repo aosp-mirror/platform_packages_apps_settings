@@ -28,6 +28,7 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,6 +42,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class LowBatteryDetectorTest {
 
     @Mock
