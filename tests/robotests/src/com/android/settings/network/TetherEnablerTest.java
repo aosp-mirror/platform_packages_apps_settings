@@ -69,6 +69,7 @@ public class TetherEnablerTest {
     private SwitchBar mSwitchBar;
     private TetherEnabler mEnabler;
     private SwitchWidgetController mSwitchWidgetController;
+    private static final String[] USB_TETHERED = {"usb"};
 
     @Before
     public void setUp() {
@@ -84,9 +85,13 @@ public class TetherEnablerTest {
         when(context.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
                 mNetworkPolicyManager);
         when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
+        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         panReference.set(mBluetoothPan);
         when(context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
                 .thenReturn(mSharedPreferences);
+        SharedPreferences.Editor editor = mock(SharedPreferences.Editor.class);
+        when(mSharedPreferences.edit()).thenReturn(editor);
         mEnabler = spy(new TetherEnabler(context, mSwitchWidgetController, panReference));
     }
 
@@ -103,7 +108,8 @@ public class TetherEnablerTest {
 
     @Test
     public void lifecycle_onStart_setCheckedCorrectly() {
-        when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[]{""});
+        when(mConnectivityManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
 
         mEnabler.onStart();
         assertThat(mSwitchBar.isChecked()).isTrue();
@@ -188,7 +194,7 @@ public class TetherEnablerTest {
         mSwitchWidgetController.setListener(mEnabler);
         mSwitchWidgetController.startListening();
 
-        mEnabler.updateState(null/*tethered*/);
+        mEnabler.updateState(null /* tethered */);
         verify(mEnabler, never()).onSwitchToggled(anyBoolean());
     }
 
@@ -210,5 +216,29 @@ public class TetherEnablerTest {
         ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
         mEnabler.updateState(new String[]{""});
         verify(mSwitchBar).setEnabled(true);
+    }
+
+    @Test
+    public void updateState_onSharedPreferencesChangeNeverCalled() {
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(mEnabler);
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+
+        mEnabler.updateState(null /* tethered */);
+        verify(mEnabler, never()).onSharedPreferenceChanged(eq(mSharedPreferences), any());
+        verify(mEnabler, never()).onSharedPreferenceChanged(eq(mSharedPreferences), any());
+    }
+
+    @Test
+    public void updateState_setSharedPreferencesOnlyWhenNeeded() {
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+
+        mEnabler.updateState(null /* tethered */);
+        verify(mSharedPreferences, never()).edit();
+
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(mEnabler);
+        mEnabler.updateState(USB_TETHERED);
     }
 }
