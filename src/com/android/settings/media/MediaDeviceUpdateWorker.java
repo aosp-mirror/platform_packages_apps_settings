@@ -174,6 +174,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSessionVolume();
     }
 
+    CharSequence getSessionName() {
+        return mLocalMediaManager.getSessionName();
+    }
+
     /**
      * Find the active MediaDevice.
      *

@@ -19,32 +19,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingBottom="16dp">
+    android:orientation="vertical">
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:paddingStart="12dp"
         android:saveEnabled="false"
-        android:textAppearance="?android:attr/textAppearanceListItem"
-        android:textColor="?android:attr/textColorAlertDialogListItem" />
+        android:textColor="?android:attr/textColorAlertDialogListItem"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:paddingStart="32dp"
+        android:paddingStart="44dp"
         android:textAppearance="?android:attr/textAppearanceListItemSecondary"
         android:textColor="?android:attr/textColorSecondary" />
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="32dp"
-        android:scaleType="fitCenter" />
+        android:layout_width="176dp"
+        android:layout_height="176dp"
+        android:layout_marginStart="44dp"
+        android:scaleType="centerCrop" />
 
 </LinearLayout>
