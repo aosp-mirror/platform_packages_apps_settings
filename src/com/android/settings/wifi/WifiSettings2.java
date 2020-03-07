@@ -711,8 +711,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                     mConnectedWifiEntryPreferenceCategory.findPreference(connectedEntry.getKey());
             if (connectedPref == null || connectedPref.getWifiEntry() != connectedEntry) {
                 mConnectedWifiEntryPreferenceCategory.removeAll();
-                final LongPressWifiEntryPreference pref =
-                        createLongPressWifiEntryPreference(connectedEntry);
+                final ConnectedWifiEntryPreference pref =
+                        new ConnectedWifiEntryPreference(getPrefContext(), connectedEntry, this);
                 pref.setKey(connectedEntry.getKey());
                 pref.refresh();
                 mConnectedWifiEntryPreferenceCategory.addPreference(pref);
@@ -723,6 +723,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         launchNetworkDetailsFragment(pref);
                     }
                     return true;
+                });
+                pref.setOnGearClickListener(preference -> {
+                    launchNetworkDetailsFragment(pref);
                 });
             }
         } else {

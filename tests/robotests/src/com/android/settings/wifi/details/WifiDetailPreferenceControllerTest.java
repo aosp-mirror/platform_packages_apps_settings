@@ -84,6 +84,7 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -1427,6 +1428,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnect_displayAsSuccess() {
         setUpForDisconnectedNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(true);
@@ -1459,6 +1461,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectButFailed_displayFailMessage() {
         setUpForDisconnectedNetwork();
         ArgumentCaptor<WifiManager.ActionListener> connectListenerCaptor =
@@ -1507,6 +1510,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectButTimeout_displayFailMessage() {
         setUpForDisconnectedNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(true);
@@ -1536,6 +1540,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectButTimeout_displayNotInRangeMessage() {
         setUpForNotInRangeNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(true);
@@ -1565,6 +1570,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectWhenWiFiDisabled_displaySuccessMessage() {
         setUpForDisconnectedNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
@@ -1606,6 +1612,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWiFi() {
         setUpForDisconnectedNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
@@ -1644,6 +1651,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void
             testConnectButton_clickConnectWhenWiFiDisabled_failedToConnectWifiBecauseNotInRange() {
         setUpForNotInRangeNetwork();
@@ -1683,6 +1691,7 @@ public class WifiDetailPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void testConnectButton_clickConnectWhenWiFiDisabled_failedToEnableWifi() {
         setUpForDisconnectedNetwork();
         when(mockWifiManager.isWifiEnabled()).thenReturn(false); // wifi disabled
