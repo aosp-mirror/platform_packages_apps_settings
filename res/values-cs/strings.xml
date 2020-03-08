@@ -3166,6 +3166,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Volání přes síť 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Používat ke zlepšení hlasové a další komunikace služby LTE (doporučeno)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Používat ke zlepšení hlasové a další komunikace služby 4G (doporučeno)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Zjišťování kontaktů"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Povoluje operátorovi zjistit, které funkce volání vaše kontakty podporují."</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Povolit zjišťování kontaktů?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"Aktivací této funkce povolíte operátorovi přístup k telefonním číslům v kontaktech, aby mohl zjistit, které funkce volání podporují."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Preferovaný typ sítě"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (doporučeno)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Zprávy MMS"</string>
@@ -4681,6 +4685,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Systémový ovladač grafiky"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4711,6 +4716,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"Skupina"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"Je vybráno 1 zařízení"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"Vybraná zařízení: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"Přijmout hovor v zařízení"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Tento APN nelze změnit."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Zvyšte životnost baterie tabletu"</string>
@@ -4830,10 +4837,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"V jednu chvíli může být aktivní pouze jedna stažená SIM karta.\n\nPřepnutím na operátora <xliff:g id="CARRIER1">%1$s</xliff:g> nezrušíte službu <xliff:g id="CARRIER2">%2$s</xliff:g>."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Přepnout na síť <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Vymazat SIM kartu"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"Vymazat staženou SIM kartu?"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"Když vymažete tuto SIM kartu, ze zařízení bude odebrána služba <xliff:g id="CARRIER_0">%1$s</xliff:g>.\n\nSlužba operátora <xliff:g id="CARRIER_1">%2$s</xliff:g> zrušena nebude."</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"Vymazat"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"Mazání SIM karty…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM kartu nelze vymazat"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Tuto SIM kartu nelze vymazat z důvodu chyby.\n\nRestartujte zařízení a zkuste to znovu."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Preferovaný typ sítě"</string>
@@ -4921,6 +4924,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"Tuto aplikaci jste nedávno nainstalovali."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Přepnout výstup"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Právě se přehrává na zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (odpojeno)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"Nelze přepnout. Klepnutím opakujte akci."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Důležité informace"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"POKRAČOVAT"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NE, DĚKUJI"</string>

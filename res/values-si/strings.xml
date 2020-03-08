@@ -3078,6 +3078,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G ඇමතුම"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"හඬ සහ වෙනත් සන්නිවේදන දියුණු කිරීමට LTE සේවය භාවිත කරන්න (නිර්දේශිතයි)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"හඬ සහ වෙනත් සන්නිවේදන දියුණු කිරීමට 4G සේවා භාවිත කරන්න (නිර්දේශිතයි)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"සම්බන්ධතා අනාවරණය"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"ඔබේ වාහකට ඔබේ සම්බන්ධතා සහාය දක්වන්නේ කුමන ඇමතුම් විශේෂාංගවලටදැයි අනාවරණය කර ගැනීමට ඉඩ දෙයි."</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"සම්බන්ධතා අනාවරණය සබල කරන්නද?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"මෙම විශේෂාංගය සබල කිරීමෙන් ඔබේ වාහකයට ඔවුන් සහාය දක්වන්නේ කුමන ඇමතුම් විශේෂාංගවලටදැයි අනාවරණය කර ගැනීමට ඔබේ සම්බන්ධතාවල දුරකථන අංක වෙත ප්‍රවේශ වීමට ඉඩ දෙනු ඇත."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"ප්‍රියකරන ජාල වර්ගය"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (නිර්දෙශිත)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS පණිවිඩ"</string>
@@ -4513,6 +4517,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"පද්ධති ග්‍රැෆික් ධාවකය"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4543,6 +4548,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"සමූහය"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"උපාංග 1ක් තෝරන ලදී"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"උපාංග <xliff:g id="COUNT">%1$d</xliff:g>ක් තෝරන ලදී"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"ඇමතුම ගැනීම ක්‍රියාත්මකයි"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"මෙම APN වෙනස් කළ නොහැක."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"ටැබ්ලටයේ බැටරි ආයු කාලය වැඩි දියුණු කරන්න"</string>
@@ -4660,10 +4667,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"එක වේලාවකට බාගත් SIM එකක් පමණක් ක්‍රියාත්මක විය හැක.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> වෙත මාරු වීම ඔබේ <xliff:g id="CARRIER2">%2$s</xliff:g> සේවය අවසන් නොකරයි."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> වෙත මාරු වන්න"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM පත මකන්න"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"මෙම බාගත් SIM පත මකන්නේද?"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"මෙම SIM පත මැකීම මෙම උපාංගයෙන් <xliff:g id="CARRIER_0">%1$s</xliff:g> සේවය ඉවත් කරයි.\n\n<xliff:g id="CARRIER_1">%2$s</xliff:g> සඳහා වන සේවය අවලංගු නොකෙරේ."</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"මැකීම"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"SIM මැකේ…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM පත මැකිය නොහැක"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"දෝෂයක් හේතුවෙන් මෙම SIM පත මැකිය නොහැක.\n\nඔබේ උපාංගය යළි අරඹා නැවත උත්සාහ කරන්න."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"ප්‍රියකරන ජාල වර්ගය"</string>
@@ -4745,6 +4748,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"ඔබ මෑතකදී මෙම යෙදුම ස්ථාපිත කළා."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"ප්‍රතිදාන මාරු කරන්න"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"දැනට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> මත වාදන කෙරෙන"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (විසන්ධි විය)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"මාරු කිරීමට නොහැකිය. නැවත උත්සාහ කිරීමට තට්ටු කරන්න."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"වැදගත් තොරතුරු"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ඉදිරියට"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"එපා, ස්තුතියි"</string>
