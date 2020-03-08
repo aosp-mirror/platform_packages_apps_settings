@@ -3078,6 +3078,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G Дуудлага"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"LTE үйлчилгээг дуу хоолой болон бусад харилцаа холбоог сайжруулахад ашиглах (санал болгосон)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"4G үйлчилгээг дуу хоолой болон бусад харилцаа холбоог сайжруулахад ашиглах (санал болгосон)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Харилцагчийг илрүүлэх"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Таны харилцагчид дуудлагын ямар онцлог дэмждэг болохыг илрүүлэхийг таны оператор компанид зөвшөөрнө."</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Харилцагчийг илрүүлэхийг идэвхжүүлэх үү?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"Энэ онцлогийг идэвхжүүлснээр таны оператор компанид таны харилцагчид дуудлагын ямар онцлог дэмждэг болохыг илрүүлэх зорилгоор утасны дугаарт нь хандахыг зөвшөөрнө."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Сүлжээний үндсэн төрөл"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (зөвлөмж болгосон)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Мультимедиа мессеж"</string>
@@ -4511,6 +4515,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Системийн графикийн драйвер"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4541,6 +4546,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"Бүлэг"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1 төхөөрөмжийг сонгосон"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"<xliff:g id="COUNT">%1$d</xliff:g> төхөөрөмжийг сонгосон"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"Дуудлага авах"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Энэ APN-г өөрчлөх боломжгүй."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Таблетын батарейн ажиллах хугацааг нэмэгдүүлэх"</string>
@@ -4658,10 +4665,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Нэг удаад зөвхөн татаж авсан нэг СИМ-г идэвхжүүлэх боломжтой.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> руу сэлгэснээр таны <xliff:g id="CARRIER2">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> руу сэлгэх"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"СИМ-г устгах"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"Энэ татаж авсан СИМ-г устгах уу?"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"Энэ СИМ-г устгаснаар энэ төхөөрөмжөөс <xliff:g id="CARRIER_0">%1$s</xliff:g>-н үйлчилгээг устгана.\n\n<xliff:g id="CARRIER_1">%2$s</xliff:g>-н үйлчилгээг цуцлахгүй."</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"Устгах"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"СИМ-г устгаж байна…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"СИМ-г устгаж чадсангүй"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Энэ СИМ-г алдааны улмаас устгаж чадсангүй.\n\nТөхөөрөмжөө дахин эхлүүлээд, дахин оролдоно уу."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Давуу эрхтэй сүлжээний төрөл"</string>
@@ -4743,6 +4746,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"Та саяхан энэ аппыг суулгасан байна."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Гаралтыг сэлгэх"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Одоогоор <xliff:g id="DEVICE_NAME">%1$s</xliff:g> дээр тоглуулж байна"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (салгасан)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"Сэлгэх боломжгүй. Дахин оролдох бол товшино уу."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Чухал мэдээлэл"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"ҮРГЭЛЖЛҮҮЛЭХ"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"ҮГҮЙ, БАЯРЛАЛАА"</string>

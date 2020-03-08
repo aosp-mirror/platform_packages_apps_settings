@@ -3078,6 +3078,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 通話功能"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"使用 LTE 服務提升語音通訊和其他通訊的品質 (建議)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"使用 4G 服務改善語音和其他通訊的品質 (建議)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"聯絡人探索"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"可讓電信業者瞭解聯絡人支援的通話功能。"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"要啟用聯絡人探索功能嗎？"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"啟用這項功能後，電信業者將可存取聯絡人的電話號碼，以便瞭解這些電話號碼支援的通話功能。"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"偏好的網路類型"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (建議)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"多媒體訊息"</string>
@@ -4513,6 +4517,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"系統繪圖驅動程式"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4543,6 +4548,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"群組"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"已選取 1 部裝置"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"已選取 <xliff:g id="COUNT">%1$d</xliff:g> 部裝置"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"接聽來電時使用的裝置"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"這個 APN 無法變更。"</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"延長平板電腦的電池續航力"</string>
@@ -4660,10 +4667,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"你一次只能啟用一張已下載的 SIM 卡。\n\n切換至「<xliff:g id="CARRIER1">%1$s</xliff:g>」不會取消「<xliff:g id="CARRIER2">%2$s</xliff:g>」的服務。"</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"切換至「<xliff:g id="CARRIER">%1$s</xliff:g>」"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"清除 SIM 卡"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"要清除這張已下載的 SIM 卡嗎？"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"清除這張 SIM 卡會同時從這個裝置中移除「<xliff:g id="CARRIER_0">%1$s</xliff:g>」服務。\n\n「<xliff:g id="CARRIER_1">%2$s</xliff:g>」服務不會因此遭到取消。"</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"清除"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"正在清除 SIM 卡…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"無法清除 SIM 卡"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"發生錯誤，因此無法清除這張 SIM 卡。\n\n請重新啟動你的裝置，然後再試一次。"</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"偏好的網路類型"</string>
@@ -4745,6 +4748,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"你最近安裝了這個應用程式。"</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"切換輸出裝置"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"目前正在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上播放"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (已中斷連線)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"無法切換，輕觸即可重試。"</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"重要資訊"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"繼續"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"不用了，謝謝"</string>
