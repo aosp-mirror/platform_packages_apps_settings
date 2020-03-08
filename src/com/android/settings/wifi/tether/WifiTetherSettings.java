@@ -40,7 +40,6 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
-import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.TetherUtil;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
@@ -130,8 +129,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         // SettingsActivity as base for all preference fragments.
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SwitchBar switchBar = activity.getSwitchBar();
-        mSwitchBarController = new WifiTetherSwitchBarController(activity,
-                new SwitchBarController(switchBar));
+        mSwitchBarController = new WifiTetherSwitchBarController(activity, switchBar);
         getSettingsLifecycle().addObserver(mSwitchBarController);
         switchBar.show();
     }
