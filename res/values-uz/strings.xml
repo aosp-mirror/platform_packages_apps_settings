@@ -2662,7 +2662,7 @@
     <string name="ca_certificate" msgid="3076484307693855611">"SM sertifikati"</string>
     <string name="user_certificate" msgid="6897024598058566466">"VPN va ilova foydalanuvchisi sertifikati"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Wi‑Fi sertifikati"</string>
-    <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Dahlsizligingiz xavf ostida"</string>
+    <string name="ca_certificate_warning_title" msgid="8229107396555793427">"Maxfiyligingiz xavf ostida"</string>
     <string name="ca_certificate_warning_description" msgid="1592953815964406032">"SM sertifikatlari saytlar, ilovalar va shifrlanadigan VPN tarmoqlar tomonidan ishlatiladi. Faqatgina ishonchli tashkilotlarning SM sertifikatlarini oʻrnating. \n\n Agar SM sertifikati oʻrnatilsa, serfitikat egasi sayt yoki ilovalarda ishlatilgan parollar, xabarlar, kredit karta axboroti kabi shaxsiy maʼlumotlaringizni hatto shifrlangan taqdirda ham koʻra oladi."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Oʻrnatilmasin"</string>
     <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"Baribir oʻrnatish"</string>
@@ -3088,6 +3088,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G chaqiruv"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Aloqa sifatini yaxshilash uchun LTE xizmatlaridan foydalanish (tavsiya etiladi)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Aloqa sifatini yaxshilash uchun 4G xizmatlaridan foydalanish (tavsiya etiladi)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Kontaktlarga kirish ruxsati"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Tarmoq operatoriga kontaktlar uchun qaysi chaqiruv funksiyalari ishlashini aniqlashga ruxsat beradi."</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Kontaktlarga kirish ruxsati berilsinmi?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"Bu funksiya yoqilsa, tarmoq operatori kontaktlar uchun qaysi chaqiruv funksiyalari ishlashini aniqlashi uchun kontaktlaringizdagi telefon raqamlaridan foydalana oladi."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tarmoq turi"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (tavsiya etiladi)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS xabarlar"</string>
@@ -4527,6 +4531,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Tizim grafik drayveri"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4557,6 +4562,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"Guruh"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1 ta qurilma tanlandi"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"<xliff:g id="COUNT">%1$d</xliff:g> ta qurilma tanlandi"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"Chaqiruv qabul qilish"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Bu APN parametrlarini almashtirish imkonsiz."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Batareya quvvatini uzoqroq vaqtga yetkazing"</string>
@@ -4674,10 +4681,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Faqat bitta yuklab olingan SIM kartani faollashtirish mumkin.\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> yoqilganda <xliff:g id="CARRIER2">%2$s</xliff:g> xizmati bekor qilinmaydi."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> xizmatini tanlash"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM karta axborotini tozalash"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"Mazkur yuklab olingan SIM karta axboroti tozalansinmi?"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"Bu SIM karta axboroti tozalanganda bu qurilmadan <xliff:g id="CARRIER_0">%1$s</xliff:g> xizmati ham oʻchirib tashlanadi.\n\n<xliff:g id="CARRIER_1">%2$s</xliff:g> xizmati bekor qilinmaydi."</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"Oʻchirish"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"SIM karta axboroti tozalanmoqda…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM karta axboroti tozalanmadi"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Bu SIM karta axboroti xatolik sabab tozalanmadi.\n\nQurilmani qayta ishga tushirib, qaytadan urining."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Tarmoq turi"</string>
@@ -4759,6 +4762,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"Bu ilovani hozirgina oʻrnatdingiz."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Audiochiqishni almashtirish"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Hozirda <xliff:g id="DEVICE_NAME">%1$s</xliff:g> qurilmasida ijro etilmoqda"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (uzilgan)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"Xatolik. Qayta urinish uchun tegining."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Muhim axborot"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"DAVOM ETISH"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"KERAK EMAS"</string>

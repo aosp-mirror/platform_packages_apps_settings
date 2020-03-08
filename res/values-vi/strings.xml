@@ -3078,6 +3078,10 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Gọi qua 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Dùng dịch vụ LTE để cải thiện tính năng thoại và các phương thức giao tiếp khác (khuyên dùng)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Sử dụng dịch vụ 4G để cải tiến tính năng thoại và các phương thức giao tiếp khác (đề xuất)"</string>
+    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Khám phá danh bạ"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Cho phép nhà mạng khám phá xem những người liên hệ của bạn hỗ trợ các tính năng gọi điện nào."</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Cho phép khám phá danh bạ?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="5787751513924920435">"Khi bạn bật tính năng này, nhà mạng sẽ được phép truy cập vào số điện thoại trong danh bạ của bạn để xác định xem những người liên hệ hỗ trợ các tính năng gọi điện nào."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Loại mạng ưu tiên"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (khuyên dùng)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Tin nhắn MMS"</string>
@@ -4513,6 +4517,7 @@
     <string name="graphics_driver_app_preference_system" msgid="3754748149113184126">"Trình điều khiển đồ họa hệ thống"</string>
     <!-- no translation found for graphics_driver_all_apps_preference_values:0 (8039644515855740879) -->
     <!-- no translation found for graphics_driver_all_apps_preference_values:1 (157748136905839375) -->
+    <!-- no translation found for graphics_driver_all_apps_preference_values:2 (8104576549429294026) -->
     <!-- no translation found for graphics_driver_app_preference_values:0 (6403705826179314116) -->
     <!-- no translation found for graphics_driver_app_preference_values:1 (485288770206606512) -->
     <!-- no translation found for graphics_driver_app_preference_values:2 (5391218026495225599) -->
@@ -4543,6 +4548,8 @@
     <string name="media_output_group" msgid="7918231774595274396">"Nhóm"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"Đã chọn 1 thiết bị"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"Đã chọn <xliff:g id="COUNT">%1$d</xliff:g> thiết bị"</string>
+    <!-- no translation found for media_output_switching (7488216595474868546) -->
+    <skip />
     <string name="take_call_on_title" msgid="1159417893879946757">"Thực hiện cuộc gọi trên"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Không thể thay đổi APN (Tên điểm truy cập) này."</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Tăng tuổi thọ pin của máy tính bảng"</string>
@@ -4660,10 +4667,6 @@
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"Chỉ một SIM đã tải xuống có thể hoạt động mỗi lần.\n\nKhi chuyển sang <xliff:g id="CARRIER1">%1$s</xliff:g>, dịch vụ <xliff:g id="CARRIER2">%2$s</xliff:g> của bạn sẽ không bị hủy."</string>
     <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"Chuyển sang <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"Xóa SIM"</string>
-    <string name="mobile_network_erase_sim_dialog_title" msgid="2751887197002033678">"Bạn muốn xóa SIM đã tải xuống này?"</string>
-    <string name="mobile_network_erase_sim_dialog_body" msgid="2452781115336285731">"Khi bạn xóa SIM này, dịch vụ <xliff:g id="CARRIER_0">%1$s</xliff:g> sẽ bị xóa khỏi thiết bị này.\n\nDịch vụ của <xliff:g id="CARRIER_1">%2$s</xliff:g> sẽ không bị hủy."</string>
-    <string name="mobile_network_erase_sim_dialog_ok" msgid="3421196386773625314">"Xóa"</string>
-    <string name="mobile_network_erase_sim_dialog_progress" msgid="27667157639219658">"Đang xóa SIM…"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"Không thể xóa SIM"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"Không xóa được SIM do lỗi.\n\nHãy khởi động lại thiết bị của bạn rồi thử lại."</string>
     <string name="preferred_network_mode_title" msgid="3083431168988535628">"Loại mạng ưu tiên"</string>
@@ -4745,6 +4748,8 @@
     <string name="recently_installed_app" msgid="2899861390925377564">"Gần đây, bạn đã cài đặt ứng dụng này."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Chuyển đổi đầu ra"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Hiện đang phát trên <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (đã ngắt kết nối)"</string>
+    <string name="media_output_switch_error_text" msgid="603563475910236831">"Không thể chuyển đổi. Nhấn để thử lại."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Thông tin quan trọng"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"TIẾP TỤC"</string>
     <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"KHÔNG, CẢM ƠN"</string>
