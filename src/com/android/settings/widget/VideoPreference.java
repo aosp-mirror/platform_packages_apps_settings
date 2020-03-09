@@ -39,12 +39,18 @@ import com.android.settings.R;
 public class VideoPreference extends Preference {
 
     private static final String TAG = "VideoPreference";
+    private static final int DEFAULT_BACKGROUND_RESOURCE_ID = -1;
     private final Context mContext;
 
     @VisibleForTesting
     AnimationController mAnimationController;
     @VisibleForTesting
     boolean mAnimationAvailable;
+    @VisibleForTesting
+    LinearLayout mAnimationView;
+    @VisibleForTesting
+    int mBackgroundResId = DEFAULT_BACKGROUND_RESOURCE_ID;
+
     private float mAspectRatio = 1.0f;
     private int mPreviewId;
     private int mAnimationId;
@@ -114,6 +120,7 @@ public class VideoPreference extends Preference {
         mVideo = (TextureView) holder.findViewById(R.id.video_texture_view);
         mPreviewImage = (ImageView) holder.findViewById(R.id.video_preview_image);
         mPlayButton = (ImageView) holder.findViewById(R.id.video_play_button);
+        mAnimationView = (LinearLayout) holder.itemView;
         final AspectRatioFrameLayout layout = (AspectRatioFrameLayout) holder.findViewById(
                 R.id.video_container);
 
@@ -122,6 +129,9 @@ public class VideoPreference extends Preference {
         if (mHeight >= LinearLayout.LayoutParams.MATCH_PARENT) {
             layout.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, mHeight));
+        }
+        if (mBackgroundResId != DEFAULT_BACKGROUND_RESOURCE_ID) {
+            mAnimationView.setBackgroundResource(mBackgroundResId);
         }
         if (mAnimationController != null) {
             mAnimationController.attachView(mVideo, mPreviewImage, mPlayButton);
@@ -200,6 +210,14 @@ public class VideoPreference extends Preference {
     void updateAspectRatio() {
         mAspectRatio = mAnimationController.getVideoWidth()
                 / (float) mAnimationController.getVideoHeight();
+    }
+
+    /**
+     * Set the background color of the video preference
+     * @param resId resource id of color
+     */
+    public void setBackgroundColor(int resId) {
+        mBackgroundResId = resId;
     }
 
     /**
