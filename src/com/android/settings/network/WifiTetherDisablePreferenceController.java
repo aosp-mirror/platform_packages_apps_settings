@@ -137,6 +137,7 @@ public final class WifiTetherDisablePreferenceController extends TogglePreferenc
     public void updateState(Preference preference) {
         super.updateState(preference);
         setVisible(mScreen, mPreferenceKey, shouldShow());
+        refreshSummary(preference);
     }
 
     @Override
