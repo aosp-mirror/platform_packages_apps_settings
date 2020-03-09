@@ -48,8 +48,6 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @VisibleForTesting
     Preference mPreference;
-    private CarrierConfigManager mCarrierConfigManager;
-    private PersistableBundle mCarrierConfig;
     private PhoneCallStateListener mPhoneStateListener;
     @VisibleForTesting
     Integer mCallState;
@@ -63,21 +61,23 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     public Enhanced4gBasePreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         m4gLteListeners = new ArrayList<>();
         mPhoneStateListener = new PhoneCallStateListener();
     }
 
     public Enhanced4gBasePreferenceController init(int subId) {
-        if (SubscriptionManager.isValidSubscriptionId(mSubId) && mSubId == subId) {
+        if (mSubId == subId) {
             return this;
         }
         mSubId = subId;
-        mCarrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
+        if (carrierConfig == null) {
+            return this;
+        }
 
-        final boolean show4GForLTE = mCarrierConfig.getBoolean(
+        final boolean show4GForLTE = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL);
-        m4gCurrentMode = mCarrierConfig.getInt(
+        m4gCurrentMode = carrierConfig.getInt(
                 CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT);
         if (m4gCurrentMode != MODE_ADVANCED_CALL) {
             m4gCurrentMode = show4GForLTE ? MODE_4G_CALLING : MODE_VOLTE;
@@ -91,10 +91,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (!isModeMatched()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = getCarrierConfigForSubId(subId);
         if ((carrierConfig == null)
                 || carrierConfig.getBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL)) {
             return CONDITIONALLY_UNAVAILABLE;
@@ -103,7 +100,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (!queryState.isReadyToVoLte()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return (isUserControlAllowed() && queryState.isAllowUserControl())
+        return (isUserControlAllowed(carrierConfig) && queryState.isAllowUserControl())
                 ? AVAILABLE : AVAILABLE_UNSEARCHABLE;
     }
 
@@ -129,7 +126,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         final SwitchPreference switchPreference = (SwitchPreference) preference;
 
         final VolteQueryImsState queryState = queryImsState(mSubId);
-        switchPreference.setEnabled(isUserControlAllowed()
+        switchPreference.setEnabled(isUserControlAllowed(getCarrierConfigForSubId(mSubId))
                 && queryState.isAllowUserControl());
         switchPreference.setChecked(queryState.isEnabledByUser()
                 && queryState.isAllowUserControl());
@@ -180,9 +177,10 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         return new VolteQueryImsState(mContext, subId);
     }
 
-    private boolean isUserControlAllowed() {
+    private boolean isUserControlAllowed(final PersistableBundle carrierConfig) {
         return (mCallState != null) && (mCallState == TelephonyManager.CALL_STATE_IDLE)
-                && mCarrierConfig.getBoolean(
+                && (carrierConfig != null)
+                && carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL);
     }
 
