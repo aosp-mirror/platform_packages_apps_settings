@@ -39,8 +39,10 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
+import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
+import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -78,9 +80,15 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private static final String TAG = "BluetoothDevicesSlice";
 
     private final Context mContext;
+    private final AvailableMediaBluetoothDeviceUpdater mAvailableMediaBtDeviceUpdater;
+    private final SavedBluetoothDeviceUpdater mSavedBtDeviceUpdater;
 
     public BluetoothDevicesSlice(Context context) {
         mContext = context;
+        mAvailableMediaBtDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(mContext,
+                null /* fragment */, null /* devicePreferenceCallback */);
+        mSavedBtDeviceUpdater = new SavedBluetoothDeviceUpdater(mContext,
+                null /* fragment */, null /* devicePreferenceCallback */);
     }
 
     @Override
@@ -123,10 +131,10 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilder();
 
         // Get displayable device count.
-        final int deviceCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
+        final int displayableCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
 
         // According to the displayable device count to add bluetooth device rows.
-        for (int i = 0; i < deviceCount; i++) {
+        for (int i = 0; i < displayableCount; i++) {
             listBuilder.addRow(rows.get(i));
         }
 
@@ -148,11 +156,14 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     @Override
     public void onNotifyChange(Intent intent) {
-        // Activate available media device.
         final int bluetoothDeviceHashCode = intent.getIntExtra(BLUETOOTH_DEVICE_HASH_CODE, -1);
-        for (CachedBluetoothDevice cachedBluetoothDevice : getConnectedBluetoothDevices()) {
-            if (cachedBluetoothDevice.hashCode() == bluetoothDeviceHashCode) {
-                cachedBluetoothDevice.setActive();
+        for (CachedBluetoothDevice device : getPairedBluetoothDevices()) {
+            if (device.hashCode() == bluetoothDeviceHashCode) {
+                if (device.isConnected()) {
+                    device.setActive();
+                } else if (!device.isBusy()) {
+                    device.connect();
+                }
                 return;
             }
         }
@@ -164,7 +175,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    List<CachedBluetoothDevice> getConnectedBluetoothDevices() {
+    List<CachedBluetoothDevice> getPairedBluetoothDevices() {
         final List<CachedBluetoothDevice> bluetoothDeviceList = new ArrayList<>();
 
         // If Bluetooth is disable, skip to get the Bluetooth devices.
@@ -174,19 +185,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         }
 
         // Get the Bluetooth devices from LocalBluetoothManager.
-        final LocalBluetoothManager bluetoothManager =
+        final LocalBluetoothManager localBtManager =
                 com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
-        if (bluetoothManager == null) {
+        if (localBtManager == null) {
             Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is unsupported.");
             return bluetoothDeviceList;
         }
         final Collection<CachedBluetoothDevice> cachedDevices =
-                bluetoothManager.getCachedDeviceManager().getCachedDevicesCopy();
+                localBtManager.getCachedDeviceManager().getCachedDevicesCopy();
 
-        // Get all connected devices and sort them.
+        // Get all paired devices and sort them.
         return cachedDevices.stream()
-                .filter(device -> device.getDevice().getBondState() == BluetoothDevice.BOND_BONDED
-                        && device.getDevice().isConnected())
+                .filter(device -> device.getDevice().getBondState() == BluetoothDevice.BOND_BONDED)
                 .sorted(COMPARATOR).collect(Collectors.toList());
     }
 
@@ -242,21 +252,21 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilder() {
         // According to Bluetooth devices to create row builders.
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
-        final List<CachedBluetoothDevice> bluetoothDevices = getConnectedBluetoothDevices();
-        for (CachedBluetoothDevice bluetoothDevice : bluetoothDevices) {
+        for (CachedBluetoothDevice device : getPairedBluetoothDevices()) {
             final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
-                    .setTitleItem(getBluetoothDeviceIcon(bluetoothDevice), ListBuilder.ICON_IMAGE)
-                    .setTitle(bluetoothDevice.getName())
-                    .setSubtitle(bluetoothDevice.getConnectionSummary());
+                    .setTitleItem(getBluetoothDeviceIcon(device), ListBuilder.ICON_IMAGE)
+                    .setTitle(device.getName())
+                    .setSubtitle(device.getConnectionSummary());
 
-            if (bluetoothDevice.isConnectedA2dpDevice()) {
-                // For available media devices, the primary action is to activate audio stream and
-                // add setting icon to the end to link detail page.
-                rowBuilder.setPrimaryAction(buildMediaBluetoothAction(bluetoothDevice));
-                rowBuilder.addEndItem(buildBluetoothDetailDeepLinkAction(bluetoothDevice));
+            if (mAvailableMediaBtDeviceUpdater.isFilterMatched(device)
+                    || mSavedBtDeviceUpdater.isFilterMatched(device)) {
+                // For all available media devices and previously connected devices, the primary
+                // action is to activate or connect, and the end gear icon links to detail page.
+                rowBuilder.setPrimaryAction(buildPrimaryBluetoothAction(device));
+                rowBuilder.addEndItem(buildBluetoothDetailDeepLinkAction(device));
             } else {
-                // For other devices, the primary action is to link detail page.
-                rowBuilder.setPrimaryAction(buildBluetoothDetailDeepLinkAction(bluetoothDevice));
+                // For other devices, the primary action is to link to detail page.
+                rowBuilder.setPrimaryAction(buildBluetoothDetailDeepLinkAction(device));
             }
 
             bluetoothRows.add(rowBuilder);
@@ -266,8 +276,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     }
 
     @VisibleForTesting
-    SliceAction buildMediaBluetoothAction(CachedBluetoothDevice bluetoothDevice) {
-        // Send broadcast to activate available media device.
+    SliceAction buildPrimaryBluetoothAction(CachedBluetoothDevice bluetoothDevice) {
         final Intent intent = new Intent(getUri().toString())
                 .setClass(mContext, SliceBroadcastReceiver.class)
                 .putExtra(BLUETOOTH_DEVICE_HASH_CODE, bluetoothDevice.hashCode());
