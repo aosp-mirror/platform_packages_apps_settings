@@ -70,9 +70,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
-    private int mUserShortcutType = UserShortcutType.DEFAULT;
+    private int mUserShortcutType = UserShortcutType.EMPTY;
     // Used to restore the edit dialog status.
-    private int mUserShortcutTypeCache = UserShortcutType.DEFAULT;
+    private int mUserShortcutTypeCache = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
     private CheckBox mTripleTapTypeCheckBox;
@@ -255,7 +255,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mTripleTapTypeCheckBox = dialogTripleTapView.findViewById(R.id.checkbox);
         final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
         updateAlertDialogCheckState();
-        updateAlertDialogEnableState();
 
         // Window magnification mode doesn't support advancedView.
         if (isWindowMagnification(getPrefContext())) {
@@ -275,30 +274,15 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         updateCheckStatus(mTripleTapTypeCheckBox, UserShortcutType.TRIPLETAP);
     }
 
-    private void updateAlertDialogEnableState() {
-        if (!mSoftwareTypeCheckBox.isChecked() && !mTripleTapTypeCheckBox.isChecked()) {
-            mHardwareTypeCheckBox.setEnabled(false);
-        } else if (!mHardwareTypeCheckBox.isChecked() && !mTripleTapTypeCheckBox.isChecked()) {
-            mSoftwareTypeCheckBox.setEnabled(false);
-        } else if (!mSoftwareTypeCheckBox.isChecked() && !mHardwareTypeCheckBox.isChecked()) {
-            mTripleTapTypeCheckBox.setEnabled(false);
-        } else {
-            mSoftwareTypeCheckBox.setEnabled(true);
-            mHardwareTypeCheckBox.setEnabled(true);
-            mTripleTapTypeCheckBox.setEnabled(true);
-        }
-    }
-
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
         checkBox.setChecked((mUserShortcutTypeCache & type) == type);
         checkBox.setOnClickListener(v -> {
             updateUserShortcutType(/* saveChanges= */ false);
-            updateAlertDialogEnableState();
         });
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
-        mUserShortcutTypeCache = UserShortcutType.DEFAULT;
+        mUserShortcutTypeCache = UserShortcutType.EMPTY;
         if (mSoftwareTypeCheckBox.isChecked()) {
             mUserShortcutTypeCache |= UserShortcutType.SOFTWARE;
         }
@@ -308,9 +292,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (mTripleTapTypeCheckBox.isChecked()) {
             mUserShortcutTypeCache |= UserShortcutType.TRIPLETAP;
         }
+
         if (saveChanges) {
+            final boolean isChanged = (mUserShortcutTypeCache != UserShortcutType.EMPTY);
+            if (isChanged) {
+                setUserShortcutType(getPrefContext(), mUserShortcutTypeCache);
+            }
             mUserShortcutType = mUserShortcutTypeCache;
-            setUserShortcutType(getPrefContext(), mUserShortcutType);
         }
     }
 
@@ -336,7 +324,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return context.getText(R.string.switch_off_text);
         }
 
-        final int shortcutType = getUserShortcutType(context, UserShortcutType.DEFAULT);
+        final int shortcutType = getUserShortcutType(context, UserShortcutType.EMPTY);
         int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
@@ -381,16 +369,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         final String str = (String) filtered.toArray()[0];
         final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
-        return shortcut.getUserShortcutType();
+        return shortcut.getType();
     }
 
     private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateUserShortcutType(/* saveChanges= */ true);
-        if (mShortcutPreference.isChecked()) {
-            optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutType);
-            optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutType);
-        }
-        mShortcutPreference.setChecked(true);
+        optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutType);
+        optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutType);
+        mShortcutPreference.setChecked(mUserShortcutType != UserShortcutType.EMPTY);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
     }
@@ -467,7 +453,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private void updateShortcutPreferenceData() {
         // Get the user shortcut type from settings provider.
         mUserShortcutType = getUserShortcutTypeFromSettings(getPrefContext());
-        if (mUserShortcutType != UserShortcutType.DEFAULT) {
+        if (mUserShortcutType != UserShortcutType.EMPTY) {
             setUserShortcutType(getPrefContext(), mUserShortcutType);
         } else {
             //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
@@ -626,7 +612,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private static int getUserShortcutTypeFromSettings(Context context) {
-        int shortcutTypes = UserShortcutType.DEFAULT;
+        int shortcutTypes = UserShortcutType.EMPTY;
         if (hasMagnificationValuesInSettings(context, UserShortcutType.SOFTWARE)) {
             shortcutTypes |= UserShortcutType.SOFTWARE;
         }

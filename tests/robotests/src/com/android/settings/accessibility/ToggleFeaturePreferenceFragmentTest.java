@@ -60,7 +60,7 @@ public class ToggleFeaturePreferenceFragmentTest {
                 TEST_SERVICE_KEY_1);
 
         assertThat(shortcut.getComponentName()).isEqualTo(TEST_SERVICE_NAME_1);
-        assertThat(shortcut.getUserShortcutType()).isEqualTo(TEST_SERVICE_VALUE_1);
+        assertThat(shortcut.getType()).isEqualTo(TEST_SERVICE_VALUE_1);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ToggleFeaturePreferenceFragmentTest {
                 TEST_SERVICE_KEY_2);
 
         shortcut.setComponentName(TEST_SERVICE_NAME_1);
-        shortcut.setUserShortcutType(TEST_SERVICE_VALUE_1);
+        shortcut.setType(TEST_SERVICE_VALUE_1);
 
         assertThat(shortcut.flattenToString()).isEqualTo(TEST_SERVICE_KEY_1);
     }
@@ -103,7 +103,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
         final String str = (String) filtered.toArray()[0];
         final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
-        final int type = shortcut.getUserShortcutType();
+        final int type = shortcut.getType();
         assertThat(type).isEqualTo(TEST_SERVICE_VALUE_1);
     }
 
