@@ -38,15 +38,6 @@ public class ConnectedWifiEntryPreference extends LongPressWifiEntryPreference i
         setWidgetLayoutResource(R.layout.preference_widget_gear_optional_background);
     }
 
-    @Override
-    public void refresh() {
-        super.refresh();
-
-        if (getWifiEntry().canSignIn()) {
-            setSummary(R.string.wifi_tap_to_sign_in);
-        }
-    }
-
     /**
      * Set gear icon click callback listener.
      */
