@@ -102,7 +102,7 @@ public class BluetoothDeviceUpdaterTest {
         mPreference = new BluetoothDevicePreference(mContext, mCachedBluetoothDevice,
                 false, BluetoothDevicePreference.SortType.TYPE_DEFAULT);
         mBluetoothDeviceUpdater =
-            new BluetoothDeviceUpdater(mDashboardFragment, mDevicePreferenceCallback,
+            new BluetoothDeviceUpdater(mContext, mDashboardFragment, mDevicePreferenceCallback,
                     mLocalManager) {
                 @Override
                 public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {

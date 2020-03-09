@@ -123,7 +123,8 @@
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:taskAffinity="com.android.settings.root"
-                  android:launchMode="singleTask">
+                  android:launchMode="singleTask"
+                  android:configChanges="keyboard|keyboardHidden">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
