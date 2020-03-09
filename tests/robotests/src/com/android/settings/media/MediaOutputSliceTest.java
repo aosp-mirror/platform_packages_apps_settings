@@ -50,7 +50,6 @@ import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -158,7 +157,6 @@ public class MediaOutputSliceTest {
     }
 
     @Test
-    @Ignore
     public void getSlice_disconnectedBluetooth_verifyTitle() {
         mDevices.clear();
         final MediaDevice device = mock(MediaDevice.class);
@@ -166,6 +164,7 @@ public class MediaOutputSliceTest {
         when(device.getIcon()).thenReturn(mTestDrawable);
         when(device.getMaxVolume()).thenReturn(100);
         when(device.isConnected()).thenReturn(false);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE);
 
         mDevices.add(device);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
@@ -174,8 +173,8 @@ public class MediaOutputSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
 
         final SliceAction primaryAction = metadata.getPrimaryAction();
-        assertThat(primaryAction.getTitle().toString()).isEqualTo(TEST_DEVICE_1_NAME + " ("
-                + mContext.getText(R.string.media_output_disconnected_status) + ")");
+        assertThat(primaryAction.getTitle().toString()).isEqualTo(mContext.getString(
+                R.string.media_output_disconnected_status, TEST_DEVICE_1_NAME));
     }
 
     @Test
