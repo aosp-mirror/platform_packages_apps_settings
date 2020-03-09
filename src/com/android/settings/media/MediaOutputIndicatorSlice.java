@@ -20,51 +20,33 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDIC
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.SliceAction;
 
-import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
-import com.android.settingslib.bluetooth.A2dpProfile;
-import com.android.settingslib.bluetooth.HearingAidProfile;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.MediaOutputSliceConstants;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MediaOutputIndicatorSlice implements CustomSliceable {
 
-    private static final String TAG = "MediaOutputIndicatorSlice";
+    private static final String TAG = "MediaOutputIndSlice";
 
     private Context mContext;
-    private LocalBluetoothManager mLocalBluetoothManager;
-    private LocalBluetoothProfileManager mProfileManager;
     private MediaOutputIndicatorWorker mWorker;
 
     public MediaOutputIndicatorSlice(Context context) {
         mContext = context;
-        mLocalBluetoothManager = com.android.settings.bluetooth.Utils.getLocalBtManager(context);
-        if (mLocalBluetoothManager == null) {
-            Log.e(TAG, "Bluetooth is not supported on this device");
-            return;
-        }
-        mProfileManager = mLocalBluetoothManager.getProfileManager();
     }
 
     @Override
@@ -86,7 +68,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
                 .addRow(new ListBuilder.RowBuilder()
                         .setTitle(title)
                         .setTitleItem(createEmptyIcon(), ListBuilder.ICON_IMAGE)
-                        .setSubtitle(findActiveDeviceName())
+                        .setSubtitle(getWorker().getCurrentConnectedMediaDevice().getName())
                         .setPrimaryAction(primarySliceAction));
         return listBuilder.build();
     }
@@ -146,63 +128,10 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         // To decide Slice's visibility.
         // Return true if
         // 1. AudioMode is not in on-going call
-        // 2. Bluetooth device is connected
-        return (!CollectionUtils.isEmpty(getConnectedA2dpDevices())
-                || !CollectionUtils.isEmpty(getConnectedHearingAidDevices()))
-                && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext);
-    }
-
-    private List<BluetoothDevice> getConnectedA2dpDevices() {
-        // Get A2dp devices on states
-        // (STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
-        final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
-        if (a2dpProfile == null) {
-            return new ArrayList<>();
-        }
-        return a2dpProfile.getConnectedDevices();
-    }
-
-    private List<BluetoothDevice> getConnectedHearingAidDevices() {
-        // Get hearing aid profile devices on states
-        // (STATE_CONNECTING, STATE_CONNECTED,  STATE_DISCONNECTING)
-        final HearingAidProfile hapProfile = mProfileManager.getHearingAidProfile();
-        if (hapProfile == null) {
-            return new ArrayList<>();
-        }
-
-        return hapProfile.getConnectedDevices();
-    }
-
-    private CharSequence findActiveDeviceName() {
-        // Return Hearing Aid device name if it is active
-        BluetoothDevice activeDevice = findActiveHearingAidDevice();
-        if (activeDevice != null) {
-            return activeDevice.getAlias();
-        }
-        // Return A2DP device name if it is active
-        final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
-        if (a2dpProfile != null) {
-            activeDevice = a2dpProfile.getActiveDevice();
-            if (activeDevice != null) {
-                return activeDevice.getAlias();
-            }
-        }
-        // No active device, return default summary
-        return mContext.getText(R.string.media_output_default_summary);
-    }
-
-    private BluetoothDevice findActiveHearingAidDevice() {
-        final HearingAidProfile hearingAidProfile = mProfileManager.getHearingAidProfile();
-        if (hearingAidProfile == null) {
-            return null;
-        }
-
-        final List<BluetoothDevice> activeDevices = hearingAidProfile.getActiveDevices();
-        for (BluetoothDevice btDevice : activeDevices) {
-            if (btDevice != null) {
-                return btDevice;
-            }
-        }
-        return null;
+        // 2. worker is not null
+        // 3. Available devices are more than 1
+        return getWorker() != null
+                && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
+                && getWorker().getMediaDevices().size() > 1;
     }
 }
