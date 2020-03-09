@@ -157,13 +157,11 @@ public class WifiUtils {
 
         switch (security) {
             case AccessPoint.SECURITY_NONE:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
                 break;
 
             case AccessPoint.SECURITY_WEP:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-                config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-                config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
                 if (!TextUtils.isEmpty(password)) {
                     int length = password.length();
                     // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
@@ -177,7 +175,7 @@ public class WifiUtils {
                 break;
 
             case AccessPoint.SECURITY_PSK:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
                 if (!TextUtils.isEmpty(password)) {
                     if (password.matches("[0-9A-Fa-f]{64}")) {
                         config.preSharedKey = password;
@@ -189,16 +187,11 @@ public class WifiUtils {
 
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_SUITE_B:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_EAP);
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.IEEE8021X);
                 if (security == AccessPoint.SECURITY_EAP_SUITE_B) {
-                    config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.SUITE_B_192);
-                    config.requirePmf = true;
-                    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
-                    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
-                    config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
-                            .BIP_GMAC_256);
                     // allowedSuiteBCiphers will be set according to certificate type
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
 
                 if (!TextUtils.isEmpty(password)) {
@@ -206,16 +199,14 @@ public class WifiUtils {
                 }
                 break;
             case AccessPoint.SECURITY_SAE:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.SAE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
                 if (!TextUtils.isEmpty(password)) {
                     config.preSharedKey = '"' + password + '"';
                 }
                 break;
 
             case AccessPoint.SECURITY_OWE:
-                config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.OWE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
                 break;
 
             default:
