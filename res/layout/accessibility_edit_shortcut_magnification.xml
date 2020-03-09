@@ -44,19 +44,21 @@
             android:id="@+id/advanced_shortcut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ic_keyboard_arrow_down" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"
                 android:paddingStart="12dp"
                 android:text="@string/accessibility_shortcut_edit_dialog_title_advance"
                 android:textAppearance="?android:attr/textAppearanceListItem"

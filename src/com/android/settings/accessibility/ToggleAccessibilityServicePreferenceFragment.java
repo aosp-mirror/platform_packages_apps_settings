@@ -417,6 +417,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mDialog.dismiss();
+
+        mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
     private void onDenyButtonFromShortcutToggleClicked() {
