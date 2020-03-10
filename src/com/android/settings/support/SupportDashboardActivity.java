@@ -25,8 +25,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +45,8 @@ public class SupportDashboardActivity extends Activity implements Indexable {
 
         // try to launch support if we have the feature provider
         if (supportFeatureProvider != null) {
-          supportFeatureProvider.startSupport(this);
-          finish();
+            supportFeatureProvider.startSupport(this);
+            finish();
         }
     }
 
@@ -66,7 +66,7 @@ public class SupportDashboardActivity extends Activity implements Indexable {
                     // Add the activity title
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.page_tab_title_support);
-                    data.screenTitle = context.getString(R.string.settings_label);
+                    data.screenTitle = context.getString(R.string.page_tab_title_support);
                     data.summaryOn = context.getString(R.string.support_summary);
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = SupportDashboardActivity.class.getName();
