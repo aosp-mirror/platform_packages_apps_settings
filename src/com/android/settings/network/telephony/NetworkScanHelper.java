@@ -113,12 +113,19 @@ public class NetworkScanHelper {
             radioAccessSpecifiers.add(
                     new RadioAccessSpecifier(AccessNetworkType.EUTRAN, null, null));
         }
-        if (networkTypeBitmap3gpp == 0
-                || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0) {
-            radioAccessSpecifiers.add(
-                    new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
-        }
-
+        // If a device supports 5G stand-alone then the code below should be re-enabled; however
+        // a device supporting only non-standalone mode cannot perform PLMN selection and camp on
+        // a 5G network, which means that it shouldn't scan for 5G at the expense of battery as
+        // part of the manual network selection process.
+        //
+        // FIXME(b/151119451): re-enable this code once there is a way to distinguish SA from NSA
+        // support in the modem.
+        //
+        // if (networkTypeBitmap3gpp == 0
+        //        || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0) {
+        //    radioAccessSpecifiers.add(
+        //            new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
+        // }
 
         return new NetworkScanRequest(
                 NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
