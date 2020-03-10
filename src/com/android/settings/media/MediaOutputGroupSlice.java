@@ -118,8 +118,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
         return listBuilder.build();
     }
 
-    private void addRow(ListBuilder listBuilder, List<MediaDevice> mediaDevices,
-            boolean selected) {
+    private void addRow(ListBuilder listBuilder, List<MediaDevice> mediaDevices, boolean selected) {
         for (MediaDevice device : mediaDevices) {
             final int maxVolume = device.getMaxVolume();
             final IconCompat titleIcon = Utils.createIconWithDrawable(device.getIcon());
