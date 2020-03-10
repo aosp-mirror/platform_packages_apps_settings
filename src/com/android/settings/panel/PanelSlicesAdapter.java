@@ -69,7 +69,12 @@ public class PanelSlicesAdapter
     public SliceRowViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         final Context context = viewGroup.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final View view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
+        View view;
+        if (viewType == PanelContent.VIEW_TYPE_SLIDER) {
+            view = inflater.inflate(R.layout.panel_slice_slider_row, viewGroup, false);
+        } else {
+            view = inflater.inflate(R.layout.panel_slice_row, viewGroup, false);
+        }
 
         return new SliceRowViewHolder(view);
     }
@@ -85,6 +90,11 @@ public class PanelSlicesAdapter
     @Override
     public int getItemCount() {
         return Math.min(mSliceLiveData.size(), MAX_NUM_OF_SLICES);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return mPanelFragment.getPanelViewType();
     }
 
     /**
