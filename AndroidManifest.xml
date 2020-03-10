@@ -3202,6 +3202,10 @@
                     <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT" />
                     <category android:name="android.intent.category.DEFAULT" />
                 </intent-filter>
+                <intent-filter>
+                    <action android:name="com.android.settings.panel.action.MEDIA_OUTPUT_GROUP" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
         </activity-alias>
 
         <provider android:name=".slices.SettingsSliceProvider"
