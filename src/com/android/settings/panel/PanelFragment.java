@@ -417,6 +417,10 @@ public class PanelFragment extends Fragment {
         };
     }
 
+    int getPanelViewType() {
+        return mPanel.getViewType();
+    }
+
     class LocalPanelCallback implements PanelContentCallback {
 
         @Override
