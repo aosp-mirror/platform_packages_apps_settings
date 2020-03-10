@@ -44,6 +44,7 @@ public class FakePanelContent implements PanelContent {
 
     private CharSequence mSubTitle;
     private IconCompat mIcon;
+    private int mViewType;
 
     @Override
     public IconCompat getIcon() {
@@ -81,5 +82,14 @@ public class FakePanelContent implements PanelContent {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.TESTING;
+    }
+
+    public void setViewType(int viewType) {
+        mViewType = viewType;
+    }
+
+    @Override
+    public int getViewType() {
+        return mViewType;
     }
 }
