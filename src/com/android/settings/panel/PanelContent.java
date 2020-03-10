@@ -30,6 +30,8 @@ import java.util.List;
  */
 public interface PanelContent extends Instrumentable {
 
+    int VIEW_TYPE_SLIDER = 1;
+
     /**
      * @return a icon for the title of the Panel.
      */
@@ -101,4 +103,11 @@ public interface PanelContent extends Instrumentable {
      * @param callback the callback to add.
      */
     default void registerCallback(PanelContentCallback callback) {}
+
+    /**
+     * @return a view type to customized it. 0 for default layout.
+     */
+    default int getViewType() {
+        return 0;
+    }
 }
