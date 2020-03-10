@@ -28,8 +28,6 @@ import android.net.ProxyInfo;
 import android.net.StaticIpConfiguration;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.AuthAlgorithm;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
@@ -638,13 +636,11 @@ public class WifiConfigController implements TextWatcher,
 
         switch (mAccessPointSecurity) {
             case AccessPoint.SECURITY_NONE:
-                config.allowedKeyManagement.set(KeyMgmt.NONE);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
                 break;
 
             case AccessPoint.SECURITY_WEP:
-                config.allowedKeyManagement.set(KeyMgmt.NONE);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
                 if (mPasswordView.length() != 0) {
                     int length = mPasswordView.length();
                     String password = mPasswordView.getText().toString();
@@ -659,7 +655,7 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_PSK:
-                config.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     if (password.matches("[0-9A-Fa-f]{64}")) {
@@ -672,16 +668,11 @@ public class WifiConfigController implements TextWatcher,
 
             case AccessPoint.SECURITY_EAP:
             case AccessPoint.SECURITY_EAP_SUITE_B:
-                config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
-                config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
                 if (mAccessPointSecurity == AccessPoint.SECURITY_EAP_SUITE_B) {
-                    config.allowedKeyManagement.set(KeyMgmt.SUITE_B_192);
-                    config.requirePmf = true;
-                    config.allowedPairwiseCiphers.set(WifiConfiguration.PairwiseCipher.GCMP_256);
-                    config.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.GCMP_256);
-                    config.allowedGroupManagementCiphers.set(WifiConfiguration.GroupMgmtCipher
-                            .BIP_GMAC_256);
                     // allowedSuiteBCiphers will be set according to certificate type
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
+                } else {
+                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
                 }
                 config.enterpriseConfig = new WifiEnterpriseConfig();
                 int eapMethod = mEapMethodSpinner.getSelectedItemPosition();
@@ -815,8 +806,7 @@ public class WifiConfigController implements TextWatcher,
                 }
                 break;
             case AccessPoint.SECURITY_SAE:
-                config.allowedKeyManagement.set(KeyMgmt.SAE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
                 if (mPasswordView.length() != 0) {
                     String password = mPasswordView.getText().toString();
                     config.preSharedKey = '"' + password + '"';
@@ -824,8 +814,7 @@ public class WifiConfigController implements TextWatcher,
                 break;
 
             case AccessPoint.SECURITY_OWE:
-                config.allowedKeyManagement.set(KeyMgmt.OWE);
-                config.requirePmf = true;
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
                 break;
 
             default:
