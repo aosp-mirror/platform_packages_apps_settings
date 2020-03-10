@@ -24,6 +24,7 @@
         android:title="@string/unrestricted_data_saver"
         android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess"
+        settings:searchable="false"
         settings:controller="com.android.settings.applications.specialaccess.DataSaverController" />
 
     <com.android.settingslib.widget.FooterPreference
