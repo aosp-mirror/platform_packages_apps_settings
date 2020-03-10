@@ -36,6 +36,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.text.TextUtils;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -67,7 +68,9 @@ import java.util.List;
 public class MediaOutputSliceTest {
 
     private static final String TEST_DEVICE_1_ID = "test_device_1_id";
+    private static final String TEST_DEVICE_2_ID = "test_device_2_id";
     private static final String TEST_DEVICE_1_NAME = "test_device_1_name";
+    private static final String TEST_DEVICE_2_NAME = "test_device_2_name";
     private static final int TEST_DEVICE_1_ICON =
             com.android.internal.R.drawable.ic_bt_headphones_a2dp;
 
@@ -98,7 +101,8 @@ public class MediaOutputSliceTest {
         mShadowBluetoothAdapter.setEnabled(true);
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
-        mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, MEDIA_OUTPUT_SLICE_URI);
+        mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext,
+                MEDIA_OUTPUT_SLICE_URI);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputSlice.init(mMediaDeviceUpdateWorker);
@@ -147,6 +151,19 @@ public class MediaOutputSliceTest {
         when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
         when(device.getIcon()).thenReturn(mTestDrawable);
         when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(false);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
+        mDevices.add(device);
+        mDevices.add(device2);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
 
         final Slice mediaSlice = mMediaOutputSlice.getSlice();
@@ -165,8 +182,16 @@ public class MediaOutputSliceTest {
         when(device.getMaxVolume()).thenReturn(100);
         when(device.isConnected()).thenReturn(false);
         when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE);
-
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(false);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
         mDevices.add(device);
+        mDevices.add(device2);
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
 
         final Slice mediaSlice = mMediaOutputSlice.getSlice();
@@ -175,6 +200,139 @@ public class MediaOutputSliceTest {
         final SliceAction primaryAction = metadata.getPrimaryAction();
         assertThat(primaryAction.getTitle().toString()).isEqualTo(mContext.getString(
                 R.string.media_output_disconnected_status, TEST_DEVICE_1_NAME));
+    }
+
+    @Test
+    public void getSlice_inGroupState_checkSliceSize() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(true);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
+        mSelectedDevices.add(device);
+        mSelectedDevices.add(device2);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        mDevices.add(device2);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        when(mMediaDeviceUpdateWorker.getSessionVolumeMax()).thenReturn(100);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+
+        assertThat(SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM, null).size())
+                .isEqualTo(mDevices.size() + 1);
+    }
+
+    @Test
+    public void getSlice_notInGroupState_checkSliceSize() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(true);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
+        mSelectedDevices.add(device);
+        mSelectableDevices.add(device2);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        mDevices.add(device2);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+
+        assertThat(SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM, null).size())
+                .isEqualTo(mDevices.size());
+    }
+
+    @Test
+    public void getSlice_singleCastDevice_notContainGroupIconText() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(null);
+        mSelectedDevices.add(device);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+
+        final String sliceInfo = SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null).toString();
+
+        assertThat(TextUtils.indexOf(sliceInfo, mContext.getText(R.string.add))).isEqualTo(-1);
+    }
+
+    @Test
+    public void getSlice_multipleCastDevices_containGroupIconText() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(true);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
+        mSelectedDevices.add(device);
+        mSelectableDevices.add(device2);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        mDevices.add(device2);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+        String sliceInfo = SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null).toString();
+
+        assertThat(TextUtils.indexOf(sliceInfo, mContext.getText(R.string.add))).isNotEqualTo(-1);
     }
 
     @Test
