@@ -73,4 +73,9 @@ public class VolumePanel implements PanelContent {
     public int getMetricsCategory() {
         return SettingsEnums.PANEL_VOLUME;
     }
+
+    @Override
+    public int getViewType() {
+        return PanelContent.VIEW_TYPE_SLIDER;
+    }
 }
