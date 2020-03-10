@@ -24,7 +24,6 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -179,7 +178,9 @@ public class MediaOutputSlice implements CustomSliceable {
                 && !device.isConnected()) {
             final SpannableString spannableTitle = new SpannableString(
                     mContext.getString(R.string.media_output_disconnected_status, deviceName));
-            spannableTitle.setSpan(new ForegroundColorSpan(Color.GRAY), deviceName.length(),
+            spannableTitle.setSpan(new ForegroundColorSpan(
+                    Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary)),
+                    deviceName.length(),
                     spannableTitle.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
             rowBuilder.setTitle(spannableTitle);
             rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
