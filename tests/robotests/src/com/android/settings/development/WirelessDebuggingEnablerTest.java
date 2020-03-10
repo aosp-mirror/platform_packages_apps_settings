@@ -27,7 +27,6 @@ import android.provider.Settings.Global;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
@@ -47,8 +46,6 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(shadows = ShadowUtils.class)
 public class WirelessDebuggingEnablerTest {
 
-    @Mock
-    private SettingsActivity mActivity;
     @Mock
     private SwitchBar mSwitchBar;
     @Mock
@@ -133,8 +130,6 @@ public class WirelessDebuggingEnablerTest {
 
         mWirelessDebuggingEnabler.onSwitchToggled(true);
 
-        verify(mSwitchBar).setChecked(true);
-        verify(mListener).onEnabled(true);
         assertThat(Global.getInt(mContext.getContentResolver(),
                 Global.ADB_WIFI_ENABLED, -1)).isEqualTo(1);
         // Should also get a callback
@@ -151,8 +146,6 @@ public class WirelessDebuggingEnablerTest {
 
         mWirelessDebuggingEnabler.onSwitchToggled(false);
 
-        verify(mSwitchBar).setChecked(false);
-        verify(mListener).onEnabled(false);
         assertThat(Global.getInt(mContext.getContentResolver(),
             Global.ADB_WIFI_ENABLED, -1)).isEqualTo(0);
         // Should also get a callback

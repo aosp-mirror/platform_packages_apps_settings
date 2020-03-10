@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,9 +39,11 @@ import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.media.LocalMediaManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothUtils.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class MediaOutputIndicatorWorkerTest {
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
 
@@ -68,6 +71,8 @@ public class MediaOutputIndicatorWorkerTest {
     private MediaSessionManager mMediaSessionManager;
     @Mock
     private MediaController mMediaController;
+    @Mock
+    private LocalMediaManager mLocalMediaManager;
 
     private Context mContext;
     private MediaOutputIndicatorWorker mMediaOutputIndicatorWorker;
@@ -95,29 +100,40 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void onSlicePinned_registerCallback() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputIndicatorWorker.onSlicePinned();
+
         verify(mBluetoothEventManager).registerCallback(mMediaOutputIndicatorWorker);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mLocalMediaManager).registerCallback(mMediaOutputIndicatorWorker);
+        verify(mLocalMediaManager).startScan();
     }
 
     @Test
     public void onSliceUnpinned_unRegisterCallback() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputIndicatorWorker.onSlicePinned();
         mMediaOutputIndicatorWorker.onSliceUnpinned();
+
         verify(mBluetoothEventManager).unregisterCallback(mMediaOutputIndicatorWorker);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mLocalMediaManager).unregisterCallback(mMediaOutputIndicatorWorker);
+        verify(mLocalMediaManager).stopScan();
     }
 
     @Test
     public void onReceive_shouldNotifyChange() {
         mMediaOutputIndicatorWorker.onSlicePinned();
+        // onSlicePinned will registerCallback() and get first callback. Callback triggers this at
+        // the first time.
+        verify(mResolver, times(1)).notifyChange(URI, null);
 
         final Intent intent = new Intent(AudioManager.STREAM_DEVICES_CHANGED_ACTION);
         for (BroadcastReceiver receiver : mShadowApplication.getReceiversForIntent(intent)) {
             receiver.onReceive(mContext, intent);
         }
-
-        verify(mResolver).notifyChange(URI, null);
+        // Intent receiver triggers notifyChange() again
+        verify(mResolver, times(2)).notifyChange(URI, null /* observer */);
     }
 
     @Test
