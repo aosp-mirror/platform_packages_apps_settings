@@ -512,6 +512,17 @@
         <item name="android:background">?android:attr/colorBackgroundFloating</item>
     </style>
 
+    <style name="SliceViewSliderStyle">
+        <item name="rowStyle">@style/SliceRowSliderStyle</item>
+        <item name="android:background">?android:attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="SliceRowSliderStyle" parent="SliceRowStyle">
+        <!-- Align text with slider -->
+        <item name="titleStartPadding">12dp</item>
+        <item name="subContentStartPadding">12dp</item>
+    </style>
+
     <style name="ContextualCardSliceViewStyle" parent="SliceViewStyle">
         <item name="android:background">@color/contextual_card_background</item>
     </style>

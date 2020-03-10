@@ -156,4 +156,9 @@ public class MediaOutputGroupPanel implements PanelContent, LocalMediaManager.De
     public int getMetricsCategory() {
         return SettingsEnums.PANEL_MEDIA_OUTPUT_GROUP;
     }
+
+    @Override
+    public int getViewType() {
+        return PanelContent.VIEW_TYPE_SLIDER;
+    }
 }
