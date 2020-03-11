@@ -19,12 +19,14 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="magnification_mode_screen"
     android:persistent="false"
-    android:title="@string/accessibility_magnification_service_settings_title">
+    android:title="@string/accessibility_magnification_service_settings_title"
+    settings:searchable="false">
 
     <Preference
         android:key="magnification_mode"
         android:persistent="false"
         android:title="@string/accessibility_magnification_mode_title"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.MagnificationModePreferenceController" />
 
     <SwitchPreference
@@ -33,6 +35,7 @@
         android:title="@string/accessibility_magnification_enable_mode_title"
         android:summaryOn="@string/accessibility_magnification_area_settings_full_screen_summary"
         android:summaryOff="@string/accessibility_magnification_area_settings_window_screen_summary"
+        settings:searchable="false"
         settings:controller="com.android.settings.accessibility.MagnificationEnablePreferenceController" />
 
 </PreferenceScreen>
