@@ -32,6 +32,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+// TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
 public class WifiMasterSwitchPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, SummaryUpdater.OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
