@@ -99,7 +99,7 @@ public class WifiScanningRequiredFragment extends InstrumentedDialogFragment imp
         Intent intent = getHelpIntent(getContext());
         if (intent != null) {
             try {
-                startActivity(intent);
+                getActivity().startActivityForResult(intent, 0);
             } catch (ActivityNotFoundException e) {
                 Log.e(TAG, "Activity was not found for intent, " + intent.toString());
             }

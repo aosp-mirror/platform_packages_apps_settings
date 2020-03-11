@@ -24,7 +24,6 @@ import static com.android.settings.wifi.dpp.WifiQrCode.SECURITY_WPA_PSK;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.text.TextUtils;
@@ -252,17 +251,15 @@ public class WifiNetworkConfig {
 
             final WifiConfiguration enhancedOpenNetworkWifiConfiguration =
                     getBasicWifiConfiguration();
-            enhancedOpenNetworkWifiConfiguration.allowedKeyManagement.set(KeyMgmt.OWE);
-            enhancedOpenNetworkWifiConfiguration.requirePmf = true;
+            enhancedOpenNetworkWifiConfiguration
+                    .setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
             wifiConfigurations.add(enhancedOpenNetworkWifiConfiguration);
             return wifiConfigurations;
         }
 
         final WifiConfiguration wifiConfiguration = getBasicWifiConfiguration();
         if (mSecurity.startsWith(SECURITY_WEP)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.NONE);
-            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
-            wifiConfiguration.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
 
             // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
             final int length = mPreSharedKey.length();
@@ -273,7 +270,7 @@ public class WifiNetworkConfig {
                 wifiConfiguration.wepKeys[0] = addQuotationIfNeeded(mPreSharedKey);
             }
         } else if (mSecurity.startsWith(SECURITY_WPA_PSK)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
 
             if (mPreSharedKey.matches("[0-9A-Fa-f]{64}")) {
                 wifiConfiguration.preSharedKey = mPreSharedKey;
@@ -281,8 +278,7 @@ public class WifiNetworkConfig {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }
         } else if (mSecurity.startsWith(SECURITY_SAE)) {
-            wifiConfiguration.allowedKeyManagement.set(KeyMgmt.SAE);
-            wifiConfiguration.requirePmf = true;
+            wifiConfiguration.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
             if (mPreSharedKey.length() != 0) {
                 wifiConfiguration.preSharedKey = addQuotationIfNeeded(mPreSharedKey);
             }
