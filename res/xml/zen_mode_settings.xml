@@ -43,6 +43,7 @@
         <Preference
             android:key="zen_mode_behavior_apps"
             android:title="@string/zen_category_apps"
+            settings:controller="com.android.settings.notification.zen.ZenModeBypassingAppsPreferenceController"
             android:fragment="com.android.settings.notification.zen.ZenModeBypassingAppsSettings" />
 
         <!-- All sounds -->
