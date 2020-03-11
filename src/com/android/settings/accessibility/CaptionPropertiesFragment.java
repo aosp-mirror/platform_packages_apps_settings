@@ -98,6 +98,11 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         return true;
     }
 
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_caption;
+    }
+
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.captioning_settings);
 }
