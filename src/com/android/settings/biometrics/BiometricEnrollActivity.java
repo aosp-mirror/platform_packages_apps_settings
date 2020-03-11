@@ -47,7 +47,6 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 public class BiometricEnrollActivity extends InstrumentedActivity {
 
     private static final String TAG = "BiometricEnrollActivity";
-    private static final int REQUEST_ENROLL = 1;
 
     public static final String EXTRA_SKIP_INTRO = "skip_intro";
 
@@ -72,7 +71,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         if (result == BiometricManager.BIOMETRIC_SUCCESS
                 || result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
             Log.e(TAG, "Unexpected result: " + result);
-            setResult(RESULT_CANCELED);
             finish();
             return;
         }
@@ -96,6 +94,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
         }
 
         if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
             if (this instanceof InternalActivity) {
                 // Propagate challenge and user Id from ChooseLockGeneric.
                 final byte[] token = getIntent()
@@ -107,18 +107,10 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 intent.putExtra(Intent.EXTRA_USER_ID, userId);
             }
 
-            startActivityForResult(intent, REQUEST_ENROLL);
-        } else {
-            Log.e(TAG, "Intent was null, finishing with RESULT_CANCELED");
-            setResult(RESULT_CANCELED);
+            startActivity(intent);
             finish();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_ENROLL) {
-            setResult(RESULT_OK);
+        } else {
+            Log.e(TAG, "Intent was null, finishing");
             finish();
         }
     }
