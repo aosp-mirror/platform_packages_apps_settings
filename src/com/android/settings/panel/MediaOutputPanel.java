@@ -240,4 +240,9 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         mLocalMediaManager.unregisterCallback(this);
         mLocalMediaManager.stopScan();
     }
+
+    @Override
+    public int getViewType() {
+        return PanelContent.VIEW_TYPE_SLIDER;
+    }
 }

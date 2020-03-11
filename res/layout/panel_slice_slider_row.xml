@@ -14,19 +14,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<com.google.android.material.card.MaterialCardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/ContextualCardStyle">
+    android:orientation="vertical">
 
     <androidx.slice.widget.SliceView
         android:id="@+id/slice_view"
-        android:theme="@style/Theme.Settings.ContextualCard"
-        style="@style/ContextualCardSliceViewStyle"
+        style="@style/SliceViewSliderStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:importantForAccessibility="no"/>
-
-</com.google.android.material.card.MaterialCardView>
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"/>
+</LinearLayout>
