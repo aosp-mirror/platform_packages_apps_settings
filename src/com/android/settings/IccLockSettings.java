@@ -122,6 +122,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     // @see android.widget.Toast$TN
     private static final long LONG_DURATION_TIMEOUT = 7000;
 
+    private int mSlotId;
     private int mSubId;
     private TelephonyManager mTelephonyManager;
 
@@ -218,6 +219,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
             Bundle savedInstanceState) {
 
         final int numSims = mProxySubscriptionMgr.getActiveSubscriptionInfoCountMax();
+        mSlotId = 0;
         if (numSims > 1) {
             final View view = inflater.inflate(R.layout.icc_lock_tabs, container, false);
             final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
@@ -243,7 +245,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
                             ? getContext().getString(R.string.sim_editor_title, i + 1)
                             : subInfo.getDisplayName())));
             }
-            final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, 0);
+            final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
+                    subInfoList, mSlotId);
             mSubId = sir.getSubscriptionId();
 
             if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
@@ -265,7 +268,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         final List<SubscriptionInfo> subInfoList =
                 mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-        final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, 0);
+        final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, mSlotId);
         mSubId = sir.getSubscriptionId();
 
         if (mPinDialog != null) {
@@ -651,9 +654,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private OnTabChangeListener mTabListener = new OnTabChangeListener() {
         @Override
         public void onTabChanged(String tabId) {
-            final int slotId = Integer.parseInt(tabId);
+            mSlotId = Integer.parseInt(tabId);
             final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
-                    mProxySubscriptionMgr.getActiveSubscriptionsInfo(), slotId);
+                    mProxySubscriptionMgr.getActiveSubscriptionsInfo(), mSlotId);
 
             // The User has changed tab; update the body.
             updatePreferences();
