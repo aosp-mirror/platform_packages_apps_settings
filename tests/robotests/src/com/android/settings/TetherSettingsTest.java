@@ -30,8 +30,11 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.FeatureFlagUtils;
 
 import androidx.preference.Preference;
+
+import com.android.settings.core.FeatureFlags;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -72,6 +75,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations
         setupIsTetherAvailable(true);
 
@@ -106,6 +110,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_usbAvailable_usbKeyNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
@@ -128,6 +133,7 @@ public class TetherSettingsTest {
 
     @Test
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         when(mConnectivityManager.getTetherableBluetoothRegexs())
                 .thenReturn(new String[]{"dummyRegex"});
 
