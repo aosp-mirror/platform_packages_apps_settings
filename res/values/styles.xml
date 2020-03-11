@@ -462,12 +462,6 @@
         <item name="rippleColor">?android:attr/colorControlHighlight</item>
     </style>
 
-    <style name="StickyCardStyle">
-        <item name="android:layout_marginBottom">@dimen/contextual_card_vertical_margin</item>
-        <item name="android:layout_marginStart">@dimen/contextual_card_side_margin</item>
-        <item name="android:layout_marginEnd">@dimen/contextual_card_side_margin</item>
-    </style>
-
     <style name="SearchBarStyle">
         <item name="android:layout_margin">@dimen/search_bar_margin</item>
         <item name="cardCornerRadius">@*android:dimen/config_dialogCornerRadius</item>
@@ -510,6 +504,17 @@
     <style name="SliceViewStyle">
         <item name="rowStyle">@style/SliceRowStyle</item>
         <item name="android:background">?android:attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="SliceViewSliderStyle">
+        <item name="rowStyle">@style/SliceRowSliderStyle</item>
+        <item name="android:background">?android:attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="SliceRowSliderStyle" parent="SliceRowStyle">
+        <!-- Align text with slider -->
+        <item name="titleStartPadding">12dp</item>
+        <item name="subContentStartPadding">12dp</item>
     </style>
 
     <style name="ContextualCardSliceViewStyle" parent="SliceViewStyle">
