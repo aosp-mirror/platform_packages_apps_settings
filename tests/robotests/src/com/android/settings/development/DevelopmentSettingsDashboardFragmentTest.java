@@ -41,6 +41,7 @@ import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -49,9 +50,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowUserManager;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
@@ -130,6 +131,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
     }
 
     @Test
+    @Ignore
     @Config(shadows = {
             ShadowPictureColorModePreferenceController.class,
             ShadowAdbPreferenceController.class,
