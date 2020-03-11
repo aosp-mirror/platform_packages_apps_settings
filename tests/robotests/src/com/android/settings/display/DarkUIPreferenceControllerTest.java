@@ -16,19 +16,10 @@
 
 package com.android.settings.display;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
-
 import androidx.fragment.app.Fragment;
-
 import com.android.settings.display.darkmode.DarkModePreference;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -36,8 +27,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class DarkUIPreferenceControllerTest {
 
     private DarkUIPreferenceController mController;
