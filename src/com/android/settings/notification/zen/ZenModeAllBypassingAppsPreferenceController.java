@@ -105,9 +105,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
         ApplicationsState.AppFilter filter = ApplicationsState.FILTER_ALL_ENABLED;
         List<ApplicationsState.AppEntry> apps = mAppSession.rebuild(filter,
                 ApplicationsState.ALPHA_COMPARATOR);
-        if (apps != null) {
-            updateNotificationChannelList(apps);
-        }
+        updateNotificationChannelList(apps);
     }
 
     @VisibleForTesting
@@ -115,6 +113,8 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
         if (mPreferenceScreen == null || apps == null) {
             return;
         }
+
+        boolean showEmptyState = true;
 
         List<Preference> channelsBypassingDnd = new ArrayList<>();
         for (ApplicationsState.AppEntry entry : apps) {
@@ -148,6 +148,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                     return true;
                 });
                 channelsBypassingDnd.add(pref);
+                showEmptyState = false;
             }
 
             mPreferenceScreen.removeAll();
@@ -155,6 +156,11 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                 for (Preference prefToAdd : channelsBypassingDnd) {
                     mPreferenceScreen.addPreference(prefToAdd);
                 }
+            }
+            if (showEmptyState) {
+                Preference pref = new Preference(mPrefContext);
+                pref.setTitle(R.string.zen_mode_bypassing_apps_subtext_none);
+                mPreferenceScreen.addPreference(pref);
             }
         }
     }
