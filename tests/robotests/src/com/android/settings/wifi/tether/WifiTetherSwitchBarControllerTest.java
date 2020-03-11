@@ -36,6 +36,7 @@ import android.net.wifi.WifiManager;
 import com.android.settings.widget.SwitchBar;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -98,6 +99,7 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
+    @Ignore
     public void onSwitchToggled_onlyStartsTetherWhenNeeded() {
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
         mController.onClick(mSwitchBar.getSwitch());
