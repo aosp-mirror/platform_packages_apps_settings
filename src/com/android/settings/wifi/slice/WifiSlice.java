@@ -38,7 +38,6 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -55,10 +54,8 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.wifi.WifiSettings2;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.util.Arrays;
@@ -253,16 +250,13 @@ public class WifiSlice implements CustomSliceable {
         accessPoint.saveWifiState(extras);
 
         if (accessPoint.isActive()) {
-            final SubSettingLauncher launcher = new SubSettingLauncher(mContext)
+            final Intent intent = new SubSettingLauncher(mContext)
                     .setTitleRes(R.string.pref_title_network_details)
+                    .setDestination(WifiNetworkDetailsFragment.class.getName())
                     .setArguments(extras)
-                    .setSourceMetricsCategory(SettingsEnums.WIFI);
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                launcher.setDestination(WifiNetworkDetailsFragment2.class.getName());
-            } else {
-                launcher.setDestination(WifiNetworkDetailsFragment.class.getName());
-            }
-            return getActivityAction(requestCode, launcher.toIntent(), icon, title);
+                    .setSourceMetricsCategory(SettingsEnums.WIFI)
+                    .toIntent();
+            return getActivityAction(requestCode, intent, icon, title);
         } else if (WifiUtils.getConnectingType(accessPoint) != WifiUtils.CONNECT_TYPE_OTHERS) {
             final Intent intent = new Intent(mContext, ConnectToWifiHandler.class)
                     .putExtra(WifiDialogActivity.KEY_ACCESS_POINT_STATE, extras);
@@ -326,21 +320,11 @@ public class WifiSlice implements CustomSliceable {
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.wifi_settings).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-
-        Intent intent;
-        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-            intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                WifiSettings2.class.getName(), KEY_WIFI, screenTitle,
-                SettingsEnums.DIALOG_WIFI_AP_EDIT)
-                .setClassName(mContext.getPackageName(), SubSettings.class.getName())
-                .setData(contentUri);
-        } else {
-            intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 WifiSettings.class.getName(), KEY_WIFI, screenTitle,
                 SettingsEnums.DIALOG_WIFI_AP_EDIT)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
-        }
 
         return intent;
     }

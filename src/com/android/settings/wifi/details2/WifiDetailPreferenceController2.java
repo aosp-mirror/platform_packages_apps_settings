@@ -101,6 +101,7 @@ import java.time.format.FormatStyle;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+// TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
 /**
  * Controller for logic pertaining to displaying Wifi information for the
  * {@link WifiNetworkDetailsFragment}.
@@ -596,7 +597,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshTxSpeed() {
-        if (mWifiInfo == null) {
+        if (mWifiInfo == null
+                || mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
             mTxLinkSpeedPref.setVisible(false);
             return;
         }
@@ -608,7 +610,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshRxSpeed() {
-        if (mWifiInfo == null) {
+        if (mWifiInfo == null
+                || mWifiEntry.getConnectedState() != WifiEntry.CONNECTED_STATE_CONNECTED) {
             mRxLinkSpeedPref.setVisible(false);
             return;
         }

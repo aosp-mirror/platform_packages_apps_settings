@@ -24,7 +24,6 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -44,6 +43,7 @@ import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import java.util.Collection;
 
@@ -54,6 +54,8 @@ public class MediaOutputSlice implements CustomSliceable {
 
     private static final String TAG = "MediaOutputSlice";
     private static final String MEDIA_DEVICE_ID = "media_device_id";
+    private static final String MEDIA_GROUP_DEVICE = "media_group_device";
+    private static final String MEDIA_GROUP_REQUEST = "media_group_request";
     private static final int NON_SLIDER_VALUE = -1;
 
     public static final String MEDIA_PACKAGE_NAME = "media_package_name";
@@ -86,50 +88,92 @@ public class MediaOutputSlice implements CustomSliceable {
 
         final Collection<MediaDevice> devices = getMediaDevices();
         final MediaDeviceUpdateWorker worker = getWorker();
-        final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
-        final boolean isTouched = worker.getIsTouched();
-        // Fix the last top device when user press device to transfer.
-        final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
-        if (topDevice != null) {
-            addRow(topDevice, connectedDevice, listBuilder);
-            worker.setTopDevice(topDevice);
-        }
+        if (worker.getSelectedMediaDevice().size() > 1) {
+            // Insert group item to the first when it is available
+            listBuilder.addInputRange(getGroupRow());
+            // Add all other devices
+            for (MediaDevice device : devices) {
+                addRow(device, null /* connectedDevice */, listBuilder);
+            }
+        } else {
+            final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
+            final boolean isTouched = worker.getIsTouched();
+            // Fix the last top device when user press device to transfer.
+            final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
-        for (MediaDevice device : devices) {
-            if (topDevice == null
-                    || !TextUtils.equals(topDevice.getId(), device.getId())) {
-                addRow(device, connectedDevice, listBuilder);
+            if (topDevice != null) {
+                addRow(topDevice, connectedDevice, listBuilder);
+                worker.setTopDevice(topDevice);
+            }
+
+            for (MediaDevice device : devices) {
+                if (topDevice == null || !TextUtils.equals(topDevice.getId(), device.getId())) {
+                    addRow(device, connectedDevice, listBuilder);
+                }
             }
         }
-
         return listBuilder.build();
     }
 
-    private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
-        if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
-            listBuilder.addInputRange(getActiveDeviceHeaderRow(device));
-        } else {
-            listBuilder.addRow(getMediaDeviceRow(device));
-        }
-    }
-
-    private ListBuilder.InputRangeBuilder getActiveDeviceHeaderRow(MediaDevice device) {
-        final String title = device.getName();
-        final IconCompat icon = getDeviceIconCompat(device);
-
+    private ListBuilder.InputRangeBuilder getGroupRow() {
+        final IconCompat icon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_speaker_group_black_24dp);
+        final CharSequence sessionName = getWorker().getSessionName();
+        final CharSequence title = TextUtils.isEmpty(sessionName)
+                ? mContext.getString(R.string.media_output_group) : sessionName;
         final PendingIntent broadcastAction =
-                getBroadcastIntent(mContext, device.getId(), device.hashCode());
+                getBroadcastIntent(mContext, MEDIA_GROUP_DEVICE, MEDIA_GROUP_DEVICE.hashCode());
         final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
                 ListBuilder.ICON_IMAGE, title);
         final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                 .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                 .setTitle(title)
                 .setPrimaryAction(primarySliceAction)
-                .setInputAction(getSliderInputAction(device.hashCode(), device.getId()))
-                .setMax(device.getMaxVolume())
-                .setValue(device.getCurrentVolume());
+                .setInputAction(getSliderInputAction(MEDIA_GROUP_DEVICE.hashCode(),
+                        MEDIA_GROUP_DEVICE))
+                .setMax(getWorker().getSessionVolumeMax())
+                .setValue(getWorker().getSessionVolume())
+                .addEndItem(getEndItemSliceAction());
         return builder;
+    }
+
+    private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
+        if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
+            final String title = device.getName();
+            final IconCompat icon = getDeviceIconCompat(device);
+
+            final PendingIntent broadcastAction =
+                    getBroadcastIntent(mContext, device.getId(), device.hashCode());
+            final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
+                    ListBuilder.ICON_IMAGE, title);
+
+            if (device.getMaxVolume() > 0) {
+                final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
+                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                        .setTitle(title)
+                        .setPrimaryAction(primarySliceAction)
+                        .setInputAction(getSliderInputAction(device.hashCode(), device.getId()))
+                        .setMax(device.getMaxVolume())
+                        .setValue(device.getCurrentVolume());
+                // Check end item visibility
+                if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE
+                        && !getWorker().getSelectableMediaDevice().isEmpty()) {
+                    builder.addEndItem(getEndItemSliceAction());
+                }
+                listBuilder.addInputRange(builder);
+            } else {
+                final ListBuilder.RowBuilder builder = getMediaDeviceRow(device);
+                // Check end item visibility
+                if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE
+                        && !getWorker().getSelectableMediaDevice().isEmpty()) {
+                    builder.addEndItem(getEndItemSliceAction());
+                }
+                listBuilder.addRow(builder);
+            }
+        } else {
+            listBuilder.addRow(getMediaDeviceRow(device));
+        }
     }
 
     private PendingIntent getSliderInputAction(int requestCode, String id) {
@@ -139,6 +183,20 @@ public class MediaOutputSlice implements CustomSliceable {
                 .setClass(mContext, SliceBroadcastReceiver.class);
 
         return PendingIntent.getBroadcast(mContext, requestCode, intent, 0);
+    }
+
+    private SliceAction getEndItemSliceAction() {
+        final Intent intent = new Intent()
+                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT_GROUP)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                        getWorker().getPackageName());
+
+        return SliceAction.createDeeplink(
+                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */),
+                IconCompat.createWithResource(mContext, R.drawable.ic_add_blue_24dp),
+                ListBuilder.ICON_IMAGE,
+                mContext.getText(R.string.add));
     }
 
     private IconCompat getDeviceIconCompat(MediaDevice device) {
@@ -169,17 +227,17 @@ public class MediaOutputSlice implements CustomSliceable {
         final PendingIntent broadcastAction =
                 getBroadcastIntent(mContext, device.getId(), device.hashCode());
         final IconCompat deviceIcon = getDeviceIconCompat(device);
-
         final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
-                .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE)
-                .setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
-                        ListBuilder.ICON_IMAGE, deviceName));
-        // Append status to tile only for the disconnected Bluetooth device.
+                .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE);
+
         if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE
                 && !device.isConnected()) {
+            // Append status to title only for the disconnected Bluetooth device.
             final SpannableString spannableTitle = new SpannableString(
                     mContext.getString(R.string.media_output_disconnected_status, deviceName));
-            spannableTitle.setSpan(new ForegroundColorSpan(Color.GRAY), deviceName.length(),
+            spannableTitle.setSpan(new ForegroundColorSpan(
+                    Utils.getColorAttrDefaultColor(mContext, android.R.attr.textColorSecondary)),
+                    deviceName.length(),
                     spannableTitle.length(), SPAN_EXCLUSIVE_EXCLUSIVE);
             rowBuilder.setTitle(spannableTitle);
             rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
@@ -214,19 +272,27 @@ public class MediaOutputSlice implements CustomSliceable {
         if (TextUtils.isEmpty(id)) {
             return;
         }
-        final MediaDevice device = worker.getMediaDeviceById(id);
-        if (device == null) {
-            return;
-        }
+
         final int newPosition = intent.getIntExtra(EXTRA_RANGE_VALUE, NON_SLIDER_VALUE);
-        if (newPosition == NON_SLIDER_VALUE) {
-            // Intent for device connection
-            Log.d(TAG, "onNotifyChange() device name : " + device.getName());
-            worker.setIsTouched(true);
-            worker.connectDevice(device);
+        if (TextUtils.equals(id, MEDIA_GROUP_DEVICE)) {
+            // Session volume adjustment
+            worker.adjustSessionVolume(newPosition);
         } else {
-            // Intent for volume adjustment
-            worker.adjustVolume(device, newPosition);
+            final MediaDevice device = worker.getMediaDeviceById(id);
+            if (device == null) {
+                Log.d(TAG, "onNotifyChange: Unable to get device " + id);
+                return;
+            }
+
+            if (newPosition == NON_SLIDER_VALUE) {
+                // Intent for device connection
+                Log.d(TAG, "onNotifyChange: Switch to " + device.getName());
+                worker.setIsTouched(true);
+                worker.connectDevice(device);
+            } else {
+                // Single device volume adjustment
+                worker.adjustVolume(device, newPosition);
+            }
         }
     }
 
