@@ -69,7 +69,7 @@ public class AppStateManageExternalStorageBridge extends AppStateAppOpsBridge {
 
     /**
      * Returns the MANAGE_EXTERNAL_STORAGE {@link AppStateAppOpsBridge.PermissionState} object
-     * associated with the given package and user.
+     * associated with the given package and UID.
      */
     public PermissionState getManageExternalStoragePermState(String pkg, int uid) {
         return getPermissionInfo(pkg, uid);
