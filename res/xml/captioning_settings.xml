@@ -18,25 +18,31 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/accessibility_captioning_title" >
+    android:persistent="false"
+    android:title="@string/accessibility_captioning_title">
 
     <SwitchPreference
         android:key="captioning_preference_switch"
+        android:persistent="false"
+        android:summary="@string/accessibility_caption_master_switch_summary"
         android:title="@string/accessibility_caption_master_switch_title" />
 
     <Preference
+        android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
         android:key="captioning_caption_appearance"
-        android:title="@string/captioning_caption_appearance_title"
-        android:summary="@string/captioning_caption_appearance_summary"
-        android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment" />
+        android:persistent="false"
+        android:title="@string/captioning_caption_appearance_title" />
 
     <Preference
+        android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment"
         android:key="captioning_more_options"
-        android:title="@string/captioning_more_options_title"
-        android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment" />
+        android:persistent="false"
+        android:title="@string/captioning_more_options_title" />
 
     <com.android.settingslib.widget.FooterPreference
+        android:persistent="false"
+        android:selectable="false"
         android:title="@string/accessibility_caption_preference_summary"
-        android:selectable="false" />
+        settings:searchable="false"/>
 
 </PreferenceScreen>
