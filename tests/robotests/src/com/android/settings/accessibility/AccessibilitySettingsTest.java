@@ -130,14 +130,17 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void getServiceSummary_invisibleType_showsDefaultSummary() {
+    public void getServiceSummary_invisibleType_shortcutDisabled_showsOffSummary() {
         setInvisibleFragmentType(mServiceInfo);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
                 mServiceInfo, SERVICE_ENABLED);
 
-        assertThat(summary).isEqualTo(DEFAULT_SUMMARY);
+        assertThat(summary).isEqualTo(
+                mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(R.string.accessibility_summary_shortcut_disabled),
+                        DEFAULT_SUMMARY));
     }
 
     @Test
