@@ -120,6 +120,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             swipeBackground.setVisibility(View.GONE);
         }
         sliceLiveData.observe(mLifecycleOwner, slice -> {
+            if (slice == null) {
+                // The logic handling this case is in OnErrorListener. Adding this check is to
+                // prevent from NPE when it calls .hasHint().
+                return;
+            }
             if (slice.hasHint(HINT_ERROR)) {
                 Log.w(TAG, "Slice has HINT_ERROR, skipping rendering. uri=" + slice.getUri());
                 mSliceLiveDataMap.get(slice.getUri()).removeObservers(mLifecycleOwner);
