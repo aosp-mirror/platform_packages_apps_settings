@@ -64,13 +64,11 @@ public class ManageExternalStorageDetailsTest {
 
     private ManageExternalStorageDetails mFragment;
 
-    private final HashMap<String, Integer> mPkgToOpModeMap = new HashMap<>();
     private final HashMap<Integer, Integer> mUidToOpModeMap = new HashMap<>();
 
     @Before
     public void setUp() {
         // Reset the global trackers
-        mPkgToOpModeMap.clear();
         mUidToOpModeMap.clear();
 
         //Start the mockin'
@@ -106,8 +104,7 @@ public class ManageExternalStorageDetailsTest {
 
         // Verify that mAppOpsManager was called to allow the app-op
         verify(mAppOpsManager, times(1))
-                .setMode(anyInt(), anyInt(), nullable(String.class), anyInt());
-        assertThat(mPkgToOpModeMap).containsExactly(mockPkgName, AppOpsManager.MODE_ALLOWED);
+                .setUidMode(anyInt(), anyInt(), anyInt());
         assertThat(mUidToOpModeMap).containsExactly(mockUid, AppOpsManager.MODE_ALLOWED);
 
         // Verify the mSwitchPref was enabled
@@ -141,8 +138,7 @@ public class ManageExternalStorageDetailsTest {
 
         // Verify that mAppOpsManager was called to deny the app-op
         verify(mAppOpsManager, times(1))
-                .setMode(anyInt(), anyInt(), nullable(String.class), anyInt());
-        assertThat(mPkgToOpModeMap).containsExactly(mockPkgName, AppOpsManager.MODE_ERRORED);
+                .setUidMode(anyInt(), anyInt(), anyInt());
         assertThat(mUidToOpModeMap).containsExactly(mockUid, AppOpsManager.MODE_ERRORED);
 
         // Verify the mSwitchPref was enabled
@@ -164,33 +160,32 @@ public class ManageExternalStorageDetailsTest {
     }
 
     private void mockAppOpsOperations() {
-        Answer<Void> answerSetMode = invocation -> {
+        Answer<Void> answerSetUidMode = invocation -> {
             int code = invocation.getArgument(0);
             int uid = invocation.getArgument(1);
-            String packageName = invocation.getArgument(2);
-            int mode = invocation.getArgument(3);
+            int mode = invocation.getArgument(2);
 
             if (code != AppOpsManager.OP_MANAGE_EXTERNAL_STORAGE) {
                 return null;
             }
 
-            mPkgToOpModeMap.put(packageName, mode);
             mUidToOpModeMap.put(uid, mode);
 
             return null;
         };
 
-        doAnswer(answerSetMode).when(mAppOpsManager)
-                .setMode(anyInt(), anyInt(), nullable(String.class), anyInt());
+        doAnswer(answerSetUidMode).when(mAppOpsManager)
+                .setUidMode(anyInt(), anyInt(), anyInt());
 
         Answer<PermissionState> answerPermState = invocation -> {
             String packageName = invocation.getArgument(0);
+            int uid = invocation.getArgument(1);
             PermissionState res = new PermissionState(packageName, null);
             res.permissionDeclared = false;
 
-            if (mPkgToOpModeMap.containsKey(packageName)) {
+            if (mUidToOpModeMap.containsKey(uid)) {
                 res.permissionDeclared = true;
-                res.appOpMode = mPkgToOpModeMap.get(packageName);
+                res.appOpMode = mUidToOpModeMap.get(uid);
             }
             return res;
         };
