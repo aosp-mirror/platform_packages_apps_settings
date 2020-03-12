@@ -19,10 +19,12 @@ package com.android.settings.wifi.tether;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.SoftApConfiguration;
@@ -31,6 +33,7 @@ import android.net.wifi.WifiManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.ValidatedEditTextPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +49,7 @@ public class WifiTetherPasswordPreferenceControllerTest {
 
     private static final String VALID_PASS = "12345678";
     private static final String VALID_PASS2 = "23456789";
+    private static final String INITIAL_PASSWORD = "test_password";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
@@ -56,6 +60,8 @@ public class WifiTetherPasswordPreferenceControllerTest {
     private WifiTetherBasePreferenceController.OnTetherConfigUpdateListener mListener;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     private WifiTetherPasswordPreferenceController mController;
     private ValidatedEditTextPreference mPreference;
@@ -66,7 +72,8 @@ public class WifiTetherPasswordPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mPreference = new ValidatedEditTextPreference(RuntimeEnvironment.application);
         mConfig = new SoftApConfiguration.Builder().setSsid("test_1234")
-                .setPassphrase("test_password", SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
+                .setPassphrase(INITIAL_PASSWORD, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK)
+                .build();
 
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mConfig);
@@ -76,7 +83,8 @@ public class WifiTetherPasswordPreferenceControllerTest {
         when(mContext.getResources()).thenReturn(RuntimeEnvironment.application.getResources());
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
-        mController = new WifiTetherPasswordPreferenceController(mContext, mListener);
+        mController = new WifiTetherPasswordPreferenceController(mContext, mListener,
+                mMetricsFeatureProvider);
     }
 
     @Test
@@ -99,6 +107,22 @@ public class WifiTetherPasswordPreferenceControllerTest {
                 .isEqualTo(VALID_PASS2);
 
         verify(mListener, times(2)).onTetherConfigUpdated(mController);
+    }
+
+    @Test
+    public void changePreference_shouldLogActionWhenChanged() {
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, VALID_PASS);
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_SETTINGS_CHANGE_WIFI_HOTSPOT_PASSWORD);
+    }
+
+    @Test
+    public void changePreference_shouldNotLogActionWhenNotChanged() {
+        mController.displayPreference(mScreen);
+        mController.onPreferenceChange(mPreference, INITIAL_PASSWORD);
+        verify(mMetricsFeatureProvider, never()).action(mContext,
+                SettingsEnums.ACTION_SETTINGS_CHANGE_WIFI_HOTSPOT_PASSWORD);
     }
 
     @Test
