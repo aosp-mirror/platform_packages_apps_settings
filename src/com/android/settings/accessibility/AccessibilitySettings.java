@@ -76,8 +76,6 @@ public class AccessibilitySettings extends DashboardFragment {
     // Index of the first preference in a preference category.
     private static final int FIRST_PREFERENCE_IN_CATEGORY_INDEX = -1;
 
-    private static final String EMPTY_STRING = "";
-
     // Preference categories
     private static final String CATEGORY_SCREEN_READER = "screen_reader_category";
     private static final String CATEGORY_AUDIO_AND_CAPTIONS = "audio_and_captions_category";
@@ -195,6 +193,10 @@ public class AccessibilitySettings extends DashboardFragment {
         for (AccessibilityShortcutController.ToggleableFrameworkFeatureInfo feature : features) {
             shortcutFeatureKeys.add(feature.getSettingKey());
         }
+
+        // Observe changes from accessibility selection menu
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -268,16 +270,24 @@ public class AccessibilitySettings extends DashboardFragment {
             return context.getText(R.string.accessibility_summary_state_stopped);
         }
 
-        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
-
+        final CharSequence serviceState;
         final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
         if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
-            return TextUtils.isEmpty(serviceSummary) ? EMPTY_STRING : serviceSummary;
+            final ComponentName componentName = new ComponentName(
+                    info.getResolveInfo().serviceInfo.packageName,
+                    info.getResolveInfo().serviceInfo.name);
+            final boolean shortcutEnabled = AccessibilityUtil.getUserShortcutTypesFromSettings(
+                    context, componentName) != AccessibilityUtil.UserShortcutType.EMPTY;
+            serviceState = shortcutEnabled
+                    ? context.getText(R.string.accessibility_summary_shortcut_enabled)
+                    : context.getText(R.string.accessibility_summary_shortcut_disabled);
+        } else {
+            serviceState = serviceEnabled
+                    ? context.getText(R.string.accessibility_summary_state_enabled)
+                    : context.getText(R.string.accessibility_summary_state_disabled);
         }
 
-        final CharSequence serviceState = serviceEnabled
-                ? context.getText(R.string.accessibility_summary_state_enabled)
-                : context.getText(R.string.accessibility_summary_state_disabled);
+        final CharSequence serviceSummary = info.loadSummary(context.getPackageManager());
         final String stateSummaryCombo = context.getString(
                 R.string.preference_summary_default_combination,
                 serviceState, serviceSummary);
@@ -485,6 +495,8 @@ public class AccessibilitySettings extends DashboardFragment {
                     mCategoryToPrefCategoryMap.get(CATEGORY_DISPLAY);
             experimentalCategory.removePreference(mToggleInversionPreference);
             experimentalCategory.removePreference(mDisplayDaltonizerPreferenceScreen);
+            mDisplayMagnificationPreferenceScreen.setSummary(
+                    ToggleScreenMagnificationPreferenceFragment.getServiceSummary(getContext()));
             mDisplayDaltonizerPreferenceScreen.setOrder(
                     mDisplayMagnificationPreferenceScreen.getOrder() + 1);
             mDisplayDaltonizerPreferenceScreen.setSummary(AccessibilityUtil.getSummary(
