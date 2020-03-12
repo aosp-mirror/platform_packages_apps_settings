@@ -378,7 +378,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"在應用程式內使用「臉孔解鎖」時，每次都要確認"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"刪除臉容資料"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"設定「臉孔解鎖」"</string>
-    <string name="security_settings_face_settings_footer" msgid="8647181576918419934">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖，看著手機亦會解鎖。\n\n如果其他人將手機舉到您面前，即使您閉上雙眼，手機亦會解鎖。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
+    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖手機，但查看手機仍會解鎖。\n\n在您睜開雙眼時，如果其他人將手機舉到您面前，將可解鎖您的手機。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"使用「臉孔解鎖」即可解鎖裝置、登入應用程式及確認付款。\n\n注意事項：\n即使您不想解鎖，看著手機亦會解鎖。\n\n如果其他人將手機舉到您面前，即使您閉上雙眼，手機亦會解鎖。\n\n跟您樣貌很相似的人 (例如您的孿生兄弟姊妹) 能夠解鎖您的手機。"</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"是否刪除臉容資料？"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"系統會妥善地將「臉孔解鎖」功能使用的臉孔資料永久刪除。資料移除後，您便需要使用 PIN、圖案或密碼來解鎖手機、登入應用程式及確認付款。"</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"使用臉孔解鎖功能解鎖手機"</string>
@@ -1199,6 +1200,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"開啟 (直至<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直至<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前沒有開啟「夜燈模式」"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"開啟，直至日出"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"關閉，直至日落"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"暗光模式"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"時間表"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"無"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"由日落至日出期間開啟"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"狀態"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"關閉/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"永遠不會自動開啟"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"日落時會自動開啟"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"開啟/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"永遠不會自動關閉"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"日出時會自動關閉"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"「深色主題背景」使用黑色背景以延長部分螢幕的電池壽命。「深色主題背景」時間表會等待啟動，直至螢幕關閉。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"螢幕逾時"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"螢幕關閉時"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
@@ -4104,6 +4121,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"由於「省電模式」已關閉，因此切換功能暫時啟用"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"受支援的應用程式也會切換至深色主題背景"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"知道了"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"試用深色主題背景"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"有助延長電池壽命"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"快速設定開發人員圖塊"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope 追蹤"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"感應器已關閉"</string>
@@ -4591,4 +4610,8 @@
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="1049161096896074364">"SIM 卡組合"</string>
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"您的工作政策資料"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理員管理的設定"</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>
