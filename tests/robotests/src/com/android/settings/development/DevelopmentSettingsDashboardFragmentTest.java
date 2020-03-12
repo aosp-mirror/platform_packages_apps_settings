@@ -135,7 +135,8 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Config(shadows = {
             ShadowPictureColorModePreferenceController.class,
             ShadowAdbPreferenceController.class,
-            ShadowClearAdbKeysPreferenceController.class
+            ShadowClearAdbKeysPreferenceController.class,
+            ShadowWirelessDebuggingPreferenceController.class
     })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
@@ -322,6 +323,14 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Implements(ClearAdbKeysPreferenceController.class)
     public static class ShadowClearAdbKeysPreferenceController {
+        @Implementation
+        protected boolean isAvailable() {
+            return true;
+        }
+    }
+
+    @Implements(WirelessDebuggingPreferenceController.class)
+    public static class ShadowWirelessDebuggingPreferenceController {
         @Implementation
         protected boolean isAvailable() {
             return true;
