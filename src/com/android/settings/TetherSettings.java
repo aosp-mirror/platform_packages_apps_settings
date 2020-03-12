@@ -31,6 +31,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -71,6 +72,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     @VisibleForTesting
     static final String KEY_ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
     private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver";
+    @VisibleForTesting
+    static final String KEY_TETHER_PREFS_FOOTER = "tether_prefs_footer";
 
     private static final String TAG = "TetheringSettings";
 
@@ -141,6 +144,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mUsbTether = (SwitchPreference) findPreference(KEY_USB_TETHER_SETTINGS);
         mBluetoothTether = (SwitchPreference) findPreference(KEY_ENABLE_BLUETOOTH_TETHERING);
+        setFooterPreferenceTitle();
 
         mDataSaverBackend.addListener(this);
 
@@ -199,6 +203,18 @@ public class TetherSettings extends RestrictedSettingsFragment
 
     @Override
     public void onBlacklistStatusChanged(int uid, boolean isBlacklisted)  {
+    }
+
+    @VisibleForTesting
+    void setFooterPreferenceTitle() {
+        final Preference footerPreference = findPreference(KEY_TETHER_PREFS_FOOTER);
+        final WifiManager wifiManager =
+                (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager.isStaApConcurrencySupported()) {
+            footerPreference.setTitle(R.string.tethering_footer_info_sta_ap_concurrency);
+        } else {
+            footerPreference.setTitle(R.string.tethering_footer_info);
+        }
     }
 
     private class TetherChangeReceiver extends BroadcastReceiver {

@@ -26,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+// TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
 public abstract class WifiTetherBasePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
