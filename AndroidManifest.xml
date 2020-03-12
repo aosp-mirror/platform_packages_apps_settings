@@ -939,6 +939,24 @@
         </activity>
 
         <activity
+                android:name="Settings$DarkThemeSettingsActivity"
+                android:label="@string/dark_ui_auto_mode_title"
+                android:enabled="true">
+            <intent-filter android:priority="32">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DARK_THEME_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.darkmode.DarkModeSettingsFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$NightDisplaySuggestionActivity"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
             android:icon="@drawable/ic_suggestion_night_display">

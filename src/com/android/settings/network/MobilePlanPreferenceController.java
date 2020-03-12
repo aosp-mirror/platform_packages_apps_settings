@@ -85,6 +85,7 @@ public class MobilePlanPreferenceController extends AbstractPreferenceController
         if (mHost != null && KEY_MANAGE_MOBILE_PLAN.equals(preference.getKey())) {
             mMobilePlanDialogMessage = null;
             onManageMobilePlanClick();
+            return true;
         }
         return false;
     }

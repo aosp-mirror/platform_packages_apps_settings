@@ -52,7 +52,7 @@ public class ApnPreferenceController extends TelephonyBasePreferenceController i
 
     public ApnPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = new CarrierConfigManager(context);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDpcApnEnforcedObserver = new DpcApnEnforcedObserver(new Handler(Looper.getMainLooper()));
     }
 

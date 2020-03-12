@@ -378,7 +378,8 @@
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Solicitar confirmación al usar el desbloqueo facial en aplicaciones"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Eliminar datos faciales"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Configurar desbloqueo facial"</string>
-    <string name="security_settings_face_settings_footer" msgid="8647181576918419934">"Utiliza el desbloqueo facial para desbloquear tu dispositivo, iniciar sesión en aplicaciones y confirmar pagos.\n\nRecuerda:\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara, incluso si tienes los ojos cerrados.\n\nEs posible que una persona que se parezca mucho a ti (como un hermano o una hermana) pueda desbloquear el teléfono."</string>
+    <string name="security_settings_face_settings_footer" msgid="4263048343191609059">"Utiliza el desbloqueo facial para desbloquear tu dispositivo, iniciar sesión en aplicaciones y confirmar pagos.\n\nRecuerda:\nEs posible que el teléfono se desbloquee si lo miras aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara y tienes los ojos abiertos o frente a una foto de tu cara.\n\nEs posible que una persona que se parezca mucho a ti, como tu gemelo, pueda desbloquear el teléfono."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Utiliza el desbloqueo facial para desbloquear tu dispositivo, iniciar sesión en aplicaciones y confirmar pagos.\n\nRecuerda:\nEs posible que el teléfono se desbloquee si lo miras, aunque no sea tu intención.\n\nOtra persona puede desbloquear el teléfono si lo pone frente a tu cara, incluso si tienes los ojos cerrados.\n\nEs posible que una persona que se parezca mucho a ti (como un hermano o una hermana) pueda desbloquear el teléfono."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"¿Quieres eliminar los datos faciales?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Los datos faciales que se utilizan en el reconocimiento facial se eliminarán definitivamente y de forma segura. Una vez que se hayan eliminado, tendrás que usar tu PIN, tu patrón o tu contraseña para desbloquear el teléfono, iniciar sesión en aplicaciones y confirmar pagos."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Usa el desbloqueo facial para desbloquear el teléfono"</string>
@@ -1199,6 +1200,22 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Desactivar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Luz nocturna desactivada"</string>
+    <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activar ahora"</string>
+    <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Desactivar ahora"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activar hasta el amanecer"</string>
+    <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Desactivar hasta el anochecer"</string>
+    <string name="dark_ui_title" msgid="3373976268671557416">"Modo oscuro"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Programar"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nunca"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Activar del anochecer al amanecer"</string>
+    <string name="dark_ui_status_title" msgid="3505119141437774329">"Estado"</string>
+    <string name="dark_ui_summary_off" msgid="3897438633224959099">"Desactivado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"No se activará nunca automáticamente"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Se activará automáticamente al anochecer"</string>
+    <string name="dark_ui_summary_on" msgid="3886998135388176000">"Activado/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"No se desactivará nunca automáticamente"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Se desactivará automáticamente al amanecer"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"El tema oscuro utiliza un fondo negro en algunas pantallas para que la batería dure más. Si lo programas, se activará después de que apagues la pantalla."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"La pantalla se apaga"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
@@ -4103,6 +4120,8 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Activado temporalmente para ahorrar batería"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Las aplicaciones que lo admitan también se cambiarán al tema oscuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entendido"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el tema oscuro"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Alarga la duración de la batería"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Iconos para desarrolladores en ajustes rápidos"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Rastro de Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
@@ -4590,4 +4609,8 @@
     <string name="dual_cdma_sim_warning_notification_channel_title" msgid="1049161096896074364">"Combinación de SIM"</string>
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Información de tu política de trabajo"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Ajustes gestionados por tu administrador de TI"</string>
+    <string name="rtt_settings_title" msgid="7049259598645966354"></string>
+    <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
+    <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
+    <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
 </resources>
