@@ -3814,6 +3814,8 @@
 
     <!-- Tethering footer info [CHAR LIMIT=NONE]-->
     <string name="tethering_footer_info">Use hotspot and tethering to provide internet to other devices through your mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
+    <!-- Tethering footer info for the device which supports Wi-Fi and Wi-Fi tethering enabled at the same time [CHAR LIMIT=NONE]-->
+    <string name="tethering_footer_info_sta_ap_concurrency">Use hotspot and tethering to provide internet to other devices through your Wi\u2011Fi or mobile data connection. Apps can also create a hotspot to share content with nearby devices.</string>
 
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
@@ -7133,6 +7135,8 @@
     <string name="help_url_magnification" translatable="false"></string>
     <string name="help_url_color_correction" translatable="false"></string>
     <string name="help_url_autoclick" translatable="false"></string>
+    <!-- Help URL, Accessibility caption preferences [DO NOT TRANSLATE] -->
+    <string name="help_url_caption" translatable="false"></string>
     <string name="help_url_system_dashboard" translatable="false"></string>
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
@@ -8910,6 +8914,9 @@
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">App exceptions</string>
 
+    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
+    <string name="zen_mode_bypassing_apps_subtext_none">No apps can override Do Not Disturb</string>
+
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
         <item quantity="zero">No apps can override Do Not Disturb</item>
@@ -9300,7 +9307,10 @@
     <string name="assist_and_voice_input_title">Assist &amp; voice input</string>
 
     <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
-    <string name="default_assist_title">Assist app</string>
+    <string name="default_assist_title">Digital assistant app</string>
+
+    <!-- Title for Default Assist settings [CHAR LIMIT=30] -->
+    <string name="default_digital_assistant_title">Default digital assistant app</string>
 
     <!-- [CHAR_LIMIT=45] Title of the security warning dialog for setting an assitant -->
     <string name="assistant_security_warning_title">

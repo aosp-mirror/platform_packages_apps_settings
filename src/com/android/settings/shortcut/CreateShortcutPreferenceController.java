@@ -32,6 +32,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -45,6 +46,8 @@ import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.Settings.TetherSettingsActivity;
+import com.android.settings.Settings.WifiSettings2Activity;
+import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -186,6 +189,15 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
             if (!info.activityInfo.applicationInfo.isSystemApp()) {
                 Log.d(TAG, "Skipping non-system app: " + info.activityInfo);
                 continue;
+            }
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+                if (info.activityInfo.name.endsWith(WifiSettingsActivity.class.getSimpleName())) {
+                    continue;
+                }
+            } else {
+                if (info.activityInfo.name.endsWith(WifiSettings2Activity.class.getSimpleName())) {
+                    continue;
+                }
             }
             shortcuts.add(info);
         }
