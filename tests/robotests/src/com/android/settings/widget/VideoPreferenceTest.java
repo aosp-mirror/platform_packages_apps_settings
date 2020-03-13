@@ -32,7 +32,6 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
@@ -61,8 +60,6 @@ public class VideoPreferenceTest {
     private ImageView fakePreview;
     @Mock
     private ImageView fakePlayButton;
-    @Mock
-    private LinearLayout mAnimationView;
 
     private Context mContext;
     private VideoPreference mVideoPreference;
@@ -77,7 +74,6 @@ public class VideoPreferenceTest {
                 new MediaAnimationController(mContext, R.raw.accessibility_screen_magnification));
         mVideoPreference = new VideoPreference(mContext, null /* attrs */);
         mVideoPreference.mAnimationController = mAnimationController;
-        mVideoPreference.mAnimationView = mAnimationView;
         when(mAnimationController.getVideoWidth()).thenReturn(VIDEO_WIDTH);
         when(mAnimationController.getVideoHeight()).thenReturn(VIDEO_HEIGHT);
 
@@ -160,13 +156,6 @@ public class VideoPreferenceTest {
 
         assertThat(vp1.mAnimationController instanceof MediaAnimationController).isTrue();
         assertThat(vp2.mAnimationController instanceof VectorAnimationController).isTrue();
-    }
-
-    @Test
-    public void setBackgroundColor_shouldBeCalled() {
-        mVideoPreference.setBackgroundColor(1111);
-
-        assertThat(mVideoPreference.mBackgroundResId).isEqualTo(1111);
     }
 
     public static class TestFragment extends PreferenceFragmentCompat {
