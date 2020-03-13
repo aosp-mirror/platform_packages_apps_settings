@@ -61,12 +61,14 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.slice.SliceViewManager;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SettingsSliceProvider;
 import com.android.settingslib.drawer.ActivityTile;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
@@ -379,9 +381,7 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         final String currentPackageName = context.getPackageName();
         for (DashboardCategory category : dashboardFeatureProvider.getAllCategories()) {
             for (Tile tile : category.getTiles()) {
-                if (currentPackageName.equals(tile.getPackageName())
-                        && tile instanceof ActivityTile) {
-                    // Skip Settings injected items because they should be indexed in the sub-pages.
+                if (!isEligibleForIndexing(currentPackageName, tile)) {
                     continue;
                 }
                 final SearchIndexableRaw raw = new SearchIndexableRaw(context);
@@ -400,6 +400,20 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
         }
 
         return rawList;
+    }
+
+    @VisibleForTesting
+    boolean isEligibleForIndexing(String packageName, Tile tile) {
+        if (TextUtils.equals(packageName, tile.getPackageName())
+                && tile instanceof ActivityTile) {
+            // Skip Settings injected items because they should be indexed in the sub-pages.
+            return false;
+        }
+        if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
+            // Skip homepage injected items since we would like to index their target activity.
+            return false;
+        }
+        return true;
     }
 
     private static Object[] createIndexableRawColumnObjects(SearchIndexableRaw raw) {
