@@ -82,10 +82,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/notification_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:clipChildren="true"
-            settings:layout_constraintHeight_max="300dp"
-            settings:layout_constrainedHeight="true"
             settings:fastScrollEnabled="true"
             settings:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
             settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
