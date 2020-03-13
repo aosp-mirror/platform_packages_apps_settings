@@ -18,9 +18,6 @@ package com.android.settings.network;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
-import static com.android.settings.network.MobileNetworkPreferenceController.MOBILE_NETWORK_CLASS;
-import static com.android.settings.network.MobileNetworkPreferenceController.MOBILE_NETWORK_PACKAGE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -30,23 +27,19 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadow.api.Shadow.extract;
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.telephony.PhoneStateListener;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.util.FeatureFlagUtils;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -56,11 +49,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
@@ -70,6 +62,8 @@ public class MobileNetworkPreferenceControllerTest {
     private Context mContext;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -81,10 +75,11 @@ public class MobileNetworkPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         mPreference = new Preference(mContext);
         mPreference.setKey(MobileNetworkPreferenceController.KEY_MOBILE_NETWORK_SETTINGS);
     }
@@ -145,8 +140,8 @@ public class MobileNetworkPreferenceControllerTest {
         verify(mTelephonyManager).listen(mController.mPhoneStateListener,
                 PhoneStateListener.LISTEN_SERVICE_STATE);
 
-        // Trigger listener update
-        when(mTelephonyManager.getNetworkOperatorName()).thenReturn(testCarrierName);
+        doReturn(testCarrierName).when(mController).getSummary();
+
         mController.mPhoneStateListener.onServiceStateChanged(null);
 
         // Carrier name should be set.
@@ -183,19 +178,5 @@ public class MobileNetworkPreferenceControllerTest {
         mPreference.setDisabledByAdmin(EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN);
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_mobileFeatureDisabled_sendIntent() {
-        mController = new MobileNetworkPreferenceController(mContext);
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.MOBILE_NETWORK_V2, false);
-        ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).startActivity(argument.capture());
-        final ComponentName componentName = argument.getValue().getComponent();
-        assertThat(componentName.getPackageName()).isEqualTo(MOBILE_NETWORK_PACKAGE);
-        assertThat(componentName.getClassName()).isEqualTo(MOBILE_NETWORK_CLASS);
     }
 }
