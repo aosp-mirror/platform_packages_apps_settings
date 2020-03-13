@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -184,7 +185,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
     // Shows no warning if there is no locale checked, shows a warning
     // about removing all the locales if all of them are checked, and
     // a "regular" warning otherwise.
-    private void showRemoveLocaleWarningDialog() {
+    @VisibleForTesting
+    void showRemoveLocaleWarningDialog() {
         int checkedCount = mAdapter.getCheckedCount();
 
         // Nothing checked, just exit remove mode without a warning dialog
@@ -218,33 +220,41 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         final String title = getResources().getQuantityString(R.plurals.dlg_remove_locales_title,
                 checkedCount);
         mShowingRemoveDialog = true;
-        new AlertDialog.Builder(getActivity())
-                .setTitle(title)
-                .setMessage(R.string.dlg_remove_locales_message)
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if (mAdapter.isFirstLocaleChecked()) {
+            builder.setMessage(R.string.dlg_remove_locales_message);
+        }
+
+        builder.setTitle(title)
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         setRemoveMode(false);
                     }
                 })
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // This is a sensitive area to change.
-                        // removeChecked() triggers a system update and "kills" the frame.
-                        // This means that saveState + restoreState are called before
-                        // setRemoveMode is called.
-                        // So we want that mRemoveMode and dialog status have the right values
-                        // before that save.
-                        // We can't just call setRemoveMode(false) before calling removeCheched
-                        // because that unchecks all items and removeChecked would have nothing
-                        // to remove.
-                        mRemoveMode = false;
-                        mShowingRemoveDialog = false;
-                        mAdapter.removeChecked();
-                        setRemoveMode(false);
-                    }
-                })
+                .setPositiveButton(R.string.locale_remove_menu,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // This is a sensitive area to change.
+                                // removeChecked() triggers a system update and "kills" the frame.
+                                // This means that saveState + restoreState are called before
+                                // setRemoveMode is called.
+                                // So we want that mRemoveMode and dialog status have the right
+                                // values
+                                // before that save.
+                                // We can't just call setRemoveMode(false) before calling
+                                // removeCheched
+                                // because that unchecks all items and removeChecked would have
+                                // nothing
+                                // to remove.
+                                mRemoveMode = false;
+                                mShowingRemoveDialog = false;
+                                mAdapter.removeChecked();
+                                setRemoveMode(false);
+                            }
+                        })
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
