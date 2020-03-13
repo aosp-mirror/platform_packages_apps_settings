@@ -25,8 +25,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.om.OverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.om.OverlayManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -393,11 +393,19 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             enabled = false;
         }
 
-        // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
+        // We don't allow uninstalling DO/PO on *any* users if it's a system app, because
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
-            enabled = false;
+        if (Utils.isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
+            if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
+                enabled = false;
+            }
+        // We allow uninstalling if the calling user is not a DO/PO and if it's not a system app,
+        // because this will not have device-wide consequences.
+        } else {
+            if (Utils.isProfileOrDeviceOwner(mDpm, mPackageInfo.packageName, mUserId)) {
+                enabled = false;
+            }
         }
 
         // Don't allow uninstalling the device provisioning package.
