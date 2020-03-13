@@ -786,7 +786,7 @@
     <string-array name="captioning_font_size_selector_titles">
         <item>Very small</item>
         <item>Small</item>
-        <item>Normal</item>
+        <item>Default</item>
         <item>Large</item>
         <item>Very large</item>
     </string-array>
@@ -920,7 +920,7 @@
 
     <!-- Titles for captioning text style preset preference. [CHAR LIMIT=35] -->
     <string-array name="captioning_preset_selector_titles" >
-        <item>Use app defaults</item>
+        <item>Set by app</item>
         <item>White on black</item>
         <item>Black on white</item>
         <item>Yellow on black</item>
@@ -1375,89 +1375,6 @@
         <item>"1"</item>
     </string-array>
 
-    <string-array name="enabled_networks_except_gsm_choices" translatable="false">
-        <item>@string/network_lte</item>
-        <item>@string/network_3G</item>
-    </string-array>
-    <string-array name="enabled_networks_except_gsm_4g_choices" translatable="false">
-        <item>@string/network_4G</item>
-        <item>@string/network_3G</item>
-    </string-array>
-    <string-array name="enabled_networks_except_gsm_values" translatable="false">
-        <item>"9"</item>
-        <item>"0"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_except_lte_choices" translatable="false">
-        <item>@string/network_3G</item>
-        <item>@string/network_2G</item>
-    </string-array>
-    <string-array name="enabled_networks_except_lte_values" translatable="false">
-        <item>"0"</item>
-        <item>"1"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_except_gsm_lte_choices" translatable="false">
-        <item>@string/network_3G</item>
-    </string-array>
-    <string-array name="enabled_networks_except_gsm_lte_values" translatable="false">
-        <item>"0"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_cdma_choices" translatable="false">
-        <item>@string/network_lte</item>
-        <item>@string/network_3G</item>
-        <item>@string/network_1x</item>
-        <item>@string/network_global</item>
-    </string-array>
-    <string-array name="enabled_networks_cdma_values" translatable="false">
-        <item>"8"</item>
-        <item>"4"</item>
-        <item>"5"</item>
-        <item>"10"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_cdma_no_lte_choices" translatable="false">
-        <item>@string/network_3G</item>
-        <item>@string/network_1x</item>
-    </string-array>
-    <string-array name="enabled_networks_cdma_no_lte_values" translatable="false">
-        <item>"4"</item>
-        <item>"5"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_cdma_only_lte_choices" translatable="false">
-        <item>@string/network_lte</item>
-        <item>@string/network_global</item>
-    </string-array>
-    <string-array name="enabled_networks_cdma_only_lte_values" translatable="false">
-        <item>"8"</item>
-        <item>"10"</item>
-    </string-array>
-
-    <string-array name="enabled_networks_tdscdma_choices" translatable="false">
-        <item>@string/network_lte</item>
-        <item>@string/network_3G</item>
-        <item>@string/network_2G</item>
-    </string-array>
-    <string-array name="enabled_networks_tdscdma_values" translatable="false">
-        <item>"22"</item>
-        <item>"18"</item>
-        <item>"1"</item>
-    </string-array>
-
-    <!--String arrays for World preferred netwrok modes -->
-    <string-array name="preferred_network_mode_choices_world_mode">
-        <item>Global</item>
-        <item>LTE / CDMA</item>
-        <item>LTE / GSM / UMTS</item>
-    </string-array>
-
-    <string-array name="preferred_network_mode_values_world_mode" translatable="false">
-        <item>"10"</item>
-        <item>"8"</item>
-        <item>"9"</item>
-    </string-array>
 
     <!-- WiFi calling mode array -->
     <string-array name="wifi_calling_mode_summaries" translatable="false">
@@ -1507,7 +1424,6 @@
         <item>@string/color_cyan</item>
         <item>@string/color_blue</item>
         <item>@string/color_purple</item>
-        <item>@string/color_pink</item>
     </string-array>
 
     <!-- Values for palette list view preference. -->
@@ -1519,7 +1435,6 @@
         <item>@color/palette_list_color_cyan</item>
         <item>@color/palette_list_color_blue</item>
         <item>@color/palette_list_color_purple</item>
-        <item>@color/palette_list_color_pink</item>
     </array>
 
     <!--String arrays for showing the rtt settings options -->

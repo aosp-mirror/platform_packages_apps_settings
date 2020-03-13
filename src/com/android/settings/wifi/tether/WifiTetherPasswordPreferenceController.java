@@ -18,18 +18,22 @@ package com.android.settings.wifi.tether;
 
 import static com.android.settings.AllInOneTetherSettings.DEDUP_POSTFIX;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.UUID;
 
@@ -40,9 +44,19 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     private String mPassword;
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
+
+    @VisibleForTesting
+    WifiTetherPasswordPreferenceController(Context context, OnTetherConfigUpdateListener listener,
+            MetricsFeatureProvider provider) {
+        super(context, listener);
+        mMetricsFeatureProvider = provider;
+    }
+
     public WifiTetherPasswordPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -69,6 +83,10 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (!TextUtils.equals(mPassword, (String) newValue)) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_SETTINGS_CHANGE_WIFI_HOTSPOT_PASSWORD);
+        }
         mPassword = (String) newValue;
         updatePasswordDisplay((EditTextPreference) mPreference);
         mListener.onTetherConfigUpdated(this);

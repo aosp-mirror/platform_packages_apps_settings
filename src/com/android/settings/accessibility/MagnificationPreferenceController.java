@@ -22,7 +22,6 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 public class MagnificationPreferenceController extends BasePreferenceController {
@@ -40,8 +39,7 @@ public class MagnificationPreferenceController extends BasePreferenceController 
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getResources().getText(
-                R.string.accessibility_screen_magnification_navbar_title);
+        return ToggleScreenMagnificationPreferenceFragment.getServiceSummary(mContext);
     }
 
     @Override
