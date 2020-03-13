@@ -22,6 +22,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.SoftApConfiguration;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
@@ -47,6 +48,15 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     private WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+
+    // This constructor is used for testing.
+    @VisibleForTesting
+    WifiTetherSSIDPreferenceController(Context context, OnTetherConfigUpdateListener listener,
+            MetricsFeatureProvider provider) {
+        super(context, listener);
+        mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
+        mMetricsFeatureProvider = provider;
+    }
 
     public WifiTetherSSIDPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
@@ -93,6 +103,10 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (!TextUtils.equals(mSSID, (String) newValue)) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_SETTINGS_CHANGE_WIFI_HOTSPOT_NAME);
+        }
         mSSID = (String) newValue;
         updateSsidDisplay((EditTextPreference) preference);
         mListener.onTetherConfigUpdated(this);

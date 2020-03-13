@@ -457,12 +457,20 @@ public class DeviceAdminAdd extends Activity {
     private void showPolicyTransparencyDialogIfRequired() {
         if (isManagedProfile(mDeviceAdmin)
                 && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
-            if (hasBaseCantRemoveProfileRestriction()) {
-                // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
-                // point showing a dialog saying it's disabled by an admin.
-                return;
+            EnforcedAdmin enforcedAdmin;
+            ComponentName adminComponent = mDPM.getProfileOwnerAsUser(getUserId());
+            if (adminComponent != null && mDPM.isOrganizationOwnedDeviceWithManagedProfile()) {
+                enforcedAdmin = new EnforcedAdmin(adminComponent,
+                        UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.of(getUserId()));
+            } else {
+                // Todo (b/151061366): Investigate this case to check if it is still viable.
+                if (hasBaseCantRemoveProfileRestriction()) {
+                    // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
+                    // point showing a dialog saying it's disabled by an admin.
+                    return;
+                }
+                enforcedAdmin = getAdminEnforcingCantRemoveProfile();
             }
-            EnforcedAdmin enforcedAdmin = getAdminEnforcingCantRemoveProfile();
             if (enforcedAdmin != null) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
                         DeviceAdminAdd.this,
@@ -640,7 +648,8 @@ public class DeviceAdminAdd extends Activity {
 
                 final EnforcedAdmin admin = getAdminEnforcingCantRemoveProfile();
                 final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
-                if (admin != null && !hasBaseRestriction) {
+                if ((hasBaseRestriction && mDPM.isOrganizationOwnedDeviceWithManagedProfile())
+                        || (admin != null && !hasBaseRestriction)) {
                     findViewById(R.id.restricted_icon).setVisibility(View.VISIBLE);
                 }
                 mActionButton.setEnabled(admin == null && !hasBaseRestriction);
