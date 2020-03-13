@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
 import org.junit.Before;
@@ -32,12 +33,16 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import java.util.Arrays;
+
 @RunWith(RobolectricTestRunner.class)
 public class TelephonyBasePreferenceControllerTest {
     private static final int VALID_SUB_ID = 1;
 
     @Mock
     private SubscriptionManager mSubscriptionManager;
+    @Mock
+    private SubscriptionInfo mSubscriptionInfo;
 
     private TestPreferenceController mPreferenceController;
     private Context mContext;
@@ -49,7 +54,7 @@ public class TelephonyBasePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(SubscriptionManager.class))
                 .thenReturn(mSubscriptionManager);
-        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[]{});
+        when(mSubscriptionInfo.getSubscriptionId()).thenReturn(VALID_SUB_ID);
         mPreferenceController = new TestPreferenceController(mContext, "prefKey");
     }
 
@@ -62,8 +67,8 @@ public class TelephonyBasePreferenceControllerTest {
 
     @Test
     public void isAvailable_noIdSetHoweverHasDefaultOne_returnTrue() {
-        when(mSubscriptionManager.getActiveSubscriptionIdList())
-                .thenReturn(new int[]{VALID_SUB_ID});
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo));
 
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
