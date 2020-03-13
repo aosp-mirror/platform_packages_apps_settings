@@ -50,8 +50,8 @@ public class MmsMessagePreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final TelephonyManager telephonyManager = TelephonyManager
-                .from(mContext).createForSubscriptionId(subId);
+        final TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(subId);
         return (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && !telephonyManager.isDataEnabled()
                 && telephonyManager.isApnMetered(ApnSetting.TYPE_MMS))
