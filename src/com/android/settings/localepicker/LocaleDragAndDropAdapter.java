@@ -251,6 +251,10 @@ class LocaleDragAndDropAdapter
         return result;
     }
 
+    boolean isFirstLocaleChecked() {
+        return mFeedItemList != null && mFeedItemList.get(0).getChecked();
+    }
+
     void addLocale(LocaleStore.LocaleInfo li) {
         mFeedItemList.add(li);
         notifyItemInserted(mFeedItemList.size() - 1);
