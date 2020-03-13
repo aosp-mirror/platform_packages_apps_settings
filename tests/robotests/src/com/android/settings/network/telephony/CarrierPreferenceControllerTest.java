@@ -28,8 +28,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -38,16 +38,15 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.ArgumentCaptor;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -90,7 +89,7 @@ public class CarrierPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_cdmaWithFlagOff_returnUnavailable() {
-        doReturn(PhoneConstants.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
+        doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, false);
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
@@ -100,7 +99,7 @@ public class CarrierPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_cdmaWithFlagOnreturnAvailable() {
-        doReturn(PhoneConstants.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
+        doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, true);
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
@@ -110,7 +109,7 @@ public class CarrierPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_gsmWithFlagOnreturnAvailable() {
-        doReturn(PhoneConstants.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
+        doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, true);
         doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
