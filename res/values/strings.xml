@@ -627,8 +627,8 @@
     <string name="lock_after_timeout_summary_with_exception"><xliff:g id="timeout_string">%1$s</xliff:g> after timeout, except when kept unlocked by <xliff:g id="trust_agent_name">%2$s</xliff:g></string>
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
-    <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
-    <string name="owner_info_settings_title">Lock screen message</string>
+    <!-- Text shown for title of owner info setting [CHAR LIMIT=30]-->
+    <string name="owner_info_settings_title">Add text on lock screen</string>
     <!-- Text shown for title of settings checkbox to enable widgets [CHAR LIMIT=20]-->
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
@@ -684,7 +684,7 @@
     <string name="encryption_and_credential_settings_summary" product="tablet">Device encrypted</string>
     <string name="decryption_settings_summary" product="tablet">Device not encrypted</string>
     <!-- Screen title for a list of settings controlling what to show on user's lockscreen [CHAR LIMIT=60] -->
-    <string name="lockscreen_settings_title">Lock screen display</string>
+    <string name="lockscreen_settings_title">Lock screen</string>
     <!-- Category title for the settings that control what lockscreen shows. [CHAR LIMIT=30] -->
     <string name="lockscreen_settings_what_to_show_category">What to show</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
@@ -1845,7 +1845,7 @@
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
     <string name="wifi_in_airplane_mode">In Airplane mode</string>
     <!-- Checkbox title for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks">Open network notification</string>
+    <string name="wifi_notify_open_networks">Notify for open networks</string>
     <!-- Checkbox summary for option to notify user when open networks are nearby-->
     <string name="wifi_notify_open_networks_summary">Notify when a high\u2011quality public network is available</string>
     <!-- Checkbox title for option to enable Wi-Fi when saved networks are nearby -->
@@ -2912,11 +2912,11 @@
     <!-- [CHAR LIMIT=30] Category title for the settings that control when Ambient display shows. -->
     <string name="ambient_display_category_triggers">When to show</string>
     <!-- [CHAR LIMIT=30] Ambient display screen, title for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
-    <string name="doze_title">New notifications</string>
+    <string name="doze_title">Wake screen for notifications</string>
     <!-- [CHAR LIMIT=NONE] Ambient display screen, summary for setting to change whether the ambient display feature is triggered for new incoming notifications. -->
     <string name="doze_summary">Wake screen when you receive notifications</string>
     <!-- [CHAR LIMIT=30] Display settings screen, setting option name to change whether the always-on ambient display feature is enabled. -->
-    <string name="doze_always_on_title">Always on</string>
+    <string name="doze_always_on_title">Always show time and info</string>
     <!-- [CHAR LIMIT=NONE] Display settings screen, setting description for the always-on ambient display feature. -->
     <string name="doze_always_on_summary">Show time, notification icons, and other info. Increased battery usage.</string>
     <!-- [CHAR LIMIT=30] Sound & display settings screen, setting option name to change font size -->
@@ -3868,7 +3868,7 @@
     <string name="managed_profile_location_switch_title">Location for work profile</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
-    <string name="location_app_level_permissions">App permission</string>
+    <string name="location_app_level_permissions">App access to location</string>
     <!-- Summary for app permission on Location settings page when location is off [CHAR LIMIT=NONE] -->
     <string name="location_app_permission_summary_location_off">Location is off</string>
     <!--
@@ -4639,21 +4639,21 @@
     <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
     <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="virtual_keyboard_category">Virtual keyboard</string>
+    <string name="virtual_keyboard_category">On-screen keyboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="available_virtual_keyboard_category">Available virtual keyboard</string>
     <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
-    <string name="add_virtual_keyboard">Manage keyboards</string>
+    <string name="add_virtual_keyboard">Manage on-screen keyboards</string>
     <!-- Title for the 'keyboard assistance' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_assistance_category">Keyboard assistance</string>
     <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
     <string name="physical_keyboard_title">Physical keyboard</string>
     <!-- Title for the 'show virtual keyboard' preference switch. [CHAR LIMIT=35] -->
-    <string name="show_ime">Show virtual keyboard</string>
+    <string name="show_ime">Use on-screen keyboard</string>
     <!-- Summary text for the 'add virtual keyboard' preference sub-screen. [CHAR LIMIT=100] -->
     <string name="show_ime_summary">Keep it on screen while physical keyboard is active</string>
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
-    <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
+    <string name="keyboard_shortcuts_helper">Keyboard shortcuts</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
     <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
@@ -5899,7 +5899,7 @@
     <string name="battery_saver_turn_on_summary">Extend battery life</string>
 
     <!-- Battery Saver: Title for sticky battery saver preference [CHAR_LIMIT=60] -->
-    <string name="battery_saver_sticky_title_new">Turn off when fully charged</string>
+    <string name="battery_saver_sticky_title_new">Turn off when charged</string>
 
     <!-- Battery Saver: Description for sticky battery saver preference [CHAR_LIMIT=NONE] -->
     <string name="battery_saver_sticky_description_new" product="default">Battery Saver turns off when your phone is at <xliff:g id="percent" example="90%">%1$s</xliff:g></string>
@@ -7655,7 +7655,7 @@
     <string name="dial_pad_tones_title">Dial pad tones</string>
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for screen locking sounds. [CHAR LIMIT=30] -->
-    <string name="screen_locking_sounds_title">Screen locking sounds</string>
+    <string name="screen_locking_sounds_title">Screen locking sound</string>
 
     <!-- Sound: Other sounds: Title for the option enabling charging sounds and vibration. [CHAR LIMIT=50] -->
     <string name="charging_sounds_title">Charging sounds and vibration</string>
@@ -8114,7 +8114,7 @@
     <string name="hide_silent_icons_summary">Icons from gentle notifications aren\'t shown in the status bar</string>
 
     <!-- Configure Notifications: Title for the notification badging option. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=5125022693565388760] -->
-    <string name="notification_badging_title">Allow notification dots</string>
+    <string name="notification_badging_title">Notification dot on app icon</string>
 
     <!-- Configure Notifications: Title for the people notification strip option. [CHAR LIMIT=60] -->
     <string name="notification_people_strip_title">Show strip of recent conversations</string>
@@ -8183,7 +8183,7 @@
     <string name="notification_pulse_title">Blink light</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_title">Lock screen</string>
+    <string name="lock_screen_notifications_title">Notifications on lock screen</string>
 
     <!-- Configure lock screen: Title for the option of unlocking directly to home. [CHAR LIMIT=30] -->
     <string name="lockscreen_bypass_title">Skip lock screen</string>
@@ -10088,7 +10088,7 @@
     <string name="billing_cycle">Data warning &amp; limit</string>
 
     <!-- Title of button for application usage cycle preferences [CHAR LIMIT=40] -->
-    <string name="app_usage_cycle">App data usage cycle</string>
+    <string name="app_usage_cycle">Mobile data usage cycle</string>
 
     <!-- Format for a summary describing the amount of data before the user is warned [CHAR LIMIT=NONE] -->
     <string name="cell_data_warning"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning</string>
@@ -10517,7 +10517,7 @@
     <string name="gesture_preference_summary" product="device">Quick gestures to control your device</string>
 
     <!-- Title text for double tap power for camera [CHAR LIMIT=60]-->
-    <string name="double_tap_power_for_camera_title">Jump to camera</string>
+    <string name="double_tap_power_for_camera_title">Quickly open camera</string>
 
     <!-- Summary text for double tap power for camera [CHAR LIMIT=160]-->
     <string name="double_tap_power_for_camera_summary">To quickly open camera, press the power button twice. Works from any screen.</string>
@@ -10526,7 +10526,7 @@
     <string name="double_tap_power_for_camera_suggestion_title">Open camera quickly</string>
 
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
-    <string name="double_twist_for_camera_mode_title">Flip camera</string>
+    <string name="double_twist_for_camera_mode_title">Flip camera for selfie</string>
 
     <!-- Summary text for double twist for camera mode  [CHAR LIMIT=160]-->
     <string name="double_twist_for_camera_mode_summary"></string>
@@ -10693,7 +10693,7 @@
     <string name="configure_section_header">Configure</string>
 
     <!-- Switch label to enable auto sync account [CHAR LIMIT=60] -->
-    <string name="auto_sync_account_title">Automatically sync data</string>
+    <string name="auto_sync_account_title">Automatically sync app data</string>
     <!-- Switch label to enable auto sync personal account [CHAR LIMIT=60] -->
     <string name="auto_sync_personal_account_title">Automatically sync personal data</string>
     <!-- Switch label to enable auto sync work account [CHAR LIMIT=60] -->
