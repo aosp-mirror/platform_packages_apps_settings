@@ -36,7 +36,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -50,8 +49,6 @@ import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
-
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -277,12 +274,43 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void updateUninstallButton_isProfileOrDeviceOwner_setButtonDisable() {
+    public void updateUninstallButton_isSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
+        mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
         doReturn(true).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
 
         mController.updateUninstallButton();
 
         verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
+        mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
+        doReturn(false).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(true);
+    }
+
+    @Test
+    public void updateUninstallButton_isNotSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
+        doReturn(0).when(mDpm).getDeviceOwnerUserId();
+        doReturn(true).when(mDpm).isDeviceOwnerApp(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(false);
+    }
+
+    @Test
+    public void updateUninstallButton_isNotSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
+        doReturn(10).when(mDpm).getDeviceOwnerUserId();
+        doReturn(false).when(mDpm).isDeviceOwnerApp(anyString());
+
+        mController.updateUninstallButton();
+
+        verify(mButtonPrefs).setButton2Enabled(true);
     }
 
     @Test
