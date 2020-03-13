@@ -4935,9 +4935,9 @@
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
     <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
-    <string name="accessibility_shortcut_service_on_lock_screen_title">Allow from lock screen</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume keys for 3 seconds to start an accessibility feature.</string>
+    <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for 3 seconds.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -4987,13 +4987,13 @@
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This helps people who are sensitive to bright light see the screen more easily.<br/><br/>Note: Dark colors will turn light. Colors will change in media and images. You can also use Dark theme (Settings > Display).]]></string>
+    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This feature may be helpful for people who are sensitive to bright light.<br/><br/>Color inversion also turns dark screens light. Colors will change in media and images.<br/><br/>Note: You can also use Dark theme to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.]]></string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Auto click (dwell timing)</string>
+    <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
-    <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
+    <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
-    <string name="accessibility_autoclick_default_title">Don\u2019t use auto click (default)</string>
+    <string name="accessibility_autoclick_default_title">Off</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -5028,16 +5028,18 @@
     <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
-    <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
+    <!-- Title for Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Show captions</string>
+    <!-- Summary for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
+    <string name="accessibility_caption_master_switch_summary">For supported app only</string>
     <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
-    <string name="captioning_caption_appearance_title">Caption appearance</string>
+    <string name="captioning_caption_appearance_title">Caption size and style</string>
     <!-- Summary for Captions settings, explaining important settings under it. [CHAR LIMIT=NONE] -->
-    <string name="captioning_caption_appearance_summary">Text size, caption style</string>
+    <string name="captioning_caption_appearance_summary"><xliff:g id="accessibility_font_size" example="Large">%1$s</xliff:g> text size</string>
     <!-- Title for Caption preference settings screen for configuring language. [CHAR LIMIT=NONE] -->
     <string name="captioning_more_options_title">More options</string>
     <!-- Used in the Captions preference to tell users that the setting doesn't support all apps. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_caption_preference_summary">Not all apps support this setting.</string>
+    <string name="accessibility_caption_preference_summary">Not all apps support these caption preferences</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_type_software">Accessibility button</string>
     <!-- Summary for accessibility shortcut preference for software shortcut type when gesture mode is on. [CHAR LIMIT=NONE] -->
@@ -5065,9 +5067,13 @@
         <item quantity="other"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aids</item>
     </plurals>
 
-    <!-- Preference's state when enabled. -->
+    <!-- Preference's shortcut when enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_shortcut_enabled">Shortcut on</string>
+    <!-- Preference's shortcut when disabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_summary_shortcut_disabled">Off</string>
+    <!-- Preference's state when enabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_state_enabled">On</string>
-    <!-- Preference's state when disabled. -->
+    <!-- Preference's state when disabled. [CHAR LIMIT=NONE] -->
     <string name="accessibility_summary_state_disabled">Off</string>
     <!-- Accessibility service's preference's state when enabled but not running (like maybe it crashed). -->
     <string name="accessibility_summary_state_stopped">Not working. Tap for info.</string>
@@ -5079,17 +5085,17 @@
     <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
     <string name="daltonizer_type">Correction mode</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Deuteranomaly</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Green-red</string>
+    <string name="daltonizer_mode_protanomaly_title">Protanomaly</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
+    <string name="daltonizer_mode_tritanomaly_title">Tritanomaly</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Red-green</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_summary">Red-green</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
+    <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
@@ -7333,8 +7339,6 @@
     <string name="color_orange">Orange</string>
     <!-- Purple label.  [CHAR LIMIT=40] -->
     <string name="color_purple">Purple</string>
-    <!-- Pink label.  [CHAR LIMIT=40] -->
-    <string name="color_pink">Pink</string>
     <!-- Message informing the user that no SIM card is inserted  [CHAR LIMIT=60] -->
     <string name="sim_no_inserted_msg">No SIM cards inserted</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
@@ -11287,7 +11291,11 @@
     <!-- Text for Network 1x [CHAR LIMIT=NONE] -->
     <string name="network_1x" translatable="false">1x</string>
     <!-- Text for Network global [CHAR LIMIT=NONE] -->
-    <string name="network_global">Global</string>
+    <string name="network_global" translatable="false">Global</string>
+    <!-- Text for Network world mode CDMA LTE [CHAR LIMIT=NONE] -->
+    <string name="network_world_mode_cdma_lte" translatable="false">LTE / CDMA</string>
+    <!-- Text for Network world mode GSM LTE [CHAR LIMIT=NONE] -->
+    <string name="network_world_mode_gsm_lte" translatable="false">LTE / GSM / UMTS</string>
 
     <!-- Available networks screen title/heading [CHAR LIMIT=NONE] -->
     <string name="label_available">Available networks</string>
