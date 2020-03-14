@@ -28,7 +28,6 @@ import android.provider.Settings;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -61,7 +60,6 @@ public class StyleSuggestionActivityTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = ShadowSecureSettings.class)
     public void hasStyleSet_yes_shouldReturnTrue() {
         when(mResources.getBoolean(com.android.internal.R.bool.config_enableWallpaperService))
@@ -73,7 +71,6 @@ public class StyleSuggestionActivityTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = ShadowSecureSettings.class)
     public void hasStyleSet_no_shouldReturnFalse() {
         when(mResources.getBoolean(com.android.internal.R.bool.config_enableWallpaperService))

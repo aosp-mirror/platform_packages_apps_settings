@@ -41,7 +41,6 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -81,7 +80,6 @@ public class AssistFlashScreenPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowSecureSettings.class})
     public void isAvailable_hasAssistantAndAllowDisclosure_shouldReturnTrue() {
         ReflectionHelpers.setField(mController, "mContext", mMockContext);
@@ -93,7 +91,6 @@ public class AssistFlashScreenPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowSecureSettings.class})
     public void isAvailable_hasAssistantAndDisallowDisclosure_shouldReturnTrue() {
         ReflectionHelpers.setField(mController, "mContext", mMockContext);
@@ -112,7 +109,6 @@ public class AssistFlashScreenPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowSecureSettings.class})
     public void onResume_shouldUpdatePreference() {
         Settings.Secure.putString(mContext.getContentResolver(),
