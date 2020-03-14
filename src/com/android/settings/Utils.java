@@ -888,6 +888,27 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return {@code true} if the supplied package is the device owner or profile owner of a
+     * given user.
+     *
+     * @param devicePolicyManager used to check whether it is device owner and profile owner app
+     * @param packageName         package to check about
+     * @param userId              the if of the relevant user
+     */
+    public static boolean isProfileOrDeviceOwner(DevicePolicyManager devicePolicyManager,
+            String packageName, int userId) {
+        if ((devicePolicyManager.getDeviceOwnerUserId() == userId)
+                && devicePolicyManager.isDeviceOwnerApp(packageName)) {
+            return true;
+        }
+        final ComponentName cn = devicePolicyManager.getProfileOwnerAsUser(userId);
+        if (cn != null && cn.getPackageName().equals(packageName)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Return the resource id to represent the install status for an app
      */
     @StringRes

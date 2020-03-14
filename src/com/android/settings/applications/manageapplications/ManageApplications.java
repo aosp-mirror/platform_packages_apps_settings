@@ -38,6 +38,7 @@ import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
 import android.compat.annotation.ChangeId;
+import android.compat.annotation.LoggingOnly;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -186,6 +187,7 @@ public class ManageApplications extends InstrumentedFragment
      * requested such permission.
      */
     @ChangeId
+    @LoggingOnly
     private static final long CHANGE_RESTRICT_SAW_INTENT = 135920175L;
 
     // sort order
