@@ -45,6 +45,7 @@ import androidx.annotation.AnimRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Preconditions;
@@ -364,7 +365,8 @@ public final class AccessibilityGestureNavigationTutorial {
         return new TutorialPage(title, image, indicatorIcon, instruction);
     }
 
-    private static List<TutorialPage> createShortcutTutorialPages(@NonNull Context context,
+    @VisibleForTesting
+    static List<TutorialPage> createShortcutTutorialPages(@NonNull Context context,
             int shortcutTypes) {
         final List<TutorialPage> tutorialPages = new ArrayList<>();
         if ((shortcutTypes & UserShortcutType.SOFTWARE) == UserShortcutType.SOFTWARE) {
