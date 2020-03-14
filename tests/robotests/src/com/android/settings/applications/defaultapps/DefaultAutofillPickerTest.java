@@ -45,7 +45,6 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -107,7 +106,6 @@ public class DefaultAutofillPickerTest {
     }
 
     @Test
-    @Ignore
     public void setAndGetDefaultAppKey_shouldUpdateDefaultAutoFill() {
         mPicker.onAttach((Context) mActivity);
 
