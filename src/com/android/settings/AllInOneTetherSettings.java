@@ -20,8 +20,6 @@ import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.ConnectivityManager.TETHERING_WIFI;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
-import static com.android.settings.network.TetherEnabler.KEY_ENABLE_WIFI_TETHERING;
-
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
@@ -30,7 +28,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -74,8 +71,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @SearchIndexable
 public class AllInOneTetherSettings extends RestrictedDashboardFragment
         implements DataSaverBackend.Listener,
-        WifiTetherBasePreferenceController.OnTetherConfigUpdateListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
 
     // TODO(b/148622133): Should clean up the postfix once this fragment replaced TetherSettings.
     public static final String DEDUP_POSTFIX = "_2";
@@ -114,9 +110,18 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     private PreferenceGroup mWifiTetherGroup;
-    private SharedPreferences mSharedPreferences;
-    private boolean mWifiTetherChosen;
+    private boolean mBluetoothTethering;
+    private boolean mUsbTethering;
+    private boolean mWifiTethering;
     private TetherEnabler mTetherEnabler;
+    private final TetherEnabler.OnTetherStateUpdateListener mStateUpdateListener =
+            state -> {
+                mBluetoothTethering = TetherEnabler.isBluetoothTethering(state);
+                mUsbTethering = TetherEnabler.isUsbTethering(state);
+                mWifiTethering = TetherEnabler.isWifiTethering(state);
+                mWifiTetherGroup.setVisible(shouldShowWifiConfig());
+                reConfigInitialExpandedChildCount();
+            };
 
     private final BroadcastReceiver mTetherChangeReceiver = new BroadcastReceiver() {
         @Override
@@ -136,7 +141,6 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
 
         private void restartWifiTetherIfNeed(int state) {
             if (state == WifiManager.WIFI_AP_STATE_DISABLED
-                    && mWifiTetherChosen
                     && mRestartWifiApAfterConfigChange) {
                 mRestartWifiApAfterConfigChange = false;
                 mTetherEnabler.startTethering(TETHERING_WIFI);
@@ -168,8 +172,6 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        mSharedPreferences =
-                context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
 
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
@@ -199,9 +201,6 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
 
         // Set initial state based on Data Saver mode.
         onDataSaverChanged(mDataSaverBackend.isDataSaverEnabled());
-
-        // Set initial state based on SharedPreferences value.
-        onSharedPreferenceChanged(mSharedPreferences, KEY_ENABLE_WIFI_TETHERING);
     }
 
     @Override
@@ -222,6 +221,9 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         mTetherEnabler = new TetherEnabler(activity,
                 new SwitchBarController(switchBar), mBluetoothPan);
         getSettingsLifecycle().addObserver(mTetherEnabler);
+        use(UsbTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
+        use(BluetoothTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
+        use(WifiTetherDisablePreferenceController.class).setTetherEnabler(mTetherEnabler);
         switchBar.show();
     }
 
@@ -247,13 +249,13 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        mTetherEnabler.addListener(mStateUpdateListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        mTetherEnabler.removeListener(mStateUpdateListener);
     }
 
     @Override
@@ -365,13 +367,8 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         mApBandPreferenceController.updateDisplay();
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (TextUtils.equals(key, KEY_ENABLE_WIFI_TETHERING)) {
-            mWifiTetherChosen = sharedPreferences.getBoolean(KEY_ENABLE_WIFI_TETHERING, true);
-            mWifiTetherGroup.setVisible(mWifiTetherChosen);
-            reConfigInitialExpandedChildCount();
-        }
+    private boolean shouldShowWifiConfig() {
+        return mWifiTethering || (!mBluetoothTethering && !mUsbTethering);
     }
 
     private void reConfigInitialExpandedChildCount() {
@@ -380,7 +377,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
 
     @Override
     public int getInitialExpandedChildCount() {
-        if (!mWifiTetherChosen) {
+        if (!shouldShowWifiConfig()) {
             // Expand all preferences in the screen.
             return getPreferenceScreen().getPreferenceCount();
         }
