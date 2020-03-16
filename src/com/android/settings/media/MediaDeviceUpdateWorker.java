@@ -112,6 +112,11 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         notifySliceChange();
     }
 
+    @Override
+    public void onRequestFailed(int reason) {
+        notifySliceChange();
+    }
+
     public Collection<MediaDevice> getMediaDevices() {
         return mMediaDevices;
     }
@@ -119,6 +124,9 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     public void connectDevice(MediaDevice device) {
         ThreadUtils.postOnBackgroundThread(() -> {
             mLocalMediaManager.connectDevice(device);
+            ThreadUtils.postOnMainThread(() -> {
+                notifySliceChange();
+            });
         });
     }
 
