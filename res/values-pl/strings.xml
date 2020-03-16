@@ -481,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Pomiń"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Dalej"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Pominąć odcisk palca?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Zapisanie odcisku palca zajmuje tylko chwilę. Zawsze możesz go dodać później w ustawieniach."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Zapisanie odcisku palca zajmuje tylko chwilę. Zawsze możesz go dodać później w ustawieniach."</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Pominąć blokadę ekranu?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Zabezpieczenia urządzenia nie zostaną włączone. Nie będzie można zablokować tego tabletu, gdy zostanie zgubiony, skradziony lub zresetowany."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Zabezpieczenia urządzenia nie zostaną włączone. Nie będzie można zablokować tego urządzenia, gdy zostanie zgubione, skradzione lub zresetowane."</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacje zużywają normalną ilość energii. Jeśli będą zużywały jej za dużo, urządzenie zasugeruje działania, które będzie można podjąć.\n\nZawsze możesz włączyć Oszczędzanie baterii, gdy spadnie poziom jej naładowania."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Menedżer baterii"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Automatycznie zarządzaj aplikacjami"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Ogranicz zużycie energii przez aplikacje, z których rzadko korzystasz"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Gdy Menedżer baterii wykryje, że aplikacje szybko rozładowują baterię, możesz wprowadzić ograniczenia. Aplikacje z ograniczeniami mogą nie działać prawidłowo, a powiadomienia mogą być opóźnione."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Gdy Menedżer baterii wykryje, że aplikacje szybko rozładowują baterię, możesz wprowadzić ograniczenia. Aplikacje z ograniczeniami mogą nie działać prawidłowo, a powiadomienia mogą być opóźnione."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Gdy Menedżer baterii wykryje, że aplikacje szybko rozładowują baterię, możesz wprowadzić ograniczenia. Aplikacje z ograniczeniami mogą nie działać prawidłowo, a powiadomienia mogą być opóźnione."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Ogranicz zużycie energii przez aplikacje, z których rzadko korzystasz"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Gdy Menedżer baterii wykryje, że aplikacje szybko rozładowują baterię, możesz wprowadzić ograniczenia. Aplikacje z ograniczeniami mogą nie działać prawidłowo, a powiadomienia mogą być opóźnione."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplikacje z ograniczeniami"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="few">Ograniczam zużycie baterii przez %1$d aplikacje</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Te aplikacje zużywają baterię w tle. Aplikacje z ograniczeniami mogą nie działać prawidłowo, a powiadomienia mogą być opóźnione."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Użyj Menedżera baterii"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Wykrywaj, gdy aplikacje szybko rozładowują baterię"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Włączony / wykrywa, gdy aplikacje szybko rozładowują baterię"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Włączony / wykrywa, gdy aplikacje szybko rozładowują baterię"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Wył."</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="few">Dla %1$d aplikacji wprowadzono ograniczenia</item>
@@ -3515,7 +3513,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Poufne powiadomienia z profilu do pracy"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Pokazuj poufne treści z profilu do pracy po zablokowaniu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Pokazuj całą treść powiadomień"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Pokaż poufne treści tylko po odblokowaniu"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Pokazuj poufne treści tylko po odblokowaniu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Nie pokazuj żadnych powiadomień"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Co ma się wyświetlać na ekranie blokady?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Ekran blokady"</string>

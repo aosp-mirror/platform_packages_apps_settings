@@ -296,7 +296,7 @@
     <string name="okay" msgid="4827099303045669054">"Në rregull"</string>
     <string name="forget" msgid="3754013654135912783">"Harro"</string>
     <string name="save" msgid="3125033126936493822">"Ruaj"</string>
-    <string name="done" msgid="7497982645646431310">"U krye!"</string>
+    <string name="done" msgid="7497982645646431310">"U krye"</string>
     <string name="apply" msgid="7834684883190163536">"Zbato"</string>
     <string name="share" msgid="8502235338607613795">"Ndaj"</string>
     <string name="add" msgid="8335206931421683426">"Shto"</string>
@@ -832,7 +832,7 @@
     <string name="wifi_display_details" msgid="2351632307998142920">"Shfaq cilësimet"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Opsionet e shfaqjes së Wi-Fi"</string>
     <string name="wifi_display_options_forget" msgid="3140558691112356024">"Harro"</string>
-    <string name="wifi_display_options_done" msgid="7608851767701954020">"U krye!"</string>
+    <string name="wifi_display_options_done" msgid="7608851767701954020">"U krye"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Emri"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="7995204987245404797">"5 GHz"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacionet e tua po përdorin një sasi normale të baterisë. Nëse aplikacionet përdorin një sasi të madhe të baterisë, pajisja jote do të japë sugjerime për veprimet që mund të kryesh.\n\nMund të aktivizosh gjithmonë \"Kursyesin e baterisë\" nëse bateria është në nivel të ulët."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Menaxheri i baterisë"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Menaxho automatikisht aplikacionet"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Kufizo baterinë për aplikacionet që nuk i përdor shpesh"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Kur \"Menaxheri i baterisë\" të zbulojë se këto aplikacione po shkarkojnë baterinë, do të kesh opsionin që t\'i kufizosh këto aplikacione. Aplikacionet e kufizuara mund të mos funksionojnë si duhet dhe njoftimet mund të vonohen."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Kur \"Menaxheri i baterisë\" të zbulojë se këto aplikacione po shkarkojnë baterinë, do të kesh opsionin që t\'i kufizosh këto aplikacione. Aplikacionet e kufizuara mund të mos funksionojnë si duhet dhe njoftimet mund të vonohen."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Kur \"Menaxheri i baterisë\" të zbulojë se këto aplikacione po shkarkojnë baterinë, do të kesh opsionin që t\'i kufizosh këto aplikacione. Aplikacionet e kufizuara mund të mos funksionojnë si duhet dhe njoftimet mund të vonohen."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Kufizo baterinë për aplikacionet që nuk i përdor shpesh"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Kur \"Menaxheri i baterisë\" të zbulojë se këto aplikacione po shkarkojnë baterinë, do të kesh opsionin që t\'i kufizosh këto aplikacione. Aplikacionet e kufizuara mund të mos funksionojnë si duhet dhe njoftimet mund të vonohen."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplikacionet e kufizuara"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Përdorimi i baterisë po kufizohet për %1$d aplikacione</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Këto aplikacione kanë përdorur bateri në sfond. Aplikacionet e kufizuara mund të mos funksionojnë siç duhet dhe njoftimet mund të vonohen."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Përdor \"Menaxherin e baterisë\""</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Zbulo kur aplikacionet shkarkojnë baterinë"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Aktiv / Po zbulon kur aplikacionet shkarkojnë baterinë"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Aktiv / Po zbulon kur aplikacionet shkarkojnë baterinë"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Joaktiv"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d aplikacione të kufizuara</item>
@@ -2905,7 +2903,7 @@
     <string name="backup_pw_cancel_button_text" msgid="2244399819018756323">"Anulo"</string>
     <string name="additional_system_update_settings_list_item_title" msgid="7230385345152138051">"Përditësime të sistemit"</string>
     <string name="ssl_ca_cert_warning" msgid="3898387588657346106">"Rrjeti mund të jetë i monitoruar"</string>
-    <string name="done_button" msgid="6269449526248267">"U krye!"</string>
+    <string name="done_button" msgid="6269449526248267">"U krye"</string>
     <plurals name="ssl_ca_cert_dialog_title" formatted="false" msgid="5491460811755938449">
       <item quantity="other">Besoji ose hiqi certifikatat</item>
       <item quantity="one">Besoje ose hiqe certifikatën</item>
@@ -3537,7 +3535,7 @@
     <string name="app_notification_row_banned" msgid="4513523107019706924">"I bllokuar"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Me prioritet"</string>
     <string name="app_notification_row_sensitive" msgid="7374688948587174964">"Delikate"</string>
-    <string name="app_notifications_dialog_done" msgid="573716608705273004">"U krye!"</string>
+    <string name="app_notifications_dialog_done" msgid="573716608705273004">"U krye"</string>
     <string name="app_notification_importance_title" msgid="8293193440040799998">"Rëndësia"</string>
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Drita me pulsim"</string>
     <string name="notification_vibrate_title" msgid="6207488114527068741">"Dridhje"</string>

@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"As túas aplicacións consomen unha cantidade normal de batería. Cando consuman demasiada, o teu dispositivo suxerirá as accións que podes levar a cabo.\n\nSe tes pouca batería, sempre podes activar a función Aforro de batería."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Xestor de batería"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Xestionar aplicacións automaticamente"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Limita o uso de batería das aplicacións que utilizas con pouca frecuencia"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Cando o xestor de batería detecte que as aplicacións están consumindo batería, terás a posibilidade de restrinxilas. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Cando o xestor de batería detecte que as aplicacións están consumindo batería, terás a posibilidade de restrinxilas. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Cando o xestor de batería detecte que as aplicacións están consumindo batería, terás a posibilidade de restrinxilas. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limita o uso de batería das aplicacións que utilizas con pouca frecuencia"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Cando o xestor de batería detecte que as aplicacións están consumindo batería, terás a posibilidade de restrinxilas. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicacións restrinxidas"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Limitando o uso de batería para %1$d aplicacións</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Estas aplicacións consumiron batería en segundo plano. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar o xestor de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta se as aplicacións consomen batería"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Activado/Detección das aplicacións que esgotan a batería"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Activado/Detección das aplicacións que esgotan a batería"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivado"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">Restrinxíronse %1$d aplicacións</item>
@@ -3380,7 +3378,7 @@
     <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Ver todas as dos últimos 7 días"</string>
     <string name="advanced_section_header" msgid="6003255455888626056">"Configuración avanzada"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificacións do traballo"</string>
-    <string name="smart_notifications_title" msgid="8995288376897952015">"Notificacións automáticas"</string>
+    <string name="smart_notifications_title" msgid="8995288376897952015">"Notificacións intelixentes"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridade das notificacións automáticas"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Define automaticamente como discretas as notificacións con prioridade baixa"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Accións suxeridas e respostas"</string>
@@ -3459,7 +3457,7 @@
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama a túa atención con son ou vibración"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ao desbloquear o dispositivo, as notificacións móstranse nun cartel na parte superior da pantalla"</string>
     <string name="notification_switch_label" msgid="2950240358797111509">"Mostrar notificacións"</string>
-    <string name="default_notification_assistant" msgid="243718059890346442">"Notificacións automáticas"</string>
+    <string name="default_notification_assistant" msgid="243718059890346442">"Notificacións intelixentes"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notificacións ao día</item>
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> notificación ao día</item>
@@ -3476,7 +3474,7 @@
       <item quantity="other">%d aplicacións poden ler notificacións</item>
       <item quantity="one">%d aplicación pode ler notificacións</item>
     </plurals>
-    <string name="notification_assistant_title" msgid="6983941403582134437">"Notificacións automáticas"</string>
+    <string name="notification_assistant_title" msgid="6983941403582134437">"Notificacións intelixentes"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Ningunha"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ningunha aplicación instalada solicitou o acceso ás notificacións."</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Queres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> teña acceso ás notificacións?"</string>
