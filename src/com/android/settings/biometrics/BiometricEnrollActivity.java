@@ -68,11 +68,13 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
 
         final int result = bm.canAuthenticate(authenticators);
 
-        if (result == BiometricManager.BIOMETRIC_SUCCESS
-                || result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
-            Log.e(TAG, "Unexpected result: " + result);
-            finish();
-            return;
+        if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            if (result == BiometricManager.BIOMETRIC_SUCCESS
+                    || result == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE) {
+                Log.e(TAG, "Unexpected result: " + result);
+                finish();
+                return;
+            }
         }
 
         if (authenticators == BiometricManager.Authenticators.DEVICE_CREDENTIAL) {
