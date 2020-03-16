@@ -275,7 +275,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void updateUninstallButton_isSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
-        mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
+        doReturn(true).when(mController).isSystemPackage(any(), any(), any());
         doReturn(true).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
 
         mController.updateUninstallButton();
@@ -285,7 +285,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void updateUninstallButton_isSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
-        mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
+        doReturn(true).when(mController).isSystemPackage(any(), any(), any());
         doReturn(false).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
 
         mController.updateUninstallButton();
@@ -295,6 +295,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void updateUninstallButton_isNotSystemAndIsProfileOrDeviceOwner_setButtonDisable() {
+        doReturn(false).when(mController).isSystemPackage(any(), any(), any());
         doReturn(0).when(mDpm).getDeviceOwnerUserId();
         doReturn(true).when(mDpm).isDeviceOwnerApp(anyString());
 
@@ -305,6 +306,7 @@ public class AppButtonsPreferenceControllerTest {
 
     @Test
     public void updateUninstallButton_isNotSystemAndIsNotProfileOrDeviceOwner_setButtonEnabled() {
+        doReturn(false).when(mController).isSystemPackage(any(), any(), any());
         doReturn(10).when(mDpm).getDeviceOwnerUserId();
         doReturn(false).when(mDpm).isDeviceOwnerApp(anyString());
 
