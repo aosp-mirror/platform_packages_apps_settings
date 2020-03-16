@@ -947,7 +947,7 @@
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"匿名ID"</string>
     <string name="wifi_password" msgid="1458802324849513755">"パスワード"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"パスワードを表示する"</string>
-    <string name="wifi_ap_band_config" msgid="1589020070150933055">"AP帯域幅を選択"</string>
+    <string name="wifi_ap_band_config" msgid="1589020070150933055">"AP周波数帯を選択"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"自動"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"2.4 GHz 帯"</string>
     <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"5.0 GHz 帯"</string>
@@ -1099,7 +1099,7 @@
     <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> を ON にしています..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"他のデバイスが <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> に接続できます"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"アクセス ポイントのパスワード"</string>
-    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 帯域幅"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP 周波数帯"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"アクセス ポイントを使って他のデバイスとの Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ通信によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くのデバイスと共有できます。"</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"アクセス ポイントを自動的にオフにする"</string>
@@ -1199,7 +1199,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ナチュラル"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ブースト"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"ビビッド"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"アダプティブ"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"自動調整"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"正確な色のみを使用"</string>
     <string name="color_mode_summary_automatic" msgid="8157885594041700275">"鮮明な色と正確な色の間で調整"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="6413384391658481700">"画面の向きに合わせて縦横表示を切り替える"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"アプリの電池使用量は正常です。アプリが電池を使いすぎる場合は、対処可能なおすすめの方法がデバイスに表示されます。\n\n電池の残量が少なくなったら、いつでもバッテリー セーバーを ON にできます。"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"バッテリー マネージャ"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"アプリを自動的に管理"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"使用頻度の低いアプリによる電池の使用を制限します"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"バッテリー マネージャによってアプリの電池使用量が多いことが検出された場合は、該当するアプリを制限できます。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"バッテリー マネージャによってアプリの電池使用量が多いことが検出された場合は、該当するアプリを制限できます。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"バッテリー マネージャによってアプリの電池使用量が多いことが検出された場合は、該当するアプリを制限できます。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"使用頻度の低いアプリによる電池の使用を制限します"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"バッテリー マネージャによってアプリの電池使用量が多いことが検出された場合は、該当するアプリを制限できます。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"制限されたアプリ"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">%1$d 個のアプリの電池使用を制限しています</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"このアプリがバックグラウンドで電池を使用していました。制限したアプリは正常に動作しないことがあります。また、通知が遅れる可能性もあります。"</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"バッテリー マネージャの使用"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"アプリの電池使用量が多いかどうかを検出します"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"ON / アプリの電池使用量が多いかどうかを検出しています"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"ON / アプリの電池使用量が多いかどうかを検出しています"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"OFF"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">制限されているアプリ: %1$d 個</item>
@@ -2564,8 +2562,8 @@
     <string name="menu_duration_6h" msgid="2843895006519153126">"6時間"</string>
     <string name="menu_duration_12h" msgid="9206922888181602565">"12時間"</string>
     <string name="menu_duration_1d" msgid="8538390358158862330">"1日"</string>
-    <string name="menu_show_system" msgid="3780310384799907818">"システムを表示"</string>
-    <string name="menu_hide_system" msgid="5197937451381420622">"システムを表示しない"</string>
+    <string name="menu_show_system" msgid="3780310384799907818">"システムアプリを表示"</string>
+    <string name="menu_hide_system" msgid="5197937451381420622">"システムアプリを表示しない"</string>
     <string name="menu_show_percentage" msgid="6143205879027928330">"割合を表示"</string>
     <string name="menu_use_uss" msgid="1663914348353623749">"Ussを使用"</string>
     <string name="menu_proc_stats_type" msgid="5048575824389855689">"統計タイプ"</string>

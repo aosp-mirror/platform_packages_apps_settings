@@ -326,7 +326,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Establecer fecha y hora"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Establecer fecha, hora, zona horaria y formatos"</string>
     <string name="date_time_auto" msgid="8227898528525208628">"Usar hora de la red"</string>
-    <string name="zone_auto_title" msgid="4715775349468228598">"Usar zona horaria proporcionada por la red"</string>
+    <string name="zone_auto_title" msgid="4715775349468228598">"Usar la zona horaria proporcionada por la red"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar la configuración regional predeterminada"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Formato de 24 horas"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
@@ -1102,7 +1102,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda del punto de acceso"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Utiliza un punto de acceso para crear una red Wi‑Fi que puedan usar otros dispositivos. Los puntos de acceso permiten acceder a Internet con una conexión de datos móviles. Es posible que se apliquen cargos adicionales por el uso de datos."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Las aplicaciones pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desactivar el punto de acceso automáticamente"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desactivar punto de acceso automáticamente"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="7342409072397243649">"El punto de acceso Wi‑Fi se desactivará si no hay dispositivos conectados"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activando zona Wi-Fi…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Desactivando zona Wi-Fi…"</string>
@@ -1154,7 +1154,7 @@
     <string name="notification_volume_title" msgid="328053763590888609">"Notificación"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1798481722572489141">"Utilizar volumen de llamada entrante para notificaciones"</string>
     <string name="home_work_profile_not_supported" msgid="2605589489324241338">"No admite perfiles de trabajo"</string>
-    <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Sonido notif. predet."</string>
+    <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Sonido de notificación predeterminado"</string>
     <string name="media_volume_title" msgid="5209147840160985178">"Multimedia"</string>
     <string name="media_volume_summary" msgid="4671324482655564873">"Establecer volumen para música y vídeos"</string>
     <string name="alarm_volume_title" msgid="706302621191735343">"Alarma"</string>
@@ -2394,10 +2394,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Tus aplicaciones usan una cantidad normal de batería. Si consumieran demasiada, tu dispositivo te recomendaría medidas para evitarlo.\n\nSi te queda poca carga, también puedes activar el Ahorro de batería."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Gestor de batería"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gestionar aplicaciones automáticamente"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Limitar el consumo de batería de las aplicaciones que no utilices con frecuencia"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Cuando el gestor de batería detecte que las aplicaciones consumen batería, podrás restringirlas, aunque es posible que no funcionen correctamente y las notificaciones se retrasen."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Cuando el gestor de batería detecte que las aplicaciones consumen batería, podrás restringirlas, aunque es posible que no funcionen correctamente y las notificaciones se retrasen."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Cuando el gestor de batería detecte que las aplicaciones consumen batería, podrás restringirlas, aunque es posible que no funcionen correctamente y las notificaciones se retrasen."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limitar el consumo de batería de las aplicaciones que no utilices con frecuencia"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Cuando el gestor de batería detecte que las aplicaciones consumen batería, podrás restringirlas, aunque es posible que no funcionen correctamente y las notificaciones se retrasen."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicaciones restringidas"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">Se está limitando el consumo de batería de %1$d aplicaciones</item>
@@ -2407,7 +2405,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Estas aplicaciones han estado consumiendo batería en segundo plano. Es posible que las aplicaciones restringidas no funcionen correctamente y las notificaciones se retrasen."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilizar el gestor de batería"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detectar el consumo de batería de las aplicaciones"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Activado: detectando el consumo de batería de las aplicaciones"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Activado: detectando el consumo de batería de las aplicaciones"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivado"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d aplicaciones restringidas</item>
@@ -2564,8 +2562,8 @@
     <string name="menu_duration_6h" msgid="2843895006519153126">"6 horas"</string>
     <string name="menu_duration_12h" msgid="9206922888181602565">"12 horas"</string>
     <string name="menu_duration_1d" msgid="8538390358158862330">"1 día"</string>
-    <string name="menu_show_system" msgid="3780310384799907818">"Mostrar aplicaciones del sistema"</string>
-    <string name="menu_hide_system" msgid="5197937451381420622">"Ocultar aplicaciones del sistema"</string>
+    <string name="menu_show_system" msgid="3780310384799907818">"Mostrar sistema"</string>
+    <string name="menu_hide_system" msgid="5197937451381420622">"Ocultar sistema"</string>
     <string name="menu_show_percentage" msgid="6143205879027928330">"Mostrar porcentajes"</string>
     <string name="menu_use_uss" msgid="1663914348353623749">"Usar USS"</string>
     <string name="menu_proc_stats_type" msgid="5048575824389855689">"Tipo de estadísticas"</string>
@@ -3217,7 +3215,7 @@
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volumen de multimedia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumen de envío"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumen de llamada"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volumen de la alarma"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volumen de alarma"</string>
     <string name="ring_volume_option_title" msgid="1628784257083776131">"Volumen del tono"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumen de notificaciones"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Tono del teléfono"</string>

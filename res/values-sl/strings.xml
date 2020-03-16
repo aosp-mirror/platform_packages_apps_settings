@@ -1923,7 +1923,7 @@
     <string name="disable_text" msgid="5146002260857428005">"Onemogoči"</string>
     <string name="enable_text" msgid="8570798764647110430">"Omogoči"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Počisti shrambo"</string>
-    <string name="app_factory_reset" msgid="8974044931667015201">"Odstrani posodobitve"</string>
+    <string name="app_factory_reset" msgid="8974044931667015201">"Odmesti posodobitve"</string>
     <string name="auto_launch_enable_text" msgid="286244432074382294">"Izbrali ste, da se bo pri nekaterih dejanjih ta aplikacija samodejno zagnala."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Aplikaciji dovolite, da ustvari pripomočke in dostopa do njihovih podatkov."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Ni privzetih nastavitev."</string>
@@ -2464,10 +2464,8 @@
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije porabljajo običajno količino energije akumulatorja. V primeru prekomerne porabe energije vam bo naprava predlagala ustrezne ukrepe.\n\nČe akumulatorju zmanjkuje energije, lahko vedno vklopite varčevanje z energijo akumulatorja."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Varčevanje z energijo akumulatorja"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Samodejno upravljanje aplikacij"</string>
-    <string name="smart_battery_summary" msgid="1492277404000064998">"Omejite porabljanje energije akumulatorja za aplikacije, ki jih ne uporabljate pogosto"</string>
-    <string name="smart_battery_footer" product="default" msgid="8407121907452993645">"Ko varčevanje z energijo akumulatorja zazna, da aplikacije porabljajo energijo akumulatorja, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
-    <string name="smart_battery_footer" product="tablet" msgid="8407121907452993645">"Ko varčevanje z energijo akumulatorja zazna, da aplikacije porabljajo energijo akumulatorja, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
-    <string name="smart_battery_footer" product="device" msgid="8407121907452993645">"Ko varčevanje z energijo akumulatorja zazna, da aplikacije porabljajo energijo akumulatorja, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Omejite porabljanje energije akumulatorja za aplikacije, ki jih ne uporabljate pogosto"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Ko varčevanje z energijo akumulatorja zazna, da aplikacije porabljajo energijo akumulatorja, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Omejene aplikacije"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="one">Omejitev porabe energije akumulatorja za %1$d aplikacijo</item>
@@ -2479,7 +2477,7 @@
     <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Te aplikacije so porabljale energijo akumulatorja v ozadju. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Uporaba varčevanja z energijo akumulatorja"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Zaznavanje, ko aplikacije porabljajo energijo akumulatorja"</string>
-    <string name="battery_manager_on" msgid="3197525907390349054">"Vklopljeno / Zaznavanje, ko aplikacije porabljajo energijo akumulatorja"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Vklopljeno / Zaznavanje, ko aplikacije porabljajo energijo akumulatorja"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Izklopljeno"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d aplikacija je omejena</item>
