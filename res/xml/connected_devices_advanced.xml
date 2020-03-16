@@ -32,6 +32,7 @@
         android:title="@string/nfc_quick_toggle_title"
         android:icon="@drawable/ic_nfc"
         android:order="-7"
+        settings:searchable="false"
         settings:controller="com.android.settings.connecteddevice.NfcAndPaymentFragmentController"/>
 
     <Preference
