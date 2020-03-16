@@ -30,6 +30,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaRoute2ProviderService;
 import android.net.Uri;
 
 import com.android.settings.testutils.shadow.ShadowAudioManager;
@@ -95,7 +96,8 @@ public class MediaDeviceUpdateWorkerTest {
 
     @Test
     public void onSelectedDeviceStateChanged_shouldNotifyChange() {
-        mMediaDeviceUpdateWorker.onSelectedDeviceStateChanged(null, 0);
+        mMediaDeviceUpdateWorker.onSelectedDeviceStateChanged(mMediaDevice1,
+                LocalMediaManager.MediaDeviceState.STATE_CONNECTED);
 
         verify(mResolver).notifyChange(URI, null);
     }
@@ -153,6 +155,13 @@ public class MediaDeviceUpdateWorkerTest {
                 new ArrayList<>(mMediaDeviceUpdateWorker.getMediaDevices());
 
         assertThat(devices.size()).isEqualTo(newDevices.size());
+    }
+
+    @Test
+    public void onRequestFailed_shouldNotifyChange() {
+        mMediaDeviceUpdateWorker.onRequestFailed(MediaRoute2ProviderService.REASON_UNKNOWN_ERROR);
+
+        verify(mResolver).notifyChange(URI, null /* observer */);
     }
 
     @Test
