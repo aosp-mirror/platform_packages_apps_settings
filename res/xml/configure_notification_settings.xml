@@ -42,7 +42,8 @@
             android:key="all_notifications"
             android:title="@string/notifications_title"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="4">
+            android:order="4"
+            settings:searchable="false">
             <extra
                 android:name="classname"
                 android:value="com.android.settings.Settings$NotificationAppListActivity"/>
@@ -136,7 +137,8 @@
             android:title="@string/notification_ringtone_title"
             android:dialogTitle="@string/notification_ringtone_title"
             android:summary="@string/summary_placeholder"
-            android:ringtoneType="notification"/>
+            android:ringtoneType="notification"
+            settings:searchable="false"/>
 
         <SwitchPreference
             android:key="notification_people_strip"

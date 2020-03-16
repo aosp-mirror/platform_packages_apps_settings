@@ -27,6 +27,7 @@
         android:title="@string/firmware_version"
         android:summary="@string/summary_placeholder"
         settings:enableCopying="true"
+        settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>
 
     <!-- Security patch -->
