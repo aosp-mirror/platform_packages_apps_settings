@@ -42,6 +42,7 @@ import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
+import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
 
@@ -246,6 +247,15 @@ public class MediaOutputSlice implements CustomSliceable {
             rowBuilder.setTitle(deviceName);
             rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                     ListBuilder.ICON_IMAGE, deviceName));
+            switch (device.getState()) {
+                case LocalMediaManager.MediaDeviceState.STATE_CONNECTING:
+                    rowBuilder.setSubtitle(mContext.getText(R.string.media_output_switching));
+                    break;
+                case LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED:
+                    rowBuilder.setSubtitle(mContext.getText(
+                            R.string.media_output_switch_error_text));
+                    break;
+            }
         }
 
         return rowBuilder;

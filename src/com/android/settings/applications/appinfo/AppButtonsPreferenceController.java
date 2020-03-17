@@ -396,7 +396,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         // We don't allow uninstalling DO/PO on *any* users if it's a system app, because
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (Utils.isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
+        if (isSystemPackage(mActivity.getResources(), mPm, mPackageInfo)) {
             if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
                 enabled = false;
             }
