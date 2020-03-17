@@ -21,14 +21,14 @@
     android:persistent="false"
     android:title="@string/accessibility_display_inversion_preference_title">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settings.widget.VideoPreference
         android:key="color_inversion_preview"
-        android:layout="@layout/color_inversion_preview"
         android:persistent="false"
         android:selectable="false"
         android:title="@string/summary_placeholder"
-        settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"
+        settings:animation="@raw/accessibility_color_inversion"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"
         settings:searchable="false" />
 
 </PreferenceScreen>
