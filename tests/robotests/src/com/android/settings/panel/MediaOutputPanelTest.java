@@ -41,6 +41,7 @@ import com.android.settingslib.media.PhoneMediaDevice;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -62,7 +63,6 @@ public class MediaOutputPanelTest {
     private MediaController mMediaController;
     @Mock
     private MediaMetadata mMediaMetadata;
-
     @Mock
     private LocalMediaManager mLocalMediaManager;
     @Mock
@@ -71,6 +71,8 @@ public class MediaOutputPanelTest {
     private MediaOutputPanel mPanel;
     private Context mContext;
     private List<MediaController> mMediaControllers = new ArrayList<>();
+    private ArgumentCaptor<MediaController.Callback> mControllerCbs =
+            ArgumentCaptor.forClass(MediaController.Callback.class);
 
     @Before
     public void setUp() {
@@ -112,6 +114,7 @@ public class MediaOutputPanelTest {
     public void onStart_shouldRegisterCallback() {
         mPanel.onStart();
 
+        verify(mMediaController).registerCallback(any());
         verify(mLocalMediaManager).registerCallback(any());
         verify(mLocalMediaManager).startScan();
     }
@@ -167,6 +170,7 @@ public class MediaOutputPanelTest {
 
     @Test
     public void getTitle_withMetadata_returnArtistName() {
+        mPanel.onStart();
         when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
@@ -201,6 +205,7 @@ public class MediaOutputPanelTest {
 
     @Test
     public void getSubTitle_withMetadata_returnAlbumName() {
+        mPanel.onStart();
         when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ALBUM)).thenReturn(TEST_ALBUM);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
@@ -242,5 +247,16 @@ public class MediaOutputPanelTest {
         mPanel.onClickCustomizedButton();
 
         verify(mLocalMediaManager).releaseSession();
+    }
+
+    @Test
+    public void onMetadataChanged_verifyCallOnHeaderChanged() {
+        mPanel.onStart();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+
+        controllerCallbacks.onMetadataChanged(mMediaMetadata);
+
+        verify(mCallback).onHeaderChanged();
     }
 }

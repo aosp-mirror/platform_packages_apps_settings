@@ -148,7 +148,7 @@ public class MediaOutputGroupPanel implements PanelContent, LocalMediaManager.De
     @Override
     public void onDeviceListUpdate(List<MediaDevice> devices) {
         if (mCallback != null) {
-            mCallback.onGroupChanged();
+            mCallback.onHeaderChanged();
         }
     }
 
