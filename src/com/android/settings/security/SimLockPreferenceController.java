@@ -52,13 +52,19 @@ public class SimLockPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        final PersistableBundle b = mCarrierConfigManager.getConfig();
-        final boolean IsAdmin = mUserManager.isAdminUser();
-        if (!IsAdmin || !isSimIccReady() ||
-                b.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
+        final List<SubscriptionInfo> subInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+
+        if (subInfoList == null) {
             return DISABLED_FOR_USER;
         }
-        return AVAILABLE;
+
+        final boolean isAdmin = mUserManager.isAdminUser();
+        if (isAdmin && (!isHideSimLockSetting(subInfoList))) {
+            return AVAILABLE;
+        }
+
+        return DISABLED_FOR_USER;
     }
 
     @Override
@@ -78,34 +84,37 @@ public class SimLockPreferenceController extends BasePreferenceController {
     private boolean isSimReady() {
         final List<SubscriptionInfo> subInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
-        if (subInfoList != null) {
-            for (SubscriptionInfo subInfo : subInfoList) {
-                final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
-                if ((simState != TelephonyManager.SIM_STATE_ABSENT) &&
-                        (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
-                    return true;
-                }
+        if (subInfoList == null) {
+            return false;
+        }
+
+        for (SubscriptionInfo subInfo : subInfoList) {
+            final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
+            if ((simState != TelephonyManager.SIM_STATE_ABSENT)
+                    && (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
+                return true;
             }
         }
         return false;
     }
 
-    /**
-     * Return true if a there is a Slot that has Icc
-     */
-    private boolean isSimIccReady() {
-        final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
+    private boolean isHideSimLockSetting(List<SubscriptionInfo> subInfoList) {
+        if (subInfoList == null) {
+            return true;
+        }
 
-        if (subInfoList != null) {
-            for (SubscriptionInfo subInfo : subInfoList) {
-                mTelephonyManager = mTelephonyManager
-                        .createForSubscriptionId(subInfo.getSimSlotIndex());
-                if (mTelephonyManager.hasIccCard()) {
-                    return true;
-                }
+        for (SubscriptionInfo subInfo : subInfoList) {
+            final TelephonyManager telephonyManager = mTelephonyManager
+                    .createForSubscriptionId(subInfo.getSubscriptionId());
+            final PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(
+                    subInfo.getSubscriptionId());
+            if (telephonyManager.hasIccCard() && bundle != null
+                    && !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
+                // one or more sims show sim lock setting UI.
+                return false;
             }
         }
-        return false;
+
+        return true;
     }
 }
