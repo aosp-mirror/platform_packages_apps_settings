@@ -82,20 +82,6 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     private MediaOutputPanel(Context context, String packageName) {
         mContext = context.getApplicationContext();
         mPackageName = TextUtils.isEmpty(packageName) ? "" : packageName;
-
-        if (!TextUtils.isEmpty(mPackageName)) {
-            mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
-            for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
-                if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
-                    mMediaController = controller;
-                    break;
-                }
-            }
-        }
-
-        if (mMediaController == null) {
-            Log.e(TAG, "Unable to find " + mPackageName + " media controller");
-        }
     }
 
     @Override
@@ -228,6 +214,19 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
+        if (!TextUtils.isEmpty(mPackageName)) {
+            mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
+            for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+                if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
+                    mMediaController = controller;
+                    mMediaController.registerCallback(mCb);
+                    break;
+                }
+            }
+        }
+        if (mMediaController == null) {
+            Log.d(TAG, "No media controller for " + mPackageName);
+        }
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
@@ -237,6 +236,9 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        if (mMediaController != null) {
+            mMediaController.unregisterCallback(mCb);
+        }
         mLocalMediaManager.unregisterCallback(this);
         mLocalMediaManager.stopScan();
     }
@@ -245,4 +247,13 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     public int getViewType() {
         return PanelContent.VIEW_TYPE_SLIDER;
     }
+
+    private final MediaController.Callback mCb = new MediaController.Callback() {
+        @Override
+        public void onMetadataChanged(MediaMetadata metadata) {
+            if (mCallback != null) {
+                mCallback.onHeaderChanged();
+            }
+        }
+    };
 }
