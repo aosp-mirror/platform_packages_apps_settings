@@ -42,6 +42,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.service.persistentdata.PersistentDataBlockManager;
 import android.text.TextUtils;
 import android.util.EventLog;
 import android.util.Log;
@@ -281,7 +282,11 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         protected boolean canRunBeforeDeviceProvisioned() {
-            return false;
+            PersistentDataBlockManager pdbm = (PersistentDataBlockManager)
+                    getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+
+            // Can only run during setup if factory reset protection has already been cleared
+            return (pdbm != null && pdbm.getDataBlockSize() == 0);
         }
 
         protected Class<? extends ChooseLockGeneric.InternalActivity> getInternalActivityClass() {
