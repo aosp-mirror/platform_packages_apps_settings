@@ -46,6 +46,7 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowPersistentDataBlockManager;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -63,6 +64,7 @@ import org.robolectric.annotation.Config;
 @Config(
         shadows = {
                 ShadowLockPatternUtils.class,
+                ShadowPersistentDataBlockManager.class,
                 ShadowStorageManager.class,
                 ShadowUserManager.class,
                 ShadowUtils.class
@@ -82,11 +84,13 @@ public class ChooseLockGenericTest {
     public void tearDown() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 1);
         ShadowStorageManager.reset();
+        ShadowPersistentDataBlockManager.reset();
     }
 
     @Test
-    public void onCreate_deviceNotProvisioned_shouldFinishActivity() {
+    public void onCreate_deviceNotProvisioned_persistentDataExists_shouldFinishActivity() {
         Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        ShadowPersistentDataBlockManager.setDataBlockSize(1000);
 
         initActivity(null);
         assertThat(mActivity.isFinishing()).isTrue();
@@ -191,7 +195,18 @@ public class ChooseLockGenericTest {
     }
 
     @Test
-    public void updatePreferencesOrFinish_callingAppIsAdmin_footerInvisible() {
+    public void updatePreferencesOrFinish_callingAppIsAdmin_deviceProvisioned_footerInvisible() {
+        initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
+
+        mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
+
+        FooterPreference footer = mFragment.findPreference(KEY_LOCK_SETTINGS_FOOTER);
+        assertThat(footer.isVisible()).isFalse();
+    }
+
+    @Test
+    public void updatePreferencesOrFinish_callingAppIsAdmin_deviceNotProvisioned_footerInvisible() {
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
         initActivity(new Intent().putExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, true));
 
         mFragment.updatePreferencesOrFinish(/* isRecreatingActivity= */ false);
