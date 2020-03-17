@@ -336,7 +336,22 @@ public class FaceSettings extends DashboardFragment {
                         keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK
                                 : PREF_KEY_DELETE_FACE_DATA);
                     }
+
+                    if (!isAttentionSupported(context)) {
+                        keys.add(FaceSettingsAttentionPreferenceController.KEY);
+                    }
+
                     return keys;
+                }
+
+                private boolean isAttentionSupported(Context context) {
+                    FaceFeatureProvider featureProvider = FeatureFactory.getFactory(
+                            context).getFaceFeatureProvider();
+                    boolean isAttentionSupported = false;
+                    if (featureProvider != null) {
+                        isAttentionSupported = featureProvider.isAttentionSupported(context);
+                    }
+                    return isAttentionSupported;
                 }
             };
 }
