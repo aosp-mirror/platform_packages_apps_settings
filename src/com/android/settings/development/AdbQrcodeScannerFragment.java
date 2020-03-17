@@ -193,6 +193,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to cancel pairing");
         }
+        getActivity().setResult(Activity.RESULT_CANCELED);
         getActivity().finish();
     }
 
@@ -268,6 +269,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
                     mAdbConfig.getPreSharedKey());
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to enable QR code pairing");
+            getActivity().setResult(Activity.RESULT_CANCELED);
             getActivity().finish();
         }
     }
