@@ -51,6 +51,7 @@
         android:title="@string/manage_device_admin"
         android:fragment="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings"
         android:summary="@string/summary_placeholder"
+        settings:searchable="false"
         settings:controller="com.android.settings.enterprise.ManageDeviceAdminPreferenceController" />
 
     <Preference

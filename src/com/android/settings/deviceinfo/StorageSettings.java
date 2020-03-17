@@ -587,12 +587,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
-                    data.title = context.getString(R.string.memory_apps_usage);
-                    data.key = "storage_settings_apps_space";
-                    data.screenTitle = context.getString(R.string.storage_settings);
-                    result.add(data);
-
-                    data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_dcim_usage);
                     data.key = "storage_settings_dcim_space";
                     data.screenTitle = context.getString(R.string.storage_settings);
