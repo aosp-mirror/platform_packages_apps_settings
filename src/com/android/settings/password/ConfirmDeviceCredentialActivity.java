@@ -111,6 +111,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     });
 
     private AuthenticationCallback mAuthenticationCallback = new AuthenticationCallback() {
+        @Override
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
@@ -123,16 +124,23 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             }
         }
 
+        @Override
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
             mTrustManager.setDeviceLockedForUser(mUserId, false);
-
+            final boolean isStrongAuth = result.getAuthenticationType()
+                    == BiometricPrompt.AUTHENTICATION_RESULT_TYPE_DEVICE_CREDENTIAL;
             ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils, mUserManager,
-                    mUserId);
+                    mDevicePolicyManager, mUserId, isStrongAuth);
             ConfirmDeviceCredentialUtils.checkForPendingIntent(
                     ConfirmDeviceCredentialActivity.this);
 
             setResult(Activity.RESULT_OK);
             finish();
+        }
+
+        @Override
+        public void onAuthenticationFailed() {
+            mDevicePolicyManager.reportFailedBiometricAttempt(mUserId);
         }
     };
 
