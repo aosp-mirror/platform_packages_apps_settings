@@ -42,6 +42,7 @@ public class FakePanelContent implements PanelContent {
 
     public static final Intent INTENT = new Intent();
 
+    private CharSequence mTitle = TITLE;
     private CharSequence mSubTitle;
     private IconCompat mIcon;
     private int mViewType;
@@ -51,13 +52,13 @@ public class FakePanelContent implements PanelContent {
         return mIcon;
     }
 
+    public void setIcon(IconCompat icon) {
+        mIcon = icon;
+    }
+
     @Override
     public CharSequence getSubTitle() {
         return mSubTitle;
-    }
-
-    public void setIcon(IconCompat icon) {
-        mIcon = icon;
     }
 
     public void setSubTitle(CharSequence subTitle) {
@@ -66,7 +67,11 @@ public class FakePanelContent implements PanelContent {
 
     @Override
     public CharSequence getTitle() {
-        return TITLE;
+        return mTitle;
+    }
+
+    public void setTitle(CharSequence title) {
+        mTitle = title;
     }
 
     @Override
