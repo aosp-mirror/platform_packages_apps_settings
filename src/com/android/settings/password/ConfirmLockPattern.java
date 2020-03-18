@@ -509,7 +509,8 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (matched) {
                 if (newResult) {
                     ConfirmDeviceCredentialUtils.reportSuccessfulAttempt(mLockPatternUtils,
-                            mUserManager, mEffectiveUserId);
+                            mUserManager, mDevicePolicyManager, mEffectiveUserId,
+                            /* isStrongAuth */ true);
                 }
                 startDisappearAnimation(intent);
                 ConfirmDeviceCredentialUtils.checkForPendingIntent(getActivity());
