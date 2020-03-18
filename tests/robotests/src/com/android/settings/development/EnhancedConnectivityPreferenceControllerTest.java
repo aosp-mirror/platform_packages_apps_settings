@@ -88,20 +88,20 @@ public class EnhancedConnectivityPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsDisabled();
+    public void onDeveloperOptionsDisabled_shouldEnablePreference() {
+        mController.onDeveloperOptionsSwitchDisabled();
 
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(false);
+        verify(mPreference).setChecked(true);
 
-        assertThat(isSettingEnabled()).isFalse();
+        assertThat(isSettingEnabled()).isTrue();
     }
 
     private boolean isSettingEnabled() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ENHANCED_CONNECTIVITY_ENABLED,
-                EnhancedConnectivityPreferenceController.ENHANCED_CONNECTIVITY_OFF
-                /* default off */)
+                EnhancedConnectivityPreferenceController.ENHANCED_CONNECTIVITY_ON
+                /* default on */)
                 == EnhancedConnectivityPreferenceController.ENHANCED_CONNECTIVITY_ON;
     }
 }
