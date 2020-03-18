@@ -100,7 +100,7 @@ public class PlatformCompatDashboard extends DashboardFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         try {
-            mChanges = getPlatformCompat().listUIChanges();
+            mChanges = getPlatformCompat().listAllChanges();
         } catch (RemoteException e) {
             throw new RuntimeException("Could not list changes!", e);
         }
