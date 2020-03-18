@@ -28,8 +28,8 @@ public interface PanelContentCallback {
     void onCustomizedButtonStateChanged();
 
     /**
-     * It will be called when group content is changed. For example, to add/remove a device into
+     * It will be called when header content is changed. For example, to add/remove a device into
      * a group
      */
-    void onGroupChanged();
+    void onHeaderChanged();
 }

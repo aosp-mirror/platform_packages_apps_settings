@@ -4877,7 +4877,21 @@
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_summary"><![CDATA[Quickly zoom in on the screen to see content more clearly.<br/><br/><b>To zoom in:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Tap the screen<br/>\t3. Drag 2 fingers to move around screen<br/>\t4. Pinch with 2 fingers to adjust zoom<br/>\t5. Use shortcut to stop magnification<br/><br/><b>To zoom in temporarily:</b><br/>\t1. Use shortcut to start magnification<br/>\t2. Touch & hold anywhere on the screen<br/>\t3. Drag finger to move around screen<br/>\t4. Lift finger to stop magnification]]></string>
+    <string name="accessibility_screen_magnification_summary">
+        <![CDATA[Quickly zoom in on the screen to display content more clearly.<br/><br/>
+        <b>To zoom in:</b><br/>
+        1. Use shortcut to start magnification<br/>
+        2. Tap the screen<br/>
+        3. Drag 2 fingers to move around screen<br/>
+        4. Pinch with 2 fingers to adjust zoom<br/>
+        5. Use shortcut to stop magnification<br/><br/>
+        <b>To zoom in temporarily:</b><br/>
+        1. Use shortcut to start magnification<br/>
+        2. Touch & hold anywhere on the screen<br/>
+        3. Drag finger to move around screen<br/>
+        4. Lift finger to stop magnification
+        ]]>
+    </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, you can zoom in on your screen.\n\n<b>To zoom</b>, start magnification, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, start magnification, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Title for the Accessibility tutorial dialog in Accessibility service with button. [CHAR LIMIT=50] -->
@@ -4987,7 +5001,16 @@
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_display_inversion_preference_subtitle"><![CDATA[Color inversion turns light screens dark. This feature may be helpful for people who are sensitive to bright light.<br/><br/>Color inversion also turns dark screens light. Colors will change in media and images.<br/><br/>Note: You can also use Dark theme to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.]]></string>
+    <string name="accessibility_display_inversion_preference_subtitle">
+        <![CDATA[Color inversion turns light screens dark.<br/><br/>
+        Note:
+        <ol>
+            <li>\u00a0Color inversion also turns dark screens light.</li>
+            <li>\u00a0Colors will change in media and images.</li>
+            <li>\u00a0Dark theme can be used to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.</li>
+        </ol>
+        ]]>
+    </string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
@@ -6134,13 +6157,13 @@
     <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
     <string name="wifi_certificate">Wi\u2011Fi certificate</string>
     <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
-    <string name="ca_certificate_warning_title">Your privacy is at risk</string>
+    <string name="ca_certificate_warning_title">Your data won\u2019t be private</string>
     <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
-    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your information, such as passwords, messages, or credit card details, from websites you visit or apps you use - even if that information is encrypted.</string>
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
     <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
     <string name="certificate_warning_dont_install">Don\u2019t install</string>
     <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
-    <string name="certificate_warning_install_anyway">Install anyways</string>
+    <string name="certificate_warning_install_anyway">Install anyway</string>
     <!-- Toast message that a certificate was not installed -->
     <string name="cert_not_installed">Certificate not installed</string>
 
