@@ -426,8 +426,10 @@ public class PanelFragment extends Fragment {
         }
 
         @Override
-        public void onGroupChanged() {
+        public void onHeaderChanged() {
             ThreadUtils.postOnMainThread(() -> {
+                mTitleIcon.setImageIcon(mPanel.getIcon().toIcon(getContext()));
+                mHeaderTitle.setText(mPanel.getTitle());
                 mHeaderSubtitle.setText(mPanel.getSubTitle());
             });
         }
