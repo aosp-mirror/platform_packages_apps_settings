@@ -42,7 +42,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
         implements LifecycleObserver {
     private static final String TAG = "ContactDiscoveryPref";
     private static final Uri UCE_URI = Uri.withAppendedPath(Telephony.SimInfo.CONTENT_URI,
-            Telephony.SimInfo.COLUMN_IMS_RCS_UCE_ENABLED);
+            Telephony.SimInfo.IMS_RCS_UCE_ENABLED);
 
     private ImsManager mImsManager;
     private CarrierConfigManager mCarrierConfigManager;
