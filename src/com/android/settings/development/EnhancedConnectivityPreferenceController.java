@@ -37,7 +37,7 @@ public class EnhancedConnectivityPreferenceController extends
 
     @VisibleForTesting
     static final int ENHANCED_CONNECTIVITY_ON = 1;
-    // default is enhanced connectivity disabled.
+    // default is enhanced connectivity enabled.
     @VisibleForTesting
     static final int ENHANCED_CONNECTIVITY_OFF = 0;
 
@@ -65,7 +65,7 @@ public class EnhancedConnectivityPreferenceController extends
     public void updateState(Preference preference) {
         final int enhancedConnectivityEnabled = Settings.Global.getInt(
                 mContext.getContentResolver(), Settings.Global.ENHANCED_CONNECTIVITY_ENABLED,
-                ENHANCED_CONNECTIVITY_OFF);
+                ENHANCED_CONNECTIVITY_ON);
         ((SwitchPreference) mPreference).setChecked(
                 enhancedConnectivityEnabled == ENHANCED_CONNECTIVITY_ON);
     }
@@ -75,7 +75,7 @@ public class EnhancedConnectivityPreferenceController extends
         super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENHANCED_CONNECTIVITY_ENABLED,
-                ENHANCED_CONNECTIVITY_OFF);
-        ((SwitchPreference) mPreference).setChecked(false);
+                ENHANCED_CONNECTIVITY_ON);
+        ((SwitchPreference) mPreference).setChecked(true);
     }
 }
