@@ -433,5 +433,16 @@ public class PanelFragment extends Fragment {
                 mHeaderSubtitle.setText(mPanel.getSubTitle());
             });
         }
+
+        @Override
+        public void forceClose() {
+            mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
+            getFragmentActivity().finish();
+        }
+
+        @VisibleForTesting
+        FragmentActivity getFragmentActivity() {
+            return getActivity();
+        }
     }
 }
