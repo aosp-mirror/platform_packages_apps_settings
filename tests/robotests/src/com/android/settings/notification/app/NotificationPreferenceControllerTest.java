@@ -236,7 +236,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isBlockableSystem()).thenReturn(false);
+        when(channel.isBlockable()).thenReturn(false);
 
         mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isChannelBlockable());
@@ -247,7 +247,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isBlockableSystem()).thenReturn(false);
+        when(channel.isBlockable()).thenReturn(false);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
 
         mController.onResume(appRow, channel, null, null, null, null);
@@ -259,7 +259,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isBlockableSystem()).thenReturn(true);
+        when(channel.isBlockable()).thenReturn(true);
 
         mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isChannelBlockable());
@@ -270,7 +270,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isBlockableSystem()).thenReturn(false);
+        when(channel.isBlockable()).thenReturn(false);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
 
         mController.onResume(appRow, channel, null, null, null, null);
