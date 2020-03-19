@@ -70,6 +70,13 @@ public class BiometricFragment extends InstrumentedFragment {
             });
             cleanup();
         }
+
+        @Override
+        public void onAuthenticationFailed() {
+            mClientExecutor.execute(() -> {
+                mClientCallback.onAuthenticationFailed();
+            });
+        }
     };
 
     private final DialogInterface.OnClickListener mNegativeButtonListener =
