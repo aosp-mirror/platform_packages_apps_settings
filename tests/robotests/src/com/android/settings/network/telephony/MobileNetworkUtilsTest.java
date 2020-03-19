@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -199,14 +198,14 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void getSearchableSubscriptionId_oneActive_returnValid() {
-        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[]{SUB_ID_1});
-
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
+                Arrays.asList(mSubscriptionInfo1));
         assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext)).isEqualTo(SUB_ID_1);
     }
 
     @Test
     public void getSearchableSubscriptionId_nonActive_returnInvalid() {
-        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[0]);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(new ArrayList<>());
 
         assertThat(MobileNetworkUtils.getSearchableSubscriptionId(mContext))
                 .isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
