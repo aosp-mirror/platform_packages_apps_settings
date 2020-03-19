@@ -33,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -66,12 +67,11 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     private final Context mContext;
     private final String mPackageName;
 
-    private PanelContentCallback mCallback;
-    private boolean mIsCustomizedButtonUsed = true;
-
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
 
+    private PanelContentCallback mCallback;
+    private boolean mIsCustomizedButtonUsed = true;
     private MediaSessionManager mMediaSessionManager;
     private MediaController mMediaController;
 
@@ -253,6 +253,13 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         public void onMetadataChanged(MediaMetadata metadata) {
             if (mCallback != null) {
                 mCallback.onHeaderChanged();
+            }
+        }
+
+        @Override
+        public void onPlaybackStateChanged(PlaybackState state) {
+            if (mCallback != null && state.getState() != PlaybackState.STATE_PLAYING) {
+                mCallback.forceClose();
             }
         }
     };
