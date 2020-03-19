@@ -8628,6 +8628,30 @@
         <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
     </plurals>
 
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_work_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_work_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your work profile</string>
+
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_personal_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_personal_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your personal profile</string>
+
+    <!-- Button text. This button takes a user to the app store so they can download and
+    install the app they need. [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_app_action">Get the app</string>
+
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
 
