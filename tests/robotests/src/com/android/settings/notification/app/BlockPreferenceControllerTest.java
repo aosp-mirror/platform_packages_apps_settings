@@ -200,7 +200,7 @@ public class BlockPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        channel.setBlockableSystem(true);
+        channel.setBlockable(true);
         mController.onResume(appRow, channel, null, null, null, null);
         mController.updateState(mPreference);
         assertTrue(mSwitch.isEnabled());
