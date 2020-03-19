@@ -103,7 +103,7 @@ public class SimLockPreferenceControllerTest {
         setupMockIcc();
         final PersistableBundle pb = new PersistableBundle();
         pb.putBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL, true);
-        when(mCarrierManager.getConfig()).thenReturn(pb);
+        when(mCarrierManager.getConfigForSubId(anyInt())).thenReturn(pb);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
@@ -114,7 +114,7 @@ public class SimLockPreferenceControllerTest {
         when(mUserManager.isAdminUser()).thenReturn(true);
         setupMockIcc();
         final PersistableBundle pb = new PersistableBundle();
-        when(mCarrierManager.getConfig()).thenReturn(pb);
+        when(mCarrierManager.getConfigForSubId(anyInt())).thenReturn(pb);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
