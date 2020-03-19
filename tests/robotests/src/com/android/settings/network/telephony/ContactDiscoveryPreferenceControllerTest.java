@@ -64,7 +64,7 @@ public class ContactDiscoveryPreferenceControllerTest {
 
     private static final int TEST_SUB_ID = 2;
     private static final Uri UCE_URI = Uri.withAppendedPath(Telephony.SimInfo.CONTENT_URI,
-            Telephony.SimInfo.IMS_RCS_UCE_ENABLED);
+            Telephony.SimInfo.COLUMN_IMS_RCS_UCE_ENABLED);
 
     @Mock private ImsManager mImsManager;
     @Mock private ImsRcsManager mImsRcsManager;
