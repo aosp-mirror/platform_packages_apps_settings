@@ -93,7 +93,7 @@ public class PlatformCompatDashboardTest {
         mChanges[2] = new CompatibilityChangeInfo(3L, "Enabled_After_SDK_1_1", 1, false, false, "");
         mChanges[3] = new CompatibilityChangeInfo(4L, "Enabled_After_SDK_1_2", 1, false, false, "");
         mChanges[4] = new CompatibilityChangeInfo(5L, "Enabled_After_SDK_2", 2, false, false, "");
-        when(mPlatformCompat.listAllChanges()).thenReturn(mChanges);
+        when(mPlatformCompat.listUIChanges()).thenReturn(mChanges);
         when(mPlatformCompat.getOverrideValidator()).thenReturn(mOverrideValidator);
         // By default, allow any change
         when(mOverrideValidator.getOverrideAllowedState(anyLong(),anyString()))
