@@ -24,27 +24,26 @@ import static org.mockito.Mockito.verify;
 import android.app.settings.SettingsEnums;
 import android.os.Bundle;
 
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.wifitrackerlib.NetworkDetailsTracker;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-// TODO(b/70983952): Can't test because b/146802959, should remove @Ignore tag after it's fixed.
-@Ignore
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowConnectivityManager.class)
 public class ConfigureWifiEntryFragmentTest {
 
     private static final String KEY_SSID = "key_ssid";
     private static final String KEY_SECURITY = "key_security";
 
     private ConfigureWifiEntryFragment mConfigureWifiEntryFragment;
+
+    @Mock
+    private NetworkDetailsTracker mNetworkDetailsTracker;
 
     @Before
     public void setUp() {
@@ -55,6 +54,8 @@ public class ConfigureWifiEntryFragmentTest {
         bundle.putInt(KEY_SECURITY, 1 /* WEP */);
         mConfigureWifiEntryFragment = spy(new ConfigureWifiEntryFragment());
         mConfigureWifiEntryFragment.setArguments(bundle);
+        mConfigureWifiEntryFragment.mNetworkDetailsTracker = mNetworkDetailsTracker;
+
         FragmentController.setupFragment(mConfigureWifiEntryFragment);
     }
 
