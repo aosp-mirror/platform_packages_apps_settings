@@ -41,7 +41,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -79,7 +78,6 @@ public class WifiScanningRequiredFragmentTest {
     }
 
     @Test
-    @Ignore
     public void onClick_positiveButtonSetsWifiScanningOn()
             throws Settings.SettingNotFoundException {
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);

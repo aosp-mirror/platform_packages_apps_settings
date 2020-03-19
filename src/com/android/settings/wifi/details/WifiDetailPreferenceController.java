@@ -1049,7 +1049,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 public void onFailure(int reason) {
                     Activity activity = mFragment.getActivity();
                     if (activity != null) {
-                        Toast.makeText(activity,
+                        Toast.makeText(mContext,
                                 R.string.wifi_failed_save_message,
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -1090,7 +1090,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         final Activity activity = mFragment.getActivity();
         // error handling, connected/saved network should have mWifiConfig.
         if (mWifiConfig == null) {
-            Toast.makeText(activity,
+            Toast.makeText(mContext,
                     R.string.wifi_failed_connect_message,
                     Toast.LENGTH_SHORT).show();
             return;
@@ -1116,7 +1116,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 if (state == STATE_ENABLE_WIFI) {
                     Log.d(TAG, "Turn on Wi-Fi automatically!");
                     updateConnectedButton(STATE_ENABLE_WIFI);
-                    Toast.makeText(activity,
+                    Toast.makeText(mContext,
                             R.string.wifi_turned_on_message,
                             Toast.LENGTH_SHORT).show();
                     mWifiManager.setWifiEnabled(true);
@@ -1137,7 +1137,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     stopTimer();
                     // reset state
                     state = STATE_NONE;
-                    Toast.makeText(activity,
+                    Toast.makeText(mContext,
                             R.string.wifi_failed_connect_message,
                             Toast.LENGTH_SHORT).show();
                     updateConnectedButton(STATE_ENABLE_WIFI_FAILED);
@@ -1159,7 +1159,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     Log.d(TAG, "connected");
                     stopTimer();
                     updateConnectedButton(STATE_CONNECTED);
-                    Toast.makeText(activity,
+                    Toast.makeText(mContext,
                             mContext.getString(R.string.wifi_connected_to_message,
                                     mAccessPoint.getTitle()),
                             Toast.LENGTH_SHORT).show();
@@ -1170,7 +1170,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     stopTimer();
                     // reset state
                     state = STATE_NONE;
-                    Toast.makeText(activity,
+                    Toast.makeText(mContext,
                             R.string.wifi_not_in_range_message,
                             Toast.LENGTH_SHORT).show();
                     updateConnectedButton(STATE_NOT_IN_RANGE);
@@ -1179,7 +1179,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                     stopTimer();
                     // reset state
                     state = STATE_NONE;
-                    Toast.makeText(activity,
+                    Toast.makeText(mContext,
                             R.string.wifi_failed_connect_message,
                             Toast.LENGTH_SHORT).show();
                     updateConnectedButton(STATE_FAILED);
