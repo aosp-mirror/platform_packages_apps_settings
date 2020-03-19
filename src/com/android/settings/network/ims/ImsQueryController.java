@@ -20,6 +20,7 @@ import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.ImsMmTelManager;
+import android.telephony.ims.feature.ImsFeature;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 
@@ -83,5 +84,21 @@ abstract class ImsQueryController {
     @VisibleForTesting
     boolean isProvisionedOnDevice(int subId) {
         return (new ImsQueryProvisioningStat(subId, mCapability, mTech)).query();
+    }
+
+    @VisibleForTesting
+    boolean isServiceStateReady(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
+
+        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(subId);
+        // TODO: have a shared thread pool instead of create ExecutorService
+        //       everytime to improve performance.
+        final ExecutorService executor = Executors.newSingleThreadExecutor();
+        final IntegerConsumer intResult = new IntegerConsumer();
+        imsMmTelManager.getFeatureState(executor, intResult);
+        return (intResult.get(TIMEOUT_MILLIS) == ImsFeature.STATE_READY);
     }
 }
