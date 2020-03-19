@@ -100,6 +100,10 @@ public class UseOpenWifiPreferenceController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // It is possible that mEnableUseWifiComponentName is no longer enabled by
+        // USE_OPEN_WIFI_PACKAGE. So update this component to reflect correct availability.
+        updateEnableUseWifiComponentName();
+        checkForFeatureSupportedScorers();
         return mDoFeatureSupportedScorersExist ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
