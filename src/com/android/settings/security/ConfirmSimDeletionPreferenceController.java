@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.app.KeyguardManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -26,19 +27,23 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /** Enable/disable user confirmation before deleting an eSim */
 public class ConfirmSimDeletionPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener{
     public static final String KEY_CONFIRM_SIM_DELETION = "confirm_sim_deletion";
     private boolean mConfirmationDefaultOn;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public ConfirmSimDeletionPreferenceController(Context context, String key) {
         super(context, key);
         mConfirmationDefaultOn =
                 context.getResources()
                         .getBoolean(R.bool.config_sim_deletion_confirmation_default_on);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -72,11 +77,15 @@ public class ConfirmSimDeletionPreferenceController extends BasePreferenceContro
             return false;
         }
         if (!isChecked()) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_CONFIRM_SIM_DELETION_ON);
             setChecked(true);
             return true;
         } else {
             // prevent disabling the feature until authorized
             WifiDppUtils.showLockScreen(mContext, () -> {
+                mMetricsFeatureProvider.action(mContext,
+                        SettingsEnums.ACTION_CONFIRM_SIM_DELETION_OFF);
                 // set data
                 setChecked(false);
                 // set UI
