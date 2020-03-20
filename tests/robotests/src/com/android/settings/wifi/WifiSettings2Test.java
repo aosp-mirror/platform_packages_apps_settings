@@ -280,4 +280,24 @@ public class WifiSettings2Test {
 
         verify(mWifiSettings2, times(1)).startActivityForResult(any(), anyInt());
     }
+
+    @Test
+    public void onNumSavedNetworksChanged_isFinishing_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.isFinishing()).thenReturn(true);
+        when(mWifiSettings2.getActivity()).thenReturn(activity);
+        when(mWifiSettings2.getContext()).thenReturn(null);
+
+        mWifiSettings2.onNumSavedNetworksChanged();
+    }
+
+    @Test
+    public void onNumSavedSubscriptionsChanged_isFinishing_ShouldNotCrash() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.isFinishing()).thenReturn(true);
+        when(mWifiSettings2.getActivity()).thenReturn(activity);
+        when(mWifiSettings2.getContext()).thenReturn(null);
+
+        mWifiSettings2.onNumSavedSubscriptionsChanged();
+    }
 }

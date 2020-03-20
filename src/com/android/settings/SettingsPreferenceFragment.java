@@ -699,4 +699,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
         getActivity().setResult(result);
     }
+
+    protected boolean isFinishingOrDestroyed() {
+        final Activity activity = getActivity();
+        return activity == null || activity.isFinishing() || activity.isDestroyed();
+    }
 }
