@@ -109,7 +109,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             profilePref.setChecked(profile.getConnectionStatus(device) ==
                     BluetoothProfile.STATE_CONNECTED);
         } else {
-            profilePref.setChecked(profile.isPreferred(device));
+            profilePref.setChecked(profile.isEnabled(device));
         }
 
         if (profile instanceof A2dpProfile) {
@@ -117,7 +117,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             SwitchPreference highQualityPref = (SwitchPreference) mProfilesContainer.findPreference(
                     HIGH_QUALITY_AUDIO_PREF_TAG);
             if (highQualityPref != null) {
-                if (a2dp.isPreferred(device) && a2dp.supportsHighQualityAudio(device)) {
+                if (a2dp.isEnabled(device) && a2dp.supportsHighQualityAudio(device)) {
                     highQualityPref.setVisible(true);
                     highQualityPref.setTitle(a2dp.getHighQualityAudioOptionLabel(device));
                     highQualityPref.setChecked(a2dp.isHighQualityAudioEnabled(device));
@@ -142,8 +142,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         if (profile instanceof MapProfile) {
             bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_ALLOWED);
         }
-        profile.setPreferred(bluetoothDevice, true);
-        mCachedDevice.connectProfile(profile);
+        profile.setEnabled(bluetoothDevice, true);
     }
 
     /**
@@ -151,8 +150,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     private void disableProfile(LocalBluetoothProfile profile) {
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
-        mCachedDevice.disconnect(profile);
-        profile.setPreferred(bluetoothDevice, false);
+        profile.setEnabled(bluetoothDevice, false);
         if (profile instanceof MapProfile) {
             bluetoothDevice.setMessageAccessPermission(BluetoothDevice.ACCESS_REJECTED);
         } else if (profile instanceof PbapServerProfile) {

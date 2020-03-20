@@ -127,7 +127,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
                 return mContext.getString(R.string.no_data_usage);
             }
             return mContext.getString(R.string.data_summary_format,
-                    Formatter.formatFileSize(mContext, totalBytes),
+                    Formatter.formatFileSize(mContext, totalBytes, Formatter.FLAG_IEC_UNITS),
                     DateUtils.formatDateTime(mContext, startTime,
                             DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH));
         }

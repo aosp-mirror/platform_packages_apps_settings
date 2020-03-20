@@ -86,7 +86,8 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                 final SubscriptionInfo currentSubInfo =
                         mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
                 final SubscriptionInfo nextSubInfo =
-                        mSubscriptionManager.getDefaultDataSubscriptionInfo();
+                        mSubscriptionManager.getActiveSubscriptionInfo(
+                                mSubscriptionManager.getDefaultDataSubscriptionId());
 
                 final String previousName = (nextSubInfo == null)
                         ? getContext().getResources().getString(

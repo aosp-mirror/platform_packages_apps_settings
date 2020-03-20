@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.net.IConnectivityManager;
+import android.net.VpnManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -145,7 +146,8 @@ public class AppDialogFragment extends InstrumentedDialogFragment implements App
         }
         final int userId = getUserId();
         try {
-            mService.setVpnPackageAuthorization(mPackageInfo.packageName, userId, false);
+            mService.setVpnPackageAuthorization(
+                    mPackageInfo.packageName, userId, VpnManager.TYPE_VPN_NONE);
             onDisconnect(dialog);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to forget authorization of " + mPackageInfo.packageName +

@@ -68,6 +68,9 @@ public class WifiQrCode {
     public static final String SECURITY_WEP = "WEP";
     public static final String SECURITY_WPA_PSK = "WPA";
     public static final String SECURITY_SAE = "SAE";
+    // Adb QR code pairing is in the following format:
+    // WIFI:T:ADB;S:myname;P:mypass;;
+    public static final String SECURITY_ADB = "ADB";
 
     private String mQrCode;
 

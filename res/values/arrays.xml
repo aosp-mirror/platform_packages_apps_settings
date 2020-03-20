@@ -100,6 +100,14 @@
         <item>1800000</item>
     </string-array>
 
+    <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
+    <string-array name="dark_ui_scheduler_preference_titles">
+        <!-- 1: None -->
+        <item>@string/dark_ui_auto_mode_never</item>
+        <!-- 2: Auto -->
+        <item>@string/dark_ui_auto_mode_auto</item>
+    </string-array>
+
     <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
@@ -457,10 +465,6 @@
         <item>1xRTT</item>
         <item>IS95B</item>
         <item>IS95A</item>
-        <item>GSM</item>
-        <item>TD_SCDMA</item>
-        <item>IWLAN</item>
-        <item>LTE_CA</item>
         <item>NR</item>
     </string-array>
 
@@ -497,14 +501,6 @@
         <item>5</item>
         <!-- Do not translate. -->
         <item>4</item>
-        <!-- Do not translate. -->
-        <item>16</item>
-        <!-- Do not translate. -->
-        <item>17</item>
-        <!-- Do not translate. -->
-        <item>18</item>
-        <!-- Do not translate. -->
-        <item>19</item>
         <!-- Do not translate. -->
         <item>20</item>
     </string-array>
@@ -924,6 +920,9 @@
         <item>IPSec Xauth PSK</item>
         <item>IPSec Xauth RSA</item>
         <item>IPSec Hybrid RSA</item>
+        <item>IKEv2/IPSec MSCHAPv2</item>
+        <item>IKEv2/IPSec PSK</item>
+        <item>IKEv2/IPSec RSA</item>
     </string-array>
 
     <!-- Match this with the constants in VpnProfile. --> <skip />
@@ -935,6 +934,9 @@
         <item>IPSec VPN with pre-shared keys and Xauth authentication</item>
         <item>IPSec VPN with certificates and Xauth authentication</item>
         <item>IPSec VPN with certificates and hybrid authentication</item>
+        <item>IKEv2/IPSec VPN with certificates and username/password authentication</item>
+        <item>IKEv2/IPSec VPN with pre-shared keys</item>
+        <item>IKEv2/IPSec VPN with certificates</item>
     </string-array>
 
     <!-- VPN proxy settings. -->

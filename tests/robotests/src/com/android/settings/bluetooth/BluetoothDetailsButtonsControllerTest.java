@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -103,7 +102,7 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
         verify(mButtonsPref).setButton2Text(R.string.bluetooth_device_context_connect);
 
         mConnectButton.callOnClick();
-        verify(mCachedDevice).connect(eq(true));
+        verify(mCachedDevice).connect();
     }
 
     @Test
@@ -119,7 +118,7 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
 
         // Click the button and make sure that connect (not disconnect) gets called.
         mConnectButton.callOnClick();
-        verify(mCachedDevice).connect(eq(true));
+        verify(mCachedDevice).connect();
     }
 
     @Test

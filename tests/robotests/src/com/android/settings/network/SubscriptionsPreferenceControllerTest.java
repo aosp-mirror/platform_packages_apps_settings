@@ -29,6 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -63,6 +64,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 
@@ -107,7 +109,7 @@ public class SubscriptionsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
@@ -257,14 +259,14 @@ public class SubscriptionsPreferenceControllerTest {
      */
     private void runPreferenceClickTest(final int subscriptionCount, final int selectedPrefIndex) {
         final List<SubscriptionInfo> subs = setupMockSubscriptions(subscriptionCount);
-        mController.displayPreference(mScreen);
         final ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
+        mController.displayPreference(mScreen);
         verify(mPreferenceCategory, times(subscriptionCount)).addPreference(prefCaptor.capture());
         final List<Preference> prefs = prefCaptor.getAllValues();
         final Preference pref = prefs.get(selectedPrefIndex);
-        pref.getOnPreferenceClickListener().onPreferenceClick(pref);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        verify(mContext).startActivity(intentCaptor.capture());
+        doNothing().when(mContext).startActivity(intentCaptor.capture());
+        pref.getOnPreferenceClickListener().onPreferenceClick(pref);
         final Intent intent = intentCaptor.getValue();
         assertThat(intent).isNotNull();
         assertThat(intent.hasExtra(Settings.EXTRA_SUB_ID)).isTrue();

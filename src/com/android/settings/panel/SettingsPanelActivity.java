@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.core.HideNonSystemOverlayMixin;
 
 /**
  * Dialog Activity to host Settings Slices.
@@ -62,6 +63,7 @@ public class SettingsPanelActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createOrUpdatePanel(true /* shouldForceCreation */);
+        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
     }
 
     @Override
