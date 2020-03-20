@@ -16,6 +16,7 @@
 
 package com.android.settings.vpn2;
 
+import static android.app.AppOpsManager.OP_ACTIVATE_PLATFORM_VPN;
 import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 import android.annotation.UiThread;
@@ -522,7 +523,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         // Fetch VPN-enabled apps from AppOps.
         AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        List<AppOpsManager.PackageOps> apps = aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN});
+        List<AppOpsManager.PackageOps> apps =
+                aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         if (apps != null) {
             for (AppOpsManager.PackageOps pkg : apps) {
                 int userId = UserHandle.getUserId(pkg.getUid());
@@ -533,8 +535,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 // Look for a MODE_ALLOWED permission to activate VPN.
                 boolean allowed = false;
                 for (AppOpsManager.OpEntry op : pkg.getOps()) {
-                    if (op.getOp() == OP_ACTIVATE_VPN &&
-                            op.getMode() == AppOpsManager.MODE_ALLOWED) {
+                    if ((op.getOp() == OP_ACTIVATE_VPN || op.getOp() == OP_ACTIVATE_PLATFORM_VPN)
+                            && op.getMode() == AppOpsManager.MODE_ALLOWED) {
                         allowed = true;
                     }
                 }

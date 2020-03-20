@@ -38,6 +38,8 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
+import android.telephony.PhoneStateListener;
+import android.telephony.PreciseDataConnectionState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -52,9 +54,6 @@ import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.telephony.PhoneConstants;
-import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -108,13 +107,13 @@ public class ApnSettings extends RestrictedSettingsFragment
     private static boolean mRestoreDefaultApnMode;
 
     private UserManager mUserManager;
+    private TelephonyManager mTelephonyManager;
     private RestoreApnUiHandler mRestoreApnUiHandler;
     private RestoreApnProcessHandler mRestoreApnProcessHandler;
     private HandlerThread mRestoreDefaultApnThread;
     private SubscriptionInfo mSubscriptionInfo;
     private int mSubId;
     private int mPhoneId;
-    private UiccController mUiccController;
     private String mMvnoType;
     private String mMvnoMatchData;
 
@@ -132,46 +131,59 @@ public class ApnSettings extends RestrictedSettingsFragment
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(
-                    TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED)) {
-                PhoneConstants.DataState state = getMobileDataState(intent);
-                switch (state) {
-                case CONNECTED:
-                    if (!mRestoreDefaultApnMode) {
-                        fillList();
-                    } else {
-                        showDialog(DIALOG_RESTORE_DEFAULTAPN);
-                    }
-                    break;
-                }
-            } else if(intent.getAction().equals(
-                    TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
+        public void onPreciseDataConnectionStateChanged(
+                PreciseDataConnectionState dataConnectionState) {
+            if (dataConnectionState.getState() == TelephonyManager.DATA_CONNECTED) {
                 if (!mRestoreDefaultApnMode) {
-                    int extraSubId = intent.getIntExtra(TelephonyManager.EXTRA_SUBSCRIPTION_ID,
-                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                    if (SubscriptionManager.isValidSubscriptionId(extraSubId) &&
-                            mPhoneId == SubscriptionManager.getPhoneId(extraSubId) &&
-                            extraSubId != mSubId) {
-                        // subscription has changed
-                        mSubId = extraSubId;
-                        mSubscriptionInfo = getSubscriptionInfo(mSubId);
-                    }
                     fillList();
+                } else {
+                    showDialog(DIALOG_RESTORE_DEFAULTAPN);
                 }
             }
         }
     };
 
-    private static PhoneConstants.DataState getMobileDataState(Intent intent) {
-        String str = intent.getStringExtra(PhoneConstants.STATE_KEY);
-        if (str != null) {
-            return Enum.valueOf(PhoneConstants.DataState.class, str);
-        } else {
-            return PhoneConstants.DataState.DISCONNECTED;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(
+                    TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED)) {
+                if (mRestoreDefaultApnMode) {
+                    return;
+                }
+                final int extraSubId = intent.getIntExtra(TelephonyManager.EXTRA_SUBSCRIPTION_ID,
+                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                if (SubscriptionManager.isValidSubscriptionId(extraSubId)
+                        && mPhoneId == SubscriptionUtil.getPhoneId(context, extraSubId)
+                        && extraSubId != mSubId) {
+                    // subscription has changed
+                    mSubId = extraSubId;
+                    mSubscriptionInfo = getSubscriptionInfo(mSubId);
+                    restartPhoneStateListener(mSubId);
+                }
+                fillList();
+            }
         }
+    };
+
+    private void restartPhoneStateListener(int subId) {
+        if (mRestoreDefaultApnMode) {
+            return;
+        }
+
+        final TelephonyManager updatedTelephonyManager =
+                mTelephonyManager.createForSubscriptionId(subId);
+
+        // restart monitoring when subscription has been changed
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_NONE);
+
+        mTelephonyManager = updatedTelephonyManager;
+
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_PRECISE_DATA_CONNECTION_STATE);
     }
 
     @Override
@@ -185,23 +197,22 @@ public class ApnSettings extends RestrictedSettingsFragment
         final Activity activity = getActivity();
         mSubId = activity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mPhoneId = SubscriptionManager.getPhoneId(mSubId);
+        mPhoneId = SubscriptionUtil.getPhoneId(activity, mSubId);
         mIntentFilter = new IntentFilter(
-                TelephonyIntents.ACTION_ANY_DATA_CONNECTION_STATE_CHANGED);
-        mIntentFilter.addAction(TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
+                TelephonyManager.ACTION_SUBSCRIPTION_CARRIER_IDENTITY_CHANGED);
 
         setIfOnlyAvailableForAdmins(true);
 
         mSubscriptionInfo = getSubscriptionInfo(mSubId);
-        mUiccController = UiccController.getInstance();
+        mTelephonyManager = activity.getSystemService(TelephonyManager.class);
 
-        CarrierConfigManager configManager = (CarrierConfigManager)
+        final CarrierConfigManager configManager = (CarrierConfigManager)
                 getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        PersistableBundle b = configManager.getConfigForSubId(mSubId);
+        final PersistableBundle b = configManager.getConfigForSubId(mSubId);
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
         if (mAllowAddingApns) {
-            String[] readOnlyApnTypes = b.getStringArray(
+            final String[] readOnlyApnTypes = b.getStringArray(
                     CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
             // if no apn type can be edited, do not allow adding APNs
             if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
@@ -238,6 +249,8 @@ public class ApnSettings extends RestrictedSettingsFragment
 
         getActivity().registerReceiver(mReceiver, mIntentFilter);
 
+        restartPhoneStateListener(mSubId);
+
         if (!mRestoreDefaultApnMode) {
             fillList();
         }
@@ -252,6 +265,9 @@ public class ApnSettings extends RestrictedSettingsFragment
         }
 
         getActivity().unregisterReceiver(mReceiver);
+
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_NONE);
     }
 
     @Override
@@ -283,36 +299,37 @@ public class ApnSettings extends RestrictedSettingsFragment
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         final Uri simApnUri = Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI,
                 String.valueOf(subId));
-        StringBuilder where = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
+        final StringBuilder where =
+                new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
 
         if (mHideImsApn) {
             where.append(" AND NOT (type='ims')");
         }
 
-        Cursor cursor = getContentResolver().query(simApnUri,
+        final Cursor cursor = getContentResolver().query(simApnUri,
                 CARRIERS_PROJECTION, where.toString(), null,
                 Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         if (cursor != null) {
-            PreferenceGroup apnPrefList = (PreferenceGroup) findPreference("apn_list");
+            final PreferenceGroup apnPrefList = (PreferenceGroup) findPreference("apn_list");
             apnPrefList.removeAll();
 
-            ArrayList<ApnPreference> apnList = new ArrayList<ApnPreference>();
-            ArrayList<ApnPreference> mmsApnList = new ArrayList<ApnPreference>();
+            final ArrayList<ApnPreference> apnList = new ArrayList<ApnPreference>();
+            final ArrayList<ApnPreference> mmsApnList = new ArrayList<ApnPreference>();
 
             mSelectedKey = getSelectedApnKey();
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
-                String name = cursor.getString(NAME_INDEX);
-                String apn = cursor.getString(APN_INDEX);
-                String key = cursor.getString(ID_INDEX);
-                String type = cursor.getString(TYPES_INDEX);
-                int edited = cursor.getInt(EDITED_INDEX);
+                final String name = cursor.getString(NAME_INDEX);
+                final String apn = cursor.getString(APN_INDEX);
+                final String key = cursor.getString(ID_INDEX);
+                final String type = cursor.getString(TYPES_INDEX);
+                final int edited = cursor.getInt(EDITED_INDEX);
                 mMvnoType = cursor.getString(MVNO_TYPE_INDEX);
                 mMvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
 
-                ApnPreference pref = new ApnPreference(getPrefContext());
+                final ApnPreference pref = new ApnPreference(getPrefContext());
 
                 pref.setKey(key);
                 pref.setTitle(name);
@@ -325,7 +342,7 @@ public class ApnSettings extends RestrictedSettingsFragment
                     pref.setSummary(apn);
                 }
 
-                boolean selectable = ((type == null) || !type.equals("mms"));
+                final boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
                 if (selectable) {
                     if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
@@ -380,10 +397,11 @@ public class ApnSettings extends RestrictedSettingsFragment
     }
 
     private void addNewApn() {
-        Intent intent = new Intent(Intent.ACTION_INSERT, Telephony.Carriers.CONTENT_URI);
-        int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
+        final Intent intent = new Intent(Intent.ACTION_INSERT, Telephony.Carriers.CONTENT_URI);
+        final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         intent.putExtra(SUB_ID, subId);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         if (!TextUtils.isEmpty(mMvnoType) && !TextUtils.isEmpty(mMvnoMatchData)) {
             intent.putExtra(MVNO_TYPE, mMvnoType);
             intent.putExtra(MVNO_MATCH_DATA, mMvnoMatchData);
@@ -405,9 +423,9 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     private void setSelectedApnKey(String key) {
         mSelectedKey = key;
-        ContentResolver resolver = getContentResolver();
+        final ContentResolver resolver = getContentResolver();
 
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(APN_ID, mSelectedKey);
         resolver.update(getUriForCurrSubId(PREFERAPN_URI), values, null, null);
     }
@@ -415,7 +433,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     private String getSelectedApnKey() {
         String key = null;
 
-        Cursor cursor = getContentResolver().query(getUriForCurrSubId(PREFERAPN_URI),
+        final Cursor cursor = getContentResolver().query(getUriForCurrSubId(PREFERAPN_URI),
                 new String[] {"_id"}, null, null, Telephony.Carriers.DEFAULT_SORT_ORDER);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -449,7 +467,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     // Append subId to the Uri
     private Uri getUriForCurrSubId(Uri uri) {
-        int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
+        final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
                 : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
             return Uri.withAppendedPath(uri, "subId/" + String.valueOf(subId));
@@ -463,7 +481,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_RESTORE_DEFAULTAPN_COMPLETE:
-                    Activity activity = getActivity();
+                    final Activity activity = getActivity();
                     if (activity == null) {
                         mRestoreDefaultApnMode = false;
                         return;
@@ -494,7 +512,7 @@ public class ApnSettings extends RestrictedSettingsFragment
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_RESTORE_DEFAULTAPN_START:
-                    ContentResolver resolver = getContentResolver();
+                    final ContentResolver resolver = getContentResolver();
                     resolver.delete(getUriForCurrSubId(DEFAULTAPN_URI), null, null);
                     mRestoreApnUiHandler
                         .sendEmptyMessage(EVENT_RESTORE_DEFAULTAPN_COMPLETE);
@@ -506,7 +524,7 @@ public class ApnSettings extends RestrictedSettingsFragment
     @Override
     public Dialog onCreateDialog(int id) {
         if (id == DIALOG_RESTORE_DEFAULTAPN) {
-            ProgressDialog dialog = new ProgressDialog(getActivity()) {
+            final ProgressDialog dialog = new ProgressDialog(getActivity()) {
                 public boolean onTouchEvent(MotionEvent event) {
                     return true;
                 }

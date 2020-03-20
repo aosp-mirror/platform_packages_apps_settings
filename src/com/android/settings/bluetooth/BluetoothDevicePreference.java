@@ -218,7 +218,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             metricsFeatureProvider.action(context,
                     SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT);
-            mCachedDevice.connect(true);
+            mCachedDevice.connect();
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             metricsFeatureProvider.action(context,
                     SettingsEnums.ACTION_SETTINGS_BLUETOOTH_PAIR);

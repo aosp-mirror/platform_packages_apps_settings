@@ -95,6 +95,17 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
+    private final View.OnLayoutChangeListener mLayoutChangeListener =
+            new View.OnLayoutChangeListener() {
+                @Override
+                public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                    // Remove the listener once the callback is triggered.
+                    mPreviewViewport.removeOnLayoutChangeListener(this);
+                    refreshPreviewText();
+                }
+            };
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_CAPTION_PROPERTIES;
@@ -192,9 +203,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         mPreviewWindow = captionPreview.findViewById(R.id.preview_window);
 
         mPreviewViewport = captionPreview.findViewById(R.id.preview_viewport);
-        mPreviewViewport.addOnLayoutChangeListener(
-                (v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom)
-                        -> refreshPreviewText());
+        mPreviewViewport.addOnLayoutChangeListener(mLayoutChangeListener);
 
         final Resources res = getResources();
         final int[] presetValues = res.getIntArray(R.array.captioning_preset_selector_values);

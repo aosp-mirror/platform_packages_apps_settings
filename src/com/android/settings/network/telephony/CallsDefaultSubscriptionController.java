@@ -28,7 +28,7 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     protected SubscriptionInfo getDefaultSubscriptionInfo() {
-        return mManager.getDefaultVoiceSubscriptionInfo();
+        return mManager.getActiveSubscriptionInfo(getDefaultSubscriptionId());
     }
 
     @Override
@@ -38,6 +38,6 @@ public class CallsDefaultSubscriptionController extends DefaultSubscriptionContr
 
     @Override
     protected void setDefaultSubscription(int subscriptionId) {
-        mManager.setDefaultVoiceSubId(subscriptionId);
+        mManager.setDefaultVoiceSubscriptionId(subscriptionId);
     }
 }

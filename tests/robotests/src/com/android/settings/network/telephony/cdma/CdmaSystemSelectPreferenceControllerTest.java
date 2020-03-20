@@ -33,6 +33,8 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceManager;
 
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -118,7 +120,7 @@ public class CdmaSystemSelectPreferenceControllerTest {
                 mTelephonyManager).getCdmaRoamingMode();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
-                TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA);
+                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
 
         mController.updateState(mPreference);
 

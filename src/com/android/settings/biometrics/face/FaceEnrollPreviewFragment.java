@@ -18,6 +18,7 @@ package com.android.settings.biometrics.face;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.Matrix;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -316,14 +317,19 @@ public class FaceEnrollPreviewFragment extends InstrumentedPreferenceFragment
         scaleX = scaleX / smaller;
         scaleY = scaleY / smaller;
 
-        // Apply the transformation/scale
-        mTextureView.setTranslationX(getResources().getDimension(R.dimen.face_preview_translate_x));
-        mTextureView.setTranslationY(getResources().getDimension(R.dimen.face_preview_translate_y));
-
+        final TypedValue tx = new TypedValue();
+        final TypedValue ty = new TypedValue();
         final TypedValue scale = new TypedValue();
+        getResources().getValue(R.dimen.face_preview_translate_x, tx, true /* resolveRefs */);
+        getResources().getValue(R.dimen.face_preview_translate_y, ty, true /* resolveRefs */);
         getResources().getValue(R.dimen.face_preview_scale, scale, true /* resolveRefs */);
-        mTextureView.setScaleX(scaleX * scale.getFloat());
-        mTextureView.setScaleY(scaleY * scale.getFloat());
+
+        // Apply the transformation/scale
+        final Matrix transform = new Matrix();
+        mTextureView.getTransform(transform);
+        transform.setScale(scaleX * scale.getFloat(), scaleY * scale.getFloat());
+        transform.postTranslate(tx.getFloat(), ty.getFloat());
+        mTextureView.setTransform(transform);
     }
 
     private void closeCamera() {

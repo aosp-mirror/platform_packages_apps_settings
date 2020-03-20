@@ -176,8 +176,7 @@ public class SimDialogActivity extends FragmentActivity {
         final TelephonyManager telephonyManager = getSystemService(TelephonyManager.class);
 
         for (PhoneAccountHandle handle : telecomManager.getCallCapablePhoneAccounts()) {
-            final PhoneAccount phoneAccount = telecomManager.getPhoneAccount(handle);
-            if (subId == telephonyManager.getSubIdForPhoneAccount(phoneAccount)) {
+            if (subId == telephonyManager.getSubscriptionId(handle)) {
                 return handle;
             }
         }

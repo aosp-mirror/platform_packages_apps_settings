@@ -47,8 +47,6 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.ims.ImsManager;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.network.ApnSettings;
@@ -104,15 +102,16 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             p2pFactoryReset(mContext);
 
             TelephonyManager telephonyManager = (TelephonyManager)
-                    mContext.getSystemService(Context.TELEPHONY_SERVICE);
+                    mContext.getSystemService(TelephonyManager.class)
+                            .createForSubscriptionId(mSubId);
             if (telephonyManager != null) {
-                telephonyManager.factoryReset(mSubId);
+                telephonyManager.resetSettings();
             }
 
             NetworkPolicyManager policyManager = (NetworkPolicyManager)
                     mContext.getSystemService(Context.NETWORK_POLICY_SERVICE);
             if (policyManager != null) {
-                String subscriberId = telephonyManager.getSubscriberId(mSubId);
+                String subscriberId = telephonyManager.getSubscriberId();
                 policyManager.factoryReset(subscriberId);
             }
 
@@ -125,8 +124,6 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 }
             }
 
-            ImsManager.getInstance(mContext,
-                    SubscriptionManager.getPhoneId(mSubId)).factoryReset();
             restoreDefaultApn(mContext);
             if (mEraseEsim) {
                 return RecoverySystem.wipeEuiccData(mContext, mPackageName);
@@ -201,7 +198,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     private void restoreDefaultApn(Context context) {
         Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
 
-        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+        if (SubscriptionManager.isUsableSubscriptionId(mSubId)) {
             uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
         }
 
@@ -252,7 +249,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
 
         Bundle args = getArguments();
         if (args != null) {
-            mSubId = args.getInt(PhoneConstants.SUBSCRIPTION_KEY,
+            mSubId = args.getInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
             mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
         }

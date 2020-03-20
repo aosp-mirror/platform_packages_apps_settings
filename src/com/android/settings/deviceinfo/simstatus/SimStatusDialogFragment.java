@@ -74,6 +74,12 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         return builder.setView(mRootView).create();
     }
 
+    @Override
+    public void onDestroy() {
+        mController.deinitialize();
+        super.onDestroy();
+    }
+
     public void removeSettingFromScreen(int viewId) {
         final View view = mRootView.findViewById(viewId);
         if (view != null) {

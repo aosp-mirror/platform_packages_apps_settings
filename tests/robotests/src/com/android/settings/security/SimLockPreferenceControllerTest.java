@@ -21,7 +21,6 @@ import static android.telephony.TelephonyManager.SIM_STATE_READY;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -104,7 +103,7 @@ public class SimLockPreferenceControllerTest {
         setupMockIcc();
         final PersistableBundle pb = new PersistableBundle();
         pb.putBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL, true);
-        when(mCarrierManager.getConfig()).thenReturn(pb);
+        when(mCarrierManager.getConfigForSubId(anyInt())).thenReturn(pb);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
@@ -115,7 +114,7 @@ public class SimLockPreferenceControllerTest {
         when(mUserManager.isAdminUser()).thenReturn(true);
         setupMockIcc();
         final PersistableBundle pb = new PersistableBundle();
-        when(mCarrierManager.getConfig()).thenReturn(pb);
+        when(mCarrierManager.getConfigForSubId(anyInt())).thenReturn(pb);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -141,8 +140,9 @@ public class SimLockPreferenceControllerTest {
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
-        when(mTelephonyManager.hasIccCard(anyInt())).thenReturn(true);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true)))
+        when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.hasIccCard()).thenReturn(true);
+        when(mSubscriptionManager.getActiveSubscriptionInfoList())
                 .thenReturn(subscriptionInfoList);
     }
 
@@ -151,7 +151,7 @@ public class SimLockPreferenceControllerTest {
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
         when(mTelephonyManager.getSimState(anyInt())).thenReturn(SIM_STATE_READY);
-        when(mSubscriptionManager.getActiveSubscriptionInfoList(eq(true)))
+        when(mSubscriptionManager.getActiveSubscriptionInfoList())
                 .thenReturn(subscriptionInfoList);
     }
 }

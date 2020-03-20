@@ -21,11 +21,10 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -38,7 +37,6 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.PhoneConstants;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -47,8 +45,8 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataServiceSetupPreferenceControllerTest {
@@ -72,7 +70,7 @@ public class DataServiceSetupPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(Robolectric.setupActivity(Activity.class));
+        mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
@@ -92,7 +90,7 @@ public class DataServiceSetupPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_allConfigOn_returnAvailable() {
-        doReturn(PhoneConstants.LTE_ON_CDMA_TRUE).when(mTelephonyManager).getLteOnCdmaMode();
+        doReturn(true).when(mTelephonyManager).isGlobalModeEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
@@ -103,7 +101,7 @@ public class DataServiceSetupPreferenceControllerTest {
     public void getAvailabilityStatus_missUrl_returnUnavailable() {
         Settings.Global.putString(mContext.getContentResolver(),
                 Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL, "");
-        doReturn(PhoneConstants.LTE_ON_CDMA_TRUE).when(mTelephonyManager).getLteOnCdmaMode();
+        doReturn(true).when(mTelephonyManager).isGlobalModeEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
@@ -115,7 +113,7 @@ public class DataServiceSetupPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_notCdma_returnUnavailable() {
-        doReturn(PhoneConstants.LTE_ON_CDMA_FALSE).when(mTelephonyManager).getLteOnCdmaMode();
+        doReturn(false).when(mTelephonyManager).isGlobalModeEnabled();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL,
                 false);
 
@@ -125,10 +123,9 @@ public class DataServiceSetupPreferenceControllerTest {
     @Test
     public void handlePreferenceTreeClick_startActivity() {
         ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doNothing().when(mContext).startActivity(captor.capture());
 
         mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).startActivity(captor.capture());
 
         final Intent intent = captor.getValue();
         assertThat(intent.getAction()).isEqualTo(Intent.ACTION_VIEW);

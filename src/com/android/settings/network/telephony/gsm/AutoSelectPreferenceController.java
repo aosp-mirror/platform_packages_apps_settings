@@ -144,7 +144,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     public AutoSelectPreferenceController init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
+                .createForSubscriptionId(mSubId);
         final PersistableBundle carrierConfig = mContext.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
@@ -175,7 +176,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     private void dismissProgressBar() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
+            try {
+                mProgressDialog.dismiss();
+            } catch (IllegalArgumentException e) {
+                // Ignore exception since the dialog will be gone anyway.
+            }
         }
     }
 

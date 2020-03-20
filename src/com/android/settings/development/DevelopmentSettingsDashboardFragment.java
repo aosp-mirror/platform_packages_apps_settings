@@ -417,6 +417,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         controllers.add(new AdbPreferenceController(context, fragment));
         controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
+        controllers.add(new WirelessDebuggingPreferenceController(context, lifecycle));
         controllers.add(new LocalTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceController(context));
         controllers.add(new AutomaticSystemServerHeapDumpPreferenceController(context));
@@ -438,6 +439,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
+        controllers.add(new BluetoothMapVersionPreferenceController(context));
         controllers.add(new BluetoothA2dpHwOffloadPreferenceController(context, fragment));
         controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));

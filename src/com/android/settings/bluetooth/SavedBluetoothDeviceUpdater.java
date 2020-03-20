@@ -53,7 +53,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
     public boolean onPreferenceClick(Preference preference) {
         final CachedBluetoothDevice device = ((BluetoothDevicePreference) preference)
                 .getBluetoothDevice();
-        device.connect(true);
+        device.connect();
         return true;
     }
 }

@@ -56,6 +56,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
 
@@ -99,12 +100,12 @@ public class MobileNetworkUtils {
      * Returns true if Wifi calling is enabled for at least one subscription.
      */
     public static boolean isWifiCallingEnabled(Context context) {
-        final SubscriptionManager subManager = context.getSystemService(SubscriptionManager.class);
-        if (subManager == null) {
-            Log.e(TAG, "isWifiCallingEnabled: couldn't get system service.");
+        final int[] subIds = getActiveSubscriptionIdList(context);
+        if (ArrayUtils.isEmpty(subIds)) {
+            Log.d(TAG, "isWifiCallingEnabled: subIds is empty");
             return false;
         }
-        for (int subId : subManager.getActiveSubscriptionIdList()) {
+        for (int subId : subIds) {
             if (isWifiCallingEnabled(context, subId)) {
                 return true;
             }
@@ -227,16 +228,23 @@ public class MobileNetworkUtils {
         final String currentCountry = tm.getNetworkCountryIso().toLowerCase();
         final String supportedCountries =
                 Settings.Global.getString(cr, Settings.Global.EUICC_SUPPORTED_COUNTRIES);
+        final String unsupportedCountries =
+                Settings.Global.getString(cr, Settings.Global.EUICC_UNSUPPORTED_COUNTRIES);
+
         boolean inEsimSupportedCountries = false;
-        if (TextUtils.isEmpty(currentCountry)) {
-            inEsimSupportedCountries = true;
-        } else if (!TextUtils.isEmpty(supportedCountries)) {
-            final List<String> supportedCountryList =
-                    Arrays.asList(TextUtils.split(supportedCountries.toLowerCase(), ","));
-            if (supportedCountryList.contains(currentCountry)) {
-                inEsimSupportedCountries = true;
-            }
+
+        if (TextUtils.isEmpty(supportedCountries)) {
+            // White list is empty, use blacklist.
+            Log.d(TAG, "Using blacklist unsupportedCountries=" + unsupportedCountries);
+            inEsimSupportedCountries = !isEsimUnsupportedCountry(currentCountry,
+                    unsupportedCountries);
+        } else {
+            Log.d(TAG, "Using whitelist supportedCountries=" + supportedCountries);
+            inEsimSupportedCountries = isEsimSupportedCountry(currentCountry, supportedCountries);
         }
+
+        Log.d(TAG, "inEsimSupportedCountries=" + inEsimSupportedCountries);
+
         final boolean esimIgnoredDevice =
                 Arrays.asList(TextUtils.split(SystemProperties.get(KEY_ESIM_CID_IGNORE, ""), ","))
                         .contains(SystemProperties.get(KEY_CID, null));
@@ -305,8 +313,8 @@ public class MobileNetworkUtils {
                     context.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                     Phone.PREFERRED_NT_MODE);
-            if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
-                    || settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
+            if (settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA
+                    || settingsNetworkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return true;
             }
 
@@ -333,8 +341,8 @@ public class MobileNetworkUtils {
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
-                    || networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
+                    || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             } else if (shouldSpeciallyUpdateGsmCdma(context, subId)) {
                 return true;
@@ -397,7 +405,7 @@ public class MobileNetworkUtils {
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO
                 && isWorldMode(context, subId)) {
             return false;
         }
@@ -410,7 +418,7 @@ public class MobileNetworkUtils {
         }
 
         if (isWorldMode(context, subId)) {
-            if (networkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA) {
+            if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA) {
                 return true;
             }
         }
@@ -458,9 +466,7 @@ public class MobileNetworkUtils {
      * otherwise return {@link SubscriptionManager#INVALID_SUBSCRIPTION_ID}
      */
     public static int getSearchableSubscriptionId(Context context) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
-        final int subIds[] = subscriptionManager.getActiveSubscriptionIdList();
+        final int[] subIds = getActiveSubscriptionIdList(context);
 
         return subIds.length >= 1 ? subIds[0] : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
@@ -477,14 +483,12 @@ public class MobileNetworkUtils {
      */
     public static int getAvailability(Context context, int defSubId,
             TelephonyAvailabilityCallback callback) {
-        final SubscriptionManager subscriptionManager = context.getSystemService(
-                SubscriptionManager.class);
         if (defSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             // If subId has been set, return the corresponding status
             return callback.getAvailabilityStatus(defSubId);
         } else {
             // Otherwise, search whether there is one subId in device that support this preference
-            final int[] subIds = subscriptionManager.getActiveSubscriptionIdList();
+            final int[] subIds = getActiveSubscriptionIdList(context);
             if (ArrayUtils.isEmpty(subIds)) {
                 return callback.getAvailabilityStatus(
                         SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -515,12 +519,12 @@ public class MobileNetworkUtils {
                 context.getContentResolver(),
                 android.provider.Settings.Global.PREFERRED_NETWORK_MODE + subId,
                 Phone.PREFERRED_NT_MODE);
-        if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
-                || networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
+        if (networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA
+                || networkMode == TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA) {
             if (!isTdscdmaSupported(context, subId) && isWorldMode(context, subId)) {
                 return true;
             }
@@ -611,5 +615,42 @@ public class MobileNetworkUtils {
             return null;
         }
         return tm.getNetworkOperatorName();
+    }
+
+    private static boolean isEsimSupportedCountry(String country, String countriesListString) {
+        if (TextUtils.isEmpty(country)) {
+            return true;
+        } else if (TextUtils.isEmpty(countriesListString)) {
+            return false;
+        }
+        final List<String> supportedCountries =
+                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
+        return supportedCountries.contains(country);
+    }
+
+    private static boolean isEsimUnsupportedCountry(String country, String countriesListString) {
+        if (TextUtils.isEmpty(country) || TextUtils.isEmpty(countriesListString)) {
+            return false;
+        }
+        final List<String> unsupportedCountries =
+                Arrays.asList(TextUtils.split(countriesListString.toLowerCase(), ","));
+        return unsupportedCountries.contains(country);
+    }
+
+    private static int[] getActiveSubscriptionIdList(Context context) {
+        final SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        final List<SubscriptionInfo> subInfoList =
+                subscriptionManager.getActiveSubscriptionInfoList();
+        if (subInfoList == null) {
+            return new int[0];
+        }
+        int[] activeSubIds = new int[subInfoList.size()];
+        int i = 0;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            activeSubIds[i] = subInfo.getSubscriptionId();
+            i++;
+        }
+        return activeSubIds;
     }
 }

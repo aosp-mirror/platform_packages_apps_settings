@@ -31,7 +31,7 @@ public class StatsLogWriter implements LogWriter {
                 attribution,
                 SettingsEnums.PAGE_VISIBLE /* action */,
                 pageId,
-                null /* changedPreferenceKey */,
+                "" /* changedPreferenceKey */,
                 0 /* changedPreferenceIntValue */);
     }
 
@@ -41,7 +41,7 @@ public class StatsLogWriter implements LogWriter {
                 SettingsEnums.PAGE_UNKNOWN /* attribution */,
                 SettingsEnums.PAGE_HIDE /* action */,
                 pageId,
-                null /* changedPreferenceKey */,
+                "" /* changedPreferenceKey */,
                 0 /* changedPreferenceIntValue */);
     }
 

@@ -39,14 +39,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.android.settings.R;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.DeviceInfoUtils;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+
+import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.DeviceInfoUtils;
+
+import java.util.List;
 
 /**
  * A dialog allowing the display name of a mobile network subscription to be changed
@@ -115,9 +117,9 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
                 .setPositiveButton(R.string.mobile_network_sim_name_rename, (dialog, which) -> {
                     mSubscriptionManager.setDisplayName(mNameView.getText().toString(), mSubId,
                             SubscriptionManager.NAME_SOURCE_USER_INPUT);
-                    mSubscriptionManager.setIconTint(
-                            mColors[mColorSpinner.getSelectedItemPosition()].getColor(),
-                            mSubId);
+                    final Color color = (mColorSpinner == null) ? mColors[0]
+                            : mColors[mColorSpinner.getSelectedItemPosition()];
+                    mSubscriptionManager.setIconTint(color.getColor(), mSubId);
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         return builder.create();
@@ -126,7 +128,17 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
     @VisibleForTesting
     protected void populateView(View view) {
         mNameView = view.findViewById(R.id.name_edittext);
-        final SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfo(mSubId);
+        SubscriptionInfo info = null;
+        final List<SubscriptionInfo> infoList = mSubscriptionManager
+                .getAvailableSubscriptionInfoList();
+        if (infoList != null) {
+            for (SubscriptionInfo subInfo : infoList) {
+                if (subInfo.getSubscriptionId() == mSubId) {
+                    info = subInfo;
+                    break;
+                }
+            }
+        }
         if (info == null) {
             Log.w(TAG, "got null SubscriptionInfo for mSubId:" + mSubId);
             return;
@@ -149,7 +161,8 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         }
 
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
-        final ServiceState serviceState = mTelephonyManager.getServiceStateForSubscriber(mSubId);
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
         operatorName.setText(serviceState.getOperatorAlphaLong());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
@@ -199,7 +212,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     private Color[] getColors() {
         final Resources res = getContext().getResources();
-        final int[] colorInts = res.getIntArray(com.android.internal.R.array.sim_colors);
+        final int[] colorInts = res.getIntArray(android.R.array.simColors);
         final String[] colorStrings = res.getStringArray(R.array.color_picker);
         final int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
         final int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);

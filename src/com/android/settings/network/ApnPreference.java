@@ -61,13 +61,13 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
 
-        View widget = view.findViewById(R.id.apn_radiobutton);
+        final View widget = view.findViewById(R.id.apn_radiobutton);
         if ((widget != null) && widget instanceof RadioButton) {
-            RadioButton rb = (RadioButton) widget;
+            final RadioButton rb = (RadioButton) widget;
             if (mSelectable) {
                 rb.setOnCheckedChangeListener(this);
 
-                boolean isChecked = getKey().equals(mSelectedKey);
+                final boolean isChecked = getKey().equals(mSelectedKey);
                 if (isChecked) {
                     mCurrentChecked = rb;
                     mSelectedKey = getKey();
@@ -113,17 +113,18 @@ public class ApnPreference extends Preference implements CompoundButton.OnChecke
     @Override
     protected void onClick() {
         super.onClick();
-        Context context = getContext();
+        final Context context = getContext();
         if (context != null) {
             if (mHideDetails) {
                 Toast.makeText(context, context.getString(
                         R.string.cannot_change_apn_toast), Toast.LENGTH_LONG).show();
                 return;
             }
-            int pos = Integer.parseInt(getKey());
-            Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
-            Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
+            final int pos = Integer.parseInt(getKey());
+            final Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+            final Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
             editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
+            editIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             context.startActivity(editIntent);
         }
     }
