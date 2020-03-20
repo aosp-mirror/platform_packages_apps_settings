@@ -129,7 +129,7 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
      * @return {@code true} if the feature is turned on for the device, otherwise {@code false}
      */
     private boolean isTurnedOn() {
-        return Settings.System.getInt(
+        return Settings.Secure.getInt(
                 mContext.getContentResolver(), Settings.Secure.ADAPTIVE_SLEEP, 0) != 0;
     }
 
