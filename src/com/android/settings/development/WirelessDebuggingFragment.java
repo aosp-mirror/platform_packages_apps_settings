@@ -63,66 +63,44 @@ public class WirelessDebuggingFragment extends DashboardFragment
     private static final String TAG = "WirelessDebuggingFrag";
 
     // Activity result from clicking on a paired device.
-    private static final int PAIRED_DEVICE_REQUEST = 0;
-    public static final String PAIRED_DEVICE_REQUEST_TYPE = "request_type";
-    public static final int FORGET_ACTION = 0;
-
+    static final int PAIRED_DEVICE_REQUEST = 0;
+    static final String PAIRED_DEVICE_REQUEST_TYPE = "request_type";
+    static final int FORGET_ACTION = 0;
     // Activity result from pairing a device.
-    private static final int PAIRING_DEVICE_REQUEST = 1;
-    public static final String PAIRING_DEVICE_REQUEST_TYPE = "request_type_pairing";
-    public static final int SUCCESS_ACTION = 0;
-    public static final int FAIL_ACTION = 1;
+    static final int PAIRING_DEVICE_REQUEST = 1;
+    static final String PAIRING_DEVICE_REQUEST_TYPE = "request_type_pairing";
+    static final int SUCCESS_ACTION = 0;
+    static final int FAIL_ACTION = 1;
+    static final String PAIRED_DEVICE_EXTRA = "paired_device";
+    static final String DEVICE_NAME_EXTRA = "device_name";
+    static final String IP_ADDR_EXTRA = "ip_addr";
 
-    public static final String PAIRED_DEVICE_EXTRA = "paired_device";
-    public static final String DEVICE_NAME_EXTRA = "device_name";
-    public static final String IP_ADDR_EXTRA = "ip_addr";
-
-    private WirelessDebuggingEnabler mWifiDebuggingEnabler;
-
-    private static AdbIpAddressPreferenceController sAdbIpAddressPreferenceController;
     // UI components
     private static final String PREF_KEY_ADB_DEVICE_NAME = "adb_device_name_pref";
     private static final String PREF_KEY_ADB_IP_ADDR = "adb_ip_addr_pref";
     private static final String PREF_KEY_PAIRING_METHODS_CATEGORY = "adb_pairing_methods_category";
-    private static final String PREF_KEY_ADB_QRCODE_PAIRING = "adb_pair_method_qrcode_pref";
     private static final String PREF_KEY_ADB_CODE_PAIRING = "adb_pair_method_code_pref";
     private static final String PREF_KEY_PAIRED_DEVICES_CATEGORY = "adb_paired_devices_category";
     private static final String PREF_KEY_FOOTER_CATEGORY = "adb_wireless_footer_category";
+    private static AdbIpAddressPreferenceController sAdbIpAddressPreferenceController;
 
+    private final PairingCodeDialogListener mPairingCodeDialogListener =
+            new PairingCodeDialogListener();
+    private WirelessDebuggingEnabler mWifiDebuggingEnabler;
     private Preference mDeviceNamePreference;
     private Preference mIpAddrPreference;
-
     private PreferenceCategory mPairingMethodsCategory;
-    private Preference mQrcodePairingPreference;
     private Preference mCodePairingPreference;
-
     private PreferenceCategory mPairedDevicesCategory;
-
     private PreferenceCategory mFooterCategory;
     private FooterPreference mOffMessagePreference;
-
     // Map of paired devices, with the device GUID is the key
     private Map<String, AdbPairedDevicePreference> mPairedDevicePreferences;
-
     private IAdbManager mAdbManager;
     private int mConnectionPort;
-
-    class PairingCodeDialogListener implements AdbWirelessDialog.AdbWirelessDialogListener {
-        @Override
-        public void onDismiss() {
-            Log.i(TAG, "onDismiss");
-            mPairingCodeDialog = null;
-            try {
-                mAdbManager.disablePairing();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Unable to cancel pairing");
-            }
-        }
-    }
-    final PairingCodeDialogListener mPairingCodeDialogListener = new PairingCodeDialogListener();
-    AdbWirelessDialog mPairingCodeDialog;
-
     private IntentFilter mIntentFilter;
+    private AdbWirelessDialog mPairingCodeDialog;
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -171,6 +149,25 @@ public class WirelessDebuggingFragment extends DashboardFragment
         }
     };
 
+    class PairingCodeDialogListener implements AdbWirelessDialog.AdbWirelessDialogListener {
+        @Override
+        public void onDismiss() {
+            Log.i(TAG, "onDismiss");
+            mPairingCodeDialog = null;
+            try {
+                mAdbManager.disablePairing();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Unable to cancel pairing");
+            }
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        use(AdbQrCodePreferenceController.class).setParentFragment(this);
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -201,12 +198,6 @@ public class WirelessDebuggingFragment extends DashboardFragment
                 (Preference) findPreference(PREF_KEY_ADB_CODE_PAIRING);
         mCodePairingPreference.setOnPreferenceClickListener(preference -> {
             showDialog(AdbWirelessDialogUiBase.MODE_PAIRING);
-            return true;
-        });
-        mQrcodePairingPreference =
-                (Preference) findPreference(PREF_KEY_ADB_QRCODE_PAIRING);
-        mQrcodePairingPreference.setOnPreferenceClickListener(preference -> {
-            launchQrcodeScannerFragment();
             return true;
         });
 
@@ -462,6 +453,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
                 showDialog(AdbWirelessDialogUiBase.MODE_PAIRING_FAILED);
                 break;
             default:
+                Log.d(TAG, "Successfully paired device");
                 break;
         }
     }
@@ -476,16 +468,8 @@ public class WirelessDebuggingFragment extends DashboardFragment
         return deviceName;
     }
 
-    private void launchQrcodeScannerFragment() {
-        new SubSettingLauncher(getContext())
-                .setDestination(AdbQrcodeScannerFragment.class.getName())
-                .setSourceMetricsCategory(getMetricsCategory())
-                .setResultListener(this, PAIRING_DEVICE_REQUEST)
-                .launch();
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.development_tile_settings) {
+            new BaseSearchIndexProvider(R.xml.adb_wireless_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
