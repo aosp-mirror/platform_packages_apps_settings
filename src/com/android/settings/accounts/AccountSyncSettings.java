@@ -42,6 +42,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
@@ -221,9 +222,8 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         // Note that this also counts accounts that are not currently displayed
         boolean syncActive = !ContentResolver.getCurrentSyncsAsUser(
                 mUserHandle.getIdentifier()).isEmpty();
-        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive);
+        menu.findItem(MENU_SYNC_NOW_ID).setVisible(!syncActive).setEnabled(enabledSyncNowMenu());
         menu.findItem(MENU_SYNC_CANCEL_ID).setVisible(syncActive);
-
     }
 
     @Override
@@ -560,6 +560,23 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     public int getHelpResource() {
         return R.string.help_url_accounts;
+    }
+
+    @VisibleForTesting
+    boolean enabledSyncNowMenu() {
+        boolean enabled = false;
+        for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
+            final Preference pref = getPreferenceScreen().getPreference(i);
+            if (!(pref instanceof SyncStateSwitchPreference)) {
+                continue;
+            }
+            final SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
+            if (syncPref.isChecked()) {
+                enabled = true;
+                break;
+            }
+        }
+        return enabled;
     }
 
     private static String formatSyncDate(Context context, Date date) {
