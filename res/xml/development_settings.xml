@@ -149,6 +149,11 @@
             settings:keywords="@string/keywords_adb_wireless" />
 
         <SwitchPreference
+            android:key="adb_authorization_timeout"
+            android:title="@string/adb_authorization_timeout_title"
+            android:summary="@string/adb_authorization_timeout_summary" />
+
+        <SwitchPreference
             android:key="enable_terminal"
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
