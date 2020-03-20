@@ -81,7 +81,8 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
         if (isSettingsAvailable() && !isUserInteracted() && !isRecentlySetup() && !isTurnedOn()) {
             final IconCompat icon = IconCompat.createWithResource(mContext,
                     R.drawable.ic_settings_adaptive_sleep);
-            final CharSequence title = mContext.getText(R.string.adaptive_sleep_title);
+            final CharSequence title =
+                    mContext.getText(R.string.adaptive_sleep_contextual_slice_title);
             final CharSequence subtitle = mContext.getText(
                     R.string.adaptive_sleep_contextual_slice_summary);
 
