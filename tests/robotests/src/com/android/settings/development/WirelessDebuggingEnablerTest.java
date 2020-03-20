@@ -28,10 +28,12 @@ import android.provider.Settings.Global;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.testutils.shadow.ShadowWirelessDebuggingPreferenceController;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +45,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {ShadowUtils.class, ShadowWirelessDebuggingPreferenceController.class})
 public class WirelessDebuggingEnablerTest {
 
     @Mock
@@ -64,6 +66,11 @@ public class WirelessDebuggingEnablerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mWirelessDebuggingEnabler = spy(new WirelessDebuggingEnabler(
                 mContext, new SwitchBarController(mSwitchBar), mListener, mLifecycle));
+    }
+
+    @After
+    public void tearDown() {
+        ShadowWirelessDebuggingPreferenceController.reset();
     }
 
     @Test
@@ -120,7 +127,8 @@ public class WirelessDebuggingEnablerTest {
     }
 
     @Test
-    public void onSwitchToggled_true_shouldSetAdbWifiEnabledTrue() {
+    public void onSwitchToggled_true_wifiConnected_shouldSetAdbWifiEnabledTrue() {
+        ShadowWirelessDebuggingPreferenceController.setIsWifiConnected(true);
         Global.putInt(mContext.getContentResolver(),
                 Global.ADB_WIFI_ENABLED, 0 /* setting disabled */);
         mWirelessDebuggingEnabler.onResume();
@@ -132,11 +140,27 @@ public class WirelessDebuggingEnablerTest {
 
         assertThat(Global.getInt(mContext.getContentResolver(),
                 Global.ADB_WIFI_ENABLED, -1)).isEqualTo(1);
-        // Should also get a callback
     }
 
     @Test
-    public void onSwitchToggled_false_shouldSetAdbWifiEnabledFalse() {
+    public void onSwitchToggled_true_wifiNotConnected_shouldSetAdbWifiEnabledFalse() {
+        ShadowWirelessDebuggingPreferenceController.setIsWifiConnected(false);
+        Global.putInt(mContext.getContentResolver(),
+                Global.ADB_WIFI_ENABLED, 0 /* setting disabled */);
+        mWirelessDebuggingEnabler.onResume();
+
+        verify(mSwitchBar).setChecked(false);
+        verify(mListener).onEnabled(false);
+
+        mWirelessDebuggingEnabler.onSwitchToggled(true);
+
+        assertThat(Global.getInt(mContext.getContentResolver(),
+                Global.ADB_WIFI_ENABLED, -1)).isEqualTo(0);
+    }
+
+    @Test
+    public void onSwitchToggled_false_wifiConnected_shouldSetAdbWifiEnabledFalse() {
+        ShadowWirelessDebuggingPreferenceController.setIsWifiConnected(true);
         Global.putInt(mContext.getContentResolver(),
                 Global.ADB_WIFI_ENABLED, 1 /* setting disabled */);
         mWirelessDebuggingEnabler.onResume();
@@ -147,7 +171,22 @@ public class WirelessDebuggingEnablerTest {
         mWirelessDebuggingEnabler.onSwitchToggled(false);
 
         assertThat(Global.getInt(mContext.getContentResolver(),
-            Global.ADB_WIFI_ENABLED, -1)).isEqualTo(0);
-        // Should also get a callback
+                Global.ADB_WIFI_ENABLED, -1)).isEqualTo(0);
+    }
+
+    @Test
+    public void onSwitchToggled_false_wifiNotConnected_shouldSetAdbWifiEnabledFalse() {
+        ShadowWirelessDebuggingPreferenceController.setIsWifiConnected(false);
+        Global.putInt(mContext.getContentResolver(),
+                Global.ADB_WIFI_ENABLED, 1 /* setting disabled */);
+        mWirelessDebuggingEnabler.onResume();
+
+        verify(mSwitchBar).setChecked(true);
+        verify(mListener).onEnabled(true);
+
+        mWirelessDebuggingEnabler.onSwitchToggled(false);
+
+        assertThat(Global.getInt(mContext.getContentResolver(),
+                Global.ADB_WIFI_ENABLED, -1)).isEqualTo(0);
     }
 }
