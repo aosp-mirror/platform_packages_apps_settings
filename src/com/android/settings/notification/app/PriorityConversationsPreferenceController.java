@@ -28,14 +28,14 @@ import com.android.settings.notification.NotificationBackend;
 import java.util.Collections;
 import java.util.List;
 
-public class ImportantConversationsPreferenceController extends
+public class PriorityConversationsPreferenceController extends
         ConversationListPreferenceController {
 
     private static final String KEY = "important_conversations";
     private static final String LIST_KEY = "important_conversations_list";
     private List<ConversationChannelWrapper> mConversations;
 
-    public ImportantConversationsPreferenceController(Context context,
+    public PriorityConversationsPreferenceController(Context context,
             NotificationBackend backend) {
         super(context, backend);
     }

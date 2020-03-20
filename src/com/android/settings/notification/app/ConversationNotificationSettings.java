@@ -79,18 +79,13 @@ public class ConversationNotificationSettings extends NotificationSettings {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
         mControllers.add(new ConversationHeaderPreferenceController(context, this));
-        mControllers.add(new ConversationImportantPreferenceController(
+        mControllers.add(new ConversationPriorityPreferenceController(
                 context, mBackend, mDependentFieldListener));
-        mControllers.add(new DefaultImportancePreferenceController(
-                context, mDependentFieldListener, mBackend));
-        mControllers.add(new AddToHomeScreenPreferenceController(context, mBackend));
         mControllers.add(new HighImportancePreferenceController(
                 context, mDependentFieldListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mDependentFieldListener, mBackend));
         mControllers.add(new VibrationPreferenceController(context, mBackend));
-        mControllers.add(new AppLinkPreferenceController(context));
-        mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
                 mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));
