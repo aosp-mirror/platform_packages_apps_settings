@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -235,5 +236,18 @@ public class PanelFragmentTest {
 
         assertThat(headerTitle.getText()).isEqualTo(TITLE2);
         assertThat(headerSubtitle.getText()).isEqualTo(SUBTITLE2);
+    }
+
+    @Test
+    public void forceClose_verifyFinish() {
+        initFakeActivity();
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = spy(mPanelContentCbs.getValue());
+        when(((PanelFragment.LocalPanelCallback) panelContentCallbacks).getFragmentActivity())
+                .thenReturn(mActivity);
+
+        panelContentCallbacks.forceClose();
+
+        verify(mActivity).finish();
     }
 }

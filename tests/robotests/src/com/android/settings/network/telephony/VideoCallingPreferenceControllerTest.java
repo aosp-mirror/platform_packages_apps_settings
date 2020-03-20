@@ -27,7 +27,6 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.ImsFeature;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
@@ -98,7 +97,7 @@ public class VideoCallingPreferenceControllerTest {
 
         doReturn(true).when(mImsManager).isVtEnabledByPlatform();
         mQueryImsState.setIsProvisionedOnDevice(true);
-        doReturn(ImsFeature.STATE_READY).when(mImsManager).getImsServiceState();
+        mQueryImsState.setServiceStateReady(true);
         doReturn(true).when(mTelephonyManager).isDataEnabled();
 
         mController.mCallState = TelephonyManager.CALL_STATE_IDLE;

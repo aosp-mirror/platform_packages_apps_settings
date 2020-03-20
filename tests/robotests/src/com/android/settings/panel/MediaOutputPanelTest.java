@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,6 +31,7 @@ import android.content.Context;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 
 import com.android.settings.R;
@@ -67,6 +69,8 @@ public class MediaOutputPanelTest {
     private LocalMediaManager mLocalMediaManager;
     @Mock
     private PanelContentCallback mCallback;
+    @Mock
+    private PlaybackState mPlaybackState;
 
     private MediaOutputPanel mPanel;
     private Context mContext;
@@ -258,5 +262,20 @@ public class MediaOutputPanelTest {
         controllerCallbacks.onMetadataChanged(mMediaMetadata);
 
         verify(mCallback).onHeaderChanged();
+    }
+
+    @Test
+    public void onPlaybackStateChanged_stateFromPlayingToStopped_verifyCallForceClose() {
+        mPanel.onStart();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PLAYING);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+        verify(mCallback, never()).forceClose();
+
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_STOPPED);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+
+        verify(mCallback).forceClose();
     }
 }
