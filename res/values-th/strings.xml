@@ -995,7 +995,7 @@
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"WiFi ขั้นสูง"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"ที่อยู่ MAC ของอุปกรณ์"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ที่อยู่ MAC ที่สุ่มขึ้นมา"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"ที่อยู่ MAC แบบสุ่ม"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"ที่อยู่ IP"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"รายละเอียดเครือข่าย"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"ซับเน็ตมาสก์"</string>
@@ -1098,7 +1098,7 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"เปิดใช้งานการโทรผ่าน Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"เปิดการโทรผ่าน Wi-Fi"</string>
     <string name="wifi_calling_not_supported" msgid="3303917737849393175">"การโทรผ่าน Wi‑Fi ไม่รองรับใน %1$s"</string>
-    <string name="wifi_disconnected_from" msgid="5249576734324159708">"ยกเลิกการเชื่อมต่อกับ <xliff:g id="SSID">%1$s</xliff:g> แล้ว"</string>
+    <string name="wifi_disconnected_from" msgid="5249576734324159708">"เลิกเชื่อมต่อกับ <xliff:g id="SSID">%1$s</xliff:g> แล้ว"</string>
     <string name="carrier" msgid="1755020806290963951">"ผู้ให้บริการ"</string>
     <string name="display_settings_title" msgid="626835071804834218">"การแสดงผล"</string>
     <string name="sound_settings" msgid="5514582720435174014">"เสียง"</string>
@@ -1188,14 +1188,16 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"ความสว่างของหน้าจอจะปรับให้เหมาะสมกับสภาพแวดล้อมและกิจกรรมที่คุณทำโดยอัตโนมัติ คุณเลื่อนแถบเลื่อนด้วยตนเองได้เพื่อช่วยให้การปรับความสว่างอัตโนมัติทราบความสว่างที่คุณต้องการ"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"แสดงไวท์บาลานซ์"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="adaptive_sleep_title" msgid="2987961991423539233">"การจดจ่อที่หน้าจอ"</string>
+    <!-- no translation found for adaptive_sleep_title (7552397432645335013) -->
+    <skip />
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"เปิด/หน้าจอจะไม่ปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ปิด"</string>
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"ต้องใช้สิทธิ์เข้าถึงกล้อง"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"แตะเพื่อจัดการสิทธิ์สำหรับบริการปรับอุปกรณ์ตามการใช้งานของผู้ใช้"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"ป้องกันไม่ให้หน้าจอปิดหากคุณกำลังดูอยู่"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"การจดจ่อที่หน้าจอใช้กล้องหน้าเพื่อดูว่ามีใครกำลังดูหน้าจออยู่หรือไม่ ฟีเจอร์นี้จะทำงานในอุปกรณ์และจะไม่มีการเก็บหรือส่งรูปภาพไปให้ Google"</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="4920636187115578946">"เปิดหน้าจอค้างไว้เมื่อดูหน้าจอ"</string>
+    <!-- no translation found for adaptive_sleep_contextual_slice_summary (2993867044745446094) -->
+    <skip />
     <string name="night_display_title" msgid="8532432776487216581">"แสงตอนกลางคืน"</string>
     <string name="night_display_text" msgid="4789324042428095383">"แสงตอนกลางคืนปรับให้หน้าจอเป็นสีเหลืองอำพัน ซึ่งจะทำให้ดูหรืออ่านหน้าจอในแสงสลัวได้ง่ายขึ้น และอาจช่วยให้คุณนอนหลับได้ง่ายขึ้นด้วย"</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"กำหนดเวลา"</string>
@@ -1654,7 +1656,12 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"กำลังแชร์การเชื่อมต่ออินเทอร์เน็ตของ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> นี้ผ่านบลูทูธ"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"ไม่สามารถปล่อยการเชื่อมต่อมากกว่า <xliff:g id="MAXCONNECTION">%1$d</xliff:g> อุปกรณ์"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> จะถูกยกเลิกการปล่อยสัญญาณ"</string>
+    <!-- no translation found for ethernet_tether_checkbox_text (959743110824197356) -->
+    <skip />
+    <!-- no translation found for ethernet_tethering_subtext (7573587396552412231) -->
+    <skip />
     <string name="tethering_footer_info" msgid="6782375845587483281">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือ เพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจากการเชื่อมต่อเน็ตมือถือได้ และแอปยังสามารถสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"ใช้ฮอตสปอตและการเชื่อมต่ออินเทอร์เน็ตผ่านมือถือเพื่อให้อุปกรณ์อื่นๆ ใช้อินเทอร์เน็ตจาก Wi-Fi หรือการเชื่อมต่ออินเทอร์เน็ตมือถือของคุณได้ แอปยังสร้างฮอตสปอตเพื่อแชร์เนื้อหากับอุปกรณ์ที่อยู่ใกล้เคียงได้อีกด้วย"</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"ความช่วยเหลือ"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"เครือข่ายมือถือ"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"แพ็กเกจอินเทอร์เน็ต"</string>
@@ -2105,16 +2112,30 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"ซูมเข้าบนหน้าจอ"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"แตะ 3 ครั้งเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="7617931632990040045">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อดูเนื้อหาได้ชัดเจนมากขึ้น&lt;br/&gt;&lt;br/&gt;&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt;	1. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt;	2. แตะหน้าจอ&lt;br/&gt;	3. ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt;	4. บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt;	5. ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt;&lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt;	1. ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt;	2. แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt;	3. ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt;	4. ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
+    <!-- no translation found for accessibility_screen_magnification_summary (2023126829553044999) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ใช้ปุ่มการช่วยเหลือพิเศษเพื่อเปิด"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (2435863802351001840) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_title_triple (7089562919284464400) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"ใช้ท่าทางสัมผัสเพื่อเปิด"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"ใช้ท่าทางสัมผัสการช่วยเหลือพิเศษแบบใหม่"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="3672965930162660635">"หากต้องการเปิดหรือปิดบริการนี้ ให้แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="2352392328654233863">"หากต้องการเปิดหรือปิดบริการนี้ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นค้างไว้"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="3328419170800579107">"หากต้องการเปิดหรือปิดบริการนี้ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นค้างไว้"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="7008711788173462227">"หากต้องการเปิดหรือปิดบริการช่วยเหลือพิเศษ ให้ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นค้างไว้"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="8503206088740095124">"หากต้องการเปิดหรือปิดบริการช่วยเหลือพิเศษ ให้ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างบริการต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นค้างไว้"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (6948413849618121900) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (6796200868291560948) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_triple (5219991116201165146) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (3763827720767811029) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (5718651098120993667) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (8541263835299261205) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (4157763767494025958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"รับทราบ"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ทางลัดของ <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"ปุ่มการช่วยเหลือพิเศษ"</string>
@@ -2134,8 +2155,8 @@
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"ทางลัดปุ่มปรับระดับเสียง"</string>
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"บริการทางลัด"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"การตั้งค่าทางลัด"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5918442016264847021">"อนุญาตจากหน้าจอล็อก"</string>
-    <string name="accessibility_shortcut_description" msgid="9051481607998911585">"เมื่อทางลัดเปิดอยู่ คุณสามารถกดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มไว้ 3 วินาทีเพื่อเริ่มฟีเจอร์การช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"ทางลัดจากหน้าจอล็อก"</string>
+    <string name="accessibility_shortcut_description" msgid="4214994274938641805">"อนุญาตให้ทางลัดฟีเจอร์เปิดขึ้นจากหน้าจอล็อก กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้ 3 วินาที"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ข้อความคอนทราสต์สูง"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"อัปเดตการขยายหน้าจอโดยอัตโนมัติ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"อัปเดตการขยายหน้าจอเมื่อเปลี่ยนแอปพลิเคชัน"</string>
@@ -2158,10 +2179,11 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"การหน่วงเวลาด้วยการแตะค้างไว้"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"การกลับสี"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"ใช้การกลับสี"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="7230891925207955620">"การกลับสีปรับหน้าจอที่สว่างให้มืดลง ซึ่งช่วยให้ผู้ที่ไวต่อแสงจ้าดูหน้าจอได้สบายตายิ่งขึ้น&lt;br/&gt;&lt;br/&gt;หมายเหตุ: สีเข้มจะปรับเป็นสีสว่าง สีในสื่อและรูปภาพจะมีการเปลี่ยนแปลง นอกจากนี้ คุณยังใช้ธีมมืด (การตั้งค่า &gt; การแสดงผล) ได้อีกด้วย"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="3189216839673212851">"การคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
-    <string name="accessibility_autoclick_description" msgid="1824668430472936549">"หากใช้เมาส์อยู่ คุณตั้งค่าเคอร์เซอร์ให้ดำเนินการโดยอัตโนมัติเมื่อเมาส์หยุดเคลื่อนที่ครู่หนึ่งได้"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2060909980831267041">"ไม่ใช้คลิกอัตโนมัติ (ค่าเริ่มต้น)"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (6955835010409034745) -->
+    <skip />
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"การคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
+    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"การคลิกอัตโนมัติใช้งานได้กับเมาส์ที่เชื่อมต่อ คุณตั้งค่าให้เคอร์เซอร์เมาส์คลิกโดยอัตโนมัติได้เมื่อเคอร์เซอร์หยุดเคลื่อนที่เป็นระยะเวลาหนึ่ง"</string>
+    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"ปิด"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"สั้น"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 วินาที"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"กลาง"</string>
@@ -2180,10 +2202,11 @@
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"เปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"ใช้การแก้สี"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"แสดงคำบรรยาย"</string>
-    <string name="captioning_caption_appearance_title" msgid="4014910076504930044">"ลักษณะคำบรรยาย"</string>
-    <string name="captioning_caption_appearance_summary" msgid="5288447033673835822">"ขนาดข้อความ รูปแบบคำบรรยาย"</string>
+    <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"สำหรับแอปที่รองรับเท่านั้น"</string>
+    <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"ขนาดและรูปแบบของคำบรรยาย"</string>
+    <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"ขนาดข้อความ <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"ตัวเลือกเพิ่มเติม"</string>
-    <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"บางแอปไม่รองรับการตั้งค่านี้"</string>
+    <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"แอปบางแอปไม่รองรับค่ากำหนดคำบรรยายภาพเหล่านี้"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่าง"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
@@ -2198,18 +2221,20 @@
       <item quantity="other">บันทึกเครื่องช่วยการได้ยิน <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> เครื่องแล้ว</item>
       <item quantity="one">บันทึกเครื่องช่วยการได้ยิน <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> เครื่องแล้ว</item>
     </plurals>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"ทางลัดเปิดอยู่"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"ปิด"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"เปิด"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"ปิด"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"ไม่ทำงาน แตะเพื่อดูข้อมูล"</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"บริการนี้ทำงานผิดปกติ"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"แสดงในการตั้งค่าด่วน"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"โหมดแก้ไข"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"สีแดง/เขียว"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="2929354940552262472">"สีเขียว/แดง"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"สีน้ำเงิน/เหลือง"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="391621040826073327">"ตาบอดสีเขียว"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="877971556622350648">"ตาบอดสีแดง"</string>
-    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ตาบอดสีน้ำเงิน"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ตาบอดสีเขียว"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"ตาบอดสีแดง"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ตาบอดสีน้ำเงิน"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"สีแดง/เขียว"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"สีแดง/เขียว"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"สีน้ำเงิน/เหลือง"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8226135362782015387">
       <item quantity="other">เวลาหน่วงสั้นที่สุด (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> วินาที)</item>
       <item quantity="one">เวลาหน่วงสั้นที่สุด (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> วินาที)</item>
@@ -2652,10 +2677,13 @@
     <string name="ca_certificate" msgid="3076484307693855611">"ใบรับรอง CA"</string>
     <string name="user_certificate" msgid="6897024598058566466">"ใบรับรองผู้ใช้ VPN และแอป"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"ใบรับรอง Wi‑Fi"</string>
-    <string name="ca_certificate_warning_title" msgid="8229107396555793427">"ความเป็นส่วนตัวของคุณมีความเสี่ยง"</string>
-    <string name="ca_certificate_warning_description" msgid="1592953815964406032">"เว็บไซต์ แอป และ VPN จะใช้ใบรับรอง CA ในการเข้ารหัส ติดตั้งใบรับรอง CA จากองค์กรที่คุณไว้วางใจเท่านั้น \n\n หากติดตั้งใบรับรอง CA เจ้าของใบรับรองจะเข้าถึงข้อมูลต่างๆ เช่น รหัสผ่าน ข้อความ หรือรายละเอียดบัตรเครดิตได้จากเว็บไซต์ที่คุณเข้าชมหรือแอปที่คุณใช้ แม้ว่าจะมีการเข้ารหัสข้อมูลดังกล่าวก็ตาม"</string>
+    <!-- no translation found for ca_certificate_warning_title (7951148441028692619) -->
+    <skip />
+    <!-- no translation found for ca_certificate_warning_description (3386740654961466569) -->
+    <skip />
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"ไม่ติดตั้ง"</string>
-    <string name="certificate_warning_install_anyway" msgid="6411936058579648212">"ติดตั้งต่อไป"</string>
+    <!-- no translation found for certificate_warning_install_anyway (4633118283407228740) -->
+    <skip />
     <string name="cert_not_installed" msgid="6725137773549974522">"ไม่ได้ติดตั้งใบรับรอง"</string>
     <string name="emergency_tone_title" msgid="6673118505206685168">"สัญญาณการโทรฉุกเฉิน"</string>
     <string name="emergency_tone_summary" msgid="2519776254708767388">"ตั้งค่าการทำงานเมื่อมีการโทรหาหมายเลขฉุกเฉิน"</string>
@@ -3034,7 +3062,8 @@
     <string name="application_restrictions" msgid="276179173572729205">"อนุญาตแอปและเนื้อหา"</string>
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"แอปพลิเคชันที่มีข้อจำกัด"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"ขยายการตั้งค่าของแอปพลิเคชัน"</string>
-    <string name="nfc_payment_settings_title" msgid="400718454435230486">"แตะและจ่าย"</string>
+    <!-- no translation found for nfc_payment_settings_title (2043139180030485500) -->
+    <skip />
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"วิธีการทำงาน"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"ชำระเงินโดยใช้โทรศัพท์ของคุณในร้านค้า"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"แอปชำระเงินเริ่มต้น"</string>
@@ -3135,7 +3164,6 @@
     <string name="sim_card_select_title" msgid="8146523005929848793">"เลือกซิมการ์ด"</string>
     <string name="color_orange" msgid="216547825489739010">"ส้ม"</string>
     <string name="color_purple" msgid="6603701972079904843">"ม่วง"</string>
-    <string name="color_pink" msgid="8596872110888626708">"ชมพู"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"ไม่ได้เสียบซิมการ์ด"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"สถานะซิม"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"สถานะซิม (ช่องซิม %1$d)"</string>
@@ -3464,6 +3492,22 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"หากต้องการเปิดลูกโป่งของแอปนี้ คุณต้องเปิดลูกโป่งของอุปกรณ์ก่อน การดำเนินการนี้จะส่งผลต่อแอปอื่นๆ ที่คุณเปิดลูกโป่งไว้ก่อนหน้านี้"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"เปิดลูกโป่งของอุปกรณ์"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"ยกเลิก"</string>
+    <!-- no translation found for notifications_bubble_setting_on_summary (4641572377430901196) -->
+    <skip />
+    <!-- no translation found for notifications_bubble_setting_title (8287649393774855268) -->
+    <skip />
+    <!-- no translation found for notifications_bubble_setting_description (7336770088735025981) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_all (312524752846978277) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_selected (4324386074198040675) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_none (8643594711863996418) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_selected_conversation_title (3060958976857529933) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_excluded_conversation_title (1847359574855645320) -->
+    <skip />
     <string name="swipe_direction_title" msgid="4260320464727178413">"การเลื่อน"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"เลื่อนไปทางขวาเพื่อปิด เลื่อนไปทางซ้ายเพื่อแสดงเมนู"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"เลื่อนไปทางซ้ายเพื่อปิด เลื่อนไปทางขวาเพื่อแสดงเมนู"</string>
@@ -3559,9 +3603,11 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"ไม่มีแอปใดที่ติดตั้งไว้ขอเข้าถึงการแจ้งเตือน"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"อนุญาตให้เข้าถึงการแจ้งเตือน"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="3119843404577399036">"<xliff:g id="NOTIFICATION_ASSISTANT_NAME">%1$s</xliff:g> จะอ่านการแจ้งเตือนทั้งหมดได้ รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ นอกจากนี้ยังแก้ไขหรือปิดการแจ้งเตือนหรือทริกเกอร์ปุ่มการทำงานที่มี \n\nการเปิดใช้ยังทำให้แอปนี้เปิดหรือปิดฟีเจอร์ห้ามรบกวนและเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <!-- no translation found for notification_assistant_security_warning_summary (7362924206925040510) -->
+    <skip />
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"อนุญาตให้ <xliff:g id="SERVICE">%1$s</xliff:g> เข้าถึงการแจ้งเตือนไหม"</string>
-    <string name="notification_listener_security_warning_summary" msgid="1896899068512197964">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> จะสามารถอ่านการแจ้งเตือนทั้งหมด รวมถึงข้อมูลส่วนบุคคล เช่น ชื่อผู้ติดต่อและข้อความที่คุณได้รับ นอกจากนี้ยังสามารถปิดการแจ้งเตือนหรือทริกเกอร์ปุ่มการทำงานที่มี \n\nการเปิดใช้งานยังทำให้แอปนี้เปิดหรือปิด \"ห้ามรบกวน\" และเปลี่ยนแปลงการตั้งค่าที่เกี่ยวข้องได้"</string>
+    <!-- no translation found for notification_listener_security_warning_summary (1658213659262173405) -->
+    <skip />
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"หากคุณปิดการเข้าถึงการแจ้งเตือนสำหรับ <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> การเข้าถึง \"ห้ามรบกวน\" อาจปิดไปด้วย"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"ปิด"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"ยกเลิก"</string>
@@ -3578,6 +3624,47 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"การแสดงภาพซ้อนภาพ"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"อนุญาตการแสดงภาพซ้อนภาพ"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"อนุญาตให้แอปนี้สร้างหน้าต่างการแสดงภาพซ้อนภาพในขณะที่แอปเปิดอยู่หรือหลังจากที่คุณปล่อยทิ้งไว้ (เช่น เพื่อดูวิดีโอต่อ) หน้าต่างนี้จะแสดงทับแอปอื่นๆ ที่คุณกำลังใช้"</string>
+    <!-- no translation found for interact_across_profiles_title (7285906999927669971) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_empty_text (419061031064397168) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_keywords (5996472773111665049) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_app_detail_title (7776184211173575648) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_switch_enabled (7294719120282287495) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_switch_disabled (4312196170211463988) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_summary_1 (6093976896137600231) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_summary_2 (3519987216379855865) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_title (8530621211216508681) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_summary (1683419794750100336) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_app_data_title (8436318876213958940) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_app_data_summary (6057019384328088311) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_permissions_title (2316852600280487055) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_consent_dialog_permissions_summary (995051542847604039) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps_none (8573289199942092964) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_number_of_connected_apps (6991750455661974772) -->
+    <!-- no translation found for interact_across_profiles_install_work_app_title (7761038025614718824) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_work_app_summary (7418653807013809609) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_personal_app_title (5405510221944166674) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_personal_app_summary (2464091172295014696) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_app_action (131173339507809328) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="1562322900340107269">"การเข้าถึง \"ห้ามรบกวน\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"อนุญาตโหมดห้ามรบกวน"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ไม่มีแอปที่ติดตั้งใดๆ ส่งคำขอสิทธิ์เข้าถึง \"ห้ามรบกวน\""</string>
@@ -3709,6 +3796,7 @@
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"จากกิจกรรมในปฏิทินที่กำลังจะเกิดขึ้น"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"อนุญาตให้แอปลบล้าง"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"ข้อยกเว้นแอป"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5957749795766020218">"ไม่มีแอปใดลบล้างโหมดห้ามรบกวนได้"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
       <item quantity="other">การแจ้งเตือนจากแอป <xliff:g id="NUMBER">%1$d</xliff:g> แอปลบล้างโหมดห้ามรบกวนได้</item>
       <item quantity="one">การแจ้งเตือนจากแอป 1 แอปลบล้างโหมดห้ามรบกวนได้</item>
@@ -3870,7 +3958,8 @@
     <string name="default_apps_title" msgid="6943471331817718664">"ค่าเริ่มต้น"</string>
     <string name="default_for_work" msgid="537558180548617528">"ค่าเริ่มต้นสำหรับงาน"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"แอปผู้ช่วยและข้อมูลเสียง"</string>
-    <string name="default_assist_title" msgid="1265914608125710127">"แอปผู้ช่วย"</string>
+    <string name="default_assist_title" msgid="1182435129627493758">"แอปผู้ช่วยดิจิทัล"</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"แอปผู้ช่วยดิจิทัลเริ่มต้น"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"ให้ <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> เป็นผู้ช่วยของคุณใช่ไหม"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"ผู้ช่วยจะสามารถอ่านข้อมูลเกี่ยวกับแอปที่ใช้งานอยู่ในระบบของคุณ รวมถึงข้อมูลที่ปรากฏบนหน้าจอหรือที่เข้าถึงได้ภายในแอป"</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"ยอมรับ"</string>
@@ -4009,7 +4098,8 @@
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"แอป"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"แสดงทับแอปอื่นๆ"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"อนุญาตให้แสดงทับแอปอื่นๆ"</string>
-    <string name="allow_overlay_description" msgid="2266886438777971131">"อนุญาตให้แอปนี้แสดงทับแอปอื่นๆ ที่คุณกำลังใช้อยู่ ซึ่งอาจรบกวนการใช้งานแอปเหล่านั้นหรือเปลี่ยนรูปลักษณ์หรือการทำงานตามที่ควรเป็น"</string>
+    <!-- no translation found for allow_overlay_description (1607235723669496298) -->
+    <skip />
     <string name="manage_external_storage_title" msgid="8024521099838816100">"การเข้าถึงไฟล์ทั้งหมด"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
@@ -4284,6 +4374,10 @@
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"ลองใช้ธีมมืด"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ช่วยยืดอายุการใช้งานแบตเตอรี่"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ชิ้นส่วนการตั้งค่าด่วนสำหรับนักพัฒนาซอฟต์แวร์"</string>
+    <!-- no translation found for adb_authorization_timeout_title (6996844506783749754) -->
+    <skip />
+    <!-- no translation found for adb_authorization_timeout_summary (409931540424019778) -->
+    <skip />
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope Trace"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"ปิดเซ็นเซอร์"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"การตั้งค่าโปรไฟล์งาน"</string>
@@ -4548,8 +4642,7 @@
     <string name="media_output_group" msgid="7918231774595274396">"กลุ่ม"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"เลือกอุปกรณ์ 1 รายการ"</string>
     <string name="media_output_group_panel_multiple_devices_summary" msgid="4838305763151455248">"เลือกอุปกรณ์ <xliff:g id="COUNT">%1$d</xliff:g> รายการ"</string>
-    <!-- no translation found for media_output_switching (7488216595474868546) -->
-    <skip />
+    <string name="media_output_switching" msgid="7488216595474868546">"กำลังเปลี่ยน…"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"รับสายใน"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"เปลี่ยนแปลง APN นี้ไม่ได้"</string>
     <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"เพิ่มอายุการใช้งานแบตเตอรี่ของแท็บเล็ต"</string>
@@ -4620,7 +4713,6 @@
     <string name="network_recommended" msgid="4665525658003183348">" (แนะนำ)"</string>
     <string name="network_lte" msgid="2449425437381668780">"LTE (แนะนำ)"</string>
     <string name="network_4G" msgid="9018841362928321047">"4G (แนะนำ)"</string>
-    <string name="network_global" msgid="30298028284372257">"ทั่วโลก"</string>
     <string name="label_available" msgid="5305726869955838606">"เครือข่ายที่ใช้งานได้"</string>
     <string name="load_networks_progress" msgid="4717874401621250401">"กำลังค้นหา…"</string>
     <string name="register_on_network" msgid="2169662800750709709">"กำลังลงทะเบียนใน <xliff:g id="NETWORK">%s</xliff:g>…"</string>
@@ -4714,6 +4806,10 @@
     <string name="enable_sizecompat_freeform_summary" msgid="1484050174538201499">"อนุญาตให้แอปที่มีขนาดเข้ากันได้อยู่ในรูปแบบอิสระ"</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"ลบล้างฟีเจอร์บังคับใช้โหมดมืด"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"ลบล้างฟีเจอร์บังคับใช้โหมดมืดให้เปิดตลอดเวลา"</string>
+    <!-- no translation found for enable_blurs_on_windows_title (4218144213800778872) -->
+    <skip />
+    <!-- no translation found for enable_blurs_on_windows_summary (8962906921531490386) -->
+    <skip />
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"ความเป็นส่วนตัว"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"สิทธิ์ กิจกรรมในบัญชี ข้อมูลส่วนตัว"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"นำออก"</string>
@@ -4789,4 +4885,8 @@
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"หยุดแคสต์"</string>
+    <!-- no translation found for volte_5G_limited_title (5908052268836750629) -->
+    <skip />
+    <!-- no translation found for volte_5G_limited_text (7150583768725182345) -->
+    <skip />
 </resources>
