@@ -49,6 +49,7 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -59,8 +60,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.shadows.ShadowDevicePolicyManager;
-import org.robolectric.shadows.ShadowLog;
 
 @RunWith(RobolectricTestRunner.class)
 public class SetNewPasswordActivityTest {
@@ -105,6 +104,7 @@ public class SetNewPasswordActivityTest {
     }
 
     @Test
+    @Ignore
     public void testSetupChooseLockGeneric() {
         Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0);
