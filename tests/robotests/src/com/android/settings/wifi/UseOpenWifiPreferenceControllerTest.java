@@ -39,7 +39,6 @@ import android.net.NetworkScorerAppData;
 import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -141,6 +140,19 @@ public class UseOpenWifiPreferenceControllerTest {
         createController();
 
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_disableUseOpenWifiComponentBetweenCalls_returnsTrueThenReturnsFalse() {
+        setupScorers(Lists.newArrayList(sAppData));
+        createController();
+
+        assertThat(mController.isAvailable()).isTrue();
+
+        // Update NetworkScorerAppData so that it no longer has openWifiActivity.
+        setupScorers(Lists.newArrayList(sAppDataNoActivity));
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
