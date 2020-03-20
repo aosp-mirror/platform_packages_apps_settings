@@ -32,4 +32,9 @@ public interface PanelContentCallback {
      * a group
      */
     void onHeaderChanged();
+
+    /**
+     * It will be called when panel requests to close itself.
+     */
+    void forceClose();
 }

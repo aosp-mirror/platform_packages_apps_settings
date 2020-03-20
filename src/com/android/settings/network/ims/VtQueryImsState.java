@@ -20,19 +20,22 @@ import android.content.Context;
 import android.telecom.TelecomManager;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.ims.ImsManager;
 import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 /**
  * Controller class for querying VT status
  */
 public class VtQueryImsState extends ImsQueryController {
+
+    private static final String LOG_TAG = "VtQueryImsState";
 
     private Context mContext;
     private int mSubId;
@@ -71,14 +74,25 @@ public class VtQueryImsState extends ImsQueryController {
      * @return true when Video Call can be performed, otherwise false
      */
     public boolean isReadyToVideoCall() {
+        if (!isProvisionedOnDevice(mSubId)) {
+            return false;
+        }
+
         final ImsManager imsManager = getImsManager(mSubId);
         if (imsManager == null) {
             return false;
         }
 
-        return imsManager.isVtEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId)
-                && MobileNetworkUtils.isImsServiceStateReady(imsManager);
+        if (!imsManager.isVtEnabledByPlatform()) {
+            return false;
+        }
+
+        try {
+            return isServiceStateReady(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get Vt service status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**

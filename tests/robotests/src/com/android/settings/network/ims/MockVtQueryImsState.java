@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telephony.ims.ImsException;
 
 import com.android.ims.ImsManager;
 
@@ -29,6 +30,7 @@ public class MockVtQueryImsState extends VtQueryImsState {
     private Boolean mIsTtyOnVolteEnabled;
     private Boolean mIsProvisionedOnDevice;
     private Boolean mIsEnabledByUser;
+    private Boolean mIsServiceStateReady;
 
     /**
      * Constructor
@@ -66,6 +68,19 @@ public class MockVtQueryImsState extends VtQueryImsState {
             return mIsProvisionedOnDevice;
         }
         return super.isProvisionedOnDevice(subId);
+    }
+
+    public void setServiceStateReady(boolean isReady) {
+        mIsServiceStateReady = isReady;
+    }
+
+    @Override
+    boolean isServiceStateReady(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsServiceStateReady != null) {
+            return mIsServiceStateReady;
+        }
+        return super.isServiceStateReady(subId);
     }
 
     public void setIsEnabledByUser(boolean enabled) {
