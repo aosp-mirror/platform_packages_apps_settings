@@ -15,6 +15,8 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -24,10 +26,13 @@ import android.content.Context;
 import android.os.UserHandle;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowContentResolver;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -38,6 +43,14 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowContentResolver.class})
 public class AccountSyncSettingsTest {
+    private Context mContext;
+    private AccountSyncSettings mAccountSyncSettings;
+
+    @Before
+    public void setUp() {
+        mContext = RuntimeEnvironment.application;
+        mAccountSyncSettings = spy(new TestAccountSyncSettings(mContext));
+    }
 
     @After
     public void tearDown() {
@@ -46,15 +59,52 @@ public class AccountSyncSettingsTest {
 
     @Test
     public void onPreferenceTreeClick_nullAuthority_shouldNotCrash() {
-        final Context context = RuntimeEnvironment.application;
-        final AccountSyncSettings settings = spy(new AccountSyncSettings());
-        when(settings.getActivity()).thenReturn(mock(FragmentActivity.class));
-        final SyncStateSwitchPreference preference = new SyncStateSwitchPreference(context,
+        when(mAccountSyncSettings.getActivity()).thenReturn(mock(FragmentActivity.class));
+        final SyncStateSwitchPreference preference = new SyncStateSwitchPreference(mContext,
                 new Account("acct1", "type1"), "" /* authority */, "testPackage", 1 /* uid */);
         preference.setOneTimeSyncMode(false);
-        ReflectionHelpers.setField(settings, "mUserHandle", UserHandle.CURRENT);
+        ReflectionHelpers.setField(mAccountSyncSettings, "mUserHandle", UserHandle.CURRENT);
 
-        settings.onPreferenceTreeClick(preference);
+        mAccountSyncSettings.onPreferenceTreeClick(preference);
         // no crash
+    }
+
+    @Test
+    public void enabledSyncNowMenu_noSyncStateSwitchPreference_returnFalse() {
+        assertThat(mAccountSyncSettings.enabledSyncNowMenu()).isFalse();
+    }
+
+    @Test
+    public void enabledSyncNowMenu_addSyncStateSwitchPreferenceAndSwitchOn_returnTrue() {
+        final SyncStateSwitchPreference preference = new SyncStateSwitchPreference(mContext,
+                new Account("acct1", "type1"), "" /* authority */, "testPackage", 1 /* uid */);
+        preference.setChecked(true);
+        mAccountSyncSettings.getPreferenceScreen().addPreference(preference);
+
+        assertThat(mAccountSyncSettings.enabledSyncNowMenu()).isTrue();
+    }
+
+    @Test
+    public void enabledSyncNowMenu_addSyncStateSwitchPreferenceAndSwitchOff_returnFalse() {
+        final SyncStateSwitchPreference preference = new SyncStateSwitchPreference(mContext,
+                new Account("acct1", "type1"), "" /* authority */, "testPackage", 1 /* uid */);
+        preference.setChecked(false);
+        mAccountSyncSettings.getPreferenceScreen().addPreference(preference);
+
+        assertThat(mAccountSyncSettings.enabledSyncNowMenu()).isFalse();
+    }
+
+    public static class TestAccountSyncSettings extends AccountSyncSettings {
+        private PreferenceScreen mScreen;
+
+        public TestAccountSyncSettings(Context context) {
+            final PreferenceManager preferenceManager = new PreferenceManager(context);
+            mScreen = preferenceManager.createPreferenceScreen(context);
+        }
+
+        @Override
+        public PreferenceScreen getPreferenceScreen() {
+            return mScreen;
+        }
     }
 }
