@@ -59,6 +59,9 @@ public class VtQueryImsState extends ImsQueryController {
      */
     @VisibleForTesting
     boolean isEnabledByUser(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryVtUserSetting(subId)).query();
     }
 
