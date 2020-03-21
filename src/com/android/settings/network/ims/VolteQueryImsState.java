@@ -60,6 +60,9 @@ public class VolteQueryImsState extends ImsQueryController {
      */
     @VisibleForTesting
     boolean isEnabledByUser(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryEnhanced4gLteModeUserSetting(subId)).query();
     }
 
@@ -75,6 +78,9 @@ public class VolteQueryImsState extends ImsQueryController {
      * @return true when VoLTE has been enabled, otherwise false
      */
     public boolean isVoLteProvisioned() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
         if (!isProvisionedOnDevice(mSubId)) {
             return false;
         }
@@ -92,6 +98,9 @@ public class VolteQueryImsState extends ImsQueryController {
      * @return true when VoLTE can be performed, otherwise false
      */
     public boolean isReadyToVoLte() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
         return isVoLteProvisioned()
                 && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
     }
