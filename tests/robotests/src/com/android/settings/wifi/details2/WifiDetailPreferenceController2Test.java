@@ -46,7 +46,6 @@ import android.net.ConnectivityManager.NetworkCallback;
 import android.net.IpPrefix;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
-import android.net.MacAddress;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -81,9 +80,9 @@ import com.android.settingslib.widget.ActionButtonsPreference;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -109,8 +108,6 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 // TODO(b/143326832): Should add test cases for connect button.
-// TODO(b/143326832): WifiEntry is not mature, should remove @Ignore after it's constructed.
-@Ignore
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDevicePolicyManager.class, ShadowEntityHeaderController.class})
 public class WifiDetailPreferenceController2Test {
@@ -123,8 +120,7 @@ public class WifiDetailPreferenceController2Test {
     private static final String MAC_ADDRESS = "01:23:45:67:89:ab";
     private static final String RANDOMIZED_MAC_ADDRESS = "RANDOMIZED_MAC_ADDRESS";
     private static final String FACTORY_MAC_ADDRESS = "FACTORY_MAC_ADDRESS";
-    // TODO(b/143326832): Add WifiEntry#getSecurityString
-    //private static final String SECURITY = "None";
+    private static final String SECURITY = "None";
     private static final String FQDN = "fqdn";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -156,8 +152,6 @@ public class WifiDetailPreferenceController2Test {
     private WifiDetailPreferenceController2.IconInjector mMockIconInjector;
     @Mock
     private WifiDetailPreferenceController2.Clock mMockClock;
-    @Mock
-    private MacAddress mMockMacAddress;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mMockHeaderController;
@@ -270,9 +264,9 @@ public class WifiDetailPreferenceController2Test {
 
         when(mContext.getPackageManager()).thenReturn(mMockPackageManager);
         when(mMockWifiEntry.getLevel()).thenReturn(LEVEL);
-        // TODO(b/143326832): Add WifiEntry#getSecurityString
-        //when(mMockWifiEntry.getSecurityString(false)).thenReturn(SECURITY);
+        when(mMockWifiEntry.getSecurityString(false /* concise */)).thenReturn(SECURITY);
         when(mMockWifiEntry.getTitle()).thenReturn(SSID);
+        when(mMockWifiEntry.getWifiConfiguration()).thenReturn(mMockWifiConfig);
         when(mMockConnectivityManager.getNetworkInfo(any(Network.class)))
                 .thenReturn(mMockNetworkInfo);
         doNothing().when(mMockConnectivityManager).registerNetworkCallback(
@@ -393,7 +387,6 @@ public class WifiDetailPreferenceController2Test {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-    /* TODO(b/143326832): Add WifiEntry#getSecurityString
     @Test
     public void securityPreference_stringShouldBeSet() {
         setUpForConnectedNetwork();
@@ -401,7 +394,6 @@ public class WifiDetailPreferenceController2Test {
 
         verify(mMockSecurityPref).setSummary(SECURITY);
     }
-    */
 
     @Test
     public void latestWifiInfo_shouldBeFetchedInDisplayPreferenceForConnectedNetwork() {
@@ -774,27 +766,27 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void macAddressPref_shouldVisibleAsRandomizedForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
-        mMockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_PERSISTENT;
-        when(mMockWifiConfig.getRandomizedMacAddress()).thenReturn(mMockMacAddress);
-        when(mMockMacAddress.toString()).thenReturn(RANDOMIZED_MAC_ADDRESS);
+        when(mMockWifiEntry.getPrivacy()).thenReturn(WifiEntry.PRIVACY_RANDOMIZED_MAC);
+        when(mMockWifiEntry.getMacAddress()).thenReturn(RANDOMIZED_MAC_ADDRESS);
 
         displayAndResume();
 
         verify(mMockMacAddressPref).setVisible(true);
         verify(mMockMacAddressPref).setSummary(RANDOMIZED_MAC_ADDRESS);
+        verify(mMockMacAddressPref).setTitle(R.string.wifi_advanced_randomized_mac_address_title);
     }
 
     @Test
     public void macAddressPref_shouldVisibleAsFactoryForDisconnectedNetwork() {
         setUpForDisconnectedNetwork();
-        mMockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_NONE;
-        when(mMockWifiManager.getFactoryMacAddresses())
-                .thenReturn(new String[]{FACTORY_MAC_ADDRESS});
+        when(mMockWifiEntry.getPrivacy()).thenReturn(WifiEntry.PRIVACY_DEVICE_MAC);
+        when(mMockWifiEntry.getMacAddress()).thenReturn(FACTORY_MAC_ADDRESS);
 
         displayAndResume();
 
         verify(mMockMacAddressPref).setVisible(true);
         verify(mMockMacAddressPref).setSummary(FACTORY_MAC_ADDRESS);
+        verify(mMockMacAddressPref).setTitle(R.string.wifi_advanced_device_mac_address_title);
     }
 
     @Test
@@ -1166,35 +1158,30 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void forgetNetwork_saved() {
         setUpForConnectedNetwork();
-        mMockWifiConfig.networkId = 5;
 
         mController.displayPreference(mMockScreen);
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mMockWifiManager).forget(mMockWifiConfig.networkId, null);
+        verify(mMockWifiEntry).forget(mController);
         verify(mMockMetricsFeatureProvider)
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
     }
 
-    /* TODO(b/143326832): Support Passpoint test cases while WifiTracker2 supports it.
     @Test
     public void forgetNetwork_shouldShowDialog() {
         setUpForConnectedNetwork();
-        final WifiDetailPreferenceController2 spyController = spy(mController);
+        when(mMockWifiEntry.isSubscription()).thenReturn(true);
 
-        mMockWifiConfig.networkId = 5;
-        when(mMockAccessPoint.isPasspoint()).thenReturn(true);
-        when(mMockAccessPoint.getPasspointFqdn()).thenReturn(FQDN);
-        spyController.displayPreference(mMockScreen);
+        displayAndResume();
+        mController.onUpdated();
 
         mForgetClickListener.getValue().onClick(null);
 
-        verify(mMockWifiManager, times(0)).removePasspointConfiguration(FQDN);
+        verify(mMockWifiEntry, times(0)).forget(mController);
         verify(mMockMetricsFeatureProvider, times(0))
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_FORGET);
-        verify(spyController).showConfirmForgetDialog();
+        verify(mController).showConfirmForgetDialog();
     }
-    */
 
     @Test
     public void networkStateChangedIntent_shouldRefetchInfo() {
@@ -1204,55 +1191,19 @@ public class WifiDetailPreferenceController2Test {
 
         verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
         verify(mMockWifiManager, times(1)).getConnectionInfo();
-
-        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
-
-        verify(mMockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(2)).getConnectionInfo();
     }
 
     @Test
-    public void networkStateChangedIntent_shouldRefetchInfoForConnectedNetwork() {
+    public void onUpdated_shouldUpdateNetworkInfo() {
         setUpForConnectedNetwork();
 
         displayAndResume();
 
-        verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(1)).getConnectionInfo();
+        verify(mController, times(1)).updateNetworkInfo();
 
-        mContext.sendBroadcast(new Intent(WifiManager.NETWORK_STATE_CHANGED_ACTION));
+        mController.onUpdated();
 
-        verify(mMockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(2)).getConnectionInfo();
-    }
-
-    @Test
-    public void rssiChangedIntent_shouldRefetchInfo() {
-        setUpForConnectedNetwork();
-
-        displayAndResume();
-
-        verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(1)).getConnectionInfo();
-
-        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
-
-        verify(mMockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(2)).getConnectionInfo();
-    }
-
-    @Test
-    public void rssiChangedIntent_shouldRefetchInfoForConnectedNetwork() {
-        setUpForConnectedNetwork();
-        displayAndResume();
-
-        verify(mMockConnectivityManager, times(1)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(1)).getConnectionInfo();
-
-        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
-
-        verify(mMockConnectivityManager, times(2)).getNetworkInfo(any(Network.class));
-        verify(mMockWifiManager, times(2)).getConnectionInfo();
+        verify(mController, times(2)).updateNetworkInfo();
     }
 
     @Test
@@ -1431,30 +1382,41 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void testConnectButton_clickConnect_displayAsSuccess() {
         setUpForDisconnectedNetwork();
-        when(mMockWifiManager.isWifiEnabled()).thenReturn(true);
-        InOrder inOrder = inOrder(mMockButtonsPref);
-        String label = "title";
+        final ArgumentCaptor<ConnectCallback> connectCallbackCaptor =
+                ArgumentCaptor.forClass(ConnectCallback.class);
+        final InOrder inOrder = inOrder(mMockButtonsPref);
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        when(mMockWifiEntry.canConnect()).thenReturn(true);
+        final String label = "title";
         when(mMockWifiEntry.getTitle()).thenReturn(label);
         setUpForToast();
 
         displayAndResume();
 
-        // check connect button enabled
-        verifyConnectBtnSetUpAsEnabled(inOrder);
+        // check connect button displayed
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
 
         // click connect button
         mController.connectDisconnectNetwork();
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTING);
+        when(mMockWifiEntry.canConnect()).thenReturn(false);
+        when(mMockWifiEntry.canDisconnect()).thenReturn(false);
+        mController.onUpdated();
 
         // check display button as connecting
-        verify(mMockWifiManager, times(1)).connect(anyInt(), any(WifiManager.ActionListener.class));
-        verifyConnectBtnSetUpAsConnecting(inOrder);
+        verify(mMockWifiEntry, times(1)).connect(connectCallbackCaptor.capture());
+        verifyConnectingBtnAvailable(inOrder);
 
         // update as connected
+        connectCallbackCaptor.getValue().onConnectResult(
+                ConnectCallback.CONNECT_STATUS_SUCCESS);
         when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+        when(mMockWifiEntry.canDisconnect()).thenReturn(true);
+        mController.onUpdated();
 
-        // check connect button invisible, be init as default state and toast success message
-        verifyConnectBtnBeInitAsDefault(inOrder);
-        inOrder.verify(mMockButtonsPref).setButton3Enabled(false);
+        // check disconnect button invisible, be init as default state and toast success message
+        verifyDisconnecBtnAvailable(inOrder);
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
                 mContext.getString(R.string.wifi_connected_to_message, label));
     }
@@ -1462,70 +1424,61 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void testConnectButton_clickConnectButFailed_displayFailMessage() {
         setUpForDisconnectedNetwork();
-        ArgumentCaptor<WifiManager.ActionListener> connectListenerCaptor =
-                ArgumentCaptor.forClass(WifiManager.ActionListener.class);
-        when(mMockWifiManager.isWifiEnabled()).thenReturn(true);
-        InOrder inOrder = inOrder(mMockButtonsPref);
+        final ArgumentCaptor<ConnectCallback> connectCallbackCaptor =
+                ArgumentCaptor.forClass(ConnectCallback.class);
+        final InOrder inOrder = inOrder(mMockButtonsPref);
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        when(mMockWifiEntry.canDisconnect()).thenReturn(true);
         setUpForToast();
 
         displayAndResume();
 
-        // check connect button enabled
-        verifyConnectBtnSetUpAsEnabled(inOrder);
+        // check connect button displayed
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
+        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
 
         // click connect button
         mController.connectDisconnectNetwork();
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTING);
+        when(mMockWifiEntry.canConnect()).thenReturn(false);
+        when(mMockWifiEntry.canDisconnect()).thenReturn(false);
+        mController.onUpdated();
 
         // check display button as connecting
-        verify(mMockWifiManager, times(1)).connect(anyInt(), connectListenerCaptor.capture());
-        verifyConnectBtnSetUpAsConnecting(inOrder);
+        verify(mMockWifiEntry, times(1)).connect(connectCallbackCaptor.capture());
+        verifyConnectingBtnAvailable(inOrder);
 
         // update as failed
-        connectListenerCaptor.getValue().onFailure(-1);
+        connectCallbackCaptor.getValue().onConnectResult(
+                ConnectCallback.CONNECT_STATUS_FAILURE_UNKNOWN);
+        when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        when(mMockWifiEntry.canConnect()).thenReturn(true);
+        mController.onUpdated();
 
-        // check connect button visible, be init as default and toast failed message
-        verifyConnectBtnBeInitAsDefault(inOrder);
-        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
+        // check connect button available, be init as default and toast failed message
+        verifyConnectBtnAvailable(inOrder);
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
                 mContext.getString(R.string.wifi_failed_connect_message));
     }
 
-    private void verifyConnectBtnSetUpAsEnabled(InOrder inOrder) {
+    private void verifyConnectBtnAvailable(InOrder inOrder) {
+        inOrder.verify(mMockButtonsPref).setButton3Visible(true);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
         inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
         inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
-        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
     }
 
-    private void verifyConnectBtnSetUpAsConnecting(InOrder inOrder) {
-        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connecting);
+    private void verifyDisconnecBtnAvailable(InOrder inOrder) {
+        inOrder.verify(mMockButtonsPref).setButton3Visible(true);
+        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_disconnect_button_text);
+        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_close);
+    }
+
+    private void verifyConnectingBtnAvailable(InOrder inOrder) {
+        inOrder.verify(mMockButtonsPref).setButton3Visible(true);
         inOrder.verify(mMockButtonsPref).setButton3Enabled(false);
-    }
-
-    private void verifyConnectBtnBeInitAsDefault(InOrder inOrder) {
-        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connect);
-        inOrder.verify(mMockButtonsPref).setButton3Icon(R.drawable.ic_settings_wireless);
-        inOrder.verify(mMockButtonsPref).setButton3Enabled(true);
-    }
-
-    @Test
-    public void testRefreshRssiViews_shouldOnUpdated() {
-        setUpForConnectedNetwork();
-        displayAndResume();
-
-        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
-
-        verify(mController).onUpdated();
-    }
-
-    @Test
-    public void testRefreshRssiViews_shouldNotUpdateForNotInRangeNetwork() {
-        setUpForNotInRangeNetwork();
-        displayAndResume();
-
-        when(mMockWifiEntry.getLevel()).thenReturn(0);
-        mContext.sendBroadcast(new Intent(WifiManager.RSSI_CHANGED_ACTION));
-
-        verify(mMockSignalStrengthPref, times(2)).setVisible(false);
+        inOrder.verify(mMockButtonsPref).setButton3Text(R.string.wifi_connecting);
     }
 
     @Test
@@ -1577,31 +1530,6 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockHeaderController, times(1)).setIcon(drawableCaptor.capture());
         ColorDrawable icon = drawableCaptor.getValue();
         assertThat(icon).isNotNull();
-    }
-
-    @Test
-    public void checkMacTitle_whenPrivacyRandomizedMac_shouldBeRandom() {
-        setUpForDisconnectedNetwork();
-        mMockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_PERSISTENT;
-        when(mMockWifiConfig.getRandomizedMacAddress()).thenReturn(mMockMacAddress);
-        when(mMockMacAddress.toString()).thenReturn(RANDOMIZED_MAC_ADDRESS);
-
-        displayAndResume();
-
-        verify(mMockMacAddressPref).setTitle(R.string.wifi_advanced_randomized_mac_address_title);
-    }
-
-    @Test
-    public void checkMacTitle_whenPrivacyDeviceMac_shouldBeFactory() {
-        setUpForDisconnectedNetwork();
-        mMockWifiConfig.macRandomizationSetting = WifiConfiguration.RANDOMIZATION_NONE;
-        when(mMockWifiConfig.getRandomizedMacAddress()).thenReturn(mMockMacAddress);
-        when(mMockWifiManager.getFactoryMacAddresses())
-                .thenReturn(new String[]{FACTORY_MAC_ADDRESS});
-
-        displayAndResume();
-
-        verify(mMockMacAddressPref).setTitle(R.string.wifi_advanced_device_mac_address_title);
     }
 
     /* TODO(b/143326832): Support Passpoint test cases while WifiTracker2 supports it.
