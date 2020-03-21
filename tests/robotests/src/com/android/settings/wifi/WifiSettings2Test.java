@@ -25,6 +25,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -98,13 +99,14 @@ public class WifiSettings2Test {
 
     @Test
     public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
-        final WifiSettings wifiSettings = spy(new WifiSettings());
+        final WifiSettings2 wifiSettings2 = spy(new WifiSettings2());
         final Intent intent = new Intent();
-        doNothing().when(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        doNothing().when(wifiSettings2).handleAddNetworkRequest(anyInt(), any(Intent.class));
 
-        wifiSettings.onActivityResult(WifiSettings.ADD_NETWORK_REQUEST, Activity.RESULT_OK, intent);
+        wifiSettings2.onActivityResult(WifiSettings2.ADD_NETWORK_REQUEST, Activity.RESULT_OK,
+                intent);
 
-        verify(wifiSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        verify(wifiSettings2).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
     @Test
@@ -160,11 +162,10 @@ public class WifiSettings2Test {
     }
 
     @Test
-    @Ignore
     public void setAdditionalSettingsSummaries_wifiWakeupEnabled_displayOn() {
         final ContentResolver contentResolver = mContext.getContentResolver();
         when(mWifiManager.isAutoWakeupEnabled()).thenReturn(true);
-        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
         Settings.Global.putInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0);
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
@@ -201,7 +202,7 @@ public class WifiSettings2Test {
         when(activity.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
 
-        when(mWifiSettings2.findPreference(WifiSettings.PREF_KEY_DATA_USAGE))
+        when(mWifiSettings2.findPreference(WifiSettings2.PREF_KEY_DATA_USAGE))
                 .thenReturn(mDataUsagePreference);
     }
 
@@ -268,5 +269,15 @@ public class WifiSettings2Test {
         mWifiSettings2.onWifiEntriesChanged();
 
         verify(mWifiSettings2).changeNextButtonState(anyBoolean());
+    }
+
+    @Test
+    public void openSubscriptionHelpPage_shouldCallStartActivityForResult() {
+        doReturn(new Intent()).when(mWifiSettings2).getHelpIntent(mContext);
+        doNothing().when(mWifiSettings2).startActivityForResult(any(Intent.class), anyInt());
+
+        mWifiSettings2.openSubscriptionHelpPage();
+
+        verify(mWifiSettings2, times(1)).startActivityForResult(any(), anyInt());
     }
 }

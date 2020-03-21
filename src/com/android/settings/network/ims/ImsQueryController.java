@@ -83,6 +83,9 @@ abstract class ImsQueryController {
 
     @VisibleForTesting
     boolean isProvisionedOnDevice(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryProvisioningStat(subId, mCapability, mTech)).query();
     }
 

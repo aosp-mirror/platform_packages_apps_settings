@@ -49,6 +49,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -70,7 +71,6 @@ import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -295,9 +295,12 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
 
@@ -307,9 +310,12 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
 
@@ -352,9 +358,12 @@ public class WifiSettingsTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void clickOnWifiNetworkWith_shouldStartCaptivePortalApp() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         when(mWifiManager.getConfiguredNetworks()).thenReturn(createMockWifiConfigurations(
                 NUM_NETWORKS));
         when(mWifiTracker.isConnected()).thenReturn(true);

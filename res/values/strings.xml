@@ -2742,7 +2742,7 @@
     <!-- Display settings screen, display white balance settings summary [CHAR LIMIT=NONE] -->
     <string name="display_white_balance_summary"></string>
     <!-- Display settings screen, setting option name to enable adaptive sleep [CHAR LIMIT=30] -->
-    <string name="adaptive_sleep_title">Turn on screen attention</string>
+    <string name="adaptive_sleep_title">Screen attention</string>
     <!-- Setting option summary when adaptive sleep is on [CHAR LIMIT=NONE] -->
     <string name="adaptive_sleep_summary_on">On / Screen won\u2019t turn off if you\u2019re looking at it</string>
     <!-- Setting option summary when adaptive sleep is off [CHAR LIMIT=NONE] -->
@@ -2755,6 +2755,8 @@
     <string name="adaptive_sleep_description">Prevents your screen from turning off if you\u2019re looking at it</string>
     <!-- Description feature's privacy sensitive details to make sure users understand what feature users, what it saves/sends etc [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_privacy">Screen attention uses the front camera to see if someone is looking at the screen. It works on device, and images are never stored or sent to Google.</string>
+    <!-- Title of the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
+    <string name="adaptive_sleep_contextual_slice_title">Turn on screen attention</string>
     <!-- Description about the contextual adaptive sleep card [CHAR LIMIT=NONE]-->
     <string name="adaptive_sleep_contextual_slice_summary">Keep screen on when looking at it</string>
 
@@ -4911,19 +4913,19 @@
     <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_button">To turn this app on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between apps, touch &amp; hold the accessibility button.</string>
+    <string name="accessibility_tutorial_dialog_message_button">To turn this feature on or off, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=100] -->
-    <string name="accessibility_tutorial_dialog_message_volume">To turn this app on or off, press &amp; hold both volume keys for 1 second.</string>
+    <string name="accessibility_tutorial_dialog_message_volume">To turn this feature on or off, press &amp; hold both volume keys.</string>
     <!-- Instruction for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_message_triple">To start and stop magnification, triple-tap anywhere on your screen.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is not enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture">To turn this app on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between apps, swipe up with two fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture">To turn this feature on or off, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using gesture navigation and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback">To turn this app on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between apps, swipe up with three fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback">To turn this feature on or off, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is disabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings">To turn an accessibility app on or off, swipe up from the bottom of the screen with two fingers.\n\nTo switch between apps, swipe up with two fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings">To turn an accessibility feature on or off, swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Message for the accessibility tutorial dialog when user chooses gesture navigation in navigation settings, an accessibility service is using the accessibility button, and touch exploration is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To turn an accessibility app on or off, swipe up from the bottom of the screen with three fingers.\n\nTo switch between apps, swipe up with three fingers and hold.</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback">To turn an accessibility feature on or off, swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Button for the accessibility tutorial dialog to dismiss the dialog when user clicks it. [CHAR LIMIT=10] -->
     <string name="accessibility_tutorial_dialog_button">Got it</string>
     <!-- Title for accessibility shortcut preference for accessibility apps. [CHAR LIMIT=40] -->
@@ -4942,10 +4944,16 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers</string>
+    <!-- Summary for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_migration_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
+    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
+    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
+    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys for 1 second</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware">Press &amp; hold both volume keys</string>
     <!-- Title for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap">Triple-tap screen</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -4962,10 +4970,10 @@
     <string name="accessibility_shortcut_service_title">Shortcut service</string>
     <!-- Label for shortcut settings button. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_settings">Shortcut settings</string>
-    <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
+    <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=50] -->
     <string name="accessibility_shortcut_service_on_lock_screen_title">Shortcut from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for 3 seconds.</string>
+    <string name="accessibility_shortcut_description">Allow feature shortcut to turn on from the lock screen. Hold both volume keys for a few seconds.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -7184,6 +7192,9 @@
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
     <string name="help_url_icc_lock" translatable="false"></string>
+    <!-- Help URI, ManageSubscription [DO NOT TRANSLATE] -->
+    <string name="help_url_manage_wifi_subscription" translatable="false"></string>
+
     <string name="help_uri_process_stats_summary" translatable="false"></string>
     <string name="help_uri_process_stats_apps" translatable="false"></string>
     <string name="help_uri_private_dns" translatable="false"></string>
@@ -7255,7 +7266,7 @@
     <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
     <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
          [CHAR LIMIT=NONE]-->
-    <string name="contact_discovery_opt_in_dialog_message">Enabling this feature will allow your carrier access to phone numbers in your contacts in order to discover which calling features they support.</string>
+    <string name="contact_discovery_opt_in_dialog_message">All of the phone numbers in your contacts will be periodically sent to your carrier in order to discover which calling features are supported.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -8177,6 +8188,24 @@
     <!-- Button to cancel out of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60] -->
     <string name="bubbles_feature_disabled_button_cancel">Cancel</string>
 
+    <!-- Bubble feature settings: Description for toggle when bubbles are turned on in notification settings [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_on_summary">On / Conversations can appear as floating icons</string>
+    <!-- Bubble feature settings: Title of the toggle to turn bubbles on and off [CHAR LIMIT=100] -->
+    <string name="notifications_bubble_setting_title">Allow apps to show bubbles</string>
+    <!-- Bubble feature settings: Description shown with the toggle to turn bubbles on and off [CHAR LIMIT=NONE]-->
+    <string name="notifications_bubble_setting_description">Some conversations will appear as floating icons on top of other apps</string>
+
+    <!-- Bubble app settings: option allowing all conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60]-->
+    <string name="bubble_app_setting_all">All conversations can bubble</string>
+    <!-- Bubble app settings: option allowing only user selected conversations from an app to bubble if the app sends bubbles [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_selected">Selected conversations can bubble</string>
+    <!-- Bubble app settings: option allowing no bubbles from the app [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_none">Nothing can bubble</string>
+    <!-- Bubble app settings: Title above a list of conversations that have been selected to bubble [CHAR LIMIT=60]-->
+    <string name="bubble_app_setting_selected_conversation_title">Conversations</string>
+    <!-- Bubble app settings: Title above a list of conversations that have been excluded from bubbling [CHAR LIMIT=60] -->
+    <string name="bubble_app_setting_excluded_conversation_title">Excluded</string>
+
     <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
     <string name="swipe_direction_title">Swipe actions</string>
 
@@ -8609,6 +8638,30 @@
         <item quantity="one"><xliff:g id="count">%d</xliff:g> app connected</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> apps connected</item>
     </plurals>
+
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_work_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    work profile in order to connect it to the corresponding personal app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_work_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your work profile</string>
+
+    <!-- Banner title. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_personal_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
+
+    <!-- Banner text. This banner lets a user know that they need to install an app in their
+    personal profile in order to connect it to the corresponding work app.
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_personal_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your personal profile</string>
+
+    <!-- Button text. This button takes a user to the app store so they can download and
+    install the app they need. [CHAR LIMIT=50]-->
+    <string name="interact_across_profiles_install_app_action">Get the app</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>

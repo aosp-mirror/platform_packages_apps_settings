@@ -56,6 +56,9 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      */
     @VisibleForTesting
     boolean isEnabledByUser(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return false;
+        }
         return (new ImsQueryWfcUserSetting(subId)).query();
     }
 
@@ -71,6 +74,9 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @return true when Wifi Calling has been enabled, otherwise false
      */
     public boolean isWifiCallingProvisioned() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
         final ImsManager imsManager = getImsManager(mSubId);
         if (imsManager == null) {
             return false;
@@ -86,6 +92,9 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
      * @return true when Wifi Calling can be performed, otherwise false
      */
     public boolean isReadyToWifiCalling() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
         return isWifiCallingProvisioned()
                 && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
     }
