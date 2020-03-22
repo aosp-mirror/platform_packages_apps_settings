@@ -49,6 +49,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -296,6 +297,10 @@ public class WifiSettingsTest {
     @Test
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceInvisibleIfWifiNotSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
 
@@ -307,6 +312,10 @@ public class WifiSettingsTest {
     @Test
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void checkDataUsagePreference_perferenceVisibleIfWifiSupported() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         setUpForOnCreate();
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
 
@@ -351,6 +360,10 @@ public class WifiSettingsTest {
     @Test
     @Config(shadows = {ShadowDataUsageUtils.class, ShadowFragment.class})
     public void clickOnWifiNetworkWith_shouldStartCaptivePortalApp() {
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
+            return;
+        }
+
         when(mWifiManager.getConfiguredNetworks()).thenReturn(createMockWifiConfigurations(
                 NUM_NETWORKS));
         when(mWifiTracker.isConnected()).thenReturn(true);
