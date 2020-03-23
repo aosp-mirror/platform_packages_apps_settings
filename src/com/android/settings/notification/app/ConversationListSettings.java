@@ -18,15 +18,8 @@ package com.android.settings.notification.app;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
-
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.NotificationBackend;
@@ -60,7 +53,7 @@ public class ConversationListSettings extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
-        mControllers.add(new ImportantConversationsPreferenceController(context, mBackend));
+        mControllers.add(new PriorityConversationsPreferenceController(context, mBackend));
         mControllers.add(new AllConversationsPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
