@@ -249,18 +249,31 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        mTetherEnabler.addListener(mStateUpdateListener);
+        if (mUnavailable) {
+            return;
+        }
+        if (mTetherEnabler != null) {
+            mTetherEnabler.addListener(mStateUpdateListener);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mTetherEnabler.removeListener(mStateUpdateListener);
+        if (mUnavailable) {
+            return;
+        }
+        if (mTetherEnabler != null) {
+            mTetherEnabler.removeListener(mStateUpdateListener);
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        if (mUnavailable) {
+            return;
+        }
         final Context context = getContext();
         if (context != null) {
             context.unregisterReceiver(mTetherChangeReceiver);
