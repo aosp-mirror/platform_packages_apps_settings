@@ -28,11 +28,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.media.MediaDescription;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -57,7 +59,7 @@ public class MediaOutputPanelTest {
 
     private static final String TEST_PACKAGENAME = "com.test.packagename";
     private static final String TEST_ARTIST = "test_artist";
-    private static final String TEST_ALBUM = "test_album";
+    private static final String TEST_SONG = "test_song";
 
     @Mock
     private MediaSessionManager mMediaSessionManager;
@@ -77,6 +79,7 @@ public class MediaOutputPanelTest {
     private List<MediaController> mMediaControllers = new ArrayList<>();
     private ArgumentCaptor<MediaController.Callback> mControllerCbs =
             ArgumentCaptor.forClass(MediaController.Callback.class);
+    private MediaDescription mMediaDescription;
 
     @Before
     public void setUp() {
@@ -89,6 +92,11 @@ public class MediaOutputPanelTest {
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        MediaDescription.Builder builder = new MediaDescription.Builder();
+        builder.setTitle(TEST_SONG);
+        builder.setSubtitle(TEST_ARTIST);
+        mMediaDescription = builder.build();
+        when(mMediaMetadata.getDescription()).thenReturn(mMediaDescription);
 
         mPanel = MediaOutputPanel.create(mContext, TEST_PACKAGENAME);
         mPanel.mLocalMediaManager = mLocalMediaManager;
@@ -173,12 +181,11 @@ public class MediaOutputPanelTest {
     }
 
     @Test
-    public void getTitle_withMetadata_returnArtistName() {
+    public void getTitle_withMetadata_returnSongName() {
         mPanel.onStart();
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getTitle()).isEqualTo(TEST_ARTIST);
+        assertThat(mPanel.getTitle()).isEqualTo(TEST_SONG);
     }
 
     @Test
@@ -187,11 +194,9 @@ public class MediaOutputPanelTest {
 
         assertThat(mPanel.getTitle()).isEqualTo(mContext.getText(R.string.media_volume_title));
     }
-
     @Test
     public void getTitle_noPackageName_returnDefaultString() {
         mPanel = MediaOutputPanel.create(mContext, null);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
         assertThat(mPanel.getTitle()).isEqualTo(mContext.getText(R.string.media_volume_title));
@@ -208,42 +213,36 @@ public class MediaOutputPanelTest {
     }
 
     @Test
-    public void getSubTitle_withMetadata_returnAlbumName() {
+    public void getSubTitle_withMetadata_returnArtistName() {
         mPanel.onStart();
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ALBUM)).thenReturn(TEST_ALBUM);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(TEST_ALBUM);
+        assertThat(mPanel.getSubTitle()).isEqualTo(TEST_ARTIST);
     }
 
     @Test
-    public void getSubTitle_noMetadata_returnDefaultString() {
+    public void getSubTitle_noMetadata_returnEmpty() {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME);
         when(mMediaController.getMetadata()).thenReturn(null);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
-    public void getSubTitle_noPackageName_returnDefaultString() {
+    public void getSubTitle_noPackageName_returnEmpty() {
         mPanel = MediaOutputPanel.create(mContext, null);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ARTIST)).thenReturn(TEST_ARTIST);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
-    public void getSubTitle_noController_returnDefaultString() {
+    public void getSubTitle_noController_returnEmpty() {
         mMediaControllers.clear();
         mPanel = MediaOutputPanel.create(mContext, TEST_PACKAGENAME);
-        when(mMediaMetadata.getString(MediaMetadata.METADATA_KEY_ALBUM)).thenReturn(TEST_ALBUM);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
-                R.string.media_output_panel_title));
+        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
     }
 
     @Test
