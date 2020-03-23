@@ -25,15 +25,19 @@ import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.icu.text.ListFormatter;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
@@ -67,7 +71,9 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getSettingsLifecycle(), getFragmentManager());
+        final Activity activity = getActivity();
+        return buildPreferenceControllers(context, getSettingsLifecycle(), getFragmentManager(),
+                activity != null ? activity.getApplication() : null, this);
     }
 
     @Override
@@ -76,15 +82,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, FragmentManager fragmentManager) {
+            Lifecycle lifecycle, FragmentManager fragmentManager, Application app,
+            Fragment fragment) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModePeoplePreferenceController(context, lifecycle,
                 "zen_mode_behavior_people"));
-        controllers.add(new ZenModeBypassingAppsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBypassingAppsPreferenceController(context, app,
+                fragment, lifecycle));
+        controllers.add(new ZenModeSoundVibrationPreferenceController(context, lifecycle,
+                "zen_sound_vibration_settings"));
         controllers.add(new ZenModeAutomationPreferenceController(context));
-        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
                 fragmentManager));
         return controllers;
@@ -110,29 +120,34 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 PRIORITY_CATEGORY_REPEAT_CALLERS,
         };
 
-        String getSoundSettingSummary(Policy policy) {
-            List<String> enabledCategories = getEnabledCategories(policy,
+        String getOtherSoundCategoriesSummary(Policy policy) {
+            List<String> enabledCategories = getEnabledCategories(
+                    policy,
                     category -> PRIORITY_CATEGORY_ALARMS == category
                             || PRIORITY_CATEGORY_MEDIA == category
-                            || PRIORITY_CATEGORY_SYSTEM == category, false);
+                            || PRIORITY_CATEGORY_SYSTEM == category
+                            || PRIORITY_CATEGORY_REMINDERS == category
+                            || PRIORITY_CATEGORY_EVENTS == category,
+                    true);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_sound_all_muted);
-            } else if (numCategories == 1) {
-                return mContext.getString(R.string.zen_sound_one_allowed,
-                        enabledCategories.get(0));
-            } else if (numCategories == 2) {
-                return mContext.getString(R.string.zen_sound_two_allowed,
-                        enabledCategories.get(0),
-                        enabledCategories.get(1));
-            } else if (numCategories == 3) {
-                return mContext.getString(R.string.zen_sound_three_allowed,
-                        enabledCategories.get(0),
-                        enabledCategories.get(1),
-                        enabledCategories.get(2));
-            } else {
-                return mContext.getString(R.string.zen_sound_none_muted);
+                return mContext.getResources().getString(R.string.zen_mode_other_sounds_none);
             }
+
+            List<String> displayCategories = new ArrayList<>();
+            if (numCategories <= 2) {
+                displayCategories = enabledCategories;
+            } else {
+                displayCategories.add(enabledCategories.get(0));
+                displayCategories.add(enabledCategories.get(1));
+                displayCategories.add(mContext.getString(R.string.zen_mode_other_sounds_list_count,
+                        numCategories - 2));
+            }
+
+            return mContext.getResources().getQuantityString(
+                    R.plurals.zen_mode_other_sounds_summary,
+                    numCategories /* quantity */,
+                    ListFormatter.getInstance().format(displayCategories));
         }
 
         String getCallsSettingSummary(Policy policy) {
@@ -322,7 +337,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null, null);
+                    return buildPreferenceControllers(context, null, null,
+                            null, null);
                 }
             };
 }
