@@ -46,6 +46,8 @@ public class FakePanelContent implements PanelContent {
     private CharSequence mSubTitle;
     private IconCompat mIcon;
     private int mViewType;
+    private boolean mIsCustomizedButtonUsed = false;
+    private CharSequence mCustomizedButtonTitle;
 
     @Override
     public IconCompat getIcon() {
@@ -96,5 +98,23 @@ public class FakePanelContent implements PanelContent {
     @Override
     public int getViewType() {
         return mViewType;
+    }
+
+    @Override
+    public boolean isCustomizedButtonUsed() {
+        return mIsCustomizedButtonUsed;
+    }
+
+    public void setIsCustomizedButtonUsed(boolean isUsed) {
+        mIsCustomizedButtonUsed = isUsed;
+    }
+
+    @Override
+    public CharSequence getCustomizedButtonTitle() {
+        return mCustomizedButtonTitle;
+    }
+
+    public void setCustomizedButtonTitle(CharSequence title) {
+        mCustomizedButtonTitle = title;
     }
 }
