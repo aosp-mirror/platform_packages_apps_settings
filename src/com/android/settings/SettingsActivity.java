@@ -282,12 +282,12 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean deviceProvisioned = WizardManagerHelper.isDeviceProvisioned(this);
+        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
-            actionBar.setHomeButtonEnabled(deviceProvisioned);
+            actionBar.setDisplayHomeAsUpEnabled(!isInSetupWizard);
+            actionBar.setHomeButtonEnabled(!isInSetupWizard);
             actionBar.setDisplayShowTitleEnabled(true);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
