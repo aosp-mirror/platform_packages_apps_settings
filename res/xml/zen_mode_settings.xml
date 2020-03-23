@@ -26,7 +26,6 @@
         android:title="@string/zen_mode_settings_title"
         android:selectable="false"
         android:layout="@layout/zen_mode_settings_button"
-        settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"
         settings:keywords="@string/keywords_zen_mode_settings"/>
 
@@ -55,26 +54,26 @@
     <!-- Automatic rules -->
     <Preference
         android:key="zen_mode_automation_settings"
-        android:title="@string/zen_mode_automation_settings_title"
+        android:title="@string/zen_category_schedule"
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"
         android:fragment="com.android.settings.notification.zen.ZenModeAutomationSettings"/>
 
     <PreferenceCategory
         android:key="zen_mode_settings_advanced"
-        settings:initialExpandedChildrenCount="1">
+        settings:initialExpandedChildrenCount="0">
+
+        <!-- DND duration settings -->
+        <com.android.settings.notification.zen.ZenDurationDialogPreference
+            android:key="zen_mode_duration_settings"
+            android:title="@string/zen_category_duration"
+            android:widgetLayout="@null"/>
 
         <!-- What to block (effects) -->
         <Preference
             android:key="zen_mode_block_effects_settings"
             android:title="@string/zen_mode_restrict_notifications_title"
             android:fragment="com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings" />
-
-        <!-- DND duration settings -->
-        <com.android.settings.notification.zen.ZenDurationDialogPreference
-            android:key="zen_mode_duration_settings"
-            android:title="@string/zen_mode_duration_settings_title"
-            android:widgetLayout="@null"/>
     </PreferenceCategory>
 
     <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->
