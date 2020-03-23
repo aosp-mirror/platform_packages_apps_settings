@@ -44,12 +44,33 @@ import java.util.regex.Pattern;
 
 @RunWith(AndroidJUnit4.class)
 public class LaunchSettingsTest {
+    private static class Page {
+        String action;
+        String displayName;
+        String title;
+
+        Page(String action, String displayName, String title) {
+            this.action = action;
+            this.displayName = displayName;
+            this.title = title;
+        }
+    }
 
     private static final int TIME_OUT = 5000;
     private static final int TEST_TIME = 10;
     private static final Pattern PATTERN = Pattern.compile("TotalTime:\\s[0-9]*");
-    private static final String[] PAGES =
-            {"Settings", "Wi-Fi", "BlueTooth", "Application", "Battery"};
+    private static final Page[] PAGES;
+
+    static {
+        PAGES = new Page[]{
+                new Page("android.settings.SETTINGS", "Search settings", "Settings"),
+                new Page("android.settings.WIFI_SETTINGS", "Use Wi‑Fi", "Wi-Fi"),
+                new Page("android.settings.BLUETOOTH_SETTINGS", "Connected devices", "BlueTooth"),
+                new Page("android.settings.APPLICATION_SETTINGS", "App info", "Application"),
+                new Page("android.intent.action.POWER_USAGE_SUMMARY", "Battery", "Battery")
+        };
+    }
+
     private Bundle mBundle;
     private UiDevice mDevice;
     private Instrumentation mInstrumentation;
@@ -64,53 +85,50 @@ public class LaunchSettingsTest {
         mDevice.pressHome();
         mDevice.waitForIdle(TIME_OUT);
 
-        for (String string : PAGES) {
-            mResult.put(string, new ArrayList<Integer>());
+        for (Page page : PAGES) {
+            mResult.put(page.title, new ArrayList<Integer>());
         }
     }
 
     @After
     public void tearDown() throws Exception {
-        sendResult();
+        putResultToBundle();
         mInstrumentation.sendStatus(0, mBundle);
     }
 
     @Test
     public void settingsPerformanceTest() throws Exception {
         for (int i = 0; i < TEST_TIME; i++) {
-            executePreformanceTest("android.settings.SETTINGS", "Search settings", 0);
-            executePreformanceTest("android.settings.WIFI_SETTINGS", "Use Wi‑Fi", 1);
-            executePreformanceTest("android.settings.BLUETOOTH_SETTINGS", "Connected devices", 2);
-            executePreformanceTest("android.settings.APPLICATION_SETTINGS", "App info", 3);
-            executePreformanceTest("android.intent.action.POWER_USAGE_SUMMARY", "Battery", 4);
+            for (Page page : PAGES) {
+                executePreformanceTest(page.action, page.displayName, page.title);
+            }
         }
-
     }
 
-    private void executePreformanceTest(String activity, String text, int page) throws Exception {
-        final String mString = mDevice.executeShellCommand("am start -W -a" + activity);
-        mDevice.wait(Until.findObject(By.text(text)), TIME_OUT);
-        handleLaunchResult(page, mString);
+    private void executePreformanceTest(String action, String displayName, String title)
+            throws Exception {
+        final String mString = mDevice.executeShellCommand("am start -W -a" + action);
+        mDevice.wait(Until.findObject(By.text(displayName)), TIME_OUT);
+        handleLaunchResult(title, mString);
         closeApp();
         mDevice.waitForIdle(TIME_OUT);
     }
 
-    private void handleLaunchResult(int page, String s) {
+    private void handleLaunchResult(String title, String s) {
         Matcher mMatcher = PATTERN.matcher(s);
         if (mMatcher.find()) {
-            mResult.get(PAGES[page]).add(Integer.valueOf(mMatcher.group().split("\\s")[1]));
+            mResult.get(title).add(Integer.valueOf(mMatcher.group().split("\\s")[1]));
         } else {
             fail("Some pages can't be found");
         }
     }
 
     private void closeApp() throws Exception {
-        mDevice.pressRecentApps();
-        mDevice.findObject(new UiSelector().resourceId("com.android.launcher3:id/snapshot"))
-                .swipeUp(10);
+        mDevice.executeShellCommand("am force-stop com.android.settings");
+        Thread.sleep(1000);
     }
 
-    private void sendResult() {
+    private void putResultToBundle() {
         for (String string : mResult.keySet()) {
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "max"),
                     getMax(mResult.get(string)));
