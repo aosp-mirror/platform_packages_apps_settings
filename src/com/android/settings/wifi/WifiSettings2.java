@@ -674,11 +674,17 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onNumSavedNetworksChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
     @Override
     public void onNumSavedSubscriptionsChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         setAdditionalSettingsSummaries();
     }
 
@@ -993,12 +999,10 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         @Override
         public void onFailure(int reason) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
-
-            Toast.makeText(activity, R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
+            Toast.makeText(getContext(), R.string.wifi_failed_connect_message, Toast.LENGTH_SHORT)
                     .show();
         }
     };
@@ -1020,8 +1024,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
         @Override
         public void onConnectResult(@ConnectStatus int status) {
-            final Activity activity = getActivity();
-            if (isFisishingOrDestroyed(activity)) {
+            if (isFinishingOrDestroyed()) {
                 return;
             }
 
@@ -1039,10 +1042,6 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                         Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private boolean isFisishingOrDestroyed(Activity activity) {
-        return activity == null || activity.isFinishing() || activity.isDestroyed();
     }
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
