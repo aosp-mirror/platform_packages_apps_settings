@@ -122,7 +122,7 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_channel_notIfAppOff() {
+    public void testIsAvailable_channel_yesIfAppOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.allowBubbles = false;
@@ -130,7 +130,7 @@ public class BubblePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null, null, null);
 
-        assertFalse(mController.isAvailable());
+        assertTrue(mController.isAvailable());
     }
 
     @Test
@@ -197,18 +197,6 @@ public class BubblePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
 
         assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_channelAppOff() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.allowBubbles = false;
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null);
-        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
-
-        assertFalse(mController.isAvailable());
     }
 
     @Test
