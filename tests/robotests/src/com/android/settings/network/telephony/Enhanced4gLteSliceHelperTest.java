@@ -43,7 +43,6 @@ import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -73,8 +72,6 @@ public class Enhanced4gLteSliceHelperTest {
     @Mock
     private CarrierConfigManager mMockCarrierConfigManager;
 
-    @Mock
-    private ImsManager mMockImsManager;
     @Mock
     private ProvisioningManager mProvisioningManager;
 
@@ -109,9 +106,10 @@ public class Enhanced4gLteSliceHelperTest {
         mReceiver = spy(new SliceBroadcastReceiver());
 
         mQueryImsState = spy(new MockVolteQueryImsState(mContext, SUB_ID));
-        doReturn(mMockImsManager).when(mQueryImsState).getImsManager(anyInt());
         mQueryImsState.setEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
+        mQueryImsState.setIsTtyOnVolteEnabled(true);
+        mQueryImsState.setServiceStateReady(true);
         mQueryImsState.setIsEnabledByUser(true);
 
         mEnhanced4gLteSliceHelper = spy(new FakeEnhanced4gLteSliceHelper(mContext));
@@ -149,7 +147,6 @@ public class Enhanced4gLteSliceHelperTest {
     public void test_CreateEnhanced4gLteSlice_success() {
         mQueryImsState.setEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
-        when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
 
         final Slice slice = mEnhanced4gLteSliceHelper.createEnhanced4gLteSlice(
@@ -163,7 +160,6 @@ public class Enhanced4gLteSliceHelperTest {
     public void test_SettingSliceProvider_getsRightSliceEnhanced4gLte() {
         mQueryImsState.setEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
-        when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
         when(mSlicesFeatureProvider.getNewEnhanced4gLteSliceHelper(mContext))
                 .thenReturn(mEnhanced4gLteSliceHelper);
@@ -180,7 +176,6 @@ public class Enhanced4gLteSliceHelperTest {
         mQueryImsState.setEnabledByPlatform(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
         mQueryImsState.setIsEnabledByUser(false);
-        when(mMockImsManager.isNonTtyOrTtyOnVolteEnabled()).thenReturn(true);
         when(mSlicesFeatureProvider.getNewEnhanced4gLteSliceHelper(mContext))
                 .thenReturn(mEnhanced4gLteSliceHelper);
 
@@ -194,7 +189,7 @@ public class Enhanced4gLteSliceHelperTest {
         // change the setting
         mReceiver.onReceive(mContext, intent);
 
-        verify((mMockImsManager)).setEnhanced4gLteModeSetting(
+        verify(mEnhanced4gLteSliceHelper).setEnhanced4gLteModeSetting(anyInt(),
                 mEnhanced4gLteSettingCaptor.capture());
 
         // assert the change
