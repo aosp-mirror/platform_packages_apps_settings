@@ -98,34 +98,6 @@ public class ZenModeSettingsTest {
     }
 
     @Test
-    public void testGetSoundSettingSummary_allOff() {
-        Policy policy = new Policy(0, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy)).isEqualTo("Muted");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOn() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_SYSTEM
-                | Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy))
-                .isEqualTo("Muted, but allow alarms, media, and touch sounds");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOffButOne() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy)).isEqualTo("Muted, but allow media");
-    }
-
-    @Test
-    public void testGetSoundSettingSummary_allOffButTwo() {
-        Policy policy = new Policy(Policy.PRIORITY_CATEGORY_SYSTEM
-                | Policy.PRIORITY_CATEGORY_MEDIA, 0, 0, 0);
-        assertThat(mBuilder.getSoundSettingSummary(policy))
-                .isEqualTo("Muted, but allow media and touch sounds");
-    }
-
-    @Test
     public void searchProvider_shouldIndexDefaultXml() {
         final List<SearchIndexableResource> sir = ZenModeSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);
