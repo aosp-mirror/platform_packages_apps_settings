@@ -29,7 +29,7 @@
     <PreferenceCategory
         android:key="security_settings_face_unlock_category"
         android:title="@string/security_settings_face_settings_use_face_category">
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_settings_face_keyguard"
             android:title="@string/security_settings_face_settings_use_face_unlock_phone"
             app:keywords="@string/keywords_face_unlock"
@@ -39,7 +39,7 @@
             android:title="@string/security_settings_face_settings_use_face_for_apps"
             app:keywords="@string/keywords_face_unlock"
             app:controller="com.android.settings.biometrics.face.FaceSettingsAppPreferenceController"/>
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="security_lockscreen_bypass"
             android:title="@string/lockscreen_bypass_title"
             android:summary="@string/lockscreen_bypass_summary"
