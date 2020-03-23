@@ -89,7 +89,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         if (mMediaController != null) {
             final MediaMetadata metadata = mMediaController.getMetadata();
             if (metadata != null) {
-                return metadata.getString(MediaMetadata.METADATA_KEY_ARTIST);
+                return metadata.getDescription().getTitle();
             }
         }
         return mContext.getText(R.string.media_volume_title);
@@ -100,10 +100,10 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         if (mMediaController != null) {
             final MediaMetadata metadata = mMediaController.getMetadata();
             if (metadata != null) {
-                return metadata.getString(MediaMetadata.METADATA_KEY_ALBUM);
+                return metadata.getDescription().getSubtitle();
             }
         }
-        return mContext.getText(R.string.media_output_panel_title);
+        return null;
     }
 
     @Override
