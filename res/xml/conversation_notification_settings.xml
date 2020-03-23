@@ -26,19 +26,11 @@
         settings:allowDividerBelow="true"/>
 
     <!-- important conversation -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="important"
+    <com.android.settings.notification.app.ConversationPriorityPreference
+        android:key="priority"
         android:title="@string/notification_conversation_important"
-        android:icon="@drawable/ic_important_outline"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin"
-        settings:allowDividerAbove="true"/>
-
-    <!-- silence -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="alerting"
-        android:icon="@drawable/ic_notification_alert"
-        android:title="@string/notification_alert_title"
-        android:summary="@string/notification_channel_summary_default"/>
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
 
     <!-- bubbles -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -48,47 +40,6 @@
         android:icon="@drawable/ic_create_bubble"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
-    <!-- peeking -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="high_importance"
-        android:title="@string/notification_importance_high_title"
-        android:summary="@string/notification_channel_summary_high"/>
-
-    <!-- Visibility Override -->
-    <com.android.settings.RestrictedListPreference
-        android:key="visibility_override"
-        android:icon="@drawable/ic_lock"
-        android:title="@string/app_notification_visibility_override_title"/>
-
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_channel_badge_title"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
-
-    <!-- Lights -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="lights"
-        android:title="@string/notification_show_lights_title"
-        settings:useAdditionalSummary="true"/>
-
-    <!-- Vibration -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="vibrate"
-        android:icon="@drawable/ic_volume_ringer_vibrate"
-        android:title="@string/notification_vibrate_title"
-        settings:useAdditionalSummary="true" />
-
-    <!-- ringtone -->
-    <com.android.settings.notification.app.NotificationSoundPreference
-        android:key="ringtone"
-        android:title="@string/notification_channel_sound_title"
-        android:dialogTitle="@string/notification_channel_sound_title"
-        android:icon="@drawable/ic_media_stream"
-        android:showSilent="true"
-        android:showDefault="true"/>
-
     <!-- demote -->
     <Preference
         android:key="demote"
@@ -97,22 +48,55 @@
         android:summary="@string/demote_conversation_summary"
         settings:allowDividerAbove="true"/>
 
-    <Preference
-        android:key="add_to_home"
-        android:title="@string/notification_conversation_add_to_home"
-        android:icon="@drawable/ic_add_to_home"
-        settings:allowDividerAbove="true"/>
-
-    <Preference
-        android:key="app_link"
-        android:title="@string/app_settings_link"
-        settings:allowDividerAbove="true"/>
-
-    <com.android.settings.notification.app.NotificationFooterPreference
-        android:key="desc" />
-
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc"
         settings:allowDividerAbove="false"/>
+
+    <PreferenceCategory
+        android:key="channel_advanced"
+        android:order="50"
+        settings:initialExpandedChildrenCount="0">
+
+        <!-- peeking -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="high_importance"
+            android:title="@string/notification_importance_high_title"
+            android:summary="@string/notification_channel_summary_high"/>
+
+        <!-- ringtone -->
+        <com.android.settings.notification.app.NotificationSoundPreference
+            android:key="ringtone"
+            android:title="@string/notification_channel_sound_title"
+            android:dialogTitle="@string/notification_channel_sound_title"
+            android:icon="@drawable/ic_media_stream"
+            android:showSilent="true"
+            android:showDefault="true"/>
+
+        <!-- Visibility Override -->
+        <com.android.settings.RestrictedListPreference
+            android:key="visibility_override"
+            android:icon="@drawable/ic_lock"
+            android:title="@string/app_notification_visibility_override_title"/>
+
+        <!-- Show badge -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="badge"
+            android:title="@string/notification_channel_badge_title"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
+
+        <!-- Lights -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="lights"
+            android:title="@string/notification_show_lights_title"
+            settings:useAdditionalSummary="true"/>
+
+        <!-- Vibration -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="vibrate"
+            android:icon="@drawable/ic_volume_ringer_vibrate"
+            android:title="@string/notification_vibrate_title"
+            settings:useAdditionalSummary="true" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

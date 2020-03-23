@@ -16,25 +16,22 @@
 
 package com.android.settings.notification.app;
 
-import static android.provider.Settings.Secure.BUBBLE_IMPORTANT_CONVERSATIONS;
-
 import android.content.Context;
-import android.provider.Settings;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.RestrictedSwitchPreference;
 
-public class ConversationImportantPreferenceController extends NotificationPreferenceController
+public class ConversationPriorityPreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String TAG = "ConvoImpPC";
-    private static final String KEY = "important";
+    private static final String TAG = "ConvoPriorityPC";
+    private static final String KEY = "priority";
     private final NotificationSettings.DependentFieldListener mDependentFieldListener;
 
-    public ConversationImportantPreferenceController(Context context,
+    public ConversationPriorityPreferenceController(Context context,
             NotificationBackend backend, NotificationSettings.DependentFieldListener listener) {
         super(context, backend);
         mDependentFieldListener = listener;
@@ -58,10 +55,12 @@ public class ConversationImportantPreferenceController extends NotificationPrefe
 
     public void updateState(Preference preference) {
         if (mAppRow != null) {
-            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
-            pref.setDisabledByAdmin(mAdmin);
-            pref.setChecked(mChannel.isImportantConversation());
-            pref.setEnabled(!pref.isDisabledByAdmin());
+            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
+            ConversationPriorityPreference pref = (ConversationPriorityPreference) preference;
+            pref.setConfigurable(!mChannel.isImportanceLockedByOEM());
+            pref.setImportance(mChannel.getImportance());
+            pref.setOriginalImportance(mChannel.getOriginalImportance());
+            pref.setPriorityConversation(mChannel.isImportantConversation());
         }
     }
 
@@ -70,19 +69,21 @@ public class ConversationImportantPreferenceController extends NotificationPrefe
         if (mChannel == null) {
             return false;
         }
-        final boolean value = (Boolean) newValue;
-        mChannel.setImportantConversation(value);
-        if (value && bubbleImportantConversations()) {
+        boolean wasPriorityConversation = mChannel.isImportantConversation();
+
+        final Pair<Integer, Boolean> value = (Pair) newValue;
+        mChannel.setImportance(value.first);
+        mChannel.setImportantConversation(value.second);
+
+        if (value.second) {
             mChannel.setAllowBubbles(true);
+        } else if (wasPriorityConversation) {
+            mChannel.setAllowBubbles(false);
         }
+
         mDependentFieldListener.onFieldValueChanged();
         saveChannel();
 
         return true;
-    }
-
-    private boolean bubbleImportantConversations() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                BUBBLE_IMPORTANT_CONVERSATIONS, 1) == 1;
     }
 }
