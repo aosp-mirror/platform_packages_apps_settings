@@ -153,6 +153,9 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
 
     @Override
     public void onSavedWifiEntriesChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         final PreferenceScreen screen = getPreferenceScreen();
         use(SavedAccessPointsPreferenceController2.class)
                 .displayPreference(screen, mSavedNetworkTracker.getSavedWifiEntries());
@@ -160,6 +163,9 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
 
     @Override
     public void onSubscriptionWifiEntriesChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
         final PreferenceScreen screen = getPreferenceScreen();
         use(SubscribedAccessPointsPreferenceController2.class)
                 .displayPreference(screen, mSavedNetworkTracker.getSubscriptionWifiEntries());
