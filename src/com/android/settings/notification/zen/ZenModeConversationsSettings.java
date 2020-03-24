@@ -16,74 +16,59 @@
 
 package com.android.settings.notification.zen;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Settings > Sound > Do Not Disturb > Conversationss
+ */
 @SearchIndexable
-public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModeConversationsSettings extends ZenModeSettingsBase {
+    private final NotificationBackend mNotificationBackend = new NotificationBackend();
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        final Activity activity = getActivity();
-        final Application app;
-        if (activity != null) {
-            app = activity.getApplication();
-        } else {
-            app = null;
-        }
-        return buildPreferenceControllers(
-                context, getSettingsLifecycle(), app, this, getFragmentManager());
+        return buildPreferenceControllers(context, getSettingsLifecycle(), mNotificationBackend);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager) {
+            Lifecycle lifecycle, NotificationBackend notificationBackend) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeConversationsPreferenceController(context,
-                "zen_mode_conversations", lifecycle));
-        controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
-                "zen_mode_people_calls"));
-        controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
-                "zen_mode_people_messages"));
-        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
-                fragmentManager));
+        controllers.add(new ZenModePriorityConversationsPreferenceController(context,
+                "zen_mode_conversations_radio_buttons", lifecycle, notificationBackend));
         return controllers;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.zen_mode_people_settings;
+        return R.xml.zen_mode_conversations_settings;
     }
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.DND_PEOPLE;
+        return SettingsEnums.DND_CONVERSATIONS;
     }
 
     /**
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.zen_mode_people_settings) {
+            new BaseSearchIndexProvider(R.xml.zen_mode_conversations_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null, null, null);
+                    return buildPreferenceControllers(context, null, null);
                 }
             };
 }

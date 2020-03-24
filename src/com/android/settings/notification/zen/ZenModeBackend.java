@@ -16,8 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
-import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_OFF;
 import static android.app.NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON;
@@ -501,7 +499,7 @@ public class ZenModeBackend {
     private List<String> getStarredContacts() {
         Cursor cursor = null;
         try {
-            cursor = queryData();
+            cursor = queryStarredContactsData();
             return getStarredContacts(cursor);
         } finally {
             if (cursor != null) {
@@ -510,7 +508,7 @@ public class ZenModeBackend {
         }
     }
 
-    public String getStarredContactsSummary(Context context) {
+    String getStarredContactsSummary(Context context) {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
 
@@ -536,11 +534,22 @@ public class ZenModeBackend {
         return ListFormatter.getInstance().format(displayContacts);
     }
 
-    private Cursor queryData() {
+    String getContactsNumberSummary(Context context) {
+        return context.getResources().getString(R.string.zen_mode_contacts_senders_summary,
+                queryAllContactsData().getCount());
+    }
+
+    private Cursor queryStarredContactsData() {
         return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
                 new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
                 ContactsContract.Data.STARRED + "=1", null,
                 ContactsContract.Data.TIMES_CONTACTED);
+    }
+
+    private Cursor queryAllContactsData() {
+        return mContext.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,
+                new String[]{ContactsContract.Contacts.DISPLAY_NAME_PRIMARY},
+                null, null, null);
     }
 
     @VisibleForTesting
