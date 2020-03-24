@@ -108,6 +108,10 @@ public class ActiveSubsciptionsListenerTest {
         private ActiveSubsciptionsListenerImpl(Looper looper, Context context) {
             super(looper, context);
         }
+
+        @Override
+        void registerForSubscriptionsChange() {}
+
         public void onChanged() {}
     }
 

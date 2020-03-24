@@ -67,7 +67,8 @@ public class SubscriptionsChangeListener extends ContentObserver {
     }
 
     public void start() {
-        mSubscriptionManager.addOnSubscriptionsChangedListener(mSubscriptionsChangedListener);
+        mSubscriptionManager.addOnSubscriptionsChangedListener(
+                mContext.getMainExecutor(), mSubscriptionsChangedListener);
         mContext.getContentResolver()
                 .registerContentObserver(mAirplaneModeSettingUri, false, this);
         final IntentFilter radioTechnologyChangedFilter = new IntentFilter(
