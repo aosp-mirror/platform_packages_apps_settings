@@ -19,37 +19,44 @@ package com.android.settings.notification.zen;
 import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
 import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
 import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_NONE;
-import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
-import static android.provider.Settings.Global.ZEN_MODE;
-import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
-import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
-import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 
+import static com.android.settings.notification.zen.ZenModePriorityConversationsPreferenceController.KEY_ALL;
+import static com.android.settings.notification.zen.ZenModePriorityConversationsPreferenceController.KEY_IMPORTANT;
+import static com.android.settings.notification.zen.ZenModePriorityConversationsPreferenceController.KEY_NONE;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.provider.Settings;
 
-import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
+
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class ZenModePriorityConversationsPreferenceControllerTest {
@@ -57,135 +64,86 @@ public class ZenModePriorityConversationsPreferenceControllerTest {
     private ZenModePriorityConversationsPreferenceController mController;
 
     @Mock
-    private ZenModeBackend mBackend;
+    private ZenModeBackend mZenBackend;
     @Mock
-    private NotificationManager mNotificationManager;
-    @Mock
-    private ListPreference mockPref;
+    private PreferenceCategory mMockPrefCategory;
     @Mock
     private NotificationManager.Policy mPolicy;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private NotificationBackend mNotifBackend;
+
+    private List<RadioButtonPreference> mRadioButtonPreferences;
     private ContentResolver mContentResolver;
     private Context mContext;
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-
         mContext = RuntimeEnvironment.application;
-        mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-
-        when(mBackend.getPriorityConversationSenders())
-            .thenReturn(CONVERSATION_SENDERS_IMPORTANT);
-        when(mBackend.getAlarmsTotalSilencePeopleSummary(PRIORITY_CATEGORY_CONVERSATIONS))
-                .thenCallRealMethod();
-        when(mBackend.getConversationSummary()).thenCallRealMethod();
-
         mController = new ZenModePriorityConversationsPreferenceController(
-                mContext, mock(Lifecycle.class));
-        ReflectionHelpers.setField(mController, "mBackend", mBackend);
+                mContext, "test_key", mock(Lifecycle.class), mNotifBackend);
+        ReflectionHelpers.setField(mController, "mBackend", mZenBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
+        when(mMockPrefCategory.getContext()).thenReturn(mContext);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+                .thenReturn(mMockPrefCategory);
+        captureRadioButtons();
+    }
+
+    @Test
+    public void displayPreference_radioButtonsCreatedOnlyOnce() {
+        when(mMockPrefCategory.findPreference(any())).thenReturn(mock(Preference.class));
+
+        // radio buttons were already created, so don't re-create them
         mController.displayPreference(mPreferenceScreen);
+        verify(mMockPrefCategory, never()).addPreference(any());
     }
 
     @Test
-    public void updateState_TotalSilence() {
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_NO_INTERRUPTIONS);
+    public void clickAllConversations() {
+        RadioButtonPreference allConversationsRb = getButton(KEY_ALL);
+        allConversationsRb.onClick();
 
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
-        final ListPreference mockPref = mock(ListPreference.class);
-        mController.updateState(mockPref);
-
-        verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
+        verify(mZenBackend).saveConversationSenders(CONVERSATION_SENDERS_ANYONE);
     }
 
     @Test
-    public void updateState_AlarmsOnly() {
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_ALARMS);
+    public void clickImportantConversations() {
+        RadioButtonPreference importantConversationsRb = getButton(KEY_IMPORTANT);
+        importantConversationsRb.onClick();
 
-        final ListPreference mockPref = mock(ListPreference.class);
-        mController.updateState(mockPref);
-
-        verify(mockPref).setEnabled(false);
-        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
+        verify(mZenBackend).saveConversationSenders(CONVERSATION_SENDERS_IMPORTANT);
     }
 
     @Test
-    public void updateState_Priority_important() {
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
+    public void clickNoConversations() {
+        RadioButtonPreference noConversationsRb = getButton(KEY_NONE);
+        noConversationsRb.onClick();
 
-        mController.updateState(mockPref);
-
-        verify(mockPref).setEnabled(true);
-        verify(mockPref).setSummary(R.string.zen_mode_from_important_conversations);
-        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
+        verify(mZenBackend)
+                .saveConversationSenders(CONVERSATION_SENDERS_NONE);
     }
 
-    @Test
-    public void updateState_Priority_all() {
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_ANYONE);
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
+    private void captureRadioButtons() {
+        ArgumentCaptor<RadioButtonPreference> rbCaptor =
+                ArgumentCaptor.forClass(RadioButtonPreference.class);
+        mController.displayPreference(mPreferenceScreen);
 
+        // verifies 3 buttons were added
+        verify(mMockPrefCategory, times(3)).addPreference(rbCaptor.capture());
+        mRadioButtonPreferences = rbCaptor.getAllValues();
+        assertThat(mRadioButtonPreferences.size()).isEqualTo(3);
 
-        mController.updateState(mockPref);
-
-        verify(mockPref).setEnabled(true);
-        verify(mockPref).setSummary(R.string.zen_mode_from_all_conversations);
-        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_ANYONE));
+        reset(mMockPrefCategory);
     }
 
-    @Test
-    public void updateState_Priority_none() {
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(false);
-
-        mController.updateState(mockPref);
-
-        verify(mockPref).setEnabled(true);
-        verify(mockPref).setSummary(R.string.zen_mode_from_no_conversations);
-        verify(mockPref).setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
-    }
-
-    @Test
-    public void onPreferenceChange_noneToImportant() {
-        // start with none
-
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_NONE);
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(false);
-
-        mController.updateState(mockPref);
-        reset(mBackend);
-
-        mController.onPreferenceChange(mockPref, String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
-
-        verify(mBackend).saveConversationSenders(CONVERSATION_SENDERS_IMPORTANT);
-        verify(mBackend).getPriorityConversationSenders();
-    }
-
-    @Test
-    public void onPreferenceChange_allToNone() {
-        // start with none
-
-        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-        when(mBackend.getPriorityConversationSenders()).thenReturn(CONVERSATION_SENDERS_ANYONE);
-        when(mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_CONVERSATIONS)).thenReturn(true);
-
-        mController.updateState(mockPref);
-        reset(mBackend);
-
-        mController.onPreferenceChange(mockPref, String.valueOf(CONVERSATION_SENDERS_NONE));
-
-        verify(mBackend).saveConversationSenders(CONVERSATION_SENDERS_NONE);
-        verify(mBackend).getPriorityConversationSenders();
+    private RadioButtonPreference getButton(String key) {
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+            if (key.equals(pref.getKey())) {
+                return pref;
+            }
+        }
+        return null;
     }
 }
