@@ -31,6 +31,7 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -231,13 +232,16 @@ public class IccLockSettings extends SettingsPreferenceFragment
         for (int i = 0; i < numSims; ++i) {
             final SubscriptionInfo subInfo =
                     getActiveSubscriptionInfoForSimSlotIndex(subInfoList, i);
-            final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
-                    CarrierConfigManager.class);
-            final PersistableBundle bundle = carrierConfigManager.getConfigForSubId(
-                    subInfo.getSubscriptionId());
-            if (bundle != null
-                    && !bundle.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
-                componenterList.add(subInfo);
+            if (subInfo != null) {
+                final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
+                        CarrierConfigManager.class);
+                final PersistableBundle bundle = carrierConfigManager.getConfigForSubId(
+                        subInfo.getSubscriptionId());
+                if (bundle != null
+                        && !bundle.getBoolean(CarrierConfigManager
+                        .KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
+                    componenterList.add(subInfo);
+                }
             }
         }
 
@@ -292,7 +296,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         final List<SubscriptionInfo> subInfoList =
                 mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, mSlotId);
-        mSubId = sir.getSubscriptionId();
+        mSubId = (sir == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            : sir.getSubscriptionId();
 
         if (mPinDialog != null) {
             mPinDialog.setEnabled(sir != null);
@@ -679,8 +684,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
         @Override
         public void onTabChanged(String tabId) {
             mSlotId = Integer.parseInt(tabId);
-            final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
-                    mProxySubscriptionMgr.getActiveSubscriptionsInfo(), mSlotId);
 
             // The User has changed tab; update the body.
             updatePreferences();
