@@ -562,10 +562,10 @@ public class UserSettings extends SettingsPreferenceFragment
                 final boolean longMessageDisplayed = preferences.getBoolean(
                         KEY_ADD_USER_LONG_MESSAGE_DISPLAYED, false);
                 final int messageResId = longMessageDisplayed
-                        ? R.string.user_add_user_message_short
-                        : R.string.user_add_user_message_long;
+                        ? com.android.settingslib.R.string.user_add_user_message_short
+                        : com.android.settingslib.R.string.user_add_user_message_long;
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.user_add_user_title)
+                        .setTitle(com.android.settingslib.R.string.user_add_user_title)
                         .setMessage(messageResId)
                         .setPositiveButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
@@ -584,21 +584,25 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             case DIALOG_SETUP_USER: {
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.user_setup_dialog_title)
-                        .setMessage(R.string.user_setup_dialog_message)
-                        .setPositiveButton(R.string.user_setup_button_setup_now,
+                        .setTitle(com.android.settingslib.R.string.user_setup_dialog_title)
+                        .setMessage(com.android.settingslib.R.string.user_setup_dialog_message)
+                        .setPositiveButton(
+                                com.android.settingslib.R.string.user_setup_button_setup_now,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         switchUserNow(mAddedUserId);
                                     }
                                 })
-                        .setNegativeButton(R.string.user_setup_button_setup_later, null)
+                        .setNegativeButton(
+                                com.android.settingslib.R.string.user_setup_button_setup_later,
+                                null)
                         .create();
                 return dlg;
             }
             case DIALOG_SETUP_PROFILE: {
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setMessage(R.string.user_setup_profile_dialog_message)
+                        .setMessage(
+                                com.android.settingslib.R.string.user_setup_profile_dialog_message)
                         .setPositiveButton(android.R.string.ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -612,11 +616,15 @@ public class UserSettings extends SettingsPreferenceFragment
             case DIALOG_CHOOSE_USER_TYPE: {
                 List<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
                 HashMap<String, String> addUserItem = new HashMap<String, String>();
-                addUserItem.put(KEY_TITLE, getString(R.string.user_add_user_item_title));
-                addUserItem.put(KEY_SUMMARY, getString(R.string.user_add_user_item_summary));
+                addUserItem.put(KEY_TITLE, getString(
+                        com.android.settingslib.R.string.user_add_user_item_title));
+                addUserItem.put(KEY_SUMMARY, getString(
+                        com.android.settingslib.R.string.user_add_user_item_summary));
                 HashMap<String, String> addProfileItem = new HashMap<String, String>();
-                addProfileItem.put(KEY_TITLE, getString(R.string.user_add_profile_item_title));
-                addProfileItem.put(KEY_SUMMARY, getString(R.string.user_add_profile_item_summary));
+                addProfileItem.put(KEY_TITLE, getString(
+                        com.android.settingslib.R.string.user_add_profile_item_title));
+                addProfileItem.put(KEY_SUMMARY, getString(
+                        com.android.settingslib.R.string.user_add_profile_item_summary));
                 data.add(addUserItem);
                 data.add(addProfileItem);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -624,7 +632,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         data, R.layout.two_line_list_item,
                         new String[]{KEY_TITLE, KEY_SUMMARY},
                         new int[]{R.id.title, R.id.summary});
-                builder.setTitle(R.string.user_add_user_type_title);
+                builder.setTitle(com.android.settingslib.R.string.user_add_user_type_title);
                 builder.setAdapter(adapter,
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -638,8 +646,8 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             case DIALOG_NEED_LOCKSCREEN: {
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setMessage(R.string.user_need_lock_message)
-                        .setPositiveButton(R.string.user_set_lock_button,
+                        .setMessage(com.android.settingslib.R.string.user_need_lock_message)
+                        .setPositiveButton(com.android.settingslib.R.string.user_set_lock_button,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -672,7 +680,7 @@ public class UserSettings extends SettingsPreferenceFragment
                         this,
                         Utils.getUserIcon(getPrefContext(), mUserManager, info),
                         info.name,
-                        getString(R.string.profile_info_settings_title),
+                        getString(com.android.settingslib.R.string.profile_info_settings_title),
                         new EditUserInfoController.OnContentChangedCallback() {
                             @Override
                             public void onPhotoChanged(UserHandle user, Drawable photo) {
@@ -699,7 +707,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 synchronized (mUserLock) {
                     mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
                             new Random(System.currentTimeMillis()).nextInt(8), false);
-                    mPendingUserName = getString(R.string.user_new_user_name);
+                    mPendingUserName = getString(
+                            com.android.settingslib.R.string.user_new_user_name);
                 }
                 return buildAddUserProfileEditorDialog(USER_TYPE_USER);
             }
@@ -707,7 +716,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 synchronized (mUserLock) {
                     mPendingUserIcon = UserIcons.getDefaultUserIcon(getPrefContext().getResources(),
                             new Random(System.currentTimeMillis()).nextInt(8), false);
-                    mPendingUserName = getString(R.string.user_new_profile_name);
+                    mPendingUserName = getString(
+                            com.android.settingslib.R.string.user_new_profile_name);
                 }
                 return buildAddUserProfileEditorDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
@@ -724,8 +734,8 @@ public class UserSettings extends SettingsPreferenceFragment
                     mPendingUserIcon,
                     mPendingUserName,
                     getString(userType == USER_TYPE_USER
-                            ? R.string.user_info_settings_title
-                            : R.string.profile_info_settings_title),
+                            ? com.android.settingslib.R.string.user_info_settings_title
+                            : com.android.settingslib.R.string.profile_info_settings_title),
                     new EditUserInfoController.OnContentChangedCallback() {
                         @Override
                         public void onPhotoChanged(UserHandle user, Drawable photo) {
