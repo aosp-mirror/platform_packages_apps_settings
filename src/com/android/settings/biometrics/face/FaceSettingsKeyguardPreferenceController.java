@@ -25,6 +25,8 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 
 import com.android.settings.Utils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 /**
  * Preference controller for Face settings page controlling the ability to unlock the phone
@@ -53,7 +55,7 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
     public boolean isChecked() {
         if (!FaceSettings.isAvailable(mContext)) {
             return false;
-        } else if (adminDisabled()) {
+        } else if (getRestrictingAdmin() != null) {
             return false;
         }
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
@@ -73,11 +75,12 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
 
     @Override
     public void updateState(Preference preference) {
+        EnforcedAdmin admin;
         super.updateState(preference);
         if (!FaceSettings.isAvailable(mContext)) {
             preference.setEnabled(false);
-        } else if (adminDisabled()) {
-            preference.setEnabled(false);
+        } else if ((admin = getRestrictingAdmin()) != null) {
+            ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);
         } else if (!mFaceManager.hasEnrolledTemplates(getUserId())) {
             preference.setEnabled(false);
         } else {

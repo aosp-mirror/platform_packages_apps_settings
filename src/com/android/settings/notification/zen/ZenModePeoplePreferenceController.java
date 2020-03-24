@@ -16,25 +16,33 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
+import static android.app.NotificationManager.Policy.CONVERSATION_SENDERS_NONE;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS;
+import static android.app.NotificationManager.Policy.PRIORITY_SENDERS_ANY;
+
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+/**
+ * Controls the summary for preference found at:
+ *  Settings > Sound > Do Not Disturb > People
+ */
 public class ZenModePeoplePreferenceController extends
         AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
     private final String KEY;
-    private final ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
     public ZenModePeoplePreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context, key, lifecycle);
         KEY = key;
-        mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
     }
 
     @Override
@@ -60,8 +68,28 @@ public class ZenModePeoplePreferenceController extends
                 break;
             default:
                 preference.setEnabled(true);
-                // TODO: How do all of the people options roll up into the summary?
-                //preference.setSummary(mSummaryBuilder.getMessagesSettingSummary(getPolicy()));
+                preference.setSummary(getPeopleSummary());
+        }
+    }
+
+    private String getPeopleSummary() {
+        final int callersAllowed = mBackend.getPriorityCallSenders();
+        final int messagesAllowed = mBackend.getPriorityMessageSenders();
+        final int conversationsAllowed = mBackend.getPriorityConversationSenders();
+        final boolean areRepeatCallersAllowed =
+                mBackend.isPriorityCategoryEnabled(PRIORITY_CATEGORY_REPEAT_CALLERS);
+
+        if (callersAllowed == PRIORITY_SENDERS_ANY
+                && messagesAllowed == PRIORITY_SENDERS_ANY
+                && conversationsAllowed == CONVERSATION_SENDERS_ANYONE) {
+            return mContext.getResources().getString(R.string.zen_mode_people_all);
+        } else if (callersAllowed == ZenModeBackend.SOURCE_NONE
+                && messagesAllowed == ZenModeBackend.SOURCE_NONE
+                && conversationsAllowed == CONVERSATION_SENDERS_NONE
+                && !areRepeatCallersAllowed) {
+            return mContext.getResources().getString(R.string.zen_mode_people_none);
+        } else {
+            return mContext.getResources().getString(R.string.zen_mode_people_some);
         }
     }
 }

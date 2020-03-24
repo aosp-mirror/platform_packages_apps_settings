@@ -7757,13 +7757,13 @@
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
 
-    <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_settings_summary_off">Never</string>
+    <!-- Sound: Summary for the Do not Disturb option when there are no automatic rules enabled. [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_settings_summary_off">None</string>
 
-    <!-- Sound: Summary for the Do not Disturb option when at least one automatic rules turned on. [CHAR LIMIT=NONE]-->
+    <!-- Sound: Summary for the Do not Disturb option when at least one automatic rule is enabled. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 enabled</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> enabled</item>
+        <item quantity="one">1 schedule set</item>
+        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> schedules set</item>
     </plurals>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
@@ -7778,26 +7778,8 @@
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
 
-    <!-- Do not disturb: Title for the page describing what can bypass DND. [CHAR LIMIT=30] -->
-    <string name="zen_mode_behavior_settings_title">Exceptions</string>
-
-    <!-- Do not disturb: Title for the dnd duration setting (user can specify how long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=30] -->
-    <string name="zen_mode_duration_settings_title">Default duration</string>
-
-    <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
-    <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
-
-    <!-- Do not disturb: Subtitle for DND behavior indicating no sound will get past DND. [CHAR LIMIT=30] -->
-    <string name="zen_mode_behavior_no_sound">No sound</string>
-
-    <!-- Do not disturb: Subtitle for DND behavior indicating no sound will get past DND. [CHAR LIMIT=40] -->
-    <string name="zen_mode_behavior_total_silence">Total Silence</string>
-
-    <!-- Do not disturb: Used before specifying which sounds can bypass DND (ie: No sound except alarms and reminders). [CHAR LIMIT=40] -->
-    <string name="zen_mode_behavior_no_sound_except">No sound except <xliff:g id="categories" example="alarms, media and system feedback">%1$s</xliff:g></string>
-
     <!-- Do not disturb: Specifies alarms and media can bypass DND.  [CHAR LIMIT=100] -->
-    <string name="zen_mode_behavior_alarms_only">No sound except alarms and media</string>
+    <string name="zen_mode_behavior_alarms_only">Alarms and media sounds can interrupt</string>
 
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
     <string name="zen_mode_automation_settings_title">Schedules</string>
@@ -7832,15 +7814,6 @@
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use schedule</string>
 
-    <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_important_interruptions">Priority only</string>
-
-    <!--  Do not disturb: Zen mode option: Alarms only [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_alarms">Alarms only</string>
-
-    <!--  Do not disturb: Zen mode option: No interruptions [CHAR LIMIT=60] -->
-    <string name="zen_mode_option_no_interruptions">Total silence</string>
-
     <!--  Do not disturb: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
     <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
 
@@ -7853,8 +7826,8 @@
     <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
     <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
 
-    <!-- Do not disturb: restrict notifications title [CHAR LIMIT=80] -->
-    <string name="zen_mode_restrict_notifications_title">Restrict notifications</string>
+    <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
+    <string name="zen_mode_restrict_notifications_title">Display options for hidden notifications</string>
     <!-- Do not disturb: Mute notifications option [CHAR LIMIT=60] -->
     <string name="zen_mode_restrict_notifications_mute">No sound from notifications</string>
     <!-- Do not disturb:Mute notifications summary [CHAR LIMIT=NONE] -->
@@ -7993,7 +7966,7 @@
     </plurals>
 
     <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
-    <string name="zen_category_behavior">Exceptions when Do Not Disturb is on</string>
+    <string name="zen_category_behavior">What can interrupt Do Not Disturb</string>
     <!-- Do not disturb settings, main screen, field, dnd breakthrough [CHAR LIMIT=100]-->
     <string name="zen_category_people">People</string>
     <!-- Do not disturb settings, main screen, field, dnd breakthrough  [CHAR LIMIT=100]-->
@@ -8002,23 +7975,12 @@
     <string name="zen_category_exceptions">Alarms &amp; other interruptions</string>
     <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedules</string>
-    <!-- Do not disturb settings, main screen, field, dnd visuals [CHAR LIMIT=100]-->
-    <string name="zen_category_visuals">Silenced notifications</string>
+    <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
+    long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=100] -->
+    <string name="zen_category_duration">Set duration for Quick Settings</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
-    <!-- Do not disturb settings, sound and vibrations screen category [CHAR LIMIT=100]-->
-    <string name="zen_sound_category_title">Mute all except</string>
-    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
-    <string name="zen_sound_all_muted">Muted</string>
-    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
-    <string name="zen_sound_none_muted">Not muted</string>
-    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
-    <string name="zen_sound_one_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g></string>
-    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
-    <string name="zen_sound_two_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g> and <xliff:g id="sound_type" example="media">%2$s</xliff:g></string>
-    <!-- Do not disturb settings, sound and vibrations summary [CHAR LIMIT=100]-->
-    <string name="zen_sound_three_allowed">Muted, but allow <xliff:g id="sound_type" example="alarms">%1$s</xliff:g>, <xliff:g id="sound_type" example="alarms">%2$s</xliff:g>, and <xliff:g id="sound_type" example="media">%3$s</xliff:g></string>
 
     <!-- Do not disturb custom settings dialog title [CHAR LIMIT=40]-->
     <string name="zen_custom_settings_dialog_title">Custom settings</string>
@@ -8190,11 +8152,11 @@
     <!-- Description for the toggle shown on the app-level bubbles page  [CHAR LIMIT=NONE] -->
     <string name="bubbles_app_toggle_summary">Allow <xliff:g id="app_name" example="YouTube">%1$s</xliff:g> to show some notifications as bubbles</string>
     <!-- Title of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
-    <string name="bubbles_feature_disabled_dialog_title">Turn on bubbles</string>
+    <string name="bubbles_feature_disabled_dialog_title">Turn on bubbles for device?</string>
     <!-- Description of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=NONE] -->
-    <string name="bubbles_feature_disabled_dialog_text">To turn on bubbles for this app, first you need to turn them on for your device. This affects other apps in which you previously turned on bubbles.</string>
+    <string name="bubbles_feature_disabled_dialog_text">Turning on bubbles for this app will also turn on bubbles for your device.\n\nThis affects other apps or conversations that are allowed to bubble.</string>
     <!-- Button of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60]-->
-    <string name="bubbles_feature_disabled_button_approve">Turn on for device</string>
+    <string name="bubbles_feature_disabled_button_approve">Turn on</string>
     <!-- Button to cancel out of the dialog shown when the user has disabled bubbles at the feature level but tries to enable it for an app. [CHAR LIMIT=60] -->
     <string name="bubbles_feature_disabled_button_cancel">Cancel</string>
 
@@ -8213,8 +8175,8 @@
     <string name="bubble_app_setting_none">Nothing can bubble</string>
     <!-- Bubble app settings: Title above a list of conversations that have been selected to bubble [CHAR LIMIT=60]-->
     <string name="bubble_app_setting_selected_conversation_title">Conversations</string>
-    <!-- Bubble app settings: Title above a list of conversations that have been excluded from bubbling [CHAR LIMIT=60] -->
-    <string name="bubble_app_setting_excluded_conversation_title">Excluded</string>
+    <!-- Bubble app settings: Title above a list of conversations that have been excluded from bubbling [CHAR LIMIT=100] -->
+    <string name="bubble_app_setting_excluded_conversation_title">All conversations can bubble except</string>
 
     <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
     <string name="swipe_direction_title">Swipe actions</string>
@@ -8443,6 +8405,12 @@
 
     <!-- [CHAR LIMIT=180] Notification importance description. More details from allow_interruption string - specifics of how notifications may interrupt. -->
     <string name="allow_interruption_summary">Let the app make sound, vibrate, and/or pop notifications on screen</string>
+
+    <!-- [CHAR LIMIT=150] Notification Importance title: important conversation level -->
+    <string name="notification_priority_title">Priority</string>
+
+    <!-- [CHAR LIMIT=150] Notification Importance title: important conversation level summary -->
+    <string name="notification_channel_summary_priority">Shows at top of conversation section and appears as a bubble.</string>
 
     <!-- Channel summaries for the app notification page -->
 
@@ -8923,19 +8891,15 @@
 
     <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
     <string name="zen_mode_calls">Allow calls</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
     <string name="zen_mode_calls_title">Calls</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
     <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
     <string name="zen_mode_starred_contacts_title">Starred contacts</string>
-
     <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
         <item quantity="one">1 other</item>
@@ -8949,128 +8913,119 @@
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Allow messages</string>
-
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
     <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">From anyone</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From contacts only -->
     <string name="zen_mode_from_contacts">From contacts only</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">From starred contacts only</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
-
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_contacts_repeat">From contacts and repeat callers</string>
-
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
     <string name="zen_mode_from_none">None</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
     <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
     <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
     <string name="zen_mode_alarms">Alarms</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow alarms summary -->
     <string name="zen_mode_alarms_summary">From timers, alarms, security systems, and other apps</string>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
     <string name="zen_mode_media">Media sounds</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow media (sound from video) to bypass dnd  summary-->
     <string name="zen_mode_media_summary">From videos, games, and other media</string>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
     <string name="zen_mode_system">Touch sounds</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: allow touch sounds to bypass DND summary  -->
     <string name="zen_mode_system_summary">From your keyboard and other buttons</string>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
     <string name="zen_mode_reminders">Reminders</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow reminder notifications/sounds to bypass DND summary  -->
     <string name="zen_mode_reminders_summary">From tasks and reminders</string>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
     <string name="zen_mode_events">Events</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow event notifications/sounds to bypass DND summary -->
     <string name="zen_mode_events_summary">From upcoming calendar events</string>
-
-    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
-    <string name="zen_mode_bypassing_apps">Allow apps to override</string>
-
-    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
-    <string name="zen_mode_bypassing_apps_title">App exceptions</string>
-
-    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
-    <string name="zen_mode_bypassing_apps_subtext_none">No apps can override Do Not Disturb</string>
-
-    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
-    <plurals name="zen_mode_bypassing_apps_subtext">
-        <item quantity="zero">No apps can override Do Not Disturb</item>
-        <item quantity="one">Notifications from 1 app can override Do Not Disturb</item>
-        <item quantity="other">Notifications from <xliff:g id="number" example="2">%1$d</xliff:g> apps can override Do Not Disturb</item>
-    </plurals>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
-    <string name="zen_mode_all_callers">anyone</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
+    <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
+    <string name="zen_mode_bypassing_apps_subtext_none">No apps can interrupt</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
+    <plurals name="zen_mode_bypassing_apps_subtext">
+        <item quantity="one"><xliff:g id="app_name" example="Nest">%s</xliff:g> can interrupt</item>
+        <item quantity="other"><xliff:g id="app_names" example="Nest and Google Play Store">%s</xliff:g> can interrupt</item>
+    </plurals>
+    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional apps are
+     allowed to bypass Do Not Disturb. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
+    <string name="zen_mode_bypassing_apps_title">App exceptions</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
-    <string name="zen_mode_contacts_callers">contacts</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
+    <plurals name="zen_mode_other_sounds_summary">
+        <item quantity="one"><xliff:g id="sound_category">%s</xliff:g> can interrupt</item>
+        <item quantity="other"><xliff:g id="sound_categories" example="Alarms, media sounds, and 2 more">%s</xliff:g> can interrupt</item>
+    </plurals>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No other sounds are allowed to bypass DND -->
+    <string name="zen_mode_other_sounds_none">Nothing can interrupt</string>
+    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional sounds
+    are allowed to bypass Do Not Disturb. For example, "Alarms, media sounds, and 2 more can
+    interrupt". -->
+    <string name="zen_mode_other_sounds_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
-    <string name="zen_mode_starred_callers">starred contacts</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
+    <string name="zen_mode_people_none">No one can interrupt</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
+    <string name="zen_mode_people_some">Some people can interrupt</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
+    <string name="zen_mode_people_all">All people can interrupt</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers option -->
     <string name="zen_mode_repeat_callers">Repeat callers</string>
-
-    <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers (ie: repeat callers are allowed to bypass dnd) -->
-    <string name="zen_mode_repeat_callers_list">repeat callers</string>
-
     <!-- [CHAR LIMIT=70] Zen mode settings: Allow repeat callers toggle title -->
     <string name="zen_mode_repeat_callers_title">Allow repeat callers</string>
-
+    <!-- [CHAR LIMIT=50] Zen mode settings: All callers summary -->
+    <string name="zen_mode_all_callers">anyone</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
+    <string name="zen_mode_contacts_callers">contacts</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Selected callers summary -->
+    <string name="zen_mode_starred_callers">starred contacts</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers (ie: repeat callers are allowed to bypass dnd) -->
+    <string name="zen_mode_repeat_callers_list">repeat callers</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
     <string name="zen_mode_calls_summary_one">Allow from <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
-
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
     <string name="zen_mode_calls_summary_two">Allow from <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
-
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
 
@@ -9079,43 +9034,33 @@
 
     <!-- [CHAR LIMIT=20] Zen mode settings: When option -->
     <string name="zen_mode_when">Automatically turn on</string>
-
     <!-- [CHAR LIMIT=20] Zen mode settings: When option value: Never -->
     <string name="zen_mode_when_never">Never</string>
-
     <!-- [CHAR LIMIT=20] Zen mode settings: When option value: Every night -->
     <string name="zen_mode_when_every_night">Every night</string>
-
     <!-- [CHAR LIMIT=20] Zen mode settings: When option value: Weeknights -->
     <string name="zen_mode_when_weeknights">Weeknights</string>
-
     <!-- [CHAR LIMIT=20] Zen mode settings: Start time option -->
     <string name="zen_mode_start_time">Start time</string>
-
     <!-- [CHAR LIMIT=20] Zen mode settings: End time option -->
     <string name="zen_mode_end_time">End time</string>
-
     <!-- [CHAR LIMIT=60] Zen mode settings: End time option: Summary text value format when end time = next day -->
     <string name="zen_mode_end_time_next_day_summary_format"><xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g> next day</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only forever. -->
     <string name="zen_mode_summary_alarms_only_indefinite">Change to alarms only indefinitely</string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for < 60 minutes. -->
     <plurals name="zen_mode_summary_alarms_only_by_minute">
         <item quantity="one">Change to alarms only for one minute until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
         <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> minutes (until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g>)</item>
     </plurals>
-
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only for N hours. -->
     <plurals name="zen_mode_summary_alarms_only_by_hour">
         <item quantity="one">Change to alarms only for one hour until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
         <item quantity="other">Change to alarms only for <xliff:g id="duration" example="2">%1$d</xliff:g> hours until <xliff:g id="formattedTime" example="10:00 PM">%2$s</xliff:g></item>
     </plurals>
-
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: switch to alarms only until a specific time. -->
     <string name="zen_mode_summary_alarms_only_by_time">Change to alarms only until <xliff:g id="formattedTime" example="10:00 PM">%1$s</xliff:g></string>
-
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
@@ -11874,6 +11819,51 @@
 
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
+
+    <!-- Quick controls name sentence case [CHAR LIMIT=40] -->
+    <string name="quick_controls_sentence">Quick controls</string>
+
+    <!-- Quick controls name lower case [CHAR LIMIT=40] -->
+    <string name="quick_controls_lower">quick controls</string>
+
+    <!-- Cards and passes name sentence case [CHAR LIMIT=40] -->
+    <string name="cards_passes_sentence">Cards &amp; passes</string>
+
+    <!-- Cards and passes name lower case [CHAR LIMIT=40] -->
+    <string name="cards_passes_lower">cards &amp; passes</string>
+
+    <!-- Power menu setting name [CHAR LIMIT=NONE] -->
+    <string name="power_menu_setting_name">Power menu</string>
+
+    <!-- Power menu setting title [CHAR LIMIT=NONE] -->
+    <string name="power_menu_setting_title">Power button menu</string>
+
+    <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
+    <string name="power_menu_cards_passes">Show cards &amp; passes</string>
+
+    <!-- Power menu setting option quick controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_quick_controls">Show quick controls</string>
+
+    <!-- Power menu setting option cards, passes, quick controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_cards_passes_quick_controls">Show cards, passes, and quick controls</string>
+
+    <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
+    <string name="power_menu_none">Don\u2019t show any content</string>
+
+    <!-- Power menu setting Privacy [CHAR LIMIT=40] -->
+    <string name="power_menu_privacy">Privacy</string>
+
+    <!-- Power menu setting privacy show all [CHAR LIMIT=NONE] -->
+    <string name="power_menu_privacy_show">Show cards and controls when locked</string>
+
+    <!-- Power menu setting privacy hide all [CHAR LIMIT=NONE] -->
+    <string name="power_menu_privacy_hide">Hide cards and controls when locked</string>
+
+    <!-- Quick controls toggle name [CHAR LIMIT=NONE] -->
+    <string name="quick_controls_setting_toggle">Show quick controls</string>
+
+    <!-- Quick controls toggle subtitle [CHAR LIMIT=NONE] -->
+    <string name="quick_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>
