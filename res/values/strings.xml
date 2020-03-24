@@ -7817,14 +7817,14 @@
     <!--  Do not disturb: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
     <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
 
+    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
+    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
+
     <!--  Do not disturb: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_interruptions_settings_title">Block visual disturbances</string>
 
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
-
-    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for hidden notifications</string>
@@ -8889,10 +8889,31 @@
     <!-- [CHAR LIMIT=40] General template for a verbal start to end range in a text summary -->
     <string name="summary_range_verbal_combination"><xliff:g id="start" example="Sun">%1$s</xliff:g> to <xliff:g id="end" example="Thu">%2$s</xliff:g></string>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
-    <string name="zen_mode_calls">Allow calls</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
+    <string name="zen_mode_conversations_title">Conversations</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Header for conversations settings page -->
+    <string name="zen_mode_conversations_section_title">Conversations that can interrupt</string>
+    <string name="zen_mode_from_all_conversations">All conversations</string>
+    <string name="zen_mode_from_important_conversations">Important conversations</string>
+    <string name="zen_mode_from_no_conversations">None</string>
+    <plurals name="zen_mode_conversations_count">
+        <item quantity="one">1 conversation</item>
+        <item quantity="other"><xliff:g id="conversations" example="3">%d</xliff:g> conversations</item>
+    </plurals>
+    <!-- [CHAR LIMIT=40] Zen mode settings: No conversations are allowed to bypass DND -->
+    <string name="zen_mode_conversations_count_none">None</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
+    setting page -->
+    <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
     <string name="zen_mode_calls_title">Calls</string>
+    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
+    <string name="zen_mode_calls">Calls</string>
+    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
+    <string name="zen_mode_calls_list">calls</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Calls settings header -->
+    <string name="zen_mode_calls_header">Calls that can interrupt</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
@@ -8906,26 +8927,32 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
-    <string name="zen_mode_conversations_title">Conversations</string>
-    <string name="zen_mode_from_all_conversations">From all conversations</string>
-    <string name="zen_mode_from_important_conversations">From important conversations</string>
-    <string name="zen_mode_from_no_conversations">Don\u2019t allow any conversations</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
-    <string name="zen_mode_messages">Allow messages</string>
+    <string name="zen_mode_messages">Messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
+    <string name="zen_mode_messages_list">messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
+    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Messages settings header -->
+    <string name="zen_mode_messages_header">Messages that can interrupt</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
-    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+
+    <!-- Zen mode settings: All senders can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_senders_summary">All <xliff:g id="sender_category" example="messages">%s</xliff:g> can reach you</string>
+    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_contacts_senders_summary"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
-    <string name="zen_mode_from_anyone">From anyone</string>
+    <string name="zen_mode_from_anyone">Anyone</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From contacts only -->
-    <string name="zen_mode_from_contacts">From contacts only</string>
+    <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
-    <string name="zen_mode_from_starred">From starred contacts only</string>
+    <string name="zen_mode_from_starred">Starred contacts</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
+    <string name="zen_mode_from_none">None</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
@@ -8934,8 +8961,6 @@
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
-    <string name="zen_mode_from_none">None</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
     <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
@@ -8978,6 +9003,8 @@
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND header -->
+    <string name="zen_mode_bypassing_apps_header">Apps that can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
     <string name="zen_mode_bypassing_apps_subtext_none">No apps can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
@@ -8990,6 +9017,10 @@
     <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">App exceptions</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
+    <string name="zen_mode_bypassing_apps_all_summary">All notifications</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
+    <string name="zen_mode_bypassing_apps_some_summary">Some notifications</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
     <plurals name="zen_mode_other_sounds_summary">
