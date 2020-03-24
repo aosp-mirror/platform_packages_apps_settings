@@ -30,7 +30,7 @@ import java.util.List;
 
 public class AllConversationsPreferenceController extends ConversationListPreferenceController {
 
-    private static final String KEY = "all_conversations";
+    private static final String KEY = "other_conversations";
 
     private List<ConversationChannelWrapper> mConversations;
 
@@ -50,6 +50,11 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
     }
 
     @Override
+    boolean matchesFilter(ConversationChannelWrapper conversation) {
+        return !conversation.getNotificationChannel().isImportantConversation();
+    }
+
+    @Override
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
@@ -66,7 +71,7 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
                 if (mContext == null) {
                     return;
                 }
-                populateList(mConversations, pref, pref);
+                populateList(mConversations, pref);
             }
         }.execute();
     }
