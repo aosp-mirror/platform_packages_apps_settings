@@ -266,6 +266,12 @@ public abstract class ActiveSubsciptionsListener
         mCachedActiveSubscriptionInfo = null;
     }
 
+    @VisibleForTesting
+    void registerForSubscriptionsChange() {
+        getSubscriptionManager().addOnSubscriptionsChangedListener(
+                mContext.getMainExecutor(), this);
+    }
+
     private void monitorSubscriptionsChange(boolean on) {
         if (on) {
             if (!mCacheState.compareAndSet(STATE_NOT_LISTENING, STATE_PREPARING)) {
@@ -277,7 +283,7 @@ public abstract class ActiveSubsciptionsListener
             }
             mContext.registerReceiver(mSubscriptionChangeReceiver,
                     mSubscriptionChangeIntentFilter, null, new Handler(mLooper));
-            getSubscriptionManager().addOnSubscriptionsChangedListener(this);
+            registerForSubscriptionsChange();
             mCacheState.compareAndSet(STATE_PREPARING, STATE_LISTENING);
             return;
         }
