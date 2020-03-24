@@ -169,16 +169,23 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     @VisibleForTesting
     List<ContextualCard> sortCards(List<ContextualCard> cards) {
-        //take mContextualCards as the source and do the ranking based on the rule.
-        return cards.stream()
+        // take mContextualCards as the source and do the ranking based on the rule.
+        final List<ContextualCard> result = cards.stream()
                 .sorted((c1, c2) -> Double.compare(c2.getRankingScore(), c1.getRankingScore()))
                 .collect(Collectors.toList());
+        final List<ContextualCard> stickyCards = result.stream()
+                .filter(c -> c.getCategory() == STICKY_VALUE)
+                .collect(Collectors.toList());
+        // make sticky cards be at the tail end.
+        result.removeAll(stickyCards);
+        result.addAll(stickyCards);
+        return result;
     }
 
     @Override
     public void onContextualCardUpdated(Map<Integer, List<ContextualCard>> updateList) {
         final Set<Integer> cardTypes = updateList.keySet();
-        //Remove the existing data that matches the certain cardType before inserting new data.
+        // Remove the existing data that matches the certain cardType before inserting new data.
         List<ContextualCard> cardsToKeep;
 
         // We are not sure how many card types will be in the database, so when the list coming
