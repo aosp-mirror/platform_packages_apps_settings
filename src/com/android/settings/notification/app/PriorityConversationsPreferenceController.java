@@ -32,7 +32,6 @@ public class PriorityConversationsPreferenceController extends
         ConversationListPreferenceController {
 
     private static final String KEY = "important_conversations";
-    private static final String LIST_KEY = "important_conversations_list";
     private List<ConversationChannelWrapper> mConversations;
 
     public PriorityConversationsPreferenceController(Context context,
@@ -48,6 +47,11 @@ public class PriorityConversationsPreferenceController extends
     @Override
     public boolean isAvailable() {
         return true;
+    }
+
+    @Override
+    boolean matchesFilter(ConversationChannelWrapper conversation) {
+        return conversation.getNotificationChannel().isImportantConversation();
     }
 
     @Override
@@ -67,7 +71,7 @@ public class PriorityConversationsPreferenceController extends
                 if (mContext == null) {
                     return;
                 }
-                populateList(mConversations, pref, pref.findPreference(LIST_KEY));
+                populateList(mConversations, pref);
             }
         }.execute();
 
