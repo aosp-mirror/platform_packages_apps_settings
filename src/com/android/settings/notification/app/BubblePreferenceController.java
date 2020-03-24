@@ -68,7 +68,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow != null && mAppRow.allowBubbles;
+                return mAppRow != null;
             }
         }
         return true;
