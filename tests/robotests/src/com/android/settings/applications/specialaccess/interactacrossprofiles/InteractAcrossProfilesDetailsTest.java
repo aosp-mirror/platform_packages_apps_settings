@@ -30,7 +30,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -48,7 +47,6 @@ public class InteractAcrossProfilesDetailsTest {
     private final InteractAcrossProfilesDetails mFragment = new InteractAcrossProfilesDetails();
 
     @Test
-    @Ignore
     public void getPreferenceSummary_appOpAllowed_returnsAllowed() {
         String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
         shadowOf(mAppOpsManager).setMode(
@@ -61,7 +59,6 @@ public class InteractAcrossProfilesDetailsTest {
     }
 
     @Test
-    @Ignore
     public void getPreferenceSummary_appOpNotAllowed_returnsNotAllowed() {
         String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
         shadowOf(mAppOpsManager).setMode(
