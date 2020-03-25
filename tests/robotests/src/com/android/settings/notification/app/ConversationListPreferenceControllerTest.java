@@ -95,18 +95,16 @@ public class ConversationListPreferenceControllerTest {
     @Test
     public void testPopulateList_hideIfNoConversations() {
         PreferenceCategory outerContainer = mock(PreferenceCategory.class);
-        PreferenceCategory innerContainer = mock(PreferenceCategory.class);
 
-        mController.populateList(new ArrayList<>(), outerContainer, innerContainer);
+        mController.populateList(new ArrayList<>(), outerContainer);
 
         verify(outerContainer).setVisible(false);
-        verify(innerContainer, never()).addPreference(any());
+        verify(outerContainer, never()).addPreference(any());
     }
 
     @Test
     public void testPopulateList_validConversations() {
         PreferenceCategory outerContainer = mock(PreferenceCategory.class);
-        PreferenceCategory innerContainer = mock(PreferenceCategory.class);
 
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         ccw.setNotificationChannel(mock(NotificationChannel.class));
@@ -117,10 +115,10 @@ public class ConversationListPreferenceControllerTest {
         ArrayList<ConversationChannelWrapper> list = new ArrayList<>();
         list.add(ccw);
 
-        mController.populateList(list, outerContainer, innerContainer);
+        mController.populateList(list, outerContainer);
 
         verify(outerContainer).setVisible(true);
-        verify(innerContainer, times(1)).addPreference(any());
+        verify(outerContainer, times(1)).addPreference(any());
     }
 
     @Test
@@ -231,6 +229,11 @@ public class ConversationListPreferenceControllerTest {
 
         private TestPreferenceController(Context context, NotificationBackend backend) {
             super(context, backend);
+        }
+
+        @Override
+        boolean matchesFilter(ConversationChannelWrapper conversation) {
+            return true;
         }
 
         @Override
