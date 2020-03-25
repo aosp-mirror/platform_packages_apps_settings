@@ -649,12 +649,10 @@
     <string name="owner_info_settings_status"><xliff:g id="count" example="90">%1$d</xliff:g> / <xliff:g id="count" example="100">%2$d</xliff:g></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
     <string name="owner_info_settings_edit_text_hint">E.g., Joe\u2019s Android.</string>
-    <!-- Text shown for title of user info setting [CHAR LIMIT=20]-->
-    <string name="user_info_settings_title">User info</string>
+
     <!-- Text shown next to checkbox for showing profile info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_profile_info_on_lockscreen_label">Show profile info on lock screen</string>
-    <!-- Text shown for title of profile info setting [CHAR LIMIT=20]-->
-    <string name="profile_info_settings_title">Profile info</string>
+
     <!-- Main Settings screen setting option title for the item to take you to the Accounts screen [CHAR LIMIT=22] -->
     <string name="Accounts_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
@@ -2188,8 +2186,6 @@
     <string name="wifi_connected_to_message">@string/bluetooth_connected_summary</string>
     <!-- Button label to connecting progress to a Wi-Fi network [CHAR LIMIT=20] -->
     <string name="wifi_connecting">Connecting\u2026</string>
-    <!-- Button label to disconnect to a Wi-Fi network [CHAR LIMIT=NONE] -->
-    <string name="wifi_disconnect">@string/bluetooth_device_context_disconnect</string>
     <!-- Failured notification for connect -->
     <string name="wifi_failed_connect_message">Failed to connect to network</string>
     <!-- Not in range notification for connect [CHAR LIMIT=40] -->
@@ -6277,7 +6273,7 @@
     <string name="notification_log_title">Notification log</string>
 
     <string name="notification_history_title">Notification history</string>
-    <string name="notification_history_today">Today</string>
+    <string name="notification_history_today">Last 24 hours</string>
     <string name="notification_history_snooze">Snoozed</string>
     <string name="notification_history_dismiss">Recently dismissed</string>
 
@@ -6885,10 +6881,7 @@
     <string name="user_add_user_menu">Add user</string>
     <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
     <string name="user_summary_restricted_profile">Restricted profile</string>
-    <!-- User settings warning that restricted profile needs a screen lock [CHAR LIMIT=NONE] -->
-    <string name="user_need_lock_message">Before you can create a restricted profile, you\u2019ll need to set up a screen lock to protect your apps and personal data.</string>
-    <!-- User settings dialog button to set screen lock [CHAR LIMIT=25] -->
-    <string name="user_set_lock_button">Set lock</string>
+
     <!-- User summary to indicate that user is currently not set up [CHAR LIMIT=100] -->
     <string name="user_summary_not_set_up">Not set up</string>
     <!-- User summary to indicate that restricted profile is currently not set up [CHAR LIMIT=100] -->
@@ -6901,35 +6894,11 @@
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
     <!-- Title for the preference to enter the nickname of the userto display in the user switcher [CHAR LIMIT=25]-->
     <string name="user_nickname">Nickname</string>
-    <!-- Title for add user type dialog [CHAR LIMIT=45] -->
-    <string name="user_add_user_type_title">Add</string>
+
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
     <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
-    <!-- Summary for add user entry in the choice dialog [CHAR LIMIT=none] -->
-    <string name="user_add_user_item_summary">Users have their own apps and content</string>
-    <!-- Summary for add restricted profile entry in the choice dialog [CHAR LIMIT=none] -->
-    <string name="user_add_profile_item_summary">You can restrict access to apps and content from your account</string>
-    <!-- Button text for adding a regular user [CHAR LIMIT=25] -->
-    <string name="user_add_user_item_title">User</string>
-    <!-- Button text for adding a restricted profile [CHAR LIMIT=25] -->
-    <string name="user_add_profile_item_title">Restricted profile</string>
-    <!-- Title for add user confirmation dialog [CHAR LIMIT=30] -->
-    <string name="user_add_user_title">Add new user?</string>
-    <!-- Message for add user confirmation dialog - long version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_long">You can share this device with other people by creating additional users. Each user has their own space, which they can customize with apps, wallpaper, and so on. Users can also adjust device settings like Wi\u2011Fi that affect everyone.\n\nWhen you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. Accessibility settings and services may not transfer to the new user.</string>
-    <!-- Message for add user confirmation dialog - short version. [CHAR LIMIT=none] -->
-    <string name="user_add_user_message_short">When you add a new user, that person needs to set up their space.\n\nAny user can update apps for all other users. </string>
-    <!-- Title of dialog to setup a new user [CHAR LIMIT=30] -->
-    <string name="user_setup_dialog_title">Set up user now?</string>
-    <!-- Message in dialog to setup a new user after creation [CHAR LIMIT=none] -->
-    <string name="user_setup_dialog_message">Make sure the person is available to take the device and set up their space</string>
-    <!-- Message in dialog to setup a new restricted profile after creation [CHAR LIMIT=none] -->
-    <string name="user_setup_profile_dialog_message">Set up profile now?</string>
-    <!-- Button text to setup the new user now [CHAR LIMIT=25] -->
-    <string name="user_setup_button_setup_now">Set up now</string>
-    <!-- Button text to setup the new user later [CHAR LIMIT=25] -->
-    <string name="user_setup_button_setup_later">Not now</string>
-    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+
+        <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="default">Only the phone\u2019s owner can manage users.</string>
@@ -6942,10 +6911,7 @@
     <string name="user_lockscreen_settings">Lock screen settings</string>
     <!-- User settings item to allow creating new users from locks screen [CHAR LIMIT=50] -->
     <string name="user_add_on_lockscreen_menu">Add users from lock screen</string>
-    <!-- User details new user name [CHAR LIMIT=30] -->
-    <string name="user_new_user_name">New user</string>
-    <!-- User details new restricted profile name [CHAR LIMIT=30] -->
-    <string name="user_new_profile_name">New profile</string>
+
     <!-- User (self) removal confirmation title [CHAR LIMIT=30] -->
     <string name="user_confirm_remove_self_title">Delete yourself?</string>
     <!-- User removal confirmation title [CHAR LIMIT=25] -->
@@ -7807,14 +7773,14 @@
     <!--  Do not disturb: Zen mode combined summary + condition line [CHAR LIMIT=60] -->
     <string name="zen_mode_summary_combination"><xliff:g id="mode" example="Priority only">%1$s</xliff:g>: <xliff:g id="exit condition" example="Until you turn this off">%2$s</xliff:g></string>
 
+    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
+    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
+
     <!--  Do not disturb: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_interruptions_settings_title">Block visual disturbances</string>
 
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
-
-    <!-- Do not disturb: zen settings screens category title [CHAR LIMIT=100] -->
-    <string name="zen_mode_settings_category">Allow interruptions that make sound</string>
 
     <!-- Do not disturb: restrict notifications settings title [CHAR LIMIT=80] -->
     <string name="zen_mode_restrict_notifications_title">Display options for hidden notifications</string>
@@ -8097,19 +8063,19 @@
     <string name="asst_capabilities_actions_replies_summary">Automatically show suggested actions &amp; replies</string>
 
     <!-- Configure notifications: settings summary [CHAR LIMIT=NONE] -->
-    <string name="notification_history_summary">Turn on notification history to keep track of past notifications and snoozed notifications</string>
+    <string name="notification_history_summary">Show recent and snoozed notifications</string>
 
     <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
     <string name="notification_history">Notification history</string>
 
     <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
-    <string name="notification_history_turn_on">Turn on history</string>
+    <string name="notification_history_toggle">Use notification history</string>
 
-    <!-- Configure notifications: settings title [CHAR LIMIT=100] -->
-    <string name="notification_history_turn_off">Turn off history</string>
+    <!-- Notification history screen; title when history is off [CHAR LIMIT=200] -->
+    <string name="notification_history_off_title_extended">Notification history turned off</string>
 
-    <!-- Notification history screen; summary when history is off [CHAR LIMIT=200] -->
-    <string name="notification_history_off_title_extended">Notification history is turned off</string>
+    <!--  Notification history screen; summary when history is off [CHAR LIMIT=NONE] -->
+   <string name="notification_history_off_summary">Turn on notification history to see recent notifications and snoozed notifications</string>
 
     <!-- Notification history screen; content description describing what happens when you tap on a notification history entry [CHAR LIMIT=NONE] -->
     <string name="notification_history_view_settings">view notification settings</string>
@@ -8336,10 +8302,10 @@
     <string name="manage_conversations">Manage conversations</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="important_conversations">Important conversations</string>
+    <string name="important_conversations">Priority conversations</string>
 
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="all_conversations">All conversations</string>
+    <string name="other_conversations">Other conversations</string>
 
     <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
     <string name="important_bubble">Bubble important conversations</string>
@@ -8879,10 +8845,31 @@
     <!-- [CHAR LIMIT=40] General template for a verbal start to end range in a text summary -->
     <string name="summary_range_verbal_combination"><xliff:g id="start" example="Sun">%1$s</xliff:g> to <xliff:g id="end" example="Thu">%2$s</xliff:g></string>
 
-    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
-    <string name="zen_mode_calls">Allow calls</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Title for conversations settings page -->
+    <string name="zen_mode_conversations_title">Conversations</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Header for conversations settings page -->
+    <string name="zen_mode_conversations_section_title">Conversations that can interrupt</string>
+    <string name="zen_mode_from_all_conversations">All conversations</string>
+    <string name="zen_mode_from_important_conversations">Important conversations</string>
+    <string name="zen_mode_from_no_conversations">None</string>
+    <plurals name="zen_mode_conversations_count">
+        <item quantity="one">1 conversation</item>
+        <item quantity="other"><xliff:g id="conversations" example="3">%d</xliff:g> conversations</item>
+    </plurals>
+    <!-- [CHAR LIMIT=40] Zen mode settings: No conversations are allowed to bypass DND -->
+    <string name="zen_mode_conversations_count_none">None</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
+    setting page -->
+    <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
+
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow calls toggle title -->
     <string name="zen_mode_calls_title">Calls</string>
+    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
+    <string name="zen_mode_calls">Calls</string>
+    <!-- [CHAR LIMIT=20] Zen mode settings: Calls option -->
+    <string name="zen_mode_calls_list">calls</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Calls settings header -->
+    <string name="zen_mode_calls_header">Calls that can interrupt</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
     <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
@@ -8896,26 +8883,32 @@
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
 
-    <string name="zen_mode_conversations_title">Conversations</string>
-    <string name="zen_mode_from_all_conversations">From all conversations</string>
-    <string name="zen_mode_from_important_conversations">From important conversations</string>
-    <string name="zen_mode_from_no_conversations">Don\u2019t allow any conversations</string>
-
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
-    <string name="zen_mode_messages">Allow messages</string>
+    <string name="zen_mode_messages">Messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
+    <string name="zen_mode_messages_list">messages</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
+    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Messages settings header -->
+    <string name="zen_mode_messages_header">Messages that can interrupt</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
     <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
-    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+
+    <!-- Zen mode settings: All senders can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_senders_summary">All <xliff:g id="sender_category" example="messages">%s</xliff:g> can reach you</string>
+    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_contacts_senders_summary"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
-    <string name="zen_mode_from_anyone">From anyone</string>
+    <string name="zen_mode_from_anyone">Anyone</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From contacts only -->
-    <string name="zen_mode_from_contacts">From contacts only</string>
+    <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
-    <string name="zen_mode_from_starred">From starred contacts only</string>
+    <string name="zen_mode_from_starred">Starred contacts</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
+    <string name="zen_mode_from_none">None</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
@@ -8924,8 +8917,6 @@
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
-    <string name="zen_mode_from_none">None</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
     <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
@@ -8968,6 +8959,8 @@
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND header -->
+    <string name="zen_mode_bypassing_apps_header">Apps that can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
     <string name="zen_mode_bypassing_apps_subtext_none">No apps can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
@@ -8980,6 +8973,10 @@
     <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">App exceptions</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
+    <string name="zen_mode_bypassing_apps_all_summary">All notifications</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
+    <string name="zen_mode_bypassing_apps_some_summary">Some notifications</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
     <plurals name="zen_mode_other_sounds_summary">

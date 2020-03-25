@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2018 The Android Open Source Project
+<!-- Copyright (C) 2020 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,17 +13,14 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_messages_settings_page"
-    android:title="@string/zen_mode_messages_title" >
-
+    android:key="zen_mode_conversations_settings"
+    android:title="@string/zen_mode_conversations_title">
+    <!-- Conversations -->
     <PreferenceCategory
-        android:key="zen_mode_settings_category_messages"
-        android:title="@string/zen_mode_messages_header">
+        android:key="zen_mode_conversations_radio_buttons"
+        android:title="@string/zen_mode_conversations_section_title">
+        <!-- TODO: add preference with chat images here (b/151845457) -->
     </PreferenceCategory>
-
-    <com.android.settingslib.widget.FooterPreference/>
-
 </PreferenceScreen>
