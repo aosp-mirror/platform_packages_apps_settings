@@ -44,6 +44,7 @@ import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,7 +57,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -80,6 +80,8 @@ public class WifiSettings2Test {
     private WifiSettings2 mWifiSettings2;
     @Mock
     private WifiPickerTracker mMockWifiPickerTracker;
+    @Mock
+    private PreferenceManager mPreferenceManager;
 
     @Before
     public void setUp() {
@@ -88,8 +90,10 @@ public class WifiSettings2Test {
 
         mWifiSettings2 = spy(new WifiSettings2());
         doReturn(mContext).when(mWifiSettings2).getContext();
+        doReturn(mPreferenceManager).when(mWifiSettings2).getPreferenceManager();
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
+        doReturn(mContext).when(mPreferenceManager).getContext();
         mWifiSettings2.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mWifiSettings2.mSavedNetworksPreference = new Preference(mContext);
         mWifiSettings2.mConfigureWifiSettingsPreference = new Preference(mContext);
@@ -239,9 +243,7 @@ public class WifiSettings2Test {
         assertThat(adapter.hasStableIds()).isTrue();
     }
 
-    //TODO(b/70983952): Remove @Ignore when WifiEntry API is constructed.
     @Test
-    @Ignore
     public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
         final FragmentActivity activity = mock(FragmentActivity.class);
         when(activity.getApplicationContext()).thenReturn(mContext);
@@ -249,6 +251,7 @@ public class WifiSettings2Test {
 
         final WifiEntry wifiEntry = mock(WifiEntry.class);
         when(wifiEntry.canDisconnect()).thenReturn(true);
+        when(wifiEntry.canForget()).thenReturn(true);
         when(wifiEntry.isSaved()).thenReturn(true);
         when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
 
