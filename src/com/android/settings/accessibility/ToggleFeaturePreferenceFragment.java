@@ -452,12 +452,23 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
     }
 
+    private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
+        final View dialogTextArea = dialogView.findViewById(R.id.container);
+        dialogTextArea.setOnClickListener(v -> {
+            checkBox.toggle();
+            updateUserShortcutType(/* saveChanges= */ false);
+        });
+    }
 
     private void initializeDialogCheckBox(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
+
         final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
         mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
+
         updateAlertDialogCheckState();
     }
 
@@ -468,9 +479,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
         checkBox.setChecked((mUserShortcutTypeCache & type) == type);
-        checkBox.setOnClickListener(v -> {
-            updateUserShortcutType(/* saveChanges= */ false);
-        });
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
