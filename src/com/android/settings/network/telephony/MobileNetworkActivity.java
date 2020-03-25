@@ -53,7 +53,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     static final int SUB_ID_NULL = Integer.MIN_VALUE;
 
-    private ProxySubscriptionManager mProxySubscriptionMgr;
+    @VisibleForTesting
+    ProxySubscriptionManager mProxySubscriptionMgr;
     private int mCurSubscriptionId;
 
     @Override
@@ -102,9 +103,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
+        registerActiveSubscriptionsListener();
 
         final Intent startIntent = getIntent();
         validate(startIntent);
@@ -119,15 +118,26 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         maybeShowContactDiscoveryDialog(mCurSubscriptionId);
     }
 
+    @VisibleForTesting
+    void registerActiveSubscriptionsListener() {
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
+    }
+
     /**
      * Implementation of ProxySubscriptionManager.OnActiveSubscriptionChangedListener
      */
     public void onChanged() {
         SubscriptionInfo info = getSubscription();
         int oldSubIndex = mCurSubscriptionId;
-        int subIndex = info.getSubscriptionId();
         updateSubscriptions(info);
+
         // Remove the dialog if the subscription associated with this activity changes.
+        if (info == null) {
+            return;
+        }
+        int subIndex = info.getSubscriptionId();
         if (subIndex != oldSubIndex) {
             removeContactDiscoveryDialog(oldSubIndex);
         }
