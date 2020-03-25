@@ -17,16 +17,11 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Accessibility settings for the vibration.
@@ -39,6 +34,11 @@ public class VibrationSettings extends DashboardFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_VIBRATION;
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_uri_accessibility_vibration;
     }
 
     @Override
