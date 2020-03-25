@@ -26,7 +26,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.android.settings.widget.MasterSwitchPreference;
 
@@ -49,8 +48,6 @@ public class AllInOneTetherPreferenceControllerTest {
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
     private MasterSwitchPreference mPreference;
-    @Mock
-    private SharedPreferences mSharedPreferences;
 
     private AllInOneTetherPreferenceController mController;
 
@@ -61,8 +58,6 @@ public class AllInOneTetherPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
         ReflectionHelpers.setField(mController, "mPreference", mPreference);
-        ReflectionHelpers
-            .setField(mController, "mTetherEnablerSharedPreferences", mSharedPreferences);
     }
 
     @Test

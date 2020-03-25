@@ -27,8 +27,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -47,7 +47,7 @@ public class BluetoothTetherPreferenceControllerTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
-    private SharedPreferences mSharedPreferences;
+    private TetherEnabler mTetherEnabler;
 
     private SwitchPreference mSwitchPreference;
     private BluetoothTetherPreferenceController mController;
@@ -61,10 +61,9 @@ public class BluetoothTetherPreferenceControllerTest {
         mSwitchPreference = spy(SwitchPreference.class);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
-        when(mContext.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
-                .thenReturn(mSharedPreferences);
         when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
         mController = new BluetoothTetherPreferenceController(mContext, BLUETOOTH_TETHER_KEY);
+        mController.setTetherEnabler(mTetherEnabler);
         ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
     }
 
@@ -75,6 +74,18 @@ public class BluetoothTetherPreferenceControllerTest {
         verify(mContext).registerReceiver(
                 eq(mController.mBluetoothChangeReceiver),
                 any());
+    }
+
+    @Test
+    public void lifecycle_shouldAddListenerOnResume() {
+        mController.onResume();
+        verify(mTetherEnabler).addListener(mController);
+    }
+
+    @Test
+    public void lifecycle_shouldRemoveListenrOnPause() {
+        mController.onPause();
+        verify(mTetherEnabler).removeListener(mController);
     }
 
     @Test
@@ -96,18 +107,26 @@ public class BluetoothTetherPreferenceControllerTest {
     }
 
     @Test
-    public void switch_shouldCheckedWhenSharedPreferenceIsTrue() {
-        when(mSharedPreferences.getBoolean(BLUETOOTH_TETHER_KEY, false)).thenReturn(true);
-        mController.onSharedPreferenceChanged(mSharedPreferences, BLUETOOTH_TETHER_KEY);
-
-        verify(mSwitchPreference).setChecked(true);
+    public void setChecked_shouldStartBluetoothTethering() {
+        mController.setChecked(true);
+        verify(mTetherEnabler).startTethering(TetheringManager.TETHERING_BLUETOOTH);
     }
 
     @Test
-    public void switch_shouldUnCheckedWhenSharedPreferenceIsFalse() {
-        when(mSharedPreferences.getBoolean(BLUETOOTH_TETHER_KEY, false)).thenReturn(false);
-        mController.onSharedPreferenceChanged(mSharedPreferences, BLUETOOTH_TETHER_KEY);
+    public void setUnchecked_shouldStopBluetoothTethering() {
+        mController.setChecked(false);
+        verify(mTetherEnabler).stopTethering(TetheringManager.TETHERING_BLUETOOTH);
+    }
 
-        verify(mSwitchPreference).setChecked(false);
+    @Test
+    public void switch_shouldCheckedWhenBluetoothTethering() {
+        mController.onTetherStateUpdated(TetherEnabler.TETHERING_BLUETOOTH_ON);
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void switch_shouldUnCheckedWhenBluetoothNotTethering() {
+        mController.onTetherStateUpdated(TetherEnabler.TETHERING_OFF);
+        assertThat(mController.isChecked()).isFalse();
     }
 }
