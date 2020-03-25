@@ -372,10 +372,10 @@ public class NotificationStation extends SettingsPreferenceFragment {
      */
     private void loadNotifications() {
         try {
-            StatusBarNotification[] active = mNoMan.getActiveNotifications(
-                    mContext.getPackageName());
-            StatusBarNotification[] dismissed = mNoMan.getHistoricalNotifications(
-                    mContext.getPackageName(), 50, false);
+            StatusBarNotification[] active = mNoMan.getActiveNotificationsWithAttribution(
+                    mContext.getPackageName(), mContext.getAttributionTag());
+            StatusBarNotification[] dismissed = mNoMan.getHistoricalNotificationsWithAttribution(
+                    mContext.getPackageName(), mContext.getAttributionTag(), 50, false);
 
             List<HistoricalNotificationInfo> list
                     = new ArrayList<>(active.length + dismissed.length);

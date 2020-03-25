@@ -116,6 +116,7 @@ public class NotificationHistoryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.notification_history);
         setContentView(R.layout.notification_history);
         mTodayView = findViewById(R.id.apps);
         mSnoozeView = findViewById(R.id.snoozed_list);
@@ -161,8 +162,8 @@ public class NotificationHistoryActivity extends Activity {
     private void bindSwitch() {
         SwitchBar bar = findViewById(R.id.switch_bar);
         if (bar != null) {
-            bar.setSwitchBarText(R.string.notification_history_turn_off,
-                    R.string.notification_history_turn_on);
+            bar.setSwitchBarText(R.string.notification_history_toggle,
+                    R.string.notification_history_toggle);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(mOnSwitchClickListener);
@@ -245,8 +246,9 @@ public class NotificationHistoryActivity extends Activity {
             StatusBarNotification[] dismissed = null;
             try {
                 snoozed = getSnoozedNotifications();
-                dismissed = mNm.getHistoricalNotifications(
-                    NotificationHistoryActivity.this.getPackageName(), 6, false);
+                dismissed = mNm.getHistoricalNotificationsWithAttribution(
+                        NotificationHistoryActivity.this.getPackageName(),
+                        NotificationHistoryActivity.this.getAttributionTag(), 6, false);
             } catch (SecurityException | RemoteException e) {
                 Log.d(TAG, "OnPaused called while trying to retrieve notifications");
             }

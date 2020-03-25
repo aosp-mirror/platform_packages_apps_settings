@@ -20,51 +20,31 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/zen_category_people" >
 
+   <!-- Conversations -->
    <PreferenceCategory
-       android:title="@string/zen_mode_calls_title"
-       android:key="zen_mode_settings_category_calls">
-      <!-- Calls -->
-      <ListPreference
-          android:key="zen_mode_calls"
-          android:title="@string/zen_mode_calls"
-          android:entries="@array/zen_mode_contacts_calls_entries"
-          android:entryValues="@array/zen_mode_contacts_values"/>
+       android:key="zen_mode_settings_category_conversations"
+       android:title="@string/zen_mode_conversations_section_title">
 
       <Preference
-          android:key="zen_mode_starred_contacts_callers"
-          android:title="@string/zen_mode_starred_contacts_title"/>
-
-      <!-- Repeat callers -->
-      <SwitchPreference
-          android:key="zen_mode_repeat_callers"
-          android:title="@string/zen_mode_repeat_callers_title" />
-   </PreferenceCategory>
-
-   <PreferenceCategory
-       android:title="@string/zen_mode_messages_title"
-       android:key="zen_mode_settings_category_messages">
-      <!-- Messages -->
-      <ListPreference
-          android:key="zen_mode_messages"
-          android:title="@string/zen_mode_messages"
-          android:entries="@array/zen_mode_contacts_messages_entries"
-          android:entryValues="@array/zen_mode_contacts_values"/>
-
-      <Preference
-          android:key="zen_mode_starred_contacts_messages"
-          android:title="@string/zen_mode_starred_contacts_title"/>
-   </PreferenceCategory>
-
-   <PreferenceCategory
-       android:title="@string/zen_mode_conversations_title"
-       android:key="zen_mode_settings_category_conversations">
-
-      <!-- Conversations -->
-      <ListPreference
           android:key="zen_mode_conversations"
           android:title="@string/zen_mode_conversations_title"
-          android:entries="@array/zen_mode_conversations_entries"
-          android:entryValues="@array/zen_mode_conversations_values"/>
+          android:fragment="com.android.settings.notification.zen.ZenModeConversationsSettings"/>
+   </PreferenceCategory>
+
+   <!-- Calls & Messages -->
+   <PreferenceCategory
+       android:key="zen_mode_people_calls_messages_section"
+       android:title="@string/zen_mode_people_calls_messages_section_title">
+
+      <Preference
+          android:key="zen_mode_people_calls"
+          android:title="@string/zen_mode_calls_title"
+          android:fragment="com.android.settings.notification.zen.ZenModeCallsSettings"/>
+
+      <Preference
+          android:key="zen_mode_people_messages"
+          android:title="@string/zen_mode_messages_title"
+          android:fragment="com.android.settings.notification.zen.ZenModeMessagesSettings"/>
    </PreferenceCategory>
 
    <!-- Footer that shows if user is put into alarms only or total silence mode by an app -->

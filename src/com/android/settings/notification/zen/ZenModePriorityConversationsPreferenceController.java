@@ -16,37 +16,65 @@
 
 package com.android.settings.notification.zen;
 
-import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_ANYONE;
-import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_IMPORTANT;
-import static android.service.notification.ZenPolicy.CONVERSATION_SENDERS_NONE;
-
 import android.app.NotificationManager;
 import android.content.Context;
-import android.provider.Settings;
+import android.content.pm.ParceledListSlice;
+import android.os.AsyncTask;
+import android.service.notification.ConversationChannelWrapper;
 
-import androidx.preference.ListPreference;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.widget.RadioButtonPreference;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Options to choose the priority conversations that are allowed to bypass DND.
+ */
 public class ZenModePriorityConversationsPreferenceController
-        extends AbstractZenModePreferenceController
-        implements Preference.OnPreferenceChangeListener {
+        extends AbstractZenModePreferenceController {
+    private static final int UNSET = -1;
+    @VisibleForTesting static final String KEY_ALL = "conversations_all";
+    @VisibleForTesting static final String KEY_IMPORTANT = "conversations_important";
+    @VisibleForTesting static final String KEY_NONE = "conversations_none";
 
-    protected static final String KEY = "zen_mode_conversations";
-    private final ZenModeBackend mBackend;
-    private ListPreference mPreference;
+    private final NotificationBackend mNotificationBackend;
 
-    public ZenModePriorityConversationsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
+    private int mNumImportantConversations = UNSET;
+    private int mNumConversations = UNSET;
+    private PreferenceCategory mPreferenceCategory;
+    private List<RadioButtonPreference> mRadioButtonPreferences = new ArrayList<>();
+
+    public ZenModePriorityConversationsPreferenceController(Context context, String key,
+            Lifecycle lifecycle, NotificationBackend notificationBackend) {
+        super(context, key, lifecycle);
+        mNotificationBackend = notificationBackend;
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY;
+    public void displayPreference(PreferenceScreen screen) {
+        mPreferenceCategory = screen.findPreference(getPreferenceKey());
+        if (mPreferenceCategory.findPreference(KEY_ALL) == null) {
+            makeRadioPreference(KEY_ALL, R.string.zen_mode_from_all_conversations);
+            makeRadioPreference(KEY_IMPORTANT, R.string.zen_mode_from_important_conversations);
+            makeRadioPreference(KEY_NONE, R.string.zen_mode_from_no_conversations);
+            updateChannelCounts();
+        }
+
+        super.displayPreference(screen);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateChannelCounts();
     }
 
     @Override
@@ -55,50 +83,98 @@ public class ZenModePriorityConversationsPreferenceController
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(KEY);
+    public String getPreferenceKey() {
+        return KEY;
     }
 
     @Override
     public void updateState(Preference preference) {
-        super.updateState(preference);
-        updateValue(preference);
-    }
+        final int currSetting = mBackend.getPriorityConversationSenders();
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object selectedContactsFrom) {
-        mBackend.saveConversationSenders(Integer.parseInt(selectedContactsFrom.toString()));
-        updateValue(preference);
-        return true;
-    }
-
-    private void updateValue(Preference preference) {
-        mPreference = (ListPreference) preference;
-        switch (getZenMode()) {
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-            case Settings.Global.ZEN_MODE_ALARMS:
-                mPreference.setEnabled(false);
-                mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
-                mPreference.setSummary(mBackend.getAlarmsTotalSilencePeopleSummary(
-                        NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS));
-                break;
-            default:
-                preference.setEnabled(true);
-                preference.setSummary(mBackend.getConversationSummary());
-                int senders = mBackend.getPriorityConversationSenders();
-
-                switch (senders) {
-                    case CONVERSATION_SENDERS_NONE:
-                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_NONE));
-                        break;
-                    case CONVERSATION_SENDERS_IMPORTANT:
-                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_IMPORTANT));
-                        break;
-                    default:
-                        mPreference.setValue(String.valueOf(CONVERSATION_SENDERS_ANYONE));
-                        break;
-                }
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+            pref.setChecked(keyToSetting(pref.getKey()) == currSetting);
+            pref.setSummary(getSummary(pref.getKey()));
         }
     }
+
+    private static int keyToSetting(String key) {
+        switch (key) {
+            case KEY_ALL:
+                return NotificationManager.Policy.CONVERSATION_SENDERS_ANYONE;
+            case KEY_IMPORTANT:
+                return NotificationManager.Policy.CONVERSATION_SENDERS_IMPORTANT;
+            default:
+                return NotificationManager.Policy.CONVERSATION_SENDERS_NONE;
+        }
+    }
+
+    private String getSummary(String key) {
+        int numConversations;
+        if (KEY_ALL.equals(key)) {
+            numConversations = mNumConversations;
+        } else if (KEY_IMPORTANT.equals(key)) {
+            numConversations = mNumImportantConversations;
+        } else {
+            return null;
+        }
+
+        if (numConversations == UNSET) {
+            return null;
+        } else if (numConversations == 0) {
+            return mContext.getResources().getString(
+                    R.string.zen_mode_conversations_count_none);
+        } else {
+            return mContext.getResources().getQuantityString(
+                    R.plurals.zen_mode_conversations_count, numConversations);
+        }
+    }
+
+    private void updateChannelCounts() {
+        // Load conversations
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                ParceledListSlice<ConversationChannelWrapper> allConversations =
+                        mNotificationBackend.getConversations(false);
+                if (allConversations != null) {
+                    mNumConversations = allConversations.getList().size();
+                }
+                ParceledListSlice<ConversationChannelWrapper> importantConversations =
+                        mNotificationBackend.getConversations(true);
+                if (importantConversations != null) {
+                    mNumImportantConversations = importantConversations.getList().size();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
+                updateState(mPreferenceCategory);
+            }
+        }.execute();
+    }
+
+    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
+        RadioButtonPreference pref = new RadioButtonPreference(mPreferenceCategory.getContext());
+        pref.setKey(key);
+        pref.setTitle(titleId);
+        pref.setOnClickListener(mRadioButtonClickListener);
+        mPreferenceCategory.addPreference(pref);
+        mRadioButtonPreferences.add(pref);
+        return pref;
+    }
+
+    private RadioButtonPreference.OnClickListener mRadioButtonClickListener =
+            new RadioButtonPreference.OnClickListener() {
+        @Override
+        public void onRadioButtonClicked(RadioButtonPreference preference) {
+            int selectedConversationSetting = keyToSetting(preference.getKey());
+            if (selectedConversationSetting != mBackend.getPriorityConversationSenders()) {
+                mBackend.saveConversationSenders(selectedConversationSetting);
+            }
+        }
+    };
 }

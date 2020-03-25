@@ -61,21 +61,25 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
     }
 
     protected void populateList(List<ConversationChannelWrapper> conversations,
-            PreferenceGroup outerContainer, PreferenceGroup innerContainer) {
+            PreferenceGroup containerGroup) {
         // TODO: if preference has children, compare with newly loaded list
-        if (conversations.isEmpty()) {
-            outerContainer.setVisible(false);
-        } else {
-            outerContainer.setVisible(true);
-            populateConversations(conversations, innerContainer);
+        containerGroup.removeAll();
+        if (conversations != null) {
+            populateConversations(conversations, containerGroup);
+        }
+
+        if (containerGroup.getPreferenceCount() == 0) {
+            containerGroup.setVisible(false);
         }
     }
 
+    abstract boolean matchesFilter(ConversationChannelWrapper conversation);
+
     protected void populateConversations(List<ConversationChannelWrapper> conversations,
             PreferenceGroup containerGroup) {
-        containerGroup.removeAll();
         for (ConversationChannelWrapper conversation : conversations) {
-            if (conversation.getNotificationChannel().isDemoted()) {
+            if (conversation.getNotificationChannel().isDemoted()
+                    || !matchesFilter(conversation)) {
                 continue;
             }
             containerGroup.addPreference(createConversationPref(conversation));
