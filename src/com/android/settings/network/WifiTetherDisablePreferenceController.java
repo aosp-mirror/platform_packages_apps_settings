@@ -17,21 +17,14 @@
 package com.android.settings.network;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.text.TextUtils;
-import android.util.Log;
+import android.net.TetheringManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.TetherUtil;
 
 /**
@@ -43,61 +36,41 @@ import com.android.settingslib.TetherUtil;
  * @see BluetoothTetherPreferenceController
  * @see UsbTetherPreferenceController
  */
-public final class WifiTetherDisablePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, SharedPreferences.OnSharedPreferenceChangeListener {
+public final class WifiTetherDisablePreferenceController extends TetherBasePreferenceController
+        implements LifecycleObserver {
 
     private static final String TAG = "WifiTetherDisablePreferenceController";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
-    private final ConnectivityManager mCm;
-    private boolean mBluetoothTetherEnabled;
-    private boolean mUSBTetherEnabled;
+    private boolean mBluetoothTethering;
+    private boolean mUsbTethering;
+    private boolean mWifiTethering;
     private PreferenceScreen mScreen;
-    private Preference mPreference;
-    private final SharedPreferences mSharedPreferences;
 
     public WifiTetherDisablePreferenceController(Context context, String prefKey) {
         super(context, prefKey);
-        mSharedPreferences =
-                context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
-        mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mUSBTetherEnabled = mSharedPreferences.getBoolean(
-                TetherEnabler.USB_TETHER_KEY, false);
-        mBluetoothTetherEnabled = mSharedPreferences.getBoolean(
-                TetherEnabler.BLUETOOTH_TETHER_KEY, false);
     }
 
     @Override
     public boolean isChecked() {
-        return !mSharedPreferences.getBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true);
+        return !mWifiTethering;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        // The shared preference's value is in the opposite of this preference's value.
-        final boolean enableWifi = !isChecked;
-        if (DEBUG) {
-            Log.d(TAG, "check state changing to " + isChecked);
+        if (mTetherEnabler == null) {
+            return false;
         }
-        final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, enableWifi);
-        editor.apply();
+        if (isChecked) {
+            mTetherEnabler.stopTethering(TetheringManager.TETHERING_WIFI);
+        } else {
+            mTetherEnabler.startTethering(TetheringManager.TETHERING_WIFI);
+        }
         return true;
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {
-        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @VisibleForTesting
     boolean shouldShow() {
-        return mBluetoothTetherEnabled || mUSBTetherEnabled;
+        return mBluetoothTethering || mUsbTethering;
     }
 
     @Override
@@ -113,11 +86,11 @@ public final class WifiTetherDisablePreferenceController extends TogglePreferenc
 
     @Override
     public CharSequence getSummary() {
-        if (mUSBTetherEnabled && mBluetoothTetherEnabled) {
+        if (mUsbTethering && mBluetoothTethering) {
             return mContext.getString(R.string.disable_wifi_hotspot_when_usb_and_bluetooth_on);
-        } else if (mUSBTetherEnabled) {
+        } else if (mUsbTethering) {
             return mContext.getString(R.string.disable_wifi_hotspot_when_usb_on);
-        } else if (mBluetoothTetherEnabled) {
+        } else if (mBluetoothTethering) {
             return mContext.getString(R.string.disable_wifi_hotspot_when_bluetooth_on);
         }
         return mContext.getString(R.string.summary_placeholder);
@@ -127,7 +100,6 @@ public final class WifiTetherDisablePreferenceController extends TogglePreferenc
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mScreen = screen;
-        mPreference = screen.findPreference(mPreferenceKey);
         if (mPreference != null) {
             mPreference.setOnPreferenceChangeListener(this);
         }
@@ -141,42 +113,10 @@ public final class WifiTetherDisablePreferenceController extends TogglePreferenc
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-            String key) {
-        final boolean shouldShowBefore = shouldShow();
-        if (TextUtils.equals(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, key) && shouldShowBefore) {
-            updateState(mPreference);
-            return;
-        }
-
-        boolean shouldUpdateState = false;
-        if (TextUtils.equals(TetherEnabler.USB_TETHER_KEY, key)) {
-            mUSBTetherEnabled = sharedPreferences.getBoolean(key, false);
-            shouldUpdateState = true;
-        } else if (TextUtils.equals(TetherEnabler.BLUETOOTH_TETHER_KEY, key)) {
-            mBluetoothTetherEnabled = sharedPreferences.getBoolean(key, false);
-            shouldUpdateState = true;
-        }
-
-        // Check if we are hiding this preference. If so, make sure the preference is set to
-        // unchecked to enable wifi tether.
-        if (mPreference != null && mPreference instanceof SwitchPreference
-                && shouldShowBefore && !shouldShow()) {
-            final SwitchPreference switchPreference = (SwitchPreference) mPreference;
-            if (switchPreference.isChecked()) {
-                if (DEBUG) {
-                    Log.d(TAG,
-                            "All other types are unchecked, wifi tether enabled automatically");
-                }
-                // Need to call this method before internal state set.
-                if (switchPreference.callChangeListener(false)) {
-                    switchPreference.setChecked(false);
-                }
-            }
-        }
-
-        if (shouldUpdateState) {
-            updateState(mPreference);
-        }
+    public void onTetherStateUpdated(int state) {
+        mUsbTethering = TetherEnabler.isUsbTethering(state);
+        mBluetoothTethering = TetherEnabler.isBluetoothTethering(state);
+        mWifiTethering = TetherEnabler.isWifiTethering(state);
+        updateState(mPreference);
     }
 }
