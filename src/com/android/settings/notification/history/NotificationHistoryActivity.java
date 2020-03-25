@@ -246,8 +246,9 @@ public class NotificationHistoryActivity extends Activity {
             StatusBarNotification[] dismissed = null;
             try {
                 snoozed = getSnoozedNotifications();
-                dismissed = mNm.getHistoricalNotifications(
-                    NotificationHistoryActivity.this.getPackageName(), 6, false);
+                dismissed = mNm.getHistoricalNotificationsWithAttribution(
+                        NotificationHistoryActivity.this.getPackageName(),
+                        NotificationHistoryActivity.this.getAttributionTag(), 6, false);
             } catch (SecurityException | RemoteException e) {
                 Log.d(TAG, "OnPaused called while trying to retrieve notifications");
             }
