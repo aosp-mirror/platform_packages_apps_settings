@@ -85,6 +85,13 @@ public class ConfigureAccessPointFragmentTest {
     }
 
     @Test
+    public void dispatchSubmit_shouldHandleSubmitAction() {
+        mConfigureAccessPointFragment.dispatchSubmit();
+
+        verify(mConfigureAccessPointFragment).handleSubmitAction();
+    }
+
+    @Test
     public void onClickCancelButton_shouldHandleCancelAction() {
         mConfigureAccessPointFragment.getCancelButton().performClick();
 
