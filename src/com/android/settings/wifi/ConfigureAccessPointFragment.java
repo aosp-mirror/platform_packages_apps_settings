@@ -27,11 +27,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.wifi.AccessPoint;
-
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Detail page for configuring Wi-Fi network.
@@ -113,7 +113,7 @@ public class ConfigureAccessPointFragment extends InstrumentedFragment implement
 
     @Override
     public void dispatchSubmit() {
-        // Do nothing
+        handleSubmitAction();
     }
 
     @Override
