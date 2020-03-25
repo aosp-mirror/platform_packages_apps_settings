@@ -397,9 +397,9 @@ public class NotificationBackend {
         return false;
     }
 
-    public NotificationHistory getNotificationHistory(String pkg) {
+    public NotificationHistory getNotificationHistory(String pkg, String attributionTag) {
         try {
-            return sINM.getNotificationHistory(pkg);
+            return sINM.getNotificationHistory(pkg, attributionTag);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
         }
