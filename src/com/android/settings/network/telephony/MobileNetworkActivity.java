@@ -103,7 +103,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        registerActiveSubscriptionsListener();
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
 
         final Intent startIntent = getIntent();
         validate(startIntent);
@@ -116,13 +116,23 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
         maybeShowContactDiscoveryDialog(mCurSubscriptionId);
+
+        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
+    }
+
+    @VisibleForTesting
+    ProxySubscriptionManager getProxySubscriptionManager() {
+        if (mProxySubscriptionMgr == null) {
+            mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        }
+        return mProxySubscriptionMgr;
     }
 
     @VisibleForTesting
     void registerActiveSubscriptionsListener() {
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
+        getProxySubscriptionManager().addActiveSubscriptionsListener(this);
     }
 
     /**
@@ -145,7 +155,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
     @Override
     protected void onStart() {
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
         super.onStart();
         // updateSubscriptions doesn't need to be called, onChanged will always be called after we
         // register a listener.
@@ -201,17 +211,20 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
         if (mCurSubscriptionId != SUB_ID_NULL) {
-            final SubscriptionInfo subInfo = SubscriptionUtil.getAvailableSubscription(
-                    this, mProxySubscriptionMgr, mCurSubscriptionId);
-            if (subInfo != null) {
-                return subInfo;
-            }
+            return getSubscriptionForSubId(mCurSubscriptionId);
         }
-        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
+                .getActiveSubscriptionsInfo();
         if (CollectionUtils.isEmpty(subInfos)) {
             return null;
         }
         return subInfos.get(0);
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo getSubscriptionForSubId(int subId) {
+        return SubscriptionUtil.getAvailableSubscription(this,
+                getProxySubscriptionManager(), subId);
     }
 
     @VisibleForTesting
