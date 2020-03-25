@@ -44,7 +44,6 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -90,13 +89,6 @@ public class MobileNetworkSettingsTest {
         when(mActivity.getSystemService(NetworkPolicyManager.class)).thenReturn(
                 mNetworkPolicyManager);
     }
-
-    @Test
-    @Ignore
-    public void onAttach_noCrash() {
-        mFragment.onAttach(mContext);
-    }
-
 
     @Test
     public void createPreferenceControllers_createsDataUsageSummaryController() {
