@@ -112,8 +112,15 @@ public class MobileNetworkActivityTest {
         private SubscriptionInfo mSubscriptionInFragment;
 
         @Override
+        ProxySubscriptionManager getProxySubscriptionManager() {
+            if (mProxySubscriptionMgr == null) {
+                mProxySubscriptionMgr = mock(ProxySubscriptionManager.class);
+            }
+            return mProxySubscriptionMgr;
+        }
+
+        @Override
         void registerActiveSubscriptionsListener() {
-            mProxySubscriptionMgr = mock(ProxySubscriptionManager.class);
             onChanged();
         }
 
