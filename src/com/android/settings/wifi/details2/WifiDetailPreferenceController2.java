@@ -456,7 +456,8 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         }
     }
 
-    private void updateNetworkInfo() {
+    @VisibleForTesting
+    void updateNetworkInfo() {
         if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
             mNetwork = mWifiManager.getCurrentNetwork();
             mLinkProperties = mConnectivityManager.getLinkProperties(mNetwork);
@@ -623,16 +624,16 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshSsid() {
-        if (mWifiEntry.isSubscription()) {
+        if (mWifiEntry.isSubscription() && mWifiEntry.getSsid() != null) {
             mSsidPref.setVisible(true);
-            mSsidPref.setSummary(mWifiEntry.getTitle());
+            mSsidPref.setSummary(mWifiEntry.getSsid());
         } else {
             mSsidPref.setVisible(false);
         }
     }
 
     private void refreshMacAddress() {
-        String macAddress = getMacAddress();
+        String macAddress = mWifiEntry.getMacAddress();
         if (macAddress == null) {
             mMacAddressPref.setVisible(false);
             return;
@@ -647,21 +648,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         // MAC Address Pref Title
         refreshMacTitle();
-    }
-
-    private String getMacAddress() {
-        if (mWifiEntry.isSaved() && mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC) {
-            return mWifiEntry.getMacAddress();
-        }
-
-        // return device MAC address
-        final String[] macAddresses = mWifiManager.getFactoryMacAddresses();
-        if (macAddresses != null && macAddresses.length > 0) {
-            return macAddresses[0];
-        }
-
-        Log.e(TAG, "Can't get device MAC address!");
-        return null;
     }
 
     private void updatePreference(Preference pref, String detailText) {
@@ -969,6 +955,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
      */
     @Override
     public void onUpdated() {
+        updateNetworkInfo();
         refreshPage();
 
         // Refresh the Preferences in fragment.

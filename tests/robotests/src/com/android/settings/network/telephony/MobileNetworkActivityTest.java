@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
@@ -39,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.telephony.TelephonyIntents;
+import com.android.settings.network.ProxySubscriptionManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -108,6 +110,12 @@ public class MobileNetworkActivityTest {
         }
 
         private SubscriptionInfo mSubscriptionInFragment;
+
+        @Override
+        void registerActiveSubscriptionsListener() {
+            mProxySubscriptionMgr = mock(ProxySubscriptionManager.class);
+            onChanged();
+        }
 
         @Override
         void switchFragment(SubscriptionInfo subInfo) {
