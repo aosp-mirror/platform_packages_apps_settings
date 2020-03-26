@@ -16,11 +16,16 @@
 
 package com.android.settings.notification.zen;
 
+import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
+import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
+
 import android.app.NotificationManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.AsyncTask;
 import android.service.notification.ConversationChannelWrapper;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -28,7 +33,10 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.ConversationListSettings;
+import com.android.settings.widget.RadioButtonPreferenceWithExtraWidget;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.RadioButtonPreference;
 
@@ -51,6 +59,7 @@ public class ZenModePriorityConversationsPreferenceController
     private int mNumConversations = UNSET;
     private PreferenceCategory mPreferenceCategory;
     private List<RadioButtonPreference> mRadioButtonPreferences = new ArrayList<>();
+    private Context mPreferenceScreenContext;
 
     public ZenModePriorityConversationsPreferenceController(Context context, String key,
             Lifecycle lifecycle, NotificationBackend notificationBackend) {
@@ -60,6 +69,7 @@ public class ZenModePriorityConversationsPreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        mPreferenceScreenContext = screen.getContext();
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
         if (mPreferenceCategory.findPreference(KEY_ALL) == null) {
             makeRadioPreference(KEY_ALL, R.string.zen_mode_from_all_conversations);
@@ -125,7 +135,7 @@ public class ZenModePriorityConversationsPreferenceController
                     R.string.zen_mode_conversations_count_none);
         } else {
             return mContext.getResources().getQuantityString(
-                    R.plurals.zen_mode_conversations_count, numConversations);
+                    R.plurals.zen_mode_conversations_count, numConversations, numConversations);
         }
     }
 
@@ -136,14 +146,27 @@ public class ZenModePriorityConversationsPreferenceController
             protected Void doInBackground(Void... unused) {
                 ParceledListSlice<ConversationChannelWrapper> allConversations =
                         mNotificationBackend.getConversations(false);
+                int numConversations = 0;
                 if (allConversations != null) {
-                    mNumConversations = allConversations.getList().size();
+                    for (ConversationChannelWrapper conversation : allConversations.getList()) {
+                        if (!conversation.getNotificationChannel().isDemoted()) {
+                            numConversations++;
+                        }
+                    }
                 }
-                ParceledListSlice<ConversationChannelWrapper> importantConversations =
+                mNumConversations = numConversations;
+
+                ParceledListSlice<ConversationChannelWrapper> impConversations =
                         mNotificationBackend.getConversations(true);
-                if (importantConversations != null) {
-                    mNumImportantConversations = importantConversations.getList().size();
+                int numImportantConversations = 0;
+                if (impConversations != null) {
+                    for (ConversationChannelWrapper conversation : impConversations.getList()) {
+                        if (!conversation.getNotificationChannel().isDemoted()) {
+                            numImportantConversations++;
+                        }
+                    }
                 }
+                mNumImportantConversations = numImportantConversations;
                 return null;
             }
 
@@ -158,7 +181,14 @@ public class ZenModePriorityConversationsPreferenceController
     }
 
     private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        RadioButtonPreference pref = new RadioButtonPreference(mPreferenceCategory.getContext());
+        RadioButtonPreferenceWithExtraWidget pref =
+                new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+        if (KEY_ALL.equals(key) || KEY_IMPORTANT.equals(key)) {
+            pref.setExtraWidgetOnClickListener(mConversationSettingsWidgetClickListener);
+            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_SETTING);
+        } else {
+            pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
+        }
         pref.setKey(key);
         pref.setTitle(titleId);
         pref.setOnClickListener(mRadioButtonClickListener);
@@ -166,6 +196,17 @@ public class ZenModePriorityConversationsPreferenceController
         mRadioButtonPreferences.add(pref);
         return pref;
     }
+
+    private View.OnClickListener mConversationSettingsWidgetClickListener =
+            new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new SubSettingLauncher(mPreferenceScreenContext)
+                    .setDestination(ConversationListSettings.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.DND_CONVERSATIONS)
+                    .launch();
+        }
+    };
 
     private RadioButtonPreference.OnClickListener mRadioButtonClickListener =
             new RadioButtonPreference.OnClickListener() {
