@@ -723,6 +723,7 @@ public class WifiDetailPreferenceController2Test {
     public void ssidPref_isSubscription_show() {
         setUpForConnectedNetwork();
         when(mMockWifiEntry.isSubscription()).thenReturn(true);
+        when(mMockWifiEntry.getSsid()).thenReturn(SSID);
 
         displayAndResume();
 
