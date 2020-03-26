@@ -6,6 +6,7 @@ import android.content.Context;
 import android.icu.text.ListFormatter;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.ArraySet;
 
 import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Controls the summary for preference found at:
@@ -102,7 +104,7 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
             return;
         }
 
-        List<String> appsBypassingDnd = new ArrayList<>();
+        Set<String> appsBypassingDnd = new ArraySet<>();
         for (ApplicationsState.AppEntry entry : apps) {
             String pkg = entry.info.packageName;
             for (NotificationChannel channel : mNotificationBackend
@@ -116,7 +118,8 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
             }
         }
 
-        if (appsBypassingDnd.size() == 0) {
+        final int numAppsBypassingDnd = appsBypassingDnd.size();
+        if (numAppsBypassingDnd == 0) {
             mSummary = mContext.getResources().getString(
                     R.string.zen_mode_bypassing_apps_subtext_none);
             refreshSummary(mPreference);
@@ -124,18 +127,20 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
         }
 
         List<String> displayAppsBypassing = new ArrayList<>();
-        if (appsBypassingDnd.size() <= 2) {
-            displayAppsBypassing = appsBypassingDnd;
+        if (numAppsBypassingDnd <= 2) {
+            displayAppsBypassing.addAll(appsBypassingDnd);
         } else {
-            displayAppsBypassing.add(appsBypassingDnd.get(0));
-            displayAppsBypassing.add(appsBypassingDnd.get(1));
+            String[] appsBypassingDndArr =
+                    appsBypassingDnd.toArray(new String[numAppsBypassingDnd]);
+            displayAppsBypassing.add(appsBypassingDndArr[0]);
+            displayAppsBypassing.add(appsBypassingDndArr[1]);
             displayAppsBypassing.add(mContext.getResources().getString(
                     R.string.zen_mode_apps_bypassing_list_count,
-                    appsBypassingDnd.size() - 2));
+                    numAppsBypassingDnd - 2));
         }
         mSummary = mContext.getResources().getQuantityString(
                 R.plurals.zen_mode_bypassing_apps_subtext,
-                appsBypassingDnd.size(),
+                numAppsBypassingDnd,
                 ListFormatter.getInstance().format(displayAppsBypassing));
         refreshSummary(mPreference);
     }

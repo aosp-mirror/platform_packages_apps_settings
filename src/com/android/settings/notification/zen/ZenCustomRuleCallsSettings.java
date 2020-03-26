@@ -44,7 +44,7 @@ public class ZenCustomRuleCallsSettings extends ZenCustomRuleSettingsBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return com.android.settings.R.xml.zen_mode_calls_settings;
+        return com.android.settings.R.xml.zen_mode_custom_rule_calls_settings;
     }
 
     @Override

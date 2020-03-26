@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Settings > Sound > Do Not Disturb > Conversationss
+ * Settings > Sound > Do Not Disturb > Conversations
  */
 @SearchIndexable
 public class ZenModeConversationsSettings extends ZenModeSettingsBase {
