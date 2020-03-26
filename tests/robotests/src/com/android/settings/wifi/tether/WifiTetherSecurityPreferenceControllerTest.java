@@ -15,7 +15,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -76,7 +75,6 @@ public class WifiTetherSecurityPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateDisplay_preferenceUpdated() {
         // test defaulting to WPA2-Personal on new config
         when(mWifiManager.getSoftApConfiguration()).thenReturn(null);
@@ -87,7 +85,7 @@ public class WifiTetherSecurityPreferenceControllerTest {
 
         // test open tether network
         SoftApConfiguration config = new SoftApConfiguration.Builder(mConfig)
-                .setPassphrase(null, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK).build();
+                .setPassphrase(null, SoftApConfiguration.SECURITY_TYPE_OPEN).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(config);
         mController.updateDisplay();
         assertThat(mController.getSecurityType()).isEqualTo(
