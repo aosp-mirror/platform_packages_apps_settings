@@ -24,6 +24,7 @@ import android.content.Context;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.Indexable;
@@ -46,13 +47,16 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
         } else {
             app = null;
         }
-        return buildPreferenceControllers(context, app, this);
+        return buildPreferenceControllers(context, app, this, new NotificationBackend());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Application app, Fragment host) {
+            Application app, Fragment host, NotificationBackend notificationBackend) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeAllBypassingAppsPreferenceController(context, app, host));
+        controllers.add(new ZenModeAllBypassingAppsPreferenceController(context, app, host,
+                notificationBackend));
+        controllers.add(new ZenModeAddBypassingAppsPreferenceController(context, app, host,
+                notificationBackend));
         return controllers;
     }
 
@@ -80,7 +84,7 @@ public class ZenModeBypassingAppsSettings extends ZenModeSettingsBase implements
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null);
+                    return buildPreferenceControllers(context, null, null, null);
                 }
             };
 }
