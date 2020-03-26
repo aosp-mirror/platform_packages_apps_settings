@@ -20,15 +20,12 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserHandle;
 
-import androidx.fragment.app.Fragment;
-
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -61,8 +58,7 @@ public class ScreenLockSettings extends DashboardFragment
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mLockPatternUtils = new LockPatternUtils(context);
-        return buildPreferenceControllers(context, this /* parent */, getSettingsLifecycle(),
-                mLockPatternUtils);
+        return buildPreferenceControllers(context, this /* parent */, mLockPatternUtils);
     }
 
     @Override
@@ -71,7 +67,7 @@ public class ScreenLockSettings extends DashboardFragment
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Fragment parent, Lifecycle lifecycle, LockPatternUtils lockPatternUtils) {
+            DashboardFragment parent, LockPatternUtils lockPatternUtils) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PatternVisiblePreferenceController(
                 context, MY_USER_ID, lockPatternUtils));
@@ -79,10 +75,9 @@ public class ScreenLockSettings extends DashboardFragment
                 context, MY_USER_ID, lockPatternUtils));
         controllers.add(new LockAfterTimeoutPreferenceController(
                 context, MY_USER_ID, lockPatternUtils));
-        controllers.add(new OwnerInfoPreferenceController(context, parent, lifecycle));
+        controllers.add(new OwnerInfoPreferenceController(context, parent));
         return controllers;
     }
-
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.screen_lock_settings) {
@@ -91,7 +86,7 @@ public class ScreenLockSettings extends DashboardFragment
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /* parent */,
-                            null /* lifecycle */, new LockPatternUtils(context));
+                            new LockPatternUtils(context));
                 }
             };
 }

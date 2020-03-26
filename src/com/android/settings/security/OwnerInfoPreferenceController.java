@@ -17,11 +17,10 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.os.UserHandle;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -31,18 +30,19 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class OwnerInfoPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume {
 
-    private static final String KEY_OWNER_INFO = "owner_info_settings";
+    @VisibleForTesting
+    static final String KEY_OWNER_INFO = "owner_info_settings";
     private static final int MY_USER_ID = UserHandle.myUserId();
 
     private final LockPatternUtils mLockPatternUtils;
-    private final Fragment mParent;
+    private final ObservablePreferenceFragment mParent;
     private RestrictedPreference mOwnerInfoPref;
 
     // Container fragment should implement this in order to show the correct summary
@@ -50,12 +50,12 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
         void onOwnerInfoUpdated();
     }
 
-    public OwnerInfoPreferenceController(Context context, Fragment parent, Lifecycle lifecycle ) {
+    public OwnerInfoPreferenceController(Context context, ObservablePreferenceFragment parent) {
         super(context);
         mParent = parent;
         mLockPatternUtils = new LockPatternUtils(context);
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
+        if (parent != null) {
+            parent.getSettingsLifecycle().addObserver(this);
         }
     }
 
@@ -80,6 +80,15 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
         return KEY_OWNER_INFO;
     }
 
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(getPreferenceKey(), preference.getKey())) {
+            OwnerInfoSettings.show(mParent);
+            return true;
+        }
+        return false;
+    }
+
     public void updateEnableState() {
         if (mOwnerInfoPref == null) {
             return;
@@ -90,16 +99,6 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
         } else {
             mOwnerInfoPref.setDisabledByAdmin(null);
             mOwnerInfoPref.setEnabled(!mLockPatternUtils.isLockScreenDisabled(MY_USER_ID));
-            if (mOwnerInfoPref.isEnabled()) {
-                mOwnerInfoPref.setOnPreferenceClickListener(
-                    new OnPreferenceClickListener() {
-                        @Override
-                        public boolean onPreferenceClick(Preference preference) {
-                            OwnerInfoSettings.show(mParent);
-                            return true;
-                        }
-                    });
-            }
         }
     }
 
