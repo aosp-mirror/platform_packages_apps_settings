@@ -49,6 +49,7 @@ public class WifiMeteredPreferenceController2 extends BasePreferenceController i
     public void updateState(Preference preference) {
         final DropDownPreference dropDownPreference = (DropDownPreference) preference;
         final int meteredOverride = getMeteredOverride();
+        preference.setSelectable(mWifiEntry.canSetMeteredChoice());
         dropDownPreference.setValue(Integer.toString(meteredOverride));
         updateSummary(dropDownPreference, meteredOverride);
     }
