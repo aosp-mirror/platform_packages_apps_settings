@@ -34,7 +34,6 @@ import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -71,6 +70,17 @@ public class NetworkScanHelperTest {
 
     private NetworkScan mNetworkScan;
 
+    private class NetworkScanMock extends NetworkScan {
+        NetworkScanMock(int scanId, int subId) {
+            super(scanId, subId);
+        }
+
+        @Override
+        public void stopScan() {
+            return;
+        }
+    }
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -80,7 +90,7 @@ public class NetworkScanHelperTest {
         mNetworkScanHelper = new NetworkScanHelper(mTelephonyManager,
                 mNetworkScanCallback, mNetworkScanExecutor);
 
-        mNetworkScan = spy(new NetworkScan(SCAN_ID, SUB_ID));
+        mNetworkScan = spy(new NetworkScanMock(SCAN_ID, SUB_ID));
     }
 
     @Test
@@ -143,7 +153,6 @@ public class NetworkScanHelperTest {
     }
 
     @Test
-    @Ignore
     public void startNetworkScan_incrementalAndAbort_doStop() {
         doReturn(mNetworkScan).when(mTelephonyManager).requestNetworkScan(
                 any(NetworkScanRequest.class), any(Executor.class),

@@ -50,7 +50,8 @@ public class HistoryLoader {
             try {
                 Map<String, NotificationHistoryPackage> historicalNotifications = new HashMap<>();
                 NotificationHistory history =
-                        mBackend.getNotificationHistory(mContext.getPackageName());
+                        mBackend.getNotificationHistory(mContext.getPackageName(),
+                                mContext.getAttributionTag());
                 while (history.hasNextNotification()) {
                     HistoricalNotification hn = history.getNextNotification();
 
