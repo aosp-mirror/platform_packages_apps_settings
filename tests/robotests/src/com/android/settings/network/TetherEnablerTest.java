@@ -32,13 +32,14 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.network.TetherEnabler.OnTetherStateUpdateListener;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.widget.SwitchWidgetController;
@@ -51,6 +52,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RunWith(RobolectricTestRunner.class)
@@ -64,7 +67,7 @@ public class TetherEnablerTest {
     @Mock
     private BluetoothPan mBluetoothPan;
     @Mock
-    private SharedPreferences mSharedPreferences;
+    private BluetoothAdapter mBluetoothAdapter;
 
     private SwitchBar mSwitchBar;
     private TetherEnabler mEnabler;
@@ -88,22 +91,8 @@ public class TetherEnablerTest {
         when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         panReference.set(mBluetoothPan);
-        when(context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
-                .thenReturn(mSharedPreferences);
-        SharedPreferences.Editor editor = mock(SharedPreferences.Editor.class);
-        when(mSharedPreferences.edit()).thenReturn(editor);
         mEnabler = spy(new TetherEnabler(context, mSwitchWidgetController, panReference));
-    }
-
-    @Test
-    public void lifecycle_onPause_unRegisterSharedPreferenceListener() {
-        mEnabler.onResume();
-        verify(mSharedPreferences).registerOnSharedPreferenceChangeListener(
-                eq(mEnabler));
-
-        mEnabler.onPause();
-        verify(mSharedPreferences).unregisterOnSharedPreferenceChangeListener(
-                eq(mEnabler));
+        ReflectionHelpers.setField(mEnabler, "mBluetoothAdapter", mBluetoothAdapter);
     }
 
     @Test
@@ -116,10 +105,19 @@ public class TetherEnablerTest {
     }
 
     @Test
+    public void lifecycle_onStop_resetBluetoothTetheringStoppedByUser() {
+        mEnabler.onStart();
+        mEnabler.mBluetoothTetheringStoppedByUser = true;
+
+        mEnabler.onStop();
+        assertThat(mEnabler.mBluetoothTetheringStoppedByUser).isFalse();
+    }
+
+    @Test
     public void startTether_fail_resetSwitchBar() {
         when(mNetworkPolicyManager.getRestrictBackground()).thenReturn(false);
         mEnabler.onStart();
-        mEnabler.startTether();
+        mEnabler.startTethering(TetheringManager.TETHERING_WIFI);
 
         when(mConnectivityManager.getTetheredIfaces()).thenReturn(new String[0]);
         mEnabler.mOnStartTetheringCallback.onTetheringFailed();
@@ -145,8 +143,6 @@ public class TetherEnablerTest {
 
     @Test
     public void onSwitchToggled_onlyStartsWifiTetherWhenNeeded() {
-        when(mSharedPreferences.getBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true))
-                .thenReturn(true);
         when(mWifiManager.isWifiApEnabled()).thenReturn(true);
         mEnabler.onSwitchToggled(true);
         verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
@@ -157,36 +153,28 @@ public class TetherEnablerTest {
     }
 
     @Test
-    public void onSwitchToggled_shouldStartUSBTetherWhenSelected() {
-        SharedPreferences preference = mock(SharedPreferences.class);
-        ReflectionHelpers.setField(mEnabler, "mSharedPreferences", preference);
-        when(preference.getBoolean(TetherEnabler.KEY_ENABLE_WIFI_TETHERING, true))
-                .thenReturn(false);
-        when(preference.getBoolean(TetherEnabler.USB_TETHER_KEY, false)).thenReturn(true);
-        when(preference.getBoolean(TetherEnabler.BLUETOOTH_TETHER_KEY, true)).thenReturn(false);
+    public void startTethering_startsBluetoothTetherWhenOff() {
+        when(mBluetoothAdapter.getState()).thenReturn(BluetoothAdapter.STATE_OFF);
 
-        mEnabler.startTether();
+        mEnabler.startTethering(ConnectivityManager.TETHERING_BLUETOOTH);
+        verify(mBluetoothAdapter).enable();
+
+        when(mBluetoothAdapter.getState()).thenReturn(BluetoothAdapter.STATE_ON);
+        mEnabler.startTethering(ConnectivityManager.TETHERING_BLUETOOTH);
         verify(mConnectivityManager).startTethering(
-                eq(ConnectivityManager.TETHERING_USB), anyBoolean(), any(), any());
-        verify(mConnectivityManager, never())
-                .startTethering(eq(ConnectivityManager.TETHERING_WIFI), anyBoolean(), any(), any());
-        verify(mConnectivityManager, never()).startTethering(
                 eq(ConnectivityManager.TETHERING_BLUETOOTH), anyBoolean(), any(), any());
     }
 
     @Test
-    public void startTether_startsBluetoothTetherWhenOff() {
-        BluetoothAdapter adapter = mock(BluetoothAdapter.class);
-        ReflectionHelpers.setField(mEnabler, "mBluetoothAdapter", adapter);
-        when(adapter.getState()).thenReturn(BluetoothAdapter.STATE_OFF);
+    public void stopTethering_setBluetoothTetheringStoppedByUserAndUpdateState() {
+        mSwitchWidgetController.setListener(mEnabler);
+        mSwitchWidgetController.startListening();
+        int state = TetherEnabler.TETHERING_BLUETOOTH_ON;
+        doReturn(state).when(mEnabler).getTetheringState(null /* tethered */);
 
-        mEnabler.startTethering(ConnectivityManager.TETHERING_BLUETOOTH);
-        verify(adapter).enable();
-
-        when(adapter.getState()).thenReturn(BluetoothAdapter.STATE_ON);
-        mEnabler.startTethering(ConnectivityManager.TETHERING_BLUETOOTH);
-        verify(mConnectivityManager).startTethering(
-                eq(ConnectivityManager.TETHERING_BLUETOOTH), anyBoolean(), any(), any());
+        mEnabler.stopTethering(TetheringManager.TETHERING_BLUETOOTH);
+        assertThat(mEnabler.mBluetoothTetheringStoppedByUser).isTrue();
+        verify(mEnabler).updateState(null);
     }
 
     @Test
@@ -210,35 +198,44 @@ public class TetherEnablerTest {
 
     @Test
     public void updateState_shouldEnableSwitchBarTethering() {
+        when(mConnectivityManager.getTetheredIfaces()).thenReturn(USB_TETHERED);
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
+
         mSwitchWidgetController.setListener(mEnabler);
         mSwitchWidgetController.startListening();
 
         ReflectionHelpers.setField(mEnabler, "mDataSaverEnabled", false);
-        mEnabler.updateState(new String[]{""});
+        mEnabler.updateState(null/*tethered*/);
         verify(mSwitchBar).setEnabled(true);
     }
 
     @Test
-    public void updateState_onSharedPreferencesChangeNeverCalled() {
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(mEnabler);
+    public void updateState_shouldCallListener() {
+        OnTetherStateUpdateListener listener = mock(
+                OnTetherStateUpdateListener.class);
+        List<OnTetherStateUpdateListener> listeners = new ArrayList<>();
+        listeners.add(listener);
+        ReflectionHelpers.setField(mEnabler, "mListeners", listeners);
         mSwitchWidgetController.setListener(mEnabler);
         mSwitchWidgetController.startListening();
 
         mEnabler.updateState(null /* tethered */);
-        verify(mEnabler, never()).onSharedPreferenceChanged(eq(mSharedPreferences), any());
-        verify(mEnabler, never()).onSharedPreferenceChanged(eq(mSharedPreferences), any());
+        verify(listener).onTetherStateUpdated(anyInt());
     }
 
     @Test
-    public void updateState_setSharedPreferencesOnlyWhenNeeded() {
-        mSwitchWidgetController.setListener(mEnabler);
-        mSwitchWidgetController.startListening();
+    public void addListener_listenerShouldAdded() {
+        OnTetherStateUpdateListener listener = mock(
+                OnTetherStateUpdateListener.class);
+        mEnabler.addListener(listener);
+        assertThat(mEnabler.mListeners).contains(listener);
+    }
 
-        mEnabler.updateState(null /* tethered */);
-        verify(mSharedPreferences, never()).edit();
-
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(USB_TETHERED);
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(mEnabler);
-        mEnabler.updateState(USB_TETHERED);
+    @Test
+    public void remListener_listenerShouldBeRemoved() {
+        OnTetherStateUpdateListener listener = mock(
+                OnTetherStateUpdateListener.class);
+        mEnabler.removeListener(listener);
+        assertThat(mEnabler.mListeners).doesNotContain(listener);
     }
 }
