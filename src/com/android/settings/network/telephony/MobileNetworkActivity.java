@@ -24,6 +24,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toolbar;
 
@@ -56,6 +57,9 @@ public class MobileNetworkActivity extends SettingsBaseActivity
     @VisibleForTesting
     ProxySubscriptionManager mProxySubscriptionMgr;
     private int mCurSubscriptionId;
+    // To avoid from Preference Controller to have a complex design for the case of Activity
+    // restart. mIsEffectiveSubId is designed to force recreate of Preference Controller(s).
+    private boolean mIsEffectiveSubId;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -69,6 +73,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         }
         int oldSubId = mCurSubscriptionId;
         mCurSubscriptionId = updateSubscriptionIndex;
+        mIsEffectiveSubId = (mCurSubscriptionId != SUB_ID_NULL);
         updateSubscriptions(getSubscription());
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
@@ -103,7 +108,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        registerActiveSubscriptionsListener();
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
 
         final Intent startIntent = getIntent();
         validate(startIntent);
@@ -112,17 +117,28 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 : ((startIntent != null)
                 ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL);
+        mIsEffectiveSubId = (mCurSubscriptionId != SUB_ID_NULL);
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
         maybeShowContactDiscoveryDialog(mCurSubscriptionId);
+
+        // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
+        // perform registration after mCurSubscriptionId been configured.
+        registerActiveSubscriptionsListener();
+    }
+
+    @VisibleForTesting
+    ProxySubscriptionManager getProxySubscriptionManager() {
+        if (mProxySubscriptionMgr == null) {
+            mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
+        }
+        return mProxySubscriptionMgr;
     }
 
     @VisibleForTesting
     void registerActiveSubscriptionsListener() {
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(this);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
-        mProxySubscriptionMgr.addActiveSubscriptionsListener(this);
+        getProxySubscriptionManager().addActiveSubscriptionsListener(this);
     }
 
     /**
@@ -145,7 +161,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
     @Override
     protected void onStart() {
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        getProxySubscriptionManager().setLifecycle(getLifecycle());
         super.onStart();
         // updateSubscriptions doesn't need to be called, onChanged will always be called after we
         // register a listener.
@@ -191,6 +207,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         switchFragment(subscription);
 
         mCurSubscriptionId = subscriptionIndex;
+        mIsEffectiveSubId = true;
     }
 
     /**
@@ -200,18 +217,21 @@ public class MobileNetworkActivity extends SettingsBaseActivity
      */
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
-        if (mCurSubscriptionId != SUB_ID_NULL) {
-            final SubscriptionInfo subInfo = SubscriptionUtil.getAvailableSubscription(
-                    this, mProxySubscriptionMgr, mCurSubscriptionId);
-            if (subInfo != null) {
-                return subInfo;
-            }
+        if (mIsEffectiveSubId && (mCurSubscriptionId != SUB_ID_NULL)) {
+            return getSubscriptionForSubId(mCurSubscriptionId);
         }
-        final List<SubscriptionInfo> subInfos = mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
+                .getActiveSubscriptionsInfo();
         if (CollectionUtils.isEmpty(subInfos)) {
             return null;
         }
         return subInfos.get(0);
+    }
+
+    @VisibleForTesting
+    SubscriptionInfo getSubscriptionForSubId(int subId) {
+        return SubscriptionUtil.getAvailableSubscription(this,
+                getProxySubscriptionManager(), subId);
     }
 
     @VisibleForTesting
@@ -223,9 +243,18 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         final Bundle bundle = new Bundle();
         bundle.putInt(Settings.EXTRA_SUB_ID, subId);
 
+        final String fragmentTag = buildFragmentTag(subId);
+        if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
+            if (mIsEffectiveSubId) {
+                Log.d(TAG, "Keep current fragment: " + fragmentTag);
+                return;
+            }
+            Log.d(TAG, "Construct fragment: " + fragmentTag);
+        }
+
         final Fragment fragment = new MobileNetworkSettings();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.content_frame, fragment, buildFragmentTag(subId));
+        fragmentTransaction.replace(R.id.content_frame, fragment, fragmentTag);
         fragmentTransaction.commit();
     }
 

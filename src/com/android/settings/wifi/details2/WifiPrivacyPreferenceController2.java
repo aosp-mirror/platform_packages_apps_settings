@@ -82,14 +82,13 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final int privacy = Integer.parseInt((String) newValue);
-        if (mWifiEntry.isSaved()) {
-            mWifiEntry.setPrivacy(privacy);
+        mWifiEntry.setPrivacy(privacy);
 
-            // To activate changing, we need to reconnect network. WiFi will auto connect to
-            // current network after disconnect(). Only needed when this is connected network.
-            if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
-                mWifiEntry.disconnect(null /* callback */);
-            }
+        // To activate changing, we need to reconnect network. WiFi will auto connect to
+        // current network after disconnect(). Only needed when this is connected network.
+        if (mWifiEntry.getConnectedState() == WifiEntry.CONNECTED_STATE_CONNECTED) {
+            mWifiEntry.disconnect(null /* callback */);
+            mWifiEntry.connect(null /* callback */);
         }
         updateSummary((DropDownPreference) preference, privacy);
         return true;
@@ -97,10 +96,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
 
     @VisibleForTesting
     int getRandomizationValue() {
-        if (mWifiEntry.isSaved()) {
-            return mWifiEntry.getPrivacy();
-        }
-        return WifiEntry.PRIVACY_RANDOMIZED_MAC;
+        return mWifiEntry.getPrivacy();
     }
 
     private static final int PREF_RANDOMIZATION_PERSISTENT = 0;
@@ -138,12 +134,11 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     public void onSubmit(WifiDialog2 dialog) {
         if (dialog.getController() != null) {
             final WifiConfiguration newConfig = dialog.getController().getConfig();
-            if (newConfig == null || !mWifiEntry.isSaved()) {
+            if (newConfig == null) {
                 return;
             }
 
-            if (newConfig.macRandomizationSetting
-                        != mWifiEntry.getWifiConfiguration().macRandomizationSetting) {
+            if (getWifiEntryPrivacy(newConfig) != mWifiEntry.getPrivacy()) {
                 mWifiEntry.setPrivacy(getWifiEntryPrivacy(newConfig));
                 onPreferenceChange(mPreference, String.valueOf(newConfig.macRandomizationSetting));
             }

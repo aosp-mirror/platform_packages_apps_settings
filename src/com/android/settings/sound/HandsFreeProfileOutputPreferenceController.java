@@ -171,7 +171,8 @@ public class HandsFreeProfileOutputPreferenceController extends AudioSwitchPrefe
         if (hapProfile != null && hfpProfile != null && device == null) {
             hfpProfile.setActiveDevice(null);
             hapProfile.setActiveDevice(null);
-        } else if (hapProfile != null && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
+        } else if (hapProfile != null && device != null
+                && hapProfile.getHiSyncId(device) != HI_SYNC_ID_INVALID) {
             hapProfile.setActiveDevice(device);
         } else if (hfpProfile != null) {
             hfpProfile.setActiveDevice(device);

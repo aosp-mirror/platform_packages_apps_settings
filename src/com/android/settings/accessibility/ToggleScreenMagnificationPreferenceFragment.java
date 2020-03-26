@@ -246,13 +246,27 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
 
+    private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
+        final View dialogTextArea = dialogView.findViewById(R.id.container);
+        dialogTextArea.setOnClickListener(v -> {
+            checkBox.toggle();
+            updateUserShortcutType(/* saveChanges= */ false);
+        });
+    }
+
     private void initializeDialogCheckBox(AlertDialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
+
         final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
         mHardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogHardwareView, mHardwareTypeCheckBox);
+
         final View dialogTripleTapView = dialog.findViewById(R.id.triple_tap_shortcut);
         mTripleTapTypeCheckBox = dialogTripleTapView.findViewById(R.id.checkbox);
+        setDialogTextAreaClickListener(dialogTripleTapView, mTripleTapTypeCheckBox);
+
         final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
         updateAlertDialogCheckState();
 
@@ -276,9 +290,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
         checkBox.setChecked((mUserShortcutTypeCache & type) == type);
-        checkBox.setOnClickListener(v -> {
-            updateUserShortcutType(/* saveChanges= */ false);
-        });
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
