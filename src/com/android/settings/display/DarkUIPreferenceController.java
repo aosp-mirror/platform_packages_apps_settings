@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.app.UiModeManager;
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -46,6 +49,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
     @VisibleForTesting
     Preference mPreference;
 
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private UiModeManager mUiModeManager;
     private PowerManager mPowerManager;
     private Context mContext;
@@ -64,6 +68,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         mContext = context;
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -86,6 +91,7 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        mMetricsFeatureProvider.logClickedPreference(mPreference, SettingsEnums.DISPLAY);
         final boolean dialogSeen =
                 Settings.Secure.getInt(mContext.getContentResolver(),
                         Settings.Secure.DARK_MODE_DIALOG_SEEN, 0) == DIALOG_SEEN;
