@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
@@ -27,7 +28,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.fuelgauge.BatterySaverReceiver;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.TwoStateButtonPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -41,13 +44,14 @@ public class BatterySaverButtonPreferenceController extends
         LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
 
     private final BatterySaverReceiver mBatterySaverReceiver;
-
     private final PowerManager mPowerManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     private TwoStateButtonPreference mPreference;
 
     public BatterySaverButtonPreferenceController(Context context, String key) {
         super(context, key);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mBatterySaverReceiver = new BatterySaverReceiver(context);
         mBatterySaverReceiver.setBatterySaverListener(this);
@@ -96,6 +100,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public boolean setChecked(boolean stateOn) {
+        mMetricsFeatureProvider.logClickedPreference(mPreference,
+                SettingsEnums.FUELGAUGE_BATTERY_SAVER);
         // This screen already shows a warning, so we don't need another warning.
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
                 false /* needFirstTimeWarning */);
