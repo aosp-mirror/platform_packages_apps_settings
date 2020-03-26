@@ -56,10 +56,15 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
     @VisibleForTesting
     ProxySubscriptionManager mProxySubscriptionMgr;
+
     private int mCurSubscriptionId;
-    // To avoid from Preference Controller to have a complex design for the case of Activity
-    // restart. mIsEffectiveSubId is designed to force recreate of Preference Controller(s).
-    private boolean mIsEffectiveSubId;
+
+    // This flag forces subscription information fragment to be re-created.
+    // Otherwise, fragment will be kept when subscription id has not been changed.
+    //
+    // Set initial value to true allows subscription information fragment to be re-created when
+    // Activity re-create occur.
+    private boolean mFragmentForceReload = true;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -73,7 +78,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         }
         int oldSubId = mCurSubscriptionId;
         mCurSubscriptionId = updateSubscriptionIndex;
-        mIsEffectiveSubId = (mCurSubscriptionId != SUB_ID_NULL);
+        mFragmentForceReload = (mCurSubscriptionId == oldSubId);
         updateSubscriptions(getSubscription());
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
@@ -117,7 +122,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 : ((startIntent != null)
                 ? startIntent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL)
                 : SUB_ID_NULL);
-        mIsEffectiveSubId = (mCurSubscriptionId != SUB_ID_NULL);
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
@@ -207,7 +211,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         switchFragment(subscription);
 
         mCurSubscriptionId = subscriptionIndex;
-        mIsEffectiveSubId = true;
+        mFragmentForceReload = false;
     }
 
     /**
@@ -217,7 +221,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
      */
     @VisibleForTesting
     SubscriptionInfo getSubscription() {
-        if (mIsEffectiveSubId && (mCurSubscriptionId != SUB_ID_NULL)) {
+        if (mCurSubscriptionId != SUB_ID_NULL) {
             return getSubscriptionForSubId(mCurSubscriptionId);
         }
         final List<SubscriptionInfo> subInfos = getProxySubscriptionManager()
@@ -245,7 +249,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         final String fragmentTag = buildFragmentTag(subId);
         if (fragmentManager.findFragmentByTag(fragmentTag) != null) {
-            if (mIsEffectiveSubId) {
+            if (!mFragmentForceReload) {
                 Log.d(TAG, "Keep current fragment: " + fragmentTag);
                 return;
             }
