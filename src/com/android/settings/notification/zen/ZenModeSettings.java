@@ -153,7 +153,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         String getCallsSettingSummary(Policy policy) {
             List<String> enabledCategories = getEnabledCategories(policy,
                     category -> PRIORITY_CATEGORY_CALLS == category
-                            || PRIORITY_CATEGORY_REPEAT_CALLERS == category, false);
+                            || PRIORITY_CATEGORY_REPEAT_CALLERS == category, true);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
                 return mContext.getString(R.string.zen_mode_from_none_calls);
@@ -303,10 +303,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_CALLS) {
                 if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+                    if (isFirst) {
+                        return mContext.getString(R.string.zen_mode_from_anyone);
+                    }
                     return mContext.getString(R.string.zen_mode_all_callers);
                 } else if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_CONTACTS){
+                    if (isFirst) {
+                        return mContext.getString(R.string.zen_mode_from_contacts);
+                    }
                     return mContext.getString(R.string.zen_mode_contacts_callers);
                 } else {
+                    if (isFirst) {
+                        return mContext.getString(R.string.zen_mode_from_starred);
+                    }
                     return mContext.getString(R.string.zen_mode_starred_callers);
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_REPEAT_CALLERS) {
