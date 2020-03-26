@@ -21,8 +21,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -30,9 +29,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
-import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -40,36 +36,33 @@ import com.google.common.annotations.VisibleForTesting;
  * This controller helps to manage the switch state and visibility of bluetooth tether switch
  * preference. It stores preference value when preference changed.
  */
-public final class BluetoothTetherPreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, SharedPreferences.OnSharedPreferenceChangeListener {
+public final class BluetoothTetherPreferenceController extends TetherBasePreferenceController
+        implements LifecycleObserver {
 
     private static final String TAG = "BluetoothTetherPreferenceController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    private final ConnectivityManager mCm;
     private int mBluetoothState;
-    private Preference mPreference;
-    private final SharedPreferences mSharedPreferences;
+    private boolean mBluetoothTethering;
 
-    public BluetoothTetherPreferenceController(Context context, String prefKey) {
-        super(context, prefKey);
-        mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        mSharedPreferences =
-                context.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE);
+    public BluetoothTetherPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
     public boolean isChecked() {
-        return mSharedPreferences.getBoolean(mPreferenceKey, false);
+        return mBluetoothTethering;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (DEBUG) {
-            Log.d(TAG, "preference changing to " + isChecked);
+        if (mTetherEnabler == null) {
+            return false;
         }
-        final SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(mPreferenceKey, isChecked);
-        editor.apply();
+        if (isChecked) {
+            mTetherEnabler.startTethering(TetheringManager.TETHERING_BLUETOOTH);
+        } else {
+            mTetherEnabler.stopTethering(TetheringManager.TETHERING_BLUETOOTH);
+        }
         return true;
     }
 
@@ -80,25 +73,9 @@ public final class BluetoothTetherPreferenceController extends TogglePreferenceC
                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {
-        mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
-    }
-
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
         mContext.unregisterReceiver(mBluetoothChangeReceiver);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
@@ -133,6 +110,12 @@ public final class BluetoothTetherPreferenceController extends TogglePreferenceC
         }
     }
 
+    @Override
+    public void onTetherStateUpdated(int state) {
+        mBluetoothTethering = TetherEnabler.isBluetoothTethering(state);
+        updateState(mPreference);
+    }
+
     @VisibleForTesting
     final BroadcastReceiver mBluetoothChangeReceiver = new BroadcastReceiver() {
         @Override
@@ -144,11 +127,4 @@ public final class BluetoothTetherPreferenceController extends TogglePreferenceC
             }
         }
     };
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (TextUtils.equals(mPreferenceKey, key)) {
-            updateState(mPreference);
-        }
-    }
 }

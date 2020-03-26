@@ -89,6 +89,13 @@ public class ConfigureWifiEntryFragmentTest {
     }
 
     @Test
+    public void dispatchSubmit_shouldHandleSubmitAction() {
+        mConfigureWifiEntryFragment.dispatchSubmit();
+
+        verify(mConfigureWifiEntryFragment).handleSubmitAction();
+    }
+
+    @Test
     public void onClickCancelButton_shouldHandleCancelAction() {
         mConfigureWifiEntryFragment.getCancelButton().performClick();
 

@@ -27,8 +27,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
@@ -47,7 +47,7 @@ public class UsbTetherPreferenceControllerTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
-    private SharedPreferences mSharedPreferences;
+    private TetherEnabler mTetherEnabler;
 
     private Context mContext;
     private UsbTetherPreferenceController mController;
@@ -61,9 +61,8 @@ public class UsbTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
         when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
-        when(mContext.getSharedPreferences(TetherEnabler.SHARED_PREF, Context.MODE_PRIVATE))
-                .thenReturn(mSharedPreferences);
         mController = new UsbTetherPreferenceController(mContext, USB_TETHER_KEY);
+        mController.setTetherEnabler(mTetherEnabler);
         mSwitchPreference = spy(SwitchPreference.class);
         ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
     }
@@ -73,6 +72,18 @@ public class UsbTetherPreferenceControllerTest {
         mController.onStart();
 
         verify(mContext).registerReceiver(eq(mController.mUsbChangeReceiver), any());
+    }
+
+    @Test
+    public void lifecycle_shouldAddListenerOnResume() {
+        mController.onResume();
+        verify(mTetherEnabler).addListener(mController);
+    }
+
+    @Test
+    public void lifecycle_shouldRemoveListenrOnPause() {
+        mController.onPause();
+        verify(mTetherEnabler).removeListener(mController);
     }
 
     @Test
@@ -93,18 +104,26 @@ public class UsbTetherPreferenceControllerTest {
     }
 
     @Test
-    public void switch_shouldCheckedWhenSharedPreferencesIsTrue() {
-        when(mSharedPreferences.getBoolean(USB_TETHER_KEY, false)).thenReturn(true);
-        mController.onSharedPreferenceChanged(mSharedPreferences, USB_TETHER_KEY);
-
-        verify(mSwitchPreference).setChecked(true);
+    public void setChecked_shouldStartUsbTethering() {
+        mController.setChecked(true);
+        verify(mTetherEnabler).startTethering(TetheringManager.TETHERING_USB);
     }
 
     @Test
-    public void switch_shouldUnCheckedWhenSharedPreferencesIsFalse() {
-        when(mSharedPreferences.getBoolean(USB_TETHER_KEY, false)).thenReturn(false);
-        mController.onSharedPreferenceChanged(mSharedPreferences, USB_TETHER_KEY);
+    public void setUnchecked_shouldStopUsbTethering() {
+        mController.setChecked(false);
+        verify(mTetherEnabler).stopTethering(TetheringManager.TETHERING_USB);
+    }
 
-        verify(mSwitchPreference).setChecked(false);
+    @Test
+    public void switch_shouldCheckedWhenUsbTethering() {
+        mController.onTetherStateUpdated(TetherEnabler.TETHERING_USB_ON);
+        assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void switch_shouldUnCheckedWhenUsbNotTethering() {
+        mController.onTetherStateUpdated(TetherEnabler.TETHERING_OFF);
+        assertThat(mController.isChecked()).isFalse();
     }
 }

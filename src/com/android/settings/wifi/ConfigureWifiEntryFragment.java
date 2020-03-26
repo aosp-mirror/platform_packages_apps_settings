@@ -148,7 +148,7 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
 
     @Override
     public void dispatchSubmit() {
-        // Do nothing
+        handleSubmitAction();
     }
 
     @Override
