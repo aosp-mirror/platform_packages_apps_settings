@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
@@ -31,7 +33,12 @@ import android.net.wifi.WifiNetworkSuggestion;
 import android.net.wifi.hotspot2.PasspointConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
+import android.os.Process;
+import android.os.SimpleClock;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -53,10 +60,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.WifiTracker;
-import com.android.settingslib.wifi.WifiTrackerFactory;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
+import java.time.Clock;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +74,7 @@ import java.util.Optional;
  * choose on either saving those networks or rejecting the request.
  */
 public class AddAppNetworksFragment extends InstrumentedFragment implements
-        WifiTracker.WifiListener {
+        WifiPickerTracker.WifiPickerTrackerCallback {
     public static final String TAG = "AddAppNetworksFragment";
 
     // Possible result values in each item of the returned result list, which is used
@@ -86,12 +94,17 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     // Signal level for the initial signal icon.
     @VisibleForTesting
     static final int INITIAL_RSSI_SIGNAL_LEVEL = 0;
-    // Max networks count within one request
+    // Max networks count within one request.
     private static final int MAX_SPECIFIC_NETWORKS_COUNT = 5;
 
     // Duration for showing different status message.
     private static final long SHOW_SAVING_INTERVAL_MILLIS = 500L;
     private static final long SHOW_SAVED_INTERVAL_MILLIS = 1000L;
+
+    // Max age of tracked WifiEntries.
+    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
+    // Interval between initiating WifiPickerTracker scans.
+    private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting
     FragmentActivity mActivity;
@@ -110,7 +123,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     @VisibleForTesting
     List<Integer> mResultCodeArrayList;
     @VisibleForTesting
-    WifiTracker mWifiTracker;
+    WifiPickerTracker mWifiPickerTracker;
 
     private boolean mIsSingleNetwork;
     private boolean mAnyNetworkSavedSuccess;
@@ -120,6 +133,8 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     private UiConfigurationItemAdapter mUiConfigurationItemAdapter;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager mWifiManager;
+    // Worker thread used for WifiPickerTracker work
+    private HandlerThread mWorkerThread;
 
     private final Handler mHandler = new Handler() {
         @Override
@@ -164,9 +179,26 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
             @Nullable Bundle savedInstanceState) {
         mActivity = getActivity();
         mWifiManager = mActivity.getSystemService(WifiManager.class);
-        mWifiTracker = WifiTrackerFactory.create(mActivity.getApplication(), this,
-                getSettingsLifecycle(), true /* includeSaved */, true /* includeScans */);
-
+        mWorkerThread = new HandlerThread(
+                TAG + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
+                Process.THREAD_PRIORITY_BACKGROUND);
+        mWorkerThread.start();
+        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
+            @Override
+            public long millis() {
+                return SystemClock.elapsedRealtime();
+            }
+        };
+        mWifiPickerTracker = new WifiPickerTracker(getSettingsLifecycle(), mActivity,
+                mActivity.getSystemService(WifiManager.class),
+                mActivity.getSystemService(ConnectivityManager.class),
+                mActivity.getSystemService(NetworkScoreManager.class),
+                new Handler(Looper.getMainLooper()),
+                mWorkerThread.getThreadHandler(),
+                elapsedRealtimeClock,
+                MAX_SCAN_AGE_MILLIS,
+                SCAN_INTERVAL_MILLIS,
+                this);
         return inflater.inflate(R.layout.wifi_add_app_networks, container, false);
     }
 
@@ -704,18 +736,10 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
         }
     }
 
-    @Override
-    public void onWifiStateChanged(int state) {
-        // Do nothing
-    }
 
-    @Override
-    public void onConnectedChanged() {
-        // Do nothing
-    }
 
     @VisibleForTesting
-    void updateScanResultsToUi(List<AccessPoint> allAccessPoints) {
+    void updateScanResultsToUi(List<WifiEntry> allEntries) {
         if (mUiToRequestedList == null) {
             // Nothing need to be updated.
             return;
@@ -724,14 +748,15 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
         // Update the signal level of the UI networks.
         for (UiConfigurationItem uiConfigurationItem : mUiToRequestedList) {
             uiConfigurationItem.mLevel = 0;
-            if (allAccessPoints != null) {
-                final Optional<AccessPoint> matchedAccessPoint = allAccessPoints
-                        .stream()
-                        .filter(accesspoint -> accesspoint.matches(
-                                uiConfigurationItem.mWifiNetworkSuggestion.getWifiConfiguration()))
+            if (allEntries != null) {
+                final Optional<WifiEntry> matchedWifiEntry = allEntries.stream()
+                        .filter(wifiEntry -> TextUtils.equals(
+                                uiConfigurationItem.mWifiNetworkSuggestion.getSsid(),
+                                wifiEntry.getSsid()))
+                        .filter(wifiEntry -> !wifiEntry.isSaved())
                         .findFirst();
                 uiConfigurationItem.mLevel =
-                        matchedAccessPoint.isPresent() ? matchedAccessPoint.get().getLevel() : 0;
+                        matchedWifiEntry.isPresent() ? matchedWifiEntry.get().getLevel() : 0;
             }
         }
 
@@ -747,15 +772,32 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        onAccessPointsChanged();
+        onWifiEntriesChanged();
+    }
+
+    /** Called when the state of Wifi has changed. */
+    @Override
+    public void onWifiStateChanged() {
+        onWifiEntriesChanged();
     }
 
     /**
      * Update the results when data changes
      */
     @Override
-    public void onAccessPointsChanged() {
+    public void onWifiEntriesChanged() {
         updateScanResultsToUi(
-                mWifiTracker.getManager().isWifiEnabled() ? mWifiTracker.getAccessPoints() : null);
+                (mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
+                        ? mWifiPickerTracker.getWifiEntries() : null);
+    }
+
+    @Override
+    public void onNumSavedSubscriptionsChanged() {
+        // Do nothing.
+    }
+
+    @Override
+    public void onNumSavedNetworksChanged() {
+        // Do nothing.
     }
 }
