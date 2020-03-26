@@ -203,7 +203,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         pref.setEnabled(item.isEnabled());
         pref.setOnPreferenceClickListener(preference -> {
             mMetricsFeatureProvider.logClickedPreference(preference,
-                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
+                    preference.getExtras().getInt(DashboardFragment.CATEGORY));
             final UserHandle user = item.getUser();
             mContext.startActivityAsUser(item.getLaunchIntent(mContext), user);
             return true;
