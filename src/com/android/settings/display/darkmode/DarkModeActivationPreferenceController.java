@@ -16,15 +16,20 @@
 package com.android.settings.display.darkmode;
 
 import android.app.UiModeManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.time.LocalTime;
@@ -33,22 +38,25 @@ import java.time.LocalTime;
  * Controller for activate/deactivate night mode button
  */
 public class DarkModeActivationPreferenceController extends BasePreferenceController {
+
     private final UiModeManager mUiModeManager;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private PowerManager mPowerManager;
     private Button mTurnOffButton;
     private Button mTurnOnButton;
     private TimeFormatter mFormat;
+    private LayoutPreference mPreference;
 
-    public DarkModeActivationPreferenceController(Context context,
-            String preferenceKey) {
+    public DarkModeActivationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPowerManager = context.getSystemService(PowerManager.class);
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mFormat = new TimeFormatter(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
-    public DarkModeActivationPreferenceController(Context context,
-                                                  String preferenceKey, TimeFormatter f) {
+    public DarkModeActivationPreferenceController(Context context, String preferenceKey,
+            TimeFormatter f) {
         this(context, preferenceKey);
         mFormat = f;
     }
@@ -128,6 +136,8 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     private final View.OnClickListener mListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            mMetricsFeatureProvider.logClickedPreference(mPreference,
+                    SettingsEnums.DARK_UI_SETTINGS);
             final boolean active = (mContext.getResources().getConfiguration().uiMode
                     & Configuration.UI_MODE_NIGHT_YES) != 0;
             mUiModeManager.setNightModeActivated(!active);
@@ -139,10 +149,10 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-        mTurnOnButton = preference.findViewById(R.id.dark_ui_turn_on_button);
+        mPreference = screen.findPreference(getPreferenceKey());
+        mTurnOnButton = mPreference.findViewById(R.id.dark_ui_turn_on_button);
         mTurnOnButton.setOnClickListener(mListener);
-        mTurnOffButton = preference.findViewById(R.id.dark_ui_turn_off_button);
+        mTurnOffButton = mPreference.findViewById(R.id.dark_ui_turn_off_button);
         mTurnOffButton.setOnClickListener(mListener);
     }
 

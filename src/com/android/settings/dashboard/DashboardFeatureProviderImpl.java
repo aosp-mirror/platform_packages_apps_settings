@@ -406,12 +406,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
         } else {
+            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
                 activity.startActivityForResultAsUser(intent, 0, userHandle);
             } else {
-                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile);
+                ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
+                        sourceMetricCategory);
             }
         }
     }
