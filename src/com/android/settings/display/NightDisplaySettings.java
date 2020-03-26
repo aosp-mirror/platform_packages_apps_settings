@@ -76,9 +76,11 @@ public class NightDisplaySettings extends DashboardFragment
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if ("night_display_end_time".equals(preference.getKey())) {
+            writePreferenceClickMetric(preference);
             showDialog(DIALOG_END_TIME);
             return true;
         } else if ("night_display_start_time".equals(preference.getKey())) {
+            writePreferenceClickMetric(preference);
             showDialog(DIALOG_START_TIME);
             return true;
         }
