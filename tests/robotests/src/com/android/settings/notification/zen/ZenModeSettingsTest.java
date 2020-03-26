@@ -79,13 +79,13 @@ public class ZenModeSettingsTest {
     public void testGetCallsSettingSummary_contacts() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_ALARMS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_CONTACTS, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from contacts");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Contacts");
     }
 
     @Test
     public void testGetCallsSettingSummary_repeatCallers() {
         Policy policy = new Policy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Allow from repeat callers");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Repeat callers");
     }
 
     @Test
@@ -94,7 +94,7 @@ public class ZenModeSettingsTest {
                 Policy.PRIORITY_CATEGORY_REPEAT_CALLERS | Policy.PRIORITY_CATEGORY_CALLS,
                 Policy.PRIORITY_SENDERS_STARRED, 0, 0);
         assertThat(mBuilder.getCallsSettingSummary(policy))
-                .isEqualTo("Allow from starred contacts and repeat callers");
+                .isEqualTo("Starred contacts and repeat callers");
     }
 
     @Test
