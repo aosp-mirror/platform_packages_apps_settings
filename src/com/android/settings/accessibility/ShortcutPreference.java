@@ -64,7 +64,6 @@ public class ShortcutPreference extends Preference {
         setLayoutResource(R.layout.accessibility_shortcut_secondary_action);
         setWidgetLayoutResource(R.layout.preference_widget_master_switch);
         setIconSpaceReserved(true);
-        setSelectable(false);
     }
 
     @Override
@@ -138,8 +137,6 @@ public class ShortcutPreference extends Preference {
     public void setSettingsEditable(boolean enabled) {
         if (mSettingsEditable != enabled) {
             mSettingsEditable = enabled;
-            // Disable whole component to let each child component can be addressed.
-            setSelectable(!mSettingsEditable);
             notifyChanged();
         }
     }
