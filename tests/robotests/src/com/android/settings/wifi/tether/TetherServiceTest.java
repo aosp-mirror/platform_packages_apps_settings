@@ -20,17 +20,19 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.wifi.WifiManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -46,8 +48,12 @@ import java.util.ArrayList;
 @RunWith(RobolectricTestRunner.class)
 public class TetherServiceTest {
 
+    private static final int CHECK_PERIOD_HOURS = 24;
+
     @Mock
     private Context mContext;
+    @Mock
+    private Resources mResources;
 
     private Context mAppContext;
     private TetherService mService;
@@ -56,13 +62,15 @@ public class TetherServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mAppContext = RuntimeEnvironment.application;
-        mService = new TetherService();
+        mService = spy(new TetherService());
         ReflectionHelpers.setField(mService, "mBase", mAppContext);
         mService.setHotspotOffReceiver(new HotspotOffReceiver(mContext));
+        doReturn(CHECK_PERIOD_HOURS).when(mResources).getInteger(
+                com.android.internal.R.integer.config_mobile_hotspot_provision_check_period);
+        doReturn(mResources).when(mService).getResourceForActiveDataSubId();
     }
 
     @Test
-    @Ignore
     public void scheduleAlarm_shouldRegisterReceiver() {
         mService.setHotspotOffReceiver(new HotspotOffReceiver(mAppContext));
 
@@ -80,7 +88,6 @@ public class TetherServiceTest {
     }
 
     @Test
-    @Ignore
     public void cancelAlarmIfNecessary_hasActiveTethers_shouldNotUnregisterReceiver() {
         mService.scheduleAlarm();
         final ArrayList<Integer> tethers = new ArrayList<>();
@@ -88,17 +95,18 @@ public class TetherServiceTest {
         ReflectionHelpers.setField(mService, "mCurrentTethers", tethers);
 
         mService.cancelAlarmIfNecessary();
+
         verify(mContext, never()).unregisterReceiver(any(HotspotOffReceiver.class));
     }
 
     @Test
-    @Ignore
     public void cancelAlarmIfNecessary_noActiveTethers_shouldUnregisterReceiver() {
         final ArrayList<Integer> tethers = new ArrayList<>();
         ReflectionHelpers.setField(mService, "mCurrentTethers", tethers);
         mService.scheduleAlarm();
 
         mService.cancelAlarmIfNecessary();
+
         verify(mContext).unregisterReceiver(any(HotspotOffReceiver.class));
     }
 
