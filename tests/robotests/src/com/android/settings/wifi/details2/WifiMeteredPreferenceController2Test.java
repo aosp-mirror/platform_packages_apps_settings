@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -50,6 +51,7 @@ public class WifiMeteredPreferenceController2Test {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 
         mPreferenceController = spy(
