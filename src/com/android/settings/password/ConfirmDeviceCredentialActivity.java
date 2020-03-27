@@ -208,7 +208,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     getTitleFromCredentialType(credentialType, isManagedProfile));
         }
         if (mDetails == null) {
-            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_DESCRIPTION,
+            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_SUBTITLE,
                     getDetailsFromCredentialType(credentialType, isManagedProfile));
         }
 
