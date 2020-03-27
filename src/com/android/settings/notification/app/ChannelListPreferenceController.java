@@ -33,6 +33,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -43,13 +48,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.SwitchPreference;
 
 public class ChannelListPreferenceController extends NotificationPreferenceController {
 
@@ -94,7 +93,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             @Override
             protected Void doInBackground(Void... unused) {
                 mChannelGroupList = mBackend.getGroups(mAppRow.pkg, mAppRow.uid).getList();
-                Collections.sort(mChannelGroupList, mChannelGroupComparator);
+                Collections.sort(mChannelGroupList, CHANNEL_GROUP_COMPARATOR);
                 return null;
             }
 
@@ -142,7 +141,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             }
             if (!group.isBlocked()) {
                 final List<NotificationChannel> channels = group.getChannels();
-                Collections.sort(channels, mChannelComparator);
+                Collections.sort(channels, CHANNEL_COMPARATOR);
                 int N = channels.size();
                 for (int i = 0; i < N; i++) {
                     final NotificationChannel channel = channels.get(i);
@@ -274,7 +273,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 }
             } else {
                 final List<NotificationChannel> channels = group.getChannels();
-                Collections.sort(channels, mChannelComparator);
+                Collections.sort(channels, CHANNEL_COMPARATOR);
                 int N = channels.size();
                 for (int i = 0; i < N; i++) {
                     final NotificationChannel channel = channels.get(i);
@@ -283,33 +282,4 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
             }
         }
     }
-
-    private Comparator<NotificationChannelGroup> mChannelGroupComparator =
-            new Comparator<NotificationChannelGroup>() {
-
-                @Override
-                public int compare(NotificationChannelGroup left, NotificationChannelGroup right) {
-                    // Non-grouped channels (in placeholder group with a null id) come last
-                    if (left.getId() == null && right.getId() != null) {
-                        return 1;
-                    } else if (right.getId() == null && left.getId() != null) {
-                        return -1;
-                    }
-                    return left.getId().compareTo(right.getId());
-                }
-            };
-
-    protected Comparator<NotificationChannel> mChannelComparator =
-            (left, right) -> {
-                if (left.isDeleted() != right.isDeleted()) {
-                    return Boolean.compare(left.isDeleted(), right.isDeleted());
-                } else if (left.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
-                    // Uncategorized/miscellaneous legacy channel goes last
-                    return 1;
-                } else if (right.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
-                    return -1;
-                }
-
-                return left.getId().compareTo(right.getId());
-            };
 }
