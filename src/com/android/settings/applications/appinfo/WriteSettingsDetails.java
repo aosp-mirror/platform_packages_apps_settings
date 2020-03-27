@@ -108,7 +108,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     private boolean canWriteSettings(String pkgName) {
-        int result = mAppOpsManager.noteOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS,
+        int result = mAppOpsManager.checkOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS,
                 mPackageInfo.applicationInfo.uid, pkgName);
         if (result == AppOpsManager.MODE_ALLOWED) {
             return true;
