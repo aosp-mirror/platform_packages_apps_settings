@@ -216,7 +216,7 @@ public class PanelFragment extends Fragment {
         mDoneButton.setOnClickListener(getCloseListener());
 
         if (mPanel.isCustomizedButtonUsed()) {
-            final CharSequence customTitle = mPanel.getCustomButtonTitle();
+            final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
             if (TextUtils.isEmpty(customTitle)) {
                 mSeeMoreButton.setVisibility(View.GONE);
             } else {
@@ -422,6 +422,7 @@ public class PanelFragment extends Fragment {
             ThreadUtils.postOnMainThread(() -> {
                 mSeeMoreButton.setVisibility(
                         mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+                mSeeMoreButton.setText(mPanel.getCustomizedButtonTitle());
             });
         }
 
