@@ -17,57 +17,59 @@
 package com.android.settings.notification.zen;
 
 import android.app.Application;
-import android.app.NotificationChannel;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.app.ChannelNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
+import com.android.settings.notification.app.AppChannelsBypassingDndSettings;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 
 /**
  * Adds a preference to the PreferenceScreen for each notification channel that can bypass DND.
  */
 public class ZenModeAllBypassingAppsPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
+    public static final String KEY_NO_APPS = getKey("none");
+    private static final String KEY = "zen_mode_bypassing_apps_list";
 
-    private final String KEY = "zen_mode_bypassing_apps_category";
+    private final NotificationBackend mNotificationBackend;
 
     @VisibleForTesting ApplicationsState mApplicationsState;
-    @VisibleForTesting PreferenceScreen mPreferenceScreen;
+    @VisibleForTesting PreferenceCategory mPreferenceCategory;
     @VisibleForTesting Context mPrefContext;
 
     private ApplicationsState.Session mAppSession;
-    private NotificationBackend mNotificationBackend = new NotificationBackend();
     private Fragment mHostFragment;
 
     public ZenModeAllBypassingAppsPreferenceController(Context context, Application app,
-            Fragment host) {
-
-        this(context, app == null ? null : ApplicationsState.getInstance(app), host);
+            Fragment host, NotificationBackend notificationBackend) {
+        this(context, app == null ? null : ApplicationsState.getInstance(app), host,
+                notificationBackend);
     }
 
     private ZenModeAllBypassingAppsPreferenceController(Context context, ApplicationsState appState,
-            Fragment host) {
+            Fragment host, NotificationBackend notificationBackend) {
         super(context);
+        mNotificationBackend = notificationBackend;
         mApplicationsState = appState;
         mHostFragment = host;
 
@@ -78,9 +80,9 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mPreferenceScreen = screen;
-        mPrefContext = mPreferenceScreen.getContext();
-        updateNotificationChannelList();
+        mPreferenceCategory = screen.findPreference(KEY);
+        mPrefContext = screen.getContext();
+        updateAppList();
         super.displayPreference(screen);
     }
 
@@ -95,9 +97,9 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
     }
 
     /**
-     * Call this method to trigger the notification channels list to refresh.
+     * Call this method to trigger the app list to refresh.
      */
-    public void updateNotificationChannelList() {
+    public void updateAppList() {
         if (mAppSession == null) {
             return;
         }
@@ -105,64 +107,95 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
         ApplicationsState.AppFilter filter = ApplicationsState.FILTER_ALL_ENABLED;
         List<ApplicationsState.AppEntry> apps = mAppSession.rebuild(filter,
                 ApplicationsState.ALPHA_COMPARATOR);
-        updateNotificationChannelList(apps);
+        updateAppList(apps);
     }
 
     @VisibleForTesting
-    void updateNotificationChannelList(List<ApplicationsState.AppEntry> apps) {
-        if (mPreferenceScreen == null || apps == null) {
+    void updateAppList(List<ApplicationsState.AppEntry> apps) {
+        if (mPreferenceCategory == null || apps == null) {
             return;
         }
 
-        boolean showEmptyState = true;
-
-        List<Preference> channelsBypassingDnd = new ArrayList<>();
-        for (ApplicationsState.AppEntry entry : apps) {
-            String pkg = entry.info.packageName;
-            mApplicationsState.ensureIcon(entry);
-            for (NotificationChannel channel : mNotificationBackend
-                    .getNotificationChannelsBypassingDnd(pkg, entry.info.uid).getList()) {
-                if (!TextUtils.isEmpty(channel.getConversationId())) {
-                    // conversation channels that bypass dnd will be shown on the People page
-                    continue;
+        List<Preference> appsBypassingDnd = new ArrayList<>();
+        for (ApplicationsState.AppEntry app : apps) {
+            String pkg = app.info.packageName;
+            mApplicationsState.ensureIcon(app);
+            final int appChannels = mNotificationBackend.getChannelCount(pkg, app.info.uid);
+            final int appChannelsBypassingDnd = mNotificationBackend
+                    .getNotificationChannelsBypassingDnd(pkg, app.info.uid).getList().size();
+            if (appChannelsBypassingDnd > 0) {
+                final String key = getKey(pkg);
+                // re-use previously created preference when possible
+                Preference pref = mPreferenceCategory.findPreference(key);
+                if (pref == null) {
+                    pref = new AppPreference(mPrefContext);
+                    pref.setKey(key);
+                    pref.setOnPreferenceClickListener(preference -> {
+                        Bundle args = new Bundle();
+                        args.putString(AppInfoBase.ARG_PACKAGE_NAME, app.info.packageName);
+                        args.putInt(AppInfoBase.ARG_PACKAGE_UID, app.info.uid);
+                        new SubSettingLauncher(mContext)
+                                .setDestination(AppChannelsBypassingDndSettings.class.getName())
+                                .setArguments(args)
+                                .setResultListener(mHostFragment, 0)
+                                .setSourceMetricsCategory(
+                                        SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
+                                .launch();
+                        return true;
+                    });
                 }
-                Preference pref = new AppPreference(mPrefContext);
-                pref.setKey(pkg + "|" + channel.getId());
-                pref.setTitle(BidiFormatter.getInstance().unicodeWrap(entry.label));
-                pref.setIcon(entry.icon);
-                pref.setSummary(BidiFormatter.getInstance().unicodeWrap(channel.getName()));
-
-                pref.setOnPreferenceClickListener(preference -> {
-                    Bundle args = new Bundle();
-                    args.putString(AppInfoBase.ARG_PACKAGE_NAME, entry.info.packageName);
-                    args.putInt(AppInfoBase.ARG_PACKAGE_UID, entry.info.uid);
-                    args.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-                    new SubSettingLauncher(mContext)
-                            .setDestination(ChannelNotificationSettings.class.getName())
-                            .setArguments(args)
-                            .setTitleRes(R.string.notification_channel_title)
-                            .setResultListener(mHostFragment, 0)
-                            .setSourceMetricsCategory(
-                                    SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
-                            .launch();
-                    return true;
-                });
-                channelsBypassingDnd.add(pref);
-                showEmptyState = false;
-            }
-
-            mPreferenceScreen.removeAll();
-            if (channelsBypassingDnd.size() > 0) {
-                for (Preference prefToAdd : channelsBypassingDnd) {
-                    mPreferenceScreen.addPreference(prefToAdd);
+                pref.setTitle(BidiFormatter.getInstance().unicodeWrap(app.label));
+                pref.setIcon(app.icon);
+                if (appChannels > appChannelsBypassingDnd) {
+                    pref.setSummary(R.string.zen_mode_bypassing_apps_summary_some);
+                } else {
+                    pref.setSummary(R.string.zen_mode_bypassing_apps_summary_all);
                 }
-            }
-            if (showEmptyState) {
-                Preference pref = new Preference(mPrefContext);
-                pref.setTitle(R.string.zen_mode_bypassing_apps_subtext_none);
-                mPreferenceScreen.addPreference(pref);
+
+                appsBypassingDnd.add(pref);
             }
         }
+
+        if (appsBypassingDnd.size() == 0) {
+            Preference pref = mPreferenceCategory.findPreference(KEY_NO_APPS);
+            if (pref == null) {
+                pref = new Preference(mPrefContext);
+                pref.setKey(KEY_NO_APPS);
+                pref.setTitle(R.string.zen_mode_bypassing_apps_none);
+            }
+            appsBypassingDnd.add(pref);
+        }
+
+        if (hasAppListChanged(appsBypassingDnd, mPreferenceCategory)) {
+            mPreferenceCategory.removeAll();
+            for (Preference prefToAdd : appsBypassingDnd) {
+                mPreferenceCategory.addPreference(prefToAdd);
+            }
+        }
+    }
+
+    static boolean hasAppListChanged(List<Preference> newAppPreferences,
+            PreferenceCategory preferenceCategory) {
+        if (newAppPreferences.size() != preferenceCategory.getPreferenceCount()) {
+            return true;
+        }
+
+        for (int i = 0; i < newAppPreferences.size(); i++) {
+            Preference newAppPref = newAppPreferences.get(i);
+            Preference pref = preferenceCategory.getPreference(i);
+            if (!Objects.equals(newAppPref.getKey(), pref.getKey())) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * Create a unique key to idenfity an AppPreference
+     */
+    static String getKey(String pkg) {
+        return pkg;
     }
 
     private final ApplicationsState.Callbacks mAppSessionCallbacks =
@@ -170,27 +203,27 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
                 @Override
                 public void onRunningStateChanged(boolean running) {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
 
                 @Override
                 public void onPackageListChanged() {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
 
                 @Override
                 public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> apps) {
-                    updateNotificationChannelList(apps);
+                    updateAppList(apps);
                 }
 
                 @Override
                 public void onPackageIconChanged() {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
 
                 @Override
                 public void onPackageSizeChanged(String packageName) {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
 
                 @Override
@@ -198,12 +231,12 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
 
                 @Override
                 public void onLauncherInfoChanged() {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
 
                 @Override
                 public void onLoadEntriesCompleted() {
-                    updateNotificationChannelList();
+                    updateAppList();
                 }
             };
 }

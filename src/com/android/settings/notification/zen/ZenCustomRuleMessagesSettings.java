@@ -37,7 +37,7 @@ public class ZenCustomRuleMessagesSettings extends ZenCustomRuleSettingsBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return com.android.settings.R.xml.zen_mode_messages_settings;
+        return com.android.settings.R.xml.zen_mode_custom_rule_messages_settings;
     }
 
     @Override

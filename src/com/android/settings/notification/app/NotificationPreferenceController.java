@@ -35,6 +35,7 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -172,4 +173,31 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         }
         return Objects.equals(NotificationChannel.DEFAULT_CHANNEL_ID, mChannel.getId());
     }
+
+    public static final Comparator<NotificationChannelGroup> CHANNEL_GROUP_COMPARATOR =
+            new Comparator<NotificationChannelGroup>() {
+        @Override
+        public int compare(NotificationChannelGroup left, NotificationChannelGroup right) {
+            // Non-grouped channels (in placeholder group with a null id) come last
+            if (left.getId() == null && right.getId() != null) {
+                return 1;
+            } else if (right.getId() == null && left.getId() != null) {
+                return -1;
+            }
+            return left.getId().compareTo(right.getId());
+        }
+    };
+
+    public static final Comparator<NotificationChannel> CHANNEL_COMPARATOR = (left, right) -> {
+        if (left.isDeleted() != right.isDeleted()) {
+            return Boolean.compare(left.isDeleted(), right.isDeleted());
+        } else if (left.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+            // Uncategorized/miscellaneous legacy channel goes last
+            return 1;
+        } else if (right.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+            return -1;
+        }
+
+        return left.getId().compareTo(right.getId());
+    };
 }

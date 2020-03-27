@@ -18,8 +18,6 @@ package com.android.settings.wifi.addappnetworks;
 
 import static com.google.common.truth.Truth.assertThat;
 
-
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -36,9 +34,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.android.settings.R;
-import com.android.settingslib.wifi.AccessPoint;
-import com.android.settingslib.wifi.WifiTracker;
-import com.android.settingslib.wifi.WifiTrackerFactory;
+import com.android.wifitrackerlib.WifiEntry;
+import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +50,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class AddAppNetworksFragmentTest {
+
     private static final String FAKE_APP_NAME = "fake_app_name";
     private static final String FAKE_NEW_WPA_SSID = "fake_new_wpa_ssid";
     private static final String FAKE_NEW_OPEN_SSID = "fake_new_open_ssid";
@@ -73,10 +71,10 @@ public class AddAppNetworksFragmentTest {
     private ArrayList<Integer> mFakedResultArrayList = new ArrayList<>();
 
     @Mock
-    private AccessPoint mMockAccessPoint;
+    private WifiEntry mMockWifiEntry;
 
     @Mock
-    private WifiTracker mMockWifiTracker;
+    private WifiPickerTracker mMockWifiPickerTracker;
 
     @Mock
     private WifiManager mMockWifiManager;
@@ -91,12 +89,8 @@ public class AddAppNetworksFragmentTest {
                 WifiConfiguration.KeyMgmt.NONE, null);
         mSavedWpaConfigurationEntry = generateRegularWifiConfiguration(FAKE_NEW_SAVED_WPA_SSID,
                 WifiConfiguration.KeyMgmt.WPA_PSK, "\"1234567890\"");
-        when(mMockWifiTracker.getManager()).thenReturn(mMockWifiManager);
         when(mMockWifiManager.isWifiEnabled()).thenReturn(true);
-
-        mAddAppNetworksFragment.mWifiTracker = mMockWifiTracker;
-        WifiTrackerFactory.setTestingWifiTracker(mMockWifiTracker);
-
+        mAddAppNetworksFragment.mWifiPickerTracker = mMockWifiPickerTracker;
         setUpOneScannedNetworkWithScanedLevel4();
     }
 
@@ -216,7 +210,7 @@ public class AddAppNetworksFragmentTest {
     @Test
     public void withOneSuggestion_whenScanResultChanged_uiListShouldHaveNewLevel() {
         // Arrange
-        when(mAddAppNetworksFragment.mWifiTracker.getManager().isWifiEnabled()).thenReturn(true);
+        when(mMockWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_ENABLED);
         // Setup a fake saved network list and assign to fragment.
         addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
         // Setup one specified networks and its results and assign to fragment.
@@ -226,7 +220,7 @@ public class AddAppNetworksFragmentTest {
         mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
 
         // Act
-        mAddAppNetworksFragment.onAccessPointsChanged();
+        mAddAppNetworksFragment.onWifiEntriesChanged();
 
         // Assert
         assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
@@ -236,7 +230,7 @@ public class AddAppNetworksFragmentTest {
     @Test
     public void withOneSuggestion_whenScanResultChangedButWifiOff_uiListShouldHaveZeroLevel() {
         // Arrange
-        when(mAddAppNetworksFragment.mWifiTracker.getManager().isWifiEnabled()).thenReturn(false);
+        when(mMockWifiPickerTracker.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
         // Setup a fake saved network list and assign to fragment.
         addOneSavedNetworkConfiguration(mSavedWpaConfigurationEntry);
         // Setup one specified networks and its results and assign to fragment.
@@ -246,7 +240,7 @@ public class AddAppNetworksFragmentTest {
         mAddAppNetworksFragment.filterSavedNetworks(mFakeSavedNetworksList);
 
         // Act
-        mAddAppNetworksFragment.onAccessPointsChanged();
+        mAddAppNetworksFragment.onWifiEntriesChanged();
 
         // Assert
         assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
@@ -255,11 +249,10 @@ public class AddAppNetworksFragmentTest {
 
     private void setUpOneScannedNetworkWithScanedLevel4() {
         final ArrayList list = new ArrayList<>();
-        list.add(mMockAccessPoint);
-        when(mMockWifiTracker.getAccessPoints()).thenReturn(list);
-        when(mMockAccessPoint.getSsidStr()).thenReturn(FAKE_NEW_OPEN_SSID);
-        when(mMockAccessPoint.matches(any(WifiConfiguration.class))).thenReturn(true);
-        when(mMockAccessPoint.getLevel()).thenReturn(SCANED_LEVEL4);
+        list.add(mMockWifiEntry);
+        when(mMockWifiPickerTracker.getWifiEntries()).thenReturn(list);
+        when(mMockWifiEntry.getSsid()).thenReturn(FAKE_NEW_OPEN_SSID);
+        when(mMockWifiEntry.getLevel()).thenReturn(SCANED_LEVEL4);
     }
 
     private void addOneSavedNetworkConfiguration(@NonNull WifiConfiguration wifiConfiguration) {
