@@ -166,7 +166,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
     }
 
     @Override
-    public CharSequence getCustomButtonTitle() {
+    public CharSequence getCustomizedButtonTitle() {
         return mContext.getText(R.string.media_output_panel_stop_casting_button);
     }
 
