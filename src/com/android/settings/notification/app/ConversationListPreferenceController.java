@@ -70,6 +70,8 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
 
         if (containerGroup.getPreferenceCount() == 0) {
             containerGroup.setVisible(false);
+        } else {
+            containerGroup.setVisible(true);
         }
     }
 
