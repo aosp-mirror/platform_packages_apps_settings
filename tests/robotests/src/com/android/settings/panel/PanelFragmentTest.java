@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -249,5 +250,28 @@ public class PanelFragmentTest {
         panelContentCallbacks.forceClose();
 
         verify(mActivity).finish();
+    }
+
+    @Test
+    public void onCustomizedButtonStateChanged_isCustomized_showCustomizedTitle() {
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+
+        final Button seeMoreButton = panelFragment.mLayoutView.findViewById(R.id.see_more);
+
+        mFakePanelContent.setIsCustomizedButtonUsed(true);
+        mFakePanelContent.setCustomizedButtonTitle("test_title");
+        verify(mFakePanelContent).registerCallback(mPanelContentCbs.capture());
+        final PanelContentCallback panelContentCallbacks = mPanelContentCbs.getValue();
+        panelContentCallbacks.onCustomizedButtonStateChanged();
+
+        assertThat(seeMoreButton.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(seeMoreButton.getText()).isEqualTo("test_title");
     }
 }
