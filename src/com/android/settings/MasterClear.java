@@ -344,6 +344,8 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                 noCancelMobilePlan.setVisibility(View.VISIBLE);
                 mEsimStorage.setChecked(true /* checked */);
             }
+        } else {
+            mEsimStorage.setChecked(false /* checked */);
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
