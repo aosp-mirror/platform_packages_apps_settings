@@ -86,9 +86,9 @@ public interface PanelContent extends Instrumentable {
     }
 
     /**
-     * @return a string for the title of the custom button.
+     * @return a string for the title of the customized button.
      */
-    default CharSequence getCustomButtonTitle() {
+    default CharSequence getCustomizedButtonTitle() {
         return null;
     }
 
