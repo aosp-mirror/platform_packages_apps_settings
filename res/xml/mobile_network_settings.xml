@@ -241,4 +241,12 @@
         settings:searchable="false"
         settings:controller="com.android.settings.network.telephony.DisableSimFooterPreferenceController"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="no_5g_in_dsds_explanation"
+        android:title="@string/no_5g_in_dsds_text"
+        android:selectable="false"
+        settings:allowDividerAbove="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.network.telephony.NrDisabledInDsdsFooterPreferenceController"/>
+
 </PreferenceScreen>
