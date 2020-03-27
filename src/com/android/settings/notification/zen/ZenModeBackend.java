@@ -287,42 +287,13 @@ public class ZenModeBackend {
 
     protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-            return R.string.zen_mode_from_none_messages;
+            return R.string.zen_mode_from_none;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
-            return R.string.zen_mode_from_none_calls;
+            return R.string.zen_mode_from_none;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
             return R.string.zen_mode_from_no_conversations;
         }
         return R.string.zen_mode_from_none;
-    }
-
-    protected int getContactsSummary(int category) {
-        int contactType = -1;
-        if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-            if (isPriorityCategoryEnabled(category)) {
-                contactType = getPriorityMessageSenders();
-            }
-        } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS) {
-            if (isPriorityCategoryEnabled(category)) {
-                contactType = getPriorityCallSenders();
-            }
-        }
-
-        switch (contactType) {
-            case NotificationManager.Policy.PRIORITY_SENDERS_ANY:
-                return R.string.zen_mode_from_anyone;
-            case NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS:
-                return R.string.zen_mode_from_contacts;
-            case NotificationManager.Policy.PRIORITY_SENDERS_STARRED:
-                return R.string.zen_mode_from_starred;
-            case SOURCE_NONE:
-            default:
-                if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-                    return R.string.zen_mode_from_none_messages;
-                } else {
-                    return R.string.zen_mode_from_none_calls;
-                }
-        }
     }
 
     protected int getConversationSummary() {
@@ -366,7 +337,7 @@ public class ZenModeBackend {
                 return R.string.zen_mode_from_starred;
             case ZenPolicy.PEOPLE_TYPE_NONE:
             default:
-                return R.string.zen_mode_from_none_messages;
+                return R.string.zen_mode_from_none;
         }
     }
 
@@ -381,20 +352,6 @@ public class ZenModeBackend {
             case ZEN_MODE_FROM_NONE:
             default:
                 return ZenPolicy.PEOPLE_TYPE_NONE;
-        }
-    }
-
-    protected static int getSettingFromPrefKey(String key) {
-        switch (key) {
-            case ZEN_MODE_FROM_ANYONE:
-                return NotificationManager.Policy.PRIORITY_SENDERS_ANY;
-            case ZEN_MODE_FROM_CONTACTS:
-                return NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
-            case ZEN_MODE_FROM_STARRED:
-                return NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
-            case ZEN_MODE_FROM_NONE:
-            default:
-                return SOURCE_NONE;
         }
     }
 

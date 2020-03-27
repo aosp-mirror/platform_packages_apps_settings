@@ -6908,7 +6908,8 @@
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
     <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
 
-        <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
+
+    <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="default">Only the phone\u2019s owner can manage users.</string>
@@ -8973,8 +8974,22 @@
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND header -->
     <string name="zen_mode_bypassing_apps_header">Apps that can interrupt</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Add apps to bypass DND header -->
+    <string name="zen_mode_bypassing_apps_add_header">Select more apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
+    <string name="zen_mode_bypassing_apps_none">No apps selected</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: No apps are bypassing DND -->
     <string name="zen_mode_bypassing_apps_subtext_none">No apps can interrupt</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Preference to add apps that are allowed to bypass DND -->
+    <string name="zen_mode_bypassing_apps_add">Add apps</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary indicating all notification channels can
+    bypass DND for this app -->
+    <string name="zen_mode_bypassing_apps_summary_all">All notifications</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Summary indicating all notification channels can
+    bypass DND for this app -->
+    <string name="zen_mode_bypassing_apps_summary_some">Some notifications</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Footer for DND bypassing apps settings -->
+    <string name="zen_mode_bypassing_apps_footer">Selected people can still reach you, even if you don\u2019t allow apps to interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
     <plurals name="zen_mode_bypassing_apps_subtext">
         <item quantity="one"><xliff:g id="app_name" example="Nest">%s</xliff:g> can interrupt</item>
@@ -8989,6 +9004,11 @@
     <string name="zen_mode_bypassing_apps_all_summary">All notifications</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
     <string name="zen_mode_bypassing_apps_some_summary">Some notifications</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow notifications from an app to bypass DND header -->
+    <string name="zen_mode_bypassing_app_channels_header">Notifications that can interrupt</string>
+    <!-- [CHAR LIMIT=100] Zen mode settings: Allow all notifications from an app to bypass DND
+    toggle title -->
+    <string name="zen_mode_bypassing_app_channels_toggle_all">Allow all notifications</string>
 
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
     <plurals name="zen_mode_other_sounds_summary">
@@ -9022,9 +9042,9 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Repeat callers (ie: repeat callers are allowed to bypass dnd) -->
     <string name="zen_mode_repeat_callers_list">repeat callers</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_one">Allow from <xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_one"><xliff:g id="caller type" example="contacts">%1$s</xliff:g></string>
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
-    <string name="zen_mode_calls_summary_two">Allow from <xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="callert tpye" example="repeat callers">%2$s</xliff:g></string>
+    <string name="zen_mode_calls_summary_two"><xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="caller type" example="repeat callers">%2$s</xliff:g></string>
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
 
