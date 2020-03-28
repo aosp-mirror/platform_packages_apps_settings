@@ -466,6 +466,7 @@ public class EnabledNetworkModePreferenceController extends
                     }
                     break;
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO:
+                case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
                 case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
                     setSelectedEntry(networkMode);
                     setSummary(mContext.getString(R.string.network_5G)
