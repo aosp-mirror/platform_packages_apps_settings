@@ -31,6 +31,7 @@ import android.provider.DeviceConfig;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -191,11 +192,9 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         context.getResources().getDimensionPixelSize(
                                 R.dimen.advanced_bluetooth_battery_meter_height));
         drawable.setBatteryLevel(level);
-        final int attr = level > LOW_BATTERY_LEVEL || charging
-                ? android.R.attr.colorControlNormal
-                : android.R.attr.colorError;
         drawable.setColorFilter(new PorterDuffColorFilter(
-                com.android.settings.Utils.getColorAttrDefaultColor(context, attr),
+                com.android.settings.Utils.getColorAttrDefaultColor(context,
+                        android.R.attr.colorControlNormal),
                 PorterDuff.Mode.SRC));
         drawable.setCharging(charging);
 
@@ -218,12 +217,10 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final boolean charging = BluetoothUtils.getBooleanMetaData(bluetoothDevice, chargeMetaKey);
         if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
             linearLayout.setVisibility(View.VISIBLE);
-            final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
-            imageView.setImageDrawable(createBtBatteryIcon(mContext, batteryLevel, charging));
-            imageView.setVisibility(View.VISIBLE);
             final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
             textView.setText(com.android.settings.Utils.formatPercentage(batteryLevel));
             textView.setVisibility(View.VISIBLE);
+            showBatteryIcon(linearLayout, batteryLevel, charging);
         } else {
             // Hide it if it doesn't have battery information
             linearLayout.setVisibility(View.GONE);
@@ -232,6 +229,28 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         final TextView textView = linearLayout.findViewById(R.id.header_title);
         textView.setText(titleResId);
         textView.setVisibility(View.VISIBLE);
+    }
+
+    private void showBatteryIcon(LinearLayout linearLayout, int level, boolean charging) {
+        boolean enableLowBattery = level <= LOW_BATTERY_LEVEL && !charging;
+        final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
+        if (enableLowBattery) {
+            imageView.setImageDrawable(mContext.getDrawable(R.drawable.ic_battery_alert_24dp));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    mContext.getResources().getDimensionPixelSize(
+                            R.dimen.advanced_bluetooth_battery_width),
+                    mContext.getResources().getDimensionPixelSize(
+                            R.dimen.advanced_bluetooth_battery_height));
+            layoutParams.rightMargin = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.advanced_bluetooth_battery_right_margin);
+            imageView.setLayoutParams(layoutParams);
+        } else {
+            imageView.setImageDrawable(createBtBatteryIcon(mContext, level, charging));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            imageView.setLayoutParams(layoutParams);
+        }
+        imageView.setVisibility(View.VISIBLE);
     }
 
     private void updateDisconnectLayout() {

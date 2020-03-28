@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,6 +35,8 @@ import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
@@ -85,7 +88,10 @@ public class ConversationListPreferenceControllerTest {
 
     @Test
     public void testPopulateList_validConversations() {
-        PreferenceCategory outerContainer = mock(PreferenceCategory.class);
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
+        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
+        ps.addPreference(outerContainer);
 
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         ccw.setNotificationChannel(mock(NotificationChannel.class));
