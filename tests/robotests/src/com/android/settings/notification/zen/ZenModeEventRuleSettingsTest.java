@@ -19,6 +19,7 @@ package com.android.settings.notification.zen;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,11 +29,11 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Looper;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.notification.zen.ZenModeEventRuleSettings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
@@ -68,7 +68,7 @@ public class ZenModeEventRuleSettingsTest {
 
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
-        mContext = RuntimeEnvironment.application;
+        mContext = application;
 
         mFragment = spy(new TestFragment());
         mFragment.onAttach(application);
@@ -81,6 +81,7 @@ public class ZenModeEventRuleSettingsTest {
         when(mActivity.getTheme()).thenReturn(res.newTheme());
         when(mActivity.getIntent()).thenReturn(mIntent);
         when(mActivity.getResources()).thenReturn(res);
+        when(mActivity.getMainLooper()).thenReturn(mock(Looper.class));
         when(mFragment.getContext()).thenReturn(mContext);
     }
 
