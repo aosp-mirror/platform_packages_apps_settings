@@ -83,6 +83,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected CharSequence mPackageName;
     protected Uri mImageUri;
     protected CharSequence mHtmlDescription;
+    // Used to restore the edit dialog status.
+    protected int mUserShortcutTypeCache = UserShortcutType.EMPTY;
     private static final String DRAWABLE_FOLDER = "drawable";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     protected static final String KEY_GENERAL_CATEGORY = "general_categories";
@@ -91,8 +93,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private static final String EXTRA_SHORTCUT_TYPE = "shortcut_type";
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
     private int mUserShortcutType = UserShortcutType.EMPTY;
-    // Used to restore the edit dialog status.
-    private int mUserShortcutTypeCache = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
 
@@ -473,8 +473,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     private void updateAlertDialogCheckState() {
-        updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
-        updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
+        if (mUserShortcutTypeCache != UserShortcutType.EMPTY) {
+            updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
+            updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
+        }
     }
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
@@ -658,7 +660,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
-        mUserShortcutTypeCache = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
+        mUserShortcutTypeCache = mShortcutPreference.isChecked()
+                ? getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE)
+                : UserShortcutType.EMPTY;
     }
 
     private void createFooterPreference(CharSequence title) {
