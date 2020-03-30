@@ -211,6 +211,14 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
                         .add(SearchIndexablesContract.SiteMapColumns.CHILD_TITLE, childTitle);
             }
         }
+
+        // Loop through custom site map registry to build additional SiteMapPairs
+        for (String childClass : CustomSiteMapRegistry.CUSTOM_SITE_MAP.keySet()) {
+            final String parentClass = CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(childClass);
+            cursor.newRow()
+                    .add(SearchIndexablesContract.SiteMapColumns.PARENT_CLASS, parentClass)
+                    .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass);
+        }
         // Done.
         return cursor;
     }
