@@ -38,7 +38,7 @@ public class CarrierPreferenceController extends TelephonyBasePreferenceControll
 
     public CarrierPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = new CarrierConfigManager(context);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
     }
 
     public void init(int subId) {

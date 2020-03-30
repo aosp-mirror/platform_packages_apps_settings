@@ -342,14 +342,14 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mView.findViewById(R.id.vpn_proxy_fields).setVisibility(visible);
     }
 
-    private boolean hasAdvancedOptionsEnabled() {
+    private boolean isAdvancedOptionsEnabled() {
         return mSearchDomains.getText().length() > 0 || mDnsServers.getText().length() > 0 ||
                     mRoutes.getText().length() > 0 || mProxyHost.getText().length() > 0
                     || mProxyPort.getText().length() > 0;
     }
 
     private void configureAdvancedOptionsVisibility() {
-        if (mShowOptions.isChecked() || hasAdvancedOptionsEnabled()) {
+        if (mShowOptions.isChecked() || isAdvancedOptionsEnabled()) {
             mView.findViewById(R.id.options).setVisibility(View.VISIBLE);
             mShowOptions.setVisibility(View.GONE);
 
