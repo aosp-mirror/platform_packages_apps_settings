@@ -20,27 +20,31 @@ import android.app.NotificationHistory;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class NotificationHistoryPackage {
     String pkgName;
     int uid;
-    List<NotificationHistory.HistoricalNotification> notifications;
+    TreeSet<NotificationHistory.HistoricalNotification> notifications;
     CharSequence label;
     Drawable icon;
 
     public NotificationHistoryPackage(String pkgName, int uid) {
         this.pkgName = pkgName;
         this.uid = uid;
-        notifications = new ArrayList<>();
+        notifications = new TreeSet<>(
+                (o1, o2) -> Long.compare(o2.getPostedTimeMs(), o1.getPostedTimeMs()));
     }
 
     public long getMostRecent() {
         if (notifications.isEmpty()) {
             return 0;
         }
-        return notifications.get(0).getPostedTimeMs();
+        return notifications.first().getPostedTimeMs();
     }
 
     @Override
