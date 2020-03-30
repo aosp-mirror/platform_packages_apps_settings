@@ -135,7 +135,9 @@ public class ZenModeBypassingAppsPreferenceControllerTest {
         appEntries.add(entry2);
 
         List<NotificationChannel> channelsBypassing = new ArrayList<>();
-        channelsBypassing.add(mock(NotificationChannel.class));
+        NotificationChannel mockChannel = mock(NotificationChannel.class);
+        when(mockChannel.getConversationId()).thenReturn(null); // not a conversation
+        channelsBypassing.add(mockChannel);
 
         when(mBackend.getNotificationChannelsBypassingDnd(entry1.info.packageName,
                 entry1.info.uid)).thenReturn(new ParceledListSlice<>(channelsBypassing));
@@ -149,6 +151,73 @@ public class ZenModeBypassingAppsPreferenceControllerTest {
         assertThat(mController.mPreference.isEnabled()).isTrue();
         assertThat(mController.getSummary().contains(entry1.label)).isTrue();
         assertThat(mController.getSummary().contains(entry2.label)).isTrue();
+    }
+
+    @Test
+    public void testUpdateBypassingApps_conversation() {
+        // GIVEN DND is off
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ZEN_MODE,
+                Settings.Global.ZEN_MODE_OFF);
+
+        // mock app list
+        ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = "test";
+        entry.label = "test";
+        entry.info.uid = 0;
+
+        List<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
+        appEntries.add(entry);
+
+        List<NotificationChannel> channelsBypassing = new ArrayList<>();
+        NotificationChannel conversation  = mock(NotificationChannel.class);
+        when(conversation.getConversationId()).thenReturn("conversation!");
+        channelsBypassing.add(conversation);
+
+        when(mBackend.getNotificationChannelsBypassingDnd(entry.info.packageName,
+                entry.info.uid)).thenReturn(new ParceledListSlice<>(channelsBypassing));
+
+        // WHEN a single app is passed to the controller with a conversation notif channel
+        mController.updateAppsBypassingDndSummaryText(appEntries);
+
+        // THEN the preference is enabled and the summary doesn't contain any apps because the
+        // only channel bypassing DND is a conversation (which will be showed on the
+        // conversations page instead of the apps page)
+        assertThat(mController.mPreference.isEnabled()).isTrue();
+        assertThat(mController.getSummary().contains("No apps")).isTrue();
+    }
+
+    @Test
+    public void testUpdateBypassingApps_demotedConversation() {
+        // GIVEN DND is off
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.ZEN_MODE,
+                Settings.Global.ZEN_MODE_OFF);
+
+        // mock app list
+        ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = "test";
+        entry.label = "test";
+        entry.info.uid = 0;
+
+        List<ApplicationsState.AppEntry> appEntries = new ArrayList<>();
+        appEntries.add(entry);
+
+        List<NotificationChannel> channelsBypassing = new ArrayList<>();
+        NotificationChannel demotedConversation  = mock(NotificationChannel.class);
+        when(demotedConversation.getConversationId()).thenReturn("conversationId");
+        when(demotedConversation.isDemoted()).thenReturn(true);
+        channelsBypassing.add(demotedConversation);
+
+        when(mBackend.getNotificationChannelsBypassingDnd(entry.info.packageName,
+                entry.info.uid)).thenReturn(new ParceledListSlice<>(channelsBypassing));
+
+        // WHEN a single app is passed to the controller with a demoted conversation notif channel
+        mController.updateAppsBypassingDndSummaryText(appEntries);
+
+        // THEN the preference is enabled and the summary contains the app name from the list
+        assertThat(mController.mPreference.isEnabled()).isTrue();
+        assertThat(mController.getSummary().contains(entry.label)).isTrue();
     }
 
     @Test
