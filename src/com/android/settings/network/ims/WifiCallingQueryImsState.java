@@ -20,8 +20,10 @@ import android.content.Context;
 import android.telecom.TelecomManager;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.SubscriptionManager;
+import android.telephony.ims.ImsException;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -33,6 +35,8 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
  * Controller class for querying Wifi calling status
  */
 public class WifiCallingQueryImsState extends ImsQueryController  {
+
+    private static final String LOG_TAG = "WifiCallingQueryImsState";
 
     private Context mContext;
     private int mSubId;
@@ -69,21 +73,29 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
     }
 
     /**
+     * Check whether Wifi Calling is a supported feature on this subscription
+     *
+     * @return true when Wifi Calling is a supported feature, otherwise false
+     */
+    public boolean isWifiCallingSupported() {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return false;
+        }
+        try {
+            return isEnabledByPlatform(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get WFC supporting status. subId=" + mSubId, exception);
+        }
+        return false;
+    }
+
+    /**
      * Check whether Wifi Calling has been provisioned or not on this subscription
      *
      * @return true when Wifi Calling has been enabled, otherwise false
      */
     public boolean isWifiCallingProvisioned() {
-        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
-            return false;
-        }
-        final ImsManager imsManager = getImsManager(mSubId);
-        if (imsManager == null) {
-            return false;
-        }
-
-        return imsManager.isWfcEnabledByPlatform()
-                && isProvisionedOnDevice(mSubId);
+        return isWifiCallingSupported() && isProvisionedOnDevice(mSubId);
     }
 
     /**

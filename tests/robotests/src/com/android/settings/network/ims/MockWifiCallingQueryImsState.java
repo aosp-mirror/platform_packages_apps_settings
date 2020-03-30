@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.content.Context;
+import android.telephony.ims.ImsException;
 
 import com.android.ims.ImsManager;
 
@@ -27,6 +28,7 @@ import com.android.ims.ImsManager;
 public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
 
     private Boolean mIsTtyOnVolteEnabled;
+    private Boolean mIsEnabledOnPlatform;
     private Boolean mIsProvisionedOnDevice;
     private Boolean mIsEnabledByUser;
 
@@ -54,6 +56,20 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
             return mIsTtyOnVolteEnabled;
         }
         return super.isTtyOnVolteEnabled(subId);
+    }
+
+
+    public void setIsEnabledByPlatform(boolean isEnabled) {
+        mIsEnabledOnPlatform = isEnabled;
+    }
+
+    @Override
+    boolean isEnabledByPlatform(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsEnabledOnPlatform != null) {
+            return mIsEnabledOnPlatform;
+        }
+        return super.isEnabledByPlatform(subId);
     }
 
     public void setIsProvisionedOnDevice(boolean isProvisioned) {
