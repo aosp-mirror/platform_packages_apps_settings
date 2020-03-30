@@ -93,6 +93,7 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
         boolean state = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, defaultValue ? 1 : 0) != 0;
 
+        assertThat(mController.isChecked()).isFalse();
         assertThat(mController.onPreferenceChange(mPreference, !state)).isTrue();
         boolean newState = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.FACE_UNLOCK_DISMISSES_KEYGUARD, 0) != 0;
