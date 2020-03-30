@@ -83,7 +83,7 @@ public class AppStoragePreferenceController extends AppInfoPreferenceControllerB
                 : R.string.storage_type_internal);
         return mContext.getString(R.string.storage_summary_format,
                 Formatter.formatFileSize(mContext, stats.getTotalBytes()),
-                storageType.toString().toLowerCase());
+                storageType.toString());
     }
 
     @Override
