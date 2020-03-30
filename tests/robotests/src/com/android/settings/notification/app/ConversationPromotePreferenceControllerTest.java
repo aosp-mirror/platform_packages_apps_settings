@@ -110,6 +110,7 @@ public class ConversationPromotePreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         channel.setConversationId("a", "a");
         channel.setDemoted(true);
+        channel.setBypassDnd(true);
         mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = mock(Preference.class);
@@ -121,6 +122,7 @@ public class ConversationPromotePreferenceControllerTest {
 
         verify(mBackend).updateChannel(eq(null), anyInt(), captor.capture());
         assertFalse(captor.getValue().isDemoted());
+        assertFalse(captor.getValue().canBypassDnd());
 
         verify(mFragment).getActivity();
     }
