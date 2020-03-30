@@ -16,11 +16,10 @@
 
 package com.android.settings.notification.history;
 
-import android.app.NotificationHistory;
+import android.app.INotificationManager;
 import android.app.NotificationHistory.HistoricalNotification;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.UserHandle;
+import android.os.RemoteException;
+import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,24 +28,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class NotificationHistoryAdapter extends
-        RecyclerView.Adapter<NotificationHistoryViewHolder> {
+        RecyclerView.Adapter<NotificationHistoryViewHolder> implements
+        NotificationHistoryRecyclerView.OnItemSwipeDeleteListener {
 
+    private static String TAG = "NotiHistoryAdapter";
+
+    private INotificationManager mNm;
     private List<HistoricalNotification> mValues;
 
-    public NotificationHistoryAdapter() {
+    public NotificationHistoryAdapter(INotificationManager nm,
+            NotificationHistoryRecyclerView listView) {
         mValues = new ArrayList<>();
         setHasStableIds(true);
+        listView.setOnItemSwipeDeleteListener(this);
+        mNm = nm;
     }
 
     @Override
@@ -76,5 +76,19 @@ public class NotificationHistoryAdapter extends
         mValues = notifications;
         mValues.sort((o1, o2) -> Long.compare(o2.getPostedTimeMs(), o1.getPostedTimeMs()));
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemSwipeDeleted(int position) {
+        HistoricalNotification hn = mValues.remove(position);
+        if (hn != null) {
+            try {
+                mNm.deleteNotificationHistoryItem(
+                        hn.getPackage(), hn.getUid(), hn.getPostedTimeMs());
+            } catch (RemoteException e) {
+                Slog.e(TAG, "Failed to delete item", e);
+            }
+        }
+        notifyItemRemoved(position);
     }
 }
