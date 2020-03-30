@@ -109,7 +109,7 @@ public class ZenModeBypassingAppsPreferenceController extends AbstractZenModePre
             String pkg = entry.info.packageName;
             for (NotificationChannel channel : mNotificationBackend
                     .getNotificationChannelsBypassingDnd(pkg, entry.info.uid).getList()) {
-                if (!TextUtils.isEmpty(channel.getConversationId())) {
+                if (!TextUtils.isEmpty(channel.getConversationId()) && !channel.isDemoted()) {
                     // conversation channels that bypass dnd will be shown on the People page
                     continue;
                 }
