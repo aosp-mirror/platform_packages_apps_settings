@@ -39,6 +39,9 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
 
     private static final String TAG = "EnableZenModeButton";
     private final FragmentManager mFragment;
+
+    // DND can also be toggled from QS. If DND wasn't toggled by this preference, don't requestFocus
+    private boolean mButtonTriggered = false;
     private Button mZenButtonOn;
     private Button mZenButtonOff;
 
@@ -65,7 +68,6 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         if (null == mZenButtonOn) {
             mZenButtonOn = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
-            mZenButtonOn.setFocusableInTouchMode(true);
             updateZenButtonOnClickListener(preference);
         }
 
@@ -73,6 +75,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             mZenButtonOff = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
+                mButtonTriggered = true;
                 writeMetrics(preference, false);
                 mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
             });
@@ -88,38 +91,39 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
                 mZenButtonOff.setVisibility(View.VISIBLE);
                 mZenButtonOn.setVisibility(View.GONE);
-                mZenButtonOff.requestFocus();
+                if (mButtonTriggered) {
+                    mButtonTriggered = false;
+                    mZenButtonOff.requestFocus();
+                }
                 break;
             case Settings.Global.ZEN_MODE_OFF:
             default:
                 mZenButtonOff.setVisibility(View.GONE);
                 updateZenButtonOnClickListener(preference);
                 mZenButtonOn.setVisibility(View.VISIBLE);
-                mZenButtonOn.requestFocus();
+                if (mButtonTriggered) {
+                    mButtonTriggered = false;
+                    mZenButtonOn.requestFocus();
+                }
         }
     }
 
     private void updateZenButtonOnClickListener(Preference preference) {
-        int zenDuration = getZenDuration();
-        switch (zenDuration) {
-            case Settings.Secure.ZEN_DURATION_PROMPT:
-                mZenButtonOn.setOnClickListener(v -> {
-                    writeMetrics(preference, true);
+        mZenButtonOn.setOnClickListener(v -> {
+            mButtonTriggered = true;
+            writeMetrics(preference, true);
+            int zenDuration = getZenDuration();
+            switch (zenDuration) {
+                case Settings.Secure.ZEN_DURATION_PROMPT:
                     new SettingsEnableZenModeDialog().show(mFragment, TAG);
-                });
-                break;
-            case Settings.Secure.ZEN_DURATION_FOREVER:
-                mZenButtonOn.setOnClickListener(v -> {
-                    writeMetrics(preference, true);
+                    break;
+                case Settings.Secure.ZEN_DURATION_FOREVER:
                     mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-                });
-                break;
-            default:
-                mZenButtonOn.setOnClickListener(v -> {
-                    writeMetrics(preference, true);
+                    break;
+                default:
                     mBackend.setZenModeForDuration(zenDuration);
-                });
-        }
+            }
+        });
     }
 
     private void writeMetrics(Preference preference, boolean buttonOn) {
