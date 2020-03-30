@@ -22,8 +22,11 @@ import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.SpannableString;
@@ -39,6 +42,8 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.bluetooth.BluetoothPairingDetail;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
@@ -81,7 +86,6 @@ public class MediaOutputSlice implements CustomSliceable {
 
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED);
-
         if (!isVisible()) {
             Log.d(TAG, "getSlice() is not visible");
             return listBuilder.build();
@@ -99,22 +103,51 @@ public class MediaOutputSlice implements CustomSliceable {
             }
         } else {
             final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
-            final boolean isTouched = worker.getIsTouched();
-            // Fix the last top device when user press device to transfer.
-            final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
+            if (devices.size() == 1) {
+                // Zero state
+                addRow(connectedDevice, connectedDevice, listBuilder);
+                listBuilder.addRow(getPairNewRow());
+            } else {
+                final boolean isTouched = worker.getIsTouched();
+                // Fix the last top device when user press device to transfer.
+                final MediaDevice topDevice = isTouched ? worker.getTopDevice() : connectedDevice;
 
-            if (topDevice != null) {
-                addRow(topDevice, connectedDevice, listBuilder);
-                worker.setTopDevice(topDevice);
-            }
+                if (topDevice != null) {
+                    addRow(topDevice, connectedDevice, listBuilder);
+                    worker.setTopDevice(topDevice);
+                }
 
-            for (MediaDevice device : devices) {
-                if (topDevice == null || !TextUtils.equals(topDevice.getId(), device.getId())) {
-                    addRow(device, connectedDevice, listBuilder);
+                for (MediaDevice device : devices) {
+                    if (topDevice == null || !TextUtils.equals(topDevice.getId(), device.getId())) {
+                        addRow(device, connectedDevice, listBuilder);
+                    }
                 }
             }
         }
         return listBuilder.build();
+    }
+
+    private ListBuilder.RowBuilder getPairNewRow() {
+        final Drawable d = mContext.getDrawable(R.drawable.ic_add_24dp);
+        d.setColorFilter(new PorterDuffColorFilter(Utils.getColorAccentDefaultColor(mContext),
+                PorterDuff.Mode.SRC_IN));
+        final IconCompat icon = Utils.createIconWithDrawable(d);
+        final String title = mContext.getString(R.string.bluetooth_pairing_pref_title);
+        final Intent intent = new SubSettingLauncher(mContext)
+                .setDestination(BluetoothPairingDetail.class.getName())
+                .setTitleRes(R.string.bluetooth_pairing_page_title)
+                .setSourceMetricsCategory(SettingsEnums.PANEL_MEDIA_OUTPUT)
+                .toIntent();
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(
+                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */),
+                IconCompat.createWithResource(mContext, R.drawable.ic_add_24dp/*ic_add_blue_24dp*/),
+                ListBuilder.ICON_IMAGE,
+                mContext.getText(R.string.bluetooth_pairing_pref_title));
+        final ListBuilder.RowBuilder builder = new ListBuilder.RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setPrimaryAction(primarySliceAction);
+        return builder;
     }
 
     private ListBuilder.InputRangeBuilder getGroupRow() {
@@ -321,10 +354,10 @@ public class MediaOutputSlice implements CustomSliceable {
         // Return true if
         // 1. AudioMode is not in on-going call
         // 2. worker is not null
-        // 3. Available devices are more than 1
+        // 3. Available devices are more than 0
         return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
-                && getWorker().getMediaDevices().size() > 1;
+                && getWorker().getMediaDevices().size() > 0;
 
     }
 }

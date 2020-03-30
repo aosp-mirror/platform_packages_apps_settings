@@ -23,6 +23,7 @@ import android.media.AudioManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.Utils;
@@ -47,6 +48,15 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        if (!Utils.isAudioModeOngoingCall(mContext)) {
+            mPreference.setVisible(true);
+        }
+    }
+
+    @Override
     public void updateState(Preference preference) {
         if (preference == null) {
             // In case UI is not ready.
@@ -61,7 +71,6 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        boolean deviceConnected = false;
         BluetoothDevice activeDevice = null;
         // Show preference if there is connected or previously connected device
         // Find active device and set its name as the preference's summary
@@ -70,10 +79,8 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
         if (mAudioManager.getMode() == AudioManager.MODE_NORMAL
                 && ((connectedA2dpDevices != null && !connectedA2dpDevices.isEmpty())
                 || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
-            deviceConnected = true;
             activeDevice = findActiveDevice();
         }
-        mPreference.setVisible(deviceConnected);
         mPreference.setSummary((activeDevice == null) ?
                 mContext.getText(R.string.media_output_default_summary) :
                 activeDevice.getAlias());

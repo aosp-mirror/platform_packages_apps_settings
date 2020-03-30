@@ -411,6 +411,69 @@ public class MediaOutputSliceTest {
     }
 
     @Test
+    public void getSlice_zeroState_containPairingText() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_PHONE_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        mSelectedDevices.add(device);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+        String sliceInfo = SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null).toString();
+
+        assertThat(TextUtils.indexOf(sliceInfo, mContext.getText(
+                R.string.bluetooth_pairing_pref_title))).isNotEqualTo(-1);
+    }
+
+    @Test
+    public void getSlice_twoConnectedDevices_notContainPairingText() {
+        final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+        final List<MediaDevice> mSelectableDevices = new ArrayList<>();
+        mDevices.clear();
+        final MediaDevice device = mock(MediaDevice.class);
+        when(device.getName()).thenReturn(TEST_DEVICE_1_NAME);
+        when(device.getIcon()).thenReturn(mTestDrawable);
+        when(device.getMaxVolume()).thenReturn(100);
+        when(device.isConnected()).thenReturn(true);
+        when(device.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device.getId()).thenReturn(TEST_DEVICE_1_ID);
+        final MediaDevice device2 = mock(MediaDevice.class);
+        when(device2.getName()).thenReturn(TEST_DEVICE_2_NAME);
+        when(device2.getIcon()).thenReturn(mTestDrawable);
+        when(device2.getMaxVolume()).thenReturn(100);
+        when(device2.isConnected()).thenReturn(true);
+        when(device2.getDeviceType()).thenReturn(MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE);
+        when(device2.getId()).thenReturn(TEST_DEVICE_2_ID);
+        mSelectedDevices.add(device);
+        mSelectableDevices.add(device2);
+        when(mLocalMediaManager.getCurrentConnectedDevice()).thenReturn(device);
+        mDevices.add(device);
+        mDevices.add(device2);
+        when(mLocalMediaManager.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(mLocalMediaManager.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
+
+        final Slice mediaSlice = mMediaOutputSlice.getSlice();
+        String sliceInfo = SliceQuery.findAll(mediaSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null).toString();
+
+        assertThat(TextUtils.indexOf(sliceInfo, mContext.getText(
+                R.string.bluetooth_pairing_pref_title))).isEqualTo(-1);
+    }
+
+    @Test
     public void onNotifyChange_foundMediaDevice_connect() {
         mDevices.clear();
         final MediaDevice device = mock(MediaDevice.class);

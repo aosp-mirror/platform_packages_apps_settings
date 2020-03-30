@@ -123,7 +123,6 @@ public class MediaOutputIndicatorSliceTest {
     @Test
     public void getSlice_withConnectedDevice_verifyMetadata() {
         mDevices.add(mDevice1);
-        mDevices.add(mDevice2);
         when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
