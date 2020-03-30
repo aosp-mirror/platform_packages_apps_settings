@@ -76,6 +76,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.LongPressWifiEntryPreference;
+import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -1008,7 +1009,22 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     };
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.wifi_settings2);
+            new BaseSearchIndexProvider(R.xml.wifi_settings2) {
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+
+                    final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+                    if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
+                        keys.add(PREF_KEY_SAVED_NETWORKS);
+                    }
+
+                    if (!DataUsageUtils.hasWifiRadio(context)) {
+                        keys.add(PREF_KEY_DATA_USAGE);
+                    }
+                    return keys;
+                }
+            };
 
     private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;
