@@ -66,6 +66,7 @@ public class ConversationPromotePreferenceController extends NotificationPrefere
             return false;
         }
         mChannel.setDemoted(false);
+        mChannel.setBypassDnd(false);
         saveChannel();
 
         if (mHostFragment != null) {
