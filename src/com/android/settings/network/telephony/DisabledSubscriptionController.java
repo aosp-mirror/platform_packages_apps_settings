@@ -73,7 +73,7 @@ public class DisabledSubscriptionController extends BasePreferenceController imp
             return;
         }
         // TODO b/135222940: re-evaluate whether to use mSubscriptionManager#isSubscriptionEnabled
-        mCategory.setVisible(mSubscriptionManager.isActiveSubId(mSubId));
+        mCategory.setVisible(mSubscriptionManager.isActiveSubscriptionId(mSubId));
     }
 
     @Override

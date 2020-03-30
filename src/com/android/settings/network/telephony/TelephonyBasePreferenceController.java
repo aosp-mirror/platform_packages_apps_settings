@@ -17,6 +17,8 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.PersistableBundle;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 
 import com.android.settings.core.BasePreferenceController;
@@ -36,5 +38,21 @@ public abstract class TelephonyBasePreferenceController extends BasePreferenceCo
     @Override
     public int getAvailabilityStatus() {
         return MobileNetworkUtils.getAvailability(mContext, mSubId, this::getAvailabilityStatus);
+    }
+
+    /**
+     * Get carrier config based on specific subscription id.
+     *
+     * @param subId is the subscription id
+     * @return {@link PersistableBundle} of carrier config, or {@code null} when carrier config
+     * is not available.
+     */
+    public PersistableBundle getCarrierConfigForSubId(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return null;
+        }
+        final CarrierConfigManager carrierConfigMgr =
+                mContext.getSystemService(CarrierConfigManager.class);
+        return carrierConfigMgr.getConfigForSubId(subId);
     }
 }

@@ -28,7 +28,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,6 +55,7 @@ import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -219,8 +223,33 @@ public class IccLockSettings extends SettingsPreferenceFragment
             Bundle savedInstanceState) {
 
         final int numSims = mProxySubscriptionMgr.getActiveSubscriptionInfoCountMax();
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         mSlotId = 0;
-        if (numSims > 1) {
+        final List<SubscriptionInfo> componenterList = new ArrayList<>();
+
+        for (int i = 0; i < numSims; ++i) {
+            final SubscriptionInfo subInfo =
+                    getActiveSubscriptionInfoForSimSlotIndex(subInfoList, i);
+            if (subInfo != null) {
+                final CarrierConfigManager carrierConfigManager = getContext().getSystemService(
+                        CarrierConfigManager.class);
+                final PersistableBundle bundle = carrierConfigManager.getConfigForSubId(
+                        subInfo.getSubscriptionId());
+                if (bundle != null
+                        && !bundle.getBoolean(CarrierConfigManager
+                        .KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
+                    componenterList.add(subInfo);
+                }
+            }
+        }
+
+        if (componenterList.size() == 0) {
+            Log.e(TAG, "onCreateView: no sim info");
+            return null;
+        }
+
+        if (componenterList.size() > 1) {
             final View view = inflater.inflate(R.layout.icc_lock_tabs, container, false);
             final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
             Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
@@ -235,25 +264,22 @@ public class IccLockSettings extends SettingsPreferenceFragment
             mTabHost.setOnTabChangedListener(mTabListener);
             mTabHost.clearAllTabs();
 
-            final List<SubscriptionInfo> subInfoList =
-                    mProxySubscriptionMgr.getActiveSubscriptionsInfo();
-            for (int i = 0; i < numSims; ++i) {
-                final SubscriptionInfo subInfo =
-                        getActiveSubscriptionInfoForSimSlotIndex(subInfoList, i);
-                mTabHost.addTab(buildTabSpec(String.valueOf(i),
+            for (SubscriptionInfo subInfo : componenterList) {
+                int slot = subInfo.getSimSlotIndex();
+                mTabHost.addTab(buildTabSpec(String.valueOf(slot),
                         String.valueOf(subInfo == null
-                            ? getContext().getString(R.string.sim_editor_title, i + 1)
-                            : subInfo.getDisplayName())));
+                                ? getContext().getString(R.string.sim_editor_title, slot + 1)
+                                : subInfo.getDisplayName())));
             }
-            final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
-                    subInfoList, mSlotId);
-            mSubId = sir.getSubscriptionId();
+
+            mSubId = componenterList.get(0).getSubscriptionId();
 
             if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
                 mTabHost.setCurrentTabByTag(savedInstanceState.getString(CURRENT_TAB));
             }
             return view;
         } else {
+            mSlotId = componenterList.get(0).getSimSlotIndex();
             return super.onCreateView(inflater, container, savedInstanceState);
         }
     }
@@ -269,7 +295,8 @@ public class IccLockSettings extends SettingsPreferenceFragment
         final List<SubscriptionInfo> subInfoList =
                 mProxySubscriptionMgr.getActiveSubscriptionsInfo();
         final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(subInfoList, mSlotId);
-        mSubId = sir.getSubscriptionId();
+        mSubId = (sir == null) ? SubscriptionManager.INVALID_SUBSCRIPTION_ID
+            : sir.getSubscriptionId();
 
         if (mPinDialog != null) {
             mPinDialog.setEnabled(sir != null);
@@ -655,8 +682,6 @@ public class IccLockSettings extends SettingsPreferenceFragment
         @Override
         public void onTabChanged(String tabId) {
             mSlotId = Integer.parseInt(tabId);
-            final SubscriptionInfo sir = getActiveSubscriptionInfoForSimSlotIndex(
-                    mProxySubscriptionMgr.getActiveSubscriptionsInfo(), mSlotId);
 
             // The User has changed tab; update the body.
             updatePreferences();
