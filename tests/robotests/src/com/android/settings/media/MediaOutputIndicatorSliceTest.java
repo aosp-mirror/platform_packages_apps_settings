@@ -42,6 +42,7 @@ import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -202,6 +203,8 @@ public class MediaOutputIndicatorSliceTest {
 
         assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intentCaptor.getValue().getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
+        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intentCaptor.getValue()
+                .getPackage())).isTrue();
         assertThat(mToken == intentCaptor.getValue().getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN)).isTrue();
     }
@@ -217,6 +220,8 @@ public class MediaOutputIndicatorSliceTest {
 
         assertThat(TextUtils.isEmpty(intentCaptor.getValue().getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
+        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intentCaptor.getValue()
+                .getPackage())).isTrue();
         assertThat(intentCaptor.getValue().getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
     }
