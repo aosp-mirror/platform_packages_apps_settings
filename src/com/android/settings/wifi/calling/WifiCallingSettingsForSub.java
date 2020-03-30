@@ -419,7 +419,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         updateBody();
 
-        if (mImsManager.isWfcEnabledByPlatform()) {
+        if (queryImsState(mSubId).isWifiCallingSupported()) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
