@@ -111,21 +111,23 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         mNewDefault = component;
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
-        p.mTitle = getString(R.string.nfc_payment_set_default_label);
         if (defaultPaymentApp == null) {
+            p.mTitle = getString(R.string.nfc_payment_set_default_label);
             String formatString = getString(R.string.nfc_payment_set_default);
             String msg = String.format(formatString,
                     sanitizePaymentAppCaption(requestedPaymentApp.label.toString()));
             p.mMessage = msg;
+            p.mPositiveButtonText = getString(R.string.nfc_payment_btn_text_set_deault);
         } else {
+            p.mTitle = getString(R.string.nfc_payment_update_default_label);
             String formatString = getString(R.string.nfc_payment_set_default_instead_of);
             String msg = String.format(formatString,
                     sanitizePaymentAppCaption(requestedPaymentApp.label.toString()),
                     sanitizePaymentAppCaption(defaultPaymentApp.label.toString()));
             p.mMessage = msg;
+            p.mPositiveButtonText = getString(R.string.nfc_payment_btn_text_update);
         }
-        p.mPositiveButtonText = getString(R.string.yes);
-        p.mNegativeButtonText = getString(R.string.no);
+        p.mNegativeButtonText = getString(R.string.cancel);
         p.mPositiveButtonListener = this;
         p.mNegativeButtonListener = this;
         setupAlert();
