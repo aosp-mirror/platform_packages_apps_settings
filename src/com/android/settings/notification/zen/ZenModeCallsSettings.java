@@ -45,6 +45,8 @@ public class ZenModeCallsSettings extends ZenModeSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePrioritySendersPreferenceController(context,
                 "zen_mode_settings_category_calls", lifecycle, false));
+        controllers.add(new ZenModeSendersImagePreferenceController(context,
+                "zen_mode_calls_image", lifecycle, false));
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                         .config_zen_repeat_callers_threshold)));
