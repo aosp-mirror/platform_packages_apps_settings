@@ -178,6 +178,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController));
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
+        use(ContactDiscoveryPreferenceController.class).init(getFragmentManager(), mSubId,
+                getLifecycle());
     }
 
     @Override
