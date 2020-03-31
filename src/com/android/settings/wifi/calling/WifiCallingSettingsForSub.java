@@ -119,8 +119,9 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     queryImsState(WifiCallingSettingsForSub.this.mSubId).isAllowUserControl();
             final boolean isWfcEnabled = mSwitchBar.isChecked()
                     && isNonTtyOrTtyOnVolteEnabled;
-            boolean isCallStateIdle =
-                    mTelephonyManager.getCallState() == TelephonyManager.CALL_STATE_IDLE;
+            boolean isCallStateIdle = getTelephonyManagerForSub(
+                    WifiCallingSettingsForSub.this.mSubId).getCallState()
+                    == TelephonyManager.CALL_STATE_IDLE;
             mSwitchBar.setEnabled(isCallStateIdle
                     && isNonTtyOrTtyOnVolteEnabled);
 
@@ -201,7 +202,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mSwitchBar.hide();
     }
 
-    private void showAlert(Intent intent) {
+    @VisibleForTesting
+    void showAlert(Intent intent) {
         final Context context = getActivity();
 
         final CharSequence title = intent.getCharSequenceExtra(Phone.EXTRA_KEY_ALERT_TITLE);
@@ -245,6 +247,14 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public int getHelpResource() {
         // Return 0 to suppress help icon. The help will be populated by parent page.
         return 0;
+    }
+
+    @VisibleForTesting
+    TelephonyManager getTelephonyManagerForSub(int subId) {
+        if (mTelephonyManager == null) {
+            mTelephonyManager = getContext().getSystemService(TelephonyManager.class);
+        }
+        return mTelephonyManager.createForSubscriptionId(subId);
     }
 
     @VisibleForTesting
@@ -420,7 +430,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         updateBody();
 
         if (queryImsState(mSubId).isWifiCallingSupported()) {
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
+                    PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
 
@@ -448,7 +459,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (mValidListener) {
             mValidListener = false;
 
-            mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
+            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
+                    PhoneStateListener.LISTEN_NONE);
 
             mSwitchBar.removeOnSwitchChangeListener(this);
         }
