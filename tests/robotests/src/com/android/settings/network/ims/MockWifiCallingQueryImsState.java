@@ -19,9 +19,6 @@ package com.android.settings.network.ims;
 import android.content.Context;
 import android.telephony.ims.ImsException;
 
-import com.android.ims.ImsManager;
-
-
 /**
  * Controller class for mock Wifi calling status
  */
@@ -30,6 +27,7 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
     private Boolean mIsTtyOnVolteEnabled;
     private Boolean mIsEnabledOnPlatform;
     private Boolean mIsProvisionedOnDevice;
+    private Boolean mIsServiceStateReady;
     private Boolean mIsEnabledByUser;
 
     /**
@@ -40,10 +38,6 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
      */
     public MockWifiCallingQueryImsState(Context context, int subId) {
         super(context, subId);
-    }
-
-    public ImsManager getImsManager(int subId) {
-        return super.getImsManager(subId);
     }
 
     public void setIsTtyOnVolteEnabled(boolean enabled) {
@@ -82,6 +76,19 @@ public class MockWifiCallingQueryImsState extends WifiCallingQueryImsState {
             return mIsProvisionedOnDevice;
         }
         return super.isProvisionedOnDevice(subId);
+    }
+
+    public void setServiceStateReady(boolean isReady) {
+        mIsServiceStateReady = isReady;
+    }
+
+    @Override
+    boolean isServiceStateReady(int subId) throws InterruptedException, ImsException,
+            IllegalArgumentException {
+        if (mIsServiceStateReady != null) {
+            return mIsServiceStateReady;
+        }
+        return super.isServiceStateReady(subId);
     }
 
     public void setIsEnabledByUser(boolean enabled) {
