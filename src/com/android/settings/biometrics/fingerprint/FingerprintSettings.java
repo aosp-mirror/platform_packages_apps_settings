@@ -33,6 +33,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -732,6 +734,25 @@ public class FingerprintSettings extends SubSettings {
             }
         }
 
+        private static InputFilter[] getFilters() {
+            InputFilter filter = new InputFilter() {
+                @Override
+                public CharSequence filter(CharSequence source, int start, int end,
+                        Spanned dest, int dstart, int dend) {
+                    for (int index = start; index < end; index++) {
+                        final char c = source.charAt(index);
+                        // KXMLSerializer does not allow these characters,
+                        // see KXmlSerializer.java:162.
+                        if (c < 0x20) {
+                            return "";
+                        }
+                    }
+                    return null;
+                }
+            };
+            return new InputFilter[]{filter};
+        }
+
         public static class RenameDialog extends InstrumentedDialogFragment {
 
             private Fingerprint mFp;
@@ -788,6 +809,7 @@ public class FingerprintSettings extends SubSettings {
                         mDialogTextField = mAlertDialog.findViewById(R.id.fingerprint_rename_field);
                         CharSequence name = fingerName == null ? mFp.getName() : fingerName;
                         mDialogTextField.setText(name);
+                        mDialogTextField.setFilters(getFilters());
                         if (textSelectionStart != -1 && textSelectionEnd != -1) {
                             mDialogTextField.setSelection(textSelectionStart, textSelectionEnd);
                         } else {

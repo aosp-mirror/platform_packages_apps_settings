@@ -27,9 +27,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
-
 /**
  * Controller class for querying VT status
  */
@@ -65,12 +62,6 @@ public class VtQueryImsState extends ImsQueryController {
         return (new ImsQueryVtUserSetting(subId)).query();
     }
 
-    @VisibleForTesting
-    ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext,
-                SubscriptionUtil.getPhoneId(mContext, subId));
-    }
-
     /**
      * Check whether Video Call can be perform or not on this subscription
      *
@@ -81,19 +72,10 @@ public class VtQueryImsState extends ImsQueryController {
             return false;
         }
 
-        final ImsManager imsManager = getImsManager(mSubId);
-        if (imsManager == null) {
-            return false;
-        }
-
-        if (!imsManager.isVtEnabledByPlatform()) {
-            return false;
-        }
-
         try {
-            return isServiceStateReady(mSubId);
+            return isEnabledByPlatform(mSubId) && isServiceStateReady(mSubId);
         } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
-            Log.w(LOG_TAG, "fail to get Vt service status. subId=" + mSubId, exception);
+            Log.w(LOG_TAG, "fail to get Vt ready. subId=" + mSubId, exception);
         }
         return false;
     }

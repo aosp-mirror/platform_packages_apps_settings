@@ -101,14 +101,12 @@ public class NotificationHistoryActivity extends Activity {
             count.setText(getResources().getQuantityString(R.plurals.notification_history_count,
                     nhp.notifications.size(), nhp.notifications.size()));
 
-            RecyclerView rv = viewForPackage.findViewById(R.id.notification_list);
-            LinearLayoutManager lm = new LinearLayoutManager(this);
-            rv.setLayoutManager(lm);
-            rv.setAdapter(new NotificationHistoryAdapter());
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                    rv.getContext(), lm.getOrientation());
-            rv.addItemDecoration(dividerItemDecoration);
-            ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(nhp.notifications);
+            NotificationHistoryRecyclerView rv =
+                    viewForPackage.findViewById(R.id.notification_list);
+            rv.setAdapter(new NotificationHistoryAdapter(mNm, rv));
+            ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(
+                    new ArrayList<>(nhp.notifications));
+
             mTodayView.addView(viewForPackage);
         }
     };

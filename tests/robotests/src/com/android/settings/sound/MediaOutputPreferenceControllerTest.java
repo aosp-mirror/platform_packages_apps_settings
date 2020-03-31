@@ -166,47 +166,6 @@ public class MediaOutputPreferenceControllerTest {
         ShadowBluetoothUtils.reset();
     }
 
-
-    /**
-     * A2DP Bluetooth device(s) are not connected nor previously connected
-     * Preference should be invisible
-     */
-    @Test
-    public void updateState_withoutConnectedBtDevice_preferenceInvisible() {
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_EARPIECE);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectedDevices.clear();
-        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
-        mPreference.setVisible(true);
-
-        assertThat(mPreference.isVisible()).isTrue();
-        mController.updateState(mPreference);
-        assertThat(mPreference.isVisible()).isFalse();
-    }
-
-    /**
-     * A2DP Bluetooth device(s) are connected, no matter active or inactive
-     * Preference should be visible
-     */
-    @Test
-    public void updateState_withConnectedBtDevice_preferenceVisible() {
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mProfileConnectedDevices.clear();
-        mProfileConnectedDevices.add(mBluetoothDevice);
-        when(mA2dpProfile.getConnectedDevices()).thenReturn(mProfileConnectedDevices);
-        assertThat(mPreference.isVisible()).isFalse();
-
-        // Without Active Bluetooth Device
-        mController.updateState(mPreference);
-        assertThat(mPreference.isVisible()).isTrue();
-
-        // With Active Bluetooth Device
-        when(mA2dpProfile.getActiveDevice()).thenReturn(mBluetoothDevice);
-        mController.updateState(mPreference);
-        assertThat(mPreference.isVisible()).isTrue();
-    }
-
     /**
      * A2DP Bluetooth device(s) are connected, but no device is set as activated
      * Preference summary should be "This device"
@@ -245,30 +204,6 @@ public class MediaOutputPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isNull();
         mController.updateState(mPreference);
         assertThat(mPreference.getSummary()).isEqualTo(TEST_DEVICE_NAME_1);
-    }
-
-
-    /**
-     * Hearing Aid device(s) are connected, no matter active or inactive
-     * Preference should be visible
-     */
-    @Test
-    public void updateState_withConnectedHADevice_preferenceVisible() {
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_HEARING_AID);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mHearingAidActiveDevices.clear();
-        mHearingAidActiveDevices.add(mLeftBluetoothHapDevice);
-        when(mHearingAidProfile.getConnectedDevices()).thenReturn(mHearingAidActiveDevices);
-        assertThat(mPreference.isVisible()).isFalse();
-
-        // Without Active Hearing Aid Device
-        mController.updateState(mPreference);
-        assertThat(mPreference.isVisible()).isTrue();
-
-        // With Active Hearing Aid Device
-        when(mHearingAidProfile.getActiveDevices()).thenReturn(mHearingAidActiveDevices);
-        mController.updateState(mPreference);
-        assertThat(mPreference.isVisible()).isTrue();
     }
 
     /**
@@ -310,12 +245,12 @@ public class MediaOutputPreferenceControllerTest {
      * Summary should be default summary
      */
     @Test
-    public void updateState_shouldSetSummary() {
+    public void updateState_notInCall_preferenceVisible() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isVisible()).isFalse();
-        assertThat(mPreference.getSummary()).isEqualTo(
-                mContext.getText(R.string.media_output_default_summary));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     /**
@@ -324,14 +259,12 @@ public class MediaOutputPreferenceControllerTest {
      * Default string should be "Unavailable during calls"
      */
     @Test
-    public void updateState_duringACall_shouldSetDefaultSummary() {
+    public void updateState_inCall_preferenceInvisible() {
         mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isFalse();
-        assertThat(mPreference.getSummary()).isEqualTo(
-                mContext.getText(R.string.media_out_summary_ongoing_call_state));
     }
 
     @Test

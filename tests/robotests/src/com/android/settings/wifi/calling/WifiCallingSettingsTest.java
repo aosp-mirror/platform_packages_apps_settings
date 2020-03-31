@@ -78,7 +78,8 @@ public class WifiCallingSettingsTest {
         doReturn(true).when(mQueryImsState2).isEnabledByUser();
         doReturn(mImsManager).when(mQueryImsState1).getImsManager(anyInt());
         doReturn(mImsManager).when(mQueryImsState2).getImsManager(anyInt());
-        doReturn(true).when(mImsManager).isWfcEnabledByPlatform();
+        mQueryImsState1.setIsEnabledByPlatform(true);
+        mQueryImsState2.setIsEnabledByPlatform(true);
         mQueryImsState1.setIsProvisionedOnDevice(true);
         mQueryImsState2.setIsProvisionedOnDevice(true);
 
@@ -100,7 +101,7 @@ public class WifiCallingSettingsTest {
 
         SubscriptionUtil.setActiveSubscriptionsForTesting(new ArrayList<>(
                 Collections.singletonList(info)));
-        doReturn(true).when(mImsManager).isWfcEnabledByPlatform();
+        mQueryImsState1.setIsEnabledByPlatform(true);
         mQueryImsState1.setIsProvisionedOnDevice(true);
 
         final Intent intent = new Intent();
