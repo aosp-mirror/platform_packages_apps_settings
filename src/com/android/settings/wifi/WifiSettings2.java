@@ -647,6 +647,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 setOffMessage();
                 setAdditionalSettingsSummaries();
                 setProgressBarVisible(false);
+                mClickedConnect = false;
                 break;
         }
     }
@@ -739,6 +740,11 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 pref.setOnGearClickListener(preference -> {
                     launchNetworkDetailsFragment(pref);
                 });
+
+                if (mClickedConnect) {
+                    mClickedConnect = false;
+                    scrollToPreference(mConnectedWifiEntryPreferenceCategory);
+                }
             }
         } else {
             mConnectedWifiEntryPreferenceCategory.removeAll();
@@ -1007,7 +1013,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     private class WifiConnectActionListener implements WifiManager.ActionListener {
         @Override
         public void onSuccess() {
-            // Do nothing.
+            mClickedConnect = true;
         }
 
         @Override
@@ -1041,7 +1047,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                 return;
             }
 
-            if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
+            if (status == ConnectCallback.CONNECT_STATUS_SUCCESS) {
+                mClickedConnect = true;
+            } else if (status == ConnectCallback.CONNECT_STATUS_FAILURE_NO_CONFIG) {
                 if (mEditIfNoConfig) {
                     // Edit an unsaved secure Wi-Fi network.
                     if (mFullScreenEdit) {
