@@ -37,7 +37,6 @@ import android.telephony.ims.ImsMmTelManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.ims.ImsManager;
 import com.android.internal.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
@@ -60,8 +59,6 @@ public class WifiCallingPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    private ImsManager mImsManager;
-    @Mock
     private ImsMmTelManager mImsMmTelManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -79,9 +76,8 @@ public class WifiCallingPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
-        mQueryImsState = spy(new MockWifiCallingQueryImsState(mContext, SUB_ID));
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
-        doReturn(mImsManager).when(mQueryImsState).getImsManager(anyInt());
+        mQueryImsState = new MockWifiCallingQueryImsState(mContext, SUB_ID);
+        mQueryImsState.setIsEnabledByUser(true);
         mQueryImsState.setIsProvisionedOnDevice(true);
 
         mPreference = new Preference(mContext);
@@ -109,7 +105,7 @@ public class WifiCallingPreferenceControllerTest {
     @Test
     public void updateState_noSimCallManager_setCorrectSummary() {
         mController.mSimCallManager = null;
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(true);
         when(mImsMmTelManager.getVoWiFiRoamingModeSetting()).thenReturn(
                 ImsMmTelManager.WIFI_MODE_WIFI_ONLY);
         when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
@@ -149,7 +145,7 @@ public class WifiCallingPreferenceControllerTest {
                 ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED);
         when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
                 ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED);
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(true);
         when(mTelephonyManager.isNetworkRoaming()).thenReturn(true);
 
         mController.updateState(mPreference);
@@ -166,7 +162,7 @@ public class WifiCallingPreferenceControllerTest {
                 ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED);
         when(mImsMmTelManager.getVoWiFiModeSetting()).thenReturn(
                 ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED);
-        doReturn(true).when(mQueryImsState).isEnabledByUser();
+        mQueryImsState.setIsEnabledByUser(true);
         when(mTelephonyManager.isNetworkRoaming()).thenReturn(true);
 
         mController.updateState(mPreference);
