@@ -24,6 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -58,6 +59,7 @@ import java.util.List;
 public class MediaOutputPanelTest {
 
     private static final String TEST_PACKAGENAME = "com.test.packagename";
+    private static final String TEST_PACKAGENAME2 = "com.test.packagename2";
     private static final String TEST_ARTIST = "test_artist";
     private static final String TEST_SONG = "test_song";
 
@@ -129,6 +131,21 @@ public class MediaOutputPanelTest {
         verify(mMediaController).registerCallback(any());
         verify(mLocalMediaManager).registerCallback(any());
         verify(mLocalMediaManager).startScan();
+    }
+
+    @Test
+    public void onStart_activeSession_verifyOnHeaderChanged() {
+        mPanel.onStart();
+
+        verify(mCallback).onHeaderChanged();
+    }
+
+    @Test
+    public void onStart_noMatchedActiveSession_verifyNeverOnHeaderChanged() {
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME2);
+        mPanel.onStart();
+
+        verify(mCallback, never()).onHeaderChanged();
     }
 
     @Test
@@ -255,12 +272,13 @@ public class MediaOutputPanelTest {
     @Test
     public void onMetadataChanged_verifyCallOnHeaderChanged() {
         mPanel.onStart();
+        verify(mCallback).onHeaderChanged();
         verify(mMediaController).registerCallback(mControllerCbs.capture());
         final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
 
         controllerCallbacks.onMetadataChanged(mMediaMetadata);
 
-        verify(mCallback).onHeaderChanged();
+        verify(mCallback, times(2)).onHeaderChanged();
     }
 
     @Test
