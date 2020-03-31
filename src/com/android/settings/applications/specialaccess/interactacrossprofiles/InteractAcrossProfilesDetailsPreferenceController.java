@@ -35,7 +35,7 @@ public class InteractAcrossProfilesDetailsPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return canConfigureInteractAcrossProfiles() ? AVAILABLE : DISABLED_FOR_USER;
+        return canUserAttemptToConfigureInteractAcrossProfiles() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
@@ -49,13 +49,12 @@ public class InteractAcrossProfilesDetailsPreferenceController
     }
 
     private CharSequence getPreferenceSummary() {
-        return InteractAcrossProfilesDetails.getPreferenceSummary(mContext, mPackageName,
-                mParent.getPackageInfo().applicationInfo.uid);
+        return InteractAcrossProfilesDetails.getPreferenceSummary(mContext, mPackageName);
     }
 
-    private boolean canConfigureInteractAcrossProfiles() {
+    private boolean canUserAttemptToConfigureInteractAcrossProfiles() {
         return mContext.getSystemService(CrossProfileApps.class)
-                .canConfigureInteractAcrossProfiles(mPackageName);
+                .canUserAttemptToConfigureInteractAcrossProfiles(mPackageName);
     }
 
     public void setPackageName(String packageName) {
