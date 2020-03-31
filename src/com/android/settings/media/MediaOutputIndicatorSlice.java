@@ -106,6 +106,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     public void onNotifyChange(Intent i) {
         final MediaController mediaController = getWorker().getActiveLocalMediaController();
         final Intent intent = new Intent()
+                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
                 .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (mediaController != null) {
@@ -129,9 +130,9 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         // Return true if
         // 1. AudioMode is not in on-going call
         // 2. worker is not null
-        // 3. Available devices are more than 1
+        // 3. Available devices are more than 0
         return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
-                && getWorker().getMediaDevices().size() > 1;
+                && getWorker().getMediaDevices().size() > 0;
     }
 }

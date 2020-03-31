@@ -20,7 +20,6 @@ import static android.app.Notification.COLOR_DEFAULT;
 import static android.content.pm.PackageManager.MATCH_ANY_USER;
 import static android.content.pm.PackageManager.NameNotFoundException;
 import static android.os.UserHandle.USER_ALL;
-import static android.os.UserHandle.USER_CURRENT;
 
 import android.annotation.ColorInt;
 import android.annotation.UserIdInt;
@@ -48,7 +47,6 @@ import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +90,7 @@ public class NotificationSbnAdapter extends
         final StatusBarNotification sbn = mValues.get(position);
         if (sbn != null) {
             holder.setIcon(loadIcon(sbn));
-            holder.setPackageName(loadPackageName(sbn.getPackageName()).toString());
+            holder.setPackageLabel(loadPackageLabel(sbn.getPackageName()).toString());
             holder.setTitle(getTitleString(sbn.getNotification()));
             holder.setSummary(getTextString(mContext, sbn.getNotification()));
             holder.setPostedTime(sbn.getPostTime());
@@ -103,6 +101,8 @@ public class NotificationSbnAdapter extends
                 mUserBadgeCache.put(userId, profile);
             }
             holder.setProfileBadge(mUserBadgeCache.get(userId));
+            holder.addOnClick(sbn.getPackageName(), sbn.getUserId(),
+                    sbn.getNotification().contentIntent);
         } else {
             Slog.w(TAG, "null entry in list at position " + position);
         }
@@ -133,7 +133,7 @@ public class NotificationSbnAdapter extends
         notifyDataSetChanged();
     }
 
-    private @NonNull CharSequence loadPackageName(String pkg) {
+    private @NonNull CharSequence loadPackageLabel(String pkg) {
         try {
             ApplicationInfo info = mPm.getApplicationInfo(pkg,
                     MATCH_ANY_USER);
