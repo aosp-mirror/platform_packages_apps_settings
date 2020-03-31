@@ -26,8 +26,8 @@ import static com.android.settings.network.telephony.TelephonyConstants.RadioAcc
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_TD_SCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.RAF_UNKNOWN;
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.WCDMA;
-import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO;
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO;
 import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
 
@@ -54,7 +54,6 @@ import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.ImsRcsManager;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.RcsUceAdapter;
-import android.telephony.ims.feature.ImsFeature;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.text.TextUtils;
@@ -63,8 +62,6 @@ import android.view.Gravity;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.ims.ImsException;
-import com.android.ims.ImsManager;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -150,7 +147,6 @@ public class MobileNetworkUtils {
         final PhoneAccountHandle simCallManager =
                 context.getSystemService(TelecomManager.class)
                        .getSimCallManagerForSubscription(subId);
-        final int phoneId = SubscriptionManager.getSlotIndex(subId);
 
         boolean isWifiCallingEnabled;
         if (simCallManager != null) {
@@ -161,9 +157,7 @@ public class MobileNetworkUtils {
         } else {
             final WifiCallingQueryImsState queryState =
                     new WifiCallingQueryImsState(context, subId);
-            final ImsManager imsMgr = ImsManager.getInstance(context, phoneId);
-            isWifiCallingEnabled = queryState.isWifiCallingProvisioned()
-                    && isImsServiceStateReady(imsMgr);
+            isWifiCallingEnabled = queryState.isReadyToWifiCalling();
         }
 
         return isWifiCallingEnabled;
@@ -278,21 +272,6 @@ public class MobileNetworkUtils {
         }
 
         return intent;
-    }
-
-    public static boolean isImsServiceStateReady(ImsManager imsMgr) {
-        boolean isImsServiceStateReady = false;
-
-        try {
-            if (imsMgr != null && imsMgr.getImsServiceState() == ImsFeature.STATE_READY) {
-                isImsServiceStateReady = true;
-            }
-        } catch (ImsException ex) {
-            Log.e(TAG, "Exception when trying to get ImsServiceStatus: " + ex);
-        }
-
-        Log.d(TAG, "isImsServiceStateReady=" + isImsServiceStateReady);
-        return isImsServiceStateReady;
     }
 
     /**
