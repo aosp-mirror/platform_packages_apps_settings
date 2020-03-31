@@ -85,8 +85,8 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
             final Preference pref = new AppPreference(prefContext);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appInfo, user.getIdentifier()));
             pref.setTitle(mPackageManager.getUserBadgedLabel(label, user));
-            pref.setSummary(InteractAcrossProfilesDetails.getPreferenceSummary(prefContext,
-                    packageName, appInfo.uid));
+            pref.setSummary(InteractAcrossProfilesDetails.getPreferenceSummary(
+                    prefContext, packageName));
             pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -127,20 +127,40 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
     static ArrayList<Pair<ApplicationInfo, UserHandle>> collectConfigurableApps(
             PackageManager packageManager, UserManager userManager,
             CrossProfileApps crossProfileApps) {
-        final UserHandle personalProfile = getPersonalProfileForCallingUser(userManager);
+        final UserHandle workProfile = getWorkProfile(userManager);
+        if (workProfile == null) {
+            return new ArrayList<>();
+        }
+        final UserHandle personalProfile = userManager.getProfileParent(workProfile);
         if (personalProfile == null) {
             return new ArrayList<>();
         }
 
         final ArrayList<Pair<ApplicationInfo, UserHandle>> apps = new ArrayList<>();
-        final List<PackageInfo> installedPackages = packageManager.getInstalledPackagesAsUser(
-                GET_ACTIVITIES, personalProfile.getIdentifier());
-        for (PackageInfo packageInfo : installedPackages) {
-            if (crossProfileApps.canConfigureInteractAcrossProfiles(packageInfo.packageName)) {
+        for (PackageInfo packageInfo : getAllInstalledPackages(
+                packageManager, personalProfile, workProfile)) {
+            if (crossProfileApps.canUserAttemptToConfigureInteractAcrossProfiles(
+                    packageInfo.packageName)) {
                 apps.add(new Pair<>(packageInfo.applicationInfo, personalProfile));
             }
         }
         return apps;
+    }
+
+    private static List<PackageInfo> getAllInstalledPackages(
+            PackageManager packageManager, UserHandle personalProfile, UserHandle workProfile) {
+        List<PackageInfo> personalPackages = packageManager.getInstalledPackagesAsUser(
+                GET_ACTIVITIES, personalProfile.getIdentifier());
+        List<PackageInfo> workPackages = packageManager.getInstalledPackagesAsUser(
+                GET_ACTIVITIES, workProfile.getIdentifier());
+        List<PackageInfo> allPackages = new ArrayList<>(personalPackages);
+        for (PackageInfo workPackage : workPackages) {
+            if (allPackages.stream().noneMatch(
+                    p -> workPackage.packageName.equals(p.packageName))) {
+                allPackages.add(workPackage);
+            }
+        }
+        return allPackages;
     }
 
     /**
@@ -149,27 +169,36 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
     static int getNumberOfEnabledApps(
             Context context, PackageManager packageManager, UserManager userManager,
             CrossProfileApps crossProfileApps) {
+        UserHandle workProfile = getWorkProfile(userManager);
+        if (workProfile == null) {
+            return 0;
+        }
+        UserHandle personalProfile = userManager.getProfileParent(workProfile);
+        if (personalProfile == null) {
+            return 0;
+        }
         final ArrayList<Pair<ApplicationInfo, UserHandle>> apps =
                 collectConfigurableApps(packageManager, userManager, crossProfileApps);
         apps.removeIf(
                 app -> !InteractAcrossProfilesDetails.isInteractAcrossProfilesEnabled(
-                        context, app.first.packageName, app.first.uid));
+                        context, app.first.packageName)
+                        || !crossProfileApps.canConfigureInteractAcrossProfiles(
+                                app.first.packageName));
         return apps.size();
     }
 
     /**
-     * Returns the personal profile in the profile group of the calling user.
-     * Returns null if user is not in a profile group.
+     * Returns the work profile in the profile group of the calling user.
+     * Returns null if not found.
      */
     @Nullable
-    private static UserHandle getPersonalProfileForCallingUser(UserManager userManager) {
-        final int callingUser = UserHandle.myUserId();
-        if (userManager.getProfiles(callingUser).isEmpty()) {
-            return null;
+    static UserHandle getWorkProfile(UserManager userManager) {
+        for (UserInfo user : userManager.getProfiles(UserHandle.myUserId())) {
+            if (userManager.isManagedProfile(user.id)) {
+                return user.getUserHandle();
+            }
         }
-        final UserInfo parentProfile = userManager.getProfileParent(callingUser);
-        return parentProfile == null
-                ? UserHandle.of(callingUser) : parentProfile.getUserHandle();
+        return null;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
