@@ -54,9 +54,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -100,7 +98,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private boolean mUseWfcHomeModeForRoaming = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    private com.android.ims.ImsManager mImsManager;
     private ImsMmTelManager mImsMmTelManager;
     private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
@@ -271,12 +268,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     }
 
     @VisibleForTesting
-    com.android.ims.ImsManager getImsManager() {
-        return com.android.ims.ImsManager.getInstance(getActivity(),
-                SubscriptionUtil.getPhoneId(getActivity(), mSubId));
-    }
-
-    @VisibleForTesting
     ImsMmTelManager getImsMmTelManager() {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return null;
@@ -299,11 +290,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     FRAGMENT_BUNDLE_SUBID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         }
 
-        mImsManager = getImsManager();
         mProvisioningManager = getImsProvisioningManager();
         mImsMmTelManager = getImsMmTelManager();
-
-        mTelephonyManager = getActivity().getSystemService(TelephonyManager.class);
 
         mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
@@ -341,7 +329,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
     @VisibleForTesting
     boolean isWfcProvisionedOnDevice() {
-        return MobileNetworkUtils.isWfcProvisionedOnDevice(mSubId);
+        return queryImsState(mSubId).isWifiCallingProvisioned();
     }
 
     private void updateBody() {

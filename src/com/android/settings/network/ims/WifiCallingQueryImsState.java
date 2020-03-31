@@ -27,10 +27,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.ims.ImsManager;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
-
 /**
  * Controller class for querying Wifi calling status
  */
@@ -64,12 +60,6 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
             return false;
         }
         return (new ImsQueryWfcUserSetting(subId)).query();
-    }
-
-    @VisibleForTesting
-    ImsManager getImsManager(int subId) {
-        return ImsManager.getInstance(mContext,
-                SubscriptionUtil.getPhoneId(mContext, subId));
     }
 
     /**
@@ -107,8 +97,15 @@ public class WifiCallingQueryImsState extends ImsQueryController  {
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             return false;
         }
-        return isWifiCallingProvisioned()
-                && MobileNetworkUtils.isImsServiceStateReady(getImsManager(mSubId));
+        if (!isWifiCallingProvisioned()) {
+            return false;
+        }
+        try {
+            return isServiceStateReady(mSubId);
+        } catch (InterruptedException | IllegalArgumentException | ImsException exception) {
+            Log.w(LOG_TAG, "fail to get WFC service status. subId=" + mSubId, exception);
+        }
+        return false;
     }
 
     /**
