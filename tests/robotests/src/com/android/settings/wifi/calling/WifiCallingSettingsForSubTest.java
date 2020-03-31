@@ -351,5 +351,13 @@ public class WifiCallingSettingsForSubTest {
                     return null;
             }
         }
+
+        @Override
+        TelephonyManager getTelephonyManagerForSub(int subId) {
+            return mTelephonyManager;
+        }
+
+        @Override
+        void showAlert(Intent intent) {}
     }
 }
