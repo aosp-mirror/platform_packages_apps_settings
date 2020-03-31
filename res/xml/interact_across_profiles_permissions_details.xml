@@ -15,22 +15,28 @@
   ~ limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/interact_across_profiles_title">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="interact_across_profiles_header"
-        android:layout="@layout/cross_profiles_settings_entity_header"
-        android:selectable="false"/>
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="interact_across_profiles_header"
+            android:layout="@layout/cross_profiles_settings_entity_header"
+            android:selectable="false"/>
 
-    <SwitchPreference
-        android:key="interact_across_profiles_settings_switch" />
+        <com.android.settings.widget.CardPreference
+            android:key="install_app_banner"
+            android:icon="@drawable/ic_download_for_offline"
+            android:gravity="top"/>
 
-    <Preference
-        android:summary="@string/interact_across_profiles_summary_1"
-        android:selectable="false" />
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="interact_across_profiles_settings_switch" />
 
-    <Preference
-        android:summary="@string/interact_across_profiles_summary_2"
-        android:selectable="false" />
+        <Preference
+            android:summary="@string/interact_across_profiles_summary_1"
+            android:selectable="false" />
+
+        <Preference
+            android:summary="@string/interact_across_profiles_summary_2"
+            android:selectable="false" />
 </PreferenceScreen>
