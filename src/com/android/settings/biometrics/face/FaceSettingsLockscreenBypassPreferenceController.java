@@ -47,6 +47,11 @@ public class FaceSettingsLockscreenBypassPreferenceController
 
     @Override
     public boolean isChecked() {
+        if (!FaceSettings.isAvailable(mContext)) {
+            return false;
+        } else if (getRestrictingAdmin() != null) {
+            return false;
+        }
         int defaultValue = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_faceAuthDismissesKeyguard) ? 1 : 0;
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
