@@ -954,18 +954,30 @@ public class WifiSettings2 extends RestrictedSettingsFragment
 
     @Override
     public void onForget(WifiDialog2 dialog) {
-        forget(mDialogWifiEntry);
+        forget(dialog.getWifiEntry());
     }
 
     @Override
     public void onSubmit(WifiDialog2 dialog) {
-        final int dialogMode = mDialog.getController().getMode();
+        final int dialogMode = dialog.getMode();
+        final WifiConfiguration config = dialog.getController().getConfig();
+        final WifiEntry wifiEntry = dialog.getWifiEntry();
 
         if (dialogMode == WifiConfigUiBase2.MODE_MODIFY) {
-            mWifiManager.save(mDialogWifiEntry.getWifiConfiguration(), mSaveListener);
+            if (config == null) {
+                Toast.makeText(getContext(), R.string.wifi_failed_save_message,
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                mWifiManager.save(config, mSaveListener);
+            }
         } else if (dialogMode == WifiConfigUiBase2.MODE_CONNECT
-                || (dialogMode == WifiConfigUiBase2.MODE_VIEW && mDialogWifiEntry.canConnect())) {
-            connect(mDialogWifiEntry, false /* editIfNoConfig */, false /* fullScreenEdit*/);
+                || (dialogMode == WifiConfigUiBase2.MODE_VIEW && wifiEntry.canConnect())) {
+            if (config == null) {
+                connect(wifiEntry, false /* editIfNoConfig */,
+                        false /* fullScreenEdit*/);
+            } else {
+                mWifiManager.connect(config, new WifiConnectActionListener());
+            }
         }
     }
 
@@ -981,7 +993,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
         wifiEntry.forget(null /* callback */);
     }
 
-    private void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
+    @VisibleForTesting
+    void connect(WifiEntry wifiEntry, boolean editIfNoConfig, boolean fullScreenEdit) {
         mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_WIFI_CONNECT,
                 wifiEntry.isSaved());
 
@@ -1034,7 +1047,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
                     if (mFullScreenEdit) {
                         launchConfigNewNetworkFragment(mConnectWifiEntry);
                     } else {
-                        showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_MODIFY);
+                        showDialog(mConnectWifiEntry, WifiConfigUiBase2.MODE_CONNECT);
                     }
                 }
             } else if (status == CONNECT_STATUS_FAILURE_UNKNOWN) {

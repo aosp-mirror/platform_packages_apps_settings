@@ -15,6 +15,9 @@
  */
 package com.android.settings.wifi;
 
+import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
+import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -34,6 +37,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -64,6 +68,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiSettings2Test {
@@ -302,5 +307,58 @@ public class WifiSettings2Test {
         when(mWifiSettings2.getContext()).thenReturn(null);
 
         mWifiSettings2.onNumSavedSubscriptionsChanged();
+    }
+
+    @Test
+    public void onSubmit_modeModifyNoConfig_toastErrorMessage() {
+        WifiDialog2 dialog = createWifiDialog2(MODE_MODIFY, null /* config */);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(
+                mContext.getString(R.string.wifi_failed_save_message));
+    }
+
+    @Test
+    public void onSubmit_modeModifyHasConfig_saveWifiManager() {
+        final WifiConfiguration config = mock(WifiConfiguration.class);
+        WifiDialog2 dialog = createWifiDialog2(MODE_MODIFY, config);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiManager).save(eq(config), any());
+    }
+
+    @Test
+    public void onSubmit_modeConnectNoConfig_connectWifiEntry() {
+        WifiDialog2 dialog = createWifiDialog2(MODE_CONNECT, null /* config */);
+        final WifiEntry wifiEntry = dialog.getWifiEntry();
+
+        mWifiSettings2.onAttach(mContext);
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiSettings2).connect(wifiEntry, false /* editIfNoConfig */,
+                false /* fullScreenEdit*/);
+    }
+
+    @Test
+    public void onSubmit_modeConnectHasConfig_connectWifiManager() {
+        final WifiConfiguration config = mock(WifiConfiguration.class);
+        WifiDialog2 dialog = createWifiDialog2(MODE_CONNECT, config);
+
+        mWifiSettings2.onSubmit(dialog);
+
+        verify(mWifiManager).connect(eq(config), any(WifiManager.ActionListener.class));
+    }
+
+    private WifiDialog2 createWifiDialog2(int mode, WifiConfiguration config) {
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.canConnect()).thenReturn(true);
+        final WifiConfigController2 controller = mock(WifiConfigController2.class);
+        when(controller.getConfig()).thenReturn(config);
+        final WifiDialog2 wifiDialog2 =  spy(WifiDialog2.createModal(mContext, null /* listener */,
+                wifiEntry, mode));
+        when(wifiDialog2.getController()).thenReturn(controller);
+        return wifiDialog2;
     }
 }
