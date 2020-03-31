@@ -18,7 +18,6 @@ package com.android.settings.wifi.calling;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -72,12 +71,10 @@ public class WifiCallingSettingsTest {
 
         mContext = spy(RuntimeEnvironment.application);
 
-        mQueryImsState1 = spy(new MockWifiCallingQueryImsState(mContext, SUB_ID1));
-        mQueryImsState2 = spy(new MockWifiCallingQueryImsState(mContext, SUB_ID2));
-        doReturn(true).when(mQueryImsState1).isEnabledByUser();
-        doReturn(true).when(mQueryImsState2).isEnabledByUser();
-        doReturn(mImsManager).when(mQueryImsState1).getImsManager(anyInt());
-        doReturn(mImsManager).when(mQueryImsState2).getImsManager(anyInt());
+        mQueryImsState1 = new MockWifiCallingQueryImsState(mContext, SUB_ID1);
+        mQueryImsState2 = new MockWifiCallingQueryImsState(mContext, SUB_ID2);
+        mQueryImsState1.setIsEnabledByUser(true);
+        mQueryImsState2.setIsEnabledByUser(true);
         mQueryImsState1.setIsEnabledByPlatform(true);
         mQueryImsState2.setIsEnabledByPlatform(true);
         mQueryImsState1.setIsProvisionedOnDevice(true);
