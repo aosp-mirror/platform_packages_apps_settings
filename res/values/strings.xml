@@ -7004,7 +7004,7 @@
     <!-- If open app supports TapPay, use that app instead of the default -->
     <string name="nfc_payment_favor_open">Except when another payment app is open</string>
     <!-- Header for a dialog asking the user which payment app to use -->
-    <string name="nfc_payment_pay_with">At a Tap &amp; pay terminal, pay with:</string>
+    <string name="nfc_payment_pay_with">At a contactless terminal, pay with:</string>
     <!-- Header for text explaning how to pay at a payment terminal in a store -->
     <string name="nfc_how_it_works_title">Paying at the terminal</string>
     <!-- Content for text explaning how to pay at a payment terminal in a store -->
@@ -7015,9 +7015,21 @@
     <string name="nfc_more_title">More...</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
-    <string name="nfc_payment_set_default_label">Set as your preference?</string>
-    <string name="nfc_payment_set_default">Always use <xliff:g id="app">%1$s</xliff:g> when you Tap &amp; pay?</string>
-    <string name="nfc_payment_set_default_instead_of">Always use <xliff:g id="app">%1$s</xliff:g> instead of <xliff:g id="app">%2$s</xliff:g> when you Tap &amp; pay?</string>
+    <string name="nfc_payment_set_default_label">Set default payment app</string>
+    <!-- Label for the dialog that is shown when the user is asked to update a
+         preferred payment application [CHAR LIMIT=50] -->
+    <string name="nfc_payment_update_default_label">Update default payment app</string>
+    <string name="nfc_payment_set_default">At a contactless terminal, pay with
+        <xliff:g id="app">%1$s</xliff:g>
+    </string>
+    <string name="nfc_payment_set_default_instead_of">At a contactless terminal, pay with <xliff:g
+        id="app">%1$s</xliff:g>.\n\nThis replaces <xliff:g id="app">%2$s</xliff:g> as your default
+        payment app.
+    </string>
+    <!-- Label of the Set default button of the Set default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_set_deault">Set default</string>
+    <!-- Label of the Update button of the Update default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_update">Update</string>
     <!-- Restrictions settings --><skip/>
 
     <!-- Restriction settings title [CHAR LIMIT=35] -->
