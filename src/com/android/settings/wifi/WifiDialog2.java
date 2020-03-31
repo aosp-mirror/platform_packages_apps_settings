@@ -214,4 +214,8 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
     public void setCancelButton(CharSequence text) {
         setButton(BUTTON_NEGATIVE, text, this);
     }
+
+    public WifiEntry getWifiEntry() {
+        return mWifiEntry;
+    }
 }
