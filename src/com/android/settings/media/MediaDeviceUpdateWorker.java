@@ -151,7 +151,7 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     }
 
     MediaDevice getTopDevice() {
-        return mTopDevice;
+        return getMediaDeviceById(mTopDevice.getId());
     }
 
     boolean addDeviceToPlayMedia(MediaDevice device) {
