@@ -6994,7 +6994,7 @@
     <!-- If open app supports TapPay, use that app instead of the default -->
     <string name="nfc_payment_favor_open">Except when another payment app is open</string>
     <!-- Header for a dialog asking the user which payment app to use -->
-    <string name="nfc_payment_pay_with">At a Tap &amp; pay terminal, pay with:</string>
+    <string name="nfc_payment_pay_with">At a contactless terminal, pay with:</string>
     <!-- Header for text explaning how to pay at a payment terminal in a store -->
     <string name="nfc_how_it_works_title">Paying at the terminal</string>
     <!-- Content for text explaning how to pay at a payment terminal in a store -->
@@ -7005,9 +7005,21 @@
     <string name="nfc_more_title">More...</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
-    <string name="nfc_payment_set_default_label">Set as your preference?</string>
-    <string name="nfc_payment_set_default">Always use <xliff:g id="app">%1$s</xliff:g> when you Tap &amp; pay?</string>
-    <string name="nfc_payment_set_default_instead_of">Always use <xliff:g id="app">%1$s</xliff:g> instead of <xliff:g id="app">%2$s</xliff:g> when you Tap &amp; pay?</string>
+    <string name="nfc_payment_set_default_label">Set default payment app</string>
+    <!-- Label for the dialog that is shown when the user is asked to update a
+         preferred payment application [CHAR LIMIT=50] -->
+    <string name="nfc_payment_update_default_label">Update default payment app</string>
+    <string name="nfc_payment_set_default">At a contactless terminal, pay with
+        <xliff:g id="app">%1$s</xliff:g>
+    </string>
+    <string name="nfc_payment_set_default_instead_of">At a contactless terminal, pay with <xliff:g
+        id="app">%1$s</xliff:g>.\n\nThis replaces <xliff:g id="app">%2$s</xliff:g> as your default
+        payment app.
+    </string>
+    <!-- Label of the Set default button of the Set default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_set_deault">Set default</string>
+    <!-- Label of the Update button of the Update default payment app dialog [CHAR LIMIT=40] -->
+    <string name="nfc_payment_btn_text_update">Update</string>
     <!-- Restrictions settings --><skip/>
 
     <!-- Restriction settings title [CHAR LIMIT=35] -->
@@ -8515,6 +8527,12 @@
     When a user connects select work and personal apps, they can access work and personal data together. [CHAR LIMIT=50] -->
     <string name="interact_across_profiles_title">Connected work &amp; personal apps</string>
 
+    <!-- Settings subtext. This text is shown when the work and personal apps are connected. [CHAR LIMIT=45] -->
+    <string name="interact_across_profiles_summary_allowed">Connected</string>
+
+    <!-- Settings subtext. This text is shown when the work and personal apps are not connected. [CHAR LIMIT=45] -->
+    <string name="interact_across_profiles_summary_not_allowed">Not connected</string>
+
     <!-- Settings subtext. This text is shown when a user doesn't have any connected apps. [CHAR LIMIT=NONE] -->
     <string name="interact_across_profiles_empty_text">No connected apps</string>
 
@@ -8581,27 +8599,18 @@
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     work profile in order to connect it to the corresponding personal app.
-    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_work_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
-
-    <!-- Banner text. This banner lets a user know that they need to install an app in their
-    work profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_work_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your work profile</string>
+    <string name="interact_across_profiles_install_work_app_title">Install work <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     personal profile in order to connect it to the corresponding work app.
-    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_personal_app_title">Install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
+    The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
+    <string name="interact_across_profiles_install_personal_app_title">Install personal <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
 
     <!-- Banner text. This banner lets a user know that they need to install an app in their
-    personal profile in order to connect it to the corresponding work app.
+    work/personal profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_personal_app_summary">To connect these apps, install the <xliff:g id="name" example="Calendar">%1$s</xliff:g> app in your personal profile</string>
-
-    <!-- Button text. This button takes a user to the app store so they can download and
-    install the app they need. [CHAR LIMIT=50]-->
-    <string name="interact_across_profiles_install_app_action">Get the app</string>
+    <string name="interact_across_profiles_install_app_summary">Tap to get the app</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -10674,6 +10683,21 @@
     <string name="ambient_display_title" product="tablet">Double-tap to check tablet</string>
     <!-- Preference and settings suggestion title text for ambient display double tap (device) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="device">Double-tap to check device</string>
+
+    <!-- Preference and settings suggestion title text for one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_title" product="default" translatable="false">One-Handed</string>
+    <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_mode_enabled" product="default" translatable="false">Enable one-handed mode</string>
+    <!-- Preference Switch for app taps to exit one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_app_taps_to_exit" product="default" translatable="false">Activity launch to exit</string>
+    <!-- Timeout(Never) title for one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_timeout_title" product="default" translatable="false">Timeout</string>
+    <!-- Timeout(Short) title for one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_timeout_short" product="default" translatable="false">4 seconds</string>
+    <!-- Timeout(Medium) title for one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_timeout_medium" product="default" translatable="false">8 seconds</string>
+    <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
+    <string name="one_handed_timeout_long" product="default" translatable="false">12 seconds</string>
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>

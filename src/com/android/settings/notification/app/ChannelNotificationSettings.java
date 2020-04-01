@@ -129,8 +129,6 @@ public class ChannelNotificationSettings extends NotificationSettings {
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new DndPreferenceController(context, mBackend));
         mControllers.add(new NotificationsOffPreferenceController(context));
-        mControllers.add(new BubblePreferenceController(context, getChildFragmentManager(),
-                mBackend, false /* isAppPage */));
         mControllers.add(new ConversationPromotePreferenceController(context, this, mBackend));
         return new ArrayList<>(mControllers);
     }

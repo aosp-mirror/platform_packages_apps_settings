@@ -54,6 +54,12 @@
         settings:controller="com.android.settings.gestures.SystemNavigationPreferenceController" />
 
     <Preference
+        android:key="gesture_one_handed"
+        android:title="@string/one_handed_title"
+        android:fragment="com.android.settings.gestures.OneHandedSettings"
+        settings:controller="com.android.settings.gestures.OneHandedEnablePreferenceController" />
+
+    <Preference
         android:key="gesture_tap_screen_input_summary"
         android:title="@string/ambient_display_tap_screen_title"
         android:fragment="com.android.settings.gestures.TapScreenGestureSettings"

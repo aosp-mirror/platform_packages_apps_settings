@@ -15,15 +15,25 @@
  */
 package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
+import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
+import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
+
 import android.Manifest;
+import android.annotation.UserIdInt;
+import android.app.ActionBar;
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.PermissionChecker;
 import android.content.pm.CrossProfileApps;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -32,13 +42,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppStoreUtil;
+import com.android.settings.widget.CardPreference;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.widget.LayoutPreference;
 
 public class InteractAcrossProfilesDetails extends AppInfoBase
@@ -47,13 +59,21 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private static final String INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH =
             "interact_across_profiles_settings_switch";
     private static final String INTERACT_ACROSS_PROFILES_HEADER = "interact_across_profiles_header";
+    public static final String INSTALL_APP_BANNER_KEY = "install_app_banner";
 
     private Context mContext;
     private CrossProfileApps mCrossProfileApps;
     private UserManager mUserManager;
-    private SwitchPreference mSwitchPref;
+    private RestrictedSwitchPreference mSwitchPref;
     private LayoutPreference mHeader;
+    private CardPreference mInstallBanner;
     private PackageManager mPackageManager;
+    private UserHandle mPersonalProfile;
+    private UserHandle mWorkProfile;
+    private boolean mInstalledInPersonal;
+    private boolean mInstalledInWork;
+    private String mAppLabel;
+    private Intent mInstallAppIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,19 +84,30 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mUserManager = mContext.getSystemService(UserManager.class);
         mPackageManager = mContext.getPackageManager();
 
+        mWorkProfile = InteractAcrossProfilesSettings.getWorkProfile(mUserManager);
+        mPersonalProfile = mUserManager.getProfileParent(mWorkProfile);
+        mInstalledInWork = isPackageInstalled(mPackageName, mWorkProfile.getIdentifier());
+        mInstalledInPersonal = isPackageInstalled(mPackageName, mPersonalProfile.getIdentifier());
+
+        mAppLabel = mPackageInfo.applicationInfo.loadLabel(mPackageManager).toString();
+        mInstallAppIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
+
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
         mSwitchPref = findPreference(INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH);
         mSwitchPref.setOnPreferenceClickListener(this);
+
         mHeader = findPreference(INTERACT_ACROSS_PROFILES_HEADER);
+
+        mInstallBanner = findPreference(INSTALL_APP_BANNER_KEY);
+        mInstallBanner.setOnPreferenceClickListener(this);
 
         // refreshUi checks that the user can still configure the appOp, return to the
         // previous page if it can't.
         if (!refreshUi()) {
             setIntentAndFinish(true/* appChanged */);
         }
-        final UserHandle workProfile = getWorkProfile();
-        final UserHandle personalProfile = mUserManager.getProfileParent(workProfile);
-        addAppTitleAndIcons(personalProfile, workProfile);
+        addAppTitleAndIcons(mPersonalProfile, mWorkProfile);
+        styleActionBar();
     }
 
     private void addAppTitleAndIcons(UserHandle personalProfile, UserHandle workProfile) {
@@ -89,70 +120,101 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         final ImageView personalIconView = mHeader.findViewById(R.id.entity_header_icon_personal);
         if (personalIconView != null) {
-            personalIconView.setImageDrawable(IconDrawableFactory.newInstance(mContext)
-                    .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier()));
+            Drawable icon = IconDrawableFactory.newInstance(mContext)
+                    .getBadgedIcon(mPackageInfo.applicationInfo, personalProfile.getIdentifier())
+                    .mutate();
+            if (!mInstalledInPersonal) {
+                icon.setColorFilter(createSuspendedColorMatrix());
+            }
+            personalIconView.setImageDrawable(icon);
         }
-        final ImageView workIconView2 = mHeader.findViewById(R.id.entity_header_icon_work);
-        if (workIconView2 != null) {
-            workIconView2.setImageDrawable(IconDrawableFactory.newInstance(mContext)
-                    .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier()));
+
+        final ImageView workIconView = mHeader.findViewById(R.id.entity_header_icon_work);
+        if (workIconView != null) {
+            Drawable icon = IconDrawableFactory.newInstance(mContext)
+                    .getBadgedIcon(mPackageInfo.applicationInfo, workProfile.getIdentifier())
+                    .mutate();
+            if (!mInstalledInWork) {
+                icon.setColorFilter(createSuspendedColorMatrix());
+            }
+            workIconView.setImageDrawable(icon);
         }
     }
 
-    @Nullable
-    private UserHandle getWorkProfile() {
-        for (UserInfo user : mUserManager.getProfiles(UserHandle.myUserId())) {
-            if (mUserManager.isManagedProfile(user.id)) {
-                return user.getUserHandle();
-            }
+    private void styleActionBar() {
+        final ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0);
         }
-        return null;
+    }
+
+    private ColorMatrixColorFilter createSuspendedColorMatrix() {
+        int grayValue = 127;
+        float scale = 0.5f; // half bright
+
+        ColorMatrix tempBrightnessMatrix = new ColorMatrix();
+        float[] mat = tempBrightnessMatrix.getArray();
+        mat[0] = scale;
+        mat[6] = scale;
+        mat[12] = scale;
+        mat[4] = grayValue;
+        mat[9] = grayValue;
+        mat[14] = grayValue;
+
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0.0f);
+        matrix.preConcat(tempBrightnessMatrix);
+        return new ColorMatrixColorFilter(matrix);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference != mSwitchPref) {
-            return false;
-        }
         // refreshUi checks that the user can still configure the appOp, return to the
         // previous page if it can't.
         if (!refreshUi()) {
             setIntentAndFinish(true/* appChanged */);
         }
+        if (preference == mSwitchPref) {
+            handleSwitchPreferenceClick();
+            return true;
+        }
+        if (preference == mInstallBanner) {
+            handleInstallBannerClick();
+            return true;
+        }
+        return false;
+    }
+
+    private void handleSwitchPreferenceClick() {
         if (isInteractAcrossProfilesEnabled()) {
             enableInteractAcrossProfiles(false);
             refreshUi();
-            return true;
-        }
-        if (!isInteractAcrossProfilesEnabled()) {
+        } else {
             showConsentDialog();
         }
-        return true;
     }
 
     private void showConsentDialog() {
-        final String appLabel = mPackageInfo.applicationInfo.loadLabel(mPackageManager).toString();
-
         final View dialogView = getLayoutInflater().inflate(
                 R.layout.interact_across_profiles_consent_dialog, null);
 
         final TextView dialogTitle = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_title);
         dialogTitle.setText(
-                getString(R.string.interact_across_profiles_consent_dialog_title, appLabel));
+                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel));
 
         final TextView dialogSummary = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_summary);
         dialogSummary.setText(
-                getString(R.string.interact_across_profiles_consent_dialog_summary, appLabel));
+                getString(R.string.interact_across_profiles_consent_dialog_summary, mAppLabel));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(getString(
-                R.string.interact_across_profiles_consent_dialog_app_data_summary, appLabel));
+                R.string.interact_across_profiles_consent_dialog_app_data_summary, mAppLabel));
 
         final TextView permissionsSummary = dialogView.findViewById(R.id.permissions_summary);
         permissionsSummary.setText(getString(
-                R.string.interact_across_profiles_consent_dialog_permissions_summary, appLabel));
+                R.string.interact_across_profiles_consent_dialog_permissions_summary, mAppLabel));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogView)
@@ -171,18 +233,38 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     }
 
     private boolean isInteractAcrossProfilesEnabled() {
-        return isInteractAcrossProfilesEnabled(
-                mContext, mPackageName, mPackageInfo.applicationInfo.uid);
+        return isInteractAcrossProfilesEnabled(mContext, mPackageName);
     }
 
-    static boolean isInteractAcrossProfilesEnabled(Context context, String packageName, int uid) {
+    static boolean isInteractAcrossProfilesEnabled(
+            Context context, String packageName) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        UserHandle workProfile = InteractAcrossProfilesSettings.getWorkProfile(userManager);
+        UserHandle personalProfile = userManager.getProfileParent(workProfile);
+        return context.getSystemService(
+                CrossProfileApps.class).canConfigureInteractAcrossProfiles(packageName)
+                && isInteractAcrossProfilesEnabledInProfile(context, packageName, personalProfile)
+                && isInteractAcrossProfilesEnabledInProfile(context, packageName, workProfile);
+
+    }
+
+    private static boolean isInteractAcrossProfilesEnabledInProfile(
+            Context context, String packageName, UserHandle userHandle) {
+        final PackageManager packageManager = context.getPackageManager();
+        final int uid;
+        try {
+            uid = packageManager.getApplicationInfoAsUser(
+                    packageName, /* flags= */0, userHandle).uid;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
         return PermissionChecker.PERMISSION_GRANTED
                 == PermissionChecker.checkPermissionForPreflight(
-                        context,
-                        Manifest.permission.INTERACT_ACROSS_PROFILES,
-                        PermissionChecker.PID_UNKNOWN,
-                        uid,
-                        packageName);
+                context,
+                Manifest.permission.INTERACT_ACROSS_PROFILES,
+                PermissionChecker.PID_UNKNOWN,
+                uid,
+                packageName);
     }
 
     private void enableInteractAcrossProfiles(boolean newState) {
@@ -190,14 +272,28 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                 mPackageName, newState ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED);
     }
 
+    private void handleInstallBannerClick() {
+        if (mInstallAppIntent == null) {
+            return;
+        }
+        if (!mInstalledInWork) {
+            mContext.startActivityAsUser(mInstallAppIntent, mWorkProfile);
+            return;
+        }
+        if (!mInstalledInPersonal) {
+            mContext.startActivityAsUser(mInstallAppIntent, mPersonalProfile);
+        }
+    }
+
     /**
      * @return the summary for the current state of whether the app associated with the given
      * {@code packageName} is allowed to interact across profiles.
      */
-    public static CharSequence getPreferenceSummary(Context context, String packageName, int uid) {
-        return context.getString(isInteractAcrossProfilesEnabled(context, packageName, uid)
-                ? R.string.app_permission_summary_allowed
-                : R.string.app_permission_summary_not_allowed);
+    public static CharSequence getPreferenceSummary(
+            Context context, String packageName) {
+        return context.getString(isInteractAcrossProfilesEnabled(context, packageName)
+                ? R.string.interact_across_profiles_summary_allowed
+                : R.string.interact_across_profiles_summary_not_allowed);
     }
 
     @Override
@@ -205,29 +301,97 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
             return false;
         }
-        if (!mCrossProfileApps.canConfigureInteractAcrossProfiles(mPackageName)) {
+        if (!mCrossProfileApps.canUserAttemptToConfigureInteractAcrossProfiles(mPackageName)) {
             // Invalid app entry. Should not allow changing permission
             mSwitchPref.setEnabled(false);
             return false;
         }
-
-        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
-        if (isInteractAcrossProfilesEnabled()) {
-            mSwitchPref.setChecked(true);
-            mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
-            if (horizontalArrowIcon != null) {
-                horizontalArrowIcon.setImageDrawable(
-                        mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
-            }
-        } else {
-            mSwitchPref.setChecked(false);
-            mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
-            if (horizontalArrowIcon != null) {
-                horizontalArrowIcon.setImageDrawable(
-                        mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
-            }
+        if (!mCrossProfileApps.canConfigureInteractAcrossProfiles(mPackageName)) {
+            return refreshUiForNonConfigurableApps();
         }
+        refreshUiForConfigurableApps();
         return true;
+    }
+
+    private boolean refreshUiForNonConfigurableApps() {
+        mSwitchPref.setChecked(false);
+        mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
+        if (!isCrossProfilePackageWhitelisted(mPackageName)) {
+            mInstallBanner.setVisible(false);
+            mSwitchPref.setDisabledByAdmin(RestrictedLockUtils.getProfileOrDeviceOwner(
+                    mContext, mWorkProfile));
+            return true;
+        }
+        mSwitchPref.setEnabled(false);
+        if (!mInstalledInPersonal && !mInstalledInWork) {
+            return false;
+        }
+        if (!mInstalledInPersonal) {
+            mInstallBanner.setTitle(getString(
+                    R.string.interact_across_profiles_install_personal_app_title,
+                    mAppLabel));
+            mInstallBanner.setSummary(
+                    R.string.interact_across_profiles_install_app_summary);
+            mInstallBanner.setVisible(true);
+            return true;
+        }
+        if (!mInstalledInWork) {
+            mInstallBanner.setTitle(getString(
+                    R.string.interact_across_profiles_install_work_app_title,
+                    mAppLabel));
+            mInstallBanner.setSummary(
+                    R.string.interact_across_profiles_install_app_summary);
+            mInstallBanner.setVisible(true);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isCrossProfilePackageWhitelisted(String packageName) {
+        return mContext.getSystemService(DevicePolicyManager.class)
+                .getAllCrossProfilePackages().contains(packageName);
+    }
+
+    private boolean isPackageInstalled(String packageName, @UserIdInt int userId) {
+        final PackageInfo info;
+        try {
+            info = mContext.createContextAsUser(UserHandle.of(userId), /* flags= */0)
+                    .getPackageManager().getPackageInfo(packageName,
+                            MATCH_DIRECT_BOOT_AWARE | MATCH_DIRECT_BOOT_UNAWARE);
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+        return info != null;
+    }
+
+    private void refreshUiForConfigurableApps() {
+        mInstallBanner.setVisible(false);
+        mSwitchPref.setEnabled(true);
+        if (isInteractAcrossProfilesEnabled()) {
+            enableSwitchPref();
+        } else {
+            disableSwitchPref();
+        }
+    }
+
+    private void enableSwitchPref() {
+        mSwitchPref.setChecked(true);
+        mSwitchPref.setTitle(R.string.interact_across_profiles_switch_enabled);
+        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        if (horizontalArrowIcon != null) {
+            horizontalArrowIcon.setImageDrawable(
+                    mContext.getDrawable(R.drawable.ic_swap_horiz_blue));
+        }
+    }
+
+    private void disableSwitchPref() {
+        mSwitchPref.setChecked(false);
+        mSwitchPref.setTitle(R.string.interact_across_profiles_switch_disabled);
+        final ImageView horizontalArrowIcon = mHeader.findViewById(R.id.entity_header_swap_horiz);
+        if (horizontalArrowIcon != null) {
+            horizontalArrowIcon.setImageDrawable(
+                    mContext.getDrawable(R.drawable.ic_swap_horiz_grey));
+        }
     }
 
     @Override

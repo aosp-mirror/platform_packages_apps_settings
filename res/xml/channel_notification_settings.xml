@@ -108,12 +108,6 @@
             settings:useAdditionalSummary="true"
             settings:restrictedSwitchSummary="@string/enabled_by_admin"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="bubble_pref"
-            android:title="@string/notification_bubbles_title"
-            android:order="16"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
         <!-- Bypass DND -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="bypass_dnd"
