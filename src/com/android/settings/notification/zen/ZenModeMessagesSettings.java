@@ -44,6 +44,8 @@ public class ZenModeMessagesSettings extends ZenModeSettingsBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeSendersImagePreferenceController(context,
+                "zen_mode_messages_image", lifecycle, true));
         controllers.add(new ZenModePrioritySendersPreferenceController(context,
                 "zen_mode_settings_category_messages", lifecycle, true));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(

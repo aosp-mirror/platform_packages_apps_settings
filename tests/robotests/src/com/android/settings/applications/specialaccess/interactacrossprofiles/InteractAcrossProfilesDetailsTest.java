@@ -22,13 +22,17 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.CrossProfileApps;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
-import android.os.Process;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +41,9 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class InteractAcrossProfilesDetailsTest {
 
+    private static final int PERSONAL_PROFILE_ID = 0;
+    private static final int WORK_PROFILE_ID = 10;
+    private static final int PACKAGE_UID = 0;
     private static final String CROSS_PROFILE_PACKAGE_NAME = "crossProfilePackage";
     public static final String INTERACT_ACROSS_PROFILES_PERMISSION =
             "android.permission.INTERACT_ACROSS_PROFILES";
@@ -44,29 +51,53 @@ public class InteractAcrossProfilesDetailsTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private final AppOpsManager mAppOpsManager = mContext.getSystemService(AppOpsManager.class);
     private final PackageManager mPackageManager = mContext.getPackageManager();
-    private final InteractAcrossProfilesDetails mFragment = new InteractAcrossProfilesDetails();
+    private final UserManager mUserManager = mContext.getSystemService(UserManager.class);
+    private final CrossProfileApps mCrossProfileApps = mContext.getSystemService(
+            CrossProfileApps.class);
 
     @Test
     public void getPreferenceSummary_appOpAllowed_returnsAllowed() {
+        shadowOf(mUserManager).addUser(
+                PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
+        shadowOf(mUserManager).addProfile(
+                PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
+                "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                WORK_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+        shadowOf(mCrossProfileApps).addCrossProfilePackage(
+                CROSS_PROFILE_PACKAGE_NAME);
         String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
         shadowOf(mAppOpsManager).setMode(
-                appOp, Process.myUid(), CROSS_PROFILE_PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
+                appOp, PACKAGE_UID, CROSS_PROFILE_PACKAGE_NAME, AppOpsManager.MODE_ALLOWED);
         shadowOf(mPackageManager).addPermissionInfo(createCrossProfilesPermissionInfo());
 
-        assertThat(mFragment.getPreferenceSummary(
-                mContext, CROSS_PROFILE_PACKAGE_NAME, Process.myUid()))
+        assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(
+                mContext, CROSS_PROFILE_PACKAGE_NAME))
                 .isEqualTo(mContext.getString(R.string.app_permission_summary_allowed));
     }
 
     @Test
     public void getPreferenceSummary_appOpNotAllowed_returnsNotAllowed() {
+        shadowOf(mUserManager).addUser(
+                PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
+        shadowOf(mUserManager).addProfile(
+                PERSONAL_PROFILE_ID, WORK_PROFILE_ID,
+                "work-profile"/* profileName */, UserInfo.FLAG_MANAGED_PROFILE);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                WORK_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+        shadowOf(mCrossProfileApps).addCrossProfilePackage(
+                CROSS_PROFILE_PACKAGE_NAME);
         String appOp = AppOpsManager.permissionToOp(INTERACT_ACROSS_PROFILES_PERMISSION);
         shadowOf(mAppOpsManager).setMode(
-                appOp, Process.myUid(), CROSS_PROFILE_PACKAGE_NAME, AppOpsManager.MODE_IGNORED);
+                appOp, PACKAGE_UID, CROSS_PROFILE_PACKAGE_NAME, AppOpsManager.MODE_IGNORED);
         shadowOf(mPackageManager).addPermissionInfo(createCrossProfilesPermissionInfo());
 
-        assertThat(mFragment.getPreferenceSummary(
-                mContext, CROSS_PROFILE_PACKAGE_NAME, Process.myUid()))
+        assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(
+                mContext, CROSS_PROFILE_PACKAGE_NAME))
                 .isEqualTo(mContext.getString(R.string.app_permission_summary_not_allowed));
     }
 

@@ -58,7 +58,7 @@ public class ZenModePrioritySendersPreferenceController
     @VisibleForTesting static final String KEY_NONE = "senders_none";
 
     private static final Intent ALL_CONTACTS_INTENT =
-            new Intent(Contacts.Intents.UI.LIST_ALL_CONTACTS_ACTION);
+            new Intent(Contacts.Intents.UI.LIST_DEFAULT);
     private static final Intent STARRED_CONTACTS_INTENT =
             new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION);
     private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN);

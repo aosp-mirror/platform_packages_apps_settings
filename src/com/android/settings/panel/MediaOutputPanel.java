@@ -220,6 +220,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
                 if (TextUtils.equals(controller.getPackageName(), mPackageName)) {
                     mMediaController = controller;
                     mMediaController.registerCallback(mCb);
+                    mCallback.onHeaderChanged();
                     break;
                 }
             }

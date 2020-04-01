@@ -21,11 +21,14 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
-import android.content.pm.CrossProfileApps;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
+
+import com.google.common.collect.ImmutableList;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,25 +39,34 @@ public class InteractAcrossProfilesPreferenceControllerTest {
 
     private static final String CROSS_PROFILE_PACKAGE_NAME = "crossProfilePackage";
     private static final String NOT_CROSS_PROFILE_PACKAGE_NAME = "notCrossProfilePackage";
+    public static final String INTERACT_ACROSS_PROFILES_PERMISSION =
+            "android.permission.INTERACT_ACROSS_PROFILES";
+    private static final int PROFILE_ID = 0;
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private final CrossProfileApps mCrossProfileApps =
-            mContext.getSystemService(CrossProfileApps.class);
+    private final PackageManager mPackageManager = mContext.getPackageManager();
     private final InteractAcrossProfilesDetailsPreferenceController mController =
             new InteractAcrossProfilesDetailsPreferenceController(mContext, "test_key");
 
     @Test
-    public void getAvailabilityStatus_crossProfilePackage_returnsAvailable() {
+    public void getAvailabilityStatus_requestedCrossProfilePermission_returnsAvailable() {
         mController.setPackageName(CROSS_PROFILE_PACKAGE_NAME);
-        shadowOf(mCrossProfileApps).addCrossProfilePackage(CROSS_PROFILE_PACKAGE_NAME);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+        PackageInfo packageInfo = shadowOf(mPackageManager).getInternalMutablePackageInfo(
+                CROSS_PROFILE_PACKAGE_NAME);
+        packageInfo.requestedPermissions = new String[]{
+                INTERACT_ACROSS_PROFILES_PERMISSION};
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
-    public void getAvailabilityStatus_notCrossProfilePackage_returnsDisabled() {
+    public void getAvailabilityStatus_notRequestedCrossProfilePermission_returnsDisabled() {
         mController.setPackageName(NOT_CROSS_PROFILE_PACKAGE_NAME);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PROFILE_ID, ImmutableList.of(NOT_CROSS_PROFILE_PACKAGE_NAME));
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
