@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -40,12 +41,15 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceIntro";
 
     private FaceManager mFaceManager;
+    private FaceFeatureProvider mFaceFeatureProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mFaceManager = Utils.getFaceManagerOrNull(this);
+        mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
+                .getFaceFeatureProvider();
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
@@ -87,6 +91,12 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     });
         }
 
+        final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);
+        final int footer2TextResource =
+                mFaceFeatureProvider.isAttentionSupported(getApplicationContext())
+                        ? R.string.security_settings_face_enroll_introduction_footer_part_2
+                        : R.string.security_settings_face_settings_footer_attention_not_supported;
+        footer2.setText(footer2TextResource);
     }
 
     @Override

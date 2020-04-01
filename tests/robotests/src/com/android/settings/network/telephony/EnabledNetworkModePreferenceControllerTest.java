@@ -148,6 +148,26 @@ public class EnabledNetworkModePreferenceControllerTest {
     }
 
     @Test
+    public void init_initDisplay5gList_returnTrue() {
+        long testBitmask = TelephonyManager.NETWORK_TYPE_BITMASK_NR
+                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+        doReturn(testBitmask).when(mTelephonyManager).getSupportedRadioAccessFamily();
+
+        mController.init(mLifecycle, SUB_ID);
+
+        assertThat(mController.mDisplay5gList).isTrue();
+    }
+
+    @Test
+    public void checkSupportedRadioBitmask_nrBitmask_returnTrue() {
+        long testBitmask = TelephonyManager.NETWORK_TYPE_BITMASK_NR
+                | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+
+        assertThat(mController.checkSupportedRadioBitmask(testBitmask,
+                TelephonyManager.NETWORK_TYPE_BITMASK_NR)).isTrue();
+    }
+
+    @Test
     public void updateState_updateByNetworkMode() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
@@ -170,6 +190,203 @@ public class EnabledNetworkModePreferenceControllerTest {
 
         assertThat(mPreference.getValue()).isEqualTo(
                 String.valueOf(TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA));
+    }
+
+    /**
+     * @string/enabled_networks_cdma_choices
+     *         Before            |        After
+     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
+     * @string/network_3G    , 4 |@string/network_lte_pure, 8
+     * @string/network_1x    , 5 |@string/network_3G      , 4
+     * @string/network_global, 10|@string/network_1x      , 5
+     *                           |@string/network_global  , 27
+     *
+     * @string/enabled_networks_cdma_only_lte_choices
+     *         Before            |        After
+     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
+     * @string/network_global, 10|@string/network_lte_pure, 8
+     *                           |@string/network_global  , 27
+     */
+    @Test
+    public void add5gListItem_lteCdma_5gLteCdma() {
+        //case#1
+        mPreference.setEntries(R.array.enabled_networks_cdma_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_cdma_values);
+        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_lte_pure)
+                , mContext.getString(R.string.network_3G)
+                , mContext.getString(R.string.network_1x)
+                , mContext.getString(R.string.network_global)};
+        CharSequence[] testEntryValues = {"25", "8", "4", "5", "27"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
+
+        //case#2
+        mPreference.setEntries(R.array.enabled_networks_cdma_only_lte_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_cdma_only_lte_values);
+        CharSequence[] testEntries1 = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_lte_pure)
+                , mContext.getString(R.string.network_global)};
+        CharSequence[] testEntryValues1 = {"25", "8", "27"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries1);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues1);
+    }
+
+    /**
+     * @string/enabled_networks_except_gsm_4g_choices
+     *         Before         |        After
+     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_4G_pure , 9
+     *                        |@string/network_3G      , 0
+     *
+     * @string/enabled_networks_except_gsm_choices
+     *         Before         |        After
+     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_lte_pure, 9
+     *                        |@string/network_3G      , 0
+     *
+     * @string/enabled_networks_4g_choices
+     *         Before         |        After
+     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_4G_pure , 9
+     * @string/network_2G , 1 |@string/network_3G      , 0
+     *                        |@string/network_2G      , 1
+     *
+     * @string/enabled_networks_choices
+     *         Before         |        After
+     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_lte_pure, 9
+     * @string/network_2G , 1 |@string/network_3G      , 0
+     *                        |@string/network_2G      , 1
+     */
+    @Test
+    public void add5gListItem_lteGsm_5gLteGsm() {
+        //csae#1
+        mPreference.setEntries(R.array.enabled_networks_except_gsm_4g_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_except_gsm_values);
+        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_4G_pure)
+                , mContext.getString(R.string.network_3G)};
+        CharSequence[] testEntryValues = {"26", "9", "0"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
+
+        //case#2
+        mPreference.setEntries(R.array.enabled_networks_except_gsm_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_except_gsm_values);
+        CharSequence[] testEntries1 = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_lte_pure)
+                , mContext.getString(R.string.network_3G)};
+        CharSequence[] testEntryValues1 = {"26", "9", "0"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries1);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues1);
+
+        //case#3
+        mPreference.setEntries(R.array.enabled_networks_4g_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_values);
+        CharSequence[] testEntries2 = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_4G_pure)
+                , mContext.getString(R.string.network_3G)
+                , mContext.getString(R.string.network_2G)};
+        CharSequence[] testEntryValues2 = {"26", "9", "0", "1"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries2);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues2);
+
+        //case#4
+        mPreference.setEntries(R.array.enabled_networks_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_values);
+        CharSequence[] testEntries3 = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_lte_pure)
+                , mContext.getString(R.string.network_3G)
+                , mContext.getString(R.string.network_2G)};
+        CharSequence[] testEntryValues3 = {"26", "9", "0", "1"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries3);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues3);
+    }
+
+    /**
+     * @string/preferred_network_mode_choices_world_mode
+     *         Before         |        After
+     * "Global"           , 10|@string/network_global  , 27
+     * "LTE / CDMA"       , 8 |"LTE / CDMA"            , 8
+     * "LTE / GSM / UMTS" , 9 |"LTE / GSM / UMTS"      , 9
+     */
+    @Test
+    public void add5gListItem_worldPhone_Global() {
+        mPreference.setEntries(R.array.preferred_network_mode_choices_world_mode);
+        mPreference.setEntryValues(R.array.preferred_network_mode_values_world_mode);
+        CharSequence[] testEntries = {mContext.getString(R.string.network_global)
+                , "LTE / CDMA"
+                , "LTE / GSM / UMTS"};
+        CharSequence[] testEntryValues = {"27", "8", "9"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
+    }
+
+    /**
+     * @string/enabled_networks_tdscdma_choices
+     *         Before         |        After
+     * @string/network_lte, 22|@string/network_5G + @string/network_recommended , 33
+     * @string/network_3G , 18|@string/network_lte_pure, 22
+     * @string/network_2G , 1 |@string/network_3G      , 18
+     *                        |@string/network_2G      , 1
+     */
+    @Test
+    public void add5gListItem_td_5gTd() {
+        mPreference.setEntries(R.array.enabled_networks_tdscdma_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_tdscdma_values);
+        CharSequence[] testEntries = {mContext.getString(R.string.network_5G)
+                + mContext.getString(R.string.network_recommended)
+                , mContext.getString(R.string.network_lte_pure)
+                , mContext.getString(R.string.network_3G)
+                , mContext.getString(R.string.network_2G)};
+        CharSequence[] testEntryValues = {"33", "22", "18", "1"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
+    }
+
+    @Test
+    public void add5gListItem_noLte_no5g() {
+        mPreference.setEntries(R.array.enabled_networks_except_lte_choices);
+        mPreference.setEntryValues(R.array.enabled_networks_except_lte_values);
+        CharSequence[] testEntries = {mContext.getString(R.string.network_3G)
+                , mContext.getString(R.string.network_2G)};
+        CharSequence[] testEntryValues = {"0", "1"};
+
+        mController.add5gListItem(mPreference);
+
+        assertThat(mPreference.getEntries()).isEqualTo(testEntries);
+        assertThat(mPreference.getEntryValues()).isEqualTo(testEntryValues);
     }
 
     @Test

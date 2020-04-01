@@ -265,20 +265,17 @@ public class PowerUsageSummaryTest {
             }
         }).when(mFeatureFactory.powerUsageFeatureProvider).getEnhancedEstimateDebugString(any());
 
-        doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary2);
         doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary1);
         mFragment.onLongClick(new View(mRealContext));
         TextView summary1 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary1);
-        TextView summary2 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary2);
         Robolectric.flushBackgroundThreadScheduler();
-        assertThat(summary2.getText().toString()).contains(NEW_ML_EST_SUFFIX);
+        assertThat(summary1.getText().toString()).contains(NEW_ML_EST_SUFFIX);
         assertThat(summary1.getText().toString()).contains(OLD_EST_SUFFIX);
     }
 
     @Test
     public void debugMode() {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isEstimateDebugEnabled();
-        doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary2);
 
         mFragment.restartBatteryInfoLoader();
         ArgumentCaptor<View.OnLongClickListener> listener = ArgumentCaptor.forClass(
