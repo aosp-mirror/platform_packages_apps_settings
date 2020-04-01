@@ -17,12 +17,15 @@
 package com.android.settings.network.ims;
 
 import android.telephony.ims.ImsMmTelManager;
+import android.util.Log;
 
 
 /**
  * An {@link ImsQuery} for accessing IMS WFC enabled settings from user
  */
 public class ImsQueryWfcUserSetting implements ImsQuery {
+
+    private static final String LOG_TAG = "QueryWfcUserSetting";
 
     /**
      * Constructor
@@ -40,7 +43,13 @@ public class ImsQueryWfcUserSetting implements ImsQuery {
      * @return result of query
      */
     public boolean query() {
-        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
-        return imsMmTelManager.isVoWiFiSettingEnabled();
+        try {
+            final ImsMmTelManager imsMmTelManager =
+                    ImsMmTelManager.createForSubscriptionId(mSubId);
+            return imsMmTelManager.isVoWiFiSettingEnabled();
+        } catch (IllegalArgumentException exception) {
+            Log.w(LOG_TAG, "fail to get Wfc settings. subId=" + mSubId, exception);
+        }
+        return false;
     }
 }
