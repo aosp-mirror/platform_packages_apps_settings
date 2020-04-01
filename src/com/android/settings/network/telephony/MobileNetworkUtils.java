@@ -51,6 +51,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
+import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsRcsManager;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.RcsUceAdapter;
@@ -66,7 +67,6 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
@@ -108,23 +108,6 @@ public class MobileNetworkUtils {
     }
 
     /**
-     * Returns true if Wifi calling is enabled for at least one subscription.
-     */
-    public static boolean isWifiCallingEnabled(Context context) {
-        final int[] subIds = getActiveSubscriptionIdList(context);
-        if (ArrayUtils.isEmpty(subIds)) {
-            Log.d(TAG, "isWifiCallingEnabled: subIds is empty");
-            return false;
-        }
-        for (int subId : subIds) {
-            if (isWifiCallingEnabled(context, subId)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Returns true if Wifi calling is provisioned for the specific subscription with id
      * {@code subId}.
      */
@@ -141,36 +124,13 @@ public class MobileNetworkUtils {
     }
 
     /**
-     * Returns true if Wifi calling is enabled for the specific subscription with id {@code subId}.
-     */
-    public static boolean isWifiCallingEnabled(Context context, int subId) {
-        final PhoneAccountHandle simCallManager =
-                context.getSystemService(TelecomManager.class)
-                       .getSimCallManagerForSubscription(subId);
-
-        boolean isWifiCallingEnabled;
-        if (simCallManager != null) {
-            final Intent intent = buildPhoneAccountConfigureIntent(
-                    context, simCallManager);
-
-            isWifiCallingEnabled = intent != null;
-        } else {
-            final WifiCallingQueryImsState queryState =
-                    new WifiCallingQueryImsState(context, subId);
-            isWifiCallingEnabled = queryState.isReadyToWifiCalling();
-        }
-
-        return isWifiCallingEnabled;
-    }
-
-    /**
      * @return The current user setting for whether or not contact discovery is enabled for the
      * subscription id specified.
      * @see RcsUceAdapter#isUceSettingEnabled()
      */
     public static boolean isContactDiscoveryEnabled(Context context, int subId) {
-        android.telephony.ims.ImsManager imsManager =
-                context.getSystemService(android.telephony.ims.ImsManager.class);
+        ImsManager imsManager =
+                context.getSystemService(ImsManager.class);
         return isContactDiscoveryEnabled(imsManager, subId);
     }
 
@@ -179,7 +139,7 @@ public class MobileNetworkUtils {
      * subscription id specified.
      * @see RcsUceAdapter#isUceSettingEnabled()
      */
-    public static boolean isContactDiscoveryEnabled(android.telephony.ims.ImsManager imsManager,
+    public static boolean isContactDiscoveryEnabled(ImsManager imsManager,
             int subId) {
         ImsRcsManager manager = getImsRcsManager(imsManager, subId);
         if (manager == null) return false;
@@ -196,7 +156,7 @@ public class MobileNetworkUtils {
      * Set the new user setting to enable or disable contact discovery through RCS UCE.
      * @see RcsUceAdapter#setUceSettingEnabled(boolean)
      */
-    public static void setContactDiscoveryEnabled(android.telephony.ims.ImsManager imsManager,
+    public static void setContactDiscoveryEnabled(ImsManager imsManager,
             int subId, boolean isEnabled) {
         ImsRcsManager manager = getImsRcsManager(imsManager, subId);
         if (manager == null) return;
@@ -211,7 +171,7 @@ public class MobileNetworkUtils {
     /**
      * @return The ImsRcsManager associated with the subscription specified.
      */
-    private static ImsRcsManager getImsRcsManager(android.telephony.ims.ImsManager imsManager,
+    private static ImsRcsManager getImsRcsManager(ImsManager imsManager,
             int subId) {
         if (imsManager == null) return null;
         try {
