@@ -19,10 +19,8 @@ package com.android.settings.wifi.calling;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
-import com.android.ims.ImsManager;
 import com.android.settings.SettingsActivity;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 
 public class WifiCallingSuggestionActivity extends SettingsActivity {
 
@@ -30,11 +28,7 @@ public class WifiCallingSuggestionActivity extends SettingsActivity {
         final WifiCallingQueryImsState queryState =
                 new WifiCallingQueryImsState(context,
                 SubscriptionManager.getDefaultVoiceSubscriptionId());
-        if (!ImsManager.isWfcEnabledByPlatform(context) ||
-                !MobileNetworkUtils.isWfcProvisionedOnDevice(
-                        SubscriptionManager.getDefaultVoiceSubscriptionId())) {
-            return true;
-        }
-        return queryState.isEnabledByUser() && queryState.isAllowUserControl();
+        return (!queryState.isWifiCallingProvisioned())
+                || (queryState.isEnabledByUser() && queryState.isAllowUserControl());
     }
 }
