@@ -240,6 +240,9 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             Context context, String packageName) {
         UserManager userManager = context.getSystemService(UserManager.class);
         UserHandle workProfile = InteractAcrossProfilesSettings.getWorkProfile(userManager);
+        if (workProfile == null) {
+            return false;
+        }
         UserHandle personalProfile = userManager.getProfileParent(workProfile);
         return context.getSystemService(
                 CrossProfileApps.class).canConfigureInteractAcrossProfiles(packageName)
