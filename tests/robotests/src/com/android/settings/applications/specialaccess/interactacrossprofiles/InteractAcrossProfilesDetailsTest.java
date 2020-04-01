@@ -75,7 +75,7 @@ public class InteractAcrossProfilesDetailsTest {
 
         assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(
                 mContext, CROSS_PROFILE_PACKAGE_NAME))
-                .isEqualTo(mContext.getString(R.string.app_permission_summary_allowed));
+                .isEqualTo(mContext.getString(R.string.interact_across_profiles_summary_allowed));
     }
 
     @Test
@@ -98,7 +98,21 @@ public class InteractAcrossProfilesDetailsTest {
 
         assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(
                 mContext, CROSS_PROFILE_PACKAGE_NAME))
-                .isEqualTo(mContext.getString(R.string.app_permission_summary_not_allowed));
+                .isEqualTo(mContext.getString(
+                        R.string.interact_across_profiles_summary_not_allowed));
+    }
+
+    @Test
+    public void getPreferenceSummary_noWorkProfile_returnsNotAllowed() {
+        shadowOf(mUserManager).addUser(
+                PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
+        shadowOf(mPackageManager).setInstalledPackagesForUserId(
+                PERSONAL_PROFILE_ID, ImmutableList.of(CROSS_PROFILE_PACKAGE_NAME));
+
+        assertThat(InteractAcrossProfilesDetails.getPreferenceSummary(
+                mContext, CROSS_PROFILE_PACKAGE_NAME))
+                .isEqualTo(mContext.getString(
+                        R.string.interact_across_profiles_summary_not_allowed));
     }
 
     private PermissionInfo createCrossProfilesPermissionInfo() {
