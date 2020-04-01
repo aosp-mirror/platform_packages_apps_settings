@@ -83,7 +83,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -1283,11 +1282,10 @@ public class WifiDetailPreferenceController2Test {
         assertThat(mMockIpv6AddressesPref.isSelectable()).isFalse();
     }
 
-    @Ignore
     @Test
     public void captivePortal_shouldShowSignInButton() {
         setUpForConnectedNetwork();
-        setUpSpyController();
+        setUpController();
 
         InOrder inOrder = inOrder(mMockButtonsPref);
 
@@ -1299,14 +1297,17 @@ public class WifiDetailPreferenceController2Test {
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
 
+        when(mMockWifiEntry.canSignIn()).thenReturn(true);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
 
         inOrder.verify(mMockButtonsPref).setButton2Text(R.string.wifi_sign_in_button_text);
         inOrder.verify(mMockButtonsPref).setButton2Visible(true);
 
+        when(mMockWifiEntry.canSignIn()).thenReturn(false);
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
+
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
     }
 
@@ -1336,7 +1337,6 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
     }
 
-    @Ignore
     @Test
     public void testSignInButton_shouldStartCaptivePortalApp() {
         setUpForConnectedNetwork();
@@ -1348,7 +1348,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockButtonsPref, atLeastOnce()).setButton2OnClickListener(captor.capture());
         // getValue() returns the last captured value
         captor.getValue().onClick(null);
-        verify(mMockConnectivityManager).startCaptivePortalApp(mMockNetwork);
+        verify(mMockWifiEntry).signIn(any(WifiEntry.SignInCallback.class));
         verify(mMockMetricsFeatureProvider)
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
     }
