@@ -13,19 +13,13 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_conversations_settings"
-    android:title="@string/zen_mode_conversations_title">
-    <!-- Conversations -->
-    <PreferenceCategory
-        android:key="zen_mode_conversations_radio_buttons"
-        android:title="@string/zen_mode_conversations_section_title">
 
-        <!-- Senders image -->
-        <com.android.settingslib.widget.LayoutPreference
-            android:key="zen_mode_conversations_image"
-            android:layout="@layout/zen_mode_senders_overlay_image"
-            android:selectable="false"/>
-    </PreferenceCategory>
-</PreferenceScreen>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/zen_mode_settings_senders_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</FrameLayout>

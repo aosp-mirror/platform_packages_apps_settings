@@ -19,12 +19,15 @@ package com.android.settings.network.ims;
 import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.feature.MmTelFeature;
 import android.telephony.ims.stub.ImsRegistrationImplBase;
+import android.util.Log;
 
 
 /**
  * An {@link ImsQuery} for accessing IMS provision stat
  */
 public class ImsQueryProvisioningStat implements ImsQuery {
+
+    private static final String LOG_TAG = "QueryPrivisioningStat";
 
     private volatile int mSubId;
     private volatile int mCapability;
@@ -50,8 +53,13 @@ public class ImsQueryProvisioningStat implements ImsQuery {
      * @return result of query
      */
     public boolean query() {
-        final ProvisioningManager privisionManager =
-                ProvisioningManager.createForSubscriptionId(mSubId);
-        return privisionManager.getProvisioningStatusForCapability(mCapability, mTech);
+        try {
+            final ProvisioningManager privisionManager =
+                    ProvisioningManager.createForSubscriptionId(mSubId);
+            return privisionManager.getProvisioningStatusForCapability(mCapability, mTech);
+        } catch (IllegalArgumentException exception) {
+            Log.w(LOG_TAG, "fail to get Provisioning stat. subId=" + mSubId, exception);
+        }
+        return false;
     }
 }
