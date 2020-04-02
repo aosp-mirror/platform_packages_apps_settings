@@ -55,7 +55,8 @@ public class SupportDashboardActivityTest {
         final SearchIndexableRaw value = indexables.get(0);
 
         assertThat(value.title).isEqualTo(mContext.getString(R.string.page_tab_title_support));
-        assertThat(value.screenTitle).isEqualTo(mContext.getString(R.string.settings_label));
+        assertThat(value.screenTitle).isEqualTo(
+                mContext.getString(R.string.page_tab_title_support));
         assertThat(value.intentTargetPackage).isEqualTo(mContext.getPackageName());
         assertThat(value.intentTargetClass).isEqualTo(SupportDashboardActivity.class.getName());
         assertThat(value.intentAction).isEqualTo(Intent.ACTION_MAIN);
@@ -67,7 +68,7 @@ public class SupportDashboardActivityTest {
         // Intent action used by setup wizard to start support settings
         Intent intent = new Intent("com.android.settings.action.SUPPORT_SETTINGS");
         ResolveInfo resolveInfo =
-            packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                packageManager.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
         assertThat(resolveInfo).isNotNull();
         assertThat(resolveInfo.activityInfo.name)
                 .isEqualTo(SupportDashboardActivity.class.getName());
