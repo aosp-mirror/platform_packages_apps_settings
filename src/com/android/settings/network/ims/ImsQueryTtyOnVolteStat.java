@@ -17,12 +17,15 @@
 package com.android.settings.network.ims;
 
 import android.telephony.ims.ImsMmTelManager;
+import android.util.Log;
 
 
 /**
  * An {@link ImsQuery} for accessing IMS tty on VoLte stat
  */
 public class ImsQueryTtyOnVolteStat implements ImsQuery {
+
+    private static final String LOG_TAG = "QueryTtyOnVolteStat";
 
     /**
      * Constructor
@@ -40,7 +43,13 @@ public class ImsQueryTtyOnVolteStat implements ImsQuery {
      * @return result of query
      */
     public boolean query() {
-        final ImsMmTelManager imsMmTelManager = ImsMmTelManager.createForSubscriptionId(mSubId);
-        return imsMmTelManager.isTtyOverVolteEnabled();
+        try {
+            final ImsMmTelManager imsMmTelManager =
+                    ImsMmTelManager.createForSubscriptionId(mSubId);
+            return imsMmTelManager.isTtyOverVolteEnabled();
+        } catch (IllegalArgumentException exception) {
+            Log.w(LOG_TAG, "fail to get VoLte Tty Stat. subId=" + mSubId, exception);
+        }
+        return false;
     }
 }

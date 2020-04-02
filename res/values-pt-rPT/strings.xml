@@ -2059,7 +2059,7 @@
     <string name="onscreen_keyboard_settings_summary" msgid="3975358507879701606">"Definições do teclado no ecrã"</string>
     <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Teclado físico"</string>
     <string name="builtin_keyboard_settings_summary" msgid="4332792334499933856">"Definições do teclado físico"</string>
-    <string name="gadget_picker_title" msgid="7615902510050731400">"Escolher miniaplicação"</string>
+    <string name="gadget_picker_title" msgid="7615902510050731400">"Escolher gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Escolher widget"</string>
     <string name="allow_bind_app_widget_activity_allow_bind_title" msgid="3537968409832846255">"Criar widget e permitir o acesso?"</string>
     <string name="allow_bind_app_widget_activity_allow_bind" msgid="5694218981358874429">"Depois de criar o widget, <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> pode aceder a todos os dados apresentados."</string>
@@ -3036,14 +3036,24 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Utilizar predefinição"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Sempre"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Exceto enquanto aberta outra app de pagamento"</string>
-    <string name="nfc_payment_pay_with" msgid="10107565447713526">"Num terminal Tocar e pagar, pagar com:"</string>
+    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
+    <skip />
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Pagar num terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configure uma aplicação de pagamento. Em seguida, basta aproximar a parte de trás do telemóvel a um terminal com o símbolo de pagamento sem contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Mais..."</string>
-    <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"Definir como preferência?"</string>
-    <string name="nfc_payment_set_default" msgid="499518459418302061">"Pretende utilizar sempre <xliff:g id="APP">%1$s</xliff:g> com a funcionalidade Tocar e pagar?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="162768672108688747">"Pretende utilizar sempre <xliff:g id="APP_0">%1$s</xliff:g>, em vez de <xliff:g id="APP_1">%2$s</xliff:g>, com a funcionalidade Tocar e pagar?"</string>
+    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
+    <skip />
+    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
+    <skip />
+    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
+    <skip />
+    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restrições"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remover restrições"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Alterar PIN"</string>
@@ -3426,6 +3436,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Histórico de notificações desativado"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Ative o histórico de notificações para ver as notificações recentes e as notificações suspensas."</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ver definições de notificação"</string>
+    <string name="notification_history_open_notification" msgid="2655071846911258371">"abrir notificação"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir a suspensão de notificações"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar os ícones das notificações discretas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Os ícones das notificações discretas não são apresentados na barra de estado."</string>
@@ -3566,6 +3577,10 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permitir imagem na imagem"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permita que esta aplicação crie uma janela de ecrã no ecrã enquanto a aplicação está aberta ou depois de sair da mesma (por exemplo, para continuar a ver um vídeo). Esta janela é apresentada sobre as outras aplicações que estiver a utilizar."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Apps pessoais e de trabalho associadas"</string>
+    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
+    <skip />
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Nenhuma app associada"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"vários perfis app associada apps de trabalho e pessoais"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Apps pessoais e de trabalho associadas"</string>
@@ -3584,11 +3599,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps associadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app associada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="7761038025614718824">"Instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil de trabalho"</string>
-    <string name="interact_across_profiles_install_work_app_summary" msgid="7418653807013809609">"Para associar estas apps, instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil de trabalho."</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5405510221944166674">"Instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil pessoal"</string>
-    <string name="interact_across_profiles_install_personal_app_summary" msgid="2464091172295014696">"Para associar estas apps, instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil pessoal."</string>
-    <string name="interact_across_profiles_install_app_action" msgid="131173339507809328">"Obter app"</string>
+    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acesso Não incomodar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir o modo Não incomodar"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nenhuma aplicação instalada solicitou acesso Não incomodar"</string>
@@ -3844,8 +3860,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Links compatíveis"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Outras predefinições"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilizados em <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="8072987826282477558">"Armazenamento interno"</string>
-    <string name="storage_type_external" msgid="8258689891893683905">"Armazenamento externo"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"armazenamento interno"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"armazenamento externo"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> util. desde <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Armazenamento utilizado"</string>
     <string name="change" msgid="273206077375322595">"Alterar"</string>

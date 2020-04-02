@@ -1268,9 +1268,9 @@
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Pantalla Ambiente"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Cuándo mostrar"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activar pantalla para notif."</string>
-    <string name="doze_summary" msgid="8252867381522942804">"La pantalla se enciende para indicar nuevas notificaciones cuando está oscura"</string>
+    <string name="doze_summary" msgid="8252867381522942804">"La pantalla se enciende para indicar nuevas notificaciones cuando está apagada"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Mostrar siempre infor. y clima"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"Mayor uso de batería"</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"El uso de la batería será mayor"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamaño de fuente"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Aumenta o reduce el tamaño del texto en pantalla"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Bloqueo de la tarjeta SIM"</string>
@@ -2128,7 +2128,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"Presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en la parte inferior de la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"Desliza dos dedos hacia arriba desde la parte inferior de la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"Desliza tres dedos hacia arriba desde la parte inferior de la pantalla"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Pulsa el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en la parte inferior de la pantalla.\n\nPara cambiar de función, mantén presionado el botón de accesibilidad."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Presiona el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> en la parte inferior de la pantalla.\n\nPara cambiar de función, mantén presionado el botón de accesibilidad."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"Desliza dos dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de función, desliza dos dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"Desliza tres dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de función, desliza tres dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener presionadas las teclas de volumen"</string>
@@ -2142,7 +2142,7 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Servicio de combinación de teclas"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Configuración de combinación de teclas"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Acceso directo desde pant. bloqueo"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite que el acceso directo de la función se active desde la pantalla de bloqueo. Mantén presionadas ambas teclas de volumen durante unos segundos."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permite que la combinación de teclas active las funciones desde la pantalla de bloqueo. Mantén presionadas ambas teclas de volumen durante unos segundos."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texto de alto contraste"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizar automáticamente la ampliación de pantalla"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualizar la ampliación de pantalla al cambiar de aplicaciones"</string>
@@ -3036,14 +3036,24 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Utilizar la aplicación predeterminada"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Siempre"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepto cuando otra app de pagos esté abierta"</string>
-    <string name="nfc_payment_pay_with" msgid="10107565447713526">"En una terminal Tocar y pagar, pagar con:"</string>
+    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
+    <skip />
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Cómo pagar en la terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación para efectuar pagos. A continuación, solo tienes que sostener la parte posterior del teléfono sobre cualquier terminal con el símbolo de pago sin contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Más…"</string>
-    <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"¿Establecer como preferencia?"</string>
-    <string name="nfc_payment_set_default" msgid="499518459418302061">"¿Quieres usar <xliff:g id="APP">%1$s</xliff:g> siempre con Tocar y pagar?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="162768672108688747">"¿Quieres usar <xliff:g id="APP_0">%1$s</xliff:g> siempre en lugar de <xliff:g id="APP_1">%2$s</xliff:g> con Tocar y pagar?"</string>
+    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
+    <skip />
+    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
+    <skip />
+    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
+    <skip />
+    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
+    <skip />
+    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricciones"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Eliminar restricciones"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambiar PIN"</string>
@@ -3074,7 +3084,7 @@
     <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Descubrimiento de contactos"</string>
     <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Permite que tu proveedor descubra qué funciones de llamadas admiten tus contactos."</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"¿Deseas habilitar el descubrimiento de contactos?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Todos los números de teléfono de contactos se enviarán periódicamente a la empresa de telefonía para descubrir qué funciones de llamada son compatibles."</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Todos los números de teléfono de los contactos se enviarán periódicamente a la empresa de telefonía para descubrir qué funciones de llamada son compatibles."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipo de red preferido"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recomendado)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mensajes MMS"</string>
@@ -3426,6 +3436,8 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"El historial de notificaciones está desactivado"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Activa el historial de notificaciones para ver las notificaciones recientes y las pospuestas"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ver configuración de notificaciones"</string>
+    <!-- no translation found for notification_history_open_notification (2655071846911258371) -->
+    <skip />
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir posponer alarmas"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar íconos de las notificaciones silenciosas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Los íconos de las notificaciones silenciosas no se muestran en la barra de estado"</string>
@@ -3441,9 +3453,9 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Si activas las burbujas para esta app, también se activarán para el dispositivo.\n\nEsto afecta otras apps o conversaciones que pueden crear burbujas."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activar"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Cancelar"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Las conversaciones activas pueden aparecer como íconos flotantes"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Burbujas activadas: las conversaciones pueden aparecer como elementos flotantes"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permitir que las apps muestren burbujas"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Algunas conversaciones aparecerán como íconos flotantes encima de otras apps"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Algunas conversaciones aparecerán como elementos flotantes encima de otras apps"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Se pueden crear burbujas de todas las conversaciones"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Se pueden crear burbujas de las conversaciones seleccionadas"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"No se pueden crear burbujas"</string>
@@ -3564,29 +3576,34 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permitir Pantalla en pantalla"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permite que esta app cree una ventana de Pantalla en pantalla mientras esté abierta o después de que hayas salido de ella (por ejemplo, para seguir viendo un video). Esta ventana se muestra sobre otras apps que estés usando."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Apps personales y de trabajo conectadas"</string>
+    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
+    <skip />
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"No hay apps conectadas"</string>
-    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"Apps personales y de trabajo conectadas al perfil sincronizado"</string>
+    <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"apps personales y de trabajo conectadas al perfil sincronizado"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Apps personales y de trabajo conectadas"</string>
-    <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectado"</string>
+    <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectadas"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar estas apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Las apps conectadas comparten permisos y pueden acceder a los datos de la otra."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Solo conecta apps de confianza a tus datos personales. Las apps de trabajo podrían exponer tus datos al administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Solo conecta apps de confianza para que accedan a tus datos personales. Las apps de trabajo podrían exponer tus datos al administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"¿Quieres confiarle tus datos personales a la app de trabajo <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> puede exponer tus datos personales al administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Datos de apps"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esta app puede acceder a los datos de tu app de <xliff:g id="NAME">%1$s</xliff:g> personal."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esta app puede acceder a los datos de tu app personal de <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permisos"</string>
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esta app puede usar los permisos de tu app de <xliff:g id="NAME">%1$s</xliff:g> personal, como el acceso a la ubicación, el almacenamiento o los contactos."</string>
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esta app puede usar los permisos de tu app personal de <xliff:g id="NAME">%1$s</xliff:g>, como el acceso a la ubicación, el almacenamiento o los contactos."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"No hay apps conectadas"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps conectadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app conectada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="7761038025614718824">"Instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo"</string>
-    <string name="interact_across_profiles_install_work_app_summary" msgid="7418653807013809609">"Para conectarte a estas apps, instala la app de <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5405510221944166674">"Instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal"</string>
-    <string name="interact_across_profiles_install_personal_app_summary" msgid="2464091172295014696">"Para conectarte a estas apps, instala la app de <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal"</string>
-    <string name="interact_across_profiles_install_app_action" msgid="131173339507809328">"Descargar app"</string>
+    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
+    <skip />
+    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
+    <skip />
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso en No interrumpir"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir opción No interrumpir"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ninguna aplicación instalada solicitó acceso en No interrumpir."</string>
@@ -3732,19 +3749,13 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"eventos"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que las apps anulen No interrumpir"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que pueden interrumpir"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_add_header (3201829605075172536) -->
-    <skip />
-    <!-- no translation found for zen_mode_bypassing_apps_none (7944221631721778096) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Seleccionar más apps"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"No se seleccionó ninguna app"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Ninguna app puede interrumpir"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_add (5031919618521327102) -->
-    <skip />
-    <!-- no translation found for zen_mode_bypassing_apps_summary_all (4684544706511555744) -->
-    <skip />
-    <!-- no translation found for zen_mode_bypassing_apps_summary_some (5315750826830358230) -->
-    <skip />
-    <!-- no translation found for zen_mode_bypassing_apps_footer (1454862989340760124) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Agregar apps"</string>
+    <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Todas las notificaciones"</string>
+    <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Algunas notificaciones"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Personas determinadas pueden comunicarse contigo, incluso si no permites que las apps causen interrupciones"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> pueden interrumpir</item>
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> puede interrumpir</item>
@@ -3753,10 +3764,8 @@
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Excepciones de apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Todas las notificaciones"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Algunas notificaciones"</string>
-    <!-- no translation found for zen_mode_bypassing_app_channels_header (4011017798712587373) -->
-    <skip />
-    <!-- no translation found for zen_mode_bypassing_app_channels_toggle_all (1449462656358219116) -->
-    <skip />
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificaciones que pueden interrumpir"</string>
+    <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Permitir todas las notificaciones"</string>
     <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
       <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> pueden interrumpir</item>
       <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> puede interrumpir</item>
@@ -3774,8 +3783,7 @@
     <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"emisores de llamadas repetidas"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
-    <!-- no translation found for zen_mode_calls_summary_two (6351563496898410742) -->
-    <skip />
+    <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> y <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Si la misma persona llama por segunda vez en un plazo de <xliff:g id="MINUTES">%d</xliff:g> minuto(s)"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Personalizado"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Activar automáticam."</string>
@@ -3851,8 +3859,10 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Vínculos admitidos"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Otras configuraciones predeterminadas"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> usado en <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="8072987826282477558">"Almacenamiento interno"</string>
-    <string name="storage_type_external" msgid="8258689891893683905">"Almacenamiento externo"</string>
+    <!-- no translation found for storage_type_internal (979243131665635278) -->
+    <skip />
+    <!-- no translation found for storage_type_external (125078274000280821) -->
+    <skip />
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> desde el <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Almacenamiento utilizado"</string>
     <string name="change" msgid="273206077375322595">"Cambiar"</string>
@@ -4339,8 +4349,8 @@
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el Tema oscuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ayuda a extender la duración de la batería"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mosaicos de configuración rápida para programadores"</string>
-    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización de ADB"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones de ADB para sistemas que no se volvieron a conectar dentro del período predeterminado (siete días) o aquel configurado por el usuario (mínimo de un día)."</string>
+    <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización ADB"</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones ADB para sistemas que no se volvieron a conectar dentro de un período predeterminado (siete días) o uno configurado por el usuario (mínimo de un día)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Seguimiento de Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Configuración del perfil de trabajo"</string>
@@ -4863,7 +4873,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Detener transmisión"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"¿Deseas desactivar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"También se desactivará tu conexión 5G.\nDurante una llamada de voz, no puedes usar Internet y es posible que algunas apps no funcionen."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"Si usas dos tarjetas SIM, este teléfono no puede conectarse a 5G. Más información"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"Si usas dos tarjetas SIM, esta tablet no puede conectarse a 5G. Más información"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"Si usas dos tarjetas SIM, este dispositivo no puede conectarse a 5G. Más información"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"Este teléfono no puede conectarse a 5G cuando se usan 2 tarjetas SIM. Más información"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"Esta tablet no puede conectarse a 5G cuando se usan 2 tarjetas SIM. Más información"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"Este dispositivo no puede conectarse a 5G cuando se usan 2 tarjetas SIM. Más información"</string>
 </resources>

@@ -83,7 +83,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -304,15 +303,31 @@ public class WifiDetailPreferenceController2Test {
     private void setUpForConnectedNetwork() {
         when(mMockNetworkDetailsTracker.getWifiEntry()).thenReturn(mMockWifiEntry);
         when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+    }
 
-        mController = newWifiDetailPreferenceController2();
+    private void setUpController() {
+        mController = new WifiDetailPreferenceController2(
+                mMockWifiEntry,
+                mMockConnectivityManager,
+                mContext,
+                mMockFragment,
+                null,  // Handler
+                mLifecycle,
+                mMockWifiManager,
+                mMockMetricsFeatureProvider,
+                mMockIconInjector,
+                mMockClock);
+    }
+
+    private void setUpSpyController() {
+        mController = newSpyWifiDetailPreferenceController2();
     }
 
     private void setUpForDisconnectedNetwork() {
         when(mMockNetworkDetailsTracker.getWifiEntry()).thenReturn(mMockWifiEntry);
         when(mMockWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
 
-        mController = newWifiDetailPreferenceController2();
+        mController = newSpyWifiDetailPreferenceController2();
     }
 
     private void setUpForNotInRangeNetwork() {
@@ -320,10 +335,10 @@ public class WifiDetailPreferenceController2Test {
         when(mMockNetworkDetailsTracker.getWifiEntry()).thenReturn(mMockWifiEntry);
         when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_UNREACHABLE);
 
-        mController = newWifiDetailPreferenceController2();
+        mController = newSpyWifiDetailPreferenceController2();
     }
 
-    private WifiDetailPreferenceController2 newWifiDetailPreferenceController2() {
+    private WifiDetailPreferenceController2 newSpyWifiDetailPreferenceController2() {
         return spy(new WifiDetailPreferenceController2(
                 mMockWifiEntry,
                 mMockConnectivityManager,
@@ -383,6 +398,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void isAvailable_shouldAlwaysReturnTrue() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mController.displayPreference(mMockScreen);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -391,6 +407,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void securityPreference_stringShouldBeSet() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         displayAndResume();
 
         verify(mMockSecurityPref).setSummary(SECURITY);
@@ -399,6 +416,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void latestWifiInfo_shouldBeFetchedInDisplayPreferenceForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -426,6 +444,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void latestNetworkInfo_shouldBeFetchedInDisplayPreferenceForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -453,6 +472,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void networkCallback_shouldBeRegisteredOnResume() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         displayAndResume();
 
         verify(mMockConnectivityManager, times(1)).registerNetworkCallback(
@@ -462,6 +482,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void networkCallback_shouldBeUnregisteredOnPause() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         displayAndResume();
         mController.onPause();
 
@@ -472,6 +493,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void entityHeader_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         Drawable expectedIcon = mMockIconInjector.getIcon(LEVEL);
 
         displayAndResume();
@@ -501,6 +523,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void entityHeader_shouldHaveLabelSetToTitle() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         String label = "title";
         when(mMockWifiEntry.getTitle()).thenReturn(label);
 
@@ -512,6 +535,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void entityHeader_shouldHaveSummarySet() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         String summary = "summary";
         when(mMockWifiEntry.getSummary()).thenReturn(summary);
 
@@ -523,6 +547,7 @@ public class WifiDetailPreferenceController2Test {
     private void doShouldShowRemainingTimeTest(ZonedDateTime now, long timeRemainingMs) {
         when(mMockClock.now()).thenReturn(now);
         setUpForConnectedNetwork();
+        setUpController();
         displayAndResume();
 
         final CaptivePortalData data = new CaptivePortalData.Builder()
@@ -534,7 +559,6 @@ public class WifiDetailPreferenceController2Test {
         updateLinkProperties(lp);
     }
 
-    @Ignore
     @Test
     public void entityHeader_shouldShowShortRemainingTime() {
         // Expires in 1h, 2min, 15sec
@@ -551,7 +575,6 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockHeaderController).setSecondSummary((String) null);
     }
 
-    @Ignore
     @Test
     public void entityHeader_shouldShowExpiryDate() {
         // Expires in 49h, 2min, 15sec
@@ -582,6 +605,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void signalStrengthPref_shouldHaveIconSetForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -609,6 +633,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void signalStrengthPref_shouldHaveDetailTextSetForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         String expectedStrength =
                 mContext.getResources().getStringArray(R.array.wifi_signal)[LEVEL];
 
@@ -640,6 +665,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void linkSpeedPref_shouldNotShowIfNotSet() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiInfo.getTxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
@@ -650,6 +676,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void linkSpeedPref_shouldVisibleForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         String expectedLinkSpeed = mContext.getString(R.string.tx_link_speed, TX_LINK_SPEED);
 
         displayAndResume();
@@ -681,6 +708,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void rxLinkSpeedPref_shouldNotShowIfNotSet() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiInfo.getRxLinkSpeedMbps()).thenReturn(WifiInfo.LINK_SPEED_UNKNOWN);
 
         displayAndResume();
@@ -691,6 +719,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void rxLinkSpeedPref_shouldVisibleForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         String expectedLinkSpeed = mContext.getString(R.string.rx_link_speed, RX_LINK_SPEED);
 
         displayAndResume();
@@ -722,6 +751,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void ssidPref_isSubscription_show() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSubscription()).thenReturn(true);
         when(mMockWifiEntry.getSsid()).thenReturn(SSID);
 
@@ -734,6 +764,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void ssidPref_notSubscription_hide() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSubscription()).thenReturn(false);
 
         displayAndResume();
@@ -745,6 +776,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void macAddressPref_shouldVisibleForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(true);
         when(mMockWifiEntry.getPrivacy()).thenReturn(WifiEntry.PRIVACY_DEVICE_MAC);
         when(mMockWifiEntry.getMacAddress()).thenReturn(MAC_ADDRESS);
@@ -787,6 +819,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void ipAddressPref_shouldHaveDetailTextSetForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
 
         displayAndResume();
@@ -807,6 +840,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void gatewayAndSubnet_shouldHaveDetailTextSetForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mLinkProperties.addLinkAddress(Constants.IPV4_ADDR);
         mLinkProperties.addRoute(Constants.IPV4_DEFAULT);
         mLinkProperties.addRoute(Constants.IPV4_SUBNET);
@@ -831,6 +865,7 @@ public class WifiDetailPreferenceController2Test {
     public void dnsServersPref_shouldHaveDetailTextSetForConnectedNetwork()
             throws UnknownHostException {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 4, 4}));
         mLinkProperties.addDnsServer(InetAddress.getByAddress(new byte[] {8, 8, 8, 8}));
         mLinkProperties.addDnsServer(Constants.IPV6_DNS);
@@ -855,6 +890,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void noCurrentNetwork_shouldNotFinishActivityForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiManager.getCurrentNetwork()).thenReturn(null);
 
         displayAndResume();
@@ -865,6 +901,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void noLinkProperties_allIpDetailsHidden() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockConnectivityManager.getLinkProperties(mMockNetwork)).thenReturn(null);
         reset(mMockIpv6Category, mMockIpAddressPref, mMockSubnetPref, mMockGatewayPref,
                 mMockDnsPref);
@@ -932,10 +969,10 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockIpv6AddressesPref).setSummary(text);
     }
 
-    @Ignore
     @Test
     public void onLinkPropertiesChanged_updatesFields() {
         setUpForConnectedNetwork();
+        setUpController();
         displayAndResume();
 
         InOrder inOrder = inOrder(mMockIpAddressPref, mMockGatewayPref, mMockSubnetPref,
@@ -990,10 +1027,10 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockDnsPref).setVisible(true);
     }
 
-    @Ignore
     @Test
     public void onCapabilitiesChanged_callsRefreshIfNecessary() {
         setUpForConnectedNetwork();
+        setUpController();
         NetworkCapabilities nc = makeNetworkCapabilities();
         when(mMockConnectivityManager.getNetworkCapabilities(mMockNetwork))
                 .thenReturn(new NetworkCapabilities(nc));
@@ -1053,8 +1090,9 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void canForgetNetwork_shouldInvisibleIfWithoutConfiguration() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(false);
-        mController = newWifiDetailPreferenceController2();
+        mController = newSpyWifiDetailPreferenceController2();
 
         displayAndResume();
 
@@ -1064,6 +1102,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void onUpdated_canForget_showForgetButton() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.canForget()).thenReturn(true);
 
         displayAndResume();
@@ -1075,6 +1114,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void onUpdated_canNotForget_hideForgetButton() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.canForget()).thenReturn(false);
 
         displayAndResume();
@@ -1086,6 +1126,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void canShareNetwork_shouldInvisibleIfWithoutConfiguration() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(false);
 
         displayAndResume();
@@ -1096,6 +1137,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void canModifyNetwork_savedNetwork_returnTrue() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSaved()).thenReturn(true);
 
         assertThat(mController.canModifyNetwork()).isTrue();
@@ -1104,6 +1146,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void canModifyNetwork_lockedDown() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         lockDownNetwork();
 
         assertThat(mController.canModifyNetwork()).isFalse();
@@ -1135,6 +1178,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void forgetNetwork_standardWifiNetwork_forget() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         displayAndResume();
 
         mForgetClickListener.getValue().onClick(null);
@@ -1147,6 +1191,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void forgetNetwork_isSubscription_shouldShowDialog() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.isSubscription()).thenReturn(true);
         displayAndResume();
 
@@ -1161,6 +1206,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void networkStateChangedIntent_shouldRefetchInfo() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -1171,6 +1217,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void onUpdated_shouldUpdateNetworkInfo() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -1184,6 +1231,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void networkDisconnectedState_shouldNotFinishActivityForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -1196,6 +1244,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void networkOnLost_shouldNotFinishActivityForConnectedNetwork() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -1207,6 +1256,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void ipv6AddressPref_shouldHaveHostAddressTextSet() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mLinkProperties.addLinkAddress(Constants.IPV6_LINKLOCAL);
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL1);
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
@@ -1224,6 +1274,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void ipv6AddressPref_shouldNotBeSelectable() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         mLinkProperties.addLinkAddress(Constants.IPV6_GLOBAL2);
 
         displayAndResume();
@@ -1231,10 +1282,10 @@ public class WifiDetailPreferenceController2Test {
         assertThat(mMockIpv6AddressesPref.isSelectable()).isFalse();
     }
 
-    @Ignore
     @Test
     public void captivePortal_shouldShowSignInButton() {
         setUpForConnectedNetwork();
+        setUpController();
 
         InOrder inOrder = inOrder(mMockButtonsPref);
 
@@ -1246,21 +1297,24 @@ public class WifiDetailPreferenceController2Test {
         updateNetworkCapabilities(nc);
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
 
+        when(mMockWifiEntry.canSignIn()).thenReturn(true);
         nc.addCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
 
         inOrder.verify(mMockButtonsPref).setButton2Text(R.string.wifi_sign_in_button_text);
         inOrder.verify(mMockButtonsPref).setButton2Visible(true);
 
+        when(mMockWifiEntry.canSignIn()).thenReturn(false);
         nc.removeCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL);
         updateNetworkCapabilities(nc);
+
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
     }
 
-    @Ignore
     @Test
     public void captivePortal_shouldShowVenueInfoButton() {
         setUpForConnectedNetwork();
+        setUpController();
 
         InOrder inOrder = inOrder(mMockButtonsPref);
 
@@ -1283,10 +1337,10 @@ public class WifiDetailPreferenceController2Test {
         inOrder.verify(mMockButtonsPref).setButton2Visible(false);
     }
 
-    @Ignore
     @Test
     public void testSignInButton_shouldStartCaptivePortalApp() {
         setUpForConnectedNetwork();
+        setUpSpyController();
 
         displayAndResume();
 
@@ -1294,7 +1348,7 @@ public class WifiDetailPreferenceController2Test {
         verify(mMockButtonsPref, atLeastOnce()).setButton2OnClickListener(captor.capture());
         // getValue() returns the last captured value
         captor.getValue().onClick(null);
-        verify(mMockConnectivityManager).startCaptivePortalApp(mMockNetwork);
+        verify(mMockWifiEntry).signIn(any(WifiEntry.SignInCallback.class));
         verify(mMockMetricsFeatureProvider)
                 .action(mMockActivity, MetricsProto.MetricsEvent.ACTION_WIFI_SIGNIN);
     }
@@ -1323,6 +1377,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void testDisconnectButton_connectedNetwork_shouldVisible() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         when(mMockWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_MAX);
         when(mMockWifiEntry.canDisconnect()).thenReturn(true);
 
@@ -1464,6 +1519,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void testRedrawIconForHeader_shouldEnlarge() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         ArgumentCaptor<BitmapDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(BitmapDrawable.class);
         Drawable original = mContext.getDrawable(Utils.getWifiIconResource(LEVEL)).mutate();
@@ -1502,6 +1558,7 @@ public class WifiDetailPreferenceController2Test {
     @Test
     public void testRedrawIconForHeader_shouldNotEnlargeIfNotVectorDrawable() {
         setUpForConnectedNetwork();
+        setUpSpyController();
         ArgumentCaptor<ColorDrawable> drawableCaptor =
                 ArgumentCaptor.forClass(ColorDrawable.class);
 
