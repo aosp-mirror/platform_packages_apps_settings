@@ -2165,7 +2165,7 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Serviciul comenzii rapide"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Setări pentru comenzi rapide"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Comandă rapidă din ecranul de blocare"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permiteți activarea comenzii rapide recomandate din ecranul de blocare. Apăsați ambele taste pentru volum timp de câteva secunde."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Permiteți activarea comenzii rapide pentru funcție din ecranul de blocare. Apăsați ambele taste pentru volum timp de câteva secunde."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Text cu contrast ridicat"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Actualizați auto. mărirea ecranului"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Actualiz. mărirea ecran. la tranziția între aplic."</string>
@@ -2188,7 +2188,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Întârziere la atingere lungă"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversarea culorilor"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Folosiți inversarea culorilor"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Inversarea culorilor întunecă ecranele luminoase.&lt;br/&gt;&lt;br/&gt; Notă: &lt;ol&gt; &lt;li&gt; în plus, inversarea culorilor deschide ecranele întunecate.&lt;/li&gt; &lt;li&gt; Culorile conținutului media și ale imaginilor se schimbă.&lt;/li&gt; &lt;li&gt; Puteți folosi Tema întunecată și pentru a afișa un fundal întunecat. Tema întunecată funcționează cu aplicațiile compatibile. Inversarea culorilor funcționează în toate aplicațiile.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Inversarea culorilor întunecă ecranele luminoase.&lt;br/&gt;&lt;br/&gt; Notă: &lt;ol&gt; &lt;li&gt; în plus, inversarea culorilor deschide ecranele întunecate.&lt;/li&gt; &lt;li&gt; Culorile conținutului media și ale imaginilor se schimbă.&lt;/li&gt; &lt;li&gt; Puteți folosi Tema întunecată pentru a afișa un fundal întunecat. Tema întunecată funcționează cu aplicațiile compatibile. Inversarea culorilor funcționează în toate aplicațiile.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automat (durată de staționare)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Clicul automat funcționează cu un mouse conectat. Puteți seta cursorul mouse-ului să dea clic automat când nu se mai mișcă pentru un anumit interval de timp."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Dezactivat"</string>
@@ -2737,8 +2737,7 @@
     <string name="admin_more_details" msgid="6698424974827333973">"Mai multe detalii"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Jurnal de notificări"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"Istoricul notificărilor"</string>
-    <!-- no translation found for notification_history_today (5828496957208237230) -->
-    <skip />
+    <string name="notification_history_today" msgid="5828496957208237230">"Ultimele 24 de ore"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Amânate"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Închise recent"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
@@ -3071,14 +3070,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Folosiți aplicația prestabilită"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Întotdeauna"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Cu excepția cazului când este deschisă altă aplicație de plată"</string>
-    <string name="nfc_payment_pay_with" msgid="10107565447713526">"La un terminal Atingeți și plătiți, plătiți cu:"</string>
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"La un terminal contactless, plătiți cu:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Plata la terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configurați o aplicație de plată. Apoi, apropiați spatele telefonului de orice terminal pe care apare simbolul de plată fără contact."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Am înțeles"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Mai multe..."</string>
-    <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"Setați ca preferință?"</string>
-    <string name="nfc_payment_set_default" msgid="499518459418302061">"Folosiți întotdeauna <xliff:g id="APP">%1$s</xliff:g> atunci când Atingeți și plătiți?"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="162768672108688747">"Folosiți întotdeauna <xliff:g id="APP_0">%1$s</xliff:g> în loc de <xliff:g id="APP_1">%2$s</xliff:g> atunci când Atingeți și plătiți?"</string>
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Setați aplicația de plată prestabilită"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualizați aplicația de plată prestabilită"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"La un terminal contactless, plătiți cu <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"La un terminal contactless, plătiți cu <xliff:g id="APP_0">%1$s</xliff:g>.\n\n <xliff:g id="APP_1">%2$s</xliff:g> va fi înlocuită ca aplicație prestabilită de plată."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Setați ca prestabilit"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualizați"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricții"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Eliminați restricțiile"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Schimbați codul PIN"</string>
@@ -3459,16 +3461,13 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Poziționați automat notificările după relevanță"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acțiuni și răspunsuri sugerate"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afișați automat acțiunile și răspunsurile sugerate"</string>
-    <!-- no translation found for notification_history_summary (5434741516307706892) -->
-    <skip />
+    <string name="notification_history_summary" msgid="5434741516307706892">"Afișați notificările recente și pe cele amânate"</string>
     <string name="notification_history" msgid="8663811361243456201">"Istoricul notificărilor"</string>
-    <!-- no translation found for notification_history_toggle (9093762294928569030) -->
-    <skip />
-    <!-- no translation found for notification_history_off_title_extended (853807652537281601) -->
-    <skip />
-    <!-- no translation found for notification_history_off_summary (671359587084797617) -->
-    <skip />
+    <string name="notification_history_toggle" msgid="9093762294928569030">"Folosiți istoricul notificărilor"</string>
+    <string name="notification_history_off_title_extended" msgid="853807652537281601">"Istoricul notificărilor a fost dezactivat"</string>
+    <string name="notification_history_off_summary" msgid="671359587084797617">"Activați istoricul notificărilor pentru a vedea notificările recente și notificările amânate"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"Afișați setările pentru notificări"</string>
+    <string name="notification_history_open_notification" msgid="2655071846911258371">"deschideți notificarea"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permiteți amânarea notificărilor"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ascundeți pictogramele notificărilor discrete"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Pictogramele pentru notificările silențioase nu se afișează în bara de stare"</string>
@@ -3486,7 +3485,7 @@
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Anulați"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activat / conversațiile pot apărea ca pictograme flotante"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permiteți ca aplicațiile să afișeze baloane"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Unele conversații vor apărea va pictograme flotante deasupra altor aplicații"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Unele conversații vor apărea ca pictograme flotante deasupra altor aplicații"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Toate conversațiile pot apărea în balon"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Conversațiile selectate pot apărea în balon"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Nimic nu poate apărea în balon"</string>
@@ -3542,10 +3541,8 @@
     <string name="promote_conversation_title" msgid="4731148769888238722">"Aceasta este o conversație"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adăugați în secțiunea cu conversații"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gestionați conversațiile"</string>
-    <!-- no translation found for important_conversations (1233893707189659401) -->
-    <skip />
-    <!-- no translation found for other_conversations (7218658664423361043) -->
-    <skip />
+    <string name="important_conversations" msgid="1233893707189659401">"Conversații cu prioritate"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Alte conversații"</string>
     <string name="important_bubble" msgid="3820813960404079472">"Afișează conversațiile importante în baloane"</string>
     <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Conversațiile importante apar în partea de sus a panoului de notificări tras în jos. Le puteți seta să se afișeze în baloane și să întrerupă funcția Nu deranja."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Afișați fără sunet și minimizați"</string>
@@ -3613,15 +3610,17 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Picture-in-picture"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permiteți picture-in-picture"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permiteți acestei aplicații să creeze o fereastră picture-in-picture în timp ce aplicația este deschisă sau după ce ieșiți (de exemplu, pentru a continua vizionarea unui videoclip). Această fereastră se afișează peste alte aplicații pe care le folosiți."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicații de serviciu și personale conectate"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicații pentru lucru și personale conectate"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Conectate"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Neconectate"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Nicio aplicație conectată"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"mai multe profiluri aplicație conectată aplicații pentru lucru și personale"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicații de serviciu și personale conectate"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicații pentru lucru și personale conectate"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectat"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectați aceste aplicații"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Aplicațiile conectate au permisiuni în comun și își pot accesa reciproc datele."</string>
     <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Conectați doar aplicațiile cărora aveți încredere să le permiteți accesul la datele dvs. personale. Aplicațiile pentru lucru pot expune datele dvs. administratorului IT."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Aveți încredere să permiteți accesul aplicației <xliff:g id="NAME">%1$s</xliff:g> la datele dvs. cu caracter personal?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Aveți încredere să permiteți accesul aplicației pentru lucru <xliff:g id="NAME">%1$s</xliff:g> la datele dvs. cu caracter personal?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> vă poate expune datele personale administratorului IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Datele aplicațiilor"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Aplicația poate accesa datele din aplicația dvs. personală <xliff:g id="NAME">%1$s</xliff:g>."</string>
@@ -3633,11 +3632,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de aplicații conectate</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicație conectată</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="7761038025614718824">"Instalați <xliff:g id="NAME">%1$s</xliff:g> în profilul de serviciu"</string>
-    <string name="interact_across_profiles_install_work_app_summary" msgid="7418653807013809609">"Ca să conectați aceste aplicații, instalați aplicația <xliff:g id="NAME">%1$s</xliff:g> în profilul de serviciu"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5405510221944166674">"Instalați <xliff:g id="NAME">%1$s</xliff:g> în profilul personal"</string>
-    <string name="interact_across_profiles_install_personal_app_summary" msgid="2464091172295014696">"Ca să conectați aceste aplicații, instalați aplicația <xliff:g id="NAME">%1$s</xliff:g> în profilul personal"</string>
-    <string name="interact_across_profiles_install_app_action" msgid="131173339507809328">"Descărcați aplicația"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instalați <xliff:g id="NAME">%1$s</xliff:g> de la serviciu ca să conectați aceste aplicații"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instalați <xliff:g id="NAME">%1$s</xliff:g> personal ca să conectați aceste aplicații"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Atingeți ca să instalați aplicația"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acces la funcția Nu deranja"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permiteți modul Nu deranja"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nicio aplicație instalată nu a solicitat accesul Nu deranja"</string>
@@ -3788,7 +3785,13 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"evenimente"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permiteți aplicațiilor să ignore"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplicații care îl pot întrerupe"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Selectați mai multe aplicații"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nicio aplicație selectată"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Nicio aplicație nu îl poate întrerupe"</string>
+    <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Adăugați aplicații"</string>
+    <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Toate notificările"</string>
+    <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Anumite notificări"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Persoanele selectate vă pot contacta chiar dacă nu permiteți ca aplicațiile să îl întrerupă"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="few"><xliff:g id="APP_NAMES">%s</xliff:g> îl pot întrerupe</item>
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> îl pot întrerupe</item>
@@ -3798,6 +3801,8 @@
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Excepțiile aplicației"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Toate notificările"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Anumite notificări"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificări care îl pot întrerupe"</string>
+    <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Permiteți toate notificările"</string>
     <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
       <item quantity="few"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> îl pot întrerupe</item>
       <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> îl pot întrerupe</item>
@@ -3814,8 +3819,9 @@
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"agendă"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"persoane din agendă marcate cu stea"</string>
     <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"apelanți care revin"</string>
-    <string name="zen_mode_calls_summary_one" msgid="6384227957828089023">"Acceptați de la <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
-    <string name="zen_mode_calls_summary_two" msgid="4020474684516812002">"Permiteți de la <xliff:g id="CALLER_TYPE">%1$s</xliff:g> și <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
+    <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
+    <skip />
+    <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> și <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Dacă aceeași persoană apelează a doua oară într-un interval de <xliff:g id="MINUTES">%d</xliff:g> minute"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Personalizat"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Activați automat"</string>
@@ -3893,8 +3899,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"Linkuri acceptate"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"Alte valori prestabilite"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="SIZE">%1$s</xliff:g> utilizați din <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="8072987826282477558">"Stocare internă"</string>
-    <string name="storage_type_external" msgid="8258689891893683905">"Stocare externă"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"memorie internă"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"stocare externă"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> folosiți din <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Spațiu de stocare utilizat"</string>
     <string name="change" msgid="273206077375322595">"Schimbați"</string>
@@ -4406,7 +4412,6 @@
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Permiteți căutările persoanelor de contact efectuate de organizația dvs. pentru a identifica apelanții și persoanele de contact"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendar cu profil combinat"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"Afișați evenimente de serviciu pe calendarul personal"</string>
-    <string name="cross_profile_calendar_restricted_summary" msgid="282962670405516067">"Organizația dvs. nu permite aplicațiilor personale să acceseze calendarul de serviciu"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
       <item quantity="few"><xliff:g id="NUMBER">%s</xliff:g> ore</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> de ore</item>
@@ -4935,7 +4940,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Nu mai proiectați"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Dezactivați VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"În plus, astfel veți dezactiva conexiunea 5G.\nÎn timpul unui apel vocal, nu puteți folosi internetul și unele aplicații pot să nu funcționeze."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"Când folosiți două carduri SIM, telefonul nu se poate conecta la 5G. Aflați mai multe"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"Când folosiți două carduri SIM, tableta nu se poate conecta la 5G. Aflați mai multe"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"Când folosiți două carduri SIM, dispozitivul nu se poate conecta la 5G. Aflați mai multe"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
+    <skip />
 </resources>
