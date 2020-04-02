@@ -25,6 +25,12 @@
        android:key="zen_mode_settings_category_conversations"
        android:title="@string/zen_mode_conversations_section_title">
 
+      <!-- Senders image -->
+      <com.android.settingslib.widget.LayoutPreference
+          android:key="zen_mode_conversations_image"
+          android:layout="@layout/zen_mode_senders_overlay_image"
+          android:selectable="false"/>
+
       <Preference
           android:key="zen_mode_conversations"
           android:title="@string/zen_mode_conversations_title"
