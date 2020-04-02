@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -47,12 +48,16 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
             app = null;
         }
         return buildPreferenceControllers(
-                context, getSettingsLifecycle(), app, this, getFragmentManager());
+                context, getSettingsLifecycle(), app, this, getFragmentManager(),
+                new NotificationBackend());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager) {
+            Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager,
+            NotificationBackend notificationBackend) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeConversationsImagePreferenceController(context,
+                "zen_mode_conversations_image", lifecycle, notificationBackend));
         controllers.add(new ZenModeConversationsPreferenceController(context,
                 "zen_mode_conversations", lifecycle));
         controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
@@ -83,7 +88,8 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null, null, null);
+                    return buildPreferenceControllers(context, null, null, null,
+                            null, null);
                 }
             };
 }
