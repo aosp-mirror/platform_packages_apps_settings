@@ -44,6 +44,8 @@ public class ZenModeConversationsSettings extends ZenModeSettingsBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, NotificationBackend notificationBackend) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeConversationsImagePreferenceController(context,
+                "zen_mode_conversations_image", lifecycle, notificationBackend));
         controllers.add(new ZenModePriorityConversationsPreferenceController(context,
                 "zen_mode_conversations_radio_buttons", lifecycle, notificationBackend));
         return controllers;
