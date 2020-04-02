@@ -652,4 +652,19 @@
             android:title="@string/autofill_reset_developer_options" />
 
     </com.android.settings.development.autofill.AutofillPreferenceCategory>
+
+    <PreferenceCategory
+        android:key="storage_category"
+        android:title="@string/storage_category"
+        android:order="1200">
+
+        <Preference
+            android:key="shared_data"
+            android:title="@string/shared_data_title"
+            android:summary="@string/shared_data_summary">
+            <intent
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.development.storage.BlobInfoListView" />
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>
