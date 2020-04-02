@@ -3324,6 +3324,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"मैसेज पर स्क्रीन चमकने से रोकें"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"संकेत दिखाए जाने की अनुमति दें"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"\'दिखाई न देने वाली सूचनाएं\' दिखाने के लिए विकल्प"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_category (5870944770935394566) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"सूचनाएं आने पर कोई आवाज़ सुनाई न दे"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"अगर आप यह सेटिंग चुनते हैं तो, आपको डिवाइस की स्क्रीन पर सूचनाएं दिखाई देंगी"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"सूचनाएं मिलने पर आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
@@ -3436,8 +3438,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचनाओं के इतिहास की सुविधा बंद कर दी गई है"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"हाल ही में मिली और स्नूज़ की गई सूचनाएं देखने के लिए, सूचनाओं के इतिहास की सुविधा चालू करें"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"सूचना सेटिंग देखें"</string>
-    <!-- no translation found for notification_history_open_notification (2655071846911258371) -->
-    <skip />
+    <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना खोलें"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूज़ करने की अनुमति दें"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"बिना आवाज़ वाली सूचनाओं से आइकॉन छिपाएं"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"स्टेटस बार में बिना आवाज़ वाली सूचनाओं के आइकॉन नहीं दिखाए जाते हैं"</string>
@@ -3861,10 +3862,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"समर्थित लिंक"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"अन्य डिफ़ॉल्ट"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"<xliff:g id="STORAGE_TYPE">%2$s</xliff:g> में <xliff:g id="SIZE">%1$s</xliff:g> का उपयोग किया गया"</string>
-    <!-- no translation found for storage_type_internal (979243131665635278) -->
-    <skip />
-    <!-- no translation found for storage_type_external (125078274000280821) -->
-    <skip />
+    <string name="storage_type_internal" msgid="979243131665635278">"डिवाइस की मेमोरी"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"बाहरी मेमोरी"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="DATE">%2$s</xliff:g> से <xliff:g id="SIZE">%1$s</xliff:g> उपयोग हुआ"</string>
     <string name="storage_used" msgid="2591194906751432725">"उपयोग की गई मेमोरी"</string>
     <string name="change" msgid="273206077375322595">"बदलें"</string>
@@ -4360,7 +4359,6 @@
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"कॉल करने वालों (कॉलर) और संपर्कों की पहचान करने के लिए अपने संगठन को संपर्क खोजने दें"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"क्रॉस-प्रोफ़ाइल कैलेंडर"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"निजी कैलेंडर पर काम से जुड़े इवेंट दिखाएं"</string>
-    <string name="cross_profile_calendar_restricted_summary" msgid="282962670405516067">"आपका संगठन निजी ऐप्लिकेशन को आपके काम से जुड़े कैलेंडर का ऐक्सेस करने की अनुमति नहीं देता"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
       <item quantity="one"><xliff:g id="NUMBER">%s</xliff:g> घंटे</item>
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> घंटे</item>
@@ -4875,7 +4873,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"कास्ट करना रोकें"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE बंद करें?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"इससे आपका 5G कनेक्शन भी बंद हो जाएगा.\nवॉइस कॉल के दौरान, आप इंटरनेट का इस्तेमाल नहीं कर सकते और कुछ ऐप्लिकेशन शायद काम न करें."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"दो सिम का इस्तेमाल करने पर, यह फ़ोन 5G से कनेक्ट नहीं हो सकता. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"दो सिम का इस्तेमाल करने पर, यह टैबलेट 5G से कनेक्ट नहीं हो सकता. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"दो सिम का इस्तेमाल करने पर, यह डिवाइस 5G से कनेक्ट नहीं हो सकता. ज़्यादा जानें"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
+    <skip />
 </resources>
