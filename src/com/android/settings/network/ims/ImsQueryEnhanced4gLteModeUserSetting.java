@@ -17,6 +17,7 @@
 package com.android.settings.network.ims;
 
 import android.telephony.ims.ImsMmTelManager;
+import android.util.Log;
 
 
 /**
@@ -24,6 +25,7 @@ import android.telephony.ims.ImsMmTelManager;
  */
 public class ImsQueryEnhanced4gLteModeUserSetting implements ImsQuery {
 
+    private static final String LOG_TAG = "QueryEnhanced4gLteModeUserSetting";
     /**
      * Constructor
      * @param subId subscription id
@@ -40,8 +42,13 @@ public class ImsQueryEnhanced4gLteModeUserSetting implements ImsQuery {
      * @return result of query
      */
     public boolean query() {
-        final ImsMmTelManager imsMmTelManager =
-                ImsMmTelManager.createForSubscriptionId(mSubId);
-        return imsMmTelManager.isAdvancedCallingSettingEnabled();
+        try {
+            final ImsMmTelManager imsMmTelManager =
+                    ImsMmTelManager.createForSubscriptionId(mSubId);
+            return imsMmTelManager.isAdvancedCallingSettingEnabled();
+        } catch (IllegalArgumentException exception) {
+            Log.w(LOG_TAG, "fail to get VoLte settings. subId=" + mSubId, exception);
+        }
+        return false;
     }
 }

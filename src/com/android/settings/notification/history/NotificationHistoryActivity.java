@@ -90,6 +90,7 @@ public class NotificationHistoryActivity extends Activity {
                     expand.setContentDescription(container.getVisibility() == View.VISIBLE
                             ? getString(R.string.condition_expand_hide)
                             : getString(R.string.condition_expand_show));
+                    expand.setAccessibilityLiveRegion(View.ACCESSIBILITY_LIVE_REGION_POLITE);
             });
 
             TextView label = viewForPackage.findViewById(R.id.label);
