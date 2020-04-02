@@ -52,6 +52,7 @@ import com.android.settings.development.bluetooth.BluetoothCodecDialogPreference
 import com.android.settings.development.bluetooth.BluetoothHDAudioPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothQualityDialogPreferenceController;
 import com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreferenceController;
+import com.android.settings.development.storage.SharedDataPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -531,6 +532,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothHDAudioPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore, fragment));
+        controllers.add(new SharedDataPreferenceController(context));
 
         return controllers;
     }
