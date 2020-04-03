@@ -1990,6 +1990,11 @@
                   android:label="Terms of Service"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" />
 
+        <activity android:name=".development.storage.BlobInfoListView"
+                  android:label="@string/shared_data_title" />
+        <activity android:name=".development.storage.LeaseInfoListView"
+                  android:label="@string/accessor_info_title" />
+
         <activity android:name="Settings$WebViewAppPickerActivity"
                   android:label="@string/select_webview_provider_dialog_title" />
 

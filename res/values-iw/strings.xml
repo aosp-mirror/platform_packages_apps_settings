@@ -3418,6 +3418,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"חסימת הפרעות חזותיות"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"הפעלת אותות חזותיים"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"אפשרויות תצוגה להתראות מוסתרות"</string>
+    <!-- no translation found for zen_mode_restrict_notifications_category (5870944770935394566) -->
+    <skip />
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ללא צליל מהתראות"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"יוצגו התראות על המסך"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"כשיגיעו התראות, הטלפון לא ישמיע צליל ולא יפעיל רטט."</string>
@@ -3534,8 +3536,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"היסטוריית ההתראות כבויה"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"יש להפעיל את היסטוריית ההתראות כדי להציג התראות אחרונות והתראות שהועברו למצב נודניק"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"צפייה בהגדרות של ההתראות"</string>
-    <!-- no translation found for notification_history_open_notification (2655071846911258371) -->
-    <skip />
+    <string name="notification_history_open_notification" msgid="2655071846911258371">"פתיחת ההתראה"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"הסתרת הסמלים מההתראות המתונות"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"סמלים מהתזכורות המתונות לא מוצגים בשורת הסטטוס"</string>
@@ -3985,10 +3986,8 @@
     <string name="app_launch_supported_domain_urls_title" msgid="5088779668667217369">"קישורים נתמכים"</string>
     <string name="app_launch_other_defaults_title" msgid="3296350563585863885">"ברירות מחדל אחרות"</string>
     <string name="storage_summary_format" msgid="5721782272185284276">"נעשה שימוש ב-<xliff:g id="SIZE">%1$s</xliff:g> ב<xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <!-- no translation found for storage_type_internal (979243131665635278) -->
-    <skip />
-    <!-- no translation found for storage_type_external (125078274000280821) -->
-    <skip />
+    <string name="storage_type_internal" msgid="979243131665635278">"אחסון פנימי"</string>
+    <string name="storage_type_external" msgid="125078274000280821">"אחסון חיצוני"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"<xliff:g id="SIZE">%1$s</xliff:g> בשימוש מאז <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"שטח אחסון מנוצל"</string>
     <string name="change" msgid="273206077375322595">"שינוי"</string>
@@ -4516,7 +4515,6 @@
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"אפשר לחיפושי אנשי קשר שמבצע הארגון לזהות מתקשרים ואנשי קשר"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"יומן למספר פרופילים"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"הצגת אירועי עבודה ביומן האישי"</string>
-    <string name="cross_profile_calendar_restricted_summary" msgid="282962670405516067">"הארגון שלך לא מתיר לאפליקציות אישיות לגשת אל יומן העבודה"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
       <item quantity="two"><xliff:g id="NUMBER">%s</xliff:g> שעות</item>
       <item quantity="many"><xliff:g id="NUMBER">%s</xliff:g> שעות</item>
@@ -5059,7 +5057,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"עצירת העברה"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏לכבות את VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏פעולה זו מכבה גם את החיבור לרשת 5G.\nבמהלך שיחה קולית, אי אפשר להשתמש באינטרנט וייתכן שאפליקציות מסוימות לא יפעלו."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="6373046128796395865">"‏כשמשתמשים בשני כרטיסי SIM, טלפון זה לא יכול להתחבר אל 5G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="315154701631933377">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה לא יכול להתחבר אל 5G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="729541315259742240">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה לא יכול להתחבר אל 5G. מידע נוסף"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
+    <skip />
 </resources>
