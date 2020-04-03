@@ -17,6 +17,7 @@ package com.android.settings.display.darkmode;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.location.LocationManager;
 import android.os.PowerManager;
 
 import androidx.preference.DropDownPreference;
@@ -25,6 +26,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.display.TwilightLocationDialog;
 
 /**
  * Controller for the dark ui option dropdown
@@ -35,12 +37,14 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
     private final UiModeManager mUiModeManager;
     private PowerManager mPowerManager;
     private DropDownPreference mPreference;
+    private LocationManager mLocationManager;
     private int mCurrentMode;
 
     public DarkModeScheduleSelectorController(Context context, String key) {
         super(context, key);
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
+        mLocationManager = context.getSystemService(LocationManager.class);
     }
 
     @Override
@@ -93,6 +97,10 @@ public class DarkModeScheduleSelectorController extends BasePreferenceController
             mUiModeManager.setNightMode(mode);
         } else if (mCurrentMode == mPreference.findIndexOfValue(
                 mContext.getString(R.string.dark_ui_auto_mode_auto))) {
+            if (!mLocationManager.isLocationEnabled()) {
+                TwilightLocationDialog.show(mContext);
+                return false;
+            }
             mUiModeManager.setNightMode(UiModeManager.MODE_NIGHT_AUTO);
         } else if (mCurrentMode == mPreference.findIndexOfValue(
                 mContext.getString(R.string.dark_ui_auto_mode_custom))) {

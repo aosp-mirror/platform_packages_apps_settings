@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.UiModeManager;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.PowerManager;
 
 import androidx.preference.DropDownPreference;
@@ -55,6 +56,8 @@ public class DarkModeScheduleSelectorControllerTest {
     @Mock
     private UiModeManager mUiService;
     @Mock
+    private LocationManager mLocationManager;
+    @Mock
     private PowerManager mPM;
 
     @Before
@@ -63,6 +66,7 @@ public class DarkModeScheduleSelectorControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mUiService);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
+        when(mContext.getSystemService(LocationManager.class)).thenReturn(mLocationManager);
         when(mContext.getString(R.string.dark_ui_auto_mode_never)).thenReturn("never");
         when(mContext.getString(R.string.dark_ui_auto_mode_auto)).thenReturn("auto");
         when(mContext.getString(R.string.dark_ui_auto_mode_custom)).thenReturn("custom");
@@ -72,6 +76,7 @@ public class DarkModeScheduleSelectorControllerTest {
                 mContext.getString(R.string.dark_ui_auto_mode_auto)
         });
         doNothing().when(mPreference).setValueIndex(anyInt());
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         when(mUiService.setNightModeActivated(anyBoolean())).thenReturn(true);
         mController = new DarkModeScheduleSelectorController(mContext, mPreferenceKey);
@@ -94,6 +99,15 @@ public class DarkModeScheduleSelectorControllerTest {
         when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mController.displayPreference(mScreen);
         verify(mPreference).setValueIndex(0);
+    }
+
+    @Test
+    public void nightMode_selectNightMode_locationOff() {
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+        mController.onPreferenceChange(mPreference,
+                mContext.getString(R.string.dark_ui_auto_mode_never));
+        assertFalse(mController.onPreferenceChange(mPreference,
+                mContext.getString(R.string.dark_ui_auto_mode_auto)));
     }
 
     @Test
