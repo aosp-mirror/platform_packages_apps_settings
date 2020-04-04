@@ -297,7 +297,7 @@ public class WifiDppUtils {
     public static Intent getConfiguratorQrCodeScannerIntentOrNull(Context context,
             WifiManager wifiManager, WifiEntry wifiEntry) {
         final Intent intent = new Intent(context, WifiDppConfiguratorActivity.class);
-        if (isSupportConfiguratorQrCodeScanner(context, wifiEntry)) {
+        if (wifiEntry.canEasyConnect()) {
             intent.setAction(WifiDppConfiguratorActivity.ACTION_CONFIGURATOR_QR_CODE_SCANNER);
         } else {
             return null;
@@ -450,19 +450,6 @@ public class WifiDppUtils {
             return false;
         }
         return isSupportWifiDpp(context, accessPoint.getSecurity());
-    }
-
-    /**
-     * Checks if QR code scanner supports to config other devices with the Wi-Fi network
-     *
-     * @param context The context to use for {@link WifiManager#isEasyConnectSupported()}
-     * @param wifiEntry The {@link WifiEntry} of the Wi-Fi network
-     */
-    public static boolean isSupportConfiguratorQrCodeScanner(Context context, WifiEntry wifiEntry) {
-        if (wifiEntry.isSubscription()) {
-            return false;
-        }
-        return isSupportWifiDpp(context, wifiEntry.getSecurity());
     }
 
     /**
