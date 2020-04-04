@@ -1842,8 +1842,8 @@
     <string name="wifi_sap_no_channel_error">5 GHz band not available in this country</string>
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
     <string name="wifi_in_airplane_mode">In Airplane mode</string>
-    <!-- Checkbox title for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks">Notify for open networks</string>
+    <!-- Checkbox title for option to notify user when public networks are nearby -->
+    <string name="wifi_notify_open_networks">Notify for public networks</string>
     <!-- Checkbox summary for option to notify user when open networks are nearby-->
     <string name="wifi_notify_open_networks_summary">Notify when a high\u2011quality public network is available</string>
     <!-- Checkbox title for option to enable Wi-Fi when saved networks are nearby -->
@@ -1862,8 +1862,8 @@
     <string name="wifi_poor_network_detection_summary">Don\u2019t use a Wi\u2011Fi network unless it has a good internet connection</string>
     <!-- Checkbox summary for option to toggle poor network detection [CHAR LIMIT=60] -->
     <string name="wifi_avoid_poor_network_detection_summary">Only use networks that have a good internet connection</string>
-    <!-- Checkbox title for option to connect to open Wi-Fi automatically [CHAR LIMIT=40] -->
-    <string name="use_open_wifi_automatically_title">Connect to open networks</string>
+    <!-- Checkbox title for option to connect to public Wi-Fi automatically [CHAR LIMIT=40] -->
+    <string name="use_open_wifi_automatically_title">Connect to public networks</string>
     <!-- Checkbox summary for option to connect to open Wi-Fi automatically  [CHAR LIMIT=100] -->
     <string name="use_open_wifi_automatically_summary">Automatically connect to high\u2011quality public networks</string>
     <!-- Checkbox summary for option to connect to open Wi-Fi automatically, to explain that a network rating provider needs to be selected to use the feature. -->
@@ -2806,6 +2806,12 @@
     <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
     <string name="night_display_not_currently_on">Night Light not currently on</string>
+
+    <!-- Twilight Mode -->
+    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
+    <string name="twilight_mode_location_off_dialog_message">Device location needed to determine you sunset to sunrise</string>
+    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
+    <string name="twilight_mode_launch_location">Turn on location</string>
 
     <!--    Dark ui screen-->
     <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
