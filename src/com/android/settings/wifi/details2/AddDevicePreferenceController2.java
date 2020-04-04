@@ -51,8 +51,7 @@ public class AddDevicePreferenceController2 extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return WifiDppUtils.isSupportConfiguratorQrCodeScanner(mContext, mWifiEntry) ? AVAILABLE
-                : CONDITIONALLY_UNAVAILABLE;
+        return mWifiEntry.canEasyConnect() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
