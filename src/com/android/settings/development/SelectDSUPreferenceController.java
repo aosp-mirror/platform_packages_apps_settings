@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemProperties;
 
 import androidx.preference.Preference;
 
@@ -37,9 +38,16 @@ class SelectDSUPreferenceController extends DeveloperOptionsPreferenceController
         return DSU_LOADER_KEY;
     }
 
+    private boolean isDSURunning() {
+        return SystemProperties.getBoolean("ro.gsid.image_running", false);
+    }
+
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (DSU_LOADER_KEY.equals(preference.getKey())) {
+            if (isDSURunning()) {
+                return true;
+            }
             final Intent intent = new Intent(mContext, DSULoader.class);
             mContext.startActivity(intent);
             return true;
@@ -49,6 +57,7 @@ class SelectDSUPreferenceController extends DeveloperOptionsPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(mContext.getResources().getString(R.string.dsu_loader_description));
+        int key = isDSURunning() ? R.string.dsu_is_running : R.string.dsu_loader_description;
+        preference.setSummary(mContext.getResources().getString(key));
     }
 }
