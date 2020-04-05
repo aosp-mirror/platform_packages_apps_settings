@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.text.TextUtils;
 import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +41,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -62,6 +66,7 @@ public class DSULoader extends ListActivity {
     private static final String PROPERTY_KEY_OS = "ro.system.build.version.release";
     private static final String PROPERTY_KEY_VNDK = "ro.vndk.version";
     private static final String PROPERTY_KEY_LIST = "ro.vendor.dsu.list";
+    private static final String PROPERTY_KEY_SPL = "ro.build.version.security_patch";
     private static final String DSU_LIST =
             "https://dl.google.com/developers/android/gsi/gsi-src.json";
 
@@ -121,7 +126,8 @@ public class DSULoader extends ListActivity {
             mDsuList = dsuList;
         }
 
-        private void fetch(URL url) throws IOException, JSONException, MalformedURLException {
+        private void fetch(URL url)
+                throws IOException, JSONException, MalformedURLException, ParseException {
             String content = readAll(url);
             JSONObject jsn = new JSONObject(content);
             // The include primitive is like below
@@ -195,6 +201,8 @@ public class DSULoader extends ListActivity {
         private static final String OS_VERSION = "os_version";
         private static final String VNDK = "vndk";
         private static final String PUBKEY = "pubkey";
+        private static final String SPL = "spl";
+        private static final String SPL_FORMAT = "yyyy-MM-dd";
         private static final String TOS = "tos";
 
         String mName = null;
@@ -203,10 +211,11 @@ public class DSULoader extends ListActivity {
         int mOsVersion = -1;
         int[] mVndk = null;
         String mPubKey = "";
+        Date mSPL = null;
         URL mTosUrl = null;
         URL mUri;
 
-        DSUPackage(JSONObject jsn) throws JSONException, MalformedURLException {
+        DSUPackage(JSONObject jsn) throws JSONException, MalformedURLException, ParseException {
             Slog.i(TAG, "DSUPackage: " + jsn.toString());
             mName = jsn.getString(NAME);
             mDetails = jsn.getString(DETAILS);
@@ -227,6 +236,9 @@ public class DSULoader extends ListActivity {
             }
             if (jsn.has(TOS)) {
                 mTosUrl = new URL(jsn.getString(TOS));
+            }
+            if (jsn.has(SPL)) {
+                mSPL = new SimpleDateFormat(SPL_FORMAT).parse(jsn.getString(SPL));
             }
         }
 
@@ -265,6 +277,18 @@ public class DSULoader extends ListActivity {
             return cpu;
         }
 
+        Date getDeviceSPL() {
+            String spl = SystemProperties.get(PROPERTY_KEY_SPL);
+            if (TextUtils.isEmpty(spl)) {
+                return null;
+            }
+            try {
+                return new SimpleDateFormat(SPL_FORMAT).parse(spl);
+            } catch (ParseException e) {
+                return null;
+            }
+        }
+
         boolean isSupported() {
             boolean supported = true;
             String cpu = getDeviceCpu();
@@ -299,6 +323,16 @@ public class DSULoader extends ListActivity {
                         Slog.i(TAG, "vndk:" + vndk + " not found");
                         supported = false;
                     }
+                }
+            }
+            if (mSPL != null) {
+                Date spl = getDeviceSPL();
+                if (spl == null) {
+                    Slog.i(TAG, "Failed to getDeviceSPL");
+                    supported = false;
+                } else if (spl.getTime() > mSPL.getTime()) {
+                    Slog.i(TAG, "Device SPL:" + spl.toString() + " > " + mSPL.toString());
+                    supported = false;
                 }
             }
             Slog.i(TAG, mName + " isSupported " + supported);
