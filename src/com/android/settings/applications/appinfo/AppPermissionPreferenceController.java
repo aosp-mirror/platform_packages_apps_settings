@@ -19,6 +19,7 @@ package com.android.settings.applications.appinfo;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.util.Log;
@@ -28,14 +29,23 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase {
+/**
+ * A PreferenceController handling the logic for permissions of apps.
+ */
+public class AppPermissionPreferenceController extends AppInfoPreferenceControllerBase implements
+        LifecycleObserver, OnStart, OnStop {
 
     private static final String TAG = "PermissionPrefControl";
     private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
+
+    private final PackageManager mPackageManager;
 
     private String mPackageName;
 
@@ -73,8 +83,22 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         }
     };
 
+    private final PackageManager.OnPermissionsChangedListener mOnPermissionsChangedListener =
+            uid -> updateState(mPreference);
+
     public AppPermissionPreferenceController(Context context, String key) {
         super(context, key);
+        mPackageManager = context.getPackageManager();
+    }
+
+    @Override
+    public void onStart() {
+        mPackageManager.addOnPermissionsChangeListener(mOnPermissionsChangedListener);
+    }
+
+    @Override
+    public void onStop() {
+        mPackageManager.removeOnPermissionsChangeListener(mOnPermissionsChangedListener);
     }
 
     @Override
