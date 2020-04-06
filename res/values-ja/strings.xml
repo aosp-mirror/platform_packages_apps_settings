@@ -800,7 +800,8 @@
     <string name="wifi_error" msgid="4903954145386086899">"エラー"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"この国では5GHz帯域は利用できません"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"機内モード"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"オープン ネットワークを通知する"</string>
+    <!-- no translation found for wifi_notify_open_networks (2610323626246818961) -->
+    <skip />
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"高品質の公共ネットワークが利用可能なときに通知する"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Wi‑Fi を自動的に ON にする"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"ホーム ネットワークなどの高品質の保存済みネットワークの検出時に Wi‑Fi を ON にする"</string>
@@ -810,7 +811,8 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"接続不良のとき無効にする"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"安定したインターネット接続があるときのみ Wi-Fi ネットワークを使用する"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"インターネット接続が安定したネットワークのみ使用する"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"オープン ネットワークに接続する"</string>
+    <!-- no translation found for use_open_wifi_automatically_title (7193846454986712009) -->
+    <skip />
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"高品質の公共ネットワークに自動的に接続する"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
@@ -1218,6 +1220,10 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> まで ON にする"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> まで OFF にする"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜間モードは現在 OFF です"</string>
+    <!-- no translation found for twilight_mode_location_off_dialog_message (5723805118454645608) -->
+    <skip />
+    <!-- no translation found for twilight_mode_launch_location (1586574792030648828) -->
+    <skip />
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"今すぐ ON にする"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"OFF にする"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"日の出まで ON にする"</string>
@@ -3036,24 +3042,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"デフォルトのアプリを使用"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"常時"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"別の決済アプリが起動されている場合を除く"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"非接触型決済端末で使用するアプリ:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"デバイス機器でのお支払い"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"決済アプリを設定してから、スマートフォンの背面を非接触型決済マークのあるデバイスにかざしてください。"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"その他..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"デフォルトのお支払いアプリの設定"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"デフォルトのお支払いアプリの更新"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"非接触型決済端末でのお支払いに <xliff:g id="APP">%1$s</xliff:g> を使用"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"非接触型決済端末でのお支払いに <xliff:g id="APP_0">%1$s</xliff:g> を使用します。\n\n<xliff:g id="APP_1">%2$s</xliff:g> に代わるデフォルトのお支払いアプリになります。"</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"デフォルトに設定"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"更新"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"制限"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"制限を削除"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PINを変更"</string>
@@ -3444,24 +3443,24 @@
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"通知音なしの通知のアイコンはステータスバーに表示されません"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"最近の会話のストリップの表示"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"ふきだし"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にふきだしとして表示できます"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にふきだしとして表示できます。ふきだしはタップすると開き、画面の下へドラッグすると消えます。"</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ふきだし"</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"バブル"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にバブルとして表示できます"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルとして表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"画面に新着メッセージが表示されます"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をふきだしとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでふきだしを ON にしますか？"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのふきだしを ON にすると、デバイスでもふきだしが ON になります。\n\nこの設定は、ふきだしが許可されているその他のアプリや会話に影響します。"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"ON にする"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"キャンセル"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"ON / 会話をフローティング アイコンとして表示できます"</string>
-    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"アプリにふきだしの表示を許可"</string>
+    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"アプリにバブルの表示を許可"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"一部の会話はフローティング アイコンとして他のアプリの上に重ねて表示されます"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"すべての会話をふきだしにできる"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"選択した会話をふきだしにできる"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"何もふきだしにできない"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"すべての会話をバブルにできる"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"選択した会話をバブルにできる"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"何もバブルにできない"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"会話"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ふきだしから除外したすべての会話"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"バブルから除外したすべての会話"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"スワイプの動作"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"右にスワイプで通知を閉じ、左にスワイプでメニューを表示"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"左にスワイプで通知を閉じ、右にスワイプでメニューを表示"</string>
@@ -3514,8 +3513,8 @@
     <string name="manage_conversations" msgid="4440289604887824337">"会話を管理する"</string>
     <string name="important_conversations" msgid="1233893707189659401">"優先する会話"</string>
     <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"重要な会話をふきだしとして表示"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"重要な会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでふきだしとして表示されるよう、設定することもできます。"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"重要な会話をバブルとして表示"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"重要な会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでバブルとして表示されるよう、設定することもできます。"</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"ポップアップで知らせて最小化"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"ポップアップで知らせる"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"音で知らせる"</string>
@@ -3531,7 +3530,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"割り込みの許可"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先度"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"会話セクションの一番上にふきだしとして表示されます。"</string>
+    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"会話セクションの一番上にバブルとして表示されます。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"音やバイブレーションが作動しないため、通知に煩わされずに済みます"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"音やバイブレーションで通知をお知らせします"</string>
@@ -3578,14 +3577,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"ピクチャー イン ピクチャー"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"PIP を許可"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"このアプリを開いているとき、またはアプリを離れた後に、動画の再生を続けるなどの目的でピクチャー イン ピクチャー ウィンドウを表示できるようにします。このウィンドウは、使用中の他のアプリの上に重ねて表示されます。"</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"接続されている仕事用アプリと個人用アプリ"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"シングル プロファイル モード"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"接続済み"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"未接続"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"接続されているアプリはありません"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"クロス プロファイル 接続されているアプリ 仕事用アプリと個人用アプリ"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"接続されている仕事用アプリと個人用アプリ"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"シングル プロファイル モード"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"接続済み"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"これらのアプリを接続"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"接続されているアプリは権限を共有するため、互いのデータにアクセスできます。"</string>
@@ -3601,12 +3598,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 件のアプリが接続されています</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 件のアプリが接続されています</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"これらのアプリを接続するには、仕事用の<xliff:g id="NAME">%1$s</xliff:g>をインストールしてください"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"これらのアプリを接続するには、個人用の<xliff:g id="NAME">%1$s</xliff:g>をインストールしてください"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"アップしてアプリを入手"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"サイレント モードへのアクセス"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"サイレント モードを許可"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"サイレント モードへのアクセスをリクエストしたインストール済みアプリはありません"</string>
