@@ -769,9 +769,9 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             pref.setOrder(index++);
             pref.refresh();
 
-            if (wifiEntry.canManageSubscription()) {
+            if (wifiEntry.getHelpUriString() != null) {
                 pref.setOnButtonClickListener(preference -> {
-                    openSubscriptionHelpPage();
+                    openSubscriptionHelpPage(wifiEntry);
                 });
             }
             mWifiEntryPreferenceCategory.addPreference(pref);
@@ -1095,8 +1095,8 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     }
 
     @VisibleForTesting
-    void openSubscriptionHelpPage() {
-        final Intent intent = getHelpIntent(getContext());
+    void openSubscriptionHelpPage(WifiEntry wifiEntry) {
+        final Intent intent = getHelpIntent(getContext(), wifiEntry.getHelpUriString());
         if (intent != null) {
             try {
                 startActivityForResult(intent, MANAGE_SUBSCRIPTION);
@@ -1107,10 +1107,7 @@ public class WifiSettings2 extends RestrictedSettingsFragment
     }
 
     @VisibleForTesting
-    Intent getHelpIntent(Context context) {
-        return HelpUtils.getHelpIntent(
-                context,
-                context.getString(R.string.help_url_manage_wifi_subscription),
-                context.getClass().getName());
+    Intent getHelpIntent(Context context, String helpUrlString) {
+        return HelpUtils.getHelpIntent(context, helpUrlString, context.getClass().getName());
     }
 }
