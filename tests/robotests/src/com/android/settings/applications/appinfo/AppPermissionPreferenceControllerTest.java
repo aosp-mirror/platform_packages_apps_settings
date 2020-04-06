@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -43,6 +44,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
@@ -57,6 +59,8 @@ public class AppPermissionPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private Preference mPreference;
+    @Mock
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private AppPermissionPreferenceController mController;
@@ -68,6 +72,7 @@ public class AppPermissionPreferenceControllerTest {
         mController = new AppPermissionPreferenceController(mContext, "permission_settings");
         mController.setPackageName("package1");
         mController.setParentFragment(mFragment);
+        ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
 
         when(mScreen.findPreference(any())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
@@ -76,9 +81,25 @@ public class AppPermissionPreferenceControllerTest {
     }
 
     @Test
+    public void onStart_shouldAddPermissionsChangeListener() {
+        mController.onStart();
+
+        verify(mPackageManager).addOnPermissionsChangeListener(
+                any(PackageManager.OnPermissionsChangedListener.class));
+    }
+
+    @Test
+    public void onStop_shouldRemovePermissionsChangeListener() {
+        mController.onStop();
+
+        verify(mPackageManager).removeOnPermissionsChangeListener(
+                any(PackageManager.OnPermissionsChangedListener.class));
+    }
+
+    @Test
     public void getAvailabilityStatus_isAlwaysAvailable() {
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(AppPermissionPreferenceController.AVAILABLE);
+                .isEqualTo(AppPermissionPreferenceController.AVAILABLE);
     }
 
     @Test
