@@ -70,6 +70,8 @@ public class NotificationHistoryActivity extends Activity {
     private PackageManager mPm;
 
     private HistoryLoader.OnHistoryLoaderListener mOnHistoryLoaderListener = notifications -> {
+        findViewById(R.id.today_list).setVisibility(
+                notifications.isEmpty() ? View.GONE : View.VISIBLE);
         // for each package, new header and recycler view
         for (NotificationHistoryPackage nhp : notifications) {
             View viewForPackage = LayoutInflater.from(this)
@@ -182,6 +184,10 @@ public class NotificationHistoryActivity extends Activity {
         } else {
             mHistoryOn.setVisibility(View.GONE);
             mHistoryOff.setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_off_title).setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(View.VISIBLE);
+            mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(View.GONE);
+            mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(View.GONE);
             mTodayView.removeAllViews();
         }
     }
@@ -232,7 +238,17 @@ public class NotificationHistoryActivity extends Activity {
                 Settings.Secure.putInt(getContentResolver(),
                         NOTIFICATION_HISTORY_ENABLED,
                         isChecked ? 1 : 0);
-                toggleViews(isChecked);
+                mHistoryOn.setVisibility(View.GONE);
+                mHistoryOff.findViewById(R.id.history_off_title).setVisibility(
+                        isChecked ? View.GONE : View.VISIBLE);
+                mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(
+                        isChecked ? View.GONE : View.VISIBLE);
+                mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(
+                        isChecked ? View.VISIBLE : View.GONE);
+                mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(
+                        isChecked ? View.VISIBLE : View.GONE);
+                mTodayView.removeAllViews();
+                mHistoryOff.setVisibility(View.VISIBLE);
             };
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
