@@ -19,7 +19,6 @@ package com.android.settings.accessibility;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
-import android.provider.SearchIndexableResource;
 
 import androidx.preference.Preference;
 
@@ -31,7 +30,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -86,6 +84,11 @@ public final class AccessibilityControlTimeoutPreferenceFragment extends Dashboa
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_url_timeout;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
