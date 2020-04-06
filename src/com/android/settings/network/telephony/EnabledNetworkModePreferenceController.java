@@ -26,9 +26,12 @@ import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
+import android.telephony.RadioAccessFamily;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
@@ -42,6 +45,9 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Preference controller for "Enabled network mode"
  */
@@ -49,6 +55,7 @@ public class EnabledNetworkModePreferenceController extends
         TelephonyBasePreferenceController implements
         ListPreference.OnPreferenceChangeListener, LifecycleObserver {
 
+    private static final String LOG_TAG = "EnabledNetworkMode";
     private CarrierConfigManager mCarrierConfigManager;
     private ContentObserver mPreferredNetworkModeObserver;
     private TelephonyManager mTelephonyManager;
@@ -56,6 +63,8 @@ public class EnabledNetworkModePreferenceController extends
     @VisibleForTesting
     boolean mShow4GForLTE;
     private Preference mPreference;
+    @VisibleForTesting
+    boolean mDisplay5gList = false;
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
@@ -149,6 +158,11 @@ public class EnabledNetworkModePreferenceController extends
                 ? carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_SHOW_4G_FOR_LTE_DATA_ICON_BOOL)
                 : false;
+
+        final long supportedRadioBitmask = mTelephonyManager.getSupportedRadioAccessFamily();
+        mDisplay5gList = checkSupportedRadioBitmask(
+                supportedRadioBitmask, mTelephonyManager.NETWORK_TYPE_BITMASK_NR);
+
         lifecycle.addObserver(this);
     }
 
@@ -249,6 +263,139 @@ public class EnabledNetworkModePreferenceController extends
             preference.setEntryValues(
                     R.array.preferred_network_mode_values_world_mode);
         }
+
+        if (mDisplay5gList) {
+            add5gListItem(preference);
+        }
+    }
+
+    @VisibleForTesting
+    boolean checkSupportedRadioBitmask(long supportedRadioBitmask, long targetBitmask) {
+        Log.d(LOG_TAG, "supportedRadioBitmask: " + supportedRadioBitmask);
+        if ((targetBitmask & supportedRadioBitmask) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /***
+     * Preferred network list add 5G item.
+     *
+     * @string/enabled_networks_cdma_choices
+     *         Before            |        After
+     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
+     * @string/network_3G    , 4 |@string/network_lte_pure, 8
+     * @string/network_1x    , 5 |@string/network_3G      , 4
+     * @string/network_global, 10|@string/network_1x      , 5
+     *                           |@string/network_global  , 27
+     *
+     * @string/enabled_networks_cdma_only_lte_choices
+     *         Before            |        After
+     * @string/network_lte   , 8 |@string/network_5G + @string/network_recommended , 25
+     * @string/network_global, 10|@string/network_lte_pure, 8
+     *                           |@string/network_global  , 27
+     *
+     * @string/enabled_networks_tdscdma_choices
+     *         Before         |        After
+     * @string/network_lte, 22|@string/network_5G + @string/network_recommended , 33
+     * @string/network_3G , 18|@string/network_lte_pure, 22
+     * @string/network_2G , 1 |@string/network_3G      , 18
+     *                        |@string/network_2G      , 1
+     *
+     * @string/enabled_networks_except_gsm_4g_choices
+     *         Before         |        After
+     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_4G_pure , 9
+     *                        |@string/network_3G      , 0
+     *
+     * @string/enabled_networks_except_gsm_choices
+     *         Before         |        After
+     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_lte_pure, 9
+     *                        |@string/network_3G      , 0
+     *
+     * @string/enabled_networks_4g_choices
+     *         Before         |        After
+     * @string/network_4G , 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_4G_pure , 9
+     * @string/network_2G , 1 |@string/network_3G      , 0
+     *                        |@string/network_2G      , 1
+     *
+     * @string/enabled_networks_choices
+     *         Before         |        After
+     * @string/network_lte, 9 |@string/network_5G + @string/network_recommended , 26
+     * @string/network_3G , 0 |@string/network_lte_pure, 9
+     * @string/network_2G , 1 |@string/network_3G      , 0
+     *                        |@string/network_2G      , 1
+     *
+     * @string/preferred_network_mode_choices_world_mode
+     *         Before         |        After
+     * "Global"           , 10|@string/network_global  , 27
+     * "LTE / CDMA"       , 8 |"LTE / CDMA"            , 8
+     * "LTE / GSM / UMTS" , 9 |"LTE / GSM / UMTS"      , 9
+     */
+    @VisibleForTesting
+    void add5gListItem(ListPreference preference) {
+        final CharSequence[] oldEntries = preference.getEntries();
+        final CharSequence[] oldEntryValues = preference.getEntryValues();
+        List<CharSequence> newEntries = new ArrayList<>();
+        List<CharSequence> newEntryValues = new ArrayList<>();
+
+        CharSequence oldEntry;
+        CharSequence oldEntryValue;
+        CharSequence new5gEntry;
+        CharSequence new5gEntryValue;
+
+        for (int i = 0; i < oldEntries.length; i++) {
+            oldEntry = oldEntries[i];
+            oldEntryValue = oldEntryValues[i];
+            new5gEntry = "";
+            new5gEntryValue = "";
+
+            if (mContext.getString(R.string.network_lte).equals(oldEntry)) {
+                oldEntry = mContext.getString(R.string.network_lte_pure);
+                new5gEntry = mContext.getString(R.string.network_5G)
+                        + mContext.getString(R.string.network_recommended);
+                new5gEntryValue = transformLteEntryValueTo5gEntryValue(oldEntryValue);
+            } else if (mContext.getString(R.string.network_4G).equals(oldEntry)) {
+                oldEntry = mContext.getString(R.string.network_4G_pure);
+                new5gEntry = mContext.getString(R.string.network_5G)
+                        + mContext.getString(R.string.network_recommended);
+                new5gEntryValue = transformLteEntryValueTo5gEntryValue(oldEntryValue);
+            } else if (mContext.getString(R.string.network_global).equals(oldEntry)) {
+                //oldEntry: network_global
+                //oldEntryValue: TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA
+                oldEntryValue = Integer.toString(
+                        TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
+            }
+
+            if (!TextUtils.isEmpty(new5gEntry)) {
+                newEntries.add(new5gEntry);
+                newEntryValues.add(new5gEntryValue);
+            }
+            newEntries.add(oldEntry);
+            newEntryValues.add(oldEntryValue);
+        }
+
+        preference.setEntries(newEntries.toArray(new CharSequence[newEntries.size()]));
+        preference.setEntryValues(newEntryValues.toArray(new CharSequence[newEntryValues.size()]));
+    }
+
+    /**
+     * LTE network mode transform to 5G network mode.
+     *
+     * @param networkMode this is LTE network mode.
+     * @return 5G network mode.
+     */
+    private CharSequence transformLteEntryValueTo5gEntryValue(CharSequence networkMode) {
+        int networkModeInt = Integer.valueOf(networkMode.toString());
+        return Integer.toString(addNrToNetworkType(networkModeInt));
+    }
+
+    private int addNrToNetworkType(int networkType) {
+        long networkTypeBitmasks = RadioAccessFamily.getRafFromNetworkType(networkType);
+        networkTypeBitmasks |= mTelephonyManager.NETWORK_TYPE_BITMASK_NR;
+        return RadioAccessFamily.getNetworkTypeFromRaf((int) networkTypeBitmasks);
     }
 
     private void updatePreferenceValueAndSummary(ListPreference preference, int networkMode) {
@@ -312,7 +459,8 @@ public class EnabledNetworkModePreferenceController extends
                 } else {
                     preference.setValue(
                             Integer.toString(TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO));
-                    preference.setSummary(R.string.network_lte);
+                    preference.setSummary(
+                            mDisplay5gList ? R.string.network_lte_pure : R.string.network_lte);
                 }
                 break;
             case TelephonyManager.NETWORK_MODE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
@@ -347,7 +495,8 @@ public class EnabledNetworkModePreferenceController extends
                     preference.setValue(
                             Integer.toString(TelephonyManager
                                     .NETWORK_MODE_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA));
-                    preference.setSummary(R.string.network_lte);
+                    preference.setSummary(
+                            mDisplay5gList ? R.string.network_lte_pure : R.string.network_lte);
                 } else {
                     preference.setValue(
                             Integer.toString(TelephonyManager
@@ -357,9 +506,32 @@ public class EnabledNetworkModePreferenceController extends
                             || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
                         preference.setSummary(R.string.network_global);
                     } else {
-                        preference.setSummary(mShow4GForLTE
-                                ? R.string.network_4G : R.string.network_lte);
+                        if (mDisplay5gList) {
+                            preference.setSummary(mShow4GForLTE
+                                    ? R.string.network_4G_pure : R.string.network_lte_pure);
+                        } else {
+                            preference.setSummary(mShow4GForLTE
+                                    ? R.string.network_4G : R.string.network_lte);
+                        }
                     }
+                }
+                break;
+            case TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO:
+            case TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_CDMA_EVDO_GSM_WCDMA:
+                preference.setValue(Integer.toString(networkMode));
+                preference.setSummary(mContext.getString(R.string.network_5G)
+                        + mContext.getString(R.string.network_recommended));
+                break;
+            case TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
+                preference.setValue(
+                        Integer.toString(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA));
+                if (mTelephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA
+                        || mIsGlobalCdma
+                        || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
+                    preference.setSummary(R.string.network_global);
+                } else {
+                    preference.setSummary(mContext.getString(R.string.network_5G)
+                            + mContext.getString(R.string.network_recommended));
                 }
                 break;
             default:

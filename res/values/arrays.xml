@@ -100,6 +100,14 @@
         <item>1800000</item>
     </string-array>
 
+    <!-- Dark theme scheduling preferences  [CHAR LIMIT=NONE] -->
+    <string-array name="dark_ui_scheduler_preference_titles">
+        <!-- 1: None -->
+        <item>@string/dark_ui_auto_mode_never</item>
+        <!-- 2: Auto -->
+        <item>@string/dark_ui_auto_mode_auto</item>
+    </string-array>
+
     <!-- Security settings.  The delay after screen is turned off until device locks.
          These are shown in a list dialog. -->
     <string-array name="lock_after_timeout_entries">
@@ -1232,6 +1240,17 @@
         <item>LTE/TDSCDMA/GSM/WCDMA</item>
         <item>TDSCDMA/CDMA/EVDO/GSM/WCDMA </item>
         <item>LTE/TDSCDMA/CDMA/EVDO/GSM/WCDMA</item>
+        <item>NR only</item>
+        <item>NR/LTE</item>
+        <item>NR/LTE/CDMA/EvDo</item>
+        <item>NR/LTE/GSM/WCDMA</item>
+        <item>NR/LTE/CDMA/EvDo/GSM/WCDMA</item>
+        <item>NR/LTE/WCDMA</item>
+        <item>NR/LTE/TDSCDMA</item>
+        <item>NR/LTE/TDSCDMA/GSM</item>
+        <item>NR/LTE/TDSCDMA/WCDMA</item>
+        <item>NR/LTE/TDSCDMA/GSM/WCDMA</item>
+        <item>NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</item>
     </string-array>
     <!-- The preferred network modes RIL constants, in order of the modes above,
          e.g. the choice "GSM/WCDMA preferred" has the corresponding value "0" -->
@@ -1259,6 +1278,17 @@
         <item>"20"</item>
         <item>"21"</item>
         <item>"22"</item>
+        <item>"23"</item>
+        <item>"24"</item>
+        <item>"25"</item>
+        <item>"26"</item>
+        <item>"27"</item>
+        <item>"28"</item>
+        <item>"29"</item>
+        <item>"30"</item>
+        <item>"31"</item>
+        <item>"32"</item>
+        <item>"33"</item>
     </string-array>
 
     <!-- Choices for CDMA subscription-->

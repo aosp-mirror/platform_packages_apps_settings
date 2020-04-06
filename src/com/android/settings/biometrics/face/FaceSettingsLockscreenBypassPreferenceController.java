@@ -30,8 +30,6 @@ import com.android.internal.annotations.VisibleForTesting;
 public class FaceSettingsLockscreenBypassPreferenceController
         extends FaceSettingsPreferenceController {
 
-    static final String KEY = "security_lockscreen_bypass";
-
     @VisibleForTesting
     protected FaceManager mFaceManager;
     private UserManager mUserManager;

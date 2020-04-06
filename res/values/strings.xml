@@ -989,7 +989,9 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -2916,6 +2918,40 @@
     <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
     <string name="night_display_not_currently_on">Night Light not currently on</string>
+
+    <!--    Dark ui screen-->
+    <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_manual">Turn on now</string>
+    <!-- Display settings screen, deactivation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_manual">Turn off now</string>
+    <!-- Display settings screen, activation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_auto">Turn on until sunrise</string>
+    <!-- Display settings screen, deactivation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_auto">Turn off until sunset</string>
+    <!-- Dark UI screen, setting option name to enable Dark UI [CHAR LIMIT=30] -->
+    <string name="dark_ui_title">Dark Mode</string>
+    <!-- Dark UI screen, setting option name to configure whether Dark UI turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_title">Schedule</string>
+    <!-- Dark UI screen, setting option value for Dark UI to *never* turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_never">None</string>
+    <!-- Dark UIscreen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
+    <!-- Dark UIscreen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <string name="dark_ui_status_title">Status</string>
+    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
+    <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
+    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
+    <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
+    <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -7040,6 +7076,7 @@
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
     <string name="help_url_night_display" translatable="false"></string>
+    <string name="help_url_dark_theme" translatable="false"></string>
     <string name="help_url_screen_saver" translatable="false"></string>
     <string name="help_url_pickup_gesture" translatable="false"></string>
     <string name="help_url_storage_dashboard" translatable="false"></string>
@@ -10132,6 +10169,12 @@
     <!-- [CHAR_LIMIT=40] Positive button text in dark theme notification -->
     <string name="dark_ui_settings_dialog_acknowledge">Got it</string>
 
+    <!-- [CHAR_LIMIT=50] Title string in the dark theme slice(suggestion) -->
+    <string name="dark_theme_slice_title">Try Dark theme</string>
+
+    <!-- [CHAR_LIMIT=50] Subtitle string in the dark theme slice(suggestion) -->
+    <string name="dark_theme_slice_subtitle">Helps extend battery life</string>
+
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
@@ -10871,6 +10914,8 @@
     <string name="preferred_network_mode_lte_gsm_wcdma_summary">Preferred network mode: GSM/WCDMA/LTE</string>
     <!-- CDMA+LTE/EVDO [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_cdma_evdo_summary">Preferred network mode: CDMA+LTE/EVDO</string>
+    <!-- LTE/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/CDMA/EvDo/GSM/WCDMA</string>
     <!-- Global [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_global_summary">Preferred network mode: Global</string>
     <!-- LTE / WCDMA [CHAR LIMIT=NONE] -->
@@ -10899,7 +10944,37 @@
     <string name="preferred_network_mode_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
     <!-- LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
     <string name="preferred_network_mode_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR only [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_only_summary">Preferred network mode: NR only</string>
+    <!-- NR / LTE [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_summary">Preferred network mode: NR / LTE</string>
+    <!-- NR/LTE/CDMA/EvDo [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_summary">Preferred network mode: NR/LTE/CDMA/EvDo</string>
+    <!-- NR/LTE/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_gsm_wcdma_summary">Preferred network mode: NR/LTE/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/CDMA/EvDo/GSM/WCDMA</string>
+    <!-- NR/LTE/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_wcdma_summary">Preferred network mode: NR/LTE/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_summary">Preferred network mode: NR/LTE/TDSCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM</string>
+    <!-- NR/LTE/TDSCDMA/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/GSM/WCDMA</string>
+    <!-- NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA [CHAR LIMIT=NONE] -->
+    <string name="preferred_network_mode_nr_lte_tdscdma_cdma_evdo_gsm_wcdma_summary">Preferred network mode: NR/LTE/TDSCDMA/CDMA/EvDo/GSM/WCDMA</string>
 
+    <!-- Text for Network mode recommended [CHAR LIMIT=NONE] -->
+    <string name="network_recommended">\u0020(recommended)</string>
+    <!-- Text for Network 5g [CHAR LIMIT=NONE] -->
+    <string name="network_5G" translatable="false">5G</string>
+    <!-- Text for Network lte [CHAR LIMIT=NONE] -->
+    <string name="network_lte_pure" translatable="false">LTE</string>
+    <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
+    <string name="network_4G_pure" translatable="false">4G</string>
     <!-- Text for Network lte [CHAR LIMIT=NONE] -->
     <string name="network_lte">LTE (recommended)</string>
     <!-- Text for Network 4g [CHAR LIMIT=NONE] -->
@@ -11351,5 +11426,13 @@
     <string name="work_policy_privacy_settings">Your work policy info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="work_policy_privacy_settings_summary">Settings managed by your IT admin</string>
+    <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_title"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_no_visible"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_visible_during_call"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_always_visible"></string>
 
 </resources>
