@@ -16,7 +16,6 @@
 package com.android.settings.display.darkmode;
 
 import android.app.UiModeManager;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
@@ -136,8 +135,7 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
     private final View.OnClickListener mListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mMetricsFeatureProvider.logClickedPreference(mPreference,
-                    SettingsEnums.DARK_UI_SETTINGS);
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
             final boolean active = (mContext.getResources().getConfiguration().uiMode
                     & Configuration.UI_MODE_NIGHT_YES) != 0;
             mUiModeManager.setNightModeActivated(!active);
