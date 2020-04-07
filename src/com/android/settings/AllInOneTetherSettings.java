@@ -91,8 +91,12 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
 
     private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver" + DEDUP_POSTFIX;
     private static final String KEY_WIFI_TETHER_GROUP = "wifi_tether_settings_group";
-    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
-    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
+    @VisibleForTesting
+    static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
+    @VisibleForTesting
+    static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
+    @VisibleForTesting
+    static final int EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG = 3;
     private static final String TAG = "AllInOneTetherSettings";
 
     private boolean mUnavailable;
@@ -120,7 +124,6 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
                 mUsbTethering = TetherEnabler.isUsbTethering(state);
                 mWifiTethering = TetherEnabler.isWifiTethering(state);
                 mWifiTetherGroup.setVisible(shouldShowWifiConfig());
-                reConfigInitialExpandedChildCount();
             };
 
     private final BroadcastReceiver mTetherChangeReceiver = new BroadcastReceiver() {
@@ -354,10 +357,6 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
             mRestartWifiApAfterConfigChange = true;
             mTetherEnabler.stopTethering(TETHERING_WIFI);
         }
-
-        if (controller instanceof WifiTetherSecurityPreferenceController) {
-            reConfigInitialExpandedChildCount();
-        }
     }
 
     private SoftApConfiguration buildNewConfig() {
@@ -384,15 +383,10 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         return mWifiTethering || (!mBluetoothTethering && !mUsbTethering);
     }
 
-    private void reConfigInitialExpandedChildCount() {
-        getPreferenceScreen().setInitialExpandedChildrenCount(getInitialExpandedChildCount());
-    }
-
     @Override
     public int getInitialExpandedChildCount() {
         if (!shouldShowWifiConfig()) {
-            // Expand all preferences in the screen.
-            return getPreferenceScreen().getPreferenceCount();
+            return EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG;
         }
 
         if (mSecurityPreferenceController == null) {
