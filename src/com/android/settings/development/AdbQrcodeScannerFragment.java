@@ -210,6 +210,15 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getActivity().getActionBar().hide();
+        // setTitle for TalkBack
+        getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
+    }
+
+    @Override
     public int getMetricsCategory() {
         return 0;
     }
