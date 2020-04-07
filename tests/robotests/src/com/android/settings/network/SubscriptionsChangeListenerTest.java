@@ -83,7 +83,7 @@ public class SubscriptionsChangeListenerTest {
         initListener(false);
         verify(contentResolver, never()).registerContentObserver(any(Uri.class), anyBoolean(),
                 any(ContentObserver.class));
-        verify(mSubscriptionManager, never()).addOnSubscriptionsChangedListener(any());
+        verify(mSubscriptionManager, never()).addOnSubscriptionsChangedListener(any(), any());
         verify(mContext, never()).registerReceiver(any(), any());
     }
 
@@ -92,7 +92,7 @@ public class SubscriptionsChangeListenerTest {
         initListener(true);
         final ArgumentCaptor<SubscriptionManager.OnSubscriptionsChangedListener> captor =
                 ArgumentCaptor.forClass(SubscriptionManager.OnSubscriptionsChangedListener.class);
-        verify(mSubscriptionManager).addOnSubscriptionsChangedListener(captor.capture());
+        verify(mSubscriptionManager).addOnSubscriptionsChangedListener(any(), captor.capture());
         captor.getValue().onSubscriptionsChanged();
         verify(mClient).onSubscriptionsChanged();
     }
