@@ -193,7 +193,7 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         // Observe changes from accessibility selection menu
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
             @Override

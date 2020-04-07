@@ -120,7 +120,7 @@ public final class MagnificationPreferenceFragment extends DashboardFragment {
         final AccessibilityManager am = (AccessibilityManager) context.getSystemService(
                 Context.ACCESSIBILITY_SERVICE);
         final String assignedId = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT);
+                Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         if (!TextUtils.isEmpty(assignedId) && !MAGNIFICATION_COMPONENT_ID.equals(assignedId)) {
             final ComponentName assignedComponentName = ComponentName.unflattenFromString(
                     assignedId);
