@@ -1304,9 +1304,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     final List<String> keys = super.getNonIndexableKeys(context);
 
                     final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-                    final List<AccessPoint> accessPoints = WifiSavedConfigUtils.getAllConfigs(
-                            context, wifiManager);
-                    if (accessPoints == null || accessPoints.size() <= 0) {
+                    if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
                         keys.add(PREF_KEY_SAVED_NETWORKS);
                     }
 
