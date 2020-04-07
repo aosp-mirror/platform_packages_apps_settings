@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.Application;
-import android.app.settings.SettingsEnums;
 import android.app.usage.UsageStats;
 import android.content.Context;
 import android.icu.text.RelativeDateTimeFormatter;
@@ -98,12 +97,12 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                 .setHeaderTitleRes(R.string.recent_app_category_title)
                 .setHeaderDetailsClickListener((View v) -> {
                     mMetricsFeatureProvider.logClickedPreference(mRecentAppsPreference,
-                            SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY);
+                            getMetricsCategory());
                     new SubSettingLauncher(mContext)
                             .setDestination(ManageApplications.class.getName())
                             .setArguments(null /* arguments */)
                             .setTitleRes(R.string.application_info_label)
-                            .setSourceMetricsCategory(SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY)
+                            .setSourceMetricsCategory(getMetricsCategory())
                             .launch();
                 });
     }
@@ -166,11 +165,10 @@ public class RecentAppsPreferenceController extends BasePreferenceController
                         RelativeDateTimeFormatter.Style.SHORT))
                 .setOnClickListener(v -> {
                     mMetricsFeatureProvider.logClickedPreference(mRecentAppsPreference,
-                            SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY);
+                            getMetricsCategory());
                     AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
                             R.string.application_info_label, pkgName, appEntry.info.uid,
-                            mHost, 1001 /*RequestCode*/,
-                            SettingsEnums.SETTINGS_APP_NOTIF_CATEGORY);
+                            mHost, 1001 /*RequestCode*/, getMetricsCategory());
                 })
                 .build();
     }
