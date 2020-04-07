@@ -113,6 +113,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
         });
 
+        // Set metrics category for BasePreferenceController.
+        final int metricCategory = getMetricsCategory();
+        mControllers.forEach(controller -> {
+            if (controller instanceof BasePreferenceController) {
+                ((BasePreferenceController) controller).setMetricsCategory(metricCategory);
+            }
+        });
+
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
         mControllers.add(mPlaceholderPreferenceController);
