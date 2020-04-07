@@ -235,6 +235,13 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
     public void refreshPreferences() {
         final PreferenceScreen screen = getPreferenceScreen();
         for (AbstractPreferenceController controller : mControllers) {
+            // WifiDetailPreferenceController2 gets the callback WifiEntryCallback#onUpdated,
+            // it can control the visibility change by itself.
+            // And WifiDetailPreferenceController2#updatePreference renew mEntityHeaderController
+            // instance which will cause icon reset.
+            if (controller instanceof WifiDetailPreferenceController2) {
+                continue;
+            }
             controller.displayPreference(screen);
         }
     }
