@@ -274,7 +274,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Seleccionar desviación do UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Data"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Hora"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloquear despois de esgotar o tempo de espera da pantalla"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloquear tralo tempo de espera da pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> despois do tempo de espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Inmediatamente despois do tempo de espera, excepto se o dispositivo está desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> despois do tempo de espera, excepto se <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> mantén o dispositivo desbloqueado"</string>
@@ -321,7 +321,7 @@
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Desbloqueo facial"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"Desbloqueo facial para o perfil de traballo"</string>
     <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Como configurar o desbloqueo facial?"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Configurar a o desbloqueo facial"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Configurar o desbloqueo facial"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Utilizar a autenticación facial"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Comezar"</string>
@@ -800,7 +800,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"Erro"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"A banda de 5 GHz non está dispoñible neste país"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"No modo avión"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"Recibir notificación cando haxa redes abertas preto"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Recibir notificacións cando haxa redes públicas"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Notifica cando unha rede pública de alta calidade estea dispoñible"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Activar a wifi automaticamente"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"A wifi volverase activar preto de redes de alta calidade gardadas, como a túa rede doméstica"</string>
@@ -810,7 +810,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Evitar conexións deficientes"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Non utilizar unha rede wifi se non ten unha boa conexión a Internet"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Usar só redes que teñan unha boa conexión a Internet"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"Conectarse ás redes abertas"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Conectarse a redes públicas"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Conéctase automaticamente a redes públicas de alta calidade"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Para utilizar a función, selecciona un provedor de valoración de rede"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Para utilizar a función, selecciona un provedor de valoración de rede que sexa compatible"</string>
@@ -1218,6 +1218,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activar ata: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Desactivar ata: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Luz nocturna non activada"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Sen localización non se coñecen o amencer nin o solpor"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"Activa a localización"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activar agora"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Desactivar agora"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activar ata o amencer"</string>
@@ -1312,6 +1314,8 @@
       <item quantity="other">O código PIN da SIM é incorrecto. Quédanche <xliff:g id="NUMBER_1">%d</xliff:g> intentos.</item>
       <item quantity="one">O código PIN da SIM é incorrecto. Quédache <xliff:g id="NUMBER_0">%d</xliff:g> intento antes de que teñas que contactar co operador para desbloquear o dispositivo.</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"Fallo no funcionamento do PIN da SIM"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Actualizacións do sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -1755,8 +1759,8 @@
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"Definiuse o PIN"</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Definiuse o padrón"</string>
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Desbloqueo facial: cómpre un contrasinal"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Para usar o desbl. f., define un padrón"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Para usar o desbl. facial, define un PIN"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Alternativa ao desbloqueo facial"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Alternativa ao desbloqueo facial"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Esqueciches o contrasinal?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Esqueciches o padrón?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Esqueciches o PIN?"</string>
@@ -1801,7 +1805,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Facer visible o padrón"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Facer visible o padrón do perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrar ao tocar"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear ao acender"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Bloquear co botón de acender"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Excepto se <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> mantén o dispositivo desbloqueado"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Definir padrón de desbloqueo"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Cambiar padrón de desbloqueo"</string>
@@ -2125,12 +2129,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Pasa 2 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Pasa 3 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Toca o botón Accesibilidade"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"Toca o botón de accesibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da pantalla"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"Pasa dous dedos cara arriba desde a parte inferior da pantalla"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"Pasa 3 dedos cara arriba desde a parte inferior da pantalla"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Toca o botón Accesibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da pantalla.\n\nPara cambiar de función, mantén premido o botón Accesibilidade."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"Pasa 2 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 2 dedos cara arriba e mantén premida a pantalla."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"Pasa 3 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 3 dedos cara arriba e mantén premida a pantalla."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén premidas as dúas teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Toca tres veces a pantalla"</string>
@@ -3028,24 +3032,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Usar aplicación predeterminada"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Sempre"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepto cando estea aberta outra aplicación de pago"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Nos terminais sen contacto, pagar con:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Pago no terminal"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura unha aplicación de pago. A continuación, coloca a parte traseira do teu teléfono sobre calquera terminal que teña o símbolo de pago sen contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Máis..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Define a aplicación de pagos predeterminada"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualiza a aplicación de pagos predeterminada"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"Nos terminais sen contacto, pagar con <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Nos terminais sen contacto, pagar con <xliff:g id="APP_0">%1$s</xliff:g>.\n\n<xliff:g id="APP_1">%2$s</xliff:g> deixará de ser a túa aplicación de pagos predeterminada."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Definir como predeterminada"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualizar"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricións"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Eliminar restricións"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambiar PIN"</string>
@@ -3316,6 +3313,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear ruído visual"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir sinais visuais"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opcións para mostrar as notificacións ocultas"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Cando está activado o modo Non molestar"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Notificacións sen son"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Verás notificacións na pantalla"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"O teléfono non vibrará nin emitirá sons cando cheguen notificacións."</string>
@@ -3427,6 +3425,8 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"Utilizar historial de notificacións"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"O historial de notificacións está desactivado"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Activa o historial de notificacións para ver as notificacións recentes e as adiadas"</string>
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"Non hai notificacións recentes"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Aquí aparecerán as notificacións recentes e as adiadas"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ver configuración de notificacións"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"abre a notificación"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir adiar notificacións"</string>
@@ -3569,10 +3569,8 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permitir pantalla superposta"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permite que esta aplicación cree unha ventá de pantalla superposta mentres estea aberta ou despois de saír dela (por exemplo, para continuar visualizando un vídeo). A ventá móstrase sobre as demais aplicacións que esteas utilizando."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicacións persoais e do traballo conectadas"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Conectadas"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Non conectadas"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Non hai ningunha aplicación conectada"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"varios perfís aplicación conectada aplicacións do traballo e persoais"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicacións persoais e do traballo conectadas"</string>
@@ -3591,12 +3589,9 @@
       <item quantity="other">Hai <xliff:g id="COUNT_1">%d</xliff:g> aplicacións conectadas</item>
       <item quantity="one">Hai <xliff:g id="COUNT_0">%d</xliff:g> aplicación conectada</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instala <xliff:g id="NAME">%1$s</xliff:g> no teu perfil de traballo para conectar estas aplicacións"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instala <xliff:g id="NAME">%1$s</xliff:g> no teu perfil persoal para conectar estas aplicacións"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca para instalar a aplicación"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso a Non molestar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir modo Non molestar"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Ningunha aplicación instalada solicitou acceso en modo Non molestar"</string>
@@ -3925,8 +3920,8 @@
     <string name="default_apps_title" msgid="6943471331817718664">"Predeterminado"</string>
     <string name="default_for_work" msgid="537558180548617528">"Predeterminado para o traballo"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Asistente e entrada de voz"</string>
-    <string name="default_assist_title" msgid="1182435129627493758">"Asistente dixital"</string>
-    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Asistente dixital predefinido"</string>
+    <string name="default_assist_title" msgid="1182435129627493758">"Aplicación de asistente dixital"</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Aplicación de asistente dixital predeterminada"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"Queres que <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> sexa o teu asistente?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"O asistente poderá ler información sobre as aplicacións en uso no teu sistema, incluída a información visible na túa pantalla ou á que se pode acceder desde as aplicacións."</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Aceptar"</string>
@@ -4388,7 +4383,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a Inicio, pasa o dedo cara arriba desde a parte inferior da pantalla. Para cambiar de aplicación, pasa o dedo cara arriba desde a parte inferior da pantalla, mantena premida e sóltaa. Para volver á pantalla anterior, pasa o dedo desde o bordo esquerdo ou dereito."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botóns"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Para volver á pantalla anterior, ir a Inicio e cambiar de aplicación, utiliza os botóns da parte inferior da pantalla."</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"navegación do sistema, navegación con 2 botóns, navegación con 3 botóns, navegación con xestos"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Non compatible coa túa aplicación de inicio predeterminada, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Cambiar app de inicio predeterminada"</string>
     <string name="information_label" msgid="6939310810756569298">"Información"</string>
@@ -4815,7 +4811,7 @@
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Podes perder ao acceso ao tempo ou aos datos restantes. Consulta o teu fornecedor antes de quitar nada."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"captura de contido, contido das aplicacións"</string>
     <string name="content_capture" msgid="868372905432812238">"Contido das aplicacións"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"Permite que as aplicación envíen contido ao sistema Android"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"Permite que as aplicacións envíen contido ao sistema Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capturar baleirado da zona de memoria dinámica do sistema"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Capturando baleirado da zona de memoria dinámica do sistema"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Non se puido capturar o baleirado da zona de memoria dinámica do sistema"</string>
@@ -4863,10 +4859,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Deter emisión"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Queres desactivar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Ao realizar esta acción, tamén se desactivará a conexión 5G.\nDurante as chamadas de voz, non poderás utilizar Internet e quizais non funcionen algunhas aplicacións."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Cando se utilicen dúas SIM, este teléfono limitarase á rede 4G. Máis información"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Cando se utilicen dúas SIM, esta tableta limitarase á rede 4G. Máis información"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Cando se utilicen dúas SIM, este dispositivo limitarase á rede 4G. Máis información"</string>
 </resources>
