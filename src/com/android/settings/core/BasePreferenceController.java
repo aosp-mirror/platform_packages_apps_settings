@@ -124,6 +124,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     private boolean mIsForWork;
     @Nullable
     private UserHandle mWorkProfileUser;
+    private int mMetricsCategory;
 
     /**
      * Instantiate a controller as specified controller type and user-defined key.
@@ -398,9 +399,25 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * This won't block UI thread however has similar side effect. Please use it if you
      * want to avoid janky animation(i.e. new preference is added in the middle of page).
      *
-     * This music be used in {@link BasePreferenceController}
+     * This must be used in {@link BasePreferenceController}
      */
     public interface UiBlocker {
+    }
+
+    /**
+     * Set the metrics category of the parent fragment.
+     *
+     * Called by DashboardFragment#onAttach
+     */
+    public void setMetricsCategory(int metricsCategory) {
+        mMetricsCategory = metricsCategory;
+    }
+
+    /**
+     * @return the metrics category of the parent fragment.
+     */
+    protected int getMetricsCategory() {
+        return mMetricsCategory;
     }
 
     /**
