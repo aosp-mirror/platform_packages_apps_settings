@@ -33,6 +33,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.telephony.ims.ProvisioningManager;
 import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,6 +183,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
+        mEmptyView.setAutoLinkMask(Linkify.WEB_URLS);
         final Resources res = getResourcesForSubId();
         final String emptyViewText = res.getString(R.string.wifi_calling_off_explanation,
                 res.getString(R.string.wifi_calling_off_explanation_2));
