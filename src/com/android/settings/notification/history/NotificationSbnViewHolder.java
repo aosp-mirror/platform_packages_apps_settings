@@ -17,6 +17,7 @@
 package com.android.settings.notification.history;
 
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -91,10 +92,14 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
                     Slog.e(TAG, "Could not launch", e);
                 }
             } else {
-                Intent appIntent = new Intent(Intent.ACTION_MAIN)
-                        .setPackage(pkg);
+                Intent appIntent = itemView.getContext().getPackageManager()
+                        .getLaunchIntentForPackage(pkg);
                 appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                itemView.getContext().startActivityAsUser(appIntent, UserHandle.of(userId));
+                try {
+                    itemView.getContext().startActivityAsUser(appIntent, UserHandle.of(userId));
+                } catch (ActivityNotFoundException e) {
+                    Slog.e(TAG, "no launch activity", e);
+                }
             }
         });
         ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
