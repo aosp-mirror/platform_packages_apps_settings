@@ -24,7 +24,6 @@ import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OV
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_GONE;
 import static com.android.settings.widget.RadioButtonPreferenceWithExtraWidget.EXTRA_WIDGET_VISIBILITY_SETTING;
 
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -273,18 +272,10 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     }
 
     private boolean isAnyServiceSupportAccessibilityButton() {
-        final AccessibilityManager ams = (AccessibilityManager) getContext().getSystemService(
-                Context.ACCESSIBILITY_SERVICE);
-        final List<AccessibilityServiceInfo> services = ams.getEnabledAccessibilityServiceList(
-                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
-
-        for (AccessibilityServiceInfo info : services) {
-            if ((info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0) {
-                return true;
-            }
-        }
-
-        return false;
+        final AccessibilityManager ams = getContext().getSystemService(AccessibilityManager.class);
+        final List<String> targets = ams.getAccessibilityShortcutTargets(
+                AccessibilityManager.ACCESSIBILITY_BUTTON);
+        return !targets.isEmpty();
     }
 
     private boolean isNavBarMagnificationEnabled() {
