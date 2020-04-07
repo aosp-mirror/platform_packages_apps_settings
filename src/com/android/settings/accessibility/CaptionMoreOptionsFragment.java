@@ -44,7 +44,7 @@ public class CaptionMoreOptionsFragment extends SettingsPreferenceFragment
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_CAPTION_PROPERTIES;
+        return SettingsEnums.ACCESSIBILITY_CAPTION_MORE_OPTIONS;
     }
 
     @Override
