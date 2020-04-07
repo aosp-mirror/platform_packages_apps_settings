@@ -46,7 +46,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -202,8 +201,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         pref.setSummary(item.getDescription());
         pref.setEnabled(item.isEnabled());
         pref.setOnPreferenceClickListener(preference -> {
-            mMetricsFeatureProvider.logClickedPreference(preference,
-                    preference.getExtras().getInt(DashboardFragment.CATEGORY));
+            mMetricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
             final UserHandle user = item.getUser();
             mContext.startActivityAsUser(item.getLaunchIntent(mContext), user);
             return true;
