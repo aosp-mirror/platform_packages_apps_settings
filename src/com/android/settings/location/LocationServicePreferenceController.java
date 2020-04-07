@@ -58,7 +58,7 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     @Override
     public void init(DashboardFragment fragment) {
         super.init(fragment);
-        mInjector = new AppSettingsInjector(mContext);
+        mInjector = new AppSettingsInjector(mContext, getMetricsCategory());
     }
 
     @Override
