@@ -527,7 +527,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Alle vingerafdrukken verwijderen?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"\'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\' verwijderen"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Wil je deze vingerafdruk verwijderen?"</string>
-    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Je kunt je vingerafdrukken niet gebruiken om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
+    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"Je kunt je vingerafdrukken dan niet meer gebruiken om je telefoon te ontgrendelen, aankopen te autoriseren of in te loggen bij apps"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"Je kunt je vingerafdrukken niet gebruiken om je werkprofiel te ontgrendelen, aankopen te autoriseren of in te loggen bij werk-apps"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, verwijderen"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Versleuteling"</string>
@@ -591,7 +591,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"Kies een methode voor schermvergrendeling"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Geen"</string>
     <string name="unlock_set_unlock_off_summary" msgid="4578319976164001322"></string>
-    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"Vegen"</string>
+    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"Swipen"</string>
     <string name="unlock_set_unlock_none_summary" msgid="641298008390890152">"Geen beveiliging"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="8224895208452995332">"Patroon"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="4482018884090552709">"Gemiddelde beveiliging"</string>
@@ -613,7 +613,7 @@
     <string name="face_unlock_title" msgid="7344830351598247267">"Je kunt je telefoon ontgrendelen met je gezicht. Uit beveiligingsoverwegingen is voor deze optie een extra schermvergrendeling vereist."</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"Uitgeschakeld door beheerder, versleutelingsbeleid of opslag certificaatgegevens"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Geen"</string>
-    <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Vegen"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Swipen"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patroon"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"Pincode"</string>
     <string name="unlock_set_unlock_mode_password" msgid="8810609692771987513">"Wachtwoord"</string>
@@ -740,7 +740,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> actieve apps</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> actieve app</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"Trust-agents"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"Trust agents"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Stel voor gebruik eerst een schermvergrendeling in"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Geen"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
@@ -3387,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Pictogrammen van subtiele meldingen verbergen"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Pictogrammen van subtiele meldingen worden niet weergegeven in de statusbalk"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Meldingsstipjes toestaan"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Ballonnen"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bepaalde meldingen kunnen in ballonnen worden weergegeven op het scherm"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Bepaalde meldingen en andere content kunnen in ballonnen worden weergegeven op het scherm. Tik op een ballon om deze te openen. Sleep deze naar de onderkant van het scherm als je deze wilt sluiten."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Ballonnen"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Toestaan dat <xliff:g id="APP_NAME">%1$s</xliff:g> bepaalde meldingen weergeeft als ballonnen"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Ballonnen inschakelen"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Als je ballonnen wilt inschakelen voor deze app, moet je ze eerst inschakelen voor je apparaat. Dit heeft effect op andere apps waarin je eerder ballonnen hebt ingeschakeld."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbels"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bepaalde meldingen kunnen in bubbels worden weergegeven op het scherm"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Bepaalde meldingen en andere content kunnen in bubbels worden weergegeven op het scherm. Tik op een bubbel om deze te openen. Sleep deze naar de onderkant van het scherm als je deze wilt sluiten."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbels"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Toestaan dat <xliff:g id="APP_NAME">%1$s</xliff:g> bepaalde meldingen weergeeft als bubbels"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Bubbels inschakelen"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Als je bubbels wilt inschakelen voor deze app, moet je ze eerst inschakelen voor je apparaat. Dit heeft effect op andere apps waarin je eerder bubbels hebt ingeschakeld."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Inschakelen voor apparaat"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuleren"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Veegacties"</string>
