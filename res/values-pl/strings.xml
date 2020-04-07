@@ -327,7 +327,7 @@
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Rozpoznawanie twarzy"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"Rozpoznawanie twarzy do pracy"</string>
     <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Konfigurowanie rozpoznawania twarzy"</string>
-    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Konfigurowanie rozpoznawania twarzy"</string>
+    <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Skonfiguruj rozpoznawanie twarzy"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Użyj własnej twarzy do uwierzytelniania"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Rozpocznij"</string>
@@ -374,7 +374,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Zawsze wymagaj potwierdzenia"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"Zawsze wymagaj potwierdzenia, gdy używasz rozpoznawania twarzy w aplikacjach"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"Usuń dane twarzy"</string>
-    <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Konfigurowanie rozpoznawania twarzy"</string>
+    <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"Skonfiguruj rozpoznawanie twarzy"</string>
     <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"Rozpoznawanie twarzy umożliwia odblokowywanie urządzenia, logowanie się w aplikacjach i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go niechcący odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Rozpoznawanie twarzy umożliwia odblokowywanie urządzenia, logowanie się do aplikacji i zatwierdzanie płatności.\n\nPamiętaj:\nPatrząc na telefon, możesz go mimowolnie odblokować.\n\nInna osoba może odblokować Twój telefon, zbliżając go do Twojej twarzy – nawet wtedy, gdy masz zamknięte oczy.\n\nIstnieje możliwość, że Twój telefon odblokuje ktoś bardzo podobny do Ciebie (np. rodzeństwo)."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Usunąć dane twarzy?"</string>
@@ -462,7 +462,7 @@
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Szyfrowanie"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Zaszyfruj tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Zaszyfruj telefon"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Zaszyfrowane"</string>
+    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Zaszyfrowano"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje wraz z danymi oraz pliki multimedialne i inne. Jeśli korzystasz z szyfrowania tabletu i masz na nim ustawione blokowanie ekranu (wykorzystujesz do tego wzór, kod PIN lub hasło), po każdym uruchomieniu urządzenia konieczne będzie odblokowanie ekranu, by odszyfrować dane. Jedynym innym sposobem odszyfrowania tabletu jest przywrócenie danych fabrycznych, co powoduje usunięcie wszystkich danych.\n\nSzyfrowanie trwa co najmniej godzinę. Przed jego rozpoczęciem naładuj baterię, a w trakcie nie odłączaj tabletu od zasilania. Przerwanie procesu szyfrowania spowoduje utratę części lub wszystkich danych."</string>
     <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Możesz zaszyfrować swoje konta, ustawienia, pobrane aplikacje wraz z danymi oraz pliki multimedialne i inne. Jeśli korzystasz z szyfrowania telefonu i masz na nim ustawione blokowanie ekranu (wykorzystujesz do tego wzór, kod PIN lub hasło), po każdym uruchomieniu urządzenia konieczne będzie odblokowanie ekranu, by odszyfrować dane. Jedynym innym sposobem odszyfrowania telefonu jest przywrócenie danych fabrycznych, co powoduje wymazanie wszystkich danych.\n\nSzyfrowanie trwa co najmniej godzinę. Przed jego rozpoczęciem naładuj baterię, a w trakcie nie odłączaj telefonu od zasilania. Przerwanie procesu szyfrowania spowoduje utratę części lub wszystkich danych."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Zaszyfruj tablet"</string>
@@ -834,10 +834,9 @@
     <string name="wifi_error" msgid="4903954145386086899">"Błąd"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"Pasmo 5 GHz nie jest dostępne w tym kraju"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"W trybie samolotowym"</string>
-    <!-- no translation found for wifi_notify_open_networks (2610323626246818961) -->
-    <skip />
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Powiadamiaj o sieciach publicznych"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Powiadamiaj o dostępnej publicznej sieci wysokiej jakości"</string>
-    <string name="wifi_wakeup" msgid="3834327315861781611">"Włącz Wi-Fi automatycznie"</string>
+    <string name="wifi_wakeup" msgid="3834327315861781611">"Włączaj Wi-Fi automatycznie"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi włączy się w pobliżu zapisanych sieci wysokiej jakości, takich jak Twoja sieć domowa"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Niedostępne, bo lokalizacja jest wyłączona. Włącz "<annotation id="link">"lokalizację"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Niedostępna, bo skanowanie Wi-Fi jest wyłączone"</string>
@@ -845,8 +844,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Unikaj słabych połączeń"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Nie korzystaj z sieci Wi-Fi, jeśli nie ma dobrego połączenia z internetem"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Używaj tylko sieci z dobrym połączeniem z internetem"</string>
-    <!-- no translation found for use_open_wifi_automatically_title (7193846454986712009) -->
-    <skip />
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Łącz z sieciami publicznymi"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Automatycznie łącz się z publicznymi sieciami wysokiej jakości"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Aby użyć tej funkcji, wybierz dostawcę ocen jakości sieci"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Aby użyć tej funkcji, wybierz zgodnego dostawcę ocen jakości sieci"</string>
@@ -959,11 +957,11 @@
     <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Potwierdź swoją tożsamość"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Hasło do Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hasło do hotspota: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Połącz automatycznie"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Łącz automatycznie"</string>
     <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Pozwól telefonowi automatycznie łączyć się w pobliżu tej sieci"</string>
     <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Pozwól tabletowi automatycznie łączyć się w pobliżu tej sieci"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Dodaj urządzenie"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Dodaj urządzenie do tej sieci, używając kodu QR"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Dodaj urządzenie do tej sieci, używając kodu QR"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Nieprawidłowy format kodu QR"</string>
     <string name="retry" msgid="7542103800274026915">"Ponów"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Udostępnij innym użytkownikom urządzenia"</string>
@@ -1260,10 +1258,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Włącz do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Wyłącz do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Podświetlenie nocne wyłączone"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (5723805118454645608) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (1586574792030648828) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Określenie czasu od zachodu do wschodu słońca wymaga lokalizacji urządzenia"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"Włącz lokalizację"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Włącz teraz"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Wyłącz teraz"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Włącz do wschodu słońca"</string>
@@ -1360,6 +1356,8 @@
       <item quantity="other">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_1">%d</xliff:g> próby.</item>
       <item quantity="one">Nieprawidłowy kod PIN karty SIM. Masz jeszcze <xliff:g id="NUMBER_0">%d</xliff:g> próbę, zanim będziesz musiał skontaktować się z operatorem, by odblokować swoje urządzenie.</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"Operacja z kodem PIN karty SIM nie udała się."</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Aktualizacje systemu"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -1784,7 +1782,7 @@
     <string name="settings_safetylegal_activity_title" msgid="2218587051061093358">"Informacje o bezpieczeństwie"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="6571695168138207587">"Brak połączenia do transmisji danych. Aby wyświetlić te informacje teraz, otwórz stronę %s na dowolnym komputerze połączonym z internetem."</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Wczytuję..."</string>
-    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Ustawianie blokady ekranu"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Ustaw blokadę ekranu"</string>
     <string name="lockpassword_choose_your_password_message" msgid="4474728476383676731">"Ze względów bezpieczeństwa ustaw hasło"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Aby korzystać z odcisku palca, ustaw hasło"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Aby korzystać z odcisku palca, ustaw wzór"</string>
@@ -1851,7 +1849,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Wzór jest widoczny"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Pokazuj wzór dla profilu"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Wibracja przy dotknięciu"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blokada przyciskiem zasilania"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Blokuj przyciskiem zasilania"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Z wyjątkiem sytuacji, gdy blokadę anuluje <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Ustaw wzór odblokowania"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Zmień wzór odblokowania"</string>
@@ -2177,12 +2175,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Przesuń w górę dwoma palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Przesuń w górę trzema palcami"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Kliknij przycisk ułatwień dostępu"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"Kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dole ekranu"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"Przesuń dwoma palcami z dołu ekranu w górę"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"Przesuń trzema palcami z dołu ekranu w górę"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Kliknij przycisk ułatwień dostępu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dole ekranu.\n\nAby przełączać aplikacje, naciśnij i przytrzymaj przycisk ułatwień dostępu."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"Przesuń dwoma palcami z dołu ekranu w górę.\n\nAby przełączać funkcje, przesuń 2 palcami w górę i przytrzymaj."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"Przesuń 3 palcami z dołu ekranu w górę.\n\nAby przełączyć funkcje, przesuń 3 palcami w górę i przytrzymaj."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Przytrzymanie przycisków głośności"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Naciśnij i przytrzymaj oba przyciski głośności"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Kliknij ekran trzykrotnie"</string>
@@ -2274,35 +2272,23 @@
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Czerwony-zielony"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Czerwony-zielony"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Niebieski-żółty"</string>
-    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="8226135362782015387">
-      <item quantity="few">Najkrótsze opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Najkrótsze opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
-      <item quantity="other">Najkrótsze opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="one">Najkrótsze opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
+      <item quantity="few">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Krótkie(<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Krótkie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekund)</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay" formatted="false" msgid="4440667435012753839">
-      <item quantity="few">Bardzo krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Bardzo krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
-      <item quantity="other">Bardzo krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="one">Bardzo krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay" formatted="false" msgid="1550891909800510628">
+      <item quantity="few">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Średnie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Średnie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="1627969745093865560">
-      <item quantity="few">Krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
-      <item quantity="other">Krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="one">Krótkie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="1126608261854734991">
-      <item quantity="few">Długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
-      <item quantity="other">Długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="one">Długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
-    </plurals>
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay" formatted="false" msgid="6624972454933133135">
-      <item quantity="few">Bardzo długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="many">Bardzo długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
-      <item quantity="other">Bardzo długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
-      <item quantity="one">Bardzo długie opóźnienie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
+    <plurals name="accessibilty_autoclick_preference_subtitle_long_delay" formatted="false" msgid="2230755548820485984">
+      <item quantity="few">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="many">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekund)</item>
+      <item quantity="other">Długie (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy)</item>
+      <item quantity="one">Długie (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> sekunda)</item>
     </plurals>
     <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekundy</item>
@@ -2728,7 +2714,7 @@
     <string name="credentials_install_summary" product="default" msgid="8161351950524166012">"Zainstaluj certyfikaty z karty SD"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Wyczyść dane o certyfikatach"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Usuń wszystkie certyfikaty"</string>
-    <string name="trusted_credentials" msgid="2522784976058244683">"Zaufane dane uwierzytelniające"</string>
+    <string name="trusted_credentials" msgid="2522784976058244683">"Zaufane certyfikaty"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Wyświetlaj zaufane certyfikaty CA"</string>
     <string name="user_credentials" msgid="4044405430790970775">"Dane logowania użytkownika"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Wyświetl i zmień zapisane dane logowania"</string>
@@ -2777,12 +2763,12 @@
     <string name="uninstall_device_admin" msgid="4481095209503956916">"Odinstaluj aplikację"</string>
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Dezaktywuj i odinstaluj"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Aplikacje do zarządzania urządzeniem"</string>
-    <string name="no_device_admins" msgid="8888779888103079854">"Brak dostępnych aplikacji do administrowania urządzeniem"</string>
+    <string name="no_device_admins" msgid="8888779888103079854">"Brak dostępnych aplikacji do zarządzania urządzeniem"</string>
     <string name="no_trust_agents" msgid="8659098725864191600">"Brak agentów zaufania"</string>
-    <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktywować aplikację do administrowania urządzeniem?"</string>
+    <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktywować tę aplikację?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktywuj tę aplikację do administrowania urządzeniem"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Administrator urządzenia"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"Aktywowanie tej aplikacji do zarządzania pozwoli aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> wykonywać te operacje:"</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"Aktywowanie tej aplikacji do administrowania urządzeniem pozwoli aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> wykonywać te operacje:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Aplikacja <xliff:g id="APP_NAME">%1$s</xliff:g> będzie zarządzać tym urządzeniem i je monitorować."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Aplikacja do administrowania jest aktywna i pozwala aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> wykonywać te operacje:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Czy aktywować menedżera profilów?"</string>
@@ -3531,6 +3517,10 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"Użyj historii powiadomień"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Historia powiadomień wyłączona"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Włącz historię powiadomień, aby sprawdzić ostatnie i odłożone powiadomienia"</string>
+    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
+    <skip />
+    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
+    <skip />
     <string name="notification_history_view_settings" msgid="5269317798670449002">"pokaż ustawienia powiadomień"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"otwórz powiadomienie"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Zezwól na odkładanie powiadomień"</string>
@@ -4551,7 +4541,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Aby wyświetlić ekran główny, przesuń dwoma palcami od dołu ekranu w górę. Aby przełączyć aplikacje, przesuń palcem w górę, przytrzymaj go i zwolnij. Aby przejść wstecz, przesuń palcem od lewej lub prawej krawędzi."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Nawigacja przy użyciu trzech przycisków"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Przyciski u dołu ekranu umożliwiają przechodzenie wstecz, otwieranie ekranu głównego i przełączanie aplikacji."</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"nawigacja w systemie, nawigacja przy użyciu dwóch przycisków, nawigacja przy użyciu trzech przycisków, nawigacja przy użyciu gestów"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Domyślna aplikacja ekranu głównego (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>) tego nie obsługuje"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Przełącz domyślną aplikację ekranu głównego"</string>
     <string name="information_label" msgid="6939310810756569298">"Informacje"</string>
@@ -4646,9 +4637,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="8395903360175064841">"Wyłączono stały VPN w Twoim profilu osobistym"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="2496961514592522377">"Włączono stały VPN w Twoim profilu do pracy"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="4350347418068037051">"Ustawiono globalny serwer proxy HTTP"</string>
-    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Zaufane dane logowania"</string>
-    <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Zaufane dane logowania w Twoim profilu osobistym"</string>
-    <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Zaufane dane logowania w Twoim profilu do pracy"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Zaufane certyfikaty"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Zaufane certyfikaty w Twoim profilu osobistym"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Zaufane certyfikaty w Twoim profilu do pracy"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="6459725295322004179">
       <item quantity="few">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikaty urzędu certyfikacji</item>
       <item quantity="many">Co najmniej <xliff:g id="COUNT_1">%d</xliff:g> certyfikatów urzędu certyfikacji</item>
