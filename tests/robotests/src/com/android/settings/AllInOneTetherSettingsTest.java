@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_DEFAULT;
+import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG;
+import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_WITH_SECURITY_NON;
 import static com.android.settings.network.TetherEnabler.BLUETOOTH_TETHER_KEY;
 import static com.android.settings.network.TetherEnabler.USB_TETHER_KEY;
 import static com.android.settings.network.TetherEnabler.WIFI_TETHER_DISABLE_KEY;
@@ -29,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.wifi.SoftApConfiguration;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
@@ -36,6 +40,7 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
+import com.android.settings.wifi.tether.WifiTetherSecurityPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -65,6 +70,8 @@ public class AllInOneTetherSettingsTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
 
     @Before
     public void setUp() {
@@ -82,6 +89,8 @@ public class AllInOneTetherSettingsTest {
 
         mAllInOneTetherSettings = new AllInOneTetherSettings();
         ReflectionHelpers.setField(mAllInOneTetherSettings, "mLifecycle", mock(Lifecycle.class));
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mSecurityPreferenceController",
+                mSecurityPreferenceController);
     }
 
     @Test
@@ -155,6 +164,32 @@ public class AllInOneTetherSettingsTest {
                 .filter(controller -> controller instanceof WifiTetherAutoOffPreferenceController)
                 .count())
                 .isEqualTo(1);
+    }
+
+    @Test
+    public void getInitialExpandedChildCount_shouldShowWifiConfigWithSecurity() {
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", true);
+        when(mSecurityPreferenceController.getSecurityType())
+                .thenReturn(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
+                .isEqualTo(EXPANDED_CHILD_COUNT_DEFAULT);
+    }
+
+    @Test
+    public void getInitialExpandedChildCount_shouldShowWifiConfigWithoutSecurity() {
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", true);
+        when(mSecurityPreferenceController.getSecurityType())
+                .thenReturn(SoftApConfiguration.SECURITY_TYPE_OPEN);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
+                .isEqualTo(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
+    }
+
+    @Test
+    public void getInitialExpandedChildCount_shouldNotShowWifiConfig() {
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", false);
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mBluetoothTethering", true);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
+                .isEqualTo(EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {
