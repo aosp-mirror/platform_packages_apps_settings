@@ -349,7 +349,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Selecciona per compensació UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Data"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Hora"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloqueja quan acabi el temps d\'espera de la pantalla"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Bloqueja després del temps d\'espera de la pantalla"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> després del temps d\'espera"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Immediatament després del temps d\'espera, excepte si està desbloquejat per <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> després del temps d\'espera,  excepte si està desbloquejat per <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -374,8 +374,8 @@
     <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Utilitza la ubicació"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desactivat"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Activada (<xliff:g id="COUNT_1">%1$d</xliff:g> aplicacions tenen accés a la ubicació)</item>
-      <item quantity="one">Activada (<xliff:g id="COUNT_0">%1$d</xliff:g> aplicació té accés a la ubicació)</item>
+      <item quantity="other">Activada - <xliff:g id="COUNT_1">%1$d</xliff:g> aplicacions tenen accés a la ubicació</item>
+      <item quantity="one">Activada - <xliff:g id="COUNT_0">%1$d</xliff:g> aplicació té accés a la ubicació</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Carregant…"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Comptes"</string>
@@ -486,7 +486,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Omet"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Cancel·la"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toca el sensor"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"És a la part posterior del telèfon. Fes servir el dit índex."</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"És a la part posterior del telèfon. Utilitza el dit índex."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Il·lustració amb la ubicació del sensor d\'empremtes dactilars i de dispositiu"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nom"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"D\'acord"</string>
@@ -513,8 +513,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fet"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Això no és el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor situat a la part posterior amb el dit índex."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"No s\'ha completat el registre"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"S\'ha esgotat el temps d\'espera per inscriure l\'empremta digital. Torna-ho a provar."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"No s\'ha completat la inscripció"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"S\'ha esgotat el límit de temps per inscriure l\'empremta digital. Torna-ho a provar."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registre de l\'empremta digital no ha funcionat. Torna-ho a provar o fes servir un altre dit."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Afegeix-ne una altra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Següent"</string>
@@ -574,7 +574,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Protegeix la tauleta"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="3585905639045649905">"Protegeix el dispositiu"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="2758197863515864300">"Protegeix el telèfon"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Defineix un bloqueig de pantalla alternatiu per a més seguretat"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Per a més seguretat, defineix un bloqueig de pantalla alternatiu"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="4870877800737248926">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquesta tauleta sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa les funcions de protecció del dispositiu per impedir que altres persones el facin servir sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
@@ -1333,7 +1333,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"Torna a escriure el PIN nou"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN de la SIM"</string>
     <string name="sim_bad_pin" msgid="5416328363761048221">"PIN incorrecte"</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"Els codis PIN no coincideixen"</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"Els PIN no coincideixen"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"No es pot canviar el PIN.\nÉs possible que sigui incorrecte."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"PIN de la SIM canviat correctament"</string>
     <string name="sim_lock_failed" msgid="16360418201678317">"No es pot canviar l\'estat de bloqueig de la targeta SD.\nÉs possible que el PIN sigui incorrecte."</string>
@@ -1761,8 +1761,8 @@
     <string name="confirm_device_credential_password" msgid="2471269024934865534">"Utilitza la contrasenya"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Defineix un bloqueig de pantalla"</string>
     <string name="lockpassword_choose_your_password_message" msgid="4474728476383676731">"Per motius de seguretat, cal que defineixis una contrasenya"</string>
-    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Defineix una contrasenya"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Defineix un patró"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Per utilitzar l\'empremta, defineix una contrasenya"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Per utilitzar l\'empremta, defineix un patró"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Per motius de seguretat, cal que defineixis un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Per utilitzar l\'empremta, defineix un PIN"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Per motius de seguretat, cal que defineixis un patró"</string>
@@ -1770,7 +1770,7 @@
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma el patró"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Torna a introduir el PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les contrasenyes no coincideixen"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Els codis PIN no coincideixen"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Els PIN no coincideixen"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Torna a dibuixar el patró"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Mètode de desbloqueig"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"La contrasenya s\'ha definit"</string>
@@ -1817,7 +1817,7 @@
     <string name="lockpattern_settings_title" msgid="9223165804553269083">"Patró de desbloqueig"</string>
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Requereix un patró"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Cal dibuixar el patró per desbloquejar la pantalla"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Mostra el patró"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Fes que el patró sigui visible"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Mostra el patró del perfil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibra en tocar"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"El botó d\'engegada bloqueja"</string>
@@ -3393,7 +3393,7 @@
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bombolles"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Permet que <xliff:g id="APP_NAME">%1$s</xliff:g> mostri algunes notificacions com a bombolles"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Activa les bombolles"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Per activar els quadres d\'ajuda en aquesta aplicació, primer els has d\'activar al dispositiu. Això afecta altres aplicacions en què has activat els quadres d\'ajuda."</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Per activar les bombolles d\'aquesta aplicació, primer els has d\'activar al dispositiu. Això afecta altres aplicacions en què has activat els quadres d\'ajuda."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Activa al dispositiu"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Cancel·la"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Accions en lliscar"</string>
@@ -3492,7 +3492,7 @@
     <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Redueix el desenfocament (recomanat)"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Redueix el parpelleig"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Pantalla en pantalla"</string>
-    <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Cap de les aplicacions instal·lades no admet la funció de pantalla en pantalla"</string>
+    <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Cap de les aplicacions instal·lades no admet pantalla en pantalla"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"pip imatge en"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Pantalla en pantalla"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permet Pantalla en pantalla"</string>
