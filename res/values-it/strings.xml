@@ -207,7 +207,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Devi inserire un valore nel campo Porta."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Il campo Porta deve essere vuoto se il campo Host è vuoto."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"La porta specificata non è valida."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Il proxy HTTP viene utilizzato dal browser ma potrebbe non essere utilizzato da altre applicazioni."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Il proxy HTTP viene utilizzato dal browser, ma potrebbe non essere usato dalle altre app."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"URL PAC: "</string>
     <string name="radio_info_subid" msgid="7327800379827284836">"ID secondario corrente:"</string>
     <string name="radio_info_dds" msgid="4170740686898792195">"ID secondario della SIM dati predefinita:"</string>
@@ -375,7 +375,7 @@
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"OFF"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">On - <xliff:g id="COUNT_1">%1$d</xliff:g> app hanno accesso alla posizione</item>
-      <item quantity="one">On - <xliff:g id="COUNT_0">%1$d</xliff:g> app ha accesso alla posizione</item>
+      <item quantity="one">ON - <xliff:g id="COUNT_0">%1$d</xliff:g> app ha accesso alla posizione</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Caricamento…"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Account"</string>
@@ -873,7 +873,7 @@
     <string name="wifi_notify_open_networks" msgid="3040435584744232163">"Notifica di reti aperte"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Invia notifica quando è disponibile una rete pubblica di alta qualità"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Attiva Wi‑Fi automaticamente"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"La connessione Wi-Fi si riattiverà vicino a reti salvate di alta qualità, come la connessione di casa"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"La connessione Wi-Fi si riattiverà vicino a reti salvate di alta qualità, come quella di casa"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Non disponibile perché la geolocalizzazione non è attiva. Attiva la "<annotation id="link">"geolocalizzazione"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Non disponibile perché la ricerca di reti Wi-Fi è disattivata"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Per usare la funzione, seleziona un fornitore di servizi di valutazione rete"</string>
@@ -959,7 +959,7 @@
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privacy"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Indirizzo MAC casuale"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Aggiungi un dispositivo"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Inquadra il codice QR indicato di seguito per aggiungere il dispositivo alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Inquadra il codice QR qui sotto per aggiungere il dispositivo alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Scansiona codice QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Inquadra il codice QR nel riquadro sottostante per connetterti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Collegati alla rete Wi‑Fi eseguendo la scansione di un codice QR"</string>
@@ -3387,13 +3387,13 @@
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Nascondi le icone dalle notifiche senza avvisi"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Le icone per le notifiche senza avvisi non appaiono nella barra di stato"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"Consenti indicatori notifica"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"Fumetti"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Alcune notifiche potrebbero essere mostrate sotto forma di fumetti sullo schermo"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Alcune notifiche e altri contenuti possono essere visualizzati come fumetti sullo schermo. Tocca un fumetto per aprirlo. Per ignorarlo, trascinalo in fondo allo schermo."</string>
-    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Fumetti"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Consenti all\'app <xliff:g id="APP_NAME">%1$s</xliff:g> di mostrare le notifiche come fumetti"</string>
-    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Attiva i fumetti"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Per attivare i fumetti per questa app, devi prima attivarli per il tuo dispositivo. Questa operazione riguarda altre app in cui hai attivato i fumetti in precedenza."</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"Bolle"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Alcune notifiche potrebbero essere mostrate sotto forma di bolle sullo schermo"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Alcune notifiche e altri contenuti possono essere visualizzati come bolle sullo schermo. Tocca una bolla per aprirla. Per ignorarla, trascinala in fondo allo schermo."</string>
+    <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bolle"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Consenti all\'app <xliff:g id="APP_NAME">%1$s</xliff:g> di mostrare le notifiche come bolle"</string>
+    <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"Attiva le bolle"</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"Per attivare le bolle per questa app, devi prima attivarle per il tuo dispositivo. Questa operazione riguarda altre app in cui hai attivato le bolle in precedenza."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"Attivali per il dispositivo"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annulla"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Azioni di scorrimento"</string>
@@ -4093,7 +4093,7 @@
     <string name="data_saver_title" msgid="2593804270788863815">"Risparmio dati"</string>
     <string name="unrestricted_data_saver" msgid="7922563266857367495">"Dati senza limitazioni"</string>
     <string name="restrict_background_blacklisted" msgid="7953049316098373715">"I dati in background sono disattivati"</string>
-    <string name="data_saver_on" msgid="7848893946018448793">"On"</string>
+    <string name="data_saver_on" msgid="7848893946018448793">"ON"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"OFF"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usa Risparmio dati"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Uso dati senza limitazioni"</string>

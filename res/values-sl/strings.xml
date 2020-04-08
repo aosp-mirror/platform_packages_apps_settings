@@ -209,7 +209,7 @@
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Izpolniti morate polje vrat."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Če je polje za gostitelja prazno, mora biti prazno tudi polje za vrata."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Vtipkana številka vrat je neveljavna."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Proxy HTTP lahko uporablja brskalnik, druge aplikacije pa ne."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Proxy za HTTP lahko uporablja brskalnik, druge aplikacije pa ne."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"URL datoteke PAC: "</string>
     <string name="radio_info_subid" msgid="7327800379827284836">"Trenutni ID naročnine:"</string>
     <string name="radio_info_dds" msgid="4170740686898792195">"ID naročnine privzete kartice SIM za prenos podatkov:"</string>
@@ -302,7 +302,7 @@
     <string name="save" msgid="3125033126936493822">"Shrani"</string>
     <string name="done" msgid="7497982645646431310">"Končano"</string>
     <string name="apply" msgid="7834684883190163536">"Uporabi"</string>
-    <string name="share" msgid="8502235338607613795">"Daj v skupno rabo"</string>
+    <string name="share" msgid="8502235338607613795">"Deli"</string>
     <string name="add" msgid="8335206931421683426">"Dodaj"</string>
     <string name="settings_label" msgid="943294133671632976">"Nastavitve"</string>
     <string name="settings_label_launcher" msgid="820982375501978609">"Nastavitve"</string>
@@ -353,7 +353,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Izberi po zamiku glede na UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Datum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Ura"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Zaklepanje po preteku časovne omejitve za zaslon"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Zaklepanje zaslona po poteku časa"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po pre teku časovne omejitve"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Takoj po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> poskrbi, da ostane odklenjen"</string>
@@ -432,10 +432,10 @@
     <string name="face_add_max" msgid="4578405795494514876">"Dodate lahko največ toliko obrazov: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Dodali ste največje dovoljeno število obrazov"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Obrazov ni več mogoče dodati"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Včlanitev ni bila dokončana."</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registracija ni bila dokončana."</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"V redu"</string>
-    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Dosežena časovna omejitev za včlanitev obraza. Poskusite znova."</string>
-    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Včlanitev obraza ni uspela."</string>
+    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Dosežena je časovna omejitev za registracijo obraza. Poskusite znova."</string>
+    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Registracija obraza ni uspela."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Vse je pravilno nastavljeno."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Končano"</string>
     <string name="security_settings_face_enroll_should_re_enroll_title" msgid="9080635904939148410">"Izboljšajte učinkovitost odklepanja z obrazom"</string>
@@ -473,9 +473,9 @@
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1044059475710838504"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="521797365974277693">"Odklepanje s prstnim odtisom"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Uporaba prstnega odtisa"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Dotaknite se tipala prstnih odtisov, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. Pazite, čigave prstne odtise boste dodali. Ta dejanja bo mogoče izvesti že z enim dodanim prstnim odtisom.\n\nOpomba: prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Dotaknite se tipala prstnih odtisov, če želite odkleniti telefon, odobriti nakupe ali se prijaviti v aplikacije. Pazite, čigave prstne odtise boste dodali. Ta dejanja bo mogoče izvesti že z enim dodanim prstnim odtisom.\n\nOpomba: Prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"S prstnim odtisom odklenite telefon ali odobrite nakupe.\n\nOpomba: prstnega odtisa ne morete uporabiti za odklepanje te naprave. Za več informacij se obrnite na skrbnika v organizaciji."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"S prstnim odtisom odklenite telefon ali odobrite nakupe.\n\nOpomba: prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"S prstnim odtisom odklenite telefon ali odobrite nakupe.\n\nOpomba: Prstni odtis bo morda manj varen kot zapleten vzorec ali koda PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Prekliči"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Naprej"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Preskoči"</string>
@@ -521,9 +521,9 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Končano"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to ni tipalo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"S kazalcem se dotaknite tipala na hrbtni strani telefona."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Včlanitev ni bila dokončana."</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Dosežena časovna omejitev za včlanitev prstnega odtisa. Poskusite znova."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Včlanitev prstnega odtisa ni uspela. Poskusite znova ali uporabite drug prst."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registracija ni bila dokončana"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Dosežena je časovna omejitev za registracijo prstnega odtisa. Poskusite znova."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija prstnega odtisa ni uspela. Poskusite znova ali uporabite drug prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodaj še enega"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Naprej"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Prstni odtis lahko uporabljate za odklepanje zaslona ter potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
@@ -771,7 +771,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktivnih aplikacij</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Posredniki zaupanja"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Če želite uporabljati, najprej nastavite zaklepanje zaslona"</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Za uporabo najprej nastavite zaklepanje zaslona"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Brez"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aktiven posrednik zaupanja</item>
@@ -995,8 +995,8 @@
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Branje kode QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Kodo QR spodaj nastavite na sredino, da vzpostavite povezavo z omrežjem »<xliff:g id="SSID">%1$s</xliff:g>«."</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Če se želite pridružiti omrežju Wi‑Fi, preberite kodo QR"</string>
-    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Skupna raba omrežja Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Če želite vzpostaviti povezavo z omrežjem »<xliff:g id="SSID">%1$s</xliff:g>« in dati geslo v skupno rabo, preberite to kodo QR"</string>
+    <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Deljenje omrežja Wi‑Fi"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Če želite vzpostaviti povezavo z omrežjem »<xliff:g id="SSID">%1$s</xliff:g>« in deliti geslo z drugimi, preberite to kodo QR"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Če želite vzpostaviti povezavo z omrežjem »<xliff:g id="SSID">%1$s</xliff:g>«, preberite to kodo QR"</string>
     <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="2112977774341648820">"Kode QR ni bilo mogoče prebrati. Kodo nastavite na sredino in poskusite znova."</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Poskusite znova. Če se težava ponavlja, se obrnite na proizvajalca naprave."</string>
@@ -2724,9 +2724,9 @@
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktivacija skrbniške aplikacije naprave?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktiviraj to skrbniško aplikacijo naprave"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Skrbnik naprave"</string>
-    <string name="device_admin_warning" msgid="1889160106787280321">"Če aktivirate to skrbniško aplikacijo, boste aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogočili izvajanje teh postopkov:"</string>
+    <string name="device_admin_warning" msgid="1889160106787280321">"Če aktivirate to skrbniško aplikacijo, boste aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogočili izvajanje teh dejanj:"</string>
     <string name="device_admin_warning_simplified" msgid="2715756519899116115">"To napravo bo upravljala in nadzirala aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
-    <string name="device_admin_status" msgid="6332571781623084064">"Ta skrbniška aplikacija je aktivna in aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogoča izvajanje teh postopkov:"</string>
+    <string name="device_admin_status" msgid="6332571781623084064">"Ta skrbniška aplikacija je aktivna in aplikaciji <xliff:g id="APP_NAME">%1$s</xliff:g> omogoča izvajanje teh dejanj:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Želite aktivirati Upravitelja profilov?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Želite dovoliti nadzor?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Če nadaljujete, bo uporabnika upravljal skrbnik, ki lahko poleg osebnih podatkov shranjuje tudi povezane podatke.\n\nSkrbnik lahko nadzira in upravlja nastavitve, dostop, aplikacije ter podatke, povezane s tem uporabnikom, vključno z omrežno dejavnostjo in podatki o lokaciji naprave."</string>
@@ -3513,7 +3513,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Občutljiva obvestila za delovni profil"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži občutljivo vsebino delovnega profila na zaklenjenem zaslonu"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Pokaži vso vsebino obvestil"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaz občutljive vsebine samo na odklenjenem zas."</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj želite, da je prikazano na zaklenjenem zaslonu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Na zaklenjenem zaslonu"</string>
@@ -4193,13 +4193,13 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> omejitev</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operaterjeve meritve prenosa podatkov so morda drugačne kot v napravi"</string>
-    <string name="data_used_template" msgid="8229342096562327646">"Porabljeno: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="data_used_template" msgid="8229342096562327646">"Preneseno: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Nastavi opozorilo za prenos podatkov"</string>
     <string name="data_warning" msgid="2925054658166062884">"Opozorilo za prenos podatkov"</string>
     <string name="data_warning_footnote" msgid="5991901765915710592">"Preneseno količino podatkov za opozorilo in omejitev prenosa podatkov meri vaša naprava. Ti podatki se lahko razlikujejo od podatkov operaterja."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Nastavi omej. prenosa pod."</string>
     <string name="data_limit" msgid="8731731657513652363">"Omejitev prenosa podatkov"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> uporabljeno v obdobju <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> preneseno v obdobju <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfiguriranje"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Druge aplikacije, vključene v prikaz porabe"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
@@ -4210,8 +4210,8 @@
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Glavni podatki"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Podatki prek omrežij Wi‑Fi"</string>
-    <string name="data_used" msgid="7770571947591789895">"Porabljeno: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="data_used_formatted" msgid="7913920278059077938">"Porabljeno: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
+    <string name="data_used" msgid="7770571947591789895">"Preneseno: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="data_used_formatted" msgid="7913920278059077938">"Preneseno: <xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="data_overusage" msgid="3680477320458707259">"Prekoračeno za <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="6316251496381922837">"Preostalo: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
