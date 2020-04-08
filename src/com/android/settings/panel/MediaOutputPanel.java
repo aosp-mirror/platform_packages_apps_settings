@@ -259,7 +259,9 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
         @Override
         public void onPlaybackStateChanged(PlaybackState state) {
-            if (mCallback != null && state.getState() != PlaybackState.STATE_PLAYING) {
+            final int playState = state.getState();
+            if (mCallback != null && (playState == PlaybackState.STATE_STOPPED
+                    || playState == PlaybackState.STATE_PAUSED)) {
                 mCallback.forceClose();
             }
         }
