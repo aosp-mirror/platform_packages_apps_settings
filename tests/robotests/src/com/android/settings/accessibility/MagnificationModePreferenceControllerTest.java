@@ -32,8 +32,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class MagnificationModePreferenceControllerTest {
     private static final String PREF_KEY = "screen_magnification_mode";
-    // TODO(b/146019459): Use magnification_capability.
-    private static final String KEY_CAPABILITY = Settings.System.MASTER_MONO;
+    private static final String KEY_CAPABILITY =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY;
     private static final int WINDOW_SCREEN_VALUE = 2;
     private static final int ALL_VALUE = 3;
 
