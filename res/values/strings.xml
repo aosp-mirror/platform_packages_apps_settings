@@ -3017,6 +3017,10 @@
         <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
         <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
     </plurals>
+
+    <!-- This is instruction text to inform the user that they have entered the wrong SIM PIN while trying to unlock the keyguard.
+         The variable will be replaced with a number. [CHAR LIMIT=NONE] -->
+    <string name="wrong_pin_code_one">Incorrect SIM PIN code, you have 1 remaining attempt before you must contact your carrier to unlock your device.</string>
     <!-- Instructions telling the user that the operation to unlock the keyguard with SIM PIN failed. Displayed in one line in a large font.  [CHAR LIMIT=40] -->
     <string name="pin_failed">SIM PIN operation failed!</string>
 
@@ -4941,17 +4945,11 @@
     <!-- Summary for accessibility shortcut preference for software shortcut type. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_software">Tap accessibility button</string>
     <!-- Summary for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
     <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers</string>
-    <!-- Summary for software shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software">Tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> at the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
-    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation is enabled. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture">Swipe up from the bottom of the screen with 2 fingers.\n\nTo switch between features, swipe up with 2 fingers and hold.</string>
-    <!-- Summary for software shortcut in gesture mode in accessibility edit shortcut dialog while using gesture navigation and touch exploration are enabled [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback">Swipe up from the bottom of the screen with 3 fingers.\n\nTo switch between features, swipe up with 3 fingers and hold.</string>
     <!-- Title for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_dialog_title_hardware">Hold volume keys</string>
     <!-- Summary for hardware shortcut in accessibility edit shortcut dialog. [CHAR LIMIT=NONE] -->
@@ -5145,29 +5143,19 @@
     <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
 
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay">
-        <item quantity="one">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Extremely short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_short_delay">
-        <item quantity="one">Very short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Very short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay">
-        <item quantity="one">Short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Short delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
+        <item quantity="one">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Short (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
+    </plurals>
+    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
+    <plurals name="accessibilty_autoclick_preference_subtitle_medium_delay">
+        <item quantity="one">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Medium (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
     <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
     <plurals name="accessibilty_autoclick_preference_subtitle_long_delay">
-        <item quantity="one">Long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
-    </plurals>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad pointer stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <plurals name="accessibilty_autoclick_preference_subtitle_very_long_delay">
-        <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
-        <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
+        <item quantity="one">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> second)</item>
+        <item quantity="other">Long (<xliff:g id="click_delay_label" example="200">%1$s</xliff:g> seconds)</item>
     </plurals>
 
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
@@ -7187,6 +7175,8 @@
     <string name="help_url_caption" translatable="false"></string>
     <!-- Help URL, Accessibility Timeout [DO NOT TRANSLATE] -->
     <string name="help_url_timeout" translatable="false"></string>
+    <!-- Help URL, Accessibility Color Inversion [DO NOT TRANSLATE] -->
+    <string name="help_url_color_inversion" translatable="false"></string>
     <string name="help_url_system_dashboard" translatable="false"></string>
     <string name="help_url_double_tap_screen" translatable="false"></string>
     <string name="help_url_account_detail" translatable="false"></string>
@@ -10667,7 +10657,7 @@
     <string name="legacy_navigation_summary">Go back, Home, and switch apps with buttons at the bottom of your screen.</string>
 
     <!-- Search keywords for System Navigation settings. [CHAR_LIMIT=NONE]-->
-    <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation</string>
+    <string name="keywords_system_navigation">system navigation, 2 button navigation, 3 button navigation, gesture navigation, swipe</string>
 
     <!-- Message for the alert dialog which says that the current default home app does not support gesture navigation. [CHAR LIMIT=NONE] -->
     <string name="gesture_not_supported_dialog_message">Not supported by your default home app, <xliff:g id="default_home_app" example="Pixel Launcher">%s</xliff:g></string>

@@ -16,44 +16,44 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="6dp"
     android:paddingTop="6dp"
+    android:minHeight="48dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:minHeight="@*android:dimen/status_bar_icon_size"
+        android:paddingBottom="6dp">
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="@*android:dimen/status_bar_icon_size"
             android:layout_height="@*android:dimen/status_bar_icon_size"
+            android:layout_width="@*android:dimen/status_bar_icon_size"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/pkgicon"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@null"
             android:adjustViewBounds="true"
             android:tint="?android:attr/textColorPrimary"
-            android:maxHeight="@*android:dimen/status_bar_icon_size"
-            android:maxWidth="@*android:dimen/status_bar_icon_size"
             android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/pkgname"
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/icon"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="?android:attr/textColorPrimary"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:marqueeRepeatLimit = "marquee_forever"
+            android:scrollHorizontally = "true"
             android:textStyle="bold"
             android:textAlignment="viewStart" />
 
@@ -66,7 +66,6 @@
             android:paddingTop="1dp"
             android:scaleType="fitCenter"
             android:visibility="gone"
-            android:layout_toEndOf="@id/pkgname"
             android:tint="?android:attr/textColorSecondary"
             android:src="@drawable/ic_notifications_alert"
         />
@@ -87,8 +86,7 @@
             android:id="@+id/timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="13dp"
-            android:paddingBottom="13dp"
+            android:minHeight="@*android:dimen/status_bar_icon_size"
             android:layout_alignBottom="@android:id/widget_frame"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@android:id/widget_frame"
@@ -98,13 +96,12 @@
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
             android:textAlignment="viewEnd"
             />
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:minHeight="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="6dp"
         >
