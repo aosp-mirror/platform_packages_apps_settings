@@ -103,4 +103,20 @@ public class SavedAccessPointsPreferenceController2Test {
         assertThat(prefs.size()).isEqualTo(1);
         assertThat(prefs.get(0).getTitle()).isEqualTo(title);
     }
+
+    @Test
+    public void displayPreference_noAccessPoint_shouldRemoveIt() {
+        final String title = "ssid_title";
+        final String key = "key";
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        when(mockWifiEntry.getTitle()).thenReturn(title);
+        when(mockWifiEntry.getKey()).thenReturn(key);
+        final WifiEntryPreference preference = new WifiEntryPreference(mContext, mockWifiEntry);
+        preference.setKey(key);
+        mPreferenceCategory.addPreference(preference);
+
+        mController.displayPreference(mPreferenceScreen, new ArrayList<>());
+
+        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(0);
+    }
 }
