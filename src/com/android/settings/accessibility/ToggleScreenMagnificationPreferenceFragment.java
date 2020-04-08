@@ -187,6 +187,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         initShortcutPreference();
 
+        mSettingsPreference = new Preference(getPrefContext());
+        mSettingsPreference.setTitle(R.string.accessibility_menu_item_settings);
+        mSettingsPreference.setFragment(MagnificationSettingsFragment.class.getName());
+        mSettingsPreference.setPersistent(false);
+
         super.onViewCreated(view, savedInstanceState);
     }
 
