@@ -318,9 +318,9 @@
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"ล็อกหน้าจอ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"เพิ่มใบหน้าแล้ว"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"ตั้งค่าปลดล็อกด้วยใบหน้า"</string>
-    <string name="security_settings_face_preference_title" msgid="821557938243856757">"Face Unlock"</string>
+    <string name="security_settings_face_preference_title" msgid="821557938243856757">"ปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"Face Unlock สำหรับการทำงาน"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"วิธีตั้งค่า Face Unlock"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"วิธีตั้งค่าการปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"ตั้งค่าปลดล็อกด้วยใบหน้า"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"ใช้ใบหน้าในการตรวจสอบสิทธิ์"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
@@ -527,9 +527,9 @@
     <string name="fingerprint_unlock_set_unlock_password" msgid="5614333047430835971">"ลายนิ้วมือ + รหัสผ่าน"</string>
     <string name="fingerprint_unlock_skip_fingerprint" msgid="7631242444064287891">"ดำเนินการต่อโดยไม่ใช้ลายนิ้วมือ"</string>
     <string name="fingerprint_unlock_title" msgid="4978686534505944042">"คุณสามารถปลดล็อกโทรศัพท์โดยใช้ลายนิ้วมือ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
-    <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"Face Unlock และรูปแบบ"</string>
-    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"Face Unlock และ PIN"</string>
-    <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"Face Unlock และรหัสผ่าน"</string>
+    <string name="face_unlock_set_unlock_pattern" msgid="5991691559532427891">"ปลดล็อกด้วยใบหน้าและรูปแบบ"</string>
+    <string name="face_unlock_set_unlock_pin" msgid="8990569318587034610">"ปลดล็อกด้วยใบหน้าและ PIN"</string>
+    <string name="face_unlock_set_unlock_password" msgid="8612535943511761549">"ปลดล็อกด้วยใบหน้าและรหัสผ่าน"</string>
     <string name="face_unlock_skip_face" msgid="7117201898540606846">"ดำเนินการต่อโดยไม่ใช้ Face Unlock"</string>
     <string name="face_unlock_title" msgid="7344830351598247267">"คุณปลดล็อกโทรศัพท์โดยใช้ใบหน้าได้ ตัวเลือกนี้ต้องใช้การล็อกหน้าจอสำรองเพื่อความปลอดภัย"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="4022867760387966129">"ปิดใช้โดยผู้ดูแลระบบ นโยบายการเข้ารหัสลับ หรือที่เก็บข้อมูลที่เชื่อถือได้"</string>
@@ -800,7 +800,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"ข้อผิดพลาด"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"ย่านความถี่ 5 GHz ไม่พร้อมใช้งานในประเทศนี้"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"ในโหมดใช้งานบนเครื่องบิน"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"แจ้งเตือนสำหรับเครือข่ายแบบเปิด"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"แจ้งเตือนเมื่อพบเครือข่ายสาธารณะ"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"แจ้งเตือนเมื่อมีเครือข่ายสาธารณะคุณภาพสูงพร้อมใช้งาน"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"เปิด Wi‑Fi อัตโนมัติ"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi จะเปิดอีกครั้งเมื่ออยู่ใกล้เครือข่ายคุณภาพสูงที่บันทึกไว้ เช่น เครือข่ายที่บ้านของคุณ"</string>
@@ -810,7 +810,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"หลีกเลี่ยงการเชื่อมต่อที่สัญญาณไม่แรงพอ"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"อย่าใช้เครือข่าย WiFi หากไม่มีการเชื่อมต่ออินเทอร์เน็ตที่สัญญาณแรงพอ"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"ใช้เครือข่ายที่มีการเชื่อมต่ออินเทอร์เน็ตสัญญาณแรงเท่านั้น"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"เชื่อมต่อเครือข่ายแบบเปิด"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"เชื่อมต่อเครือข่ายสาธารณะ"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"เชื่อมต่อเครือข่ายสาธารณะคุณภาพสูงโดยอัตโนมัติ"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"เลือกผู้ให้บริการจัดอันดับเครือข่ายเพื่อใช้งาน"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"เลือกผู้ให้บริการจัดอันดับเครือข่ายที่ใช้งานร่วมกันได้เพื่อใช้งาน"</string>
@@ -831,7 +831,7 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"เพิ่มเครือข่าย"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"ค่ากำหนด Wi‑Fi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"ไม่เปิด Wi‑Fi อีกครั้งโดยอัตโนมัติ"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"ไม่เปิด Wi‑Fi โดยอัตโนมัติ"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"เครือข่าย Wi-Fi"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"ตัวเลือกอื่น"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"WiFi Direct"</string>
@@ -842,7 +842,7 @@
     <string name="wifi_menu_remember" msgid="8639523871321603112">"จดจำเครือข่ายไว้"</string>
     <string name="wifi_menu_forget" msgid="6557142984528657361">"ไม่จำเครือข่าย"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"แก้ไขเครือข่าย"</string>
-    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"หากต้องการดูเครือข่ายที่ใช้ได้ ให้เปิด WiFi"</string>
+    <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"เปิด Wi-Fi เพื่อดูเครือข่ายที่ใช้ได้"</string>
     <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"กำลังค้นหาเครือข่าย WiFi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"คุณไม่ได้รับอนุญาตให้เปลี่ยนแปลงเครือข่าย WiFi"</string>
     <string name="wifi_more" msgid="8742256421693351035">"เพิ่มเติม"</string>
@@ -893,13 +893,13 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"ดูหรือเปลี่ยนการสมัครใช้บริการ"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"MAC แบบสุ่ม"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"เพิ่มอุปกรณ์"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ถือให้โค้ด QR อยู่กลางช่องด้านล่างเพื่อเพิ่มอุปกรณ์ไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ถือคิวอาร์โค้ดให้อยู่กลางช่องด้านล่างเพื่อเพิ่มอุปกรณ์ไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"สแกนคิวอาร์โค้ด"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"ถือให้โค้ด QR อยู่กลางช่องด้านล่างเพื่อเชื่อมต่อไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"เข้าร่วม Wi‑Fi โดยการสแกนคิวอาร์โค้ด"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"แชร์ Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"สแกนโค้ด QR นี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>” และแชร์รหัสผ่าน"</string>
-    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"สแกนโค้ด QR นี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"สแกนคิวอาร์โค้ดนี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>” และแชร์รหัสผ่าน"</string>
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"สแกนคิวอาร์โค้ดนี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"ลองอีกครั้ง หากยังแก้ปัญหาไม่ได้ ให้ติดต่อผู้ผลิตอุปกรณ์"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"มีข้อผิดพลาดเกิดขึ้น"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"ตรวจสอบว่าได้เสียบปลั๊ก ชาร์จ และเปิดอุปกรณ์แล้ว"</string>
@@ -1094,7 +1094,7 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"เปิดใช้งานการโทรผ่าน Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"เปิดการโทรผ่าน Wi-Fi"</string>
     <string name="wifi_calling_not_supported" msgid="3303917737849393175">"การโทรผ่าน Wi‑Fi ไม่รองรับใน %1$s"</string>
-    <string name="wifi_disconnected_from" msgid="5249576734324159708">"เลิกเชื่อมต่อกับ <xliff:g id="SSID">%1$s</xliff:g> แล้ว"</string>
+    <string name="wifi_disconnected_from" msgid="5249576734324159708">"ยกเลิกการเชื่อมต่อกับ <xliff:g id="SSID">%1$s</xliff:g> แล้ว"</string>
     <string name="carrier" msgid="1755020806290963951">"ผู้ให้บริการ"</string>
     <string name="display_settings_title" msgid="626835071804834218">"การแสดงผล"</string>
     <string name="sound_settings" msgid="5514582720435174014">"เสียง"</string>
@@ -1218,6 +1218,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"เปิดจนถึง <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"ปิดจนถึง <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"ไม่ได้เปิดแสงตอนกลางคืน"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"ต้องใช้ตำแหน่งอุปกรณ์เพื่อระบุเวลาพระอาทิตย์ตกถึงพระอาทิตย์ขึ้น"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"เปิดตำแหน่ง"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"เปิดเลย"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"ปิดเลย"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"เปิดจนถึงพระอาทิตย์ขึ้น"</string>
@@ -1312,6 +1314,8 @@
       <item quantity="other">รหัส PIN ของซิมไม่ถูกต้อง คุณพยายามได้อีก <xliff:g id="NUMBER_1">%d</xliff:g> ครั้ง</item>
       <item quantity="one">รหัส PIN ของซิมไม่ถูกต้อง คุณพยายามได้อีก <xliff:g id="NUMBER_0">%d</xliff:g> ครั้งก่อนที่จะต้องติดต่อผู้ให้บริการเพื่อปลดล็อกอุปกรณ์</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"การปลดล็อกด้วย PIN ของซิมล้มเหลว!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"การอัปเดตระบบ"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -1736,10 +1740,10 @@
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"กำลังโหลด…"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"ตั้งค่าการล็อกหน้าจอ"</string>
     <string name="lockpassword_choose_your_password_message" msgid="4474728476383676731">"เพื่อความปลอดภัย โปรดตั้งรหัสผ่าน"</string>
-    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"หากต้องการใช้ลายนิ้วมือ ให้ตั้งรหัสผ่าน"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"หากต้องการใช้ลายนิ้วมือ ให้ตั้งค่ารูปแบบ"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"ตั้งรหัสผ่านเพื่อใช้ลายนิ้วมือ"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"ตั้งรูปแบบเพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"เพื่อความปลอดภัย โปรดตั้ง PIN"</string>
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"หากต้องการใช้ลายนิ้วมือ ให้ตั้งค่า PIN"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"ตั้ง PIN เพื่อใช้ลายนิ้วมือ"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"เพื่อความปลอดภัย โปรดตั้งรูปแบบ"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"ป้อนรหัสผ่านอีกครั้ง"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"ป้อนรหัสผ่านของโปรไฟล์งาน"</string>
@@ -1754,9 +1758,9 @@
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"ตั้งค่ารหัสผ่านแล้ว"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"ตั้งค่า PIN แล้ว"</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"ตั้งค่ารูปแบบแล้ว"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"ตั้งรหัสผ่านเพื่อใช้ Face Unlock"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"ตั้งรูปแบบเพื่อใช้ Face Unlock"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"ตั้ง PIN เพื่อใช้ Face Unlock"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"ตั้งรหัสผ่านเพื่อใช้การปลดล็อกด้วยใบหน้า"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"ตั้งรูปแบบเพื่อใช้การปลดล็อกด้วยใบหน้า"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"ตั้ง PIN เพื่อใช้การปลดล็อกด้วยใบหน้า"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"หากลืมรหัสผ่าน"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"หากลืมรูปแบบ"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"หากลืม PIN"</string>
@@ -1802,7 +1806,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"แสดงรูปแบบโปรไฟล์"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"สั่นเมื่อแตะ"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"ล็อกทันทีที่กดปุ่มเปิด/ปิด"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ล็อก"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"ยกเว้นเมื่อ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> สั่งไม่ให้ล็อก"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"ตั้งค่ารูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"เปลี่ยนรูปแบบการปลดล็อก"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"วิธีวาดรูปแบบการปลดล็อก"</string>
@@ -2125,12 +2129,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"ใช้ 2 นิ้วเลื่อนขึ้น"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"ใช้ 3 นิ้วเลื่อนขึ้น"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"แตะปุ่มการช่วยเหลือพิเศษ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"แตะปุ่มการช่วยเหลือพิเศษ <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ที่ด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้แตะปุ่มการช่วยเหลือพิเศษค้างไว้"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 2 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"ใช้ 3 นิ้วเลื่อนขึ้นจากด้านล่างของหน้าจอ\n\nหากต้องการสลับระหว่างฟีเจอร์ต่างๆ ให้ใช้ 3 นิ้วเลื่อนขึ้นแล้วค้างไว้"</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"แตะหน้าจอ 3 ครั้ง"</string>
@@ -3028,24 +3032,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"ใช้ค่าเริ่มต้น"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"ทุกครั้ง"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"ยกเว้นเมื่อแอปการชำระเงินอื่นเปิดอยู่"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"แอปสำหรับจ่ายเงินที่เครื่องชำระเงินแบบไม่ต้องสัมผัส"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"การชำระเงินที่เครื่องเทอร์มินัล"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"ตั้งค่าแอปการชำระเงิน แล้วแตะด้านหลังของโทรศัพท์กับเทอร์มินัลเครื่องใดก็ได้ที่มีสัญลักษณ์ \"ไร้สัมผัส\""</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"รับทราบ"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"เพิ่มเติม..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"ตั้งค่าแอปการชำระเงินเริ่มต้น"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"อัปเดตแอปการชำระเงินเริ่มต้น"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"ใช้ <xliff:g id="APP">%1$s</xliff:g> เพื่อจ่ายเงินที่เครื่องชำระเงินแบบไม่ต้องสัมผัส"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"ใช้ <xliff:g id="APP_0">%1$s</xliff:g> เพื่อจ่ายเงินที่เครื่องชำระเงินแบบไม่ต้องสัมผัส\n\nระบบจะใช้แอปนี้เป็นแอปการชำระเงินเริ่มต้นแทน <xliff:g id="APP_1">%2$s</xliff:g>"</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"ตั้งเป็นค่าเริ่มต้น"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"อัปเดต"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"ข้อจำกัด"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"ลบข้อจำกัด"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"เปลี่ยน PIN"</string>
@@ -3316,6 +3313,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"บล็อกสิ่งรบกวนการมองเห็น"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"อนุญาตสัญญาณที่มองเห็น"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"ตัวเลือกการแสดงสำหรับการแจ้งเตือนที่ซ่อนอยู่"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"เมื่อเปิดโหมดห้ามรบกวน"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ไม่มีเสียงเวลาแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"คุณจะเห็นการแจ้งเตือนในหน้าจอ"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"เมื่อมีการแจ้งเตือนเข้ามา โทรศัพท์จะไม่ส่งเสียงหรือสั่น"</string>
@@ -3427,6 +3425,10 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"ใช้ประวัติการแจ้งเตือน"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"ประวัติการแจ้งเตือนปิดอยู่"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"เปิดประวัติการแจ้งเตือนเพื่อดูการแจ้งเตือนล่าสุดและการแจ้งเตือนที่มีการเลื่อนเวลา"</string>
+    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
+    <skip />
+    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
+    <skip />
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ดูการตั้งค่าการแจ้งเตือน"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"เปิดการแจ้งเตือน"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้ใช้เลื่อนการแจ้งเตือน"</string>
@@ -3434,12 +3436,12 @@
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"ไอคอนจากการแจ้งเตือนเบาๆ จะไม่แสดงในแถบสถานะ"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"จุดแสดงการแจ้งเตือนบนไอคอนแอป"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"แสดงแถบการสนทนาล่าสุด"</string>
-    <string name="notification_bubbles_title" msgid="5681506665322329301">"ลูกโป่ง"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"การแจ้งเตือนบางรายการแสดงเป็นลูกโป่งในหน้าจอได้"</string>
+    <string name="notification_bubbles_title" msgid="5681506665322329301">"บับเบิล"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"การแจ้งเตือนบางรายการแสดงเป็นบับเบิลในหน้าจอได้"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"การแจ้งเตือนบางรายการและเนื้อหาอื่นอาจแสดงเป็นลูกโป่งในหน้าจอได้ แตะลูกโป่งเพื่อเปิด ลากลูกโป่งลงไปที่ด้านล่างของหน้าจอเพื่อปิด"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ลูกโป่ง"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"ข้อความใหม่จะปรากฏบนหน้าจอ"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"อนุญาตให้ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" แสดงการแจ้งเตือนบางรายการเป็นลูกโป่ง"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"อนุญาตให้ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" แสดงการแจ้งเตือนบางรายการเป็นบับเบิล"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"เปิดบับเบิลของอุปกรณ์ไหม"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"การเปิดบับเบิลของแอปนี้จะเปิดบับเบิลของอุปกรณ์ด้วย\n\nการดำเนินการนี้จะส่งผลต่อแอปหรือการสนทนาอื่นๆ ที่ได้รับอนุญาตให้แสดงเป็นบับเบิล"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"เปิด"</string>
@@ -3568,14 +3570,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"การแสดงภาพซ้อนภาพ"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"อนุญาตการแสดงภาพซ้อนภาพ"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"อนุญาตให้แอปนี้สร้างหน้าต่างการแสดงภาพซ้อนภาพในขณะที่แอปเปิดอยู่หรือหลังจากที่คุณปล่อยทิ้งไว้ (เช่น เพื่อดูวิดีโอต่อ) หน้าต่างนี้จะแสดงทับแอปอื่นๆ ที่คุณกำลังใช้"</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"แอปงานและแอปส่วนตัวที่เชื่อมต่อกัน"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"แอปงานและส่วนตัวที่เชื่อมต่อ"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"เชื่อมต่อแล้ว"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"ไม่ได้เชื่อมต่อ"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"ไม่มีแอปที่เชื่อมต่อ"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"เชื่อมต่อข้ามโปรไฟล์ แอปที่เชื่อมต่อ แอป งานและส่วนตัว"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"แอปงานและแอปส่วนตัวที่เชื่อมต่อกัน"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"แอปงานและส่วนตัวที่เชื่อมต่อ"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"เชื่อมต่อแล้ว"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"เชื่อมต่อแอปเหล่านี้"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"แอปที่เชื่อมต่อจะแชร์สิทธิ์และเข้าถึงข้อมูลของกันและกันได้"</string>
@@ -3591,12 +3591,9 @@
       <item quantity="other">มี <xliff:g id="COUNT_1">%d</xliff:g> แอปที่เชื่อมต่ออยู่</item>
       <item quantity="one">มี <xliff:g id="COUNT_0">%d</xliff:g> แอปที่เชื่อมต่ออยู่</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"ติดตั้ง<xliff:g id="NAME">%1$s</xliff:g>งานเพื่อเชื่อมต่อแอปเหล่านี้"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"ติดตั้ง<xliff:g id="NAME">%1$s</xliff:g>ส่วนตัวเพื่อเชื่อมต่อแอปเหล่านี้"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"แตะเพื่อติดตั้งแอป"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"การเข้าถึง \"ห้ามรบกวน\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"อนุญาตโหมดห้ามรบกวน"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"ไม่มีแอปที่ติดตั้งใดๆ ส่งคำขอสิทธิ์เข้าถึง \"ห้ามรบกวน\""</string>
@@ -4198,7 +4195,7 @@
     <string name="usage" msgid="287782903846013936">"การใช้งาน"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"ปริมาณการใช้อินเทอร์เน็ตมือถือ"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"การใช้อินเทอร์เน็ตของแอป"</string>
-    <string name="wifi_data_usage" msgid="6868503699134605707">"การใช้อินเทอร์เน็ตผ่าน Wi-Fi"</string>
+    <string name="wifi_data_usage" msgid="6868503699134605707">"ปริมาณการใช้อินเทอร์เน็ตผ่าน Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="4552227880905679761">"ปริมาณการใช้อีเทอร์เน็ต"</string>
     <string name="wifi" msgid="2932584495223243842">"Wi-Fi"</string>
     <string name="ethernet" msgid="4665162609974492983">"อีเทอร์เน็ต"</string>
@@ -4388,7 +4385,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ไปที่หน้าแรกโดยเลื่อนขึ้นจากด้านล่างของหน้าจอ สลับแอปโดยเลื่อนขึ้นจากด้านล่างค้างไว้แล้วปล่อย กลับโดยเลื่อนจากขอบด้านซ้ายหรือขวา"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"การนำทางแบบ 3 ปุ่ม"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"กลับ ไปที่หน้าแรก และสลับแอปโดยใช้ปุ่มที่ด้านล่างของหน้าจอ"</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"การนำทางของระบบ การนำทางแบบ 2 ปุ่ม การนำทางแบบ 3 ปุ่ม การนำทางโดยใช้ท่าทางสัมผัส"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"ใช้ไม่ได้กับแอปหน้าแรกเริ่มต้นของคุณ <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"สลับแอปหน้าแรกเริ่มต้น"</string>
     <string name="information_label" msgid="6939310810756569298">"ข้อมูล"</string>
@@ -4863,10 +4861,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"หยุดแคสต์"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"ปิด VoLTE ใช่ไหม"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"การดำเนินการนี้จะปิดการเชื่อมต่อ 5G ด้วย\nคุณจะใช้อินเทอร์เน็ตไม่ได้และบางแอปอาจใช้งานไม่ได้ระหว่างการโทร"</string>
-    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"เมื่อใช้ 2 ซิม โทรศัพท์นี้จะจำกัดการใช้งานอยู่ที่ 4G ดูข้อมูลเพิ่มเติม"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"เมื่อใช้ 2 ซิม แท็บเล็ตนี้จะจำกัดการใช้งานอยู่ที่ 4G ดูข้อมูลเพิ่มเติม"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"เมื่อใช้ 2 ซิม อุปกรณ์นี้จะจำกัดการใช้งานอยู่ที่ 4G ดูข้อมูลเพิ่มเติม"</string>
 </resources>

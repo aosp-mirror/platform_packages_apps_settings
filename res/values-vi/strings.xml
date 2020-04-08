@@ -800,7 +800,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"Lỗi"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"Băng tần 5 GHz không khả dụng ở quốc gia này"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Ở chế độ trên máy bay"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"Thông báo về các mạng mở"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Thông báo về mạng công cộng"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Thông báo khi có mạng công cộng chất lượng cao"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Tự động bật Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi sẽ bật lại khi ở gần các mạng đã lưu chất lượng cao, chẳng hạn như mạng gia đình của bạn"</string>
@@ -810,7 +810,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Tránh kết nối kém"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Không sử dụng mạng Wi-Fi trừ khi mạng đó có kết nối Internet tốt"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Chỉ sử dụng mạng có kết nối Internet tốt"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"Kết nối với mạng mở"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Kết nối với mạng công cộng"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Tự động kết nối với mạng công cộng chất lượng cao"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Để sử dụng, hãy chọn một nhà cung cấp dịch vụ xếp hạng mạng"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Để sử dụng, hãy chọn một nhà cung cấp dịch vụ xếp hạng mạng tương thích"</string>
@@ -1218,6 +1218,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Bật cho đến <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Tắt cho đến <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Ánh sáng đêm hiện không bật"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Cần có vị trí thiết bị để xác định thời điểm từ hoàng hôn đến bình minh"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"Bật dịch vụ vị trí"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Bật ngay"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Tắt ngay"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Bật cho đến bình minh"</string>
@@ -1312,6 +1314,8 @@
       <item quantity="other">Mã PIN SIM của bạn không chính xác, bạn còn  <xliff:g id="NUMBER_1">%d</xliff:g> lần thử.</item>
       <item quantity="one">Mã PIN của SIM không chính xác, bạn còn  <xliff:g id="NUMBER_0">%d</xliff:g> lần thử trước khi bạn phải liên hệ với nhà cung cấp dịch vụ để mở khóa thiết bị của bạn.</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"Thao tác mã PIN của SIM không thành công!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Bản cập nhật hệ thống"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -2125,12 +2129,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Vuốt lên bằng 2 ngón tay"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Vuốt lên bằng 3 ngón tay"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Nhấn vào nút hỗ trợ tiếp cận"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"Nhấn vào nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"Vuốt lên từ cuối màn hình bằng 2 ngón tay"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"Vuốt lên từ cuối màn hình bằng 3 ngón tay"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Nhấn nút hỗ trợ tiếp cận <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ở cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy chạm và giữ nút hỗ trợ tiếp cận."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"Dùng 2 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 2 ngón tay vuốt lên và giữ."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"Dùng 3 ngón tay vuốt lên từ cuối màn hình.\n\nĐể chuyển đổi giữa các tính năng, hãy dùng 3 ngón tay vuốt lên và giữ."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Giữ phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Nhấn và giữ cả 2 phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Nhấn 3 lần vào màn hình"</string>
@@ -3028,24 +3032,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Sử dụng mặc định"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Luôn luôn"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Trừ khi một ứng dụng thanh toán khác đang mở"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Tại trạm thanh toán không cần tiếp xúc, thanh toán bằng:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Thanh toán tại thiết bị đầu cuối"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Thiết lập ứng dụng thanh toán. Sau đó chỉ cần giữ mặt sau điện thoại của bạn gần với thiết bị đầu cuối bất kỳ có biểu tượng không tiếp xúc."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Đã hiểu"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Thêm..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Đặt ứng dụng thanh toán mặc định"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Cập nhật ứng dụng thanh toán mặc định"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"Tại trạm thanh toán không cần tiếp xúc, thanh toán bằng <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Tại trạm thanh toán không cần tiếp xúc, hãy thanh toán bằng <xliff:g id="APP_0">%1$s</xliff:g>.\n\nỨng dụng này sẽ thay thế <xliff:g id="APP_1">%2$s</xliff:g> trở thành ứng dụng thanh toán mặc định của bạn."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Đặt làm mặc định"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Cập nhật"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Hạn chế"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Xóa các hạn chế"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Thay đổi PIN"</string>
@@ -3316,6 +3313,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Ngăn gián đoạn hình ảnh"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Cho phép tín hiệu hình ảnh"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Tùy chọn hiển thị cho thông báo ẩn"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Khi chế độ Không làm phiền đang bật"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Không phát âm thanh khi có thông báo"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Bạn sẽ thấy thông báo trên màn hình của mình"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Khi có thông báo, điện thoại của bạn sẽ không phát ra âm thanh hoặc rung."</string>
@@ -3427,6 +3425,10 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"Sử dụng lịch sử thông báo"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Đã tắt lịch sử thông báo"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Bật lịch sử thông báo để xem các thông báo gần đây và thông báo đã tạm ẩn"</string>
+    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
+    <skip />
+    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
+    <skip />
     <string name="notification_history_view_settings" msgid="5269317798670449002">"xem tùy chọn cài đặt thông báo"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"mở thông báo"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Cho phép tạm hoãn thông báo"</string>
@@ -3568,14 +3570,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Hình trong hình"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Cho phép ảnh trong ảnh"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Cho phép ứng dụng này tạo cửa sổ ảnh trong ảnh khi ứng dụng đang mở hoặc sau khi bạn rời khỏi ứng dụng đó (chẳng hạn như để tiếp tục xem video). Cửa sổ này sẽ hiển thị trên các ứng dụng khác mà bạn đang sử dụng."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Những ứng dụng công việc và cá nhân được kết nối"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Những ứng dụng công việc và cá nhân kết hợp"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Đã kết nối"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Chưa kết nối"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Bạn chưa kết nối ứng dụng nào"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"hồ sơ chéo ứng dụng kết nối ứng dụng công việc và cá nhân"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Những ứng dụng công việc và cá nhân được kết nối"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Những ứng dụng công việc và cá nhân kết hợp"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Đã kết nối"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Kết nối những ứng dụng này"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Các ứng dụng kết nối sẽ dùng chung quyền và có thể truy cập vào dữ liệu của nhau."</string>
@@ -3591,12 +3591,9 @@
       <item quantity="other">Đã kết nối <xliff:g id="COUNT_1">%d</xliff:g> ứng dụng</item>
       <item quantity="one">Đã kết nối <xliff:g id="COUNT_0">%d</xliff:g> ứng dụng</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Cài đặt <xliff:g id="NAME">%1$s</xliff:g> dành cho công việc để kết nối các ứng dụng này"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Cài đặt <xliff:g id="NAME">%1$s</xliff:g> cá nhân để kết nối các ứng dụng này"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Nhấn để tải ứng dụng"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Truy cập Không làm phiền"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Cho phép tính năng Không làm phiền"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Không có ứng dụng được cài đặt nào yêu cầu quyền truy cập Không làm phiền"</string>
@@ -4388,7 +4385,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Để trở về Màn hình chính, hãy vuốt lên từ cuối màn hình. Để chuyển ứng dụng, hãy vuốt lên từ cuối màn hình, giữ rồi thả ra. Để quay lại, hãy vuốt từ mép trái hoặc mép phải."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Di chuyển bằng 3 nút"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Quay lại, trở về Màn hình chính và chuyển ứng dụng bằng các nút ở cuối màn hình."</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"di chuyển trên hệ thống, di chuyển bằng 2 nút, di chuyển bằng 3 nút, di chuyển bằng cử chỉ"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Chưa hỗ trợ trong ứng dụng mặc định trên màn hình chính <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Chuyển ứng dụng mặc định trên màn hình chính"</string>
     <string name="information_label" msgid="6939310810756569298">"Thông tin"</string>
@@ -4863,10 +4861,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Dừng truyền"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Tắt VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Thao tác này cũng sẽ tắt kết nối 5G của bạn.\nTrong khi gọi thoại, bạn không thể sử dụng Internet và một số ứng dụng có thể không hoạt động."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Khi dùng 2 SIM, điện thoại này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Khi dùng 2 SIM, máy tính bảng này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Khi dùng 2 SIM, thiết bị này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
 </resources>

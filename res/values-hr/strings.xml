@@ -817,7 +817,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"Pogreška"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"U ovoj zemlji nije dostupna frekvencija od 5 GHz"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"U načinu rada u zrakoplovu"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"Obavijesti za otvorene mreže"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Obavijesti o javnim mrežama"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Obavijesti kada je dostupna javna mreža visoke kvalitete"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Automatski uključi Wi-Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi‑Fi će se automatski ponovo uključiti u blizini spremljenih mreža visoke kvalitete, poput vaše kućne mreže"</string>
@@ -827,7 +827,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Izbjegavati slabe veze"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Ne upotrebljavaj Wi-Fi mrežu ako internetska veza nije zadovoljavajuća"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Koristi samo mreže s dobrom internetskom vezom"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"Poveži se s otvorenim mrežama"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Poveži se s javnim mrežama"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Uređaj se automatski povezuje s javnim mrežama visoke kvalitete"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Za upotrebu odaberite ocjenjivača mreže"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Za upotrebu odaberite kompatibilnog ocjenjivača mreže"</string>
@@ -1238,6 +1238,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Uključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Isključi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Noćno svjetlo nije uključeno"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Lokacija uređaja potrebna je za zalazak i izlazak sunca"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"Uključi lokaciju"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Odmah uključi"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Odmah isključi"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Uključi do izlaska sunca"</string>
@@ -1333,6 +1335,8 @@
       <item quantity="few">Netočan PIN kôd SIM kartice; imate još <xliff:g id="NUMBER_1">%d</xliff:g> pokušaja.</item>
       <item quantity="other">Netočan PIN kôd SIM kartice; imate još <xliff:g id="NUMBER_1">%d</xliff:g> pokušaja.</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"Operacija PIN-a SIM kartice nije uspjela!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Ažuriranja sustava"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -2148,12 +2152,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Prijeđite s dva prsta prema gore"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Prijeđite s tri prsta prema gore"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Dodirnite gumb za Pristupačnost"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"Dodirnite gumb za Pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dnu zaslona"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"Prijeđite s dva prsta prema gore od dna zaslona"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"Prijeđite s tri prsta prema gore od dna zaslona"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"Dodirnite gumb za Pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> u dnu zaslona.\n\nDa biste prešli na neku drugu značajku, dodirnite i zadržite gumb za Pristupačnost."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"Prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"Prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Držite tipke za glasnoću"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite i zadržite obje tipke za glasnoću"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triput dodirnite zaslon"</string>
@@ -3070,24 +3074,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Koristi zadano"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Uvijek"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Osim kada je otvorena neka druga aplikacija za plaćanje"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Na beskontaktnom terminalu plaćat će se putem aplikacije:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Plaćanje na terminalu"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Postavite aplikaciju za plaćanje. Zatim samo prislonite stražnju stranu telefona na bilo koji terminal sa simbolom beskontaktnog povezivanja."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Shvaćam"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Više..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Postavite zadanu aplikaciju za plaćanje"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Ažurirajte zadanu aplikaciju za plaćanje"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"Na beskontaktnom terminalu plaćat će se putem aplikacije <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Na beskontaktnom terminalu plaćat će se putem aplikacije <xliff:g id="APP_0">%1$s</xliff:g>.\n\nTo znači da <xliff:g id="APP_1">%2$s</xliff:g> više neće biti vaša zadana aplikacija za plaćanje."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Postavi zadano"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Ažuriraj"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Ograničenja"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Uklanjanje ograničenja"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Promjena PIN-a"</string>
@@ -3360,6 +3357,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokiranje vizualnih ometanja"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Dopusti vizualne signale"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opcije prikaza za skrivene obavijesti"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kad je uključena značajka Ne uznemiravaj"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Bez zvuka obavijesti"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vidjet ćete obavijesti na zaslonu"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Kada obavijesti stignu, telefon neće davati zvučne signale niti vibrirati."</string>
@@ -3473,6 +3471,8 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"Koristi povijest obavijesti"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Povijest obavijesti isključena"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Uključite povijest obavijesti da biste vidjeli nedavne i odgođene obavijesti"</string>
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"Nema nedavnih obavijesti"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Ovdje će se prikazati vaše nedavne i odgođene obavijesti"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"prikaz postavki obavijesti"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"otvaranje obavijesti"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Dopusti odgodu obavijesti"</string>
@@ -3618,10 +3618,8 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Dopusti sliku u slici"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Omogućite da ova aplikacija izradi prozor sa slikom u slici dok je otvorena ili kad izađete iz nje (npr. da biste nastavili gledati videozapis). Taj se prozor prikazuje iznad drugih aplikacija koje upotrebljavate."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Povezane poslovne i osobne aplikacije"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Povezano"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Nije povezano"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Nema povezanih aplikacija"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"više profila povezana aplikacija aplikacije poslovne i osobne"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Povezane poslovne i osobne aplikacije"</string>
@@ -3641,12 +3639,9 @@
       <item quantity="few">Povezane su <xliff:g id="COUNT_1">%d</xliff:g> aplikacije</item>
       <item quantity="other">Povezano je <xliff:g id="COUNT_1">%d</xliff:g> aplikacija</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instalirajte poslovnu aplikaciju <xliff:g id="NAME">%1$s</xliff:g> da biste povezali te aplikacije"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instalirajte osobnu aplikaciju <xliff:g id="NAME">%1$s</xliff:g> da biste povezali te aplikacije"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Dodirnite da biste preuzeli aplikaciju"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Pristup opciji Ne ometaj"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Dopusti Ne uznemiravaj"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nijedna instalirana aplikacija nije zatražila pristup opciji Ne ometaj"</string>
@@ -4466,7 +4461,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Da biste otvorili početni zaslon, prijeđite prstom od dna zaslona prema gore. Da biste promijenili aplikaciju, prijeđite prstom od dna prema gore, zadržite i otpustite. Da biste se vratili, prijeđite prstom od lijevog ili desnog ruba."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću tri gumba"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Za povratak, otvaranje početnog zaslona i promjenu aplikacije koristite se gumbima pri dnu zaslona."</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"navigacija za sustav, navigacija pomoću dva gumba, navigacija pomoću tri gumba, navigacija pokretima"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Nije podržano u vašoj zadanoj aplikaciji početnog zaslona, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Promijeni zadanu apl. početnog zaslona"</string>
     <string name="information_label" msgid="6939310810756569298">"Informacije"</string>
@@ -4952,10 +4948,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Zaustavi emitiranje"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Isključiti VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Time se isključuje i vaša 5G veza.\nTijekom glasovnog poziva ne možete upotrebljavati internet i neke aplikacije možda neće funkcionirati."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Kad se koriste dva SIM-a, telefon će biti ograničen na 4G. Saznajte više"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Kad se koriste dva SIM-a, tablet će biti ograničen na 4G. Saznajte više"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Kad se koriste dva SIM-a, uređaj će biti ograničen na 4G. Saznajte više"</string>
 </resources>
