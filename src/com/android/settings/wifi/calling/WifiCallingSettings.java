@@ -22,9 +22,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.telephony.ims.ProvisioningManager;
-import android.telephony.ims.feature.MmTelFeature;
-import android.telephony.ims.stub.ImsRegistrationImplBase;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +32,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.android.ims.ImsManager;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
@@ -196,25 +193,6 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         }
     }
 
-    @VisibleForTesting
-    boolean isWfcEnabledByPlatform(SubscriptionInfo info) {
-        final ImsManager imsManager = ImsManager.getInstance(getActivity(),
-                info.getSimSlotIndex());
-        return imsManager.isWfcEnabledByPlatform();
-    }
-
-    @VisibleForTesting
-    boolean isWfcProvisionedOnDevice(SubscriptionInfo info) {
-        final ProvisioningManager provisioningMgr =
-                ProvisioningManager.createForSubscriptionId(info.getSubscriptionId());
-        if (provisioningMgr == null) {
-            return true;
-        }
-        return provisioningMgr.getProvisioningStatusForCapability(
-                MmTelFeature.MmTelCapabilities.CAPABILITY_TYPE_VOICE,
-                ImsRegistrationImplBase.REGISTRATION_TECH_IWLAN);
-    }
-
     private void updateSubList() {
         mSil = SubscriptionUtil.getActiveSubscriptions(
                 getContext().getSystemService(SubscriptionManager.class));
@@ -225,7 +203,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         }
         for (int i = 0; i < mSil.size(); ) {
             final SubscriptionInfo info = mSil.get(i);
-            if (!isWfcEnabledByPlatform(info) || !isWfcProvisionedOnDevice(info)) {
+            if (!queryImsState(info.getSubscriptionId()).isWifiCallingProvisioned()) {
                 mSil.remove(i);
             } else {
                 i++;
@@ -240,5 +218,10 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
                     .getString(R.string.wifi_calling_settings_title);
             getActivity().getActionBar().setTitle(title);
         }
+    }
+
+    @VisibleForTesting
+    WifiCallingQueryImsState queryImsState(int subId) {
+        return new WifiCallingQueryImsState(getContext(), subId);
     }
 }
