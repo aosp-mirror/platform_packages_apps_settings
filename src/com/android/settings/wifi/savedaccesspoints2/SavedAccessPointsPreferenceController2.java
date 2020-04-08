@@ -17,6 +17,7 @@
 package com.android.settings.wifi.savedaccesspoints2;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -83,14 +84,35 @@ public class SavedAccessPointsPreferenceController2 extends BasePreferenceContro
         return false;
     }
 
+    /**
+     * mPreferenceGroup is not in a RecyclerView. To keep TalkBack focus, this method should not
+     * mPreferenceGroup.removeAll() then mPreferenceGroup.addPreference for mWifiEntries.
+     */
     private void updatePreference() {
-        mPreferenceGroup.removeAll();
-        for (WifiEntry wifiEntry : mWifiEntries) {
-            final WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
-            preference.setKey(wifiEntry.getKey());
-            preference.setOnPreferenceClickListener(this);
+        // Remove the Preference of removed WifiEntry.
+        final List<String> removedPreferenceKeys = new ArrayList<>();
+        final int preferenceCount = mPreferenceGroup.getPreferenceCount();
+        for (int i = 0; i < preferenceCount; i++) {
+            final String key = mPreferenceGroup.getPreference(i).getKey();
+            if (mWifiEntries.stream().filter(wifiEntry ->
+                    TextUtils.equals(key, wifiEntry.getKey())).count() == 0) {
+                removedPreferenceKeys.add(key);
+            }
+        }
+        for (String removedPreferenceKey : removedPreferenceKeys) {
+            mPreferenceGroup.removePreference(
+                    mPreferenceGroup.findPreference(removedPreferenceKey));
+        }
 
-            mPreferenceGroup.addPreference(preference);
+        // Add the Preference of new added WifiEntry.
+        for (WifiEntry wifiEntry : mWifiEntries) {
+            if (mPreferenceGroup.findPreference(wifiEntry.getKey()) == null) {
+                final WifiEntryPreference preference = new WifiEntryPreference(mContext, wifiEntry);
+                preference.setKey(wifiEntry.getKey());
+                preference.setOnPreferenceClickListener(this);
+
+                mPreferenceGroup.addPreference(preference);
+            }
         }
     }
 }
