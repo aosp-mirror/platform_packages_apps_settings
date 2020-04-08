@@ -268,7 +268,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
                         | PhoneStateListener.LISTEN_SERVICE_STATE);
-        mSubscriptionManager.addOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
+        mSubscriptionManager.addOnSubscriptionsChangedListener(
+                mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
 
         if (mShowLatestAreaInfo) {
