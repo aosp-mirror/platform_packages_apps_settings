@@ -18,6 +18,7 @@ package com.android.settings.network;
 
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -130,5 +131,25 @@ public class DataDuringCallsPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mSwitchPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    public void getAvailabilityStatus_mobileDataChangWithDefaultDataSubId_returnUnavailable() {
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
+
+        mController.refreshPreference();
+
+        assertThat(mController.getAvailabilityStatus(SUB_ID_1))
+                .isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_mobileDataChangWithoutDefaultDataSubId_returnAvailable() {
+        ShadowSubscriptionManager.setDefaultDataSubscriptionId(SUB_ID_1);
+
+        mController.displayPreference(mPreferenceScreen);
+        mController.refreshPreference();
+
+        assertThat(mController.getAvailabilityStatus(SUB_ID_2)).isEqualTo(AVAILABLE);
     }
 }
