@@ -114,6 +114,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
+    public int getHelpResource() {
+        return R.string.help_url_color_inversion;
+    }
+
+    @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         super.onSettingsClicked(preference);
         showDialog(DialogEnums.EDIT_SHORTCUT);

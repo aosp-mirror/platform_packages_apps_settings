@@ -15,6 +15,7 @@
  */
 package com.android.settings.wifi.dpp;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 /**
@@ -52,5 +53,14 @@ public class AdbQrCode extends WifiQrCode {
 
     public WifiNetworkConfig getAdbNetworkConfig() {
         return mAdbConfig;
+    }
+
+    /**
+     * Triggers a vibration to notify of a valid QR code.
+     *
+     * @param context The context to use
+     */
+    public static void triggerVibrationForQrCodeRecognition(Context context) {
+        WifiDppUtils.triggerVibrationForQrCodeRecognition(context);
     }
 }

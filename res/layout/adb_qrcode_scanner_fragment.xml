@@ -99,10 +99,12 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:id="@+id/verifying_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/adb_wireless_item_progress_text"
-                android:text="@string/adb_wireless_verifying_qrcode_text"/>
+                android:text="@string/adb_wireless_verifying_qrcode_text"
+                android:accessibilityLiveRegion="polite"/>
 
         </LinearLayout>
 
