@@ -74,6 +74,7 @@ import org.robolectric.shadows.ShadowToast;
 public class WifiSettings2Test {
 
     private static final int NUM_NETWORKS = 4;
+    private static final String FAKE_URI_STRING = "fakeuri";
 
     @Mock
     private PowerManager mPowerManager;
@@ -281,10 +282,12 @@ public class WifiSettings2Test {
 
     @Test
     public void openSubscriptionHelpPage_shouldCallStartActivityForResult() {
-        doReturn(new Intent()).when(mWifiSettings2).getHelpIntent(mContext);
+        doReturn(new Intent()).when(mWifiSettings2).getHelpIntent(mContext, FAKE_URI_STRING);
         doNothing().when(mWifiSettings2).startActivityForResult(any(Intent.class), anyInt());
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        when(mockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
 
-        mWifiSettings2.openSubscriptionHelpPage();
+        mWifiSettings2.openSubscriptionHelpPage(mockWifiEntry);
 
         verify(mWifiSettings2, times(1)).startActivityForResult(any(), anyInt());
     }
