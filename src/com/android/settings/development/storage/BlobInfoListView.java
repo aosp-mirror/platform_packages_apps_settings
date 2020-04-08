@@ -16,6 +16,7 @@
 
 package com.android.settings.development.storage;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.blob.BlobInfo;
 import android.app.blob.BlobStoreManager;
@@ -30,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -41,7 +41,6 @@ import com.android.settings.R;
 import java.io.IOException;
 import java.util.List;
 
-// TODO: have this class extend DashboardFragment for consistency
 public class BlobInfoListView extends ListActivity {
     private static final String TAG = "BlobInfoListView";
 
@@ -60,6 +59,17 @@ public class BlobInfoListView extends ListActivity {
 
         mAdapter = new BlobListAdapter(this);
         setListAdapter(mAdapter);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
     }
 
     @Override
@@ -89,14 +99,6 @@ public class BlobInfoListView extends ListActivity {
             intent.putExtra(SharedDataUtils.BLOB_KEY, blob);
             startActivityForResult(intent, SharedDataUtils.LEASE_VIEW_REQUEST_CODE);
         }
-    }
-
-    private View getEmptyView() {
-        final View emptyView = mInflater.inflate(R.layout.shared_data_empty_list_view,
-                (ViewGroup) getListView().getRootView());
-        final TextView emptyText = emptyView.findViewById(R.id.empty_view_text);
-        emptyText.setText(R.string.shared_data_no_blobs_text);
-        return emptyView;
     }
 
     private void showDeleteBlobDialog(BlobInfo blob) {
@@ -139,7 +141,7 @@ public class BlobInfoListView extends ListActivity {
         void updateList(List<BlobInfo> blobs) {
             clear();
             if (blobs.isEmpty()) {
-                getListView().setEmptyView(getEmptyView());
+                finish();
             } else {
                 addAll(blobs);
             }

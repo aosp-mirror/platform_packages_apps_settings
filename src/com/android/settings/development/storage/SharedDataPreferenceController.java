@@ -18,13 +18,20 @@ package com.android.settings.development.storage;
 
 import android.app.blob.BlobStoreManager;
 import android.content.Context;
+import android.os.UserHandle;
+import android.util.Log;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class SharedDataPreferenceController extends DeveloperOptionsPreferenceController {
+import java.io.IOException;
 
+public class SharedDataPreferenceController extends DeveloperOptionsPreferenceController
+        implements PreferenceControllerMixin {
+    private static final String TAG = "SharedDataPrefCtrl";
     private static final String SHARED_DATA = "shared_data";
 
     private BlobStoreManager mBlobStoreManager;
@@ -40,13 +47,17 @@ public class SharedDataPreferenceController extends DeveloperOptionsPreferenceCo
     }
 
     @Override
-    public boolean isAvailable() {
-        return mBlobStoreManager != null;
-    }
-
-    @Override
     public void updateState(Preference preference) {
-        preference.setEnabled(mBlobStoreManager != null);
-        // TODO: update summary to indicate why this preference isn't available
+        try {
+            final boolean showPref = mBlobStoreManager != null
+                    && !mBlobStoreManager.queryBlobsForUser(UserHandle.CURRENT).isEmpty();
+            preference.setEnabled(showPref);
+            preference.setSummary(showPref ? R.string.shared_data_summary
+                                           : R.string.shared_data_no_blobs_text);
+        } catch (IOException e) {
+            Log.e(TAG, "Unable to fetch blobs for current user: " + e.getMessage());
+            preference.setEnabled(false);
+            preference.setSummary(R.string.shared_data_no_blobs_text);
+        }
     }
 }

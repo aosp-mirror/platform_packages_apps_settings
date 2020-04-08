@@ -16,6 +16,7 @@
 
 package com.android.settings.development.storage;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.blob.BlobInfo;
 import android.app.blob.BlobStoreManager;
@@ -44,7 +45,6 @@ import com.android.settings.R;
 import java.io.IOException;
 import java.util.List;
 
-// TODO: have this class extend DashboardFragment for consistency
 public class LeaseInfoListView extends ListActivity {
     private static final String TAG = "LeaseInfoListView";
 
@@ -74,6 +74,17 @@ public class LeaseInfoListView extends ListActivity {
         getListView().addHeaderView(getHeaderView());
         getListView().addFooterView(getFooterView());
         getListView().setClickable(false);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
     }
 
     private LinearLayout getHeaderView() {
