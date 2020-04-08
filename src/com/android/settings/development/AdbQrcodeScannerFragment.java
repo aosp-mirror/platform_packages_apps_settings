@@ -73,6 +73,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     private QrDecorateView mDecorateView;
     private View mQrCameraView;
     private View mVerifyingView;
+    private TextView mVerifyingTextView;
     private TextView mErrorMessage;
 
     /** QR code data scanned by camera */
@@ -168,6 +169,7 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
         mQrCameraView = view.findViewById(R.id.camera_layout);
         mVerifyingView = view.findViewById(R.id.verifying_layout);
+        mVerifyingTextView = view.findViewById(R.id.verifying_textview);
 
         setHeaderTitle(R.string.wifi_dpp_scan_qr_code);
         mSummary.setText(R.string.adb_wireless_qrcode_pairing_description);
@@ -205,6 +207,15 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getActivity().getActionBar().hide();
+        // setTitle for TalkBack
+        getActivity().setTitle(R.string.wifi_dpp_scan_qr_code);
     }
 
     @Override
@@ -264,6 +275,8 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mDecorateView.setFocused(true);
         mQrCameraView.setVisibility(View.GONE);
         mVerifyingView.setVisibility(View.VISIBLE);
+        AdbQrCode.triggerVibrationForQrCodeRecognition(getContext());
+        mVerifyingTextView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
         try {
             mAdbManager.enablePairingByQrCode(mAdbConfig.getSsid(),
                     mAdbConfig.getPreSharedKey());

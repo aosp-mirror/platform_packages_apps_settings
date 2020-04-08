@@ -16,7 +16,6 @@
 
 package com.android.settings.display;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
@@ -50,8 +49,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
         @Override
         public void onClick(View v) {
             mButtonTriggered = true;
-            mMetricsFeatureProvider.logClickedPreference(mPreference,
-                    SettingsEnums.NIGHT_DISPLAY_SETTINGS);
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
             mColorDisplayManager.setNightDisplayActivated(
                     !mColorDisplayManager.isNightDisplayActivated());
             updateStateInternal();
