@@ -25,7 +25,6 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.CheckBox;
 
-import androidx.annotation.IntDef;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
@@ -36,21 +35,19 @@ import com.android.settingslib.search.SearchIndexable;
 
 import com.google.common.primitives.Ints;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 /** Settings page for magnification. */
 @SearchIndexable
 public class MagnificationSettingsFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationSettingsFragment";
     private static final String PREF_KEY_MODE = "magnification_mode";
-    // TODO(b/146019459): Use magnification_capability.
-    private static final String KEY_CAPABILITY = Settings.System.MASTER_MONO;
+    private static final String KEY_CAPABILITY =
+            Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY;
     private static final int DIALOG_MAGNIFICATION_CAPABILITY = 1;
     private static final String EXTRA_CAPABILITY = "capability";
+    private static final int NONE = 0;
     private Preference mModePreference;
-    private int mCapabilities = MagnifyMode.NONE;
+    private int mCapabilities = NONE;
     private CheckBox mMagnifyFullScreenCheckBox;
     private CheckBox mMagnifyWindowCheckBox;
 
@@ -67,7 +64,8 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     }
 
     private static int getMagnificationCapabilities(Context context) {
-        return getSecureIntValue(context, KEY_CAPABILITY, MagnifyMode.FULLSCREEN);
+        return getSecureIntValue(context, KEY_CAPABILITY,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN);
     }
 
     private static int getSecureIntValue(Context context, String key, int defaultValue) {
@@ -91,9 +89,9 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            mCapabilities = savedInstanceState.getInt(EXTRA_CAPABILITY, MagnifyMode.NONE);
+            mCapabilities = savedInstanceState.getInt(EXTRA_CAPABILITY, NONE);
         }
-        if (mCapabilities == MagnifyMode.NONE) {
+        if (mCapabilities == NONE) {
             mCapabilities = getMagnificationCapabilities(getPrefContext());
         }
     }
@@ -161,8 +159,10 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     }
 
     private void updateAlertDialogCheckState() {
-        updateCheckStatus(mMagnifyWindowCheckBox, MagnifyMode.WINDOW);
-        updateCheckStatus(mMagnifyFullScreenCheckBox, MagnifyMode.FULLSCREEN);
+        updateCheckStatus(mMagnifyWindowCheckBox,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW);
+        updateCheckStatus(mMagnifyFullScreenCheckBox,
+                Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN);
 
     }
 
@@ -175,7 +175,7 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     }
 
     private void updateAlertDialogEnableState() {
-        if (mCapabilities != MagnifyMode.ALL) {
+        if (mCapabilities != Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_ALL) {
             disableEnabledMagnificationModePreference();
         } else {
             enableAllPreference();
@@ -198,8 +198,10 @@ public class MagnificationSettingsFragment extends DashboardFragment {
     private void updateCapabilities(boolean saveToDB) {
         int capabilities = 0;
         capabilities |=
-                mMagnifyFullScreenCheckBox.isChecked() ? MagnifyMode.FULLSCREEN : 0;
-        capabilities |= mMagnifyWindowCheckBox.isChecked() ? MagnifyMode.WINDOW : 0;
+                mMagnifyFullScreenCheckBox.isChecked()
+                        ? Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_FULLSCREEN : 0;
+        capabilities |= mMagnifyWindowCheckBox.isChecked()
+                ? Settings.Secure.ACCESSIBILITY_MAGNIFICATION_MODE_WINDOW : 0;
         mCapabilities = capabilities;
         if (saveToDB) {
             setMagnificationCapabilities(capabilities);
@@ -213,20 +215,6 @@ public class MagnificationSettingsFragment extends DashboardFragment {
 
     private void setMagnificationCapabilities(int capabilities) {
         setSecureIntValue(KEY_CAPABILITY, capabilities);
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    @IntDef({
-            MagnifyMode.NONE,
-            MagnifyMode.FULLSCREEN,
-            MagnifyMode.WINDOW,
-            MagnifyMode.ALL,
-    })
-    private @interface MagnifyMode {
-        int NONE = 0;
-        int FULLSCREEN = 1;
-        int WINDOW = 2;
-        int ALL = 3;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
