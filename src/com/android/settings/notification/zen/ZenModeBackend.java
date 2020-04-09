@@ -322,7 +322,7 @@ public class ZenModeBackend {
                 return R.string.zen_mode_from_starred;
             case ZenPolicy.PEOPLE_TYPE_NONE:
             default:
-                return R.string.zen_mode_from_none_calls;
+                return R.string.zen_mode_from_none;
         }
     }
 
@@ -492,8 +492,12 @@ public class ZenModeBackend {
     }
 
     String getContactsNumberSummary(Context context) {
+        final int numContacts = queryAllContactsData().getCount();
+        if (numContacts == 0) {
+            return context.getResources().getString(R.string.zen_mode_from_none);
+        }
         return context.getResources().getString(R.string.zen_mode_contacts_senders_summary,
-                queryAllContactsData().getCount());
+                numContacts);
     }
 
     private Cursor queryStarredContactsData() {
