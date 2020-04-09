@@ -19,37 +19,36 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingVertical="@dimen/zen_mode_button_padding_vertical">
+    android:orientation="vertical">
 
     <TextView
         android:text="@string/zen_mode_settings_summary"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/screen_margin_sides"
-        android:paddingTop="@dimen/zen_mode_button_padding_vertical"
-        android:paddingBottom="@dimen/zen_mode_button_padding_vertical"/>
+        android:layout_marginTop="@dimen/zen_mode_settings_button_margin_vertical"/>
 
     <Button
         android:id="@+id/zen_mode_settings_turn_on_button"
         style="@style/ActionPrimaryButton"
-        android:focusableInTouchMode="true"
         android:layout_marginStart="@dimen/screen_margin_sides"
+        android:layout_marginTop="@dimen/zen_mode_settings_button_margin_vertical"
+        android:layout_marginBottom="@dimen/zen_mode_settings_button_margin_vertical"
+        android:text="@string/zen_mode_button_turn_on"
+        android:focusableInTouchMode="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:gravity="center"
-        android:text="@string/zen_mode_button_turn_on"/>
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/zen_mode_settings_turn_off_button"
         style="@style/ActionSecondaryButton"
-        android:focusableInTouchMode="true"
         android:layout_marginStart="@dimen/screen_margin_sides"
+        android:layout_marginTop="@dimen/zen_mode_settings_button_margin_vertical"
+        android:layout_marginBottom="@dimen/zen_mode_settings_button_margin_vertical"
+        android:text="@string/zen_mode_button_turn_off"
+        android:focusableInTouchMode="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:gravity="center"
-        android:text="@string/zen_mode_button_turn_off" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
