@@ -26,8 +26,7 @@
         <!-- Alarms -->
         <SwitchPreference
             android:key="zen_mode_alarms"
-            android:title="@string/zen_mode_alarms"
-            android:summary="@string/zen_mode_alarms_summary"/>
+            android:title="@string/zen_mode_alarms"/>
 
         <!-- Media -->
         <SwitchPreference
@@ -44,17 +43,13 @@
         <!-- Reminders -->
         <SwitchPreference
             android:key="zen_mode_reminders"
-            android:title="@string/zen_mode_reminders"
-            android:summary="@string/zen_mode_reminders_summary"/>
+            android:title="@string/zen_mode_reminders"/>
 
         <!-- Events -->
         <SwitchPreference
             android:key="zen_mode_events"
-            android:title="@string/zen_mode_events"
-            android:summary="@string/zen_mode_events_summary"/>
+            android:title="@string/zen_mode_events"/>
 
     </PreferenceCategory>
-
-    <com.android.settingslib.widget.FooterPreference/>
 
 </PreferenceScreen>

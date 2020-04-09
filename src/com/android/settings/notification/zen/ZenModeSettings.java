@@ -156,7 +156,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                             || PRIORITY_CATEGORY_REPEAT_CALLERS == category, true);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_from_none_calls);
+                return mContext.getString(R.string.zen_mode_from_none);
             } else if (numCategories == 1) {
                 return mContext.getString(R.string.zen_mode_calls_summary_one,
                         enabledCategories.get(0));
@@ -172,7 +172,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                     category -> PRIORITY_CATEGORY_MESSAGES == category, false);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_from_none_messages);
+                return mContext.getString(R.string.zen_mode_from_none);
             } else {
                 return enabledCategories.get(0);
             }
