@@ -88,9 +88,8 @@
         settings:controller="com.android.settings.gestures.PreventRingingParentPreferenceController" />
 
     <Preference
-        android:key="gesture_global_actions_panel_summary"
-        android:title="@string/global_actions_panel_short_title"
-        android:fragment="com.android.settings.gestures.GlobalActionsPanelSettings"
-        settings:controller="com.android.settings.gestures.GlobalActionsPanelPreferenceController" />
-
+        android:key="gesture_power_menu_summary"
+        android:title="@string/power_menu_setting_name"
+        android:fragment="com.android.settings.gestures.PowerMenuSettings"
+        settings:controller="com.android.settings.gestures.PowerMenuPreferenceController" />
 </PreferenceScreen>
