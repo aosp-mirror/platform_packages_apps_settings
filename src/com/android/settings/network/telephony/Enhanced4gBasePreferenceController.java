@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -187,7 +188,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     private class PhoneCallStateListener extends PhoneStateListener {
 
         PhoneCallStateListener() {
-            super();
+            super(Looper.getMainLooper());
         }
 
         private TelephonyManager mTelephonyManager;

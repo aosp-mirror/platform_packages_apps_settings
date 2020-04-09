@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
@@ -62,8 +63,6 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
 
-    private GlobalSettingsChangeListener mAirplaneModeObserver;
-
     public AirplaneModeEnabler(Context context, OnAirplaneModeChangedListener listener) {
         super(context, Settings.Global.AIRPLANE_MODE_ON);
 
@@ -73,7 +72,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
 
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
 
-        mPhoneStateListener = new PhoneStateListener() {
+        mPhoneStateListener = new PhoneStateListener(Looper.getMainLooper()) {
             @Override
             public void onRadioPowerStateChanged(int state) {
                 if (DEBUG) {
@@ -87,6 +86,7 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     /**
      * Implementation of GlobalSettingsChangeListener.onChanged
      */
+    @Override
     public void onChanged(String field) {
         if (DEBUG) {
             Log.d(LOG_TAG, "Airplane mode configuration update");
@@ -94,12 +94,18 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         onAirplaneModeChanged();
     }
 
-    public void resume() {
+    /**
+     * Start listening to the phone state change
+     */
+    public void start() {
         mTelephonyManager.listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_RADIO_POWER_STATE_CHANGED);
     }
 
-    public void pause() {
+    /**
+     * Stop listening to the phone state change
+     */
+    public void stop() {
         mTelephonyManager.listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_NONE);
     }
