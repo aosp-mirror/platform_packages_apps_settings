@@ -26,8 +26,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
-
 /**
  * Preference controller for "System Select"
  */

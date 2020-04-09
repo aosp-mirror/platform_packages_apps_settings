@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -104,6 +105,10 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
 
     @Override
     public void onNotifyChange(Intent i) {
+        if (getWorker() == null) {
+            Log.d(TAG, "onNotifyChange: Worker is null");
+            return;
+        }
         final MediaController mediaController = getWorker().getActiveLocalMediaController();
         final Intent intent = new Intent()
                 .setPackage(Utils.SETTINGS_PACKAGE_NAME)
