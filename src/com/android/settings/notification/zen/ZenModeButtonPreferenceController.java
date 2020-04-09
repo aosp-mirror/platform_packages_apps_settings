@@ -81,10 +81,10 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             });
         }
 
-        updateButtons(preference);
+        updatePreference(preference);
     }
 
-    private void updateButtons(Preference preference) {
+    private void updatePreference(Preference preference) {
         switch (getZenMode()) {
             case Settings.Global.ZEN_MODE_ALARMS:
             case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
