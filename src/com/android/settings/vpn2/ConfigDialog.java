@@ -173,6 +173,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mProxySettings.setOnItemSelectedListener(this);
         mProxyHost.addTextChangedListener(this);
         mProxyPort.addTextChangedListener(this);
+        mIpsecIdentifier.addTextChangedListener(this);
         mIpsecSecret.addTextChangedListener(this);
         mIpsecUserCert.setOnItemSelectedListener(this);
         mShowOptions.setOnClickListener(this);
