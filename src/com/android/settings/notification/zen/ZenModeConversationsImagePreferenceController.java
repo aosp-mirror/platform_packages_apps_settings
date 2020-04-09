@@ -25,6 +25,7 @@ import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.service.notification.ConversationChannelWrapper;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -60,7 +61,8 @@ public class ZenModeConversationsImagePreferenceController
         mNotificationBackend = notificationBackend;
         mIconSizePx =
                 mContext.getResources().getDimensionPixelSize(R.dimen.zen_conversations_icon_size);
-        mIconOffsetPx = mIconSizePx * 3 / 4;
+        mIconOffsetPx = mContext.getResources()
+                .getDimensionPixelSize(R.dimen.zen_conversations_icon_offset);
     }
 
     @Override
@@ -97,6 +99,8 @@ public class ZenModeConversationsImagePreferenceController
                             R.string.zen_mode_from_important_conversations));
         } else {
             mViewGroup.setContentDescription(null);
+            mViewGroup.setVisibility(View.GONE);
+            return;
         }
 
         final int numDrawablesToShow = Math.min(MAX_CONVERSATIONS_SHOWN,
@@ -111,6 +115,8 @@ public class ZenModeConversationsImagePreferenceController
             fl.setPadding((numDrawablesToShow - i - 1) * mIconOffsetPx, 0, 0, 0);
             mViewGroup.addView(fl);
         }
+
+        mViewGroup.setVisibility(numDrawablesToShow > 0 ? View.VISIBLE : View.GONE);
     }
 
     private void loadConversations() {
