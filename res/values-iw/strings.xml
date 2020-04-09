@@ -834,7 +834,7 @@
     <string name="wifi_error" msgid="4903954145386086899">"שגיאה"</string>
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"‏רצועת התדרים של ‎5 GHz אינה זמינה במדינה זו"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"במצב טיסה"</string>
-    <string name="wifi_notify_open_networks" msgid="1456448686400730751">"אני רוצה לקבל הודעה על רשתות פתוחות"</string>
+    <string name="wifi_notify_open_networks" msgid="2610323626246818961">"אני רוצה לקבל הודעה על רשתות ציבוריות"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"הצג הודעה כאשר רשת ציבורית באיכות גבוהה זמינה"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"‏הפעלה אוטומטית של Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"‏Wi‑Fi יחזור לפעול בסביבת רשתות שמורות באיכות גבוהה, כמו הרשת הביתית שלך"</string>
@@ -844,7 +844,7 @@
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"הימנע מחיבורים באיכות ירודה"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"‏אין להשתמש ברשת Wi-Fi, אלא אם יש לה חיבור איכותי לאינטרנט"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"יש להשתמש רק ברשתות בעלות חיבור אינטרנט איכותי"</string>
-    <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"חיבור לרשתות פתוחות"</string>
+    <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"חיבור לרשתות ציבוריות"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"חיבור אוטומטי לרשתות ציבוריות באיכות גבוהה"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"כדי להשתמש בתכונה, יש לבחור ספק של דירוג רשת"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"כדי להשתמש בתכונה, יש לבחור ספק תואם של דירוג רשת"</string>
@@ -955,7 +955,7 @@
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"בתהליך התחברות…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"שיתוף של נקודה לשיתוף אינטרנט"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"אימות זהותך"</string>
-    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמה של Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
+    <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמת ה-Wi‑Fi היא: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"חיבור אוטומטי"</string>
     <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"הטלפון יוכל להתחבר באופן אוטומטי בסביבת הרשת הזו"</string>
@@ -1258,6 +1258,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"הפעלה עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"כיבוי עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"תאורת הלילה לא פועלת כרגע"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"מיקום המכשיר נדרש כדי לקבוע את זמני השקיעה והזריחה"</string>
+    <string name="twilight_mode_launch_location" msgid="1586574792030648828">"הפעלת המיקום"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"להפעלה עכשיו"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"לכיבוי עכשיו"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"הפעלה עד הזריחה"</string>
@@ -1354,6 +1356,8 @@
       <item quantity="other">‏קוד גישה שגוי של כרטיס SIM. נותרו לך <xliff:g id="NUMBER_1">%d</xliff:g> ניסיונות.</item>
       <item quantity="one">‏קוד גישה שגוי של כרטיס SIM. נותר לך ניסיון <xliff:g id="NUMBER_0">%d</xliff:g> לפני שיהיה עליך ליצור קשר עם הספק כדי לבטל את נעילת המכשיר.</item>
     </plurals>
+    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
+    <skip />
     <string name="pin_failed" msgid="3726505565797352255">"‏פעולת קוד הגישה של כרטיס ה-SIM נכשלה!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
@@ -2171,12 +2175,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"יש להחליק למעלה בעזרת שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"יש להחליק למעלה בעזרת שלוש אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"יש להקיש על לחצן הנגישות"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="8922102767509399352">"יש להקיש על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="7019216141092205215">"יש להחליק למעלה מתחתית המסך בעזרת שתי אצבעות"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="5967787136477866253">"יש להחליק למעלה מתחתית המסך בעזרת שלוש אצבעות"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software" msgid="6385773622750180915">"יש ללחוץ על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך.\n\nכדי לעבור בין התכונות השונות, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture" msgid="1154928652701117990">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_migration_software_gesture_talkback" msgid="8776915395975815294">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
+    <skip />
+    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"החזקה של לחצני עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"יש להקיש 3 פעמים על המסך"</string>
@@ -3114,24 +3118,17 @@
     <string name="nfc_payment_use_default" msgid="788899906312142803">"השתמש בברירת המחדל"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"תמיד"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"מלבד כשאפליקציית תשלום אחרת פועלת"</string>
-    <!-- no translation found for nfc_payment_pay_with (3001320460566523453) -->
-    <skip />
+    <string name="nfc_payment_pay_with" msgid="3001320460566523453">"במסוף ללא מגע, יש לשלם באמצעות:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"תשלום במסוף"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"הגדר אפליקציית תשלום. לאחר מכן עליך רק להצמיד את גב הטלפון למסוף שעליו מופיע סמל התשלום ללא מגע."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"הבנתי"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"עוד..."</string>
-    <!-- no translation found for nfc_payment_set_default_label (7395939287766230293) -->
-    <skip />
-    <!-- no translation found for nfc_payment_update_default_label (8201975914337221246) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default (4101484767872365195) -->
-    <skip />
-    <!-- no translation found for nfc_payment_set_default_instead_of (565237441045013280) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_set_deault (1821065137209590196) -->
-    <skip />
-    <!-- no translation found for nfc_payment_btn_text_update (5159700960497443832) -->
-    <skip />
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"הגדרה של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"עדכון של אפליקציית התשלומים שתשמש כברירת המחדל"</string>
+    <string name="nfc_payment_set_default" msgid="4101484767872365195">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"במסוף ללא מגע, יש לשלם באמצעות <xliff:g id="APP_0">%1$s</xliff:g>.\n\nהאפליקציה הזו מחליפה את <xliff:g id="APP_1">%2$s</xliff:g> כאפליקציית התשלומים שתשמש כברירת מחדל."</string>
+    <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"הגדרה כברירת מחדל"</string>
+    <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"עדכון"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"הגבלות"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"הסרת הגבלות"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"שינוי קוד גישה"</string>
@@ -3406,6 +3403,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"חסימת הפרעות חזותיות"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"הפעלת אותות חזותיים"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"אפשרויות תצוגה להתראות מוסתרות"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"כשמצב \'נא לא להפריע\' פועל"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ללא צליל מהתראות"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"יוצגו התראות על המסך"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"כשיגיעו התראות, הטלפון לא ישמיע צליל ולא יפעיל רטט."</string>
@@ -3521,6 +3519,10 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"שימוש בהיסטוריית ההתראות"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"היסטוריית ההתראות כבויה"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"יש להפעיל את היסטוריית ההתראות כדי להציג התראות אחרונות והתראות שהועברו למצב נודניק"</string>
+    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
+    <skip />
+    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
+    <skip />
     <string name="notification_history_view_settings" msgid="5269317798670449002">"צפייה בהגדרות של ההתראות"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"פתיחת ההתראה"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
@@ -3666,16 +3668,14 @@
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"אין אפליקציות מותקנות שתומכות ב\'תמונה בתוך תמונה\'"</string>
     <string name="picture_in_picture_keywords" msgid="3605379820551656253">"תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"תמונה בתוך תמונה"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"עם תמונה בתוך תמונה"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"תמונה בתוך תמונה"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"אפליקציה זו תוכל ליצור חלון מסוג תמונה-בתוך-תמונה בזמן שהיא תהיה פתוחה או לאחר היציאה ממנה (למשל, כדי להמשיך לצפות בסרטון). חלון זה מוצג מעל אפליקציות אחרות שנמצאות בשימוש."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"קישור בין אפליקציות לשימוש אישי לאפליקציות לעבודה"</string>
-    <!-- no translation found for interact_across_profiles_summary_allowed (1365881452153799092) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_summary_not_allowed (5802674212788171790) -->
-    <skip />
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"אפליקציות מקושרות לשימוש אישי ולעבודה"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"מקושרות"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"לא מקושרות"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"אין אפליקציות מקושרות"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"מעבר בין פרופילים אפליקציה מקושרת אפליקציות לעבודה ולשימוש אישי"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"קישור בין אפליקציות לשימוש אישי לאפליקציות לעבודה"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"אפליקציות מקושרות לשימוש אישי ולעבודה"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"מקושרות"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"אני רוצה לקשר בין האפליקציות האלה"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"לאפליקציות מקושרות יש הרשאות משותפות, ויש להן גישה לנתונים שבכל אחת מהן."</string>
@@ -3693,12 +3693,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות מקושרות</item>
       <item quantity="one">אפליקציה אחת מקושרת (<xliff:g id="COUNT_0">%d</xliff:g>)</item>
     </plurals>
-    <!-- no translation found for interact_across_profiles_install_work_app_title (4901842246952439197) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_personal_app_title (5888651450930541550) -->
-    <skip />
-    <!-- no translation found for interact_across_profiles_install_app_summary (7715324358034968657) -->
-    <skip />
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"כדי לקשר את האפליקציות האלו, יש להתקין פרופיל עבודה לאפליקציה <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"כדי לקשר את האפליקציות האלו, יש להתקין פרופיל אישי לאפליקציה <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"יש להקיש כדי להוריד את האפליקציה"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"גישה אל \'נא לא להפריע\'"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"הפעלת ההרשאה \'נא לא להפריע\'"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"אין אפליקציות מותקנות שביקשו גישה אל \'נא לא להפריע\'"</string>
@@ -4546,7 +4543,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"כדי לעבור למסך הבית, יש להחליק מעלה מהחלק התחתון של המסך. כדי לעבור בין אפליקציות יש להחליק מעלה מהחלק התחתון של המסך, להחזיק ולאחר מכן לשחרר. כדי לחזור למסך הקודם יש להחליק מהקצה הימני או השמאלי של המסך."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ניווט באמצעות 3 לחצנים"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ניתן לבצע פעולות כמו חזרה למסך קודם, מעבר למסך הבית ומעבר בין אפליקציות באמצעות לחצנים בחלק התחתון של המסך."</string>
-    <string name="keywords_system_navigation" msgid="3196622931210138387">"ניווט במערכת, ניווט באמצעות 2 לחצנים, ניווט באמצעות 3 לחצנים, ניווט באמצעות תנועות"</string>
+    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
+    <skip />
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"הפעולה לא נתמכת באפליקציית ברירת המחדל לדף הבית, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"החלפה של אפליקציית ברירת המחדל לדף הבית"</string>
     <string name="information_label" msgid="6939310810756569298">"מידע"</string>
@@ -5043,10 +5041,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"עצירת העברה"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏לכבות את VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏פעולה זו מכבה גם את החיבור לרשת 5G.\nבמהלך שיחה קולית, אי אפשר להשתמש באינטרנט וייתכן שאפליקציות מסוימות לא יפעלו."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4190689671789979105) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (4818918108340095381) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (3901515020072229315) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"‏כשמשתמשים בשני כרטיסי SIM, טלפון זה יוגבל ל-4G. מידע נוסף"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה יוגבל ל-4G. מידע נוסף"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה יוגבל ל-4G. מידע נוסף"</string>
 </resources>

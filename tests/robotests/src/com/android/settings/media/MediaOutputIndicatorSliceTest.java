@@ -21,7 +21,9 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDIC
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -188,6 +190,14 @@ public class MediaOutputIndicatorSliceTest {
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
 
         assertThat(metadata.isErrorSlice()).isTrue();
+    }
+
+    @Test
+    public void onNotifyChange_noWorker_doNothing() {
+        sMediaOutputIndicatorWorker = null;
+        mMediaOutputIndicatorSlice.onNotifyChange(new Intent());
+
+        verify(mContext, never()).startActivity(any());
     }
 
     @Test

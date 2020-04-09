@@ -295,4 +295,19 @@ public class MediaOutputPanelTest {
 
         verify(mCallback).forceClose();
     }
+
+    @Test
+    public void onPlaybackStateChanged_stateFromPlayingToPaused_verifyCallForceClose() {
+        mPanel.onStart();
+        verify(mMediaController).registerCallback(mControllerCbs.capture());
+        final MediaController.Callback controllerCallbacks = mControllerCbs.getValue();
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PLAYING);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+        verify(mCallback, never()).forceClose();
+
+        when(mPlaybackState.getState()).thenReturn(PlaybackState.STATE_PAUSED);
+        controllerCallbacks.onPlaybackStateChanged(mPlaybackState);
+
+        verify(mCallback).forceClose();
+    }
 }
