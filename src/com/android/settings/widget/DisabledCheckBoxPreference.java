@@ -18,6 +18,7 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
@@ -95,6 +96,7 @@ public class DisabledCheckBoxPreference extends CheckBoxPreference {
         if (title != null) {
             title.setSingleLine(false);
             title.setMaxLines(2);
+            title.setEllipsize(TextUtils.TruncateAt.END);
         }
     }
 
