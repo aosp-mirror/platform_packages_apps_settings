@@ -7522,8 +7522,8 @@
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gestures</string>
-    <!-- Search keywords for Global Actions Panel. [DO NOT TRANSLATE] -->
-    <string name="keywords_global_actions_panel" translatable="false">global actions</string>
+    <string name="keywords_cards_passes">cards, passes</string>
+    <string name="keywords_device_controls">device controls, controls</string>
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
@@ -7956,7 +7956,7 @@
     <string name="zen_category_schedule">Schedules</string>
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
     long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=100] -->
-    <string name="zen_category_duration">Set duration for Quick Settings</string>
+    <string name="zen_category_duration">Duration for Quick Settings</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
     <string name="zen_sound_footer">When Do Not Disturb is on, sound and vibration will be muted, except for the items you allow above.</string>
@@ -8879,7 +8879,7 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for conversations settings page -->
     <string name="zen_mode_conversations_section_title">Conversations that can interrupt</string>
     <string name="zen_mode_from_all_conversations">All conversations</string>
-    <string name="zen_mode_from_important_conversations">Important conversations</string>
+    <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <string name="zen_mode_from_no_conversations">None</string>
     <plurals name="zen_mode_conversations_count">
         <item quantity="one">1 conversation</item>
@@ -8900,7 +8900,7 @@
     <!-- [CHAR LIMIT=120] Zen mode settings: Calls settings header -->
     <string name="zen_mode_calls_header">Calls that can interrupt</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Calls screen footer -->
-    <string name="zen_mode_calls_footer">To be sure allowed calls make sound, check whether your device is set to ring, vibrate, or silent.</string>
+    <string name="zen_mode_calls_footer">To make sure allowed calls make sound, check that device is set to ring</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Calls screen footer -->
     <string name="zen_mode_custom_calls_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming calls are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
@@ -8917,11 +8917,11 @@
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages_list">messages</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Allow messages to bypass DND title -->
-    <string name="zen_mode_messages_title">SMS, MMS, and messaging apps</string>
+    <string name="zen_mode_messages_title">Messages</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Messages settings header -->
     <string name="zen_mode_messages_header">Messages that can interrupt</string>
     <!-- Do not disturb settings, messages, events and reminders footer [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_messages_footer">To be sure allowed messages make sound, check whether your device is set to ring, vibrate, or silent.</string>
+    <string name="zen_mode_messages_footer">To make sure allowed messages make sound, check that device is set to ring</string>
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
@@ -8961,14 +8961,14 @@
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
     <string name="zen_mode_media">Media sounds</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow media (sound from video) to bypass dnd  summary-->
-    <string name="zen_mode_media_summary">From videos, games, and other media</string>
+    <string name="zen_mode_media_summary">Sounds from videos, games, and other media</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
     <string name="zen_mode_system">Touch sounds</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: allow touch sounds to bypass DND summary  -->
-    <string name="zen_mode_system_summary">From your keyboard and other buttons</string>
+    <string name="zen_mode_system_summary">Sounds from the keyboard and other buttons</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
 
@@ -8980,7 +8980,7 @@
     <string name="zen_mode_reminders_list">reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
-    <string name="zen_mode_events">Events</string>
+    <string name="zen_mode_events">Calendar events</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow event notifications/sounds to bypass DND summary -->
     <string name="zen_mode_events_summary">From upcoming calendar events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
@@ -9062,7 +9062,7 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: calls summary -->
     <string name="zen_mode_calls_summary_two"><xliff:g id="caller type" example="starred contacts">%1$s</xliff:g> and <xliff:g id="caller type" example="repeat callers">%2$s</xliff:g></string>
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
-    <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
+    <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g>-minute period</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings dnd beahvior description: when a user has chosen custom sounds to bypass DND -->
     <string name="zen_mode_behavior_summary_custom">Custom</string>
@@ -10725,13 +10725,6 @@
     <!-- Summary text for ambient display tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_tap_screen_summary">To check time, notifications, and other info, tap your screen.</string>
 
-    <!-- Summary text for global actions panel [CHAR LIMIT=NONE] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_summary" translatable="false">To show the global actions panel, press &amp; hold Power button</string>
-    <!-- Preference and settings suggestion title text for global actions panel [CHAR LIMIT=60] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_title" translatable="false">Show global actions</string>
-    <!-- Short title text for global actions panel [CHAR LIMIT=40] [DO NOT TRANSLATE]-->
-    <string name="global_actions_panel_short_title" translatable="false">Global actions</string>
-
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
     <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
@@ -11854,11 +11847,11 @@
     <!-- Developer settings: text for the bug report handler selection toast shown if an invalid bug report handler was chosen. [CHAR LIMIT=NONE] -->
     <string name="select_invalid_bug_report_handler_toast_text">This choice is no longer valid. Try again.</string>
 
-    <!-- Quick controls name sentence case [CHAR LIMIT=40] -->
-    <string name="quick_controls_sentence">Quick controls</string>
+    <!-- Device controls name sentence case [CHAR LIMIT=40] -->
+    <string name="device_controls_sentence">Device controls</string>
 
-    <!-- Quick controls name lower case [CHAR LIMIT=40] -->
-    <string name="quick_controls_lower">quick controls</string>
+    <!-- Device controls name lower case [CHAR LIMIT=40] -->
+    <string name="quick_controls_lower">device controls</string>
 
     <!-- Cards and passes name sentence case [CHAR LIMIT=40] -->
     <string name="cards_passes_sentence">Cards &amp; passes</string>
@@ -11875,11 +11868,11 @@
     <!-- Power menu setting option cards and passes [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes">Show cards &amp; passes</string>
 
-    <!-- Power menu setting option quick controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_quick_controls">Show quick controls</string>
+    <!-- Power menu setting option device controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_device_controls">Show device controls</string>
 
-    <!-- Power menu setting option cards, passes, quick controls [CHAR LIMIT=NONE] -->
-    <string name="power_menu_cards_passes_quick_controls">Show cards, passes, and quick controls</string>
+    <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
 
     <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
     <string name="power_menu_none">Don\u2019t show any content</string>
@@ -11893,11 +11886,17 @@
     <!-- Power menu setting privacy hide all [CHAR LIMIT=NONE] -->
     <string name="power_menu_privacy_hide">Hide cards and controls when locked</string>
 
-    <!-- Quick controls toggle name [CHAR LIMIT=NONE] -->
-    <string name="quick_controls_setting_toggle">Show quick controls</string>
+    <!-- Device controls toggle name [CHAR LIMIT=60] -->
+    <string name="device_controls_setting_toggle">Show device controls</string>
 
-    <!-- Quick controls toggle subtitle [CHAR LIMIT=NONE] -->
-    <string name="quick_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
+    <!-- Cards and passes toggle name [CHAR LIMIT=60] -->
+    <string name="cards_passes_setting_toggle">Show cards &amp; passes</string>
+
+    <!-- Device controls toggle subtitle [CHAR LIMIT=NONE] -->
+    <string name="device_controls_setting_subtitle">To access controls for connected devices, hold the Power button</string>
+
+    <!-- Cards and passes toggle subtitle [CHAR LIMIT=NONE] -->
+    <string name="cards_passes_setting_subtitle">To access things like your payment methods and boarding passes, press and hold the Power button.</string>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>
