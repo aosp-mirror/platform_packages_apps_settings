@@ -20,9 +20,6 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
-
 import com.android.settings.core.TogglePreferenceController;
 
 /** Controller that shows the magnification enable mode summary. */

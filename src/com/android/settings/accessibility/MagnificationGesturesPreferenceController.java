@@ -54,6 +54,7 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
             populateMagnificationGesturesPreferenceExtras(extras, mContext);
             extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED, isChecked());
             extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mIsFromSUW);
+            return true;
         }
         return false;
     }
