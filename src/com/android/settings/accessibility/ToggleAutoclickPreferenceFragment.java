@@ -43,7 +43,7 @@ import java.util.List;
  * Fragment for preference screen for settings related to Automatically click after mouse stops
  * feature.
  */
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleAutoclickPreferenceFragment extends DashboardFragment
         implements ToggleAutoclickPreferenceController.OnChangeListener {
 

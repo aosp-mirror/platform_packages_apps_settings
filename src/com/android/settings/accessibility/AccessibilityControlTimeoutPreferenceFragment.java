@@ -32,7 +32,8 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable
+/** Settings fragment containing accessibility control timeout preference. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class AccessibilityControlTimeoutPreferenceFragment extends DashboardFragment
         implements AccessibilityTimeoutController.OnChangeListener {
 
