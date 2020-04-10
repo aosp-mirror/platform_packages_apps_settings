@@ -59,6 +59,7 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
                     mContext.getText(R.string.accessibility_screen_magnification_navbar_summary));
             extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED, isChecked());
             extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, mIsFromSUW);
+            return true;
         }
         return false;
     }

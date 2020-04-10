@@ -173,6 +173,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         checkUiBlocker(mControllers);
         refreshAllPreferences(getLogTag());
+        mControllers.stream()
+                .map(controller -> (Preference) findPreference(controller.getPreferenceKey()))
+                .filter(Objects::nonNull)
+                .forEach(preference -> {
+                    // Give all controllers a chance to handle click.
+                    preference.getExtras().putInt(CATEGORY, getMetricsCategory());
+                });
     }
 
     @Override
@@ -211,8 +218,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     public boolean onPreferenceTreeClick(Preference preference) {
         final Collection<List<AbstractPreferenceController>> controllers =
                 mPreferenceControllers.values();
-        // Give all controllers a chance to handle click.
-        preference.getExtras().putInt(CATEGORY, getMetricsCategory());
         for (List<AbstractPreferenceController> controllerList : controllers) {
             for (AbstractPreferenceController controller : controllerList) {
                 if (controller.handlePreferenceTreeClick(preference)) {
