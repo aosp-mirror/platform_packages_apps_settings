@@ -1596,15 +1596,8 @@ public class WifiConfigController implements TextWatcher,
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
         } else if (parent == mHiddenSettingsSpinner) {
-            mHiddenWarningView.setVisibility(
-                    position == NOT_HIDDEN_NETWORK
-                            ? View.GONE
-                            : View.VISIBLE);
-            if (position == HIDDEN_NETWORK) {
-                mDialogContainer.post(() -> {
-                  mDialogContainer.fullScroll(View.FOCUS_DOWN);
-                });
-            }
+            mHiddenWarningView.setVisibility(position == NOT_HIDDEN_NETWORK
+                    ? View.GONE : View.VISIBLE);
         } else {
             showIpConfigFields();
         }
