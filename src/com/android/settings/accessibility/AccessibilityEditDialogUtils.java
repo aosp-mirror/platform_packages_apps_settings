@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -76,7 +77,7 @@ public class AccessibilityEditDialogUtils {
         final AlertDialog alertDialog = createDialog(context, DialogType.EDIT_SHORTCUT_GENERIC,
                 dialogTitle, listener);
         alertDialog.show();
-
+        setScrollIndicators(alertDialog);
         return alertDialog;
     }
 
@@ -93,7 +94,7 @@ public class AccessibilityEditDialogUtils {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.EDIT_SHORTCUT_MAGNIFICATION, dialogTitle, listener);
         alertDialog.show();
-
+        setScrollIndicators(alertDialog);
         return alertDialog;
     }
 
@@ -110,7 +111,7 @@ public class AccessibilityEditDialogUtils {
         final AlertDialog alertDialog = createDialog(context,
                 DialogType.EDIT_MAGNIFICATION_MODE, dialogTitle, listener);
         alertDialog.show();
-
+        setScrollIndicators(alertDialog);
         return alertDialog;
     }
 
@@ -126,6 +127,17 @@ public class AccessibilityEditDialogUtils {
                 .create();
 
         return alertDialog;
+    }
+
+    /**
+     * Sets the scroll indicators for dialog view. The indicators appears while content view is
+     * out of vision for vertical scrolling.
+     */
+    private static void setScrollIndicators(AlertDialog dialog) {
+        final ScrollView scrollView = dialog.findViewById(R.id.container_layout);
+        scrollView.setScrollIndicators(
+                View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM,
+                View.SCROLL_INDICATOR_TOP | View.SCROLL_INDICATOR_BOTTOM);
     }
 
     /**

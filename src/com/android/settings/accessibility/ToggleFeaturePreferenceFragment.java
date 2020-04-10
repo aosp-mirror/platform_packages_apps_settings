@@ -42,6 +42,7 @@ import android.view.accessibility.AccessibilityManager.TouchExplorationStateChan
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -242,7 +243,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
-                Dialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
                 return dialog;
