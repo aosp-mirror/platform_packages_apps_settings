@@ -16,7 +16,6 @@
 
 package com.android.settings.dream;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.widget.Button;
 
@@ -25,6 +24,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -62,7 +62,8 @@ public class StartNowPreferenceController extends AbstractPreferenceController i
         LayoutPreference pref = screen.findPreference(getPreferenceKey());
         Button startButton = pref.findViewById(R.id.dream_start_now_button);
         startButton.setOnClickListener(v -> {
-            mMetricsFeatureProvider.logClickedPreference(pref, SettingsEnums.DREAM);
+            mMetricsFeatureProvider.logClickedPreference(pref,
+                    pref.getExtras().getInt(DashboardFragment.CATEGORY));
             mBackend.startDreaming();
         });
     }
