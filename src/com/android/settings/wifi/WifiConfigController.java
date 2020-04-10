@@ -48,6 +48,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.inputmethod.EditorInfo;
@@ -1020,6 +1021,8 @@ public class WifiConfigController implements TextWatcher,
             mEapUserCertSpinner.setOnItemSelectedListener(this);
             mEapIdentityView = (TextView) mView.findViewById(R.id.identity);
             mEapAnonymousView = (TextView) mView.findViewById(R.id.anonymous);
+
+            setAccessibilityDelegateForSecuritySpinners();
         }
 
         if (refreshEapMethods) {
@@ -1146,6 +1149,26 @@ public class WifiConfigController implements TextWatcher,
         } else {
             showEapFieldsByMethod(mEapMethodSpinner.getSelectedItemPosition());
         }
+    }
+
+    private void setAccessibilityDelegateForSecuritySpinners() {
+        final AccessibilityDelegate selectedEventBlocker = new AccessibilityDelegate() {
+            @Override
+            public void sendAccessibilityEvent(View host, int eventType) {
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) {
+                    // Ignore TYPE_VIEW_SELECTED or there will be multiple Spinner selected
+                    // information for WifiController#showSecurityFields.
+                    return;
+                }
+                super.sendAccessibilityEvent(host, eventType);
+            }
+        };
+
+        mEapMethodSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mPhase2Spinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapCaCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapOcspSpinner.setAccessibilityDelegate(selectedEventBlocker);
+        mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
     }
 
     /**
