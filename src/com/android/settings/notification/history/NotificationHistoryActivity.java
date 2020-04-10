@@ -77,7 +77,7 @@ public class NotificationHistoryActivity extends Activity {
             View viewForPackage = LayoutInflater.from(this)
                     .inflate(R.layout.notification_history_app_layout, null);
 
-            final View container = viewForPackage.findViewById(R.id.list_container);
+            final View container = viewForPackage.findViewById(R.id.notification_list);
             container.setVisibility(View.GONE);
             ImageButton expand = viewForPackage.findViewById(R.id.expand);
             expand.setContentDescription(container.getVisibility() == View.VISIBLE

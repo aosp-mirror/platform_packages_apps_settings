@@ -73,18 +73,12 @@
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/list_container"
-        android:layout_width="match_parent"
-        android:clipChildren="true"
-        android:layout_height="wrap_content">
         <com.android.settings.notification.history.NotificationHistoryRecyclerView
             android:id="@+id/notification_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipChildren="true"
+            android:importantForAccessibility="yes"
             android:scrollbars="none"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
