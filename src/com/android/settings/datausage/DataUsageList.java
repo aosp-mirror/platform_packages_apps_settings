@@ -42,6 +42,8 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.View.AccessibilityDelegate;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
@@ -180,6 +182,16 @@ public class DataUsageList extends DataUsageBaseFragment
                 mCycleSpinner.setSelection(position);
             }
         }, mCycleListener);
+        mCycleSpinner.setAccessibilityDelegate(new AccessibilityDelegate() {
+            @Override
+            public void sendAccessibilityEvent(View host, int eventType) {
+                if (eventType == AccessibilityEvent.TYPE_VIEW_SELECTED) {
+                    // Ignore TYPE_VIEW_SELECTED or TalkBack will speak for it at onResume.
+                    return;
+                }
+                super.sendAccessibilityEvent(host, eventType);
+            }
+        });
 
         mLoadingViewController = new LoadingViewController(
                 getView().findViewById(R.id.loading_container), getListView());
