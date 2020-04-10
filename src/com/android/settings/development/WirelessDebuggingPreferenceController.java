@@ -135,7 +135,10 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
         ((MasterSwitchPreference) preference).setChecked(enabled);
     }
 
-    static boolean isWifiConnected(Context context) {
+    /**
+     * Returns true if connected to Wi-Fi network.
+     */
+    public static boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
