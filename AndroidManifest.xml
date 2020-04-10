@@ -3314,13 +3314,33 @@
         </activity>
 
         <activity android:name="Settings$GlobalActionsPanelSettingsActivity"
-            android:label="@string/global_actions_panel_title">
+            android:label="@string/cards_passes_sentence">
             <intent-filter>
                 <action android:name="com.android.settings.GLOBAL_ACTIONS_PANEL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.gestures.GlobalActionsPanelSettings" />
+        </activity>
+
+        <activity android:name="Settings$PowerMenuSettingsActivity"
+                  android:label="@string/power_menu_setting_name">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_POWER_MENU_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.gestures.PowerMenuSettings" />
+        </activity>
+
+        <activity android:name="Settings$DeviceControlsSettingsActivity"
+                      android:label="@string/device_controls_sentence">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_DEVICE_CONTROLS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.gestures.DeviceControlsSettings" />
         </activity>
 
         <activity
