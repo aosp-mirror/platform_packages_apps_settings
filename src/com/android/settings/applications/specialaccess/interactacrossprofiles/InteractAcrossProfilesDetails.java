@@ -17,11 +17,13 @@ package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
+import static android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS;
 
 import android.Manifest;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -37,6 +39,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
 import android.view.View;
 import android.widget.ImageView;
@@ -60,6 +63,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             "interact_across_profiles_settings_switch";
     private static final String INTERACT_ACROSS_PROFILES_HEADER = "interact_across_profiles_header";
     public static final String INSTALL_APP_BANNER_KEY = "install_app_banner";
+    public static final String EXTRA_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args";
+    public static final String INTENT_KEY = "intent";
 
     private Context mContext;
     private CrossProfileApps mCrossProfileApps;
@@ -108,6 +113,52 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
         addAppTitleAndIcons(mPersonalProfile, mWorkProfile);
         styleActionBar();
+        logPageLaunchMetrics();
+    }
+
+    private void logPageLaunchMetrics() {
+        if (!mCrossProfileApps.canConfigureInteractAcrossProfiles(mPackageName)) {
+            logNonConfigurableAppMetrics();
+        }
+        Bundle bundle = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGS);
+        if (bundle == null) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
+            return;
+        }
+        Intent intent = (Intent) bundle.get(INTENT_KEY);
+        if (intent == null) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
+            return;
+        }
+        if (ACTION_MANAGE_CROSS_PROFILE_ACCESS.equals(intent.getAction())) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_APP);
+        }
+    }
+
+    private void logNonConfigurableAppMetrics() {
+        if (!isCrossProfilePackageWhitelisted(mPackageName)) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_ADMIN_RESTRICTED);
+            return;
+        }
+        if (mInstallBanner == null) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_MISSING_INSTALL_BANNER_INTENT);
+        }
+        if (!mInstalledInPersonal) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_MISSING_PERSONAL_APP);
+            return;
+        }
+        if (!mInstalledInWork) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_MISSING_WORK_APP);
+        }
+    }
+
+    private void logEvent(int eventId) {
+        DevicePolicyEventLogger.createEvent(eventId)
+                .setStrings(mPackageName)
+                .setInt(UserHandle.myUserId())
+                .setAdmin(RestrictedLockUtils.getProfileOrDeviceOwner(
+                        mContext, mWorkProfile).component)
+                .write();
     }
 
     private void addAppTitleAndIcons(UserHandle personalProfile, UserHandle workProfile) {
@@ -187,6 +238,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
     private void handleSwitchPreferenceClick() {
         if (isInteractAcrossProfilesEnabled()) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_PERMISSION_REVOKED);
             enableInteractAcrossProfiles(false);
             refreshUi();
         } else {
@@ -220,12 +272,15 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         builder.setView(dialogView)
                 .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_USER_CONSENTED);
                         enableInteractAcrossProfiles(true);
                         refreshUi();
                     }
                 })
                 .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        logEvent(
+                                DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_USER_DECLINED_CONSENT);
                         refreshUi();
                     }
                 })
@@ -277,13 +332,17 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
     private void handleInstallBannerClick() {
         if (mInstallAppIntent == null) {
+            logEvent(
+                    DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_NO_INTENT_CLICKED);
             return;
         }
         if (!mInstalledInWork) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mWorkProfile);
             return;
         }
         if (!mInstalledInPersonal) {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_INSTALL_BANNER_CLICKED);
             mContext.startActivityAsUser(mInstallAppIntent, mPersonalProfile);
         }
     }
@@ -333,8 +392,10 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             mInstallBanner.setTitle(getString(
                     R.string.interact_across_profiles_install_personal_app_title,
                     mAppLabel));
-            mInstallBanner.setSummary(
-                    R.string.interact_across_profiles_install_app_summary);
+            if (mInstallAppIntent != null) {
+                mInstallBanner.setSummary(
+                        R.string.interact_across_profiles_install_app_summary);
+            }
             mInstallBanner.setVisible(true);
             return true;
         }
@@ -342,8 +403,10 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             mInstallBanner.setTitle(getString(
                     R.string.interact_across_profiles_install_work_app_title,
                     mAppLabel));
-            mInstallBanner.setSummary(
-                    R.string.interact_across_profiles_install_app_summary);
+            if (mInstallAppIntent != null) {
+                mInstallBanner.setSummary(
+                        R.string.interact_across_profiles_install_app_summary);
+            }
             mInstallBanner.setVisible(true);
             return true;
         }
