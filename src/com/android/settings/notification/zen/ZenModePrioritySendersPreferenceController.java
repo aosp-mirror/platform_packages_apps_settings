@@ -171,6 +171,10 @@ public class ZenModePrioritySendersPreferenceController
     private RadioButtonPreferenceWithExtraWidget makeRadioPreference(String key, int titleId) {
         RadioButtonPreferenceWithExtraWidget pref =
                 new RadioButtonPreferenceWithExtraWidget(mPreferenceCategory.getContext());
+        pref.setKey(key);
+        pref.setTitle(titleId);
+        pref.setOnClickListener(mRadioButtonClickListener);
+
         View.OnClickListener widgetClickListener = getWidgetClickListener(key);
         if (widgetClickListener != null) {
             pref.setExtraWidgetOnClickListener(widgetClickListener);
@@ -179,9 +183,6 @@ public class ZenModePrioritySendersPreferenceController
             pref.setExtraWidgetVisibility(EXTRA_WIDGET_VISIBILITY_GONE);
         }
 
-        pref.setKey(key);
-        pref.setTitle(titleId);
-        pref.setOnClickListener(mRadioButtonClickListener);
         mPreferenceCategory.addPreference(pref);
         mRadioButtonPreferences.add(pref);
         return pref;
