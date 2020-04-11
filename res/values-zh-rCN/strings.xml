@@ -239,12 +239,12 @@
     <string name="roaming" msgid="3055365654530847985">"漫游"</string>
     <string name="roaming_enable" msgid="7845716016861535340">"漫游时连接到移动数据网络服务"</string>
     <string name="roaming_disable" msgid="729512894708689604">"漫游时连接到移动数据网络服务"</string>
-    <string name="roaming_reenable_message" msgid="5150423860521673540">"移动数据网络连接已断开，因为您已离开本地网络并关闭了移动数据网络漫游功能。"</string>
+    <string name="roaming_reenable_message" msgid="5150423860521673540">"移动数据网络连接已断开，因为您已离开本地网络并关闭了数据漫游服务。"</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"将其启用"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"可能需要支付漫游费用。"</string>
     <string name="roaming_warning_multiuser" product="tablet" msgid="5629953315019604726">"如果允许数据网络漫游，您可能需要支付漫游费用！\n\n此设置会影响这部平板电脑上的所有用户。"</string>
     <string name="roaming_warning_multiuser" product="default" msgid="3693719745119874126">"如果允许数据网络漫游，您可能需要支付漫游费用！\n\n此设置会影响这部手机上的所有用户。"</string>
-    <string name="roaming_reenable_title" msgid="770824950144026180">"允许移动数据网络漫游吗？"</string>
+    <string name="roaming_reenable_title" msgid="770824950144026180">"允许数据漫游？"</string>
     <string name="networks" msgid="5184501333492775095">"运营商选择"</string>
     <string name="sum_carrier_select" msgid="1669911795517995916">"选择网络运营商"</string>
     <string name="date_and_time_settings_title" msgid="2305454529709812364">"日期和时间"</string>
@@ -363,10 +363,10 @@
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"解锁手机"</string>
     <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"应用登录和付款"</string>
     <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"人脸解锁要求"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"需要您睁开双眼"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"要解锁手机，您必须睁开双眼"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"需要睁开双眼"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"必须睁开双眼才能解锁手机"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"一律需要确认"</string>
-    <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"在应用中使用人脸解锁时，一律需要确认"</string>
+    <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"在应用中使用人脸解锁时，一律需确认"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"删除人脸数据"</string>
     <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"设置人脸解锁"</string>
     <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"您可以使用人脸解锁功能来解锁设备、登录应用以及确认付款。\n\n注意：\n目视手机可能会让手机意外解锁。\n\n如果有人将手机对着您的脸，手机可能会因此解锁。\n\n长相与您十分相似的人（例如同胞兄弟姐妹）可能也能解锁您的手机。"</string>
@@ -1215,8 +1215,8 @@
     <string name="night_display_activation_off_manual" msgid="4842907786868153218">"立即关闭"</string>
     <string name="night_display_activation_on_twilight" msgid="3440889451767582067">"开启，直到日出"</string>
     <string name="night_display_activation_off_twilight" msgid="2853594955401726956">"关闭，直到日落"</string>
-    <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持开启状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持关闭状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_activation_on_custom" msgid="4951143503599226846">"开启，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_activation_off_custom" msgid="79965738861100371">"关闭，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前未开启护眼模式"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"需要开启位置信息模式，设备才能确定从日落到日出的时间"</string>
     <string name="twilight_mode_launch_location" msgid="1586574792030648828">"开启位置信息模式"</string>
@@ -1238,9 +1238,9 @@
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"一律不自动关闭"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"将在日出时自动关闭"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"将在<xliff:g id="ID_1">%1$s</xliff:g> 自动关闭"</string>
-    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"保持开启状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"保持关闭状态，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"在某些屏幕上，深色主题使用纯黑背景，有助于延长您的电池续航时间。深色主题时间表会在您的屏幕进入关闭状态后开启。"</string>
+    <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"开启，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"关闭，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"在某些屏幕上，深色主题使用纯黑背景，有助于延长您的电池续航时间。深色主题开启时间设置会等到屏幕进入关闭状态后才应用。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"屏幕超时"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
@@ -2559,11 +2559,11 @@
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"没有时间表"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"根据您平时充电的时间"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"根据电量百分比"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"如果电池的电量可能会在下次的例行充电时间之前耗尽，系统会开启省电模式"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"根据您平常的充电时间，如果电池电量可能会在下次充电之前耗尽，则开启省电模式"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"将在电量为 <xliff:g id="PERCENT">%1$s</xliff:g> 时开启"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"设置时间表"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延长电池续航时间"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"电量充满后关闭"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充电时关闭"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"在手机电量为 <xliff:g id="PERCENT">%1$s</xliff:g> 时关闭省电模式"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"在平板电脑电量为 <xliff:g id="PERCENT">%1$s</xliff:g> 时关闭省电模式"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"在设备电量为 <xliff:g id="PERCENT">%1$s</xliff:g> 时关闭省电模式"</string>
@@ -2779,7 +2779,7 @@
     <string name="data_usage_data_limit" msgid="1120291692444009289">"设置流量上限"</string>
     <string name="data_usage_cycle" msgid="6875568429140150029">"流量消耗重置周期"</string>
     <string name="data_usage_app_items_header_text" msgid="7513812163443595033">"应用数据流量"</string>
-    <string name="data_usage_menu_roaming" msgid="6864561338842056939">"移动数据网络漫游"</string>
+    <string name="data_usage_menu_roaming" msgid="6864561338842056939">"数据漫游"</string>
     <string name="data_usage_menu_restrict_background" msgid="1414574366645086133">"限制后台流量"</string>
     <string name="data_usage_menu_allow_background" msgid="6242931073390680432">"允许使用后台流量"</string>
     <string name="data_usage_menu_split_4g" msgid="3391899816926640583">"单独显示4G流量"</string>
@@ -2882,7 +2882,7 @@
     <string name="vpn_not_used" msgid="7229312881336083354">"（未使用）"</string>
     <string name="vpn_no_ca_cert" msgid="3687379414088677735">"（不验证服务器）"</string>
     <string name="vpn_no_server_cert" msgid="8106540968643125407">"（来自服务器）"</string>
-    <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"此 VPN 类型无法随时保持连接"</string>
+    <string name="vpn_always_on_invalid_reason_type" msgid="4699113710248872972">"此类型的 VPN 无法随时保持连接"</string>
     <string name="vpn_always_on_invalid_reason_server" msgid="2635347740046212693">"始终开启的 VPN 仅支持数字格式的服务器地址"</string>
     <string name="vpn_always_on_invalid_reason_no_dns" msgid="3980357762395272467">"必须为始终开启的 VPN 指定 DNS 服务器"</string>
     <string name="vpn_always_on_invalid_reason_dns" msgid="3934369594591801587">"DNS 服务器地址必须为数字才能使用始终开启的 VPN"</string>
@@ -2915,7 +2915,7 @@
     <string name="vpn_menu_lockdown" msgid="5284041663859541007">"始终开启的 VPN"</string>
     <string name="vpn_no_vpns_added" msgid="7387080769821533728">"尚未添加任何 VPN"</string>
     <string name="vpn_always_on_summary" msgid="2171252372476858166">"随时和 VPN 保持连接"</string>
-    <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"不受此应用支持"</string>
+    <string name="vpn_always_on_summary_not_supported" msgid="9084872130449368437">"此应用不支持"</string>
     <string name="vpn_always_on_summary_active" msgid="2532123735674813569">"已启用“始终开启”模式"</string>
     <string name="vpn_require_connection" msgid="1027347404470060998">"屏蔽未使用 VPN 的所有连接"</string>
     <string name="vpn_require_connection_title" msgid="4186758487822779039">"需要连接 VPN？"</string>
@@ -3266,7 +3266,7 @@
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"应用提供的提示音"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"默认通知提示音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"默认闹钟提示音"</string>
-    <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"有来电时振动"</string>
+    <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"来电振动"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"一律不振动"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"一律振动"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"先振动再响铃（铃声逐渐增大）"</string>
@@ -3286,7 +3286,7 @@
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"振动"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"开机音效"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"实时字幕"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"自动字幕媒体"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"自动生成媒体字幕"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"无"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="other">已设置 <xliff:g id="ON_COUNT">%d</xliff:g> 个时间表</item>
@@ -3469,7 +3469,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"闪烁指示灯"</string>
     <string name="lock_screen_notifications_title" msgid="3063951257121435570">"锁定屏幕上的通知"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"跳过锁定屏幕"</string>
-    <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"进行人脸解锁后，请直接转到上次使用的屏幕"</string>
+    <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"进行人脸解锁后，直接转到上次离开时的画面"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
     <string name="lock_screen_notifs_title" msgid="4936392753621150992">"锁定屏幕上的通知"</string>
@@ -4744,7 +4744,7 @@
     <string name="cdma_subscription_summary" msgid="7134032708555561334">"在 RUIM/SIM 和 NV 之间切换"</string>
     <string name="cdma_subscription_dialogtitle" msgid="555971296756231647">"订阅"</string>
     <string name="register_automatically" msgid="5208258089316657167">"自动注册…"</string>
-    <string name="roaming_alert_title" msgid="9052791521868787985">"要允许数据网络漫游吗？"</string>
+    <string name="roaming_alert_title" msgid="9052791521868787985">"允许数据漫游？"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"请与您的网络服务提供商联系以了解定价。"</string>
     <string name="mobile_data_usage_title" msgid="2047864499317759728">"应用的流量使用情况"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"无效的网络模式<xliff:g id="NETWORKMODEID">%1$d</xliff:g>。忽略。"</string>
