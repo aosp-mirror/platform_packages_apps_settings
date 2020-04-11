@@ -398,8 +398,13 @@ public class EnabledNetworkModePreferenceController extends
                     if (!mIsGlobalCdma) {
                         setSelectedEntry(
                                 TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
-                        setSummary(
-                                mShow4gForLTE ? R.string.network_4G : R.string.network_lte);
+                        if (is5gEntryDisplayed()) {
+                            setSummary(mShow4gForLTE
+                                ? R.string.network_4G_pure : R.string.network_lte_pure);
+                        } else {
+                            setSummary(mShow4gForLTE
+                                ? R.string.network_4G : R.string.network_lte);
+                        }
                     } else {
                         setSelectedEntry(
                                 TelephonyManagerConstants.NETWORK_MODE_LTE_CDMA_EVDO_GSM_WCDMA);
@@ -542,6 +547,7 @@ public class EnabledNetworkModePreferenceController extends
                 mEntriesValue.add(value);
                 mIs5gEntryDisplayed = true;
             } else {
+                mIs5gEntryDisplayed = false;
                 Log.d(LOG_TAG, "Hide 5G option. "
                         + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
                         + " allowed5GNetworkType: " + mAllowed5gNetworkType

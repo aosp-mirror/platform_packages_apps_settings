@@ -311,8 +311,9 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         @Override
         public boolean onPreferenceTreeClick(Preference preference) {
-            final String key = preference.getKey();
+            writePreferenceClickMetric(preference);
 
+            final String key = preference.getKey();
             if (!isUnlockMethodSecure(key) && mLockPatternUtils.isSecure(mUserId)) {
                 // Show the disabling FRP warning only when the user is switching from a secure
                 // unlock method to an insecure one
