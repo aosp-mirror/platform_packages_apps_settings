@@ -80,6 +80,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private static final int ORDER_NEXT_TO_LAST = 1001;
     private static final int ORDER_NEXT_TO_NEXT_TO_LAST = 1000;
 
+    private static final String PREF_KEY_ADD_ACCOUNT = "add_account";
     private static final String PREF_KEY_REMOVE_PROFILE = "remove_profile";
     private static final String PREF_KEY_WORK_PROFILE_SETTING = "work_profile_setting";
 
@@ -225,11 +226,13 @@ public class AccountPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        final int metricsCategory = mFragment.getMetricsCategory();
         // Check the preference
         final int count = mProfiles.size();
         for (int i = 0; i < count; i++) {
             ProfileData profileData = mProfiles.valueAt(i);
             if (preference == profileData.addAccountPreference) {
+                mMetricsFeatureProvider.logClickedPreference(preference, metricsCategory);
                 Intent intent = new Intent(ACTION_ADD_ACCOUNT);
                 intent.putExtra(EXTRA_USER, profileData.userInfo.getUserHandle());
                 intent.putExtra(EXTRA_AUTHORITIES, mAuthorities);
@@ -237,16 +240,18 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 return true;
             }
             if (preference == profileData.removeWorkProfilePreference) {
+                mMetricsFeatureProvider.logClickedPreference(preference, metricsCategory);
                 final int userId = profileData.userInfo.id;
                 RemoveUserFragment.newInstance(userId).show(mFragment.getFragmentManager(),
                         "removeUser");
                 return true;
             }
             if (preference == profileData.managedProfilePreference) {
+                mMetricsFeatureProvider.logClickedPreference(preference, metricsCategory);
                 Bundle arguments = new Bundle();
                 arguments.putParcelable(Intent.EXTRA_USER, profileData.userInfo.getUserHandle());
                 new SubSettingLauncher(mContext)
-                        .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                        .setSourceMetricsCategory(metricsCategory)
                         .setDestination(ManagedProfileSettings.class.getName())
                         .setTitleRes(R.string.managed_profile_settings_title)
                         .setArguments(arguments)
@@ -360,6 +365,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private RestrictedPreference newAddAccountPreference() {
         RestrictedPreference preference =
                 new RestrictedPreference(mFragment.getPreferenceManager().getContext());
+        preference.setKey(PREF_KEY_ADD_ACCOUNT);
         preference.setTitle(R.string.add_account_label);
         preference.setIcon(R.drawable.ic_add_24dp);
         preference.setOnPreferenceClickListener(this);

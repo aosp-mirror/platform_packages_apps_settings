@@ -415,14 +415,16 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (signalStrength == null) {
             return;
         }
-        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-        final PersistableBundle carrierConfig =
-                mCarrierConfigManager.getConfigForSubId(subscriptionId);
         // by default we show the signal strength
         boolean showSignalStrength = true;
-        if (carrierConfig != null) {
-            showSignalStrength = carrierConfig.getBoolean(
-                    CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
+        if (mSubscriptionInfo != null) {
+            final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
+            final PersistableBundle carrierConfig =
+                    mCarrierConfigManager.getConfigForSubId(subscriptionId);
+            if (carrierConfig != null) {
+                showSignalStrength = carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
+            }
         }
         if (!showSignalStrength) {
             mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_LABEL_ID);
@@ -455,6 +457,14 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateNetworkType() {
+        if (mSubscriptionInfo == null) {
+            final String unknownNetworkType =
+                    getNetworkTypeName(TelephonyManager.NETWORK_TYPE_UNKNOWN);
+            mDialog.setText(CELL_VOICE_NETWORK_TYPE_VALUE_ID, unknownNetworkType);
+            mDialog.setText(CELL_DATA_NETWORK_TYPE_VALUE_ID, unknownNetworkType);
+            return;
+        }
+
         // Whether EDGE, UMTS, etc...
         String dataNetworkTypeName = null;
         String voiceNetworkTypeName = null;
@@ -497,14 +507,16 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateIccidNumber() {
-        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-        final PersistableBundle carrierConfig =
-                mCarrierConfigManager.getConfigForSubId(subscriptionId);
         // do not show iccid by default
         boolean showIccId = false;
-        if (carrierConfig != null) {
-            showIccId = carrierConfig.getBoolean(
-                    CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
+        if (mSubscriptionInfo != null) {
+            final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
+            final PersistableBundle carrierConfig =
+                    mCarrierConfigManager.getConfigForSubId(subscriptionId);
+            if (carrierConfig != null) {
+                showIccId = carrierConfig.getBoolean(
+                        CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
+            }
         }
         if (!showIccId) {
             mDialog.removeSettingFromScreen(ICCID_INFO_LABEL_ID);
@@ -556,6 +568,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private boolean isImsRegistrationStateShowUp() {
+        if (mSubscriptionInfo == null) {
+            return false;
+        }
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
         final PersistableBundle carrierConfig =
                 mCarrierConfigManager.getConfigForSubId(subscriptionId);
