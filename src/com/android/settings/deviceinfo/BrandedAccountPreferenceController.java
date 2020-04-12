@@ -20,6 +20,7 @@ import android.accounts.Account;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -63,23 +64,29 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
         }
 
         accountPreference.setSummary(mAccounts[0].name);
-        accountPreference.setOnPreferenceClickListener(preference -> {
-            final Bundle args = new Bundle();
-            args.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
-                    mAccounts[0]);
-            args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
-                    android.os.Process.myUserHandle());
-            args.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
-                    mAccountFeatureProvider.getAccountType());
+    }
 
-            new SubSettingLauncher(mContext)
-                    .setDestination(AccountDetailDashboardFragment.class.getName())
-                    .setTitleRes(R.string.account_sync_title)
-                    .setArguments(args)
-                    .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
-                    .launch();
-            return true;
-        });
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
+        }
+
+        final Bundle args = new Bundle();
+        args.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT,
+                mAccounts[0]);
+        args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE,
+                android.os.Process.myUserHandle());
+        args.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
+                mAccountFeatureProvider.getAccountType());
+
+        new SubSettingLauncher(mContext)
+                .setDestination(AccountDetailDashboardFragment.class.getName())
+                .setTitleRes(R.string.account_sync_title)
+                .setArguments(args)
+                .setSourceMetricsCategory(SettingsEnums.DEVICEINFO)
+                .launch();
+        return true;
     }
 
     @Override
