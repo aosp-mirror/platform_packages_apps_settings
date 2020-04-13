@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
@@ -124,22 +124,15 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingBottom="16dp" />
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/list_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipChildren="true"
-                    android:elevation="3dp"
-                    android:background="@drawable/rounded_bg">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
+                        android:elevation="3dp"
+                        android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
                         android:scrollbars="none"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -156,21 +149,14 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:paddingBottom="16dp" />
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/list_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="3dp"
-                    android:clipChildren="true"
-                    android:background="@drawable/rounded_bg">
-                    <androidx.recyclerview.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
+                        android:elevation="3dp"
+                        android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:clipChildren="true"
                         android:scrollbars="none"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -198,4 +184,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>
