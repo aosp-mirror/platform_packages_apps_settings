@@ -16,13 +16,22 @@
 
 package com.android.settings.notification.history;
 
+import static android.provider.Settings.EXTRA_APP_PACKAGE;
+import static android.provider.Settings.EXTRA_CHANNEL_ID;
+import static android.provider.Settings.EXTRA_CONVERSATION_ID;
+
 import android.app.INotificationManager;
 import android.app.NotificationHistory.HistoricalNotification;
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.RemoteException;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.Slog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,8 +72,37 @@ public class NotificationHistoryAdapter extends
         holder.setTitle(hn.getTitle());
         holder.setSummary(hn.getText());
         holder.setPostedTime(hn.getPostedTimeMs());
-        holder.addOnClick(hn.getPackage(), hn.getUserId(), hn.getChannelId(),
-                hn.getConversationId());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                    .putExtra(EXTRA_APP_PACKAGE, hn.getPackage())
+                    .putExtra(EXTRA_CHANNEL_ID, hn.getChannelId())
+                    .putExtra(EXTRA_CONVERSATION_ID, hn.getConversationId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            holder.itemView.getContext().startActivityAsUser(intent, UserHandle.of(hn.getUserId()));
+        });
+        holder.itemView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+            @Override
+            public void onInitializeAccessibilityNodeInfo(View host,
+                    AccessibilityNodeInfo info) {
+                super.onInitializeAccessibilityNodeInfo(host, info);
+                CharSequence description =
+                        host.getResources().getText(R.string.notification_history_view_settings);
+                AccessibilityNodeInfo.AccessibilityAction customClick =
+                        new AccessibilityNodeInfo.AccessibilityAction(
+                                AccessibilityNodeInfo.ACTION_CLICK, description);
+                info.addAction(customClick);
+                //info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS);
+            }
+
+            @Override
+            public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                if (action == AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS.getId()) {
+                    onItemSwipeDeleted(position);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

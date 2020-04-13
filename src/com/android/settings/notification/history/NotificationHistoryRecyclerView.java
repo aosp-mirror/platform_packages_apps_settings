@@ -34,6 +34,7 @@ public class NotificationHistoryRecyclerView extends RecyclerView {
         ItemTouchHelper touchHelper = new ItemTouchHelper(
                 new DismissTouchHelper(0, ItemTouchHelper.START | ItemTouchHelper.END));
         touchHelper.attachToRecyclerView(this);
+        setNestedScrollingEnabled(false);
     }
 
     public void setOnItemSwipeDeleteListener(OnItemSwipeDeleteListener listener) {
