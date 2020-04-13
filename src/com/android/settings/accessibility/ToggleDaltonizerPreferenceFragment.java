@@ -44,7 +44,8 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SearchIndexable
+/** Settings for daltonizer. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener {
 

@@ -40,7 +40,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /** Settings page for magnification. */
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MagnificationSettingsFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationSettingsFragment";
