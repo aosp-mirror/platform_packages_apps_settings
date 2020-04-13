@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
+import android.nfc.cardemulation.CardEmulation;
 
 import androidx.preference.Preference;
 
@@ -30,10 +31,14 @@ import com.android.settings.nfc.BaseNfcEnabler;
  * preference is updated.
  */
 public class PaymentSettingsEnabler extends BaseNfcEnabler {
+    private final CardEmulation mCardEmuManager;
     private final Preference mPreference;
+    boolean mIsPaymentAvailable;
 
     public PaymentSettingsEnabler(Context context, Preference preference) {
         super(context);
+        mCardEmuManager = CardEmulation.getInstance(super.mNfcAdapter);
+        mIsPaymentAvailable = false;
         mPreference = preference;
     }
 
@@ -46,9 +51,29 @@ public class PaymentSettingsEnabler extends BaseNfcEnabler {
                 mPreference.setEnabled(false);
                 break;
             case NfcAdapter.STATE_ON:
-                mPreference.setSummary(null);
-                mPreference.setEnabled(true);
+                if (mIsPaymentAvailable) {
+                    mPreference.setSummary(null);
+                    mPreference.setEnabled(true);
+                } else {
+                    mPreference.setSummary(
+                            R.string.nfc_and_payment_settings_no_payment_installed_summary);
+
+                    mPreference.setEnabled(false);
+                }
                 break;
         }
+    }
+
+    @Override
+    public void resume() {
+        if (!isNfcAvailable()) {
+            return;
+        }
+        if (mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT).isEmpty()) {
+            mIsPaymentAvailable = false;
+        } else {
+            mIsPaymentAvailable = true;
+        }
+        super.resume();
     }
 }
