@@ -19,9 +19,17 @@ package com.android.settings.search;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.DisplaySettings;
+import com.android.settings.backup.UserBackupSettingsActivity;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
+import com.android.settings.fuelgauge.PowerUsageAdvanced;
+import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.location.LocationSettings;
+import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
+import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiSettings2;
 
@@ -49,5 +57,32 @@ public class CustomSiteMapRegistryTest {
     public void shouldContainWifiSettings2Pairs() {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(WifiSettings2.class.getName()))
                 .isEqualTo(NetworkDashboardFragment.class.getName());
+    }
+
+    @Test
+    public void shouldContainPowerUsageAdvancedPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(PowerUsageAdvanced.class.getName()))
+                .isEqualTo(PowerUsageSummary.class.getName());
+    }
+
+    @Test
+    public void shouldContainRecentLocationRequestSeeAllFragmentPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                RecentLocationRequestSeeAllFragment.class.getName())).isEqualTo(
+                LocationSettings.class.getName());
+    }
+
+    @Test
+    public void shouldContainUsbDetailsFragmentPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                UsbDetailsFragment.class.getName())).isEqualTo(
+                ConnectedDeviceDashboardFragment.class.getName());
+    }
+
+    @Test
+    public void shouldContainUserBackupSettingsActivityPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                UserBackupSettingsActivity.class.getName())).isEqualTo(
+                SystemDashboardFragment.class.getName());
     }
 }
