@@ -86,16 +86,6 @@ public class NfcAndPaymentFragmentControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_notAdminUser_shouldReturnDisabled() {
-        when(mPackageManager.hasSystemFeature(anyString())).thenReturn(true);
-        when(mUserManager.isAdminUser()).thenReturn(false);
-        when(mNfcAdapter.isEnabled()).thenReturn(true);
-
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(NfcAndPaymentFragmentController.DISABLED_FOR_USER);
-    }
-
-    @Test
     public void getSummary_nfcOn_shouldProvideOnSummary() {
         when(mNfcAdapter.isEnabled()).thenReturn(true);
         assertThat(mController.getSummary().toString()).contains(
