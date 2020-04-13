@@ -36,7 +36,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.google.common.primitives.Ints;
 
 /** Settings page for magnification. */
-@SearchIndexable
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MagnificationSettingsFragment extends DashboardFragment {
 
     private static final String TAG = "MagnificationSettingsFragment";
