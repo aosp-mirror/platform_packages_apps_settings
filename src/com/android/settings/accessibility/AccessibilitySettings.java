@@ -65,10 +65,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Activity with the accessibility settings.
- */
-@SearchIndexable
+/** Activity with the accessibility settings. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class AccessibilitySettings extends DashboardFragment {
 
     private static final String TAG = "AccessibilitySettings";

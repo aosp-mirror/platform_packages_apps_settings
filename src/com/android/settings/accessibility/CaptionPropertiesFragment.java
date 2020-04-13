@@ -37,10 +37,8 @@ import com.google.common.primitives.Floats;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Settings fragment containing captioning properties.
- */
-@SearchIndexable
+/** Settings fragment containing captioning properties. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptionPropertiesFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
     private static final String PREF_SWITCH = "captioning_preference_switch";
