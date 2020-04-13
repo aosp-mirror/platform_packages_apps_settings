@@ -19,19 +19,16 @@ package com.android.settings.wifi.calling;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
-import com.android.ims.ImsManager;
 import com.android.settings.SettingsActivity;
-import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 
 public class WifiCallingSuggestionActivity extends SettingsActivity {
 
     public static boolean isSuggestionComplete(Context context) {
-        if (!ImsManager.isWfcEnabledByPlatform(context) ||
-                !MobileNetworkUtils.isWfcProvisionedOnDevice(
-                        SubscriptionManager.getDefaultVoiceSubscriptionId())) {
-            return true;
-        }
-        return ImsManager.isWfcEnabledByUser(context)
-                && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
+        final WifiCallingQueryImsState queryState =
+                new WifiCallingQueryImsState(context,
+                SubscriptionManager.getDefaultVoiceSubscriptionId());
+        return (!queryState.isWifiCallingProvisioned())
+                || (queryState.isEnabledByUser() && queryState.isAllowUserControl());
     }
 }
