@@ -30,10 +30,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/**
- * Settings fragment containing more options of captioning properties.
- */
-@SearchIndexable
+/** Settings fragment containing more options of captioning properties. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptionMoreOptionsFragment extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     private static final String PREF_LOCALE = "captioning_locale";

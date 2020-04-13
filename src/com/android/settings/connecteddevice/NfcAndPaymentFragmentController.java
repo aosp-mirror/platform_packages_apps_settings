@@ -47,9 +47,6 @@ public class NfcAndPaymentFragmentController extends BasePreferenceController {
                 PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        if (!mUserManager.isAdminUser()) {
-            return DISABLED_FOR_USER;
-        }
         return AVAILABLE;
     }
 
