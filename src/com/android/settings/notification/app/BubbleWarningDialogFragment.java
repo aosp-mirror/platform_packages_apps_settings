@@ -27,6 +27,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 public class BubbleWarningDialogFragment extends InstrumentedDialogFragment {
     static final String KEY_PKG = "p";
     static final String KEY_UID = "u";
+    static final String KEY_SELECTED_PREFERENCE = "pref";
 
 
     @Override
@@ -34,10 +35,11 @@ public class BubbleWarningDialogFragment extends InstrumentedDialogFragment {
         return SettingsEnums.DIALOG_APP_BUBBLE_SETTINGS;
     }
 
-    public BubbleWarningDialogFragment setPkgInfo(String pkg, int uid) {
+    public BubbleWarningDialogFragment setPkgPrefInfo(String pkg, int uid, int preference) {
         Bundle args = new Bundle();
         args.putString(KEY_PKG, pkg);
         args.putInt(KEY_UID, uid);
+        args.putInt(KEY_SELECTED_PREFERENCE, preference);
         setArguments(args);
         return this;
     }
@@ -48,6 +50,7 @@ public class BubbleWarningDialogFragment extends InstrumentedDialogFragment {
         final Bundle args = getArguments();
         final String pkg = args.getString(KEY_PKG);
         final int uid = args.getInt(KEY_UID);
+        final int pref = args.getInt(KEY_SELECTED_PREFERENCE);
 
         final String title =
                 getResources().getString(R.string.bubbles_feature_disabled_dialog_title);
@@ -60,7 +63,7 @@ public class BubbleWarningDialogFragment extends InstrumentedDialogFragment {
                 .setPositiveButton(R.string.bubbles_feature_disabled_button_approve,
                         (dialog, id) ->
                                 BubblePreferenceController.applyBubblesApproval(
-                                        getContext(), pkg, uid))
+                                        getContext(), pkg, uid, pref))
                 .setNegativeButton(R.string.bubbles_feature_disabled_button_cancel,
                         (dialog, id) ->
                                 BubblePreferenceController.revertBubblesApproval(
