@@ -1356,13 +1356,12 @@
       <item quantity="many">Netinkamas SIM kortelės PIN kodas. Liko <xliff:g id="NUMBER_1">%d</xliff:g> bandymo.</item>
       <item quantity="other">Netinkamas SIM kortelės PIN kodas. Liko <xliff:g id="NUMBER_1">%d</xliff:g> bandymų.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"Netinkamas SIM kortelės PIN kodas. Jums liko vienas bandymas, paskui reikės susisiekti su operatoriumi, kad atrakintų įrenginį."</string>
     <string name="pin_failed" msgid="3726505565797352255">"Nepavyko atlikti SIM kortelės PIN kodo operacijos."</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Sistemos naujiniai"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"„Android“ versija"</string>
-    <string name="security_patch" msgid="2872125288404962091">"„Android“ saugos pataisos lygis"</string>
+    <string name="security_patch" msgid="4071756145347865382">"„Android“ saugos naujinys"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelis"</string>
     <string name="model_summary" msgid="2246651782442466213">"Modelis: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelis, aparat. įranga"</string>
@@ -2175,12 +2174,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Perbraukimas aukštyn dviem pirštais"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Perbraukimas aukštyn trim pirštais"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Palieskite pritaikomumo mygtuką"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Palieskite ekrano apačioje esantį pritaikomumo mygtuką <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nJei norite perjungti funkcijas, palieskite ir palaikykite pritaikomumo mygtuką."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Perbraukite aukštyn dviem pirštais nuo ekrano apačios.\n\nJei norite perjungti funkcijas, perbraukite aukštyn dviem pirštais ir palaikykite."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Perbraukite aukštyn trimis pirštais nuo ekrano apačios.\n\nJei norite perjungti funkcijas, perbraukite aukštyn trimis pirštais ir palaikykite."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Laikyti garsumo klavišus"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Paspauskite ir palaikykite abu garsumo klavišus"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ekrano palietimas tris kartus"</string>
@@ -3299,6 +3295,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"darbo iššūkis, darbas, profilis"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"darbo profilis, tvarkomas profilis, suvienodinti, suvienodinimas, darbas, profilis"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestai"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"kortelės, pasai"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"įrenginio valdikliai, valdikliai"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"mokėti, paliesti, mokėjimai"</string>
     <string name="keywords_backup" msgid="707735920706667685">"atsarginė kopija, kurti atsarginę kopiją"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gestas"</string>
@@ -3470,7 +3468,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Programos"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Signalai ir kitos pertrauktys"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Tvarkaraščiai"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"Nustatyti sparčiųjų nustatymų trukmę"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Sparčiųjų nustatymų trukmė"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Įjungus netrukdymo režimą garsas ir vibravimas bus nutildomi, išskyrus anksčiau nurodytus elementus, kuriuos leidžiate."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Tinkinti nustatymai"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Peržiūrėti tvarkaraštį"</string>
@@ -3527,23 +3525,23 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Pranešimo taškas programos piktogramoje"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Pastarųjų pokalbių juostos rodymas"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbulai"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Kai kurie pranešimai gali būti rodomi kaip debesėliai ekrane"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"Kai kurie pranešimai ir kitas turinys ekrane gali būti rodomi kaip debesėliai. Jei norite atidaryti debesėlį, palieskite jį. Jei norite jo atsisakyti, vilkite į ekrano apačią."</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Kai kurie pranešimai gali būti rodomi kaip burbulai ekrane"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"Kai kurie pranešimai ir kitas turinys ekrane gali būti rodomi kaip burbulai. Jei norite atidaryti burbulą, palieskite jį. Jei norite jo atsisakyti, vilkite į ekrano apačią."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Burbulai"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Nauji pranešimai bus rodomi ekrane"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Leisti „<xliff:g id="APP_NAME">%1$s</xliff:g>“ rodyti tam tikrus pranešimus kaip debesėlius"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Leisti „<xliff:g id="APP_NAME">%1$s</xliff:g>“ rodyti tam tikrus pranešimus kaip burbulus"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Įjungti debesėlius įrenginyje?"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Įjungus debesėlius šioje programoje taip pat bus įjungti debesėliai įrenginyje.\n\nTai turi įtakos kitoms programoms ar pokalbiams, kuriuose leidžiami debesėliai."</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Įjungus burbulus šioje programoje taip pat bus įjungti burbulai įrenginyje.\n\nTai turi įtakos kitoms programoms ar pokalbiams, kuriuose leidžiami burbulai."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Įjungti"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Atšaukti"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Įjungti / pokalbiai gali būti rodomi kaip slankiosios piktogramos"</string>
-    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Leidimas programoms rodyti debesėlius"</string>
+    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Leidimas programoms rodyti burbulus"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Kai kurie pokalbiai bus rodomi kaip slankiosios piktogramos kitų programų viršuje"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"Visi pokalbiai gali būti pateikiami kaip debesėliai"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Pasirinkti pokalbiai gali būti pateikiami kaip debesėliai"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"Visi pokalbiai gali būti pateikiami kaip burbulai"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Pasirinkti pokalbiai gali būti pateikiami kaip burbulai"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Negalima rodyti debesėlių"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Pokalbiai"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Visi pokalbiai gali būti pateikiami kaip debesėliai, išskyrus nurodytus toliau"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Visi pokalbiai gali būti pateikiami kaip burbulai, išskyrus nurodytus toliau"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Perbraukimo veiksmai"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Perbraukite dešinėn, kad atsisakytumėte, arba kairėn, kad būtų rodomas meniu"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Perbraukite kairėn, kad atsisakytumėte, arba dešinėn, kad būtų rodomas meniu"</string>
@@ -3596,8 +3594,8 @@
     <string name="manage_conversations" msgid="4440289604887824337">"Tvarkyti pokalbius"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Svarbiausi pokalbiai"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Kiti pokalbiai"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Rodyti svarbius pokalbius debesėliuose"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Svarbūs pokalbiai rodomi išskleidžiamojo skydelio viršuje. Taip pat galite nustatyti, kad debesėlis pertrauktų netrukdymo režimą."</string>
+    <string name="important_bubble" msgid="3820813960404079472">"Rodyti svarbius pokalbius burbulus"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Svarbūs pokalbiai rodomi išskleidžiamojo skydelio viršuje. Taip pat galite nustatyti, kad burbulas pertrauktų netrukdymo režimą."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Rodyti tyliai ir sumažinti"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Rodyti tyliai"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Skambėti"</string>
@@ -3613,7 +3611,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Leisti pertrauktis"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Leisti programai skambėti, vibruoti ir (arba) rodyti pranešimus ekrane"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritetas"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Rodoma pokalbio skilties viršuje kaip debesėlis."</string>
+    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Rodoma pokalbio skilties viršuje kaip burbulas."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Išskleidžiamajame skydelyje sutraukti pranešimus į vieną eilutę"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Padeda atkreipti dėmesį be garso arba vibravimo"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Atkreipia dėmesį garsu arba vibravimu"</string>
@@ -3666,12 +3664,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Vaizdas vaizde"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Leisti vaizdą vaizde"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Leisti šiai programai kurti vaizdo vaizde langą, kol programa yra atidaryta arba ją uždarius (pvz., kad galėtumėte ir toliau žiūrėti vaizdo įrašą). Šis langas rodomas virš kitų naudojamų programų."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Prijungtos darbo ir asmeninės programos"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Apjungtos darbo ir asmeninės programos"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Susieta"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Nesusieta"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Nėra prijungtų programų"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"kelių profilių prijungta programa programos darbo ir asmeninė"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Prijungtos darbo ir asmeninės programos"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Apjungtos darbo ir asmeninės programos"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Prijungta"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Prijungti šias programas"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Prijungtos programos bendrina leidimus ir gali pasiekti viena kitos duomenis."</string>
@@ -3790,7 +3788,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Pokalbiai"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Pokalbiai, kurie gali trikdyti"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Visi pokalbiai"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"Svarbūs pokalbiai"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Svarbiausi pokalbiai"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nėra"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> pokalbis</item>
@@ -3804,7 +3802,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Skambučiai"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"skambučiai"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Skambučiai, kurie gali trikdyti"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus skambučius, patikrinkite, ar jame nustatytas skambėjimo, vibravimo ar begarsis režimas."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus skambučius, patikrinkite, ar jame nustatytas skambėjimo režimas"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Veikiant „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ blokuojami gaunamieji skambučiai. Galite koreguoti nustatymus ir leisti draugams, šeimos nariams ar kitiems kontaktams jus pasiekti."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Žvaigždute pažymėti kontaktai"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3815,9 +3813,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Pranešimai"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"pranešimai"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"SMS, MMS ir pranešimų programos"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Pranešimai"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Pranešimai, kurie gali trikdyti"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus pranešimus, patikrinkite, ar jame nustatytas skambėjimo, vibravimo ar begarsis režimas."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Kad užtikrintumėte, jog įrenginys skambės priimant leidžiamus pranešimus, patikrinkite, ar jame nustatytas skambėjimo režimas"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Veikiant „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“ blokuojami gaunami pranešimai. Galite koreguoti nustatymus ir leisti draugams, šeimos nariams ar kitiems kontaktams jus pasiekti."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Visi <xliff:g id="SENDER_CATEGORY">%s</xliff:g> gali jus pasiekti"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"Kontaktų: <xliff:g id="NUM_CONTACTS">%d</xliff:g>"</string>
@@ -3834,15 +3832,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Iš laikmačių, signalų, saugos sistemų ir kitų programų"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"signalai"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Medijos garsai"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Iš vaizdo įrašų, žaidimų ir kitos medijos"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Vaizdo įrašų, žaidimų ir kitos medijos garsai"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"medija"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Lietimo garsai"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Iš klaviatūros ir kitų mygtukų"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Klaviatūros ir kitų mygtukų garsai"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"lietimo garsai"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Priminimai"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Iš užduočių ir priminimų"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"priminimai"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"Įvykiai"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"Kalendoriaus įvykiai"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Iš būsimų kalendoriaus įvykių"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"įvykiai"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Leisti programoms nepaisyti"</string>
@@ -3886,7 +3884,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> ir <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Jei asmuo skambina antrą kartą per <xliff:g id="MINUTES">%d</xliff:g> min. laikotarpį"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Jei asmuo skambina antrą kartą per <xliff:g id="MINUTES">%d</xliff:g> min. laikotarpį"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Tinkintas garsas"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Automatiškai įjungti"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Niekada"</string>
@@ -4539,8 +4537,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Jei norite eiti į pagrindinį ekraną, perbraukite aukštyn nuo ekrano apačios. Jei norite perjungti programas, perbraukite aukštyn nuo apačios, palaikykite ir atleiskite. Jei norite grįžti, perbraukite nuo kairiojo arba dešiniojo krašto."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Naršymas 3 mygtukais"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Grįžkite, eikite į pagrindinį ekraną ir perjunkite programas naudodami ekrano apačioje esančius mygtukus."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"sistemos naršymas, naršymas 2 mygtukais, naršymas 3 mygtukais, naršymas gestais, perbraukti"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Nepalaiko numatytoji namų programa „<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>“"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Perjungti numatytąją namų programą"</string>
     <string name="information_label" msgid="6939310810756569298">"Informacija"</string>
@@ -5015,21 +5012,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Darbo"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Numatytasis sistemos nustatymas"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Šios parinkties nebegalima pasirinkti. Bandykite dar kartą."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"Spartieji valdikliai"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"spartieji valdikliai"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Įrenginio valdikliai"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"įrenginio valdikliai"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kortelės"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kortelės"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Įjungimo meniu"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Maitinimo mygtuko meniu"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Rodyti korteles"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"Rodyti sparčiuosius valdiklius"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"Rodyti korteles ir sparčiuosius valdiklius"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Rodyti įrenginio valdiklius"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Rodyti korteles ir įrenginio valdiklius"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Nerodyti jokio turinio"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Privatumas"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Rodyti korteles ir valdiklius, kai užrakinta"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Slėpti korteles ir valdiklius, kai užrakinta"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"Rodyti sparčiuosius valdiklius"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"Jei norite pasiekti prijungtų įrenginių valdiklius, laikykite paspaudę maitinimo mygtuką"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Rodyti įrenginio valdiklius"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Rodyti korteles ir pasus"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Jei norite pasiekti prijungtų įrenginių valdiklius, laikykite paspaudę maitinimo mygtuką"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Kad galėtumėte pasiekti mokėjimo metodus, įlaipinimo bilietus ir kitus dalykus, paspauskite ir palaikykite maitinimo mygtuką."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

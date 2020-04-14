@@ -277,7 +277,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"स्क्रीन बंद होने पर लॉक करें"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"टाइम आउट के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"टाइम आउट के तुरंत बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ने लॉक न कर रखा हो"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> टाइम आउट के बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> बंद हो"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> टाइम आउट के बाद, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> के बंद होने पर"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"लॉक स्‍क्रीन पर अपनी जानकारी दिखाएं"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्क्रीन पर टेक्स्ट डालें"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"शॉर्टकट चालू करें"</string>
@@ -368,7 +368,7 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"हमेशा पुष्टि करना ज़रूरी है"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="6454776517804994007">"ऐप में \'मालिक का चेहरा पहचानकर अनलॉक करना\' का इस्तेमाल करते समय हमेशा पुष्टि करना ज़रूरी है"</string>
     <string name="security_settings_face_settings_remove_face_data" msgid="6491161841504747384">"चेहरे का डेटा मिटाएं"</string>
-    <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"\'चेहरा पहचानकर अनलॉक करना\' सेट अप करें"</string>
+    <string name="security_settings_face_settings_enroll" msgid="4656842124181309056">"\'मालिक का चेहरा पहचानकर अनलॉक करना\' सेट अप करें"</string>
     <string name="security_settings_face_settings_footer" msgid="5545455769328594736">"अपने डिवाइस को अनलॉक करने के लिए, मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा का इस्तेमाल करें. इसका इस्तेमाल, ऐप्लिकेशन में साइन इन करने और पैसे चुकाने की पुष्टि के लिए भी किया जा सकता है.\n\nध्यान रखें:\nफ़ोन को सामने से देखने पर, आपके न चाहते हुए भी फ़ोन अनलॉक हो सकता है.\n\nआपका फ़ोन, आपके चेहरे के सामने लाकर कोई भी व्यक्ति उसे अनलॉक कर सकता है.\n\nआपका फ़ोन कोई ऐसा व्यक्ति भी अनलॉक कर सकता है जिसका चेहरा आपसे काफ़ी मिलता हो, जैसे कि जुड़वां भाई या बहन."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"अपने डिवाइस को अनलॉक करने, ऐप्लिकेशन में साइन इन करने, और भुगतानों की पुष्टि करने के लिए आप मालिक का चेहरा पहचानकर अनलॉक करने की सुविधा का इस्तेमाल कर सकते हैं.\n\nध्यान रखें:\nफ़ोन को सामने से देखने पर, आपके न चाहते हुए भी आपका फ़ोन अनलॉक हो सकता है.\n\nआपका फ़ोन आपके चेहरे के सामने लाकर कोई भी व्यक्ति उसे अनलॉक कर सकता है, भले ही आपकी आंखें बंद क्यों न हों.\n\nआपका फ़ोन कोई ऐसा व्यक्ति भी अनलॉक कर सकता है जिसका चेहरा आपसे मिलता-जुलता हो, जैसे कि कोई जुड़वां भाई-बहन."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"चेहरे का डेटा मिटाएं?"</string>
@@ -765,9 +765,9 @@
     <string name="wifi_time_remaining" msgid="8503606272869846170">"<xliff:g id="REMAINING_TIME">%1$s</xliff:g> बचे हैं"</string>
     <string name="wifi_expiry_time" msgid="5419758551129267624">"इंटरनेट कनेक्शन <xliff:g id="EXPIRY_TIME">%1$s</xliff:g> पर बंद हो जाएगा"</string>
     <string name="wifi_tap_to_sign_in" msgid="8658506618807549483">"नेटवर्क में साइन इन करने के लिए टैप करें"</string>
-    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> एमबीपीएस"</string>
-    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> एमबीपीएस"</string>
-    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> एमबीपीएस"</string>
+    <string name="tx_link_speed" msgid="3071955184703668113">"<xliff:g id="TRANSMIT_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <string name="rx_link_speed" msgid="6292229178855567783">"<xliff:g id="RECEIVE_LINK_SPEED">%1$d</xliff:g> Mbps"</string>
+    <string name="link_speed" msgid="931786745741016446">"<xliff:g id="LINK_SPEED">%1$d</xliff:g> Mbps"</string>
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को चालू करना चाहता है"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> वाई-फ़ाई को बंद करना चाहता है"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"डीबग वाले ऐप्लिकेशन के बाइटकोड की पुष्टि करें"</string>
@@ -802,8 +802,8 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"हवाई जहाज़ मोड में"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"सार्वजनिक नेटवर्क मिलने की सूचना पाएं"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"बढ़िया इंटरनेट देने वाला सार्वजनिक नेटवर्क मिलने पर बताएं"</string>
-    <string name="wifi_wakeup" msgid="3834327315861781611">"वाई-फ़ाई अपने आप चालू करें"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"वाई-फ़ाई, सेव किए गए अच्छी क्वालिटी के नेटवर्क पास होने पर अपने आप चालू हो जाएगा, जैसे कि आपके घर का नेटवर्क"</string>
+    <string name="wifi_wakeup" msgid="3834327315861781611">"वाई-फ़ाई अपने-आप चालू करें"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"वाई-फ़ाई, सेव किए गए अच्छी क्वालिटी के नेटवर्क पास होने पर अपने-आप चालू हो जाएगा, जैसे कि आपके घर का नेटवर्क"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"जगह की जानकारी का विकल्प बंद होने की वजह से अपने आप वाई-फ़ाई कनेक्ट होने की सुविधा उपलब्ध नहीं है. "<annotation id="link">"जगह की जानकारी"</annotation>" का विकल्प चालू करें."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"मौजूद नहीं है क्योंकि वाई-फ़ाई स्कैन करना बंद कर दिया गया है"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"उपयोग करने के लिए, कोई नेटवर्क रेटिंग कंपनी चुनें"</string>
@@ -811,7 +811,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"जब तक इंटरनेट कनेक्‍शन अच्छा न हो, वाई-फ़ाई नेटवर्क का इस्तेमाल न करें"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"उन्हीं नेटवर्क का इस्तेमाल करें, जिनमें अच्छा इंटरनेट कनेक्शन है"</string>
     <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"सार्वजनिक नेटवर्क से जुड़ें"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"अच्छा इंटरनेट देने वाले सार्वजनिक नेटवर्क से अपने आप कनेक्ट करें"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"अच्छा इंटरनेट देने वाले सार्वजनिक नेटवर्क से अपने-आप कनेक्ट करें"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"उपयोग करने के लिए, कोई नेटवर्क रेटिंग कंपनी चुनें"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"उपयोग करने के लिए, कोई संगत नेटवर्क रेटिंग कंपनी चुनें"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"प्रमाणपत्र इंस्टॉल करें"</string>
@@ -831,7 +831,7 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"नेटवर्क जोड़ें"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"वाई-फ़ाई से जुड़ी पसंद"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"नेटवर्क मिलने पर वाई-फ़ाई अपने आप चालू हो जाता है"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"नेटवर्क मिलने पर भी वाई-फ़ाई अपने आप चालू नहीं होता"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"नेटवर्क मिलने पर भी वाई-फ़ाई अपने-आप चालू नहीं होता"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"वाई-फ़ाई  नेटवर्क"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"ज़्यादा विकल्प"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"वाई-फ़ाई डायरेक्ट"</string>
@@ -931,7 +931,7 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोड का फ़ॉर्मैट गलत है"</string>
     <string name="retry" msgid="7542103800274026915">"फिर से कोशिश करें"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"अन्‍य डिवाइस उपयोगकर्ताओं से शेयर करें"</string>
-    <string name="wifi_unchanged" msgid="8026045290856150191">"(अपरिवर्तित)"</string>
+    <string name="wifi_unchanged" msgid="8026045290856150191">"(काेई बदलाव नहीं)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"कृपया चुनें"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(एकाधिक प्रमाणपत्र जोड़े गए)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"सिस्टम प्रमाणपत्रों का उपयोग करें"</string>
@@ -971,7 +971,7 @@
     <string name="wifi_forget" msgid="3485573280364015620">"भूलें"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"बदलें"</string>
     <string name="wifi_failed_forget_message" msgid="8272732599235525880">"नेटवर्क भूलने में विफल रहा"</string>
-    <string name="wifi_save" msgid="2312643132472226807">"जोड़ें"</string>
+    <string name="wifi_save" msgid="2312643132472226807">"सेव करें"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"नेटवर्क सहेजने में विफल रहा"</string>
     <string name="wifi_cancel" msgid="6698897376888935410">"रद्द करें"</string>
     <string name="wifi_forget_dialog_title" msgid="4363829200968563164">"नेटवर्क की जानकारी हटाएं?"</string>
@@ -1003,7 +1003,7 @@
     <skip />
     <string name="wifi_advanced_settings_label" msgid="5880605751602184383">"आईपी सेटिंग"</string>
     <string name="wifi_advanced_not_available" msgid="8701003884367299092">"वाई-फ़ाई की बेहतर सेटिंग इस उपयोगकर्ता के लिए मौजूद नहीं हैं"</string>
-    <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"जोड़ें"</string>
+    <string name="wifi_ip_settings_menu_save" msgid="5190481040428567106">"सेव करें"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="1757817733064004598">"रद्द करें"</string>
     <string name="wifi_ip_settings_invalid_ip_address" msgid="3622891107865052307">"सही आईपी पता लिखें."</string>
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"कोई मान्‍य गेटवे पता लिखें."</string>
@@ -1218,7 +1218,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> तक के लिए चालू करें"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> तक बंद रखें"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"नाइट लाइट इस समय चालू नहीं है"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"सूरज उगने और सूरज डूबने का समय पता लगाने के लिए, आपके डिवाइस की जगह की जानकारी की ज़रूरत होती है"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"सूरज उगने और डूबने का समय पता लगाने के लिए, आपके डिवाइस की जगह की जानकारी की ज़रूरत होती है"</string>
     <string name="twilight_mode_launch_location" msgid="1586574792030648828">"जगह की जानकारी चालू करें"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"अभी चालू करें"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"अभी बंद करें"</string>
@@ -1314,13 +1314,12 @@
       <item quantity="one">गलत सिम पिन कोड, आप <xliff:g id="NUMBER_1">%d</xliff:g> बार और कोशिश कर सकते हैं.</item>
       <item quantity="other">गलत सिम पिन कोड, आप <xliff:g id="NUMBER_1">%d</xliff:g> बार और कोशिश कर सकते हैं.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"आपके सिम का पिन कोड गलत है. आप 1 बार और कोशिश कर सकते हैं. अगर फिर भी डिवाइस अनलॉक नहीं होता है, तो आपको मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करना होगा."</string>
     <string name="pin_failed" msgid="3726505565797352255">"सिम PIN की कार्यवाही विफल रही!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"सिस्‍टम के बारे में नई जानकारी"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android वर्शन"</string>
-    <string name="security_patch" msgid="2872125288404962091">"Android सुरक्षा पैच का स्‍तर"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android की सुरक्षा से जुड़ा अपडेट"</string>
     <string name="model_info" msgid="8997566254717810904">"मॉडल"</string>
     <string name="model_summary" msgid="2246651782442466213">"मॉडल: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"मॉडल और हार्डवेयर"</string>
@@ -1569,7 +1568,7 @@
     <string name="mvno_match_data" msgid="5213193073684321156">"MVNO मान"</string>
     <string name="menu_delete" msgid="9199740901584348273">"APN मिटाएं"</string>
     <string name="menu_new" msgid="6571230342655509006">"नया APN"</string>
-    <string name="menu_save" msgid="6611465355127483100">"सुरक्षित करें"</string>
+    <string name="menu_save" msgid="6611465355127483100">"सेव करें"</string>
     <string name="menu_cancel" msgid="4526003389139913077">"रद्द करें"</string>
     <string name="error_title" msgid="7158648377702417716"></string>
     <string name="error_name_empty" msgid="1258275899283079142">"नाम फ़ील्‍ड खाली मत छोड़िए."</string>
@@ -1794,7 +1793,7 @@
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"कम से कम <xliff:g id="NUMBER">%d</xliff:g> बिंदुओं को कनेक्‍ट करें. फिर से कोशिश करें."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"पैटर्न रिकॉर्ड किया गया"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"पुष्टि के लिए आकार को फिर से बनाएं"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"आपका नया अनलॉक आकार"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"आपका नया अनलॉक पैटर्न"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"पुष्टि करें"</string>
     <string name="lockpattern_restart_button_text" msgid="255339375151895998">"फिर से आरेखित करें"</string>
     <string name="lockpattern_retry_button_text" msgid="4229668933251849760">"साफ़ करें"</string>
@@ -1805,8 +1804,8 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"पैटर्न दिखाई दे"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"प्रोफ़ाइल पैटर्न दिखाई दे"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"छूने पर कंपन (वाइब्रेशन) करें"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"पॉवर बटन तुरंत लॉक होता है"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"सिर्फ़ <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> के ज़रिए अनलॉक होने पर"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"पॉवर बटन से तुरंत लॉक हो"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> के बंद होने पर"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"अनलॉक आकार सेट करें"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"अनलॉक आकार बदलें"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"अनलॉक आकार कैसे आरेखित करें"</string>
@@ -2129,12 +2128,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"दो उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"तीन उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"सुलभता बटन पर टैप करें"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"स्क्रीन पर सबसे नीचे मौजूद, सुलभता बटन <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> पर टैप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, सुलभता बटन को दबाकर रखें."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"स्क्रीन पर नीचे से ऊपर की ओर दो उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, दो उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"स्क्रीन पर नीचे से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और स्क्रीन को थोड़ी देर दबाकर रखें."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"आवाज़ कम-ज़्यादा करने वाले बटन दबाकर रखें"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"आवाज़ कम-ज़्यादा करने वाले दोनों बटन दबाकर रखें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"स्क्रीन पर तीन बार टैप करें"</string>
@@ -2656,7 +2652,7 @@
     <string name="credentials_not_erased" msgid="3611058412683184031">"प्रमाणिकता मेमोरी मिटाया नहीं जा सका."</string>
     <string name="usage_access_title" msgid="1580006124578134850">"उपयोग के ऐक्सेस वाले ऐप्लिकेशन"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA प्रमाणपत्र"</string>
-    <string name="user_certificate" msgid="6897024598058566466">"वीपीएन और एएमपी; ऐप्लिकेशन उपयोगकर्ता प्रमाणपत्र"</string>
+    <string name="user_certificate" msgid="6897024598058566466">"वीपीएन और ऐप्लिकेशन उपयोगकर्ता प्रमाणपत्र"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"वाई-फ़ाई प्रमाणपत्र"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"इसे इंस्टाल करने से आपका डेटा निजी नहीं रहेगा"</string>
     <string name="ca_certificate_warning_description" msgid="3386740654961466569">"वेबसाइट, ऐप्लिकेशन, और वीपीएन, CA प्रमाणपत्र का इस्तेमाल सुरक्षा के लिए करते हैं. सिर्फ़ उन संगठनों से मिले CA प्रमाणपत्र इंस्टॉल करें जिन पर आप भरोसा करते हैं. \n\n अगर आप CA प्रमाणपत्र इंस्टॉल करते हैं, तो इस प्रमाणपत्र का मालिक आपका डेटा, जैसे कि पासवर्ड या क्रेडिट कार्ड का ब्यौरा ऐक्सेस कर सकता है. ऐसा वह उन वेबसाइट या ऐप्लिकेशन से कर सकता है जिनका आप अक्सर इस्तेमाल करते हैं. भले ही, उस डेटा को सुरक्षित किया गया हो."</string>
@@ -2892,7 +2888,7 @@
     <string name="vpn_always_on_invalid_reason_other" msgid="4571905303713233321">"डाली गई जानकारी VPN हमेशा चालू रखें से मेल नहीं खाती"</string>
     <string name="vpn_cancel" msgid="5929410618112404383">"रद्द करें"</string>
     <string name="vpn_done" msgid="5137858784289564985">"ख़ारिज करें"</string>
-    <string name="vpn_save" msgid="683868204634860888">"जोड़ें"</string>
+    <string name="vpn_save" msgid="683868204634860888">"सेव करें"</string>
     <string name="vpn_connect" msgid="7102335248484045354">"जोड़ दें"</string>
     <string name="vpn_replace" msgid="1533147558671640341">"बदलें"</string>
     <string name="vpn_edit" msgid="5862301148429324911">"वीपीएन प्रोफ़ाइल में बदलाव करें"</string>
@@ -3213,6 +3209,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"काम की चुनौती, काम, प्रोफ़ाइल"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"वर्क प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, काम, प्रोफ़ाइल"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"जेस्चर"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"क्रेडिट कार्ड, पास"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"डिवाइस के कंट्रोल, कंट्रोल"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"भुगतान करें, टैप करें, भुगतान"</string>
     <string name="keywords_backup" msgid="707735920706667685">"बैकअप, बैक अप"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"जेस्चर"</string>
@@ -3378,7 +3376,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"ऐप्लिकेशन"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म और दूसरी सूचनाएं"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"शेड्यूल"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"फटाफट सेटिंग में जाकर \'परेशान न करें\' मोड की अवधि सेट करें"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"फटाफट सेटिंग की अवधि"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"\'परेशान न करें\' सुविधा चालू होने पर आवाज़ और वाइब्रेशन बंद रहेंगे. हालांकि, जिन चीजों के लिए आपने मंज़ूरी दी है उनके लिए यह सुविधा काम नहीं करेगी."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"पसंद के मुताबिक सेटिंग"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"समीक्षा का शेड्यूल"</string>
@@ -3425,10 +3423,8 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"सूचना के इतिहास की सुविधा का इस्तेमाल करें"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचनाओं के इतिहास की सुविधा बंद कर दी गई है"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"हाल ही में मिली और स्नूज़ की गई सूचनाएं देखने के लिए, सूचनाओं के इतिहास की सुविधा चालू करें"</string>
-    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
-    <skip />
-    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
-    <skip />
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"हाल ही में कोई सूचना नहीं मिली है"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"वे सूचनाएं यहां दिखेंगी जो हाल ही में मिली हैं या थोड़ी देर के लिए बंद की गई हैं"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"सूचना सेटिंग देखें"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना खोलें"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूज़ करने की अनुमति दें"</string>
@@ -3686,7 +3682,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"बातचीत"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"वे बातचीत जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सभी बातचीत"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"अहम बातचीत"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"अहम बातचीत"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कोई भी नहीं"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> बातचीत</item>
@@ -3698,7 +3694,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"कॉल"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"कॉल"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"ऐसे कॉल जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"जिन कॉल के आने की अनुमति है, उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने, वाइब्रेट करने या मौन रहने में से किस मोड पर सेट है."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"जिन कॉल के आने की अनुमति है उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने वाले मोड पर सेट है"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले कॉल ब्लॉक कर दिए गए हैं. आप सेटिंग में बदलाव करके दोस्तों, परिवार के लोगों, या दूसरे संपर्कों को आप तक पहुंचने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"तारे के निशान वाले संपर्क"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3707,9 +3703,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"मैसेज"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"मैसेज"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"एसएमएस, एमएमएस और मैसेज सेवा ऐप्लिकेशन"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"मैसेज"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"वे मैसेज जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"जिन मैसेज के आने की अनुमति है, उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने, वाइब्रेट करने या मौन रहने में से किस मोड पर सेट है."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"जिन मैसेज के आने की अनुमति है उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने वाले मोड पर सेट है"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले मैसेज ब्लॉक कर दिए गए हैं. आप सेटिंग में अपने हिसाब से बदलाव करके दोस्तों, परिवार के सदस्यों या दूसरे लोगों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"सभी <xliff:g id="SENDER_CATEGORY">%s</xliff:g> जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> संपर्क"</string>
@@ -3726,15 +3722,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"टाइमर, अलार्म, सुरक्षा सिस्टम, और अन्य ऐप्लिकेशन की सूचनाएं"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"अलार्म"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"मीडिया साउंड"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"वीडियो, गेम, और अन्य मीडिया की सूचनाएं"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"वीडियो, गेम, और दूसरे मीडिया की आवाज़ें"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"मीडिया"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"छूने पर आने वाली आवाज़ें"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"आपके कीबोर्ड और अन्य बटन से आने वाली आवाज़ें"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"कीबोर्ड और दूसरे बटन से आने वाली आवाज़ें"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"स्क्रीन छूने पर आने वाली आवाज़"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"रिमाइंडर"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"टास्क और रिमाइंडर की सूचनाएं"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"रिमाइंडर"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"इवेंट"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"कैलेंडर इवेंट"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"आने वाले कैलेंडर इवेंट की सूचनाएं"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"इवेंट"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ऐप्लिकेशन को ओवरराइड करने की मंज़ूरी दें"</string>
@@ -3774,7 +3770,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> और <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"अगर कोई व्यक्ति <xliff:g id="MINUTES">%d</xliff:g> मिनट के अंदर दोबारा कॉल करे"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"अगर कोई व्यक्ति <xliff:g id="MINUTES">%d</xliff:g>-मिनट के अंदर दोबारा कॉल करे"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"पसंद के मुताबिक"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"स्वचालित रूप से चालू"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"कभी नहीं"</string>
@@ -4385,8 +4381,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"होम पर जाने के लिए स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर स्वाइप करें. एक ऐप्लिकेशन से दूसरे पर जाने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर स्वाइप करें, फिर छोड़ दें. वापस जाने के लिए बाएं या दाएं किनारे से स्वाइप करें."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"तीन बटन वाला नेविगेशन"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"डिवाइस की स्क्रीन पर सबसे नीचे मौजूद बटन की मदद से वापस जाएं, होम पेज पर जाएं और एक ऐप्लिकेशन से दूसरे पर जाएं."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"सिस्टम नेविगेशन, दो बटन वाला नेविगेशन, तीन बटन वाला नेविगेशन, हाथ के जेस्चर (स्पर्श) वाला नेविगेशन, स्वाइप"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"यह सुविधा आपके डिफ़ॉल्ट होम ऐप्लिकेशन <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> पर काम नहीं करती"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"डिफ़ॉल्ट होम ऐप्लिकेशन बदलें"</string>
     <string name="information_label" msgid="6939310810756569298">"जानकारी"</string>
@@ -4819,7 +4814,7 @@
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"सिस्टम हीप डंप कैप्चर नहीं किया जा सका"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"अपने आप सिस्टम हीप डंप कैप्चर करें"</string>
     <string name="automatic_system_heap_dump_summary" msgid="4060846186592886986">"जब Android सिस्टम बहुत ज़्यादा मेमोरी का इस्तेमाल करने लगे, तब अपने आप इसके लिए हीप डंप कैप्चर करें"</string>
-    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"अलग करें"</string>
+    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"डिसकनेक्ट करें"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"आपातकालीन कॉल"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी, \'वाई-फ़ाई कॉलिंग\' के ज़रिए आपातकालीन कॉल करने की सुविधा नहीं देती है.\n आपातकालीन कॉल करने के लिए डिवाइस अपने आप माेबाइल नेटवर्क पर स्विच करता है.\n आपातकालीन कॉल सिर्फ़ उन्हीं इलाकाें में किया जा सकता है जहां नेटवर्क कवरेज हाे."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"कॉल की क्वालिटी सुधारने के लिए वाई-फ़ाई का इस्तेमाल करें"</string>
@@ -4839,21 +4834,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"काम"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"सिस्टम के डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"यह विकल्प अब मान्य नहीं है. फिर से कोशिश करें."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"फटाफट कंट्रोल"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"फटाफट कंट्रोल"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"डिवाइस के कंट्रोल"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"डिवाइस के कंट्रोल"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"कार्ड और पास"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"कार्ड और पास"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"पावर मेन्यू"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"पावर बटन वाला मेन्यू"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"कार्ड और पास दिखाएं"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"\'फटाफट कंट्रोल\' दिखाएं"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"कार्ड, पास, और फटाफट कंट्रोल दिखाएं"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"डिवाइस के कंट्रोल दिखाएं"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"कार्ड, पास, और डिवाइस के कंट्रोल दिखाएं"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"कोई भी सामग्री न दिखाएं"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"निजता"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"जब डिवाइस लॉक हो, तो कार्ड और कंट्रोल दिखाएं"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"जब डिवाइस लॉक हो, तब कार्ड और कंट्रोल छिपाएं"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"\'फटाफट कंट्रोल\' दिखाएं"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"कनेक्ट किए गए डिवाइस को कंट्रोल करने के लिए, पावर बटन को दबाकर रखें"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"डिवाइस के कंट्रोल दिखाएं"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"क्रेडिट कार्ड और पास दिखाएं"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"कनेक्ट किए गए डिवाइस को कंट्रोल करने के लिए, पावर बटन को दबाकर रखें"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"पैसे चुकाने के तरीकों और बोर्डिंग पास जैसी चीज़ों का ऐक्सेस पाने के लिए, पावर बटन को दबाकर रखें."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -4861,7 +4858,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"कास्ट करना रोकें"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE बंद करें?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"इससे आपका 5G कनेक्शन भी बंद हो जाएगा.\nवॉइस कॉल के दौरान, आप इंटरनेट का इस्तेमाल नहीं कर सकते और कुछ ऐप्लिकेशन शायद काम न करें."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"दो सिम का इस्तेमाल करने पर, इस फ़ोन पर ज़्यादा से ज़्यादा 4G का ही इस्तेमाल किया जा सकेगा. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"दो सिम का इस्तेमाल करने पर, इस टेबलेट पर ज़्यादा से ज़्यादा 4G का ही इस्तेमाल किया जा सकेगा. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"दो सिम का इस्तेमाल करने पर, इस डिवाइस पर ज़्यादा से ज़्यादा 4G का ही इस्तेमाल किया जा सकेगा. ज़्यादा जानें"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"इस फ़ोन में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"इस टैबलेट में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"इस डिवाइस में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
 </resources>

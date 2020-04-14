@@ -1218,7 +1218,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Skakel aan tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Skakel af tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Aandbeligting is nie tans aan nie"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Toestelligging nodig om sonsondergang en -opkoms te bepaal"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="5723805118454645608">"Toestelligging nodig om sonsak en -opkoms te bepaal"</string>
     <string name="twilight_mode_launch_location" msgid="1586574792030648828">"Skakel ligging aan"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Skakel nou aan"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Skakel nou af"</string>
@@ -1314,13 +1314,12 @@
       <item quantity="other">Verkeerde SIM-PIN-kode. Jy het <xliff:g id="NUMBER_1">%d</xliff:g> pogings oor.</item>
       <item quantity="one">Verkeerde SIM-PIN. <xliff:g id="NUMBER_0">%d</xliff:g> poging oor voor jy jou diensverskaffer moet kontak om jou toestel te ontsluit.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"Verkeerde SIM-PIN-kode. Jy het 1 oorblywende poging voordat jy jou diensverskaffer sal moet kontak om jou toestel te ontsluit."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN-bewerking het misluk!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Stelselopdaterings"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android-weergawe"</string>
-    <string name="security_patch" msgid="2872125288404962091">"Android-sekuriteitregstellingvlak"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android-sekuriteitopdatering"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model en hardeware"</string>
@@ -2129,12 +2128,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Swiep op met 2 vingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Swiep op met 3 vingers"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tik op toeganklikheidknoppie"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Tik op die toeganklikheidknoppie <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> aan die onderkant van jou skerm.\n\nRaak en hou die toeganklikheidknoppie om tussen kenmerke te wissel."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swiep met 2 vingers van die onderkant van die skerm af op.\n\nSwiep op met 2 vingers en hou om tussen kenmerke te wissel."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swiep met 3 vingers van die onderkant van die skerm af op.\n\nSwiep op met 3 vingers en hou om tussen kenmerke te wissel."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Hou volumesleutels"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Druk en hou albei volumesleutels"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tik 3 keer op skerm"</string>
@@ -2423,9 +2419,9 @@
       <item quantity="other">Beperk %1$d programme?</item>
       <item quantity="one">Beperk program?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Om batterykrag te bespaar, keer <xliff:g id="APP">%1$s</xliff:g> om die battery op die agtergrond te gebruik. Hierdie program sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word."</string>
-    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Om batterykrag te bespaar, keer hierdie programme om die battery op die agtergrond te gebruik. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:"</string>
-    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Om batterykrag te bespaar, keer hierdie programme om die battery op die agtergrond te gebruik. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
+    <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Verhoed <xliff:g id="APP">%1$s</xliff:g> om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Hierdie program sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5894648804112181324">"Verhoed hierdie programme om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Verhoed hierdie programme om die battery op die agtergrond te gebruik om so batterykrag te bespaar. Beperkte programme sal dalk nie behoorlik werk nie en kennisgewings sal dalk vertraag word.\n\nProgramme:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Beperk"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"Verwyder beperking?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Hierdie program sal batterykrag op die agtergrond kan gebruik. Jou battery sal dalk gouer as verwag afloop."</string>
@@ -3213,6 +3209,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"werkuitdaging, werk, profiel"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"werkprofiel, bestuurde profiel, verenig, vereniging, werk, profiel"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gebare"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"kaarte, passe"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"toestelkontroles, kontroles"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"betaal, tik, betalings"</string>
     <string name="keywords_backup" msgid="707735920706667685">"rugsteun, rugsteun"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gebaar"</string>
@@ -3378,7 +3376,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Programme"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Wekkers en ander onderbrekings"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Skedules"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"Stel tydsduur vir Kitsinstellings"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Tydsduur vir Kitsinstellings"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Klank en vibrasie sal gedemp word wanneer Moenie Steur Nie aan is, met die uitsondering van die items wat jy hierbo toelaat."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Gepasmaakte instellings"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Gaan skedule na"</string>
@@ -3684,7 +3682,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Gesprekke"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Gesprekke wat kan onderbreek"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle gesprekke"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"Belangrike gesprekke"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioriteitgesprekke"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Geen"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> gesprekke</item>
@@ -3696,7 +3694,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Oproepe"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"oproepe"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Oproepe wat kan onderbreek"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"Kyk of jou toestel op lui, vibreer of stil gestel is om seker te wees dat toegelate oproepe klank maak."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Kyk of jou toestel gestel is om te lui om seker te wees dat toegelate oproepe \'n klank maak"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Inkomende oproepe word vir \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" geblokkeer. Jy kan instellings verstel om dit vir jou vriende, familielede of ander kontakte moontlik te maak om jou te bereik."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Gesterde kontakte"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3705,9 +3703,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Boodskappe"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"boodskappe"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"SMS-, MMS- en boodskapprogramme"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Boodskappe"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Boodskappe wat kan onderbreek"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Kyk of jou toestel op lui, vibreer of stil gestel is om seker te wees dat toegelate boodskappe klank maak."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Kyk of jou toestel gestel is om te lui om seker te wees dat toegelate boodskappe \'n klank maak"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Inkomende boodskappe word vir \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" geblokkeer. Jy kan instellings verstel om dit vir jou vriende, familielede of ander kontakte moontlik te maak om jou te bereik."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Almal in <xliff:g id="SENDER_CATEGORY">%s</xliff:g> kan jou bereik"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakte"</string>
@@ -3724,15 +3722,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Van aftellers, wekkers, sekuriteitstelsels en ander programme af"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"wekkers"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Mediaklanke"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Van video\'s, speletjies en ander media af"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Klanke van video\'s, speletjies en ander media af"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"media"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Raakklanke"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Van jou sleutelbord- en ander knoppies af"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Klanke van die sleutelbord en ander knoppies"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"raakklanke"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Onthounotas"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Van take en onthounotas af"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"onthounotas"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"Geleenthede"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"Kalendergeleenthede"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Van komende kalendergeleenthede af"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"geleenthede"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Laat programme toe om te ignoreer"</string>
@@ -3772,7 +3770,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> en <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"As dieselfde persoon binne \'n tydperk van <xliff:g id="MINUTES">%d</xliff:g> minute \'n tweede keer bel"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"As dieselfde persoon binne \'n tydperk van <xliff:g id="MINUTES">%d</xliff:g> minute \'n tweede keer bel"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Gepasmaak"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Sit outomaties aan"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Nooit"</string>
@@ -3964,7 +3962,7 @@
     </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"Nie geoptimeer nie"</string>
     <string name="high_power_on" msgid="8778058701270819268">"Nie geoptimeer nie"</string>
-    <string name="high_power_off" msgid="317000444619279018">"Optimaliseer batterygebruik"</string>
+    <string name="high_power_off" msgid="317000444619279018">"Optimeer batterygebruik"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Batteryoptimering is nie beskikbaar nie"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Moenie batteryoptimering toepas nie. Dit kan jou battery dalk vinniger pap maak."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Laat program altyd in die agtergrond loop?"</string>
@@ -4383,8 +4381,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Swiep op van die onderkant van die skerm af om na die tuisskerm toe te gaan. Swiep op van die onderkant af, hou, en los dan om programme te wissel. Swiep van óf die linker- óf die regterrand af om terug te gaan."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-knoppienavigasie"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Gaan terug, Tuis, en wissel programme met knoppies onderaan jou skerm."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"stelselnavigasie, 2-knoppienavigasie, 3-knoppienavigasie, gebaarnavigasie, swiep"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Word nie deur jou verstekhuisprogram, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>, gesteun nie"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Wissel verstekhuisprogram"</string>
     <string name="information_label" msgid="6939310810756569298">"Inligting"</string>
@@ -4837,21 +4834,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Werk"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Stelselverstek"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Hierdie keuse is nie meer geldig nie. Probeer weer."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"Vinnige kontroles"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"vinnige kontroles"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Toestelkontroles"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"toestelkontroles"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kaarte en passe"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kaarte en passe"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Aan/af-kieslys"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Aan/af-skakelaarkieslys"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Wys kaarte en passe"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"Wys vinnige kontroles"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"Wys kaarte, passe en vinnige kontroles"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Wys toestelkontroles"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Wys kaarte, passe en toestelkontroles"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Moenie enige inhoud wys nie"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Privaatheid"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Wys kaarte en kontroles indien gesluit"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Versteek kaarte en kontroles indien gesluit"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"Wys vinnige kontroles"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"Hou die aan/af-skakelaar in om toegang te kry tot kontroles vir gekoppelde toestelle"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Wys toestelkontroles"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Wys kaarte en passe"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Hou die aan/af-skakelaar in om toegang te kry tot kontroles vir gekoppelde toestelle"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Druk en hou die aan/af-skakelaar om toegang te kry tot goed soos jou betaalmetodes en instapkaarte."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
