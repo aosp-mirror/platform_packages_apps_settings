@@ -35,7 +35,6 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -238,28 +237,31 @@ public class MediaOutputPanelTest {
     }
 
     @Test
-    public void getSubTitle_noMetadata_returnEmpty() {
+    public void getSubTitle_noMetadata_returnDefault() {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME);
         when(mMediaController.getMetadata()).thenReturn(null);
 
-        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
+        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
+                R.string.media_output_panel_title));
     }
 
     @Test
-    public void getSubTitle_noPackageName_returnEmpty() {
+    public void getSubTitle_noPackageName_returnDefault() {
         mPanel = MediaOutputPanel.create(mContext, null);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
+        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
+                R.string.media_output_panel_title));
     }
 
     @Test
-    public void getSubTitle_noController_returnEmpty() {
+    public void getSubTitle_noController_returnDefault() {
         mMediaControllers.clear();
         mPanel = MediaOutputPanel.create(mContext, TEST_PACKAGENAME);
         when(mMediaController.getMetadata()).thenReturn(mMediaMetadata);
 
-        assertThat(TextUtils.isEmpty(mPanel.getSubTitle())).isTrue();
+        assertThat(mPanel.getSubTitle()).isEqualTo(mContext.getText(
+                R.string.media_output_panel_title));
     }
 
     @Test
