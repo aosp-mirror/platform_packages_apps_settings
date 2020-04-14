@@ -30,6 +30,9 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * App level settings for bubbles.
+ */
 @SearchIndexable
 public class AppBubbleNotificationSettings extends NotificationSettings implements
         GlobalBubblePermissionObserverMixin.Listener {
