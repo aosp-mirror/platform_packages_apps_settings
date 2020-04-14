@@ -21,6 +21,7 @@ import static android.app.slice.Slice.HINT_ERROR;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -29,6 +30,9 @@ import android.widget.Button;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -167,6 +171,27 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
             resetCardView(holder);
             mSliceLiveDataMap.get(card.getSliceUri()).removeObservers(mLifecycleOwner);
         });
+
+        ViewCompat.setAccessibilityDelegate(getInitialView(holder),
+                new AccessibilityDelegateCompat() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host,
+                            AccessibilityNodeInfoCompat info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.addAction(AccessibilityNodeInfoCompat.ACTION_DISMISS);
+                        info.setDismissable(true);
+                    }
+
+                    @Override
+                    public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                        if (action == AccessibilityNodeInfoCompat.ACTION_DISMISS) {
+                            mControllerRendererPool.getController(mContext,
+                                    card.getCardType()).onDismissed(card);
+                        }
+                        return super.performAccessibilityAction(host, action, args);
+                    }
+                });
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
