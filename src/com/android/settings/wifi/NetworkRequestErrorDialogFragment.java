@@ -25,6 +25,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -42,10 +43,6 @@ public class NetworkRequestErrorDialogFragment extends InstrumentedDialogFragmen
 
     public static NetworkRequestErrorDialogFragment newInstance() {
         return new NetworkRequestErrorDialogFragment();
-    }
-
-    private NetworkRequestErrorDialogFragment() {
-        super();
     }
 
     @Override

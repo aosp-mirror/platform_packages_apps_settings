@@ -65,7 +65,8 @@ public class DSULoader extends ListActivity {
     private static final String PROPERTY_KEY_CPU = "ro.product.cpu.abi";
     private static final String PROPERTY_KEY_OS = "ro.system.build.version.release";
     private static final String PROPERTY_KEY_VNDK = "ro.vndk.version";
-    private static final String PROPERTY_KEY_LIST = "ro.vendor.dsu.list";
+    private static final String PROPERTY_KEY_LIST =
+            "persist.sys.fflag.override.settings_dynamic_system.list";
     private static final String PROPERTY_KEY_SPL = "ro.build.version.security_patch";
     private static final String DSU_LIST =
             "https://dl.google.com/developers/android/gsi/gsi-src.json";
