@@ -28,12 +28,19 @@
         android:padding="24dp">
 
         <TextView
-            style="@style/AccessibilityDialogDescription"
-            android:text="@string/accessibility_magnification_area_settings_message" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accessibility_magnification_area_settings_message"
+            android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="24dp"/>
 
         <include
             android:id="@+id/magnify_full_screen"
-            layout="@layout/accessibility_edit_shortcut_component" />
+            layout="@layout/accessibility_edit_shortcut_component"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp" />
 
         <include
             android:id="@+id/magnify_window_screen"
