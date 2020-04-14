@@ -16,12 +16,13 @@
 
 package com.android.settings;
 
+import static com.android.settings.AllInOneTetherSettings.BLUETOOTH_TETHER_KEY;
+import static com.android.settings.AllInOneTetherSettings.ETHERNET_TETHER_KEY;
 import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_DEFAULT;
-import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG;
+import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_MAX;
 import static com.android.settings.AllInOneTetherSettings.EXPANDED_CHILD_COUNT_WITH_SECURITY_NON;
-import static com.android.settings.network.TetherEnabler.BLUETOOTH_TETHER_KEY;
-import static com.android.settings.network.TetherEnabler.USB_TETHER_KEY;
-import static com.android.settings.network.TetherEnabler.WIFI_TETHER_DISABLE_KEY;
+import static com.android.settings.AllInOneTetherSettings.USB_TETHER_KEY;
+import static com.android.settings.AllInOneTetherSettings.WIFI_TETHER_DISABLE_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,6 +37,9 @@ import android.net.wifi.SoftApConfiguration;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
+
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
@@ -62,6 +66,7 @@ public class AllInOneTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
     private static final String[] USB_REGEXS = {"usb_regexs"};
     private static final String[] BT_REGEXS = {"bt_regexs"};
+    private static final String[] ETHERNET_REGEXS = {"ethernet_regexs"};
 
     private Context mContext;
     private AllInOneTetherSettings mAllInOneTetherSettings;
@@ -72,6 +77,10 @@ public class AllInOneTetherSettingsTest {
     private UserManager mUserManager;
     @Mock
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
+    @Mock
+    private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private PreferenceGroup mWifiTetherGroup;
 
     @Before
     public void setUp() {
@@ -83,14 +92,16 @@ public class AllInOneTetherSettingsTest {
         doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
         doReturn(USB_REGEXS).when(mConnectivityManager).getTetherableUsbRegexs();
         doReturn(BT_REGEXS).when(mConnectivityManager).getTetherableBluetoothRegexs();
+        doReturn(ETHERNET_REGEXS).when(mConnectivityManager).getTetherableIfaces();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         // Assume the feature is enabled for most test cases.
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, true);
-
-        mAllInOneTetherSettings = new AllInOneTetherSettings();
+        mAllInOneTetherSettings = spy(new AllInOneTetherSettings());
+        doReturn(mPreferenceScreen).when(mAllInOneTetherSettings).getPreferenceScreen();
         ReflectionHelpers.setField(mAllInOneTetherSettings, "mLifecycle", mock(Lifecycle.class));
         ReflectionHelpers.setField(mAllInOneTetherSettings, "mSecurityPreferenceController",
                 mSecurityPreferenceController);
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTetherGroup", mWifiTetherGroup);
     }
 
     @Test
@@ -110,6 +121,7 @@ public class AllInOneTetherSettingsTest {
         assertThat(niks).doesNotContain(AllInOneTetherSettings.KEY_WIFI_TETHER_SECURITY);
         assertThat(niks).doesNotContain(BLUETOOTH_TETHER_KEY);
         assertThat(niks).doesNotContain(USB_TETHER_KEY);
+        assertThat(niks).doesNotContain(ETHERNET_TETHER_KEY);
 
         // This key should be returned because it's not visible by default.
         assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
@@ -131,6 +143,7 @@ public class AllInOneTetherSettingsTest {
         assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
         assertThat(niks).contains(BLUETOOTH_TETHER_KEY);
         assertThat(niks).contains(USB_TETHER_KEY);
+        assertThat(niks).contains(ETHERNET_TETHER_KEY);
     }
 
     @Test
@@ -149,6 +162,7 @@ public class AllInOneTetherSettingsTest {
         assertThat(niks).contains(WIFI_TETHER_DISABLE_KEY);
         assertThat(niks).doesNotContain(BLUETOOTH_TETHER_KEY);
         assertThat(niks).doesNotContain(USB_TETHER_KEY);
+        assertThat(niks).doesNotContain(ETHERNET_TETHER_KEY);
     }
 
     @Test
@@ -167,29 +181,31 @@ public class AllInOneTetherSettingsTest {
     }
 
     @Test
-    public void getInitialExpandedChildCount_shouldShowWifiConfigWithSecurity() {
-        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", true);
+    public void getInitialChildCount_withSecurity() {
         when(mSecurityPreferenceController.getSecurityType())
                 .thenReturn(SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
-        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
-                .isEqualTo(EXPANDED_CHILD_COUNT_DEFAULT);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount()).isEqualTo(
+                EXPANDED_CHILD_COUNT_DEFAULT);
     }
 
     @Test
-    public void getInitialExpandedChildCount_shouldShowWifiConfigWithoutSecurity() {
-        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", true);
+    public void getInitialChildCount_withoutSecurity() {
         when(mSecurityPreferenceController.getSecurityType())
                 .thenReturn(SoftApConfiguration.SECURITY_TYPE_OPEN);
-        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
-                .isEqualTo(EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount()).isEqualTo(
+                EXPANDED_CHILD_COUNT_WITH_SECURITY_NON);
     }
 
     @Test
-    public void getInitialExpandedChildCount_shouldNotShowWifiConfig() {
-        ReflectionHelpers.setField(mAllInOneTetherSettings, "mWifiTethering", false);
-        ReflectionHelpers.setField(mAllInOneTetherSettings, "mBluetoothTethering", true);
+    public void getInitialExpandedChildCount_expandAllChild() {
         assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
-                .isEqualTo(EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG);
+                .isNotEqualTo(EXPANDED_CHILD_COUNT_MAX);
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mShouldShowWifiConfig", false);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
+                .isEqualTo(EXPANDED_CHILD_COUNT_MAX);
+        ReflectionHelpers.setField(mAllInOneTetherSettings, "mShouldShowWifiConfig", true);
+        assertThat(mAllInOneTetherSettings.getInitialExpandedChildCount())
+                .isEqualTo(EXPANDED_CHILD_COUNT_MAX);
     }
 
     private void setupIsTetherAvailable(boolean returnValue) {
