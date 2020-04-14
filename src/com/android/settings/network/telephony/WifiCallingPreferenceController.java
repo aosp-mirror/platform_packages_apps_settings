@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -194,7 +195,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     private class PhoneCallStateListener extends PhoneStateListener {
 
         PhoneCallStateListener() {
-            super();
+            super(Looper.getMainLooper());
         }
 
         private TelephonyManager mTelephonyManager;
