@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
@@ -81,39 +82,44 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
 
     void setProfileBadge(Drawable badge) {
         mProfileBadge.setImageDrawable(badge);
+        mProfileBadge.setVisibility(badge != null ? View.VISIBLE : View.GONE);
     }
 
     void addOnClick(String pkg, int userId, PendingIntent pi) {
-        itemView.setOnClickListener(v -> {
-            if (pi != null) {
-                try {
-                    pi.send();
-                } catch (PendingIntent.CanceledException e) {
-                    Slog.e(TAG, "Could not launch", e);
+        Intent appIntent = itemView.getContext().getPackageManager()
+                .getLaunchIntentForPackage(pkg);
+        boolean isPendingIntentValid = pi != null && PendingIntent.getActivity(
+                itemView.getContext(), 0, pi.getIntent(), PendingIntent.FLAG_NO_CREATE) != null;
+        if (isPendingIntentValid || appIntent != null) {
+            itemView.setOnClickListener(v -> {
+                if (pi != null) {
+                    try {
+                        pi.send();
+                    } catch (PendingIntent.CanceledException e) {
+                        Slog.e(TAG, "Could not launch", e);
+                    }
+                } else if (appIntent != null) {
+                    appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        itemView.getContext().startActivityAsUser(appIntent, UserHandle.of(userId));
+                    } catch (ActivityNotFoundException e) {
+                        Slog.e(TAG, "no launch activity", e);
+                    }
                 }
-            } else {
-                Intent appIntent = itemView.getContext().getPackageManager()
-                        .getLaunchIntentForPackage(pkg);
-                appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                try {
-                    itemView.getContext().startActivityAsUser(appIntent, UserHandle.of(userId));
-                } catch (ActivityNotFoundException e) {
-                    Slog.e(TAG, "no launch activity", e);
+            });
+            ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+                @Override
+                public void onInitializeAccessibilityNodeInfo(View host,
+                        AccessibilityNodeInfoCompat info) {
+                    super.onInitializeAccessibilityNodeInfo(host, info);
+                    CharSequence description = host.getResources().getText(
+                            R.string.notification_history_open_notification);
+                    AccessibilityNodeInfoCompat.AccessibilityActionCompat customClick =
+                            new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                                    AccessibilityNodeInfoCompat.ACTION_CLICK, description);
+                    info.addAction(customClick);
                 }
-            }
-        });
-        ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
-            @Override
-            public void onInitializeAccessibilityNodeInfo(View host,
-                    AccessibilityNodeInfoCompat info) {
-                super.onInitializeAccessibilityNodeInfo(host, info);
-                CharSequence description = host.getResources().getText(
-                        R.string.notification_history_open_notification);
-                AccessibilityNodeInfoCompat.AccessibilityActionCompat customClick =
-                        new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
-                                AccessibilityNodeInfoCompat.ACTION_CLICK, description);
-                info.addAction(customClick);
-            }
-        });
+            });
+        }
     }
 }

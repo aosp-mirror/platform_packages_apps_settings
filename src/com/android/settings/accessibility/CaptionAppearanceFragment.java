@@ -44,10 +44,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Settings fragment containing font style of captioning properties.
- */
-@SearchIndexable
+/** Settings fragment containing font style of captioning properties. */
+@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptionAppearanceFragment extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
     private static final String PREF_CAPTION_PREVIEW = "caption_preview";

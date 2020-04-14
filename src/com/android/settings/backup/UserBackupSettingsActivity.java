@@ -29,8 +29,8 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +109,7 @@ public class UserBackupSettingsActivity extends FragmentActivity implements Inde
                     // Add the activity title
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.privacy_settings_title);
-                    data.screenTitle = context.getString(R.string.settings_label);
+                    data.screenTitle = context.getString(R.string.privacy_settings_title);
                     data.keywords = context.getString(R.string.keywords_backup);
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = UserBackupSettingsActivity.class.getName();
