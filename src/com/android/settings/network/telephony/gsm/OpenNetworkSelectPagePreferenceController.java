@@ -16,38 +16,64 @@
 
 package com.android.settings.network.telephony.gsm;
 
+import static androidx.lifecycle.Lifecycle.Event.ON_START;
+import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.network.PreferredNetworkModeContentObserver;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
+
 
 /**
  * Preference controller for "Open network select"
  */
 public class OpenNetworkSelectPagePreferenceController extends
         TelephonyBasePreferenceController implements
-        AutoSelectPreferenceController.OnNetworkSelectModeListener {
+        AutoSelectPreferenceController.OnNetworkSelectModeListener, LifecycleObserver {
 
     private TelephonyManager mTelephonyManager;
     private Preference mPreference;
+    private PreferenceScreen mPreferenceScreen;
+    private PreferredNetworkModeContentObserver mPreferredNetworkModeObserver;
 
     public OpenNetworkSelectPagePreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
+                new Handler(Looper.getMainLooper()));
+        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+                () -> updatePreference());
+
+    }
+
+    private void updatePreference() {
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     @Override
@@ -57,9 +83,20 @@ public class OpenNetworkSelectPagePreferenceController extends
                 : CONDITIONALLY_UNAVAILABLE;
     }
 
+    @OnLifecycleEvent(ON_START)
+    public void onStart() {
+        mPreferredNetworkModeObserver.register(mContext, mSubId);
+    }
+
+    @OnLifecycleEvent(ON_STOP)
+    public void onStop() {
+        mPreferredNetworkModeObserver.unregister(mContext);
+    }
+
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreferenceScreen = screen;
         mPreference = screen.findPreference(getPreferenceKey());
     }
 
@@ -97,10 +134,11 @@ public class OpenNetworkSelectPagePreferenceController extends
         return false;
     }
 
-    public OpenNetworkSelectPagePreferenceController init(int subId) {
+    public OpenNetworkSelectPagePreferenceController init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        lifecycle.addObserver(this);
         return this;
     }
 
