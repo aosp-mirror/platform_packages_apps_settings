@@ -82,13 +82,18 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
         final TelephonyManager teleManager = ((TelephonyManager)
                 mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .createForSubscriptionId(mSubId);
+        final SubscriptionManager subManager = ((SubscriptionManager)
+                mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE));
+        final int[] activeSubIdList = subManager.getActiveSubscriptionIdList();
+        final int activeSubCount = activeSubIdList == null ? 0 : activeSubIdList.length;
         // Show the footer only when DSDS is enabled, and mobile data is enabled on this SIM, and
         // 5G is supported on this device.
-        if (!teleManager.isDataEnabled() || teleManager.getActiveModemCount() < 2
-                || !is5GSupportedByRadio(teleManager)) {
+        if (teleManager.isDataEnabled() && activeSubCount >= 2 && is5GSupportedByRadio(teleManager)
+                && !teleManager.canConnectTo5GInDsdsMode()) {
+            return AVAILABLE;
+        } else {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return AVAILABLE;
     }
 
     private boolean is5GSupportedByRadio(TelephonyManager tm) {
