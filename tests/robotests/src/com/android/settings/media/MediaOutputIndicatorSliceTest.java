@@ -21,11 +21,8 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDIC
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -48,14 +45,12 @@ import com.android.settings.Utils;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -84,8 +79,6 @@ public class MediaOutputIndicatorSliceTest {
     private LocalBluetoothManager mLocalBluetoothManager;
     @Mock
     private MediaController mMediaController;
-    @Mock
-    private LocalMediaManager mLocalMediaManager;
     @Mock
     private MediaDevice mDevice1;
     @Mock
@@ -193,46 +186,32 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void onNotifyChange_noWorker_doNothing() {
-        sMediaOutputIndicatorWorker = null;
-        mMediaOutputIndicatorSlice.onNotifyChange(new Intent());
-
-        verify(mContext, never()).startActivity(any());
-    }
-
-    @Test
-    public void onNotifyChange_withActiveLocalMedia_verifyIntentExtra() {
+    public void getMediaOutputSliceIntent_withActiveLocalMedia_verifyIntentExtra() {
         when(mMediaController.getSessionToken()).thenReturn(mToken);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
+        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputSliceIntent();
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        mMediaOutputIndicatorSlice.onNotifyChange(new Intent());
-        verify(mContext).startActivity(intentCaptor.capture());
-
-        assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intentCaptor.getValue().getStringExtra(
+        assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intentCaptor.getValue()
-                .getPackage())).isTrue();
-        assertThat(mToken == intentCaptor.getValue().getExtras().getParcelable(
+        assertThat(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT).isEqualTo(intent.getAction());
+        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intent.getPackage())).isTrue();
+        assertThat(mToken == intent.getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN)).isTrue();
     }
 
     @Test
-    public void onNotifyChange_withoutActiveLocalMedia_verifyIntentExtra() {
+    public void getMediaOutputSliceIntent_withoutActiveLocalMedia_verifyIntentExtra() {
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
+        final Intent intent = mMediaOutputIndicatorSlice.getMediaOutputSliceIntent();
 
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        mMediaOutputIndicatorSlice.onNotifyChange(new Intent());
-        verify(mContext).startActivity(intentCaptor.capture());
-
-        assertThat(TextUtils.isEmpty(intentCaptor.getValue().getStringExtra(
+        assertThat(TextUtils.isEmpty(intent.getStringExtra(
                 MediaOutputSliceConstants.EXTRA_PACKAGE_NAME))).isTrue();
-        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intentCaptor.getValue()
-                .getPackage())).isTrue();
-        assertThat(intentCaptor.getValue().getExtras().getParcelable(
+        assertThat(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT).isEqualTo(intent.getAction());
+        assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intent.getPackage())).isTrue();
+        assertThat(intent.getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
     }
 
