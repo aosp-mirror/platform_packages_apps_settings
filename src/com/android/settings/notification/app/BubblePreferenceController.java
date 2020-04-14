@@ -16,6 +16,7 @@
 
 package com.android.settings.notification.app;
 
+import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
 import android.annotation.Nullable;
@@ -26,11 +27,14 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedSwitchPreference;
 
+/**
+ * Preference controller for Bubbles. This is used as the app-specific page and conversation
+ * settings.
+ */
 public class BubblePreferenceController extends NotificationPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
@@ -74,40 +78,49 @@ public class BubblePreferenceController extends NotificationPreferenceController
         return true;
     }
 
+    @Override
     public void updateState(Preference preference) {
-        if (mAppRow != null) {
-            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
+        if (mIsAppPage && mAppRow != null) {
+            // We're on the app specific bubble page which displays a tri-state
+            int backEndPref = mAppRow.bubblePreference;
+            BubblePreference pref = (BubblePreference) preference;
             pref.setDisabledByAdmin(mAdmin);
-            if (mChannel != null) {
-                pref.setChecked(mChannel.canBubble() && isGloballyEnabled());
-                pref.setEnabled(!pref.isDisabledByAdmin());
+            if (!isGloballyEnabled()) {
+                pref.setSelectedPreference(BUBBLE_PREFERENCE_NONE);
             } else {
-                pref.setChecked(mAppRow.allowBubbles && isGloballyEnabled());
-                pref.setSummary(mContext.getString(
-                        R.string.bubbles_app_toggle_summary, mAppRow.label));
+                pref.setSelectedPreference(backEndPref);
             }
+        } else if (mChannel != null) {
+            // We're on the channel specific notification page which displays a toggle.
+            RestrictedSwitchPreference switchpref = (RestrictedSwitchPreference) preference;
+            switchpref.setDisabledByAdmin(mAdmin);
+            switchpref.setChecked(mChannel.canBubble() && isGloballyEnabled());
         }
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean value = (Boolean) newValue && isGloballyEnabled();
         if (mChannel != null) {
-            mChannel.setAllowBubbles(value);
+            // Channel page is toggle
+            mChannel.setAllowBubbles((boolean) newValue);
             saveChannel();
-            return true;
-        } else if (mAppRow != null && mFragmentManager != null) {
-            RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;
-            // if the global setting is off, toggling app level permission requires extra
-            // confirmation
-            if (!isGloballyEnabled() && !pref.isChecked()) {
-                new BubbleWarningDialogFragment()
-                        .setPkgInfo(mAppRow.pkg, mAppRow.uid)
-                        .show(mFragmentManager, "dialog");
-                return false;
-            } else {
-                mAppRow.allowBubbles = value;
-                mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
+        } else if (mIsAppPage) {
+            // App page is bubble preference
+            BubblePreference pref = (BubblePreference) preference;
+            if (mAppRow != null && mFragmentManager != null) {
+                final int value = (int) newValue;
+                if (!isGloballyEnabled()
+                        && pref.getSelectedPreference() == BUBBLE_PREFERENCE_NONE) {
+                    // if the global setting is off, toggling app level permission requires extra
+                    // confirmation
+                    new BubbleWarningDialogFragment()
+                            .setPkgPrefInfo(mAppRow.pkg, mAppRow.uid, value)
+                            .show(mFragmentManager, "dialog");
+                    return false;
+                } else {
+                    mAppRow.bubblePreference = value;
+                    mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
+                }
             }
         }
         return true;
@@ -118,21 +131,26 @@ public class BubblePreferenceController extends NotificationPreferenceController
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
     }
 
-    // Used in app level prompt that confirms the user is ok with turning on bubbles
-    // globally. If they aren't, undo what
+    /**
+     * Used in app level prompt that confirms the user is ok with turning on bubbles
+     * globally. If they aren't, undo that.
+     */
     public static void revertBubblesApproval(Context mContext, String pkg, int uid) {
         NotificationBackend backend = new NotificationBackend();
-        backend.setAllowBubbles(pkg, uid, false);
+        backend.setAllowBubbles(pkg, uid, BUBBLE_PREFERENCE_NONE);
+
         // changing the global settings will cause the observer on the host page to reload
         // correct preference state
         Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
     }
 
-    // Apply global bubbles approval
-    public static void applyBubblesApproval(Context mContext, String pkg, int uid) {
+    /**
+     * Apply global bubbles approval
+     */
+    public static void applyBubblesApproval(Context mContext, String pkg, int uid, int pref) {
         NotificationBackend backend = new NotificationBackend();
-        backend.setAllowBubbles(pkg, uid, true);
+        backend.setAllowBubbles(pkg, uid, pref);
         // changing the global settings will cause the observer on the host page to reload
         // correct preference state
         Settings.Global.putInt(mContext.getContentResolver(),
