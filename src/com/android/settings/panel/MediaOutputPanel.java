@@ -103,7 +103,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
                 return metadata.getDescription().getSubtitle();
             }
         }
-        return null;
+        return mContext.getText(R.string.media_output_panel_title);
     }
 
     @Override
