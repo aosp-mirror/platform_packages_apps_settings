@@ -17,7 +17,7 @@
 package com.android.settings.network.telephony.gsm;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -29,11 +29,11 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkUtils;
-import java.util.Arrays;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +42,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
 public class OpenNetworkSelectPagePreferenceControllerTest {
@@ -63,12 +65,16 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     private OpenNetworkSelectPagePreferenceController mController;
     private Preference mPreference;
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
@@ -92,7 +98,7 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
         mPreference = new Preference(mContext);
         mController = new OpenNetworkSelectPagePreferenceController(mContext,
                 "open_network_select");
-        mController.init(SUB_ID);
+        mController.init(mLifecycle, SUB_ID);
     }
 
     @Test
