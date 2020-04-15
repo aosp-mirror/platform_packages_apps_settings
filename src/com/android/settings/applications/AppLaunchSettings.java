@@ -28,7 +28,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.ArraySet;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -49,8 +48,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
     private static final String KEY_CLEAR_DEFAULTS = "app_launch_clear_defaults";
     private static final String FRAGMENT_OPEN_SUPPORTED_LINKS =
             "com.android.settings.applications.OpenSupportedLinks";
-
-    public static final String KEY_PACKAGE_INFO = "pkg_info";
 
     private static final Intent sBrowserIntent;
 
@@ -79,7 +76,8 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
         mAppLinkState = findPreference(KEY_APP_LINK_STATE);
         mAppLinkState.setOnPreferenceClickListener(preference -> {
             final Bundle args = new Bundle();
-            args.putParcelable(KEY_PACKAGE_INFO, this.mPackageInfo);
+            args.putString(ARG_PACKAGE_NAME, mPackageName);
+            args.putInt(ARG_PACKAGE_UID, mUserId);
 
             new SubSettingLauncher(this.getContext())
                     .setDestination(FRAGMENT_OPEN_SUPPORTED_LINKS)
@@ -145,7 +143,6 @@ public class AppLaunchSettings extends AppInfoWithHeader implements OnClickListe
     private void setAppLinkStateSummary() {
         final int state = mPm.getIntentVerificationStatusAsUser(mPackageName,
                 UserHandle.myUserId());
-        Log.d("[sunny]", "setAppLinkStateSummary+ state=" + state);
         mAppLinkState.setSummary(linkStateToResourceId(state));
     }
 
