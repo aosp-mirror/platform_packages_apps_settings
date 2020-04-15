@@ -40,7 +40,6 @@
                 android:layout_width="67dp"
                 android:layout_height="67dp"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="@string/notification_history"
                 android:scaleType="fitCenter"
                 android:focusable="false"
                 android:tint="?android:attr/colorControlNormal"
@@ -50,7 +49,6 @@
                 android:id="@+id/history_off_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/history_image"
                 android:layout_marginTop="48dp"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
@@ -63,7 +61,6 @@
                 android:id="@+id/history_off_summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/history_off_title"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
                 android:layout_marginTop="16dp"
@@ -73,17 +70,33 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/notification_history_off_summary" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/history_on_empty"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="164dp"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/history_image_on"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                android:focusable="false"
+                android:tint="?android:attr/colorControlNormal"
+                android:src="@drawable/ic_history" />
             <TextView
                 android:id="@+id/history_toggled_on_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/history_image"
                 android:layout_marginTop="48dp"
                 android:layout_marginStart="48dp"
                 android:layout_marginEnd="48dp"
                 android:layout_gravity="center_horizontal"
                 android:focusable="true"
-                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/history_toggled_on_title" />
 
@@ -98,7 +111,6 @@
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
                 android:focusable="true"
-                android:visibility="gone"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/history_toggled_on_summary" />
         </LinearLayout>
