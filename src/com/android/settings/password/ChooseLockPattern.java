@@ -16,6 +16,9 @@
 
 package com.android.settings.password;
 
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -23,6 +26,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -50,6 +54,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 
 import com.google.android.collect.Lists;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -127,6 +132,19 @@ public class ChooseLockPattern extends SettingsActivity {
 
         public IntentBuilder setForFace(boolean forFace) {
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
+            return this;
+        }
+
+        /**
+         * Configures the launch such that at the end of the pattern enrollment, one of its
+         * managed profile (specified by {@code profileId}) will have its lockscreen unified
+         * to the parent user. The profile's current lockscreen credential needs to be specified by
+         * {@code credential}.
+         */
+        public IntentBuilder setProfileToUnify(int profileId, LockscreenCredential credential) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, profileId);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL,
+                    credential);
             return this;
         }
 
@@ -810,8 +828,18 @@ public class ChooseLockPattern extends SettingsActivity {
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
             getFragmentManager().executePendingTransactions();
 
-            final boolean required = getActivity().getIntent().getBooleanExtra(
+            final Intent intent = getActivity().getIntent();
+            final boolean required = intent.getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+            if (intent.hasExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID)) {
+                try (LockscreenCredential profileCredential = (LockscreenCredential)
+                        intent.getParcelableExtra(EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)) {
+                    mSaveAndFinishWorker.setProfileToUnify(
+                            intent.getIntExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID,
+                                    UserHandle.USER_NULL),
+                            profileCredential);
+                }
+            }
             mSaveAndFinishWorker.start(mChooseLockSettingsHelper.utils(), required,
                     mHasChallenge, mChallenge, mChosenPattern, mCurrentCredential, mUserId);
         }
@@ -863,6 +891,9 @@ public class ChooseLockPattern extends SettingsActivity {
             final int userId = mUserId;
             final boolean success = mUtils.setLockCredential(mChosenPattern, mCurrentCredential,
                     userId);
+            if (success) {
+                unifyProfileCredentialIfRequested();
+            }
             Intent result = null;
             if (success && mHasChallenge) {
                 byte[] token;
