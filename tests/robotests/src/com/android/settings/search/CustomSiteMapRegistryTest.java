@@ -27,6 +27,8 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
+import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
+import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -84,5 +86,12 @@ public class CustomSiteMapRegistryTest {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
                 UserBackupSettingsActivity.class.getName())).isEqualTo(
                 SystemDashboardFragment.class.getName());
+    }
+
+    @Test
+    public void shouldContainZenModeBlockedEffectsSettingsPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                ZenModeBlockedEffectsSettings.class.getName())).isEqualTo(
+                ZenModeRestrictNotificationsSettings.class.getName());
     }
 }
