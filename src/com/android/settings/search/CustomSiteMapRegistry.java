@@ -27,6 +27,8 @@ import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
+import com.android.settings.notification.zen.ZenModeBlockedEffectsSettings;
+import com.android.settings.notification.zen.ZenModeRestrictNotificationsSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -59,5 +61,7 @@ public class CustomSiteMapRegistry {
                 ConnectedDeviceDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(UserBackupSettingsActivity.class.getName(),
                 SystemDashboardFragment.class.getName());
+        CUSTOM_SITE_MAP.put(ZenModeBlockedEffectsSettings.class.getName(),
+                ZenModeRestrictNotificationsSettings.class.getName());
     }
 }
