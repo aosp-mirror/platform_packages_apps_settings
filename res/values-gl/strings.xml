@@ -48,7 +48,7 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Borrar tarxeta SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Vista previa"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Vista previa, páxina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Reduce ou amplía o texto da pantalla."</string>
+    <string name="font_size_summary" msgid="1296835853522566260">"Reduce ou amplía o tamaño do texto na pantalla."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Reducir"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Ampliar"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Texto de mostra"</string>
@@ -361,7 +361,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="950213874209080175">"Elimina os datos faciais actuais para volver configurar o desbloqueo facial.\n\nOs datos das caras usados por esta función eliminaranse de modo permanente e seguro. Tras quitalos, deberás usar o teu PIN, padrón ou contrasinal para desbloquear o teléfono, iniciar sesión nas aplicacións e confirmar pagos."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="2374998717426341095">"Usar desbloqueo facial para"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"Desbloquear o teléfono"</string>
-    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"Pagos/inicio de sesión en apps"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"Inicio de sesión/pagos en apps"</string>
     <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"Requisitos para o desbloqueo facial"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Os ollos deben estar abertos"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Para desbloquear o teléfono, debes ter os ollos abertos"</string>
@@ -1195,9 +1195,9 @@
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Mantén a pantalla activa cando mires para ela"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Luz nocturna"</string>
     <string name="night_display_text" msgid="4789324042428095383">"A función Luz nocturna dálle un ton ámbar á pantalla pola noite para que che resulte máis fácil mirala con pouca luz e che axude a coller o sono."</string>
-    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Planificar"</string>
+    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Planificación"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Nunca"</string>
-    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Actívase en horario personalizado"</string>
+    <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Actívase no horario escollido"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Actívase do solpor ao amencer"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Hora de inicio"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Hora de finalización"</string>
@@ -1314,13 +1314,12 @@
       <item quantity="other">O código PIN da SIM é incorrecto. Quédanche <xliff:g id="NUMBER_1">%d</xliff:g> intentos.</item>
       <item quantity="one">O código PIN da SIM é incorrecto. Quédache <xliff:g id="NUMBER_0">%d</xliff:g> intento antes de que teñas que contactar co operador para desbloquear o dispositivo.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"Código PIN da SIM incorrecto. Quédache 1 intento antes de que teñas que contactar co operador para desbloquear o dispositivo."</string>
     <string name="pin_failed" msgid="3726505565797352255">"Fallo no funcionamento do PIN da SIM"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Actualizacións do sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Versión de Android"</string>
-    <string name="security_patch" msgid="2872125288404962091">"Nivel do parche de seguranza de Android"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Actualización de seguranza de Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
     <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo e hardware"</string>
@@ -2129,12 +2128,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Pasa 2 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Pasa 3 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Toca o botón Accesibilidade"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Toca o botón Accesibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da pantalla.\n\nPara cambiar de función, mantén premido o botón Accesibilidade."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Pasa 2 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 2 dedos cara arriba e mantén premida a pantalla."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Pasa 3 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 3 dedos cara arriba e mantén premida a pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén premidas as dúas teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Toca tres veces a pantalla"</string>
@@ -2428,7 +2424,7 @@
     <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="4546838397423565138">"Para aforrar batería, evita que estas aplicacións consuman batería en segundo plano. É posible que as aplicacións restrinxidas non funcionen de forma adecuada e que as notificacións se atrasen.\n\nAplicacións:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="7025027696689301916">"Restrinxir"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="5501997201160532301">"Queres eliminar a restrición?"</string>
-    <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta aplicación poderá utilizar a batería en segundo plano, de tal modo que esta última pódese esgotar antes do esperado."</string>
+    <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"Esta aplicación poderá utilizar a batería en segundo plano e provocar que quedes sen ela antes do esperado."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Quitar"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancelar"</string>
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"As túas aplicacións consomen unha cantidade normal de batería. Cando consuman demasiada, o teu teléfono suxerirá as accións que podes levar a cabo.\n\nSe tes pouca batería, sempre podes activar a función Aforro de batería."</string>
@@ -3213,6 +3209,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"desafío de traballo, traballo, perfil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de traballo, perfil xestionado, agrupar, agrupación traballo, perfil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"xestos"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"tarxetas, pases"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"controis do dispositivo, controis"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"pagar, tocar, pagos"</string>
     <string name="keywords_backup" msgid="707735920706667685">"copia de seguranza, facer copia de seguranza"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"xesto"</string>
@@ -3378,7 +3376,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplicacións"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmas e outras interrupcións"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Planificacións"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"Define a duración da Configuración rápida"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Duración da Configuración rápida"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Cando estea activado o modo Non molestar, silenciaranse o son e a vibración, agás nos casos autorizados anteriormente."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Configuración personalizada"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Revisar planificación"</string>
@@ -3568,12 +3566,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Pantalla superposta"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permitir pantalla superposta"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permite que esta aplicación cree unha ventá de pantalla superposta mentres estea aberta ou despois de saír dela (por exemplo, para continuar visualizando un vídeo). A ventá móstrase sobre as demais aplicacións que esteas utilizando."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicacións persoais e do traballo conectadas"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicacións persoais e profesionais conectadas"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Conectadas"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Non conectadas"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Non hai ningunha aplicación conectada"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"varios perfís aplicación conectada aplicacións do traballo e persoais"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicacións persoais e do traballo conectadas"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Aplicacións persoais e profesionais conectadas"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Aplicacións conectadas"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar estas aplicacións"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"As aplicacións conectadas comparten permisos e poden acceder aos datos das outras."</string>
@@ -3684,7 +3682,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Conversas"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Conversas que poden interromper"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Todas as conversas"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"Conversas importantes"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversas prioritarias"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ningunha"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversas</item>
@@ -3696,7 +3694,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Chamadas"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"chamadas"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Chamadas que poden interromper"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"Para asegurarte de que as chamadas permitidas soen, comproba se o dispositivo ten activado o son e a vibración ou se está configurado en silencio."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Para asegurarte de que soen as chamadas permitidas, comproba que o dispositivo teña activado o son"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"As chamadas entrantes para \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" están bloqueadas. Podes axustar a configuración para permitir que os amigos, os familiares ou outros contactos se comuniquen contigo."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contactos marcados con estrela"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3705,9 +3703,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mensaxes"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mensaxes"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"SMS, MMS e mensaxaría"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mensaxes"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Mensaxes que poden interromper"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"Para asegurarte de que as mensaxes permitidas soen, comproba se o dispositivo ten activado o son e a vibración ou se está configurado en silencio."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Para asegurarte de que soen as mensaxes, comproba que o dispositivo teña activado o son"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"As mensaxes entrantes para \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" están bloqueadas. Podes axustar a configuración para permitir que os amigos, os familiares ou outros contactos se comuniquen contigo."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Podes recibir todas as <xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> contactos"</string>
@@ -3724,15 +3722,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"De temporizadores, alarmas, sistemas de seguranza e outras aplicacións"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmas"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Sons multimedia"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"De vídeos, videoxogos e outro contido multimedia"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Sons de vídeos, videoxogos e outro contido multimedia"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"contido multimedia"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Sons ao tocar"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Do teclado e doutros botóns"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Sons do teclado e doutros botóns"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sons ao tocar"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Recordatorios"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"De tarefas e recordatorios"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"recordatorios"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"Eventos"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"Eventos do calendario"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"De eventos próximos no calendario"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"eventos"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que as aplicacións anulen o modo Non molestar"</string>
@@ -3772,7 +3770,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> e <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Se a mesma persoa chama por segunda vez nun período de <xliff:g id="MINUTES">%d</xliff:g> minutos"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Se a mesma persoa chama por segunda vez nun período de <xliff:g id="MINUTES">%d</xliff:g> min"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Personalizados"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Activar automaticam."</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Nunca"</string>
@@ -3953,7 +3951,7 @@
     <string name="high_power_apps" msgid="5623152700992102510">"Optimización da batería"</string>
     <string name="additional_battery_info" msgid="3104208543623068714">"Alertas de uso"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"Mostrar uso completo do dispositivo"</string>
-    <string name="hide_extra_apps" msgid="7313907836289865123">"Mostrar uso das aplicacións"</string>
+    <string name="hide_extra_apps" msgid="7313907836289865123">"Uso das aplicacións"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="573433136005336970">
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> aplicacións presentan un comportamento anormal</item>
       <item quantity="one">A aplicación <xliff:g id="APP">%1$s</xliff:g> presenta un comportamento anormal</item>
@@ -4091,7 +4089,7 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Tamaño de visualización"</string>
     <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Reduce ou amplía os elementos da pantalla"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densidade de visualización, zoom da pantalla, escala, escalado"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Reduce ou amplía os elementos da pantalla. É posible que algunhas aplicacións da pantalla cambien de posición."</string>
+    <string name="screen_zoom_summary" msgid="1362984939045594989">"Reduce ou amplía o tamaño dos elementos na pantalla. É posible que algunhas aplicacións da pantalla cambien de posición."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Vista previa"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Facer máis pequeno"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Facer máis grande"</string>
@@ -4383,8 +4381,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a Inicio, pasa o dedo cara arriba desde a parte inferior da pantalla. Para cambiar de aplicación, pasa o dedo cara arriba desde a parte inferior da pantalla, mantena premida e sóltaa. Para volver á pantalla anterior, pasa o dedo desde o bordo esquerdo ou dereito."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botóns"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Para volver á pantalla anterior, ir a Inicio e cambiar de aplicación, utiliza os botóns da parte inferior da pantalla."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"navegación do sistema, navegación con 2 botóns, navegación con 3 botóns, navegación con xestos, pasar o dedo"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Non compatible coa túa aplicación de inicio predeterminada, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Cambiar app de inicio predeterminada"</string>
     <string name="information_label" msgid="6939310810756569298">"Información"</string>
@@ -4837,21 +4834,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Traballo"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Aplicación predeterminada do sistema"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Esta opción xa non é válida. Téntao de novo."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"Controis rápidos"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"controis rápidos"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Controis do dispositivo"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"controis do dispositivo"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Tarxetas e pases"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"tarxetas e pases"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Menú de acendido"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Menú do botón de acendido"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Mostrar tarxetas e pases"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"Mostrar controis rápidos"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"Mostrar tarxetas, pases e controis rápidos"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Mostrar controis do dispositivo"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Mostrar tarxetas, pases e controis do dispositivo"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Non mostrar ningún contido"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Privacidade"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar tarxetas e controis cando a pantalla está bloqueada"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar tarxetas e controis cando a pantalla está bloqueada"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"Mostrar controis rápidos"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"Para acceder aos controis dos dispositivos conectados, preme o botón de acendido"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controis do dispositivo"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar tarxetas/pases"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acceder aos controis dos dispositivos conectados, preme o botón de acendido"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Preme o botón de acendido para acceder, por exemplo, aos teus métodos de pago e ás tarxetas de embarque."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

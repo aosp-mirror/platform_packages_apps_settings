@@ -274,7 +274,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC  წანაცვლებით არჩევა"</string>
     <string name="date_picker_title" msgid="646573308567782578">"თარიღი"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"დრო"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"ჩაკეტვა ეკრანის დროის ლიმიტის შემდეგ"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"ჩაკეტვა ეკრანის ჩაქრ. შემდეგ"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"ლოდინის დროის დასრულებისთანავე, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ"</string>
@@ -677,7 +677,7 @@
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"კავშირების მართვა, მოწყობილობის სახელის &amp;amp დადგენა; ხელმისაწვდომობა"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"გსურთ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-თან დაწყვილება?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-ის დაკავშირების კოდი"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth-ის დაწყვილების კოდი"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"აკრიფეთ დაწყვილების კოდი და დააჭირეთ Return-ს ან Enter-ს"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN მოიცავს ასოებს ან სიმბოლოებს"</string>
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"ჩვეულებრივ 0000 ან 1234"</string>
@@ -1011,7 +1011,7 @@
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"შეიყვანეთ ქსელის პრეფიქსი, რომლის სიგრძეა 0-დან 32-მდე."</string>
     <string name="wifi_dns1" msgid="6462967242512284778">"DNS 1"</string>
     <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
-    <string name="wifi_gateway" msgid="3699227808616416759">"კარიბჭე"</string>
+    <string name="wifi_gateway" msgid="3699227808616416759">"გეითვეი"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"ქსელის პრეფიქსის სიგრძე"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"ინფორმაცია მოწყობილობის შესახებ"</string>
@@ -1030,7 +1030,7 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="2409074184473879809">"ნამდვილად გსურთ <xliff:g id="PEER_NAME">%1$s</xliff:g>-თან დაკავშირების მიწვევის გაუქმება?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="4880242270742385699">"გსურთ, ამ ჯგუფის დავიწყება?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="1549663436920597006">"Wi‑Fi უსადენო ქსელი"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"არ მოხდეს ინტერნეტის ან კონტენტის სხვა მოწყობილობებთან გაზიარება"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2751383134504362078">"არ ხორციელდება ინტერნეტის ან კონტენტის სხვა მოწყობილობებთან გაზიარება"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5832429443898690152">"ამ ტაბლეტის ინტერნეტ-კავშირი უსადენო ქსელით ზიარდება"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5451921191609178326">"ამ ტელეფონის ინტერნეტ-კავშირი უსადენო ქსელით ზიარდება"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"აპი კონტენტს აზიარებს. ინტერნეტ-კავშირის გასაზიარებლად, ჯერ გამორთეთ, შემდეგ კი ხელახლა ჩართეთ უსადენო ქსელი"</string>
@@ -1314,13 +1314,12 @@
       <item quantity="other">SIM-ის PIN არასწორია. დაგრჩათ <xliff:g id="NUMBER_1">%d</xliff:g> მცდელობა.</item>
       <item quantity="one">SIM-ის PIN არასწორია. დაგრჩათ <xliff:g id="NUMBER_0">%d</xliff:g> მცდელობა, სანამ მოგიწევთ მოწყობილობის განსაბლოკად ოპერატორთან დაკავშირება.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"SIM-ის PIN კოდი არასწორია. თქვენ დაგრჩათ 1 მცდელობა, რის შემდეგაც მოწყობილობის განსაბლოკად ოპერატორთან დაკავშირება მოგიწევთ."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN ოპერაცია ჩაიშალა!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"სისტემური განახლებები"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android-ის ვერსია"</string>
-    <string name="security_patch" msgid="2872125288404962091">"Android-ის უსაფრთხოების ნაწილაკის დონე"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android-ის უსაფრთხოების განახლება"</string>
     <string name="model_info" msgid="8997566254717810904">"მოდელი"</string>
     <string name="model_summary" msgid="2246651782442466213">"მოდელი: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"მოდელი და აპარატურა"</string>
@@ -1639,7 +1638,7 @@
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"უსადენო ქსელი, Bluetooth"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"უსადენო ქსელი, USB, Bluetooth"</string>
-    <string name="tether_settings_summary_off" msgid="2526164899130351968">"არ მოხდეს ინტერნეტის სხვა მოწყობილობებთან გაზიარება"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"არ ხორციელდება ინტერნეტის სხვა მოწყობილობებთან გაზიარება"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"ტეტერინგი"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"არ გამოიყენო Wi-Fi უსადენო ქსელი"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"ინტერნეტის გაზიარება მხოლოდ USB-ით"</string>
@@ -2129,12 +2128,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"გადაფურცლეთ ზემოთ 2 თითით"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"გადაფურცლეთ ზემოთ 3 თითით"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"შეეხეთ მარტივი წვდომის ღილაკს"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"შეეხეთ მარტივი წვდომის ღილაკს <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> თქვენი ეკრანის ქვედა ნაწილში.\n\nფუნქციების გადასართავად, ხანგრძლივად შეეხეთ მარტივი წვდომის ღილაკს."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"ორი თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად, ორი თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"სამი თითით გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ.\n\nფუნქციების გადასართავად, სამი თითით გადაფურცლეთ ზემოთ და დააყოვნეთ."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"ხანგრძლივად დააჭირეთ ხმის ღილაკებს"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"ხანგრძლივად დააჭირეთ ხმის ორივე ღილაკს"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"სამმაგად შეეხეთ ეკრანს"</string>
@@ -2834,7 +2830,7 @@
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"გამოირთოს მონაცემთა ავტომატური სინქრონიზაცია?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"ეს გამოიწვევს მონაცემებისა და ბატარეის გამოყენების დაზოგვას, მაგრამ თქვენ ბოლო ინფორმაციის შესაგროვებლად დაგჭირდებათ თითოეულ ანგარიშთან მექანიკურად სინქრონიზაცია. განახლებების შესახებ შეტყობინებებს არ მიიღებთ."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"გამოყენების ციკლის ჩამოყრის თარიღი"</string>
-    <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"თითოეული თვის თარიღი:"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"თვის შემდეგ რიცხვში:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"შენახვა"</string>
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"გაფრთხილების დაყენება"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"ინტერნეტის მოხმარების ლიმიტის დაყენება"</string>
@@ -3213,6 +3209,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"სამსახურის გამოწვევა, სამსახური, პროფილი"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"სამსახურის პროფილი, მართული პროფილი, გაერთიანება, უნიფიკაცია, სამსახური, პროფილი"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ჟესტები"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"ბარათები, საშვები"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"მოწყობილობის მართვის საშუალებები, მართვის საშუალებები"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"გადახდა, შეხება, გადახდები"</string>
     <string name="keywords_backup" msgid="707735920706667685">"სარეზერვო ასლი, სარეზერვო ასლის შექმნა"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"ჟესტი"</string>
@@ -3265,7 +3263,7 @@
     <string name="notification_ringtone_title" msgid="6924501621312095512">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"აპის მიერ უზრუნველყოფილი ხმა"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"შეტყობინებების ნაგულისხმევი ხმა"</string>
-    <string name="alarm_ringtone_title" msgid="6680761007731764726">"მაღვიძარას ნაგულისხმევი ხმა"</string>
+    <string name="alarm_ringtone_title" msgid="6680761007731764726">"მაღვიძარას ნაგულ. ხმა"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"ვიბრაცია ზარებისას"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ვიბრაციის არასოდეს გამოყენება"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"ვიბრაციის ყოველთვის გამოყენება"</string>
@@ -3378,7 +3376,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"აპები"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"მაღვიძარები და სხვა წყვეტები"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"განრიგები"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"ხანგრძლივობის დაყენება სწრაფი პარამეტრებისთვის"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"ხანგრძლივობა სწრაფი პარამეტრებისთვის"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"როცა ჩართულია რეჟიმი „არ შემაწუხოთ“, დადუმდება ყველა ხმოვანი და ვიბროსიგნალი იმ ერთეულების გარდა, რომლებსაც ზემოთ დაუშვებთ."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"მორგებული პარამეტრები"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"განრიგის გადახედვა"</string>
@@ -3425,17 +3423,15 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"შეტყობინებების ისტორიის გამოყენება"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"შეტყობინებების ისტორია გამორთულია"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"ბოლო შეტყობინებებისა და ჩაჩუმებული შეტყობინებების სანახავად ჩართეთ შეტყობინებების ისტორია"</string>
-    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
-    <skip />
-    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
-    <skip />
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"ბოლოდროინდელი შეტყობინებები არ არის"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"აქ გამოჩნდება თქვენი ბოლოდროინდელი და ჩაჩუმებული შეტყობინებები"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"შეტყობინების პარამეტრების ნახვა"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"შეტყობინების გახსნა"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"შეტყობინებების ჩაჩუმების დაშვება"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"მსუბუქი შეტყობინებების ხატულების დამალვა"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"მსუბუქი შეტყობინებების ხატულები სტატუსის ზოლში არ გამოჩნდება"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"შეტყობ. ნიშნული აპის ხატულაზე"</string>
-    <string name="notification_people_strip_title" msgid="1185857822541001139">"ბოლოდროინდელი მიმოწერების ზოლის ჩვენება"</string>
+    <string name="notification_people_strip_title" msgid="1185857822541001139">"ბოლოდროინდელი საუბრების ზოლის ჩვენება"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"ბუშტები"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"ზოგიერთი შეტყობინება შეიძლება ეკრანზე ბუშტების სახით გამოჩნდეს"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"ზოგიერთი შეტყობინება და სხვა კონტენტი შეიძლება ეკრანზე ბუშტების სახით გამოჩნდეს. ბუშტის გასახსნელად შეეხეთ მას. მის დასახურად, ჩაავლეთ და გადაიტანეთ ის ეკრანის ქვედა ნაწილში."</string>
@@ -3443,17 +3439,17 @@
     <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"ახალი შეტყობინებები ეკრანზე გამოჩნდება"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"დართეთ ნება <xliff:g id="APP_NAME">%1$s</xliff:g>-ს, აჩვენოს ზოგიერთი შეტყობინება ბუშტების სახით"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"ჩაირთოს ბუშტები მოწყობილობისთვის?"</string>
-    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"ბუშტების ამ აპისთვის ჩართვა მათ თქვენი მოწყობილობისთვისაც ჩართავს.\n\nეს გავლენას მოახდენს სხვა აპებზე ან მიმოწერებზე, რომლებისთვისაც დაშვებულია ბუშტები."</string>
+    <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"ბუშტების ამ აპისთვის ჩართვა მათ თქვენი მოწყობილობისთვისაც ჩართავს.\n\nეს გავლენას მოახდენს სხვა აპებზე ან საუბრებზე, რომლებისთვისაც დაშვებულია ბუშტები."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"ჩართვა"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"გაუქმება"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"ჩართულია / მიმოწერები შეიძლება გამოჩნდეს, როგორც მოტივტივე ხატულები"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"ჩართულია / საუბრები შეიძლება გამოჩნდეს, როგორც მოტივტივე ხატულები"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"აპების მიერ ბუშტების ჩვენების დაშვება"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ზოგიერთი მიმოწერა სხვა აპებს ზემოთ, მოტივტივე ხატულების სახით, გამოჩნდება"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"ყველა მიმოწერა შეიძლება გამოჩნდეს ბუშტის სახით"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"გარკვეული მიმოწერები შეიძლება გამოჩნდეს ბუშტის სახით"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ზოგიერთი საუბარი სხვა აპებს ზემოთ, მოტივტივე ხატულების სახით, გამოჩნდება"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"ყველა საუბარი შეიძლება გამოჩნდეს ბუშტის სახით"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"გარკვეული საუბრები შეიძლება გამოჩნდეს ბუშტის სახით"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"არცერთი მიმოწერა არ შეიძლება გამოჩნდეს ბუშტის სახით"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"მიმოწერები"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ყველა მიმოწერა შეიძლება გამოჩნდეს ბუშტის სახით, გარდა"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ყველა საუბრები შეიძლება გამოჩნდეს ბუშტის სახით, გარდა"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"გადაფურცვლის ქმედებები"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"მარჯვნივ გადაფურცვლა დასახურად, მარცხნივ — მენიუს საჩვენებლად"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"მარცხნივ გადაფურცვლა დასახურად, მარჯვნივ — მენიუს საჩვენებლად"</string>
@@ -3497,17 +3493,17 @@
     <string name="notification_importance_title" msgid="1545158655988342703">"ქცევა"</string>
     <string name="notification_importance_unspecified" msgid="1543165530748339700">"ხმის გამოყენების დაშვება"</string>
     <string name="notification_importance_blocked" msgid="4933285639639899394">"შეტყობინებების ჩვენების აღკვეთა"</string>
-    <string name="conversations_category_title" msgid="5586541340846847798">"მიმოწერები"</string>
+    <string name="conversations_category_title" msgid="5586541340846847798">"საუბრები"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"მიმოწერა"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"არ არის მიმოწერა"</string>
-    <string name="demote_conversation_summary" msgid="4319929331165604112">"მიმოწერების სექციიდან ამოშლა"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"საუბრების სექციიდან ამოშლა"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"ეს არის მიმოწერა"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"მიმოწერის სექციაში დამატება"</string>
-    <string name="manage_conversations" msgid="4440289604887824337">"მიმოწერების მართვა"</string>
-    <string name="important_conversations" msgid="1233893707189659401">"პრიორიტეტული მიმოწერები"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"სხვა მიმოწერები"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"მნიშვნელოვანი მიმოწერების ბუშტებად ჩვენება"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"მნიშვნელოვანი მიმოწერები გამოჩნდება ჩამოსაშლელი ფარდის ზედა ნაწილში. ასევე, მათი დაყენება შეგიძლიათ ისე, რომ გამოჩნდნენ ბუშტებად და შეწყვიტონ „არ შემაწუხოთ“ რეჟიმი."</string>
+    <string name="manage_conversations" msgid="4440289604887824337">"საუბრების მართვა"</string>
+    <string name="important_conversations" msgid="1233893707189659401">"პრიორიტეტული საუბრები"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"სხვა საუბრები"</string>
+    <string name="important_bubble" msgid="3820813960404079472">"მნიშვნელოვანი საუბრების ბუშტებად ჩვენება"</string>
+    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"მნიშვნელოვანი საუბრები გამოჩნდება ჩამოსაშლელი ფარდის ზედა ნაწილში. ასევე, მათი დაყენება შეგიძლიათ ისე, რომ გამოჩნდნენ ბუშტებად და შეწყვიტონ „არ შემაწუხოთ“ რეჟიმი."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"ჩუმად ჩვენება და ჩაკეცვა"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"უხმოდ ჩვენება"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"ხმის გამოცემა"</string>
@@ -3523,7 +3519,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"შეწყვეტის დაშვება"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"აპისთვის ხმოვანი სიგნალების გამოყენების, ვიბრაციის ჩართვის ან/და შეტყობინებათა ეკრანზე გამოტანის ნებართვის მინიჭება"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"პრიორიტეტი"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"გამოჩნდება მიმოწერის სექციის ზედა ნაწილში ბუშტის სახით."</string>
+    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"გამოჩნდება საუბრის სექციის ზედა ნაწილში ბუშტის სახით."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"ჩამოსაწევ ფარდაში, შეტყობინებები ჩაიკეცოს ერთ ხაზად"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"გეხმარებათ ფოკუსირებაში ხმის ან ვიბრაციის უქონლობის გამო"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"იპყრობს თქვენს ყურადღებას ხმით ან ვიბრაციით"</string>
@@ -3683,14 +3679,14 @@
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> – <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>-დან <xliff:g id="END">%2$s</xliff:g>-მდე"</string>
-    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"მიმოწერები"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"მიმოწერები, რომლებსაც შეწყვეტა შეუძლია"</string>
-    <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"ყველა მიმოწერა"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"მნიშვნელოვანი მიმოწერები"</string>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"საუბრები"</string>
+    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"საუბრები, რომლებსაც შეწყვეტა შეუძლია"</string>
+    <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"ყველა საუბარი"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"პრიორიტეტული საუბრები"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"არცერთი"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> მიმოწერა</item>
-      <item quantity="one">1 მიმოწერა</item>
+      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> საუბარი</item>
+      <item quantity="one">1 საუბარი</item>
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"არცერთი"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ვის შეუძლია შეწყვეტა"</string>
@@ -3698,7 +3694,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"ზარები"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"ზარები"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"ზარები, რომლებსაც შეწყვეტა შეუძლია"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"იმაში დასარწმუნებლად, რომ დაშვებული ზარები გამოსცემს ხმას, შეამოწმეთ, რა არის დაყენებული თქვენი მოწყობილობისთვის — ზარი, ვიბრაცია თუ ჩუმი რეჟიმი."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"იმაში დასარწმუნებლად, რომ დაშვებული ზარები გამოსცემს ხმას, გადაამოწმეთ რომ მოწყობილობა დაყენებულია დარეკვის რეჟიმზე"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"„<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“-ის ფარგლებში შემომავალი ზარები დაბლოკილია. სურვილისამებრ, შეგიძლიათ შეცვალოთ პარამეტრები და მისცეთ თქვენთან დაკავშირების საშუალება მეგობრებს, ოჯახის წევრებს და სხვა კონტაქტებს."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ვარსკვლავით მონიშნული კონტაქტები"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3707,9 +3703,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"შეტყობინებები"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"შეტყობინებები"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"SMS, MMS და შეტყ.-ის მიმოცვლის აპები"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"შეტყობინებები"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"შეტყობინებები, რომლებსაც შეწყვეტა შეუძლია"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"იმაში დასარწმუნებლად, რომ დაშვებული შეტყობინებები გამოსცემს ხმას, შეამოწმეთ, რა არის დაყენებული თქვენი მოწყობილობისთვის — ზარი, ვიბრაცია თუ ჩუმი რეჟიმი."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"იმაში დასარწმუნებლად, რომ დაშვებული შეტყობინებები გამოსცემს ხმას, გადაამოწმეთ რომ მოწყობილობა დაყენებულია დარეკვის რეჟიმზე"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"„<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“-ის ფარგლებში შემომავალი შეტყობინებები დაბლოკილია. სურვილისამებრ, შეგიძლიათ შეცვალოთ პარამეტრები და მისცეთ თქვენთან დაკავშირების საშუალება მეგობრებს, ოჯახის წევრებს და სხვა კონტაქტებს."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"თქვენთან დაკავშირებას შეძლებს ყველა <xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> კონტაქტი"</string>
@@ -3726,15 +3722,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"ტაიმერებიდან, მაღვიძარებიდან, უსაფრთხოების სისტემებიდან და სხვა აპებიდან"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"გაფრთხილებები"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"მედიის ხმები"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"ვიდეოებიდან, თამაშებიდან და სხვა მედიებიდან"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"ხმები ვიდეოებიდან, თამაშებიდან და სხვა მედიებიდან"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"მედია"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"შეხების ხმები"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"თქვენი კლავიატურიდან და სხვა ღილაკებიდან"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"ხმები კლავიატურიდან და სხვა ღილაკებიდან"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"შეხების ხმები"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"შეხსენებები"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"ამოცანებიდან და შეხსენებებიდან"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"შეხსენებები"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"ღონისძიებები"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"კალენდრის მოვლენები"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"კალენდრის მოახლოებული ღონისძიებებიდან"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"მოვლენები"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"აპებისთვის უგულებელყოფის დაშვება"</string>
@@ -3774,7 +3770,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> და <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"თუ პიროვნება <xliff:g id="MINUTES">%d</xliff:g> წუთის განმავლობაში მეორედ დარეკავს"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"თუ პიროვნება <xliff:g id="MINUTES">%d</xliff:g> წუთის განმავლობაში მეორედ დარეკავს"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"მორგებული"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"ავტომატურად ჩაირთოს"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"არასოდეს"</string>
@@ -4335,7 +4331,7 @@
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"მხარდაჭერილი აპებიც მუქ თემაზე გადაირთვება"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"გასაგებია"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"ცადე მუქი თემა"</string>
-    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ეხმარება ელემენტის მოქმედების გახანგრძლივებაში"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ეხმარება ბატარეის მოქმედების გახანგრძლივებაში"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"დეველოპერის სწრაფი პარამეტრების მოზაიკები"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb ავტორიზაციის დროის ამოწურვის გამორთვა"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"adb ავტორიზაციების ავტომატურად გაუქმების გამორთვა სისტემებისთვის, რომლებიც ნაგულისხმევი (7 დღე) ან მომხმარებლის მიერ დაყენებული პერიოდის განმავლობაში (მინიმუმ 1 დღე) ხელახლა არ დაუკავშირდა."</string>
@@ -4385,8 +4381,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"მთავარზე გადასასვლელად, გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ. აპების გადასართავად, გადაფურცლეთ ეკრანის ქვედა კიდიდან ზემოთ, დააყოვნეთ, შემდეგ გაუშვით. უკან გადასასვლელად, გადაფურცლეთ ეკრანის მარცხენა ან მარჯვენა კიდიდან."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3-ღილაკიანი ნავიგაცია"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"უკან გადასვლა, მთავარი და აპების გადართვა თქვენი ეკრანის ქვედა ნაწილში მდებარე ღილაკებით."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"სისტემური ნავიგაცია, 2-ღილაკიანი ნავიგაცია, 3-ღილაკიანი ნავიგაცია, ჟესტებით ნავიგაცია, გადაფურცვლა"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"არ არის მხარდაჭერილი თქვენი ნაგულისხმევი მთავარი აპის, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>-ის მიერ"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"ნაგულისხმევი მთავარი აპის გადართვა"</string>
     <string name="information_label" msgid="6939310810756569298">"ინფორმაცია"</string>
@@ -4839,21 +4834,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"სამსახური"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"სისტემის ნაგულისხმევი"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"თქვენი არჩევანი აღარ მოქმედებს. ცადეთ ხელახლა."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"სწრაფად მართვის საშუალებები"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"სწრაფად მართვის საშუალებები"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"მოწყობილობის მართვის საშუალებები"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"მოწყობილობის მართვის საშუალებები"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"ბარათები და საშვები"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"ბარათები და საშვები"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"ჩართვის მენიუ"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"ჩართვის ღილაკის მენიუ"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"ბარათებისა და საშვების ჩვენება"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"სწრაფად მართვის საშუალებების ჩვენება"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"ბარათების, საშვებისა და სწრაფად მართვის საშუალებების ჩვენება"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"მოწყობილობის მართვის საშუალებების ჩვენება"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"ბარათების, საშვებისა და სწრაფად მოწყობილობის მართვის საშუალებების ჩვენება"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"არ გამოჩნდეს არანაირი კონტენტი"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"კონფიდენციალურობა"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"როდესაც ჩაკეტილია, გამოჩნდეს ბარათები და მართვის საშუალებები"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"როდესაც ჩაკეტილია, დაიმალოს ბარათები და მართვის საშუალებები"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"სწრაფად მართვის საშუალებების ჩვენება"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"დაკავშირებული მოწყობილობების მართვის საშუალებებზე წვდომისთვის დააჭირეთ ჩართვის ღილაკს"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"მოწყობილობის მართვის საშუალებების ჩვენება"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"ბარათებისა და საშვების ჩვენება"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"დაკავშირებული მოწყობილობების მართვის საშუალებებზე წვდომისთვის დააჭირეთ ჩართვის ღილაკს"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"იმისათვის, რომ გქონდეთ წვდომა ისეთ კონტენტზე, როგორიც არის გადახდის მეთოდები და ჩასხდომის ბარათები, ხანგრძლივად დააჭირეთ ჩართვის ღილაკს."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

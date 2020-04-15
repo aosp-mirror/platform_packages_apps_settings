@@ -19,14 +19,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/ContextualCardStyle">
+    style="@style/ContextualCardStyle"
+    android:importantForAccessibility="no">
 
     <androidx.slice.widget.SliceView
         android:id="@+id/slice_view"
         android:theme="@style/Theme.Settings.ContextualCard"
         style="@style/ContextualCardSliceViewStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:importantForAccessibility="no"/>
+        android:layout_height="wrap_content"/>
 
 </com.google.android.material.card.MaterialCardView>
