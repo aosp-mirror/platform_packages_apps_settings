@@ -15,14 +15,26 @@
  */
 package com.android.settings.applications;
 
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK;
+import static android.content.pm.PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.util.ArraySet;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.widget.FooterPreference;
@@ -31,6 +43,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -40,15 +54,25 @@ import org.robolectric.annotation.Config;
 public class OpenSupportedLinksTest {
     private static final String TEST_FOOTER_TITLE = "FooterTitle";
     private static final String TEST_DOMAIN_LINK = "aaa.bbb.ccc";
+    private static final String TEST_SUMMARY = "TestSummary";
+    private static final String TEST_PACKAGE = "ssl.test.package.com";
+
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private Resources mResources;
 
     private Context mContext;
     private TestFragment mSettings;
     private FooterPreference mFooter;
+    private PreferenceCategory mCategory;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mSettings = spy(new TestFragment(mContext));
+        mSettings = spy(new TestFragment(mContext, mPackageManager));
+        mCategory = spy(new PreferenceCategory(mContext));
         mFooter = new FooterPreference.Builder(mContext).setTitle(TEST_FOOTER_TITLE).build();
     }
 
@@ -75,18 +99,68 @@ public class OpenSupportedLinksTest {
         assertThat(mFooter.getTitle().toString()).contains(TEST_DOMAIN_LINK);
     }
 
+    @Test
+    public void initRadioPreferencesGroup_statusAlways_allowOpenChecked() {
+        init(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ALWAYS);
+
+        mSettings.initRadioPreferencesGroup();
+
+        assertThat(mSettings.mAllowOpening.isChecked()).isTrue();
+        assertThat(mSettings.mAskEveryTime.isChecked()).isFalse();
+        assertThat(mSettings.mNotAllowed.isChecked()).isFalse();
+    }
+
+    @Test
+    public void initRadioPreferencesGroup_statusAsk_askEveryTimeChecked() {
+        init(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_ASK);
+
+        mSettings.initRadioPreferencesGroup();
+
+        assertThat(mSettings.mAllowOpening.isChecked()).isFalse();
+        assertThat(mSettings.mAskEveryTime.isChecked()).isTrue();
+        assertThat(mSettings.mNotAllowed.isChecked()).isFalse();
+    }
+
+    @Test
+    public void initRadioPreferencesGroup_statusNever_notAllowedChecked() {
+        init(INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER);
+
+        mSettings.initRadioPreferencesGroup();
+
+        assertThat(mSettings.mAllowOpening.isChecked()).isFalse();
+        assertThat(mSettings.mAskEveryTime.isChecked()).isFalse();
+        assertThat(mSettings.mNotAllowed.isChecked()).isTrue();
+    }
+
+    @Test
+    public void getEntriesNo_oneHandledDomains_returnOne() {
+        initHandledDomains();
+
+        assertThat(mSettings.getEntriesNo()).isEqualTo(1);
+    }
+
+    private void init(int status) {
+        doReturn(status).when(mPackageManager).getIntentVerificationStatusAsUser(anyString(),
+                anyInt());
+        doReturn(mCategory).when(mSettings).findPreference(any(CharSequence.class));
+        doReturn(mResources).when(mSettings).getResources();
+        when(mResources.getQuantityString(anyInt(), anyInt(), anyInt())).thenReturn(TEST_SUMMARY);
+        doReturn(true).when(mCategory).addPreference(any(Preference.class));
+    }
+
     public static class TestFragment extends OpenSupportedLinks {
         private final Context mContext;
 
-        public TestFragment(Context context) {
+        public TestFragment(Context context, PackageManager packageManager) {
             mContext = context;
-            mPackageInfo = new PackageInfo();
-            mPackageInfo.packageName = "ssl.test.package.com";
+            mPackageManager = packageManager;
+            mPackageName = TEST_PACKAGE;
         }
+    }
 
-        @Override
-        protected PackageManager getPackageManager() {
-            return mContext.getPackageManager();
-        }
+    private void initHandledDomains() {
+        final ArraySet<String> domainLinks = new ArraySet<>();
+        domainLinks.add(TEST_DOMAIN_LINK);
+        ShadowUtils.setHandledDomains(domainLinks);
     }
 }
