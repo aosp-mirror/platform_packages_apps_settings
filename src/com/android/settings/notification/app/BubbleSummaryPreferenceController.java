@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,36 +16,32 @@
 
 package com.android.settings.notification.app;
 
+import static android.app.NotificationManager.BUBBLE_PREFERENCE_ALL;
+import static android.app.NotificationManager.BUBBLE_PREFERENCE_NONE;
 import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.provider.Settings;
-
-import com.android.settings.R;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.notification.NotificationBackend;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
-public class BubbleSummaryPreferenceController extends NotificationPreferenceController {
+import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 
-    private static final String KEY = "bubble_link_pref";
+/**
+ * Summary of the app setting for bubbles, available through app notification settings.
+ */
+public class BubbleSummaryPreferenceController extends NotificationPreferenceController {
+    private static final String KEY = "bubble_pref_link";
+
     @VisibleForTesting
-    static final int SYSTEM_WIDE_ON = 1;
-    @VisibleForTesting
-    static final int SYSTEM_WIDE_OFF = 0;
+    static final int ON = 1;
 
     public BubbleSummaryPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -63,10 +59,15 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
             if (isDefaultChannel()) {
                 return true;
             } else {
-                return mAppRow != null && mAppRow.allowBubbles;
+                return mAppRow != null;
             }
         }
         return isGloballyEnabled();
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY;
     }
 
     @Override
@@ -74,34 +75,31 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
         super.updateState(preference);
 
         if (mAppRow != null) {
-            Bundle args = new Bundle();
-            args.putString(AppInfoBase.ARG_PACKAGE_NAME, mAppRow.pkg);
-            args.putInt(AppInfoBase.ARG_PACKAGE_UID, mAppRow.uid);
-
-            preference.setIntent(new SubSettingLauncher(mContext)
-                    .setDestination(AppBubbleNotificationSettings.class.getName())
-                    .setArguments(args)
-                    .setSourceMetricsCategory(
-                            SettingsEnums.NOTIFICATION_APP_NOTIFICATION)
-                    .toIntent());
+            final Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_BUBBLE_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, mAppRow.pkg);
+            intent.putExtra(Settings.EXTRA_APP_UID, mAppRow.uid);
+            preference.setIntent(intent);
         }
     }
 
     @Override
     public CharSequence getSummary() {
-        boolean canBubble = false;
-        if (mAppRow != null) {
-            if (mChannel != null) {
-               canBubble |= mChannel.canBubble() && isGloballyEnabled();
-            } else {
-               canBubble |= mAppRow.allowBubbles && isGloballyEnabled();
-            }
+        if (mAppRow == null) {
+            return null;
         }
-        return mContext.getString(canBubble ? R.string.switch_on_text : R.string.switch_off_text);
+        int backEndPref = mAppRow.bubblePreference;
+        Resources res = mContext.getResources();
+        if (backEndPref == BUBBLE_PREFERENCE_NONE || !isGloballyEnabled()) {
+            return res.getString(R.string.bubble_app_setting_none);
+        } else if (backEndPref == BUBBLE_PREFERENCE_ALL) {
+            return res.getString(R.string.bubble_app_setting_all);
+        } else {
+            return res.getString(R.string.bubble_app_setting_selected);
+        }
     }
 
     private boolean isGloballyEnabled() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF) == SYSTEM_WIDE_ON;
+                NOTIFICATION_BUBBLES, ON) == ON;
     }
 }

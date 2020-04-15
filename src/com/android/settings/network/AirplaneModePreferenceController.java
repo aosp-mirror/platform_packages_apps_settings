@@ -35,11 +35,11 @@ import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnResume, OnPause,
+        implements LifecycleObserver, OnStart, OnStop,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -120,16 +120,16 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (isAvailable()) {
-            mAirplaneModeEnabler.resume();
+            mAirplaneModeEnabler.start();
         }
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (isAvailable()) {
-            mAirplaneModeEnabler.pause();
+            mAirplaneModeEnabler.stop();
         }
     }
 

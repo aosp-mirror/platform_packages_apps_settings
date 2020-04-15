@@ -30,9 +30,11 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,12 +64,16 @@ public class AutoSelectPreferenceControllerTest {
     private AutoSelectPreferenceController mController;
     private SwitchPreference mSwitchPreference;
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
@@ -83,7 +89,7 @@ public class AutoSelectPreferenceControllerTest {
         mController = new AutoSelectPreferenceController(mContext, "auto_select");
         mController.mProgressDialog = mProgressDialog;
         mController.mSwitchPreference = mSwitchPreference;
-        mController.init(SUB_ID);
+        mController.init(mLifecycle, SUB_ID);
     }
 
     @Test
@@ -125,6 +131,6 @@ public class AutoSelectPreferenceControllerTest {
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(null);
 
         // Should not crash
-        mController.init(SUB_ID);
+        mController.init(mLifecycle, SUB_ID);
     }
 }
