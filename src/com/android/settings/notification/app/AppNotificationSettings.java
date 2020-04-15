@@ -22,16 +22,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 /** These settings are per app, so should not be returned in global search results. */
 public class AppNotificationSettings extends NotificationSettings {
@@ -41,8 +41,7 @@ public class AppNotificationSettings extends NotificationSettings {
     private static String KEY_ADVANCED_CATEGORY = "app_advanced";
     private static String KEY_BADGE = "badge";
     private static String KEY_APP_LINK = "app_link";
-    private static String KEY_BUBBLE = "bubble_link_pref";
-    private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK, KEY_BUBBLE};
+    private static String[] LEGACY_NON_ADVANCED_KEYS = {KEY_BADGE, KEY_APP_LINK};
 
     @Override
     public int getMetricsCategory() {
@@ -121,9 +120,9 @@ public class AppNotificationSettings extends NotificationSettings {
         mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new NotificationsOffPreferenceController(context));
         mControllers.add(new DeletedChannelsPreferenceController(context, mBackend));
-        mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         mControllers.add(new ChannelListPreferenceController(context, mBackend));
         mControllers.add(new AppConversationListPreferenceController(context, mBackend));
+        mControllers.add(new BubbleSummaryPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
     }
 }
