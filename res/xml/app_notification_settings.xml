@@ -29,6 +29,14 @@
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc" />
 
+    <!--Bubbles -->
+    <Preference
+        android:key="bubble_pref_link"
+        android:title="@string/notification_bubbles_title"
+        android:icon="@drawable/ic_create_bubble"
+        settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
+    </Preference>
+
     <!-- Conversations added here -->
     <PreferenceCategory
         android:title="@string/conversations_category_title"
@@ -73,10 +81,6 @@
             settings:useAdditionalSummary="true"
             android:order="1001"
             settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-        <Preference
-            android:key="bubble_link_pref"
-            android:title="@string/notification_bubbles_title"
-            android:order="1002" />
         <Preference
             android:key="app_link"
             android:order="1003"

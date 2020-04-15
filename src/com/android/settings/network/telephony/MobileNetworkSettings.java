@@ -44,7 +44,6 @@ import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceCon
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
@@ -155,14 +154,13 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
                 use(WifiCallingPreferenceController.class).init(mSubId);
 
         final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =
-                use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
+                use(OpenNetworkSelectPagePreferenceController.class).init(getLifecycle(), mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(mSubId)
+                        .init(getLifecycle(), mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
-        use(PreferenceCategoryController.class).setChildren(
-                Arrays.asList(autoSelectPreferenceController));
-
+        use(NetworkPreferenceCategoryController.class).init(getLifecycle(), mSubId)
+                .setChildren(Arrays.asList(autoSelectPreferenceController));
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
         mCdmaSubscriptionPreferenceController = use(CdmaSubscriptionPreferenceController.class);
