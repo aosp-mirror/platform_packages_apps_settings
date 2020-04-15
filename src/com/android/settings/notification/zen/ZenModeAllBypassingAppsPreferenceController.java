@@ -20,6 +20,7 @@ import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.text.BidiFormatter;
@@ -137,6 +138,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                         new SubSettingLauncher(mContext)
                                 .setDestination(AppChannelsBypassingDndSettings.class.getName())
                                 .setArguments(args)
+                                .setUserHandle(UserHandle.getUserHandleForUid(app.info.uid))
                                 .setResultListener(mHostFragment, 0)
                                 .setSourceMetricsCategory(
                                         SettingsEnums.NOTIFICATION_ZEN_MODE_OVERRIDING_APP)
