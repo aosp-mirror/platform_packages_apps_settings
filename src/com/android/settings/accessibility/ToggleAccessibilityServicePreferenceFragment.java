@@ -295,7 +295,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             if (!mToggleServiceDividerSwitchPreference.isChecked()) {
                 preference.setChecked(false);
@@ -413,7 +413,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private void onAllowButtonFromShortcutToggleClicked() {
         mShortcutPreference.setChecked(true);
 
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
 
         mDialog.dismiss();
