@@ -22,15 +22,11 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.ContentObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
@@ -50,9 +46,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class NotificationHistoryActivity extends Activity {
 
@@ -60,18 +60,22 @@ public class NotificationHistoryActivity extends Activity {
 
     private ViewGroup mHistoryOn;
     private ViewGroup mHistoryOff;
+    private ViewGroup mHistoryEmpty;
     private ViewGroup mTodayView;
     private ViewGroup mSnoozeView;
     private ViewGroup mDismissView;
+    private SwitchBar mSwitchBar;
 
-    private SettingsObserver mSettingsObserver = new SettingsObserver();
     private HistoryLoader mHistoryLoader;
     private INotificationManager mNm;
     private PackageManager mPm;
+    private CountDownLatch mCountdownLatch;
+    private Future mCountdownFuture;
 
     private HistoryLoader.OnHistoryLoaderListener mOnHistoryLoaderListener = notifications -> {
         findViewById(R.id.today_list).setVisibility(
                 notifications.isEmpty() ? View.GONE : View.VISIBLE);
+        mCountdownLatch.countDown();
         // for each package, new header and recycler view
         for (NotificationHistoryPackage nhp : notifications) {
             View viewForPackage = LayoutInflater.from(this)
@@ -124,6 +128,8 @@ public class NotificationHistoryActivity extends Activity {
         mDismissView = findViewById(R.id.recently_dismissed_list);
         mHistoryOff = findViewById(R.id.history_off);
         mHistoryOn = findViewById(R.id.history_on);
+        mHistoryEmpty = findViewById(R.id.history_on_empty);
+        mSwitchBar = findViewById(R.id.switch_bar);
     }
 
     @Override
@@ -131,6 +137,8 @@ public class NotificationHistoryActivity extends Activity {
         super.onResume();
 
         mPm = getPackageManager();
+        // wait for history loading and recent/snooze loading
+        mCountdownLatch = new CountDownLatch(2);
 
         mTodayView.removeAllViews();
         mHistoryLoader = new HistoryLoader(this, new NotificationBackend(), mPm);
@@ -144,9 +152,25 @@ public class NotificationHistoryActivity extends Activity {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot register listener", e);
         }
-        mSettingsObserver.observe();
 
         bindSwitch();
+
+        mCountdownFuture = ThreadUtils.postOnBackgroundThread(() -> {
+            try {
+                mCountdownLatch.await(2, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                Slog.e(TAG, "timed out waiting for loading", e);
+            }
+            ThreadUtils.postOnMainThread(() -> {
+                if (mSwitchBar.isChecked()
+                        && findViewById(R.id.today_list).getVisibility() == View.GONE
+                        && mSnoozeView.getVisibility() == View.GONE
+                        && mDismissView.getVisibility() == View.GONE) {
+                    mHistoryOn.setVisibility(View.GONE);
+                    mHistoryEmpty.setVisibility(View.VISIBLE);
+                }
+            });
+        });
     }
 
     @Override
@@ -156,24 +180,30 @@ public class NotificationHistoryActivity extends Activity {
         } catch (RemoteException e) {
             Log.e(TAG, "Cannot unregister listener", e);
         }
-        mSettingsObserver.stopObserving();
         super.onPause();
     }
 
+    @Override
+    public void onDestroy() {
+        if (mCountdownFuture != null) {
+            mCountdownFuture.cancel(true);
+        }
+        super.onDestroy();
+    }
+
     private void bindSwitch() {
-        SwitchBar bar = findViewById(R.id.switch_bar);
-        if (bar != null) {
-            bar.setSwitchBarText(R.string.notification_history_toggle,
+        if (mSwitchBar != null) {
+            mSwitchBar.setSwitchBarText(R.string.notification_history_toggle,
                     R.string.notification_history_toggle);
-            bar.show();
+            mSwitchBar.show();
             try {
-                bar.addOnSwitchChangeListener(mOnSwitchClickListener);
+                mSwitchBar.addOnSwitchChangeListener(mOnSwitchClickListener);
             } catch (IllegalStateException e) {
                 // an exception is thrown if you try to add the listener twice
             }
-            bar.setChecked(Settings.Secure.getInt(getContentResolver(),
+            mSwitchBar.setChecked(Settings.Secure.getInt(getContentResolver(),
                     NOTIFICATION_HISTORY_ENABLED, 0) == 1);
-            toggleViews(bar.isChecked());
+            toggleViews(mSwitchBar.isChecked());
         }
     }
 
@@ -184,53 +214,9 @@ public class NotificationHistoryActivity extends Activity {
         } else {
             mHistoryOn.setVisibility(View.GONE);
             mHistoryOff.setVisibility(View.VISIBLE);
-            mHistoryOff.findViewById(R.id.history_off_title).setVisibility(View.VISIBLE);
-            mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(View.VISIBLE);
-            mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(View.GONE);
-            mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(View.GONE);
             mTodayView.removeAllViews();
         }
-    }
-
-    private void onHistoryEnabledChanged(boolean enabled) {
-        if (enabled) {
-            mHistoryLoader.load(mOnHistoryLoaderListener);
-        }
-    }
-
-    final class SettingsObserver extends ContentObserver {
-        private final Uri NOTIFICATION_HISTORY_URI
-                = Settings.Secure.getUriFor(Settings.Secure.NOTIFICATION_HISTORY_ENABLED);
-
-        SettingsObserver() {
-            super(null);
-        }
-
-        void observe() {
-            ContentResolver resolver = getContentResolver();
-            resolver.registerContentObserver(NOTIFICATION_HISTORY_URI,
-                    false, this, UserHandle.USER_ALL);
-        }
-
-        void stopObserving() {
-            ContentResolver resolver = getContentResolver();
-            resolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            update(uri);
-        }
-
-        public void update(Uri uri) {
-            ContentResolver resolver = getContentResolver();
-            if (uri == null || NOTIFICATION_HISTORY_URI.equals(uri)) {
-                boolean historyEnabled = Settings.Secure.getInt(resolver,
-                        Settings.Secure.NOTIFICATION_HISTORY_ENABLED, 0)
-                        != 0;
-                onHistoryEnabledChanged(historyEnabled);
-            }
-        }
+        mHistoryEmpty.setVisibility(View.GONE);
     }
 
     private final SwitchBar.OnSwitchChangeListener mOnSwitchClickListener =
@@ -239,16 +225,14 @@ public class NotificationHistoryActivity extends Activity {
                         NOTIFICATION_HISTORY_ENABLED,
                         isChecked ? 1 : 0);
                 mHistoryOn.setVisibility(View.GONE);
-                mHistoryOff.findViewById(R.id.history_off_title).setVisibility(
-                        isChecked ? View.GONE : View.VISIBLE);
-                mHistoryOff.findViewById(R.id.history_off_summary).setVisibility(
-                        isChecked ? View.GONE : View.VISIBLE);
-                mHistoryOff.findViewById(R.id.history_toggled_on_title).setVisibility(
-                        isChecked ? View.VISIBLE : View.GONE);
-                mHistoryOff.findViewById(R.id.history_toggled_on_summary).setVisibility(
-                        isChecked ? View.VISIBLE : View.GONE);
+                if (isChecked) {
+                    mHistoryEmpty.setVisibility(View.VISIBLE);
+                    mHistoryOff.setVisibility(View.GONE);
+                } else {
+                    mHistoryOff.setVisibility(View.VISIBLE);
+                    mHistoryEmpty.setVisibility(View.GONE);
+                }
                 mTodayView.removeAllViews();
-                mHistoryOff.setVisibility(View.VISIBLE);
             };
 
     private final NotificationListenerService mListener = new NotificationListenerService() {
@@ -303,6 +287,8 @@ public class NotificationHistoryActivity extends Activity {
                 ((NotificationSbnAdapter) mDismissedRv.getAdapter()).onRebuildComplete(
                     new ArrayList<>(Arrays.asList(dismissed)));
             }
+
+            mCountdownLatch.countDown();
         }
 
         @Override
