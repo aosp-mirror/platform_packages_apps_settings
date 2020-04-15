@@ -413,6 +413,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
+    int getUserShortcutTypes() {
+        return getUserShortcutTypeFromSettings(getPrefContext());
+    }
+
+    @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
