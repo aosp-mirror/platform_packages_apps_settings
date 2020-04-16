@@ -156,10 +156,11 @@ public class EmergencyInfoPreferenceControllerTest {
         final Preference preference = new Preference(activity);
         preference.setKey("emergency_info");
         mController = new EmergencyInfoPreferenceController(activity, preference.getKey());
+        mController.mIntent = new Intent("com.example.action.new").setPackage("com.example.test");
 
         mController.handlePreferenceTreeClick(preference);
 
         assertThat(application.getNextStartedActivity().getAction())
-                .isEqualTo("android.settings.EDIT_EMERGENCY_INFO");
+                .isEqualTo("com.example.action.new");
     }
 }
