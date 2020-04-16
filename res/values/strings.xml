@@ -24,6 +24,8 @@
     <string name="allow">Allow</string>
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
+    <!-- Used in confirmation dialogs as the action that the user will tap to turn on the feature. [CHAR LIMIT=40]-->
+    <string name="confirmation_turn_on">Turn on</string>
 
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -7245,19 +7247,33 @@
     <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
     <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
-    <!-- Title of a preference determining whether or not the user has enabled contact discovery,
-         which is a service that uses the phone numbers in your contacts to determine if your
+    <!-- Title of a preference determining whether or not the user has allowed the device to share
+         their contacts' phone numbers with their carrier in order to implement contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your
          contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
-    <string name="contact_discovery_opt_in_title">Contact discovery</string>
-    <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
-         [CHAR LIMIT=110] -->
-    <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
-    <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
+    <string name="contact_discovery_opt_in_title">Send contacts to carrier</string>
+    <!-- Summary of a preference determining whether or not the user has enabled contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=110] -->
+    <string name="contact_discovery_opt_in_summary">Send your contacts\u2019 phone numbers to provide enhanced features</string>
+    <!-- Title of the dialog shown when the user tries to enable Contact Discovery, which is a
+         service that exchanges contacts with the carrier to determine if your contacts support
+         enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=50] -->
+    <string name="contact_discovery_opt_in_dialog_title">Send contacts to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>?</string>
+    <!-- Title of the dialog shown when the carrier name is not known and the user tries to enable
+         Contact Discovery, which is a service that exchanges contacts with the carrier to determine
+         if your contacts support enhanced features, such as video calling and RCS messaging.
          [CHAR LIMIT=50] -->
-    <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
-    <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
-         [CHAR LIMIT=NONE]-->
-    <string name="contact_discovery_opt_in_dialog_message">All of the phone numbers in your contacts will be periodically sent to your carrier in order to discover which calling features are supported.</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined">Send contacts to your carrier?</string>
+    <!-- The text displayed in the dialog shown when the user tries to enable Contact Discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message">Your contacts\u2019 phone numbers will be periodically sent to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
+    <!-- The text displayed in the dialog shown when the mobile carrier's name is not known and the
+         user tries to enable Contact Discovery, which is a service that exchanges contacts with
+         the carrier to determine if your contacts support enhanced features, such as video calling
+         and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined">Your contacts\u2019 phone numbers will be periodically sent to your carrier.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
