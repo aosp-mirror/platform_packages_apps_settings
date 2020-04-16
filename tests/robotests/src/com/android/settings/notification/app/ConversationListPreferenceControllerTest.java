@@ -191,7 +191,7 @@ public class ConversationListPreferenceControllerTest {
     }
 
     @Test
-    public void testGetIntent() {
+    public void testGetSubSettingLauncher() {
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         NotificationChannel channel = new NotificationChannel("a", "child", 2);
         channel.setConversationId("parent", "convo id");
@@ -199,7 +199,7 @@ public class ConversationListPreferenceControllerTest {
         ccw.setPkg("pkg");
         ccw.setUid(1);
         ccw.setParentChannelLabel("parent label");
-        Intent intent = mController.getIntent(ccw, "title");
+        Intent intent = mController.getSubSettingLauncher(ccw, "title").toIntent();
 
         Bundle extras = intent.getExtras();
         assertThat(extras.getString(AppInfoBase.ARG_PACKAGE_NAME)).isEqualTo(ccw.getPkg());
