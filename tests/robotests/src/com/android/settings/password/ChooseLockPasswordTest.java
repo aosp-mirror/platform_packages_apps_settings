@@ -148,6 +148,21 @@ public class ChooseLockPasswordTest {
     }
 
     @Test
+    public void intentBuilder_setProfileToUnify_shouldAddExtras() {
+        Intent intent = new IntentBuilder(application)
+                .setProfileToUnify(23, LockscreenCredential.createNone())
+                .build();
+
+        assertThat(intent.getIntExtra(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0))
+                .named("EXTRA_KEY_UNIFICATION_PROFILE_ID")
+                .isEqualTo(23);
+        assertThat((LockscreenCredential) intent.getParcelableExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL))
+                .named("EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL")
+                .isNotNull();
+    }
+
+    @Test
     public void processAndValidatePasswordRequirements_noMinPasswordComplexity() {
         mShadowDpm.setPasswordQuality(PASSWORD_QUALITY_ALPHABETIC);
         mShadowDpm.setPasswordMinimumLength(10);

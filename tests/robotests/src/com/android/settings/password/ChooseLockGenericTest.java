@@ -35,12 +35,14 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings.Global;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
@@ -310,6 +312,56 @@ public class ChooseLockGenericTest {
         assertThat(actualIntent.hasExtra(EXTRA_KEY_CALLER_APP_NAME)).isTrue();
         assertThat(actualIntent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME))
                 .isEqualTo("app name");
+    }
+
+    @Test
+    public void testUnifyProfile_IntentPassedToChooseLockPassword() {
+        final Bundle arguments = new Bundle();
+        arguments.putInt(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 11);
+        arguments.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL,
+                LockscreenCredential.createNone());
+        mFragment.setArguments(arguments);
+
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getComponent().getClassName()).isEqualTo(
+                ChooseLockPassword.class.getName());
+        assertThat(nextIntent.getIntExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0)).isEqualTo(11);
+        assertThat((LockscreenCredential) nextIntent.getParcelableExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)).isNotNull();
+    }
+
+    @Test
+    public void testUnifyProfile_IntentPassedToChooseLockPattern() {
+        final Bundle arguments = new Bundle();
+        arguments.putInt(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 13);
+        arguments.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL,
+                LockscreenCredential.createNone());
+        mFragment.setArguments(arguments);
+
+        Intent intent = new Intent().putExtra(
+                LockPatternUtils.PASSWORD_TYPE_KEY,
+                DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+        initActivity(intent);
+
+        mFragment.updatePreferencesOrFinish(false /* isRecreatingActivity */);
+
+        Intent nextIntent = shadowOf(mActivity).getNextStartedActivity();
+        assertThat(nextIntent).isNotNull();
+        assertThat(nextIntent.getComponent().getClassName()).isEqualTo(
+                ChooseLockPattern.class.getName());
+        assertThat(nextIntent.getIntExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID, 0)).isEqualTo(13);
+        assertThat((LockscreenCredential) nextIntent.getParcelableExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)).isNotNull();
     }
 
     private void initActivity(@Nullable Intent intent) {
