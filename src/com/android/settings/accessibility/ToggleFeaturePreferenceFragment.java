@@ -363,10 +363,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         // Summary.
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY_RES)) {
-            final int summary = arguments.getInt(AccessibilitySettings.EXTRA_SUMMARY_RES);
-            createFooterPreference(getText(summary));
-        } else if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
             createFooterPreference(summary);
