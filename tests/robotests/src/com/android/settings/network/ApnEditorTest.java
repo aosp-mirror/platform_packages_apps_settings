@@ -22,7 +22,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -100,8 +99,6 @@ public class ApnEditorTest {
 
     @Mock
     private FragmentActivity mActivity;
-    @Mock
-    private ProxySubscriptionManager mProxySubscriptionMgr;
 
     @Captor
     private ArgumentCaptor<Uri> mUriCaptor;
@@ -453,8 +450,6 @@ public class ApnEditorTest {
     @Test
     @Config(shadows = ShadowFragment.class)
     public void onCreate_noAction_shouldFinishAndNoCrash() {
-        ProxySubscriptionManager proxySubscriptionMgr = mock(ProxySubscriptionManager.class);
-        mApnEditorUT.mProxySubscriptionMgr = proxySubscriptionMgr;
         doReturn(new Intent()).when(mActivity).getIntent();
         doNothing().when(mApnEditorUT).addPreferencesFromResource(anyInt());
 
