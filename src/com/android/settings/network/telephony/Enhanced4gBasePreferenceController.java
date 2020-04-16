@@ -16,7 +16,10 @@
 
 package com.android.settings.network.telephony;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -31,6 +34,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -50,6 +54,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     @VisibleForTesting
     Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
+    private boolean mShow5gLimitedDialog;
+    private boolean mHas5gCapability;
     @VisibleForTesting
     Integer mCallState;
     private final List<On4gLteUpdateListener> m4gLteListeners;
@@ -83,6 +89,9 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (m4gCurrentMode != MODE_ADVANCED_CALL) {
             m4gCurrentMode = show4GForLTE ? MODE_4G_CALLING : MODE_VOLTE;
         }
+
+        mShow5gLimitedDialog = carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_VOLTE_5G_LIMITED_ALERT_DIALOG_BOOL);
         return this;
     }
 
@@ -142,16 +151,13 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
         if (imsMmTelManager == null) {
             return false;
         }
-        try {
-            imsMmTelManager.setAdvancedCallingSettingEnabled(isChecked);
-        } catch (IllegalArgumentException exception) {
-            Log.w(TAG, "fail to set VoLTE=" + isChecked + ". subId=" + mSubId, exception);
-            return false;
+
+        if (isDialogNeeded() && !isChecked) {
+            show5gLimitedDialog(imsMmTelManager);
+        } else {
+            return setAdvancedCallingSettingEnabled(imsMmTelManager, isChecked);
         }
-        for (final On4gLteUpdateListener lsn : m4gLteListeners) {
-            lsn.on4gLteUpdated();
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -205,6 +211,10 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
                 mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
             }
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
+
+            final long supportedRadioBitmask = mTelephonyManager.getSupportedRadioAccessFamily();
+            mHas5gCapability =
+                    (supportedRadioBitmask & TelephonyManager.NETWORK_TYPE_BITMASK_NR) > 0;
         }
 
         public void unregister() {
@@ -218,5 +228,47 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
      */
     public interface On4gLteUpdateListener {
         void on4gLteUpdated();
+    }
+
+    private boolean isDialogNeeded() {
+        Log.d(TAG, "Has5gCapability:" + mHas5gCapability);
+        return mShow5gLimitedDialog && mHas5gCapability;
+    }
+
+    private void show5gLimitedDialog(ImsMmTelManager imsMmTelManager) {
+        Log.d(TAG, "show5gLimitedDialog");
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        DialogInterface.OnClickListener networkSettingsClickListener =
+                new Dialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "onClick,isChecked:false");
+                        setAdvancedCallingSettingEnabled(imsMmTelManager, false);
+                        updateState(mPreference);
+                    }
+                };
+        builder.setTitle(R.string.volte_5G_limited_title)
+                .setMessage(R.string.volte_5G_limited_text)
+                .setNeutralButton(mContext.getResources().getString(
+                        R.string.cancel), null)
+                .setPositiveButton(mContext.getResources().getString(
+                        R.string.condition_turn_off),
+                        networkSettingsClickListener)
+                .create()
+                .show();
+    }
+
+    private boolean setAdvancedCallingSettingEnabled(ImsMmTelManager imsMmTelManager,
+            boolean isChecked) {
+        try {
+            imsMmTelManager.setAdvancedCallingSettingEnabled(isChecked);
+        } catch (IllegalArgumentException exception) {
+            Log.w(TAG, "fail to set VoLTE=" + isChecked + ". subId=" + mSubId, exception);
+            return false;
+        }
+        for (final On4gLteUpdateListener lsn : m4gLteListeners) {
+            lsn.on4gLteUpdated();
+        }
+        return true;
     }
 }

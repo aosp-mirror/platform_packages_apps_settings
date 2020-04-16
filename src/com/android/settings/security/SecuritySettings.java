@@ -47,7 +47,6 @@ public class SecuritySettings extends DashboardFragment {
     private static final String WORK_PROFILE_SECURITY_CATEGORY = "security_category_profile";
 
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
-    public static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
 
