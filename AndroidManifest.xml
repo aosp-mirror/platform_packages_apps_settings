@@ -3180,6 +3180,7 @@
             android:theme="@style/Theme.Panel"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />
