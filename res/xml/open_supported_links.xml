@@ -18,17 +18,9 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/app_launch_open_domain_urls_title">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="app_header_view"
-        android:layout="@layout/settings_entity_header"
-        android:selectable="false"
-        settings:controller="com.android.settings.applications.AppHeaderPreferenceController"
-        settings:allowDividerBelow="true"/>
-
     <PreferenceCategory
-        android:key="app_launch_allow_app_to_open_supported_links"
-        android:title="@string/app_link_open_always"
-        settings:controller="com.android.settings.applications.AppOpenSupportedLinksPreferenceController">
+        android:key="supported_links_radio_group"
+        android:title="@string/app_link_open_always">
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference

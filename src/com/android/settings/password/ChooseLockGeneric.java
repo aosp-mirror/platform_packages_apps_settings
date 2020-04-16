@@ -143,7 +143,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         static final int SKIP_FINGERPRINT_REQUEST = 104;
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
-        private DevicePolicyManager mDPM;
+        private DevicePolicyManager mDpm;
         private boolean mHasChallenge = false;
         private long mChallenge;
         private boolean mPasswordConfirmed = false;
@@ -158,6 +158,8 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mIsSetNewPassword = false;
         private UserManager mUserManager;
         private ChooseLockGenericController mController;
+        private int mUnificationProfileId = UserHandle.USER_NULL;
+        private LockscreenCredential mUnificationProfileCredential;
 
         /**
          * From intent extra {@link ChooseLockSettingsHelper#EXTRA_KEY_REQUESTED_MIN_COMPLEXITY}.
@@ -185,48 +187,57 @@ public class ChooseLockGeneric extends SettingsActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             final Activity activity = getActivity();
+            final Bundle arguments = getArguments();
             if (!WizardManagerHelper.isDeviceProvisioned(activity)
                     && !canRunBeforeDeviceProvisioned()) {
                 Log.i(TAG, "Refusing to start because device is not provisioned");
                 activity.finish();
                 return;
             }
-
-            String chooseLockAction = getActivity().getIntent().getAction();
-            mFingerprintManager = Utils.getFingerprintManagerOrNull(getActivity());
-            mFaceManager = Utils.getFaceManagerOrNull(getActivity());
-            mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this.getActivity());
-            mLockPatternUtils = new LockPatternUtils(getActivity());
+            final Intent intent = activity.getIntent();
+            String chooseLockAction = intent.getAction();
+            mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+            mFaceManager = Utils.getFaceManagerOrNull(activity);
+            mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(activity);
+            mLockPatternUtils = new LockPatternUtils(activity);
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
                     || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
 
             // Defaults to needing to confirm credentials
-            final boolean confirmCredentials = getActivity().getIntent()
+            final boolean confirmCredentials = intent
                 .getBooleanExtra(CONFIRM_CREDENTIALS, true);
-            if (getActivity() instanceof ChooseLockGeneric.InternalActivity) {
+            if (activity instanceof ChooseLockGeneric.InternalActivity) {
                 mPasswordConfirmed = !confirmCredentials;
-                mUserPassword = getActivity().getIntent().getParcelableExtra(
+                mUserPassword = intent.getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
 
-            mHasChallenge = getActivity().getIntent().getBooleanExtra(
+            mHasChallenge = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
-            mChallenge = getActivity().getIntent().getLongExtra(
+            mChallenge = intent.getLongExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
-            mForFingerprint = getActivity().getIntent().getBooleanExtra(
+            mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
-            mForFace = getActivity().getIntent().getBooleanExtra(
+            mForFace = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, false);
-            mRequestedMinComplexity = getActivity().getIntent()
+            mRequestedMinComplexity = intent
                     .getIntExtra(EXTRA_KEY_REQUESTED_MIN_COMPLEXITY, PASSWORD_COMPLEXITY_NONE);
             mCallerAppName =
-                    getActivity().getIntent().getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
-            mIsCallingAppAdmin = getActivity().getIntent()
+                    intent.getStringExtra(EXTRA_KEY_CALLER_APP_NAME);
+            mIsCallingAppAdmin = intent
                     .getBooleanExtra(EXTRA_KEY_IS_CALLING_APP_ADMIN, /* defValue= */ false);
-            mForChangeCredRequiredForBoot = getArguments() != null && getArguments().getBoolean(
+            mForChangeCredRequiredForBoot = arguments != null && arguments.getBoolean(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT);
-            mUserManager = UserManager.get(getActivity());
+            mUserManager = UserManager.get(activity);
+
+            if (arguments != null) {
+                mUnificationProfileCredential = (LockscreenCredential) arguments.getParcelable(
+                        ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL);
+                mUnificationProfileId = arguments.getInt(
+                        ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID,
+                        UserHandle.USER_NULL);
+            }
 
             if (savedInstanceState != null) {
                 mPasswordConfirmed = savedInstanceState.getBoolean(PASSWORD_CONFIRMED);
@@ -242,19 +253,19 @@ public class ChooseLockGeneric extends SettingsActivity {
             //    from Settings app itself.
             // c) Otherwise, use UserHandle.myUserId().
             mUserId = Utils.getSecureTargetUser(
-                    getActivity().getActivityToken(),
-                    UserManager.get(getActivity()),
-                    getArguments(),
-                    getActivity().getIntent().getExtras()).getIdentifier();
+                    activity.getActivityToken(),
+                    UserManager.get(activity),
+                    arguments,
+                    intent.getExtras()).getIdentifier();
             mController = new ChooseLockGenericController(
                     getContext(), mUserId, mRequestedMinComplexity, mLockPatternUtils);
             if (ACTION_SET_NEW_PASSWORD.equals(chooseLockAction)
-                    && UserManager.get(getActivity()).isManagedProfile(mUserId)
+                    && UserManager.get(activity).isManagedProfile(mUserId)
                     && mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
-                getActivity().setTitle(R.string.lock_settings_picker_title_profile);
+                activity.setTitle(R.string.lock_settings_picker_title_profile);
             }
 
-            mManagedPasswordProvider = ManagedLockPasswordProvider.get(getActivity(), mUserId);
+            mManagedPasswordProvider = ManagedLockPasswordProvider.get(activity, mUserId);
 
             if (mPasswordConfirmed) {
                 updatePreferencesOrFinish(savedInstanceState != null);
@@ -264,9 +275,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else if (!mWaitingForConfirmation) {
                 ChooseLockSettingsHelper helper =
-                        new ChooseLockSettingsHelper(this.getActivity(), this);
+                        new ChooseLockSettingsHelper(activity, this);
                 boolean managedProfileWithUnifiedLock =
-                        UserManager.get(getActivity()).isManagedProfile(mUserId)
+                        UserManager.get(activity).isManagedProfile(mUserId)
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 boolean skipConfirmation = managedProfileWithUnifiedLock && !mIsSetNewPassword;
                 if (skipConfirmation
@@ -632,9 +643,22 @@ public class ChooseLockGeneric extends SettingsActivity {
                 boolean hideDisabled) {
             final PreferenceScreen entries = getPreferenceScreen();
 
-            int adminEnforcedQuality = mDPM.getPasswordQuality(null, mUserId);
+            int adminEnforcedQuality = mDpm.getPasswordQuality(null, mUserId);
             EnforcedAdmin enforcedAdmin = RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
                     getActivity(), mUserId);
+            // If we are to unify a work challenge at the end of the credential enrollment, manually
+            // merge any password policy from that profile here, so we are enrolling a compliant
+            // password. This is because once unified, the profile's password policy will
+            // be enforced on the new credential.
+            if (mUnificationProfileId != UserHandle.USER_NULL) {
+                int profileEnforceQuality = mDpm.getPasswordQuality(null, mUnificationProfileId);
+                if (profileEnforceQuality > adminEnforcedQuality) {
+                    adminEnforcedQuality = profileEnforceQuality;
+                    enforcedAdmin = EnforcedAdmin.combine(enforcedAdmin,
+                            RestrictedLockUtilsInternal.checkIfPasswordQualityIsSet(
+                                    getActivity(), mUnificationProfileId));
+                }
+            }
 
             for (ScreenLockType lock : ScreenLockType.values()) {
                 String key = lock.preferenceKey;
@@ -704,6 +728,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             if (mUserPassword != null) {
                 builder.setPassword(mUserPassword);
             }
+            if (mUnificationProfileId != UserHandle.USER_NULL) {
+                builder.setProfileToUnify(mUnificationProfileId, mUnificationProfileCredential);
+            }
             return builder.build();
         }
 
@@ -718,6 +745,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
             if (mUserPassword != null) {
                 builder.setPattern(mUserPassword);
+            }
+            if (mUnificationProfileId != UserHandle.USER_NULL) {
+                builder.setProfileToUnify(mUnificationProfileId, mUnificationProfileCredential);
             }
             return builder.build();
         }
