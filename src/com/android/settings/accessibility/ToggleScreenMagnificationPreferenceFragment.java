@@ -192,7 +192,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutTypeCache);
+        outState.putInt(EXTRA_SHORTCUT_TYPE, mUserShortcutTypesCache);
         super.onSaveInstanceState(outState);
     }
 
@@ -281,7 +281,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void updateAlertDialogCheckState() {
-        if (mUserShortcutTypeCache != UserShortcutType.EMPTY) {
+        if (mUserShortcutTypesCache != UserShortcutType.EMPTY) {
             updateCheckStatus(mSoftwareTypeCheckBox, UserShortcutType.SOFTWARE);
             updateCheckStatus(mHardwareTypeCheckBox, UserShortcutType.HARDWARE);
             updateCheckStatus(mTripleTapTypeCheckBox, UserShortcutType.TRIPLETAP);
@@ -289,32 +289,32 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void updateCheckStatus(CheckBox checkBox, @UserShortcutType int type) {
-        checkBox.setChecked((mUserShortcutTypeCache & type) == type);
+        checkBox.setChecked((mUserShortcutTypesCache & type) == type);
     }
 
     private void updateUserShortcutType(boolean saveChanges) {
-        mUserShortcutTypeCache = UserShortcutType.EMPTY;
+        mUserShortcutTypesCache = UserShortcutType.EMPTY;
         if (mSoftwareTypeCheckBox.isChecked()) {
-            mUserShortcutTypeCache |= UserShortcutType.SOFTWARE;
+            mUserShortcutTypesCache |= UserShortcutType.SOFTWARE;
         }
         if (mHardwareTypeCheckBox.isChecked()) {
-            mUserShortcutTypeCache |= UserShortcutType.HARDWARE;
+            mUserShortcutTypesCache |= UserShortcutType.HARDWARE;
         }
         if (mTripleTapTypeCheckBox.isChecked()) {
-            mUserShortcutTypeCache |= UserShortcutType.TRIPLETAP;
+            mUserShortcutTypesCache |= UserShortcutType.TRIPLETAP;
         }
 
         if (saveChanges) {
-            final boolean isChanged = (mUserShortcutTypeCache != UserShortcutType.EMPTY);
+            final boolean isChanged = (mUserShortcutTypesCache != UserShortcutType.EMPTY);
             if (isChanged) {
-                setUserShortcutType(getPrefContext(), mUserShortcutTypeCache);
+                setUserShortcutType(getPrefContext(), mUserShortcutTypesCache);
             }
-            mUserShortcutType = mUserShortcutTypeCache;
+            mUserShortcutType = mUserShortcutTypesCache;
         }
     }
 
     private void setUserShortcutType(Context context, int type) {
-        Set<String> info = SharedPreferenceUtils.getUserShortcutType(context);
+        Set<String> info = SharedPreferenceUtils.getUserShortcutTypes(context);
         if (info.isEmpty()) {
             info = new HashSet<>();
         } else {
@@ -335,7 +335,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             return context.getText(R.string.switch_off_text);
         }
 
-        final int shortcutType = getUserShortcutType(context, UserShortcutType.EMPTY);
+        final int shortcutType = getUserShortcutTypes(context, UserShortcutType.EMPTY);
         int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
@@ -369,8 +369,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    protected int getUserShortcutType(Context context, @UserShortcutType int defaultValue) {
-        final Set<String> info = SharedPreferenceUtils.getUserShortcutType(context);
+    protected int getUserShortcutTypes(Context context, @UserShortcutType int defaultValue) {
+        final Set<String> info = SharedPreferenceUtils.getUserShortcutTypes(context);
         final Set<String> filtered = info.stream().filter(
                 str -> str.contains(MAGNIFICATION_CONTROLLER_NAME)).collect(
                 Collectors.toSet());
@@ -446,7 +446,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onToggleClicked(ShortcutPreference preference) {
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
         } else {
@@ -458,8 +458,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public void onSettingsClicked(ShortcutPreference preference) {
         // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
-        mUserShortcutTypeCache = mShortcutPreference.isChecked()
-                ? getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE)
+        mUserShortcutTypesCache = mShortcutPreference.isChecked()
+                ? getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE)
                 : UserShortcutType.EMPTY;
         showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
     }
@@ -471,7 +471,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             setUserShortcutType(getPrefContext(), mUserShortcutType);
         } else {
             //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
-            mUserShortcutType = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+            mUserShortcutType = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         }
     }
 
@@ -487,7 +487,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     private void updateShortcutPreference() {
-        final int shortcutTypes = getUserShortcutType(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));

@@ -35,7 +35,7 @@ public final class SharedPreferenceUtils {
     }
 
     /** Returns a set of user shortcuts list to determine user preferred service shortcut. */
-    public static Set<String> getUserShortcutType(Context context) {
+    public static Set<String> getUserShortcutTypes(Context context) {
         return getSharedPreferences(context, ACCESSIBILITY_PERF)
                 .getStringSet(USER_SHORTCUT_TYPE, ImmutableSet.of());
     }
