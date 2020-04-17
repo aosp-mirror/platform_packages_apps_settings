@@ -46,21 +46,6 @@ public class HardwareRevisionPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_shouldBeSliceable() {
-        assertThat(mController.isSliceable()).isTrue();
-    }
-
-    @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
-    }
-
-    @Test
-    public void isCopyableSlice_shouldBeCopyableSlice() {
-        assertThat(mController.isCopyableSlice()).isTrue();
-    }
-
-    @Test
     public void copy_shouldCopyHardwareRevisionToClipboard() {
         final String fakeHardwareVer = "FakeVer1.0";
         SystemProperties.set("ro.boot.hardware.revision", fakeHardwareVer);
