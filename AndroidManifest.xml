@@ -1135,6 +1135,7 @@
                 android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
+                <action android:name="android.intent.action.AUTO_REVOKE_PERMISSIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
@@ -3180,6 +3181,7 @@
             android:theme="@style/Theme.Panel"
             android:launchMode="singleInstance"
             android:excludeFromRecents="true"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true">
                  <intent-filter>
                      <action android:name="android.settings.panel.action.INTERNET_CONNECTIVITY" />

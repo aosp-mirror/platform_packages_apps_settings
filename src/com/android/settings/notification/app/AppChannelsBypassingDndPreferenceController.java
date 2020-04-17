@@ -24,6 +24,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.core.text.BidiFormatter;
@@ -183,12 +184,16 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
             channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mAppRow.pkg);
             channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
             channelArgs.putBoolean(ARG_FROM_SETTINGS, true);
-            channelPreference.setIntent(new SubSettingLauncher(mContext)
-                    .setDestination(ChannelNotificationSettings.class.getName())
-                    .setArguments(channelArgs)
-                    .setTitleRes(com.android.settings.R.string.notification_channel_title)
-                    .setSourceMetricsCategory(SettingsEnums.DND_APPS_BYPASSING)
-                    .toIntent());
+            channelPreference.setOnPreferenceClickListener(preference -> {
+                new SubSettingLauncher(mContext)
+                        .setDestination(ChannelNotificationSettings.class.getName())
+                        .setArguments(channelArgs)
+                        .setUserHandle(UserHandle.of(mAppRow.userId))
+                        .setTitleRes(com.android.settings.R.string.notification_channel_title)
+                        .setSourceMetricsCategory(SettingsEnums.DND_APPS_BYPASSING)
+                        .launch();
+                return true;
+            });
             mPreferenceCategory.addPreference(channelPreference);
         }
         mAllNotificationsToggle.setChecked(areAllChannelsBypassing());

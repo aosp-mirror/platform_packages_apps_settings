@@ -23,12 +23,12 @@
     <string name="deny" msgid="7326117222944479942">"דחה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="two">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="many">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="other">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="one">אתה כעת במרחק של צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> מלהיות מפתח.</item>
+      <item quantity="two">נותרו לך עוד  <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="many">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="other">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="one">נותר לך עוד צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> כדי להיות מפתח.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"אתה כעת מפתח!"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"הוגדרת כמפתח!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"אין צורך, אתה כבר מפתח."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"קודם עליך להפעיל את אפשרויות המפתח."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"רשתות ותקשורת אלחוטית"</string>
@@ -324,7 +324,7 @@
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"נעילת מסך"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"הפנים נוספו"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
-    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה על ידי זיהוי פנים"</string>
+    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה בזיהוי פנים"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"שחרור נעילה על ידי זיהוי פנים עבור העבודה"</string>
     <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"איך להגדיר שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
@@ -915,8 +915,8 @@
     <string name="wifi_show_password" msgid="6865993988238157923">"הצגת סיסמה"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"‏בחר תדר AP"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"אוטומטי"</string>
-    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏פס של ‎2.4 GHz"</string>
-    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏פס של ‎5.0 GHz"</string>
+    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏תדר ‎2.4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏תדר ‎5.0 GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"‏עדיפות לתדר 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="4099628221864343015">"‎2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"‎5.0 GHz"</string>
@@ -1356,13 +1356,12 @@
       <item quantity="other">‏קוד גישה שגוי של כרטיס SIM. נותרו לך <xliff:g id="NUMBER_1">%d</xliff:g> ניסיונות.</item>
       <item quantity="one">‏קוד גישה שגוי של כרטיס SIM. נותר לך ניסיון <xliff:g id="NUMBER_0">%d</xliff:g> לפני שיהיה עליך ליצור קשר עם הספק כדי לבטל את נעילת המכשיר.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"‏קוד האימות של כרטיס ה-SIM שגוי. נותר לך ניסיון נוסף אחד לפני שיהיה עליך ליצור קשר עם הספק על מנת לבטל את נעילת המכשיר."</string>
     <string name="pin_failed" msgid="3726505565797352255">"‏פעולת קוד הגישה של כרטיס ה-SIM נכשלה!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"‏גרסת Android"</string>
-    <string name="security_patch" msgid="2872125288404962091">"‏רמת תיקון האבטחה ב-Android"</string>
+    <string name="security_patch" msgid="4071756145347865382">"‏עדכון אבטחה ל-Android"</string>
     <string name="model_info" msgid="8997566254717810904">"דגם"</string>
     <string name="model_summary" msgid="2246651782442466213">"‏מודל: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"דגם וחומרה"</string>
@@ -2175,12 +2174,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"יש להחליק למעלה בעזרת שתי אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"יש להחליק למעלה בעזרת שלוש אצבעות"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"יש להקיש על לחצן הנגישות"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"יש ללחוץ על לחצן הנגישות <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> שבתחתית המסך.\n\nכדי לעבור בין התכונות השונות, יש ללחוץ לחיצה ארוכה על לחצן הנגישות."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שתי אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שתי אצבעות ולהחזיק."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"יש להחליק כלפי מעלה מתחתית המסך באמצעות שלוש אצבעות.\n\nכדי לעבור בין תכונות, יש להחליק כלפי מעלה באמצעות שלוש אצבעות ולהחזיק."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"החזקה של לחצני עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"יש ללחוץ לחיצה ארוכה על שני הלחצנים של עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"יש להקיש 3 פעמים על המסך"</string>
@@ -3301,6 +3297,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"אתגר בעבודה, עבודה, פרופיל"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"כרטיסים"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"פקדי המכשיר, פקדים"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="707735920706667685">"‏גיבוי, לגבות, backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"תנועה"</string>
@@ -3472,7 +3470,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"התראות והפרעות אחרות"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"לוחות זמנים"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"הגדרה של משך זמן להגדרות מהירות"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"משך זמן להגדרות מהירות"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"כשמצב \'נא לא להפריע\' פועל, צלילים ורטט מושתקים, חוץ מהפריטים שאפשרת למעלה."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"הגדרות מותאמות אישית"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"בדיקת לוח זמנים"</string>
@@ -3519,10 +3517,8 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"שימוש בהיסטוריית ההתראות"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"היסטוריית ההתראות כבויה"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"יש להפעיל את היסטוריית ההתראות כדי להציג התראות אחרונות והתראות שהועברו למצב נודניק"</string>
-    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
-    <skip />
-    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
-    <skip />
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"אין התראות אחרונות"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"ההתראות האחרונות וההתראות שהועברו למצב נודניק יופיעו כאן"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"צפייה בהגדרות של ההתראות"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"פתיחת ההתראה"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"הפעלת האפשרות להעביר התראות למצב \'נודניק\'"</string>
@@ -3794,7 +3790,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"שיחות"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"שיחות שיכולות להפריע"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"כל השיחות"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"שיחות חשובות"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"שיחות בעדיפות גבוהה"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ללא"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="two"><xliff:g id="CONVERSATIONS">%d</xliff:g> שיחות</item>
@@ -3808,7 +3804,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"שיחות"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"שיחות"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"שיחות שיכולות להפריע"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"כדי לוודא ששיחות מורשות יישמעו, יש לבדוק אם המכשיר שלך מוגדר לצלצול, לרטט או למצב שקט."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"כדי לוודא ששיחות מורשות יישמעו, יש לבדוק אם המכשיר מוגדר לצלצול"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, שיחות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"אנשי קשר שמסומנים בכוכב"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3819,9 +3815,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"התראות"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"הודעות"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"‏SMS,‏ MMS ואפליקציות לשליחת הודעות"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"הודעות"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"הודעות שיכולות להפריע"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"כדי לוודא שהודעות מורשות יישמעו, יש לבדוק אם המכשיר שלך מוגדר לצלצול, לרטט או למצב שקט."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"כדי לוודא שהודעות מורשות יישמעו, יש לבדוק אם המכשיר מוגדר לצלצול"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"כל המתקשרים מקטגוריה <xliff:g id="SENDER_CATEGORY">%s</xliff:g> יכולים להשיג אותך"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר"</string>
@@ -3838,15 +3834,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"מטיימרים, התראות, מערכות אבטחה ואפליקציות אחרות"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"התראות"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"צלילי מדיה"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"מסרטונים, משחקים ומדיה אחרת"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"צלילים מסרטונים, ממשחקים וממדיה אחרת"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"מדיה"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"צלילי מגע"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"מהמקלדת שלך ומלחצנים אחרים"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"צלילים מהמקלדת ומלחצנים אחרים"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"צלילי מגע"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"תזכורות"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"ממשימות ותזכורות"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"תזכורות"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"אירועים"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"אירועים ביומן"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים צפויים ביומן"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"אירועים"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
@@ -3890,7 +3886,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> ו<xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"אם מגיעה שיחה ממישהו בפעם השנייה תוך <xliff:g id="MINUTES">%d</xliff:g> דקות"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"אם מגיעה שיחה מאותו אדם בפעם השנייה תוך <xliff:g id="MINUTES">%d</xliff:g> דקות"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"מותאם אישית"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"הפעלה אוטומטית"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"אף פעם"</string>
@@ -4255,7 +4251,7 @@
       <item quantity="other">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
       <item quantity="one">כבויות עבור אפליקציה אחת</item>
     </plurals>
-    <string name="notification_summary_none" msgid="9179312319023988089">"מופעל לכל האפליקציות"</string>
+    <string name="notification_summary_none" msgid="9179312319023988089">"מופעלות לכל האפליקציות"</string>
     <string name="apps_summary" msgid="4007416751775414252">"הותקנו <xliff:g id="COUNT">%1$d</xliff:g> אפליקציות"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"הותקנו 24 אפליקציות"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש, <xliff:g id="FREE_SPACE">%2$s</xliff:g> פנויים"</string>
@@ -4536,15 +4532,14 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"צילום מהיר יותר של סלפי"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"ניווט במערכת"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 לחצנים"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעזור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"כדאי לנסות את הלחצן הראשי החדש"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"הפעלת התנועה החדשה למעבר בין אפליקציות"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ניווט באמצעות תנועות"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"כדי לעבור למסך הבית, יש להחליק מעלה מהחלק התחתון של המסך. כדי לעבור בין אפליקציות יש להחליק מעלה מהחלק התחתון של המסך, להחזיק ולאחר מכן לשחרר. כדי לחזור למסך הקודם יש להחליק מהקצה הימני או השמאלי של המסך."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"ניווט באמצעות 3 לחצנים"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"ניתן לבצע פעולות כמו חזרה למסך קודם, מעבר למסך הבית ומעבר בין אפליקציות באמצעות לחצנים בחלק התחתון של המסך."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"ניווט במערכת, ניווט ב-2 לחצנים, ניווט ב-3 לחצנים, ניווט באמצעות תנועות, החלקה"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"הפעולה לא נתמכת באפליקציית ברירת המחדל לדף הבית, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"החלפה של אפליקציית ברירת המחדל לדף הבית"</string>
     <string name="information_label" msgid="6939310810756569298">"מידע"</string>
@@ -5019,21 +5014,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"עבודה"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"ברירת מחדל של המערכת"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"אפשרות זו כבר לא תקפה. יש לנסות שוב."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"פקדים מהירים"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"פקדים מהירים"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"פקדי המכשיר"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"פקדי המכשיר"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"כרטיסים וכרטיסי אשראי"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"כרטיסים וכרטיסי אשראי"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"תפריט הפעלה"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"תפריט לחצן הפעלה"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"הצגת כרטיסים וכרטיסי אשראי"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"הצגת פקדים מהירים"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"הצגת כרטיסים, כרטיסי אשראי ופקדים מהירים"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"הצגת פקדי המכשיר"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"הצגת כרטיסים, שוברים ופקדי מכשיר"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"לא להציג שום תוכן"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"פרטיות"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"הצגת כרטיסים ופקדים בנעילה"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"הסתרת כרטיסים ופקדים בנעילה"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"הצגת פקדים מהירים"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"יש להחזיק את לחצן ההפעלה כדי לגשת לפקדים למכשירים מחוברים"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"הצגת פקדי המכשיר"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"הצגת כרטיסים"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"יש להחזיק את לחצן ההפעלה כדי לגשת לפקדים למכשירים מחוברים"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"כדי לגשת לפרטים כמו אמצעי תשלום וכרטיסי עלייה למטוס, יש ללחוץ לחיצה ארוכה על לחצן ההפעלה."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>

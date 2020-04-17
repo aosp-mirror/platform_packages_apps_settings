@@ -23,8 +23,8 @@
     <string name="deny" msgid="7326117222944479942">"Rədd edin"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Naməlum"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Tərtibatçı olmaqdan <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> addım uzaqsınız.</item>
-      <item quantity="one">Tərtibatçı olmaqdan <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> addım uzaqsınız.</item>
+      <item quantity="other">Developer olmaqdan <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> addım uzaqsınız.</item>
+      <item quantity="one">Developer olmaqdan <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> addım uzaqsınız.</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"Siz indi tərtibatçısınız!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Ehtiyac yoxdur, Siz artı gəlişdiricisiniz."</string>
@@ -274,7 +274,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC ofsetinə görə seçin"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Tarix"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Vaxt"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Ekranın avtomatik söndükdən sonra kilinlənsin"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Ekran söndükdən sonra kilinlənsin"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən dərhal sonra"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
@@ -320,7 +320,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Üz kilidi"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"İş üçün üz kilidi"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Üz kilidi ayarlamaq haqqında"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Üz kilidi necə ayarlanır"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
@@ -859,7 +859,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID daxil edin"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Təhlükəsizlik"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Gizlədilmiş şəbəkə"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Yönləndirici şəbəkə ID-sini yayımlamırsa, lakin ona gələcəkdə qoşulmaq istəyirsinizsə, şəbəkəni gizlədə bilərsiniz.\n\nBu təhlükəsizliyinizi riskə ata bilər çünki telefon şəbəkəni tapmaq üçün daima siqnal yayımlayacaq.\n\nŞəbəkəini gizlətmək yönləndirici ayarlarını dəyişməyəcək."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Yönləndirici şəbəkə ID-sini yayımlamırsa, lakin ona gələcəkdə qoşulmaq istəyirsinizsə, şəbəkəni gizlədə bilərsiniz.\n\nBu təhlükəsizliyinizi riskə ata bilər, çünki telefon şəbəkəni tapmaq üçün daima siqnal yayımlayacaq.\n\nŞəbəkəini gizlətmək yönləndirici ayarlarını dəyişməyəcək."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Siqnal gücü"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Link sürətini ötürün"</string>
@@ -1019,7 +1019,7 @@
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Cihaz axtarışı"</string>
     <string name="wifi_p2p_menu_searching" msgid="3428767661028761100">"Axtarır..."</string>
     <string name="wifi_p2p_menu_rename" msgid="7059994112737743336">"Cihazı yenidən adlandır"</string>
-    <string name="wifi_p2p_peer_devices" msgid="5158559154640283546">"Peer cihazlar"</string>
+    <string name="wifi_p2p_peer_devices" msgid="5158559154640283546">"Əlçatımlı cihazlar"</string>
     <string name="wifi_p2p_remembered_groups" msgid="5497007770930525695">"Qrupları yadda saxla"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="6767831720507440027">"Bağlana bilmədi."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="1317434386267376606">"Cihazın adı dəyişə bilmədi."</string>
@@ -1271,7 +1271,7 @@
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Nə vaxt göstərmək lazımdır"</string>
     <string name="doze_title" msgid="1523090408230862316">"Bildirişlər üçün ekranı oyadın"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Ekran tünd olduqda o, yeni bildirişləri göstərmək üçün aktiv olur"</string>
-    <string name="doze_always_on_title" msgid="7326245192352868477">"Həmişə vaxtı və məlumatı göstərin"</string>
+    <string name="doze_always_on_title" msgid="7326245192352868477">"Həmişə vaxt və bilgini göstər"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Batareya istifadəsi artdı"</string>
     <string name="title_font_size" msgid="570613010306330622">"Şrift ölçüsü"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Mətni kiçildin və ya böyüdün"</string>
@@ -1314,13 +1314,12 @@
       <item quantity="other">Yanlış SIM PIN kodu, <xliff:g id="NUMBER_1">%d</xliff:g> cəhdiniz qalır.</item>
       <item quantity="one">Yanlış SIM PIN kodu, cihazınızı kiliddən çıxarmaq üçün operatorunuzla əlaqə saxlamadan öncə <xliff:g id="NUMBER_0">%d</xliff:g> cəhdiniz qalır.</item>
     </plurals>
-    <!-- no translation found for wrong_pin_code_one (6924852214263071441) -->
-    <skip />
+    <string name="wrong_pin_code_one" msgid="6924852214263071441">"Yanlış SIM PIN kodu, 1 cəhddən sonra cihazı kiliddən çıxarmaq üçün operatorla əlaqə saxlamalısınız."</string>
     <string name="pin_failed" msgid="3726505565797352255">"SIM PIN əməliyyatı alınmadı!"</string>
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Sistem güncəlləmələri"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android versiyası"</string>
-    <string name="security_patch" msgid="2872125288404962091">"Android təhlükəsizlik yamaq səviyyəsi"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android güvənlik güncəlləməsi"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
     <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model və avadanlıq"</string>
@@ -1538,7 +1537,7 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Kontent <xliff:g id="NAME_0">^1</xliff:g> ünvanına köçürüldü. \n\n<xliff:g id="NAME_1">^2</xliff:g> ünvanını idarə etmək üçün, "<b>"Ayarlar &gt; Yaddaş"</b>" bölməsinə keçin."</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batareya statusu"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batareya səviyyəsi"</string>
-    <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
+    <string name="apn_settings" msgid="4295467389400441299">"APN-lər"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Giriş nöqtəsinə düzəliş edin"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Təyin edilməyib"</string>
     <string name="apn_name" msgid="6677695784108157953">"Ad"</string>
@@ -1719,7 +1718,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Hüquqi məlumata, statusa, proqram versiyasına baxın"</string>
     <string name="legal_information" msgid="7509900979811934843">"Hüquqi məlumat"</string>
     <string name="contributors_title" msgid="7965640251547037965">"Yazarlar"</string>
-    <string name="manual" msgid="3651593989906084868">"Dərslik"</string>
+    <string name="manual" msgid="3651593989906084868">"Manual"</string>
     <string name="regulatory_labels" msgid="5960251403367154270">"Tənzimləyici etiketlər"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Təhlükəsizlik və tənzimləyici təlimatı"</string>
     <string name="copyright_title" msgid="83245306827757857">"Müəlliflik hüququ"</string>
@@ -1729,7 +1728,7 @@
     <string name="webview_license_title" msgid="5832692241345780517">"Sistem WebView Lisenziyası"</string>
     <string name="wallpaper_attributions" msgid="3080339190260272255">"Divar kağızları"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Peyk şəkillərini təqdim edənlər:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
-    <string name="settings_manual_activity_title" msgid="1682978148920788484">"Dərslik"</string>
+    <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Dərsliklərin yüklənməsində problem var."</string>
     <string name="settings_license_activity_title" msgid="7832071619364734914">"Üçüncü tərəf lisenziyaları"</string>
     <string name="settings_license_activity_unavailable" msgid="9014803774391134570">"Lisenziyaların yüklənilməsində problem var."</string>
@@ -1984,9 +1983,9 @@
     <string name="language_input_gesture_summary_on_with_assist" msgid="8670153838520237089"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="2738661322747920463"></string>
     <string name="language_input_gesture_summary_off" msgid="1604575860215661606"></string>
-    <string name="language_settings" msgid="8700174277543875046">"Dillər və daxiletmə"</string>
+    <string name="language_settings" msgid="8700174277543875046">"Dillər və yazı dili"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Cihaz dilini dəyişmək icazəniz yoxdur."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Dillər və daxiletmə"</string>
+    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Dillər və yazı dili"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Alətlər"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"Klaviatura &amp; daxiletmə metodları"</string>
     <string name="phone_language" msgid="5986939176239963826">"Dillər"</string>
@@ -2129,12 +2128,9 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 barmaqla yuxarıya çəkin"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 barmaqla yuxarıya çəkin"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Əlçatımlılıq düyməsinə toxunun"</string>
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software (5606196352833449600) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture (8292555254353761635) -->
-    <skip />
-    <!-- no translation found for accessibility_shortcut_edit_dialog_summary_software_gesture_talkback (84483464524360845) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Ekranınızın aşağısındakı əlçatımlılıq düyməsinə <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> toxunun.\n\nFunksiyalar arasında keçid etmək üçün əlçatımlılıq düyməsinə toxunub saxlayın."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"2 barmaq ilə ekranın aşağısından yuxarı doğru sürüşdürün\n\nFunksiyalar arasında keçid etmək üçün 2 barmaq ilə yuxarı doğru sürüşdürüb saxlayın."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 barmaq ilə ekranın aşağısından yuxarı doğru sürüşdürün.\n\nFunksiyalar arasında keçid etmək üçün 3 barmaq ilə yuxarı sürüşdürüb saxlayın."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Səs düymələrini basıb saxlayın"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Hər iki səs səviyyəsi düyməsinə basıb saxlayın"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ekrana üç dəfə toxunun"</string>
@@ -2189,7 +2185,7 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Toxunuş rəyi"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> istifadə edin"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> tətbiqini açın"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Rəng korreksiyasından istifadə edin"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Rəng düzəlişini işlədin"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Başlıqları göstərin"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Yalnız dəstəklənən tətbiq üçün"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Altyazı ölçüsü və üslubu"</string>
@@ -2642,7 +2638,7 @@
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Bütün sertifikatları sil"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"İnanılmış etimadlar"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"İnanılmış CA sertifikatları göstər"</string>
-    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi haqqında məlumatlar"</string>
+    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi məlumatı"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Saxlanılan məlumatlara baxın və dəyişin"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Qabaqcıl ayarlar"</string>
     <string name="credential_storage_type" msgid="930861336971619888">"Saxlama növü"</string>
@@ -3213,6 +3209,8 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"iş məşqi, iş, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"iş profili, idarə olunan profil, birləşdirin, birləşmə, iş, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"jestlər"</string>
+    <string name="keywords_cards_passes" msgid="4798102029412153067">"kartlar, keçidlər"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"cihaz nizamlayıcıları, nizamlayıcılar"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"ödəyin, tıklayın, ödəmələr"</string>
     <string name="keywords_backup" msgid="707735920706667685">"yedəkləmə, yedəkləyin"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"jest"</string>
@@ -3378,7 +3376,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Tətbiqlər"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Siqnallar və digər xəbərdarlıqlar"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Cədvəllər"</string>
-    <string name="zen_category_duration" msgid="9087097798798014653">"Sürətli Ayarlar üçün müddət təyin edin"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Sürətli Ayarlar üçün müddət"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"\"Narahat Etməyin\" rejimi aktiv olduğu zaman, yuxarıda icazə verdiyiniz elementlərdən başqa səs və vibrasiya susdurulacaq."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Fərdi ayarlar"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Ayarları nəzərdən keçirin"</string>
@@ -3425,10 +3423,8 @@
     <string name="notification_history_toggle" msgid="9093762294928569030">"Bildiriş tarixçəsindən istifadə edin"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Bildiriş tarixçəsi deaktiv edilib"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Son bildirişlər və mürgü rejiminə keçirilmiş bildirişləri görmək üçün bildiriş tarixçəsini aktiv edin"</string>
-    <!-- no translation found for history_toggled_on_title (4518001110492652830) -->
-    <skip />
-    <!-- no translation found for history_toggled_on_summary (9034278971358282728) -->
-    <skip />
+    <string name="history_toggled_on_title" msgid="4518001110492652830">"Son bildirişlər yoxdur"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Son və mürgü rejiminə qoyulmuş bildirişlər burada görünəcək"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"bildiriş ayarlarına baxın"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"bildirişi açın"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Bildirişin mürgü rejiminə keçirilməsinə icazə verin"</string>
@@ -3686,7 +3682,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Söhbətlər"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Bölə bilən söhbətlər"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Bütün söhbətlər"</string>
-    <string name="zen_mode_from_important_conversations" msgid="7995611445250122407">"Vacib söhbətlər"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Prioritet söhbətlər"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Heç biri"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> söhbət</item>
@@ -3698,7 +3694,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Çağrılar"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"zənglər"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Bölə bilən zənglər"</string>
-    <string name="zen_mode_calls_footer" msgid="4486295365803001814">"İcazəli zənglərin səsli olduğuna əmin olmaq üçün cihazın səsli, vibrasiya yoxsa səssiz olaraq ayarlanıb-ayarlanmadığını yoxlayın."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"İcazə verilən zənglərin səs çıxardığından əmin olmaq üçün cihazın zəng çalmağa ayarlandığını yoxlayın"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"\"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" üçün daxil olan zənglər blok edilir. Dostlar, ailə və ya digər kontakların əlaqə saxlaması üçün ayarları tənzimləyə bilərsiniz."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Ulduzlanmış kontaktlar"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3707,9 +3703,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mesajlar"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mesajlar"</string>
-    <string name="zen_mode_messages_title" msgid="1894654645929324997">"SMS, MMS və mesajlaşma tətbiqləri"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mesajlar"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Bölə bilən mesajlar"</string>
-    <string name="zen_mode_messages_footer" msgid="6996375319078720643">"İcazəli mesajların səsli olduğuna əmin olmaq üçün cihazın səsli, vibrasiya yoxsa səssiz olaraq ayarlanıb-ayarlanmadığını yoxlayın."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"İcazə verilən mesajların səs çıxardığından əmin olmaq üçün cihazın zəng çalmağa ayarlandığına əmin olun"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"\"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" üçün gələn mesajlar blok edilir. Dostlar, ailə və ya digər kontakların Sizinlə əlaqə saxlaması üçün ayarları tənzimləyə bilərsiniz."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Bütün <xliff:g id="SENDER_CATEGORY">%s</xliff:g> sizinlə əlaqə saxlaya bilər"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> kontakt"</string>
@@ -3726,15 +3722,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Taymerlər, siqnallar, təhlükəsizlik sistemləri və digər tətbiqlərdən"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"siqnallar"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Media səsləri"</string>
-    <string name="zen_mode_media_summary" msgid="3052407079117545815">"Videolar, oyunlar və digər mediadan"</string>
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Videolar, oyunlar və digər mediadan gələn səslər"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"media"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Toxunma səsləri"</string>
-    <string name="zen_mode_system_summary" msgid="7905531918458452765">"Klaviatura və digər düymələrdən"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Klaviatura və digər düymələrdən gələn səslər"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"klik səsləri"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Xatırlamalar"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Tapşırıqlar və xatırladıcılardan"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"xatırlatmalar"</string>
-    <string name="zen_mode_events" msgid="7455308377739125312">"Tədbirlər"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"Təqvim tədbirləri"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Gələcək təqvim tədbirlərindən"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"tədbirlər"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tətbiqlərin rejimdən imtina etməsinə icazə verin"</string>
@@ -3774,7 +3770,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> və <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Eyni şəxs <xliff:g id="MINUTES">%d</xliff:g> dəqiqə ərzində yenidən zəng edərsə,"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Eyni şəxs <xliff:g id="MINUTES">%d</xliff:g> dəqiqə ərzində yenidən zəng edərsə"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Fərdi"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Avtomatik aktivləşdir"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Heç vaxt"</string>
@@ -3935,7 +3931,7 @@
     <string name="default_app" msgid="445053777504688596">"(Defolt)"</string>
     <string name="system_app" msgid="1863291702508355041">"(Sistem)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(Sistem defoltu)"</string>
-    <string name="apps_storage" msgid="643866814746927111">"Tətbiq yaddaş ehtiyatı"</string>
+    <string name="apps_storage" msgid="643866814746927111">"Tətbiq yaddaşı"</string>
     <string name="usage_access" msgid="5487993885373893282">"İstifadə girişi"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"İstifadə girişinə icazə verin"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Tətbiqin istifadə tərcihləri"</string>
@@ -3952,7 +3948,7 @@
     <string name="memory_avg_desc" msgid="2632995851138152303">"Orta <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4376086847362492613">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="4239069158701023623">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="5623152700992102510">"Batareya optimallaşdırılması"</string>
+    <string name="high_power_apps" msgid="5623152700992102510">"Batareya optimallaşması"</string>
     <string name="additional_battery_info" msgid="3104208543623068714">"İstifadə siqnalları"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"Tam cihaz istifadəsini göstərin"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"Tətbiq istifadəsini göstərin"</string>
@@ -4062,7 +4058,7 @@
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Tətbiqlər"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Tətbiqlər üzərindən görüntüləmə"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Digər tətbiq üzərindən görüntüləmək icazəsi"</string>
-    <string name="allow_overlay_description" msgid="1607235723669496298">"Bu tətbiqə istifadə etdiyiniz digər tətbiqlərin üzərində göstərilmək icazəsi verin. Bu tətbiq hara toxunduğunuzu görə və ya ekranda göstəriləni dəyişə biləcək."</string>
+    <string name="allow_overlay_description" msgid="1607235723669496298">"Bu tətbiqə işlətdiyiniz digər tətbiqlərin üzərində göstərilmək icazəsi verin. Bu tətbiq hara toxunduğunuzu görə və ya ekranda göstəriləni dəyişə biləcək."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Bütün fayllara giriş"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Bütün faylları idarə etmək üçün giriş icazəsi verin"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Bu tətbiqə bu cihazda və ya qoşulmuş cihazların yaddaşındakı bütün faylları oxumaq, dəyişmək və silmək icazəsi verin. İcazə verilsə, tətbiq xəbəriniz olmadan fayllara daxil ola bilər."</string>
@@ -4272,7 +4268,7 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Cihaz kilidlidirsə, bildirişlərdə cavab və ya digər mətnlərin yazılmasının qarşısını alın."</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Defolt orfoqrafik yoxlama"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Orfoqrafik yoxlama seçin"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Orfoqrafik yoxlamadan istifadə edin"</string>
+    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Orfoqrafik yoxlama işlədin"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Seçilməyib"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(heç biri)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4385,8 +4381,7 @@
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Əsas səhifəyə keçmək üçün ekranın aşağısından yuxarı doğru sürüşdürün. Tətbiqləri dəyişmək üçün aşağıdan yuxarı sürüşdürüb saxlayın və buraxın. Geri qayıtmaq üçün sol, yaxud sağ küncə sürüşdürün."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"3 düyməli naviqasiya"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"\"Geri qayıdın\", \"Əsas səhifə\" və ekranın aşağısındakı düymələrlə tətbiqləri dəyişin."</string>
-    <!-- no translation found for keywords_system_navigation (3131782378486554934) -->
-    <skip />
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"sistem naviqasiyası, 2 düyməli naviqasiya, 3 düyməli naviqasiya, jest naviqasiyası, sürüşdürmə"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Defolt home tətbiqi <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> tərəfindən dəstəklənmir"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Defolt home tətbiqini dəyişin"</string>
     <string name="information_label" msgid="6939310810756569298">"Məlumat"</string>
@@ -4526,7 +4521,7 @@
     <string name="launch_instant_app" msgid="8503927414339606561">"Açın"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Oyunlar"</string>
     <string name="audio_files_title" msgid="5981409295669041303">"Audio fayllar"</string>
-    <string name="app_info_storage_title" msgid="4076977173803093808">"Yaddaş sahəsi istifadə edildi"</string>
+    <string name="app_info_storage_title" msgid="4076977173803093808">"İşlədilən yaddaş"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(<xliff:g id="USER">%s</xliff:g> üçün silindi)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(<xliff:g id="USER">%s</xliff:g> üçün deaktiv edildi)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Avtodoldurma xidməti"</string>
@@ -4839,21 +4834,23 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"İş"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Sistem defoltu"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Bu seçim artıq etibarlı deyil. Yenidən cəhd edin."</string>
-    <string name="quick_controls_sentence" msgid="1117027971581616247">"Sürətli nizamlayıcılar"</string>
-    <string name="quick_controls_lower" msgid="3122306592747647839">"sürətli nizamlayıcılar"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Cihaz nizamlayıcıları"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"cihaz nizamlayıcıları"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartlar və giriş talonları"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartlar və giriş talonları"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Yandırıb-söndürmə menyusu"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Yandırıb-söndürmə düyməsi menyusu"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Kartları və giriş talonlarını göstərin"</string>
-    <string name="power_menu_quick_controls" msgid="1177158735026325991">"Sürətli nizamlayıcıları göstərin"</string>
-    <string name="power_menu_cards_passes_quick_controls" msgid="1697953705587563813">"Kartları, giriş talonlarını və sürətli nizamlayıcıları göstərin"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Cihaz nizamlayıcılarını göstərin"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Kartları, giriş talonlarını və cihaz nizamlayıcılarını göstərin"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Heç bir məzmunu göstərməyin"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Məxfilik"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Kilidli olduqda kartları və nizamlayıcıları göstərin"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Kilidli olduqda kartları və nizamlayıcıları gizlədin"</string>
-    <string name="quick_controls_setting_toggle" msgid="2286950842335581923">"Sürətli nizamlayıcıları göstərin"</string>
-    <string name="quick_controls_setting_subtitle" msgid="6802721236627739779">"Qoşulmuş cihazların nizamlayıcılarına giriş üçün Yandırıb-söndürmə düyməsini basıb saxlayın"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Cihaz nizamlayıcılarını göstərin"</string>
+    <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Kartları &amp; gedişləri göstərin"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Qoşulmuş cihazlar üçün nizamlayıcılara daxil olmaq məqsədilə Yandırıb-söndürmə düyməsinə basıb saxlayın"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Ödəniş metodlarına, keçid biletlərinə və s. giriş etmək üçün Yandırıb-söndürmə düyməsinə basıb-saxlayın."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
