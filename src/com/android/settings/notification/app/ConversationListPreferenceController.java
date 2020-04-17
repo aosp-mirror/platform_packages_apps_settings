@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.text.TextUtils;
@@ -97,7 +98,10 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                 conversation.getPkg(), conversation.getUid(),
                 conversation.getNotificationChannel().isImportantConversation()));
         pref.setKey(conversation.getNotificationChannel().getId());
-        pref.setIntent(getIntent(conversation, pref.getTitle()));
+        pref.setOnPreferenceClickListener(preference -> {
+            getSubSettingLauncher(conversation, pref.getTitle()).launch();
+            return true;
+        });
 
         return pref;
     }
@@ -116,7 +120,8 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                 : conversation.getNotificationChannel().getName();
     }
 
-    Intent getIntent(ConversationChannelWrapper conversation, CharSequence title) {
+    SubSettingLauncher getSubSettingLauncher(ConversationChannelWrapper conversation,
+            CharSequence title) {
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, conversation.getUid());
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, conversation.getPkg());
@@ -129,9 +134,9 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                 .setDestination(ChannelNotificationSettings.class.getName())
                 .setArguments(channelArgs)
                 .setExtras(channelArgs)
+                .setUserHandle(UserHandle.getUserHandleForUid(conversation.getUid()))
                 .setTitleText(title)
-                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS)
-                .toIntent();
+                .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS);
     }
 
     protected Comparator<ConversationChannelWrapper> mConversationComparator =
