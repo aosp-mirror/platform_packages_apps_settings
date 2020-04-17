@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
 public class ListWithEntrySummaryPreferenceTest {
@@ -53,6 +54,7 @@ public class ListWithEntrySummaryPreferenceTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mContext.setTheme(R.style.Theme_Settings_Home);
+        ShadowLooper.pauseMainLooper();
         mPreference = new ListWithEntrySummaryPreference(mContext, null);
         mPreference.setEntries(mDefaultEntries);
         mPreference.setEntryValues(mDefaultEntryValues);
@@ -60,7 +62,7 @@ public class ListWithEntrySummaryPreferenceTest {
     }
 
     @Test
-    public void initialize_defaultEntries_shouldDisplayDefalutEntries() {
+    public void initialize_defaultEntries_shouldDisplayDefaultEntries() {
         AlertDialog dialog = showDialog(mPreference);
         ListAdapter adapter = dialog.getListView().getAdapter();
 

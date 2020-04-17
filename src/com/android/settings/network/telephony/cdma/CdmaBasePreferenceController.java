@@ -44,7 +44,6 @@ public abstract class CdmaBasePreferenceController extends TelephonyBasePreferen
     protected Preference mPreference;
     protected TelephonyManager mTelephonyManager;
     protected PreferenceManager mPreferenceManager;
-    protected int mSubId;
     private DataContentObserver mDataContentObserver;
 
     public CdmaBasePreferenceController(Context context, String key) {

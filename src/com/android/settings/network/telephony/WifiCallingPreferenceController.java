@@ -34,8 +34,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.ims.ImsManager;
 import com.android.settings.R;
+import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -48,12 +48,12 @@ import java.util.List;
 public class WifiCallingPreferenceController extends TelephonyBasePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
+    private static final String TAG = "WifiCallingPreference";
+
     @VisibleForTesting
     Integer mCallState;
     @VisibleForTesting
     CarrierConfigManager mCarrierConfigManager;
-    @VisibleForTesting
-    ImsManager mImsManager;
     private ImsMmTelManager mImsMmTelManager;
     @VisibleForTesting
     PhoneAccountHandle mSimCallManager;
@@ -68,8 +68,8 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
-                && MobileNetworkUtils.isWifiCallingEnabled(mContext, subId)
+        return SubscriptionManager.isValidSubscriptionId(subId)
+                && isWifiCallingEnabled(mContext, subId)
                 ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
     }
@@ -100,6 +100,7 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         if (mCallState == null) {
             return;
         }
+        CharSequence summaryText = null;
         if (mSimCallManager != null) {
             final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(mContext,
                     mSimCallManager);
@@ -110,53 +111,55 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             final PackageManager pm = mContext.getPackageManager();
             final List<ResolveInfo> resolutions = pm.queryIntentActivities(intent, 0);
             preference.setTitle(resolutions.get(0).loadLabel(pm));
-            preference.setSummary(null);
             preference.setIntent(intent);
         } else {
             final String title = SubscriptionManager.getResourcesForSubId(mContext, mSubId)
                     .getString(R.string.wifi_calling_settings_title);
             preference.setTitle(title);
-            int resId = com.android.internal.R.string.wifi_calling_off_summary;
-            if (mImsManager.isWfcEnabledByUser()) {
-                boolean useWfcHomeModeForRoaming = false;
-                if (mCarrierConfigManager != null) {
-                    final PersistableBundle carrierConfig =
-                            mCarrierConfigManager.getConfigForSubId(mSubId);
-                    if (carrierConfig != null) {
-                        useWfcHomeModeForRoaming = carrierConfig.getBoolean(
-                                CarrierConfigManager
-                                        .KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL);
-                    }
-                }
-                final boolean isRoaming = getTelephonyManager(mContext, mSubId)
-                        .isNetworkRoaming();
-                final int wfcMode = (isRoaming && !useWfcHomeModeForRoaming)
-                        ? mImsMmTelManager.getVoWiFiRoamingModeSetting() :
-                        mImsMmTelManager.getVoWiFiModeSetting();
-                switch (wfcMode) {
-                    case ImsMmTelManager.WIFI_MODE_WIFI_ONLY:
-                        resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
-                        break;
-                    case ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED:
-                        resId = com.android.internal.R.string
-                                .wfc_mode_cellular_preferred_summary;
-                        break;
-                    case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
-                        resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
-                        break;
-                    default:
-                        break;
+            summaryText = getResourceIdForWfcMode(mSubId);
+        }
+        preference.setSummary(summaryText);
+        preference.setEnabled(mCallState == TelephonyManager.CALL_STATE_IDLE);
+    }
+
+    private CharSequence getResourceIdForWfcMode(int subId) {
+        int resId = com.android.internal.R.string.wifi_calling_off_summary;
+        if (queryImsState(subId).isEnabledByUser()) {
+            boolean useWfcHomeModeForRoaming = false;
+            if (mCarrierConfigManager != null) {
+                final PersistableBundle carrierConfig =
+                        mCarrierConfigManager.getConfigForSubId(subId);
+                if (carrierConfig != null) {
+                    useWfcHomeModeForRoaming = carrierConfig.getBoolean(
+                            CarrierConfigManager
+                                    .KEY_USE_WFC_HOME_NETWORK_MODE_IN_ROAMING_NETWORK_BOOL);
                 }
             }
-            preference.setSummary(
-                    SubscriptionManager.getResourcesForSubId(mContext, mSubId).getText(resId));
+            final boolean isRoaming = getTelephonyManager(mContext, subId)
+                    .isNetworkRoaming();
+            final int wfcMode = (isRoaming && !useWfcHomeModeForRoaming)
+                    ? mImsMmTelManager.getVoWiFiRoamingModeSetting() :
+                    mImsMmTelManager.getVoWiFiModeSetting();
+            switch (wfcMode) {
+                case ImsMmTelManager.WIFI_MODE_WIFI_ONLY:
+                    resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
+                    break;
+                case ImsMmTelManager.WIFI_MODE_CELLULAR_PREFERRED:
+                    resId = com.android.internal.R.string
+                            .wfc_mode_cellular_preferred_summary;
+                    break;
+                case ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED:
+                    resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
+                    break;
+                default:
+                    break;
+            }
         }
-        preference.setEnabled(mCallState == TelephonyManager.CALL_STATE_IDLE);
+        return SubscriptionManager.getResourcesForSubId(mContext, subId).getText(resId);
     }
 
     public WifiCallingPreferenceController init(int subId) {
         mSubId = subId;
-        mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         mImsMmTelManager = getImsMmTelManager(mSubId);
         mSimCallManager = mContext.getSystemService(TelecomManager.class)
                 .getSimCallManagerForSubscription(mSubId);
@@ -164,14 +167,22 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
         return this;
     }
 
+    @VisibleForTesting
+    WifiCallingQueryImsState queryImsState(int subId) {
+        return new WifiCallingQueryImsState(mContext, subId);
+    }
+
     protected ImsMmTelManager getImsMmTelManager(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return null;
+        }
         return ImsMmTelManager.createForSubscriptionId(subId);
     }
 
     @VisibleForTesting
     TelephonyManager getTelephonyManager(Context context, int subId) {
         final TelephonyManager telephonyMgr = context.getSystemService(TelephonyManager.class);
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             return telephonyMgr;
         }
         final TelephonyManager subscriptionTelephonyMgr =
@@ -203,5 +214,24 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
             mCallState = null;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
+    }
+
+    private boolean isWifiCallingEnabled(Context context, int subId) {
+        final PhoneAccountHandle simCallManager =
+                context.getSystemService(TelecomManager.class)
+                       .getSimCallManagerForSubscription(subId);
+        final int phoneId = SubscriptionManager.getSlotIndex(subId);
+
+        boolean isWifiCallingEnabled;
+        if (simCallManager != null) {
+            final Intent intent = MobileNetworkUtils.buildPhoneAccountConfigureIntent(
+                    context, simCallManager);
+
+            isWifiCallingEnabled = intent != null;
+        } else {
+            isWifiCallingEnabled = queryImsState(subId).isReadyToWifiCalling();
+        }
+
+        return isWifiCallingEnabled;
     }
 }
