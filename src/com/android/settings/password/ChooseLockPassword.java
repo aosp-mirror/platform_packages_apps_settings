@@ -32,6 +32,8 @@ import static com.android.internal.widget.PasswordValidationError.RECENTLY_USED;
 import static com.android.internal.widget.PasswordValidationError.TOO_LONG;
 import static com.android.internal.widget.PasswordValidationError.TOO_SHORT;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -46,6 +48,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.Selection;
@@ -153,6 +156,18 @@ public class ChooseLockPassword extends SettingsActivity {
             return this;
         }
 
+        /**
+         * Configures the launch such that at the end of the password enrollment, one of its
+         * managed profile (specified by {@code profileId}) will have its lockscreen unified
+         * to the parent user. The profile's current lockscreen credential needs to be specified by
+         * {@code credential}.
+         */
+        public IntentBuilder setProfileToUnify(int profileId, LockscreenCredential credential) {
+            mIntent.putExtra(EXTRA_KEY_UNIFICATION_PROFILE_ID, profileId);
+            mIntent.putExtra(EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL, credential);
+            return this;
+        }
+
         public Intent build() {
             return mIntent;
         }
@@ -208,6 +223,7 @@ public class ChooseLockPassword extends SettingsActivity {
         @PasswordComplexity private int mMinComplexity = PASSWORD_COMPLEXITY_NONE;
         protected int mUserId;
         private byte[] mPasswordHistoryHashFactor;
+        private int mUnificationProfileId = UserHandle.USER_NULL;
 
         private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
@@ -367,8 +383,19 @@ public class ChooseLockPassword extends SettingsActivity {
 
             mRequestedQuality = intent.getIntExtra(
                     LockPatternUtils.PASSWORD_TYPE_KEY, PASSWORD_QUALITY_NUMERIC);
+            mUnificationProfileId = intent.getIntExtra(
+                    EXTRA_KEY_UNIFICATION_PROFILE_ID, UserHandle.USER_NULL);
 
             mMinMetrics = mLockPatternUtils.getRequestedPasswordMetrics(mUserId);
+            // If we are to unify a work challenge at the end of the credential enrollment, manually
+            // merge any password policy from that profile here, so we are enrolling a compliant
+            // password. This is because once unified, the profile's password policy will
+            // be enforced on the new credential.
+            if (mUnificationProfileId != UserHandle.USER_NULL) {
+                mMinMetrics.maxWith(
+                        mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
+            }
+
             mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
 
             if (intent.getBooleanExtra(
@@ -833,8 +860,16 @@ public class ChooseLockPassword extends SettingsActivity {
                     FRAGMENT_TAG_SAVE_AND_FINISH).commit();
             getFragmentManager().executePendingTransactions();
 
-            final boolean required = getActivity().getIntent().getBooleanExtra(
+            final Intent intent = getActivity().getIntent();
+            final boolean required = intent.getBooleanExtra(
                     EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, true);
+            if (mUnificationProfileId != UserHandle.USER_NULL) {
+                try (LockscreenCredential profileCredential = (LockscreenCredential)
+                        intent.getParcelableExtra(EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL)) {
+                    mSaveAndFinishWorker.setProfileToUnify(mUnificationProfileId,
+                            profileCredential);
+                }
+            }
             mSaveAndFinishWorker.start(mLockPatternUtils, required, mHasChallenge, mChallenge,
                     mChosenPassword, mCurrentCredential, mUserId);
         }
@@ -912,6 +947,9 @@ public class ChooseLockPassword extends SettingsActivity {
         protected Pair<Boolean, Intent> saveAndVerifyInBackground() {
             final boolean success = mUtils.setLockCredential(
                     mChosenPassword, mCurrentCredential, mUserId);
+            if (success) {
+                unifyProfileCredentialIfRequested();
+            }
             Intent result = null;
             if (success && mHasChallenge) {
                 byte[] token;
