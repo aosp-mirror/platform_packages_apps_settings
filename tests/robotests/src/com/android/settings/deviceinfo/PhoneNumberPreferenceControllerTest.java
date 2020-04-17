@@ -159,11 +159,6 @@ public class PhoneNumberPreferenceControllerTest {
     }
 
     @Test
-    public void isSliceable_shouldBeTrue() {
-        assertThat(mController.isSliceable()).isTrue();
-    }
-
-    @Test
     public void copy_shouldCopyPhoneNumberToClipboard() {
         final List<SubscriptionInfo> list = new ArrayList<>();
         list.add(mSubscriptionInfo);
@@ -177,10 +172,5 @@ public class PhoneNumberPreferenceControllerTest {
                 CLIPBOARD_SERVICE);
         final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
         assertThat(phoneNumber.contentEquals(data)).isTrue();
-    }
-
-    @Test
-    public void isPublicSlice_returnTrue() {
-        assertThat(mController.isPublicSlice()).isTrue();
     }
 }
