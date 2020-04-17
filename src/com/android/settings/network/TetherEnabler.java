@@ -212,7 +212,8 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
         // Only check bluetooth tethering state if not stopped by user already.
         if (!mBluetoothTetheringStoppedByUser) {
             final BluetoothPan pan = mBluetoothPan.get();
-            if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON
+            if (mBluetoothAdapter != null &&
+                mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON
                     && pan != null && pan.isTetheringOn()) {
                 tetherState |= TETHERING_BLUETOOTH_ON;
             }
@@ -279,7 +280,7 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
 
         if (choice == TETHERING_BLUETOOTH) {
             mBluetoothTetheringStoppedByUser = false;
-            if (isBluetoothTethering(state)) {
+            if (mBluetoothAdapter == null || isBluetoothTethering(state)) {
                 return;
             } else if (mBluetoothAdapter.getState() == BluetoothAdapter.STATE_OFF) {
                 if (DEBUG) {
