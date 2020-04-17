@@ -19,12 +19,14 @@ package com.android.settings.panel;
 import static com.android.settingslib.media.MediaOutputSliceConstants.EXTRA_PACKAGE_NAME;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -43,6 +45,8 @@ public class SettingsPanelActivity extends FragmentActivity {
 
     @VisibleForTesting
     final Bundle mBundle = new Bundle();
+    @VisibleForTesting
+    boolean mForceCreation = false;
 
     /**
      * Key specifying which Panel the app is requesting.
@@ -58,8 +62,6 @@ public class SettingsPanelActivity extends FragmentActivity {
      * Key specifying the package name for which the
      */
     public static final String KEY_MEDIA_PACKAGE_NAME = "PANEL_MEDIA_PACKAGE_NAME";
-
-    private boolean mForceCreation = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +86,12 @@ public class SettingsPanelActivity extends FragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        mForceCreation = true;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
         mForceCreation = true;
     }
 
