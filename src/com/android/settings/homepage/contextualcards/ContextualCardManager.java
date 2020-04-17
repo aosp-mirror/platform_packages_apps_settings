@@ -117,13 +117,13 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         } else {
             mSavedCards = savedInstanceState.getStringArrayList(KEY_CONTEXTUAL_CARDS);
         }
-        //for data provided by Settings
+        // for data provided by Settings
         for (@ContextualCard.CardType int cardType : getSettingsCards()) {
             setupController(cardType);
         }
     }
 
-    void loadContextualCards(LoaderManager loaderManager) {
+    void loadContextualCards(LoaderManager loaderManager, boolean restartLoaderNeeded) {
         if (mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion)) {
             Log.w(TAG, "Legacy suggestion contextual card enabled, skipping contextual cards.");
             return;
@@ -132,9 +132,17 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         final CardContentLoaderCallbacks cardContentLoaderCallbacks =
                 new CardContentLoaderCallbacks(mContext);
         cardContentLoaderCallbacks.setListener(this);
-        // Use the cached data when navigating back to the first page and upon screen rotation.
-        loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
-                cardContentLoaderCallbacks);
+        if (!restartLoaderNeeded) {
+            // Use the cached data when navigating back to the first page and upon screen rotation.
+            loaderManager.initLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+                    cardContentLoaderCallbacks);
+        } else {
+            // Reload all cards when navigating back after pressing home key, recent app key, or
+            // turn off screen.
+            mIsFirstLaunch = true;
+            loaderManager.restartLoader(CARD_CONTENT_LOADER_ID, null /* bundle */,
+                    cardContentLoaderCallbacks);
+        }
     }
 
     private void loadCardControllers() {
@@ -146,7 +154,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     @VisibleForTesting
     int[] getSettingsCards() {
         if (!FeatureFlagUtils.isEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS)) {
-            return new int[]{ContextualCard.CardType.LEGACY_SUGGESTION};
+            return new int[] {ContextualCard.CardType.LEGACY_SUGGESTION};
         }
         return new int[]
                 {ContextualCard.CardType.CONDITIONAL, ContextualCard.CardType.LEGACY_SUGGESTION};
@@ -194,7 +202,7 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
         // except Conditional cards, all other cards are from the database. So when the map sent
         // here is empty, we only keep Conditional cards.
         if (cardTypes.isEmpty()) {
-            final Set<Integer> conditionalCardTypes = new TreeSet() {{
+            final Set<Integer> conditionalCardTypes = new TreeSet<Integer>() {{
                 add(ContextualCard.CardType.CONDITIONAL);
                 add(ContextualCard.CardType.CONDITIONAL_HEADER);
                 add(ContextualCard.CardType.CONDITIONAL_FOOTER);
