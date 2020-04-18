@@ -25,16 +25,41 @@
         settings:controller="com.android.settings.widget.VideoPreferenceController"
         android:persistent="false" />
 
-    <!-- Empty category to draw divider -->
-    <PreferenceCategory
-        android:key="all_notifications_divider"
-        android:order="2"/>
+    <Preference
+        android:key="notification_history"
+        android:title="@string/notification_history"
+        android:summary="@string/notification_history_summary"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="false"
+        android:order="2">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.notification.history.NotificationHistoryActivity" />
+    </Preference>
+
+    <Preference
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:summary="@string/manage_conversations"
+        android:order="3"
+        android:fragment="com.android.settings.notification.app.ConversationListSettings"
+    />
+
+    <Preference
+        android:key="notification_bubbles"
+        android:title="@string/notification_bubbles_title"
+        android:summary="@string/notifications_bubble_setting_on_summary"
+        android:order="4"
+        settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
+        android:fragment="com.android.settings.notification.BubbleNotificationSettings"
+    />
 
     <PreferenceCategory
         android:key="recent_notifications_category"
         android:title="@string/recent_notifications"
-        settings:allowDividerAbove="false"
-        android:order="3">
+        settings:allowDividerAbove="true"
+        android:order="5">
         <!-- Placeholder for a list of recent apps -->
 
         <!-- See all apps button -->
@@ -42,7 +67,7 @@
             android:key="all_notifications"
             android:title="@string/notifications_title"
             android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
-            android:order="4"
+            android:order="6"
             settings:searchable="false">
             <extra
                 android:name="classname"
@@ -50,23 +75,6 @@
         </Preference>
     </PreferenceCategory>
 
-    <Preference
-        android:key="conversations"
-        android:title="@string/conversations_category_title"
-        settings:allowDividerAbove="true"
-        android:summary="@string/manage_conversations"
-        android:order="6"
-        android:fragment="com.android.settings.notification.app.ConversationListSettings"
-        />
-
-    <Preference
-        android:key="notification_bubbles"
-        android:title="@string/notification_bubbles_title"
-        android:summary="@string/notifications_bubble_setting_on_summary"
-        android:order="7"
-        settings:controller="com.android.settings.notification.BubbleSummaryNotificationPreferenceController"
-        android:fragment="com.android.settings.notification.BubbleNotificationSettings"
-        />
 
     <PreferenceCategory
         android:key="configure_notifications_lock"
@@ -104,12 +112,6 @@
         android:key="configure_notifications_advanced"
         android:order="15"
         settings:initialExpandedChildrenCount="0">
-
-        <SwitchPreference
-            android:key="notification_history"
-            android:title="@string/notification_history"
-            android:summary="@string/notification_history_summary"
-            settings:controller="com.android.settings.notification.NotificationHistoryPreferenceController"/>
 
         <SwitchPreference
             android:key="silent_icons"
