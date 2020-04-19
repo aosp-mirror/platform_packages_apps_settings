@@ -1135,6 +1135,7 @@
                 android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
+                <action android:name="android.intent.action.AUTO_REVOKE_PERMISSIONS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
