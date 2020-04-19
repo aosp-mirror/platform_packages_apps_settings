@@ -23,12 +23,12 @@
     <string name="deny" msgid="7326117222944479942">"דחה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="two">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="many">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="other">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="one">אתה כעת במרחק של צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> מלהיות מפתח.</item>
+      <item quantity="two">נותרו לך עוד  <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="many">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="other">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="one">נותר לך עוד צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> כדי להיות מפתח.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"אתה כעת מפתח!"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"הוגדרת כמפתח!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"אין צורך, אתה כבר מפתח."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"קודם עליך להפעיל את אפשרויות המפתח."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"רשתות ותקשורת אלחוטית"</string>
@@ -403,7 +403,7 @@
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"נעילת מסך"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"הפנים נוספו"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
-    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה על ידי זיהוי פנים"</string>
+    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה בזיהוי פנים"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"שחרור נעילה על ידי זיהוי פנים עבור העבודה"</string>
     <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"איך להגדיר שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
@@ -981,8 +981,8 @@
     <string name="wifi_show_password" msgid="6865993988238157923">"הצגת סיסמה"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"‏בחר תדר AP"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"אוטומטי"</string>
-    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏פס של ‎2.4 GHz"</string>
-    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏פס של ‎5.0 GHz"</string>
+    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏תדר ‎2.4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏תדר ‎5.0 GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"‏עדיפות לתדר 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="4099628221864343015">"‎2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"‎5.0 GHz"</string>
@@ -4090,7 +4090,7 @@
       <item quantity="other">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
       <item quantity="one">כבויות עבור אפליקציה אחת</item>
     </plurals>
-    <string name="notification_summary_none" msgid="9179312319023988089">"מופעל לכל האפליקציות"</string>
+    <string name="notification_summary_none" msgid="9179312319023988089">"מופעלות לכל האפליקציות"</string>
     <string name="apps_summary" msgid="4007416751775414252">"הותקנו <xliff:g id="COUNT">%1$d</xliff:g> אפליקציות"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"הותקנו 24 אפליקציות"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש, <xliff:g id="FREE_SPACE">%2$s</xliff:g> פנויים"</string>
@@ -4372,7 +4372,7 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"צילום מהיר יותר של סלפי"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"ניווט במערכת"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 לחצנים"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעזור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"כדאי לנסות את הלחצן הראשי החדש"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"הפעלת התנועה החדשה למעבר בין אפליקציות"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ניווט באמצעות תנועות"</string>

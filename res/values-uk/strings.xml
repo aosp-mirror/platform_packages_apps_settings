@@ -23,10 +23,10 @@
     <string name="deny" msgid="7326117222944479942">"Заборонити"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Невідомо"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="one">Щоб стати розробником, залишився ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> крок.</item>
-      <item quantity="few">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроки.</item>
-      <item quantity="many">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроків.</item>
-      <item quantity="other">Щоб стати розробником, залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку.</item>
+      <item quantity="one">Залишився ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> крок, щоб стати розробником.</item>
+      <item quantity="few">Залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроки, щоб стати розробником.</item>
+      <item quantity="many">Залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроків, щоб стати розробником.</item>
+      <item quantity="other">Залишилося ще <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> кроку, щоб стати розробником.</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"Тепер ви – розробник!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Немає потреби, ви вже розробник."</string>
@@ -446,7 +446,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="950213874209080175">"Видаліть наявні дані про обличчя, щоб повторно налаштувати фейсконтроль.\n\nДані про обличчя, потрібні для фейсконтролю, буде остаточно видалено без можливості відновлення. Після цього потрібно буде вводити PIN-код, ключ або пароль, щоб розблоковувати телефон, входити в додатки й підтверджувати платежі."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="2374998717426341095">"Використання Фейсконтролю"</string>
     <string name="security_settings_face_settings_use_face_unlock_phone" msgid="5209963876503148501">"Розблокування телефона"</string>
-    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"Вхід у додатки та платежі"</string>
+    <string name="security_settings_face_settings_use_face_for_apps" msgid="8813038341122613020">"Вхід у додатки й оплата"</string>
     <string name="security_settings_face_settings_require_category" msgid="3906382658164073665">"Вимоги для використання Фейсконтролю"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Очі мають бути відкритими"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Розблоковувати телефон, коли очі відкриті"</string>
@@ -857,7 +857,7 @@
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Трансляція"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Увімкнути бездротовий екран"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Не знайдено пристроїв поблизу."</string>
-    <string name="wifi_display_status_connecting" msgid="530880182560077334">"Під’єднуються"</string>
+    <string name="wifi_display_status_connecting" msgid="530880182560077334">"Підключення"</string>
     <string name="wifi_display_status_connected" msgid="2189925211258519539">"Під’єднані"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"Використовується"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Недоступно"</string>
@@ -974,16 +974,16 @@
     <string name="please_select_phase2" msgid="577633852089847142">"Друга фаза автентифікації"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Сертифікат ЦС"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Домен"</string>
-    <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Сертиф. корист-ча"</string>
-    <string name="wifi_eap_identity" msgid="3629406902174137028">"Ідентифік."</string>
-    <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Анонімна ідентиф-ція"</string>
+    <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Сертифікат користувача"</string>
+    <string name="wifi_eap_identity" msgid="3629406902174137028">"Ідентифікація"</string>
+    <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Анонімна ідентифікація"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Пароль"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Показати пароль"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Виберіть діапазон частот точки доступу"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Автоматично"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Діапазон 2,4 ГГц"</string>
     <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"Діапазон 5 ГГц"</string>
-    <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Бажано використовувати діапазон 5,0 ГГц"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Діапазон 5,0 ГГц (рекомендовано)"</string>
     <string name="wifi_ap_2G" msgid="4099628221864343015">"2,4 ГГц"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"5 ГГц"</string>
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Виберіть принаймні один діапазон для точки доступу Wi-Fi:"</string>
@@ -1175,7 +1175,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="3490633500025717573">"Екстрена адреса"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Використовується як адреса, коли ви телефонуєте в екстрені служби через Wi-Fi"</string>
-    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Докладніше"</annotation>" про функції приватної DNS"</string>
+    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Докладніше"</annotation>" про приватний DNS-сервер"</string>
     <string name="wifi_calling_pref_managed_by_carrier" msgid="129524064888622179">"Налаштуванням керує оператор"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Активувати дзвінки через Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Увімкнути дзвінки через Wi-Fi"</string>
@@ -1737,8 +1737,8 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Показати всі"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Служби локації"</string>
     <string name="location_title" msgid="5819154746934945021">"Моє місцезнах."</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Місцезнах.для робочого профілю"</string>
-    <string name="location_app_level_permissions" msgid="8621490207602159375">"Дозвіл додаткам"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Геодані для робочого профілю"</string>
+    <string name="location_app_level_permissions" msgid="8621490207602159375">"Дозвіл для додатків"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Передавання геоданих вимкнено"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="one"> Кількість додатків із доступом до геоданих: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> з <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
@@ -1748,7 +1748,7 @@
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"Доступ до останніх геоданих"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Переглянути деталі"</string>
-    <string name="location_no_recent_apps" msgid="6814206631456177033">"Жодна програма не запитувала місцезнаходження останнім часом"</string>
+    <string name="location_no_recent_apps" msgid="6814206631456177033">"Останнім часом додатки не запитували доступ до геоданих"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Немає додатків, які нещодавно отримували доступ до геоданих"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Значне використання заряду"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Низьке використання заряду"</string>
@@ -2748,7 +2748,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"Робочий профіль"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Профілем керує ваша організація"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Додатки й сповіщення вимкнено"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Видалити службовий профіль"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"Видалити робочий профіль"</string>
     <string name="background_data" msgid="321903213000101158">"Фонові дані"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Програми можуть будь-коли синхроніз., надсил. й отрим. дані"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Вимкн. фонові дані?"</string>
@@ -2774,7 +2774,7 @@
     <string name="preference_change_password_title" msgid="5465821666939825972">"Змінити пароль"</string>
     <string name="header_account_settings" msgid="1189339410278750008">"Параметри облікового запису"</string>
     <string name="remove_account_label" msgid="4169490568375358010">"Видалити"</string>
-    <string name="header_add_an_account" msgid="3919151542338822661">"Додати об. запис"</string>
+    <string name="header_add_an_account" msgid="3919151542338822661">"Новий обл. запис"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Видалити обліковий запис?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Видалення цього облікового запису призведе до видалення всіх його повідомлень, контактів та інших даних із планшетного ПК."</string>
     <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Видалення цього облікового запису призведе до видалення всіх його повідомлень, контактів та інших даних із телефону."</string>
@@ -3078,7 +3078,7 @@
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="788899906312142803">"Використовувати додаток за умовчанням"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Завжди"</string>
-    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Якщо не відрито інший додаток для платежів"</string>
+    <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Якщо не відкрито інший додаток для платежів"</string>
     <string name="nfc_payment_pay_with" msgid="10107565447713526">"У терміналі експрес-платежів використовувати додаток"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Оплата через термінал"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Виберіть додаток для платежів. Тоді просто прикладіть телефон тильною стороною до будь-якого термінала зі значком безконтактної оплати."</string>
@@ -3713,7 +3713,7 @@
     <string name="zen_mode_alarms" msgid="1111047002365378012">"Дозволити будильники"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"сигнали будильників"</string>
     <string name="zen_mode_media" msgid="3470940840136036522">"Відтворювати звуки медіа"</string>
-    <string name="zen_mode_media_list" msgid="2006413476596092020">"медіа-вміст"</string>
+    <string name="zen_mode_media_list" msgid="2006413476596092020">"мультимедіа"</string>
     <string name="zen_mode_system" msgid="4996563074066075171">"Дозволити звуки під час дотику"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"звуки під час дотику"</string>
     <string name="zen_mode_reminders" msgid="1957379696610030851">"Дозволити нагадування"</string>
@@ -4351,10 +4351,10 @@
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> секунди</item>
     </plurals>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Керувати сховищем"</string>
-    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Щоб звільнити місце, диспетчер пам’яті видаляє з пристрою резервні копії фото й відео."</string>
+    <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Щоб звільнити місце, менеджер сховища видаляє з пристрою фото й відео, для яких є резервні копії."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Видалити фото й відео"</string>
-    <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Диспетчер пам’яті"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Використовувати диспетчер пам’яті"</string>
+    <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Менеджер сховища"</string>
+    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Використовувати менеджер сховища"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Автоматично"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Вручну"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Звільнити місце"</string>
@@ -4374,7 +4374,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Спробуйте нову кнопку головного екрана"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Увімкніть новий жест, щоб переходити між додатками"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навігація жестами"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Щоб перейти на головний екран, проведіть пальцем знизу вгору. Щоб переключитися між додатками, проведіть пальцем знизу вгору, утримуйте екран, а потім відпустіть. Щоб повернутися назад, проведіть пальцем від лівого чи правого краю."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Щоб перейти на головний екран, проведіть пальцем від низу екрана вгору. Щоб переключитися між додатками, проведіть пальцем від низу екрана вгору, утримуйте екран, а потім відпустіть. Щоб повернутися назад, проведіть пальцем від лівого чи правого краю."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навігація з трьома кнопками"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Щоб повертатися назад, виходити на головний екран і переключатися між додатками, використовуйте кнопки внизу екрана."</string>
     <string name="keywords_system_navigation" msgid="3196622931210138387">"навігація в системі, навігація з двома кнопками, навігація з трьома кнопками, навігація жестами"</string>
@@ -4401,7 +4401,7 @@
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Торкніться, щоб перевірити пристрій"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Щоб перевірити час, сповіщення та іншу інформацію, торкніться екрана."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Використовувати відбиток пальця для перегляду сповіщень"</string>
-    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Гортання сканером"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Сканер відбитків"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Щоб переглянути сповіщення, проведіть пальцем униз по сканеру відбитків на задній панелі телефона."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Щоб переглянути сповіщення, проведіть пальцем униз по сканеру відбитків на задній панелі планшета."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Щоб переглянути сповіщення, проведіть пальцем униз по сканеру відбитків на задній панелі пристрою."</string>
@@ -4419,7 +4419,7 @@
     <string name="web_action_section_title" msgid="994717569424234098">"Додатки з миттєвим запуском"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"Параметри додатків із миттєвим запуском"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Установлені додатки"</string>
-    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Зараз пам’яттю керує диспетчер пам’яті"</string>
+    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Пам’ять пристрою тепер керується менеджером сховища"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Облікові записи (<xliff:g id="USER_NAME">%1$s</xliff:g>)"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Налаштування"</string>
     <string name="auto_sync_account_title" msgid="1458391453998755273">"Автоматично синхронізувати дані"</string>
@@ -4543,11 +4543,11 @@
     <string name="default_theme" msgid="4815428567082263639">"За умовчанням"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Назва мережі"</string>
     <string name="show_operator_name_summary" msgid="5352696579216501773">"Показувати назву мережі в рядку стану"</string>
-    <string name="storage_manager_indicator" msgid="6187509172735927297">"Диспетчер пам’яті: <xliff:g id="STATUS">^1</xliff:g>"</string>
+    <string name="storage_manager_indicator" msgid="6187509172735927297">"Менеджер сховища: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="2705959642617709265">"Вимкнено"</string>
     <string name="storage_manager_indicator_on" msgid="8380330763647785309">"Увімкнено"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"Додаток із миттєвим запуском"</string>
-    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Вимкнути диспетчер пам’яті?"</string>
+    <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Вимкнути менеджер сховища?"</string>
     <string name="storage_movies_tv" msgid="7897612625450668593">"Фільми й серіали"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Інформація про ініціалізацію оператора"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Активатор ініціалізації оператора"</string>
@@ -4588,7 +4588,7 @@
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Керування Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Дозволити додатку керувати Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Дозволити цьому додатку вмикати чи вимикати Wi-Fi, шукати мережі Wi-Fi та підключатися до них, додавати або видаляти мережі чи запускати лише локальну точку доступу"</string>
-    <string name="media_output_title" msgid="8283629315159510680">"Відтворювати медіа-вміст у додатку"</string>
+    <string name="media_output_title" msgid="8283629315159510680">"Де відтворювати мультимедіа"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Цей пристрій"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Телефон"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Планшет"</string>

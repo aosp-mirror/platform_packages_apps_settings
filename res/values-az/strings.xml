@@ -23,8 +23,8 @@
     <string name="deny" msgid="7326117222944479942">"Rədd edin"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Naməlum"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Tərtibatçı olmaqdan <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> addım uzaqsınız.</item>
-      <item quantity="one">Tərtibatçı olmaqdan <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> addım uzaqsınız.</item>
+      <item quantity="other">Developer olmaqdan <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> addım uzaqsınız.</item>
+      <item quantity="one">Developer olmaqdan <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> addım uzaqsınız.</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"Siz indi tərtibatçısınız!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Ehtiyac yoxdur, Siz artı gəlişdiricisiniz."</string>
@@ -349,7 +349,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC ofsetinə görə seçin"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Tarix"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Vaxt"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Ekranın avtomatik söndükdən sonra kilinlənsin"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Ekran söndükdən sonra kilinlənsin"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"Vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən dərhal sonra"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> tərəfindən açıq saxlanması istisna olmaqla, vaxt limiti bitdikdən <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> sonra"</string>
@@ -399,7 +399,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_preference_title" msgid="821557938243856757">"Üz kilidi"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"İş üçün üz kilidi"</string>
-    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Üz kilidi ayarlamaq haqqında"</string>
+    <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"Üz kilidi necə ayarlanır"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"Üz kilidi ayarlayın"</string>
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
@@ -929,7 +929,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID daxil edin"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Təhlükəsizlik"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Gizlədilmiş şəbəkə"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Yönləndirici şəbəkə ID-sini yayımlamırsa, lakin ona gələcəkdə qoşulmaq istəyirsinizsə, şəbəkəni gizlədə bilərsiniz.\n\nBu təhlükəsizliyinizi riskə ata bilər çünki telefon şəbəkəni tapmaq üçün daima siqnal yayımlayacaq.\n\nŞəbəkəini gizlətmək yönləndirici ayarlarını dəyişməyəcək."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Yönləndirici şəbəkə ID-sini yayımlamırsa, lakin ona gələcəkdə qoşulmaq istəyirsinizsə, şəbəkəni gizlədə bilərsiniz.\n\nBu təhlükəsizliyinizi riskə ata bilər, çünki telefon şəbəkəni tapmaq üçün daima siqnal yayımlayacaq.\n\nŞəbəkəini gizlətmək yönləndirici ayarlarını dəyişməyəcək."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Siqnal gücü"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Status"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Link sürətini ötürün"</string>
@@ -1079,7 +1079,7 @@
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Cihaz axtarışı"</string>
     <string name="wifi_p2p_menu_searching" msgid="3428767661028761100">"Axtarır..."</string>
     <string name="wifi_p2p_menu_rename" msgid="7059994112737743336">"Cihazı yenidən adlandır"</string>
-    <string name="wifi_p2p_peer_devices" msgid="5158559154640283546">"Peer cihazlar"</string>
+    <string name="wifi_p2p_peer_devices" msgid="5158559154640283546">"Əlçatımlı cihazlar"</string>
     <string name="wifi_p2p_remembered_groups" msgid="5497007770930525695">"Qrupları yadda saxla"</string>
     <string name="wifi_p2p_failed_connect_message" msgid="6767831720507440027">"Bağlana bilmədi."</string>
     <string name="wifi_p2p_failed_rename_message" msgid="1317434386267376606">"Cihazın adı dəyişə bilmədi."</string>
@@ -1573,7 +1573,7 @@
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Kontent <xliff:g id="NAME_0">^1</xliff:g> ünvanına köçürüldü. \n\n<xliff:g id="NAME_1">^2</xliff:g> ünvanını idarə etmək üçün, "<b>"Ayarlar &gt; Yaddaş"</b>" bölməsinə keçin."</string>
     <string name="battery_status_title" msgid="4661768220545945771">"Batareya statusu"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"Batareya səviyyəsi"</string>
-    <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
+    <string name="apn_settings" msgid="4295467389400441299">"APN-lər"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Giriş nöqtəsinə düzəliş edin"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Təyin edilməyib"</string>
     <string name="apn_name" msgid="6677695784108157953">"Ad"</string>
@@ -1737,7 +1737,7 @@
     <string name="about_settings_summary" msgid="4831942939227432513">"Hüquqi məlumata, statusa, proqram versiyasına baxın"</string>
     <string name="legal_information" msgid="7509900979811934843">"Hüquqi məlumat"</string>
     <string name="contributors_title" msgid="7965640251547037965">"Yazarlar"</string>
-    <string name="manual" msgid="3651593989906084868">"Dərslik"</string>
+    <string name="manual" msgid="3651593989906084868">"Manual"</string>
     <string name="regulatory_labels" msgid="5960251403367154270">"Tənzimləyici etiketlər"</string>
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Təhlükəsizlik və tənzimləyici təlimatı"</string>
     <string name="copyright_title" msgid="83245306827757857">"Müəlliflik hüququ"</string>
@@ -1747,7 +1747,7 @@
     <string name="webview_license_title" msgid="5832692241345780517">"Sistem WebView Lisenziyası"</string>
     <string name="wallpaper_attributions" msgid="3080339190260272255">"Divar kağızları"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Peyk şəkillərini təqdim edənlər:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
-    <string name="settings_manual_activity_title" msgid="1682978148920788484">"Dərslik"</string>
+    <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Dərsliklərin yüklənməsində problem var."</string>
     <string name="settings_license_activity_title" msgid="7832071619364734914">"Üçüncü tərəf lisenziyaları"</string>
     <string name="settings_license_activity_unavailable" msgid="9014803774391134570">"Lisenziyaların yüklənilməsində problem var."</string>
@@ -1997,9 +1997,9 @@
     <string name="language_input_gesture_summary_on_with_assist" msgid="8670153838520237089"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="2738661322747920463"></string>
     <string name="language_input_gesture_summary_off" msgid="1604575860215661606"></string>
-    <string name="language_settings" msgid="8700174277543875046">"Dillər və daxiletmə"</string>
+    <string name="language_settings" msgid="8700174277543875046">"Dillər və yazı dili"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Cihaz dilini dəyişmək icazəniz yoxdur."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Dillər və daxiletmə"</string>
+    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Dillər və yazı dili"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Alətlər"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"Klaviatura &amp; daxiletmə metodları"</string>
     <string name="phone_language" msgid="5986939176239963826">"Dillər"</string>
@@ -2158,7 +2158,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Zəng vibrasiyası"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Toxunuş rəyi"</string>
     <string name="accessibility_service_master_switch_title" msgid="979099798342407249">"Xidmətdən istifadə edin"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Rəng korreksiyasından istifadə edin"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Rəng düzəlişini işlədin"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"Başlıqlardan istifadə edin"</string>
     <string name="accessibility_caption_preference_summary" msgid="1118803144637364439">"Bütün tətbiqlər bu ayarı dəstəkləmir."</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Davam edin"</string>
@@ -2602,7 +2602,7 @@
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Bütün sertifikatları sil"</string>
     <string name="trusted_credentials" msgid="2522784976058244683">"İnanılmış etimadlar"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"İnanılmış CA sertifikatları göstər"</string>
-    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi haqqında məlumatlar"</string>
+    <string name="user_credentials" msgid="4044405430790970775">"İstifadəçi məlumatı"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Saxlanılan məlumatlara baxın və dəyişin"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Qabaqcıl ayarlar"</string>
     <string name="credential_storage_type" msgid="930861336971619888">"Saxlama növü"</string>
@@ -3783,7 +3783,7 @@
     <string name="default_app" msgid="445053777504688596">"(Defolt)"</string>
     <string name="system_app" msgid="1863291702508355041">"(Sistem)"</string>
     <string name="system_default_app" msgid="2647834628622214931">"(Sistem defoltu)"</string>
-    <string name="apps_storage" msgid="643866814746927111">"Tətbiq yaddaş ehtiyatı"</string>
+    <string name="apps_storage" msgid="643866814746927111">"Tətbiq yaddaşı"</string>
     <string name="usage_access" msgid="5487993885373893282">"İstifadə girişi"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"İstifadə girişinə icazə verin"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Tətbiqin istifadə tərcihləri"</string>
@@ -3800,7 +3800,7 @@
     <string name="memory_avg_desc" msgid="2632995851138152303">"Orta <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4376086847362492613">"<xliff:g id="MEMORY">%1$s</xliff:g> / <xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="4239069158701023623">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="5623152700992102510">"Batareya optimallaşdırılması"</string>
+    <string name="high_power_apps" msgid="5623152700992102510">"Batareya optimallaşması"</string>
     <string name="additional_battery_info" msgid="3104208543623068714">"İstifadə siqnalları"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"Tam cihaz istifadəsini göstərin"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"Tətbiq istifadəsini göstərin"</string>
@@ -3910,7 +3910,7 @@
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Tətbiqlər"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Tətbiqlər üzərindən görüntüləmə"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Digər tətbiq üzərindən görüntüləmək icazəsi"</string>
-    <string name="allow_overlay_description" msgid="2266886438777971131">"Bu tətbiqə istifadə etdiyiniz digər tətbiqlərin üzərində göstərilmək icazəsi verin. Bu tətbiq həmin tətbiqlərin istifadəsinə müdaxilə edə və ya tətbiqlərin görünüş və davranışını dəyişə bilər."</string>
+    <string name="allow_overlay_description" msgid="2266886438777971131">"Bu tətbiqə işlətdiyiniz digər tətbiqlərin üzərində göstərilmək icazəsi verin. Bu tətbiq həmin tətbiqlərin istifadəsinə müdaxilə edə və ya tətbiqlərin görünüş və davranışını dəyişə bilər."</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr virtual reallıq dinləyici stereo köməkçi xidməti"</string>
     <string name="keywords_system_alert_window" msgid="5810664019581804395">"digər tətbiqlərin üzərində sistem siqnalının pəncərə dialoq görüntüsü"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"Tətbiqlər üzərindən görüntüləmə"</string>
@@ -4115,7 +4115,7 @@
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Cihaz kilidlidirsə, bildirişlərdə cavab və ya digər mətnlərin yazılmasının qarşısını alın."</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Defolt orfoqrafik yoxlama"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Orfoqrafik yoxlama seçin"</string>
-    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Orfoqrafik yoxlamadan istifadə edin"</string>
+    <string name="spell_checker_master_switch_title" msgid="1233180004430328851">"Orfoqrafik yoxlama işlədin"</string>
     <string name="spell_checker_not_selected" msgid="8818618543474481451">"Seçilməyib"</string>
     <string name="notification_log_no_title" msgid="2343315128609978203">"(heç biri)"</string>
     <string name="notification_log_details_delimiter" msgid="2475986465985309821">": "</string>
@@ -4367,7 +4367,7 @@
     <string name="launch_instant_app" msgid="8503927414339606561">"Açın"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Oyunlar"</string>
     <string name="audio_files_title" msgid="5981409295669041303">"Audio fayllar"</string>
-    <string name="app_info_storage_title" msgid="4076977173803093808">"Yaddaş sahəsi istifadə edildi"</string>
+    <string name="app_info_storage_title" msgid="4076977173803093808">"İşlədilən yaddaş"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(<xliff:g id="USER">%s</xliff:g> üçün silindi)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(<xliff:g id="USER">%s</xliff:g> üçün deaktiv edildi)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"Avtodoldurma xidməti"</string>
