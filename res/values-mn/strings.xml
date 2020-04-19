@@ -2791,8 +2791,8 @@
     <string name="data_usage_menu_sim_cards" msgid="8966135605336735887">"SIM карт"</string>
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Хязгаарт хүрмэгц зогсоосон"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Датаг автоматаар синклэх"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Хувийн датаг автоматаар синк хийх"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Ажлын датаг автоматаар синк хийх"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Хувийн өгөгдлийг автоматаар синк хийх"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Ажлын өгөгдлийг автоматаар синк хийх"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Циклийг өөрчлөх…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Дата ашиглалтын циклийг шинэчлэх сарын өдөр:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Энэ хугацаанд дата ашигласан апп байхгүй."</string>
@@ -3154,6 +3154,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC унтраалттай тул боломжгүй"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Ашиглахын тулд эхлээд төлбөр төлөх аппыг суулгана уу"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Апп; мэдэгдэл"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Саяхны хэрэглээний программууд, өгөгдмөл хэрэглээний программууд"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Мэдэгдлийн хандалт ажлын профайлын аппад боломжгүй байна."</string>
@@ -3210,8 +3211,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"ажлын профайл, удирдсан профайл, нэгтгэх, нэгдэл, ажил, профайл"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"зангаа"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"картууд, тасалбарууд"</string>
-    <!-- no translation found for keywords_device_controls (8962494082504033651) -->
-    <skip />
+    <string name="keywords_device_controls" msgid="8962494082504033651">"төхөөрөмжийн хяналт, хяналт"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"төлөх, товших, төлбөр"</string>
     <string name="keywords_backup" msgid="707735920706667685">"нөөцлөлт, нөөцлөх"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"зангаа"</string>
@@ -3377,8 +3377,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"Аппууд"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Сэрүүлэг болон бусад саад болох зүйл"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Хуваарь"</string>
-    <!-- no translation found for zen_category_duration (7515850842082631460) -->
-    <skip />
+    <string name="zen_category_duration" msgid="7515850842082631460">"Шуурхай тохиргооны үргэлжлэх хугацаа"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Бүү саад бол горим асаалттай үед таны сонгосон зүйлсээс бусад зүйлийн дууг хаана."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Өөрчлөх тохиргоо"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Хуваарийг хянах"</string>
@@ -3682,8 +3681,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"Харилцан яриа"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Тасалдуулах боломжтой харилцан яриа"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Бүх харилцан яриа"</string>
-    <!-- no translation found for zen_mode_from_important_conversations (528050873364229253) -->
-    <skip />
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Чухал харилцан яриа"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Байхгүй"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> харилцан яриа</item>
@@ -3695,8 +3693,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Дуудлага"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"дуудлага"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Тасалдуулах боломжтой дуудлага"</string>
-    <!-- no translation found for zen_mode_calls_footer (2008079711083701243) -->
-    <skip />
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Зөвшөөрөгдсөн дуудлагууд дуугарч байгааг шалгахын тулд төхөөрөмжийг дуугаргах дээр нь тохируулсан эсэхийг шалгана уу"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-д ирэх дуудлагыг хориглосон. Та найзууд, гэр бүлийнхэн болон бусад харилцагчдаа тантай холбоо барихыг зөвшөөрөхийн тулд тохиргоогоо өөрчлөх боломжтой."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Одоор тэмдэглэсэн харилцагчид"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3705,11 +3702,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Зурвасууд"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"зурвас"</string>
-    <!-- no translation found for zen_mode_messages_title (1777598523485334405) -->
-    <skip />
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Зурвас"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Тасалдуулах боломжтой зурвас"</string>
-    <!-- no translation found for zen_mode_messages_footer (6002468050854126331) -->
-    <skip />
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Зөвшөөрөгдсөн зурвасууд дуугарч байгааг шалгахын тулд уг төхөөрөмжийг дуугаргах дээр нь тохируулсан эсэхийг шалгана уу"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-н ирэх зурвасыг хориглосон. Та найзууд, гэр бүлийнхэн эсвэл бусад харилцагчдаа тантай холбоо барихыг зөвшөөрөхийн тулд тохиргоогоо өөрчлөх боломжтой."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Бүх <xliff:g id="SENDER_CATEGORY">%s</xliff:g> нь тантай холбогдох боломжтой"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> харилцагч"</string>
@@ -3726,18 +3721,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Цаг хэмжигч, сэрүүлэг, хамгаалалтын систем болон бусад аппын"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"сэрүүлэг"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Медианы ая"</string>
-    <!-- no translation found for zen_mode_media_summary (7174081803853351461) -->
-    <skip />
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"Видео, тоглоом болон бусад медианы ая"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"медиа"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Хүрэлтийн ая"</string>
-    <!-- no translation found for zen_mode_system_summary (7225581762792177522) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Гар болон бусад товчлуурын чимээ"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"товшилтын авиа"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Сануулагч"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Ажил болон сануулагчийн"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"сануулагч"</string>
-    <!-- no translation found for zen_mode_events (7425795679353531794) -->
-    <skip />
+    <string name="zen_mode_events" msgid="7425795679353531794">"Календарийн үйл явдал"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Календарьт удахгүй болох үйл явдлын"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"арга хэмжээ"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Аппуудад дарахыг нь зөвшөөрөх"</string>
@@ -3777,8 +3769,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> болон <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_repeat_callers_summary (4121054819936083025) -->
-    <skip />
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Хэрэв нэг ижил хүн <xliff:g id="MINUTES">%d</xliff:g> минутын дотор хоёр удаа залгавал"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Тусгай"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Автоматаар асаах"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Хэзээ ч үгүй"</string>
@@ -4441,7 +4432,7 @@
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Аппын өгөгдлийг автоматаар синк хийх"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Хувийн өгөгдлийг автоматаар синк хийх"</string>
     <string name="auto_sync_work_account_title" msgid="6060310415978781885">"Ажлын өгөгдлийг автоматаар синк хийх"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Өгөгдлийг автоматаар дахин боловсруулахыг апп-д зөвшөөрөх"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"Өгөгдлийг автоматаар дахин боловсруулахыг аппад зөвшөөрөх"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"Бүртгэл синк хийх"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"<xliff:g id="ID_2">%2$d</xliff:g>-с <xliff:g id="ID_1">%1$d</xliff:g> зүйлд синк асаалттай"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"Бүх зүйлд синк асаалттай"</string>
@@ -4842,28 +4833,22 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Ажлын"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Системийн өгөгдмөл"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Энэ сонголт хүчингүй болсон байна. Дахин оролдоно уу."</string>
-    <!-- no translation found for device_controls_sentence (4887752349920801907) -->
-    <skip />
-    <!-- no translation found for quick_controls_lower (6675573610027367819) -->
-    <skip />
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Төхөөрөмжийн хяналт"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"төхөөрөмжийн хяналт"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Карт, тасалбарууд"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"карт, тасалбарууд"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Асаах/унтраах цэс"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Асаах товчны цэс"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Карт, тасалбаруудыг харуулах"</string>
-    <!-- no translation found for power_menu_device_controls (5114816270328063924) -->
-    <skip />
-    <!-- no translation found for power_menu_cards_passes_device_controls (8645794247280620106) -->
-    <skip />
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Төхөөрөмжийн хяналтыг харуулах"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Карт, тасалбар болон төхөөрөмжийн хяналтыг харуулах"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Ямар ч контентыг бүү үзүүл"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Нууцлал"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Түгжээтэй үед карт болон хяналтыг харуулах"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Түгжээтэй үед карт болон хяналтыг нуух"</string>
-    <!-- no translation found for device_controls_setting_toggle (8972005569207737469) -->
-    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Төхөөрөмжийн хяналтыг харуулах"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Карт, тасалбаруудыг харуулах"</string>
-    <!-- no translation found for device_controls_setting_subtitle (4388544861427973600) -->
-    <skip />
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Холбогдсон төхөөрөмжүүдийн хяналтад хандахын тулд Асаах товчийг удаан дарна уу"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Төлбөрийн хэрэгсэл болон зорчигчийн тасалбар зэрэг зүйлсдээ хандахын тулд Асаах товчийг удаан дарна уу."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
