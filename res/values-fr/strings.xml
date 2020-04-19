@@ -23,8 +23,8 @@
     <string name="deny" msgid="7326117222944479942">"Refuser"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Inconnu"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="one">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir développeur</item>
-      <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir développeur</item>
+      <item quantity="one">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir développeur.</item>
+      <item quantity="other">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étapes pour devenir développeur.</item>
     </plurals>
     <string name="show_dev_on" msgid="2840850085134853754">"Vous êtes désormais un développeur !"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Inutile, vous êtes déjà un développeur."</string>
@@ -279,11 +279,11 @@
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Immédiatement après la mise en veille, sauf lorsque l\'appareil est maintenu en activité par <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> après la mise en veille, sauf lorsque l\'appareil est maintenu en activité par <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Coordonnées du propriétaire sur l\'écran verrouillé"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Ajouter texte sur écran de verr."</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Texte sur écran de verrouillage"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Activer les widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Désactivé par l\'administrateur"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Afficher l\'option de blocage"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Permet d\'afficher un bouton Marche/Arrêt qui désactive Smart Lock, le déverrouillage à l\'aide de données biométriques et les notifications sur l\'écran de verrouillage"</string>
+    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Afficher l\'option du bouton Marche/Arrêt, qui désactive la fonctionnalité Smart Lock, le déverrouillage à l\'aide de données biométriques et les notifications sur l\'écran de verrouillage"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Verrouiller l\'écran en l\'absence d\'agent de confiance"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Si cette option est activée, l\'appareil se verrouille lorsqu\'il n\'existe plus aucun agent de confiance"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Aucun"</string>
@@ -883,7 +883,7 @@
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"Automatique"</string>
     <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"Bande 2,4 GHz"</string>
     <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"Bande 5 GHz"</string>
-    <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Bande 5 GHz de préférence"</string>
+    <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"Bande 5 GHz (de préférence)"</string>
     <string name="wifi_ap_2G" msgid="4099628221864343015">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Sélectionnez au moins une bande pour le point d\'accès Wi-Fi :"</string>
@@ -1268,7 +1268,7 @@
     <string name="automatic_brightness" msgid="4599827881929079513">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Soulever pour activer"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
-    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Activation du mode Veille"</string>
+    <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quand l\'afficher"</string>
     <string name="doze_title" msgid="1523090408230862316">"Activer écran pour notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Lorsque l\'écran est sombre, il s\'allume en cas de nouvelles notifications"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Toujours afficher heure et infos"</string>
@@ -1341,7 +1341,7 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"Désinstaller la mémoire de stockage USB, afficher l\'espace disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="267557695753980969">"Désinstaller la carte SD, afficher la mémoire disponible"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"Code IMEI (emplacement SIM %1$d)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"Pour afficher, sélectionnez \"Réseau enregistré\""</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"Pour l\'afficher, sélectionnez un réseau enregistré"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
     <string name="status_number" product="default" msgid="8407999629121682207">"Numéro de téléphone"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (emplacement SIM %1$d)"</string>
@@ -1584,7 +1584,7 @@
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Vous pouvez réinitialiser les applications"</string>
     <string name="reset_network_title" msgid="1395494440355807616">"Réinitialiser le Wi-Fi, les données mobiles et le Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"Tous les paramètres réseau seront réinitialisés, y compris les suivants :\n\n"<li>"Wi‑Fi"</li>\n<li>"Données mobiles"</li>\n<li>"Bluetooth"</li></string>
-    <string name="reset_esim_title" msgid="6152167073280852849">"Eff. cartes SIM téléchargées"</string>
+    <string name="reset_esim_title" msgid="6152167073280852849">"Effacer les cartes SIM téléchargées"</string>
     <string name="reset_esim_desc" msgid="4256518544336245086">"Pour télécharger des cartes SIM de remplacement, contactez votre opérateur. Cela n\'entraînera la résiliation d\'aucun forfait mobile."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Réinitialiser les paramètres"</string>
     <string name="reset_network_final_desc" msgid="5304365082065278425">"Réinitialiser tous les paramètres du réseau ? Cette action est irréversible."</string>
@@ -2108,7 +2108,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom avant sur l\'écran"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Appuyer trois fois pour zoomer"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Appuyer sur un bouton pour zoomer"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Faites un zoom avant rapide sur l\'écran pour mieux voir le contenu qui vous intéresse.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour cela, procédez comme suit :&lt;/b&gt;&lt;br/&gt; 1. Utilisez le raccourci pour agrandir.&lt;br/&gt; 2. Appuyez sur l\'écran.&lt;br/&gt; 3. Faites glisser deux doigts pour vous déplacer sur l\'écran.&lt;br/&gt; 4. Pincez l\'écran avec les deux doigts pour régler le zoom.&lt;br/&gt; 5. Utilisez le raccourci pour arrêter l\'agrandissement.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant temporaire, procédez comme suit :&lt;/b&gt;&lt;br/&gt; 1. Utilisez le raccourci pour agrandir.&lt;br/&gt; 2. Appuyez de manière prolongée n\'importe où sur l\'écran.&lt;br/&gt; 3. Faites glisser un doigt pour vous déplacer sur l\'écran.&lt;br/&gt; 4. Relevez le doigt pour arrêter l\'agrandissement."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Faites un zoom avant rapide sur l\'écran pour mieux voir le contenu qui vous intéresse.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; 1. Utilisez le raccourci pour démarrer l\'agrandissement.&lt;br/&gt; 2. Appuyez sur l\'écran.&lt;br/&gt; 3. Faites glisser deux doigts pour vous déplacer sur l\'écran.&lt;br/&gt; 4. Pincez l\'écran avec les deux doigts pour régler le zoom.&lt;br/&gt; 5. Utilisez le raccourci pour arrêter l\'agrandissement.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant temporaire :&lt;/b&gt;&lt;br/&gt; 1. Utilisez le raccourci pour démarrer l\'agrandissement.&lt;br/&gt; 2. Appuyez de manière prolongée n\'importe où sur l\'écran.&lt;br/&gt; 3. Faites glisser un doigt pour vous déplacer sur l\'écran.&lt;br/&gt; 4. Relevez le doigt pour arrêter l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Lorsque l\'option \"Agrandissement\" est activée, vous pouvez effectuer un zoom avant sur votre écran.\n\n"<b>"Pour zoomer"</b>", activez l\'option \"Agrandissement\", puis appuyez n\'importe où sur l\'écran.\n"<ul><li>"Pour faire défiler l\'écran, faites glisser deux doigts ou plus dessus."</li>\n<li>"Pour régler le niveau de zoom, pincez l\'écran avec deux doigts ou plus."</li></ul>\n\n<b>"Pour faire un zoom temporaire"</b>", lancez l\'option \"Agrandissement\", puis appuyez de manière prolongée n\'importe où sur l\'écran.\n"<ul><li>"Pour vous déplacer sur l\'écran, faites glisser un doigt dessus."</li>\n<li>"Pour faire un zoom arrière, relevez le doigt."</li></ul>\n\n"Il est impossible de faire un zoom avant sur le clavier ni sur la barre de navigation."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Utiliser le bouton Accessibilité pour ouvrir"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Maintenez le bouton de volume appuyé pour ouvrir"</string>
@@ -2141,8 +2141,8 @@
     <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Raccourci (volume)"</string>
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Service associé au raccourci"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Paramètres des raccourcis"</string>
-    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Raccourci depuis écran verrouillage"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autoriser le raccourci de la fonctionnalité à s\'activer à partir de l\'écran de verrouillage. Pour cela, appuyez sur les deux touches de volume pendant quelques secondes."</string>
+    <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Raccourci depuis l\'écran de verrouillage"</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autoriser le raccourci à activer la fonctionnalité à partir de l\'écran de verrouillage. Pour cela, appuyez sur les deux touches de volume pendant quelques secondes."</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
@@ -2165,7 +2165,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de pression"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs permet d\'assombrir l\'écran.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&gt; sachez qu\'elle permet également de l\'éclaircir.&lt;/li&gt; &lt;li&gt; Les couleurs des contenus multimédias et des images seront modifiées.&lt;/li&gt; &lt;li&gt; Vous pouvez également utiliser le thème sombre pour afficher un arrière-plan sombre. Le thème sombre ne fonctionne que dans les applications compatibles. L\'inversion des couleurs fonctionne dans toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversion des couleurs permet d\'assombrir l\'écran.&lt;br/&gt;&lt;br/&gt; Remarque : &lt;ol&gt; &lt;li&gt; Cette fonctionnalité permet également d\'éclaircir l\'écran.&lt;/li&gt; &lt;li&gt; Les couleurs des contenus multimédias et des images seront modifiées.&lt;/li&gt; &lt;li&gt; Vous pouvez également utiliser le thème sombre pour afficher un arrière-plan sombre. Le thème sombre ne fonctionne que dans les applications compatibles. L\'inversion des couleurs fonctionne dans toutes les applications.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'interaction)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Le clic automatique fonctionne avec une souris connectée. Vous pouvez configurer le curseur de la souris de sorte qu\'un clic soit automatiquement déclenché s\'il cesse de bouger pendant un certain temps."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Désactiver"</string>
@@ -2179,13 +2179,13 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Plus court"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Plus long"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Délai du clic automatique"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Force du retour tactile et vibrations"</string>
+    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Force du retour haptique et vibrations"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibreur des notifications"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibreur de la sonnerie"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Retour tactile"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Utiliser <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Ouvrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Corriger les couleurs"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Utiliser la correction des couleurs"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Afficher les sous-titres"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Pour les applications compatibles uniquement"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Style et taille des sous-titres"</string>
@@ -3030,7 +3030,7 @@
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Sauf si une autre application de paiement est ouverte"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Application à utiliser au terminal de paiement sans contact :"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Paiement à un terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configurez une application de paiement. Il suffit ensuite de poser l\'arrière de votre téléphone sur n\'importe quel terminal disposant du symbole Sans contact."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configurez une application de paiement. Il suffit ensuite d\'approcher l\'arrière de votre appareil de n\'importe quel terminal disposant du symbole Sans contact."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Plus..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Définir l\'application de paiement par défaut"</string>
@@ -3154,6 +3154,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponible, car la fonctionnalité NFC est désactivée"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser cette option, vous devez d\'abord installer une application de paiement"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Applis et notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applications récentes, applications par défaut"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Les applications du profil professionnel n\'ont pas accès aux notifications."</string>
@@ -3443,7 +3444,7 @@
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activer"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Annuler"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activé : les conversations peuvent s\'afficher sous forme de bulles"</string>
-    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Autoriser des applications à afficher des bulles"</string>
+    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Autoriser les applications à afficher des bulles"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Certaines conversations s\'afficheront sous forme de bulles superposées aux autres applications"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Toutes les conversations peuvent s\'afficher dans des bulles"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Conversations sélectionnées visibles dans des bulles"</string>
@@ -3465,8 +3466,8 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Masquer les notifications silencieuses dans la barre d\'état"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Clignotement"</string>
     <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notif. sur écran de verrouillage"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Passer l\'écran de verrouillage"</string>
-    <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Après Face Unlock, accéder au dernier écran utilisé"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ignorer l\'écran de verrouillage"</string>
+    <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Après le déverrouillage via Face Unlock, accéder au dernier écran utilisé"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Écran de verrouillage, verrouiller l\'écran, passer, ignorer"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Profil professionnel verrouillé"</string>
     <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notifications sur l\'écran de verrouillage"</string>
@@ -3579,7 +3580,7 @@
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Autoriser l\'application <xliff:g id="NAME">%1$s</xliff:g> professionnelle à accéder à vos données personnelles ?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"L\'application <xliff:g id="NAME">%1$s</xliff:g> risque de dévoiler vos données personnelles à votre administrateur informatique."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Données des applications"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Cette application peut accéder aux données de votre application<xliff:g id="NAME">%1$s</xliff:g> personnelle."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Cette application peut accéder aux données de votre application <xliff:g id="NAME">%1$s</xliff:g> personnelle."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Autorisations"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Cette application peut utiliser les autorisations de votre application <xliff:g id="NAME">%1$s</xliff:g> personnelle pour accéder, le cas échéant, à votre position, à votre espace de stockage ou à vos contacts."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Aucune application associée"</string>
@@ -3590,7 +3591,7 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Installez <xliff:g id="NAME">%1$s</xliff:g> dans votre profil professionnel pour associer ces applications"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Installez <xliff:g id="NAME">%1$s</xliff:g> dans votre profil personnel pour associer ces applications"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Appuyez pour obtenir l\'application"</string>
-    <string name="manage_zen_access_title" msgid="1562322900340107269">"Accès \"Ne pas déranger\""</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"Accès au mode \"Ne pas déranger\""</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Autoriser le mode Ne pas déranger"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Aucune demande d\'accès \"Ne pas déranger\" n\'a été envoyée par les applications installées."</string>
     <string name="loading_notification_apps" msgid="1458413761470945269">"Chargement des applications en cours…"</string>
@@ -3965,8 +3966,8 @@
     <string name="high_power_off" msgid="317000444619279018">"Utilisation de la batterie optimisée"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Optimisation de la batterie non disponible"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"N\'applique aucune optimisation de batterie et risque de décharger la batterie plus rapidement."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Autoriser l\'exécution en arrière-plan systématique de l\'application ?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Si vous autorisez l\'exécution en arrière-plan systématique de <xliff:g id="APP_NAME">%1$s</xliff:g>, vous risquez de réduire l\'autonomie de l\'appareil. \n\nVous pouvez modifier cette option ultérieurement dans Paramètres &gt; Applications et notifications."</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Autoriser l\'appli à toujours s\'exécuter en arrière-plan ?"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Si vous autorisez <xliff:g id="APP_NAME">%1$s</xliff:g> à toujours fonctionner en arrière-plan, l\'autonomie de la batterie peut être réduite. \n\nVous pouvez modifier cette option ultérieurement dans Paramètres &gt; Applis et notifications."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Utilisation depuis la dernière charge complète : <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Gestion de l\'alimentation"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Aucune utilisation de la batterie depuis la dernière charge complète"</string>
@@ -4057,7 +4058,7 @@
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Superposition sur d\'autres applis"</string>
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Applications"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Superposition sur d\'autres applis"</string>
-    <string name="permit_draw_overlay" msgid="4468994037192804075">"Autoriser la superposition d\'applis"</string>
+    <string name="permit_draw_overlay" msgid="4468994037192804075">"Autoriser la superposition sur d\'autres applis"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Autorisez cette application à se superposer aux autres applications que vous utilisez. Cette application pourra voir où vous appuyez ou modifier les éléments qui s\'affichent à l\'écran."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Accès à tous les fichiers"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Autoriser accès à tous fichiers et leur gestion"</string>
@@ -4366,10 +4367,10 @@
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"Commandes gestuelles pour contrôler votre téléphone"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"Commandes gestuelles pour contrôler votre tablette"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"Commandes gestuelles pour contrôler votre appareil"</string>
-    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Ouvrir rapidement la caméra"</string>
+    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Ouvrir rapidement l\'appareil photo"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Pour accéder rapidement à l\'appareil photo, appuyez deux fois sur le bouton Marche/Arrêt. Fonctionne à partir de n\'importe quel écran."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Ouvrir l\'appareil photo rapidement"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Retourner la caméra pour prendre un selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Faire pivoter le téléphone pour les selfies"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Prendre des selfies plus rapidement"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navigation système"</string>
@@ -4389,7 +4390,7 @@
     <string name="high_label" msgid="357503396626018487">"Élevée"</string>
     <string name="left_edge" msgid="1513576842959071849">"Bord gauche"</string>
     <string name="right_edge" msgid="1505309103265829121">"Bord droit"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité plus élevée peut entrer en conflit avec les gestes d\'application impliquant les bords de l\'écran."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Une sensibilité élevée peut perturber l\'interprétation des gestes effectués sur les bords de l\'écran dans les applications."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilité du geste \"retour en arrière\""</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Paramètres des gestes"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigation par gestes, sensibilité du retour en arrière, geste de retour"</string>
@@ -4404,7 +4405,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Pour afficher l\'heure, les notifications et d\'autres informations, saisissez votre téléphone."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Pour afficher l\'heure, les notifications et d\'autres informations, saisissez votre tablette."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Pour afficher l\'heure, les notifications et d\'autres informations, saisissez votre appareil."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Appuyer pour vérifier le téléphone"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Appuyer pour consulter le téléphone"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Appuyer pour vérifier la tablette"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Appuyer pour vérifier l\'appareil"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Pour afficher l\'heure, les notifications et d\'autres informations, appuyez sur l\'écran."</string>

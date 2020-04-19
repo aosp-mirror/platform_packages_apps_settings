@@ -23,10 +23,10 @@
     <string name="deny" msgid="7326117222944479942">"Rechazar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconocido"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="other">Estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser programador.</item>
-      <item quantity="one">Estás a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> paso de ser programador.</item>
+      <item quantity="other">Estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser desarrollador.</item>
+      <item quantity="one">Estás a <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> paso de ser desarrollador.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"¡Ya eres programador!"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"¡Ya eres desarrollador!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"No es necesario, ya eres programador."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Primero habilita las opciones para programador."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"Conexiones inalámbricas y redes"</string>
@@ -780,7 +780,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activa NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC intercambia datos entre este dispositivo y otras orientaciones o dispositivos cercanos, como terminales de pago, lectores de acceso o etiquetas."</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Requerir el desbloqueo del dispositivo para la NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Permitir uso de pagos NFC y Transit solo cuando la pantalla está desbloqueada"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Permitir el uso de NFC en pagos y transporte público solo cuando la pantalla está desbloqueada"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Listo para transmitir contenido de aplicaciones por NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Desactivada"</string>
@@ -847,7 +847,7 @@
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"No tienes permiso para cambiar la red Wi‑Fi."</string>
     <string name="wifi_more" msgid="8742256421693351035">"Más"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Configuración automática (WPS)"</string>
-    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"¿Quieres activar la búsqueda de Wi‑Fi?"</string>
+    <string name="wifi_settings_scanning_required_title" msgid="1088663325396007484">"¿Deseas activar la búsqueda de Wi‑Fi?"</string>
     <string name="wifi_settings_scanning_required_summary" msgid="4770243653675416569">"Para activar la conexión Wi-Fi automáticamente, primero debes activar la búsqueda de Wi-Fi."</string>
     <string name="wifi_settings_scanning_required_info" msgid="1473411566072565789">"La búsqueda de Wi-Fi permite que las apps y los servicios busquen redes de este tipo en cualquier momento, incluso cuando la conexión Wi-Fi está desactivada. Puedes usar esta función, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación."</string>
     <string name="wifi_settings_scanning_required_turn_on" msgid="1112223196123955447">"Activar"</string>
@@ -1469,7 +1469,7 @@
     <string name="storage_detail_system" msgid="3797439069473271732">"Sistema"</string>
     <string name="storage_detail_explore" msgid="13782374784415466">"Explorar <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_detail_dialog_other" msgid="3359851869961609901">"En Otros se incluyen los archivos compartidos que guardan las apps, los que se descargan de Internet o mediante Bluetooth, los archivos de Android, etc. \n\nPara ver el contenido visible de <xliff:g id="NAME">^1</xliff:g>, presiona Explorar."</string>
-    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"El sistema incluye archivos que se usan para ejecutar la versión <xliff:g id="VERSION">%s</xliff:g> de Android"</string>
+    <string name="storage_detail_dialog_system" msgid="7461009051858709479">"El sistema incluye archivos que se usan para ejecutar la versión <xliff:g id="VERSION">%s</xliff:g> de Android."</string>
     <string name="storage_detail_dialog_user" msgid="1691219071007313226">"Es posible que <xliff:g id="USER_0">^1</xliff:g> haya guardado fotos, música, apps y otros datos que ocupan <xliff:g id="SIZE">^2</xliff:g> de almacenamiento. \n\nPara ver más detalles, cambia a <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="9036374223934708619">"Configurar el dispositivo <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_init_external_title" msgid="6540132491909241713">"Usar como medio de almacenamiento portátil"</string>
@@ -1598,7 +1598,7 @@
     <string name="master_clear_title" msgid="5309249309235959383">"Borrar todos los datos (restablecer la configuración de fábrica)"</string>
     <string name="master_clear_short_title" msgid="5331449583601739360">"Borrar todos los datos"</string>
     <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"Esta acción borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu tablet, como\n\n"<li>"Tu Cuenta de Google"</li>\n<li>"Los datos y la configuración del sistema y de las apps"</li>\n<li>"Las apps descargadas"</li></string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"Esta acción borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu teléfono, como\n\n"<li>"Tu Cuenta de Google"</li>\n<li>"Los datos y la configuración del sistema y de las apps"</li>\n<li>"Las apps descargadas"</li></string>
+    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, por ejemplo:\n\n"<li>"Tu Cuenta de Google"</li>\n<li>"Los datos y la configuración del sistema y de las apps"</li>\n<li>"Las apps descargadas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"Accediste a las siguientes cuentas:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"Hay otros usuarios presentes en este dispositivo.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"Música"</li>\n<li>"Fotos"</li>\n<li>"Otros datos de usuario"</li></string>
@@ -2655,7 +2655,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"Cert. de usuario de app y VPN"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Certificado de Wi‑Fi"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Tus datos no serán privados"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Los sitios web, las apps y las VPN usan Certificados de CA para la encriptación. Instala Certificados de CA solo de organizaciones que sean de confianza. \n\n Si instalas un Certificado de CA, el propietario podrá acceder a tus datos, como contraseñas y detalles de tarjetas de crédito, desde sitios web que visites o apps que uses, incluso aunque la información esté encriptada."</string>
+    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Los Certificados de CA permiten que los sitios web, las apps y las VPN puedan encriptar datos. Instala solo Certificados de CA de organizaciones que sean de confianza. \n\n Si instalas un Certificado de CA, el propietario podrá acceder a los datos (como contraseñas y detalles de tarjetas de crédito) que ingreses en sitios web que visites o apps que uses, incluso aunque la información esté encriptada."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"No instalar"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Instalar de todas formas"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"No se instaló el certificado"</string>
@@ -3154,6 +3154,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No disponible porque la NFC está desactivada"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar esta opción, debes instalar una app de pagos"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps y notificaciones"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recientes y predeterminadas"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Las apps del perfil de trabajo no tienen acceso a las notificaciones."</string>
@@ -4378,7 +4379,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navegación por gestos"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Para ir a la pantalla principal, desliza el dedo hacia arriba desde la parte inferior de la pantalla. Para cambiar de app, desliza el dedo hacia arriba desde la parte inferior, sostenlo y, luego, suéltalo. Para ir atrás, desliza el dedo desde el borde izquierdo o el derecho."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navegación con 3 botones"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve atrás o a la pantalla de inicio y cambia de app con los botones de la parte inferior de la pantalla."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Ve atrás o a la pantalla principal y cambia de app con los botones de la parte inferior de la pantalla."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navegación del sistema, navegación con 2 botones, navegación con 3 botones, navegación por gestos, deslizar"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"La app de inicio predeterminada <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g> no admite la navegación por gestos"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Cambiar de app de inicio predeterminada"</string>
