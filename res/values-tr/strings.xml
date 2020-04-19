@@ -26,7 +26,7 @@
       <item quantity="other">Geliştirici olmanıza <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> adım kaldı.</item>
       <item quantity="one">Geliştirici olmanıza <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> adım kaldı.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"Artık siz bir geliştiricisiniz!"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"Artık bir geliştiricisiniz"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Gerekli değil, siz zaten bir geliştiricisiniz."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Lütfen önce geliştirici seçeneklerini etkinleştirin."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"Kablosuz ve ağlar"</string>
@@ -2214,9 +2214,9 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Bu hizmet hatalı çalışıyor."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Hızlı Ayarlar\'da göster"</string>
     <string name="daltonizer_type" msgid="1715154680803795947">"Düzeltme modu"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Yeşil renk körlüğü"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Kırmızı renk körlüğü"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Mavi renk körlüğü"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Döteranomali"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Protanomali"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Tritanomali"</string>
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Kırmızı-yeşil"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Kırmızı-yeşil"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Mavi-sarı"</string>
@@ -2655,7 +2655,7 @@
     <string name="user_certificate" msgid="6897024598058566466">"VPN ve uygulama kullanıcı sertifikası"</string>
     <string name="wifi_certificate" msgid="8461905432409380387">"Kablosuz sertifikası"</string>
     <string name="ca_certificate_warning_title" msgid="7951148441028692619">"Verileriniz gizli kalmayacak"</string>
-    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"CA sertifikaları web siteleri, uygulamalar ve VPN\'ler tarafından şifreleme için kullanılır. Yalnızca güvendiğiniz kuruluşların CA sertifikalarını yükleyin. \n\n Bir CA sertifikası yüklerseniz sertifika sahibi; şifreler, veya kredi kartı bilgileri gibi verilerinize, verileriniz şifreli olsa bile, ziyaret ettiğiniz web sitelerinden veya kullandığınız uygulamalardan erişebilir."</string>
+    <string name="ca_certificate_warning_description" msgid="3386740654961466569">"Web siteleri, uygulamalar ve VPN\'ler, CA sertifikalarını şifreleme için kullanır. Yalnızca güvendiğiniz kuruluşların CA sertifikalarını yükleyin. \n\n Bir CA sertifikası yüklerseniz sertifika sahibi, ziyaret ettiğiniz web sitelerinden veya kullandığınız uygulamalardan, verileriniz şifreli olsa bile, şifrelerinize veya kredi kartı bilgileri gibi verilerinize erişebilir."</string>
     <string name="certificate_warning_dont_install" msgid="3794366420884560605">"Yükleme"</string>
     <string name="certificate_warning_install_anyway" msgid="4633118283407228740">"Yine de yükle"</string>
     <string name="cert_not_installed" msgid="6725137773549974522">"Sertifika yüklenmedi"</string>
@@ -3154,6 +3154,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC kapalı olduğundan kullanılamaz"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Kullanmak için önce bir ödeme uygulaması yükleyin"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Uygulama ve bildirimler"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Son uygulamalar, varsayılan uygulamalar"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"İş profilindeki uygulamalar için bildirim erişimi kullanılamaz."</string>
@@ -3965,7 +3966,7 @@
     <string name="high_power_off" msgid="317000444619279018">"Pil kullanımı optimize ediliyor"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Pil optimizasyonu kullanılamıyor"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Pil optimizasyonu uygulanmasın. Bu seçenek, pilinizi daha hızlı tüketebilir."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulamanın her zaman arka planda çalıştırılmasına izin verilsin mi?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulamanın arka planda çalışmaya devam etsin mi?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının her zaman arka planda çalıştırılmasına izin vermeniz pil ömrünü kısaltabilir. \n\nBunu daha sonra Ayarlar &gt; Uygulamalar ve bildirimler seçeneğinden değiştirebilirsiniz."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Son kez tamamen şarj olduktan sonra <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanıldı"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Güç yönetimi"</string>
@@ -4428,7 +4429,7 @@
     <string name="instant_apps_settings" msgid="4280942494969957858">"Hazır Uygulama tercihleri"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Yüklü uygulamalar"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Depolama alanınız artık depolama yöneticisi tarafından yönetiliyor"</string>
-    <string name="account_for_section_header" msgid="7466759342105251096">"<xliff:g id="USER_NAME">%1$s</xliff:g> adlı kullanıcının hesapları"</string>
+    <string name="account_for_section_header" msgid="7466759342105251096">"<xliff:g id="USER_NAME">%1$s</xliff:g> kullanıcısının hesapları"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Yapılandırma"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"Uygulama verilerini otomatik olarak senkronize et"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"Kişisel verileri otomatik olarak senkronize et"</string>

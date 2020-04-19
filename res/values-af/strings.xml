@@ -2189,7 +2189,7 @@
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Wys onderskrifte"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"Net vir gesteunde program"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Grootte en styl van onderskrif"</string>
-    <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Teksgrootte van <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
+    <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>teksgrootte"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Meer opsies"</string>
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Nie alle programme steun hierdie onderskrifvoorkeure nie"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Toeganklikheidknoppie"</string>
@@ -2750,8 +2750,8 @@
     <string name="remove_account_label" msgid="4169490568375358010">"Verwyder rekening"</string>
     <string name="header_add_an_account" msgid="3919151542338822661">"Voeg \'n rekening by"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"Verwyder rekening?"</string>
-    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Verwydering van hierdie rekening sal ook al sy boodskappe, kontakte en ander data van die tablet uitvee."</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Verwydering van hierdie rekening sal ook al sy boodskappe, kontakte en ander data van die foon uitvee."</string>
+    <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"Verwydering van hierdie rekening sal ook al sy boodskappe, kontakte en ander data van die tablet af uitvee."</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"Verwydering van hierdie rekening sal ook al sy boodskappe, kontakte en ander data van die foon af uitvee."</string>
     <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"As hierdie rekening verwyder word, sal al sy boodskappe, kontakte en ander data van die toestel af uitgevee word!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"Hierdie verandering word nie deur jou administrateur toegelaat nie"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Kan nie handmatig sinkroniseer nie"</string>
@@ -3154,6 +3154,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nie beskikbaar nie want NFC is af"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Installeer eers \'n betalingprogram om dit te gebruik"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Programme en kennisgewings"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Onlangse programme, verstekprogramme"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Kennisgewingtoegang is nie vir programme in die werkprofiel beskikbaar nie."</string>
@@ -4325,12 +4326,12 @@
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Gekoppel aan <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Gekoppel aan veelvuldige toestelle"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Stelsel-UI-demonstrasiemodus"</string>
-    <string name="dark_ui_mode" msgid="898146394425795281">"Donker-tema"</string>
+    <string name="dark_ui_mode" msgid="898146394425795281">"Donkertema"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Aan / Tydelik gedeaktiveer vanweë Batterybespaarder"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Tydelik aangeskakel vanweë Batterybespaarder"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Gesteunde programme sal ook na donker tema toe oorskakel"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Het dit"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Probeer Donker-tema"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Probeer Donkertema"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Help om batterylewe te verleng"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Kitsinstellings-ontwikkelaarteëls"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Deaktiveer uitteltyd vir ADB-magtiging"</string>
@@ -4369,7 +4370,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Maak kamera vinnig oop"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Druk die aan/af-skakelaar twee keer om die kamera vinnig oop te maak. Dit werk op enige skerm."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Maak kamera vinnig oop"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Keer kamera om vir selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Draai kamera om vir selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Neem selfies vinniger"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Stelselnavigasie"</string>
