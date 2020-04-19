@@ -144,10 +144,11 @@ public class SpecialAppAccessPreferenceController extends BasePreferenceControll
 
     @Override
     public void onLauncherInfoChanged() {
+        // when the value of the AppEntry.hasLauncherEntry was changed.
+        updateSummary();
     }
 
     @Override
     public void onLoadEntriesCompleted() {
     }
-
 }
