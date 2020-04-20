@@ -32,13 +32,23 @@
         settings:allowDividerAbove="true"
         settings:allowDividerBelow="true"/>
 
-    <!-- bubbles -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="bubble_pref"
-        android:title="@string/notification_bubbles_title"
-        android:summary="@string/bubbles_conversation_toggle_summary"
-        android:icon="@drawable/ic_create_bubble"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+    <PreferenceCategory
+        android:key="bubbles"
+        android:title="@string/notification_bubbles_title">
+
+        <!-- bubbles -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="bubble_pref"
+            android:title="@string/bubbles_conversation_toggle_title"
+            android:summary="@string/bubbles_conversation_toggle_summary"
+            android:icon="@drawable/ic_create_bubble"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+
+        <Preference
+            android:key="notification_bubbles"
+            android:title="@string/bubbles_conversation_app_link"
+        />
+    </PreferenceCategory>
 
     <!-- demote -->
     <Preference
