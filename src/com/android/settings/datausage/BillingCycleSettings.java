@@ -25,9 +25,11 @@ import android.content.res.Resources;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -45,6 +47,8 @@ import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.TimeZone;
 
 @SearchIndexable
@@ -279,30 +283,35 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             final DataUsageEditController target = (DataUsageEditController) getTargetFragment();
             final NetworkPolicyEditor editor = target.getNetworkPolicyEditor();
 
+            bytesPicker.setKeyListener(new NumberKeyListener() {
+                protected char[] getAcceptedChars() {
+                    return new char [] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                            ',', '.'};
+                }
+                public int getInputType() {
+                    return EditorInfo.TYPE_CLASS_NUMBER | EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
+                }
+            });
+
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
-            if (bytes > 1.5f * GIB_IN_BYTES) {
-                final String bytesText = formatText(bytes / (float) GIB_IN_BYTES);
-                bytesPicker.setText(bytesText);
-                bytesPicker.setSelection(0, bytesText.length());
+            final boolean unitInGigaBytes = (bytes > 1.5f * GIB_IN_BYTES);
+            final String bytesText = formatText(bytes,
+                    unitInGigaBytes ? GIB_IN_BYTES : MIB_IN_BYTES);
+            bytesPicker.setText(bytesText);
+            bytesPicker.setSelection(0, bytesText.length());
 
-                type.setSelection(1);
-            } else {
-                final String bytesText = formatText(bytes / (float) MIB_IN_BYTES);
-                bytesPicker.setText(bytesText);
-                bytesPicker.setSelection(0, bytesText.length());
-
-                type.setSelection(0);
-            }
+            type.setSelection(unitInGigaBytes ? 1 : 0);
         }
 
-        private String formatText(float v) {
-            v = Math.round(v * 100) / 100f;
-            return String.valueOf(v);
+        private String formatText(double v, double unitInBytes) {
+            final NumberFormat formatter = NumberFormat.getNumberInstance();
+            formatter.setMaximumFractionDigits(2);
+            return formatter.format((double) (v / unitInBytes));
         }
 
         @Override
@@ -315,15 +324,22 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
 
             final NetworkTemplate template = getArguments().getParcelable(EXTRA_TEMPLATE);
             final boolean isLimit = getArguments().getBoolean(EXTRA_LIMIT);
-            EditText bytesField = (EditText) mView.findViewById(R.id.bytes);
-            Spinner spinner = (Spinner) mView.findViewById(R.id.size_spinner);
+            final EditText bytesField = (EditText) mView.findViewById(R.id.bytes);
+            final Spinner spinner = (Spinner) mView.findViewById(R.id.size_spinner);
 
-            String bytesString = bytesField.getText().toString();
-            if (bytesString.isEmpty() || bytesString.equals(".")) {
-                bytesString = "0";
+            final String bytesString = bytesField.getText().toString();
+
+            final NumberFormat formatter = NumberFormat.getNumberInstance();
+            Number number = null;
+            try {
+                number = formatter.parse(bytesString);
+            } catch (ParseException ex) {
             }
-            final long bytes = (long) (Float.valueOf(bytesString)
-                    * (spinner.getSelectedItemPosition() == 0 ? MIB_IN_BYTES : GIB_IN_BYTES));
+            long bytes = 0L;
+            if (number != null) {
+                bytes = (long) (number.floatValue()
+                        * (spinner.getSelectedItemPosition() == 0 ? MIB_IN_BYTES : GIB_IN_BYTES));
+            }
 
             // to fix the overflow problem
             final long correctedBytes = Math.min(MAX_DATA_LIMIT_BYTES, bytes);
