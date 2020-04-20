@@ -23,6 +23,7 @@ import android.app.ActivityManager;
 import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -189,6 +190,20 @@ public class NotificationHistoryActivity extends Activity {
             mCountdownFuture.cancel(true);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleBackPressed();
+    }
+
+    private void handleBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+        } else {
+            startActivity(new Intent(Settings.ACTION_NOTIFICATION_SETTINGS));
+            finish();
+        }
     }
 
     private void bindSwitch() {
