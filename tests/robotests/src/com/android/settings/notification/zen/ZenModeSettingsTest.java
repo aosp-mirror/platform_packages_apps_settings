@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.notification.zen.ZenModeSettings;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -70,6 +71,7 @@ public class ZenModeSettingsTest {
     }
 
     @Test
+    @Ignore
     public void testGetCallsSettingSummary_none() {
         Policy policy = new Policy(0, 0, 0, 0);
         assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Don\u2019t allow any calls");
