@@ -26,8 +26,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.widget.Toast;
 
@@ -35,8 +33,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.widget.SwitchWidgetController;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -75,9 +71,6 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             }
         }
     };
-
-    private static final String EVENT_DATA_IS_WIFI_ON = "is_wifi_on";
-    private static final int EVENT_UPDATE_INDEX = 0;
 
     public WifiEnabler(Context context, SwitchWidgetController switchWidget,
         MetricsFeatureProvider metricsFeatureProvider) {
@@ -160,15 +153,6 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
             default:
                 setSwitchBarChecked(false);
                 mSwitchWidget.setEnabled(true);
-        }
-
-        if (RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
-                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId())) {
-            mSwitchWidget.setEnabled(false);
-        } else {
-            final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
-                    mContext, UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.myUserId());
-            mSwitchWidget.setDisabledByAdmin(admin);
         }
     }
 
