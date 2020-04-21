@@ -68,13 +68,12 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private final EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
     private final PreferenceFragmentCompat mFragment;
-    protected final DataUsageController mDataUsageController;
-    protected final DataUsageInfoController mDataInfoController;
-    private final NetworkTemplate mDefaultTemplate;
-    protected final NetworkPolicyEditor mPolicyEditor;
-    private final int mDataUsageTemplate;
-    private final boolean mHasMobileData;
-    private final SubscriptionManager mSubscriptionManager;
+    protected DataUsageController mDataUsageController;
+    protected DataUsageInfoController mDataInfoController;
+    private NetworkTemplate mDefaultTemplate;
+    protected NetworkPolicyEditor mPolicyEditor;
+    private int mDataUsageTemplate;
+    private boolean mHasMobileData;
 
     /** Name of the carrier, or null if not available */
     private CharSequence mCarrierName;
@@ -112,29 +111,31 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
                 fragment, null);
         mLifecycle = lifecycle;
         mFragment = fragment;
+        init(subscriptionId);
+    }
+
+    protected void init(int subscriptionId) {
         mSubscriptionId = subscriptionId;
 
-        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(activity, mSubscriptionId);
-        NetworkPolicyManager policyManager = activity.getSystemService(NetworkPolicyManager.class);
+        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubscriptionId);
+        final NetworkPolicyManager policyManager =
+                mContext.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
         mHasMobileData = SubscriptionManager.isValidSubscriptionId(mSubscriptionId)
-                && DataUsageUtils.hasMobileData(activity);
+                && DataUsageUtils.hasMobileData(mContext);
 
-        mDataUsageController = new DataUsageController(activity);
+        mDataUsageController = new DataUsageController(mContext);
         mDataUsageController.setSubscriptionId(mSubscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
         if (mHasMobileData) {
             mDataUsageTemplate = R.string.cell_data_template;
-        } else if (DataUsageUtils.hasWifiRadio(activity)) {
+        } else if (DataUsageUtils.hasWifiRadio(mContext)) {
             mDataUsageTemplate = R.string.wifi_data_template;
         } else {
             mDataUsageTemplate = R.string.ethernet_data_template;
         }
-
-        mSubscriptionManager = (SubscriptionManager)
-                mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
     }
 
     @VisibleForTesting
@@ -144,8 +145,6 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             NetworkTemplate defaultTemplate,
             NetworkPolicyEditor policyEditor,
             int dataUsageTemplate,
-            boolean hasMobileData,
-            SubscriptionManager subscriptionManager,
             Activity activity,
             Lifecycle lifecycle,
             EntityHeaderController entityHeaderController,
@@ -157,8 +156,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mDefaultTemplate = defaultTemplate;
         mPolicyEditor = policyEditor;
         mDataUsageTemplate = dataUsageTemplate;
-        mHasMobileData = hasMobileData;
-        mSubscriptionManager = subscriptionManager;
+        mHasMobileData = true;
         mActivity = activity;
         mLifecycle = lifecycle;
         mEntityHeaderController = entityHeaderController;
@@ -174,24 +172,25 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     }
 
     @VisibleForTesting
-    void setPlanValues(int dataPlanCount, long dataPlanSize, long dataPlanUse) {
-        mDataplanCount = dataPlanCount;
-        mDataplanSize = dataPlanSize;
-        mDataBarSize = dataPlanSize;
-        mDataplanUse = dataPlanUse;
+    List<SubscriptionPlan> getSubscriptionPlans(int subscriptionId) {
+        return ProxySubscriptionManager.getInstance(mContext).get()
+                .getSubscriptionPlans(subscriptionId);
     }
 
     @VisibleForTesting
-    void setCarrierValues(String carrierName, long snapshotTime, long cycleEnd, Intent intent) {
-        mCarrierName = carrierName;
-        mSnapshotTime = snapshotTime;
-        mCycleEnd = cycleEnd;
-        mManageSubscriptionIntent = intent;
+    SubscriptionInfo getSubscriptionInfo(int subscriptionId) {
+        return ProxySubscriptionManager.getInstance(mContext)
+                .getAccessibleSubscriptionInfo(subscriptionId);
+    }
+
+    @VisibleForTesting
+    boolean hasSim() {
+        return DataUsageUtils.hasSim(mContext);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return DataUsageUtils.hasSim(mActivity)
+        return hasSim()
                 || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -200,7 +199,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
         final DataUsageController.DataUsageInfo info;
-        if (DataUsageUtils.hasSim(mActivity)) {
+        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubscriptionId);
+        if (hasSim()) {
             info = mDataUsageController.getDataUsageInfo(mDefaultTemplate);
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
@@ -223,9 +223,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             return;
         }
 
-        if (mSubscriptionManager != null) {
-            refreshDataplanInfo(info);
-        }
+        refreshDataplanInfo(info, subInfo);
 
         if (info.warningLevel > 0 && info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
@@ -260,7 +258,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     // TODO(b/70950124) add test for this method once the robolectric shadow run script is
     // completed (b/3526807)
-    private void refreshDataplanInfo(DataUsageController.DataUsageInfo info) {
+    private void refreshDataplanInfo(DataUsageController.DataUsageInfo info,
+            SubscriptionInfo subInfo) {
         // reset data before overwriting
         mCarrierName = null;
         mDataplanCount = 0;
@@ -271,16 +270,10 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mCycleEnd = info.cycleEnd;
         mSnapshotTime = -1L;
 
-        final ProxySubscriptionManager proxySubsciptionMgr =
-                ProxySubscriptionManager.getInstance(mContext);
-        final SubscriptionInfo subInfo = proxySubsciptionMgr
-                .getAccessibleSubscriptionInfo(mSubscriptionId);
         if (subInfo != null && mHasMobileData) {
             mCarrierName = subInfo.getCarrierName();
-            List<SubscriptionPlan> plans = mSubscriptionManager.getSubscriptionPlans(
-                    mSubscriptionId);
-            final SubscriptionPlan primaryPlan = getPrimaryPlan(mSubscriptionManager,
-                    mSubscriptionId);
+            final List<SubscriptionPlan> plans = getSubscriptionPlans(mSubscriptionId);
+            final SubscriptionPlan primaryPlan = getPrimaryPlan(plans);
 
             if (primaryPlan != null) {
                 mDataplanCount = plans.size();
@@ -313,7 +306,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
      *         {@code null} if no carrier app is defined, or if the defined
      *         carrier app provides no management activity.
      */
-    private Intent createManageSubscriptionIntent(int subId) {
+    @VisibleForTesting
+    Intent createManageSubscriptionIntent(int subId) {
         final INetworkPolicyManager iNetPolicyManager = INetworkPolicyManager.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
         String owner = "";
@@ -327,7 +321,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             return null;
         }
 
-        final List<SubscriptionPlan> plans = mSubscriptionManager.getSubscriptionPlans(subId);
+        final List<SubscriptionPlan> plans = getSubscriptionPlans(subId);
         if (plans.isEmpty()) {
             return null;
         }
@@ -344,8 +338,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         return intent;
     }
 
-    public static SubscriptionPlan getPrimaryPlan(SubscriptionManager subManager, int primaryId) {
-        List<SubscriptionPlan> plans = subManager.getSubscriptionPlans(primaryId);
+    private static SubscriptionPlan getPrimaryPlan(List<SubscriptionPlan> plans) {
         if (CollectionUtils.isEmpty(plans)) {
             return null;
         }
