@@ -95,7 +95,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                         GROUP_DEVICES.hashCode() + ACTION_MEDIA_SESSION_OPERATION,
                         ACTION_MEDIA_SESSION_OPERATION),
                 IconCompat.createWithBitmap(emptyBitmap), ListBuilder.ICON_IMAGE, "");
-        if (maxVolume > 0) {    // Add InputRange row
+        if (maxVolume > 0 && !getWorker().hasAdjustVolumeUserRestriction()) {
+            // Add InputRange row
             listBuilder.addInputRange(new ListBuilder.InputRangeBuilder()
                     .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
                     .addEndItem(endItemAction)
@@ -119,6 +120,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
     }
 
     private void addRow(ListBuilder listBuilder, List<MediaDevice> mediaDevices, boolean selected) {
+        final boolean adjustVolumeUserRestriction = getWorker().hasAdjustVolumeUserRestriction();
         for (MediaDevice device : mediaDevices) {
             final int maxVolume = device.getMaxVolume();
             final IconCompat titleIcon = Utils.createIconWithDrawable(device.getIcon());
@@ -133,7 +135,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                     IconCompat.createWithResource(mContext, R.drawable.ic_check_box_anim),
                     "",
                     selected);
-            if (maxVolume > 0) {    // Add InputRange row
+            if (maxVolume > 0 && !adjustVolumeUserRestriction) {
+                // Add InputRange row
                 final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                         .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
                         .setTitle(title)
