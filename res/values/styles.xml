@@ -733,4 +733,14 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:gravity">start</item>
     </style>
+
+    <style name="TextAppearance.HeadLineFontFamily"
+           parent="@*android:style/TextAppearance.DeviceDefault.Title">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
+
+    <style name="TextAppearance.HeadLineFontFamily.Subhead"
+           parent="@*android:style/TextAppearance.DeviceDefault.Subhead">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
+    </style>
 </resources>
