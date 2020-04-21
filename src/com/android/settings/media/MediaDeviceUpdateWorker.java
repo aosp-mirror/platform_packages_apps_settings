@@ -26,11 +26,14 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.Utils;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
@@ -212,6 +215,17 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     String getPackageName() {
         return mPackageName;
+    }
+
+    boolean hasAdjustVolumeUserRestriction() {
+        if (RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_ADJUST_VOLUME, UserHandle.myUserId()) != null) {
+            return true;
+        }
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        return um.hasBaseUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME,
+                UserHandle.of(UserHandle.myUserId()));
+
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
