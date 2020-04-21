@@ -125,6 +125,7 @@ public class DataUsageSummaryTest {
     }
 
     @Test
+    @Ignore
     public void configuration_withoutSim_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
@@ -144,6 +145,7 @@ public class DataUsageSummaryTest {
     }
 
     @Test
+    @Ignore
     public void configuration_withoutMobile_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
@@ -164,6 +166,7 @@ public class DataUsageSummaryTest {
 
     @Test
     @Config(shadows = ShadowSubscriptionManager.class)
+    @Ignore
     public void configuration_invalidDataSusbscription_shouldShowWifiSectionOnly() {
         ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
         ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
