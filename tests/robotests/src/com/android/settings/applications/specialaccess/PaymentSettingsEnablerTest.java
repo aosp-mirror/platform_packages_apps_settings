@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -35,6 +36,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class PaymentSettingsEnablerTest {
     private Context mContext;
     private Preference mPreference;
