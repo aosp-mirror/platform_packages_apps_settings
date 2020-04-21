@@ -91,11 +91,12 @@ public class NotificationHistoryAdapter extends
                         new AccessibilityNodeInfo.AccessibilityAction(
                                 AccessibilityNodeInfo.ACTION_CLICK, description);
                 info.addAction(customClick);
-                //info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS);
+                info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS);
             }
 
             @Override
             public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                super.performAccessibilityAction(host, action, args);
                 if (action == AccessibilityNodeInfo.AccessibilityAction.ACTION_DISMISS.getId()) {
                     onItemSwipeDeleted(position);
                     return true;
