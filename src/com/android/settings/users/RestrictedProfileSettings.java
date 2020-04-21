@@ -16,6 +16,7 @@
 
 package com.android.settings.users;
 
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
@@ -23,7 +24,10 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +40,7 @@ import com.android.settingslib.utils.ThreadUtils;
 public class RestrictedProfileSettings extends AppRestrictionsFragment
         implements EditUserInfoController.OnContentChangedCallback {
 
+    private static final String TAG = RestrictedProfileSettings.class.getSimpleName();
     public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
     static final int DIALOG_ID_EDIT_USER_INFO = 1;
     private static final int DIALOG_CONFIRM_REMOVE = 2;
@@ -44,6 +49,8 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     private ImageView mUserIconView;
     private TextView mUserNameView;
     private ImageView mDeleteButton;
+    private View mSwitchUserView;
+    private TextView mSwitchTitle;
 
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController();
@@ -67,6 +74,11 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
         mUserNameView = (TextView) mHeaderView.findViewById(android.R.id.title);
         mDeleteButton = (ImageView) mHeaderView.findViewById(R.id.delete);
         mDeleteButton.setOnClickListener(this);
+
+        mSwitchTitle = mHeaderView.findViewById(R.id.switchTitle);
+        mSwitchUserView = mHeaderView.findViewById(R.id.switch_pref);
+        mSwitchUserView.setOnClickListener(v -> switchUser());
+
         // This is going to bind the preferences.
         super.onActivityCreated(savedInstanceState);
     }
@@ -80,7 +92,6 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
     @Override
     public void onResume() {
         super.onResume();
-
         // Check if user still exists
         UserInfo info = Utils.getExistingUser(mUserManager, mUser);
         if (info == null) {
@@ -89,6 +100,16 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
             ((TextView) mHeaderView.findViewById(android.R.id.title)).setText(info.name);
             ((ImageView) mHeaderView.findViewById(android.R.id.icon)).setImageDrawable(
                     com.android.settingslib.Utils.getUserIcon(getActivity(), mUserManager, info));
+
+            boolean canSwitchUser =
+                    mUserManager.getUserSwitchability() == UserManager.SWITCHABILITY_STATUS_OK;
+            if (mShowSwitchUser && canSwitchUser) {
+                mSwitchUserView.setVisibility(View.VISIBLE);
+                mSwitchTitle.setText(getString(com.android.settingslib.R.string.user_switch_to_user,
+                        info.name));
+            } else {
+                mSwitchUserView.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -156,6 +177,16 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
                 finishFragment();
             }
         });
+    }
+
+    private void switchUser() {
+        try {
+            ActivityManager.getService().switchUser(mUser.getIdentifier());
+        } catch (RemoteException re) {
+            Log.e(TAG, "Error while switching to other user.");
+        } finally {
+            finishFragment();
+        }
     }
 
     @Override
