@@ -26,6 +26,7 @@ import android.nfc.NfcAdapter;
 import android.provider.SearchIndexableResource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -62,6 +63,7 @@ public class NfcAndPaymentFragmentTest {
     }
 
     @Test
+    @Ignore
     public void searchIndexProvider_shouldIndexAllItems() {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
