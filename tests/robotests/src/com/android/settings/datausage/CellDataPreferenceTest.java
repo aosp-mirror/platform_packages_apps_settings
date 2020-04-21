@@ -31,6 +31,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.network.ProxySubscriptionManager;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -39,6 +40,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class CellDataPreferenceTest {
 
     @Mock
