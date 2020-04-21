@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -74,6 +75,7 @@ public class WifiEnhancedMacRandomizationPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void updateState_preferenceShouldBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, 1);
