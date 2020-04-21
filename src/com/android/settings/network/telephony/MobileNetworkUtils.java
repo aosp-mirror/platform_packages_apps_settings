@@ -42,6 +42,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.PersistableBundle;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telecom.PhoneAccountHandle;
@@ -70,9 +71,12 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class MobileNetworkUtils {
 
@@ -242,6 +246,18 @@ public class MobileNetworkUtils {
      * the user has enabled development mode.
      */
     public static boolean showEuiccSettings(Context context) {
+        long timeForAccess = SystemClock.elapsedRealtime();
+        try {
+            return ((Future<Boolean>) ThreadUtils.postOnBackgroundThread(()
+                    -> showEuiccSettingsDetecting(context))).get();
+        } catch (ExecutionException | InterruptedException exception) {
+            timeForAccess = SystemClock.elapsedRealtime() - timeForAccess;
+            Log.w(TAG, "Accessing Euicc takes too long: +" + timeForAccess + "ms");
+        }
+        return false;
+    }
+
+    private static Boolean showEuiccSettingsDetecting(Context context) {
         final EuiccManager euiccManager =
                 (EuiccManager) context.getSystemService(EuiccManager.class);
         if (!euiccManager.isEnabled()) {
