@@ -83,6 +83,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected ComponentName mComponentName;
     protected CharSequence mPackageName;
     protected Uri mImageUri;
+    private CharSequence mDescription;
     protected CharSequence mHtmlDescription;
     // Used to restore the edit dialog status.
     protected int mUserShortcutTypesCache = UserShortcutType.EMPTY;
@@ -190,7 +191,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             groupCategory.addPreference(mSettingsPreference);
         }
 
-        if (mHtmlDescription != null) {
+        if (!TextUtils.isEmpty(mHtmlDescription)) {
             final PreferenceCategory introductionCategory = new PreferenceCategory(
                     getPrefContext());
             final CharSequence title = getString(R.string.accessibility_introduction_title,
@@ -204,6 +205,16 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             htmlTextPreference.setImageGetter(mImageGetter);
             htmlTextPreference.setSelectable(false);
             introductionCategory.addPreference(htmlTextPreference);
+        }
+
+        if (!TextUtils.isEmpty(mDescription)) {
+            createFooterPreference(mDescription);
+        }
+
+        if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
+            final CharSequence defaultDescription = getText(
+                    R.string.accessibility_service_default_description);
+            createFooterPreference(defaultDescription);
         }
     }
 
@@ -364,9 +375,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         // Summary.
         if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
-            final CharSequence summary = arguments.getCharSequence(
-                    AccessibilitySettings.EXTRA_SUMMARY);
-            createFooterPreference(summary);
+            mDescription = arguments.getCharSequence(AccessibilitySettings.EXTRA_SUMMARY);
         }
 
         // Settings html description.
