@@ -24,9 +24,12 @@ import android.content.pm.PackageManager;
 import android.net.NetworkCapabilities;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.android.settings.Utils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.nio.charset.StandardCharsets;
@@ -77,6 +80,7 @@ public class WifiUtils {
         final DevicePolicyManager dpm =
                 (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         final PackageManager pm = context.getPackageManager();
+        final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
         // Check if device has DPM capability. If it has and dpm is still null, then we
         // treat this case with suspicion and bail out.
@@ -95,6 +99,18 @@ public class WifiUtils {
                     isConfigEligibleForLockdown = deviceOwnerUid == config.creatorUid;
                 } catch (PackageManager.NameNotFoundException e) {
                     // don't care
+                }
+            } else if (dpm.isOrganizationOwnedDeviceWithManagedProfile()) {
+                int profileOwnerUserId = Utils.getManagedProfileId(um, UserHandle.myUserId());
+                final ComponentName profileOwner = dpm.getProfileOwnerAsUser(profileOwnerUserId);
+                if (profileOwner != null) {
+                    try {
+                        final int profileOwnerUid = pm.getPackageUidAsUser(
+                                profileOwner.getPackageName(), profileOwnerUserId);
+                        isConfigEligibleForLockdown = profileOwnerUid == config.creatorUid;
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // don't care
+                    }
                 }
             }
         }
