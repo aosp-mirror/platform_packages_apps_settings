@@ -44,25 +44,25 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
+        return (SubscriptionManager.isValidSubscriptionId(subId))
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            mContext.startActivity(mIntent);
-            return true;
+        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            return false;
         }
 
-        return false;
+        mContext.startActivity(mIntent);
+        return true;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
             preference.setEnabled(false);
             return;
         }
