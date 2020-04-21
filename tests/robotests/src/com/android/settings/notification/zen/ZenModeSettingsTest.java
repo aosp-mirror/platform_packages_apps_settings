@@ -74,7 +74,7 @@ public class ZenModeSettingsTest {
     @Ignore
     public void testGetCallsSettingSummary_none() {
         Policy policy = new Policy(0, 0, 0, 0);
-        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("Don\u2019t allow any calls");
+        assertThat(mBuilder.getCallsSettingSummary(policy)).isEqualTo("None");
     }
 
     @Test
