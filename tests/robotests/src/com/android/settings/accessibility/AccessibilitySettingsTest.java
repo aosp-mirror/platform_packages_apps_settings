@@ -215,17 +215,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void getServiceDescription_noDescription_showsDefaultString() {
-        doReturn(EMPTY_STRING).when(mServiceInfo).loadDescription(any());
-
-        final CharSequence description = AccessibilitySettings.getServiceDescription(mContext,
-                mServiceInfo, SERVICE_ENABLED);
-
-        assertThat(description).isEqualTo(
-                mContext.getString(R.string.accessibility_service_default_description));
-    }
-
-    @Test
     public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
         final String key = DUMMY_COMPONENT_NAME.flattenToString();
         final AccessibilitySettings.RestrictedPreferenceHelper helper =
