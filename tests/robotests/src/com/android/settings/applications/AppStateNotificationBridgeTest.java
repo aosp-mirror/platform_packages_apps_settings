@@ -62,7 +62,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -133,7 +132,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testGetAggregatedUsageEvents_onlyNotificationEvents() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
@@ -156,7 +154,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testGetAggregatedUsageEvents_multipleEventsAgg() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
@@ -180,7 +177,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testGetAggregatedUsageEvents_multiplePkgs() throws Exception {
         List<Event> events = new ArrayList<>();
         Event good = new Event();
@@ -219,7 +215,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testLoadAllExtraInfo_multipleEventsAgg() throws RemoteException {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
@@ -249,7 +244,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testLoadAllExtraInfo_multiplePkgs() throws RemoteException {
         List<Event> events = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
@@ -287,7 +281,6 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    @Ignore
     public void testLoadAllExtraInfo_multipleUsers() throws RemoteException {
         // has work profile
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{1});
