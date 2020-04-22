@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.TetherEnabler.BLUETOOTH_TETHER_KEY;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.TetheringManager;
@@ -62,7 +61,7 @@ public class BluetoothTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
         when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
-        mController = new BluetoothTetherPreferenceController(mContext, BLUETOOTH_TETHER_KEY);
+        mController = new BluetoothTetherPreferenceController(mContext, "BLUETOOTH");
         mController.setTetherEnabler(mTetherEnabler);
         ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
     }
@@ -98,14 +97,17 @@ public class BluetoothTetherPreferenceControllerTest {
     }
 
     @Test
-    public void display_availableChangedCorrectly() {
-        when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[] {""});
-        assertThat(mController.isAvailable()).isTrue();
-
+    public void shouldShow_noBluetoothTetherable() {
         when(mConnectivityManager.getTetherableBluetoothRegexs()).thenReturn(new String[0]);
         assertThat(mController.isAvailable()).isFalse();
     }
 
+    @Test
+    public void shouldEnable_transientState() {
+        ReflectionHelpers.setField(mController, "mBluetoothState",
+                BluetoothAdapter.STATE_TURNING_OFF);
+        assertThat(mController.shouldEnable()).isFalse();
+    }
     @Test
     public void setChecked_shouldStartBluetoothTethering() {
         mController.setChecked(true);
