@@ -28,6 +28,7 @@ import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -65,6 +66,7 @@ public class HighUsageTipTest {
     }
 
     @Test
+    @Ignore
     public void testParcelable() {
 
         Parcel parcel = Parcel.obtain();
