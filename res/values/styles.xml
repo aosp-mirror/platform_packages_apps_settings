@@ -511,10 +511,28 @@
         <item name="android:background">?android:attr/colorBackgroundFloating</item>
     </style>
 
-    <style name="SliceRowSliderStyle" parent="SliceRowStyle">
+    <style name="SliceRowSliderStyle">
+        <!-- 2dp start padding for the start icon -->
+        <item name="titleItemStartPadding">10dp</item>
+        <item name="titleItemEndPadding">0dp</item>
+
+        <!-- Padding between content and the start icon is 14dp -->
+        <item name="contentStartPadding">5dp</item>
+        <!-- Padding between content and end items is 16dp -->
+        <item name="contentEndPadding">16dp</item>
+
+        <!-- Both side margins of end item are 16dp -->
+        <item name="endItemStartPadding">0dp</item>
+        <item name="endItemEndPadding">24dp</item>
+
+        <!-- Both side margins of bottom divider are 12dp -->
+        <item name="bottomDividerStartPadding">12dp</item>
+        <item name="bottomDividerEndPadding">12dp</item>
+
+        <item name="actionDividerHeight">32dp</item>
         <!-- Align text with slider -->
-        <item name="titleStartPadding">12dp</item>
-        <item name="subContentStartPadding">12dp</item>
+        <item name="titleStartPadding">6dp</item>
+        <item name="subContentStartPadding">6dp</item>
     </style>
 
     <style name="ContextualCardSliceViewStyle" parent="SliceViewStyle">
