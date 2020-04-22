@@ -18,6 +18,7 @@ package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -27,7 +28,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -75,13 +75,12 @@ public class WifiEnhancedMacRandomizationPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_preferenceShouldBeChecked() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, 1);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isTrue();
+        verify(mPreference).setChecked(true);
     }
 
     @Test
@@ -90,7 +89,7 @@ public class WifiEnhancedMacRandomizationPreferenceControllerTest {
                 ENHANCED_MAC_RANDOMIZATION_FEATURE_FLAG, 0);
         mController.updateState(mPreference);
 
-        assertThat(mPreference.isChecked()).isFalse();
+        verify(mPreference).setChecked(false);
     }
 
     @Test
