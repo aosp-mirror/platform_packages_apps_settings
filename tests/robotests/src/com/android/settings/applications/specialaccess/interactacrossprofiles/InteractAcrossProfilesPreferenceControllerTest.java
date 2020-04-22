@@ -30,7 +30,6 @@ import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.collect.ImmutableList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -50,7 +49,6 @@ public class InteractAcrossProfilesPreferenceControllerTest {
             new InteractAcrossProfilesDetailsPreferenceController(mContext, "test_key");
 
     @Test
-    @Ignore
     public void getAvailabilityStatus_requestedCrossProfilePermission_returnsAvailable() {
         mController.setPackageName(CROSS_PROFILE_PACKAGE_NAME);
         shadowOf(mPackageManager).setInstalledPackagesForUserId(
