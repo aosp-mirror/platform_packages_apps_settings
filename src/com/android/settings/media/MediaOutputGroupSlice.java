@@ -168,7 +168,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
     }
 
     private IconCompat getDisabledCheckboxIcon() {
-        final Drawable drawable = mContext.getDrawable(R.drawable.ic_check_box_blue_24dp);
+        final Drawable drawable = mContext.getDrawable(R.drawable.ic_check_box_blue_24dp).mutate();
         final Bitmap checkbox = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
                 drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(checkbox);
