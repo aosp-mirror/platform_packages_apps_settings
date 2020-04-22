@@ -36,7 +36,6 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
 
     private NetworkTemplate mTemplate;
     private DataUsageController.DataUsageInfo mDataUsageInfo;
-    private Intent mIntent;
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
@@ -54,8 +53,11 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
+        final Intent intent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
+        intent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mTemplate);
+        intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
 
-        mContext.startActivity(mIntent);
+        mContext.startActivity(intent);
         return true;
     }
 
@@ -84,16 +86,13 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
     public void init(int subId) {
         mSubId = subId;
 
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
-
-            final DataUsageController controller = new DataUsageController(mContext);
-            controller.setSubscriptionId(mSubId);
-            mDataUsageInfo = controller.getDataUsageInfo(mTemplate);
-
-            mIntent = new Intent(Settings.ACTION_MOBILE_DATA_USAGE);
-            mIntent.putExtra(Settings.EXTRA_NETWORK_TEMPLATE, mTemplate);
-            mIntent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return;
         }
+        mTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
+
+        final DataUsageController controller = new DataUsageController(mContext);
+        controller.setSubscriptionId(mSubId);
+        mDataUsageInfo = controller.getDataUsageInfo(mTemplate);
     }
 }
