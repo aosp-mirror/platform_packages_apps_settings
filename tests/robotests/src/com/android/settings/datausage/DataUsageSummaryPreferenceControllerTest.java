@@ -55,7 +55,6 @@ import com.android.settingslib.net.DataUsageController;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -170,7 +169,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_onePlan_basic() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -198,7 +196,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_noPlan_basic() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -227,7 +224,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_noCarrier_basic() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -255,7 +251,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_noPlanData_basic() {
         final long now = System.currentTimeMillis();
 
@@ -283,7 +278,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_noLimitNoWarning() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -300,7 +294,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_warningOnly() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -321,7 +314,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_limitOnly() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -342,7 +334,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_limitAndWarning() {
         final long now = System.currentTimeMillis();
         final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
@@ -365,7 +356,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testSummaryUpdate_noSim_shouldSetWifiMode() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mController.mDataUsageController = mDataUsageController;
@@ -393,13 +383,11 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testMobileData_preferenceAvailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    @Ignore
     public void testMobileData_noSimNoWifi_preferenceDisabled() {
         final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mController.init(subscriptionId);
@@ -412,7 +400,6 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testMobileData_noSimWifi_preferenceDisabled() {
         final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mController.init(subscriptionId);
