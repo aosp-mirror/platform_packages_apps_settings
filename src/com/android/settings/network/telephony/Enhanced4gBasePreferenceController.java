@@ -133,6 +133,9 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (preference == null) {
+            return;
+        }
         final SwitchPreference switchPreference = (SwitchPreference) preference;
 
         final VolteQueryImsState queryState = queryImsState(mSubId);

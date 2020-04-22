@@ -30,6 +30,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -98,7 +99,8 @@ public class WifiCallingPreferenceController extends TelephonyBasePreferenceCont
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (mCallState == null) {
+        if ((mCallState == null) || (preference == null)) {
+            Log.d(TAG, "Skip update under mCallState=" + mCallState);
             return;
         }
         CharSequence summaryText = null;
