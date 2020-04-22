@@ -33,7 +33,6 @@ import android.os.Parcel;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -94,7 +93,6 @@ public class NotificationBackendTest {
     }
 
     @Test
-    @Ignore
     public void testGetAggregatedUsageEvents_multipleEventsAgg() {
         List<UsageEvents.Event> events = new ArrayList<>();
         UsageEvents.Event good = new UsageEvents.Event();
