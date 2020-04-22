@@ -34,21 +34,21 @@ import android.os.Parcel;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class RestrictAppTipTest {
@@ -110,7 +110,6 @@ public class RestrictAppTipTest {
     }
 
     @Test
-    @Ignore
     public void parcelable() {
         Parcel parcel = Parcel.obtain();
         mNewBatteryTip.writeToParcel(parcel, mNewBatteryTip.describeContents());
