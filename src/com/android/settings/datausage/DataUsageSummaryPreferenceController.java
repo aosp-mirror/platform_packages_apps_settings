@@ -114,7 +114,11 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         init(subscriptionId);
     }
 
-    protected void init(int subscriptionId) {
+    /**
+     * Initialize based on subscription ID provided
+     * @param subscriptionId is the target subscriptionId
+     */
+    public void init(int subscriptionId) {
         mSubscriptionId = subscriptionId;
 
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubscriptionId);
