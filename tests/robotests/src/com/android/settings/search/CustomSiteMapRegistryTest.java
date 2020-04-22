@@ -24,6 +24,8 @@ import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.gestures.GestureNavigationSettingsFragment;
+import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -93,5 +95,12 @@ public class CustomSiteMapRegistryTest {
         assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
                 ZenModeBlockedEffectsSettings.class.getName())).isEqualTo(
                 ZenModeRestrictNotificationsSettings.class.getName());
+    }
+
+    @Test
+    public void shouldContainGestureNavigationSettingsFragmentPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(
+                GestureNavigationSettingsFragment.class.getName())).isEqualTo(
+                SystemNavigationGestureSettings.class.getName());
     }
 }
