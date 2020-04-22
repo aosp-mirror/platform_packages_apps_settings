@@ -30,6 +30,7 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_GROUP
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -109,6 +110,7 @@ public class MediaOutputGroupSliceTest {
         when(sMediaDeviceUpdateWorker.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         mDrawable = mContext.getDrawable(R.drawable.ic_check_box_blue_24dp);
         when(sMediaDeviceUpdateWorker.getSelectableMediaDevice()).thenReturn(mSelectableDevices);
+        doReturn(false).when(sMediaDeviceUpdateWorker).hasAdjustVolumeUserRestriction();
         when(mDevice1.getId()).thenReturn(TEST_DEVICE_1_ID);
         when(mDevice1.getIcon()).thenReturn(mDrawable);
         when(mDevice1.getName()).thenReturn(TEST_DEVICE_1_NAME);
