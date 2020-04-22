@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.android.settings.network;
 
+
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -26,50 +26,59 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.EthernetManager;
 import android.net.TetheringManager;
 
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-public class UsbTetherPreferenceControllerTest {
+public class EthernetTetherPreferenceControllerTest {
+
+    @Rule
+    public MockitoRule mocks = MockitoJUnit.rule();
 
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
+    private EthernetManager mEthernetManager;
+    @Mock
     private TetherEnabler mTetherEnabler;
 
     private Context mContext;
-    private UsbTetherPreferenceController mController;
-    private SwitchPreference mSwitchPreference;
+    private EthernetTetherPreferenceController mController;
+    private SwitchPreference mPreference;
+    private static final String ETHERNET_REGEX = "ethernet";
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
-                mConnectivityManager);
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
-        mController = new UsbTetherPreferenceController(mContext, "USB");
+        mPreference = spy(SwitchPreference.class);
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
+                .thenReturn(mConnectivityManager);
+        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[]{ETHERNET_REGEX});
+        when(mContext.getSystemService(Context.ETHERNET_SERVICE)).thenReturn(mEthernetManager);
+        mController = new EthernetTetherPreferenceController(mContext, "ethernet");
         mController.setTetherEnabler(mTetherEnabler);
-        mSwitchPreference = spy(SwitchPreference.class);
-        ReflectionHelpers.setField(mController, "mPreference", mSwitchPreference);
+        ReflectionHelpers.setField(mController, "mEthernetRegex", ETHERNET_REGEX);
+        ReflectionHelpers.setField(mController, "mPreference", mPreference);
     }
 
     @Test
     public void lifecycle_shouldRegisterReceiverOnStart() {
         mController.onStart();
 
-        verify(mContext).registerReceiver(eq(mController.mUsbChangeReceiver), any());
+        verify(mEthernetManager).addListener(eq(mController.mEthernetListener));
     }
 
     @Test
@@ -79,7 +88,7 @@ public class UsbTetherPreferenceControllerTest {
     }
 
     @Test
-    public void lifecycle_shouldRemoveListenrOnPause() {
+    public void lifecycle_shouldRemoveListenerOnPause() {
         mController.onPause();
         verify(mTetherEnabler).removeListener(mController);
     }
@@ -87,43 +96,45 @@ public class UsbTetherPreferenceControllerTest {
     @Test
     public void lifecycle_shouldUnregisterReceiverOnStop() {
         mController.onStart();
+        EthernetManager.Listener listener = mController.mEthernetListener;
         mController.onStop();
 
-        verify(mContext).unregisterReceiver(eq(mController.mUsbChangeReceiver));
+        verify(mEthernetManager).removeListener(eq(listener));
+        assertThat(mController.mEthernetListener).isNull();
     }
 
     @Test
-    public void shouldShow_noTetherableUsb() {
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
-        assertThat(mController.shouldShow()).isFalse();
-    }
-
-    @Test
-    public void shouldEnable_noUsbConnected() {
-        ReflectionHelpers.setField(mController, "mUsbConnected", false);
+    public void shouldEnable_noTetherable() {
+        when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
         assertThat(mController.shouldEnable()).isFalse();
     }
 
     @Test
-    public void setChecked_shouldStartUsbTethering() {
+    public void shouldShow_noEthernetInterface() {
+        ReflectionHelpers.setField(mController, "mEthernetRegex", "");
+        assertThat(mController.shouldShow()).isFalse();
+    }
+
+    @Test
+    public void setChecked_shouldStartEthernetTethering() {
         mController.setChecked(true);
-        verify(mTetherEnabler).startTethering(TetheringManager.TETHERING_USB);
+        verify(mTetherEnabler).startTethering(TetheringManager.TETHERING_ETHERNET);
     }
 
     @Test
-    public void setUnchecked_shouldStopUsbTethering() {
+    public void setUnchecked_shouldStopEthernetTethering() {
         mController.setChecked(false);
-        verify(mTetherEnabler).stopTethering(TetheringManager.TETHERING_USB);
+        verify(mTetherEnabler).stopTethering(TetheringManager.TETHERING_ETHERNET);
     }
 
     @Test
-    public void switch_shouldCheckedWhenUsbTethering() {
-        mController.onTetherStateUpdated(TetherEnabler.TETHERING_USB_ON);
+    public void switch_shouldCheckedWhenEthernetTethering() {
+        mController.onTetherStateUpdated(TetherEnabler.TETHERING_ETHERNET_ON);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
-    public void switch_shouldUnCheckedWhenUsbNotTethering() {
+    public void switch_shouldUnCheckedWhenEthernetNotTethering() {
         mController.onTetherStateUpdated(TetherEnabler.TETHERING_OFF);
         assertThat(mController.isChecked()).isFalse();
     }
