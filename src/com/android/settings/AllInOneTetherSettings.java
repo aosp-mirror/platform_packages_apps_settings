@@ -44,6 +44,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.DataSaverBackend;
 import com.android.settings.network.BluetoothTetherPreferenceController;
+import com.android.settings.network.EthernetTetherPreferenceController;
 import com.android.settings.network.TetherEnabler;
 import com.android.settings.network.UsbTetherPreferenceController;
 import com.android.settings.network.WifiTetherDisablePreferenceController;
@@ -91,12 +92,17 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
 
     private static final String KEY_DATA_SAVER_FOOTER = "disabled_on_data_saver" + DEDUP_POSTFIX;
     private static final String KEY_WIFI_TETHER_GROUP = "wifi_tether_settings_group";
+    public static final String WIFI_TETHER_DISABLE_KEY = "disable_wifi_tethering";
+    public static final String USB_TETHER_KEY = "enable_usb_tethering";
+    public static final String BLUETOOTH_TETHER_KEY = "enable_bluetooth_tethering" + DEDUP_POSTFIX;
+    public static final String ETHERNET_TETHER_KEY = "enable_ethernet_tethering" + DEDUP_POSTFIX;
+
     @VisibleForTesting
     static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
     @VisibleForTesting
     static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
     @VisibleForTesting
-    static final int EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG = 3;
+    static final int EXPANDED_CHILD_COUNT_MAX = Integer.MAX_VALUE;
     private static final String TAG = "AllInOneTetherSettings";
 
     private boolean mUnavailable;
@@ -114,16 +120,17 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     private WifiTetherApBandPreferenceController mApBandPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     private PreferenceGroup mWifiTetherGroup;
-    private boolean mBluetoothTethering;
-    private boolean mUsbTethering;
-    private boolean mWifiTethering;
+    private boolean mShouldShowWifiConfig = true;
+    private boolean mHasShownAdvance;
     private TetherEnabler mTetherEnabler;
-    private final TetherEnabler.OnTetherStateUpdateListener mStateUpdateListener =
+    @VisibleForTesting
+    final TetherEnabler.OnTetherStateUpdateListener mStateUpdateListener =
             state -> {
-                mBluetoothTethering = TetherEnabler.isBluetoothTethering(state);
-                mUsbTethering = TetherEnabler.isUsbTethering(state);
-                mWifiTethering = TetherEnabler.isWifiTethering(state);
-                mWifiTetherGroup.setVisible(shouldShowWifiConfig());
+                mShouldShowWifiConfig = TetherEnabler.isTethering(state, TETHERING_WIFI)
+                        || state == TetherEnabler.TETHERING_OFF;
+                getPreferenceScreen().setInitialExpandedChildrenCount(
+                        getInitialExpandedChildCount());
+                mWifiTetherGroup.setVisible(mShouldShowWifiConfig);
             };
 
     private final BroadcastReceiver mTetherChangeReceiver = new BroadcastReceiver() {
@@ -182,13 +189,13 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         mApBandPreferenceController = use(WifiTetherApBandPreferenceController.class);
         getSettingsLifecycle().addObserver(use(UsbTetherPreferenceController.class));
         getSettingsLifecycle().addObserver(use(BluetoothTetherPreferenceController.class));
+        getSettingsLifecycle().addObserver(use(EthernetTetherPreferenceController.class));
         getSettingsLifecycle().addObserver(use(WifiTetherDisablePreferenceController.class));
     }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
         mDataSaverBackend = new DataSaverBackend(getContext());
         mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
         mDataSaverFooter = findPreference(KEY_DATA_SAVER_FOOTER);
@@ -226,6 +233,7 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         getSettingsLifecycle().addObserver(mTetherEnabler);
         use(UsbTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
         use(BluetoothTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
+        use(EthernetTetherPreferenceController.class).setTetherEnabler(mTetherEnabler);
         use(WifiTetherDisablePreferenceController.class).setTetherEnabler(mTetherEnabler);
         switchBar.show();
     }
@@ -379,14 +387,11 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         mApBandPreferenceController.updateDisplay();
     }
 
-    private boolean shouldShowWifiConfig() {
-        return mWifiTethering || (!mBluetoothTethering && !mUsbTethering);
-    }
-
     @Override
     public int getInitialExpandedChildCount() {
-        if (!shouldShowWifiConfig()) {
-            return EXPANDED_CHILD_COUNT_WITHOUT_WIFI_CONFIG;
+        if (mHasShownAdvance || !mShouldShowWifiConfig) {
+            mHasShownAdvance = true;
+            return EXPANDED_CHILD_COUNT_MAX;
         }
 
         if (mSecurityPreferenceController == null) {
@@ -396,6 +401,12 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
         return (mSecurityPreferenceController.getSecurityType()
                 == SoftApConfiguration.SECURITY_TYPE_OPEN)
                 ? EXPANDED_CHILD_COUNT_WITH_SECURITY_NON : EXPANDED_CHILD_COUNT_DEFAULT;
+    }
+
+    @Override
+    public void onExpandButtonClick() {
+        super.onExpandButtonClick();
+        mHasShownAdvance = true;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
