@@ -16,6 +16,17 @@
 
 package com.android.settings.network;
 
+import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
+import static android.net.ConnectivityManager.TETHERING_USB;
+import static android.net.ConnectivityManager.TETHERING_WIFI;
+import static android.net.TetheringManager.TETHERING_ETHERNET;
+
+import static com.android.settings.network.TetherEnabler.TETHERING_BLUETOOTH_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_ETHERNET_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_OFF;
+import static com.android.settings.network.TetherEnabler.TETHERING_USB_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_WIFI_ON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -63,6 +74,8 @@ public class TetherEnablerTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
+    private TetheringManager mTetheringManager;
+    @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
     @Mock
     private BluetoothPan mBluetoothPan;
@@ -85,6 +98,7 @@ public class TetherEnablerTest {
         when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
                 mConnectivityManager);
+        when(context.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(context.getSystemService(Context.NETWORK_POLICY_SERVICE)).thenReturn(
                 mNetworkPolicyManager);
         when(mConnectivityManager.getTetherableIfaces()).thenReturn(new String[0]);
@@ -102,6 +116,23 @@ public class TetherEnablerTest {
 
         mEnabler.onStart();
         assertThat(mSwitchBar.isChecked()).isTrue();
+    }
+
+    @Test
+    public void lifecycle_onStart_shoudRegisterTetheringEventCallback() {
+        mEnabler.onStart();
+        verify(mTetheringManager).registerTetheringEventCallback(any(),
+                eq(mEnabler.mTetheringEventCallback));
+    }
+
+    @Test
+    public void lifecycle_onStop_shouldUnregisterTetheringEventCallback() {
+        mEnabler.onStart();
+        TetheringManager.TetheringEventCallback callback = mEnabler.mTetheringEventCallback;
+
+        mEnabler.onStop();
+        verify(mTetheringManager).unregisterTetheringEventCallback(callback);
+        assertThat(mEnabler.mTetheringEventCallback).isNull();
     }
 
     @Test
@@ -143,13 +174,40 @@ public class TetherEnablerTest {
 
     @Test
     public void onSwitchToggled_onlyStartsWifiTetherWhenNeeded() {
-        when(mWifiManager.isWifiApEnabled()).thenReturn(true);
+        doReturn(TETHERING_WIFI_ON).when(mEnabler).getTetheringState(null /* tethered */);
         mEnabler.onSwitchToggled(true);
         verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
 
-        doReturn(false).when(mWifiManager).isWifiApEnabled();
+        doReturn(TETHERING_OFF).when(mEnabler).getTetheringState(null /* tethered */);
         mEnabler.onSwitchToggled(true);
-        verify(mConnectivityManager).startTethering(anyInt(), anyBoolean(), any(), any());
+        verify(mConnectivityManager).startTethering(eq(TETHERING_WIFI), anyBoolean(), any(), any());
+        verify(mConnectivityManager, never()).startTethering(eq(TETHERING_USB), anyBoolean(), any(),
+                any());
+        verify(mConnectivityManager, never()).startTethering(eq(TETHERING_BLUETOOTH), anyBoolean(),
+                any(), any());
+        verify(mConnectivityManager, never()).startTethering(eq(TETHERING_ETHERNET), anyBoolean(),
+                any(), any());
+    }
+
+    @Test
+    public void onSwitchToggled_stopAllTetheringInterfaces() {
+        mEnabler.onStart();
+
+        doReturn(TETHERING_WIFI_ON).when(mEnabler).getTetheringState(null /* tethered */);
+        mEnabler.onSwitchToggled(false);
+        verify(mConnectivityManager).stopTethering(TETHERING_WIFI);
+
+        doReturn(TETHERING_USB_ON).when(mEnabler).getTetheringState(null /* tethered */);
+        mEnabler.onSwitchToggled(false);
+        verify(mConnectivityManager).stopTethering(TETHERING_USB);
+
+        doReturn(TETHERING_BLUETOOTH_ON).when(mEnabler).getTetheringState(null /* tethered */);
+        mEnabler.onSwitchToggled(false);
+        verify(mConnectivityManager).stopTethering(TETHERING_BLUETOOTH);
+
+        doReturn(TETHERING_ETHERNET_ON).when(mEnabler).getTetheringState(null /* tethered */);
+        mEnabler.onSwitchToggled(false);
+        verify(mConnectivityManager).stopTethering(TETHERING_ETHERNET);
     }
 
     @Test
@@ -169,8 +227,7 @@ public class TetherEnablerTest {
     public void stopTethering_setBluetoothTetheringStoppedByUserAndUpdateState() {
         mSwitchWidgetController.setListener(mEnabler);
         mSwitchWidgetController.startListening();
-        int state = TetherEnabler.TETHERING_BLUETOOTH_ON;
-        doReturn(state).when(mEnabler).getTetheringState(null /* tethered */);
+        doReturn(TETHERING_BLUETOOTH_ON).when(mEnabler).getTetheringState(null /* tethered */);
 
         mEnabler.stopTethering(TetheringManager.TETHERING_BLUETOOTH);
         assertThat(mEnabler.mBluetoothTetheringStoppedByUser).isTrue();
@@ -237,5 +294,21 @@ public class TetherEnablerTest {
                 OnTetherStateUpdateListener.class);
         mEnabler.removeListener(listener);
         assertThat(mEnabler.mListeners).doesNotContain(listener);
+    }
+
+    @Test
+    public void isTethering_shouldReturnCorrectly() {
+        assertThat(TetherEnabler.isTethering(TETHERING_WIFI_ON, TETHERING_WIFI)).isTrue();
+        assertThat(TetherEnabler.isTethering(~TETHERING_WIFI_ON, TETHERING_WIFI)).isFalse();
+
+        assertThat(TetherEnabler.isTethering(TETHERING_USB_ON, TETHERING_USB)).isTrue();
+        assertThat(TetherEnabler.isTethering(~TETHERING_USB_ON, TETHERING_USB)).isFalse();
+
+        assertThat(TetherEnabler.isTethering(TETHERING_BLUETOOTH_ON, TETHERING_BLUETOOTH)).isTrue();
+        assertThat(TetherEnabler.isTethering(~TETHERING_BLUETOOTH_ON, TETHERING_BLUETOOTH))
+                .isFalse();
+
+        assertThat(TetherEnabler.isTethering(TETHERING_ETHERNET_ON, TETHERING_ETHERNET)).isTrue();
+        assertThat(TetherEnabler.isTethering(~TETHERING_ETHERNET_ON, TETHERING_ETHERNET)).isFalse();
     }
 }
