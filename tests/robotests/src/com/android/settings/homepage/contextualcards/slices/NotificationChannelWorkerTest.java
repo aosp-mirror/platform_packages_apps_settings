@@ -33,7 +33,6 @@ import android.util.ArraySet;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -81,7 +80,6 @@ public class NotificationChannelWorkerTest {
     }
 
     @Test
-    @Ignore
     public void onSliceUnpinned_interactedPackageIsInstalled_shouldKeepPackage() {
         mockInteractedPackageAsInstalled();
 

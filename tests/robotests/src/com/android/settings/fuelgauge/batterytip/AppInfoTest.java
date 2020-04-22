@@ -22,14 +22,13 @@ import android.os.Parcel;
 import android.text.format.DateUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppInfoTest {
@@ -56,7 +55,6 @@ public class AppInfoTest {
     }
 
     @Test
-    @Ignore
     public void testParcel() {
         Parcel parcel = Parcel.obtain();
         mAppInfo.writeToParcel(parcel, mAppInfo.describeContents());
