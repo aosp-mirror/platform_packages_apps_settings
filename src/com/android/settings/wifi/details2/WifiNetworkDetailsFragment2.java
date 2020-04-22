@@ -18,6 +18,7 @@ package com.android.settings.wifi.details2;
 import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -29,6 +30,8 @@ import android.os.Looper;
 import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,10 +39,12 @@ import android.view.MenuItem;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase2;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
@@ -129,8 +134,18 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         switch (menuItem.getItemId()) {
             case Menu.FIRST:
                 if (!mWifiDetailPreferenceController2.canModifyNetwork()) {
-                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
-                            RestrictedLockUtilsInternal.getDeviceOwner(getContext()));
+                    EnforcedAdmin admin = RestrictedLockUtilsInternal.getDeviceOwner(getContext());
+                    if (admin == null) {
+                        final DevicePolicyManager dpm = (DevicePolicyManager)
+                                getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
+                        final UserManager um = (UserManager)
+                                getContext().getSystemService(Context.USER_SERVICE);
+                        int profileOwnerUserId = Utils.getManagedProfileId(
+                                um, UserHandle.myUserId());
+                        admin = new EnforcedAdmin(dpm.getProfileOwnerAsUser(profileOwnerUserId),
+                                null, UserHandle.of(profileOwnerUserId));
+                    }
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), admin);
                 } else {
                     showDialog(WIFI_DIALOG_ID);
                 }
