@@ -16,6 +16,14 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.network.TetherEnabler.TETHERING_BLUETOOTH_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_ETHERNET_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_OFF;
+import static com.android.settings.network.TetherEnabler.TETHERING_USB_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_WIFI_ON;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,6 +35,7 @@ import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.widget.MasterSwitchPreference;
 
 import org.junit.Before;
@@ -34,13 +43,71 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.ParameterizedRobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(ParameterizedRobolectricTestRunner.class)
 public class AllInOneTetherPreferenceControllerTest {
+
+    @ParameterizedRobolectricTestRunner.Parameters(name = "TetherState: {0}")
+    public static List params() {
+        return Arrays.asList(new Object[][] {
+                {TETHERING_OFF, R.string.tether_settings_summary_off},
+                {TETHERING_WIFI_ON, R.string.tether_settings_summary_hotspot_only},
+                {TETHERING_USB_ON, R.string.tether_settings_summary_usb_tethering_only},
+                {TETHERING_BLUETOOTH_ON, R.string.tether_settings_summary_bluetooth_tethering_only},
+                {TETHERING_ETHERNET_ON, R.string.tether_settings_summary_ethernet_tethering_only},
+                {
+                        TETHERING_WIFI_ON | TETHERING_USB_ON,
+                        R.string.tether_settings_summary_hotspot_and_usb
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_BLUETOOTH_ON,
+                        R.string.tether_settings_summary_hotspot_and_bluetooth
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_hotspot_and_ethernet
+                },
+                {
+                        TETHERING_USB_ON | TETHERING_BLUETOOTH_ON,
+                        R.string.tether_settings_summary_usb_and_bluetooth
+                },
+                {
+                        TETHERING_USB_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_usb_and_ethernet
+                },
+                {
+                        TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_bluetooth_and_ethernet
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_BLUETOOTH_ON,
+                        R.string.tether_settings_summary_hotspot_and_usb_and_bluetooth
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_hotspot_and_usb_and_ethernet
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_hotspot_and_bluetooth_and_ethernet
+                },
+                {
+                        TETHERING_USB_ON | TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_usb_and_bluetooth_and_ethernet
+                },
+                {
+                        TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_BLUETOOTH_ON
+                                | TETHERING_ETHERNET_ON,
+                        R.string.tether_settings_summary_all
+                }
+        });
+    }
 
     @Mock
     private Context mContext;
@@ -50,6 +117,13 @@ public class AllInOneTetherPreferenceControllerTest {
     private MasterSwitchPreference mPreference;
 
     private AllInOneTetherPreferenceController mController;
+    private final int mTetherState;
+    private final int mSummaryResId;
+
+    public AllInOneTetherPreferenceControllerTest(int tetherState, int summaryResId) {
+        mTetherState = tetherState;
+        mSummaryResId = summaryResId;
+    }
 
     @Before
     public void setUp() {
@@ -89,5 +163,11 @@ public class AllInOneTetherPreferenceControllerTest {
         mController.onDestroy();
 
         verify(mBluetoothAdapter).closeProfileProxy(BluetoothProfile.PAN, pan);
+    }
+
+    @Test
+    public void getSummary_afterTetherStateChanged() {
+        mController.onTetherStateUpdated(mTetherState);
+        assertThat(mController.getSummary()).isEqualTo(mContext.getString(mSummaryResId));
     }
 }

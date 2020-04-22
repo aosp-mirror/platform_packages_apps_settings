@@ -16,13 +16,15 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.network.TetherEnabler.WIFI_TETHER_DISABLE_KEY;
+import static com.android.settings.AllInOneTetherSettings.WIFI_TETHER_DISABLE_KEY;
+import static com.android.settings.network.TetherEnabler.TETHERING_BLUETOOTH_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_ETHERNET_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_OFF;
+import static com.android.settings.network.TetherEnabler.TETHERING_USB_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -32,16 +34,47 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.ParameterizedRobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
-@RunWith(RobolectricTestRunner.class)
+import java.util.Arrays;
+import java.util.List;
+
+@RunWith(ParameterizedRobolectricTestRunner.class)
 public class WifiTetherDisablePreferenceControllerTest {
+
+    @ParameterizedRobolectricTestRunner.Parameters(name = "TetherState: {0}")
+    public static List params() {
+        return Arrays.asList(new Object[][] {
+                {TETHERING_OFF, R.string.summary_placeholder},
+                {TETHERING_USB_ON, R.string.disable_wifi_hotspot_when_usb_on},
+                {TETHERING_BLUETOOTH_ON, R.string.disable_wifi_hotspot_when_bluetooth_on},
+                {TETHERING_ETHERNET_ON, R.string.disable_wifi_hotspot_when_ethernet_on},
+                {
+                        TETHERING_USB_ON | TETHERING_BLUETOOTH_ON,
+                        R.string.disable_wifi_hotspot_when_usb_and_bluetooth_on
+                },
+                {
+                        TETHERING_USB_ON | TETHERING_ETHERNET_ON,
+                        R.string.disable_wifi_hotspot_when_usb_and_ethernet_on
+                },
+                {
+                        TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON,
+                        R.string.disable_wifi_hotspot_when_bluetooth_and_ethernet_on
+                },
+                {
+                        TETHERING_USB_ON | TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON,
+                        R.string.disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on
+                }
+        });
+    }
 
     @Mock
     private ConnectivityManager mConnectivityManager;
@@ -53,6 +86,13 @@ public class WifiTetherDisablePreferenceControllerTest {
     private SwitchPreference mPreference;
     private Context mContext;
     private WifiTetherDisablePreferenceController mController;
+    private final int mTetherState;
+    private final int mSummaryResId;
+
+    public WifiTetherDisablePreferenceControllerTest(int tetherState, int summaryResId) {
+        mTetherState = tetherState;
+        mSummaryResId = summaryResId;
+    }
 
     @Before
     public void setUp() {
@@ -71,21 +111,16 @@ public class WifiTetherDisablePreferenceControllerTest {
     }
 
     @Test
-    public void display_availableChangedCorrectly() {
+    public void shouldShow_noTetherableWifi() {
         when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[0]);
-        assertThat(mController.isAvailable()).isFalse();
-
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"test"});
-        ReflectionHelpers.setField(mController, "mBluetoothTethering", false);
-        ReflectionHelpers.setField(mController, "mUsbTethering", false);
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.shouldShow()).isFalse();
     }
 
     @Test
-    public void switch_shouldListenToUsbAndBluetooth() {
+    public void onTetherStateUpdated_visibilityChangeCorrectly() {
         int state = TetherEnabler.TETHERING_BLUETOOTH_ON;
         mController.onTetherStateUpdated(state);
-        verify(mPreference).setVisible(eq(true));
+        assertThat(mController.shouldShow()).isTrue();
 
         state |= TetherEnabler.TETHERING_USB_ON;
         mController.onTetherStateUpdated(state);
@@ -97,6 +132,12 @@ public class WifiTetherDisablePreferenceControllerTest {
 
         state = TetherEnabler.TETHERING_OFF;
         mController.onTetherStateUpdated(state);
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mController.shouldShow()).isFalse();
+    }
+
+    @Test
+    public void getSummary_onTetherStateUpdated() {
+        mController.onTetherStateUpdated(mTetherState);
+        assertThat(mController.getSummary()).isEqualTo(mContext.getString(mSummaryResId));
     }
 }
