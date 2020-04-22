@@ -37,7 +37,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.google.common.collect.ImmutableList;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -74,7 +73,6 @@ public class InteractAcrossProfilesSettingsTest {
     private final AppOpsManager mAppOpsManager = mContext.getSystemService(AppOpsManager.class);
 
     @Test
-    @Ignore
     public void collectConfigurableApps_fromPersonal_returnsCombinedPackages() {
         shadowOf(mUserManager).addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
@@ -100,7 +98,6 @@ public class InteractAcrossProfilesSettingsTest {
     }
 
     @Test
-    @Ignore
     public void collectConfigurableApps_fromWork_returnsCombinedPackages() {
         shadowOf(mUserManager).addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
@@ -142,7 +139,6 @@ public class InteractAcrossProfilesSettingsTest {
     }
 
     @Test
-    @Ignore
     public void getNumberOfEnabledApps_returnsNumberOfEnabledApps() {
         shadowOf(mUserManager).addUser(
                 PERSONAL_PROFILE_ID, "personal-profile"/* name */, 0/* flags */);
