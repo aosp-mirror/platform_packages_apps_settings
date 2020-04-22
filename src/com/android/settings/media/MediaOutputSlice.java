@@ -96,7 +96,11 @@ public class MediaOutputSlice implements CustomSliceable {
 
         if (worker.getSelectedMediaDevice().size() > 1) {
             // Insert group item to the first when it is available
-            listBuilder.addInputRange(getGroupRow());
+            if (worker.getSessionVolumeMax() > 0 && !worker.hasAdjustVolumeUserRestriction()) {
+                listBuilder.addInputRange(getGroupSliderRow());
+            } else {
+                listBuilder.addRow(getGroupRow());
+            }
             // Add all other devices
             for (MediaDevice device : devices) {
                 addRow(device, null /* connectedDevice */, listBuilder);
@@ -150,7 +154,7 @@ public class MediaOutputSlice implements CustomSliceable {
         return builder;
     }
 
-    private ListBuilder.InputRangeBuilder getGroupRow() {
+    private ListBuilder.InputRangeBuilder getGroupSliderRow() {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_speaker_group_black_24dp);
         final CharSequence sessionName = getWorker().getSessionName();
@@ -172,6 +176,24 @@ public class MediaOutputSlice implements CustomSliceable {
         return builder;
     }
 
+    private ListBuilder.RowBuilder getGroupRow() {
+        final IconCompat icon = IconCompat.createWithResource(mContext,
+                R.drawable.ic_speaker_group_black_24dp);
+        final CharSequence sessionName = getWorker().getSessionName();
+        final CharSequence title = TextUtils.isEmpty(sessionName)
+                ? mContext.getString(R.string.media_output_group) : sessionName;
+        final PendingIntent broadcastAction =
+                getBroadcastIntent(mContext, MEDIA_GROUP_DEVICE, MEDIA_GROUP_DEVICE.hashCode());
+        final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
+                ListBuilder.ICON_IMAGE, title);
+        final ListBuilder.RowBuilder builder = new ListBuilder.RowBuilder()
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setTitle(title)
+                .setPrimaryAction(primarySliceAction)
+                .addEndItem(getEndItemSliceAction());
+        return builder;
+    }
+
     private void addRow(MediaDevice device, MediaDevice connectedDevice, ListBuilder listBuilder) {
         if (connectedDevice != null && TextUtils.equals(device.getId(), connectedDevice.getId())) {
             final String title = device.getName();
@@ -182,7 +204,7 @@ public class MediaOutputSlice implements CustomSliceable {
             final SliceAction primarySliceAction = SliceAction.createDeeplink(broadcastAction, icon,
                     ListBuilder.ICON_IMAGE, title);
 
-            if (device.getMaxVolume() > 0) {
+            if (device.getMaxVolume() > 0 && !getWorker().hasAdjustVolumeUserRestriction()) {
                 final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                         .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                         .setTitle(title)
@@ -368,6 +390,5 @@ public class MediaOutputSlice implements CustomSliceable {
         return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
                 && getWorker().getMediaDevices().size() > 0;
-
     }
 }

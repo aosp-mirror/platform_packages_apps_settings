@@ -25,6 +25,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -102,6 +103,7 @@ public class RedactionInterstitialTest {
     }
 
     @Test
+    @Ignore
     public void managedProfileNoRestrictionsTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
         final ShadowUserManager sum =
@@ -115,6 +117,7 @@ public class RedactionInterstitialTest {
     }
 
     @Test
+    @Ignore
     public void managedProfileUnredactedRestrictionTest() {
         setupSettings(1 /* show */, 1 /* showUnredacted */);
         final ShadowUserManager sum =
