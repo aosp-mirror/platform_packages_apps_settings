@@ -135,7 +135,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                     IconCompat.createWithResource(mContext, R.drawable.ic_check_box_anim),
                     "",
                     selected);
-            if (maxVolume > 0 && !adjustVolumeUserRestriction) {
+            if (maxVolume > 0 && selected && !adjustVolumeUserRestriction) {
                 // Add InputRange row
                 final ListBuilder.InputRangeBuilder builder = new ListBuilder.InputRangeBuilder()
                         .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
