@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -27,20 +26,26 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.datausage.DataSaverBackend;
 
 public abstract class TetherBasePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, TetherEnabler.OnTetherStateUpdateListener {
+        implements LifecycleObserver,  DataSaverBackend.Listener,
+        TetherEnabler.OnTetherStateUpdateListener {
 
     private static final String TAG = "TetherBasePreferenceController";
-    static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     final ConnectivityManager mCm;
+    private final DataSaverBackend mDataSaverBackend;
 
-    TetherEnabler mTetherEnabler;
+    private TetherEnabler mTetherEnabler;
     Preference mPreference;
+    private boolean mDataSaverEnabled;
+    int mTetheringState;
 
-    public TetherBasePreferenceController(Context context, String preferenceKey) {
+    TetherBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mCm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        mDataSaverBackend = new DataSaverBackend(context);
+        mDataSaverEnabled = mDataSaverBackend.isDataSaverEnabled();
     }
 
     /**
@@ -57,6 +62,7 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
         if (mTetherEnabler != null) {
             mTetherEnabler.addListener(this);
         }
+        mDataSaverBackend.addListener(this);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -64,6 +70,25 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
         if (mTetherEnabler != null) {
             mTetherEnabler.removeListener(this);
         }
+        mDataSaverBackend.remListener(this);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return TetherEnabler.isTethering(mTetheringState, getTetherType());
+    }
+
+    @Override
+    public boolean setChecked(boolean isChecked) {
+        if (mTetherEnabler == null) {
+            return false;
+        }
+        if (isChecked) {
+            mTetherEnabler.startTethering(getTetherType());
+        } else {
+            mTetherEnabler.stopTethering(getTetherType());
+        }
+        return true;
     }
 
     @Override
@@ -71,4 +96,61 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
         super.displayPreference(screen);
         mPreference = screen.findPreference(mPreferenceKey);
     }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (isAvailable()) {
+            preference.setEnabled(getAvailabilityStatus() != DISABLED_DEPENDENT_SETTING);
+        }
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        if (!shouldShow()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        if (mDataSaverEnabled || !shouldEnable()) {
+            return DISABLED_DEPENDENT_SETTING;
+        }
+        return AVAILABLE;
+    }
+
+    @Override
+    public void onTetherStateUpdated(@TetherEnabler.TetheringState int state) {
+        mTetheringState = state;
+        updateState(mPreference);
+    }
+
+    @Override
+    public void onDataSaverChanged(boolean isDataSaving) {
+        mDataSaverEnabled = isDataSaving;
+    }
+
+    @Override
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    }
+
+    @Override
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    }
+
+    /**
+     * Used to enable or disable the preference.
+     * @return true if the preference should be enabled; false otherwise.
+     */
+    public abstract boolean shouldEnable();
+
+    /**
+     * Used to determine visibility of the preference.
+     * @return true if the preference should be visible; false otherwise.
+     */
+    public abstract boolean shouldShow();
+
+    /**
+     * Get the type of tether interface that is controlled by the preference.
+     * @return the tether interface, like {@link ConnectivityManager#TETHERING_WIFI}
+     */
+    public abstract int getTetherType();
 }
