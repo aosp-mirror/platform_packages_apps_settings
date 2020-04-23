@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -36,7 +37,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.net.DataUsageController;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -46,7 +46,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowTelephonyManager;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 public class DataUsagePreferenceControllerTest {
@@ -73,7 +72,7 @@ public class DataUsagePreferenceControllerTest {
         doReturn(mNetworkStatsManager).when(mContext).getSystemService(NetworkStatsManager.class);
 
         mPreference = new SwitchPreference(mContext);
-        mController = new DataUsagePreferenceController(mContext, "data_usage");
+        mController = spy(new DataUsagePreferenceController(mContext, "data_usage"));
         mController.init(SUB_ID);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -115,10 +114,10 @@ public class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_noUsageData_shouldDisablePreference() {
-        ReflectionHelpers.setField(
-                mController, "mDataUsageInfo", new DataUsageController.DataUsageInfo());
+        final DataUsageController.DataUsageInfo usageInfo =
+                new DataUsageController.DataUsageInfo();
+        doReturn(usageInfo).when(mController).getDataUsageInfo(any());
 
         mController.updateState(mPreference);
 
@@ -126,11 +125,11 @@ public class DataUsagePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_shouldUseIECUnit() {
-        final DataUsageController.DataUsageInfo usageInfo = new DataUsageController.DataUsageInfo();
+        final DataUsageController.DataUsageInfo usageInfo =
+                new DataUsageController.DataUsageInfo();
         usageInfo.usageLevel = TrafficStats.MB_IN_BYTES;
-        ReflectionHelpers.setField(mController, "mDataUsageInfo", usageInfo);
+        doReturn(usageInfo).when(mController).getDataUsageInfo(any());
 
         mController.updateState(mPreference);
 
