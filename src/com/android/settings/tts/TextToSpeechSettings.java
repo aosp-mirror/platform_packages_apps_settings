@@ -46,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.SeekBarPreference;
@@ -720,8 +721,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
     }
 
     private void updateTTSSetting(String key, int value) {
-        Secure.putInt(
-                    getContentResolver(), key, value);
+        Secure.putInt(getContentResolver(), key, value);
         final int managedProfileUserId =
                 Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
         if (managedProfileUserId != UserHandle.USER_NULL) {
@@ -799,6 +799,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
             } else {
                 Log.e(TAG, "settingsIntent is null");
             }
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                    .logClickedPreference(p, getMetricsCategory());
         }
     }
 
