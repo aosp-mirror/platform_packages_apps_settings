@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.PersistableBundle;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionInfo;
 import android.telephony.ims.ImsManager;
 import android.util.Log;
 
@@ -33,6 +34,8 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
+import com.android.settings.network.SubscriptionUtil;
 
 
 /**
@@ -130,7 +133,19 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
 
     private void showContentDiscoveryDialog() {
         ContactDiscoveryDialogFragment dialog = ContactDiscoveryDialogFragment.newInstance(
-                mSubId);
+                mSubId, getCarrierDisplayName(preference.getContext()));
         dialog.show(mFragmentManager, ContactDiscoveryDialogFragment.getFragmentTag(mSubId));
+    }
+
+    private CharSequence getCarrierDisplayName(Context context) {
+        CharSequence result = "";
+
+        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(context)) {
+            if (mSubId == info.getSubscriptionId()) {
+                result = info.getDisplayName();
+                break;
+            }
+        }
+        return result;
     }
 }
