@@ -53,6 +53,7 @@ public class ConversationListSettings extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
+        mControllers.add(new NoConversationsPreferenceController(context, mBackend));
         mControllers.add(new PriorityConversationsPreferenceController(context, mBackend));
         mControllers.add(new AllConversationsPreferenceController(context, mBackend));
         return new ArrayList<>(mControllers);
