@@ -116,7 +116,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference preference) {
-        int value = mAccessibilityAutoclickKeyToValueMap.get(mPreferenceKey);
+        final int value = mAccessibilityAutoclickKeyToValueMap.get(mPreferenceKey);
         handleRadioButtonPreferenceChange(value);
         if (mOnChangeListener != null) {
             mOnChangeListener.onCheckedChanged(mDelayModePref);
@@ -137,11 +137,15 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mCurrentUiAutoClickMode = getSharedPreferenceForAutoClickMode();
+        final boolean enabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, 0) == 1;
+
+        mCurrentUiAutoClickMode =
+                enabled ? getSharedPreferenceForAutoClickMode() : AUTOCLICK_OFF_MODE;
 
         // Reset RadioButton.
         mDelayModePref.setChecked(false);
-        int mode = mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey());
+        final int mode = mAccessibilityAutoclickKeyToValueMap.get(mDelayModePref.getKey());
         updatePreferenceCheckedState(mode);
         updatePreferenceVisibleState(mode);
     }
@@ -155,10 +159,10 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     }
 
     private void setAutoclickModeToKeyMap() {
-        String[] autoclickKeys = mResources.getStringArray(
+        final String[] autoclickKeys = mResources.getStringArray(
                 R.array.accessibility_autoclick_control_selector_keys);
 
-        int[] autoclickValues = mResources.getIntArray(
+        final int[] autoclickValues = mResources.getIntArray(
                 R.array.accessibility_autoclick_selector_values);
 
         final int autoclickValueCount = autoclickValues.length;
@@ -168,19 +172,14 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     }
 
     private void handleRadioButtonPreferenceChange(int preference) {
-        if (preference == AUTOCLICK_OFF_MODE) {
-            putSecureInt(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /*value= */ 0);
-        } else {
-            putSecureInt(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED, /*value= */ 1);
-        }
+        putSecureInt(Settings.Secure.ACCESSIBILITY_AUTOCLICK_ENABLED,
+                (preference != AUTOCLICK_OFF_MODE) ? /* enabled */ 1 : /* disabled */ 0);
 
         mSharedPreferences.edit().putInt(KEY_DELAY_MODE, preference).apply();
 
-        if (preference == AUTOCLICK_CUSTOM_MODE) {
-            return;
+        if (preference != AUTOCLICK_CUSTOM_MODE) {
+            putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, preference);
         }
-
-        putSecureInt(CONTROL_AUTOCLICK_DELAY_SECURE, preference);
     }
 
     private void putSecureInt(String name, int value) {
@@ -188,6 +187,6 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     }
 
     private int getSharedPreferenceForAutoClickMode() {
-        return mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_OFF_MODE);
+        return mSharedPreferences.getInt(KEY_DELAY_MODE, AUTOCLICK_CUSTOM_MODE);
     }
 }
