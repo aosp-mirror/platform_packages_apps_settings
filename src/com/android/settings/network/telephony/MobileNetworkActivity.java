@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -79,7 +80,8 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         int oldSubId = mCurSubscriptionId;
         mCurSubscriptionId = updateSubscriptionIndex;
         mFragmentForceReload = (mCurSubscriptionId == oldSubId);
-        updateSubscriptions(getSubscription());
+        final SubscriptionInfo info = getSubscription();
+        updateSubscriptions(info);
 
         // If the subscription has changed or the new intent doesnt contain the opt in action,
         // remove the old discovery dialog. If the activity is being recreated, we will see
@@ -91,7 +93,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         // evaluate showing the new discovery dialog if this intent contains an action to show the
         // opt-in.
         if (doesIntentContainOptInAction(intent)) {
-            maybeShowContactDiscoveryDialog(updateSubscriptionIndex);
+            maybeShowContactDiscoveryDialog(info);
         }
     }
 
@@ -125,7 +127,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         final SubscriptionInfo subscription = getSubscription();
         updateTitleAndNavigation(subscription);
-        maybeShowContactDiscoveryDialog(mCurSubscriptionId);
+        maybeShowContactDiscoveryDialog(subscription);
 
         // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
         // perform registration after mCurSubscriptionId been configured.
@@ -276,7 +278,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 .findFragmentByTag(ContactDiscoveryDialogFragment.getFragmentTag(subId));
     }
 
-    private void maybeShowContactDiscoveryDialog(int subId) {
+    private void maybeShowContactDiscoveryDialog(SubscriptionInfo info) {
+        int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        CharSequence carrierName = "";
+        if (info != null) {
+            subId = info.getSubscriptionId();
+            carrierName = info.getDisplayName();
+        }
         // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
         // associated dialog only if the opt-in has not been granted yet.
         boolean showOptInDialog = doesIntentContainOptInAction(getIntent())
@@ -287,7 +295,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity
         ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
         if (showOptInDialog) {
             if (fragment == null) {
-                fragment = ContactDiscoveryDialogFragment.newInstance(subId);
+                fragment = ContactDiscoveryDialogFragment.newInstance(subId, carrierName);
             }
             // Only try to show the dialog if it has not already been added, otherwise we may
             // accidentally add it multiple times, causing multiple dialogs.
