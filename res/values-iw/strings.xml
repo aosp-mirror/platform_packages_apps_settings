@@ -23,12 +23,12 @@
     <string name="deny" msgid="7326117222944479942">"דחה"</string>
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
-      <item quantity="two">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="many">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="other">אתה כעת במרחק של <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים מלהיות מפתח.</item>
-      <item quantity="one">אתה כעת במרחק של צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> מלהיות מפתח.</item>
+      <item quantity="two">נותרו לך עוד  <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="many">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="other">נותרו לך עוד <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
+      <item quantity="one">נותר לך עוד צעד <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> כדי להיות מפתח.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"אתה כעת מפתח!"</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"הוגדרת כמפתח!"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"אין צורך, אתה כבר מפתח."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"קודם עליך להפעיל את אפשרויות המפתח."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"רשתות ותקשורת אלחוטית"</string>
@@ -324,7 +324,7 @@
     <string name="security_dashboard_summary_no_fingerprint" msgid="1044589595710115123">"נעילת מסך"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"הפנים נוספו"</string>
     <string name="security_settings_face_preference_summary_none" msgid="3758209126322559995">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
-    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה על ידי זיהוי פנים"</string>
+    <string name="security_settings_face_preference_title" msgid="821557938243856757">"שחרור נעילה בזיהוי פנים"</string>
     <string name="security_settings_face_profile_preference_title" msgid="4618796080378248740">"שחרור נעילה על ידי זיהוי פנים עבור העבודה"</string>
     <string name="security_settings_face_enroll_education_title" msgid="8662585502032112675">"איך להגדיר שחרור נעילה על ידי זיהוי פנים"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" msgid="4632402390714441918">"הגדרת שחרור נעילה על ידי זיהוי פנים"</string>
@@ -915,8 +915,8 @@
     <string name="wifi_show_password" msgid="6865993988238157923">"הצגת סיסמה"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"‏בחר תדר AP"</string>
     <string name="wifi_ap_choose_auto" msgid="8944442003151215691">"אוטומטי"</string>
-    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏פס של ‎2.4 GHz"</string>
-    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏פס של ‎5.0 GHz"</string>
+    <string name="wifi_ap_choose_2G" msgid="1436802195991542016">"‏תדר ‎2.4 GHz"</string>
+    <string name="wifi_ap_choose_5G" msgid="8413248472288180075">"‏תדר ‎5.0 GHz"</string>
     <string name="wifi_ap_prefer_5G" msgid="2520628479818369902">"‏עדיפות לתדר 5.0 GHz"</string>
     <string name="wifi_ap_2G" msgid="4099628221864343015">"‎2.4 GHz"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"‎5.0 GHz"</string>
@@ -1361,8 +1361,7 @@
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"‏גרסת Android"</string>
-    <!-- no translation found for security_patch (4071756145347865382) -->
-    <skip />
+    <string name="security_patch" msgid="4071756145347865382">"‏עדכון אבטחה ל-Android"</string>
     <string name="model_info" msgid="8997566254717810904">"דגם"</string>
     <string name="model_summary" msgid="2246651782442466213">"‏מודל: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"דגם וחומרה"</string>
@@ -1677,16 +1676,40 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"נקודה לשיתוף אינטרנט בלבד"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"‏USB בלבד"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"‏Bluetooth בלבד"</string>
+    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"‏נקודה לשיתוף אינטרנט, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"‏נקודה לשיתוף אינטרנט, Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
+    <skip />
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"‏USB,‏ Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"‏נקודה לשיתוף אינטרנט, USB,‏ Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
+    <skip />
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"לא יתבצע שיתוף של חיבור לאינטרנט עם מכשירים אחרים"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"שיתוף אינטרנט בין מכשירים"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏אין להשתמש בנקודה לשיתוף אינטרנט דרך Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏שיתוף אינטרנט רק באמצעות USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"‏שיתוף אינטרנט רק באמצעות Bluetooth"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
+    <skip />
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"‏שיתוף אינטרנט רק באמצעות USB ו-Bluetooth"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
+    <skip />
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏שיתוף אינטרנט דרך USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏שיתוף בחיבור לאינטרנט של הטלפון דרך USB"</string>
@@ -3243,6 +3266,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"‏Bluetooth,‏ NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏לא זמין כי NFC כבוי"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"כדי להשתמש, יש להתקין תחילה אפליקציה לתשלום"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"אפליקציות והתראות"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"אפליקציות אחרונות, אפליקציות ברירת מחדל"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"הגישה להתראות אינה זמינה לאפליקציות בפרופיל העבודה."</string>
@@ -3299,8 +3323,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"כרטיסים"</string>
-    <!-- no translation found for keywords_device_controls (8962494082504033651) -->
-    <skip />
+    <string name="keywords_device_controls" msgid="8962494082504033651">"פקדי מכשירים, פקדים"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="707735920706667685">"‏גיבוי, לגבות, backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"תנועה"</string>
@@ -3472,8 +3495,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"התראות והפרעות אחרות"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"לוחות זמנים"</string>
-    <!-- no translation found for zen_category_duration (7515850842082631460) -->
-    <skip />
+    <string name="zen_category_duration" msgid="7515850842082631460">"משך זמן להגדרות מהירות"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"כשמצב \'נא לא להפריע\' פועל, צלילים ורטט מושתקים, חוץ מהפריטים שאפשרת למעלה."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"הגדרות מותאמות אישית"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"בדיקת לוח זמנים"</string>
@@ -3533,7 +3555,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"חלק מההתראות יכולות להופיע כבועות במסך"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"חלק מההתראות ותוכן אחר יכולים להופיע כבועות במסך. כדי לפתוח בועה צריך להקיש עליה. כדי לסגור אותה, צריך לגרור אותה לתחתית המסך."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"בועות"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"הודעות חדשות יופיעו במסך"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"כל הגדרות הבועה"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"הוספת בועה לשיחה"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"הצגת סמל צף מעל אפליקציות"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> יכולה להציג חלק מההתראות כבועות"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"להפעיל בועות למכשיר?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"הפעלת הבועות לאפליקציה זו תפעיל בועות גם למכשיר.\n\nפעולה זו משפיעה על אפליקציות או שיחות אחרות שיש להן אישור להצגת בועות."</string>
@@ -3793,8 +3817,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"שיחות"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"שיחות שיכולות להפריע"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"כל השיחות"</string>
-    <!-- no translation found for zen_mode_from_important_conversations (528050873364229253) -->
-    <skip />
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"שיחות בעדיפות גבוהה"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ללא"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="two"><xliff:g id="CONVERSATIONS">%d</xliff:g> שיחות</item>
@@ -3808,8 +3831,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"שיחות"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"שיחות"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"שיחות שיכולות להפריע"</string>
-    <!-- no translation found for zen_mode_calls_footer (2008079711083701243) -->
-    <skip />
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"כדי לוודא ששיחות מורשות יישמעו, יש לבדוק אם המכשיר מוגדר לצלצול"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, שיחות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"אנשי קשר שמסומנים בכוכב"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3820,11 +3842,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"התראות"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"הודעות"</string>
-    <!-- no translation found for zen_mode_messages_title (1777598523485334405) -->
-    <skip />
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"הודעות"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"הודעות שיכולות להפריע"</string>
-    <!-- no translation found for zen_mode_messages_footer (6002468050854126331) -->
-    <skip />
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"כדי לוודא שהודעות מורשות יישמעו, יש לבדוק אם המכשיר מוגדר לצלצול"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"כל המתקשרים מקטגוריה <xliff:g id="SENDER_CATEGORY">%s</xliff:g> יכולים להשיג אותך"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר"</string>
@@ -3841,18 +3861,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"מטיימרים, התראות, מערכות אבטחה ואפליקציות אחרות"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"התראות"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"צלילי מדיה"</string>
-    <!-- no translation found for zen_mode_media_summary (7174081803853351461) -->
-    <skip />
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"צלילים מסרטונים, ממשחקים וממדיה אחרת"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"מדיה"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"צלילי מגע"</string>
-    <!-- no translation found for zen_mode_system_summary (7225581762792177522) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"צלילים מהמקלדת ומלחצנים אחרים"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"צלילי מגע"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"תזכורות"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"ממשימות ותזכורות"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"תזכורות"</string>
-    <!-- no translation found for zen_mode_events (7425795679353531794) -->
-    <skip />
+    <string name="zen_mode_events" msgid="7425795679353531794">"אירועים ביומן"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים צפויים ביומן"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"אירועים"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
@@ -3896,8 +3913,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> ו<xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_repeat_callers_summary (4121054819936083025) -->
-    <skip />
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"אם מגיעה שיחה מאותו אדם בפעם השנייה תוך <xliff:g id="MINUTES">%d</xliff:g> דקות"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"מותאם אישית"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"הפעלה אוטומטית"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"אף פעם"</string>
@@ -4262,7 +4278,7 @@
       <item quantity="other">כבויות עבור <xliff:g id="COUNT">%d</xliff:g> אפליקציות</item>
       <item quantity="one">כבויות עבור אפליקציה אחת</item>
     </plurals>
-    <string name="notification_summary_none" msgid="9179312319023988089">"מופעל לכל האפליקציות"</string>
+    <string name="notification_summary_none" msgid="9179312319023988089">"מופעלות לכל האפליקציות"</string>
     <string name="apps_summary" msgid="4007416751775414252">"הותקנו <xliff:g id="COUNT">%1$d</xliff:g> אפליקציות"</string>
     <string name="apps_summary_example" msgid="6034002063446955592">"הותקנו 24 אפליקציות"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> בשימוש, <xliff:g id="FREE_SPACE">%2$s</xliff:g> פנויים"</string>
@@ -4543,7 +4559,7 @@
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"צילום מהיר יותר של סלפי"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"ניווט במערכת"</string>
     <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"ניווט באמצעות 2 לחצנים"</string>
-    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעזור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
+    <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"כדי לעבור בין אפליקציות יש להחליק מעלה על הלחצן הראשי. כדי להציג את כל האפליקציות, יש להחליק מעלה שוב. כדי לחזור למסך הקודם, יש להקיש על הלחצן \'הקודם\'."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"כדאי לנסות את הלחצן הראשי החדש"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"הפעלת התנועה החדשה למעבר בין אפליקציות"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"ניווט באמצעות תנועות"</string>
@@ -5025,28 +5041,22 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"עבודה"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"ברירת מחדל של המערכת"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"אפשרות זו כבר לא תקפה. יש לנסות שוב."</string>
-    <!-- no translation found for device_controls_sentence (4887752349920801907) -->
-    <skip />
-    <!-- no translation found for quick_controls_lower (6675573610027367819) -->
-    <skip />
+    <string name="device_controls_sentence" msgid="4887752349920801907">"פקדי המכשירים"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"פקדי המכשירים"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"כרטיסים וכרטיסי אשראי"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"כרטיסים וכרטיסי אשראי"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"תפריט הפעלה"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"תפריט לחצן הפעלה"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"הצגת כרטיסים וכרטיסי אשראי"</string>
-    <!-- no translation found for power_menu_device_controls (5114816270328063924) -->
-    <skip />
-    <!-- no translation found for power_menu_cards_passes_device_controls (8645794247280620106) -->
-    <skip />
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"הצגת פקדי המכשירים"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"הצגת כרטיסים, שוברים ופקדי מכשירים"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"לא להציג שום תוכן"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"פרטיות"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"הצגת כרטיסים ופקדים בנעילה"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"הסתרת כרטיסים ופקדים בנעילה"</string>
-    <!-- no translation found for device_controls_setting_toggle (8972005569207737469) -->
-    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"הצגת פקדי המכשירים"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"הצגת כרטיסים"</string>
-    <!-- no translation found for device_controls_setting_subtitle (4388544861427973600) -->
-    <skip />
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"יש להחזיק את לחצן ההפעלה כדי לגשת לפקדים למכשירים מחוברים"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"כדי לגשת לפרטים כמו אמצעי תשלום וכרטיסי עלייה למטוס, יש ללחוץ לחיצה ארוכה על לחצן ההפעלה."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -5055,7 +5065,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"עצירת העברה"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏לכבות את VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏פעולה זו מכבה גם את החיבור לרשת 5G.\nבמהלך שיחה קולית, אי אפשר להשתמש באינטרנט וייתכן שאפליקציות מסוימות לא יפעלו."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"‏כשמשתמשים בשני כרטיסי SIM, טלפון זה יוגבל ל-4G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה יוגבל ל-4G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה יוגבל ל-4G. מידע נוסף"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
+    <skip />
 </resources>
