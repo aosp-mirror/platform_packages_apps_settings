@@ -53,11 +53,13 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
     @Retention(SOURCE)
     @IntDef({
             Quantity.OTHER,
-            Quantity.ONE
+            Quantity.ONE,
+            Quantity.FEW
     })
     @interface Quantity {
         int OTHER = 0;
         int ONE = 1;
+        int FEW = 3;
     }
 
     /**
@@ -79,7 +81,7 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment
      */
     static CharSequence getAutoclickPreferenceSummary(Resources resources, int delayMillis) {
         final int summaryIndex = getAutoclickPreferenceSummaryIndex(delayMillis);
-        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.OTHER;
+        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.FEW;
         final float delaySecond =  (float) delayMillis / 1000;
         // Only show integer when delay time is 1.
         final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
