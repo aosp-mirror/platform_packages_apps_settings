@@ -21,52 +21,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
-import android.net.TetheringManager;
+import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
 
 import com.android.settings.Utils;
 
 /**
  * This controller helps to manage the switch state and visibility of USB tether switch
- * preference. It stores preference values when preference changed.
+ * preference.
  *
  */
-public final class UsbTetherPreferenceController extends TetherBasePreferenceController implements
-        LifecycleObserver {
+public final class UsbTetherPreferenceController extends TetherBasePreferenceController {
 
     private static final String TAG = "UsbTetherPrefController";
 
     private boolean mUsbConnected;
     private boolean mMassStorageActive;
-    private boolean mUsbTethering;
 
     public UsbTetherPreferenceController(Context context, String prefKey) {
         super(context, prefKey);
-    }
-
-    @Override
-    public boolean isChecked() {
-        return mUsbTethering;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        if (mTetherEnabler == null) {
-            return false;
-        }
-        if (isChecked) {
-            mTetherEnabler.startTethering(TetheringManager.TETHERING_USB);
-        } else {
-            mTetherEnabler.stopTethering(TetheringManager.TETHERING_USB);
-        }
-        return true;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -84,27 +62,19 @@ public final class UsbTetherPreferenceController extends TetherBasePreferenceCon
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean shouldEnable() {
+        return mUsbConnected && !mMassStorageActive;
+    }
+
+    @Override
+    public boolean shouldShow() {
         String[] usbRegexs = mCm.getTetherableUsbRegexs();
-        if (usbRegexs == null || usbRegexs.length == 0 || Utils.isMonkeyRunning()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        } else {
-            return AVAILABLE;
-        }
+        return  usbRegexs != null && usbRegexs.length != 0 && !Utils.isMonkeyRunning();
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (preference != null) {
-            preference.setEnabled(mUsbConnected && !mMassStorageActive);
-        }
-    }
-
-    @Override
-    public void onTetherStateUpdated(int state) {
-        mUsbTethering = TetherEnabler.isUsbTethering(state);
-        updateState(mPreference);
+    public int getTetherType() {
+        return ConnectivityManager.TETHERING_USB;
     }
 
     @VisibleForTesting

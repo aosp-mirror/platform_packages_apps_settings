@@ -72,6 +72,13 @@
             settings:keywords="@string/keywords_hotspot_tethering" />
 
         <SwitchPreference
+            android:key="enable_ethernet_tethering_2"
+            android:title="@string/ethernet_tether_checkbox_text"
+            android:summary="@string/ethernet_tethering_subtext"
+            settings:controller="com.android.settings.network.EthernetTetherPreferenceController"
+            settings:keywords="@string/keywords_hotspot_tethering"/>
+
+        <SwitchPreference
             android:key="disable_wifi_tethering"
             android:title="@string/disable_wifi_hotspot_title"
             android:summary="@string/summary_placeholder"
