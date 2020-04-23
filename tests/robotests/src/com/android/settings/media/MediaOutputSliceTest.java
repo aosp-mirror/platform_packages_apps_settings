@@ -25,6 +25,7 @@ import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -101,10 +102,11 @@ public class MediaOutputSliceTest {
         mShadowBluetoothAdapter.setEnabled(true);
 
         mMediaOutputSlice = new MediaOutputSlice(mContext);
-        mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext,
-                MEDIA_OUTPUT_SLICE_URI);
+        mMediaDeviceUpdateWorker = spy(new MediaDeviceUpdateWorker(mContext,
+                MEDIA_OUTPUT_SLICE_URI));
         mMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         mMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
+        doReturn(false).when(mMediaDeviceUpdateWorker).hasAdjustVolumeUserRestriction();
         mMediaOutputSlice.init(mMediaDeviceUpdateWorker);
     }
 

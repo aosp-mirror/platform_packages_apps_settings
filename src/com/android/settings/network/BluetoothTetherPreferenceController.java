@@ -21,49 +21,23 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.TetheringManager;
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
-import androidx.preference.Preference;
 
 import com.google.common.annotations.VisibleForTesting;
 
 /**
  * This controller helps to manage the switch state and visibility of bluetooth tether switch
- * preference. It stores preference value when preference changed.
+ * preference.
  */
-public final class BluetoothTetherPreferenceController extends TetherBasePreferenceController
-        implements LifecycleObserver {
-
-    private static final String TAG = "BluetoothTetherPreferenceController";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+public final class BluetoothTetherPreferenceController extends TetherBasePreferenceController {
     private int mBluetoothState;
-    private boolean mBluetoothTethering;
 
     public BluetoothTetherPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-    }
-
-    @Override
-    public boolean isChecked() {
-        return mBluetoothTethering;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        if (mTetherEnabler == null) {
-            return false;
-        }
-        if (isChecked) {
-            mTetherEnabler.startTethering(TetheringManager.TETHERING_BLUETOOTH);
-        } else {
-            mTetherEnabler.stopTethering(TetheringManager.TETHERING_BLUETOOTH);
-        }
-        return true;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
@@ -79,41 +53,30 @@ public final class BluetoothTetherPreferenceController extends TetherBasePrefere
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        if (preference == null) {
-            return;
-        }
-
+    public boolean shouldEnable() {
         switch (mBluetoothState) {
             case BluetoothAdapter.STATE_ON:
             case BluetoothAdapter.STATE_OFF:
                 // fall through.
             case BluetoothAdapter.ERROR:
-                preference.setEnabled(true);
-                break;
+                return true;
             case BluetoothAdapter.STATE_TURNING_OFF:
             case BluetoothAdapter.STATE_TURNING_ON:
                 // fall through.
             default:
-                preference.setEnabled(false);
+                return false;
         }
     }
 
     @Override
-    public int getAvailabilityStatus() {
+    public boolean shouldShow() {
         final String[] bluetoothRegexs = mCm.getTetherableBluetoothRegexs();
-        if (bluetoothRegexs == null || bluetoothRegexs.length == 0) {
-            return CONDITIONALLY_UNAVAILABLE;
-        } else {
-            return AVAILABLE;
-        }
+        return bluetoothRegexs != null && bluetoothRegexs.length != 0;
     }
 
     @Override
-    public void onTetherStateUpdated(int state) {
-        mBluetoothTethering = TetherEnabler.isBluetoothTethering(state);
-        updateState(mPreference);
+    public int getTetherType() {
+        return ConnectivityManager.TETHERING_BLUETOOTH;
     }
 
     @VisibleForTesting
