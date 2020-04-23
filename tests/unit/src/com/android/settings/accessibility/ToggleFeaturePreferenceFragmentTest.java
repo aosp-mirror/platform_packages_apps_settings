@@ -86,5 +86,10 @@ public class ToggleFeaturePreferenceFragmentTest {
         public int getMetricsCategory() {
             return 0;
         }
+
+        @Override
+        int getUserShortcutTypes() {
+            return 0;
+        }
     }
 }
