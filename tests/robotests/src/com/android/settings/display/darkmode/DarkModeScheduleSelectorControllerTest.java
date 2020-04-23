@@ -37,7 +37,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -100,16 +99,6 @@ public class DarkModeScheduleSelectorControllerTest {
         when(mUiService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mController.displayPreference(mScreen);
         verify(mPreference).setValueIndex(0);
-    }
-
-    @Test
-    @Ignore
-    public void nightMode_selectNightMode_locationOff() {
-        when(mLocationManager.isLocationEnabled()).thenReturn(false);
-        mController.onPreferenceChange(mPreference,
-                mContext.getString(R.string.dark_ui_auto_mode_never));
-        assertFalse(mController.onPreferenceChange(mPreference,
-                mContext.getString(R.string.dark_ui_auto_mode_auto)));
     }
 
     @Test
