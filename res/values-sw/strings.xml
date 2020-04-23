@@ -163,7 +163,7 @@
     <string name="proxy_settings_title" msgid="4201866858226087066">"Seva mbadala"</string>
     <string name="proxy_clear_text" msgid="6529658759984031149">"Futa"</string>
     <string name="proxy_port_label" msgid="4647357286461712574">"Mlango wa seva mbadala"</string>
-    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Proksi ya Bypass ya"</string>
+    <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Seva mbadala ya kando ya"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Rejesha kwa chaguo misingi"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Nimemaliza"</string>
     <string name="proxy_hostname_label" msgid="5504327742505848063">"Jina la mpangishaji wa seva mbadala"</string>
@@ -350,7 +350,7 @@
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Hukukamilisha kujiandikishaji"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Sawa"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Muda wa kuandikisha uso umefikia kikomo. Jaribu tena."</string>
-    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Imeshindwa kuandikisha uso."</string>
+    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Imeshindwa kusajili uso."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Tayari kabisa. Safi."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Nimemaliza"</string>
     <string name="security_settings_face_enroll_should_re_enroll_title" msgid="9080635904939148410">"Boresha utendaji wa kipengele cha kufungua kwa uso"</string>
@@ -931,7 +931,7 @@
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Msimbo wa QR si muundo sahihi"</string>
     <string name="retry" msgid="7542103800274026915">"Jaribu tena"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"Shiriki na watumiaji wengine wa kifaa"</string>
-    <string name="wifi_unchanged" msgid="8026045290856150191">"(haijabadilishwa)"</string>
+    <string name="wifi_unchanged" msgid="8026045290856150191">"(hujabadilisha)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Tafadhali chagua"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Imeongeza vyeti vingi)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Tumia vyeti vya mfumo"</string>
@@ -1634,16 +1634,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Mtandaopepe pekee"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB pekee"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth pekee"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Ethaneti pekee"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Mtandaopepe, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Mtandaopepe, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Mtandao pepe, Ethaneti"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethaneti"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethaneti"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Mtandaopepe, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Mtandao pepe, USB, Ethaneti"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Mtandao pepe, Bluetooth, Ethaneti"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethaneti"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Mtandao pepe, USB, Bluetooth, Ethaneti"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Haishiriki intaneti na vifaa vingine"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Kusambaza mtandao"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Usitumie mtandaopepe wa Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Shiriki intaneti kupitia USB pekee"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Shiriki intaneti kupitia Bluetooth pekee"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Shiriki intaneti kupitia Ethaneti pekee"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Shiriki intaneti kupitia USB na Bluetooth pekee"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Shiriki intaneti kupitia USB na Ethaneti pekee"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Shiriki intaneti kupitia Bluetooth na Ethaneti pekee"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Shiriki intaneti kupitia USB, Bluetooth na Ethaneti pekee"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Shiriki intaneti kwa USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Shiriki muunganisho wa intaneti ya simu kupitia USB"</string>
@@ -2686,7 +2698,7 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Zima na uondoe"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Programu za msimamizi wa kifaa"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Hakuna programu za msimamizi wa kifaa zinazopatikana"</string>
-    <string name="no_trust_agents" msgid="8659098725864191600">"Hakuna madalali wa kuaminiwa wanaopatikana"</string>
+    <string name="no_trust_agents" msgid="8659098725864191600">"Hakuna kipengele cha kutathmini hali ya kuaminika"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Ungependa kuanza kutumia programu ya msimamizi wa kifaa?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Anza kutumia programu ya msimamizi wa kifaa"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Msimamizi wa kifaa"</string>
@@ -2856,7 +2868,7 @@
     <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"Ili uchague mitandao inayopima matumizi ya data, washa Wi-Fi."</string>
     <string name="data_usage_metered_auto" msgid="1560514082131687116">"Otomatiki"</string>
     <string name="wifi_metered_title" msgid="6623732965268033931">"Utumiaji mtandao"</string>
-    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Mtandao unapima data"</string>
+    <string name="data_usage_metered_yes" msgid="4262598072030135223">"Mtandao unaopima data"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Mtandao haupimi data"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Hesabu ya data ya mtoa huduma huenda ikatofautiana na ya kifaa chako."</string>
     <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Simu ya dharura"</string>
@@ -3211,7 +3223,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"wasifu wa kazini, wasifu uliodhibitiwa, unganisha, uunganishaji, kazi, wasifu"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ishara"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"kadi, pasi"</string>
-    <string name="keywords_device_controls" msgid="8962494082504033651">"vidhibiti vya kifaa, vidhibiti"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"vidhibiti vya vifaa, vidhibiti"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"lipa, gusa, malipo"</string>
     <string name="keywords_backup" msgid="707735920706667685">"hifadhi rudufu, hifadhi nakala"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"ishara"</string>
@@ -3437,7 +3449,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Baadhi ya arifa zinaweza kuonekana kama viputo kwenye skrini"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Baadhi ya arifa na maudhui mengine yanaweza kuonekana kama viputo kwenye skrini. Ili ufungue kiputo, kiguse. Ili ukiondoe, kiburute chini kwenye skrini."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Viputo"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Ujumbe mpya utaonekana kwenye skrini"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Mipangilio yote ya Viputo"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Yafanye mazungumzo haya yatoe viputo"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Onyesha aikoni inayoelea juu ya programu"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Ruhusu <xliff:g id="APP_NAME">%1$s</xliff:g> ionyeshe baadhi ya arifa kama viputo"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Ungependa kuwasha viputo vya kifaa hiki?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Hatua ya kuwasha viputo vya programu hii pia itawasha viputo vya kifaa chako.\n\nHii huathiri programu au mazungumzo mengine yanayoruhusiwa kutoa viputo."</string>
@@ -3481,7 +3495,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Onyesha arifa za maudhui yote"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Onyesha maudhui nyeti ikiwa skrini imefunguliwa tu"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Usionyeshe arifa zozote"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Ungependa arifa zako zionyeshweje kwenye skrini iliyofungwa?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Ungependa arifa zako zionyeshwe vipi kwenye skrini iliyofungwa?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Skrini iliyofungwa"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Onyesha maudhui yote ya arifa za kazi"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ficha maudhui nyeti ya kazini"</string>
@@ -4210,7 +4224,7 @@
       <item quantity="other">Vizuizi <xliff:g id="COUNT">%1$d</xliff:g></item>
       <item quantity="one">Kizuizi 1</item>
     </plurals>
-    <string name="operator_warning" msgid="5672761970087591211">"Huenda hesabu ya data ya mtoa huduma ikawa tofauti na ya kifaa chako."</string>
+    <string name="operator_warning" msgid="5672761970087591211">"Huenda hesabu ya data ya mtoa huduma ikawa tofauti na ya kifaa chako"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> zimetumika"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Weka onyo la matumizi ya data"</string>
     <string name="data_warning" msgid="2925054658166062884">"Onyo kuhusu data"</string>
@@ -4836,20 +4850,20 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Kazi"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Chaguomsingi la mfumo"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Chaguo hili halipo tena. Jaribu tena."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Vidhibiti vya kifaa"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"vidhibiti vya kifaa"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Vidhibiti vya vifaa"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"vidhibiti vya vifaa"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kadi na pasi"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kadi na pasi"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Menyu ya kuzima/kuwasha"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Menyu ya kitufe cha kuwasha/kuzima"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Onyesha kadi na pasi"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Onyesha vidhibiti vya kifaa"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Onyesha pasi, kadi na vidhibiti vya kifaa"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Onyesha vidhibiti vya vifaa"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Onyesha pasi, kadi na vidhibiti vya vifaa"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Usionyeshe maudhui yoyote"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Faragha"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Onyesha kadi na vidhibiti wakati imefungwa"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ficha kadi na vidhibiti wakati imefungwa"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Onyesha vidhibiti vya kifaa"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Onyesha vidhibiti vya vifaa"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Onyesha kadi na pasi"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Ili ufikie vidhibiti vya vifaa vilivyounganishwa, shikilia Kitufe cha kuwasha/kuzima"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Ili ufikie vitu kama vile njia unazotumia kulipa na pasi za kuabiri, bonyeza na ushikilie kitufe cha Kuwasha/Kuzima."</string>
@@ -4860,7 +4874,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Acha kutuma"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Ungependa kuzima VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Hatua hii pia huzima muunganisho wako wa 5G.\nSimu ya sauti inapoendelea, huwezi kutumia intaneti na huenda baadhi ya programu zisifanye kazi."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Unapotumia SIM mbili, simu hii itatumia 4G pekee. Pata maelezo zaidi"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Unapotumia SIM mbili, kompyuta hii kibao itatumia 4G pekee. Pata maelezo zaidi"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Unapotumia SIM mbili, kifaa hiki kitatumia 4G pekee. Pata maelezo zaidi"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Unapotumia SIM mbili, simu hii itatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Unapotumia SIM mbili, kompyuta hii kibao itatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Unapotumia SIM mbili, kifaa hiki kitatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
 </resources>

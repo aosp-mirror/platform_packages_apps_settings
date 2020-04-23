@@ -1634,16 +1634,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Faqat Hotspot orqali"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Faqat USB orqali"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Faqat Bluetooth orqali"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Faqat Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Hotspot, USB orqali"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Hotspot, Bluetooth orqali"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Hotspot, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth orqali"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Hotspot, USB, Bluetooth orqali"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Hotspot, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internet boshqa qurilmalarga ulashilmaydi"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Modem rejimi"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi‑Fi hotspot ishlatilmasin"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Internetni faqat USB orqali ulashish"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Internetni faqat Bluetooth orqali ulashish"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Internetni faqat Ethernet orqali ulashish"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Internetni faqat USB va Bluetooth orqali ulashish"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Internetni faqat USB va Ethernet orqali ulashish"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Internetni faqat Bluetooth va Ethernet orqali ulashish"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Internetni faqat USB, Bluetooth va Ethernet orqali ulashish"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB modem"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Telefondagi internetni USB orqali tarqatish"</string>
@@ -3445,7 +3457,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Ayrim bildirishnomalar ekranda bulutcha sifatida chiqishi mumkin"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Ayrim bildirishnomalar va boshqa kontent ekranda bulutchalar sifatida chiqishi mumkin. Bulutchani ochish uchun uning ustiga bosing. Yopish uchun esa ekranda uni pastga torting."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulutchalar"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Yangi xabarlar ekranga chiqariladi"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Barcha bulutchali xabarlar"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bu suhbat uchun bulutchali xabarlarni chiqarish"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Ilovalarning ustida bulutchali xabar sifatida chiqarish"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga ayrim bildirishnomalarini pufatkchalar sifatida chiqarish uchun ruxsat berilsinmi?"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Qurilma uchun bulutchalar yoqilsinmi?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Bu ilova uchun bulutchalar yoqilganda qurilmangiz uchun ham bulutchalar yoqiladi.\n\nBunda boshqa ilovalar yoki suhbatlar ham bulutchalarga olinishiga taʼsir qilinishi mumkin."</string>
@@ -4848,7 +4862,7 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Tizim standarti"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Bu variant endi yaroqsiz. Qaytadan urining."</string>
     <string name="device_controls_sentence" msgid="4887752349920801907">"Qurilma boshqaruv elementlari"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"qurilma boshqaruvi"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"qurilma boshqaruv elementlari"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartalar va talonlar"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartalar va talonlar"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Quvvat menyusi"</string>
@@ -4871,7 +4885,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Translatsiyani toʻxtatish"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE aloqasi oʻchirilsinmi?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Bunda 5G ulanishingiz uziladi.\nOvozli chaqiruvlar vaqtida internet va ayrim ilovalar ishlamasligi mumkin."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"2 ta SIM kartadan foydalansangiz, bu telefonda 4G aloqasi cheklanadi. Batafsil"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"2 ta SIM kartadan foydalansangiz, bu planshetda 4G aloqasi cheklanadi. Batafsil"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"2 ta SIM kartadan foydalansangiz, bu qurilmada 4G aloqasi cheklanadi. Batafsil"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"2 ta SIM kartadan foydalansangiz, bu telefonda 4G aloqasi cheklanadi. "<annotation id="url">"Batafsil"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 ta SIM kartadan foydalansangiz, bu planshetda 4G aloqasi cheklanadi. "<annotation id="url">"Batafsil"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 ta SIM kartadan foydalansangiz, bu qurilmada 4G aloqasi cheklanadi. "<annotation id="url">"Batafsil"</annotation>"."</string>
 </resources>

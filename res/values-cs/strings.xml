@@ -1676,16 +1676,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Pouze hotspot"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Pouze USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Pouze Bluetooth"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Pouze Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Hotspot, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Hotspot, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Hotspot, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Hotspot, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Hotspot, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internet není sdílen s dalšími zařízeními"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Nepoužívat Wi‑Fi hotspot"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Sdílet internet pouze přes USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Sdílet internet pouze přes Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Internet sdílet pouze přes Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Sdílet internet pouze přes USB a Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Internet sdílet pouze přes USB a Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Internet sdílet pouze přes Bluetooth a Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Internet sdílet pouze přes USB, Bluetooth a Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Připojení přes USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Sdílet připojení telefonu k internetu přes USB"</string>
@@ -3297,7 +3309,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"pracovní profil, spravovaný profil, sjednotit, sjednocení, práce, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gesta"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"platební karty, lístky"</string>
-    <string name="keywords_device_controls" msgid="8962494082504033651">"ovládací prvky zařízení, ovládací prvky"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"ovládání zařízení, ovládací prvky"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"platit, klepnout, platby"</string>
     <string name="keywords_backup" msgid="707735920706667685">"záloha, zálohování"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gesto"</string>
@@ -3529,7 +3541,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Některá oznámení se mohou zobrazovat jako bubliny na obrazovce"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Některá oznámení a další obsah se mohou zobrazovat jako bubliny na obrazovce. Bublinu otevřete klepnutím. Zavřete ji přetažením dolů."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubliny"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Na obrazovce se budou zobrazovat nové zprávy"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Všechna nastavení bublin"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Zobrazovat tuto konverzaci jako bublinu"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Zobrazovat plovoucí ikonu nad aplikacemi"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Povolit aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> zobrazovat některá oznámení jako bubliny"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Zapnout v zařízení bubliny?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Zapnutím bublin u této aplikace zapnete bubliny také v zařízení.\n\nTato akce bude mít vliv na ostatní aplikace a konverzace, kde je zobrazování bublin povoleno."</string>
@@ -5013,20 +5027,20 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Práce"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Výchozí nastavení systému"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Tato volba již není platná. Zkuste to znovu."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Ovládací prvky zařízení"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"ovládací prvky zařízení"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Ovládání zařízení"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"ovládání zařízení"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Platební a ostatní karty"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"platební a ostatní karty"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Nabídka vypínače"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Nabídka vypínače"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Zobrazit platební a ostatní karty"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Zobrazit ovládací prvky zařízení"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Zobrazit karty, lístky a ovládací prvky zařízení"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Zobrazit ovládání zařízení"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Zobrazit karty, lístky a ovládání zařízení"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Nezobrazovat žádný obsah"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"Ochrana soukromí"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Při uzamčení zobrazit karty a ovládací prvky"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Při uzamčení skrýt karty a ovládací prvky"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Zobrazit ovládací prvky zařízení"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Zobrazit ovládání zařízení"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Zobrazit karty a lístky"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Ovládací prvky připojených zařízení zobrazíte podržením vypínače"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Chcete-li mít přístup k věcem, jako jsou vaše platební metody a palubní lístky, stiskněte a podržte vypínač."</string>
@@ -5037,7 +5051,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Zastavit odesílání"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Vypnout VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Touto akcí vypnete také připojení 5G.\nBěhem hlasového hovoru nemůžete používat internet a některé aplikace nemusí fungovat."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Při používání dvou SIM karet bude telefon omezen na 4G. Další informace"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Při používání dvou SIM karet bude tablet omezen na 4G. Další informace"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Při používání dvou SIM karet bude zařízení omezeno na 4G. Další informace"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Při používání dvou SIM karet bude telefon omezen na 4G. "<annotation id="url">"Další informace"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Při používání dvou SIM karet bude tablet omezen na 4G. "<annotation id="url">"Další informace"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Při používání dvou SIM karet bude zařízení omezeno na 4G. "<annotation id="url">"Další informace"</annotation></string>
 </resources>
