@@ -373,7 +373,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Sử dụng tính năng mở khóa bằng khuôn mặt để mở khóa thiết bị, đăng nhập vào ứng dụng và xác nhận thanh toán.\n\nLưu ý:\nViệc nhìn vào điện thoại có thể khiến điện thoại mở khóa ngay cả khi bạn không định làm vậy.\n\nNgười khác có thể mở khóa bằng cách giơ điện thoại lên trước mặt bạn, kể cả khi bạn đang nhắm mắt.\n\nNhững người có diện mạo giống bạn, chẳng hạn như anh chị em ruột giống hệt bạn, đều có thể mở khóa điện thoại."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Bạn muốn xóa dữ liệu khuôn mặt?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Dữ liệu khuôn mặt mà tính năng mở khóa bằng khuôn mặt sử dụng sẽ bị xóa vĩnh viễn một cách an toàn. Sau khi xóa, bạn phải có mã PIN, hình mở khóa hoặc mật khẩu để mở khóa điện thoại, đăng nhập vào ứng dụng và xác nhận thanh toán."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Dùng tính năng mở khóa bằng khuôn mặt để mở khóa điện thoại"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Dùng khuôn mặt để mở khóa điện thoại"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vân tay"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Quản lý vân tay"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Sử dụng vân tay để"</string>
@@ -1119,11 +1119,11 @@
     <string name="volume_media_description" msgid="2736061076584067204">"Nhạc, video, trò chơi &amp; phương tiện khác"</string>
     <string name="volume_ring_description" msgid="5423168446359881864">"Nhạc chuông &amp; thông báo"</string>
     <string name="volume_notification_description" msgid="3241009629930030492">"Thông báo"</string>
-    <string name="volume_alarm_description" msgid="156563371961039376">"Báo thức"</string>
+    <string name="volume_alarm_description" msgid="156563371961039376">"Chuông báo"</string>
     <string name="volume_ring_mute" msgid="1445718401945149622">"Tắt nhạc chuông và ẩn thông báo"</string>
     <string name="volume_media_mute" msgid="1881020121757820746">"Tắt nhạc và phương tiện khác"</string>
     <string name="volume_notification_mute" msgid="2612197659377126312">"Ẩn thông báo"</string>
-    <string name="volume_alarm_mute" msgid="3730895630530980760">"Tắt báo thức"</string>
+    <string name="volume_alarm_mute" msgid="3730895630530980760">"Tắt chuông báo"</string>
     <string name="dock_settings" msgid="4654404127402812514">"Đế"</string>
     <string name="dock_settings_title" msgid="1276956575555480214">"Cài đặt đế"</string>
     <string name="dock_audio_settings_title" msgid="8294821925086965934">"Âm thanh"</string>
@@ -1634,16 +1634,40 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Chỉ điểm phát sóng"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Chỉ qua USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Chỉ qua Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Điểm phát sóng, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Chia sẻ kết nối qua điểm phát sóng, Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
+    <skip />
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"Chỉ chia sẻ kết nối qua USB, Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Điểm phát sóng, USB, Bluetooth"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
+    <skip />
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Hiện không chia sẻ Internet với các thiết bị khác"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Chia sẻ Internet"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Không dùng điểm phát sóng Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Chỉ chia sẻ kết nối Internet qua USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Chỉ chia sẻ kết nối Internet qua Bluetooth"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
+    <skip />
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Chỉ chia sẻ kết nối Internet qua USB và Bluetooth"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
+    <skip />
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Chia sẻ Internet qua USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Chia sẻ kết nối Internet của điện thoại qua USB"</string>
@@ -3425,7 +3449,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Đã tắt lịch sử thông báo"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Bật lịch sử thông báo để xem các thông báo gần đây và thông báo đã tạm ẩn"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Không có thông báo gần đây"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Thông báo gần đây và thông báo tạm hoãn sẽ xuất hiện tại đây"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Thông báo gần đây và thông báo đã bị tạm ẩn sẽ xuất hiện tại đây"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"xem tùy chọn cài đặt thông báo"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"mở thông báo"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Cho phép tạm hoãn thông báo"</string>
@@ -3437,7 +3461,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Một số thông báo có thể xuất hiện dưới dạng bong bóng trên màn hình"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Một số thông báo và nội dung khác có thể hiển thị dưới dạng bong bóng trên màn hình. Hãy nhấn vào bong bóng nếu bạn muốn mở. Để loại bỏ, hãy kéo bong bóng xuống phía cuối màn hình."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bong bóng"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Tin nhắn mới sẽ xuất hiện trên màn hình"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Tất cả tùy chọn cài đặt Bong bóng"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Hiển thị cuộc trò chuyện này ở dạng bong bóng"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Hiện biểu tượng nổi bên trên các ứng dụng"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Cho phép <xliff:g id="APP_NAME">%1$s</xliff:g> hiển thị một số thông báo dưới dạng bong bóng"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Bật bong bóng cho thiết bị?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Thao tác bật bong bóng cho ứng dụng này cũng sẽ bật bong bóng cho thiết bị của bạn.\n\nViệc này sẽ ảnh hưởng đến các ứng dụng hoặc cuộc trò chuyện khác được phép bật bong bóng."</string>
@@ -3719,12 +3745,12 @@
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Chỉ từ người gọi nhiều lần"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Không cho phép cuộc gọi"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Không cho phép tin nhắn"</string>
-    <string name="zen_mode_alarms" msgid="5989343060100771099">"Báo thức"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"Chuông báo"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Từ đồng hồ hẹn giờ, chuông báo, hệ thống an ninh và các ứng dụng khác"</string>
-    <string name="zen_mode_alarms_list" msgid="334782233067365405">"báo thức"</string>
+    <string name="zen_mode_alarms_list" msgid="334782233067365405">"chuông báo"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Âm thanh nội dung nghe nhìn"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Âm thanh của video, trò chơi và các nội dung nghe nhìn khác"</string>
-    <string name="zen_mode_media_list" msgid="2006413476596092020">"nội dung phương tiện"</string>
+    <string name="zen_mode_media_list" msgid="2006413476596092020">"nội dung nghe nhìn"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Âm chạm"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Âm thanh của bàn phím và các nút khác"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"âm chạm"</string>
@@ -3748,7 +3774,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> có thể gián đoạn</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> ứng dụng khác"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Ngoại lệ ứng dụng"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Ứng dụng ngoại lệ"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Tất cả thông báo"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Một số thông báo"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Các thông báo bạn vẫn nhận được"</string>
@@ -4859,7 +4885,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Dừng truyền"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Tắt VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Thao tác này cũng sẽ tắt kết nối 5G của bạn.\nTrong khi gọi thoại, bạn không thể sử dụng Internet và một số ứng dụng có thể không hoạt động."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Khi dùng 2 SIM, điện thoại này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Khi dùng 2 SIM, máy tính bảng này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Khi dùng 2 SIM, thiết bị này chỉ dùng mạng 4G. Tìm hiểu thêm"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
+    <skip />
 </resources>

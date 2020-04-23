@@ -1634,16 +1634,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Solo hotspot"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Solo USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Solo Bluetooth"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Solo Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Hotspot, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Hotspot, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Hotspot, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Hotspot, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Hotspot, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Condivisione della connessione a Internet con altri dispositivi non attiva"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Non usare hotspot Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Condividi Internet solo tramite USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Condividi Internet solo tramite Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Condividi Internet solo tramite Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Condividi Internet solo tramite USB e Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Condividi Internet solo tramite USB ed Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Condividi Internet solo tramite Bluetooth ed Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Condividi Internet solo tramite USB, Bluetooth ed Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Tethering USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Condividi la connessione a Internet del telefono tramite USB"</string>
@@ -3437,7 +3449,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Alcune notifiche potrebbero essere mostrate sotto forma di bolle sullo schermo"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Alcune notifiche e altri contenuti possono essere visualizzati come bolle sullo schermo. Tocca una bolla per aprirla. Per ignorarla, trascinala in fondo allo schermo."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bolle"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"I nuovi messaggi verranno visualizzati sullo schermo"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Tutte le impostazioni Bolla"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Usa bolla per questa conversazione"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Mostra icona mobile sopra le app"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Consenti all\'app <xliff:g id="APP_NAME">%1$s</xliff:g> di mostrare le notifiche come bolle"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Vuoi attivare le bolle per il dispositivo?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Se attivi le bolle per questa app, vengono attivate anche per il dispositivo.\n\nQuesta operazione riguarda anche altre app o conversazioni per cui è possibile usare le bolle."</string>
@@ -4859,7 +4873,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Interrompi trasmissione"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Vuoi disattivare VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Viene disattivata anche la connessione 5G.\nDurante le chiamate vocali non potrai usare Internet e alcune app potrebbero non funzionare."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Se vengono usate due SIM, questo telefono può usare soltanto la rete 4G. Ulteriori informazioni"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Se vengono usate due SIM, questo tablet può usare soltanto la rete 4G. Ulteriori informazioni"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Se vengono usate due SIM, questo dispositivo può usare soltanto la rete 4G. Ulteriori informazioni"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Se vengono usate due SIM, questo telefono può usare soltanto la rete 4G. "<annotation id="url">"Ulteriori informazioni"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Se vengono usate due SIM, questo tablet può usare soltanto la rete 4G. "<annotation id="url">"Ulteriori informazioni"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Se vengono usate due SIM, questo dispositivo può usare soltanto la rete 4G. "<annotation id="url">"Ulteriori informazioni"</annotation>"."</string>
 </resources>

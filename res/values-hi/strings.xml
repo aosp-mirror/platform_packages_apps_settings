@@ -1443,7 +1443,7 @@
     <string name="storage_external_title" msgid="8984075540312137135">"पोर्टेबल संग्रहण"</string>
     <string name="storage_volume_summary" msgid="7087627975196777994">"<xliff:g id="TOTAL">%2$s</xliff:g> में से <xliff:g id="USED">%1$s</xliff:g> उपयोग किया गया"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="5031288167242496837">"<xliff:g id="TOTAL">%1$s</xliff:g> में से उपयोग की गई"</string>
+    <string name="storage_volume_used" msgid="5031288167242496837">"<xliff:g id="TOTAL">%1$s</xliff:g> में से इस्तेमाल की गई"</string>
     <string name="storage_volume_used_total" msgid="283558499413754323">"<xliff:g id="TOTAL">%1$s</xliff:g> में से कुल उपयोग किया गया"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> माउंट किया गया है"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> को माउंट नहीं किया जा सका"</string>
@@ -1634,16 +1634,40 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"सिर्फ़ हॉटस्पॉट"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"सिर्फ़ यूएसबी"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"सिर्फ़ ब्लूटूथ"</string>
+    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"हॉटस्पॉट और यूएसबी"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"हॉटस्पॉट और ब्लूटूथ"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
+    <skip />
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"यूएसबी और ब्लूटूथ"</string>
+    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"हॉटस्पॉट, यूएसबी, और ब्लूटूथ"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
+    <skip />
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"इंटरनेट को दूसरे डिवाइस से शेयर नहीं किया जा रहा है"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"टेदरिंग"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"वाई-फ़ाई हॉटस्पॉट का इस्तेमाल न करें"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"सिर्फ़ यूएसबी के ज़रिए इंटरनेट शेयर करें"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"सिर्फ़ ब्लूटूथ के ज़रिए इंटरनेट शेयर करें"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
+    <skip />
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"सिर्फ़ ब्लूटूथ और यूएसबी के ज़रिए इंटरनेट शेयर करें"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
+    <skip />
     <string name="usb_title" msgid="1157283449840612901">"यूएसबी"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"यूएसबी से टेदरिंग"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"यूएसबी के ज़रिए फ़ोन का इंटरनेट कनेक्‍शन शेयर करें"</string>
@@ -1844,7 +1868,7 @@
     <string name="screen_compatibility_label" msgid="7549658546078613431">"स्क्रीन संगतता"</string>
     <string name="permissions_label" msgid="1708927634370314404">"अनुमतियां"</string>
     <string name="cache_header_label" msgid="2441967971921741047">"कैश"</string>
-    <string name="clear_cache_btn_text" msgid="8597272828928143723">"कैश साफ़ करें"</string>
+    <string name="clear_cache_btn_text" msgid="8597272828928143723">"कैश मेमोरी साफ़ करें"</string>
     <string name="cache_size_label" msgid="313456088966822757">"कैश"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
       <item quantity="one">%d आइटम</item>
@@ -1853,8 +1877,8 @@
     <string name="clear_uri_btn_text" msgid="4828117421162495134">"ऐक्सेस साफ़ करें"</string>
     <string name="controls_label" msgid="8671492254263626383">"नियंत्रण"</string>
     <string name="force_stop" msgid="2681771622136916280">"ज़बरदस्ती रोकें"</string>
-    <string name="total_size_label" msgid="2052185048749658866">"सम्पूर्ण जगह"</string>
-    <string name="application_size_label" msgid="6407051020651716729">"ऐप्लिकेशन का आकार"</string>
+    <string name="total_size_label" msgid="2052185048749658866">"कुल जगह"</string>
+    <string name="application_size_label" msgid="6407051020651716729">"ऐप्लिकेशन की साइज़"</string>
     <string name="external_code_size_label" msgid="7375146402660973743">"USB मेमोरी ऐप्लिकेशन"</string>
     <string name="data_size_label" msgid="7814478940141255234">"उपयोगकर्ता डेटा"</string>
     <string name="external_data_size_label" product="nosdcard" msgid="1054860423004751290">"USB मेमोरी डेटा"</string>
@@ -2015,7 +2039,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"काम के प्रोफ़ाइल से जुड़े कीबोर्ड और टूल"</string>
     <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"काम के लिए वर्चुअल कीबोर्ड"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"डिफ़ॉल्ट"</string>
-    <string name="pointer_speed" msgid="7398649279282675718">"प्वाइंटर की गति"</string>
+    <string name="pointer_speed" msgid="7398649279282675718">"पॉइंटर स्पीड"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"गेमनियंत्रक"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"वाइब्रेशन रिडायरेक्ट करें"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"कनेक्ट होने पर, गेम कंट्रोलर पर वाइब्रेशन हो"</string>
@@ -3211,7 +3235,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"वर्क प्रोफ़ाइल, प्रबंधित प्रोफ़ाइल, एक करना, एकीकरण, काम, प्रोफ़ाइल"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"जेस्चर"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"क्रेडिट कार्ड, पास"</string>
-    <string name="keywords_device_controls" msgid="8962494082504033651">"डिवाइस के कंट्रोल, कंट्रोल"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"डिवाइस कंट्रोल, कंट्रोल"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"भुगतान करें, टैप करें, भुगतान"</string>
     <string name="keywords_backup" msgid="707735920706667685">"बैकअप, बैक अप"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"जेस्चर"</string>
@@ -3437,7 +3461,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"स्क्रीन पर कुछ सूचनाएं बबल्स के रूप में दिखाई दे सकती हैं."</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"कुछ सूचनाएं और दूसरी सामग्री स्क्रीन पर बबल के रूप में दिखाई दे सकती हैं. बबल खोलने के लिए इस पर टैप करें. इसे खारिज करने के लिए इसे खींचकर स्क्रीन पर नीचे की ओर ले जाएं."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"बबल्स"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"नए मैसेज आपकी स्क्रीन पर दिखेंगे"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"बबल्स की सभी सेटिंग"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"इस बातचीत को बबल करें"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"ऐप्लिकेशन के ऊपर फ़्लोटिंग आइकॉन दिखाएं"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"<xliff:g id="APP_NAME">%1$s</xliff:g> को कुछ सूचनाएं बबल्स के तौर पर दिखाने की अनुमति दें"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"डिवाइस के लिए बबल्स की सुविधा चालू करें?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"इस ऐप्लिकेशन पर बबल्स की सुविधा चालू करने से आपके डिवाइस के लिए भी बबल्स की सुविधा चालू हो जाएगी.\n\nइससे उन ऐप्लिकेशन और बातचीत पर भी असर पड़ता है जिन्हें बबल की अनुमति दी गई है."</string>
@@ -4434,7 +4460,7 @@
     <string name="auto_sync_account_title" msgid="1070908045600374254">"ऐप्लिकेशन का डेटा अपने-आप सिंक होने की सुविधा चालू करें"</string>
     <string name="auto_sync_personal_account_title" msgid="3544275021920818595">"व्यक्तिगत डेटा अपने आप सिंक करें"</string>
     <string name="auto_sync_work_account_title" msgid="6060310415978781885">"दफ़्तर डेटा अपने आप सिंक करें"</string>
-    <string name="auto_sync_account_summary" msgid="7580352130028957346">"ऐप्लिकेशन को डेटा अपने आप रीफ्रे़श करने दें"</string>
+    <string name="auto_sync_account_summary" msgid="7580352130028957346">"ऐप्लिकेशन को डेटा अपने-आप रीफ्रे़श करने दें"</string>
     <string name="account_sync_title" msgid="7036067017433297574">"खाता सिंक"</string>
     <string name="account_sync_summary_some_on" msgid="911460286297968724">"<xliff:g id="ID_2">%2$d</xliff:g> में से <xliff:g id="ID_1">%1$d</xliff:g> आइटम के लिए सिंक करना चालू है"</string>
     <string name="account_sync_summary_all_on" msgid="2953682111836599841">"सभी आइटम के लिए सिंक करना चालू है"</string>
@@ -4835,20 +4861,20 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"काम"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"सिस्टम के डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"यह विकल्प अब मान्य नहीं है. फिर से कोशिश करें."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"डिवाइस के कंट्रोल"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"डिवाइस के कंट्रोल"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"डिवाइस कंट्रोल"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"डिवाइस कंट्रोल"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"कार्ड और पास"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"कार्ड और पास"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"पावर मेन्यू"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"पावर बटन वाला मेन्यू"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"कार्ड और पास दिखाएं"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"डिवाइस के कंट्रोल दिखाएं"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"कार्ड, पास, और डिवाइस के कंट्रोल दिखाएं"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"डिवाइस कंट्रोल दिखाएं"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"कार्ड, पास, और डिवाइस कंट्रोल दिखाएं"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"कोई भी सामग्री न दिखाएं"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"निजता"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"जब डिवाइस लॉक हो, तो कार्ड और कंट्रोल दिखाएं"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"जब डिवाइस लॉक हो, तब कार्ड और कंट्रोल छिपाएं"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"डिवाइस के कंट्रोल दिखाएं"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"डिवाइस कंट्रोल दिखाएं"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"क्रेडिट कार्ड और पास दिखाएं"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"कनेक्ट किए गए डिवाइस के कंट्रोल को ऐक्सेस करने के लिए, पावर बटन को दबाकर रखें"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"पैसे चुकाने के तरीकों और बोर्डिंग पास जैसी चीज़ों का ऐक्सेस पाने के लिए, पावर बटन को दबाकर रखें."</string>
@@ -4859,7 +4885,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"कास्ट करना रोकें"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE बंद करें?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"इससे आपका 5G कनेक्शन भी बंद हो जाएगा.\nवॉइस कॉल के दौरान, आप इंटरनेट का इस्तेमाल नहीं कर सकते और कुछ ऐप्लिकेशन शायद काम न करें."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"इस फ़ोन में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"इस टैबलेट में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"इस डिवाइस में अगर 2 सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. ज़्यादा जानें"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
+    <skip />
 </resources>

@@ -898,7 +898,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続してパスワードを共有するには、この QR コードをスキャンしてください"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"パスワードを共有して「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンします"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"エラーが発生しました"</string>
@@ -1634,16 +1634,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"アクセス ポイントのみ"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB のみ"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth のみ"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"イーサネットのみ"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"アクセス ポイント、USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"アクセス ポイント、Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"アクセス ポイント、イーサネット"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB、Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB、イーサネット"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"アクセス ポイント、USB、Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"アクセス ポイント、USB、イーサネット"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"アクセス ポイント、Bluetooth、イーサネット"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB、Bluetooth、イーサネット"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"アクセス ポイント、USB、Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"インターネットを他のデバイスと共有しない"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"テザリング"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi アクセス ポイントを使用しない"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB でのみインターネットを共有"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Bluetooth でのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"イーサネットでのみインターネットを共有"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB と Bluetooth でのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"USB とイーサネットでのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Bluetooth とイーサネットでのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB、Bluetooth、イーサネットでのみインターネットを共有"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB テザリング"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"スマートフォンのインターネット接続を USB 経由で共有"</string>
@@ -3437,7 +3449,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にバブルとして表示できます"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルとして表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"画面に新着メッセージが表示されます"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"すべてのバブル設定"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルとして表示"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
@@ -4768,7 +4782,7 @@
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"プライバシー"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"権限、アカウント アクティビティ、個人データ"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"削除"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保存"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保持"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"このおすすめを削除しますか？"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"候補を非表示にしました"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"元に戻す"</string>
@@ -4835,20 +4849,20 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"デバイスのコントロール"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"デバイスのコントロール"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"デバイス コントロール"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"電源メニュー"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"電源ボタン メニュー"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"カードとパスを表示"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"デバイスのコントロールを表示"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイスのコントロールを表示"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"デバイス コントロールを表示"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイス コントロールを表示"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"どのコンテンツも表示しない"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"プライバシー"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ロック時にカードとコントロールを表示"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ロック時にカードとコントロールを表示しない"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイスのコントロールを表示"</string>
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイス コントロールを表示"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"カードとパスの表示"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"接続されているデバイスのコントロールにアクセスするには、電源ボタンを長押しします"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"電源ボタンを長押しすることで、お支払い方法や搭乗券などにアクセスできます。"</string>
@@ -4859,7 +4873,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"キャストを停止"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE を OFF にしますか？"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"また、5G 接続も OFF になります。\n音声通話中は、インターネットを使用できず、アプリによっては動作しないこともあります。"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"SIM を 2 つ使用している場合、このスマートフォンの接続は 4G に制限されます。詳細"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。詳細"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。詳細"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"SIM を 2 つ使用している場合、このスマートフォンの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
 </resources>
