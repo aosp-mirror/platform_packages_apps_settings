@@ -17,6 +17,11 @@ package com.android.settings.network;
 
 import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
 
+import static com.android.settings.network.TetherEnabler.TETHERING_BLUETOOTH_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_ETHERNET_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_OFF;
+import static com.android.settings.network.TetherEnabler.TETHERING_USB_ON;
+import static com.android.settings.network.TetherEnabler.TETHERING_WIFI_ON;
 import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfRestrictionEnforced;
 
 import android.bluetooth.BluetoothAdapter;
@@ -52,19 +57,7 @@ public class AllInOneTetherPreferenceController extends BasePreferenceController
         LifecycleObserver, TetherEnabler.OnTetherStateUpdateListener {
     private static final String TAG = "AllInOneTetherPreferenceController";
 
-    private static final byte TETHERING_TYPE_HOTSPOT_ONLY = 1;
-    private static final byte TETHERING_TYPE_USB_ONLY = 1 << 1;
-    private static final byte TETHERING_TYPE_BLUETOOTH_ONLY = 1 << 2;
-    private static final byte TETHERING_TYPE_HOTSPOT_AND_USB =
-            TETHERING_TYPE_HOTSPOT_ONLY | TETHERING_TYPE_USB_ONLY;
-    private static final byte TETHERING_TYPE_HOTSPOT_AND_BLUETOOTH =
-            TETHERING_TYPE_HOTSPOT_ONLY | TETHERING_TYPE_BLUETOOTH_ONLY;
-    private static final byte TETHERING_TYPE_USB_AND_BLUETOOTH =
-            TETHERING_TYPE_USB_ONLY | TETHERING_TYPE_BLUETOOTH_ONLY;
-    private static final byte TETHERING_TYPE_HOTSPOT_AND_USB_AND_BLUETOOTH =
-            TETHERING_TYPE_HOTSPOT_ONLY | TETHERING_TYPE_USB_ONLY | TETHERING_TYPE_BLUETOOTH_ONLY;
-    // A bitwise value that stands for the current tethering interface type.
-    private int mTetheringType;
+    private int mTetheringState;
 
     private final boolean mAdminDisallowedTetherConfig;
     private final AtomicReference<BluetoothPan> mBluetoothPan;
@@ -124,32 +117,49 @@ public class AllInOneTetherPreferenceController extends BasePreferenceController
 
     @Override
     public CharSequence getSummary() {
-        if (mPreference != null && mPreference.isChecked()) {
-            switch (mTetheringType) {
-                case TETHERING_TYPE_HOTSPOT_ONLY:
-                    return mContext.getString(R.string.tether_settings_summary_hotspot_only);
-                case TETHERING_TYPE_USB_ONLY:
-                    return mContext.getString(R.string.tether_settings_summary_usb_tethering_only);
-                case TETHERING_TYPE_BLUETOOTH_ONLY:
-                    return mContext.getString(
-                            R.string.tether_settings_summary_bluetooth_tethering_only);
-                case TETHERING_TYPE_HOTSPOT_AND_USB:
-                    return mContext.getString(R.string.tether_settings_summary_hotspot_and_usb);
-                case TETHERING_TYPE_HOTSPOT_AND_BLUETOOTH:
-                    return mContext.getString(
-                            R.string.tether_settings_summary_hotspot_and_bluetooth);
-                case TETHERING_TYPE_USB_AND_BLUETOOTH:
-                    return mContext.getString(R.string.tether_settings_summary_usb_and_bluetooth);
-                case TETHERING_TYPE_HOTSPOT_AND_USB_AND_BLUETOOTH:
-                    return mContext.getString(
-                            R.string.tether_settings_summary_hotspot_and_usb_and_bluetooth);
-                default:
-                    Log.e(TAG, "None of the tether interfaces is chosen");
-                    return mContext.getString(R.string.summary_placeholder);
-            }
+        switch (mTetheringState) {
+            case TETHERING_OFF:
+                return mContext.getString(R.string.tether_settings_summary_off);
+            case TETHERING_WIFI_ON:
+                return mContext.getString(R.string.tether_settings_summary_hotspot_only);
+            case TETHERING_USB_ON:
+                return mContext.getString(R.string.tether_settings_summary_usb_tethering_only);
+            case TETHERING_BLUETOOTH_ON:
+                return mContext.getString(
+                        R.string.tether_settings_summary_bluetooth_tethering_only);
+            case TETHERING_ETHERNET_ON:
+                return mContext.getString(R.string.tether_settings_summary_ethernet_tethering_only);
+            case TETHERING_WIFI_ON | TETHERING_USB_ON:
+                return mContext.getString(R.string.tether_settings_summary_hotspot_and_usb);
+            case TETHERING_WIFI_ON | TETHERING_BLUETOOTH_ON:
+                return mContext.getString(R.string.tether_settings_summary_hotspot_and_bluetooth);
+            case TETHERING_WIFI_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(R.string.tether_settings_summary_hotspot_and_ethernet);
+            case TETHERING_USB_ON | TETHERING_BLUETOOTH_ON:
+                return mContext.getString(R.string.tether_settings_summary_usb_and_bluetooth);
+            case TETHERING_USB_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(R.string.tether_settings_summary_usb_and_ethernet);
+            case TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(R.string.tether_settings_summary_bluetooth_and_ethernet);
+            case TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_BLUETOOTH_ON:
+                return mContext.getString(
+                        R.string.tether_settings_summary_hotspot_and_usb_and_bluetooth);
+            case TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(
+                        R.string.tether_settings_summary_hotspot_and_usb_and_ethernet);
+            case TETHERING_WIFI_ON | TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(
+                        R.string.tether_settings_summary_hotspot_and_bluetooth_and_ethernet);
+            case TETHERING_USB_ON | TETHERING_BLUETOOTH_ON | TETHERING_ETHERNET_ON:
+                return mContext.getString(
+                        R.string.tether_settings_summary_usb_and_bluetooth_and_ethernet);
+            case TETHERING_WIFI_ON | TETHERING_USB_ON | TETHERING_BLUETOOTH_ON
+                    | TETHERING_ETHERNET_ON:
+                return mContext.getString(R.string.tether_settings_summary_all);
+            default:
+                Log.e(TAG, "Unknown tethering state");
+                return mContext.getString(R.string.summary_placeholder);
         }
-
-        return mContext.getString(R.string.tether_settings_summary_off);
     }
 
     @OnLifecycleEvent(Event.ON_CREATE)
@@ -197,11 +207,7 @@ public class AllInOneTetherPreferenceController extends BasePreferenceController
 
     @Override
     public void onTetherStateUpdated(@TetherEnabler.TetheringState int state) {
-        mTetheringType = 0;
-        mTetheringType |= TetherEnabler.isBluetoothTethering(state) ? TETHERING_TYPE_BLUETOOTH_ONLY
-                : 0;
-        mTetheringType |= TetherEnabler.isWifiTethering(state) ? TETHERING_TYPE_HOTSPOT_ONLY : 0;
-        mTetheringType |= TetherEnabler.isUsbTethering(state) ? TETHERING_TYPE_USB_ONLY : 0;
+        mTetheringState = state;
         updateState(mPreference);
     }
 }

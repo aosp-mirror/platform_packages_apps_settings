@@ -207,6 +207,8 @@ public class PanelFragment extends Fragment {
 
         final IconCompat icon = mPanel.getIcon();
         if (icon == null) {
+            mTitleView.setVisibility(View.VISIBLE);
+            mPanelHeader.setVisibility(View.GONE);
             mTitleView.setText(mPanel.getTitle());
         } else {
             mTitleView.setVisibility(View.GONE);
@@ -226,6 +228,7 @@ public class PanelFragment extends Fragment {
             if (TextUtils.isEmpty(customTitle)) {
                 mSeeMoreButton.setVisibility(View.GONE);
             } else {
+                mSeeMoreButton.setVisibility(View.VISIBLE);
                 mSeeMoreButton.setText(customTitle);
             }
         } else if (mPanel.getSeeMoreIntent() == null) {

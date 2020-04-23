@@ -191,9 +191,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_DISABLE;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                return AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
-                        ? SettingsEnums.DIALOG_TOGGLE_SCREEN_GESTURE_NAVIGATION
-                        : SettingsEnums.DIALOG_TOGGLE_SCREEN_ACCESSIBILITY_BUTTON;
+                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
