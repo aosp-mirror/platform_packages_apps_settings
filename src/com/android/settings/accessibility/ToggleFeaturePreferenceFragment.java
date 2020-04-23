@@ -42,7 +42,6 @@ import android.view.accessibility.AccessibilityManager.TouchExplorationStateChan
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -250,13 +249,20 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
-                final AlertDialog dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
+                dialog = AccessibilityEditDialogUtils.showEditShortcutDialog(
                         getPrefContext(), dialogTitle, this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
+                return dialog;
+            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                dialog = AccessibilityGestureNavigationTutorial
+                        .createAccessibilityTutorialDialog(getPrefContext(),
+                                getUserShortcutTypes());
+                dialog.setCanceledOnTouchOutside(false);
                 return dialog;
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
@@ -268,6 +274,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
                 return SettingsEnums.DIALOG_ACCESSIBILITY_SERVICE_EDIT_SHORTCUT;
+            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                return SettingsEnums.DIALOG_ACCESSIBILITY_TUTORIAL;
             default:
                 return SettingsEnums.ACTION_UNKNOWN;
         }
@@ -333,6 +341,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         super.onDestroyView();
         removeActionBarToggleSwitch();
     }
+
+    /**
+     * Returns the shortcut type list which has been checked by user.
+     */
+    abstract int getUserShortcutTypes();
 
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.accessibility_service_master_switch_title);
@@ -658,6 +671,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
+            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
