@@ -224,24 +224,22 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        final AlertDialog dialog;
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityGestureNavigationTutorial
                         .showGestureNavigationTutorialDialog(getPrefContext());
-            case DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL:
-                return AccessibilityGestureNavigationTutorial
-                        .showAccessibilityButtonTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
-                final AlertDialog dialog =
-                        AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
+                dialog = AccessibilityEditDialogUtils.showMagnificationEditShortcutDialog(
                                 getPrefContext(), dialogTitle,
                                 this::callOnAlertDialogCheckboxClicked);
                 initializeDialogCheckBox(dialog);
                 return dialog;
+            default:
+                return super.onCreateDialog(dialogId);
         }
-        throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
 
     private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
@@ -408,8 +406,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 return SettingsEnums.DIALOG_MAGNIFICATION_EDIT_SHORTCUT;
             default:
-                return 0;
+                return super.getDialogMetricsCategory(dialogId);
         }
+    }
+
+    @Override
+    int getUserShortcutTypes() {
+        return getUserShortcutTypeFromSettings(getPrefContext());
     }
 
     @Override
@@ -417,9 +420,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         if (enabled && TextUtils.equals(
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED,
                 preferenceKey)) {
-            showDialog(AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
-                    ? DialogEnums.GESTURE_NAVIGATION_TUTORIAL
-                    : DialogEnums.ACCESSIBILITY_BUTTON_TUTORIAL);
+            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         }
         MagnificationPreferenceFragment.setChecked(getContentResolver(), preferenceKey, enabled);
     }
@@ -449,6 +450,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             optInAllMagnificationValuesToSettings(getPrefContext(), shortcutTypes);
+            showDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
         } else {
             optOutAllMagnificationValuesFromSettings(getPrefContext(), shortcutTypes);
         }
