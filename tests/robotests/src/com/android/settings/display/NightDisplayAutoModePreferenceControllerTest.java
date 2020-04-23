@@ -16,16 +16,20 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.location.LocationManager;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -36,10 +40,14 @@ public class NightDisplayAutoModePreferenceControllerTest {
 
     private Context mContext;
     private NightDisplayAutoModePreferenceController mController;
+    private LocationManager mLocationManager;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mContext = Mockito.spy(RuntimeEnvironment.application);
+        mLocationManager = Mockito.mock(LocationManager.class);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+        when(mContext.getSystemService(eq(LocationManager.class))).thenReturn(mLocationManager);
         mController = new NightDisplayAutoModePreferenceController(mContext,
             "night_display_auto_mode");
     }
@@ -64,7 +72,6 @@ public class NightDisplayAutoModePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onPreferenceChange_changesAutoMode() {
         mController.onPreferenceChange(null,
                 String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT));
