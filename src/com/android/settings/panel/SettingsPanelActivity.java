@@ -117,7 +117,7 @@ public class SettingsPanelActivity extends FragmentActivity {
         if (!shouldForceCreation && fragment != null && fragment instanceof PanelFragment) {
             final PanelFragment panelFragment = (PanelFragment) fragment;
             panelFragment.setArguments(mBundle);
-            ((PanelFragment) fragment).updatePanelWithAnimation();
+            panelFragment.updatePanelWithAnimation();
         } else {
             setContentView(R.layout.settings_panel);
 
