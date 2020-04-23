@@ -1261,7 +1261,7 @@
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"一律不"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"关闭"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"要控制手机在插入基座时和/或休眠状态下的行为，请开启屏保功能。"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"启用时间"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"启用时机"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"当前的屏保"</string>
     <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"立即启动"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"设置"</string>
@@ -1319,8 +1319,7 @@
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"系统更新"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android 版本"</string>
-    <!-- no translation found for security_patch (4071756145347865382) -->
-    <skip />
+    <string name="security_patch" msgid="4071756145347865382">"Android 安全更新"</string>
     <string name="model_info" msgid="8997566254717810904">"型号"</string>
     <string name="model_summary" msgid="2246651782442466213">"型号：%1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"型号和硬件"</string>
@@ -1635,16 +1634,40 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"仅热点"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"仅 USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"仅蓝牙"</string>
+    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"热点与 USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"热点与蓝牙"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
+    <skip />
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB 与蓝牙"</string>
+    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
+    <skip />
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"热点、USB 与蓝牙"</string>
+    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
+    <skip />
+    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
+    <skip />
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"目前没有与其他设备共享互联网连接"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"网络共享"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"不使用 WLAN 热点"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"仅通过 USB 共享互联网连接"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"仅通过蓝牙共享互联网连接"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
+    <skip />
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"仅通过 USB 和蓝牙共享互联网连接"</string>
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
+    <skip />
+    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
+    <skip />
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB 网络共享"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"通过 USB 共享手机的互联网连接"</string>
@@ -2160,15 +2183,15 @@
     <string name="accessibility_timeout_30secs" msgid="7814673496724760684">"30 秒"</string>
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 分钟"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 分钟"</string>
-    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"操作执行时长（无障碍功能超时）"</string>
-    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"操作执行时长"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"请选择提示您执行操作的消息的显示时间（只会暂时显示）。\n\n部分应用可能不支持这项设置。"</string>
+    <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"等待操作的时长（无障碍功能超时）"</string>
+    <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"等待操作的时长"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"请选择多长时间后显示提示您执行操作的消息（但仅短暂显示）。\n\n部分应用可能不支持这项设置。"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"触摸和按住延迟"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"颜色反转"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用颜色反转"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"颜色反转功能可将亮屏幕调暗。&lt;br/&gt;&lt;br/&gt;注意：&lt;ol&gt; &lt;li&gt;颜色反转功能也可将暗屏幕调亮。&lt;/li&gt; &lt;li&gt;媒体文件和图片中的颜色会发生变化。&lt;/li&gt; &lt;li&gt;深色主题功能可用于显示深色背景。深色主题适用于支持该模式的应用。颜色反转功能适用于所有应用。&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自动点击（停留时间）"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自动点击功能可与连接的鼠标配合使用。您可以将鼠标光标设置为在停止移动一段时间后自动点击。"</string>
+    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"自动点击功能需连接鼠标才能使用。您可以将鼠标光标设置为在停止移动一段时间后自动点击。"</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"关闭"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"短"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 秒"</string>
@@ -2389,7 +2412,7 @@
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"延长设备的电池续航时间"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"开启电池管理器"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"开启省电模式"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"电池电量可能会比平时更早耗尽"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"电池电量可能会比平时更快耗尽"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"省电模式已开启"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"部分功能可能会受到限制"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"手机的使用强度比平时高"</string>
@@ -2856,7 +2879,7 @@
     <string name="data_usage_metered_wifi" msgid="4807465959110473407">"按流量计费的WLAN网络"</string>
     <string name="data_usage_metered_wifi_disabled" msgid="4664158157415362613">"要选择按流量计费的网络，请开启WLAN网络。"</string>
     <string name="data_usage_metered_auto" msgid="1560514082131687116">"自动"</string>
-    <string name="wifi_metered_title" msgid="6623732965268033931">"网络使用情况"</string>
+    <string name="wifi_metered_title" msgid="6623732965268033931">"网络流量消耗情况"</string>
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"按流量计费"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"不按流量计费"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"运营商的流量计算方式可能与您设备的计算方式不同。"</string>
@@ -2973,7 +2996,7 @@
     <string name="user_settings_title" msgid="6550866465409807877">"多用户"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"通过添加新用户来共享您的设备。每个用户都将在您的设备上拥有个人空间，以便使用自定义的主屏幕、帐号、应用和设置等。"</string>
     <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"通过添加新用户来共享您的平板电脑。每个用户都将在您的平板电脑上拥有个人空间，以便使用自定义的主屏幕、帐号、应用和设置等。"</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"通过添加新用户来共享您的手机。每个用户都将在您的手机上拥有个人空间，以便使用自定义的主屏幕、帐号、应用和设置等。"</string>
+    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"通过添加新用户，您可以与他人共用一部手机。每个用户都将在您的手机上拥有个人空间，并可自行设定主屏幕、帐号、应用和设置等。"</string>
     <string name="user_list_title" msgid="1387379079186123404">"用户和个人资料"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"添加用户或个人资料"</string>
     <string name="user_add_user_menu" msgid="6395904234221724625">"添加用户"</string>
@@ -3021,7 +3044,7 @@
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"受限应用"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"展开应用设置"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"非接触付款"</string>
-    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"工作原理"</string>
+    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"工作方式"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"使用手机在商店内付款"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"默认付款应用"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"未设置"</string>
@@ -3155,6 +3178,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"蓝牙、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"蓝牙"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用触碰付款功能"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"应用和通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的应用、默认应用"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"工作资料中的应用无法访问通知。"</string>
@@ -3211,8 +3235,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手势"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"银行卡, 卡券"</string>
-    <!-- no translation found for keywords_device_controls (8962494082504033651) -->
-    <skip />
+    <string name="keywords_device_controls" msgid="8962494082504033651">"设备控制器, 控制器"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支付、点按、付款"</string>
     <string name="keywords_backup" msgid="707735920706667685">"备份内容, 备份"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"手势"</string>
@@ -3295,7 +3318,7 @@
     <string name="zen_mode_settings_title" msgid="682676757791334259">"勿扰模式"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"仅接收来自重要联系人和重要应用的通知"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"限制打扰"</string>
-    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"开启“勿扰”模式"</string>
+    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"开启勿扰模式"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"闹钟和媒体音效可以中断"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间安排"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"删除时间表"</string>
@@ -3312,7 +3335,7 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"允许会发出声音的干扰项"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"屏蔽视觉打扰"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允许视觉信号"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"显示隐藏通知的选项"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"隐藏通知的显示方式"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"开启勿扰模式时"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不发出通知提示音"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"您会在屏幕上看到通知"</string>
@@ -3378,8 +3401,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"应用"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"闹钟和其他干扰项"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"时间安排"</string>
-    <!-- no translation found for zen_category_duration (7515850842082631460) -->
-    <skip />
+    <string name="zen_category_duration" msgid="7515850842082631460">"在快捷设置中开启时的持续时长"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"开启勿扰模式后，除了您在上方允许的项目外，所有音效和振动均会设为静音。"</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"自定义设置"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"查看时间表"</string>
@@ -3439,7 +3461,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"部分通知可能会以对话泡形式显示在屏幕上"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"部分通知及其他内容可以对话泡形式显示在屏幕上。点按对话泡即可将其打开，将对话泡向屏幕下方拖动即可将其关闭。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"对话泡"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"屏幕将会显示新消息"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"所有对话泡设置"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以对话泡形式显示此对话"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"在应用之上显示悬浮图标"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"允许<xliff:g id="APP_NAME">%1$s</xliff:g>以对话泡的形式显示部分通知"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"要为设备开启对话泡功能吗？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"如果您为此应用开启对话泡功能，设备也将同时开启对话泡功能。\n\n这会影响允许以对话泡形式显示的其他应用或对话。"</string>
@@ -3685,8 +3709,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"对话"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"不会被屏蔽的对话"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"所有对话"</string>
-    <!-- no translation found for zen_mode_from_important_conversations (528050873364229253) -->
-    <skip />
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"优先对话"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"无"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> 个对话</item>
@@ -3698,8 +3721,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"来电"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通话"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"不会被屏蔽的通话"</string>
-    <!-- no translation found for zen_mode_calls_footer (2008079711083701243) -->
-    <skip />
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"为了让设备在允许的来电呼入时发出提示音，请检查并确保设备已设为响铃"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系统会在“<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”启用时屏蔽来电。您可以调整设置，方便亲朋好友或其他联系人与您联系。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星标的联系人"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3708,11 +3730,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"消息"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"消息"</string>
-    <!-- no translation found for zen_mode_messages_title (1777598523485334405) -->
-    <skip />
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"消息"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"不会被屏蔽的消息"</string>
-    <!-- no translation found for zen_mode_messages_footer (6002468050854126331) -->
-    <skip />
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"为了让设备在允许的消息传入时发出提示音，请检查并确保设备已设为响铃"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"系统会在“<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”排程进行时屏蔽收到的消息。您可以调整相应设置，以便允许您的好友、家人或其他联系人与您联系。"</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"您会收到所有<xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> 位联系人"</string>
@@ -3729,18 +3749,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"来自定时器、闹钟、安防系统和其他应用"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"闹钟"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"媒体声音"</string>
-    <!-- no translation found for zen_mode_media_summary (7174081803853351461) -->
-    <skip />
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"视频、游戏和其他媒体内容的音效"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"媒体"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"触摸提示音"</string>
-    <!-- no translation found for zen_mode_system_summary (7225581762792177522) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"键盘和其他按钮的音效"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"轻触提示音"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"提醒"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"来自任务和提醒"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"提醒"</string>
-    <!-- no translation found for zen_mode_events (7425795679353531794) -->
-    <skip />
+    <string name="zen_mode_events" msgid="7425795679353531794">"日历活动"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"来自即将进行的日历活动"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"活动"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允许应用覆盖"</string>
@@ -3757,7 +3774,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g>可以中断</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"另外 <xliff:g id="NUMBER">%d</xliff:g> 个应用"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"应用例外情况"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"例外应用"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"所有通知"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"部分通知"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"不会被屏蔽的通知"</string>
@@ -3772,7 +3789,7 @@
     <string name="zen_mode_people_some" msgid="9101872681298810281">"某些人可以中断"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"所有人都可以中断"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"重复来电者"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"允许显示重复来电者"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"不屏蔽重复来电者"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"任何人"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"联系人"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"已加星标的联系人"</string>
@@ -3780,8 +3797,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g>和<xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_repeat_callers_summary (4121054819936083025) -->
-    <skip />
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"如果同一个人在 <xliff:g id="MINUTES">%d</xliff:g> 分钟内第二次来电"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"自定义"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"自动开启"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"永不"</string>
@@ -4779,7 +4795,7 @@
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"权限、帐号活动、个人数据"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"移除"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保留"</string>
-    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除这项推荐内容吗？"</string>
+    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除这项建议吗？"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"已移除建议"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"撤消"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"存储空间不足。已使用 <xliff:g id="PERCENTAGE">%1$s</xliff:g>，还剩 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
@@ -4845,28 +4861,22 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"这项选择已失效，请重试。"</string>
-    <!-- no translation found for device_controls_sentence (4887752349920801907) -->
-    <skip />
-    <!-- no translation found for quick_controls_lower (6675573610027367819) -->
-    <skip />
+    <string name="device_controls_sentence" msgid="4887752349920801907">"设备控制器"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"设备控制器"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"银行卡和卡券"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"银行卡和卡券"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"电源菜单"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"电源按钮菜单"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"显示银行卡和卡券"</string>
-    <!-- no translation found for power_menu_device_controls (5114816270328063924) -->
-    <skip />
-    <!-- no translation found for power_menu_cards_passes_device_controls (8645794247280620106) -->
-    <skip />
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"显示设备控制器"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"显示银行卡、卡券和设备控制器"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"不显示任何内容"</string>
     <string name="power_menu_privacy" msgid="5048326557686732700">"隐私设置"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"锁定状态下显示银行卡和控件"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"锁定状态下隐藏银行卡和控件"</string>
-    <!-- no translation found for device_controls_setting_toggle (8972005569207737469) -->
-    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"显示设备控制器"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"显示银行卡和卡券"</string>
-    <!-- no translation found for device_controls_setting_subtitle (4388544861427973600) -->
-    <skip />
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"按住电源按钮即可访问已关联设备的控制器"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"要获取您的付款方式和登机牌等内容，请按住电源按钮。"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -4875,7 +4885,10 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"停止投射"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"要关闭 VoLTE 吗？"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"此操作也会关闭您的 5G 连接。\n在语音通话期间，您无法使用互联网，并且部分应用可能无法正常运行。"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"使用 2 个 SIM 卡时，此手机只能使用 4G 网络。了解详情"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"使用 2 个 SIM 卡时，此平板电脑只能使用 4G 网络。了解详情"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"使用 2 个 SIM 卡时，此设备只能使用 4G 网络。了解详情"</string>
+    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
+    <skip />
+    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
+    <skip />
 </resources>
