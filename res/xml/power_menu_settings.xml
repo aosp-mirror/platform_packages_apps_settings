@@ -31,4 +31,13 @@
         android:title="@string/device_controls_sentence"
         android:fragment="com.android.settings.gestures.DeviceControlsSettings"
         settings:controller="com.android.settings.gestures.DeviceControlsPreferenceController" />
+
+    <PreferenceCategory
+        android:title="@string/power_menu_lock_screen_category" >
+
+        <SwitchPreference
+            android:key="gesture_power_menu_privacy"
+            android:title="@string/power_menu_privacy"
+            settings:controller="com.android.settings.gestures.PowerMenuPrivacyPreferenceController" />
+    </PreferenceCategory>
 </PreferenceScreen>
