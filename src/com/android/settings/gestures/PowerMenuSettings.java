@@ -21,7 +21,9 @@ import android.app.settings.SettingsEnums;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
+@SearchIndexable
 public class PowerMenuSettings extends DashboardFragment {
 
     private static final String TAG = "PowerMenuSettings";
