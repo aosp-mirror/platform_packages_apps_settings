@@ -120,14 +120,14 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mContext.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mHasMobileData = SubscriptionManager.isValidSubscriptionId(mSubId)
-                && DataUsageUtils.hasMobileData(mContext);
+        mHasMobileData = DataUsageUtils.hasMobileData(mContext);
 
         mDataUsageController = new DataUsageController(mContext);
         mDataUsageController.setSubscriptionId(mSubId);
         mDataInfoController = new DataUsageInfoController();
 
-        if (mHasMobileData) {
+        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
+        if (subInfo != null) {
             mDataUsageTemplate = R.string.cell_data_template;
         } else if (DataUsageUtils.hasWifiRadio(mContext)) {
             mDataUsageTemplate = R.string.wifi_data_template;
@@ -180,18 +180,16 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @VisibleForTesting
     SubscriptionInfo getSubscriptionInfo(int subscriptionId) {
+        if (!mHasMobileData) {
+            return null;
+        }
         return ProxySubscriptionManager.getInstance(mContext)
                 .getAccessibleSubscriptionInfo(subscriptionId);
     }
 
-    @VisibleForTesting
-    boolean hasSim() {
-        return DataUsageUtils.hasSim(mContext);
-    }
-
     @Override
     public int getAvailabilityStatus(int subId) {
-        return hasSim()
+        return (getSubscriptionInfo(subId) != null)
                 || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -199,16 +197,15 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     public void updateState(Preference preference) {
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
-        final boolean isSimCardAdded = hasSim();
-        if (!isSimCardAdded) {
+        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
+        if (subInfo == null) {
             mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
         }
 
         final DataUsageController.DataUsageInfo info =
                 mDataUsageController.getDataUsageInfo(mDefaultTemplate);
 
-        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
-        if (isSimCardAdded) {
+        if (subInfo != null) {
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
                     /* usagePeriod */ null, /* isSingleWifi */ false);
