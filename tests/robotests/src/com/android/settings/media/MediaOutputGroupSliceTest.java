@@ -157,6 +157,12 @@ public class MediaOutputGroupSliceTest {
     }
 
     @Test
+    public void getSlice_nullWorker_noException() {
+        sMediaDeviceUpdateWorker = null;
+        mMediaOutputGroupSlice.getSlice();
+    }
+
+    @Test
     public void getSlice_withOneSelectableDevice_checkTitle() {
         mSelectableDevices.add(mDevice1);
         mSelectedDevices.add(mDevice1);

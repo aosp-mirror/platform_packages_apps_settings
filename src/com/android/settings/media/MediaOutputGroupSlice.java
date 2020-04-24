@@ -83,6 +83,9 @@ public class MediaOutputGroupSlice implements CustomSliceable {
         final IconCompat titleIcon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_speaker_group_black_24dp);
         final Bitmap emptyBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        if (getWorker() == null) {
+            return listBuilder.build();
+        }
         final int maxVolume = getWorker().getSessionVolumeMax();
         final String title = mContext.getString(R.string.media_output_group);
         final SliceAction primaryAction = SliceAction.createDeeplink(
