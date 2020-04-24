@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"作成"</string>
     <string name="allow" msgid="3763244945363657722">"許可"</string>
     <string name="deny" msgid="7326117222944479942">"許可しない"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"ON にする"</string>
     <string name="device_info_default" msgid="1406619232867343310">"不明"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">デベロッパーになるまであと<xliff:g id="STEP_COUNT_1">%1$d</xliff:g>ステップです。</item>
@@ -898,7 +899,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続してパスワードを共有するには、この QR コードをスキャンしてください"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"パスワードを共有して「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンします"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"エラーが発生しました"</string>
@@ -1131,15 +1132,15 @@
     <string name="dock_audio_summary_car" msgid="292911654994476080">"装着したカーホルダーを設定する"</string>
     <string name="dock_audio_summary_none" product="tablet" msgid="7758416095500202500">"タブレットが装着されていません"</string>
     <string name="dock_audio_summary_none" product="default" msgid="9056359991181743485">"デバイスが装着されていません"</string>
-    <string name="dock_audio_summary_unknown" msgid="5486086330763810318">"装着したホルダーを設定する"</string>
+    <string name="dock_audio_summary_unknown" msgid="5486086330763810318">"ドッキング先の設定"</string>
     <string name="dock_not_found_title" msgid="4721157149003423417">"ホルダーが見つかりません"</string>
     <string name="dock_not_found_text" product="tablet" msgid="9192097687086523411">"ホルダーの音声を設定するにはタブレットをホルダーに装着する必要があります。"</string>
     <string name="dock_not_found_text" product="default" msgid="2247163115146852069">"ホルダーの音声を設定するにはデバイスをホルダーに装着する必要があります。"</string>
     <string name="dock_sounds_enable_title" msgid="2974614136344237932">"ドッキング時の音"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="468592489565539336">"タブレットのホルダー脱着時に音を鳴らす"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8121670617316301768">"携帯のホルダー脱着時に音を鳴らす"</string>
-    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="7833926726878567889">"タブレットのホルダー脱着時に音を鳴らさない"</string>
-    <string name="dock_sounds_enable_summary_off" product="default" msgid="5560601997128422001">"携帯のホルダー脱着時に音を鳴らさない"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="7833926726878567889">"タブレットのドッキング脱着時に音を鳴らさない"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="5560601997128422001">"スマートフォンのドッキング脱着時に音を鳴らさない"</string>
     <string name="account_settings" msgid="255404935489127404">"アカウント"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"仕事用プロファイルアカウント - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"個人用プロファイルアカウント"</string>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"アクセス ポイントのみ"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB のみ"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth のみ"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"イーサネットのみ"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"アクセス ポイント、USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"アクセス ポイント、Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"アクセス ポイント、イーサネット"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB、Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB、イーサネット"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"アクセス ポイント、USB、Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"アクセス ポイント、USB、イーサネット"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"アクセス ポイント、Bluetooth、イーサネット"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB、Bluetooth、イーサネット"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"アクセス ポイント、USB、Bluetooth、イーサネット"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"インターネットを他のデバイスと共有しない"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"テザリング"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi-Fi アクセス ポイントを使用しない"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB でのみインターネットを共有"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Bluetooth でのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"イーサネットでのみインターネットを共有"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB と Bluetooth でのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"USB とイーサネットでのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Bluetooth とイーサネットでのみインターネットを共有"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB、Bluetooth、イーサネットでのみインターネットを共有"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB テザリング"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"スマートフォンのインターネット接続を USB 経由で共有"</string>
@@ -2563,7 +2576,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"電池を長持ちさせる"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時にオフにする"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"スマートフォンの電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になると、バッテリー セーバーは無効になります"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"スマートフォンの電池が <xliff:g id="PERCENT">%1$s</xliff:g> まで充電されると、バッテリー セーバーが OFF になります"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"タブレットの電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になると、バッテリー セーバーは無効になります"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"デバイスの電池残量が <xliff:g id="PERCENT">%1$s</xliff:g> になると、バッテリー セーバーは無効になります"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 回線による通話"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"LTE サービスを使用して音声などの通信を改善する（推奨）"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"4G サービスを使用して、音声やその他の通話の品質を改善する（推奨）"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"連絡先の検出"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"連絡先が利用できる通話機能を携帯通信会社が検出できるようにしますか？"</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"連絡先の検出を有効にしますか？"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"サポートされている通話機能を検出するため、連絡先に保存されているすべての電話番号がお使いの携帯通信会社に定期的に送信されます。"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"連絡先を携帯通信会社に送信する"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"拡張機能を利用するために、連絡先の電話番号を送信します"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"連絡先を <xliff:g id="CARRIER">%1$s</xliff:g> に送信しますか？"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"連絡先を携帯通信会社に送信しますか？"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"連絡先の電話番号が <xliff:g id="CARRIER">%1$s</xliff:g> に定期的に送信されます。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報に基づいて、連絡先が特定の機能（ビデオ通話、一部のメッセージ機能など）を利用できるかどうかが判別されます。"</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"連絡先の電話番号が携帯通信会社に定期的に送信されます。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>この情報に基づいて、連絡先が特定の機能（ビデオ通話、一部のメッセージ機能など）を利用できるかどうかが判別されます。"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"優先ネットワークタイプ"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE（推奨）"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS メッセージ"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC がオフのため使用できません"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"アプリと通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"仕事用プロファイルのアプリには通知へのアクセス権限はありません。"</string>
@@ -3272,7 +3292,7 @@
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"画面ロックの音"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電時の音とバイブレーション"</string>
-    <string name="docking_sounds_title" msgid="5341616179210436159">"装着音"</string>
+    <string name="docking_sounds_title" msgid="5341616179210436159">"ドッキング音"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"タッチ操作音"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"タップ操作時のバイブ"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"タップ、キー操作などの触覚フィードバック"</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にバブルとして表示できます"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルとして表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"画面に新着メッセージが表示されます"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"すべてのバブル設定"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルとして表示"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"会話を管理する"</string>
     <string name="important_conversations" msgid="1233893707189659401">"優先する会話"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"重要な会話をバブルとして表示"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"重要な会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでバブルとして表示されるよう、設定することもできます。"</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"ポップアップで知らせて最小化"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"ポップアップで知らせる"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"音で知らせる"</string>
@@ -3524,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"音やバイブレーションが作動しないため、通知に煩わされずに済みます"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"音やバイブレーションで通知をお知らせします"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"デバイスのロックが解除されているとき、画面上部にバナーとして通知を表示します"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"<xliff:g id="APP_NAME">%1$s</xliff:g>のすべての通知"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"通知の自動調整"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">約 <xliff:g id="NUMBER_1">%d</xliff:g> 件の通知 / 日</item>
@@ -4767,7 +4803,7 @@
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"プライバシー"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"権限、アカウント アクティビティ、個人データ"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"削除"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保存"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保持"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"このおすすめを削除しますか？"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"候補を非表示にしました"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"元に戻す"</string>
@@ -4834,20 +4870,27 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"仕事用"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"システムのデフォルト"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"この選択は無効になりました。もう一度お試しください。"</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"デバイスのコントロール"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"デバイスのコントロール"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"デバイス コントロール"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"電源メニュー"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"電源ボタン メニュー"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"カードとパスを表示"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"デバイスのコントロールを表示"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイスのコントロールを表示"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"デバイス コントロールを表示"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"カード、パス、デバイス コントロールを表示"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"どのコンテンツも表示しない"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"プライバシー"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ロック時にカードとコントロールを表示"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ロック時にカードとコントロールを表示しない"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイスのコントロールを表示"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイス コントロールを表示"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"カードとパスの表示"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"接続されているデバイスのコントロールにアクセスするには、電源ボタンを長押しします"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"電源ボタンを長押しすることで、お支払い方法や搭乗券などにアクセスできます。"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"キャストを停止"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE を OFF にしますか？"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"また、5G 接続も OFF になります。\n音声通話中は、インターネットを使用できず、アプリによっては動作しないこともあります。"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"SIM を 2 つ使用している場合、このスマートフォンの接続は 4G に制限されます。詳細"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。詳細"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。詳細"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"SIM を 2 つ使用している場合、このスマートフォンの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
 </resources>
