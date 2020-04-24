@@ -124,6 +124,12 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         showDialog(DialogEnums.EDIT_SHORTCUT);
     }
 
+    @Override
+    int getUserShortcutTypes() {
+        return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                mComponentName);
+    }
+
     private void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
         if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {

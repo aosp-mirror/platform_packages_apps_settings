@@ -24,6 +24,8 @@
     <string name="allow">Allow</string>
     <!-- Strings for Dialog deny button -->
     <string name="deny">Deny</string>
+    <!-- Used in confirmation dialogs as the action that the user will tap to turn on the feature. [CHAR LIMIT=40]-->
+    <string name="confirmation_turn_on">Turn on</string>
 
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
@@ -7266,19 +7268,33 @@
     <string name="enhanced_4g_lte_mode_summary">Use LTE services to improve voice and other communications (recommended)</string>
     <!-- Enhaced 4G LTE Mode summary for 4g calling.  [CHAR LIMIT=100] -->
     <string name="enhanced_4g_lte_mode_summary_4g_calling">Use 4G services to improve voice and other communications (recommended)</string>
-    <!-- Title of a preference determining whether or not the user has enabled contact discovery,
-         which is a service that uses the phone numbers in your contacts to determine if your
+    <!-- Title of a preference determining whether or not the user has allowed the device to share
+         their contacts' phone numbers with their carrier in order to implement contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your
          contacts support advanced calling features, such as video calling. [CHAR LIMIT=50]-->
-    <string name="contact_discovery_opt_in_title">Contact discovery</string>
-    <!-- Summary of a preference determining whether or not the user has enabled contact discovery.
-         [CHAR LIMIT=110] -->
-    <string name="contact_discovery_opt_in_summary">Allows your carrier to discover which calling features your contacts support.</string>
-    <!-- Title of the dialog shown when the user tries to enable Contact Discovery.
+    <string name="contact_discovery_opt_in_title">Send contacts to carrier</string>
+    <!-- Summary of a preference determining whether or not the user has enabled contact discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=110] -->
+    <string name="contact_discovery_opt_in_summary">Send your contacts\u2019 phone numbers to provide enhanced features</string>
+    <!-- Title of the dialog shown when the user tries to enable Contact Discovery, which is a
+         service that exchanges contacts with the carrier to determine if your contacts support
+         enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=50] -->
+    <string name="contact_discovery_opt_in_dialog_title">Send contacts to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>?</string>
+    <!-- Title of the dialog shown when the carrier name is not known and the user tries to enable
+         Contact Discovery, which is a service that exchanges contacts with the carrier to determine
+         if your contacts support enhanced features, such as video calling and RCS messaging.
          [CHAR LIMIT=50] -->
-    <string name="contact_discovery_opt_in_dialog_title">Enable contact discovery?</string>
-    <!-- Text displayed in the dialog shown when the user tries to enable Contact Discovery.
-         [CHAR LIMIT=NONE]-->
-    <string name="contact_discovery_opt_in_dialog_message">All of the phone numbers in your contacts will be periodically sent to your carrier in order to discover which calling features are supported.</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined">Send contacts to your carrier?</string>
+    <!-- The text displayed in the dialog shown when the user tries to enable Contact Discovery,
+         which is a service that exchanges contacts with the carrier to determine if your contacts
+         support enhanced features, such as video calling and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message">Your contacts\u2019 phone numbers will be periodically sent to <xliff:g id="carrier" example="T-mobile">%1$s</xliff:g>.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
+    <!-- The text displayed in the dialog shown when the mobile carrier's name is not known and the
+         user tries to enable Contact Discovery, which is a service that exchanges contacts with
+         the carrier to determine if your contacts support enhanced features, such as video calling
+         and RCS messaging. [CHAR LIMIT=NONE]-->
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined">Your contacts\u2019 phone numbers will be periodically sent to your carrier.<xliff:g id="empty_line" example="  ">\n\n</xliff:g>This info identifies whether your contacts can use certain features, like video calls or some messaging features.</string>
     <!-- Preferred network type title.  [CHAR LIMIT=50] -->
     <string name="preferred_network_type_title">Preferred network type</string>
     <!-- Preferred network type summary.  [CHAR LIMIT=100] -->
@@ -8367,14 +8383,31 @@
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
 
+    <!-- preference category summary -->
+    <string name="important_conversations_summary_bubbles">Show at top of conversation section and appear as floating bubbles</string>
+
+    <!-- preference category summary -->
+    <string name="important_conversations_summary">Show at top of conversation section</string>
+
     <!-- [CHAR LIMIT=100] preference category title -->
-    <string name="other_conversations">Other conversations</string>
+    <string name="other_conversations">Modified conversations</string>
+
+    <!-- summary for other conversations list -->
+    <string name="other_conversations_summary">Conversations you\u2019ve made changes to</string>
 
     <!-- [CHAR LIMIT=100] Setting to automatically bubble all notifications from favorite conversations -->
-    <string name="important_bubble">Bubble important conversations</string>
+    <string name="important_bubble">Bubble priority conversations</string>
 
     <!-- [CHAR LIMIT=NONE] description of how notifications from important conversations behave -->
-    <string name="important_conversation_behavior_summary">Important conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
+    <string name="important_conversation_behavior_summary">Priority conversations show at the top of the pull-down shade. You can also set them to bubble and interrupt Do Not Disturb.</string>
+
+    <!-- title for conversation onboarding -->
+    <string name="conversation_onboarding_title">Priority and modified conversations will appear here</string>
+
+    <!-- summary for conversation onboarding -->
+    <string name="conversation_onboarding_summary">Once you mark a conversation as priority, or make any other changes to conversations, they will appear here.
+        \n\nTo change conversation settings:
+        \nSwipe down from the top of the screen to open the pull-down shade, then touch &amp; hold a conversation.</string>
 
     <!-- Importance title strings for the Importance page. Also the second part of the importance
      summary on the channel page-->
@@ -8446,7 +8479,7 @@
     <string name="notification_channel_summary_high">When device is unlocked, show notifications as a banner across the top of the screen</string>
 
     <!-- [CHAR LIMIT=100] Label for on/off toggle -->
-    <string name="notification_switch_label">All <xliff:g id="app_name" example="Android Services">%1$s</xliff:g> notifications</string>
+    <string name="notification_switch_label">All \"<xliff:g id="app_name" example="Android Services">%1$s</xliff:g>\" notifications</string>
 
     <!-- Default Apps > Default notification assistant -->
     <string name="default_notification_assistant">Adaptive Notifications</string>
@@ -11905,17 +11938,26 @@
     <!-- Power menu setting option cards, passes, device controls [CHAR LIMIT=NONE] -->
     <string name="power_menu_cards_passes_device_controls">Show cards, passes, and device controls</string>
 
+    <!-- Power menu setting lock screen category name [CHAR LIMIT=40] -->
+    <string name="power_menu_lock_screen_category">Lock screen</string>
+
     <!-- Power menu setting option none [CHAR LIMIT=NONE] -->
     <string name="power_menu_none">Don\u2019t show any content</string>
 
     <!-- Power menu setting Privacy [CHAR LIMIT=40] -->
-    <string name="power_menu_privacy">Privacy</string>
+    <string name="power_menu_privacy">Sensitive content</string>
 
     <!-- Power menu setting privacy show all [CHAR LIMIT=NONE] -->
     <string name="power_menu_privacy_show">Show cards and controls when locked</string>
 
+    <!-- Power menu setting privacy show controls [CHAR LIMIT=NONE] -->
+    <string name="power_menu_privacy_show_controls">Show controls when locked</string>
+
     <!-- Power menu setting privacy hide all [CHAR LIMIT=NONE] -->
     <string name="power_menu_privacy_hide">Hide cards and controls when locked</string>
+
+    <!-- Power menu setting privacy no secure screen lock set [CHAR_LIMIT=NONE] -->
+    <string name="power_menu_privacy_not_secure">To use, first set a screen lock</string>
 
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="device_controls_setting_toggle">Show device controls</string>
