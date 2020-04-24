@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"צור"</string>
     <string name="allow" msgid="3763244945363657722">"כן, זה בסדר"</string>
     <string name="deny" msgid="7326117222944479942">"דחה"</string>
+    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
+    <skip />
     <string name="device_info_default" msgid="1406619232867343310">"לא ידוע"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="two">נותרו לך עוד  <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> צעדים כדי להיות מפתח.</item>
@@ -1676,16 +1678,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"נקודה לשיתוף אינטרנט בלבד"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"‏USB בלבד"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"‏Bluetooth בלבד"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"‏Ethernet בלבד"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"‏נקודה לשיתוף אינטרנט, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"‏נקודה לשיתוף אינטרנט, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"‏נקודה לשיתוף אינטרנט, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"‏USB,‏ Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"‏USB, ‏Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"‏Bluetooth,‏ Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"‏נקודה לשיתוף אינטרנט, USB,‏ Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"‏נקודה לשיתוף אינטרנט, USB, ‏Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"‏נקודה לשיתוף אינטרנט, Bluetooth, ‏Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"‏USB,‏ Bluetooth,‏ Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"‏נקודה לשיתוף אינטרנט, USB, ‏Bluetooth, ‏Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"לא יתבצע שיתוף של חיבור לאינטרנט עם מכשירים אחרים"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"שיתוף אינטרנט בין מכשירים"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏אין להשתמש בנקודה לשיתוף אינטרנט דרך Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏שיתוף אינטרנט רק באמצעות USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"‏שיתוף אינטרנט רק באמצעות Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"‏שיתוף אינטרנט רק באמצעות Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"‏שיתוף אינטרנט רק באמצעות USB ו-Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"‏שיתוף אינטרנט רק באמצעות USB ו-Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"‏שיתוף אינטרנט רק באמצעות Bluetooth ו-Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏שיתוף אינטרנט רק באמצעות USB, ‏Bluetooth ו-Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏שיתוף אינטרנט דרך USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏שיתוף בחיבור לאינטרנט של הטלפון דרך USB"</string>
@@ -3152,10 +3166,18 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏שיחות 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏שימוש בשירותי LTE כדי לשפר את הקול ודרכי תקשורת אחרות (מומלץ)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏שימוש בשירותי 4G משפר את התקשורת הקולית ותקשורת אחרת (מומלץ)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"גילוי אנשי קשר"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"תכונה זו מאפשרת לספק לגלות אילו תכונות התקשרות נתמכות על ידי אנשי הקשר שלך."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"להפעיל את הגילוי של אנשי הקשר?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"כל מספרי הטלפון ששמורים באנשי הקשר שלך יישלחו לספק שלך כדי לגלות אילו תכונות התקשרות נתמכות."</string>
+    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
+    <skip />
     <string name="preferred_network_type_title" msgid="812509938714590857">"סוג רשת מועדף"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"‏LTE (מומלץ)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"‏הודעות MMS"</string>
@@ -3242,6 +3264,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"‏Bluetooth,‏ NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏לא זמין כי NFC כבוי"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"כדי להשתמש, יש להתקין תחילה אפליקציה לתשלום"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"אפליקציות והתראות"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"אפליקציות אחרונות, אפליקציות ברירת מחדל"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"הגישה להתראות אינה זמינה לאפליקציות בפרופיל העבודה."</string>
@@ -3298,7 +3321,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"פרופיל עבודה, פרופיל מנוהל, לאחד, איחוד, עבודה, פרופיל"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"תנועות לביצוע פעולות"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"כרטיסים"</string>
-    <string name="keywords_device_controls" msgid="8962494082504033651">"פקדי המכשיר, פקדים"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"פקדי מכשירים, פקדים"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"שלם, הקש, תשלומים"</string>
     <string name="keywords_backup" msgid="707735920706667685">"‏גיבוי, לגבות, backup, back up"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"תנועה"</string>
@@ -3530,7 +3553,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"חלק מההתראות יכולות להופיע כבועות במסך"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"חלק מההתראות ותוכן אחר יכולים להופיע כבועות במסך. כדי לפתוח בועה צריך להקיש עליה. כדי לסגור אותה, צריך לגרור אותה לתחתית המסך."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"בועות"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"הודעות חדשות יופיעו במסך"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"כל הגדרות הבועה"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"הוספת בועה לשיחה"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"הצגת סמל צף מעל אפליקציות"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> יכולה להציג חלק מההתראות כבועות"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"להפעיל בועות למכשיר?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"הפעלת הבועות לאפליקציה זו תפעיל בועות גם למכשיר.\n\nפעולה זו משפיעה על אפליקציות או שיחות אחרות שיש להן אישור להצגת בועות."</string>
@@ -3595,9 +3620,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"הוספה לקטע השיחות"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"ניהול השיחות"</string>
     <string name="important_conversations" msgid="1233893707189659401">"שיחות בעדיפות גבוהה"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"שיחות אחרות"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"הצגת שיחות חשובות בבועות"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"שיחות חשובות יוצגו בחלק העליון של חלונית ההתראות הנפתחת. אפשר גם להגדיר שיוצגו בבועות ויפריעו לתכונה \'נא לא להפריע\'."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"יש להציג באופן שקט וממוזער"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"הצג ללא צליל"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"עם צליל"</string>
@@ -3618,7 +3656,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"עוזרת להתרכז ללא צלילים או רטט"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"מעוררת תשומת לב באמצעות צלילים או רטט"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"כשהמכשיר לא נעול, יש להציג התראות כבאנר בראש המסך"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"כל ההתראות של <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"התראות מותאמות"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="two">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות ליום</item>
@@ -5014,20 +5053,27 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"עבודה"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"ברירת מחדל של המערכת"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"אפשרות זו כבר לא תקפה. יש לנסות שוב."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"פקדי המכשיר"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"פקדי המכשיר"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"פקדי המכשירים"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"פקדי המכשירים"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"כרטיסים וכרטיסי אשראי"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"כרטיסים וכרטיסי אשראי"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"תפריט הפעלה"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"תפריט לחצן הפעלה"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"הצגת כרטיסים וכרטיסי אשראי"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"הצגת פקדי המכשיר"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"הצגת כרטיסים, שוברים ופקדי מכשיר"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"הצגת פקדי המכשירים"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"הצגת כרטיסים, שוברים ופקדי מכשירים"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"לא להציג שום תוכן"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"פרטיות"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"הצגת כרטיסים ופקדים בנעילה"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"הסתרת כרטיסים ופקדים בנעילה"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"הצגת פקדי המכשיר"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"הצגת פקדי המכשירים"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"הצגת כרטיסים"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"יש להחזיק את לחצן ההפעלה כדי לגשת לפקדים למכשירים מחוברים"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"כדי לגשת לפרטים כמו אמצעי תשלום וכרטיסי עלייה למטוס, יש ללחוץ לחיצה ארוכה על לחצן ההפעלה."</string>
@@ -5038,7 +5084,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"עצירת העברה"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏לכבות את VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏פעולה זו מכבה גם את החיבור לרשת 5G.\nבמהלך שיחה קולית, אי אפשר להשתמש באינטרנט וייתכן שאפליקציות מסוימות לא יפעלו."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"‏כשמשתמשים בשני כרטיסי SIM, טלפון זה יוגבל ל-4G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה יוגבל ל-4G. מידע נוסף"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה יוגבל ל-4G. מידע נוסף"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"‏כשמשתמשים בשני כרטיסי SIM, טלפון זה יוגבל ל-4G. "<annotation id="url">"מידע נוסף"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה יוגבל ל-4G. "<annotation id="url">"מידע נוסף"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה יוגבל ל-4G. "<annotation id="url">"מידע נוסף"</annotation>"."</string>
 </resources>
