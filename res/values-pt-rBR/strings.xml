@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Criar"</string>
     <string name="allow" msgid="3763244945363657722">"Permitir"</string>
     <string name="deny" msgid="7326117222944479942">"Recusar"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Ativar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconhecido"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Faltam <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> etapas para você se tornar um desenvolvedor.</item>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Somente ponto de acesso"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Somente USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Somente Bluetooth"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Apenas Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Ponto de acesso, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Ponto de acesso, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Ponto de acesso, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Ponto de acesso, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Ponto de acesso, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Ponto de acesso, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Ponto de acesso, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Não está compartilhando a Internet com outros dispositivos"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Não usar ponto de acesso Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Compartilhar Internet apenas por USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Compartilhar Internet apenas por Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Compartilhar Internet apenas por Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Compartilhar Internet apenas por USB e Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Compartilhar Internet apenas por USB e Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Compartilhar Internet apenas por Bluetooth e Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Compartilhar Internet apenas por USB, Bluetooth e Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Tethering USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Compartilhar conexão de Internet do smartphone via USB"</string>
@@ -2416,7 +2429,7 @@
       <item quantity="other">Não é possível executar estes apps em segundo plano</item>
     </plurals>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">Restringir %1$d app?</item>
+      <item quantity="one">Restringir app?</item>
       <item quantity="other">Restringir %1$d apps?</item>
     </plurals>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Para economizar bateria, não permita que <xliff:g id="APP">%1$s</xliff:g> use a bateria em segundo plano. Esse app pode não funcionar corretamente e é possível que haja atraso nas notificações."</string>
@@ -2841,7 +2854,7 @@
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"Ao restringir os dados móveis em segundo plano, alguns apps e serviços só funcionarão se você estiver conectado ao Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"Se você restringir os dados móveis em segundo plano, alguns apps e serviços só funcionarão se você estiver conectado ao Wi‑Fi.\n\nEssa configuração afeta todos os usuários neste tablet."</string>
     <string name="data_usage_restrict_background_multiuser" product="default" msgid="6402714504088590463">"Se você restringir os dados móveis em segundo plano, alguns apps e serviços só funcionarão se você estiver conectado ao Wi‑Fi.\n\nEssa configuração afeta todos os usuários neste smartphone."</string>
-    <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"alerta"</font></string>
+    <string name="data_usage_sweep_warning" msgid="2072854703184614828"><font size="12">"Alerta:"</font>\n<font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font></string>
     <string name="data_usage_sweep_limit" msgid="6947019190890086284"><font size="18">"<xliff:g id="NUMBER">^1</xliff:g>"</font>" "<font size="9">"<xliff:g id="UNIT">^2</xliff:g>"</font>\n<font size="12">"limite"</font></string>
     <string name="data_usage_uninstalled_apps" msgid="9065885396147675694">"Apps removidos"</string>
     <string name="data_usage_uninstalled_apps_users" msgid="1262228664057122983">"Apps e usuários removidos"</string>
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamada 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usar serviços de LTE para melhorar a comunicação por voz e de outros tipos (recomendado)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usar os serviços 4G para melhorar comunicações por voz e de outros tipos (recomendado)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Descoberta de contatos"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Permite que sua operadora descubra quais recursos de chamada são compatíveis com seus contatos."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Ativar descoberta de contatos?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Todos os números de telefone dos seus contatos serão enviados periodicamente à operadora para descobrir quais recursos de chamada estão disponíveis."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contatos para a operadora"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Enviar os números de telefone dos contatos para fornecer recursos avançados"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Enviar contatos para a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Enviar contatos para a operadora?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Os números de telefone dos seus contatos serão enviados periodicamente para a <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Essa informação identifica se os contatos podem usar recursos específicos, como videochamadas ou alguns recursos de mensagem."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Os números de telefone dos seus contatos serão enviados periodicamente para a operadora.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Essa informação identifica se os contatos podem usar recursos específicos, como videochamadas ou alguns recursos de mensagem."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipo de rede preferencial"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recomendado)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mensagens MMS"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponível porque a NFC está desativada"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale um app de pagamento"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps e notificações"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps padrão"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"O acesso às notificações não está disponível para apps no perfil de trabalho."</string>
@@ -3356,7 +3376,7 @@
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="2310353944697868606"><annotation id="link">" Ver configurações personalizadas"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Somente prioridade"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Ativar / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Ativado / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Desativado / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Desativado"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Ativado"</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algumas notificações podem ser exibidas como balões na tela"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Notificações e outros conteúdos podem aparecer como balões na tela. Para abrir um balão, toque nele. Para dispensá-lo, arraste-o para baixo."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balões"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Novas mensagens serão exibidas na tela"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Todas as configurações do balão"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostrar conversa em balão"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Mostrar ícone flutuante sobre outros apps"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Permitir que <xliff:g id="APP_NAME">%1$s</xliff:g> mostre algumas notificações na forma de balões"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Ativar balões no dispositivo?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Ativar os balões neste app fará o mesmo no dispositivo.\n\nIsso afeta outros apps e conversas que têm permissão para usar balões."</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adicionar à seção de conversas"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gerenciar conversas"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritárias"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Mostrar conversas importantes em balões"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Conversas importantes são mostradas na parte superior da aba suspensa. Você também pode configurá-las para que sejam mostradas em balões e interrompam o modo \"Não perturbe\"."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostrar de forma silenciosa e minimizada"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostrar de forma silenciosa"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Emitir som"</string>
@@ -3524,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ajuda você a manter o foco sem som ou vibração"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama sua atenção com som ou vibração"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo estiver desbloqueado, mostrar notificações em um banner no topo da tela"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Todas as notificações do app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificações adaptáveis"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">Cerca de <xliff:g id="NUMBER_1">%d</xliff:g> notificação por dia</item>
@@ -3801,7 +3837,7 @@
     <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback sobre o dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Inserir PIN do administrador"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Desativada"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
     <string name="screen_pinning_title" msgid="5203530107022449124">"Fixar tela"</string>
     <string name="screen_pinning_description" msgid="5181462036494390860">"Com esta configuração ativada, o recurso Fixar tela mantém a tela atual em exibição até que você a libere.\n\nPara usar o recurso Fixar tela:\n\n1. Verifique se o recurso está ativado.\n\n2. Abra a Visão geral.\n\n3. Toque no ícone do app na parte superior da tela e depois em Fixar."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pedir padrão de desbloqueio antes de desafixar"</string>
@@ -4843,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Mostrar cartões e passes"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Mostrar controles do dispositivo"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Mostrar cartões, passes e controles do dispositivo"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Não mostrar conteúdo"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privacidade"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar cartões e controles quando estiver bloqueado"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar cartões e controles quando estiver bloqueado"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles do dispositivo"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar cartões e passes"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acessar os controles de dispositivos conectados, mantenha o botão liga/desliga pressionado"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Parar transmissão"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Desativar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Isso também desativa sua conexão 5G.\nDurante uma chamada de voz, não é possível usar a Internet, e alguns apps podem não funcionar."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Ao usar dois chips, este smartphone será limitado ao 4G. Saiba mais"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Ao usar dois chips, este tablet será limitado ao 4G. Saiba mais"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Ao usar dois chips, este dispositivo será limitado ao 4G. Saiba mais"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Ao usar dois chips, este smartphone será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ao usar dois chips, este tablet será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ao usar dois chips, este dispositivo será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
 </resources>
