@@ -50,6 +50,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -79,9 +80,9 @@ public class WifiP2pSettings extends DashboardFragment
     private OnClickListener mDisconnectListener;
     private OnClickListener mCancelConnectListener;
     private OnClickListener mDeleteGroupListener;
-    private WifiP2pPeer mSelectedWifiPeer;
+    @VisibleForTesting WifiP2pPeer mSelectedWifiPeer;
     private WifiP2pPersistentGroup mSelectedGroup;
-    private String mSelectedGroupName;
+    @VisibleForTesting String mSelectedGroupName;
     private EditText mDeviceNameText;
 
     private boolean mWifiP2pEnabled;
@@ -100,13 +101,13 @@ public class WifiP2pSettings extends DashboardFragment
     private static final int DIALOG_DELETE_GROUP = 4;
 
     private static final String SAVE_DIALOG_PEER = "PEER_STATE";
-    private static final String SAVE_DEVICE_NAME = "DEV_NAME";
-    private static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
+    @VisibleForTesting static final String SAVE_DEVICE_NAME = "DEV_NAME";
+    @VisibleForTesting static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
 
     private WifiP2pDevice mThisDevice;
     private WifiP2pDeviceList mPeers = new WifiP2pDeviceList();
 
-    private String mSavedDeviceName;
+    @VisibleForTesting String mSavedDeviceName;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
