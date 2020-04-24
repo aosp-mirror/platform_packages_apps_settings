@@ -106,7 +106,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     // capabilities. For
     // example, before JellyBean MR2 the user was granting the explore by touch
     // one.
-    private AccessibilityServiceInfo getAccessibilityServiceInfo() {
+    AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
                 getPrefContext()).getInstalledAccessibilityServiceList();
 
@@ -164,16 +164,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                                 this::onDialogButtonFromDisableToggleClicked);
                 break;
             }
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL: {
-                if (AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())) {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showGestureNavigationTutorialDialog(getPrefContext());
-                } else {
-                    mDialog = AccessibilityGestureNavigationTutorial
-                            .showAccessibilityButtonTutorialDialog(getPrefContext());
-                }
-                break;
-            }
             default: {
                 mDialog = super.onCreateDialog(dialogId);
             }
@@ -195,6 +185,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             default:
                 return super.getDialogMetricsCategory(dialogId);
         }
+    }
+
+    @Override
+    int getUserShortcutTypes() {
+        return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
+                mComponentName);
     }
 
     @Override
@@ -301,6 +297,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
             } else {
                 AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                         mComponentName);
+                showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
             }
         } else {
             AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), shortcutTypes,
@@ -413,6 +410,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
         final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes, mComponentName);
+
+        mIsDialogShown.set(false);
+        showPopupDialog(DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL);
 
         mDialog.dismiss();
 

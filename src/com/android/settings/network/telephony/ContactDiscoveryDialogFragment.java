@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsRcsManager;
+import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentManager;
@@ -39,9 +40,11 @@ public class ContactDiscoveryDialogFragment extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {
 
     private static final String SUB_ID_KEY = "sub_id_key";
+    private static final String CARRIER_NAME_KEY = "carrier_name_key";
     private static final String DIALOG_TAG = "discovery_dialog:";
 
     private int mSubId;
+    private CharSequence mCarrierName;
     private ImsManager mImsManager;
 
     /**
@@ -50,10 +53,11 @@ public class ContactDiscoveryDialogFragment extends InstrumentedDialogFragment
      * @param subId The subscription ID to associate with this Dialog.
      * @return a new instance of ContactDiscoveryDialogFragment.
      */
-    public static ContactDiscoveryDialogFragment newInstance(int subId) {
+    public static ContactDiscoveryDialogFragment newInstance(int subId, CharSequence carrierName) {
         final ContactDiscoveryDialogFragment dialogFragment = new ContactDiscoveryDialogFragment();
         final Bundle args = new Bundle();
         args.putInt(SUB_ID_KEY, subId);
+        args.putCharSequence(CARRIER_NAME_KEY, carrierName);
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -64,18 +68,30 @@ public class ContactDiscoveryDialogFragment extends InstrumentedDialogFragment
         super.onAttach(context);
         final Bundle args = getArguments();
         mSubId = args.getInt(SUB_ID_KEY);
+        mCarrierName = args.getCharSequence(CARRIER_NAME_KEY);
         mImsManager = getImsManager(context);
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        final int title = R.string.contact_discovery_opt_in_dialog_title;
-        int message = R.string.contact_discovery_opt_in_dialog_message;
-        builder.setMessage(getResources().getString(message))
+        CharSequence title;
+        CharSequence message;
+        if (!TextUtils.isEmpty(mCarrierName)) {
+            title = getContext().getString(
+                    R.string.contact_discovery_opt_in_dialog_title, mCarrierName);
+            message = getContext().getString(
+                    R.string.contact_discovery_opt_in_dialog_message, mCarrierName);
+        } else {
+            title = getContext().getString(
+                    R.string.contact_discovery_opt_in_dialog_title_no_carrier_defined);
+            message = getContext().getString(
+                    R.string.contact_discovery_opt_in_dialog_message_no_carrier_defined);
+        }
+        builder.setMessage(message)
                 .setTitle(title)
                 .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setPositiveButton(android.R.string.ok, this)
+                .setPositiveButton(R.string.confirmation_turn_on, this)
                 .setNegativeButton(android.R.string.cancel, this);
         return builder.create();
     }
