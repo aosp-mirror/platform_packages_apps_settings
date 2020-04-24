@@ -31,7 +31,6 @@ import android.telephony.TelephonyManager;
 import android.util.DataUnit;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -74,22 +73,6 @@ public final class DataUsageUtilsTest {
         when(mManager.isNetworkSupported(anyInt())).thenReturn(false);
         final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isFalse();
-    }
-
-    @Test
-    @Ignore
-    public void hasSim_simStateReady() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
-        final boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isTrue();
-    }
-
-    @Test
-    @Ignore
-    public void hasSim_simStateMissing() {
-        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
-        final boolean hasSim = DataUsageUtils.hasSim(mContext);
-        assertThat(hasSim).isFalse();
     }
 
     @Test
