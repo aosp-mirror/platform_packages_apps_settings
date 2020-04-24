@@ -374,7 +374,6 @@ public class EntityHeaderController {
         }
     }
 
-
     private void setText(@IdRes int id, CharSequence text) {
         TextView textView = mHeader.findViewById(id);
         if (textView != null) {
