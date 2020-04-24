@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.os.Bundle;
 import android.view.View;
 
@@ -46,6 +47,22 @@ public class LegacyAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setSettingsEditable(false);
 
         setAllowedPreferredShortcutType(UserShortcutType.HARDWARE);
+    }
+
+    @Override
+    int getUserShortcutTypes() {
+        int shortcutTypes = super.getUserShortcutTypes();
+
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+        final boolean hasRequestAccessibilityButtonFlag =
+                (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
+        if (hasRequestAccessibilityButtonFlag) {
+            shortcutTypes |= UserShortcutType.SOFTWARE;
+        } else {
+            shortcutTypes &= (~UserShortcutType.SOFTWARE);
+        }
+
+        return shortcutTypes;
     }
 
     private void setAllowedPreferredShortcutType(int type) {

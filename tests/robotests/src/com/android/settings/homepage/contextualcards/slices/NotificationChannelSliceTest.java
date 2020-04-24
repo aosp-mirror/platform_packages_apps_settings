@@ -54,7 +54,6 @@ import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -115,7 +114,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_hasSuggestedApp_shouldHaveNotificationChannelTitle() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
@@ -131,7 +129,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_hasSuggestedApp_shouldSortByNotificationSentCount() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
@@ -227,7 +224,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_exceedDefaultRowCount_shouldOnlyShowDefaultRows() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
@@ -245,7 +241,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_channelCountIsLessThanDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
@@ -262,7 +257,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_channelCountIsEqualToDefaultRows_subTitleShouldNotHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);
@@ -278,7 +272,6 @@ public class NotificationChannelSliceTest {
 
     @Test
     @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-    @Ignore
     public void getSlice_channelCountIsMoreThanDefaultRows_subTitleShouldHaveTapToManagerAll() {
         addMockPackageToPackageManager(true /* isRecentlyInstalled */,
                 ApplicationInfo.FLAG_INSTALLED);

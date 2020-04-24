@@ -47,19 +47,12 @@ import android.os.UserManager;
 import android.service.notification.NotifyingApp;
 import android.text.TextUtils;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -73,6 +66,12 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class RecentNotifyingAppsPreferenceControllerTest {
@@ -153,7 +152,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void display_showRecents() throws Exception {
         List<Event> events = new ArrayList<>();
         Event app = new Event();
@@ -201,7 +199,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void display_showRecentsWithInstantApp() throws Exception {
         List<Event> events = new ArrayList<>();
         Event app = new Event();
@@ -257,7 +254,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void display_showRecents_formatSummary() throws Exception {
         List<Event> events = new ArrayList<>();
         Event app = new Event();
@@ -282,7 +278,6 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void reloadData() throws Exception {
         when(mUserManager.getProfileIdsWithDisabled(0)).thenReturn(new int[] {0, 10});
 
