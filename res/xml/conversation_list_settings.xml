@@ -20,6 +20,12 @@
     android:key="conversation_list"
     android:title="@string/zen_mode_conversations_title">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="no_conversations"
+        android:layout="@layout/conversation_onboarding"
+        android:selectable="false"
+        settings:isPreferenceVisible="false"/>
+
     <PreferenceCategory
         android:key="important_conversations"
         android:title="@string/important_conversations"

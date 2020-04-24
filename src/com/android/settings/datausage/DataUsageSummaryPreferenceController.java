@@ -64,7 +64,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
     private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
-    private final EntityHeaderController mEntityHeaderController;
+    private EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
     private final PreferenceFragmentCompat mFragment;
     protected DataUsageController mDataUsageController;
@@ -103,8 +103,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
         super(activity, KEY);
 
-        mEntityHeaderController = EntityHeaderController.newInstance(activity,
-                fragment, null);
         mLifecycle = lifecycle;
         mFragment = fragment;
         init(subscriptionId);
@@ -165,6 +163,10 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public void onStart() {
+        if (mEntityHeaderController == null) {
+            mEntityHeaderController =
+                    EntityHeaderController.newInstance((Activity) mContext, mFragment, null);
+        }
         RecyclerView view = mFragment.getListView();
         mEntityHeaderController.setRecyclerView(view, mLifecycle);
         mEntityHeaderController.styleActionBar((Activity) mContext);
@@ -197,16 +199,20 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     public void updateState(Preference preference) {
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
-        final DataUsageController.DataUsageInfo info;
+        final boolean isSimCardAdded = hasSim();
+        if (!isSimCardAdded) {
+            mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
+        }
+
+        final DataUsageController.DataUsageInfo info =
+                mDataUsageController.getDataUsageInfo(mDefaultTemplate);
+
         final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
-        if (hasSim()) {
-            info = mDataUsageController.getDataUsageInfo(mDefaultTemplate);
+        if (isSimCardAdded) {
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
                     /* usagePeriod */ null, /* isSingleWifi */ false);
         } else {
-            info = mDataUsageController.getDataUsageInfo(
-                    NetworkTemplate.buildTemplateWifiWildcard());
             summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
                     info.period, /* isSingleWifi */ false);
             summaryPreference.setLimitInfo(null);

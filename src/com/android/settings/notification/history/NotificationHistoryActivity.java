@@ -30,6 +30,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
@@ -71,6 +73,7 @@ public class NotificationHistoryActivity extends Activity {
 
     private HistoryLoader mHistoryLoader;
     private INotificationManager mNm;
+    private UserManager mUm;
     private PackageManager mPm;
     private CountDownLatch mCountdownLatch;
     private Future mCountdownFuture;
@@ -104,6 +107,8 @@ public class NotificationHistoryActivity extends Activity {
 
             TextView label = viewForPackage.findViewById(R.id.label);
             label.setText(nhp.label != null ? nhp.label : nhp.pkgName);
+            label.setContentDescription(mUm.getBadgedLabelForUser(label.getText(),
+                    UserHandle.getUserHandleForUid(nhp.uid)));
             ImageView icon = viewForPackage.findViewById(R.id.icon);
             icon.setImageDrawable(nhp.icon);
 
@@ -140,6 +145,7 @@ public class NotificationHistoryActivity extends Activity {
         super.onResume();
 
         mPm = getPackageManager();
+        mUm = getSystemService(UserManager.class);
         // wait for history loading and recent/snooze loading
         mCountdownLatch = new CountDownLatch(2);
 
