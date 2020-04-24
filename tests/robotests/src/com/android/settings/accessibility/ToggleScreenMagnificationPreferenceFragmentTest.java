@@ -40,7 +40,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private static final ComponentName DUMMY_COMPONENT_NAME = new ComponentName(DUMMY_PACKAGE_NAME,
             DUMMY_CLASS_NAME);
     private static final String SOFTWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
+            Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
     private static final String HARDWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
     private static final String TRIPLETAP_SHORTCUT_KEY =
