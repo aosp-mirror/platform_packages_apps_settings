@@ -120,6 +120,8 @@ public class MediaOutputIndicatorSliceTest {
     public void getSlice_withConnectedDevice_verifyMetadata() {
         mDevices.add(mDevice1);
         when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
+        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
 
@@ -213,6 +215,30 @@ public class MediaOutputIndicatorSliceTest {
         assertThat(TextUtils.equals(Utils.SETTINGS_PACKAGE_NAME, intent.getPackage())).isTrue();
         assertThat(intent.getExtras().getParcelable(
                 MediaOutputSliceConstants.KEY_MEDIA_SESSION_TOKEN) == null).isTrue();
+    }
+
+    @Test
+    public void isVisible_allConditionMatched_returnTrue() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mDevices.add(mDevice1);
+
+        when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
+        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
+
+        assertThat(mMediaOutputIndicatorSlice.isVisible()).isTrue();
+    }
+
+    @Test
+    public void isVisible_noActiveSession_returnFalse() {
+        mAudioManager.setMode(AudioManager.MODE_NORMAL);
+        mDevices.add(mDevice1);
+
+        when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
+        doReturn(null).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
+
+        assertThat(mMediaOutputIndicatorSlice.isVisible()).isFalse();
     }
 
     @Implements(SliceBackgroundWorker.class)
