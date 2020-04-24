@@ -64,7 +64,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
     private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
-    private final EntityHeaderController mEntityHeaderController;
+    private EntityHeaderController mEntityHeaderController;
     private final Lifecycle mLifecycle;
     private final PreferenceFragmentCompat mFragment;
     protected DataUsageController mDataUsageController;
@@ -103,8 +103,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
         super(activity, KEY);
 
-        mEntityHeaderController = EntityHeaderController.newInstance(activity,
-                fragment, null);
         mLifecycle = lifecycle;
         mFragment = fragment;
         init(subscriptionId);
@@ -122,14 +120,14 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 mContext.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mHasMobileData = SubscriptionManager.isValidSubscriptionId(mSubId)
-                && DataUsageUtils.hasMobileData(mContext);
+        mHasMobileData = DataUsageUtils.hasMobileData(mContext);
 
         mDataUsageController = new DataUsageController(mContext);
         mDataUsageController.setSubscriptionId(mSubId);
         mDataInfoController = new DataUsageInfoController();
 
-        if (mHasMobileData) {
+        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
+        if (subInfo != null) {
             mDataUsageTemplate = R.string.cell_data_template;
         } else if (DataUsageUtils.hasWifiRadio(mContext)) {
             mDataUsageTemplate = R.string.wifi_data_template;
@@ -165,6 +163,10 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public void onStart() {
+        if (mEntityHeaderController == null) {
+            mEntityHeaderController =
+                    EntityHeaderController.newInstance((Activity) mContext, mFragment, null);
+        }
         RecyclerView view = mFragment.getListView();
         mEntityHeaderController.setRecyclerView(view, mLifecycle);
         mEntityHeaderController.styleActionBar((Activity) mContext);
@@ -178,18 +180,16 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
     @VisibleForTesting
     SubscriptionInfo getSubscriptionInfo(int subscriptionId) {
+        if (!mHasMobileData) {
+            return null;
+        }
         return ProxySubscriptionManager.getInstance(mContext)
                 .getAccessibleSubscriptionInfo(subscriptionId);
     }
 
-    @VisibleForTesting
-    boolean hasSim() {
-        return DataUsageUtils.hasSim(mContext);
-    }
-
     @Override
     public int getAvailabilityStatus(int subId) {
-        return hasSim()
+        return (getSubscriptionInfo(subId) != null)
                 || DataUsageUtils.hasWifiRadio(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -197,16 +197,19 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     public void updateState(Preference preference) {
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
-        final DataUsageController.DataUsageInfo info;
         final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
-        if (hasSim()) {
-            info = mDataUsageController.getDataUsageInfo(mDefaultTemplate);
+        if (subInfo == null) {
+            mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
+        }
+
+        final DataUsageController.DataUsageInfo info =
+                mDataUsageController.getDataUsageInfo(mDefaultTemplate);
+
+        if (subInfo != null) {
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
                     /* usagePeriod */ null, /* isSingleWifi */ false);
         } else {
-            info = mDataUsageController.getDataUsageInfo(
-                    NetworkTemplate.buildTemplateWifiWildcard());
             summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
                     info.period, /* isSingleWifi */ false);
             summaryPreference.setLimitInfo(null);

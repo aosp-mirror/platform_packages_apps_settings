@@ -130,6 +130,11 @@ public class ToggleFeaturePreferenceFragmentTest {
         }
 
         @Override
+        int getUserShortcutTypes() {
+            return 0;
+        }
+
+        @Override
         public int getPreferenceScreenResId() {
             return R.xml.placeholder_prefs;
         }
