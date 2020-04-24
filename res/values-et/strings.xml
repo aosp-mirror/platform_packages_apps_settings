@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Loo"</string>
     <string name="allow" msgid="3763244945363657722">"Luba"</string>
     <string name="deny" msgid="7326117222944479942">"Keela"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Lülita sisse"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Tundmatu"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Olete nüüd <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> sammu kaugusel arendajastaatusest.</item>
@@ -1118,7 +1119,7 @@
     <string name="audio_record_proc_title" msgid="486071779724181619">"Mürasummutus"</string>
     <string name="volume_media_description" msgid="2736061076584067204">"Muusika, video, mängud ja muu meedia"</string>
     <string name="volume_ring_description" msgid="5423168446359881864">"Helin ja teated"</string>
-    <string name="volume_notification_description" msgid="3241009629930030492">"Teated"</string>
+    <string name="volume_notification_description" msgid="3241009629930030492">"Märguanded"</string>
     <string name="volume_alarm_description" msgid="156563371961039376">"Äratused"</string>
     <string name="volume_ring_mute" msgid="1445718401945149622">"Helinate ja teatiste summutamine"</string>
     <string name="volume_media_mute" msgid="1881020121757820746">"Muusika ja muude meediumide summutamine"</string>
@@ -1634,40 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Ainult kuumkoht"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Ainult USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Ainult Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Ainult Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Kuumkoht, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Kuumkoht, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Kuumkoht, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Kuumkoht, USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Kuumkoht, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Kuumkoht, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Kuumkoht, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetiühendust ei jagata teiste seadmetega"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Jagamine"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ära kasuta WiFi-kuumkohta"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Jaga Internetti ainult USB kaudu"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Jaga internetti ainult Bluetoothi kaudu"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Jaga internetti ainult Etherneti kaudu"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Jaga Internetti ainult USB või Bluetoothi kaudu"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Jaga internetti ainult USB ja Etherneti kaudu"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Jaga internetti ainult Bluetoothi ja Etherneti kaudu"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Jaga internetti ainult USB, Bluetoothi ja Etherneti kaudu"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB jagamine"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Telefoni Interneti-ühenduse jagamine USB kaudu"</string>
@@ -3090,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-helistamine"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Parema hääl- ja muu side kvaliteedi tagamiseks LTE-teenuste kasutamine (soovitatav)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Parema hääl- ja muu side kvaliteedi tagamiseks 4G-teenuste kasutamine (soovitatav)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Kontaktide teabe uurimine"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Võimaldab operaatoril välja uurida, milliseid helistamisfunktsioone kontaktide seadmed toetavad."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Kas lubada kontaktide teabe uurimine?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Kõik teie kontaktide telefoninumbrid edastatakse regulaarselt teie operaatorile, et välja uurida, milliseid kõnefunktsioone toetatakse."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kontaktide saatmine operaatorile"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Saatke oma kontaktide telefoninumbrid, et pakkuda täiustatud funktsioone"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kas saata kontaktid operaatorile <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Kas saata kontaktid operaatorile?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Teie kontaktide telefoninumbrid saadetakse perioodiliselt operaatorile <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Selle teabe abil tuvastatakse, kas kontaktid saavad kasutada teatud funktsioone, nagu videokõned või mõned sõnumsidefunktsioonid."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Teie kontaktide telefoninumbrid saadetakse perioodiliselt teie operaatorile.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Selle teabe abil tuvastatakse, kas kontaktid saavad kasutada teatud funktsioone, nagu videokõned või mõned sõnumsidefunktsioonid."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Eelistatud võrgutüüp"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (soovitatav)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Multimeediumsõnumid"</string>
@@ -3310,7 +3305,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Sisselülitamise helid"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Reaalajas subtiitrid"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Meediasisu automaatsed subtiitrid"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Pole"</string>
+    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Mitte ükski"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ajakava on määratud</item>
       <item quantity="one">1 ajakava on määratud</item>
@@ -3332,7 +3327,7 @@
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Ajastamine"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Kasuta ajakava"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Luba helimärguandega katkestused"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Helimärguandega katkestuste lubamine"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Visuaalsete häirimiste blok."</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Luba visuaalsed signaalid"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Peidetud märguannete kuvamisvalikud"</string>
@@ -3396,10 +3391,10 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ajakava saab automaatselt sisse lülitada</item>
       <item quantity="one">1 ajakava saab automaatselt sisse lülitada</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Mis saavad režiimi Mitte segada ajal katkestada?"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Mis saavad režiimi Mitte segada katkestada?"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Inimesed"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Rakendused"</string>
-    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmid ja muud katkestused"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Äratused ja muud katkestused"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"Ajakavad"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Kiirseadete kestus"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Kui funktsioon Mitte segada on sisse lülitatud, vaigistatakse heli ja vibreerimine (v.a ülal lubatud üksuste puhul)."</string>
@@ -3528,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Lisa vestluste jaotisse"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Vestluste haldamine"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioriteetsed vestlused"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Muud vestlused"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Kuva olulised vestlused mullis"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Olulised vestlused kuvatakse allatõmmatava ala ülaosas. Saate lasta need kuvada ka mullis ja katkestada funktsiooni Mitte segada."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Kuva vaikselt ja minimeeri"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Kuva hääletult"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Esita heli"</string>
@@ -3551,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Aitab teil keskenduda (heli või vibreerimine puudub)"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Haarab heli või vibreerimisega teie tähelepanu"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kui seade on avatud, kuvatakse märguanded bännerina ekraanikuva ülaosas"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Kõik rakenduse <xliff:g id="APP_NAME">%1$s</xliff:g> märguanded"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Kohanduvad märguanded"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> märguannet päevas</item>
@@ -3730,8 +3739,8 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Sõnumid"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"sõnumid"</string>
-    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Teated"</string>
-    <string name="zen_mode_messages_header" msgid="253721635061451577">"Sõnumi, mis saavad katkestada"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Sõnumid"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"Sõnumid, mis saavad katkestada"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Selleks et telefon lubatud sõnumite puhul heliseks, kontrollige, kas helinarežiim on aktiveeritud."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Ajakava „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” puhul on sissetulevad sõnumid blokeeritud Võite seadeid kohandada, et võimaldada sõpradel, pereliikmetel või muudel kontaktidel teiega ühendust võtta."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Kõik <xliff:g id="SENDER_CATEGORY">%s</xliff:g> jõuavad teieni"</string>
@@ -3739,7 +3748,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Kõik"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontaktid"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Tärniga tähistatud kontaktid"</string>
-    <string name="zen_mode_from_none" msgid="8456745188276131873">"Mitte kelleltki"</string>
+    <string name="zen_mode_from_none" msgid="8456745188276131873">"Mitte ükski"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Tärniga tähistatud kontaktidelt ja korduvatelt helistajatelt"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Kontaktidelt ja korduvatelt helistajatelt"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Ainult korduvatelt helistajatelt"</string>
@@ -3757,7 +3766,7 @@
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Meeldetuletused"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Ülesannetelt ja meeldetuletustelt"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"meeldetuletused"</string>
-    <string name="zen_mode_events" msgid="7425795679353531794">"Kalendri sündmused"</string>
+    <string name="zen_mode_events" msgid="7425795679353531794">"Kalendrisündmused"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Tulevastelt kalendrisündmustelt"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"sündmused"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Luba rakendustel alistada"</string>
@@ -3774,7 +3783,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> saab katkestada</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Veel <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Rakenduse erandid"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Rakenduste erandid"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Kõik märguanded"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Mõnd märguanded"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Märguanded, mis saavad katkestada"</string>
@@ -3792,8 +3801,8 @@
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Luba korduvad helistajad"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"igaüks"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"kontaktid"</string>
-    <string name="zen_mode_starred_callers" msgid="1002370699564211178">"tärniga tähistatud kontaktidelt"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"korduvatelt helistajatelt"</string>
+    <string name="zen_mode_starred_callers" msgid="1002370699564211178">"tärniga tähistatud kontaktid"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"korduvad helistajad"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> ja <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
@@ -4870,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Kuva kaardid ja pääsmed"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Kuva seadmete juhtimisvidinad"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Kuva kaardid, pääsmed ja seadmete juhtimisvidinad"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Ära kuva sisu"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privaatsus"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Kuva lukustatuna kaardid ja nupud"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Peida lukustatuna kaardid ja nupud"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Kuva seadmete juhtimisvidinad"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Kuva kaarte ja pääsmeid"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Ühendatud seadmete kiirnuppudele juurdepääsemiseks hoidke all toitenuppu"</string>
@@ -4885,10 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Peata ülekandmine"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Kas lülitada VoLTE välja?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"See lülitab välja ka teie 5G-ühenduse.\nTe ei saa häälkõne ajal internetti kasutada ja mõni rakendus ei pruugi töötada."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Kui kasutate kaht SIM-kaarti, saab see telefon kasutada ainult 4G-võrku. "<annotation id="url">"Vaadake lisateavet"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Kui kasutate kaht SIM-kaarti, saab see tahvelarvuti kasutada ainult 4G-võrku. "<annotation id="url">"Vaadake lisateavet"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Kui kasutate kaht SIM-kaarti, saab see seade kasutada ainult 4G-võrku. "<annotation id="url">"Vaadake lisateavet"</annotation>"."</string>
 </resources>

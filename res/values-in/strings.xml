@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Buat"</string>
     <string name="allow" msgid="3763244945363657722">"Izinkan"</string>
     <string name="deny" msgid="7326117222944479942">"Tolak"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Aktifkan"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Tidak diketahui"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Tinggal <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> langkah untuk menjadi developer.</item>
@@ -3078,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Panggilan 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Gunakan layanan LTE untuk menyempurnakan suara dan komunikasi lainnya (disarankan)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Gunakan layanan 4G untuk menyempurnakan suara dan komunikasi lainnya (disarankan)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Penemuan kontak"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Mengizinkan operator menemukan fitur menelepon yang didukung oleh kontak."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Aktifkan penemuan kontak?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Semua nomor telepon di kontak Anda akan dikirim secara berkala ke operator Anda untuk mencari tahu fitur panggilan mana saja yang didukung."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kirimkan kontak ke operator"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Kirim nomor telepon kontak untuk menyediakan fitur yang disempurnakan"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kirimkan kontak ke <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Kirimkan kontak ke operator?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Nomor telepon kontak akan dikirimkan secara berkala ke <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Info ini mengidentifikasi apakah kontak dapat menggunakan fitur tertentu, seperti video call atau beberapa fitur pengiriman pesan."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Nomor telepon kontak akan dikirimkan secara berkala ke operator.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Info ini mengidentifikasi apakah kontak dapat menggunakan fitur tertentu, seperti video call atau beberapa fitur pengiriman pesan."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Jenis jaringan yang dipilih"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (disarankan)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Pesan MMS"</string>
@@ -3347,7 +3354,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Sembunyikan ikon status bar di bagian atas layar"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Sembunyikan titik notifikasi di ikon aplikasi"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Jangan aktifkan jika ada notifikasi"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Sembunyikan dari bayangan pull-down"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Sembunyikan dari menu notifikasi"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Tidak pernah"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Saat layar nonaktif"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Saat layar aktif"</string>
@@ -3516,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Menambahkan ke bagian percakapan"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Kelola percakapan"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Percakapan prioritas"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Percakapan lain"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Tampilkan balon percakapan penting"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Percakapan penting muncul di bagian atas menu notifikasi. Anda juga dapat menyetelnya untuk menampilkan balon dan mengganggu fitur Jangan Ganggu."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Tampilkan tanpa suara dan sembunyikan"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Tampilkan tanpa suara"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Buat suara"</string>
@@ -3539,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Membantu Anda tetap fokus tanpa suara atau getaran"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Menarik perhatian Anda dengan suara atau getaran"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Jika perangkat dibuka kuncinya, menampilkan notifikasi sebagai banner di bagian atas layar"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Semua notifikasi <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notifikasi Adaptif"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikasi per hari</item>
@@ -4858,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Tampilkan kartu &amp; tiket"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Tampilkan kontrol perangkat"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Tampilkan kartu, tiket, dan kontrol perangkat"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Jangan tampilkan konten"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privasi"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Tampilkan kartu dan kontrol saat dikunci"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Sembunyikan kartu dan kontrol saat dikunci"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Tampilkan kontrol perangkat"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Tampilkan kartu &amp; tiket"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Guna mengakses kontrol untuk perangkat yang terhubung, tahan tombol Daya"</string>
