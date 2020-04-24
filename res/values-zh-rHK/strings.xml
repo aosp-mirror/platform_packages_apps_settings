@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"建立"</string>
     <string name="allow" msgid="3763244945363657722">"允許"</string>
     <string name="deny" msgid="7326117222944479942">"拒絕"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"開啟"</string>
     <string name="device_info_default" msgid="1406619232867343310">"未知"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">尚餘 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 個步驟，您就可以成為開發人員。</item>
@@ -1635,40 +1636,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"只限熱點"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"只限 USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"只限藍牙"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"僅限以太網"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"熱點、USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"熱點、藍牙"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"熱點、以太網"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB、藍牙"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB、以太網"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"藍牙、以太網"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"熱點、USB、藍牙"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"熱點、USB、以太網"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"熱點、藍牙、以太網"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB、藍牙、以太網"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"熱點、USB、藍牙、以太網"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"目前沒有與其他裝置分享互聯網"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"網絡共享"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"不使用 Wi‑Fi 熱點"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"僅透過 USB 分享互聯網"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"僅透過藍牙分享互聯網"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"僅透過以太網分享互聯網"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"僅透過 USB 和藍牙分享互聯網"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"僅透過 USB 和以太網分享互聯網"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"僅透過藍牙和以太網分享互聯網"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"僅透過 USB、藍牙和以太網分享互聯網"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB 網絡共享"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"透過 USB 分享手機的互聯網連線"</string>
@@ -2154,12 +2143,12 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"用 3 隻手指向上掃"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"㩒一下無障礙功能按鈕"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"㩒一下畫面底部嘅無障礙功能按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n㩒住無障礙功能按鈕，就可以切換唔同功能。"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"用 2 隻手指由螢幕底部向上掃。\n\n用 2 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"用 2 隻手指由螢幕底部向上掃。\n\n如要切換功能，請用 2 隻手指向上掃並按住。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"用 3 隻手指由螢幕底部向上掃。\n\n用 3 隻手指向上掃然後㩒住，就可以切換唔同功能。"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"按住音量鍵"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"同時按住兩個音量鍵"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"㩒螢幕 3 下"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"快速㩒螢幕 3 下。呢個快速鍵可能會減慢裝置運作速度。"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"輕按螢幕三下"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"快速輕按螢幕 3 下。此快速鍵可能會減慢裝置運作速度。"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"進階"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"「無障礙功能」按鈕已設定為「<xliff:g id="SERVICE">%1$s</xliff:g>」。如要使用放大功能，請按住「無障礙功能」按鈕，然後選擇「放大功能」。"</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"無障礙手勢已設為「<xliff:g id="SERVICE">%1$s</xliff:g>」。如要使用放大功能，請使用兩隻手指從螢幕底部向上滑動並長按，然後選取放大功能。"</string>
@@ -3091,10 +3080,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G 通話"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"使用 LTE 服務改善語音及其他通訊 (建議)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"使用 4G 服務改善語音及其他通訊 (建議)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"聯絡人探索"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"允許流動網絡供應商找出聯絡人支援的通話功能。"</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"要啟用聯絡人探索嗎？"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"聯絡人中的所有電話號碼都會定期傳送到您的流動網絡供應商，以便找出號碼支援的通話功能。"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"將聯絡人傳送至流動網絡供應商"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"傳送您的聯絡人電話號碼以使用提升功能"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"要將聯絡人傳送至「<xliff:g id="CARRIER">%1$s</xliff:g>」嗎？"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"要將聯絡人傳送至您的流動網絡供應商嗎？"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"系統會定期將您的聯絡人電話號碼傳送至「<xliff:g id="CARRIER">%1$s</xliff:g>」。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>這些資料可識別您的聯絡人是否可以使用特定功能，例如視像通話或部分訊息功能。"</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"系統會定期將您的聯絡人電話號碼傳送至您的流動網絡供應商。<xliff:g id="EMPTY_LINE">
+
+</xliff:g>這些資料可識別您的聯絡人是否可以使用特定功能，例如視像通話或部分訊息功能。"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"偏好的網絡類型"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (建議)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS 訊息"</string>
@@ -3397,7 +3392,7 @@
       <item quantity="other">系統已自動啟用 <xliff:g id="ON_COUNT">%d</xliff:g> 個日程表</item>
       <item quantity="one">系統已自動啟用 1 個日程表</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"可中斷「請勿騷擾」的功能"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"可中斷「請勿騷擾」的項目類別"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"人物"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"應用程式"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"鬧鐘和其他干擾"</string>
@@ -3529,9 +3524,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"新增至對話部分"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"管理對話"</string>
     <string name="important_conversations" msgid="1233893707189659401">"優先對話"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"其他對話"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"以小視窗顯示重要對話"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"在下拉式面板頂部顯示重要對話。您亦可設定為以小視窗顯示，並中斷「請勿騷擾」。"</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"無聲顯示並將重要性級別最小化"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"顯示通知但不發出音效"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"發出音效"</string>
@@ -3552,7 +3560,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"助您保持專注，不會發出聲音或震動"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"發出聲音或震動來吸引您的注意"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"裝置處於解鎖狀態時，系統會在螢幕頂部以橫額形式顯示通知"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」的所有通知"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調節通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~每天 <xliff:g id="NUMBER_1">%d</xliff:g> 個通知</item>
@@ -3735,7 +3744,7 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"可中斷的訊息"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"如要讓允許的訊息發出音效，請確保裝置已設定為發出鈴聲。"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」中，收到的訊息會被封鎖。您可以調整設定，讓好友、家人或其他聯絡人聯絡您。"</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"所有「<xliff:g id="SENDER_CATEGORY">%s</xliff:g>」均可聯絡您"</string>
+    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"接收所有<xliff:g id="SENDER_CATEGORY">%s</xliff:g>聯絡"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> 位聯絡人"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"聯絡人"</string>
@@ -4871,10 +4880,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"顯示付款卡和票卡"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"顯示裝置控制"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"顯示信用卡、票卡和裝置控制"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"不要顯示任何內容"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"私隱"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"螢幕鎖定時顯示付款卡和控制項"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"螢幕鎖定時隱藏付款卡和控制項"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"顯示裝置控制"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"顯示信用卡和票卡"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"按住「開關」按鈕，即可存取已連結裝置的控制項"</string>
@@ -4886,10 +4902,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"停止投放"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"要關閉 VoLTE 嗎？"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"這樣做也會關閉您的 5G 連線。\n進行語音通話時，您將無法使用互聯網，部分應用程式也可能無法運作。"</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"使用 2 張 SIM 卡時，此手機將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"使用 2 張 SIM 卡時，此平板電腦將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"使用 2 張 SIM 卡時，此裝置將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
 </resources>

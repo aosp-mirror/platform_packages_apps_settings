@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"නිර්මාණය කරන්න"</string>
     <string name="allow" msgid="3763244945363657722">"අවසර දෙන්න"</string>
     <string name="deny" msgid="7326117222944479942">"ප්‍රතික්ෂේප කරන්න"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"ක්‍රියාත්මක කරන්න"</string>
     <string name="device_info_default" msgid="1406619232867343310">"නොදනී"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">ඔබට දැන් සංවර්ධකයකු වීමට ඇත්තේ පියවර <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> කි.</item>
@@ -1634,40 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"හොට්ස්පොට් පමණයි"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB පමණයි"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"බ්ලූටූත් පමණයි"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"ඊතර්නෙට් පමණී"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"හොට්ස්පොට්, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"හොට්ස්පොට්, බ්ලූටූත්"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"හොට්ස්පොට්, ඊතර්නෙට්"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, බ්ලූටූත්"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, ඊතර්නෙට්"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"බ්ලූටූත්, ඊතර්නෙට්"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"හොට්ස්පොට්, USB, බ්ලූටූත්"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"හොට්ස්පොට්, USB, ඊතර්නෙට්"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"හොට්ස්පොට්, බ්ලූටූත්, ඊතර්නෙට්"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, බ්ලූටූත්, ඊතර්නෙට්"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"හොට්ස්පොට්, USB, බ්ලූටූත්, ඊතර්නෙට්"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"අන්තර්ජාලය වෙනත් උපාංග සමග බෙදා නොගනී"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"ටෙදරින්"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Wi‑Fi හොට්ස්පොට් භාවිත නොකරන්න"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"USB හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"බ්ලූටූත් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"ඊතර්නෙට් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"USB සහ බ්ලූටූත් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"USB සහ ඊතර්නෙට් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"බ්ලූටූත් සහ ඊතර්නෙට් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"USB, බ්ලූටූත් සහ ඊතර්නෙට් හරහා පමණක් අන්තර්ජාලය බෙදා ගන්න"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB ටෙදරින්"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"USB හරහා දුරකථනයේ අන්තර්ජාල සබැඳුම බෙදා ගන්න"</string>
@@ -3090,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G ඇමතුම"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"හඬ සහ වෙනත් සන්නිවේදන දියුණු කිරීමට LTE සේවය භාවිත කරන්න (නිර්දේශිතයි)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"හඬ සහ වෙනත් සන්නිවේදන දියුණු කිරීමට 4G සේවා භාවිත කරන්න (නිර්දේශිතයි)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"සම්බන්ධතා අනාවරණය"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"ඔබේ වාහකට ඔබේ සම්බන්ධතා සහාය දක්වන්නේ කුමන ඇමතුම් විශේෂාංගවලටදැයි අනාවරණය කර ගැනීමට ඉඩ දෙයි."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"සම්බන්ධතා අනාවරණය සබල කරන්නද?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"කුමන විශේෂාංග සහාය දක්වන්නේදැයි අනාවරණය කිරීම පිණිස ඔබේ සම්බන්ධතාවල සියලු දුරකථන අංක කලින් කලට ඔබේ වාහකය වෙන එවනු ඇත."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"සම්බන්ධතා වාහකය වෙත යවන්න"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"වැඩිදියුණු කළ විශේෂාංග සැපයීමට ඔබගේ සම්බන්ධතාවල දුරකථන අංක යවන්න"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"සම්බන්ධතා <xliff:g id="CARRIER">%1$s</xliff:g> වෙත යවන්නද?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"සම්බන්ධතා ඔබගේ වාහකය වෙත යවන්නද?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"ඔබගේ සම්බන්ධතාවල දුරකථන අංක වරින් වර <xliff:g id="CARRIER">%1$s</xliff:g> වෙත යවනු ඇත.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>මෙම තොරතුරු ඔබගේ සම්බන්ධතාවලට වීඩියෝ ඇමතුම් හෝ සමහර පණිවිඩකරණ විශේෂාංග වැනි විශේෂාංග භාවිත කළ හැකිද යන්න හඳුනා ගනී."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"ඔබගේ සම්බන්ධතාවල දුරකථන අංක වරින් වර ඔබගේ වාහකය වෙත යවනු ඇත.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>මෙම තොරතුරු ඔබගේ සම්බන්ධතාවලට වීඩියෝ ඇමතුම් හෝ සමහර පණිවිඩකරණ විශේෂාංග වැනි විශේෂාංග භාවිත කළ හැකිද යන්න හඳුනා ගනී."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"ප්‍රියකරන ජාල වර්ගය"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (නිර්දෙශිත)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS පණිවිඩ"</string>
@@ -3528,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"සංවාද කොටසට එක් කරන්න"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"සංවාද කළමනාකරණය කරන්න"</string>
     <string name="important_conversations" msgid="1233893707189659401">"ප්‍රමුඛතා සංවාද"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"වෙනත් සංවාද"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"වැදගත් සංවාද බුබුලු නගන්න"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"වැදගත් සංවාද ඇද හෙළන වැස්ම මුදුනේදී පෙන්වයි. ඔබට ඒවා බුබුලු නැගීමට සැකසීමට සහ බාධා නොකරන්න බාධා කිරීමටද හැකිය."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"නිහඬව පෙන්වන්න සහ කුඩා කරන්න"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"නිහඬව පෙන්වන්න"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"ශබ්ද කරන්න"</string>
@@ -3551,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"ඔබට ශබ්දය හෝ කම්පනය නොමැතිව අවධානය යොමු කිරීමට උදවු කරයි"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ශබ්දය හෝ කම්පනය සමඟ ඔබේ අවධානය ලබා ගනී"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"උපාංගය අඟුලු අරිනු ලැබූ විට, තිරයේ මුදුනින් දැනුම්දීම් බැනරයක් ලෙස පෙන්වන්න"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"සියලු <xliff:g id="APP_NAME">%1$s</xliff:g> දැනුම්දීම්"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"අනුවර්තී දැනුම්දීම්"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
@@ -4870,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"කාඩ්පත් &amp; ප්‍රවේශපත් පෙන්වන්න"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"උපාංග පාලන පෙන්වන්න"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"කාඩ්පත්, ප්‍රවේශපත් සහ උපාංග පාලන පෙන්වන්න"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"කිසිදු අන්තර්ගතයක් නොපෙන්වන්න"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"රහස්‍යතාව"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"අගුලු දැමූ විට කාඩ්පත් සහ පාලන පෙන්වන්න"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"අගුලු දැමූ විට කාඩ්පත් සහ පාලන සඟවන්න"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"උපාංග පාලන පෙන්වන්න"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"කාඩ්පත් සහ පාස්පත් පෙන්වන්න"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"සම්බන්ධිත උපාංග සඳහා පාලන වෙත ප්‍රවේශ වීමට, බල බොත්තම අල්ලාගෙන සිටින්න"</string>
@@ -4885,10 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"විකාශය නවතන්න"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"VoLTE ක්‍රියා විරහිත කරන්නද?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"මෙය ඔබේ 5G සම්බන්ධතාව ද ක්‍රියාවිරහිත කරයි.\nහඬ ඇමතුමක් අතරතුර, ඔබට අන්තර්ජාලය භාවිත කිරීමට නොහැකි අතර සමහර යෙදුම් ක්‍රියා නොකළ හැකිය."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"2 SIMs භාවිත කරන විට, මෙම දුරකථනය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIMs භාවිත කරන විට, මෙම ටැබ්ලට් පරිගණකය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIMs භාවිත කරන විට, මෙම උපාංගය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
 </resources>

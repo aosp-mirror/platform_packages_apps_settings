@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"إنشاء"</string>
     <string name="allow" msgid="3763244945363657722">"سماح"</string>
     <string name="deny" msgid="7326117222944479942">"رفض"</string>
+    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
+    <skip />
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
@@ -842,7 +844,7 @@
     <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"‏تمكين ART من التحقُّق من رمز البايت للتطبيقات القابلة للتصحيح"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"إظهار معدّل إعادة التحميل"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"إظهار معدّل إعادة التحميل الحالي للشاشة"</string>
-    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
+    <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"‏الاتصالات القريبة المدى (NFC)"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"‏السماح بتبادل البيانات عند لمس الجهاز اللوحي لجهاز من خلال تقنية \"الاتصال قصير المدى\" (NFC)"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"‏السماح بتبادل البيانات عند لمس الهاتف لجهاز من خلال تقنية \"الاتصالات القريبة المدى\" (NFC)"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"‏تفعيل NFC"</string>
@@ -1718,40 +1720,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"نقطة الاتصال فقط"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"‏USB فقط"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"البلوتوث فقط"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"إيثرنت فقط"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"‏نقطة الاتصال، USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"نقطة الاتصال، البلوتوث"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"نقطة اتصال، إيثرنت"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"‏USB، البلوتوث"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"‏USB، إيثرنت"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"بلوتوث، إيثرنت"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"‏نقطة الاتصال، USB، البلوتوث"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"‏نقطة اتصال، USB، إيثرنت"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"نقطة اتصال، بلوتوث، إيثرنت"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"‏USB، بلوتوث، إيثرنت"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"‏نقطة اتصال، USB، بلوتوث، إيثرنت"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"عدم مشاركة الإنترنت مع الأجهزة الأخرى"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"التوصيل"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏عدم استخدام نقطة اتصال Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏مشاركة اتصال الإنترنت من خلال USB فقط"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"مشاركة اتصال الإنترنت من خلال البلوتوث فقط"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"مشاركة الإنترنت من خلال إيثرنت فقط"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"‏مشاركة اتصال الإنترنت من خلال USB والبلوتوث فقط"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"‏مشاركة اتصال الإنترنت من خلال USB وإيثرنت فقط"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"مشاركة اتصال الإنترنت من خلال البلوتوث وإيثرنت"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏مشاركة اتصال الإنترنت من خلال USB والبلوتوث وإيثرنت"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏التوصيل عبر USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏مشاركة اتصال الإنترنت على الهاتف عبر USB"</string>
@@ -3258,10 +3248,18 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏الاتصال في وضع 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏استخدام خدمات LTE لتحسين الصوت والاتصالات الأخرى (مستحسن)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏استخدام خدمات 4G لتحسين الصوت والاتصالات الأخرى (مُستحسَن)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"التعرّف على جهة الاتصال التي تدعم الميزات"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"يسمح هذا الإعداد لمشغّل شبكة الجوّال بالتعرّف على ميزات الاتصال التي تدعمها جهات الاتصال."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"هل تريد تفعيل التعرّف على جهة الاتصال؟"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"سيتم دوريًا إرسال كل أرقام الهواتف المُدرَجة في جهات الاتصال إلى مشغّل شبكة الجوّال للتعرّف التلقائي على ميزات الاتصال المتوافقة."</string>
+    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
+    <skip />
     <string name="preferred_network_type_title" msgid="812509938714590857">"نوع الشبكة المفضّل"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"‏LTE (مستحسن)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"رسائل الوسائط المتعددة"</string>
@@ -3712,9 +3710,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"إضافة إلى قسم المحادثات"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"إدارة المحادثات"</string>
     <string name="important_conversations" msgid="1233893707189659401">"المحادثات ذات الأولوية"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"المحادثات الأخرى"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"إظهار فقاعات المحادثات للمحادثات المهمة"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"تظهر المحادثات المهمة في أعلى مركز الإشعارات المنسدل. يمكنك أيضًا ضبطها لتظهر كفقاعات محادثات وتقاطِع ميزة \"عدم الإزعاج\"."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"إظهار بدون إزعاج مع التصغير"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"عرض بدون تنبيه صوتي"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"إصدار تنبيه صوتي"</string>
@@ -3735,7 +3746,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"يساعدك هذا الإشعار على التركيز بدون صوت أو اهتزاز."</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"يلفت هذا الإشعار انتباهك باستخدام الصوت والاهتزاز."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صور بانر أعلى الشاشة."</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"الإشعارات التكيّفية"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="zero"><xliff:g id="NUMBER_1">%d</xliff:g> إشعار تقريبًا في اليوم</item>
@@ -5226,10 +5238,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"عرض البطاقات والتذاكر"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"إظهار أدوات التحكم بالجهاز"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"إظهار البطاقات والتذاكر وأدوات التحكم بالجهاز"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"عدم عرض أي محتوى"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"الخصوصية"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"إظهار البطاقات وعناصر التحكّم في حال قفل الجهاز"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"إخفاء البطاقات وعناصر التحكّم في حال قفل الجهاز"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"إظهار أدوات التحكم بالجهاز"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"عرض البطاقات والتذاكر"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"للوصول إلى عناصر التحكّم في الأجهزة المرتبطة، اضغط مع الاستمرار على زر التشغيل."</string>
@@ -5241,10 +5260,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"إيقاف الإرسال"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏هل تريد إيقاف VoLTE؟"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏سيؤدي هذا أيضًا إلى إيقاف اتصال الجيل الخامس (5G).\nلا يمكنك استخدام الإنترنت أثناء إجراء مكالمة صوتية، وقد لا تعمل بعض التطبيقات أيضًا."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الهاتف على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الجهاز اللوحي على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"‏عندما تستخدم شريحتَي SIM، سيقتصر عمل هذا الجهاز على الجيل الرابع. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
 </resources>

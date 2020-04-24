@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Vytvořit"</string>
     <string name="allow" msgid="3763244945363657722">"Povolit"</string>
     <string name="deny" msgid="7326117222944479942">"Odmítnout"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Zapnout"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Neznámé"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="few">Ještě <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroky a bude z vás vývojář.</item>
@@ -1232,7 +1233,7 @@
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Zabrání ve vypnutí obrazovky, když se na ni budete dívat"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Vnímavá obrazovka pomocí přední kamery sleduje, zda se někdo dívá na obrazovku. Data se zpracovávají v zařízení a snímky nejsou odesílány do Googlu."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Zapnutí vnímavé obrazovky"</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Ponechat obrazovku zapnutou, když se na ni díváte"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Nechat obrazovku zapnutou, když na ní koukáte"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Noční režim"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Noční režim obrazovku zbarví do oranžova. Čtení a sledování obrazovky při tlumeném osvětlení tak bude snazší a bude se vám lépe usínat."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Plán"</string>
@@ -3162,10 +3163,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Volání přes síť 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Používat ke zlepšení hlasové a další komunikace služby LTE (doporučeno)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Používat ke zlepšení hlasové a další komunikace služby 4G (doporučeno)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Zjišťování kontaktů"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Povoluje operátorovi zjistit, které funkce volání vaše kontakty podporují."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Povolit zjišťování kontaktů?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Všechna telefonní čísla ve vašich kontaktech budou pravidelně odesílána operátorovi, aby mohl zjistit, které funkce volání jsou podporovány."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Odesílat kontakty operátorovi"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Odesílejte telefonní čísla kontaktů a získejte rozšířené funkce"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Odesílat kontakty operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Odesílat kontakty operátorovi?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Telefonní čísla vašich kontaktů budou pravidelně odesílána operátorovi <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Na základě těchto údajů se určí, zda vaše kontakty mohou používat určité funkce, např. videohovory nebo některé funkce zpráv."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Telefonní čísla vašich kontaktů budou pravidelně odesílána vašemu operátorovi.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Na základě těchto údajů se určí, zda vaše kontakty mohou používat určité funkce, např. videohovory nebo některé funkce zpráv."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Preferovaný typ sítě"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (doporučeno)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Zprávy MMS"</string>
@@ -3608,9 +3615,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Přidat do sekce konverzace"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Správa konverzací"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioritní konverzace"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Jiné konverzace"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Důležité konverzace v bublinách"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Důležité konverzace se zobrazují v horní části vysouvacího panelu. Můžete také nastavit, aby se zobrazovaly v bublinách a v režimu Nerušit."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Zobrazit tiše a minimalizovat"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Zobrazovat tiše"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Vydat zvukový signál"</string>
@@ -3631,7 +3651,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Pomáhá vám soustředit se vypnutím zvuku a vibrací"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Upozorňuje vás pomocí zvuku a vibrací"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Když je zařízení odemčené, zobrazovat oznámení jako banner v horní části obrazovky"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Všechna oznámení aplikace <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptivní oznámení"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> oznámení za den</item>
@@ -3817,7 +3838,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Volání"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hovory"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Hovory, které mohou vyrušovat"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Chcete-li zajistit, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pokud chcete, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí hovory. Nastavení můžete upravit, aby se s vámi mohli spojit kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakty označené hvězdičkou"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3830,7 +3851,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"zprávy"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Zprávy"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Zprávy, které mohou vyrušovat"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Chcete-li zajistit, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Pokud chcete, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí zprávy. Nastavení můžete upravit, aby se vám dovolali kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Budete přijímat všechny <xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> kontaktů"</string>
@@ -3874,7 +3895,7 @@
       <item quantity="one">Vyrušovat může aplikace <xliff:g id="APP_NAME_0">%s</xliff:g></item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"ještě <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Výjimky aplikací"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Výjimky v rámci aplikací"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Všechna oznámení"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Některá oznámení"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Oznámení, která mohou vyrušovat"</string>
@@ -3888,7 +3909,7 @@
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Nic nemůže vyrušovat"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"ještě <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Nikdo nemůže vyrušovat"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Někteří lidé mohou vyrušovat"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Vyrušovat mohou někteří lidé"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Všichni lidé mohou vyrušovat"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Volající, kteří volají opakovaně"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Povolit opakovaná volání"</string>
@@ -4495,7 +4516,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Dočasně vypnuto spořičem baterie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Na tmavý motiv se přepnou i podporované aplikace"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Rozumím"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Vyzkoušejte tmavý motiv"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Vyzkoušet tmavý motiv"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomáhá prodloužit výdrž baterie"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Dlaždice rychlého nastavení pro vývojáře"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Vypnout časový limit autorizací adb"</string>
@@ -4954,7 +4975,7 @@
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Ochrana soukromí"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Oprávnění, aktivita na účtu, osobní údaje"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Odstranit"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Zachovat"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Ponechat"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Odstranit tento návrh?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Návrh byl odebrán"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Zpět"</string>
@@ -5036,10 +5057,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Zobrazit platební a ostatní karty"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Zobrazit ovládání zařízení"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Zobrazit karty, lístky a ovládání zařízení"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Nezobrazovat žádný obsah"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Ochrana soukromí"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Při uzamčení zobrazit karty a ovládací prvky"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Při uzamčení skrýt karty a ovládací prvky"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Zobrazit ovládání zařízení"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Zobrazit karty a lístky"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Ovládací prvky připojených zařízení zobrazíte podržením vypínače"</string>

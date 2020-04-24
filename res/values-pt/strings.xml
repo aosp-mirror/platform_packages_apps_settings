@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Criar"</string>
     <string name="allow" msgid="3763244945363657722">"Permitir"</string>
     <string name="deny" msgid="7326117222944479942">"Recusar"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Ativar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Desconhecido"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Faltam <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> etapas para você se tornar um desenvolvedor.</item>
@@ -2428,7 +2429,7 @@
       <item quantity="other">Não é possível executar estes apps em segundo plano</item>
     </plurals>
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="7897944678619251740">
-      <item quantity="one">Restringir %1$d app?</item>
+      <item quantity="one">Restringir app?</item>
       <item quantity="other">Restringir %1$d apps?</item>
     </plurals>
     <string name="battery_tip_restrict_app_dialog_message" msgid="137856003724730751">"Para economizar bateria, não permita que <xliff:g id="APP">%1$s</xliff:g> use a bateria em segundo plano. Esse app pode não funcionar corretamente e é possível que haja atraso nas notificações."</string>
@@ -3078,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamada 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usar serviços de LTE para melhorar a comunicação por voz e de outros tipos (recomendado)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usar os serviços 4G para melhorar comunicações por voz e de outros tipos (recomendado)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Descoberta de contatos"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Permite que sua operadora descubra quais recursos de chamada são compatíveis com seus contatos."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Ativar descoberta de contatos?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Todos os números de telefone dos seus contatos serão enviados periodicamente à operadora para descobrir quais recursos de chamada estão disponíveis."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contatos para a operadora"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Enviar os números de telefone dos contatos para fornecer recursos avançados"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Enviar contatos para a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Enviar contatos para a operadora?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Os números de telefone dos seus contatos serão enviados periodicamente para a <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Essa informação identifica se os contatos podem usar recursos específicos, como videochamadas ou alguns recursos de mensagem."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Os números de telefone dos seus contatos serão enviados periodicamente para a operadora.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Essa informação identifica se os contatos podem usar recursos específicos, como videochamadas ou alguns recursos de mensagem."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipo de rede preferencial"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recomendado)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mensagens MMS"</string>
@@ -3516,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adicionar à seção de conversas"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gerenciar conversas"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritárias"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Mostrar conversas importantes em balões"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Conversas importantes são mostradas na parte superior da aba suspensa. Você também pode configurá-las para que sejam mostradas em balões e interrompam o modo \"Não perturbe\"."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostrar de forma silenciosa e minimizada"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostrar de forma silenciosa"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Emitir som"</string>
@@ -3539,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ajuda você a manter o foco sem som ou vibração"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama sua atenção com som ou vibração"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo estiver desbloqueado, mostrar notificações em um banner no topo da tela"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Todas as notificações do app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificações adaptáveis"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">Cerca de <xliff:g id="NUMBER_1">%d</xliff:g> notificação por dia</item>
@@ -4858,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Mostrar cartões e passes"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Mostrar controles do dispositivo"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Mostrar cartões, passes e controles do dispositivo"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Não mostrar conteúdo"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privacidade"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar cartões e controles quando estiver bloqueado"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar cartões e controles quando estiver bloqueado"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles do dispositivo"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar cartões e passes"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acessar os controles de dispositivos conectados, mantenha o botão liga/desliga pressionado"</string>

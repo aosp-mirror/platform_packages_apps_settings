@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"তৈরি করুন"</string>
     <string name="allow" msgid="3763244945363657722">"অনুমতি দিন"</string>
     <string name="deny" msgid="7326117222944479942">"অস্বীকার করুন"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"চালু করুন"</string>
     <string name="device_info_default" msgid="1406619232867343310">"অজানা"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">একজন ডেভেলপার হওয়া থেকে আপনি এখন <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> পদক্ষেপ দূরে রয়েছেন৷</item>
@@ -3090,10 +3091,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G কলিং"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"ভয়েস ও অন্যান্য কমিউনিকেশনের উন্নতি করতে LTE পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"ভয়েস ও অন্যান্য কমিউনিকেশনের উন্নতি করতে 4G পরিষেবা ব্যবহার করুন (সাজেস্ট করা হয়েছে)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"পরিচিতি খোঁজা"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"এটি পরিষেবা প্রদানকারীকে আপনার পরিচিতিদের নম্বরে কী কী কলিং ফিচার আছে তা জানার অনুমতি দেয়।"</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"\"পরিচিতি খোঁজা\" চালু করতে চাইছেন?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"কী কী কলিং ফিচার কাজ করে তা জানতে, আপনার পরিচিতিতে সেভ করা সব ফোন নম্বর সময়ান্তরে পরিষেবা প্রদানকারীকে পাঠানো হবে।"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"পরিষেবা প্রদানকারীকে পরিচিতি পাঠান"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"উন্নত ফিচার প্রদান করতে আপনার পরিচিতির ফোন নম্বর পাঠান"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"<xliff:g id="CARRIER">%1$s</xliff:g>-কে পরিচিতি পাঠাবেন?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"আপনার পরিষেবা প্রদানকারীকে পরিচিতি পাঠাবেন?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"আপনার পরিচিতির ফোন নম্বর আপনার <xliff:g id="CARRIER">%1$s</xliff:g>-কে পর্যায়ক্রমে পাঠানো হবে।<xliff:g id="EMPTY_LINE">
+
+</xliff:g>আপনার পরিচিতিগুলি কিছু নির্দিষ্ট ফিচার যেমন ভিডিও কল বা কিছু মেসেজিং ফিচার ব্যবহার করতে পারে কিনা তা এই তথ্য শনাক্ত করে।"</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"আপনার পরিচিতির ফোন নম্বর আপনার পরিষেবা প্রদানকারীকে পর্যায়ক্রমে পাঠানো হবে।<xliff:g id="EMPTY_LINE">
+
+</xliff:g>আপনার পরিচিতিগুলি কিছু নির্দিষ্ট ফিচার যেমন ভিডিও কল বা কিছু মেসেজিং ফিচার ব্যবহার করতে পারে কিনা তা এই তথ্য শনাক্ত করে।"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"পছন্দের নেটওয়ার্ক"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (প্রস্তাবিত)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"এমএমএস মেসেজ"</string>
@@ -3531,9 +3538,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"কথোপকথন বিভাগে যোগ করুন"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"কথোপকথন ম্যানেজ করুন"</string>
     <string name="important_conversations" msgid="1233893707189659401">"গুরুত্বপূর্ণ কথোপকথন"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"অন্যান্য কথোপকথন"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"গুরুত্বপূর্ণ কথোপকথন বাবলে সেট করুন"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"পুল-ডাউন শেডের উপরে গুরুত্বপূর্ণ কথোপকথন দেখায়। আপনি এগুলি বাবলে সেট করতে পারেন এবং \'বিরক্ত করবে না\' মোড থামাতে পারেন।"</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"নিঃশব্দে দেখুন এবং ছোট করুন"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"নিঃশব্দে দেখান"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"শব্দ করে"</string>
@@ -3554,7 +3574,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"সাউন্ড বা ভাইব্রেশন ছাড়া ফোকাস করতে সাহায্য করে"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"সাউন্ড বা ভাইব্রেশনের সাহায্যে দৃষ্টি আকর্ষণ করে"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"কোনও ডিভাইস আনলক করা হলে বিজ্ঞপ্তি, স্ক্রিনের উপরে একটি ব্যানার হিসেবে দেখানো হয়"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"সমস্ত <xliff:g id="APP_NAME">%1$s</xliff:g> সংক্রান্ত বিজ্ঞপ্তি"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
@@ -4873,10 +4894,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"কার্ড এবং পাস দেখান"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"ডিভাইস কন্ট্রোল দেখায়"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"কার্ড, পাস ও ডিভাইস কন্ট্রোলগুলি দেখায়"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"কোনও কন্টেন্ট দেখাবেন না"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"গোপনীয়তা"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ডিভাইস লক থাকা অবস্থায় কার্ড ও কন্ট্রোলগুলি দেখান"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ডিভাইস লক থাকা অবস্থায় কার্ড ও কন্ট্রোলগুলি লুকান"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"ডিভাইস কন্ট্রোল দেখায়"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"কার্ড এবং পাস দেখুন"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"কানেক্ট করা ডিভাইসে কন্ট্রোল অ্যাক্সেস করতে, পাওয়ার বোতাম প্রেস করে ধরে রাখুন"</string>

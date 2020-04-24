@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Направи"</string>
     <string name="allow" msgid="3763244945363657722">"Дозволи"</string>
     <string name="deny" msgid="7326117222944479942">"Одбиј"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Укључи"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Непознато"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Треба да обавите још <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> корак да бисте постали програмер.</item>
@@ -1655,40 +1656,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Само хотспот"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Само USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Само Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Само етернет"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Хотспот, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Хотспот, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Хотспот, етернет"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, етернет"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, етернет"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Хотспот, USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Хотспот, USB, етернет"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Хотспот, Bluetooth, етернет"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, етернет"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Хотспот, USB, Bluetooth, етернет"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Интернет се не дели са другим уређајима"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Привезивање"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Немој да користиш Wi‑Fi хотспот"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Дели интернет само преко USB-а"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Дели интернет само преко Bluetooth-а"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Дели интернет само преко етернета"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Дели интернет само преко USB-а и Bluetooth-а"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Дели интернет само преко USB-а и етернета"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Дели интернет само преко Bluetooth-а и етернета"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Дели интернет само преко USB-а, Bluetooth-а и етернета"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB повезивање"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Дељење интернет везе телефона преко USB-а"</string>
@@ -3132,10 +3121,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G позивање"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Коришћење LTE услуга за побољшање гласовних и других комуникација (препоручено)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Користи 4G услуге за побољшање гласовне и друге комуникације (препоручено)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Откривање контаката"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Омогућава мобилном оператеру да открије које функције позивања подржавају ваши контакти."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Желите ли да омогућите откривање контаката?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Сви бројеви телефона у контактима се периодично шаљу мобилном оператеру ради откривања функција позива које су подржане."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Шаљи контакте мобилном оператеру"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Шаље бројеве телефона контаката ради пружања побољшаних функција"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Желите да шаљете контакте мобилном оператеру <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Желите да шаљете контакте мобилном оператеру?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Бројеви телефона контаката се повремено шаљу мобилном оператеру <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Помоћу тих података се одређује да ли контакти могу да користе одређене функције, попут видео позива или неких функција размене порука."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Бројеви телефона контаката се повремено шаљу мобилном оператеру.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Помоћу тих података се одређује да ли контакти могу да користе одређене функције, попут видео позива или неких функција размене порука."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Жељени тип мреже"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (препоручено)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS поруке"</string>
@@ -3398,10 +3393,10 @@
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Када је екран искључен"</string>
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"Искључи звук и вибрацију"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"Не укључуј екран"</string>
-    <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Не користи треперење лампице"</string>
+    <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"Не трепери лампицом"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"Не приказуј искачућа обавештења на екрану"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Сакриј иконе статусне траке у врху"</string>
-    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Сакриј тачке за обав. на иконама апл."</string>
+    <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Сакриј тачке за обавештења на иконама апликација"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Не буди због обавештења"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Сакриј са клизног панела"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Никад"</string>
@@ -3455,7 +3450,7 @@
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Обавештења"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Трајање"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Поруке, догађаји и подсетници"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Када је укључен режим Не узнемиравај, звукови обавештења за поруке, подсетнике и догађаје ће бити искључени, осим за ставке које сте дозволили изнад. Можете да прилагодите подешавања да бисте дозволили пријатељима, члановима породице или другим контактима да вас контактирају."</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Када је укључен режим Не узнемиравај, звукови обавештења за поруке, подсетнике и догађаје ће бити искључени, осим за ставке које сте дозволили изнад. Можете да прилагодите подешавања и дозволите пријатељима, члановима породице или другим контактима да допру до вас."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Готово"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Подешавања"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Без звучног сигнала или визуелног обавештења"</string>
@@ -3574,9 +3569,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Додајте у одељак конверзација"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Управљајте конверзацијама"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Приоритетне конверзације"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Остале конверзације"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Означи важне конверзације облачићима"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Важне конверзације се приказују у врху клизног панела. Можете и да их подесите тако да имају облачиће и да прекидају режим Не узнемиравај."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Приказуј без звучног сигнала и умањи"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Приказује се без звучног сигнала"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Емитује се звучни сигнал"</string>
@@ -3597,7 +3605,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Помаже вам да се концентришете без звука или вибрације"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Привлачи вам пажњу помоћу звука или вибрације"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Када је уређај откључан, приказује обавештења као банер у врху екрана"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Сва обавештења апликације <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Прилагодљива обавештења"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> обавештење дневно</item>
@@ -3776,7 +3785,7 @@
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"позиви"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Позиви који могу да прекидају"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Да бисте били сигурни да ће се дозвољени позиви чути, проверите да ли је уређај подешен да звони"</string>
-    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Долазни позиви су блокирани за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Можете да прилагодите подешавања да бисте дозволили пријатељима, члановима породице или другим контактима да вас контактирају."</string>
+    <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Долазни позиви су блокирани за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Можете да прилагодите подешавања и дозволите пријатељима, члановима породице или другим контактима да допру до вас."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Контакти са звездицом"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
       <item quantity="one">Још <xliff:g id="NUM_PEOPLE">%d</xliff:g> особа</item>
@@ -3788,13 +3797,13 @@
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Поруке"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Поруке које могу да прекидају"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Да бисте били сигурни да ће се дозвољене поруке чути, проверите да ли је уређај подешен да звони"</string>
-    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Долазне поруке су блокиране за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Можете да прилагодите подешавања да бисте дозволили пријатељима, члановима породице или другим контактима да вас контактирају."</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Сви из категорије <xliff:g id="SENDER_CATEGORY">%s</xliff:g> могу да вам се обрате"</string>
+    <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Долазне поруке су блокиране за „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Можете да прилагодите подешавања и дозволите пријатељима, члановима породице или другим контактима да допру до вас."</string>
+    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Свe (из категорије <xliff:g id="SENDER_CATEGORY">%s</xliff:g>) стиже до вас"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"Контаката: <xliff:g id="NUM_CONTACTS">%d</xliff:g>"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Сви"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакти"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Контакти са звездицом"</string>
-    <string name="zen_mode_from_none" msgid="8456745188276131873">"Ни од кога"</string>
+    <string name="zen_mode_from_none" msgid="8456745188276131873">"Нико"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Од контаката са звездицом и поновних позивалаца"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Од контаката и поновних позивалаца"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Само од поновних позивалаца"</string>
@@ -3823,7 +3832,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Додајте апликације"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Сва обавештења"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Нека обавештења"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Изабрани људи и даље могу да вам се обрате чак и ако не омогућите апликацијама да вас прекидају"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Изабрани људи и даље допиру до вас чак и ако не омогућите апликацијама да вас прекидају"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> могу да прекину</item>
       <item quantity="few"><xliff:g id="APP_NAMES">%s</xliff:g> могу да прекину</item>
@@ -4946,7 +4955,7 @@
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Обрађивач извештаја о грешци"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Одређује која апликација управља пречицом за извештај о грешци на уређају."</string>
-    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Лични"</string>
+    <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Лично"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Пословни"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Подразумевана системска"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Овај избор више није важећи. Пробајте поново."</string>
@@ -4959,10 +4968,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Приказуј карте и картице"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Приказуј контроле уређаја"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Приказуј карте, картице и контроле уређаја"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Не приказуј никакав садржај"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Приватност"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Приказуј картице и контроле када је уређај закључан"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Сакриј картице и контроле када је уређај закључан"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Приказуј контроле уређаја"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Прикажи кредитне и друге картице"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Да бисте приступили контролама за повезане уређаје, задржите дугме за укључивање"</string>
@@ -4974,10 +4990,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Заустави пребацивање"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Желите ли да искључите VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Тиме ћете искључити и 5G везу.\nТоком гласовног позива не можете да користите интернет и неке апликације можда неће радити."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Овај телефон је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Овај таблет је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Овај уређај је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
 </resources>
