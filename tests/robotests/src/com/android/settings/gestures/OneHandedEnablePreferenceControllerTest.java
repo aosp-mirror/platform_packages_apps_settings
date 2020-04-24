@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
@@ -59,5 +60,21 @@ public class OneHandedEnablePreferenceControllerTest {
     public void getAvailabilityStatus_byDefault_shouldAvailable() {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getSummary_enabledOneHanded_shouldDisplayOnSummary() {
+        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, true);
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.switch_on_text));
+    }
+
+    @Test
+    public void getSummary_disabledOneHanded_shouldDisplayOffSummary() {
+        OneHandedSettingsUtils.setSettingsOneHandedModeEnabled(mContext, false);
+
+        assertThat(mController.getSummary())
+                .isEqualTo(mContext.getText(R.string.switch_off_text));
     }
 }
