@@ -114,25 +114,30 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
      */
     public void init(int subscriptionId) {
         mSubId = subscriptionId;
+        mDataUsageController = null;
+    }
 
-        mDefaultTemplate = DataUsageUtils.getDefaultTemplate(mContext, mSubId);
+    private void updateConfiguration(Context context,
+            int subscriptionId, SubscriptionInfo subInfo) {
         final NetworkPolicyManager policyManager =
-                mContext.getSystemService(NetworkPolicyManager.class);
+                context.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mHasMobileData = DataUsageUtils.hasMobileData(mContext);
+        mHasMobileData = DataUsageUtils.hasMobileData(context);
 
-        mDataUsageController = new DataUsageController(mContext);
-        mDataUsageController.setSubscriptionId(mSubId);
+        mDataUsageController = new DataUsageController(context);
+        mDataUsageController.setSubscriptionId(subscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
-        final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
         if (subInfo != null) {
             mDataUsageTemplate = R.string.cell_data_template;
-        } else if (DataUsageUtils.hasWifiRadio(mContext)) {
+            mDefaultTemplate = DataUsageUtils.getMobileTemplate(context, subscriptionId);
+        } else if (DataUsageUtils.hasWifiRadio(context)) {
             mDataUsageTemplate = R.string.wifi_data_template;
+            mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
         } else {
             mDataUsageTemplate = R.string.ethernet_data_template;
+            mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
         }
     }
 
@@ -198,8 +203,8 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         DataUsageSummaryPreference summaryPreference = (DataUsageSummaryPreference) preference;
 
         final SubscriptionInfo subInfo = getSubscriptionInfo(mSubId);
-        if (subInfo == null) {
-            mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
+        if (mDataUsageController == null) {
+            updateConfiguration(mContext, mSubId, subInfo);
         }
 
         final DataUsageController.DataUsageInfo info =
