@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"ایجاد"</string>
     <string name="allow" msgid="3763244945363657722">"مجاز است"</string>
     <string name="deny" msgid="7326117222944479942">"اجازه ندارد"</string>
+    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
+    <skip />
     <string name="device_info_default" msgid="1406619232867343310">"ناشناس"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">اکنون <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> قدم با برنامه‌نویس شدن فاصله دارید.</item>
@@ -1192,7 +1194,7 @@
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"باعث می‌شود تازمانی‌که فردی به صفحه‌نمایش نگاه می‌کند، صفحه خاموش نشود"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"‏«توجه به صفحه» با استفاده از دوربین جلو متوجه می‌شود که آیا فردی درحال تماشای صفحه‌نمایش است یا نه. این ویژگی در دستگاه کار می‌کند و تصاویر هرگز ذخیره نمی‌شوند و به Google فرستاده نمی‌شود."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"روشن کردن توجه به صفحه"</string>
-    <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"تا زمانی‌که به صفحه‌نمایش نگاه می‌کنید، صفحه خاموش نشود"</string>
+    <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"وقتی به صفحه‌نمایش نگاه می‌کنید صفحه خاموش نشود"</string>
     <string name="night_display_title" msgid="8532432776487216581">"نور شب"</string>
     <string name="night_display_text" msgid="4789324042428095383">"«نور شب» ته‌رنگ کهربایی به صفحه‌نمایش شما می‌بخشد. این کار باعث می‌شود نگاه کردن به صفحه در نور کم آسان‌تر شود و ممکن است کمک کند آسان‌تر به خواب بروید."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"زمان‌بندی"</string>
@@ -1634,16 +1636,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"فقط نقطه اتصال"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"‏فقط USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"فقط بلوتوث"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"فقط اترنت"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"‏نقطه اتصال، USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"نقطه اتصال، بلوتوث"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"نقطه اتصال، اترنت"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"‏USB، بلوتوث"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"‏USB، اترنت"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"بلوتوث، اترنت"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"‏نقطه اتصال، USB، بلوتوث"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"‏نقطه اتصال، USB، اترنت"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"نقطه اتصال، بلوتوث، اترنت"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"‏USB، بلوتوث، اترنت"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"‏نقطه اتصال، USB، بلوتوث، اترنت"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"اینترنت با دستگاه‌های دیگر هم‌رسانی نمی‌شود"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"اشتراک‌گذاری اینترنت"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"‏استفاده نکردن از نقطه اتصال Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"‏اینترنت را فقط ازطریق USB هم‌رسانی کنید"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"اینترنت را فقط ازطریق بلوتوث هم‌رسانی کنید"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"اینترنت فقط ازطریق اترنت هم‌رسانی می‌شود"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"‏اینترنت را فقط ازطریق USB و بلوتوث هم‌رسانی کنید"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"‏اینترنت فقط ازطریق USB و اترنت هم‌رسانی می‌شود"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"اینترنت فقط ازطریق بلوتوث و اترنت هم‌رسانی می‌شود"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"‏اینترنت فقط ازطریق USB، بلوتوث، و اترنت هم‌رسانی می‌شود"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"‏اشتراک‌گذاری اینترنت با USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"‏هم‌رسانی اتصال اینترنت تلفن ازطریق USB"</string>
@@ -3066,10 +3080,18 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏تماس 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏استفاده از سرویس‌های LTE جهت بهبود ارتباطات صوتی و سایر ارتباطات (توصیه می‌شود)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏استفاده از سرویس‌های 4G برای بهبود صدا و سایر ارتباطات (توصیه می‌شود)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"کاوش مخاطب"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"به شرکت مخابراتی‌تان اجازه می‌دهد کاوش کند مخاطبینتان از کدام ویژگی‌های تماس پشتیبانی می‌کنند."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"«کاوش مخاطب» فعال شود؟"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"همه شماره تلفن‌های موجود در مخاطبین به‌صورت دوره‌ای به شرکت مخابراتی ارسال می‌شوند تا بررسی شود از کدام ویژگی‌های تماس پشتیبانی می‌شود."</string>
+    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
+    <skip />
     <string name="preferred_network_type_title" msgid="812509938714590857">"نوع شبکه ترجیحی"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"‏LTE (توصیه می‌شود)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"فراپیام"</string>
@@ -3154,6 +3176,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"‏بلوتوث، NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"بلوتوث"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏غیرقابل‌دسترسی چون NFC خاموش است"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"برای استفاده، ابتدا یک برنامه پرداخت نصب کنید"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"برنامه‌ها و اعلان‌ها"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"برنامه‌های اخیر، برنامه‌ها پیش‌فرض"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"برنامه‌ها نمی‌توانند در نمایه کاری به اعلان‌ها دسترسی داشته باشند."</string>
@@ -3334,7 +3357,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"نمادهای نوار وضعیت در بالای صفحه پنهان شود"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"نقطه‌های اعلان در نمادهای برنامه پنهان شود"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"با دریافت اعلان بیدار نشود"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"پنهان کردن از کشوی اعلان‌های پایین‌کش"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"پنهان کردن از کشوی اعلان‌های پایین‌پر"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"هرگز"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"وقتی صفحه‌نمایش روشن است"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"وقتی صفحه‌نمایش روشن است"</string>
@@ -3436,7 +3459,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"برخی اعلان‌ها می‌توانند درقالب ابزارک اعلان روی صفحه نشان داده شوند"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"برخی اعلان‌ها و سایر محتواها می‌تواند درقالب ابزارک اعلان روی صفحه نشان داده شود. برای باز کردن ابزارک اعلان، روی آن ضربه بزنید. برای رد کردن، آن را به پایین صفحه بکشید."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ابزارک اعلان"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"پیام‌های جدیدی روی صفحه‌نمایش ظاهر خواهند شد"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"همه تنظیمات حباب‌ها"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"نمایش مکالمه به‌صورت حباب"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"نمایش نماد شناور روی برنامه‌ها"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"مجاز کردن <xliff:g id="APP_NAME">%1$s</xliff:g> برای نمایش برخی اعلان‌ها درقالب ابزارک اعلان"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"ابزارک اعلان برای دستگاه روشن شود؟"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"با روشن کردن ابزارک اعلان برای این برنامه، ویژگی ابزراک اعلان در سطح دستگاه هم روشن می‌شود.\n\nاین کار بر دیگر برنامه‌ها و مکالمه‌هایی که مجازند ابزارک اعلان نمایش دهند تأثیر می‌گذارد."</string>
@@ -3457,11 +3482,11 @@
     <string name="gentle_notifications_also_display" msgid="8617545395880297691">"همچنین نمایش داده شود در"</string>
     <string name="gentle_notifications_display_status" msgid="7410244447768694856">"نوار وضعیت"</string>
     <string name="gentle_notifications_display_lock" msgid="1914245082527924144">"صفحه قفل"</string>
-    <string name="gentle_notifications_education" msgid="5957509621826384362">"اعلان‌های ملایم همیشه بی‌صدا هستند و در کشوی اعلان‌های پایین‌کش نشان داده می‌شوند"</string>
-    <string name="gentle_notifications_display_summary_shade" msgid="7616926954719310445">"فقط در کشوی اعلان‌های پایین‌کش نشان داده می‌شود"</string>
-    <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"در کشوی اعلان‌های پایین‌کش و در صفحه قفل نشان داده می‌شود"</string>
-    <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"در کشوی اعلان‌های پایین‌کش و نوار وضعیت نشان داده می‌شود"</string>
-    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"در کشوی اعلان‌های پایین‌کش، نوار وضعیت و صفحه قفل نشان داده می‌شود"</string>
+    <string name="gentle_notifications_education" msgid="5957509621826384362">"اعلان‌های ملایم همیشه بی‌صدا هستند و در کشوی اعلان‌های پایین‌پر نشان داده می‌شوند"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="7616926954719310445">"فقط در کشوی اعلان‌های پایین‌پر نشان داده می‌شود"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"در کشوی اعلان‌های پایین‌پر و در صفحه قفل نشان داده می‌شود"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"در کشوی اعلان‌های پایین‌پر و نوار وضعیت نشان داده می‌شود"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"در کشوی اعلان‌های پایین‌پر، نوار وضعیت و صفحه قفل نشان داده می‌شود"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"پنهان کردن اعلان‌های ساکت در نوار وضعیت"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"نور چشمک‌زن"</string>
     <string name="lock_screen_notifications_title" msgid="3063951257121435570">"اعلان‌ها در صفحه قفل"</string>
@@ -3501,9 +3526,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"افزودن به بخش مکالمه"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"مدیریت مکالمه‌ها"</string>
     <string name="important_conversations" msgid="1233893707189659401">"مکالمه‌های اولویت‌دار"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"دیگر مکالمه‌ها"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"نمایش مکالمه‌های مهم به‌صورت ابزارک اعلان"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"مکالمه‌های مهم در بالای کشوی پایین‌بر نمایش داده می‌شوند. به‌علاوه می‌توانید تنظیم کنید به‌صورت ابزارک اعلان ظاهر شوند و در حالت «مزاحم نشوید» وقفه ایجاد کنند."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"نمایش در سکوت و اهمیت پایین"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"نمایش به‌صورت بی‌صدا"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"پخش صدا"</string>
@@ -3520,11 +3558,12 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"به برنامه اجازه پخش صدا، لرزش و/یا نمایش اعلان‌های بازشو در صفحه‌نمایش داده شود"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"اولویت"</string>
     <string name="notification_channel_summary_priority" msgid="6688477880223319982">"در بالای بخش مکالمه و به‌صورت ابزارک اعلان نمایش داده می‌شود."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"در اعلان‌های پایین‌کش تیره و کوچک در یک سطر"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"در اعلان‌های پایین‌پر تیره و کوچک در یک سطر"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"به شما کمک می‌کند بدون صدا یا لرزش تمرکز کنید"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"با صدا و لرزش توجه شما را جلب می‌کند"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"وقتی قفل دستگاه باز می‌شود، اعلان‌ها به‌صورت برنمایی در بالای صفحه‌نمایش نشان داده شود"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"همه اعلان‌های <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"اعلان‌های تطبیقی"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> اعلان در روز</item>
@@ -3694,7 +3733,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"تماس‌ها"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"تماس‌ها"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"تماس‌هایی که می‌توانند وقفه ایجاد کنند"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"برای اطمینان از اینکه تماس‌های مجاز صدا دارند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"برای اطمینان از اینکه تماس‌های مجاز صدا داشته باشند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"تماس‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود می‌شود. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دسترسی به خودتان بدهید، می‌توانید تنظیمات را تغییر دهید."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"مخاطبین ستاره‌دار"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3705,9 +3744,9 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"پیام‌ها"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"پیام‌ها"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"پیام‌هایی که می‌توانند وقفه ایجاد کنند"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"برای اطمینان از اینکه پیام‌های مجاز صدا دارند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"برای اطمینان از اینکه پیام‌های مجاز صدا داشته باشند، بررسی کنید دستگاه روی زنگ زدن تنظیم شده باشد"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"پیام‌های ورودی برای «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>» مسدود شده‌اند. برای اینکه به دوستان و خانواده و سایر مخاطبین امکان دهید به شما دسترسی داشته باشند، می‌توانید تنظیمات را تغییر دهید."</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"همه <xliff:g id="SENDER_CATEGORY">%s</xliff:g> می‌توانند با شما ارتباط برقرار کنند"</string>
+    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"همه <xliff:g id="SENDER_CATEGORY">%s</xliff:g> به شما می‌رسد"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> مخاطب"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"همه"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"مخاطبین"</string>
@@ -4358,7 +4397,7 @@
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"برای کمک به خالی کردن فضای ذخیره‌سازی، مدیر ذخیره‌سازی عکس‌ها و ویدیوهای پشتیبان‌گیری‌شده را از دستگاهتان پاک می‌کند."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"پاک کردن عکس‌ها و ویدئوها"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"مدیر فضای ذخیره‌سازی"</string>
-    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"استفاده از مدیر حافظه"</string>
+    <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"استفاده از «مدیر فضای ذخیره‌سازی»"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"خودکار"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"دستی"</string>
     <string name="deletion_helper_preference_title" msgid="6364023246849161274">"هم‌اکنون فضا را خالی کنید"</string>
@@ -4427,7 +4466,7 @@
     <string name="web_action_section_title" msgid="994717569424234098">"برنامه‌های فوری"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"اولویت‌های برنامه‌های فوری"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"برنامه‌های نصب‌شده"</string>
-    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"حافظه شما اکنون توسط مدیر حافظه مدیریت می‌شود"</string>
+    <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"مدیر فضای ذخیره‌سازی اکنون فضای ذخیره‌سازی شما را مدیریت می‌کند"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"حساب‌های <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"پیکربندی"</string>
     <string name="auto_sync_account_title" msgid="1070908045600374254">"همگام‌سازی خودکار داده‌های برنامه"</string>
@@ -4843,10 +4882,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"نمایش کارت‌ها و مجوزها"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"نمایش کنترل‌های دستگاه"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"نمایش کارت‌ها، مجوزها، و کنترل‌های دستگاه"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"محتوایی نمایش داده نشود"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"حریم‌خصوصی"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"درحالت قفل، کارت‌ها و کنترل‌ها نمایش داده شوند"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"درحالت قفل، کارت‌ها و کنترل‌ها پنهان شوند"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"نمایش کنترل‌های دستگاه"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"نمایش کارت‌ها و مجوزها"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"برای دسترسی به کنترل‌های دستگاه‌های متصل، دکمه روشن/خاموش را نگه دارید"</string>
@@ -4858,7 +4904,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"توقف ارسال محتوا"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏VoLTE خاموش شود؟"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏این کار اتصال 5G را هم خاموش می‌کند.\nدرحین تماس صوتی، نمی‌توانید از اینترنت استفاده کنید و ممکن است برخی برنامه‌ها کار نکنند."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این تلفن به 4G محدود می‌شود. بیشتر بدانید"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این رایانه لوحی به 4G محدود می‌شود. بیشتر بدانید"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این دستگاه به 4G محدود می‌شود. بیشتر بدانید"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این تلفن به 4G محدود می‌شود. "<annotation id="url">"بیشتر بدانید"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این رایانه لوحی به 4G محدود می‌شود. "<annotation id="url">"بیشتر بدانید"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این دستگاه به 4G محدود می‌شود. "<annotation id="url">"بیشتر بدانید"</annotation>"."</string>
 </resources>

@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Skep"</string>
     <string name="allow" msgid="3763244945363657722">"Laat toe"</string>
     <string name="deny" msgid="7326117222944479942">"Weier"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Skakel aan"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Onbekend"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Nog net <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> stappe oor voordat jy \'n ontwikkelaar is.</item>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Net warmkol"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Net USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Net Bluetooth"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Net Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Warmkol, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Warmkol, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Warmkol, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Warmkol, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Warmkol, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Warmkol, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Warmkol, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Deel nie tans internet met ander toestelle nie"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Verbinding"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Moenie Wi-Fi-warmkol gebruik nie"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Deel internet net deur USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Deel internet net deur Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Deel internet net deur Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Deel internet net deur USB en Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Deel internet net deur USB en Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Deel internet net deur Bluetooth en Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Deel internet net deur USB, Bluetooth en Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"USB-verbinding"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Deel foon se internetverbinding via USB"</string>
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-Oproepe"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Gebruik LTE-dienste om stem- en ander kommunikasie te verbeter (aanbeveel)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Gebruik 4G-dienste om stem- en ander kommunikasie te verbeter (aanbeveel)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Kontakontdekking"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Laat jou diensverskaffer toe om te ontdek watter oproepkenmerke jou kontakte steun."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Aktiveer kontakontdekking?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Al die foonnommers in jou kontakte sal van tyd tot tyd na jou diensverskaffer gestuur word om uit te vind watter oproepkenmerke hulle steun."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Stuur kontakte na diensverskaffer toe"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Stuur jou kontakte se foonnommers om uitgebreide kenmerke te bied"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Stuur kontakte na <xliff:g id="CARRIER">%1$s</xliff:g> toe?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Stuur kontakte na jou diensverskaffer toe?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Jou kontakte se foonnommers sal van tyd tot tyd na <xliff:g id="CARRIER">%1$s</xliff:g> toe gestuur word.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdie inligting dui aan of jou kontakte sekere kenmerke, soos video-oproepe of sommige boodskapkenmerke, kan gebruik."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Jou kontakte se foonnommers sal van tyd tot tyd na jou diensverskaffer toe gestuur word.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Hierdie inligting dui aan of jou kontakte sekere kenmerke, soos video-oproepe of sommige boodskapkenmerke, kan gebruik."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Voorkeurnetwerktipe"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (aanbeveel)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS-boodskappe"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nie beskikbaar nie want NFC is af"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Installeer eers \'n betalingprogram om dit te gebruik"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Programme en kennisgewings"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Onlangse programme, verstekprogramme"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Kennisgewingtoegang is nie vir programme in die werkprofiel beskikbaar nie."</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Sommige kennisgewings kan as borrels op die skerm verskyn"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Party kennsgewings en ander inhoud kan as borrels op die skerm verskyn. Tik op \'n borrel om dit oop te maak. Sleep dit na onder op die skerm om dit toe te maak."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Borrels"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Nuwe boodskappe sal op skerm verskyn"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Alle borrelinstellings"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Laat hierdie gesprek in \'n borrel verskyn"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Wys swewende ikoon bo-oor programme"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Laat <xliff:g id="APP_NAME">%1$s</xliff:g> toe om sekere kennisgewings as borrels te wys"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Skakel borrels vir toestel aan"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"As jy borrels vir hierdie program aanskakel, skakel jy ook borrels vir jou toestel aan.\n\nDit raak ander programme of gesprekke wat toegelaat word om borrels te maak."</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Voeg by die gesprekafdeling"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Bestuur gesprekke"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prioriteitgesprekke"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Ander gesprekke"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Plaas belangrike gesprekke in borrels"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Belangrike gesprekke word aan die bokant van die kennisgewingskerm gewys. Jy kan ook stel dat dit in borrels verskyn en Moenie Steur Nie onderbreek."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Wys stil en maak klein"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Wys sonder klank"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Maak geluid"</string>
@@ -3524,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Help jou om te fokus sonder klank of vibrasie"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Kry jou aandag met klank of vibrasie"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Wys kennisgewings as \'n banier boaan die skerm wanneer die toestel ontsluit is"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-kennisgewings"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Aanpasbare kennisgewings"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> kennisgewings per dag</item>
@@ -4843,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Wys kaarte en passe"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Wys toestelkontroles"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Wys kaarte, passe en toestelkontroles"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Moenie enige inhoud wys nie"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privaatheid"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Wys kaarte en kontroles indien gesluit"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Versteek kaarte en kontroles indien gesluit"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Wys toestelkontroles"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Wys kaarte en passe"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Hou die aan/af-skakelaar in om toegang te kry tot kontroles vir gekoppelde toestelle"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Hou op uitsaai"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Skakel VoLTE af?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Dit skakel ook jou 5G-verbinding af.\nJy kan nie die iternet tydens stemoproepe gebruik nie en sekere programme kan dalk nie werk nie."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Hierdie foon sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. Kom meer te wete"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Hierdie tablet sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. Kom meer te wete"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Hierdie toestel sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. Kom meer te wete"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Hierdie foon sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. "<annotation id="url">"Kom meer te wete"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Hierdie tablet sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. "<annotation id="url">"Kom meer te wete"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Hierdie toestel sal tot 4G beperk word wanneer dit 2 SIM-kaarte gebruik. "<annotation id="url">"Kom meer te wete"</annotation>"."</string>
 </resources>

@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"ສ້າງ"</string>
     <string name="allow" msgid="3763244945363657722">"ອະນຸຍາດ"</string>
     <string name="deny" msgid="7326117222944479942">"ປະ​ຕິ​ເສດ"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"ເປີດໃຊ້"</string>
     <string name="device_info_default" msgid="1406619232867343310">"ບໍ່ຮູ້ຈັກ"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">ຕອນນີ້ທ່ານຍັງ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ຂັ້ນຕອນເພື່ອຈະເປັນນັກພັດທະນາ.</item>
@@ -1461,7 +1462,7 @@
     <string name="storage_internal_forget_confirm_title" msgid="379238668153099015">"ລືມ <xliff:g id="NAME">^1</xliff:g> ບໍ?"</string>
     <string name="storage_internal_forget_confirm" msgid="5752634604952674123">"ແອັບ, ຮູບຖ່າຍ ແລະຂໍ້ມູນທັງໝົດທີ່ເກັບໄວ້ເທິງ <xliff:g id="NAME">^1</xliff:g> ອຸປະກອນນີ້ຈະເສຍໄປຕະຫຼອດການ."</string>
     <string name="storage_detail_apps" msgid="5055911985540355324">"ແອັບ"</string>
-    <string name="storage_detail_images" msgid="6003883845718804371">"ຮູບພາບ"</string>
+    <string name="storage_detail_images" msgid="6003883845718804371">"ຮູບ"</string>
     <string name="storage_detail_videos" msgid="9079894412680404208">"ວິດີໂອ"</string>
     <string name="storage_detail_audio" msgid="234272983148223114">"ສຽງ"</string>
     <string name="storage_detail_cached" msgid="4066364341463331199">"ຂໍ້ມູນທີ່ເກັບໄວ້"</string>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"ຮັອດສະປອດເທົ່ານັ້ນ"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB ເທົ່ານັ້ນ"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth ເທົ່ານັ້ນ"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Ethernet ເທົ່ານັ້ນ"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"ຮັອດສະປອດ, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"ຮັອດສະປອດ, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"ຮັອດສະປອດ, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"ຮັອດສະປອດ, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"ຮັອດສະປອດ, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"ຮັອດສະປອດ, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"ຮັອດສະປອດ, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"ບໍ່ໄດ້ແບ່ງປັນອິນເຕີເນັດກັບອຸປະກອນອື່ນ"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"ການປ່ອຍສັນຍານ"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"ຢ່າໃຊ້ Wi‑Fi ຮັອດສະປອດ"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ USB ເທົ່ານັ້ນ"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ Bluetooth ເທົ່ານັ້ນ"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ Ethernet ເທົ່ານັ້ນ"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ USB ແລະ Bluetooth ເທົ່ານັ້ນ"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ USB ແລະ Ethernet ເທົ່ານັ້ນ"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ Bluetooth ຫຼື Ethernet ເທົ່ານັ້ນ"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"ແບ່ງປັນອິນເຕີເນັດຜ່ານ USB, Bluetooth ແລະ Ethernet ເທົ່ານັ້ນ"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"ການປ່ອຍສັນຍານດ້ວຍ USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"ແບ່ງປັນອິນເຕີເນັດຂອງໂທລະສັບຜ່ານທາງ USB"</string>
@@ -1837,7 +1850,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"ອຸປະກອນ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານຈະສາມາດຖືກແອັບທີ່ບໍ່ຮູ້ຈັກໂຈມຕີໄດ້ງ່າຍຂຶ້ນ. ໂດຍການຕິດຕັ້ງແອັບຕ່າງໆຈາກແຫລ່ງທີ່ມາເຫຼົ່ານີ້, ແມ່ນທ່ານຍອມຮັບວ່າຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍທີ່ເກີດຂຶ້ນກັບອຸປະກອນຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຂຶ້ນຈາກການນຳໃຊ້ແອັບເຫຼົ່ານັ້ນ."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"ການຕັ້ງຄ່າຂັ້ນສູງ"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"ເປີດໃຊ້ໂຕເລືອກການຕັ້ງຄ່າເພີ່ມເຕີມ."</string>
-    <string name="application_info_label" msgid="1015706497694165866">"ຂໍ້ມູນແອັບຯ"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"ຂໍ້ມູນແອັບ"</string>
     <string name="storage_label" msgid="2522307545547515733">"ພື້ນທີ່ຈັດເກັບຂໍ້ມູນ"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"ເປີດ​ຕາມຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"ຄ່າເລີ່ມຕົ້ນ"</string>
@@ -2501,7 +2514,7 @@
     <string name="usage_type_computed_power" msgid="5191902025833668752">"​ການ​ນຳ​ໃຊ້​ພະ​ລັງ​ງານ​ທີ່​ຄຳ​ນວນ​​ໄວ້"</string>
     <string name="usage_type_actual_power" msgid="1221358930299037926">"ການ​ນຳ​ໃຊ້​ພະ​ລັງ​ງານ​ທີ່​ຕິດ​ຕາມ"</string>
     <string name="battery_action_stop" msgid="6998228610098034316">"ບັງ​ຄັບ​ປິດ"</string>
-    <string name="battery_action_app_details" msgid="7201369216798227707">"ຂໍ້ມູນແອັບຯ"</string>
+    <string name="battery_action_app_details" msgid="7201369216798227707">"ຂໍ້ມູນແອັບ"</string>
     <string name="battery_action_app_settings" msgid="2437124469335488464">"ການຕັ້ງຄ່າແອັບຯ"</string>
     <string name="battery_action_display" msgid="6515712081248863749">"ການຕັ້ງຄ່າໜ້າຈໍ"</string>
     <string name="battery_action_wifi" msgid="1829212604573932607">"ການຕັ້ງຄ່າ Wi-Fi"</string>
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"ການໂທ 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"ໃຊ້ບໍລິການ LTE ເພື່ອປັບປຸງສຽງ ແລະ ການສື່ສານອື່ນໆ (ແນະນຳ)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"ໃຊ້ບໍລິການ 4G ເພື່ອປັບປຸງສຽງ ແລະ ການສື່ສານອື່ນໆ (ແນະນຳ)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"ການຄົ້ນພົບລາຍຊື່ຜູ້ຕິດຕໍ່"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"ອະນຸຍາດໃຫ້ຜູ້ໃຫ້ບໍລິການຂອງທ່ານຄົ້ນພົບໄດ້ລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານຮອງຮັບຄຸນສົມບັດການໂທໃດ."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"ເປີດໃຊ້ການຄົ້ນພົບລາຍຊື່ຜູ້ຕິດຕໍ່ບໍ?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"ເບີໂທລະສັບທັງໝົດໃນລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານຈະຖືກສົ່ງໄປຫາຜູ້ໃຫ້ບໍລິການຂອງທ່ານເປັນໄລຍະໆເພື່ອກວດສອບວ່າຮອງຮັບຄຸນສົມບັດການໂທໃດແດ່."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"ສົ່ງລາຍຊື່ຜູູ້ຕິດຕໍ່ໄປໃຫ້ຜູ້ໃຫ້ບໍລິການ"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"ສົ່ງເບີໂທລະສັບຂອງລາຍຊື່ຜູ້ຕິດຕໍ່ທ່ານເພື່ອສະໜອງຄຸນສົມບັດຂັ້ນສູງ"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"ສົ່ງລາຍຊື່ຜູ້ຕິດຕໍ່ໄປໃຫ້ <xliff:g id="CARRIER">%1$s</xliff:g> ບໍ?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"ສົ່ງລາຍຊື່ຜູ້ຕິດຕໍ່ໄປໃຫ້ຜູ້ໃຫ້ບໍລິການຂອງທ່ານບໍ?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"ເບີໂທລະສັບຂອງລາຍຊື່ຜູ້ຕິດຕໍ່ທ່ານຈະຖືກສົ່ງໄປໃຫ້ <xliff:g id="CARRIER">%1$s</xliff:g> ເປັນໄລຍະໆ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ຂໍ້ມູນນີ້ຈະລະບຸວ່າລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານສາມາດໃຊ້ຄຸນສົມບັດບາງຢ່າງໄດ້ຫຼືບໍ່ ເຊັ່ນ: ການໂທວິດີໂອ ຫຼື ຄຸນສົມບັດການຮັບສົ່ງຂໍ້ຄວາມບາງຢ່າງ."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"ເບີໂທລະສັບຂອງລາຍຊື່ຜູ້ຕິດຕໍ່ທ່ານຈະຖືກສົ່ງໄປໃຫ້ຜູ້ໃຫ້ບໍລິການຂອງທ່ານເປັນໄລຍະໆ.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ຂໍ້ມູນນີ້ຈະລະບຸວ່າລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານສາມາດໃຊ້ຄຸນສົມບັດບາງຢ່າງໄດ້ຫຼືບໍ່ ເຊັ່ນ: ການໂທວິດີໂອ ຫຼື ຄຸນສົມບັດການຮັບສົ່ງຂໍ້ຄວາມບາງຢ່າງ."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"ປະ​ເພດ​ເຄືອ​ຂ່າຍທີ່ຕ້ອງການ"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (ແນະ​ນໍາ​)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"ຂໍ້ຄວາມ MMS"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ບໍ່ສາມາດໃຊ້ໄດ້ເນື່ອງຈາກ NFC ປິດຢູ່"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ກະລຸນາຕິດຕັ້ງແອັບການຈ່າຍເງິນກ່ອນຈຶ່ງຈະໃຊ້ໄດ້"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"ແອັບ ແລະ ການແຈ້ງເຕືອນ"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"ແອັບຫຼ້າສຸດ, ແອັບເລີ່ມຕົ້ນ"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"ບໍ່ສາມາດເຂົ້າເຖິງການແຈ້ງເຕືອນສຳລັບແອັບໃນໂປຣໄຟລ໌ບ່ອນເຮັດວຽກໄດ້."</string>
@@ -3375,7 +3395,7 @@
     <string name="zen_category_people" msgid="8252926021894933047">"ຜູ້ຄົນ"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"ແອັບ"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"ໂມງປຸກ ແລະ ການລົບກວນອື່ນໆ"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"ກຳນົດການ"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"ກຳນົດເວລາ"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"ໄລຍະເວລາສຳລັບການຕັ້ງຄ່າດ່ວນ"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"ເມື່ອເປີດໃຊ້ໂໝດຫ້າມລົບກວນ, ສຽງ ແລະ ການສັ່ນເຕືອນຈະຖືກປິດໄວ້, ຍົກເວັ້ນລາຍການທີ່ທ່ານອະນຸຍາດຂ້າງເທິງ."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"ການຕັ້ງຄ່າແບບກຳນົດເອງ"</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"ການແຈ້ງເຕືອນບາງຢ່າງອາດປາກົດເປັນຟອງຢູ່ໜ້າຈໍ"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"ການແຈ້ງເຕືອນບາງຢ່າງ ແລະ ເນື້ອຫາອື່ນໆສາມາດປາກົດເປັນຟອງຢູ່ໜ້າຈໍໄດ້. ເພື່ອເປີດຟອງໃດໜຶ່ງ, ໃຫ້ແຕະໃສ່ມັນ. ເພື່ອປິດມັນໄວ້, ໃຫ້ລາກມັນລົງມາທາງລຸ່ມຂອງໜ້າຈໍ."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ຟອງ"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"ຂໍ້ຄວາມໃໝ່ຈະປາກົດຢູ່ໜ້າຈໍ"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"ການຕັ້ງຄ່າ Bubble ທັງໝົດ"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Bubble ການສົນທະນານີ້"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"ສະແດງໄອຄອນລອຍຢູ່ເໜືອແອັບ"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"ອະນຸຍາດໃຫ້ <xliff:g id="APP_NAME">%1$s</xliff:g> ສະແດງການແຈ້ງເຕືອນບາງຢ່າງເປັນຟອງໄດ້"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"ເປີດໃຊ້ຟອງສຳລັບອຸປະກອນບໍ?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"ການເປີດໃຊ້ຟອງສຳລັບແອັບນີ້ຈະເປີດໃຊ້ຟອງສຳລັບອຸປະກອນຂອງທ່ານນຳ.\n\nນີ້ຈະມີຜົນກັບແອັບ ຫຼື ການສົນທະນາອື່ນທີ່ໄດ້ຮັບອະນຸຍາດໃຫ້ໃຊ້ຟອງນຳ."</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"ເພີ່ມໃສ່ພາກສ່ວນການສົນທະນາ"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"ຈັດການການສົນທະນາ"</string>
     <string name="important_conversations" msgid="1233893707189659401">"ການສົນທະນາສຳຄັນ"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"ການສົນທະນາອື່ນໆ"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"ແຈ້ງການສົນທະນາສຳຄັນເປັນຟອງ"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"ການສົນທະນາສຳຄັນຈະສະແດງຢູ່ເທິງສຸດຂອງແຖບແບບເລື່ອນລົງ. ນອກຈາກນັ້ນ, ທ່ານຍັງສາມາດຕັ້ງໃຫ້ພວກມັນສະແດງເປັນຟອງ ແລະ ລົບກວນໂໝດຫ້າມລົບກວນໄດ້ນຳ."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"ສະແດງແບບງຽບໆ ແລະ ເຊື່ອງໄວ້"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"ສະແດງແບບງຽບໆ"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"ເຮັດສຽງ"</string>
@@ -3524,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"ຊ່ວຍທ່ານມີສະມາທິໂດຍບໍ່ໃຊ້ສຽງ ຫຼື ການສັ່ນເຕືອນ"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ດຶງຄວາມສົນໃຈຂອງທ່ານດ້ວຍສຽງ ຫຼື ການສັ່ນເຕືອນ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ເມື່ອປົດລັອກອຸປະກອນແລ້ວ, ໃຫ້ສະແດງການແຈ້ງເຕືອນເປັນປ້າຍຢູ່ເທິງສຸດຂອງໜ້າຈໍ"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"ການແຈ້ງເຕືອນ <xliff:g id="APP_NAME">%1$s</xliff:g> ທັງໝົດ"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"ການແຈ້ງເຕືອນແບບປັບປ່ຽນໄດ້ເອງ"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> ການແຈ້ງເຕືອນຕໍ່ມື້</item>
@@ -4843,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"ສະແດງບັດ ແລະ ປີ້"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"ສະແດງການຄວບຄຸມອຸປະກອນ"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"ສະແດງບັດ, ປີ້ ແລະ ການຄວບຄຸມອຸປະກອນ"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"ຢ່າສະແດງເນື້ອຫາໃດໆ"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"ຄວາມເປັນສ່ວນຕົວ"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ສະແດງບັດ ແລະ ການຄວບຄຸມເມື່ອລັອກໄວ້"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ເຊື່ອງບັດ ແລະ ການຄວບຄຸມເມື່ອລັອກໄວ້"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"ສະແດງການຄວບຄຸມອຸປະກອນ"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"ສະແດງບັດ ແລະ ປີ້"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"ເພື່ອເຂົ້າເຖິງການຄວບຄຸມສຳລັບອຸປະກອນທີ່ເຊື່ອມຕໍ່ໄວ້, ໃຫ້ກົດປຸ່ມເປີດປິດຄ້າງໄວ້"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"ຢຸດການສົ່ງສັນຍານ"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"ປິດ VoLTE ໄວ້ບໍ?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"ນີ້ຈະເປັນການປິດການເຊື່ອມຕໍ່ 5G ຂອງທ່ານນຳ.\nໃນລະຫວ່າງການໂທສຽງ, ທ່ານຈະບໍ່ສາມາດໃຊ້ອິນເຕີເນັດ ແລະ ບາງແອັບອາດບໍ່ສາມາດເຮັດວຽກໄດ້."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ໂທລະສັບນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. ສຶກສາເພີ່ມເຕີມ"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ແທັບເລັດນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. ສຶກສາເພີ່ມເຕີມ"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ອຸປະກອນນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. ສຶກສາເພີ່ມເຕີມ"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ໂທລະສັບນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ແທັບເລັດນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"ເມື່ອໃຊ້ 2 ຊິມແລ້ວ, ອຸປະກອນນີ້ຈະຖືກຈຳກັດໃຫ້ໃຊ້ໄດ້ສະເພາະ 4G. "<annotation id="url">"ສຶກສາເພີ່ມເຕີມ"</annotation>"."</string>
 </resources>
