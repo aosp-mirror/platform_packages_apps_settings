@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Ustvari"</string>
     <string name="allow" msgid="3763244945363657722">"Dovoli"</string>
     <string name="deny" msgid="7326117222944479942">"Zavrni"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Vklopi"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Neznano"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas loči od tega, da postanete razvijalec.</item>
@@ -379,7 +380,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Odklepanje z obrazom omogoča, da odklenete napravo, se prijavite v aplikacije in potrdite plačila.\n\nUpoštevajte:\ntelefon se lahko nenamerno odklene, če ga pogledate.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Želite izbrisati podatke o obrazu?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Podatki o obrazu, ki se uporabljajo za odklepanje z obrazom, bodo trajno in varno izbrisani. Po odstranitvi boste za odklepanje telefona, prijavo v aplikacije in potrjevanje plačil potrebovali kodo PIN, vzorec ali geslo."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Za odklepanje telefona uporabite funkcijo odklepanja z obrazom"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Za odklepanje telefona uporabite obraz"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Prstni odtis"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Upravlj. prst. odtisov"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Upor. prst. odtisa za"</string>
@@ -1676,40 +1677,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Samo dostopna točka"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Samo USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Samo Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_ethernet_tethering_only (3582266687537419309) -->
-    <skip />
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Samo ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Dostopna točka, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Dostopna točka, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_ethernet (5489192670354277152) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Dostopna točka, ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_usb_and_ethernet (2195017679820919905) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth_and_ethernet (1015253926959211012) -->
-    <skip />
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Dostopna točka, USB, Bluetooth"</string>
-    <!-- no translation found for tether_settings_summary_hotspot_and_usb_and_ethernet (5178946567323581144) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_hotspot_and_bluetooth_and_ethernet (4104425838594994441) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_and_bluetooth_and_ethernet (5880591133984166550) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (7565193614882005775) -->
-    <skip />
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Dostopna točka, USB, ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Dostopna točka, Bluetooth, ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Dostopna točka, USB, Bluetooth, ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internetna povezava ni deljena z drugimi napravami"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Internetna povezava prek mobilnega telefona"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Brez uporabe dostopne točke Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Deljenje internetne povezave samo prek USB-ja"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Deljenje internetne povezave samo prek Bluetootha"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_ethernet_on (4123242400542103599) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Deljenje internetne povezave samo prek etherneta"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Deljenje internetne povezave samo prek USB-ja in Bluetootha"</string>
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_ethernet_on (7126313562907225612) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_bluetooth_and_ethernet_on (2943464651349235967) -->
-    <skip />
-    <!-- no translation found for disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on (3934609816834760008) -->
-    <skip />
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Deljenje internetne povezave samo prek USB-ja in etherneta"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Deljenje internetne povezave samo prek Bluetootha in etherneta"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Deljenje internetne povezave samo prek USB-ja, Bluetootha in etherneta"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Internet prek USB-ja"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Deljenje internetne povezave telefona prek USB-ja"</string>
@@ -2471,14 +2460,14 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Izboljšajte čas delovanja akumulatorja tabličnega računalnika"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Izboljšajte čas delovanja akumulatorja naprave"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Vklopite varčevanje z energijo akumulatorja"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Vklop varčevanja z energijo akumulatorja"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Akumulator se bo morda izpraznil prej kot običajno"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Vklop varčevanja z baterijo"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterija se bo morda izpraznila prej kot običajno"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Varčevanje z energijo akumulatorja je vklopljeno"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nekatere funkcije bodo morda omejene"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefon uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablični računalnik uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Napravo uporabljate več kot običajno"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Akumulator se bo morda izpraznil prej kot običajno"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija se bo morda izpraznila prej kot običajno"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablični računalnik ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Napravo ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
@@ -2496,10 +2485,10 @@
       <item quantity="other">Nedavno je bilo omejenih %2$d aplikacij</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="one">%2$d aplikacija ima visoko porabo energije akumulatorja v ozadju</item>
-      <item quantity="two">%2$d aplikaciji imata visoko porabo energije akumulatorja v ozadju</item>
-      <item quantity="few">%2$d aplikacije imajo visoko porabo energije akumulatorja v ozadju</item>
-      <item quantity="other">%2$d aplikacij ima visoko porabo energije akumulatorja v ozadju</item>
+      <item quantity="one">%2$d apl. ima visoko porabo baterije v ozadju</item>
+      <item quantity="two">%2$d apl. imata visoko porabo baterije v ozadju</item>
+      <item quantity="few">%2$d apl. imajo visoko porabo baterije v ozadju</item>
+      <item quantity="other">%2$d apl. ima visoko porabo baterije v ozadju</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="one">Te aplikacije se ne smejo izvajati v ozadju</item>
@@ -3174,10 +3163,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Klicanje prek omrežja 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Uporaba storitev LTE za izboljšanje glasovne in druge komunikacije (priporočeno)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Uporaba storitev 4G za izboljšanje glasovne in druge komunikacije (priporočeno)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Odkrivanje stikov"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Operaterju omogoča odkrivanje, katere funkcije za klicanje podpirajo vaši stiki."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Želite omogočiti odkrivanje stikov?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Vse telefonske številke v stikih se bodo redno pošiljale operaterju, da bo mogoče odkriti, katere funkcije za klicanje so podprte."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Pošiljanje stikov operaterju"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Pošiljajte telefonske številke stikov za zagotavljanje dodatnih funkcij"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Želite stike pošiljati operaterju <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Želite stike pošiljati operaterju?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Telefonske številke stikov se bodo redno pošiljale operaterju <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Na podlagi teh podatkov je mogoče ugotoviti, ali stiki lahko uporabljajo določene funkcije, na primer videoklice ali nekatere funkcije za sporočila."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Telefonske številke stikov se bodo redno pošiljale operaterju.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Na podlagi teh podatkov je mogoče ugotoviti, ali stiki lahko uporabljajo določene funkcije, na primer videoklice ali nekatere funkcije za sporočila."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Prednostna vrsta omrežja"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (priporočeno)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Sporočila MMS"</string>
@@ -3404,7 +3399,7 @@
       <item quantity="other">Nastavljenih je <xliff:g id="ON_COUNT">%d</xliff:g> razporedov</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne moti"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Samo prejemanje obvestil pomembnih oseb in aplikacij"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Prejemajte samo obvestila pomembnih oseb in aplikacij"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Omejitev prekinitev"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Vklop načina »ne moti«"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmi in zvoki predstavnosti lahko preglasijo"</string>
@@ -3455,7 +3450,7 @@
     <string name="zen_mode_block_effect_summary_some" msgid="2730383453754229650">"Zvok, vibriranje in nekateri vizualni znaki obvestil"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="3131918059492425222">"Zvok, vibriranje in vizualni znaki obvestil"</string>
     <string name="zen_mode_blocked_effects_footer" msgid="1115914818435434668">"Obvestila, potrebna za osnovno delovanje telefona in obveščanje o njegovem stanju, ne bodo nikoli skrita."</string>
-    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Nič"</string>
+    <string name="zen_mode_no_exceptions" msgid="1580136061336585873">"Brez"</string>
     <string name="zen_mode_other_options" msgid="3399967231522580421">"druge možnosti"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Dodaj"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Vklopi"</string>
@@ -3620,9 +3615,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dodajanje v razdelek s pogovorom"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Upravljanje pogovorov"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Prednostni pogovori"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Drugi pogovori"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Prikaz pomembnih pogovorov v oblačkih"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Pomembni pogovori so prikazani na vrhu poteznega zaslona z obvestili. Nastavite lahko tudi, naj se prikažejo v oblačkih in naj preglasijo način »ne moti«."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Prikaži brez zvoka in minimiraj"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Prikaži brez zvoka"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Predvajaj zvok"</string>
@@ -3643,7 +3651,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Nemoteč prikaz brez zvoka ali vibriranja"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Pritegne vašo pozornost z zvokom ali vibriranjem"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ko je naprava odklenjena, so obvestila prikazana kot pasica na vrhu zaslona"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Vsa obvestila aplikacije <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Prilagodljiva obvestila"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestilo na dan</item>
@@ -3849,7 +3858,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Vsi"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Stiki"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stiki z zvezdico"</string>
-    <string name="zen_mode_from_none" msgid="8456745188276131873">"Nič"</string>
+    <string name="zen_mode_from_none" msgid="8456745188276131873">"Brez"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Od stikov z zvezdico in večkratnih klicateljev"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Od stikov in večkratnih klicateljev"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Samo od večkratnih klicateljev"</string>
@@ -5048,10 +5057,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Prikaži kreditne in plačilne kartice"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Prikaži kontrolnike naprave"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Prikaži kreditne in plačilne kartice ter kontrolnike naprave"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Ne prikaži nobene vsebine"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Zasebnost"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Prikaži kartice in kontrolnike na zaklenjenem zaslonu"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Skrij kartice in kontrolnike na zaklenjenem zaslonu"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Prikaži kontrolnike naprave"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Prikaz kartic in vstopnic"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Za dostop do kontrolnikov za povezane naprave pridržite gumb za vklop"</string>
@@ -5063,10 +5079,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Ustavi predvajanje"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Želite izklopiti VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"S tem tudi izklopite povezavo 5G.\nMed glasovnim klicem ne boste mogli uporabljati interneta in nekatere aplikacije morda ne bodo delovale."</string>
-    <!-- no translation found for no_5g_in_dsds_text (4515609502932757256) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (7460150915372077523) -->
-    <skip />
-    <!-- no translation found for no_5g_in_dsds_text (8206029713556021714) -->
-    <skip />
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Ko uporabljate dve kartici SIM, lahko ta telefon vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ko uporabljate dve kartici SIM, lahko ta tablični računalnik vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ko uporabljate dve kartici SIM, lahko ta naprava vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
 </resources>

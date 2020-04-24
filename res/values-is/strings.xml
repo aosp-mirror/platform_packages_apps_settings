@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Búa til"</string>
     <string name="allow" msgid="3763244945363657722">"Leyfa"</string>
     <string name="deny" msgid="7326117222944479942">"Hafna"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Kveikja"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Óþekkt"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Nú ertu <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> skrefi frá því að gerast þróunaraðili.</item>
@@ -3078,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G símtöl"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Nota LTE-þjónustu til að bæta talsamband og önnur samskipti (ráðlagt)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Nota 4G-þjónustu til að bæta talsamband og önnur samskipti (ráðlagt)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Greining tengiliða"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Leyfir símafyrirtækinu þínu að komast að því hvaða símtalaeiginleikar eru studdir fyrir tengiliði."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Viltu leyfa greiningu tengiliða?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Öll símanúmerin í tengiliðunum þínum verða reglulega send til símafyrirtækisins þíns til að sjá hvaða eiginleikar símtala eru studdir."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Senda tengiliði til símafyrirtækis"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Senda símanúmer tengiliða til að gera viðbótareiginleka mögulega"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Viltu senda tengiliði til <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Senda tengiliði til símafyrirtækis?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Símanúmer tengiliðanna þinna verða send reglulega til <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Þessar upplýsingar segja fyrir um hvort tengiliðir geti notað tiltekna eiginleika á borð við myndsímtöl og suma skilaboðaeiginleika."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Símanúmer tengiliðanna þinna verða send reglulega til símafyrirtækisins þíns.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Þessar upplýsingar segja fyrir um hvort tengiliðir geti notað tiltekna eiginleika á borð við myndsímtöl og suma skilaboðaeiginleika."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Valin símkerfistegund"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (ráðlagt)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS-skilaboð"</string>
@@ -3516,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Bæta við samtalshlutann"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Stjórna samtölum"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Forgangssamtöl"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Önnur samtöl"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Setja mikilvæg samtöl í blöðru"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Mikilvæg samtöl birtast efst á tilkynningasvæðinu. Þú getur einnig stillt þau á að birtast í blöðru og trufla „Ónáðið ekki“."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Sýna án hljóðs og fela"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Sýna án hljóðs"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Spila hljóð"</string>
@@ -3539,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Auðveldar þér að einbeita þér án hljóðs eða titrings"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Fangar athygli þína með hljóði eða titringi"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Birta tilkynningar á borða efst á skjánum þegar tækið er opið"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Allar tilkynningar fyrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Breytilegar tilkynningar"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> tilkynning á dag</item>
@@ -4858,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Sýna kort og passa"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Sýna tækjastjórnun"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Sýna kort, passa og tækjastjórnun"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Ekki sýna neitt efni"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Persónuvernd"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Sýna kort og stýringar þegar tækið er læst"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Fela kort og stýringar þegar tækið er læst"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Sýna tækjastjórnun"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Sýna kort og passa"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Haltu aflrofanum inni til að sjá stjórnun fyrir tengd tæki"</string>
