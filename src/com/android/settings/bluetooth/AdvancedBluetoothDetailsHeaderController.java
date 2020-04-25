@@ -62,7 +62,7 @@ import java.util.Map;
 public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, OnDestroy, CachedBluetoothDevice.Callback {
     private static final String TAG = "AdvancedBtHeaderCtrl";
-    private static final int LOW_BATTERY_LEVEL = 20;
+    private static final int LOW_BATTERY_LEVEL = 15;
 
     @VisibleForTesting
     LayoutPreference mLayoutPreference;

@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"Buat"</string>
     <string name="allow" msgid="3763244945363657722">"Benarkan"</string>
     <string name="deny" msgid="7326117222944479942">"Nafikan"</string>
+    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
+    <skip />
     <string name="device_info_default" msgid="1406619232867343310">"Tidak diketahui"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> langkah lagi sebelum menjadi pembangun.</item>
@@ -1634,16 +1636,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Tempat liputan sahaja"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB sahaja"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth sahaja"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Ethernet sahaja"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Tempat liputan, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Tempat liputan, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Tempat liputan, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Tempat liputan, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Tempat liputan, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Tempat liputan, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Tempat liputan, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Tidak berkongsi Internet dengan peranti lain"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Penambatan"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Jangan gunakan tempat liputan Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Kongsi Internet melalui USB sahaja"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Kongsi Internet melalui Bluetooth sahaja"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Kongsi Internet melalui Ethernet sahaja"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Kongsi Internet melalui USB dan Bluetooth sahaja"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Kongsi Internet melalui USB dan Ethernet sahaja"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Kongsi Internet melalui Bluetooth dan Ethernet sahaja"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Kongsi Internet melalui USB, Bluetooth dan Ethernet sahaja"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Penambatan USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Kongsi sambungan Internet telefon melalui USB"</string>
@@ -1837,7 +1851,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Peranti dan data peribadi anda lebih mudah diserang oleh apl yang tidak diketahui. Dengan memasang apl daripada sumber ini, anda bersetuju bahawa anda bertanggungjawab terhadap sebarang kerosakan pada peranti anda atau kehilangan data akibat penggunaan apl tersebut."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Tetapan terperinci"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Dayakan lebih banyak pilihan tetapan"</string>
-    <string name="application_info_label" msgid="1015706497694165866">"Maklumat aplikasi"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"Maklumat apl"</string>
     <string name="storage_label" msgid="2522307545547515733">"Storan"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Buka secara lalai"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Lalai"</string>
@@ -2108,7 +2122,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zum masuk pada skrin"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ketik 3 kali untuk mengezum"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketik butang untuk mengezum"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zum masuk dengan pantas pada skrin untuk melihat kandungan dengan lebih jelas.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt;	1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Ketik skrin&lt;br/&gt; 3. Seret 2 jari untuk menerokai skrin&lt;br/&gt; 4. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; 5. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; 3. Seret jari untuk menerokai skrin&lt;br/&gt; 4. Angkat jari untuk menghentikan pembesaran"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zum masuk dengan pantas pada skrin untuk melihat kandungan dengan lebih jelas.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Ketik skrin&lt;br/&gt; 3. Seret 2 jari untuk menerokai skrin&lt;br/&gt; 4. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; 5. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; 3. Seret jari untuk menerokai skrin&lt;br/&gt; 4. Angkat jari untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Gunakan butang kebolehaksesan untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Tahan kekunci kelantangan untuk buka"</string>
@@ -3066,10 +3080,18 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Panggilan 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Gunakan perkhidmatan LTE untuk memperbaik suara dan komunikasi lain (disyorkan)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Gunakan perkhidmatan 4G untuk memperbaik suara dan komunikasi lain (disyorkan)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Penemuan kenalan"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Membenarkan pembawa anda mengetahui ciri panggilan yang disokong oleh kenalan anda."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Dayakan penemuan kenalan?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Semua nombor telefon dalam kenalan anda akan dihantar kepada pembawa anda dari semasa ke semasa untuk mengetahui ciri panggilan yang disokong."</string>
+    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
+    <skip />
     <string name="preferred_network_type_title" msgid="812509938714590857">"Jenis rangkaian pilihan"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (disyorkan)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mesej MMS"</string>
@@ -3154,6 +3176,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Tidak tersedia kerana NFC dimatikan"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakan ciri ini, pasang apl pembayaran dahulu"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apl &amp; pemberitahuan"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apl terbaharu, apl lalai"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Akses pemberitahuan tidak tersedia untuk apl dalam profil kerja."</string>
@@ -3436,7 +3459,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Sesetengah pemberitahuan boleh muncul sebagai gelembung pada skrin"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Sesetengah pemberitahuan dan kandungan lain boleh dipaparkan sebagai gelembung pada skrin. Untuk membuka gelembung, ketik pada gelembung itu. Untuk mengetepikan gelembung, seret gelembung itu ke bawah skrin."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Gelembung"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Mesej baharu akan muncul pada skrin"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Semua tetapan Gelembung"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Gelembungkan perbualan ini"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Tunjukkan ikon terapung di atas apl"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Benarkan <xliff:g id="APP_NAME">%1$s</xliff:g> menunjukkan sesetengah pemberitahuan sebagai gelembung"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Hidupkan gelembung untuk peranti?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Tindakan menghidupkan gelembung untuk apl ini akan turut menghidupkan gelembung untuk peranti anda.\n\nHal ini melibatkan apl lain atau perbualan yang dibenarkan untuk menjadi gelembung."</string>
@@ -3501,9 +3526,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Tambahkan pada bahagian perbualan"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Urus perbualan"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Perbualan keutamaan"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Perbualan lain"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Buat gelembung untuk perbualan penting"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Perbualan penting ditunjukkan di bahagian atas bidai tarik turun. Anda juga boleh menetapkan perbualan ini agar dipaparkan dalam gelembung dan mengganggu ciri Jangan Ganggu."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Tunjukkan dengan senyap dan minimumkan"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Tunjukkan secara senyap"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Berbunyi"</string>
@@ -3524,7 +3562,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Membantu anda fokus tanpa bunyi atau getaran"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Menarik perhatian anda dengan bunyi atau getaran"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Apabila kunci peranti dibuka, tunjukkan pemberitahan sebagai sepanduk di bahagian atas skrin"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Semua pemberitahuan <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Pemberitahuan Boleh Suai"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> pemberitahuan sehari</item>
@@ -3705,7 +3744,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mesej"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mesej"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Mesej yang boleh ganggu"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Untuk memastikan mesej yang dibenarkan berbunyi, periksa bahawa peranti dibenarkan berdering"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Untuk memastikan mesej yang dibenarkan berbunyi, pastikan peranti dibenarkan berdering"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Mesej masuk disekat untuk ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’. Anda boleh melaraskan tetapan untuk membenarkan rakan, keluarga atau kenalan lain menghubungi anda."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Semua <xliff:g id="SENDER_CATEGORY">%s</xliff:g> boleh menghubungi anda"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> kenalan"</string>
@@ -4843,10 +4882,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Tunjukkan kad &amp; pas"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Tunjukkan kawalan peranti"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Tunjukkan kad, pas dan kawalan peranti"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Jangan tunjukkan sebarang kandungan"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privasi"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Tunjukkan kad dan kawalan apabila dikunci"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Sembunyikan kad dan kawalan apabila dikunci"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Tunjukkan kawalan peranti"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Tunjukkan kad &amp; pas"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Untuk mengakses kawalan bagi peranti yang disambungkan, tahan butang Kuasa"</string>
@@ -4858,7 +4904,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Berhenti menghantar"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Matikan VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Tindakan ini turut mematikan sambungan 5G.\nSemasa panggilan suara, anda tidak boleh menggunakan Internet dan sesetengah apl mungkin tidak berfungsi."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Apabila menggunakan 2 SIM, telefon ini akan dihadkan kepada 4G. Ketahui lebih lanjut"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Apabila menggunakan 2 SIM, tablet ini akan dihadkan kepada 4G. Ketahui lebih lanjut"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Apabila menggunakan 2 SIM, peranti ini akan dihadkan kepada 4G. Ketahui lebih lanjut"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Apabila menggunakan 2 SIM, telefon ini akan dihadkan kepada 4G. "<annotation id="url">"Ketahui lebih lanjut"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Apabila menggunakan 2 SIM, tablet ini akan dihadkan kepada 4G. "<annotation id="url">"Ketahui lebih lanjut"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Apabila menggunakan 2 SIM, peranti ini akan dihadkan kepada 4G. "<annotation id="url">"Ketahui lebih lanjut"</annotation>"."</string>
 </resources>

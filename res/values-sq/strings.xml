@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"Krijo"</string>
     <string name="allow" msgid="3763244945363657722">"Lejo"</string>
     <string name="deny" msgid="7326117222944479942">"Refuzo"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Aktivizo"</string>
     <string name="device_info_default" msgid="1406619232867343310">"I panjohur"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Tani të duhen edhe <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hapa për t\'u bërë zhvillues.</item>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Vetëm zona e qasjes për internet"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Vetëm USB"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Vetëm Bluetooth"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Vetëm eternet"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Zona e qasjes për internet, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Zona e qasjes për internet, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Zona e qasjes së internetit, eternet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, eternet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, eternet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Zona e qasjes për internet, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Zona e qasjes së internetit, USB, eternet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Zona e qasjes së internetit, Bluetooth, eternet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, eternet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Zona e qasjes së internetit, USB, Bluetooth, eternet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Interneti nuk ndahet me pajisje të tjera"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Ndarja e internetit"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Mos përdor zonën e qasjes për internet me Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Ndaje internetin vetëm me USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Ndaje internetin vetëm me Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Ndaje internetin vetëm me eternet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Ndaje internetin vetëm me USB dhe Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Ndaje internetin vetëm me USB dhe eternet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Ndaje internetin vetëm me Bluetooth dhe eternet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Ndaje internetin vetëm me USB, Bluetooth dhe eternet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Ndarje përmes USB-së"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Ndaj lidhjen e internetit të telefonit nëpërmjet USB-së"</string>
@@ -2168,7 +2181,7 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Anasjellja e ngjyrave i bën të errëta ekranet e çelura.&lt;br/&gt;&lt;br/&gt; Shënim. &lt;ol&gt; &lt;li&gt; Anasjellja e ngjyrave gjithashtu i bën të çelura ekranet e errëta.&lt;/li&gt; &lt;li&gt; Ngjyrat do të ndryshojnë në media dhe imazhe.&lt;/li&gt; &lt;li&gt; \"Tema e errët\" mund të përdoret për të shfaqur një sfond të errët. \"Tema e errët\" funksionon me aplikacionet e mbështetura. Anasjellja e ngjyrave funksionon në të gjitha aplikacionet.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Klikimi automatik (koha e qëndrimit pa lëvizur)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Klikimi automatik funksionon me një mi të lidhur. Kursorin e miut mund ta caktosh që të klikojë automatikisht kur kursori të ndalojë lëvizjen për një kohë të caktuar."</string>
-    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Joaktive"</string>
+    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Joaktiv"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"I shkurtër"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 sekonda"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Mesatar"</string>
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Telefonatat me 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Përdor shërbimet LTE për të përmirësuar komunikimet zanore dhe të tjera (rekomandohet)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Përdor shërbimet 4G për të përmirësuar komunikimet zanore dhe të tjera (rekomandohet)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Zbulimi i kontakteve"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Lejo që operatori yt celular të zbulojë se cilat veçori mbështesin kontaktet e tua."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Të aktivizohet zbulimi i kontakteve?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Të gjithë numrat e telefonit në kontaktet e tua mund të dërgohen në mënyrë periodike te operatori yt celular për të zbuluar se cilat veçori telefonate mbështeten."</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Dërgo kontaktet te operatori celular"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Dërgo numrat e telefonit të kontakteve të tua për të ofruar veçori të përmirësuara"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Të dërgohen kontaktet te <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Të dërgohen kontaktet te operatori yt celular?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Numrat e telefonit të kontakteve të tua do të dërgohen periodikisht te <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Ky informacion identifikon nëse kontaktet e tua mund të përdorin veçori të caktuara, si telefonatat me video ose disa veçori të mesazheve."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Numrat e telefonit të kontakteve të tua do të dërgohen periodikisht tek operatori yt.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Ky informacion identifikon nëse kontaktet e tua mund të përdorin veçori të caktuara, si telefonatat me video ose disa veçori të mesazheve."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Lloji i preferuar i rrjetit"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (rekomandohet)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mesazhet MMS"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nuk ofrohet sepse NFC është joaktive"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Për ta përdorur, në fillim instalo një aplikacion pagese"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apl. dhe njoftimet"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplikacionet së fundi, aplikacionet e parazgjedhura"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Qasja te njoftimet nuk ofrohet për aplikacionet në profilin e punës."</string>
@@ -3294,7 +3314,7 @@
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Merr njoftime vetëm nga aplikacionet dhe personat e rëndësishëm"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Kufizo ndërprerjet"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivizo \"Mos shqetëso\""</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmet dhe tingujt e medias mund të ndërpresin"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmet dhe tingujt e medias mund ta ndërpresin"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Oraret"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Fshi oraret"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Fshi"</string>
@@ -3371,7 +3391,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> orare mund të aktivizohen automatikisht</item>
       <item quantity="one">1 orar mund të aktivizohet automatikisht</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Çfarë mund të ndërpresë \"Mos shqetëso\""</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Çfarë mund ta ndërpresë \"Mos shqetëso\""</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personat"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacionet"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmet dhe ndërprerjet e tjera"</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Disa njoftime mund të shfaqen si flluska në ekran"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Disa njoftime dhe përmbajtje të tjera mund të shfaqen si flluska në ekran. Për të hapur një flluskë, trokit tek ajo. Për ta hequr, zvarrite poshtë në ekran."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Flluskat"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Mesazhet e reja do të shfaqen në ekran"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Të gjitha cilësimet e flluskave"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Shfaq flluskën për këtë bisedë"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Shfaq ikona pluskuese mbi aplikacione"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Lejo që <xliff:g id="APP_NAME">%1$s</xliff:g> të shfaqë disa njoftime si flluska"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Të aktivizohen flluskat për pajisjen?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Aktivizimi i flluskave për këtë aplikacion do të aktivizojë edhe flluskat për pajisjen tënde.\n\nKjo ndikon tek aplikacionet ose bisedat e tjera që lejohen të shfaqen si flluskë."</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Shto te seksioni i bisedës"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Menaxho bisedat"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Bisedat me përparësi"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Biseda të tjera"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Shfaq si flluskë bisedat e rëndësishme"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Bisedat e rëndësishme shfaqen në krye të strehës me tërheqje poshtë. Mund t\'i caktosh po ashtu që të shfaqen si flluskë dhe të ndërpresin \"Mos shqetëso\"."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Shfaq në heshtje dhe minimizo"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Shfaq në heshtje"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Bëj tingull"</string>
@@ -3524,7 +3559,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Të ndihmon të fokusohesh pa tinguj ose dridhje"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Të tërheq vëmendjen me tinguj ose dridhje"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kur pajisja është e shkyçur, shfaq njoftimet si një banderolë përgjatë kreut të ekranit"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Të gjitha njoftimet e <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Njoftimet me përshtatje"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> njoftime në ditë</item>
@@ -3737,30 +3773,30 @@
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacionet që mund të ndërpresin"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Zgjidh më shumë aplikacione"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nuk u përzgjodh asnjë aplikacion"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Asnjë aplikacion nuk mund të ndërpresë"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Asnjë aplikacion nuk mund ta ndërpresë"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Shto aplikacione"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Të gjitha njoftimet"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Disa njoftime"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Zgjidh personat që sërish mund të të kontaktojnë, edhe nëse nuk i lejon aplikacionet të të ndërpresin"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> mund të ndërpresin</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> mund të ndërpresë</item>
+      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> mund ta ndërpresin</item>
+      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> mund ta ndërpresë</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> të tjera"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Përjashtimet e aplikacioneve"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Të gjitha njoftimet"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Disa njoftime"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Njoftimet që mund të ndërpresin"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Njoftimet që mund ta ndërpresin"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Lejo të gjitha njoftimet"</string>
     <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> mund të ndërpresin</item>
-      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> mund të ndërpresë</item>
+      <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> mund ta ndërpresin</item>
+      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> mund ta ndërpresë</item>
     </plurals>
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Asgjë nuk mund të ndërpresë"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> të tjera"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Askush nuk mund të ndërpresë"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Disa kontakte mund të ndërpresin"</string>
-    <string name="zen_mode_people_all" msgid="311036110283015205">"Të gjithë kontaktet mund të ndërpresin"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Disa persona mund ta ndërpresin"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Të gjithë kontaktet mund ta ndërpresin"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Telefonuesit e përsëritur"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Lejo telefonuesit e përsëritur"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"çdo person"</string>
@@ -4843,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Shfaq kartat dhe lejet e kalimit"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Shfaq kontrollet e pajisjes"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Shfaq kartat, lejet e kalimit dhe kontrollet e pajisjes"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Mos shfaq asnjë përmbajtje"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Privatësia"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Shfaq kartat dhe kontrollet kur është e kyçur"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Fshih kartat dhe kontrollet kur është e kyçur"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Shfaq kontrollet e pajisjes"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Shfaq kartat dhe lejet e kalimit"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Për të pasur qasje te kontrollet për pajisjet e lidhura, mbaj shtypur butonin e energjisë"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Ndalo transmetimin"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Të çaktivizohet VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Kjo çaktivizon gjithashtu lidhjen tënde 5G.\nGjatë një telefonate zanore, nuk mund ta përdorësh internetin dhe disa aplikacione mund të mos funksionojnë."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Kur përdor 2 karta SIM, ky telefon do të kufizohet në 4G. Mëso më shumë"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Kur përdor 2 karta SIM, ky tablet do të kufizohet në 4G. Mëso më shumë"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Kur përdor 2 karta SIM, kjo pajisje do të kufizohet në 4G. Mëso më shumë"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Kur përdor 2 karta SIM, ky telefon do të kufizohet në 4G. "<annotation id="url">"Mëso më shumë"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Kur përdor 2 karta SIM, ky tablet do të kufizohet në 4G. "<annotation id="url">"Mëso më shumë"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Kur përdor 2 karta SIM, kjo pajisje do të kufizohet në 4G. "<annotation id="url">"Mëso më shumë"</annotation>"."</string>
 </resources>

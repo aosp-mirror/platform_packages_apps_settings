@@ -21,6 +21,8 @@
     <string name="create" msgid="986997212165228751">"Créer"</string>
     <string name="allow" msgid="3763244945363657722">"Autoriser"</string>
     <string name="deny" msgid="7326117222944479942">"Refuser"</string>
+    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
+    <skip />
     <string name="device_info_default" msgid="1406619232867343310">"Inconnu"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">Plus que <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> étape pour devenir concepteur.</item>
@@ -1634,16 +1636,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Point d\'accès sans fil uniquement"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB uniquement"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"Bluetooth uniquement"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"Ethernet seulement"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"Point d\'accès sans fil, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"Point d\'accès sans fil, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"Partage de connexion, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, Bluetooth"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, Ethernet"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"Point d\'accès sans fil, USB, Bluetooth"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"Partage de connexion, USB, Ethernet"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Partage de connexion, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"Partage de connexion, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Connexion Internet non partagée avec d\'autres appareils"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Partage de connexion"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ne pas utiliser les points d\'accès Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Uniquement partager la connexion Internet par USB"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Uniquement partager la connexion Internet par Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"Uniquement partager la connexion Internet par Ethernet"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"Uniquement partager la connexion Internet par USB et par Bluetooth"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"Uniquement partager la connexion Internet par USB et par Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Uniquement partager la connexion Internet par Bluetooth et par Ethernet"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Uniquement partager la connexion Internet par USB, par Bluetooth et par Ethernet"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"Partage de connexion par USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Partager la connexion Internet du téléphone par connexion USB"</string>
@@ -1837,7 +1851,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Votre appareil et vos données personnelles sont plus vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être responsable de tout dommage causé à votre appareil ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Paramètres avancés"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activer d\'autres paramètres"</string>
-    <string name="application_info_label" msgid="1015706497694165866">"Infos sur l\'application"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"Infos sur les applis"</string>
     <string name="storage_label" msgid="2522307545547515733">"Stockage"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Ouvert par défaut"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Valeurs par défaut"</string>
@@ -2792,7 +2806,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Interrompues à la limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Synchronisation auto données"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Synchro auto des données perso"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synchro auto données profess."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synchro auto des données pros"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Changer le cycle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Jour du mois de réinitialisation du cycle utilisation données :"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Aucune donnée utilisée par les applications pendant cette période."</string>
@@ -3066,10 +3080,18 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Appels 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Utiliser les services LTE pour améliorer les communications vocales et autres (recommandé)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Utiliser les services 4G pour améliorer les communications vocales et autres (recommandé)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"Analyse des contacts"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"Permet à votre fourn. de serv. d\'analyser quelles fonct. d\'appels vos contacts prennent en charge."</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"Activer l\'analyse des contacts?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"Tous les numéros de téléphone de vos contacts seront régulièrement envoyés à votre fournisseur de services afin de déterminer avec quelles fonctionnalités d\'appel ils sont compatibles."</string>
+    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
+    <skip />
+    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
+    <skip />
     <string name="preferred_network_type_title" msgid="812509938714590857">"Type de réseau préféré"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recommandé)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Messages multimédias"</string>
@@ -3154,6 +3176,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la fonctionnalité NFC est désactivée"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour l\'utiliser, installez d\'abord une application de paiement"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Applis et notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applications récentes, applications par défaut"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Les applications du profil professionnel n\'ont pas accès aux notifications."</string>
@@ -3210,7 +3233,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"profil professionnel, profil géré, unifier, unification, travail, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestes"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"cartes, laissez-passer"</string>
-    <string name="keywords_device_controls" msgid="8962494082504033651">"commandes de l\'appareil, commandes"</string>
+    <string name="keywords_device_controls" msgid="8962494082504033651">"commandes de contrôle des appareils, commandes"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"payer, toucher, paiements"</string>
     <string name="keywords_backup" msgid="707735920706667685">"sauvegarde, sauvegarder"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"geste"</string>
@@ -3436,7 +3459,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Certaines notifications peuvent s\'afficher sous forme de bulles à l\'écran"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Certaines notifications et d\'autre contenu peuvent s\'afficher sous forme de bulles à l\'écran. Pour ouvrir une bulle, touchez-la. Pour l\'ignorer, faites-la glisser vers le bas de l\'écran."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bulles"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"Les nouveaux messages s\'afficheront sur l\'écran"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Tous les paramètres des bulles"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Afficher cette conversation sous forme de bulles"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"Afficher une icône flottante par-dessus les applications"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"Autoriser l\'application <xliff:g id="APP_NAME">%1$s</xliff:g> à afficher des notifications sous forme de bulles"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"Activer les bulles à l\'échelle de l\'appareil?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"L\'activation des bulles pour cette application activera aussi les bulles pour votre appareil.\n\nCela a un impact sur les autres applications ou les conversations qui peuvent s\'afficher en bulles."</string>
@@ -3501,9 +3526,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Ajouter à la section des conversations"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gérer les conversations"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversations prioritaires"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"Autres conversations"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"Utiliser les bulles pour les conversations importantes"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"Les conversations importantes s\'affichent dans le haut du volet déroulant. Vous pouvez aussi les configurer pour qu\'elles s\'affichent dans des bulles et interrompent le mode Ne pas déranger."</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"Affichage silencieux et réduction"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Affichage silencieux"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Émettre un son"</string>
@@ -3524,7 +3562,8 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Vous aider à vous concentrer, sans son ni vibration"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Attire votre attention à l\'aide de sons et de vibrations"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière dans le haut de l\'écran"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"Toutes les notifications de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notifications adaptatives"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notification par jour</item>
@@ -4834,20 +4873,27 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Travail"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Paramètres par défaut"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Ce choix n\'est plus valide. Réessayez."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Commandes de l\'appareil"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"commandes de l\'appareil"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Commandes de contrôle des appareils"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"commandes de contrôle des appareils"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Cartes et laissez-passer"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"cartes et laissez-passer"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Menu d\'alimentation"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Menu de l\'interrupteur"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Afficher les cartes et les laissez-passer"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"Afficher les commandes de l\'appareil"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Afficher les cartes, les laissez-passer et les commandes de l\'appareil"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"Afficher les commandes de contrôle des appareils"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Afficher les cartes, les laissez-passer et les commandes de contrôle des appareils"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"Afficher aucun contenu"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"Confidentialité"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Afficher les cartes et les commandes lorsque l\'écran est verrouillé"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Masquer les cartes et les commandes lorsque l\'écran est verrouillé"</string>
-    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Afficher les commandes de l\'appareil"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Afficher les commandes de contrôle des appareils"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Afficher les cartes et les laissez-passer"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Pour accéder aux commandes des appareils connectés, maintenez l\'interrupteur enfoncé"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Pour accéder à des éléments comme vos modes de paiement et vos cartes d\'embarquement, maintenir l\'interrupteur enfoncé."</string>
@@ -4858,7 +4904,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Arrêter la diffusion"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Désactiver la connexion VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Cela désactive aussi votre connexion 5G.\nDurant un appel vocal, vous ne pourrez pas utiliser la connexion Internet et certaines applications pourraient ne pas fonctionner."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"Lorsque vous utilisez deux modules SIM, ce téléphone est limité aux réseaux 4G. En savoir plus"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"Lorsque vous utilisez deux modules SIM, cette tablette est limitée aux réseaux 4G. En savoir plus"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"Lorsque vous utilisez deux modules SIM, cet appareil est limité aux réseaux 4G. En savoir plus"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Lorsque vous utilisez deux modules SIM, ce téléphone est limité aux réseaux 4G. "<annotation id="url">"Apprenez-en plus."</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Lorsque vous utilisez deux modules SIM, cette tablette est limitée aux réseaux 4G. "<annotation id="url">"Apprenez-en plus."</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Lorsque vous utilisez deux modules SIM, cet appareil est limité aux réseaux 4G. "<annotation id="url">"Apprenez-en plus."</annotation></string>
 </resources>
