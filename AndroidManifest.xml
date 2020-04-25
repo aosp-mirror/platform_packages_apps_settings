@@ -2269,6 +2269,7 @@
                   android:configChanges="mnc|mcc|keyboard|keyboardHidden|uiMode"
                   android:windowSoftInputMode="adjustResize"
                   android:screenOrientation="nosensor"
+                  android:taskAffinity="com.android.settings.CryptKeeper"
                   android:process=":CryptKeeper">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
