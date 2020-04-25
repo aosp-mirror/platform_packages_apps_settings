@@ -114,6 +114,7 @@ public class DataUsageSummaryTest {
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
+        doReturn(true).when(dataUsageSummary).hasActiveSubscription();
         doReturn(mContext).when(dataUsageSummary).getContext();
 
         doReturn(true).when(dataUsageSummary).removePreference(anyString());
@@ -134,6 +135,7 @@ public class DataUsageSummaryTest {
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
+        doReturn(false).when(dataUsageSummary).hasActiveSubscription();
         doReturn(mContext).when(dataUsageSummary).getContext();
 
         doReturn(true).when(dataUsageSummary).removePreference(anyString());
@@ -154,6 +156,7 @@ public class DataUsageSummaryTest {
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
+        doReturn(false).when(dataUsageSummary).hasActiveSubscription();
         doReturn(mContext).when(dataUsageSummary).getContext();
 
         doReturn(true).when(dataUsageSummary).removePreference(anyString());
@@ -177,6 +180,7 @@ public class DataUsageSummaryTest {
 
         final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
         doNothing().when(dataUsageSummary).enableProxySubscriptionManager(any());
+        doReturn(false).when(dataUsageSummary).hasActiveSubscription();
         doReturn(mContext).when(dataUsageSummary).getContext();
 
         doReturn(true).when(dataUsageSummary).removePreference(anyString());
