@@ -52,7 +52,7 @@ public final class AccessibilityUtilTest {
     private static final ComponentName DUMMY_COMPONENT_NAME2 = new ComponentName(DUMMY_PACKAGE_NAME,
             DUMMY_CLASS_NAME2);
     private static final String SOFTWARE_SHORTCUT_KEY =
-            Settings.Secure.ACCESSIBILITY_BUTTON_TARGET_COMPONENT;
+            Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
     private static final String HARDWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
 

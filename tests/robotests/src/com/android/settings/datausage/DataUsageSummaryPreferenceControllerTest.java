@@ -19,7 +19,6 @@ package com.android.settings.datausage;
 import static android.net.ConnectivityManager.TYPE_WIFI;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -159,8 +158,6 @@ public class DataUsageSummaryPreferenceControllerTest {
         doReturn(CARRIER_NAME).when(mSubscriptionInfo).getCarrierName();
         doReturn(mSubscriptionInfo).when(mController).getSubscriptionInfo(mDefaultSubscriptionId);
         doReturn(mSubscriptionPlans).when(mController).getSubscriptionPlans(mDefaultSubscriptionId);
-
-        doReturn(true).when(mController).hasSim();
     }
 
     @After
@@ -356,47 +353,8 @@ public class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    public void testSummaryUpdate_noSim_shouldSetWifiMode() {
-        mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mController.mDataUsageController = mDataUsageController;
-        doReturn(TelephonyManager.SIM_STATE_ABSENT).when(mTelephonyManager).getSimState();
-        doReturn(false).when(mController).hasSim();
-
-        final long now = System.currentTimeMillis();
-        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
-        info.warningLevel = BillingCycleSettings.MIB_IN_BYTES;
-        info.limitLevel = BillingCycleSettings.MIB_IN_BYTES;
-
-        final Intent intent = new Intent();
-
-        doReturn(info).when(mDataUsageController).getDataUsageInfo(any());
-        setupTestDataUsage(LIMIT1, USAGE1, now - UPDATE_BACKOFF_MS);
-
-        mController.updateState(mSummaryPreference);
-
-        verify(mSummaryPreference).setWifiMode(true /* isWifiMode */, info.period /* usagePeriod */,
-                false /* isSingleWifi */);
-        verify(mSummaryPreference).setLimitInfo(null);
-        verify(mSummaryPreference).setUsageNumbers(info.usageLevel, -1L, true);
-        verify(mSummaryPreference).setChartEnabled(false);
-        verify(mSummaryPreference).setUsageInfo(info.cycleEnd, -1L, null, 0, null);
-    }
-
-    @Test
     public void testMobileData_preferenceAvailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void testMobileData_noSimNoWifi_preferenceDisabled() {
-        final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        mController.init(subscriptionId);
-        mController.mDataUsageController = mDataUsageController;
-        doReturn(TelephonyManager.SIM_STATE_ABSENT).when(mTelephonyManager).getSimState();
-        doReturn(false).when(mController).hasSim();
-        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
-        assertThat(mController.getAvailabilityStatus())
-                        .isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
@@ -404,7 +362,6 @@ public class DataUsageSummaryPreferenceControllerTest {
         final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mController.init(subscriptionId);
         mController.mDataUsageController = mDataUsageController;
-        doReturn(TelephonyManager.SIM_STATE_ABSENT).when(mTelephonyManager).getSimState();
         when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
