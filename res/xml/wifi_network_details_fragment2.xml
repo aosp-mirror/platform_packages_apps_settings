@@ -31,10 +31,18 @@
         android:selectable="false"
         settings:isPreferenceVisible="false"/>
 
+    <!-- The preference to display the second summary -->
+    <com.android.settings.widget.LinkifySummaryPreference
+        android:key="second_summary"
+        android:icon="@drawable/ic_info_outline_24dp"
+        android:selectable="false"
+        settings:allowDividerAbove="false"/>
+
     <!-- Buttons -->
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="buttons"
-        android:selectable="false" />
+        android:selectable="false"
+        settings:allowDividerAbove="true"/>
 
     <!-- General Details Preferences -->
     <Preference

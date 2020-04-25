@@ -78,10 +78,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         super.onCreate(icicle);
         Context context = getContext();
 
-        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
-        // live within this fragment
-        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
-        mProxySubscriptionMgr.setLifecycle(getLifecycle());
+        enableProxySubscriptionManager(context);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
 
@@ -149,6 +146,14 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     @VisibleForTesting
     void addMobileSection(int subId) {
         addMobileSection(subId, null);
+    }
+
+    @VisibleForTesting
+    void enableProxySubscriptionManager(Context context) {
+        // Enable ProxySubscriptionMgr with Lifecycle support for all controllers
+        // live within this fragment
+        mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
+        mProxySubscriptionMgr.setLifecycle(getLifecycle());
     }
 
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
