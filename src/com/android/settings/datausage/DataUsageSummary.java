@@ -95,8 +95,8 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasMobileData) {
             addMobileSection(defaultSubId);
-            if (DataUsageUtils.hasSim(context) && hasWifiRadio) {
-                // If the device has a SIM installed, the data usage section shows usage for mobile,
+            if (hasActiveSubscription() && hasWifiRadio) {
+                // If the device has active SIM, the data usage section shows usage for mobile,
                 // and the WiFi section is added if there is a WiFi radio - legacy behavior.
                 addWifiSection();
             }
@@ -154,6 +154,13 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
         // live within this fragment
         mProxySubscriptionMgr = ProxySubscriptionManager.getInstance(context);
         mProxySubscriptionMgr.setLifecycle(getLifecycle());
+    }
+
+    @VisibleForTesting
+    boolean hasActiveSubscription() {
+        final List<SubscriptionInfo> subInfoList =
+                mProxySubscriptionMgr.getActiveSubscriptionsInfo();
+        return ((subInfoList != null) && (subInfoList.size() > 0));
     }
 
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {

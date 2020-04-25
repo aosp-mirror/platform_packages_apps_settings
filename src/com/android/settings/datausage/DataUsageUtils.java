@@ -151,22 +151,6 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
         return connectivityManager != null && connectivityManager.isNetworkSupported(TYPE_WIFI);
     }
 
-    public static boolean hasSim(Context context) {
-        // Access cache within ProxySubscriptionManager to speed up
-        final List<SubscriptionInfo> subInfoList =
-                ProxySubscriptionManager.getInstance(context)
-                .getActiveSubscriptionsInfo();
-        if ((subInfoList != null) && (subInfoList.size() > 0)) {
-            return true;
-        }
-
-        TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class);
-        final int simState = telephonyManager.getSimState();
-        // Note that pulling the SIM card returns UNKNOWN, not ABSENT.
-        return simState != TelephonyManager.SIM_STATE_ABSENT
-                && simState != TelephonyManager.SIM_STATE_UNKNOWN;
-    }
-
     /**
      * Returns the default subscription if available else returns
      * SubscriptionManager#INVALID_SUBSCRIPTION_ID
