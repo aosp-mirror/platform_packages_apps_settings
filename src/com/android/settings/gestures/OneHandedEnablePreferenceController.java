@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -45,5 +46,12 @@ public class OneHandedEnablePreferenceController extends TogglePreferenceControl
     @Override
     public boolean isChecked() {
         return OneHandedSettingsUtils.isOneHandedModeEnabled(mContext);
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return OneHandedSettingsUtils.isOneHandedModeEnabled(mContext)
+                ? mContext.getText(R.string.switch_on_text)
+                : mContext.getText(R.string.switch_off_text);
     }
 }
