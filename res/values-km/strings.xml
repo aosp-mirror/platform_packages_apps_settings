@@ -21,6 +21,7 @@
     <string name="create" msgid="986997212165228751">"បង្កើត"</string>
     <string name="allow" msgid="3763244945363657722">"អនុញ្ញាត"</string>
     <string name="deny" msgid="7326117222944479942">"បដិសេធ"</string>
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"បើក"</string>
     <string name="device_info_default" msgid="1406619232867343310">"មិន​ស្គាល់"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">ឥឡូវនេះអ្នកនៅសល់ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ជំហានទៀតដើម្បីក្លាយជាអ្នកអភិវឌ្ឍន៍។</item>
@@ -843,7 +844,7 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"បំភ្លេច​បណ្ដាញ"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"កែ​បណ្ដាញ"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"ដើម្បី​មើល​បណ្ដាញ​ដែល​មាន​ សូមបើក Wi-Fi ។"</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"កំពុង​ស្វែងរក​បណ្ដាញ​វ៉ាយហ្វាយ…"</string>
+    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"កំពុង​ស្វែងរក​បណ្ដាញ Wi‑Fi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"អ្នក​មិន​មាន​សិទ្ធិ​ដើម្បី​ប្ដូរ​បណ្ដាញ​វ៉ាយហ្វាយ​ទេ។"</string>
     <string name="wifi_more" msgid="8742256421693351035">"ច្រើន​ទៀត"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"រៀបចំ​ស្វ័យ​ប្រវត្តិ (WPS)"</string>
@@ -1634,16 +1635,28 @@
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"ហតស្ប៉ត​តែប៉ុណ្ណោះ"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"USB តែប៉ុណ្ណោះ"</string>
     <string name="tether_settings_summary_bluetooth_tethering_only" msgid="1451008625343274930">"ប៊្លូធូស​តែប៉ុណ្ណោះ"</string>
+    <string name="tether_settings_summary_ethernet_tethering_only" msgid="3582266687537419309">"អ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
     <string name="tether_settings_summary_hotspot_and_usb" msgid="5999349643653265016">"ហតស្ប៉ត, USB"</string>
     <string name="tether_settings_summary_hotspot_and_bluetooth" msgid="810514646401708557">"ហតស្ប៉ត ប៊្លូធូស"</string>
+    <string name="tether_settings_summary_hotspot_and_ethernet" msgid="5489192670354277152">"ហតស្ប៉ត អ៊ីសឺរណិត"</string>
     <string name="tether_settings_summary_usb_and_bluetooth" msgid="1355680331767261967">"USB, ប៊្លូធូស"</string>
+    <string name="tether_settings_summary_usb_and_ethernet" msgid="2195017679820919905">"USB, អ៊ីសឺរណិត"</string>
+    <string name="tether_settings_summary_bluetooth_and_ethernet" msgid="1015253926959211012">"ប៊្លូធូស អ៊ីសឺរណិត"</string>
     <string name="tether_settings_summary_hotspot_and_usb_and_bluetooth" msgid="2949043525073791732">"ហតស្ប៉ត, USB, ប៊្លូធូស"</string>
+    <string name="tether_settings_summary_hotspot_and_usb_and_ethernet" msgid="5178946567323581144">"ហតស្ប៉ត, USB, អ៊ីសឺរណិត"</string>
+    <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"ហតស្ប៉ត ប៊្លូធូស អ៊ីសឺរណិត"</string>
+    <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, ប៊្លូធូស, អ៊ីសឺរណិត"</string>
+    <string name="tether_settings_summary_all" msgid="7565193614882005775">"ហតស្ប៉ត, USB, ប៊្លូធូស, អ៊ីសឺរណិត"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"មិនកំពុង​ចែករំលែក​អ៊ីនធឺណិត​ជាមួយ​ឧបករណ៍​ផ្សេងទៀត​នោះទេ"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"ការ​ភ្ជាប់"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"កុំប្រើ​ហតស្ប៉ត Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ USB តែប៉ុណ្ណោះ"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ​ប៊្លូធូស​តែប៉ុណ្ណោះ"</string>
+    <string name="disable_wifi_hotspot_when_ethernet_on" msgid="4123242400542103599">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ​អ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_on" msgid="5258774769658150180">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ USB និង​ប៊្លូធូស​តែប៉ុណ្ណោះ"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_ethernet_on" msgid="7126313562907225612">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ USB និង​អ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
+    <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ​ប៊្លូធូស និងអ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
+    <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"ចែករំលែក​អ៊ីនធឺណិត​តាមរយៈ USB, ប៊្លូធូស និងអ៊ីសឺរណិត​តែប៉ុណ្ណោះ"</string>
     <string name="usb_title" msgid="1157283449840612901">"យូអេសប៊ី"</string>
     <string name="usb_tethering_button_text" msgid="7364633823180913777">"ការ​ភ្ជាប់​តាម USB"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"ចែករំលែកការភ្ជាប់អ៊ីនធឺណិតរបស់ទូរសព្ទតាមរយៈ USB"</string>
@@ -2123,7 +2136,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"ដើម្បី​បើក ឬបិទ​មុខងារ​ភាពងាយប្រើ សូមអូស​ឡើងលើ​ពីផ្នែកខាងក្រោម​នៃ​អេក្រង់ ដោយប្រើ​ម្រាមដៃ 2។\n\nដើម្បី​ប្ដូរ​រវាង​មុខងារ​ផ្សេងៗ សូមអូស​ឡើងលើ ដោយប្រើ​ម្រាមដៃ 2 រួច​សង្កត់ឱ្យជាប់។"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"ដើម្បី​បើក ឬបិទ​មុខងារ​ភាពងាយប្រើ សូមអូស​ឡើងលើ​ពីផ្នែកខាងក្រោម​នៃ​អេក្រង់ ដោយប្រើ​ម្រាមដៃ 3។\n\nដើម្បី​ប្ដូរ​រវាង​មុខងារ​ផ្សេងៗ សូមអូស​ឡើងលើ ដោយប្រើ​ម្រាមដៃ 3 រួចសង្កត់ឱ្យជាប់។"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"យល់ហើយ"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ផ្លូវកាត់ <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"ផ្លូវកាត់​<xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"ប៊ូតុង​ភាពងាយស្រួល"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"អូស​ឡើង​លើ ដោយប្រើ​ម្រាមដៃ 2"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"អូស​ឡើង​លើ ដោយប្រើ​ម្រាមដៃ 3"</string>
@@ -2722,7 +2735,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"កម្រងព័ត៌មានការងារ"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"គ្រប់គ្រងដោយ​ស្ថាប័ន​របស់អ្នក"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"កម្មវិធី និង​ការ​ជូនដំណឹង​បាន​បិទ"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"លុប​ប្រវត្តិរូប​ការងារ"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"លុបកម្រងព័ត៌មានការងារ"</string>
     <string name="background_data" msgid="321903213000101158">"ទិន្នន័យ​ផ្ទៃ​ខាង​ក្រោយ"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"កម្មវិធី​អាច​ធ្វើ​សម​កាល​កម្ម​ ផ្ញើ និង​ទទួល​ទិន្នន័យ​នៅ​ពេល​ណា​មួយ"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"បិទ​ទិន្នន័យ​ផ្ទៃ​ខាង​ក្រោយ?"</string>
@@ -2993,7 +3006,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"លុប​ខ្លួន​ឯង​ផ្ទាល់?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"លុបអ្នកប្រើប្រាស់​នេះ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"លុប​ប្រវត្តិ​រូប​នេះ?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"លុប​ប្រវត្តិរូប​ការងារ?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"លុបកម្រងព័ត៌មានការងារឬ?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"អ្នក​នឹង​បាត់បង់​ទំហំ​ ព្រម​ទាំង​ទិន្នន័យ​របស់​អ្នក​លើ​កុំព្យូទ័រ​បន្ទះ​នេះ​។ អ្នក​មិន​អាច​ធ្វើ​សកម្មភាព​នេះ​វិញ​បាន​ទេ។"</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"អ្នក​នឹង​បាត់បង់​ទំហំ និង​ទិន្នន័យ​របស់​អ្នក​លើ​ទូរស័ព្ទ​នេះ។ អ្នក​មិន​អាច​ធ្វើ​សកម្មភាព​នេះ​វិញ​បាន​ទេ។"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"កម្មវិធី និង​ទិន្នន័យ​ទាំងអស់​នឹង​ត្រូវ​បាន​លុប។"</string>
@@ -3066,10 +3079,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"ការហៅទូរសព្ទតាមរយៈ 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"ប្រើសេវាកម្ម LTE ដើម្បីធ្វើឱ្យសំឡេង និងការប្រាស្រ័យទាក់ទង​ផ្សេងទៀតប្រសើរជាងមុន ​(បានណែនាំ)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"ប្រើប្រាស់​សេវាកម្ម 4G ដើម្បីធ្វើឱ្យ​សំឡេង និង​ការ​ប្រាស្រ័យ​ទាក់ទង​ផ្សេងទៀតប្រសើរជាងមុន (បានណែនាំ)"</string>
-    <string name="contact_discovery_opt_in_title" msgid="4076990635900099116">"ការរកមើលទំនាក់ទំនង"</string>
-    <string name="contact_discovery_opt_in_summary" msgid="4104310593310967300">"អនុញ្ញាតឱ្យក្រុមហ៊ុន​សេវាទូរសព្ទរបស់អ្នករកមើលថាមុខងារហៅទូរសព្ទណាខ្លះ ដែលទំនាក់ទំនងរបស់អ្នកអាចប្រើបាន។"</string>
-    <string name="contact_discovery_opt_in_dialog_title" msgid="6278407286820554079">"បើកការរកមើលទំនាក់ទំនងឬ?"</string>
-    <string name="contact_discovery_opt_in_dialog_message" msgid="4989532058109978769">"លេខទូរសព្ទ​ទាំងអស់​នៅក្នុង​ទំនាក់ទំនង​របស់អ្នក​នឹងត្រូវបាន​ផ្ញើទៅ​ក្រុមហ៊ុន​សេវាទូរសព្ទ​របស់អ្នក​ម្ដងម្កាល ដើម្បី​រកមើលថា​មុខងារហៅទូរសព្ទ​ណាខ្លះ ដែលអាច​ប្រើបាន។"</string>
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"ផ្ញើ​ទំនាក់ទំនង​ទៅ​ក្រុមហ៊ុន​សេវាទូរសព្ទ"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"ផ្ញើ​លេខទូរសព្ទ​របស់​ទំនាក់ទំនង​អ្នក ដើម្បី​ផ្ដល់​មុខងារ​ដែលប្រសើរជាងមុន"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"ផ្ញើ​ទំនាក់ទំនង​ទៅ <xliff:g id="CARRIER">%1$s</xliff:g> ដែរទេ​?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"ផ្ញើទំនាក់ទំនងទៅក្រុមហ៊ុនសេវាទូរសព្ទរបស់អ្នកដែរទេ?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"លេខទូរសព្ទ​របស់​ទំនាក់ទំនង​អ្នក​នឹង​ត្រូវបាន​ផ្ញើ​ម្ដងម្កាល​ទៅ <xliff:g id="CARRIER">%1$s</xliff:g>។<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ព័ត៌មាន​នេះ​កំណត់​ថាតើ​ទំនាក់ទំនង​របស់អ្នក​អាច​ប្រើ​មុខងារ​ជាក់លាក់​ដូចជា​ការហៅជាវីដេអូ ឬ​មុខងារ​ផ្ញើសារ​មួយចំនួន​ឬអត់​។"</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"លេខទូរសព្ទ​របស់​ទំនាក់ទំនង​អ្នក​នឹង​ត្រូវបាន​ផ្ញើ​ម្ដងម្កាល​ទៅ​ក្រុមហ៊ុន​សេវាទូរសព្ទរបស់អ្នក។<xliff:g id="EMPTY_LINE">
+
+</xliff:g>ព័ត៌មាន​នេះ​កំណត់​ថាតើ​ទំនាក់ទំនង​របស់អ្នក​អាច​ប្រើ​មុខងារ​ជាក់លាក់​ដូចជា​ការហៅជាវីដេអូ ឬ​មុខងារ​ផ្ញើសារ​មួយចំនួន​ឬអត់​។"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"ប្រភេទ​បណ្ដាញ​​ដែល​​ពេញចិត្ត"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (បាន​ណែនាំ)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"សារ MMS"</string>
@@ -3154,6 +3173,7 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"ប៊្លូធូស, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"ប៊្លូធូស"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"មិនអាចប្រើបានទេ ដោយសារ NFC ត្រូវបានបិទ"</string>
+    <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ដើម្បី​ប្រើ សូមដំឡើង​កម្មវិធី​បង់ប្រាក់​ជាមុនសិន"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"កម្មវិធី និងការជូនដំណឹង"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"កម្មវិធី​ថ្មីៗ កម្មវិធីលំនាំដើម"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"មិនអាច​ចូល​ប្រើ​ការ​ជូន​ដំណឹងបានទេ​សម្រាប់​កម្មវិធី​នៅក្នុង​កម្រង​ព័ត៌មាន​ការងារ។"</string>
@@ -3312,18 +3332,18 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"អនុញ្ញាត​សញ្ញា​ដែលមើល​ឃើញ"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"ជម្រើស​បង្ហាញ​សម្រាប់​ការជូនដំណឹង​ដែលបានលាក់"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"នៅ​ពេល​បើក​មុខងារ​កុំ​រំខាន"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"គ្មានសំឡេង​ពីការជូន​ដំណឹងទេ"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"គ្មានសំឡេង​ពីការជូន​ដំណឹង"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"អ្នក​នឹង​ឃើញ​ការ​ជូនដំណឹង​នៅលើអេក្រង់​របស់អ្នក"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"នៅ​ពេល​មាន​ការ​ជូនដំណឹង ទូរសព្ទ​របស់អ្នក​នឹង​មិន​បន្លឺ​សំឡេង ឬ​ញ័រ​ទេ។"</string>
-    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង​ទេ"</string>
+    <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"អ្នក​នឹង​មិនឃើញ ឬឮការជូនដំណឹង​ទេ"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"ទូរសព្ទ​របស់អ្នក​នឹងមិន​បង្ហាញ ញ័រ ឬ​បញ្ចេញ​សំឡេង​សម្រាប់​ការជូនដំណឹង​ថ្មី ឬ​ដែលមាន​ស្រាប់​នោះទេ។ សូមចាំថា ការជូនដំណឹង​សំខាន់ៗ​សម្រាប់​សកម្មភាព និង​ស្ថានភាព​ទូរសព្ទ​នឹង​នៅតែបង្ហាញ​ដដែល។\n\nនៅពេល​ដែលអ្នក​បិទ​មុខងារកុំ​រំខាន សូម​ស្វែងរក​ការជូនដំណឹង​ដែល​មិនបាន​មើល ដោយ​អូសអេក្រង់​របស់អ្នក​ពី​លើចុះ​ក្រោម។"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"តាម​បំណង"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"បើក​ការ​កំណត់​តាមបំណង"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"លុប​ការ​កំណត់​តាម​បំណង"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"គ្មានសំឡេង​ពីការជូន​ដំណឹងទេ"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"គ្មានសំឡេង​ពីការជូន​ដំណឹង"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"លាក់​មួយ​ផ្នែក"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង​ទេ"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"ការ​ដាក់​កំហិត​តាម​បំណង"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"នៅ​ពេល​អេកេ្រង់​បើក"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"នៅពេល​អេក្រង់​បិទ"</string>
@@ -3334,7 +3354,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"លាក់រូប​របារស្ថានភាព​នៅខាងលើ​អេក្រង់"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"លាក់ស្លាក​ជូនដំណឹង​នៅលើ​រូប​កម្មវិធី"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"កុំ​ដាស់​សម្រាប់ការ​ជូនដំណឹង"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"លាក់ពី​ផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"លាក់ពី​ផ្ទាំង​ទាញចុះ"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"កុំឱ្យសោះ"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"នៅពេលអេក្រង់បិទ"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"នៅពេលអេក្រង់បើក"</string>
@@ -3387,8 +3407,8 @@
     <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"នៅ​ពេល​មុខងារ​កុំរំខាន​បើក សារ ការរំលឹក និង​ព្រឹត្តិការណ៍​នានានឹង​​ត្រូវបានបិទ​សំឡេង លើក​លែង​តែធាតុ​ដែល​អ្នកអនុញ្ញាត​ខាង​លើតែប៉ុណ្ណោះ។ អ្នក​អាច​កែតម្រូវ​ការកំណត់​សារ ដើម្បី​អនុញ្ញាត​​ឱ្យ​មិត្តភ័ក្តិ គ្រួសារ ឬ​ទំនាក់ទំនង​ផ្សេង​ទៀត​របស់អ្នកអាច​ទាក់ទង​អ្នកបាន។"</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"រួចរាល់"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"ការកំណត់"</string>
-    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង​ទេ"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"គ្មានសំឡេង​ពីការជូន​ដំណឹងទេ"</string>
+    <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"គ្មាន​រូបភាព ឬសំឡេងពីការជូនដំណឹង"</string>
+    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"គ្មានសំឡេង​ពីការជូន​ដំណឹង"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"អ្នកនឹង​មិនឃើញ ឬមិន​​ឮការជូន​ដំណឹងទេ។ ការហៅ​ទូរសព្ទ​ពីទំនាក់​ទំនងមានផ្កាយ និង​អ្នកហៅ​ទូរសព្ទ​ដដែលៗ​ត្រូវបាន​អនុញ្ញាត។"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ការកំណត់​បច្ចុប្បន្ន)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"ប្ដូរ​ការកំណត់​ការជូនដំណឹង​នៃមុខងារ​កុំរំខាន?"</string>
@@ -3436,7 +3456,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"ការជូនដំណឹង​មួយចំនួន​អាចបង្ហាញ​ជាពពុះនៅលើអេក្រង់"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"ការជូនដំណឹងមួយចំនួន និងខ្លឹមសារ​ផ្សេងទៀត​អាចបង្ហាញជាពពុះនៅលើអេក្រង់។ ដើម្បី​បើកពពុះ សូមចុច​លើវា។ ដើម្បី​បិទពពុះ សូមអូសវាទៅផ្នែកខាងក្រោមអេក្រង់។"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"ពពុះ"</string>
-    <string name="bubbles_conversation_toggle_summary" msgid="7518341992582158610">"សារ​ថ្មី​ៗនឹង​បង្ហាញ​នៅលើ​អេក្រង់"</string>
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"ការកំណត់​ទាំងអស់​សម្រាប់​ពពុះ"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"បង្ហាញ​ការសន្ទនានេះ​ជាពពុះ"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"បង្ហាញ​រូប​អណ្ដែត​នៅផ្នែកខាងលើ​នៃ​កម្មវិធី"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"អនុញ្ញាត​ឱ្យ​ <xliff:g id="APP_NAME">%1$s</xliff:g> បង្ហាញ​ការជូនដំណឹង​មួយចំនួន​ជាពពុះ"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"បើក​ពពុះសម្រាប់​ឧបករណ៍​ឬ​?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"ការបើក​ពពុះសម្រាប់​កម្មវិធី​នេះ​ក៏នឹង​បើក​ពពុះសម្រាប់​ឧបករណ៍​របស់អ្នក​ផងដែរ​។\n\nសកម្មភាពនេះ​ប៉ះពាល់ដល់​កម្មវិធី ឬ​ការសន្ទនា​ផ្សេងទៀត​ដែល​ត្រូវបានអនុញ្ញាតឱ្យ​បង្ហាញជាពពុះ​។"</string>
@@ -3457,11 +3479,11 @@
     <string name="gentle_notifications_also_display" msgid="8617545395880297691">"បង្ហាញ​ផងដែរ​នៅក្នុង"</string>
     <string name="gentle_notifications_display_status" msgid="7410244447768694856">"របារ​ស្ថានភាព"</string>
     <string name="gentle_notifications_display_lock" msgid="1914245082527924144">"អេក្រង់ចាក់សោ"</string>
-    <string name="gentle_notifications_education" msgid="5957509621826384362">"ការជូនដំណឹងស្ងាត់ៗ​បិទសំឡេង និងបង្ហាញ​នៅក្នុង​ផ្ទាំងជូនដំណឹងធ្លាក់ចុះ​ជានិច្ច"</string>
-    <string name="gentle_notifications_display_summary_shade" msgid="7616926954719310445">"បង្ហាញ​នៅក្នុងផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ​តែប៉ុណ្ណោះ"</string>
-    <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"បង្ហាញ​នៅក្នុងផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ និងនៅលើ​អេក្រង់ចាក់សោ"</string>
-    <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"បង្ហាញ​នៅក្នុងផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ និងរបារ​ស្ថានភាព"</string>
-    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"បង្ហាញ​នៅក្នុងផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ របារ​ស្ថានភាព និងនៅលើ​អេក្រង់ចាក់សោ"</string>
+    <string name="gentle_notifications_education" msgid="5957509621826384362">"ការជូនដំណឹងស្ងាត់ៗ​បិទសំឡេង និងបង្ហាញ​ក្នុង​ផ្ទាំង​ទាញចុះជានិច្ច"</string>
+    <string name="gentle_notifications_display_summary_shade" msgid="7616926954719310445">"បង្ហាញ​ក្នុងផ្ទាំង​ទាញចុះ​តែប៉ុណ្ណោះ"</string>
+    <string name="gentle_notifications_display_summary_shade_lock" msgid="3936088046873705625">"បង្ហាញ​ក្នុងផ្ទាំង​ទាញចុះ និងនៅលើ​អេក្រង់ចាក់សោ"</string>
+    <string name="gentle_notifications_display_summary_shade_status" msgid="3363137853729359907">"បង្ហាញ​ក្នុងផ្ទាំង​ទាញចុះ និងរបារ​ស្ថានភាព"</string>
+    <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"បង្ហាញ​ក្នុងផ្ទាំង​ទាញចុះ របារ​ស្ថានភាព និងនៅលើ​អេក្រង់ចាក់សោ"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"លាក់​ការជូនដំណឹង​ស្ងាត់ៗ​នៅក្នុង​របារ​ស្ថានភាព"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"ភ្លើងលោត"</string>
     <string name="lock_screen_notifications_title" msgid="3063951257121435570">"ការជូនដំណឹង​នៅលើ​អេក្រង់ចាក់សោ"</string>
@@ -3501,9 +3523,22 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"បញ្ចូលទៅ​ផ្នែក​សន្ទនា"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"គ្រប់គ្រង​ការសន្ទនា"</string>
     <string name="important_conversations" msgid="1233893707189659401">"ការសន្ទនា​អាទិភាព"</string>
-    <string name="other_conversations" msgid="7218658664423361043">"ការ​សន្ទនា​ផ្សេងទៀត"</string>
-    <string name="important_bubble" msgid="3820813960404079472">"បង្ហាញ​ការសន្ទនា​សំខាន់ៗ​ជាពពុះ"</string>
-    <string name="important_conversation_behavior_summary" msgid="3813751382595404403">"ការសន្ទនា​សំខាន់ៗ​បង្ហាញ​នៅ​ផ្នែកខាងលើ​នៃ​ផ្ទាំង​ទាញចុះ។ អ្នកក៏អាចកំណត់​ការសន្ទនាទាំងនោះឱ្យ​បង្ហាញជា​ពពុះ និងផ្អាក​មុខងារកុំ​រំខាន​ បានផងដែរ។"</string>
+    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
+    <skip />
+    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
+    <skip />
+    <!-- no translation found for other_conversations (8666033204953175307) -->
+    <skip />
+    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
+    <skip />
+    <!-- no translation found for important_bubble (7911698275408390846) -->
+    <skip />
+    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
+    <skip />
+    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
+    <skip />
     <string name="notification_importance_min" msgid="4609688642942787774">"បង្ហាញ​ដោយ​ស្ងៀម​ស្ងាត់ ហើយ​បង្រួម"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"បង្ហាញ​ស្ងាត់ៗ"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"បន្លឺ​សំឡេង"</string>
@@ -3520,11 +3555,12 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"អនុញ្ញាតឲ្យកម្មវិធីបន្លឺសំឡេង ញ័រ និង/ឬលោតបង្ហាញការ​ជូន​ដំណឹងនៅលើអេក្រង់"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"អាទិភាព"</string>
     <string name="notification_channel_summary_priority" msgid="6688477880223319982">"បង្ហាញ​នៅខាងលើ​ផ្នែកសន្ទនា និង​បង្ហាញជា​ពពុះ។"</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"បង្រួម​ការជូនដំណឹង​ទៅជាមួយជួរ នៅក្នុង​ផ្ទាំងជូនដំណឹង​ធ្លាក់ចុះ"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"បង្រួម​ការជូនដំណឹង​ទៅមួយជួរ ក្នុង​ផ្ទាំង​ទាញចុះ"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"ជួយឱ្យ​អ្នក​ផ្តោតអារម្មណ៍​ ដោយមិនឮសំឡេង ឬ​ការញ័រ"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ធ្វើឱ្យ​អ្នក​ចាប់អារម្មណ៍​តាមរយៈ​សំឡេង ឬ​ការញ័រ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"បង្ហាញការ​ជូនដំណឹងជា​ផ្ទាំងនៅផ្នែក​ខាងលើ​អេក្រង់ នៅពេល​ឧបករណ៍មិនជាប់សោ"</string>
-    <string name="notification_switch_label" msgid="6022236996552304892">"ការជូនដំណឹង​ទាំងអស់​របស់ <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_switch_label (8029371325967501557) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"ការជូនដំណឺង​ដែល​មានភាព​បត់បែន"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~ការជូន​ដំណឹង <xliff:g id="NUMBER_1">%d</xliff:g> ក្នុងមួយថ្ងៃ</item>
@@ -3694,7 +3730,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"ហៅ"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"ការហៅទូរសព្ទ"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"ការហៅទូរសព្ទ​ដែលអាច​ផ្អាកបាន"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"ដើម្បី​ប្រាកដថា ការហៅទូរសព្ទ​ដែលមាន​ការអនុញ្ញាត​អាចបញ្ចេញ​សំឡេងបាន សូមពិនិត្យមើល​ថាឧបករណ៍​ត្រូវបានកំណត់ឱ្យរោទ៍"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"ដើម្បី​ប្រាកដថា ការហៅទូរសព្ទ​ដែលមាន​ការអនុញ្ញាត​អាចរោទ៍សំឡេងបាន សូមពិនិត្យមើល​ថាឧបករណ៍​ត្រូវបានកំណត់ឱ្យរោទ៍"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"បាន​ទប់ស្កាត់​ការហៅចូល​សម្រាប់ ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ ។ អ្នកអាចកែតម្រូវការកំណត់ ដើម្បីអនុញ្ញាតឱ្យមិត្តភ័ក្តិ គ្រួសារ ឬទំនាក់ទំនងផ្សេងទៀតរបស់អ្នកអាចទាក់ទងអ្នកបាន។"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ទំនាក់​ទំនង​​​​​មាន​ផ្កាយ"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3707,7 +3743,7 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"សារ​ដែលអាច​ផ្អាកបាន"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"ដើម្បី​ប្រាកដថា សារ​ដែលមាន​ការអនុញ្ញាត​អាចបញ្ចេញ​សំឡេងបាន សូមពិនិត្យមើល​ថាឧបករណ៍​ត្រូវបានកំណត់ឱ្យរោទ៍"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"បានទប់ស្កាត់​សារចូល​សម្រាប់ ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’។ អ្នកអាចកែតម្រូវការកំណត់ ដើម្បីអនុញ្ញាតឱ្យមិត្តភ័ក្តិ គ្រួសារ ឬទំនាក់ទំនងផ្សេងទៀតរបស់អ្នកអាចទាក់ទងអ្នកបាន។"</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"<xliff:g id="SENDER_CATEGORY">%s</xliff:g> ទាំងអស់​អាច​ទាក់ទង​អ្នកបាន"</string>
+    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"<xliff:g id="SENDER_CATEGORY">%s</xliff:g>​ទាំងអស់​អាច​ទាក់ទង​អ្នកបាន"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"ទំនាក់ទំនង <xliff:g id="NUM_CONTACTS">%d</xliff:g>"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"គ្រប់គ្នា"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"ទំនាក់ទំនង"</string>
@@ -4337,7 +4373,7 @@
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"បិទ​ការដកសិទ្ធិ adb ដោយស្វ័យប្រវត្តិ​សម្រាប់ប្រព័ន្ធ​ដែលមិនបានភ្ជាប់​ឡើងវិញ​ក្នុងអំឡុង​រយៈពេល​លំនាំដើម (7 ថ្ងៃ) ឬ​រយៈពេល​ដែលបាន​កំណត់​រចនាសម្ព័ន្ធ​ដោយអ្នក​ប្រើប្រាស់ (តិចបំផុត 1 ថ្ងៃ)។"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"ដាន Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"ឧបករណ៍​ចាប់សញ្ញាបានបិទ"</string>
-    <string name="managed_profile_settings_title" msgid="3400923723423564217">"ការកំណត់ប្រវត្តិរូបការងារ"</string>
+    <string name="managed_profile_settings_title" msgid="3400923723423564217">"ការកំណត់កម្រងព័ត៌មានការងារ"</string>
     <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"ការស្វែងរកទំនាក់ទំនង"</string>
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"អនុញ្ញាតការស្វែងរកទំនាក់ទំនងដោយស្ថាប័នរបស់អ្នកដើម្បីកំណត់អត្តសញ្ញាណអ្នកហៅ និងលេខទំនាក់ទំនង"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"ប្រតិទិនអន្តរ​កម្រងព័ត៌មាន"</string>
@@ -4843,10 +4879,17 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"បង្ហាញ​កាត និង​សំបុត្រ"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"បង្ហាញ​ផ្ទាំងគ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"បង្ហាញ​ផ្ទាំងគ្រប់គ្រង​ឧបករណ៍ កាត និង​សំបុត្រ"</string>
+    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
+    <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"កុំ​បង្ហាញ​ខ្លឹមសារ"</string>
-    <string name="power_menu_privacy" msgid="5048326557686732700">"ឯកជនភាព"</string>
+    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
+    <skip />
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"បង្ហាញ​បណ្ណឥណទាន និង​ការគ្រប់គ្រង នៅពេល​ជាប់សោ"</string>
+    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"លាក់​បណ្ណឥណទាន និង​ការគ្រប់គ្រង នៅពេល​ជាប់សោ"</string>
+    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
+    <skip />
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"បង្ហាញ​ផ្ទាំងគ្រប់គ្រង​ឧបករណ៍"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"បង្ហាញ​បណ្ណឥណទាន និង​សំបុត្រធ្វើដំណើរ"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"ដើម្បី​ចូលប្រើ​ការគ្រប់គ្រង​សម្រាប់​ឧបករណ៍​ដែលបានភ្ជាប់ សូម​សង្កត់​ប៊ូតុងថាមពល​ឱ្យជាប់"</string>
@@ -4858,7 +4901,7 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"បញ្ឈប់​ការបញ្ជូន"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"បិទ VoLTE ឬ?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"សកម្មភាពនេះក៏បិទ​ការតភ្ជាប់ 5G របស់អ្នកផងដែរ។\nអំឡុងពេលហៅជាសំឡេង អ្នក​មិនអាចប្រើ​អ៊ីនធឺណិត ហើយកម្មវិធីមួយចំនួនប្រហែលជាមិនដំណើរការទេ។"</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4190689671789979105">"នៅពេល​ប្រើស៊ីម 2 ទូរសព្ទនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ ស្វែងយល់បន្ថែម"</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="4818918108340095381">"នៅពេល​ប្រើស៊ីម 2 ថេប្លេតនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ ស្វែងយល់បន្ថែម"</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="3901515020072229315">"នៅពេល​ប្រើស៊ីម 2 ឧបករណ៍នេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ ស្វែងយល់បន្ថែម"</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"នៅពេល​ប្រើស៊ីម 2 ទូរសព្ទនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"។"</string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"នៅពេល​ប្រើស៊ីម 2 ថេប្លេតនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"។"</string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"នៅពេល​ប្រើស៊ីម 2 ឧបករណ៍នេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"។"</string>
 </resources>

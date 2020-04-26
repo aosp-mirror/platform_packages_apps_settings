@@ -140,7 +140,7 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                                 getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
                         final UserManager um = (UserManager)
                                 getContext().getSystemService(Context.USER_SERVICE);
-                        int profileOwnerUserId = Utils.getManagedProfileId(
+                        final int profileOwnerUserId = Utils.getManagedProfileId(
                                 um, UserHandle.myUserId());
                         admin = new EnforcedAdmin(dpm.getProfileOwnerAsUser(profileOwnerUserId),
                                 null, UserHandle.of(profileOwnerUserId));
@@ -161,6 +161,11 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
         final ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         setupNetworksDetailTracker();
         final WifiEntry wifiEntry = mNetworkDetailsTracker.getWifiEntry();
+
+        final WifiSecondSummaryController2 wifiSecondSummaryController2 =
+                new WifiSecondSummaryController2(context);
+        wifiSecondSummaryController2.setWifiEntry(wifiEntry);
+        mControllers.add(wifiSecondSummaryController2);
 
         mWifiDetailPreferenceController2 = WifiDetailPreferenceController2.newInstance(
                 wifiEntry,
