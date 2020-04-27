@@ -30,16 +30,18 @@ public class ZenDurationDialogPreference extends CustomDialogPreferenceCompat {
     public ZenDurationDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setSingleLineTitle(false);
     }
 
     public ZenDurationDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setSingleLineTitle(false);
     }
 
     public ZenDurationDialogPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setSingleLineTitle(false);
     }
-
 
     @Override
     protected void onPrepareDialogBuilder(AlertDialog.Builder builder,
