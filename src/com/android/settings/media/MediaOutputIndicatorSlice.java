@@ -120,14 +120,17 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         return mWorker;
     }
 
-    private boolean isVisible() {
+    @VisibleForTesting
+    boolean isVisible() {
         // To decide Slice's visibility.
         // Return true if
         // 1. AudioMode is not in on-going call
         // 2. worker is not null
         // 3. Available devices are more than 0
+        // 4. The local media session is active and the state is playing.
         return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
-                && getWorker().getMediaDevices().size() > 0;
+                && getWorker().getMediaDevices().size() > 0
+                && getWorker().getActiveLocalMediaController() != null;
     }
 }
