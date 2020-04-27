@@ -205,7 +205,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
     }
 
     private CharSequence delayTimeToString(int delayMillis) {
-        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.OTHER;
+        final int quantity = (delayMillis == 1000) ? Quantity.ONE : Quantity.FEW;
         final float delaySecond = (float) delayMillis / 1000;
         // Only show integer when delay time is 1.
         final String decimalFormat = (delaySecond == 1) ? "%.0f" : "%.1f";
