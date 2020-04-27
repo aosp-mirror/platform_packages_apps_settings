@@ -90,6 +90,9 @@ import java.util.List;
  *
  * The second is for Setup Wizard, with a simplified interface that hides the action bar
  * and menus.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link WifiSettings2}.
  */
 @SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
