@@ -23,6 +23,12 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPointPreference;
 
+/**
+ * An AP preference for the currently connected AP.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link com.android.settingslib.wifi.LongPressWifiEntryPreference}.
+ */
 public class LongPressAccessPointPreference extends AccessPointPreference {
 
     private final Fragment mFragment;
