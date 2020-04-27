@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"Crea"</string>
     <string name="allow" msgid="3763244945363657722">"Consenti"</string>
     <string name="deny" msgid="7326117222944479942">"Rifiuta"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Attiva"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Sconosciuto"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Ora ti mancano <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> passaggi per diventare uno sviluppatore.</item>
@@ -2138,7 +2137,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Per attivare o disattivare una funzione di accessibilità, scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con tre dita e tieni premuto."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Scorciatoia <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"Pulsante Accessibilità"</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Scorri verso l\'alto con due dita"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Scorri verso l\'alto con tre dita"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tocca il pulsante Accessibilità"</string>
@@ -2146,7 +2146,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con due dita e tieni premuto."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con tre dita e tieni premuto."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tieni premuti i tasti del volume"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tieni premuti entrambi i tasti del volume"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tieni premuti entrambi i tasti del volume."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tocca tre volte lo schermo"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Tocca velocemente lo schermo tre volte. Questa scorciatoia potrebbe rallentare il dispositivo."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzate"</string>
@@ -2422,8 +2422,8 @@
       <item quantity="one">%1$s app con limitazione recente</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d app hanno un consumo elevato della batteria in background</item>
-      <item quantity="one">%1$s app ha un consumo elevato della batteria in background</item>
+      <item quantity="other">Le app %2$d consumano molta batteria in background</item>
+      <item quantity="one">L\'app %1$s consuma molta batteria in background</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Queste app non possono essere eseguite in background</item>
@@ -3080,18 +3080,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chiamate 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usa i servizi LTE per migliorare le comunicazioni vocali e di altro tipo (consigliato)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usa i servizi 4G per migliorare le comunicazioni vocali e di altro tipo (consigliato)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Invia contatti all\'operatore"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Invia i numeri di telefono dei tuoi contatti per fornire funzionalità avanzate"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Vuoi inviare i contatti a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Vuoi inviare i contatti al tuo operatore?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"I numeri di telefono dei tuoi contatti verranno inviati periodicamente a <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Queste informazioni consentono di stabilire se i tuoi contatti possono usare determinate funzionalità, ad esempio videochiamate o alcune funzionalità di messaggistica."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"I numeri di telefono dei tuoi contatti verranno inviati periodicamente al tuo operatore.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Queste informazioni consentono di stabilire se i tuoi contatti possono usare determinate funzionalità, ad esempio videochiamate o alcune funzionalità di messaggistica."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipo di rete preferito"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (opzione consigliata)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Messaggi MMS"</string>
@@ -3774,7 +3772,7 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"eventi"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Consenti alle app di ignorarla"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"App che possono interrompere"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Seleziona più app"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Seleziona altre app"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nessuna app selezionata"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Nessuna app può interrompere"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Aggiungi app"</string>
@@ -4142,7 +4140,7 @@
     <string name="screen_zoom_conversation_timestamp_2" msgid="472183807915497199">"Mar 18:01"</string>
     <string name="screen_zoom_conversation_timestamp_3" msgid="1659313906250856104">"Mar 18:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2046797647382623313">"Mar 18:03"</string>
-    <string name="disconnected" msgid="3469373726996129247">"Non connesso"</string>
+    <string name="disconnected" msgid="3469373726996129247">"Non connessa"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Non collegata"</string>
     <string name="data_usage_summary_format" msgid="6844301859713164522">"<xliff:g id="AMOUNT">%1$s</xliff:g> di dati utilizzati"</string>
     <string name="data_usage_wifi_format" msgid="7644390582649568117">"Dati utilizzati su Wi-Fi: <xliff:g id="AMOUNT">^1</xliff:g>"</string>

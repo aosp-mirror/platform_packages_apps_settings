@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"बनाएं"</string>
     <string name="allow" msgid="3763244945363657722">"अनुमति दें"</string>
     <string name="deny" msgid="7326117222944479942">"अस्वीकार करें"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"चालू करें"</string>
     <string name="device_info_default" msgid="1406619232867343310">"अनजान"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="one">अब आप डेवलपर बनने से <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> कदम दूर हैं.</item>
@@ -2096,7 +2095,7 @@
     <string name="screen_reader_category_title" msgid="6195867428854871553">"स्क्रीन रीडर"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"ऑडियो और ऑन-स्क्रीन लेख"</string>
     <string name="display_category_title" msgid="6638191682294461408">"डिसप्ले"</string>
-    <string name="interaction_control_category_title" msgid="2696474616743882372">"इंटरैक्शन नियंत्रण"</string>
+    <string name="interaction_control_category_title" msgid="2696474616743882372">"इंटरैक्शन कंट्रोल"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"डाउनलोड किए गए ऐप्लिकेशन"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"प्रयोग के लिए"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"सुविधाएं दिखाने वाले फ़्लैग"</string>
@@ -2138,7 +2137,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"किसी सुलभता सुविधा को चालू या बंद करने के लिए, स्क्रीन के सबसे निचले हिस्से से ऊपर की ओर तीन उंगलियों से स्वाइप करें.\n\nएक सुविधा से दूसरी सुविधा पर जाने के लिए, तीन उंगलियों से ऊपर की ओर स्वाइप करें और थोड़ी देर तक स्क्रीन को दबाए रखें."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"समझ लिया"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> का शॉर्टकट"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"सुलभता बटन"</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"दो उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"तीन उंगलियों से ऊपर की ओर स्वाइप करें"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"सुलभता बटन पर टैप करें"</string>
@@ -2422,7 +2422,7 @@
       <item quantity="other">%2$d ऐप्लिकेशन पर हाल ही में रोक लगाई गई है</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="one">%2$d ऐप्लिकेशन बैकग्राउंड में ज़्यादा बैटरी खर्च करते हैं</item>
+      <item quantity="one">%2$d ऐप्लिकेशन बैकग्राउंड में ज़्यादा बैटरी खर्च करता है</item>
       <item quantity="other">%2$d ऐप्लिकेशन बैकग्राउंड में ज़्यादा बैटरी खर्च करते हैं</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
@@ -3080,18 +3080,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G कॉलिंग"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"आवाज़ और दूसरी तरह के संचार को बेहतर बनाने के लिए LTE सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"आवाज़ और दूसरे संचारों को बेहतर बनाने के लिए 4G सेवाओं का इस्तेमाल करें (सुझाया गया)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी को संपर्कों की जानकारी भेजें"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"अपने संपर्कों के फ़ोन नंबर भेजें, ताकि आपको बेहतर सुविधाएं दी जा सकें"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"क्या आप <xliff:g id="CARRIER">%1$s</xliff:g> को संपर्कों की जानकारी भेजना चाहते हैं?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी को संपर्कों की जानकारी भेजना चाहते हैं?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"आपके संपर्कों के फ़ोन नंबर, समय-समय पर <xliff:g id="CARRIER">%1$s</xliff:g> को भेजे जाएंगे.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>इससे यह पता लगता है कि आपके संपर्क कुछ खास सुविधाओं का इस्तेमाल कर सकते हैं या नहीं, जैसे कि वीडियो कॉल या मैसेज भेजने की कुछ सुविधाएं."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"आपके संपर्कों के फ़ोन नंबर, समय-समय पर आपकी मोबाइल और इंटरनेट सेवा देने वाली कंपनी को भेजे जाएंगे.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>इससे यह पता लगता है कि आपके संपर्क कुछ खास सुविधाओं का इस्तेमाल कर सकते हैं या नहीं, जैसे कि वीडियो कॉल या मैसेज भेजने की कुछ सुविधाएं."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"अपनी पसंद का नेटवर्क"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (सुझाया गया)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"मल्टीमीडिया मैसेज (एमएमएस)"</string>
@@ -3307,7 +3305,7 @@
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"कंपन (वाइब्रेशन)"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"चालू होने की ध्वनि"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"लाइव कैप्शन"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"मीडिया में अपने आप कैप्शन जोड़ें"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"ऑडियो-वीडियो पहचानकर अपने-आप कैप्शन बनना"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"कोई नहीं"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल सेट किया गया है</item>
@@ -3336,11 +3334,11 @@
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"\'दिखाई न देने वाली सूचनाएं\' दिखाने के लिए विकल्प"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"\'परेशान न करें\' मोड चालू होने पर"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"सूचनाएं आने पर कोई आवाज़ सुनाई न दे"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"अगर आप यह सेटिंग चुनते हैं तो, आपको डिवाइस की स्क्रीन पर सूचनाएं दिखाई देंगी"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"अगर आप यह सेटिंग चुनते हैं, तो आपको डिवाइस की स्क्रीन पर सूचनाएं दिखाई देंगी"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"सूचनाएं मिलने पर आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखे और न ही आवाज़ आए"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"अगर आप यह सेटिंग चुनते हैं तो, सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखाई देगा और न ही आवाज़ सुनाई देगी"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"आपका फ़ोन नई या मौजूदा सूचनाएं न तो दिखाएगा और न ही उनके लिए आवाज़ करेगा या वाइब्रेट होगा. ध्यान रखें कि फ़ोन की गतिविधि के लिए ज़रूरी सूचनाएं और स्थिति अब भी दिखाई देंगी.\n\nजब आप \'परेशान न करें\' सेवा को बंद करें, तो आपको स्क्रीन पर सबसे ऊपर से नीचे की ओर स्वाइप करने पर छूटी हुईं सूचनाएं दिखाई देंगी."</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"अगर आप यह सेटिंग चुनते हैं, तो सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखाई देगा और न ही आवाज़ सुनाई देगी"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"आपका फ़ोन नई या मौजूदा सूचनाएं न तो दिखाएगा और न ही उनके लिए आवाज़ करेगा या वाइब्रेट होगा. ध्यान रखें कि फ़ोन की गतिविधि के लिए ज़रूरी सूचनाएं और स्थिति अब भी दिखाई देंगी.\n\nजब आप \'परेशान न करें\' सेवा को बंद करें, तो आपको स्क्रीन पर सबसे ऊपर से नीचे की ओर स्वाइप करने पर छूटी हुई सूचनाएं दिखाई देंगी."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"पसंद के मुताबिक बनाएं"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"पसंद के मुताबिक बनाई गई सेटिंग चालू करें"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"पसंद के मुताबिक बनाई गई सेटिंग हटाएं"</string>
@@ -3372,7 +3370,7 @@
     <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"अभी चालू करें"</string>
     <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"अभी बंद करें"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"\'परेशान न करें\' <xliff:g id="FORMATTED_TIME">%s</xliff:g> तक चालू है"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"\'परेशान न करें\' तब तक चालू रहेगा जब तक आप इसे बंद नहीं करते"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"\'परेशान न करें\' तब तक चालू रहेगा, जब तक आप इसे बंद नहीं करते"</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"शेड्यूल (<xliff:g id="RULE_NAME">%s</xliff:g>) से \'परेशान न करें\' मोड अपने आप चालू हो गया था"</string>
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"ऐप्लिकेशन (<xliff:g id="APP_NAME">%s</xliff:g>) से \'परेशान न करें\' अपने आप चालू हो गया था"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"\'परेशान न करें\' मोड <xliff:g id="RULE_NAMES">%s</xliff:g> के लिए पसंद के मुताबिक सेटिंग के साथ चालू है."</string>
@@ -3394,7 +3392,7 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल अपने आप चालू हो सकते हैं</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> शेड्यूल अपने आप चालू हो सकते हैं</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"वे सुविधाएं जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"\'परेशान न करें\' मोड को कौन बायपास कर सकता है"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"लोग"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"ऐप्लिकेशन"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म और दूसरी सूचनाएं"</string>
@@ -3447,7 +3445,7 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"सूचनाओं के इतिहास की सुविधा बंद कर दी गई है"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"हाल ही में मिली और स्नूज़ की गई सूचनाएं देखने के लिए, सूचनाओं के इतिहास की सुविधा चालू करें"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"हाल ही में कोई सूचना नहीं मिली है"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"वे सूचनाएं यहां दिखेंगी जो हाल ही में मिली हैं या थोड़ी देर के लिए बंद की गई हैं"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"वे सूचनाएं यहां दिखेंगी जो हाल ही में मिली हैं. साथ ही, थोड़ी देर के लिए बंद की गई सूचनाएं भी यहां दिखाई देंगी."</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"सूचना सेटिंग देखें"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"सूचना खोलें"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"सूचना स्नूज़ करने की अनुमति दें"</string>
@@ -3744,7 +3742,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"मैसेज"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"मैसेज"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"वे मैसेज जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"जिन मैसेज के आने की अनुमति है उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग करने वाले मोड पर सेट है"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"जिन मैसेज के आने की अनुमति है उनके आने पर आवाज़ आए, यह पक्का करने के लिए देखें कि आपका डिवाइस रिंग मोड पर सेट है"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए आने वाले मैसेज ब्लॉक कर दिए गए हैं. आप सेटिंग में अपने हिसाब से बदलाव करके दोस्तों, परिवार के सदस्यों या दूसरे लोगों को आपसे संपर्क करने की मंज़ूरी दे सकते हैं."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"सभी <xliff:g id="SENDER_CATEGORY">%s</xliff:g> जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> संपर्क"</string>
@@ -3780,7 +3778,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"ऐप्लिकेशन जोड़ें"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"सभी सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"कुछ सूचनाएं"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"ऐप्लिकेशन को \'परेशान न करें\' मोड में डालने के बावजूद, चुनिंदा लोग आपसे संपर्क कर सकते हैं"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"अगर आपने ऐप्लिकेशन को \'परेशान न करें\' मोड में डाला है, तब भी चुने हुए लोग आपसे संपर्क कर सकते हैं"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकता है</item>
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकते हैं</item>
@@ -3798,7 +3796,7 @@
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"कोई भी दूसरी आवाज़ \'परेशान न करें\' मोड को बायपास नहीं कर सकती"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> और"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास नहीं कर सकता"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"कुछ लोग \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"कुछ चुने हुए लोग \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"कोई भी व्यक्ति \'परेशान न करें\' मोड को बायपास कर सकता है"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"बार-बार कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"15 मिनट में दूसरी बार काॅल करने वाले लोगों (कॉलर) के काॅल दिखाएं"</string>
@@ -4157,7 +4155,7 @@
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"डिवाइस की मेमोरी: <xliff:g id="PERCENTAGE">%1$s</xliff:g> इस्तेमाल किया गया - <xliff:g id="FREE_SPACE">%2$s</xliff:g> खाली है"</string>
     <string name="display_summary" msgid="5526061030874717172">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> तक कोई गतिविधि न होने पर, कम बैटरी मोड में जाएं"</string>
     <string name="display_dashboard_summary" msgid="5102247404958535634">"वॉलपेपर, सुलाएं (कम बैटरी मोड), फ़ॉन्ट आकार"</string>
-    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"स्टाइल, वॉलपेपर, स्क्रीन इतनी देर में बंद हो जाएगी, फ़ॉन्ट का आकार"</string>
+    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"स्टाइल, वॉलपेपर, स्क्रीन इतनी देर में बंद हो जाएगी, फ़ॉन्ट साइज़"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="6198590533661927162">"स्लीप मोड, फ़ॉन्ट का आकार"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"10 मिनट तक कोई गतिविधि न होने पर कम बैटरी मोड में जाएं"</string>
     <string name="memory_summary" msgid="8221954450951651735">"औसतन <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> में से <xliff:g id="USED_MEMORY">%1$s</xliff:g> मेमोरी उपयोग की गई"</string>
