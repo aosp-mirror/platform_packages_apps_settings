@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"Crear"</string>
     <string name="allow" msgid="3763244945363657722">"Permitir"</string>
     <string name="deny" msgid="7326117222944479942">"Rexeitar"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Activar"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Descoñecido"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">Agora estás a <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> pasos de ser programador.</item>
@@ -375,7 +374,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Utiliza o desbloqueo facial para desbloquear o teu dispositivo, iniciar sesión en aplicacións e confirmar pagos.\n\nTen en conta o seguinte:\nAo mirar o teléfono, podes desbloquealo sen querer.\n\nOutra persoa pode desbloquealo se che pon o teléfono diante da cara, aínda que teñas os ollos pechados.\n\nTamén pode desbloquealo alguén que se pareza moito a ti, como un xemelgo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Queres eliminar os datos faciais?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Os datos das caras utilizados polo desbloqueo facial eliminaranse de modo permanente e seguro. Tras quitalos, deberás utilizar o teu PIN, padrón ou contrasinal para desbloquear o teléfono, iniciar sesión nas aplicacións e confirmar pagos."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Utiliza o desbloqueo facial para desbloquear o teu teléfono"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Úsao para desbloquear o teléfono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Impresión dixital"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Xest. identificación"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Usar impresión para"</string>
@@ -2137,8 +2136,9 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Para activar ou desactivar unha función de accesibilidade, pasa 2 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 2 dedos cara arriba e mantén premida a pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Para activar ou desactivar unha función de accesibilidade, pasa 3 dedos cara arriba desde a parte inferior da pantalla.\n\nPara cambiar de función, pasa 3 dedos cara arriba e mantén premida a pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"De acordo"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atallo de: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"Botón Accesibilidade"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g>: atallo"</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Pasa 2 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Pasa 3 dedos cara arriba"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Toca o botón Accesibilidade"</string>
@@ -3080,18 +3080,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"Chamadas a través de 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Usa os servizos LTE para mellorar a comunicación por voz e outras (recomendado)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Usa os servizos 4G para mellorar a comunicación por voz e outras (recomendado)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Enviar contactos ao operador"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Envía os números de teléfono dos teus contactos para dispoñer de funcións melloradas"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Queres enviar os contactos a <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Queres enviar os contactos ao teu operador?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Os números de teléfono dos teus contactos enviaranse periodicamente a <xliff:g id="CARRIER">%1$s</xliff:g>.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Con esta información, pódese saber se os teus contactos poden usar certas opcións, como as videochamadas ou outras funcións de mensaxaría."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Os números de teléfono dos teus contactos enviaranse periodicamente ao teu operador.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Con esta información, pódese saber se os teus contactos poden usar certas opcións, como as videochamadas ou outras funcións de mensaxaría."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Tipo de rede preferido"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (recomendado)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"Mensaxes MMS"</string>
@@ -3436,7 +3434,7 @@
     <string name="profile_section_header" msgid="4970209372372610799">"Notificacións do traballo"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificacións intelixentes"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridade das notificacións automáticas"</string>
-    <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Define automaticamente como discretas as notificacións con prioridade baixa"</string>
+    <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Define automaticamente como discretas as notificacións de prioridade baixa"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Clasificación automática das notificacións"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Clasifica as notificacións automaticamente por relevancia"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Accións suxeridas e respostas"</string>
@@ -3751,7 +3749,7 @@
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Calquera"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contactos"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Contactos marcados con estrela"</string>
-    <string name="zen_mode_from_none" msgid="8456745188276131873">"De ninguén"</string>
+    <string name="zen_mode_from_none" msgid="8456745188276131873">"Ninguén"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"De contactos marcados con estrela e chamadas repetidas"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Dos contactos e de chamadas repetidas"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Só de chamadas repetidas"</string>
@@ -3764,7 +3762,7 @@
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Sons de vídeos, videoxogos e outro contido multimedia"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"contido multimedia"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Sons ao tocar"</string>
-    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Sons do teclado e doutros botóns"</string>
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"Sons do teclado e outros botóns"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sons ao tocar"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Recordatorios"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"De tarefas e recordatorios"</string>
@@ -3780,7 +3778,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Engadir aplicacións"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Todas as notificacións"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Algunhas notificacións"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"As persoas seleccionadas seguirán podendo contactar contigo, aínda que non permitas que as aplicacións interrompan"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"As persoas seleccionadas seguirán podendo contactar contigo aínda que non permitas que as aplicacións interrompan"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> teñen permiso para interromper o modo Non molestar</item>
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> ten permiso para interromper o modo Non molestar</item>
@@ -3839,8 +3837,8 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Pechar"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Enviar comentarios do dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduce o PIN do administrador"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Activada"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"Desactivada"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
     <string name="screen_pinning_title" msgid="5203530107022449124">"Fixar pantalla"</string>
     <string name="screen_pinning_description" msgid="5181462036494390860">"Cando esta opción de configuración está activada, podes usar a fixación de pantalla para manter visible a pantalla actual ata que deixes de fixala.\n\nPara utilizar a función mencionada:\n\n1. Asegúrate de que estea activada a fixación de pantalla\n\n2. Abre Visión xeral\n\n3. Toca a icona da aplicación na parte superior da pantalla e, a continuación, toca Fixar"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar padrón de desbloqueo para deixar de fixar a pantalla"</string>

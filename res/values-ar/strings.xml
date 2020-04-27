@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"إنشاء"</string>
     <string name="allow" msgid="3763244945363657722">"سماح"</string>
     <string name="deny" msgid="7326117222944479942">"رفض"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"تفعيل"</string>
     <string name="device_info_default" msgid="1406619232867343310">"غير معروف"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="zero">لا يفصلك الآن عن الوصول إلى مرحلة مطوري البرامج سوى <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> خطوة.</item>
@@ -232,7 +231,7 @@
     <string name="proxy_settings_label" msgid="6300573815025557843">"إعدادات الخادم الوكيل"</string>
     <string name="cancel" msgid="5780102414089664898">"إلغاء"</string>
     <string name="okay" msgid="4827099303045669054">"حسنًا"</string>
-    <string name="forget" msgid="3754013654135912783">"نسيان"</string>
+    <string name="forget" msgid="3754013654135912783">"حذف"</string>
     <string name="save" msgid="3125033126936493822">"حفظ"</string>
     <string name="done" msgid="7497982645646431310">"تم"</string>
     <string name="apply" msgid="7834684883190163536">"تطبيق"</string>
@@ -2230,7 +2229,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"لتفعيل إحدى ميزات إمكانية الوصول أو إيقافها، مرّر سريعًا من أسفل الشاشة إلى أعلاها بثلاثة أصابع.\n\nوللتبديل بين الميزات، مرّر سريعًا للأعلى بثلاثة أصابع مع تثبيتها."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"حسنًا"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"اختصار <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"زر أدوات تمكين الوصول"</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"التمرير بسرعة إلى الأعلى بإصبعين"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"التمرير بسرعة إلى الأعلى بثلاثة أصابع"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"انقر على زر أدوات تمكين الوصول"</string>
@@ -2555,7 +2555,7 @@
       <item quantity="few">‏هناك %2$d تطبيقات تستخدم البطارية في الخلفية بدرجة عالية</item>
       <item quantity="many">‏هناك %2$d تطبيقًا يستخدم البطارية في الخلفية بدرجة عالية</item>
       <item quantity="other">‏هناك %2$d تطبيق يستخدم البطارية في الخلفية بدرجة عالية</item>
-      <item quantity="one">‏يستخدم تطبيق %1$s البطارية في الخلفية بدرجة عالية</item>
+      <item quantity="one">‏هناك تطبيق واحد (%1$s) يستخدم البطارية في الخلفية بدرجة عالية</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="zero">يتعذّر تشغيل هذه التطبيقات في الخلفية.</item>
@@ -3248,18 +3248,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"‏الاتصال في وضع 4G"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"‏استخدام خدمات LTE لتحسين الصوت والاتصالات الأخرى (مستحسن)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"‏استخدام خدمات 4G لتحسين الصوت والاتصالات الأخرى (مُستحسَن)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"إرسال جهات الاتصال لمشغّل شبكة الجوّال"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"إرسال أرقام هواتف جهات الاتصال لتقديم ميزات محسَّنة"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"هل تريد إرسال جهات الاتصال إلى <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"هل تريد إرسال جهات الاتصال إلى مشغّل شبكة الجوّال؟"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"سيتم إرسال أرقام هواتف جهات اتصالك إلى <xliff:g id="CARRIER">%1$s</xliff:g> بشكل دوري.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>تحدِّد هذه المعلومات ما إذا كان يمكن لجهات اتصالك استخدام ميزات معيّنة، مثلاً مكالمات الفيديو أو بعض ميزات المراسلة."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"سيتم إرسال أرقام هواتف جهات اتصالك إلى مشغّل شبكة الجوّال بشكل دوري.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>تحدِّد هذه المعلومات ما إذا كان يمكن لجهات اتصالك استخدام ميزات معيّنة، مثلاً مكالمات الفيديو أو بعض ميزات المراسلة."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"نوع الشبكة المفضّل"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"‏LTE (مستحسن)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"رسائل الوسائط المتعددة"</string>
@@ -3490,10 +3488,10 @@
       <item quantity="one">تم ضبط جدول زمني واحد.</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"وضع \"عدم الإزعاج\""</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"عدم الحصول على إشعار إلا من المستخدمين المهمين والتطبيقات المهمة"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"عدم الحصول على إشعار إلا من الأشخاص المهمين والتطبيقات المهمة"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"الحد من المقاطعات"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"تفعيل وضع \"الرجاء عدم الإزعاج\""</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"السماح للتنبيهات وأصوات الوسائط مقاطعة عمل الميزة"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"السماح للمنبهات وأصوات الوسائط بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"الجداول الزمنية"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"حذف الجداول الزمنية"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"حذف"</string>
@@ -3533,7 +3531,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"إخفاء رموز شريط الحالة في أعلى الشاشة"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"إخفاء نقاط الإشعارات على رموز التطبيقات"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"عدم تشغيل الشاشة عند تلقّي إشعارات"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"إخفاء من شريط الإشعارات القابل للتمرير"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"إخفاء من مركز الإشعارات المنسدل"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"أبدًا"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"عندما تكون الشاشة مطفأة"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"عندما تكون الشاشة مُشغَّلة"</string>
@@ -3579,9 +3577,9 @@
       <item quantity="one">يمكن تفعيل جدول زمني واحد تلقائيًا.</item>
     </plurals>
     <string name="zen_category_behavior" msgid="3214056473947178507">"ما الذي يمكنه مقاطعة ميزة \"عدم الإزعاج\"؟"</string>
-    <string name="zen_category_people" msgid="8252926021894933047">"المستخدمون"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"الأشخاص"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"التطبيقات"</string>
-    <string name="zen_category_exceptions" msgid="1316097981052752811">"الإنذارات والمقاطعات الأخرى"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"المنبهات والمقاطعات الأخرى"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"الجداول الزمنية"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"المدة للإعدادات السريعة"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"عند تفعيل الوضع \"عدم الإزعاج\"، سيتم كتم الصوت ومنع الاهتزاز عند تلقّي أي عناصر باستثناء تلك التي تسمح بها أعلاه."</string>
@@ -3968,7 +3966,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"وفقًا للجدول الزمني \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\"، يتم حظر الرسائل الواردة. ويمكنك ضبط الإعدادات للسماح لأصدقائك أو أفراد عائلتك أو جهات الاتصال الأخرى بالتواصل معك."</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"يمكن لكل <xliff:g id="SENDER_CATEGORY">%s</xliff:g> الوصول إليك."</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> جهة اتصال"</string>
-    <string name="zen_mode_from_anyone" msgid="6027004263046694174">"أي مستخدم"</string>
+    <string name="zen_mode_from_anyone" msgid="6027004263046694174">"أي شخص"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"جهات الاتصال"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"جهات الاتصال المميّزة بنجمة"</string>
     <string name="zen_mode_from_none" msgid="8456745188276131873">"لا أحد"</string>
@@ -3977,7 +3975,7 @@
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"من المتّصلين المتكرّرين فقط"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"حظر تلقّي أي مكالمات"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"حظر تلقّي أي رسائل"</string>
-    <string name="zen_mode_alarms" msgid="5989343060100771099">"التنبيهات"</string>
+    <string name="zen_mode_alarms" msgid="5989343060100771099">"المنبّهات"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"من الموقتات والإنذارات وأنظمة الأمان والتطبيقات الأخرى"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"المنبِّهات"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"أصوات الوسائط"</string>
@@ -4000,7 +3998,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"إضافة تطبيقات"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"جميع الإشعارات"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"بعض الإشعارات"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"لا يزال بإمكان المستخدمين المحدّدين الوصول إليك حتى إذا لم تسمح للتطبيقات بمقاطعة عمل الميزة"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"لا يزال بإمكان الأشخاص المُختارين الوصول إليك حتى إذا لم تسمح للتطبيقات بمقاطعة عمل الميزة"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="zero">السماح لتطبيقات <xliff:g id="APP_NAMES">%s</xliff:g> بمقاطعة عمل الميزة</item>
       <item quantity="two">السماح لتطبيقَي <xliff:g id="APP_NAMES">%s</xliff:g> بمقاطعة عمل الميزة</item>
@@ -4026,14 +4024,14 @@
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"عدم السماح لأي عنصر بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"<xliff:g id="NUMBER">%d</xliff:g> صوت آخر"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"عدم السماح لأي مستخدم بمقاطعة عمل الميزة"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"السماح لبعض المستخدمين بمقاطعة عمل الميزة"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"السماح لبعض الأشخاص بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"السماح لكل المستخدمين بمقاطعة عمل الميزة"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"المتصلون المتكرّرون"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"السماح بالمتصلين المتكررين"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"أي شخص"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"جهات الاتصال"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"جهات الاتصال المميّزة بنجمة"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"جهات الاتصال المتكرِّرة"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"المتصلون المتكرّرون"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> و<xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
