@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 
 /**
  * Controller that manages a PreferenceGroup, which contains a list of subscribed access points.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.savedaccesspoints2.SubscribedAccessPointsPreferenceController2}.
  */
 public class SubscribedAccessPointsPreferenceController extends
         SavedAccessPointsPreferenceController {
