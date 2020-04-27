@@ -265,19 +265,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         private String getCategory(int category, Policy policy, boolean isFirst) {
             if (category == PRIORITY_CATEGORY_ALARMS) {
                 if (isFirst) {
-                    return mContext.getString(R.string.zen_mode_alarms);
+                    return mContext.getString(R.string.zen_mode_alarms_list_first);
                 } else {
                     return mContext.getString(R.string.zen_mode_alarms_list);
                 }
             } else if (category == PRIORITY_CATEGORY_MEDIA) {
                 if (isFirst) {
-                    return mContext.getString(R.string.zen_mode_media);
+                    return mContext.getString(R.string.zen_mode_media_list_first);
                 } else {
                     return mContext.getString(R.string.zen_mode_media_list);
                 }
             } else if (category == PRIORITY_CATEGORY_SYSTEM) {
                 if (isFirst) {
-                    return mContext.getString(R.string.zen_mode_system);
+                    return mContext.getString(R.string.zen_mode_system_list_first);
                 } else {
                     return mContext.getString(R.string.zen_mode_system_list);
                 }
@@ -291,13 +291,13 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_EVENTS) {
                 if (isFirst) {
-                    return mContext.getString(R.string.zen_mode_events);
+                    return mContext.getString(R.string.zen_mode_events_list_first);
                 } else {
                     return mContext.getString(R.string.zen_mode_events_list);
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_REMINDERS) {
                 if (isFirst) {
-                    return mContext.getString(R.string.zen_mode_reminders);
+                    return mContext.getString(R.string.zen_mode_reminders_list_first);
                 } else {
                     return mContext.getString(R.string.zen_mode_reminders_list);
                 }
