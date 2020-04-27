@@ -150,10 +150,9 @@ public class ZenModePrioritySendersPreferenceController
             case KEY_CONTACTS:
                 return mBackend.getContactsNumberSummary(mContext);
             case KEY_ANY:
-                return mContext.getResources().getString(R.string.zen_mode_all_senders_summary,
-                        mContext.getResources().getString(mIsMessages
-                                ? R.string.zen_mode_messages_list
-                                : R.string.zen_mode_calls_list));
+                return mContext.getResources().getString(mIsMessages
+                                ? R.string.zen_mode_all_messages_summary
+                                : R.string.zen_mode_all_calls_summary);
             case KEY_NONE:
             default:
                 return null;
