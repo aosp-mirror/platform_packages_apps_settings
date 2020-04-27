@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.PersistableBundle;
@@ -66,8 +68,6 @@ import java.util.Map;
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
     private final static String TAG = "SimStatusDialogCtrl";
-
-    private static final String CELL_BROADCAST_SERVICE_PACKAGE = "com.android.cellbroadcastservice";
 
     @VisibleForTesting
     final static int NETWORK_PROVIDER_VALUE_ID = R.id.operator_name_value;
@@ -355,7 +355,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private void bindCellBroadcastService() {
         mCellBroadcastServiceConnection = new CellBroadcastServiceConnection();
         Intent intent = new Intent(CellBroadcastService.CELL_BROADCAST_SERVICE_INTERFACE);
-        intent.setPackage(CELL_BROADCAST_SERVICE_PACKAGE);
+        String cbsPackage = getCellBroadcastServicePackage();
+        if (TextUtils.isEmpty(cbsPackage)) return;
+        intent.setPackage(cbsPackage);
         if (mCellBroadcastServiceConnection != null
                 && mCellBroadcastServiceConnection.getService() == null) {
             if (!mContext.bindService(intent, mCellBroadcastServiceConnection,
@@ -365,6 +367,38 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         } else {
             Log.d(TAG, "skipping bindService because connection already exists");
         }
+    }
+
+    /** Returns the package name of the cell broadcast service, or null if there is none. */
+    private String getCellBroadcastServicePackage() {
+        PackageManager packageManager = mContext.getPackageManager();
+        List<ResolveInfo> cbsPackages = packageManager.queryIntentServices(
+                new Intent(CellBroadcastService.CELL_BROADCAST_SERVICE_INTERFACE),
+                PackageManager.MATCH_SYSTEM_ONLY);
+        if (cbsPackages.size() != 1) {
+            Log.e(TAG, "getCellBroadcastServicePackageName: found " + cbsPackages.size()
+                    + " CBS packages");
+        }
+        for (ResolveInfo info : cbsPackages) {
+            if (info.serviceInfo == null) continue;
+            String packageName = info.serviceInfo.packageName;
+            if (!TextUtils.isEmpty(packageName)) {
+                if (packageManager.checkPermission(
+                        android.Manifest.permission.READ_PRIVILEGED_PHONE_STATE,
+                        packageName) == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "getCellBroadcastServicePackageName: " + packageName);
+                    return packageName;
+                } else {
+                    Log.e(TAG, "getCellBroadcastServicePackageName: " + packageName
+                            + " does not have READ_PRIVILEGED_PHONE_STATE permission");
+                }
+            } else {
+                Log.e(TAG, "getCellBroadcastServicePackageName: found a CBS package but "
+                        + "packageName is null/empty");
+            }
+        }
+        Log.e(TAG, "getCellBroadcastServicePackageName: package name not found");
+        return null;
     }
 
     private void updateLatestAreaInfo() {
