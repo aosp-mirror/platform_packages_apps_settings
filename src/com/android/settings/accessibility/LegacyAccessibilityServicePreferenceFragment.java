@@ -52,11 +52,12 @@ public class LegacyAccessibilityServicePreferenceFragment extends
     @Override
     int getUserShortcutTypes() {
         int shortcutTypes = super.getUserShortcutTypes();
-
+        final boolean isServiceOn =
+                getArguments().getBoolean(AccessibilitySettings.EXTRA_CHECKED);
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final boolean hasRequestAccessibilityButtonFlag =
                 (info.flags & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
-        if (hasRequestAccessibilityButtonFlag) {
+        if (hasRequestAccessibilityButtonFlag && isServiceOn) {
             shortcutTypes |= UserShortcutType.SOFTWARE;
         } else {
             shortcutTypes &= (~UserShortcutType.SOFTWARE);
