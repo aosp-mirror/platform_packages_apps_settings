@@ -27,7 +27,10 @@ import com.android.settings.R;
 import com.android.settingslib.wifi.AccessPoint;
 
 /**
- * An AP preference for the currently connected AP
+ * An AP preference for the currently connected AP.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link ConnectedWifiEntryPreference}.
  */
 public class ConnectedAccessPointPreference extends LongPressAccessPointPreference implements
         View.OnClickListener {
