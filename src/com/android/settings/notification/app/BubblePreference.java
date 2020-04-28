@@ -52,6 +52,8 @@ public class BubblePreference extends Preference implements View.OnClickListener
     private ButtonViewHolder mBubbleSelectedButton;
     private ButtonViewHolder mBubbleNoneButton;
 
+    private boolean mSelectedVisible;
+
     public BubblePreference(Context context) {
         this(context, null);
     }
@@ -89,6 +91,11 @@ public class BubblePreference extends Preference implements View.OnClickListener
         }
     }
 
+    public void setSelectedVisibility(boolean visible) {
+        mSelectedVisible = visible;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
@@ -122,7 +129,8 @@ public class BubblePreference extends Preference implements View.OnClickListener
                 mSelectedPreference == BUBBLE_PREFERENCE_SELECTED);
         bubbleSelected.setTag(BUBBLE_PREFERENCE_SELECTED);
         bubbleSelected.setOnClickListener(this);
-        bubbleSelected.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
+        bubbleSelected.setVisibility((!mSelectedVisible || disabledByAdmin)
+                ? View.GONE : View.VISIBLE);
 
         View bubbleNone = holder.findViewById(R.id.bubble_none);
         ImageView bubbleNoneImage = (ImageView) holder.findViewById(R.id.bubble_none_icon);
