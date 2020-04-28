@@ -102,36 +102,36 @@ public final class AccessibilityUtilTest {
     }
 
     @Test
-    public void getAccessibilityServiceFragmentType_targetSdkQ_legacyType() {
+    public void getAccessibilityServiceFragmentType_targetSdkQ_volumeShortcutType() {
         final AccessibilityServiceInfo info = getMockAccessibilityServiceInfo();
 
         info.getResolveInfo().serviceInfo.applicationInfo.targetSdkVersion = Build.VERSION_CODES.Q;
         info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
-                AccessibilityUtil.AccessibilityServiceFragmentType.LEGACY);
+                AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE);
     }
 
     @Test
-    public void getAccessibilityServiceFragmentType_targetSdkR_HaveA11yButton_headlessType() {
+    public void getAccessibilityServiceFragmentType_targetSdkR_HaveA11yButton_invisibleType() {
         final AccessibilityServiceInfo info = getMockAccessibilityServiceInfo();
 
         info.getResolveInfo().serviceInfo.applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
         info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
-                AccessibilityUtil.AccessibilityServiceFragmentType.INVISIBLE);
+                AccessibilityUtil.AccessibilityServiceFragmentType.INVISIBLE_TOGGLE);
     }
 
     @Test
-    public void getAccessibilityServiceFragmentType_targetSdkR_NoA11yButton_intuitiveType() {
+    public void getAccessibilityServiceFragmentType_targetSdkR_NoA11yButton_toggleType() {
         final AccessibilityServiceInfo info = getMockAccessibilityServiceInfo();
 
         info.getResolveInfo().serviceInfo.applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
         info.flags |= ~AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
 
         assertThat(AccessibilityUtil.getAccessibilityServiceFragmentType(info)).isEqualTo(
-                AccessibilityUtil.AccessibilityServiceFragmentType.INTUITIVE);
+                AccessibilityUtil.AccessibilityServiceFragmentType.TOGGLE);
     }
 
     @Test
