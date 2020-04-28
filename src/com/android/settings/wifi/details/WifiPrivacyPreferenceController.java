@@ -33,7 +33,11 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * {@link AbstractPreferenceController} that controls whether the wifi network is mac randomized
- * or not
+ * or not.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.details2.WifiPrivacyPreferenceController2}.
  */
 public class WifiPrivacyPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener, WifiDialog.WifiDialogListener {

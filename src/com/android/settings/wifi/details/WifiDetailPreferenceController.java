@@ -99,6 +99,10 @@ import java.util.stream.Collectors;
 /**
  * Controller for logic pertaining to displaying Wifi information for the
  * {@link WifiNetworkDetailsFragment}.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.details2.WifiDetailPreferenceController2}.
  */
 public class WifiDetailPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, WifiDialogListener, LifecycleObserver, OnPause,
