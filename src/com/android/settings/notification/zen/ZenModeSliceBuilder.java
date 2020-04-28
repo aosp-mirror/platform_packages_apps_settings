@@ -82,15 +82,18 @@ public class ZenModeSliceBuilder {
         final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
                 null /* actionTitle */,
                 isZenModeEnabled);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(title)
+                .addEndItem(toggleSliceAction)
+                .setPrimaryAction(primarySliceAction);
+        if (!Utils.isSettingsIntelligence(context)) {
+            rowBuilder.setSubtitle(subtitle);
+        }
 
         return new ListBuilder(context, CustomSliceRegistry.ZEN_MODE_SLICE_URI,
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(subtitle)
-                        .addEndItem(toggleSliceAction)
-                        .setPrimaryAction(primarySliceAction))
+                .addRow(rowBuilder)
                 .build();
     }
 
