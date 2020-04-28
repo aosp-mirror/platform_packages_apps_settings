@@ -27,4 +27,12 @@
             android:title="@string/notification_bubbles_title"
             settings:allowDividerBelow="false"/>
 
+        <!-- Selected or excluded conversations get added here -->
+        <PreferenceCategory
+            android:title="@string/bubble_app_setting_selected_conversation_title"
+            android:key="bubble_conversations"
+            android:visibility="gone"
+            settings:allowDividerAbove="false"
+            settings:allowDividerBelow="false" />
+
 </PreferenceScreen>
