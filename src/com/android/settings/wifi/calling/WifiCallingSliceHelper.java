@@ -269,14 +269,17 @@ public class WifiCallingSliceHelper {
         // Top row shows information on current preference state
         final ListBuilder listBuilder = new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext));
-        listBuilder.setHeader(new ListBuilder.HeaderBuilder()
+        final ListBuilder.HeaderBuilder headerBuilder = new ListBuilder.HeaderBuilder()
                 .setTitle(res.getText(R.string.wifi_calling_mode_title))
-                .setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref, subId))
                 .setPrimaryAction(SliceAction.createDeeplink(
                         getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
                         icon,
                         ListBuilder.ICON_IMAGE,
-                        res.getText(R.string.wifi_calling_mode_title))));
+                        res.getText(R.string.wifi_calling_mode_title)));
+        if (!Utils.isSettingsIntelligence(mContext)) {
+            headerBuilder.setSubtitle(getWifiCallingPreferenceSummary(currentWfcPref, subId));
+        }
+        listBuilder.setHeader(headerBuilder);
 
         if (isWifiOnlySupported) {
             listBuilder.addRow(wifiPreferenceRowBuilder(listBuilder,
@@ -458,14 +461,17 @@ public class WifiCallingSliceHelper {
     private Slice getNonActionableWifiCallingSlice(CharSequence title, CharSequence subtitle,
             Uri sliceUri, PendingIntent primaryActionIntent) {
         final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.wifi_signal);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(title)
+                .setPrimaryAction(SliceAction.createDeeplink(
+                        primaryActionIntent, icon, ListBuilder.SMALL_IMAGE,
+                        title));
+        if (!Utils.isSettingsIntelligence(mContext)) {
+            rowBuilder.setSubtitle(subtitle);
+        }
         return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
                 .setAccentColor(Utils.getColorAccentDefaultColor(mContext))
-                .addRow(new RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(subtitle)
-                        .setPrimaryAction(SliceAction.createDeeplink(
-                                primaryActionIntent, icon, ListBuilder.SMALL_IMAGE,
-                                title)))
+                .addRow(rowBuilder)
                 .build();
     }
 

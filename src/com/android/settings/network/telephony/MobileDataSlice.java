@@ -96,15 +96,18 @@ public class MobileDataSlice implements CustomSliceable {
                 ListBuilder.ICON_IMAGE, title);
         final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
                 null /* actionTitle */, isMobileDataEnabled());
+        final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
+                .setTitle(title)
+                .addEndItem(toggleSliceAction)
+                .setPrimaryAction(primarySliceAction);
+        if (!Utils.isSettingsIntelligence(mContext)) {
+            rowBuilder.setSubtitle(summary);
+        }
 
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(),
                 ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new ListBuilder.RowBuilder()
-                        .setTitle(title)
-                        .setSubtitle(summary)
-                        .addEndItem(toggleSliceAction)
-                        .setPrimaryAction(primarySliceAction));
+                .addRow(rowBuilder);
         return listBuilder.build();
     }
 
