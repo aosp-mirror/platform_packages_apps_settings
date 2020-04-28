@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.notification.AppBubbleListPreferenceController;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -56,18 +57,20 @@ public class AppBubbleNotificationSettings extends NotificationSettings implemen
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        mControllers = getPreferenceControllers(context, this);
+        mControllers = getPreferenceControllers(context, this, mDependentFieldListener);
         return new ArrayList<>(mControllers);
     }
 
     protected static List<NotificationPreferenceController> getPreferenceControllers(
-            Context context, AppBubbleNotificationSettings fragment) {
+            Context context, AppBubbleNotificationSettings fragment,
+            DependentFieldListener listener) {
         List<NotificationPreferenceController> controllers = new ArrayList<>();
         controllers.add(new HeaderPreferenceController(context, fragment));
         controllers.add(new BubblePreferenceController(context, fragment != null
                 ? fragment.getChildFragmentManager()
                 : null,
-                new NotificationBackend(), true /* isAppPage */));
+                new NotificationBackend(), true /* isAppPage */, listener));
+        controllers.add(new AppBubbleListPreferenceController(context, new NotificationBackend()));
         return controllers;
     }
 
@@ -114,7 +117,7 @@ public class AppBubbleNotificationSettings extends NotificationSettings implemen
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return new ArrayList<>(AppBubbleNotificationSettings.getPreferenceControllers(
-                            context, null));
+                            context, null, null));
                 }
             };
 }

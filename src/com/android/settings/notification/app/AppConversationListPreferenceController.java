@@ -19,6 +19,7 @@ package com.android.settings.notification.app;
 import android.app.NotificationChannel;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.pm.ParceledListSlice;
 import android.content.pm.ShortcutInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -42,8 +44,8 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     private static final String KEY = "conversations";
     public static final String ARG_FROM_SETTINGS = "fromSettings";
 
-    private List<ConversationChannelWrapper> mConversations;
-    private PreferenceCategory mPreference;
+    protected List<ConversationChannelWrapper> mConversations = new ArrayList<>();
+    protected PreferenceCategory mPreference;
     private boolean mHasSentMsg;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
@@ -75,13 +77,23 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     @Override
     public void updateState(Preference preference) {
         mPreference = (PreferenceCategory) preference;
+        loadConversationsAndPopulate();
+    }
+
+    protected void loadConversationsAndPopulate() {
+        if (mAppRow == null) {
+            return;
+        }
         // Load channel settings
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
                 mHasSentMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
-                mConversations = mBackend.getConversations(mAppRow.pkg, mAppRow.uid).getList();
-                Collections.sort(mConversations, mConversationComparator);
+                ParceledListSlice<ConversationChannelWrapper> list =
+                        mBackend.getConversations(mAppRow.pkg, mAppRow.uid);
+                if (list != null) {
+                    mConversations = filterAndSortConversations(list.getList());
+                }
                 return null;
             }
 
@@ -95,11 +107,22 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         }.execute();
     }
 
+    protected List<ConversationChannelWrapper> filterAndSortConversations(
+            List<ConversationChannelWrapper> conversations) {
+        Collections.sort(conversations, mConversationComparator);
+        return conversations;
+    }
+
+    protected int getTitleResId() {
+        return R.string.conversations_category_title;
+    }
+
     private void populateList() {
+        if (mPreference == null) {
+            return;
+        }
         // TODO: if preference has children, compare with newly loaded list
         mPreference.removeAll();
-        mPreference.setTitle(R.string.conversations_category_title);
-
         if (mConversations.isEmpty()) {
             if (mHasSentMsg) {
                 mPreference.setVisible(true);
@@ -112,6 +135,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
             }
         } else {
             mPreference.setVisible(true);
+            mPreference.setTitle(getTitleResId());
             populateConversations();
         }
     }
@@ -127,6 +151,12 @@ public class AppConversationListPreferenceController extends NotificationPrefere
 
     protected Preference createConversationPref(final ConversationChannelWrapper conversation) {
         Preference pref = new Preference(mContext);
+        populateConversationPreference(conversation, pref);
+        return pref;
+    }
+
+    protected void populateConversationPreference(final ConversationChannelWrapper conversation,
+            final Preference pref) {
         ShortcutInfo si = conversation.getShortcutInfo();
 
         pref.setTitle(si != null
@@ -157,7 +187,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
                 .setTitleText(pref.getTitle())
                 .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_APP_NOTIFICATION)
                 .toIntent());
-        return pref;
     }
 
     protected Comparator<ConversationChannelWrapper> mConversationComparator =
