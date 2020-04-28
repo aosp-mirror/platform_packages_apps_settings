@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"सिर्जना गर्नुहोस्"</string>
     <string name="allow" msgid="3763244945363657722">"अनुमति दिनुहोस्"</string>
     <string name="deny" msgid="7326117222944479942">"अस्वीकार गर्नुहोस्"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"सक्रिय गरियोस्"</string>
     <string name="device_info_default" msgid="1406619232867343310">"अज्ञात"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">अहिले तपाईं विकासकर्ता हुनका लागि <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> चरण टाढा हुनुहुन्छ।</item>
@@ -2150,7 +2149,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"पहुँचसम्बन्धी कुनै सुविधा सक्रिय वा निष्क्रिय पार्न ३ वटा औँलाले स्क्रिनको फेदबाट माथितिर स्वाइप गर्नुहोस्।\n\nएउटा सुविधाबाट अर्को सुविधामा जान ३ वटा औँलाले माथितिर स्वाइप गरी स्क्रिनमा छोइराख्नुहोस्।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"बुझेँ"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> सर्टकट"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"पहुँचको बटन"</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"२ वटा औँलाले माथितिर स्वाइप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"३ वटा औँलाले माथितिर स्वाइप गर्नुहोस्"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"पहुँचको बटनमा ट्याप गर्नुहोस्"</string>
@@ -3092,18 +3092,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G कल गर्दै"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"आवाज र अन्य सञ्चारमा सुधार गर्न LTE सेवाहरूको प्रयोग गर्नुहोस् (सिफारिस गरिएको)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"आवाज र अन्य सञ्चार सेवाको गुणस्तर सुधार्न 4G सेवाहरूको प्रयोग गर्नुहोस् (सिफारिस गरिएको)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"सम्पर्क ठेगानाहरू सेवा प्रदायकलाई पठाउनुहोस्"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"परिष्कृत सुविधाहरू उपलब्ध गराउने प्रयोजनका लागि आफ्नो सम्पर्क सूचीमा भएका मान्छेका फोन नम्बरहरू पठाउनुहोस्"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"सम्पर्क ठेगानाहरू <xliff:g id="CARRIER">%1$s</xliff:g> लाई पठाउने हो?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"सम्पर्क ठेगानाहरू आफ्नो सेवा प्रदायकलाई पठाउने हो?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"तपाईंको सम्पर्क सूचीमा भएका मान्छेका फोन नम्बरहरू समय समयमा <xliff:g id="CARRIER">%1$s</xliff:g> लाई पठाइने छ।<xliff:g id="EMPTY_LINE">
+
+</xliff:g>यो जानकारीले तपाईंका सम्पर्क ठेगानाहरू भिडियो कल वा सन्देश प्रवाहसम्बन्धी सुविधा जस्ता कुनै खास सुविधाहरू प्रयोग गर्छन् कि गर्दैनन् भन्ने कुरा पत्ता लगाउँछ।"</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"तपाईंको सम्पर्क सूचीमा भएका मान्छेका फोन नम्बरहरू समय समयमा तपाईंको सेवा प्रदायकलाई पठाइने छ।<xliff:g id="EMPTY_LINE">
+
+</xliff:g>यो जानकारीले तपाईंका सम्पर्क ठेगानाहरू भिडियो कल वा सन्देश प्रवाहसम्बन्धी सुविधा जस्ता कुनै खास सुविधाहरू प्रयोग गर्छन् कि गर्दैनन् भन्ने कुरा पत्ता लगाउँछ।"</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"सञ्जाल प्रकार रुचाइएको"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (सिफारिस गरिएको)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS सन्देश"</string>
@@ -3245,8 +3243,7 @@
     <string name="keywords_unification" msgid="2677472004971453468">"कार्यको प्रोफाइल, व्यवस्थापन गरिएको प्रोफाइल, एकरूपता ल्याउनु, एकरूपता, कार्य, प्रोफाइल"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"इसाराहरू"</string>
     <string name="keywords_cards_passes" msgid="4798102029412153067">"कार्ड, पासहरू"</string>
-    <!-- no translation found for keywords_device_controls (8962494082504033651) -->
-    <skip />
+    <string name="keywords_device_controls" msgid="8962494082504033651">"यन्त्र नियन्त्रण गर्ने विजेटहरू, नियन्त्रणहरू"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"भुक्तानी गर्नुहोस्, ट्याप गर्नुहोस्, भुक्तानी"</string>
     <string name="keywords_backup" msgid="707735920706667685">"ब्याकअप, ब्याकअप गर्नुहोस्"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"इसारा"</string>
@@ -3412,8 +3409,7 @@
     <string name="zen_category_apps" msgid="1167374545618451925">"एपहरू"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"अलार्म र अन्य अवरोधहरू"</string>
     <string name="zen_category_schedule" msgid="2003707171924226212">"समयतालिकाहरू"</string>
-    <!-- no translation found for zen_category_duration (7515850842082631460) -->
-    <skip />
+    <string name="zen_category_duration" msgid="7515850842082631460">"द्रुत सेटिङहरूको अवधि"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"बाधा नपुर्‍याउनुहोस् मोड सक्रिय भएका बेला तपाईंले माथि अनुमति दिनुभएका वस्तुहरूबाहेक आवाज तथा कम्पनलाई म्युट गरिने छ।"</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"आफू अनुकूल सेटिङहरू"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"समयतालिकाको समीक्षा गर्नुहोस्"</string>
@@ -3473,12 +3469,9 @@
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"केही सूचनाहरू स्क्रिनमा बबलका रूपमा देखिन सक्छन्"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"केही सूचनाहरू र अन्य सामग्री स्क्रिनमा बबलका रूपमा देखिन सक्छन्। कुनै बबल खोल्न यसमा ट्याप गर्नुहोस्। यसलाई खारेज गर्न यसलाई स्क्रिनका पुछारतिर ड्र्याग गर्नुहोस्।"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"बबलहरू"</string>
-    <!-- no translation found for bubbles_conversation_app_link (5468779786387915337) -->
-    <skip />
-    <!-- no translation found for bubbles_conversation_toggle_title (5225039214083311316) -->
-    <skip />
-    <!-- no translation found for bubbles_conversation_toggle_summary (720229032254323578) -->
-    <skip />
+    <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"बबलसम्बन्धी सबै सेटिङ"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"यो वार्तालाप बबलमा देखाइयोस्"</string>
+    <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"एपहरूमाथि तैरिने आइकन देखाइयोस्"</string>
     <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"<xliff:g id="APP_NAME">%1$s</xliff:g> लाई केही सूचनाहरू बबलका रूपमा देखाउन दिनुहोस्"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"यस यन्त्रमा बबल सक्रिय गर्ने हो?"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"यो एपमा बबल सक्रिय गर्नुले तपाईंको यन्त्रमा पनि बबल सक्रिय गर्ने छ। \n\nयस कार्यले बबल देखाउने अनुमति दिइएका अन्य एप वा वार्तालापहरू प्रभावित हुन्छन्।"</string>
@@ -3738,8 +3731,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"वार्तालापहरू"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"अवरोध गर्न सक्ने वार्तालापहरू"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सबै वार्तालापहरू"</string>
-    <!-- no translation found for zen_mode_from_important_conversations (528050873364229253) -->
-    <skip />
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"महत्वपूर्ण वार्तालापहरू"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कुनै पनि होइन"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> वार्तालापहरू</item>
@@ -3751,8 +3743,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"कलहरू"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"कलहरू"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"अवरोध गर्न सक्ने कलहरू"</string>
-    <!-- no translation found for zen_mode_calls_footer (2008079711083701243) -->
-    <skip />
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"अनुमति दिइएका कलहरू आउँदा घन्टी बजोस् भन्नाका खातिर यन्त्रमा घन्टी बज्ने मोड सक्रिय गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ का आगम कलहरूलाई रोक लगाइएको छ। तपाईं आफ्ना साथीभाइ, परिवारजन वा अन्य सम्पर्कहरूलाई आफूसँग सम्पर्क राख्न दिने गरी सेटिङहरू समायोजन गर्न सक्नुहुन्छ।"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ताराङ्कित सम्पर्कहरू"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3761,11 +3752,9 @@
     </plurals>
     <string name="zen_mode_messages" msgid="7315084748885170585">"सन्देशहरू"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"सन्देशहरू"</string>
-    <!-- no translation found for zen_mode_messages_title (1777598523485334405) -->
-    <skip />
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"अवरोध गर्न सक्ने सन्देशहरू"</string>
-    <!-- no translation found for zen_mode_messages_footer (6002468050854126331) -->
-    <skip />
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"अनुमति दिइएका सन्देशहरू आउँदा घन्टी बजोस् भन्नाका खातिर यन्त्रमा घन्टी बज्ने मोड सक्रिय गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ का आगम कलहरूलाई रोक लगाइएको छ। तपाईं आफ्ना साथीभाइ, परिवारजन वा अन्य सूचीमा भएका अन्य मान्छेहरूलाई आफूसँग सम्पर्क राख्न दिने गरी सेटिङहरू समायोजन गर्न सक्नुहुन्छ।"</string>
     <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"सबै <xliff:g id="SENDER_CATEGORY">%s</xliff:g> तपाईंलाई सम्पर्क गर्न सक्छन्"</string>
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> सम्पर्क ठेगानाहरू"</string>
@@ -3782,18 +3771,15 @@
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"टाइमर, अलार्म, सुरक्षा प्रणाली र अन्य एपहरू"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"अलार्महरू"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"मिडियाका आवाजहरू"</string>
-    <!-- no translation found for zen_mode_media_summary (7174081803853351461) -->
-    <skip />
+    <string name="zen_mode_media_summary" msgid="7174081803853351461">"भिडियो, गेम र अन्य मिडियाका आवाजहरू"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"मिडिया"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"छुवाइसम्बन्धी ध्वनि"</string>
-    <!-- no translation found for zen_mode_system_summary (7225581762792177522) -->
-    <skip />
+    <string name="zen_mode_system_summary" msgid="7225581762792177522">"किबोर्ड र अन्य बटनहरूबाट निस्कने आवाजहरू"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"टच गर्दा आउने आवाज"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"रिमान्डरहरू"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"कार्य र रिमाइन्डरहरूबाट"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"रिमाइन्डरहरू"</string>
-    <!-- no translation found for zen_mode_events (7425795679353531794) -->
-    <skip />
+    <string name="zen_mode_events" msgid="7425795679353531794">"पात्रोका कार्यक्रमहरू"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"पात्रोका आगामी कार्यक्रमहरूबाट"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"खेलहरू"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"अनुप्रयोगहरूलाई ओभरराइड गर्ने अनुमति दिनुहोस्"</string>
@@ -3833,8 +3819,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> र <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_repeat_callers_summary (4121054819936083025) -->
-    <skip />
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"एउटै व्यक्तिले <xliff:g id="MINUTES">%d</xliff:g> मिनेटभित्र दोस्रो पटक कल गरेका खण्डमा"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"आफू अनुकूल"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"स्वचालित रूपमा चालू"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"कहिले पनि होइन"</string>
@@ -4898,19 +4883,15 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"काम"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"प्रणालीको पूर्वनिर्धारित सेटिङ"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"यो छनोट अब उप्रान्त मान्य छैन। फेरि प्रयास गर्नुहोस्।"</string>
-    <!-- no translation found for device_controls_sentence (4887752349920801907) -->
-    <skip />
-    <!-- no translation found for quick_controls_lower (6675573610027367819) -->
-    <skip />
+    <string name="device_controls_sentence" msgid="4887752349920801907">"यन्त्र नियन्त्रण गर्ने विजेटहरू"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"यन्त्र नियन्त्रण गर्ने विजेटहरू"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"कार्ड तथा पासहरू"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"कार्ड तथा पासहरू"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"पावर मेनु"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"पावर बटन मेनु"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"कार्ड तथा पासहरू देखाउनुहोस्"</string>
-    <!-- no translation found for power_menu_device_controls (5114816270328063924) -->
-    <skip />
-    <!-- no translation found for power_menu_cards_passes_device_controls (8645794247280620106) -->
-    <skip />
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"यन्त्र नियन्त्रण गर्ने विजेटहरू देखाइयोस्"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"कार्ड, पास र यन्त्र नियन्त्रण गर्ने विजेटहरू देखाइयोस्"</string>
     <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
     <skip />
     <string name="power_menu_none" msgid="4620640577918731270">"कुनै पनि सामग्री नदेखाउनुहोस्"</string>
@@ -4922,11 +4903,9 @@
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"लक भएका बेला कार्ड तथा नियन्त्रणहरू लुकाउनुहोस्"</string>
     <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
     <skip />
-    <!-- no translation found for device_controls_setting_toggle (8972005569207737469) -->
-    <skip />
+    <string name="device_controls_setting_toggle" msgid="8972005569207737469">"यन्त्र नियन्त्रण गर्ने विजेटहरू देखाइयोस्"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"कार्ड तथा पासहरू देखाउनुहोस्"</string>
-    <!-- no translation found for device_controls_setting_subtitle (4388544861427973600) -->
-    <skip />
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"जोडिएका यन्त्र नियन्त्रण गर्ने विजेटहरू प्रयोग गर्न पावर बटन थिचिराख्नुहोस्"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"तपाईंका भुक्तानी विधि र बोर्डिङ पासहरू जस्ता कुराहरूमाथि पहुँच राख्न, पावर बटन थिचिराख्नुहोस्।"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>

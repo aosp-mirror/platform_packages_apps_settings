@@ -19,7 +19,6 @@ package com.android.settings.wifi;
 import android.annotation.StyleRes;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +32,12 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.wifi.AccessPoint;
 
+/**
+ * Dialog for users to edit a Wi-Fi network.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link WifiDialog2}.
+ */
 public class WifiDialog extends AlertDialog implements WifiConfigUiBase,
         DialogInterface.OnClickListener {
 
