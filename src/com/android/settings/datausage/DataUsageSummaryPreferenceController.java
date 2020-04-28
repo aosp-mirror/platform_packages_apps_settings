@@ -114,6 +114,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
      */
     public void init(int subscriptionId) {
         mSubId = subscriptionId;
+        mHasMobileData = DataUsageUtils.hasMobileData(mContext);
         mDataUsageController = null;
     }
 
@@ -122,8 +123,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         final NetworkPolicyManager policyManager =
                 context.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
-
-        mHasMobileData = DataUsageUtils.hasMobileData(context);
 
         mDataUsageController = new DataUsageController(context);
         mDataUsageController.setSubscriptionId(subscriptionId);
