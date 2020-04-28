@@ -597,7 +597,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         return shortcut.getType();
     }
 
-    private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
+    /**
+     * This method will be invoked when a button in the edit shortcut dialog is clicked.
+     *
+     * @param dialog The dialog that received the click
+     * @param which The button that was clicked
+     */
+    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         if (mComponentName == null) {
             return;
         }
