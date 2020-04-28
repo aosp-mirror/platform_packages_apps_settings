@@ -34,6 +34,10 @@ import com.android.settingslib.wifi.AccessPointPreference;
 
 /**
  * UI to manage saved networks/access points.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in
+ * {@link com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiSettings2}.
  */
 public class SavedAccessPointsWifiSettings extends DashboardFragment {
 
