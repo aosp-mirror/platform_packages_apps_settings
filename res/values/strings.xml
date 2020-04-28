@@ -989,7 +989,9 @@
     <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
     <string name="security_settings_face_settings_enroll">Set up face unlock</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face while your eyes are open.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <string name="security_settings_face_settings_footer">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
+    <!-- Text shown in face settings explaining what your face can be used for. Used when attention checking is not supported. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_footer_attention_not_supported">Use face unlock to unlock your device, sign in to apps, and confirm payments.\n\nKeep in mind:\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour phone can be unlocked by someone who looks a lot like you, say, an identical sibling.</string>
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face data?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
@@ -2600,7 +2602,7 @@
     <string name="wifi_calling_roaming_mode_summary"><xliff:g id="wfc_roaming_preference" example="Wi-Fi">%1$s</xliff:g></string>
     <!-- WFC mode dialog [CHAR LIMIT=45] -->
     <string name="wifi_calling_roaming_mode_dialog_title">Roaming preference</string>
-    <string-array name="wifi_calling_mode_choices">
+    <string-array name="wifi_calling_mode_choices" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
         <item>@*android:string/wfc_mode_wifi_only_summary</item>
@@ -2615,7 +2617,7 @@
         <item>"1"</item>
         <item>"0"</item>
     </string-array>
-    <string-array name="wifi_calling_mode_choices_without_wifi_only">
+    <string-array name="wifi_calling_mode_choices_without_wifi_only" translatable="false">
         <item>@*android:string/wfc_mode_wifi_preferred_summary</item>
         <item>@*android:string/wfc_mode_cellular_preferred_summary</item>
     </string-array>
@@ -2645,8 +2647,6 @@
     <string name="emergency_address_summary">Used as your location when you make an emergency call over Wi\u2011Fi</string>
     <!-- Message of private dns that provides a help link. [CHAR LIMIT=NONE] -->
     <string name="private_dns_help_message"><annotation id="url">Learn more</annotation> about Private DNS features</string>
-    <!-- Message to display when private dns is on. [CHAR LIMIT=10] -->
-    <string name="private_dns_mode_on">On</string>
 
     <!-- Message to display when setting wifi calling are not editable [CHAR LIMIT=NONE] -->
     <string name="wifi_calling_pref_managed_by_carrier">Setting managed by carrier</string>
@@ -2918,6 +2918,40 @@
     <string name="night_display_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Night display slice screen, subtitle of intensity setting when night light is off. [CHAR LIMIT=30] -->
     <string name="night_display_not_currently_on">Night Light not currently on</string>
+
+    <!--    Dark ui screen-->
+    <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_manual">Turn on now</string>
+    <!-- Display settings screen, deactivation button action for manual mode. [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_manual">Turn off now</string>
+    <!-- Display settings screen, activation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_on_auto">Turn on until sunrise</string>
+    <!-- Display settings screen, deactivation button action for sunset-to-sunrise schedule [CHAR LIMIT=40] -->
+    <string name="dark_ui_activation_off_auto">Turn off until sunset</string>
+    <!-- Dark UI screen, setting option name to enable Dark UI [CHAR LIMIT=30] -->
+    <string name="dark_ui_title">Dark Mode</string>
+    <!-- Dark UI screen, setting option name to configure whether Dark UI turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_title">Schedule</string>
+    <!-- Dark UI screen, setting option value for Dark UI to *never* turn on/off automatically. [CHAR LIMIT=30] -->
+    <string name="dark_ui_auto_mode_never">None</string>
+    <!-- Dark UIscreen, setting option value for Dark UI to turn on/off automatically at sunset/sunrise. [CHAR LIMIT=32] -->
+    <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
+    <!-- Dark UIscreen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
+    <string name="dark_ui_status_title">Status</string>
+    <!-- Display settings screen, summary format of Dark UI when off. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off">Off / <xliff:g name="auto_mode_summary" example="Never turn on automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_never">Will never turn on automatically</string>
+    <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at sunset. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
+    <!-- Display settings screen, summary format of Dark UI when on. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on">On / <xliff:g name="auto_mode_summary" example="Never turn off automatically">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
+    <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
+    <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -5524,13 +5558,9 @@
     <!-- Title for the smart battery toggle [CHAR LIMIT=NONE] -->
     <string name="smart_battery_title">Manage apps automatically</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_summary">Limit battery for apps that you don\u2019t use often</string>
+    <string name="smart_battery_summary" product="default">Limit battery for apps that you don\u2019t use often</string>
     <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="default">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="tablet">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
-    <!-- Footer for the aosp smart battery page -->
-    <string name="smart_battery_footer" product="device">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
+    <string name="smart_battery_footer">When Battery Manager detects that apps are draining battery, you\u2019ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed.</string>
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
@@ -5551,7 +5581,8 @@
     <string name="battery_auto_restriction_summary">Detect when apps drain battery</string>
 
     <!-- Summary for battery manager when it is on -->
-    <string name="battery_manager_on">On / Detecting when apps drain battery</string>
+    <string name="battery_manager_on" product="default">On / Detecting when apps drain battery</string>
+
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
     <!-- Summary for battery manager, showing app restricted -->
@@ -7042,6 +7073,7 @@
     <string name="help_url_connected_devices" translatable="false"></string>
     <string name="help_url_apps_and_notifications" translatable="false"></string>
     <string name="help_url_night_display" translatable="false"></string>
+    <string name="help_url_dark_theme" translatable="false"></string>
     <string name="help_url_screen_saver" translatable="false"></string>
     <string name="help_url_pickup_gesture" translatable="false"></string>
     <string name="help_url_storage_dashboard" translatable="false"></string>
@@ -8743,9 +8775,6 @@
     <!-- Generic label for suggestion card's ok button [CHAR LIMIT=20] -->
     <string name="suggestion_button_text">Ok</string>
 
-    <!-- Strings for suggestion card's close button [CHAR LIMIT=20] -->
-    <string name="suggestion_button_close">Close</string>
-
     <!-- [CHAR LIMIT=35] Feedback on the device -->
     <string name="device_feedback">Send feedback about this device</string>
 
@@ -10137,6 +10166,12 @@
     <!-- [CHAR_LIMIT=40] Positive button text in dark theme notification -->
     <string name="dark_ui_settings_dialog_acknowledge">Got it</string>
 
+    <!-- [CHAR_LIMIT=50] Title string in the dark theme slice(suggestion) -->
+    <string name="dark_theme_slice_title">Try Dark theme</string>
+
+    <!-- [CHAR_LIMIT=50] Subtitle string in the dark theme slice(suggestion) -->
+    <string name="dark_theme_slice_subtitle">Helps extend battery life</string>
+
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
@@ -11388,5 +11423,13 @@
     <string name="work_policy_privacy_settings">Your work policy info</string>
     <!-- Summary for Enterprise Privacy settings, explaining what the user can expect to find under it [CHAR LIMIT=NONE]-->
     <string name="work_policy_privacy_settings_summary">Settings managed by your IT admin</string>
+    <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_title"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_no_visible"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_visible_during_call"></string>
+    <!-- Subtext for showing the option of RTT setting. [CHAR LIMIT=NONE] -->
+    <string name="rtt_settings_always_visible"></string>
 
 </resources>

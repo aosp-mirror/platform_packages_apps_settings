@@ -84,12 +84,14 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
 
     @Override
     public RecyclerView.ViewHolder createViewHolder(View view, @LayoutRes int viewType) {
-        if (viewType == VIEW_TYPE_DEFERRED_SETUP) {
-            return mDeferredSetupCardHelper.createViewHolder(view);
-        } else if (viewType == VIEW_TYPE_HALF_WIDTH) {
-            return mHalfCardHelper.createViewHolder(view);
+        switch (viewType) {
+            case VIEW_TYPE_DEFERRED_SETUP:
+                return mDeferredSetupCardHelper.createViewHolder(view);
+            case VIEW_TYPE_HALF_WIDTH:
+                return mHalfCardHelper.createViewHolder(view);
+            default:
+                return mFullCardHelper.createViewHolder(view);
         }
-        return mFullCardHelper.createViewHolder(view);
     }
 
     @Override
@@ -130,24 +132,30 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
                 return;
             }
 
-            if (holder.getItemViewType() == VIEW_TYPE_DEFERRED_SETUP) {
-                mDeferredSetupCardHelper.bindView(holder, card, slice);
-            } else if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
-                mHalfCardHelper.bindView(holder, card, slice);
-            } else {
-                mFullCardHelper.bindView(holder, card, slice);
+            switch (holder.getItemViewType()) {
+                case VIEW_TYPE_DEFERRED_SETUP:
+                    mDeferredSetupCardHelper.bindView(holder, card, slice);
+                    break;
+                case VIEW_TYPE_HALF_WIDTH:
+                    mHalfCardHelper.bindView(holder, card, slice);
+                    break;
+                default:
+                    mFullCardHelper.bindView(holder, card, slice);
             }
             if (swipeBackground != null) {
                 swipeBackground.setVisibility(View.VISIBLE);
             }
         });
 
-        if (holder.getItemViewType()
-                == VIEW_TYPE_DEFERRED_SETUP) {// Deferred setup is never dismissible.
-        } else if (holder.getItemViewType() == VIEW_TYPE_HALF_WIDTH) {
-            initDismissalActions(holder, card);
-        } else {
-            initDismissalActions(holder, card);
+        switch (holder.getItemViewType()) {
+            case VIEW_TYPE_DEFERRED_SETUP:
+                // Deferred setup is never dismissible.
+                break;
+            case VIEW_TYPE_HALF_WIDTH:
+                initDismissalActions(holder, card);
+                break;
+            default:
+                initDismissalActions(holder, card);
         }
 
         if (card.isPendingDismiss()) {

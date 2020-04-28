@@ -207,12 +207,16 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (checkedId == R.id.private_dns_mode_off) {
-            mMode = PRIVATE_DNS_MODE_OFF;
-        } else if (checkedId == R.id.private_dns_mode_opportunistic) {
-            mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
-        } else if (checkedId == R.id.private_dns_mode_provider) {
-            mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+        switch (checkedId) {
+            case R.id.private_dns_mode_off:
+                mMode = PRIVATE_DNS_MODE_OFF;
+                break;
+            case R.id.private_dns_mode_opportunistic:
+                mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
+                break;
+            case R.id.private_dns_mode_provider:
+                mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+                break;
         }
         updateDialogInfo();
     }

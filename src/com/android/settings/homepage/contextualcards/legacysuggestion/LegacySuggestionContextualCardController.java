@@ -47,9 +47,6 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
     private static final String TAG = "LegacySuggestCardCtrl";
 
     @VisibleForTesting
-    final List<ContextualCard> mSuggestions;
-
-    @VisibleForTesting
     SuggestionController mSuggestionController;
 
     private ContextualCardUpdateListener mCardUpdateListener;
@@ -58,7 +55,6 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
 
     public LegacySuggestionContextualCardController(Context context) {
         mContext = context;
-        mSuggestions = new ArrayList<>();
         if (!mContext.getResources().getBoolean(R.bool.config_use_legacy_suggestion)) {
             Log.w(TAG, "Legacy suggestion contextual card disabled, skipping.");
             return;
@@ -92,10 +88,7 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
 
     @Override
     public void onDismissed(ContextualCard card) {
-        mSuggestionController
-                .dismissSuggestions(((LegacySuggestionContextualCard)card).getSuggestion());
-        mSuggestions.remove(card);
-        updateAdapter();
+
     }
 
     @Override
@@ -151,7 +144,6 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
                     }
                     cardBuilder
                             .setPendingIntent(suggestion.getPendingIntent())
-                            .setSuggestion(suggestion)
                             .setName(suggestion.getId())
                             .setTitleText(suggestion.getTitle().toString())
                             .setSummaryText(suggestion.getSummary().toString())
@@ -161,16 +153,12 @@ public class LegacySuggestionContextualCardController implements ContextualCardC
                 }
             }
 
-            mSuggestions.clear();
-            mSuggestions.addAll(cards);
-            updateAdapter();
-        });
-    }
+            // Update adapter
+            final Map<Integer, List<ContextualCard>> suggestionCards = new ArrayMap<>();
+            suggestionCards.put(ContextualCard.CardType.LEGACY_SUGGESTION, cards);
+            ThreadUtils.postOnMainThread(
+                    () -> mCardUpdateListener.onContextualCardUpdated(suggestionCards));
 
-    private void updateAdapter() {
-        final Map<Integer, List<ContextualCard>> suggestionCards = new ArrayMap<>();
-        suggestionCards.put(ContextualCard.CardType.LEGACY_SUGGESTION, mSuggestions);
-        ThreadUtils.postOnMainThread(
-                () -> mCardUpdateListener.onContextualCardUpdated(suggestionCards));
+        });
     }
 }

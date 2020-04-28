@@ -37,14 +37,13 @@ public class VideoPreferenceController extends BasePreferenceController implemen
 
     @Override
     public int getAvailabilityStatus() {
-        return mVideoPreference.isAnimationAvailable() ?
-                AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        mVideoPreference = screen.findPreference(getPreferenceKey());
         super.displayPreference(screen);
+        mVideoPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

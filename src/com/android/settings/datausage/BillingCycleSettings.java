@@ -26,6 +26,7 @@ import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,6 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
 @SearchIndexable
 public class BillingCycleSettings extends DataUsageBaseFragment implements
@@ -405,7 +405,7 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             mCycleDayPicker.clearFocus();
 
             final int cycleDay = mCycleDayPicker.getValue();
-            final String cycleTimezone = TimeZone.getDefault().getID();
+            final String cycleTimezone = new Time().timezone;
             editor.setPolicyCycleDay(template, cycleDay, cycleTimezone);
             target.updateDataUsage();
         }

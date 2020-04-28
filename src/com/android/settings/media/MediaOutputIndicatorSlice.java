@@ -149,14 +149,14 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         // Return Hearing Aid device name if it is active
         BluetoothDevice activeDevice = findActiveHearingAidDevice();
         if (activeDevice != null) {
-            return activeDevice.getAlias();
+            return activeDevice.getAliasName();
         }
         // Return A2DP device name if it is active
         final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
         if (a2dpProfile != null) {
             activeDevice = a2dpProfile.getActiveDevice();
             if (activeDevice != null) {
-                return activeDevice.getAlias();
+                return activeDevice.getAliasName();
             }
         }
         // No active device, return default summary

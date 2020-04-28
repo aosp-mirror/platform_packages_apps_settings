@@ -88,6 +88,8 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                     settingsMode);
+            final ListPreference listPreference = (ListPreference) preference;
+            listPreference.setSummary(getPreferredNetworkModeSummaryResId(settingsMode));
             return true;
         }
 

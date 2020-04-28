@@ -30,6 +30,7 @@ import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
+import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
 import android.os.ServiceSpecificException;
 import android.security.KeyStore;
@@ -266,6 +267,20 @@ public class WifiConfigControllerTest {
     }
 
     @Test
+    public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
+        final Spinner spinner = new Spinner(mContext);
+        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
+
+        mController.loadCertificates(spinner,
+                "prefix",
+                "doNotProvideEapUserCertString",
+                false /* showMultipleCerts */,
+                false /* showUsePreinstalledCertOption */);
+
+        assertThat(spinner.getAdapter().getCount()).isEqualTo(1);   // doNotProvideEapUserCertString
+    }
+
+    @Test
     public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
         mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
                 WifiConfigUiBase.MODE_CONNECT);
@@ -484,9 +499,25 @@ public class WifiConfigControllerTest {
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
                 WifiConfigUiBase.MODE_MODIFY);
         final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        WifiConfiguration wifiConfiguration;
 
-        eapMethodSpinner.setSelection(Eap.TLS);
+        // Test EAP method PEAP
+        eapMethodSpinner.setSelection(Eap.PEAP);
+        phase2Spinner.setSelection(WifiConfigController.WIFI_PEAP_PHASE2_MSCHAPV2);
+        wifiConfiguration = mController.getConfig();
 
-        assertThat(eapMethodSpinner.getSelectedItemPosition()).isEqualTo(Eap.TLS);
+        assertThat(wifiConfiguration.enterpriseConfig.getEapMethod()).isEqualTo(Eap.PEAP);
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(
+                Phase2.MSCHAPV2);
+
+        // Test EAP method TTLS
+        eapMethodSpinner.setSelection(Eap.TTLS);
+        phase2Spinner.setSelection(WifiConfigController.WIFI_TTLS_PHASE2_MSCHAPV2);
+        wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getEapMethod()).isEqualTo(Eap.TTLS);
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(
+                Phase2.MSCHAPV2);
     }
 }

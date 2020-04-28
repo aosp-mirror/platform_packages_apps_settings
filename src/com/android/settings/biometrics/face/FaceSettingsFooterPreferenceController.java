@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.widget.FooterPreference;
@@ -34,8 +35,11 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
 
     private static final String ANNOTATION_URL = "url";
 
+    private FaceFeatureProvider mProvider;
+
     public FaceSettingsFooterPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mProvider = FeatureFactory.getFactory(context).getFaceFeatureProvider();
     }
 
     public FaceSettingsFooterPreferenceController(Context context) {
@@ -55,7 +59,12 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
                 mContext, mContext.getString(R.string.help_url_face), getClass().getName());
         final AnnotationSpan.LinkInfo linkInfo =
                 new AnnotationSpan.LinkInfo(mContext, ANNOTATION_URL, helpIntent);
+
+        final int footerRes = mProvider.isAttentionSupported(mContext)
+                ? R.string.security_settings_face_settings_footer
+                : R.string.security_settings_face_settings_footer_attention_not_supported;
+
         preference.setTitle(AnnotationSpan.linkify(
-                mContext.getText(R.string.security_settings_face_settings_footer), linkInfo));
+                mContext.getText(footerRes), linkInfo));
     }
 }

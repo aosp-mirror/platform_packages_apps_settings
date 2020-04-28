@@ -23,6 +23,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,11 +180,16 @@ public class SimListDialogFragment extends SimDialogFragment implements
                         Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
             } else {
                 title.setText(sub.getDisplayName());
-                summary.setText(sub.getNumber());
+                summary.setText(isMdnProvisioned(sub.getNumber()) ? sub.getNumber() : "");
                 icon.setImageBitmap(sub.createIconBitmap(mContext));
 
             }
             return convertView;
+        }
+
+        // An MDN is considered not provisioned if it's empty or all 0's
+        private boolean isMdnProvisioned(String mdn) {
+            return !(TextUtils.isEmpty(mdn) || mdn.matches("[\\D0]+"));
         }
     }
 }

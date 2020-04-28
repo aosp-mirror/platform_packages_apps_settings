@@ -18,7 +18,6 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.mock;
@@ -26,18 +25,20 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,19 +48,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 public class EditUserInfoControllerTest {
+    private static final int MAX_USER_NAME_LENGTH = 100;
+
     @Mock
     private Fragment mFragment;
-    @Mock
-    private LayoutInflater mInflater;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private View mDialogContent;
-    @Mock
-    private EditText mUserName;
-    @Mock
-    private ImageView mPhotoView;
     @Mock
     private Drawable mCurrentIcon;
 
@@ -86,12 +82,6 @@ public class EditUserInfoControllerTest {
         MockitoAnnotations.initMocks(this);
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getLayoutInflater()).thenReturn(mInflater);
-        when(mInflater.inflate(eq(R.layout.edit_user_info_dialog_content), any())).thenReturn(
-                mDialogContent);
-        when(mDialogContent.findViewById(eq(R.id.user_name))).thenReturn(mUserName);
-        when(mDialogContent.findViewById(eq(R.id.user_photo))).thenReturn(mPhotoView);
-        when(mPhotoView.getContext()).thenReturn((Context) mActivity);
         mController = new TestEditUserInfoController();
     }
 
@@ -105,5 +95,22 @@ public class EditUserInfoControllerTest {
         EditUserPhotoController photoController = mController.getPhotoController();
         assertThat(photoController).isNotNull();
         verify(photoController).onActivityResult(eq(0), eq(0), same(resultData));
+    }
+
+    @Test
+    @Config(shadows = ShadowAlertDialogCompat.class)
+    public void userNameView_inputLongName_shouldBeConstrained() {
+        // generate a string of 200 'A's
+        final String longName = Stream.generate(
+                () -> String.valueOf('A')).limit(200).collect(Collectors.joining());
+        final AlertDialog dialog = (AlertDialog) mController.createDialog(mFragment, mCurrentIcon,
+                "test user", R.string.profile_info_settings_title, null,
+                android.os.Process.myUserHandle());
+        final EditText userName = ShadowAlertDialogCompat.shadowOf(dialog).getView()
+                .findViewById(R.id.user_name);
+
+        userName.setText(longName);
+
+        assertThat(userName.getText().length()).isEqualTo(MAX_USER_NAME_LENGTH);
     }
 }

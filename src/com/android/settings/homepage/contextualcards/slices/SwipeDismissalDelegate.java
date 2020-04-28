@@ -52,20 +52,21 @@ public class SwipeDismissalDelegate extends ItemTouchHelper.Callback {
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView,
             @NonNull RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder.getItemViewType() == SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH
-                || viewHolder.getItemViewType()
-                == SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH) {// Here we are making sure
-            // the current displayed view is the initial view of
-            // either slice full card or half card, and only allow swipe on these two types.
-            if (viewHolder.itemView.findViewById(R.id.dismissal_view).getVisibility()
-                    == View.VISIBLE) {
-                // Disable swiping when we are in the dismissal view
+        switch (viewHolder.getItemViewType()) {
+            case SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH:
+            case SliceContextualCardRenderer.VIEW_TYPE_HALF_WIDTH:
+                // Here we are making sure the current displayed view is the initial view of
+                // either slice full card or half card, and only allow swipe on these two types.
+                if (viewHolder.itemView.findViewById(R.id.dismissal_view).getVisibility()
+                        == View.VISIBLE) {
+                    // Disable swiping when we are in the dismissal view
+                    return 0;
+                }
+                return makeMovementFlags(0 /*dragFlags*/,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT /*swipeFlags*/);
+            default:
                 return 0;
-            }
-            return makeMovementFlags(0 /*dragFlags*/,
-                    ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT /*swipeFlags*/);
         }
-        return 0;
     }
 
     @Override

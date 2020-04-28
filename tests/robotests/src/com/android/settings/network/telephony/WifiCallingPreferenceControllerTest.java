@@ -64,6 +64,7 @@ public class WifiCallingPreferenceControllerTest {
 
     private WifiCallingPreferenceController mController;
     private Preference mPreference;
+    private PreferenceCategory mPreferenceCategory;
     private Context mContext;
     private PersistableBundle mCarrierConfig;
 
@@ -86,6 +87,10 @@ public class WifiCallingPreferenceControllerTest {
         mCarrierConfig = new PersistableBundle();
         when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
+        mPreferenceCategory = new PreferenceCategory(mContext);
+        when(mPreferenceScreen.findPreference(
+                WifiCallingPreferenceController.KEY_PREFERENCE_CATEGORY)).thenReturn(
+                mPreferenceCategory);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);
     }
@@ -159,12 +164,12 @@ public class WifiCallingPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_notAvailable_setPreferenceInvisible() {
+    public void displayPreference_notAvailable_setCategoryInvisible() {
         mController.init(SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mPreferenceScreen.isVisible()).isFalse();
+        assertThat(mPreferenceCategory.isVisible()).isFalse();
     }
 
     @Test

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2019 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/dark_ui_mode"
+    android:key="dark_ui_mode_screen"
+    settings:keywords="@string/keywords_dark_ui_mode">
+
+    <DropDownPreference
+        android:key="dark_ui_auto_mode"
+        android:title="@string/dark_ui_auto_mode_title"
+        android:summary="%s"
+        android:entries="@array/dark_ui_scheduler_preference_titles"
+        android:entryValues="@array/dark_ui_scheduler_preference_titles"
+        settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
+        settings:keywords="@string/keywords_dark_ui_mode"/>
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_activated"
+        android:title="@string/dark_ui_title"
+        android:selectable="false"
+        android:layout="@layout/dark_ui_activation_button"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.display.darkmode.DarkModeActivationPreferenceController"
+        settings:keywords="@string/keywords_dark_ui_mode"/>
+
+    <com.android.settingslib.widget.FooterPreference
+            android:key="dark_ui_footer"
+            android:title="@string/dark_ui_text"
+            android:selectable="false"
+            settings:searchable="false"
+            settings:allowDividerAbove="true"/>
+
+</PreferenceScreen>

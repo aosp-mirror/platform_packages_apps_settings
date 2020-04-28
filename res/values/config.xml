@@ -410,11 +410,25 @@
     <string name="config_nearby_devices_slice_uri" translatable="false">content://com.google.android.gms.nearby.fastpair/device_status_list_item</string>
 
     <!-- Grayscale settings intent -->
-    <string name="config_grayscale_settings_intent" translatable="false"></string>
+    <string name="config_grayscale_settings_intent" translate="false"></string>
 
     <!-- List containing the injected tile keys which are suppressed. -->
     <string-array name="config_suppress_injected_tile_keys" translatable="false"/>
 
     <!-- "Show work policy info" intent action. TODO(b/134391103): Replace with final SystemAPI intent when it's available. -->
     <string name="config_work_policy_info_intent_action" translatable="false"/>
+
+    <!-- RTT setting intent action -->
+    <string name="config_rtt_setting_intent_action" translatable="false"></string>
+
+    <!-- Package name of dialer supports RTT setting-->
+    <string name="config_rtt_setting_package_name" translatable="false"></string>
+
+    <!-- Reset application package name -->
+    <string-array name="config_skip_reset_apps_package_name" translatable="false">
+        <item>android</item>
+        <item>com.android.providers.downloads</item>
+        <item>com.android.systemui</item>
+        <item>com.android.vending</item>
+    </string-array>
 </resources>

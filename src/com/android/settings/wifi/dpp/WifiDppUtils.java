@@ -206,7 +206,7 @@ public class WifiDppUtils {
         setConfiguratorIntentExtra(intent, wifiManager, wifiConfiguration);
 
         // For a transition mode Wi-Fi AP, creates a QR code that's compatible with more devices
-        if (accessPoint.getSecurity() == AccessPoint.SECURITY_PSK_SAE_TRANSITION) {
+        if (accessPoint.isPskSaeTransitionMode()) {
             intent.putExtra(EXTRA_WIFI_SECURITY, WifiQrCode.SECURITY_WPA_PSK);
         }
 
@@ -406,7 +406,6 @@ public class WifiDppUtils {
                 }
                 break;
             case AccessPoint.SECURITY_PSK:
-            case AccessPoint.SECURITY_PSK_SAE_TRANSITION:
                 return true;
             default:
         }
@@ -419,8 +418,6 @@ public class WifiDppUtils {
             case AccessPoint.SECURITY_PSK:
             case AccessPoint.SECURITY_WEP:
             case AccessPoint.SECURITY_NONE:
-            case AccessPoint.SECURITY_PSK_SAE_TRANSITION:
-            case AccessPoint.SECURITY_OWE_TRANSITION:
                 return true;
             case AccessPoint.SECURITY_SAE:
                 if (wifiManager.isWpa3SaeSupported()) {
