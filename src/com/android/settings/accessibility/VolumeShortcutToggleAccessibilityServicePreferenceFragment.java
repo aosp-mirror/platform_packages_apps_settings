@@ -34,7 +34,7 @@ import com.google.common.collect.ImmutableSet;
  *
  * <p>For accessibility services that target SDK <= Q.
  */
-public class LegacyAccessibilityServicePreferenceFragment extends
+public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
         ToggleAccessibilityServicePreferenceFragment {
 
     @Override

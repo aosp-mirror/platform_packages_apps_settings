@@ -46,22 +46,23 @@ final class AccessibilityUtil {
     /**
      * Annotation for different accessibilityService fragment UI type.
      *
-     * {@code LEGACY} for displaying appearance aligned with sdk version Q accessibility service
-     * page, but only hardware shortcut allowed.
-     * {@code INVISIBLE} for displaying appearance without switch bar.
-     * {@code INTUITIVE} for displaying appearance with new design.
+     * {@code VOLUME_SHORTCUT_TOGGLE} for displaying basic accessibility service fragment but
+     * only hardware shortcut allowed.
+     * {@code INVISIBLE_TOGGLE} for displaying basic accessibility service fragment without
+     * switch bar.
+     * {@code TOGGLE} for displaying basic accessibility service fragment.
      */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
-            AccessibilityServiceFragmentType.LEGACY,
-            AccessibilityServiceFragmentType.INVISIBLE,
-            AccessibilityServiceFragmentType.INTUITIVE,
+            AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE,
+            AccessibilityServiceFragmentType.INVISIBLE_TOGGLE,
+            AccessibilityServiceFragmentType.TOGGLE,
     })
 
     public @interface AccessibilityServiceFragmentType {
-        int LEGACY = 0;
-        int INVISIBLE = 1;
-        int INTUITIVE = 2;
+        int VOLUME_SHORTCUT_TOGGLE = 0;
+        int INVISIBLE_TOGGLE = 1;
+        int TOGGLE = 2;
     }
 
     // TODO(b/147021230): Will move common functions and variables to
@@ -162,11 +163,11 @@ final class AccessibilityUtil {
                 & AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON) != 0;
 
         if (targetSdk <= Build.VERSION_CODES.Q) {
-            return AccessibilityServiceFragmentType.LEGACY;
+            return AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
         }
         return requestA11yButton
-                ? AccessibilityServiceFragmentType.INVISIBLE
-                : AccessibilityServiceFragmentType.INTUITIVE;
+                ? AccessibilityServiceFragmentType.INVISIBLE_TOGGLE
+                : AccessibilityServiceFragmentType.TOGGLE;
     }
 
     /**
