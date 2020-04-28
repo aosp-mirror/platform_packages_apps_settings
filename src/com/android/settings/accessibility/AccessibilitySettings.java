@@ -269,7 +269,7 @@ public class AccessibilitySettings extends DashboardFragment {
 
         final CharSequence serviceState;
         final int fragmentType = AccessibilityUtil.getAccessibilityServiceFragmentType(info);
-        if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE) {
+        if (fragmentType == AccessibilityServiceFragmentType.INVISIBLE_TOGGLE) {
             final ComponentName componentName = new ComponentName(
                     info.getResolveInfo().serviceInfo.packageName,
                     info.getResolveInfo().serviceInfo.name);
@@ -652,13 +652,16 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private String getAccessibilityServiceFragmentTypeName(AccessibilityServiceInfo info) {
-            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(
-                    info)) {
-                case AccessibilityServiceFragmentType.LEGACY:
-                    return LegacyAccessibilityServicePreferenceFragment.class.getName();
-                case AccessibilityServiceFragmentType.INVISIBLE:
+            // Shorten the name to avoid exceeding 100 characters in one line.
+            final String volumeShortcutToggleAccessibilityServicePreferenceFragment =
+                    VolumeShortcutToggleAccessibilityServicePreferenceFragment.class.getName();
+
+            switch (AccessibilityUtil.getAccessibilityServiceFragmentType(info)) {
+                case AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE:
+                    return volumeShortcutToggleAccessibilityServicePreferenceFragment;
+                case AccessibilityServiceFragmentType.INVISIBLE_TOGGLE:
                     return InvisibleToggleAccessibilityServicePreferenceFragment.class.getName();
-                case AccessibilityServiceFragmentType.INTUITIVE:
+                case AccessibilityServiceFragmentType.TOGGLE:
                     return ToggleAccessibilityServicePreferenceFragment.class.getName();
                 default:
                     // impossible status
