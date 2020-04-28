@@ -21,8 +21,8 @@ import android.os.Bundle;
 import android.view.View;
 
 /** For accessibility services that target SDK <= Q in setup wizard. */
-public class LegacyToggleSelectToSpeakPreferenceFragmentForSetupWizard
-        extends LegacyAccessibilityServicePreferenceFragment {
+public class VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard
+        extends VolumeShortcutToggleAccessibilityServicePreferenceFragment {
 
     private boolean mToggleSwitchWasInitiallyChecked;
 
@@ -42,7 +42,7 @@ public class LegacyToggleSelectToSpeakPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
-                    SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SELECT_TO_SPEAK,
+                    SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER,
                     mToggleServiceDividerSwitchPreference.isChecked());
         }
 
