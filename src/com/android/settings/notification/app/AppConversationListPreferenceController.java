@@ -44,6 +44,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
 
     private List<ConversationChannelWrapper> mConversations;
     private PreferenceCategory mPreference;
+    private boolean mHasSentMsg;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -78,6 +79,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
+                mHasSentMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
                 mConversations = mBackend.getConversations(mAppRow.pkg, mAppRow.uid).getList();
                 Collections.sort(mConversations, mConversationComparator);
                 return null;
@@ -99,7 +101,15 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         mPreference.setTitle(R.string.conversations_category_title);
 
         if (mConversations.isEmpty()) {
-            mPreference.setVisible(false);
+            if (mHasSentMsg) {
+                mPreference.setVisible(true);
+                Preference notSupportedPref = new Preference(mContext);
+                notSupportedPref.setSummary(mContext.getString(
+                        R.string.convo_not_supported_summary, mAppRow.label));
+                mPreference.addPreference(notSupportedPref);
+            } else {
+                mPreference.setVisible(false);
+            }
         } else {
             mPreference.setVisible(true);
             populateConversations();
