@@ -287,13 +287,13 @@ public class ZenModeBackend {
 
     protected int getAlarmsTotalSilencePeopleSummary(int category) {
         if (category == NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES) {
-            return R.string.zen_mode_from_none;
+            return R.string.zen_mode_none_messages;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CALLS){
-            return R.string.zen_mode_from_none;
+            return R.string.zen_mode_none_calls;
         } else if (category == NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS) {
             return R.string.zen_mode_from_no_conversations;
         }
-        return R.string.zen_mode_from_none;
+        return R.string.zen_mode_from_no_conversations;
     }
 
     protected int getConversationSummary() {
@@ -322,7 +322,7 @@ public class ZenModeBackend {
                 return R.string.zen_mode_from_starred;
             case ZenPolicy.PEOPLE_TYPE_NONE:
             default:
-                return R.string.zen_mode_from_none;
+                return R.string.zen_mode_none_calls;
         }
     }
 
@@ -337,7 +337,7 @@ public class ZenModeBackend {
                 return R.string.zen_mode_from_starred;
             case ZenPolicy.PEOPLE_TYPE_NONE:
             default:
-                return R.string.zen_mode_from_none;
+                return R.string.zen_mode_none_messages;
         }
     }
 
@@ -472,7 +472,7 @@ public class ZenModeBackend {
         List<String> displayContacts = new ArrayList<>();
 
         if (numStarredContacts == 0) {
-            displayContacts.add(context.getString(R.string.zen_mode_from_none));
+            displayContacts.add(context.getString(R.string.zen_mode_starred_contacts_summary_none));
         } else {
             for (int i = 0; i < 2 && i < numStarredContacts; i++) {
                 displayContacts.add(starredContacts.get(i));
@@ -494,10 +494,11 @@ public class ZenModeBackend {
     String getContactsNumberSummary(Context context) {
         final int numContacts = queryAllContactsData().getCount();
         if (numContacts == 0) {
-            return context.getResources().getString(R.string.zen_mode_from_none);
+            return context.getResources().getString(
+                    R.string.zen_mode_contacts_count_none);
         }
-        return context.getResources().getString(R.string.zen_mode_contacts_senders_summary,
-                numContacts);
+        return context.getResources().getQuantityString(R.plurals.zen_mode_contacts_count,
+                numContacts, numContacts);
     }
 
     private Cursor queryStarredContactsData() {

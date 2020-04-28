@@ -91,7 +91,9 @@ public class ZenModePrioritySendersPreferenceController
             makeRadioPreference(KEY_ANY,
                     com.android.settings.R.string.zen_mode_from_anyone);
             makeRadioPreference(KEY_NONE,
-                    com.android.settings.R.string.zen_mode_from_none);
+                    mIsMessages
+                            ? com.android.settings.R.string.zen_mode_none_messages
+                            : com.android.settings.R.string.zen_mode_none_calls);
             updateSummaries();
         }
 
