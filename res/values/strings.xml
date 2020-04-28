@@ -8978,6 +8978,8 @@
         <item quantity="one">1 other</item>
         <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
     </plurals>
+    <!-- [CHAR LIMIT=40] Zen mode settings: Starred contacts summary when there are no starred contacts -->
+    <string name="zen_mode_starred_contacts_summary_none">None</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
@@ -8997,8 +8999,13 @@
     <!-- Zen mode settings: All calls can bypass DND summary [CHAR LIMIT=NONE -->
     <string name="zen_mode_all_calls_summary">All calls can reach you</string>
 
-    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE -->
-    <string name="zen_mode_contacts_senders_summary"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</string>
+    <!-- Zen mode settings: There are no contacts on the device [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_contacts_count_none">None</string>
+    <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE] -->
+    <plurals name="zen_mode_contacts_count">
+        <item quantity="one">1 contact</item>
+        <item quantity="other"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">Anyone</string>
@@ -9006,8 +9013,6 @@
     <string name="zen_mode_from_contacts">Contacts</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From starred contacts only -->
     <string name="zen_mode_from_starred">Starred contacts</string>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Calls and/or messages from none-->
-    <string name="zen_mode_from_none">None</string>
 
     <!-- Do not disturb settings, calls summary [CHAR LIMIT=100]-->
     <string name="zen_calls_summary_starred_repeat">From starred contacts and repeat callers</string>
@@ -9017,9 +9022,9 @@
     <string name="zen_calls_summary_repeat_only">From repeat callers only</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls option value: No calls allowed -->
-    <string name="zen_mode_from_none_calls">Don\u2019t allow any calls</string>
+    <string name="zen_mode_none_calls">None</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option value: No messages allowed -->
-    <string name="zen_mode_from_none_messages">Don\u2019t allow any messages</string>
+    <string name="zen_mode_none_messages">None</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow alarms option -->
     <string name="zen_mode_alarms">Alarms</string>
