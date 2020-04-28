@@ -2137,7 +2137,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Para mag-on o mag-off ng feature ng pagiging accessible, mag-swipe pataas mula sa ibaba ng screen gamit ang 3 daliri.\n\nPara magpalipat-lipat sa mga feature, mag-swipe pataas gamit ang 3 daliri at i-hold ang mga ito."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Shortcut ng <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"Button ng Pagiging Accessible"</string>
+    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Button ng accessibility"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Mag-swipe pataas gamit ang 2 daliri"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Mag-swipe pataas gamit ang 2 daliri"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"I-tap ang button ng pagiging accessible"</string>
@@ -3523,22 +3523,14 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Ilagay sa seksyon ng pag-uusap"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Pamahalaan ang mga pag-uusap"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Mga priyoridad na pag-uusap"</string>
-    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
-    <skip />
-    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
-    <skip />
-    <!-- no translation found for other_conversations (8666033204953175307) -->
-    <skip />
-    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
-    <skip />
-    <!-- no translation found for important_bubble (7911698275408390846) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
-    <skip />
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Ipakita sa itaas ng seksyon ng pag-uusap at lalabas bilang mga nakalutang na bubble"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Ipakita sa itaas ng seksyon ng pag-uusap"</string>
+    <string name="other_conversations" msgid="8666033204953175307">"Mga binagong pag-uusap"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Mga pag-uusap na ginawan mo ng mga pagbabago"</string>
+    <string name="important_bubble" msgid="7911698275408390846">"Mga bubble ng mga priyoridad na pag-uusap"</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Lalabas ang mga priyoridad na pag-uusap sa itaas ng pull-down shade. Puwede mo ring itakda ang mga ito na maging bubble at gambalain ang Huwag Istorbohin."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Lalabas dito ang mga priyoridad at binagong pag-uusap"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Sa sandaling markahan mo ang isang pag-uusap bilang priyoridad, o magsagawa ng anupamang pagbabago sa mga pag-uusap, lalabas dito ang mga ito. \n\nPara baguhin ang mga setting ng pag-uusap: \nMag-swipe pababa mula sa itaas ng screen para buksan ang pull-down shade, pagkatapos ay pindutin nang matagal ang isang pag-uusap."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Ipakita nang tahimik at i-minimize"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Ipakita nang tahimik"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Tumunog"</string>
@@ -3559,8 +3551,7 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Nakakatulong sa iyong tumuon nang walang tunog o pag-vibrate"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Kinukuha ang iyong atensyon sa pamamagitan ng tunog o pag-vibrate"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kapag naka-unlock ang device, ipakita ang mga notification bilang banner sa itaas ng screen"</string>
-    <!-- no translation found for notification_switch_label (8029371325967501557) -->
-    <skip />
+    <string name="notification_switch_label" msgid="8029371325967501557">"Lahat ng notification ng \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Mga Adaptive na Notification"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notification bawat araw</item>
@@ -4879,17 +4870,13 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Ipakita ang mga card at pass"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Ipakita ang mga kontrol ng device"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Ipakita ang mga card, pass, at kontrol ng device"</string>
-    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
-    <skip />
+    <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Lock screen"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Huwag magpakita ng anumang content"</string>
-    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
-    <skip />
+    <string name="power_menu_privacy" msgid="7900052501075197854">"Sensitibong content"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Ipakita ang mga card at kontrol kapag naka-lock"</string>
-    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
-    <skip />
+    <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Ipakita ang mga kontrol kapag naka-lock"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Itago ang mga card at kontrol kapag naka-lock"</string>
-    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
-    <skip />
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para magamit, magtakda muna ng lock ng screen"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Ipakita ang mga kontrol ng device"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Ipakita ang mga card at pass"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para i-access ang mga kontrol para sa mga nakakonektang device, pindutin nang matagal ang Power button"</string>

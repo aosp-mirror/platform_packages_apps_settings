@@ -5188,7 +5188,8 @@
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
     <plurals name="accessibilty_autoclick_delay_unit_second">
         <item quantity="one"><xliff:g id="click_delay_label" example="1">%1$s</xliff:g> second</item>
-        <item quantity="other"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
+        <item quantity="few"><xliff:g id="click_delay_label" example="0.6">%1$s</xliff:g> seconds</item>
+        <item quantity="other"><xliff:g id="click_delay_label">%1$s</xliff:g> seconds</item>
     </plurals>
 
     <!-- Summary for vibration settings preference when notification vibration and haptic feedback intensity are set. [CHAR LIMIT=50] -->
@@ -7998,7 +7999,7 @@
     <!-- Do not disturb settings, main screen, field, schedules [CHAR LIMIT=100]-->
     <string name="zen_category_schedule">Schedules</string>
     <!-- Do not disturb settings, main screen, field, duration setting where user can specify how
-    long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=100] -->
+    long dnd will last when toggling dnd on from qs) [CHAR LIMIT=100] -->
     <string name="zen_category_duration">Duration for Quick Settings</string>
 
     <!-- Do not disturb settings, sound and vibrations screen footer [CHAR LIMIT=NONE]-->
@@ -8989,8 +8990,11 @@
     <!-- [CHAR LIMIT=NONE] Zen mode custom rule settings: Messages screen footer -->
     <string name="zen_mode_custom_messages_footer">For \u2018<xliff:g id="schedule_name" example="Schedule 1">%1$s</xliff:g>\u2019 incoming messages are blocked. You can adjust settings to allow your friends, family, or other contacts to reach you.</string>
 
-    <!-- Zen mode settings: All senders can bypass DND summary [CHAR LIMIT=NONE -->
-    <string name="zen_mode_all_senders_summary">All <xliff:g id="sender_category" example="messages">%s</xliff:g> can reach you</string>
+    <!-- Zen mode settings: All messages can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_messages_summary">All messages can reach you</string>
+    <!-- Zen mode settings: All calls can bypass DND summary [CHAR LIMIT=NONE -->
+    <string name="zen_mode_all_calls_summary">All calls can reach you</string>
+
     <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE -->
     <string name="zen_mode_contacts_senders_summary"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</string>
 
@@ -9019,8 +9023,10 @@
     <string name="zen_mode_alarms">Alarms</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Allow alarms summary -->
     <string name="zen_mode_alarms_summary">From timers, alarms, security systems, and other apps</string>
-    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option (ie: sound from alarm clock) -->
+    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms list option (ie: sound from alarm clock) -->
     <string name="zen_mode_alarms_list">alarms</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Alarms (ie: sound from alarm clock) category in a list of sounds that can bypass DND when alarms is the first or only element in the list. For example "Alarms can interrupt" or "Alarms and media can interrupt" -->
+    <string name="zen_mode_alarms_list_first">Alarms</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow media (sound from video) to bypass dnd -->
     <string name="zen_mode_media">Media sounds</string>
@@ -9028,6 +9034,8 @@
     <string name="zen_mode_media_summary">Sounds from videos, games, and other media</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) -->
     <string name="zen_mode_media_list">media</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Media (ie: sound from video) category in a list of sounds when media is the first or only element in the list. For example "Media can interrupt" or "Media and touch sounds can interrupt" -->
+    <string name="zen_mode_media_list_first">Media</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: allow touch sounds to bypass DND  -->
     <string name="zen_mode_system">Touch sounds</string>
@@ -9035,6 +9043,8 @@
     <string name="zen_mode_system_summary">Sounds from the keyboard and other buttons</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) -->
     <string name="zen_mode_system_list">touch sounds</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: System sounds (ie: touch sounds) category in a list of sounds that can bypass DND when touch sounds is the first or only element in the list. For example "Touch sounds can interrupt" or "Touch sounds and events can interrupt" -->
+    <string name="zen_mode_system_list_first">Touch sounds</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow reminder notifications/sounds to bypass DND  -->
     <string name="zen_mode_reminders">Reminders</string>
@@ -9042,6 +9052,8 @@
     <string name="zen_mode_reminders_summary">From tasks and reminders</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders are allowed to bypass dnd) -->
     <string name="zen_mode_reminders_list">reminders</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Reminders (ie: calendar reminders) category in a list of elements that can bypass DND where reminders is the first or only element in the list. For example, "Reminds can interrupt” or "Reminders and events can interrupt” -->
+    <string name="zen_mode_reminders_list_first">Reminders</string>
 
     <!-- [CHAR LIMIT=80] Zen mode settings: Allow event notifications/sounds to bypass DND -->
     <string name="zen_mode_events">Calendar events</string>
@@ -9049,6 +9061,8 @@
     <string name="zen_mode_events_summary">From upcoming calendar events</string>
     <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) -->
     <string name="zen_mode_events_list">events</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Events (ie: calendar events) category in a list of sounds when events is the first or only element in the list. For example “Events can interrupt" or “Events and touch sounds can interrupt" -->
+    <string name="zen_mode_events_list_first">Events</string>
 
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND -->
     <string name="zen_mode_bypassing_apps">Allow apps to override</string>

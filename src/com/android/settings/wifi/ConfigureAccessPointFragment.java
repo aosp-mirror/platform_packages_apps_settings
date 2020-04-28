@@ -38,6 +38,9 @@ import com.android.settingslib.wifi.AccessPoint;
  *
  * The AccessPoint should be saved to the argument when launching this class in order to properly
  * render this page.
+ *
+ * Migrating from Wi-Fi SettingsLib to to WifiTrackerLib, this object will be removed in the near
+ * future, please develop in {@link ConfigureWifiEntryFragment}.
  */
 public class ConfigureAccessPointFragment extends InstrumentedFragment implements WifiConfigUiBase {
 

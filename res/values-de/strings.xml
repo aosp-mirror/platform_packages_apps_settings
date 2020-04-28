@@ -21,8 +21,7 @@
     <string name="create" msgid="986997212165228751">"Erstellen"</string>
     <string name="allow" msgid="3763244945363657722">"Zulassen"</string>
     <string name="deny" msgid="7326117222944479942">"Ablehnen"</string>
-    <!-- no translation found for confirmation_turn_on (2979094011928347665) -->
-    <skip />
+    <string name="confirmation_turn_on" msgid="2979094011928347665">"Aktivieren"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Unbekannt"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
       <item quantity="other">In <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> Schritten bist du Entwickler.</item>
@@ -2151,7 +2150,8 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Du kannst eine Bedienungshilfe aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"\"<xliff:g id="SERVICE">%1$s</xliff:g>\"-Verknüpfung"</string>
-    <string name="accessibility_shortcut_edit_summary_software" msgid="2820923641553461297">"Schaltfläche \"Bedienungshilfen\""</string>
+    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Mit zwei Fingern nach oben wischen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Mit drei Fingern nach oben wischen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Tippe auf die Schaltfläche \"Bedienungshilfen\""</string>
@@ -2435,8 +2435,8 @@
       <item quantity="one">%1$s App kürzlich eingeschränkt</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">Bei %2$d Apps ist der Akkuverbrauch im Hintergrund hoch</item>
-      <item quantity="one">Bei %1$s App ist der Akkuverbrauch im Hintergrund hoch</item>
+      <item quantity="other">Die Apps \"%2$d\" haben einen hohen Akkuverbrauch im Hintergrund</item>
+      <item quantity="one">Die App \"%1$s\" hat einen hohen Akkuverbrauch im Hintergrund</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Diese Apps können nicht im Hintergrund ausgeführt werden</item>
@@ -3093,18 +3093,16 @@
     <string name="enhanced_4g_lte_mode_title_4g_calling" msgid="7445853566718786195">"4G-Anrufe"</string>
     <string name="enhanced_4g_lte_mode_summary" msgid="6776190202179584104">"Zur Verbesserung von Sprache und Kommunikation LTE-Dienste verwenden (empfohlen)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="7814006095552641136">"Zur Verbesserung von Sprache und Kommunikation 4G-Dienste verwenden (empfohlen)"</string>
-    <!-- no translation found for contact_discovery_opt_in_title (8708034790649773814) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_summary (6539010458256667300) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title (2230536282911854114) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_title_no_carrier_defined (2028983133745990320) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message (8818310894782757538) -->
-    <skip />
-    <!-- no translation found for contact_discovery_opt_in_dialog_message_no_carrier_defined (1914894516552445911) -->
-    <skip />
+    <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Kontakte an Mobilfunkanbieter senden"</string>
+    <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Telefonnummern meiner Kontakte senden, um erweiterte Funktionen bereitzustellen"</string>
+    <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Kontakte an <xliff:g id="CARRIER">%1$s</xliff:g> senden?"</string>
+    <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Kontakte an deinen Mobilfunkanbieter senden?"</string>
+    <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Die Telefonnummern deiner Kontakte werden regelmäßig an <xliff:g id="CARRIER">%1$s</xliff:g> gesendet.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Anhand dieser Informationen kann festgestellt werden, ob deine Kontakte bestimmte Funktionen wie Videoanrufe oder einzelne Chatfunktionen verwenden können."</string>
+    <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Die Telefonnummern deiner Kontakte werden regelmäßig an deinen Mobilfunkanbieter gesendet.<xliff:g id="EMPTY_LINE">
+
+</xliff:g>Anhand dieser Informationen kann festgestellt werden, ob deine Kontakte bestimmte Funktionen wie Videoanrufe oder einzelne Chatfunktionen verwenden können."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Bevorzugter Netztyp"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (empfohlen)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS"</string>
@@ -3818,7 +3816,7 @@
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"Alle"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"Kontakten"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"markierten Kontakten"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"wiederholten Anrufern"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"wiederholte Anrufer"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> und <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
@@ -4000,7 +3998,7 @@
     <string name="memory_avg_desc" msgid="2632995851138152303">"Durchschnittlich <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4376086847362492613">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="4239069158701023623">"<xliff:g id="APP_NAME">%1$s</xliff:g> (<xliff:g id="COUNT">%2$d</xliff:g>)"</string>
-    <string name="high_power_apps" msgid="5623152700992102510">"Akku-Optimierung"</string>
+    <string name="high_power_apps" msgid="5623152700992102510">"Akkuoptimierung"</string>
     <string name="additional_battery_info" msgid="3104208543623068714">"Akkuwarnung"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"Vollständige Gerätenutzung anzeigen"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"App-Nutzung anzeigen"</string>
@@ -4015,7 +4013,7 @@
     <string name="high_power_filter_on" msgid="447849271630431531">"Nicht optimiert"</string>
     <string name="high_power_on" msgid="8778058701270819268">"Nicht optimiert"</string>
     <string name="high_power_off" msgid="317000444619279018">"Akkunutzung optimieren"</string>
-    <string name="high_power_system" msgid="3966701453644915787">"Akku-Optimierung nicht verfügbar"</string>
+    <string name="high_power_system" msgid="3966701453644915787">"Akkuoptimierung nicht verfügbar"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Keine Optimierung bezüglich der Akkuleistung anwenden. Dein Akku entleert sich hierdurch möglicherweise schneller."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Soll die App immer im Hintergrund ausgeführt werden?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Wenn du erlaubst, dass die App \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" dauerhaft im Hintergrund ausgeführt wird, kann dies die  Akkulaufzeit verringern. \n\nDu kannst diese Einstellung jederzeit unter \"Einstellungen\" &gt; \"Apps &amp; Benachrichtigungen\" ändern."</string>
@@ -4316,7 +4314,7 @@
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Aus"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Jetzt aktivieren"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Jetzt deaktivieren"</string>
-    <string name="not_battery_optimizing" msgid="8361294470943376258">"Akku-Optimierung wird nicht verwendet"</string>
+    <string name="not_battery_optimizing" msgid="8361294470943376258">"Akkuoptimierung wird nicht verwendet"</string>
     <string name="lockscreen_remote_input" msgid="6030274311185811503">"Wenn das Gerät gesperrt ist, ist das Schreiben von Antworten oder anderen Texten in Nachrichten nicht möglich"</string>
     <string name="default_spell_checker" msgid="7108373288347014351">"Standardrechtschreibprüfung"</string>
     <string name="choose_spell_checker" msgid="7402513404783243675">"Rechtschreibprüfung wählen"</string>
