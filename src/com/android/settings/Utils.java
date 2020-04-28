@@ -57,6 +57,7 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -1088,5 +1089,16 @@ public final class Utils extends com.android.settingslib.Utils {
             f = Fragment.instantiate(activity, fragmentName, args);
         }
         return f;
+    }
+
+    /**
+     * Returns true if current binder uid is Settings Intelligence.
+     */
+    public static boolean isSettingsIntelligence(Context context) {
+        final int callingUid = Binder.getCallingUid();
+        final String callingPackage = context.getPackageManager().getPackagesForUid(callingUid)[0];
+        final boolean isSettingsIntelligence = TextUtils.equals(callingPackage,
+                context.getString(R.string.config_settingsintelligence_package_name));
+        return isSettingsIntelligence;
     }
 }
