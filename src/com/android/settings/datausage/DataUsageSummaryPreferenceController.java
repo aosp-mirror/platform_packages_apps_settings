@@ -210,6 +210,11 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         final DataUsageController.DataUsageInfo info =
                 mDataUsageController.getDataUsageInfo(mDefaultTemplate);
 
+        long usageLevel = info.usageLevel;
+        if (usageLevel <= 0L) {
+            usageLevel = mDataUsageController.getHistoricalUsageLevel(mDefaultTemplate);
+        }
+
         if (subInfo != null) {
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
             summaryPreference.setWifiMode(/* isWifiMode */ false,
@@ -218,7 +223,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
                     info.period, /* isSingleWifi */ false);
             summaryPreference.setLimitInfo(null);
-            summaryPreference.setUsageNumbers(info.usageLevel,
+            summaryPreference.setUsageNumbers(usageLevel,
                     /* dataPlanSize */ -1L,
                     /* hasMobileData */ true);
             summaryPreference.setChartEnabled(false);
@@ -231,6 +236,11 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         }
 
         refreshDataplanInfo(info, subInfo);
+        if ((mDataplanUse <= 0L) && (mSnapshotTime < 0)) {
+            Log.d(TAG, "Display data usage from history");
+            mDataplanUse = usageLevel;
+            mSnapshotTime = -1L;
+        }
 
         if (info.warningLevel > 0 && info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
