@@ -1420,7 +1420,7 @@
     <string name="storage_low_title" msgid="8002650511493419567">"Pouco espaço de armazenamento"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"Algumas funções do sistema, como a sincronização, podem não funcionar corretamente. Tente liberar espaço excluindo ou desmarcando itens como apps ou conteúdo de mídia."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Renomear"</string>
-    <string name="storage_menu_mount" msgid="4760531872302820569">"Ativar"</string>
+    <string name="storage_menu_mount" msgid="4760531872302820569">"Montar"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Ejetar"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formatar"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formatar como portátil"</string>
@@ -1447,13 +1447,13 @@
     <string name="storage_volume_used" msgid="5031288167242496837">"Usado(s) de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_volume_used_total" msgid="283558499413754323">"Total usado de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"Ativação de <xliff:g id="NAME">%1$s</xliff:g> concluída"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Falha ao ativar <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Falha ao montar <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> ejetado com segurança"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"Não foi possível ejetar <xliff:g id="NAME">%1$s</xliff:g> com segurança"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"Formatação de <xliff:g id="NAME">%1$s</xliff:g> concluída"</string>
     <string name="storage_format_failure" msgid="2042691589726261987">"Não foi possível concluir a formatação de <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Renomear armazenamento"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"O <xliff:g id="NAME_0">^1</xliff:g> foi ejetado com segurança, mas ainda está disponível. \n\nPara usar esse <xliff:g id="NAME_1">^1</xliff:g>, é necessário ativá-lo primeiro."</string>
+    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"O <xliff:g id="NAME_0">^1</xliff:g> foi ejetado com segurança, mas ainda está disponível. \n\nPara usar esse <xliff:g id="NAME_1">^1</xliff:g>, é necessário montá-lo primeiro."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"Esse <xliff:g id="NAME_0">^1</xliff:g> está corrompido. \n\nPara utilizar o <xliff:g id="NAME_1">^1</xliff:g>, é necessário configurá-lo primeiro."</string>
     <string name="storage_dialog_unsupported" msgid="7787241928013470089">"Esse dispositivo não suporta o <xliff:g id="NAME_0">^1</xliff:g>. \n\nPara usar o <xliff:g id="NAME_1">^1</xliff:g> com esse dispositivo, é necessário configurá-lo primeiro."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Após a formatação, você pode usar este <xliff:g id="NAME_0">^1</xliff:g> em outros dispositivos. \n\nTodos os dados deste <xliff:g id="NAME_1">^1</xliff:g> serão apagados. Faça backup primeiro. \n\n"<b>"Backup de fotos e outras mídias"</b>" \nMova seus arquivos de mídia para um local de armazenamento alternativo neste dispositivo ou transfira-os para um computador usando um cabo USB. \n\n"<b>"Backup de apps"</b>" \nTodos os apps armazenados neste <xliff:g id="NAME_6">^1</xliff:g> serão desinstalados, e os dados deles serão apagados. Para manter esses apps, mova-os para um local de armazenamento alternativo neste dispositivo."</string>
@@ -2137,8 +2137,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Para ativar ou desativar um recurso de acessibilidade, deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com três dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ok"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar para cima com dois dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Deslizar para cima com três dedos"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Toque no botão de acessibilidade"</string>
@@ -2246,9 +2245,9 @@
       <item quantity="one">Longo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo)</item>
       <item quantity="other">Longo (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundo</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos</item>
+    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
+      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> segundo</item>
+      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> segundos</item>
     </plurals>
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"Toque sonoro: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, Notificação: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, Toque tátil: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Toque e notificação desativados"</string>
@@ -3524,22 +3523,14 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adicionar à seção de conversas"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gerenciar conversas"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritárias"</string>
-    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
-    <skip />
-    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
-    <skip />
-    <!-- no translation found for other_conversations (8666033204953175307) -->
-    <skip />
-    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
-    <skip />
-    <!-- no translation found for important_bubble (7911698275408390846) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
-    <skip />
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Aparecer na parte superior da seção de conversa como balões flutuantes"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Aparecer na parte superior da seção de conversa"</string>
+    <string name="other_conversations" msgid="8666033204953175307">"Conversas modificadas"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que você modificou"</string>
+    <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritárias em balões"</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Conversas prioritárias são mostradas na parte superior da aba suspensa. Você também pode configurá-las para que sejam mostradas em balões e interrompam o modo \"Não perturbe\"."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"As conversas prioritárias e modificadas aparecerão aqui"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Depois de marcar uma conversa como prioritária ou fazer qualquer outra mudança nas conversas, elas aparecerão aqui. \n\nPara mudar as configurações da conversa: \ndeslize o dedo de cima para baixo na tela para abrir a aba suspensa. Em seguida, toque na conversa e a mantenha pressionada."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostrar de forma silenciosa e minimizada"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostrar de forma silenciosa"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Emitir som"</string>
@@ -3560,8 +3551,7 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ajuda você a manter o foco sem som ou vibração"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama sua atenção com som ou vibração"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo estiver desbloqueado, mostrar notificações em um banner no topo da tela"</string>
-    <!-- no translation found for notification_switch_label (8029371325967501557) -->
-    <skip />
+    <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificações de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificações adaptáveis"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">Cerca de <xliff:g id="NUMBER_1">%d</xliff:g> notificação por dia</item>
@@ -3744,7 +3734,10 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Mensagens que podem interromper"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Para garantir que as mensagens permitidas emitam sons, verifique se o dispositivo está configurado para tocar"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Durante \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\", as mensagens recebidas são bloqueadas. Você pode ajustar as configurações para permitir que seus amigos, familiares ou outros contatos falem com você."</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Você pode receber todas as <xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
+    <!-- no translation found for zen_mode_all_messages_summary (3756267858343104554) -->
+    <skip />
+    <!-- no translation found for zen_mode_all_calls_summary (7337907849083824698) -->
+    <skip />
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> contatos"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Qualquer pessoa"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Contatos"</string>
@@ -3758,18 +3751,28 @@
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmes"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"De timers, alarmes, sistemas de segurança e outros apps"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmes"</string>
+    <!-- no translation found for zen_mode_alarms_list_first (2780418316613576610) -->
+    <skip />
     <string name="zen_mode_media" msgid="885017672250984735">"Sons de mídia"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Sons de vídeos, jogos e outras mídias"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"mídia"</string>
+    <!-- no translation found for zen_mode_media_list_first (7824427062528618442) -->
+    <skip />
     <string name="zen_mode_system" msgid="7301665021634204942">"Sons de toque"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Sons do teclado e de outros botões"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"sons de toque"</string>
+    <!-- no translation found for zen_mode_system_list_first (8590078626001067855) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Lembretes"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"De tarefas e lembretes"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"lembretes"</string>
+    <!-- no translation found for zen_mode_reminders_list_first (1130470396012190814) -->
+    <skip />
     <string name="zen_mode_events" msgid="7425795679353531794">"Eventos da agenda"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"De eventos futuros da agenda"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"eventos"</string>
+    <!-- no translation found for zen_mode_events_list_first (7425369082835214361) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Permitir que apps modifiquem o \"Não perturbe\""</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps que podem interromper"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Selecionar mais apps"</string>
@@ -4880,17 +4883,13 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Mostrar cartões e passes"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Mostrar controles do dispositivo"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Mostrar cartões, passes e controles do dispositivo"</string>
-    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
-    <skip />
+    <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Bloquear tela"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Não mostrar conteúdo"</string>
-    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
-    <skip />
+    <string name="power_menu_privacy" msgid="7900052501075197854">"Conteúdo sensível"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar cartões e controles quando estiver bloqueado"</string>
-    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
-    <skip />
+    <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Mostrar controles com a tela bloqueada"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar cartões e controles quando estiver bloqueado"</string>
-    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
-    <skip />
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usar, primeiro defina um bloqueio de tela"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles do dispositivo"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar cartões e passes"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acessar os controles de dispositivos conectados, mantenha o botão liga/desliga pressionado"</string>

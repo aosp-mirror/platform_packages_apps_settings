@@ -1667,7 +1667,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"透過藍牙分享這個「<xliff:g id="DEVICE_NAME">%1$d</xliff:g>」的網際網路連線"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"最多只能有 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 個裝置共用網路。"</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"將中斷 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的網路共用。"</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"乙太網路數據連線"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"乙太網路網路共用"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"透過 USB 乙太網路分享手機的網際網路連線"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"使用無線基地台和網路共用功能，透過你的行動數據連線提供網際網路給其他裝置。應用程式也可以建立無線基地台來和鄰近的裝置分享內容。"</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"使用無線基地台和網路共用功能，讓其他裝置能夠透過你的 Wi-Fi 或行動數據連線連上網際網路。應用程式也可以建立無線基地台，以便與鄰近的裝置分享內容。"</string>
@@ -2245,10 +2245,7 @@
       <item quantity="other">長 (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒)</item>
       <item quantity="one">長 (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒)</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> 秒</item>
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> 秒</item>
-    </plurals>
+    <!-- no translation found for accessibilty_autoclick_delay_unit_second (4537791441118261556) -->
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"響鈴：<xliff:g id="SUMMARY_RING">%1$s</xliff:g>、通知：<xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>、輕觸：<xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"將鈴聲和通知震動設為關閉"</string>
     <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"將鈴聲和通知震動設為低"</string>
@@ -3734,7 +3731,10 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"例外的訊息"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"如要確認允許的訊息是否會發出音效，請檢查裝置目前是否已設為響鈴"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程進行時封鎖訊息。你可以調整設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"你會接收到所有<xliff:g id="SENDER_CATEGORY">%s</xliff:g>"</string>
+    <!-- no translation found for zen_mode_all_messages_summary (3756267858343104554) -->
+    <skip />
+    <!-- no translation found for zen_mode_all_calls_summary (7337907849083824698) -->
+    <skip />
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> 位聯絡人"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"所有人"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"聯絡人"</string>
@@ -3748,18 +3748,28 @@
     <string name="zen_mode_alarms" msgid="5989343060100771099">"鬧鐘"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"計時器、鬧鐘、安全系統和其他應用程式的通知"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"鬧鐘"</string>
+    <!-- no translation found for zen_mode_alarms_list_first (2780418316613576610) -->
+    <skip />
     <string name="zen_mode_media" msgid="885017672250984735">"媒體音效"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"影片、遊戲和其他媒體的音效"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"媒體"</string>
+    <!-- no translation found for zen_mode_media_list_first (7824427062528618442) -->
+    <skip />
     <string name="zen_mode_system" msgid="7301665021634204942">"觸控音效"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"鍵盤和其他按鈕的音效"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"觸控音效"</string>
+    <!-- no translation found for zen_mode_system_list_first (8590078626001067855) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="1970224691551417906">"提醒"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"工作和提醒的通知/音效"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"提醒"</string>
+    <!-- no translation found for zen_mode_reminders_list_first (1130470396012190814) -->
+    <skip />
     <string name="zen_mode_events" msgid="7425795679353531794">"日曆活動"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"近期日曆活動的通知/音效"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"活動"</string>
+    <!-- no translation found for zen_mode_events_list_first (7425369082835214361) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允許應用程式覆寫"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"例外的應用程式"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"選取更多應用程式"</string>
@@ -4014,7 +4024,7 @@
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"將檔案轉移到另一個裝置"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"如果 MTP 不受支援，則轉移相片或檔案 (PTP)"</string>
-    <string name="usb_use_tethering" msgid="2897063414491670531">"USB 數據連線"</string>
+    <string name="usb_use_tethering" msgid="2897063414491670531">"USB 網路共用"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"將這個裝置用做 MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"USB 用途"</string>
@@ -4034,7 +4044,7 @@
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"檔案傳輸和供電"</string>
-    <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB 數據連線和供電"</string>
+    <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB 網路共用和供電"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP 和供電"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI 模式和供電"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"背景檢查"</string>

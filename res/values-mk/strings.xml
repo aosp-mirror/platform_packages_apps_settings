@@ -2137,8 +2137,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"За да вклучите или исклучите функција за пристапност, повлечете нагоре од дното на екранот со три прста.\n\nЗа префрлање помеѓу функциите, повлечете нагоре со три прста и задржете."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Сфатив"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Кратенка за <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_shortcut_edit_summary_software (6405629977940618205) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Копче за пристапност"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Повлечете нагоре со два прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Повлечете нагоре со три прста"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Допрете го копчето за пристапност"</string>
@@ -2246,9 +2245,9 @@
       <item quantity="one">Долго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда)</item>
       <item quantity="other">Долго (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди)</item>
     </plurals>
-    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="8132935106204075064">
-      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунда</item>
-      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> секунди</item>
+    <plurals name="accessibilty_autoclick_delay_unit_second" formatted="false" msgid="4537791441118261556">
+      <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунда</item>
+      <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> секунди</item>
     </plurals>
     <string name="accessibility_vibration_summary" msgid="27904038683405084">"Ѕвонење <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, известување <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, допир <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
     <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Вибрациите при ѕвонење и известувања се поставени на исклучени"</string>
@@ -3524,22 +3523,14 @@
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Додајте во секцијата со разговори"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Управувајте со разговорите"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Приоритетни разговори"</string>
-    <!-- no translation found for important_conversations_summary_bubbles (614327166808117644) -->
-    <skip />
-    <!-- no translation found for important_conversations_summary (3184022761562676418) -->
-    <skip />
-    <!-- no translation found for other_conversations (8666033204953175307) -->
-    <skip />
-    <!-- no translation found for other_conversations_summary (3487426787901236273) -->
-    <skip />
-    <!-- no translation found for important_bubble (7911698275408390846) -->
-    <skip />
-    <!-- no translation found for important_conversation_behavior_summary (1845064084071107732) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_title (5194559958353468484) -->
-    <skip />
-    <!-- no translation found for conversation_onboarding_summary (2484845363368486941) -->
-    <skip />
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Прикажи најгоре во делот со разговори и да изгледа како лебдечки балончиња"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Прикажи најгоре во делот со разговори"</string>
+    <string name="other_conversations" msgid="8666033204953175307">"Изменети разговори"</string>
+    <string name="other_conversations_summary" msgid="3487426787901236273">"Разговори на кои сте направиле промени"</string>
+    <string name="important_bubble" msgid="7911698275408390846">"Стави ги приоритетните разговори во балонче"</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Приоритетните разговори се прикажуваат на горниот дел од списокот со известувања. Може да ги поставите и во балонче и да ја прекинуваат „Не вознемирувај“."</string>
+    <string name="conversation_onboarding_title" msgid="5194559958353468484">"Приоритетот и изменетите разговори ќе се појавуваат тука"</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Откако ќе означите разговор како приоритетен или ќе направите какви било промени на разговорите, тие ќе се појават тука. \n\nЗа промена на поставките за разговор: \nПовлечете надолу од горниот дел на екранот за да се отвори списокот со известувања, а потоа допрете и задржете разговор."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Прикажи тивко и минимизирај"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Прикажи тивко"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Испушти звук"</string>
@@ -3560,8 +3551,7 @@
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ви помага да се концентрирате без звук или вибрации"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Ви го привлекува вниманието со звук или вибрации"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Кога уредот е отклучен, прикажувај ги известувањата како рекламен напис на горниот дел од екранот"</string>
-    <!-- no translation found for notification_switch_label (8029371325967501557) -->
-    <skip />
+    <string name="notification_switch_label" msgid="8029371325967501557">"Сите известувања на „<xliff:g id="APP_NAME">%1$s</xliff:g>“"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Приспособливи известувања"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">околу <xliff:g id="NUMBER_1">%d</xliff:g> известување дневно</item>
@@ -3744,7 +3734,10 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Пораки што може да го прекинуваат"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"За да проверите дали дозволените пораки пуштаат звук, видете дали уредот е поставен да ѕвони"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"За „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“, дојдовните пораки се блокирани. Може да ги приспособите поставките за да им дозволите на пријателите, семејството или другите контакти да ве добијат."</string>
-    <string name="zen_mode_all_senders_summary" msgid="8107956322038861701">"Сите <xliff:g id="SENDER_CATEGORY">%s</xliff:g> може да стигнат до вас"</string>
+    <!-- no translation found for zen_mode_all_messages_summary (3756267858343104554) -->
+    <skip />
+    <!-- no translation found for zen_mode_all_calls_summary (7337907849083824698) -->
+    <skip />
     <string name="zen_mode_contacts_senders_summary" msgid="208881195580433414">"<xliff:g id="NUM_CONTACTS">%d</xliff:g> контакти"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Секој"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакти"</string>
@@ -3758,18 +3751,28 @@
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Аларми"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Од тајмери, аларми, безбедносни системи и други апликации"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"аларми"</string>
+    <!-- no translation found for zen_mode_alarms_list_first (2780418316613576610) -->
+    <skip />
     <string name="zen_mode_media" msgid="885017672250984735">"Звуци од аудиовизуелни содржини"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Звуци од видеа, игри и други аудиовизуелни содржини"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"аудиовизизуелни содржини"</string>
+    <!-- no translation found for zen_mode_media_list_first (7824427062528618442) -->
+    <skip />
     <string name="zen_mode_system" msgid="7301665021634204942">"Звуци при допир"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Звуци од тастатурата и другите копчиња"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"звуци при допир"</string>
+    <!-- no translation found for zen_mode_system_list_first (8590078626001067855) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Потсетници"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Од задачи и потсетници"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"потсетници"</string>
+    <!-- no translation found for zen_mode_reminders_list_first (1130470396012190814) -->
+    <skip />
     <string name="zen_mode_events" msgid="7425795679353531794">"Настани од календарот"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"Од претстојните настани во календарот"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"настани"</string>
+    <!-- no translation found for zen_mode_events_list_first (7425369082835214361) -->
+    <skip />
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дозволете апликациите да занемаруваат"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Апликации што може да го прекинуваат"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Изберете повеќе апликации"</string>
@@ -4880,17 +4883,13 @@
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Прикажувај картички и пропусници"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Прикажувај контроли за уредите"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Прикажувај картички, пропусници и контроли за уредите"</string>
-    <!-- no translation found for power_menu_lock_screen_category (1478249026305417128) -->
-    <skip />
+    <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Заклучен екран"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Не прикажувај никакви содржини"</string>
-    <!-- no translation found for power_menu_privacy (7900052501075197854) -->
-    <skip />
+    <string name="power_menu_privacy" msgid="7900052501075197854">"Чувствителни содржини"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Прикажувај ги картичките и контролите кога е заклучен"</string>
-    <!-- no translation found for power_menu_privacy_show_controls (8294874046577167797) -->
-    <skip />
+    <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Прикажувај контроли кога е заклучен"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Сокривај ги картичките и контролите кога е заклучен"</string>
-    <!-- no translation found for power_menu_privacy_not_secure (6247119934128206924) -->
-    <skip />
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"За да користите, прво поставете заклучување екран"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Прикажувај контроли за уредите"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Прикажи картички и пропусници"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"За да пристапите до контролите за поврзаните уреди, задржете го копчето за вклучување"</string>
