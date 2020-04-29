@@ -47,12 +47,17 @@ public class BubblePreferenceController extends NotificationPreferenceController
 
     private FragmentManager mFragmentManager;
     private boolean mIsAppPage;
+    private boolean mHasSentInvalidMsg;
+    private int mNumConversations;
+    private NotificationSettings.DependentFieldListener mListener;
 
     public BubblePreferenceController(Context context, @Nullable FragmentManager fragmentManager,
-            NotificationBackend backend, boolean isAppPage) {
+            NotificationBackend backend, boolean isAppPage,
+            @Nullable NotificationSettings.DependentFieldListener listener) {
         super(context, backend);
         mFragmentManager = fragmentManager;
         mIsAppPage = isAppPage;
+        mListener = listener;
     }
 
     @Override
@@ -81,10 +86,14 @@ public class BubblePreferenceController extends NotificationPreferenceController
     @Override
     public void updateState(Preference preference) {
         if (mIsAppPage && mAppRow != null) {
+            mHasSentInvalidMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
+            mNumConversations = mBackend.getConversations(
+                    mAppRow.pkg, mAppRow.uid).getList().size();
             // We're on the app specific bubble page which displays a tri-state
             int backEndPref = mAppRow.bubblePreference;
             BubblePreference pref = (BubblePreference) preference;
             pref.setDisabledByAdmin(mAdmin);
+            pref.setSelectedVisibility(!mHasSentInvalidMsg || mNumConversations > 0);
             if (!isGloballyEnabled()) {
                 pref.setSelectedPreference(BUBBLE_PREFERENCE_NONE);
             } else {
@@ -121,6 +130,9 @@ public class BubblePreferenceController extends NotificationPreferenceController
                     mAppRow.bubblePreference = value;
                     mBackend.setAllowBubbles(mAppRow.pkg, mAppRow.uid, value);
                 }
+            }
+            if (mListener != null) {
+                mListener.onFieldValueChanged();
             }
         }
         return true;

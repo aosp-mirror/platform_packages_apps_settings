@@ -23,7 +23,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -453,37 +452,6 @@ public class SliceBuilderUtilsTest {
 
         final int actualIconResource = actualIcon.toIcon().getResId();
         assertThat(actualIconResource).isEqualTo(settingsIcon);
-    }
-
-    @Test
-    public void buildUnavailableSlice_customizeSubtitle_returnsSliceWithCustomizedSubtitle() {
-        final String subtitleOfUnavailableSlice = "subtitleOfUnavailableSlice";
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
-                SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE, 0 /* icon */,
-                subtitleOfUnavailableSlice);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getSubtitle()).isEqualTo(subtitleOfUnavailableSlice);
-    }
-
-    @Test
-    public void buildUnavailableSlice_notCustomizeSubtitle_returnsSliceWithDefaultSubtitle() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
-                SliceData.SliceType.SWITCH);
-        Settings.Global.putInt(mContext.getContentResolver(),
-                FakeUnavailablePreferenceController.AVAILABILITY_KEY,
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
-
-        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
-        assertThat(metadata.getSubtitle()).isEqualTo(
-                mContext.getString(R.string.disabled_dependent_setting_summary));
     }
 
     private SliceData getDummyData() {
