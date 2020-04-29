@@ -33,6 +33,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -44,8 +45,10 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ParceledListSlice;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.service.notification.ConversationChannelWrapper;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -65,6 +68,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BubblePreferenceControllerTest {
@@ -98,6 +104,10 @@ public class BubblePreferenceControllerTest {
                 false /* isAppPage */, mListener));
         mAppPageController = spy(new BubblePreferenceController(mContext, mFragmentManager,
                 mBackend, true /* isAppPage */, mListener));
+        List<ConversationChannelWrapper> convos = new ArrayList<>();
+        convos.add(mock(ConversationChannelWrapper.class));
+        when(mBackend.getConversations(anyString(), anyInt())).thenReturn(
+                new ParceledListSlice<>(convos));
     }
 
     @Test
@@ -221,7 +231,9 @@ public class BubblePreferenceControllerTest {
     public void updateState_app_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mAppPageController.onResume(new NotificationBackend.AppRow(), channel, null,
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
+        mAppPageController.onResume(appRow, channel, null,
                 null, null, mock(RestrictedLockUtils.EnforcedAdmin.class));
 
         BubblePreference pref = new BubblePreference(mContext);
@@ -234,6 +246,7 @@ public class BubblePreferenceControllerTest {
     public void updateState_channel_channelNotBlockable() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         mController.onResume(appRow, channel, null, null, null, null);
@@ -248,6 +261,7 @@ public class BubblePreferenceControllerTest {
     public void updateState_channel() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBubble()).thenReturn(true);
         mController.onResume(appRow, channel, null, null, null, null);
@@ -268,6 +282,7 @@ public class BubblePreferenceControllerTest {
     public void updateState_app() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.label = "App!";
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         mAppPageController.onResume(appRow, null, null, null, null, null);
@@ -294,6 +309,7 @@ public class BubblePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, SYSTEM_WIDE_OFF);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.label = "App!";
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         mAppPageController.onResume(appRow, null, null, null, null, null);
@@ -307,6 +323,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_on_channel() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_SELECTED;
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
@@ -326,6 +343,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_off_channel() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_SELECTED;
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
@@ -346,6 +364,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_app_all() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_NONE;
         mAppPageController.onResume(appRow, null, null, null, null, null);
 
@@ -365,6 +384,7 @@ public class BubblePreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_NONE;
         mAppPageController.onResume(appRow, null, null, null, null, null);
 
@@ -384,6 +404,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_app_selected() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         mAppPageController.onResume(appRow, null, null, null, null, null);
 
@@ -402,6 +423,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_app_none() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         mAppPageController.onResume(appRow, null, null, null, null, null);
 
@@ -420,6 +442,7 @@ public class BubblePreferenceControllerTest {
     public void onPreferenceChange_dependentFieldListenerCalled() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "a";
         appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
         mAppPageController.onResume(appRow, null, null, null, null, null);
 
