@@ -386,7 +386,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         return shortcut.getType();
     }
 
-    private void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
+    @Override
+    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
         updateUserShortcutType(/* saveChanges= */ true);
         optInAllMagnificationValuesToSettings(getPrefContext(), mUserShortcutType);
         optOutAllMagnificationValuesFromSettings(getPrefContext(), ~mUserShortcutType);
