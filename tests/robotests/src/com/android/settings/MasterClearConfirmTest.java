@@ -115,6 +115,20 @@ public class MasterClearConfirmTest {
     }
 
     @Test
+    public void shouldWipePersistentDataBlock_frpPolicyNotSupported_shouldReturnFalse() {
+        when(mMasterClearConfirm.getActivity()).thenReturn(mMockActivity);
+
+        doReturn(false).when(mMasterClearConfirm).isDeviceStillBeingProvisioned();
+        doReturn(false).when(mMasterClearConfirm).isOemUnlockedAllowed();
+        when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
+                .thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(false);
+
+        assertThat(mMasterClearConfirm.shouldWipePersistentDataBlock(
+                mPersistentDataBlockManager)).isFalse();
+    }
+
+    @Test
     public void shouldWipePersistentDataBlock_hasFactoryResetProtectionPolicy_shouldReturnFalse() {
         when(mMasterClearConfirm.getActivity()).thenReturn(mMockActivity);
 
@@ -128,6 +142,7 @@ public class MasterClearConfirmTest {
                 .build();
         when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
         when(mDevicePolicyManager.getFactoryResetProtectionPolicy(null)).thenReturn(frp);
         when(mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()).thenReturn(true);
 
@@ -144,6 +159,7 @@ public class MasterClearConfirmTest {
 
         when(mMockActivity.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
+        when(mDevicePolicyManager.isFactoryResetProtectionPolicySupported()).thenReturn(true);
         when(mDevicePolicyManager.getFactoryResetProtectionPolicy(null)).thenReturn(null);
         when(mDevicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()).thenReturn(false);
 
