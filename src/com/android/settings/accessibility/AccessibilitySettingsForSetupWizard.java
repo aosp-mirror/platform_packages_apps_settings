@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.LEGACY;
+import static com.android.settings.accessibility.AccessibilityUtil.AccessibilityServiceFragmentType.VOLUME_SHORTCUT_TOGGLE;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.settings.SettingsEnums;
@@ -102,10 +102,10 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         super.onResume();
         updateAccessibilityServicePreference(mScreenReaderPreference,
                 SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME,
-                LegacyToggleScreenReaderPreferenceFragmentForSetupWizard.class.getName());
+                VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard.class.getName());
         updateAccessibilityServicePreference(mSelectToSpeakPreference,
                 SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME,
-                LegacyToggleSelectToSpeakPreferenceFragmentForSetupWizard.class.getName());
+                VolumeShortcutToggleSelectToSpeakPreferenceFragmentForSetupWizard.class.getName());
         configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
@@ -147,7 +147,7 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     }
 
     private void updateAccessibilityServicePreference(Preference preference,
-            String packageName, String serviceName, String targetLegacyFragment) {
+            String packageName, String serviceName, String targetFragment) {
         final AccessibilityServiceInfo info = findService(packageName, serviceName);
         if (info == null) {
             getPreferenceScreen().removePreference(preference);
@@ -159,8 +159,8 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         preference.setTitle(title);
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
         preference.setKey(componentName.flattenToString());
-        if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == LEGACY) {
-            preference.setFragment(targetLegacyFragment);
+        if (AccessibilityUtil.getAccessibilityServiceFragmentType(info) == VOLUME_SHORTCUT_TOGGLE) {
+            preference.setFragment(targetFragment);
         }
 
         // Update the extras.

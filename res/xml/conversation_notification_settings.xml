@@ -78,14 +78,14 @@
             android:key="ringtone"
             android:title="@string/notification_channel_sound_title"
             android:dialogTitle="@string/notification_channel_sound_title"
-            android:icon="@drawable/ic_media_stream"
+            android:icon="@drawable/ic_notifications"
             android:showSilent="true"
             android:showDefault="true"/>
 
         <!-- Visibility Override -->
         <com.android.settings.RestrictedListPreference
             android:key="visibility_override"
-            android:icon="@drawable/ic_lock"
+            android:icon="@drawable/ic_lock_closed"
             android:title="@string/app_notification_visibility_override_title"/>
 
         <!-- Show badge -->
