@@ -17,8 +17,6 @@
 package com.android.settings.wifi.tether;
 
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.app.usage.UsageStatsManager;
 import android.bluetooth.BluetoothAdapter;
@@ -36,7 +34,6 @@ import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.os.ResultReceiver;
-import android.os.SystemClock;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -74,7 +71,6 @@ public class TetherService extends Service {
     private TetherServiceWrapper mWrapper;
     private ArrayList<Integer> mCurrentTethers;
     private ArrayMap<Integer, List<ResultReceiver>> mPendingCallbacks;
-    private HotspotOffReceiver mHotspotReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -97,7 +93,6 @@ public class TetherService extends Service {
         mPendingCallbacks.put(ConnectivityManager.TETHERING_USB, new ArrayList<ResultReceiver>());
         mPendingCallbacks.put(
                 ConnectivityManager.TETHERING_BLUETOOTH, new ArrayList<ResultReceiver>());
-        mHotspotReceiver = new HotspotOffReceiver(this);
     }
 
     @Override
@@ -146,18 +141,9 @@ public class TetherService extends Service {
                 if (index >= 0) {
                     removeTypeAtIndex(index);
                 }
-                cancelAlarmIfNecessary();
             } else {
-                if (DEBUG) Log.d(TAG, "Don't cancel alarm during provisioning");
+                if (DEBUG) Log.d(TAG, "Don't remove tether type during provisioning");
             }
-        }
-
-        // Only set the alarm if we have one tether, meaning the one just added,
-        // to avoid setting it when it was already set previously for another
-        // type.
-        if (intent.getBooleanExtra(ConnectivityManager.EXTRA_SET_ALARM, false)
-                && mCurrentTethers.size() == 1) {
-            scheduleAlarm();
         }
 
         if (intent.getBooleanExtra(ConnectivityManager.EXTRA_RUN_PROVISION, false)) {
@@ -182,14 +168,9 @@ public class TetherService extends Service {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         prefs.edit().putString(KEY_TETHERS, tethersToString(mCurrentTethers)).commit();
 
-        unregisterReceivers();
+        unregisterReceiver(mReceiver);
         if (DEBUG) Log.d(TAG, "Destroying TetherService");
         super.onDestroy();
-    }
-
-    private void unregisterReceivers() {
-        unregisterReceiver(mReceiver);
-        mHotspotReceiver.unregister();
     }
 
     private void removeTypeAtIndex(int index) {
@@ -200,11 +181,6 @@ public class TetherService extends Service {
         if (index <= mCurrentTypeIndex && mCurrentTypeIndex > 0) {
             mCurrentTypeIndex--;
         }
-    }
-
-    @VisibleForTesting
-    void setHotspotOffReceiver(HotspotOffReceiver receiver) {
-        mHotspotReceiver = receiver;
     }
 
     private ArrayList<Integer> stringToTethers(String tethersStr) {
@@ -302,48 +278,6 @@ public class TetherService extends Service {
                 getTetherServiceWrapper().setAppInactive(packageName, false);
             }
         }
-    }
-
-    @VisibleForTesting
-    void scheduleAlarm() {
-        Intent intent = new Intent(this, TetherService.class);
-        intent.putExtra(ConnectivityManager.EXTRA_RUN_PROVISION, true);
-
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int period = getResourceForActiveDataSubId().getInteger(
-                com.android.internal.R.integer.config_mobile_hotspot_provision_check_period);
-        long periodMs = period * MS_PER_HOUR;
-        long firstTime = SystemClock.elapsedRealtime() + periodMs;
-        if (DEBUG) Log.d(TAG, "Scheduling alarm at interval " + periodMs);
-        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, firstTime, periodMs,
-                pendingIntent);
-        mHotspotReceiver.register();
-    }
-
-    /**
-     * Cancels the recheck alarm only if no tethering is currently active.
-     *
-     * Runs in the background, to get access to bluetooth service that takes time to bind.
-     */
-    public static void cancelRecheckAlarmIfNecessary(final Context context, int type) {
-        Intent intent = new Intent(context, TetherService.class);
-        intent.putExtra(ConnectivityManager.EXTRA_REM_TETHER_TYPE, type);
-        context.startService(intent);
-    }
-
-    @VisibleForTesting
-    void cancelAlarmIfNecessary() {
-        if (mCurrentTethers.size() != 0) {
-            if (DEBUG) Log.d(TAG, "Tethering still active, not cancelling alarm");
-            return;
-        }
-        Intent intent = new Intent(this, TetherService.class);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.cancel(pendingIntent);
-        if (DEBUG) Log.d(TAG, "Tethering no longer active, canceling recheck");
-        mHotspotReceiver.unregister();
     }
 
     private void fireCallbacksForType(int type, int result) {
