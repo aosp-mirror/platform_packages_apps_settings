@@ -200,20 +200,6 @@ public class NotificationHistoryActivity extends Activity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        handleBackPressed();
-    }
-
-    private void handleBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 1) {
-            super.onBackPressed();
-        } else {
-            startActivity(new Intent(Settings.ACTION_NOTIFICATION_SETTINGS));
-            finish();
-        }
-    }
-
     private void bindSwitch() {
         if (mSwitchBar != null) {
             mSwitchBar.setSwitchBarText(R.string.notification_history_toggle,
