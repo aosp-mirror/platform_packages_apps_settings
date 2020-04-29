@@ -247,7 +247,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (componenterList.size() == 0) {
             Log.e(TAG, "onCreateView: no sim info");
-            return null;
+            return super.onCreateView(inflater, container, savedInstanceState);
         }
 
         if (componenterList.size() > 1) {
