@@ -130,8 +130,8 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void getServiceSummary_invisibleType_shortcutDisabled_showsOffSummary() {
-        setInvisibleFragmentType(mServiceInfo);
+    public void getServiceSummary_invisibleToggle_shortcutDisabled_showsOffSummary() {
+        setInvisibleToggleFragmentType(mServiceInfo);
         doReturn(DEFAULT_SUMMARY).when(mServiceInfo).loadSummary(any());
 
         final CharSequence summary = AccessibilitySettings.getServiceSummary(mContext,
@@ -277,7 +277,7 @@ public class AccessibilitySettingsTest {
         when(mockInfo.getComponentName()).thenReturn(DUMMY_COMPONENT_NAME);
     }
 
-    private void setInvisibleFragmentType(AccessibilityServiceInfo info) {
+    private void setInvisibleToggleFragmentType(AccessibilityServiceInfo info) {
         info.getResolveInfo().serviceInfo.applicationInfo.targetSdkVersion = Build.VERSION_CODES.R;
         info.flags |= AccessibilityServiceInfo.FLAG_REQUEST_ACCESSIBILITY_BUTTON;
     }

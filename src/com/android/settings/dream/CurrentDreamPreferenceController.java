@@ -20,8 +20,10 @@ import android.content.Context;
 
 import androidx.preference.Preference;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
 
@@ -45,6 +47,7 @@ public class CurrentDreamPreferenceController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
         setGearClickListenerForPreference(preference);
+        setActiveDreamIcon(preference);
     }
 
     @Override
@@ -77,5 +80,14 @@ public class CurrentDreamPreferenceController extends BasePreferenceController {
                 .stream()
                 .filter((info) -> info.isActive)
                 .findFirst();
+    }
+
+    private void setActiveDreamIcon(Preference preference) {
+        if (!(preference instanceof GearPreference)) {
+            return;
+        }
+        final GearPreference gearPref = (GearPreference) preference;
+        gearPref.setIconSize(RestrictedPreference.ICON_SIZE_SMALL);
+        Utils.setSafeIcon(gearPref, mBackend.getActiveIcon());
     }
 }
