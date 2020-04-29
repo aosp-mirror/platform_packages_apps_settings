@@ -36,6 +36,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImeAwareEditText;
 import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
@@ -55,7 +56,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.utils.AnnotationSpan;
-import com.android.settings.widget.ImeAwareEditText;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
