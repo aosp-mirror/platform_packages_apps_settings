@@ -241,16 +241,19 @@ public class SliceBuilderUtils {
         final SliceAction sliceAction = getToggleAction(context, sliceData,
                 toggleController.isChecked());
         final Set<String> keywords = buildSliceKeywords(sliceData);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(sliceData.getTitle())
+                .setPrimaryAction(
+                        SliceAction.createDeeplink(contentIntent, icon,
+                                ListBuilder.ICON_IMAGE, sliceData.getTitle()))
+                .addEndItem(sliceAction);
+        if (!Utils.isSettingsIntelligence(context)) {
+            rowBuilder.setSubtitle(subtitleText);
+        }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
-                        .setTitle(sliceData.getTitle())
-                        .setSubtitle(subtitleText)
-                        .setPrimaryAction(
-                                SliceAction.createDeeplink(contentIntent, icon,
-                                        ListBuilder.ICON_IMAGE, sliceData.getTitle()))
-                        .addEndItem(sliceAction))
+                .addRow(rowBuilder)
                 .setKeywords(keywords)
                 .build();
     }
@@ -262,16 +265,19 @@ public class SliceBuilderUtils {
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final Set<String> keywords = buildSliceKeywords(sliceData);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(sliceData.getTitle())
+                .setPrimaryAction(
+                        SliceAction.createDeeplink(contentIntent, icon,
+                                ListBuilder.ICON_IMAGE,
+                                sliceData.getTitle()));
+        if (!Utils.isSettingsIntelligence(context)) {
+            rowBuilder.setSubtitle(subtitleText);
+        }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
-                        .setTitle(sliceData.getTitle())
-                        .setSubtitle(subtitleText)
-                        .setPrimaryAction(
-                                SliceAction.createDeeplink(contentIntent, icon,
-                                        ListBuilder.ICON_IMAGE,
-                                        sliceData.getTitle())))
+                .addRow(rowBuilder)
                 .setKeywords(keywords)
                 .build();
     }
@@ -301,7 +307,6 @@ public class SliceBuilderUtils {
         }
         final InputRangeBuilder inputRangeBuilder = new InputRangeBuilder()
                 .setTitle(sliceData.getTitle())
-                .setSubtitle(subtitleText)
                 .setPrimaryAction(primaryAction)
                 .setMax(sliderController.getMax())
                 .setMin(sliderController.getMin())
@@ -310,6 +315,9 @@ public class SliceBuilderUtils {
         if (sliceData.getIconResource() != 0) {
             inputRangeBuilder.setTitleItem(icon, ListBuilder.ICON_IMAGE);
             color = CustomSliceable.COLOR_NOT_TINTED;
+        }
+        if (!Utils.isSettingsIntelligence(context)) {
+            inputRangeBuilder.setSubtitle(subtitleText);
         }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
@@ -330,14 +338,17 @@ public class SliceBuilderUtils {
         final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(context);
         final Set<String> keywords = buildSliceKeywords(sliceData);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(sliceData.getTitle())
+                .setPrimaryAction(primaryAction)
+                .addEndItem(copyableAction);
+        if (!Utils.isSettingsIntelligence(context)) {
+            rowBuilder.setSubtitle(subtitleText);
+        }
 
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
-                        .setTitle(sliceData.getTitle())
-                        .setSubtitle(subtitleText)
-                        .setPrimaryAction(primaryAction)
-                        .addEndItem(copyableAction))
+                .addRow(rowBuilder)
                 .setKeywords(keywords)
                 .build();
     }
@@ -418,14 +429,17 @@ public class SliceBuilderUtils {
         final SliceAction primaryAction = SliceAction.createDeeplink(
                 getContentPendingIntent(context, data),
                 icon, ListBuilder.ICON_IMAGE, title);
+        final RowBuilder rowBuilder = new RowBuilder()
+                .setTitle(title)
+                .setTitleItem(icon, ListBuilder.ICON_IMAGE)
+                .setPrimaryAction(primaryAction);
+        if (!Utils.isSettingsIntelligence(context)) {
+            rowBuilder.setSubtitle(subtitle);
+        }
 
         return new ListBuilder(context, data.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
-                .addRow(new RowBuilder()
-                        .setTitle(title)
-                        .setTitleItem(icon, ListBuilder.ICON_IMAGE)
-                        .setSubtitle(subtitle)
-                        .setPrimaryAction(primaryAction))
+                .addRow(rowBuilder)
                 .setKeywords(keywords)
                 .build();
     }
