@@ -128,6 +128,13 @@ public class MobileDataPreferenceController extends TelephonyTogglePreferenceCon
             preference.setEnabled(true);
             preference.setSummary(R.string.mobile_data_settings_summary);
         }
+
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            preference.setSelectable(false);
+            preference.setSummary(R.string.mobile_data_settings_summary_unavailable);
+        } else {
+            preference.setSelectable(true);
+        }
     }
 
     private boolean isOpportunistic() {
