@@ -57,6 +57,7 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Button;
+import android.widget.ImeAwareEditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -64,7 +65,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
-import com.android.settings.widget.ImeAwareEditText;
 
 import java.util.List;
 
