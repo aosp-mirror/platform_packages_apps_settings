@@ -27,16 +27,19 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class EnhancedConnectivityPreferenceControllerTest {
-    @Mock
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
     @Mock
@@ -95,6 +98,29 @@ public class EnhancedConnectivityPreferenceControllerTest {
         verify(mPreference).setChecked(true);
 
         assertThat(isSettingEnabled()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_enhancedConnectivityShown_shouldReturnTrue() {
+        enableEnhancedConnectivityPreference(true);
+
+        boolean availability = mController.isAvailable();
+
+        assertThat(availability).isTrue();
+    }
+
+    @Test
+    public void isAvailable_enhancedConnectivityNotShown_shouldReturnFalse() {
+        enableEnhancedConnectivityPreference(false);
+
+        boolean availability = mController.isAvailable();
+
+        assertThat(availability).isFalse();
+    }
+
+    private void enableEnhancedConnectivityPreference(boolean enable) {
+        when(mContext.getResources().getBoolean(R.bool.config_show_enhanced_connectivity))
+                .thenReturn(enable);
     }
 
     private boolean isSettingEnabled() {
