@@ -37,7 +37,7 @@ import java.util.List;
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DarkModeSettingsFragment extends DashboardFragment {
 
-    private static final String TAG = "DarkModeSettingsFragment";
+    private static final String TAG = "DarkModeSettingsFrag";
     private static final String DARK_THEME_END_TIME = "dark_theme_end_time";
     private static final String DARK_THEME_START_TIME = "dark_theme_start_time";
     private DarkModeObserver mContentObserver;
