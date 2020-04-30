@@ -151,11 +151,16 @@ public class MasterClearConfirm extends InstrumentedFragment {
         if (isOemUnlockedAllowed()) {
             return false;
         }
+        final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+        // Do not erase the factory reset protection data (from Settings) if factory reset
+        // protection policy is not supported on the device.
+        if (!dpm.isFactoryResetProtectionPolicySupported()) {
+            return false;
+        }
         // Do not erase the factory reset protection data (from Settings) if the
         // device is an organization-owned managed profile device and a factory
         // reset protection policy has been set.
-        final DevicePolicyManager dpm = (DevicePolicyManager) getActivity()
-                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         FactoryResetProtectionPolicy frpPolicy = dpm.getFactoryResetProtectionPolicy(null);
         if (dpm.isOrganizationOwnedDeviceWithManagedProfile() && frpPolicy != null
                 && frpPolicy.isNotEmpty()) {
