@@ -20,12 +20,20 @@
     android:title="@string/dark_ui_mode"
     settings:keywords="@string/keywords_dark_ui_mode">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_location_off"
+        android:selectable="false"
+        android:layout="@layout/twilight_mode_location_off"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"/>
+
     <DropDownPreference
         android:key="dark_ui_auto_mode"
         android:title="@string/dark_ui_auto_mode_title"
         android:summary="%s"
         android:entries="@array/dark_ui_scheduler_preference_titles"
         android:entryValues="@array/dark_ui_scheduler_preference_titles"
+        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.display.darkmode.DarkModeScheduleSelectorController"
         settings:keywords="@string/keywords_dark_ui_mode"/>
 
