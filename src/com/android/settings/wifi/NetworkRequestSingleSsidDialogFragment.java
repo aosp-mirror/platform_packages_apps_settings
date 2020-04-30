@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
+
 import com.android.settings.R;
 
 /**
@@ -33,6 +35,8 @@ public class NetworkRequestSingleSsidDialogFragment extends
         final View customTitle = inflater.inflate(R.layout.network_request_dialog_title, null);
         final TextView title = customTitle.findViewById(R.id.network_request_title_text);
         title.setText(getTitle());
+        final TextView summary = customTitle.findViewById(R.id.network_request_summary_text);
+        summary.setText(getSummary());
         final ProgressBar progressBar = customTitle
                 .findViewById(R.id.network_request_title_progress);
         progressBar.setVisibility(View.GONE);
