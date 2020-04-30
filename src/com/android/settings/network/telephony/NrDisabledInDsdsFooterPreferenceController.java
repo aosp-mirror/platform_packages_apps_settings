@@ -17,10 +17,17 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.HelpUtils;
+
 
 /**
  * Class to show the footer that can't connect to 5G when device is in DSDS mode.
@@ -41,6 +48,29 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
      */
     public void init(int subId) {
         mSubId = subId;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        if (preference != null) {
+            preference.setTitle(getFooterText());
+        }
+    }
+
+    private CharSequence getFooterText() {
+        final Intent helpIntent = HelpUtils.getHelpIntent(mContext,
+                mContext.getString(R.string.help_uri_5g_dsds),
+                mContext.getClass().getName());
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(mContext,
+                "url", helpIntent);
+
+        if (linkInfo.isActionable()) {
+            return AnnotationSpan.linkify(mContext.getText(R.string.no_5g_in_dsds_text), linkInfo);
+        } else {
+            return mContext.getText(R.string.no_5g_in_dsds_text);
+        }
     }
 
     @Override
