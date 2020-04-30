@@ -42,6 +42,7 @@ import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
@@ -300,6 +301,9 @@ public class LocaleListEditor extends RestrictedSettingsFragment {
         mAddLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                        .logSettingsTileClick(INDEX_KEY_ADD_LANGUAGE, getMetricsCategory());
+
                 final Intent intent = new Intent(getActivity(),
                         LocalePickerWithRegionActivity.class);
                 startActivityForResult(intent, REQUEST_LOCALE_PICKER);
