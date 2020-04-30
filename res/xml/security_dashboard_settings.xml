@@ -145,7 +145,8 @@
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
         android:summary="@string/summary_placeholder"
-        android:fragment="com.android.settings.security.ScreenPinningSettings" />
+        android:fragment="com.android.settings.security.ScreenPinningSettings"
+        settings:keywords="@string/keywords_app_pinning" />
 
     <SwitchPreference
         android:order="90"
