@@ -1200,8 +1200,7 @@
 
         <activity
             android:name=".notification.history.NotificationHistoryActivity"
-            android:label="@string/notification_history_title"
-            android:taskAffinity="com.android.settings.notification">
+            android:label="@string/notification_history_title">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_HISTORY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2008,6 +2007,8 @@
                 <action android:name="android.settings.BUGREPORT_HANDLER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
         </activity>
@@ -2532,7 +2533,6 @@
         <activity
             android:name="Settings$ConfigureNotificationSettingsActivity"
             android:label="@string/configure_notification_settings"
-            android:taskAffinity="com.android.settings.notification"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NOTIFICATION_SETTINGS" />
