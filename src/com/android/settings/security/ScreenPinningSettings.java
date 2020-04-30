@@ -18,6 +18,7 @@ package com.android.settings.security;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -25,6 +26,7 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.widget.Switch;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceScreen;
@@ -43,12 +45,13 @@ import com.android.settingslib.widget.FooterPreference;
 import java.util.Arrays;
 import java.util.List;
 
+
 /**
  * Screen pinning settings.
  */
 @SearchIndexable
 public class ScreenPinningSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, DialogInterface.OnClickListener {
 
     private static final String KEY_USE_SCREEN_LOCK = "use_screen_lock";
     private static final String KEY_FOOTER = "screen_pinning_settings_screen_footer";
@@ -78,9 +81,9 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         mFooterPreference = root.findPreference(KEY_FOOTER);
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
+        mSwitchBar.addOnSwitchChangeListener(this);
 
         updateDisplay();
     }
@@ -184,7 +187,26 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      */
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        setLockToAppEnabled(isChecked);
+        if (isChecked) {
+            new AlertDialog.Builder(getContext())
+                    .setMessage(R.string.screen_pinning_dialog_message)
+                    .setPositiveButton(R.string.dlg_ok, this)
+                    .setNegativeButton(R.string.dlg_cancel, this)
+                    .setCancelable(false)
+                    .show();
+        } else {
+            setLockToAppEnabled(false);
+            updateDisplay();
+        }
+    }
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            setLockToAppEnabled(true);
+        } else {
+            mSwitchBar.setChecked(false);
+        }
         updateDisplay();
     }
 
@@ -210,14 +232,14 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      * For search
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
+            new BaseSearchIndexProvider() {
 
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
-                final SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.screen_pinning_settings;
-                return Arrays.asList(sir);
-            }
-        };
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.screen_pinning_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }
