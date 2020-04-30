@@ -17,8 +17,6 @@
 package com.android.settings.wifi.slice;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -86,26 +84,46 @@ public class ContextualWifiSlice extends WifiSlice {
     }
 
     @Override
-    protected ListBuilder.RowBuilder getHeaderRow(AccessPoint accessPoint) {
-        final ListBuilder.RowBuilder builder = super.getHeaderRow(accessPoint);
+    protected ListBuilder.RowBuilder getHeaderRow(boolean isWifiEnabled, AccessPoint accessPoint) {
+        final ListBuilder.RowBuilder builder = super.getHeaderRow(isWifiEnabled, accessPoint);
+        builder.setTitleItem(getHeaderIcon(isWifiEnabled, accessPoint), ListBuilder.ICON_IMAGE);
         if (sApRowCollapsed) {
-            builder.setTitleItem(getLevelIcon(accessPoint), ListBuilder.ICON_IMAGE)
-                    .setSubtitle(getSubtitle(accessPoint));
+            builder.setSubtitle(getSubtitle(accessPoint));
         }
         return builder;
     }
 
-    private IconCompat getLevelIcon(AccessPoint accessPoint) {
-        if (accessPoint != null) {
-            return getAccessPointLevelIcon(accessPoint);
+    private IconCompat getHeaderIcon(boolean isWifiEnabled, AccessPoint accessPoint) {
+        final Drawable drawable;
+        final int tint;
+        if (!isWifiEnabled) {
+            drawable = mContext.getDrawable(R.drawable.ic_wifi_off);
+            tint = Utils.getDisabled(mContext, Utils.getColorAttrDefaultColor(mContext,
+                    android.R.attr.colorControlNormal));
+        } else {
+            // get icon of medium signal strength
+            drawable = mContext.getDrawable(com.android.settingslib.Utils.getWifiIconResource(2));
+            if (isNetworkConnected(accessPoint)) {
+                tint = Utils.getColorAccentDefaultColor(mContext);
+            } else {
+                tint = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
+            }
+        }
+        drawable.setTint(tint);
+        return Utils.createIconWithDrawable(drawable);
+    }
+
+    private boolean isNetworkConnected(AccessPoint accessPoint) {
+        if (accessPoint == null) {
+            return false;
         }
 
-        final Drawable drawable = mContext.getDrawable(
-                com.android.settingslib.Utils.getWifiIconResource(0));
-        final int color = Utils.getColorAttrDefaultColor(mContext,
-                android.R.attr.colorControlNormal);
-        drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-        return Utils.createIconWithDrawable(drawable);
+        final NetworkInfo networkInfo = accessPoint.getNetworkInfo();
+        if (networkInfo == null) {
+            return false;
+        }
+
+        return networkInfo.getState() == State.CONNECTED;
     }
 
     private CharSequence getSubtitle(AccessPoint accessPoint) {
