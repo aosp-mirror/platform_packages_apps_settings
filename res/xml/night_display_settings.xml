@@ -20,6 +20,13 @@
     android:title="@string/night_display_title"
     settings:keywords="@string/keywords_display_night_display">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="dark_ui_location_off"
+        android:selectable="false"
+        android:layout="@layout/twilight_mode_location_off"
+        settings:controller="com.android.settings.display.TwilightLocationPreferenceController"
+        settings:allowDividerBelow="true"/>
+
     <DropDownPreference
         android:key="night_display_auto_mode"
         android:title="@string/night_display_auto_mode_title"
