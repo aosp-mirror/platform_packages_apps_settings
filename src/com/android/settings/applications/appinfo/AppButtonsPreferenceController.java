@@ -116,6 +116,7 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     private Intent mAppLaunchIntent;
     private ApplicationsState.Session mSession;
     private RestrictedLockUtils.EnforcedAdmin mAppsControlDisallowedAdmin;
+    private PreferenceScreen mScreen;
 
     private boolean mUpdatedSysApp = false;
     private boolean mListeningToPackageRemove = false;
@@ -167,19 +168,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mScreen = screen;
         if (isAvailable()) {
-            mButtonsPref = ((ActionButtonsPreference) screen.findPreference(
-                    KEY_ACTION_BUTTONS))
-                    .setButton1Text(R.string.launch_instant_app)
-                    .setButton1Icon(R.drawable.ic_settings_open)
-                    .setButton1OnClickListener(v -> launchApplication())
-                    .setButton2Text(R.string.uninstall_text)
-                    .setButton2Icon(R.drawable.ic_settings_delete)
-                    .setButton2OnClickListener(new UninstallAndDisableButtonListener())
-                    .setButton3Text(R.string.force_stop)
-                    .setButton3Icon(R.drawable.ic_settings_force_stop)
-                    .setButton3OnClickListener(new ForceStopButtonListener())
-                    .setButton3Enabled(false);
+            initButtonPreference();
         }
     }
 
@@ -663,11 +654,31 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
             }
         }
 
+        // When the app was installed from instant state, buttons preferences could be null.
+        if (mButtonsPref == null) {
+            initButtonPreference();
+            mButtonsPref.setVisible(true);
+        }
         updateOpenButton();
         updateUninstallButton();
         updateForceStopButton();
 
         return true;
+    }
+
+    private void initButtonPreference() {
+        mButtonsPref = ((ActionButtonsPreference) mScreen.findPreference(
+                KEY_ACTION_BUTTONS))
+                .setButton1Text(R.string.launch_instant_app)
+                .setButton1Icon(R.drawable.ic_settings_open)
+                .setButton1OnClickListener(v -> launchApplication())
+                .setButton2Text(R.string.uninstall_text)
+                .setButton2Icon(R.drawable.ic_settings_delete)
+                .setButton2OnClickListener(new UninstallAndDisableButtonListener())
+                .setButton3Text(R.string.force_stop)
+                .setButton3Icon(R.drawable.ic_settings_force_stop)
+                .setButton3OnClickListener(new ForceStopButtonListener())
+                .setButton3Enabled(false);
     }
 
     private void startListeningToPackageRemove() {
