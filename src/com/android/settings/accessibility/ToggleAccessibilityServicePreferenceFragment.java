@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logServiceStatus;
+
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
@@ -99,6 +101,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     @Override
     public void onPreferenceToggled(String preferenceKey, boolean enabled) {
         ComponentName toggledService = ComponentName.unflattenFromString(preferenceKey);
+        logServiceStatus(toggledService.flattenToString(), enabled);
         AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
