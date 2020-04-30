@@ -27,8 +27,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -104,11 +102,12 @@ public class WifiSlice implements CustomSliceable {
         final boolean isFirstApActive = apCount > 0 && apList.get(0).isActive();
         handleNetworkCallback(worker, isFirstApActive);
 
+        if (isFirstApActive) {
+            // refresh header subtext
+            listBuilder = getListBuilder(true /* isWifiEnabled */, apList.get(0));
+        }
+
         if (isApRowCollapsed()) {
-            if (isFirstApActive) {
-                // refresh header subtext
-                listBuilder = getListBuilder(true /* isWifiEnabled */, apList.get(0));
-            }
             return listBuilder.build();
         }
 
@@ -143,7 +142,7 @@ public class WifiSlice implements CustomSliceable {
         return false;
     }
 
-    protected ListBuilder.RowBuilder getHeaderRow(AccessPoint accessPoint) {
+    protected ListBuilder.RowBuilder getHeaderRow(boolean isWifiEnabled, AccessPoint accessPoint) {
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_wireless);
         final String title = mContext.getString(R.string.wifi_settings);
@@ -163,7 +162,7 @@ public class WifiSlice implements CustomSliceable {
         final ListBuilder builder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
                 .setKeywords(getKeywords())
-                .addRow(getHeaderRow(accessPoint))
+                .addRow(getHeaderRow(isWifiEnabled, accessPoint))
                 .addAction(toggleSliceAction);
         return builder;
     }
@@ -200,25 +199,24 @@ public class WifiSlice implements CustomSliceable {
         return TextUtils.isEmpty(summary) ? mContext.getText(R.string.disconnected) : summary;
     }
 
-    protected IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
-        final Drawable d = mContext.getDrawable(
-                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
-
-        final @ColorInt int color;
+    private IconCompat getAccessPointLevelIcon(AccessPoint accessPoint) {
+        final @ColorInt int tint;
         if (accessPoint.isActive()) {
             final NetworkInfo.State state = accessPoint.getNetworkInfo().getState();
             if (state == NetworkInfo.State.CONNECTED) {
-                color = Utils.getColorAccentDefaultColor(mContext);
+                tint = Utils.getColorAccentDefaultColor(mContext);
             } else { // connecting
-                color = Utils.getDisabled(mContext, Utils.getColorAttrDefaultColor(mContext,
+                tint = Utils.getDisabled(mContext, Utils.getColorAttrDefaultColor(mContext,
                         android.R.attr.colorControlNormal));
             }
         } else {
-            color = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
+            tint = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
         }
 
-        d.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
-        return Utils.createIconWithDrawable(d);
+        final Drawable drawable = mContext.getDrawable(
+                com.android.settingslib.Utils.getWifiIconResource(accessPoint.getLevel()));
+        drawable.setTint(tint);
+        return Utils.createIconWithDrawable(drawable);
     }
 
     private IconCompat getEndIcon(AccessPoint accessPoint) {
