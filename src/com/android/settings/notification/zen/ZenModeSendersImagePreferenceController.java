@@ -91,7 +91,10 @@ public class ZenModeSendersImagePreferenceController
             newImageRes = mIsMessages
                     ? R.drawable.zen_messages_none
                     : R.drawable.zen_calls_none;
-            newContentDescription = mContext.getString(R.string.zen_mode_from_none);
+            newContentDescription =
+                    mContext.getString(mIsMessages
+                            ? R.string.zen_mode_none_messages
+                            : R.string.zen_mode_none_calls);
         }
 
         mImageView.setImageResource(newImageRes);
