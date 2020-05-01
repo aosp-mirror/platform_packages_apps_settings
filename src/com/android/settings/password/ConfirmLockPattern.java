@@ -26,6 +26,7 @@ import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,9 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.HEADER_TEXT);
                 mDetailsText = intent.getCharSequenceExtra(
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
+            }
+            if (TextUtils.isEmpty(mHeaderText) && mIsManagedProfile) {
+                mHeaderText = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
             }
 
             mLockPatternView.setTactileFeedbackEnabled(
