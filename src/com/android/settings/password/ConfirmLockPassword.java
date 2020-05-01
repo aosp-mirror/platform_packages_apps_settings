@@ -159,6 +159,9 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         ConfirmDeviceCredentialBaseFragment.HEADER_TEXT);
                 CharSequence detailsMessage = intent.getCharSequenceExtra(
                         ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT);
+                if (TextUtils.isEmpty(headerMessage) && mIsManagedProfile) {
+                    headerMessage = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
+                }
                 if (TextUtils.isEmpty(headerMessage)) {
                     headerMessage = getString(getDefaultHeader());
                 }
