@@ -208,6 +208,11 @@
     <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
     <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
 
+    <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
+    <!-- Description about contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
+    <string name="bluetooth_devices_card_off_summary">Tap to turn it on</string>
+
     <!-- Strings for BluetoothDevicePicker [CHAR LIMIT=40]-->
     <string name="device_picker">Choose Bluetooth device</string>
 
@@ -2810,10 +2815,10 @@
     <string name="night_display_not_currently_on">Night Light not currently on</string>
 
     <!-- Twilight Mode -->
+    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=120] -->
+    <string name="twilight_mode_location_off_dialog_message">Device location needed to determine your sunset and sunrise times.</string>
     <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
-    <string name="twilight_mode_location_off_dialog_message">Device location needed to determine you sunset to sunrise</string>
-    <!-- When location mode is off, twilight scheduling does not function. [CHAR LIMIT=40] -->
-    <string name="twilight_mode_launch_location">Turn on location</string>
+    <string name="twilight_mode_launch_location">Location settings</string>
 
     <!--    Dark ui screen-->
     <!-- Display settings screen, activation button action for manual mode. [CHAR LIMIT=40] -->
@@ -7563,6 +7568,8 @@
     <string name="keywords_color_mode">vibrant, RGB, sRGB, color, natural, standard</string>
     <string name="keywords_color_temperature">color, temperature, D65, D73, white, yellow, blue, warm, cool</string>
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
+    <!-- Search keyword for App pinning Settings [CHAR LIMIT=NONE] -->
+    <string name="keywords_app_pinning">screen pinning</string>
     <string name="keywords_profile_challenge">work challenge, work, profile</string>
     <string name="keywords_unification">work profile, managed profile, unify, unification, work, profile</string>
     <string name="keywords_gesture">gestures</string>
@@ -9219,9 +9226,34 @@
     <string name="switch_off_text">Off</string>
 
     <!-- [CHAR LIMIT=28] Screen pinning title -->
-    <string name="screen_pinning_title">Screen pinning</string>
-    <!-- [CHAR LIMIT=300] Screen pinning description -->
-    <string name="screen_pinning_description">When this setting is turned on, you can use screen pinning to keep the current screen in view until you unpin.\n\nTo use screen pinning:\n\n1. Make sure screen pinning is turned on\n\n2. Open Overview\n\n3. Tap the app icon at the top of the screen, then tap Pin</string>
+    <string name="screen_pinning_title">App pinning</string>
+    <!-- [CHAR LIMIT=none] Screen pinning description -->
+    <string name="screen_pinning_description">
+        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
+        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        \n\nTo use app pinning:
+        \t\n1.\tTurn on app pinning
+        \t\n2.\tOpen Overview
+        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+    </string>
+    <!-- [CHAR LIMIT=none] Screen pinning description -->
+    <string name="screen_pinning_guest_mode_description">
+        App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
+        \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
+        \n\nIf you want to securely share your device with someone, try using a guest profile instead.
+        \n\nTo use app pinning:
+        \t\n1.\tTurn on app pinning
+        \t\n2.\tOpen Overview
+        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+    </string>
+    <!-- [CHAR LIMIT=300] Screen pinning title -->
+    <string name="screen_pinning_dialog_message">
+        When app is pinned:
+        \n\n\u2022\t\tPersonal data may be accessible
+        \n\t\t(such as contacts and email content)
+        \n\u2022\t\tPinned app may open other apps
+        \n\nOnly use app pinning with people you trust.
+    </string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
     <string name="screen_pinning_unlock_pattern">Ask for unlock pattern before unpinning</string>
     <!-- [CHAR LIMIT=60] Unlock setting for screen pinning -->
@@ -11266,6 +11298,9 @@
 
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>
+
+    <!-- Title with application label for media output settings. [CHAR LIMIT=NONE] -->
+    <string name="media_output_label_title">Play <xliff:g id="label" example="Music Player">%s</xliff:g> to</string>
 
     <!-- Summary for media output default settings. (this device) [CHAR LIMIT=30] -->
     <string name="media_output_default_summary">This device</string>

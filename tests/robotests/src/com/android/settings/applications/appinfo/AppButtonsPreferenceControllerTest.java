@@ -50,6 +50,8 @@ import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
@@ -116,6 +118,8 @@ public class AppButtonsPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private PackageInfo mPackageInfo;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private Context mContext;
     private Intent mUninstallIntent;
@@ -472,6 +476,20 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void refreshUi_buttonPreferenceNull_shouldNotCrash()
+            throws PackageManager.NameNotFoundException {
+        doReturn(AppButtonsPreferenceController.AVAILABLE)
+                .when(mController).getAvailabilityStatus();
+        doReturn(mPackageInfo).when(mPackageManger).getPackageInfo(anyString(), anyInt());
+        doReturn(mButtonPrefs).when(mScreen).findPreference(anyString());
+        mController.displayPreference(mScreen);
+        mController.mButtonsPref = null;
+
+        // Should not crash in this method
+        assertThat(mController.refreshUi()).isTrue();
+    }
+
+    @Test
     public void onPackageListChanged_available_shouldRefreshUi() {
         doReturn(AppButtonsPreferenceController.AVAILABLE)
                 .when(mController).getAvailabilityStatus();
@@ -545,11 +563,19 @@ public class AppButtonsPreferenceControllerTest {
 
     private ActionButtonsPreference createMock() {
         final ActionButtonsPreference pref = mock(ActionButtonsPreference.class);
+        when(pref.setButton1Text(anyInt())).thenReturn(pref);
+        when(pref.setButton1Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton1Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton1OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
         when(pref.setButton2Text(anyInt())).thenReturn(pref);
         when(pref.setButton2Icon(anyInt())).thenReturn(pref);
         when(pref.setButton2Enabled(anyBoolean())).thenReturn(pref);
         when(pref.setButton2Visible(anyBoolean())).thenReturn(pref);
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
+        when(pref.setButton3Text(anyInt())).thenReturn(pref);
+        when(pref.setButton3Icon(anyInt())).thenReturn(pref);
+        when(pref.setButton3Enabled(anyBoolean())).thenReturn(pref);
+        when(pref.setButton3OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
     }
