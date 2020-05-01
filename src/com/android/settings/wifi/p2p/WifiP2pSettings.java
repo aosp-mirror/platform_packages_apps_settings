@@ -70,35 +70,35 @@ public class WifiP2pSettings extends DashboardFragment
 
     private static final String TAG = "WifiP2pSettings";
     private static final boolean DBG = false;
-    private static final int MENU_ID_SEARCH = Menu.FIRST;
-    private static final int MENU_ID_RENAME = Menu.FIRST + 1;
+    @VisibleForTesting static final int MENU_ID_SEARCH = Menu.FIRST;
+    @VisibleForTesting static final int MENU_ID_RENAME = Menu.FIRST + 1;
 
     private final IntentFilter mIntentFilter = new IntentFilter();
-    private WifiP2pManager mWifiP2pManager;
+    @VisibleForTesting WifiP2pManager mWifiP2pManager;
     private WifiP2pManager.Channel mChannel;
-    private OnClickListener mRenameListener;
-    private OnClickListener mDisconnectListener;
-    private OnClickListener mCancelConnectListener;
-    private OnClickListener mDeleteGroupListener;
+    @VisibleForTesting OnClickListener mRenameListener;
+    @VisibleForTesting OnClickListener mDisconnectListener;
+    @VisibleForTesting OnClickListener mCancelConnectListener;
+    @VisibleForTesting OnClickListener mDeleteGroupListener;
     @VisibleForTesting WifiP2pPeer mSelectedWifiPeer;
-    private WifiP2pPersistentGroup mSelectedGroup;
+    @VisibleForTesting WifiP2pPersistentGroup mSelectedGroup;
     @VisibleForTesting String mSelectedGroupName;
     private EditText mDeviceNameText;
 
     private boolean mWifiP2pEnabled;
-    private boolean mWifiP2pSearching;
-    private int mConnectedDevices;
-    private boolean mLastGroupFormed = false;
+    @VisibleForTesting boolean mWifiP2pSearching;
+    @VisibleForTesting int mConnectedDevices;
+    @VisibleForTesting boolean mLastGroupFormed = false;
     private boolean mIsIgnoreInitConnectionInfoCallback = false;
 
     private P2pPeerCategoryPreferenceController mPeerCategoryController;
     private P2pPersistentCategoryPreferenceController mPersistentCategoryController;
     private P2pThisDevicePreferenceController mThisDevicePreferenceController;
 
-    private static final int DIALOG_DISCONNECT  = 1;
-    private static final int DIALOG_CANCEL_CONNECT = 2;
-    private static final int DIALOG_RENAME = 3;
-    private static final int DIALOG_DELETE_GROUP = 4;
+    @VisibleForTesting static final int DIALOG_DISCONNECT  = 1;
+    @VisibleForTesting static final int DIALOG_CANCEL_CONNECT = 2;
+    @VisibleForTesting static final int DIALOG_RENAME = 3;
+    @VisibleForTesting static final int DIALOG_DELETE_GROUP = 4;
 
     private static final String SAVE_DIALOG_PEER = "PEER_STATE";
     @VisibleForTesting static final String SAVE_DEVICE_NAME = "DEV_NAME";
@@ -109,7 +109,8 @@ public class WifiP2pSettings extends DashboardFragment
 
     @VisibleForTesting String mSavedDeviceName;
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -198,7 +199,10 @@ public class WifiP2pSettings extends DashboardFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         final Activity activity = getActivity();
-        mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        if (mWifiP2pManager == null) {
+            mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        }
+
         if (mWifiP2pManager != null) {
             mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
                     getActivity().getMainLooper(), null);
