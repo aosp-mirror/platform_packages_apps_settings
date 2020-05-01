@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -68,6 +69,11 @@ public class EnhancedConnectivityPreferenceController extends
                 ENHANCED_CONNECTIVITY_ON);
         ((SwitchPreference) mPreference).setChecked(
                 enhancedConnectivityEnabled == ENHANCED_CONNECTIVITY_ON);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_enhanced_connectivity);
     }
 
     @Override

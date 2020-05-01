@@ -19,6 +19,8 @@ package com.android.settings.homepage.contextualcards.slices;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
+import static com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice.EXTRA_ENABLE_BLUETOOTH;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -75,6 +77,7 @@ public class BluetoothDevicesSliceTest {
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDevice;
 
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private List<CachedBluetoothDevice> mBluetoothDeviceList;
     private BluetoothDevicesSlice mBluetoothDevicesSlice;
     private Context mContext;
@@ -103,9 +106,9 @@ public class BluetoothDevicesSliceTest {
 
         final BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (defaultAdapter != null) {
-            final ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(defaultAdapter);
-            shadowBluetoothAdapter.setEnabled(true);
-            shadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
+            mShadowBluetoothAdapter = Shadow.extract(defaultAdapter);
+            mShadowBluetoothAdapter.setEnabled(true);
+            mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
         }
     }
 
@@ -125,7 +128,38 @@ public class BluetoothDevicesSliceTest {
     }
 
     @Test
-    public void getSlice_hasBluetoothHardware_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
+    public void getSlice_bluetoothOff_shouldHaveBluetoothOffTitleAndSummary() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
+
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(
+                R.string.bluetooth_devices_card_off_title));
+        assertThat(metadata.getSummary()).isEqualTo(mContext.getString(
+                R.string.bluetooth_devices_card_off_summary));
+    }
+
+    @Test
+    public void getSlice_bluetoothTurningOn_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
+        final Intent intent = new Intent().putExtra(EXTRA_ENABLE_BLUETOOTH, true);
+
+        mBluetoothDevicesSlice.onNotifyChange(intent);
+        final Slice slice = mBluetoothDevicesSlice.getSlice();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_devices));
+
+        final List<SliceItem> sliceItems = slice.getItems();
+        SliceTester.assertAnySliceItemContainsTitle(sliceItems, mContext.getString(
+                R.string.bluetooth_pairing_pref_title));
+    }
+
+    @Test
+    public void getSlice_bluetoothOn_shouldHaveBluetoothDevicesTitleAndPairNewDevice() {
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
@@ -182,15 +216,15 @@ public class BluetoothDevicesSliceTest {
     }
 
     @Test
-    public void getSlice_exceedDefaultRowCount_shouldOnlyShowDefaultRows() {
-        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
+    public void getSlice_exceedDefaultRowCount_shouldOnlyShowHeaderAndDefaultRowCount() {
+        mockBluetoothDeviceList(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 2);
         doReturn(mBluetoothDeviceList).when(mBluetoothDevicesSlice).getPairedBluetoothDevices();
 
         final Slice slice = mBluetoothDevicesSlice.getSlice();
 
         // Get the number of RowBuilders from Slice.
         final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
-        assertThat(rows).isEqualTo(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT);
+        assertThat(rows).isEqualTo(BluetoothDevicesSlice.DEFAULT_EXPANDED_ROW_COUNT + 1);
     }
 
     @Test
