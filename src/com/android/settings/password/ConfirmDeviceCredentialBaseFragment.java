@@ -27,10 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.graphics.Point;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.hardware.biometrics.BiometricManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,10 +35,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -208,30 +201,6 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     }
 
     public void startEnterAnimation() {
-    }
-
-    private void setWorkChallengeBackground(View baseView, int userId) {
-        View mainContent = getActivity().findViewById(com.android.settings.R.id.main_content);
-        if (mainContent != null) {
-            // Remove the main content padding so that the background image is full screen.
-            mainContent.setPadding(0, 0, 0, 0);
-        }
-
-        baseView.setBackground(
-                new ColorDrawable(mDevicePolicyManager.getOrganizationColorForUser(userId)));
-        ImageView imageView = (ImageView) baseView.findViewById(R.id.background_image);
-        if (imageView != null) {
-            Drawable image = getResources().getDrawable(R.drawable.work_challenge_background);
-            image.setColorFilter(
-                    getResources().getColor(R.color.confirm_device_credential_transparent_black),
-                    PorterDuff.Mode.DARKEN);
-            imageView.setImageDrawable(image);
-            Point screenSize = new Point();
-            getActivity().getWindowManager().getDefaultDisplay().getSize(screenSize);
-            imageView.setLayoutParams(new FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    screenSize.y));
-        }
     }
 
     protected void reportFailedAttempt() {
