@@ -72,7 +72,7 @@ public class ProxySubscriptionManager implements LifecycleObserver {
     private static ProxySubscriptionManager sSingleton;
 
     private ProxySubscriptionManager(Context context) {
-        final Looper looper = Looper.getMainLooper();
+        final Looper looper = context.getMainLooper();
 
         mActiveSubscriptionsListeners =
                 new ArrayList<OnActiveSubscriptionChangedListener>();
