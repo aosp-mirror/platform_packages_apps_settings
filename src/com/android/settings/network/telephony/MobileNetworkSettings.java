@@ -36,8 +36,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
@@ -47,17 +45,14 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class MobileNetworkSettings extends RestrictedDashboardFragment {
+public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
@@ -189,11 +184,8 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
 
-        final Collection<List<AbstractPreferenceController>> controllerLists =
-                getPreferenceControllers();
-        final Future<Boolean> result = ThreadUtils.postOnBackgroundThread(() ->
-                setupAvailabilityStatus(controllerLists)
-        );
+        final TelephonyStatusControlSession session =
+                setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
 
         super.onCreate(icicle);
         final Context context = getContext();
@@ -201,44 +193,9 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 
-        //check the background thread is finished then unset the status of availability.
-        try {
-            result.get();
-        } catch (ExecutionException | InterruptedException exception) {
-            Log.e(LOG_TAG, "onCreate, setup availability status failed!", exception);
-        }
-        unsetAvailabilityStatus(controllerLists);
+        session.close();
 
         onRestoreInstance(icicle);
-    }
-
-    private Boolean setupAvailabilityStatus(
-            Collection<List<AbstractPreferenceController>> controllerLists) {
-        try {
-            controllerLists.stream().flatMap(Collection::stream)
-                    .filter(controller -> controller instanceof TelephonyAvailabilityHandler)
-                    .map(TelephonyAvailabilityHandler.class::cast)
-                    .forEach(controller -> {
-                        int status = ((BasePreferenceController) controller)
-                                .getAvailabilityStatus();
-                        controller.unsetAvailabilityStatus(true);
-                        controller.setAvailabilityStatus(status);
-                    });
-            return true;
-        } catch (Exception exception) {
-            Log.e(LOG_TAG, "Setup availability status failed!", exception);
-            return false;
-        }
-    }
-
-    private void unsetAvailabilityStatus(
-            Collection<List<AbstractPreferenceController>> controllerLists) {
-        controllerLists.stream().flatMap(Collection::stream)
-                .filter(controller -> controller instanceof TelephonyAvailabilityHandler)
-                .map(TelephonyAvailabilityHandler.class::cast)
-                .forEach(controller -> {
-                    controller.unsetAvailabilityStatus(false);
-                });
     }
 
     @Override
