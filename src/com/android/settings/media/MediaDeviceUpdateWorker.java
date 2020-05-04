@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
+import android.media.RoutingSessionInfo;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -173,6 +174,10 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSelectedMediaDevice();
     }
 
+    void adjustSessionVolume(String sessionId, int volume) {
+        mLocalMediaManager.adjustSessionVolume(sessionId, volume);
+    }
+
     void adjustSessionVolume(int volume) {
         mLocalMediaManager.adjustSessionVolume(volume);
     }
@@ -189,15 +194,14 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSessionName();
     }
 
-    /**
-     * Find the active MediaDevice.
-     *
-     * @param type the media device type.
-     * @return MediaDevice list
-     *
-     */
-    public List<MediaDevice> getActiveMediaDevice(@MediaDevice.MediaDeviceType int type) {
-        return mLocalMediaManager.getActiveMediaDevice(type);
+    List<RoutingSessionInfo> getActiveRemoteMediaDevice() {
+        final List<RoutingSessionInfo> sessionInfos = new ArrayList<>();
+        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
+            if (!info.isSystemSession()) {
+                sessionInfos.add(info);
+            }
+        }
+        return sessionInfos;
     }
 
     /**
