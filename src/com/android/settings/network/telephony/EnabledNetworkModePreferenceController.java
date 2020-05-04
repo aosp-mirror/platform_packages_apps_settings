@@ -61,19 +61,6 @@ public class EnabledNetworkModePreferenceController extends
 
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
-        mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
-                () -> updatePreference());
-    }
-
-    private void updatePreference() {
-        if (mPreferenceScreen != null) {
-            displayPreference(mPreferenceScreen);
-        }
-        if (mPreference != null) {
-            updateState(mPreference);
-        }
     }
 
     @Override
@@ -100,11 +87,17 @@ public class EnabledNetworkModePreferenceController extends
 
     @OnLifecycleEvent(ON_START)
     public void onStart() {
+        if (mPreferredNetworkModeObserver == null) {
+            return;
+        }
         mPreferredNetworkModeObserver.register(mContext, mSubId);
     }
 
     @OnLifecycleEvent(ON_STOP)
     public void onStop() {
+        if (mPreferredNetworkModeObserver == null) {
+            return;
+        }
         mPreferredNetworkModeObserver.unregister(mContext);
     }
 
@@ -151,7 +144,23 @@ public class EnabledNetworkModePreferenceController extends
         mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
         mBuilder = new PreferenceEntriesBuilder(mContext, mSubId);
 
+        if (mPreferredNetworkModeObserver == null) {
+            mPreferredNetworkModeObserver = new PreferredNetworkModeContentObserver(
+                    new Handler(Looper.getMainLooper()));
+            mPreferredNetworkModeObserver.setPreferredNetworkModeChangedListener(
+                    () -> updatePreference());
+        }
+
         lifecycle.addObserver(this);
+    }
+
+    private void updatePreference() {
+        if (mPreferenceScreen != null) {
+            displayPreference(mPreferenceScreen);
+        }
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 
     private final static class PreferenceEntriesBuilder {
