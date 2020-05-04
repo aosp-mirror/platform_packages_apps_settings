@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaRoute2ProviderService;
+import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
 import com.android.settings.testutils.shadow.ShadowAudioManager;
@@ -190,5 +191,22 @@ public class MediaDeviceUpdateWorkerTest {
         }
 
         verify(mResolver, never()).notifyChange(URI, null);
+    }
+
+    @Test
+    public void getActiveRemoteMediaSession_verifyList() {
+        mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+        final List<RoutingSessionInfo> routingSessionInfos = new ArrayList<>();
+        final RoutingSessionInfo remoteSessionInfo = mock(RoutingSessionInfo.class);
+        final RoutingSessionInfo localSessionInfo = mock(RoutingSessionInfo.class);
+        when(remoteSessionInfo.isSystemSession()).thenReturn(false);
+        when(localSessionInfo.isSystemSession()).thenReturn(true);
+        routingSessionInfos.add(remoteSessionInfo);
+        routingSessionInfos.add(localSessionInfo);
+        when(mMediaDeviceUpdateWorker.mLocalMediaManager.getActiveMediaSession()).thenReturn(
+                routingSessionInfos);
+
+        assertThat(mMediaDeviceUpdateWorker.getActiveRemoteMediaDevice()).containsExactly(
+                remoteSessionInfo);
     }
 }
