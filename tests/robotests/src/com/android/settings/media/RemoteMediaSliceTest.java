@@ -24,7 +24,7 @@ import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
 import androidx.slice.Slice;
@@ -43,7 +44,6 @@ import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.media.LocalMediaManager;
-import com.android.settingslib.media.MediaDevice;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,19 +64,16 @@ import java.util.List;
 public class RemoteMediaSliceTest {
 
     private static final String MEDIA_ID = "media_id";
-    private static final String TEST_PACKAGE_LABEL = "music";
-    private static final String TEST_DEVICE_1_ID = "test_device_1_id";
-    private static final String TEST_DEVICE_1_NAME = "test_device_1_name";
+    private static final String TEST_SESSION_1_ID = "test_session_1_id";
+    private static final String TEST_SESSION_1_NAME = "test_session_1_name";
     private static final int TEST_VOLUME = 3;
 
     private static MediaDeviceUpdateWorker sMediaDeviceUpdateWorker;
 
     @Mock
     private LocalMediaManager mLocalMediaManager;
-    @Mock
-    private MediaDevice mDevice;
 
-    private final List<MediaDevice> mDevices = new ArrayList<>();
+    private final List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
     private Context mContext;
     private RemoteMediaSlice mRemoteMediaSlice;
@@ -93,44 +90,42 @@ public class RemoteMediaSliceTest {
         sMediaDeviceUpdateWorker = spy(new MediaDeviceUpdateWorker(mContext,
                 REMOTE_MEDIA_SLICE_URI));
         sMediaDeviceUpdateWorker.mLocalMediaManager = mLocalMediaManager;
-        when(sMediaDeviceUpdateWorker.getActiveMediaDevice(
-                MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE)).thenReturn(mDevices);
-        when(mDevice.getId()).thenReturn(TEST_DEVICE_1_ID);
-        when(mDevice.getName()).thenReturn(TEST_DEVICE_1_NAME);
-        when(mDevice.getMaxVolume()).thenReturn(100);
-        when(mDevice.getCurrentVolume()).thenReturn(10);
-        when(mDevice.getClientAppLabel()).thenReturn(TEST_PACKAGE_LABEL);
+        final RoutingSessionInfo remoteSessionInfo = mock(RoutingSessionInfo.class);
+        when(remoteSessionInfo.getId()).thenReturn(TEST_SESSION_1_ID);
+        when(remoteSessionInfo.getName()).thenReturn(TEST_SESSION_1_NAME);
+        when(remoteSessionInfo.getVolumeMax()).thenReturn(100);
+        when(remoteSessionInfo.getVolume()).thenReturn(10);
+        when(remoteSessionInfo.isSystemSession()).thenReturn(false);
+        mRoutingSessionInfos.add(remoteSessionInfo);
+        when(sMediaDeviceUpdateWorker.getActiveRemoteMediaDevice()).thenReturn(
+                mRoutingSessionInfos);
     }
 
     @Test
     public void onNotifyChange_noId_doNothing() {
-        mDevices.add(mDevice);
-        when(mLocalMediaManager.getMediaDeviceById(mDevices, TEST_DEVICE_1_ID)).thenReturn(mDevice);
-        sMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         final Intent intent = new Intent();
         intent.putExtra(EXTRA_RANGE_VALUE, TEST_VOLUME);
 
         mRemoteMediaSlice.onNotifyChange(intent);
 
-        verify(mDevice, never()).requestSetVolume(anyInt());
+        verify(sMediaDeviceUpdateWorker, never())
+                .adjustSessionVolume(TEST_SESSION_1_ID, TEST_VOLUME);
     }
 
     @Test
     public void onNotifyChange_verifyAdjustVolume() {
-        mDevices.add(mDevice);
-        when(mLocalMediaManager.getMediaDeviceById(mDevices, TEST_DEVICE_1_ID)).thenReturn(mDevice);
-        sMediaDeviceUpdateWorker.onDeviceListUpdate(mDevices);
         final Intent intent = new Intent();
-        intent.putExtra(MEDIA_ID, TEST_DEVICE_1_ID);
+        intent.putExtra(MEDIA_ID, TEST_SESSION_1_ID);
         intent.putExtra(EXTRA_RANGE_VALUE, TEST_VOLUME);
 
         mRemoteMediaSlice.onNotifyChange(intent);
 
-        verify(mDevice).requestSetVolume(TEST_VOLUME);
+        verify(sMediaDeviceUpdateWorker).adjustSessionVolume(TEST_SESSION_1_ID, TEST_VOLUME);
     }
 
     @Test
-    public void getSlice_noActiveDevice_checkRowNumber() {
+    public void getSlice_noActiveSession_checkRowNumber() {
+        mRoutingSessionInfos.clear();
         final Slice slice = mRemoteMediaSlice.getSlice();
         final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
 
@@ -138,8 +133,7 @@ public class RemoteMediaSliceTest {
     }
 
     @Test
-    public void getSlice_withActiveDevice_checkRowNumber() {
-        mDevices.add(mDevice);
+    public void getSlice_withActiveSession_checkRowNumber() {
         final Slice slice = mRemoteMediaSlice.getSlice();
         final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
 
@@ -148,15 +142,13 @@ public class RemoteMediaSliceTest {
     }
 
     @Test
-    public void getSlice_withActiveDevice_checkTitle() {
-        mDevices.add(mDevice);
+    public void getSlice_withActiveSession_checkTitle() {
         final Slice slice = mRemoteMediaSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         final SliceAction primaryAction = metadata.getPrimaryAction();
 
         assertThat(primaryAction.getTitle().toString()).isEqualTo(mContext.getText(
-                com.android.settings.R.string.remote_media_volume_option_title)
-                + " (" + TEST_PACKAGE_LABEL + ")");
+                com.android.settings.R.string.remote_media_volume_option_title));
     }
 
     @Implements(SliceBackgroundWorker.class)
