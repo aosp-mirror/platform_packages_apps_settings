@@ -73,6 +73,7 @@ public abstract class ActiveSubsciptionsListener
      * @param context {@code Context} of this listener
      */
     public ActiveSubsciptionsListener(Looper looper, Context context) {
+        super(looper);
         mLooper = looper;
         mContext = context;
 
