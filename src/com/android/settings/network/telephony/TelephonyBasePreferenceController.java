@@ -23,7 +23,6 @@ import android.telephony.SubscriptionManager;
 
 import com.android.settings.core.BasePreferenceController;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -33,7 +32,7 @@ public abstract class TelephonyBasePreferenceController extends BasePreferenceCo
         implements TelephonyAvailabilityCallback, TelephonyAvailabilityHandler {
     protected int mSubId;
     private AtomicInteger mAvailabilityStatus = new AtomicInteger(0);
-    private AtomicBoolean mUnsetAvailabilityStatus = new AtomicBoolean(false);
+    private AtomicInteger mSetSessionCount = new AtomicInteger(0);
 
     public TelephonyBasePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -42,7 +41,7 @@ public abstract class TelephonyBasePreferenceController extends BasePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        if (!mUnsetAvailabilityStatus.get()) {
+        if (mSetSessionCount.get() <= 0) {
             mAvailabilityStatus.set(MobileNetworkUtils
                     .getAvailability(mContext, mSubId, this::getAvailabilityStatus));
         }
@@ -52,11 +51,12 @@ public abstract class TelephonyBasePreferenceController extends BasePreferenceCo
     @Override
     public void setAvailabilityStatus(int status) {
         mAvailabilityStatus.set(status);
+        mSetSessionCount.getAndIncrement();
     }
 
     @Override
-    public void unsetAvailabilityStatus(boolean enable) {
-        mUnsetAvailabilityStatus.set(enable);
+    public void unsetAvailabilityStatus() {
+        mSetSessionCount.getAndDecrement();
     }
 
     /**
