@@ -137,7 +137,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
             } else {
                 fieldContextName = mAppRow.label;
             }
-            return mContext.getString(R.string.notification_switch_label, fieldContextName);
+            return mContext.getString(R.string.notification_app_switch_label, fieldContextName);
         }
     }
 }
