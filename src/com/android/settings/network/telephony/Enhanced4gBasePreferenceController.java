@@ -69,10 +69,13 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     public Enhanced4gBasePreferenceController(Context context, String key) {
         super(context, key);
         m4gLteListeners = new ArrayList<>();
-        mPhoneStateListener = new PhoneCallStateListener();
     }
 
     public Enhanced4gBasePreferenceController init(int subId) {
+        if (mPhoneStateListener == null) {
+            mPhoneStateListener = new PhoneCallStateListener();
+        }
+
         if (mSubId == subId) {
             return this;
         }
@@ -122,11 +125,17 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     @Override
     public void onStart() {
+        if (mPhoneStateListener == null) {
+            return;
+        }
         mPhoneStateListener.register(mContext, mSubId);
     }
 
     @Override
     public void onStop() {
+        if (mPhoneStateListener == null) {
+            return;
+        }
         mPhoneStateListener.unregister();
     }
 

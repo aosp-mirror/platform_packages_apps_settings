@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 
 import com.android.settingslib.Utils;
 
@@ -28,6 +29,11 @@ import org.robolectric.annotation.Implements;
 
 @Implements(Utils.class)
 public class ShadowSettingsLibUtils {
+
+    @Implementation
+    protected static Drawable getBadgedIcon(Context context, Drawable icon, UserHandle user) {
+        return new ColorDrawable(0);
+    }
 
     @Implementation
     protected static Drawable getBadgedIcon(Context context, ApplicationInfo appInfo) {
