@@ -25,14 +25,16 @@ import android.content.Context;
 public interface TelephonyAvailabilityHandler {
 
     /**
-     * Set availability to preference controller.
+     * Set availability status of preference controller to a fixed value.
+     * @param status is the given status. Which will be reported from
+     * {@link BasePreferenceController#getAvailabilityStatus()}
      */
-    public void setAvailabilityStatus(int status);
+    void setAvailabilityStatus(int status);
 
     /**
      * Do not set availability, use
      * {@link MobileNetworkUtils#getAvailability(Context, int, TelephonyAvailabilityCallback)}
      * to get the availability.
      */
-    public void unsetAvailabilityStatus(boolean enable);
+    void unsetAvailabilityStatus();
 }
