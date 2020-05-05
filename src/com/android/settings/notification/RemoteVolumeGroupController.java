@@ -18,6 +18,8 @@ package com.android.settings.notification;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.RoutingSessionInfo;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -51,7 +53,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     static final String SWITCHER_PREFIX = "OUTPUT_SWITCHER";
 
     private PreferenceCategory mPreferenceCategory;
-    private List<MediaDevice> mActiveRemoteMediaDevices = new ArrayList<>();
+    private List<RoutingSessionInfo> mRoutingSessionInfos = new ArrayList<>();
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -67,7 +69,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
 
     @Override
     public int getAvailabilityStatus() {
-        if (mActiveRemoteMediaDevices.isEmpty()) {
+        if (mRoutingSessionInfos.isEmpty()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return AVAILABLE_UNSEARCHABLE;
@@ -77,10 +79,17 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
-        mActiveRemoteMediaDevices.clear();
-        mActiveRemoteMediaDevices.addAll(mLocalMediaManager.getActiveMediaDevice(
-                MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE));
+        initRemoteMediaSession();
         refreshPreference();
+    }
+
+    private void initRemoteMediaSession() {
+        mRoutingSessionInfos.clear();
+        for (RoutingSessionInfo info : mLocalMediaManager.getActiveMediaSession()) {
+            if (!info.isSystemSession()) {
+                mRoutingSessionInfos.add(info);
+            }
+        }
     }
 
     /**
@@ -102,27 +111,27 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         final CharSequence outputTitle = mContext.getText(R.string.media_output_title);
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
         mPreferenceCategory.setVisible(true);
-        int i = 0;
-        for (MediaDevice device : mActiveRemoteMediaDevices) {
-            if (mPreferenceCategory.findPreference(device.getId()) != null) {
+
+        for (RoutingSessionInfo info : mRoutingSessionInfos) {
+            if (mPreferenceCategory.findPreference(info.getId()) != null) {
                 continue;
             }
             // Add slider
             final RemoteVolumeSeekBarPreference seekBarPreference =
                     new RemoteVolumeSeekBarPreference(mContext);
-            seekBarPreference.setKey(device.getId());
-            seekBarPreference.setTitle(castVolume + " (" + device.getClientAppLabel() + ")");
-            seekBarPreference.setMax(device.getMaxVolume());
-            seekBarPreference.setProgress(device.getCurrentVolume());
+            seekBarPreference.setKey(info.getId());
+            seekBarPreference.setTitle(castVolume);
+            seekBarPreference.setMax(info.getVolumeMax());
+            seekBarPreference.setProgress(info.getVolume());
             seekBarPreference.setMin(0);
             seekBarPreference.setOnPreferenceChangeListener(this);
             seekBarPreference.setIcon(R.drawable.ic_volume_remote);
             mPreferenceCategory.addPreference(seekBarPreference);
             // Add output indicator
             final Preference preference = new Preference(mContext);
-            preference.setKey(SWITCHER_PREFIX + device.getId());
+            preference.setKey(SWITCHER_PREFIX + info.getId());
             preference.setTitle(outputTitle);
-            preference.setSummary(device.getName());
+            preference.setSummary(info.getName());
             mPreferenceCategory.addPreference(preference);
         }
     }
@@ -135,7 +144,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             return false;
         }
         ThreadUtils.postOnBackgroundThread(() -> {
-            device.requestSetVolume((int) newValue);
+            mLocalMediaManager.adjustSessionVolume(preference.getKey(), (int) newValue);
         });
         return true;
     }
@@ -145,18 +154,19 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         if (!preference.getKey().startsWith(SWITCHER_PREFIX)) {
             return false;
         }
-        final String key = preference.getKey().substring(SWITCHER_PREFIX.length());
-        final MediaDevice device = mLocalMediaManager.getMediaDeviceById(key);
-        if (device == null) {
-            return false;
+        for (RoutingSessionInfo info : mRoutingSessionInfos) {
+            if (TextUtils.equals(info.getId(),
+                    preference.getKey().substring(SWITCHER_PREFIX.length()))) {
+                final Intent intent = new Intent()
+                        .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
+                                info.getClientPackageName());
+                mContext.startActivity(intent);
+                return true;
+            }
         }
-        final Intent intent = new Intent()
-                .setAction(MediaOutputSliceConstants.ACTION_MEDIA_OUTPUT)
-                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                .putExtra(MediaOutputSliceConstants.EXTRA_PACKAGE_NAME,
-                        device.getClientPackageName());
-        mContext.startActivity(intent);
-        return true;
+        return false;
     }
 
     @Override
@@ -170,9 +180,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             // Preference group is not ready.
             return;
         }
-        mActiveRemoteMediaDevices.clear();
-        mActiveRemoteMediaDevices.addAll(mLocalMediaManager.getActiveMediaDevice(
-                MediaDevice.MediaDeviceType.TYPE_CAST_DEVICE));
+        initRemoteMediaSession();
         refreshPreference();
     }
 
