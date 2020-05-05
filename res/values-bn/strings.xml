@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"ডিসকানেক্ট করুন"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"আপনার কাছে ব্লুটুথ সেটিংস পরিবর্তন করার অনুমতি নেই৷"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"নতুন ডিভাইস যুক্ত করুন"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"ব্লুটুথ সেটিংস খোলা থাকা অবস্থায় <xliff:g id="DEVICE_NAME">%1$s</xliff:g> কাছাকাছি ডিভাইসগুলির কাছে দৃশ্যমান হয়৷"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"ফোনের ব্লুটুথ ঠিকানা: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ট্যাবলেটের ব্লুটুথ ঠিকানা: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -3552,14 +3554,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"বিরক্ত করার অনুমতি দিন"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"অ্যাপটিকে আওয়াজ করতে, ভাইব্রেট করতে, এবং স্ক্রিনে বিজ্ঞপ্তি দেখাতে দিন"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"অগ্রাধিকার"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"এটিকে কথোপকথন বিভাগের সবচেয়ে উপরে একটি \'বাবল\' রূপে দেখানো হয়।"</string>
-    <!-- no translation found for convo_not_supported_summary (1794355603342685230) -->
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
     <skip />
+    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> অ্যাপে কথোপকথনের ক্ষেত্রে প্রযোজ্য সেটিংস কাজ করে না।"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"পুল-ডাউন শেডে বিজ্ঞপ্তিগুলিকে একটি লাইনের মধ্যে দেখুন"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"সাউন্ড বা ভাইব্রেশন ছাড়া ফোকাস করতে সাহায্য করে"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"সাউন্ড বা ভাইব্রেশনের সাহায্যে দৃষ্টি আকর্ষণ করে"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"কোনও ডিভাইস আনলক করা হলে বিজ্ঞপ্তি, স্ক্রিনের উপরে একটি ব্যানার হিসেবে দেখানো হয়"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"সমস্ত \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" বিজ্ঞপ্তি"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g>টি বিজ্ঞপ্তি প্রতিদিন</item>
@@ -3736,56 +3740,48 @@
       <item quantity="one">আরও <xliff:g id="NUM_PEOPLE">%d</xliff:g>টি</item>
       <item quantity="other">আরও <xliff:g id="NUM_PEOPLE">%d</xliff:g>টি</item>
     </plurals>
-    <!-- no translation found for zen_mode_starred_contacts_summary_none (6320777044373994482) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"কোনও তারা চিহ্নিত পরিচিতি নেই"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"মেসেজ"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"মেসেজ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"মেসেজ"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"যে মেসেজগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"মেসেজ আসলে রিং বাজবে কিনা তা নিশ্চিত করতে ডিভাইসটি রিং হওয়ার মোডে সেট করা আছে কিনা"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’-এর জন্য ইনকামিং মেসেজ ব্লক করা হয়েছে। আপনার বন্ধুবান্ধব, পরিবারের সদস্য অথবা অন্য পরিচিতিরা যাতে আপনার সাথে যোগাযোগ করতে পারেন তার জন্য আপনি সেটিংস অ্যাডজাস্ট করে নিতে পারেন।"</string>
-    <!-- no translation found for zen_mode_all_messages_summary (3756267858343104554) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_calls_summary (7337907849083824698) -->
-    <skip />
-    <!-- no translation found for zen_mode_contacts_count_none (7928563147160462589) -->
-    <skip />
-    <!-- no translation found for zen_mode_contacts_count (3434092344686708445) -->
+    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"আপনার ফোনে সব মেসেজই আসতে পারবে"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"আপনার ফোনে সব কলই আসতে পারবে"</string>
+    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"কোনও পরিচিতি নেই"</string>
+    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
+      <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g>টি পরিচিতি</item>
+      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g>টি পরিচিতি</item>
+    </plurals>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"যেকেউ"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"পরিচিতি"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"তারা চিহ্নিত পরিচিতিগুলি"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"যারা তারা চিহ্নিত পরিচিতি এবং আগে যারা ফোন করেছেন তারা আবার ফোন করলে"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"পরিচিতি এবং আগে যারা ফোন করেছেন তারা আবার ফোন করলে"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"শুধুমাত্র আগে যারা ফোন করেছেন তারা আবার ফোন করলে"</string>
-    <!-- no translation found for zen_mode_none_calls (2047166006414016327) -->
-    <skip />
-    <!-- no translation found for zen_mode_none_messages (1386626352943268342) -->
-    <skip />
+    <string name="zen_mode_none_calls" msgid="2047166006414016327">"কোনও কল করা যাবে না"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"কোনও মেসেজ করা যাবে না"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"অ্যালার্মগুলি"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"টাইমার, অ্যালার্ম, সিকিউরিটি সিস্টেম এবং অন্যান্য অ্যাপ থেকে"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"অ্যালার্ম"</string>
-    <!-- no translation found for zen_mode_alarms_list_first (2780418316613576610) -->
-    <skip />
+    <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"অ্যালার্ম"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"মিডিয়ার শব্দ"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"ভিডিও, গেম এবং অন্যান্য মিডিয়া থেকে হওয়া সাউন্ড"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"মিডিয়া"</string>
-    <!-- no translation found for zen_mode_media_list_first (7824427062528618442) -->
-    <skip />
+    <string name="zen_mode_media_list_first" msgid="7824427062528618442">"মিডিয়া"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"টাচ সাউন্ড"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"কীবোর্ড এবং অন্য বোতাম থেকে হওয়া সাউন্ড"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"টাচ সাউন্ড"</string>
-    <!-- no translation found for zen_mode_system_list_first (8590078626001067855) -->
-    <skip />
+    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"টাচ সাউন্ড"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"রিমাইন্ডার"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"টাস্ক এবং রিমাইন্ডার থেকে"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"রিমাইন্ডার"</string>
-    <!-- no translation found for zen_mode_reminders_list_first (1130470396012190814) -->
-    <skip />
+    <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"রিমাইন্ডার"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"ক্যালেন্ডারের ইভেন্ট"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"ক্যালেন্ডারে শিডিউল করে রাখা ইভেন্ট থেকে"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"ইভেন্ট"</string>
-    <!-- no translation found for zen_mode_events_list_first (7425369082835214361) -->
-    <skip />
+    <string name="zen_mode_events_list_first" msgid="7425369082835214361">"ইভেন্ট"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"অ্যাপ ওভাররাইডের অনুমতি দিন"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"যে অ্যাপগুলি \'বিরক্ত করবে না\' মোড এড়িয়ে নিজের কাজ করতে পারে"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"আরও অ্যাপ বেছে নিন"</string>
@@ -4801,7 +4797,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>-এ কনেক্ট থাকলে উপলভ্য থাকে না"</string>
     <string name="see_more" msgid="7499355691042812723">"আরও দেখুন"</string>
     <string name="see_less" msgid="2642392725363552793">"কম দেখুন"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> ব্যবহার করা যাবে এমন ডিভাইস"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"কোনও ডিভাইস খুঁজে পাওয়া যায়নি। ডিভাইস চালু আছে এবং কানেক্ট করার জন্য তৈরি কিনা তা ভাল করে দেখে নিন।"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"আবার চেষ্টা করুন"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"কোনও সমস্যা হয়েছে। ডিভাইস বেছে নেওয়ার আবেদনটি এই অ্যাপ্লিকেশনের মাধ্যমে বাতিল করা হয়েছে।"</string>
@@ -4826,6 +4825,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"কম্পোজিটর লেভেলে উইন্ডো ঝাপসা করে দেওয়া চালু করে। ডিভাইস রিবুট করতে হয়।"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"গোপনীয়তা"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"অনুমতি, অ্যাকাউন্ট অ্যাক্টিভিটি, ব্যক্তিগত ডেটা"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"সরান"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"রাখুন"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"সাজেশনটি সরাতে চান?"</string>

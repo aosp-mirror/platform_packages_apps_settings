@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Déconnecter"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Vous n\'êtes pas autorisé à modifier les paramètres Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Associer un appareil"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Lorsque le Bluetooth est activé, votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g> est visible par les appareils à proximité."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Adresse Bluetooth du téléphone : <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Adresse Bluetooth de la tablette : <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -96,10 +98,8 @@
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Touchez pour associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Fichiers reçus"</string>
     <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Fichiers reçus par Bluetooth"</string>
-    <!-- no translation found for bluetooth_devices_card_off_title (1320149821945129127) -->
-    <skip />
-    <!-- no translation found for bluetooth_devices_card_off_summary (2276527382891105858) -->
-    <skip />
+    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Le Bluetooth est désactivé"</string>
+    <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Touchez pour l\'activer"</string>
     <string name="device_picker" msgid="2427027896389445414">"Sélectionner un appareil Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> souhaite activer le Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> souhaite désactiver le Bluetooth"</string>
@@ -1223,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activer jusqu\'à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Désactiver jusqu\'à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Mode Écl. nocturne pas activé"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"La position de l\'appareil est nécessaire pour déterminer les heures de coucher et de lever du soleil."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Paramètres de localisation"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activer maintenant"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Désactiver maintenant"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activer jusqu\'au lever du soleil"</string>
@@ -3232,8 +3230,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"vibrantes, rvb, srvb, couleurs, naturelles, standard"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"température, couleur, D65, D73, blanc, jaune, bleu, chaud, froid"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"glisser pour déverrouiller, mot de passe, schéma, nip"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"épinglage d\'écran"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"défi professionnel, travail, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"profil professionnel, profil géré, unifier, unification, travail, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestes"</string>
@@ -3313,7 +3310,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Activation par les sons"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Transcription instantanée"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Ajouter automatiquement des sous-titres aux contenus multimédias"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Aucune"</string>
+    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Aucun"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> horaire programmé</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horaires programmés</item>
@@ -3554,13 +3551,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Autoriser les interruptions"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Autoriser l\'application à émettre des sons, à vibrer et à afficher des notifications à l\'écran"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorité"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"S\'affiche dans le haut de la section des conversations sous forme de bulle."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> ne prend pas en charge les paramètres propres aux conversations."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Dans le volet déroulant, afficher les notifications sur une seule ligne"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Vous aider à vous concentrer, sans son ni vibration"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Attire votre attention à l\'aide de sons et de vibrations"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière dans le haut de l\'écran"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Toutes les notifications de « <xliff:g id="APP_NAME">%1$s</xliff:g> »"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notifications adaptatives"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notification par jour</item>
@@ -3610,7 +3610,7 @@
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Applications professionnelles et personnelles associées"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Associées"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Associer ces applications"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les applications associées partagent leurs autorisations et peuvent accéder aux données appartenant l\'une à l\'autre."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les applications associées partagent leurs autorisations, et chacune peut accéder aux données de l\'autre."</string>
     <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"N\'associez que les applications avec lesquelles vous souhaitez partager vos données personnelles. Les applications professionnelles risquent de dévoiler vos données personnelles à votre administrateur informatique."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Autoriser l\'application professionnelle <xliff:g id="NAME">%1$s</xliff:g> à accéder à vos données personnelles?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"L\'application <xliff:g id="NAME">%1$s</xliff:g> risque de dévoiler vos données personnelles à votre administrateur informatique."</string>
@@ -3848,14 +3848,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Entrez le NIP d\'administrateur"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activé"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Désactivé"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Épinglage d\'application"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"L\'épinglage d\'écran vous permet de garder l\'application actuelle en vue jusqu\'à ce que vous annuliez l\'épinglage. Cette fonctionnalité peut être utilisée, par exemple, pour laisser un ami de confiance jouer à un certain jeu. \n\nLorsqu\'une application est épinglée, elle peut ouvrir d\'autres applications, et certaines données personnelles pourraient être accessibles. \n\nPour utiliser l\'épinglage d\'application : 	\n1.	Activez l\'épinglage d\'application 	\n2.	Ouvrez Aperçu 	\n3.	Touchez l\'icône de l\'application dans le haut de l\'écran, puis touchez Épingler"</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"L\'épinglage d\'écran vous permet de garder l\'application actuelle en vue jusqu\'à ce que vous annuliez l\'épinglage. Cette fonctionnalité peut être utilisée, par exemple, pour laisser un ami de confiance jouer à un certain jeu. \n\nLorsqu\'une application est épinglée, elle peut ouvrir d\'autres applications, et certaines données personnelles pourraient être accessibles. \n\nSi vous souhaitez partager votre appareil de manière sécuritaire, essayez d\'utiliser un profil d\'invité à la place. \n\nPour utiliser l\'épinglage d\'application : 	\n1.	Activez l\'épinglage d\'application 	\n2.	Ouvrez Aperçu 	\n3.	Touchez l\'icône de l\'application dans le haut de l\'écran, puis touchez Épingler"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Lorsqu\'une application est épinglée : \n\n•	 Certaines données personnelles pourraient être accessibles \n		(comme les contacts et le contenu des courriels) \n•	 L\'application épinglée peut ouvrir d\'autres applications \n\nUtilisez l\'épinglage d\'application uniquement avec les gens en qui vous avez confiance."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Demander le schéma de déverrouillage avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demander le NIP avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
@@ -4640,8 +4636,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Autoriser l\'application à gérer le Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Autorisez cette application à activer ou à désactiver le Wi-Fi, à rechercher les réseaux Wi-Fi et à s\'y connecter, à ajouter et à supprimer des réseaux ou à créer un point d\'accès local uniquement"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Faire jouer les contenus multimédias sur"</string>
-    <!-- no translation found for media_output_label_title (1070976175129103096) -->
-    <skip />
+    <string name="media_output_label_title" msgid="1070976175129103096">"Faire jouer <xliff:g id="LABEL">%s</xliff:g> sur"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Cet appareil"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Téléphone"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablette"</string>
@@ -4795,7 +4790,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Indisponible lorsque vous êtes connectés au réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"En voir plus"</string>
     <string name="see_less" msgid="2642392725363552793">"En voir moins"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Appareil à utiliser avec <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Aucun appareil trouvé. Assurez-vous que l\'appareil est allumé et prêt à se connecter."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Réessayer"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Une erreur s\'est produite. L\'application a annulé la demande de sélection d\'un appareil."</string>
@@ -4820,6 +4818,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Active le floutage pour les fenêtres à l\'échelle du compositeur. Vous devrez redémarrer l\'appareil."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Confidentialité"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Autorisations, activité du compte, données personnelles"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Supprimer"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Garder"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Supprimer cette suggestion?"</string>

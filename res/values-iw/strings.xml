@@ -84,6 +84,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"אני רוצה להתנתק"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"‏אין לך הרשאה לשנות את הגדרות ה-Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"התאמה של מכשיר חדש"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"‏<xliff:g id="DEVICE_NAME">%1$s</xliff:g> גלוי למכשירים קרובים כאשר הגדרת Bluetooth פתוחה."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"‏כתובת הטלפון לחיבור דרך Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"‏כתובת הטאבלט לחיבור דרך Bluetooth: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -98,10 +100,8 @@
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"הקש כדי ליצור התאמה עם <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"קבצים שהתקבלו"</string>
     <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"‏הקבצים התקבלו באמצעות Bluetooth"</string>
-    <!-- no translation found for bluetooth_devices_card_off_title (1320149821945129127) -->
-    <skip />
-    <!-- no translation found for bluetooth_devices_card_off_summary (2276527382891105858) -->
-    <skip />
+    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"‏Bluetooth כבוי"</string>
+    <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"יש להקיש כדי להפעיל אותו"</string>
     <string name="device_picker" msgid="2427027896389445414">"‏בחר מכשיר Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה להפעיל את ה-Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"‏<xliff:g id="APP_NAME">%1$s</xliff:g> רוצה לכבות את ה-Bluetooth"</string>
@@ -3648,13 +3648,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"סוגי הפרעות שאפשר להפעיל"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"האפליקציה יכולה להפעיל צלילים ורטט ו/או להציג התראות קופצות במסך"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"עדיפות"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"מוצג בראש קטע השיחה ומופיע כבועה."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תומכת בהגדרות ספציפיות לשיחות."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"כיווץ ההתראות בלוח ההתראות הנפתח לשורה אחת"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"עוזרת להתרכז ללא צלילים או רטט"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"מעוררת תשומת לב באמצעות צלילים או רטט"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"כשהמכשיר לא נעול, יש להציג התראות כבאנר בראש המסך"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"כל ההתראות של \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"התראות מותאמות"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="two">כ-<xliff:g id="NUMBER_1">%d</xliff:g> התראות ליום</item>
@@ -3849,7 +3852,7 @@
       <item quantity="other"><xliff:g id="NUM_PEOPLE">%d</xliff:g> נוספים</item>
       <item quantity="one">1 נוסף</item>
     </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"ללא"</string>
+    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"אף איש קשר שסומן בכוכב"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"התראות"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"הודעות"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"הודעות"</string>
@@ -3858,7 +3861,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"למשך ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’, הודעות נכנסות ייחסמו. ניתן לשנות את ההגדרות כדי לאפשר לחברים, לבני משפחה או לאנשי קשר אחרים ליצור איתך קשר."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"כל ההודעות יכולות להגיע אליך"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"כל השיחות יכולות להגיע אליך"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"ללא"</string>
+    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"אף איש קשר"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="two"><xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר</item>
       <item quantity="many"><xliff:g id="NUM_CONTACTS">%d</xliff:g> אנשי קשר</item>
@@ -3871,8 +3874,8 @@
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"מאנשי קשר שמסומנים בכוכב וממתקשרים חוזרים"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"מאנשי הקשר וממתקשרים חוזרים"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"ממתקשרים חוזרים בלבד"</string>
-    <string name="zen_mode_none_calls" msgid="2047166006414016327">"ללא"</string>
-    <string name="zen_mode_none_messages" msgid="1386626352943268342">"ללא"</string>
+    <string name="zen_mode_none_calls" msgid="2047166006414016327">"אף שיחה"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"אף הודעה"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"התראות"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"מטיימרים, התראות, מערכות אבטחה ואפליקציות אחרות"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"התראות"</string>
@@ -4814,8 +4817,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"‏מאפשר לאפליקציה לשלוט ב-Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏מאפשר לאפליקציה זו להפעיל ולכבות חיבור Wi-Fi, לסרוק רשתות Wi-Fi ולהתחבר אליהן, להוסיף ולהסיר רשתות או להתחיל נקודה לשיתוף אינטרנט מקומית בלבד"</string>
     <string name="media_output_title" msgid="8283629315159510680">"הפעלת מדיה באמצעות"</string>
-    <!-- no translation found for media_output_label_title (1070976175129103096) -->
-    <skip />
+    <string name="media_output_label_title" msgid="1070976175129103096">"הפעלת <xliff:g id="LABEL">%s</xliff:g> באמצעות"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"מכשיר זה"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"טלפון"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"טאבלט"</string>
@@ -4971,7 +4973,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"לא זמין כשהמכשיר מחובר ל-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"הצגת פריטים נוספים"</string>
     <string name="see_less" msgid="2642392725363552793">"הצג פחות"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"מכשיר לשימוש עם <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"לא נמצאו מכשירים. יש לוודא שהמכשירים פועלים וזמינים לחיבור."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"לניסיון חוזר"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"משהו קרה. האפליקציה ביטלה את הבקשה לבחירת מכשיר."</string>
@@ -4996,6 +5001,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"מאפשר טשטוש חלון ברמה של רכיב היצירה. נדרשת הפעלת המכשיר מחדש."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"פרטיות"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"הרשאות, פעילות בחשבון, מידע אישי"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"הסרה"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"שמירה"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"להסיר את ההצעה הזו?"</string>

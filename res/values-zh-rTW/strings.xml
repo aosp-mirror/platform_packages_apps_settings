@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"中斷連線"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"你沒有變更藍牙設定的權限。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"藍牙設定開啟時，附近的裝置可偵測到「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"手機的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"平板電腦的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1221,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持開啟狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜燈模式目前已關閉"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位模式，裝置才能判斷日落和日出的時間。"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置資訊設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"開啟，直到日出"</string>
@@ -3230,8 +3230,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"鮮活, RGB, sRGB, 色彩, 自然, 標準"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"色彩, 色溫, D65, D73, 白色, 黃色, 藍色, 暖色系, 冷色系"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"滑動解鎖, 密碼, 圖案, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"螢幕固定"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"Work 驗證、Work、設定檔"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"工作資料夾, 受管理設定檔, 整合, 整合, Work, 設定檔"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手勢"</string>
@@ -3552,13 +3551,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"允許干擾"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允許應用程式發出音效、震動，以及/或在畫面上彈出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先順序"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"以對話框形式顯示在對話部分的頂端。"</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」不支援對話專用設定。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"將下拉式通知欄中的通知收合為單一行"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"協助你不受音效或震動干擾"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"發出音效或震動吸引你的注意力"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"裝置處於解鎖狀態時，在螢幕頂端以橫幅形式顯示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有「<xliff:g id="APP_NAME">%1$s</xliff:g>」通知"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調整通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">每天大約 <xliff:g id="NUMBER_1">%d</xliff:g> 則通知</item>
@@ -3846,14 +3848,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"輸入管理員 PIN 碼"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"開啟"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"關閉"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如要安全地與他人共用裝置，建議你改用訪客設定檔。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電子郵件內容)\n•		固定的應用程式可開啟其他應用程式\n\n請務必只針對你信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN 碼"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定時必須輸入密碼"</string>
@@ -4792,7 +4790,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
     <string name="see_more" msgid="7499355691042812723">"顯示更多"</string>
     <string name="see_less" msgid="2642392725363552793">"顯示較少"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"搭配「<xliff:g id="APPNAME">%1$s</xliff:g>」使用的裝置"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到裝置。請確認裝置已經開啟並可進行連線。"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"再試一次"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"網路連線發生錯誤，因此應用程式已取消選擇裝置的要求。"</string>
@@ -4817,6 +4818,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"在合成器層級啟用視窗模糊效果。裝置必須重新啟動。"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"隱私"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"權限、帳戶活動、個人資料"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"移除"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保留"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除這項建議嗎？"</string>

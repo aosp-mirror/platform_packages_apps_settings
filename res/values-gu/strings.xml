@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"ડિસ્કનેક્ટ"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"તમારી પાસે બ્લૂટૂથ સેટિંગ્સ બદલવાની પરવાનગી નથી."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"નવા ડિવાઇસ જોડો"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"જ્યારે બ્લૂટૂથ  સેટિંગ્સ ખુલ્લી હોય ત્યારે <xliff:g id="DEVICE_NAME">%1$s</xliff:g> નજીકનાં ઉપકરણોને દૃશ્યક્ષમ છે."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"ફોનનું બ્લૂટૂથ ઍડ્રેસ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ટૅબ્લેટનું બ્લૂટૂથ ઍડ્રેસ: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -598,7 +600,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"જો તમે આગલા પ્રયત્નમાં ખોટો પાસવર્ડ દાખલ કરશો, તો તમારી કાર્યાલયની પ્રોફાઇલ અને તેનો ડેટા કાઢી નાખવામાં આવશે"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"ઘણા બધા ખોટા પ્રયત્નો. આ ઉપકરણોનો ડેટા કાઢી નાખવામાં આવશે."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"ઘણા બધા ખોટા પ્રયત્નો. આ વપરાશકર્તાને કાઢી નાખવામાં આવશે."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ઘણા બધા ખોટા પ્રયત્નો. આ કાર્યાલયની પ્રોફાઇલ અને તેનો ડેટા કાઢી નાખવામાં આવશે."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ઘણા બધા ખોટા પ્રયત્નો. આ કાર્યાલયની પ્રોફાઇલ અને તેનો ડેટા ડિલીટ કરવામાં આવશે."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"છોડી દો"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">ઓછામાં ઓછા <xliff:g id="COUNT_1">%d</xliff:g> અક્ષરો હોવા જરૂરી છે</item>
@@ -915,7 +917,7 @@
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"નેટવર્ક પસંદ કરો"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"તમારા ડિવાઇસને કનેક્ટ કરવા માટે, નેટવર્ક પસંદ કરો"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"આ ડિવાઇસને  “<xliff:g id="SSID">%1$s</xliff:g>” પર ઉમેરીએ?"</string>
-    <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"ડિવાઇસ સાથે શેર કરેલું વાઇ-ફાઇ"</string>
+    <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"ડિવાઇસ સાથે વાઇ-ફાઇ શેર થઈ ગયું"</string>
     <string name="wifi_dpp_add_another_device" msgid="3307575293580739604">"બીજું ડિવાઇસ ઉમેરો"</string>
     <string name="wifi_dpp_choose_different_network" msgid="8963625819804792157">"અલગ નેટવર્ક પસંદ કરો"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"ડિવાઇસ ઉમેરી શક્યાં નથી"</string>
@@ -3552,13 +3554,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"વિક્ષેપોને મંજૂરી આપો"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"ઍપ્લિકેશનને ધ્વનિ, વાઇબ્રેટ અને/અથવા સ્ક્રીન પર સૂચનાઓ હાઇલાઇટ કરવા દો"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"પ્રાધાન્યતા"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"વાતચીત વિભાગની ટોચ પર બતાવે છે અને બબલ તરીકે દેખાય છે."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> વાતચીત માટેના ચોક્કસ સેટિંગને સપોર્ટ કરતી નથી"</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
+    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> વાતચીત માટેના ચોક્કસ સેટિંગને સપોર્ટ કરતી નથી."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"નીચે દેખાતા શેડમાં, નોટિફિકેશનને નાના કરીને એક લાઇનમાં બતાવો"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"તમને સાઉન્ડ અથવા વાઇબ્રેશન વિના ફોકસ કરવામાં સહાય કરે છે"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"સાઉન્ડ અથવા વાઇબ્રેશન વિના તમારું ધ્યાન દોરે છે"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ડિવાઇસ અનલૉક થયેલું હોય ત્યારે, સ્ક્રીનના ઉપરના ભાગ પર બૅનરના સ્વરૂપમાં નોટિફિકેશન બતાવો"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\"ના તમામ નોટિફિકેશન"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"સુવિધાજનક નોટિફિકેશન"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> નોટિફિકેશન પ્રતિ દિવસ</item>
@@ -3901,7 +3906,7 @@
     <string name="storage_used" msgid="2591194906751432725">"સંગ્રહ ઉપયોગમાં લેવાયો"</string>
     <string name="change" msgid="273206077375322595">"બદલો"</string>
     <string name="change_storage" msgid="8773820275624113401">"સ્ટોરેજ બદલો"</string>
-    <string name="notifications_label" msgid="8471624476040164538">"સૂચનાઓ"</string>
+    <string name="notifications_label" msgid="8471624476040164538">"નોટિફિકેશન"</string>
     <string name="notifications_enabled" msgid="7743168481579361019">"ચાલુ"</string>
     <string name="notifications_enabled_with_info" msgid="1808946629277684308">"<xliff:g id="NOTIFICATIONS_SENT">%1$s</xliff:g> / <xliff:g id="NOTIFICATIONS_CATEGORIES_OFF">%2$s</xliff:g>"</string>
     <string name="notifications_disabled" msgid="5603160425378437143">"બંધ"</string>
@@ -4792,7 +4797,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"જ્યારે <xliff:g id="CARRIER">%1$s</xliff:g> સાથે કનેક્ટ થયેલ હોય, ત્યારે ઉપલબ્ધ નથી"</string>
     <string name="see_more" msgid="7499355691042812723">"વધુ જુઓ"</string>
     <string name="see_less" msgid="2642392725363552793">"ઓછું જુઓ"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> સાથે ઉપયોગમાં લેવાનું ડિવાઇસ"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"કોઈ ડિવાઇસ મળ્યું નથી. ખાતરી કરો કે ડિવાઇસ ચાલુ છે અને કનેક્ટ કરવા માટે ઉપલબ્ધ છે."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"ફરી પ્રયાસ કરો"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"કંઈક નડ્યું. ઍપ્લિકેશને ડિવાઇસ પસંદ કરવાની વિનંતી રદ કરી છે."</string>
@@ -4817,8 +4825,12 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"કમ્પોઝિટર લેવલ પર વિંડોને ઝાંખી કરવાનું ચાલુ કરે છે. આના માટે ડિવાઇસને રીબૂટ કરવાની જરૂર છે."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"પ્રાઇવસી"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"પરવાનગીઓ, એકાઉન્ટ પ્રવૃત્તિ, વ્યક્તિગત ડેટા"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"કાઢી નાખો"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"રાખો"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Keep"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"આ સુઝાવ કાઢી નાખીએ?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"સૂચન કાઢી નાખ્યું"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"છેલ્લો ફેરફાર રદ કરો"</string>
