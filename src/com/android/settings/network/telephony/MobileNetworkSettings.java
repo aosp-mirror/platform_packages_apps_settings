@@ -34,7 +34,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
@@ -56,7 +55,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -85,8 +83,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private UserManager mUserManager;
     private String mClickedPrefKey;
-
-    private List<AbstractPreferenceController> mHiddenControllerList;
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -208,50 +204,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         session.close();
 
         onRestoreInstance(icicle);
-    }
-
-    @Override
-    public void onExpandButtonClick() {
-        final PreferenceScreen screen = getPreferenceScreen();
-        mHiddenControllerList.stream()
-                .filter(controller -> controller.isAvailable())
-                .forEach(controller -> {
-                    final String key = controller.getPreferenceKey();
-                    final Preference preference = screen.findPreference(key);
-                    controller.updateState(preference);
-                });
-        super.onExpandButtonClick();
-    }
-
-    /*
-     * Replace design within {@link DashboardFragment#updatePreferenceStates()}
-     */
-    @Override
-    protected void updatePreferenceStates() {
-        mHiddenControllerList = new ArrayList<AbstractPreferenceController>();
-
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Collection<List<AbstractPreferenceController>> controllerLists =
-                getPreferenceControllers();
-        controllerLists.stream().flatMap(Collection::stream)
-                .forEach(controller -> {
-                    final String key = controller.getPreferenceKey();
-                    if (TextUtils.isEmpty(key)) {
-                        return;
-                    }
-                    final Preference preference = screen.findPreference(key);
-                    if (preference == null) {
-                        return;
-                    }
-                    if (!isPreferenceExpanded(preference)) {
-                        mHiddenControllerList.add(controller);
-                        return;
-                    }
-                    if (!controller.isAvailable()) {
-                        return;
-                    }
-                    controller.updateState(preference);
-                });
     }
 
     @VisibleForTesting
