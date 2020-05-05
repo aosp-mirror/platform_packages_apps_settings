@@ -45,6 +45,7 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
 
     private Future<NetworkTemplate> mTemplateFuture;
     private AtomicReference<NetworkTemplate> mTemplate;
+    private Future<Long> mHistoricalUsageLevel;
 
     public DataUsagePreferenceController(Context context, String key) {
         super(context, key);
@@ -127,11 +128,17 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
         final DataUsageController controller = new DataUsageController(context);
         controller.setSubscriptionId(subId);
 
+        mHistoricalUsageLevel = ThreadUtils.postOnBackgroundThread(() ->
+                controller.getHistoricalUsageLevel(getNetworkTemplate()));
+
         final DataUsageController.DataUsageInfo usageInfo = getDataUsageInfo(controller);
 
         long usageLevel = usageInfo.usageLevel;
         if (usageLevel <= 0L) {
-            usageLevel = controller.getHistoricalUsageLevel(getNetworkTemplate());
+            try {
+                usageLevel = mHistoricalUsageLevel.get();
+            } catch (Exception exception) {
+            }
         }
         if (usageLevel <= 0L) {
             return null;
