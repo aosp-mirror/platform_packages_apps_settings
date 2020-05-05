@@ -415,6 +415,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                     // (it would be quite confusing why the connected network has no signal)
                     pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
                     mPreferenceCategory.addPreference(pref);
+                    break;
                 }
             }
         }
