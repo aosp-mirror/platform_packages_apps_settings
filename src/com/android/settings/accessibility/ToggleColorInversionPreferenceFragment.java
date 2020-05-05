@@ -22,6 +22,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,14 +34,11 @@ import android.view.ViewGroup;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Settings page for color inversion. */
-@SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
@@ -56,11 +54,6 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         logServiceStatus(mComponentName.flattenToString(), enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_color_inversion_settings;
     }
 
     @Override
@@ -91,6 +84,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(getPrefContext().getPackageName())
+                .appendPath(String.valueOf(R.drawable.accessibility_color_inversion_banner))
+                .build();
         final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
         enableServiceFeatureKeys.add(ENABLED);
         mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
@@ -139,7 +136,4 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         }
         mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_color_inversion_settings);
 }
