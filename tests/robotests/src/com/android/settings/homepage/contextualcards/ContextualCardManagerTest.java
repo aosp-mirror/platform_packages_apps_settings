@@ -24,6 +24,7 @@ import static com.android.settings.homepage.contextualcards.slices.SliceContextu
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.atLeast;
@@ -44,6 +45,7 @@ import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.FeatureFlagUtils;
 
+import androidx.loader.app.LoaderManager;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.FeatureFlags;
@@ -64,6 +66,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowSubscriptionManager;
 import org.robolectric.shadows.ShadowTelephonyManager;
 
@@ -77,13 +80,15 @@ import java.util.stream.Collectors;
 public class ContextualCardManagerTest {
     private static final int SUB_ID = 2;
 
-    private static final String TEST_SLICE_URI = "context://test/test";
+    private static final String TEST_SLICE_URI = "content://test/test";
     private static final String TEST_SLICE_NAME = "test_name";
 
     @Mock
     ContextualCardUpdateListener mListener;
     @Mock
     Lifecycle mLifecycle;
+    @Mock
+    LoaderManager mLoaderManager;
 
     private Context mContext;
     private ShadowSubscriptionManager mShadowSubscriptionManager;
@@ -147,6 +152,27 @@ public class ContextualCardManagerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void loadContextualCards_restartLoaderNotNeeded_shouldInitLoader() {
+        mManager.loadContextualCards(mLoaderManager, false /* restartLoaderNeeded */);
+
+        verify(mLoaderManager).initLoader(anyInt(), nullable(Bundle.class),
+                any(ContextualCardManager.CardContentLoaderCallbacks.class));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void loadContextualCards_restartLoaderNeeded_shouldRestartLoaderAndSetIsFirstLaunch() {
+        mManager.mIsFirstLaunch = false;
+
+        mManager.loadContextualCards(mLoaderManager, true /* restartLoaderNeeded */);
+
+        verify(mLoaderManager).restartLoader(anyInt(), nullable(Bundle.class),
+                any(ContextualCardManager.CardContentLoaderCallbacks.class));
+        assertThat(mManager.mIsFirstLaunch).isTrue();
+    }
+
+    @Test
     public void getSettingsCards_conditionalsEnabled_shouldContainLegacyAndConditionals() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONDITIONAL_CARDS, true);
         final int[] expected = {ContextualCard.CardType.CONDITIONAL,
@@ -184,7 +210,7 @@ public class ContextualCardManagerTest {
         final ContextualCard card1 =
                 buildContextualCard(TEST_SLICE_URI).mutate().setRankingScore(99.0).build();
         final ContextualCard card2 =
-                buildContextualCard("context://test/test2").mutate().setRankingScore(88.0).build();
+                buildContextualCard("content://test/test2").mutate().setRankingScore(88.0).build();
         cards.add(card1);
         cards.add(card2);
 
@@ -203,6 +229,24 @@ public class ContextualCardManagerTest {
 
         assertThat(sortedCards.get(cards.size() - 1).getCardType())
                 .isEqualTo(ContextualCard.CardType.CONDITIONAL);
+    }
+
+    @Test
+    public void sortCards_hasStickyCards_stickyShouldAlwaysBeTheLast() {
+        final List<ContextualCard> cards = new ArrayList<>();
+        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI,
+                ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.02f));
+        cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI,
+                ContextualCardProto.ContextualCard.Category.STICKY_VALUE, 1.01f));
+        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI,
+                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE, 0.01f));
+
+        final List<ContextualCard> sortedCards = mManager.sortCards(cards);
+
+        assertThat(sortedCards.get(cards.size() - 1).getSliceUri())
+                .isEqualTo(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI);
+        assertThat(sortedCards.get(cards.size() - 2).getSliceUri())
+                .isEqualTo(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI);
     }
 
     @Test
@@ -683,6 +727,17 @@ public class ContextualCardManagerTest {
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(Uri.parse(sliceUri))
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
+                .build();
+    }
+
+    private ContextualCard buildContextualCard(Uri uri, int category, double rankingScore) {
+        return new ContextualCard.Builder()
+                .setName(uri.toString())
+                .setCardType(ContextualCard.CardType.SLICE)
+                .setSliceUri(uri)
+                .setViewType(VIEW_TYPE_FULL_WIDTH)
+                .setCategory(category)
+                .setRankingScore(rankingScore)
                 .build();
     }
 
