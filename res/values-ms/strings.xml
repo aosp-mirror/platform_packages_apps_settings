@@ -20,7 +20,7 @@
     <string name="no" msgid="5541738710521607130">"Tidak"</string>
     <string name="create" msgid="986997212165228751">"Buat"</string>
     <string name="allow" msgid="3763244945363657722">"Benarkan"</string>
-    <string name="deny" msgid="7326117222944479942">"Nafikan"</string>
+    <string name="deny" msgid="7326117222944479942">"Tolak"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"Hidupkan"</string>
     <string name="device_info_default" msgid="1406619232867343310">"Tidak diketahui"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Putuskan sambungan"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Anda tidak mempunyai kebenaran untuk menukar tetapan Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Gandingkan peranti baharu"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kelihatan kepada peranti yang berhampiran semasa tetapan Bluetooth dibuka."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Alamat Bluetooth telefon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Alamat Bluetooth tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -598,7 +600,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika anda memasukkan kata laluan yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Terlalu banyak percubaan yang salah. Data peranti ini akan dipadamkan."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Terlalu banyak percubaan yang salah. Pengguna ini akan dipadamkan."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak percubaan yang salah. Profil kerja ini dan data profil itu akan dipadamkan."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak percubaan yang salah. Profil kerja ini dan data profil akan dipadamkan."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Ketepikan"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_1">%d</xliff:g> aksara</item>
@@ -3552,13 +3554,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Benarkan gangguan"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Benarkan apl membuat bunyi, bergetar dan/atau memaparkan pemberitahuan pada skrin"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Keutamaan"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Ditunjukkan di sebelah atas bahagian perbualan dan muncul sebagai gelembung."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> tidak menyokong tetapan khusus perbualan."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Dalam bidai tarik turun, runtuhkan pemberitahuan kepada satu baris"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Membantu anda fokus tanpa bunyi atau getaran"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Menarik perhatian anda dengan bunyi atau getaran"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Apabila kunci peranti dibuka, tunjukkan pemberitahan sebagai sepanduk di bahagian atas skrin"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Semua pemberitahuan \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Pemberitahuan Boleh Suai"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> pemberitahuan sehari</item>
@@ -3742,8 +3747,8 @@
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Mesej yang boleh ganggu"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Untuk memastikan mesej yang dibenarkan berbunyi, pastikan peranti dibenarkan berdering"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Mesej masuk disekat untuk ‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’. Anda boleh melaraskan tetapan untuk membenarkan rakan, keluarga atau kenalan lain menghubungi anda."</string>
-    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Semua mesej boleh sampai kepada anda"</string>
-    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Semua panggilan boleh sampai kepada anda"</string>
+    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Anda boleh menerima semua mesej"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Anda boleh dihubungi oleh semua panggilan"</string>
     <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Tiada"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kenalan</item>
@@ -3980,7 +3985,7 @@
     <string name="default_phone_title" msgid="7616730756650803827">"Apl telefon"</string>
     <string name="default_app" msgid="445053777504688596">"(Lalai)"</string>
     <string name="system_app" msgid="1863291702508355041">"(Sistem)"</string>
-    <string name="system_default_app" msgid="2647834628622214931">"(Lalai sistem)"</string>
+    <string name="system_default_app" msgid="2647834628622214931">"(Ciri lalai sistem)"</string>
     <string name="apps_storage" msgid="643866814746927111">"Storan apl"</string>
     <string name="usage_access" msgid="5487993885373893282">"Akses penggunaan"</string>
     <string name="permit_usage_access" msgid="179630895262172674">"Benarkan akses penggunaan"</string>
@@ -4792,7 +4797,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Tidak tersedia apabila disambungkan ke <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Lihat lagi"</string>
     <string name="see_less" msgid="2642392725363552793">"Lihat kurang"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Peranti untuk digunakan dengan <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Tiada peranti ditemui. Pastikan peranti dihidupkan dan tersedia untuk menyambung."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Cuba lagi"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Sesuatu telah berlaku. Aplikasi telah membatalkan permintaan untuk memilih peranti."</string>
@@ -4817,6 +4825,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Mendayakan kabur tetingkap pada tahap pengatur huruf. Memerlukan but semula peranti."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privasi"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Kebenaran, aktiviti akaun, data peribadi"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Alih keluar"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Simpan"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Alih keluarkan cadangan ini?"</string>
@@ -4883,7 +4895,7 @@
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Menentukan apl yang mengendalikan pintasan Laporan Pepijat pada peranti anda."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Peribadi"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Kerja"</string>
-    <string name="system_default_app_subtext" msgid="5212055189703164839">"Lalai sistem"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"Ciri lalai sistem"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Pilihan ini tidak lagi sah. Cuba lagi."</string>
     <string name="device_controls_sentence" msgid="4887752349920801907">"Kawalan peranti"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"kawalan peranti"</string>

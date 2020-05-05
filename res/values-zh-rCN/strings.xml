@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"断开连接"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"您无权更改蓝牙设置。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"与新设备配对"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"在 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 上开启蓝牙设置后，附近的设备将可以检测到该设备。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"手机的蓝牙地址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"平板电脑的蓝牙地址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -905,8 +907,8 @@
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"扫描此二维码即可连接到“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"请重试。如果问题依然存在，请与设备制造商联系"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"出了点问题"</string>
-    <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"请确保设备已连接到电源，正在充电且处于开启状态"</string>
-    <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"请确保设备已连接到电源，正在充电且处于开启状态。如果问题依然存在，请与设备制造商联系"</string>
+    <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"请确保设备已连接到电源、电量充足且已开机"</string>
+    <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"请确保设备已连接到电源、电量充足且已开机。如果问题依然存在，请与设备制造商联系"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"此设备不支持添加“<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_failure_cannot_find_network" msgid="8519567801353014036">"请尝试让设备更靠近您的 WLAN 接入点/路由器"</string>
     <string name="wifi_dpp_failure_enrollee_authentication" msgid="7008840843663520852">"请检查密码，然后重试"</string>
@@ -1196,8 +1198,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"屏幕感知功能会通过前置摄像头来确定是否有人正在看屏幕。这个功能只会在设备上运行，系统绝对不会存储图片或将图片发送给 Google。"</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"开启屏幕感知功能"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"直视屏幕时让屏幕保持开启"</string>
-    <string name="night_display_title" msgid="8532432776487216581">"夜间模式"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"夜间模式会将您的屏幕色调调为琥珀色，可让您在光线昏暗的环境下更舒适地查看屏幕或阅读文字，并有助您入睡。"</string>
+    <string name="night_display_title" msgid="8532432776487216581">"护眼模式"</string>
+    <string name="night_display_text" msgid="4789324042428095383">"护眼模式会将您的屏幕色调调为琥珀色，可让您在光线昏暗的环境下更舒适地查看屏幕或阅读文字，并有助您入睡。"</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"设定时间"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"无"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"在设定的时间开启"</string>
@@ -1221,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"开启，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"关闭，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前未开启护眼模式"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"需要开启位置信息模式，设备才能确定日落和日出时间。"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置信息设置"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即开启"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即关闭"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"开启，直到日出"</string>
@@ -2717,9 +2717,9 @@
     <string name="admin_more_details" msgid="6698424974827333973">"更多详情"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"通知日志"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"通知历史记录"</string>
-    <string name="notification_history_today" msgid="5828496957208237230">"过去 24 小时"</string>
-    <string name="notification_history_snooze" msgid="3980568893290512257">"已延后"</string>
-    <string name="notification_history_dismiss" msgid="6180321217375722918">"最近关闭"</string>
+    <string name="notification_history_today" msgid="5828496957208237230">"过去 24 小时的通知"</string>
+    <string name="notification_history_snooze" msgid="3980568893290512257">"延后的通知"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"最近关闭的通知"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 条通知</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 条通知</item>
@@ -3230,8 +3230,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"鲜亮, RGB, SRGB, 颜色, 自然, 标准"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"颜色, 温度, D65, D73, 白色, 黄色, 蓝色, 暖色, 冷色"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"滑动解锁, 密码, 图案, PIN 码"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"固定屏幕"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"工作验证, 工作, 资料"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手势"</string>
@@ -3444,7 +3443,7 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"按相关性自动排列通知"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"建议的操作和回复"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"自动显示建议的操作和回复"</string>
-    <string name="notification_history_summary" msgid="5434741516307706892">"显示近期通知和已暂停通知"</string>
+    <string name="notification_history_summary" msgid="5434741516307706892">"显示近期通知和延后的通知"</string>
     <string name="notification_history" msgid="8663811361243456201">"通知历史记录"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"使用通知历史记录"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"通知历史记录已关闭"</string>
@@ -3552,13 +3551,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"优先级"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"以对话泡形式显示在对话部分顶部。"</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g>不支持对话专用设置。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"将下拉通知栏中的通知合拢为一行"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"不会发出提示音或振动，可帮助您保持专注"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"通过提示音或振动吸引您的注意"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有“<xliff:g id="APP_NAME">%1$s</xliff:g>”通知"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"自动调节通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">每天大约 <xliff:g id="NUMBER_1">%d</xliff:g> 条通知</item>
@@ -3600,29 +3602,29 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"画中画"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"允许进入画中画模式"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"允许此应用在您打开应用时或您离开应用后（例如继续观看视频）创建画中画窗口。这类窗口会显示在您当前使用的其他应用的上层。"</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"连接工作和个人应用"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"关联工作应用和个人应用"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"已关联"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"未关联"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"没有任何关联的应用"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"跨资料 关联的应用 应用 工作和个人"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"连接工作和个人应用"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"关联工作应用和个人应用"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"已关联"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"关联这些应用"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"关联的应用会共享权限并且可以相互访问数据。"</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"仅关联您信任并允许访问您的个人数据的应用。工作应用可能会向您的 IT 管理员公开您的数据。"</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"要信任工作<xliff:g id="NAME">%1$s</xliff:g>并允许该应用访问您的个人数据吗？"</string>
+    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"请只关联您信任并要允许其访问您的个人数据的应用。工作应用可能会向您的 IT 管理员公开您的数据。"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"您信任“<xliff:g id="NAME">%1$s</xliff:g>”工作应用并要允许其访问您的个人数据吗？"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g>可能会向您的 IT 管理员公开您的个人数据。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"应用数据"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"此应用可访问您的个人<xliff:g id="NAME">%1$s</xliff:g>应用中的数据。"</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"此应用可访问您的个人\"<xliff:g id="NAME">%1$s</xliff:g>\"应用中的数据。"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"权限"</string>
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"此应用可使用您的个人<xliff:g id="NAME">%1$s</xliff:g>应用的权限，例如对位置信息、存储空间或通讯录的访问权限。"</string>
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"此应用可使用您的个人“<xliff:g id="NAME">%1$s</xliff:g>”应用的权限，例如对位置信息、存储空间或通讯录的访问权限。"</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"未关联任何应用"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
       <item quantity="other">已关联 <xliff:g id="COUNT_1">%d</xliff:g> 个应用</item>
       <item quantity="one">已关联 <xliff:g id="COUNT_0">%d</xliff:g> 个应用</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"需要在工作资料中安装<xliff:g id="NAME">%1$s</xliff:g>应用，才能关联这些应用"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"需要在个人资料中安装<xliff:g id="NAME">%1$s</xliff:g>应用，才能关联这些应用"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"需要在工作资料中安装“<xliff:g id="NAME">%1$s</xliff:g>”应用，才能关联这些应用"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"需要在个人资料中安装“<xliff:g id="NAME">%1$s</xliff:g>”应用，才能关联这些应用"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"点按即可获取应用"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"“勿扰”权限"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"允许勿扰模式"</string>
@@ -3846,14 +3848,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"输入管理员 PIN 码"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"开启"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"关闭"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如果您想安全地与他人共用您的设备，请尝试改用访客个人资料。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定应用后：\n\n•		该应用可访问您的个人数据\n		（例如通讯录和电子邮件内容）\n•		已固定的应用可打开其他应用\n\n只针对您信任的人使用固定应用功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定屏幕前要求绘制解锁图案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定屏幕前要求输入 PIN 码"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
@@ -4212,9 +4210,9 @@
     <string name="condition_device_muted_summary" msgid="3772178424510397327">"通话和通知"</string>
     <string name="condition_device_vibrate_title" msgid="9058943409545158583">"仅振动"</string>
     <string name="condition_device_vibrate_summary" msgid="7537724181691903202">"通话和通知"</string>
-    <string name="night_display_suggestion_title" msgid="5418911386429667704">"设置“夜间模式”时间安排"</string>
+    <string name="night_display_suggestion_title" msgid="5418911386429667704">"设置“护眼模式”时间表"</string>
     <string name="night_display_suggestion_summary" msgid="4218017907425509769">"每晚自动调节屏幕色调"</string>
-    <string name="condition_night_display_title" msgid="1072880897812554421">"“夜间模式”已开启"</string>
+    <string name="condition_night_display_title" msgid="1072880897812554421">"“护眼模式”已开启"</string>
     <string name="condition_night_display_summary" msgid="3278349775875166984">"已将屏幕调为琥珀色"</string>
     <string name="condition_grayscale_title" msgid="9029271080007984542">"灰度模式"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"仅以灰色显示"</string>
@@ -4792,7 +4790,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"连接到<xliff:g id="CARRIER">%1$s</xliff:g>时无法使用"</string>
     <string name="see_more" msgid="7499355691042812723">"查看更多"</string>
     <string name="see_less" msgid="2642392725363552793">"隐藏部分"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"要与<xliff:g id="APPNAME">%1$s</xliff:g>搭配使用的设备"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到设备。请确保设备已开启并可连接到网络。"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"重试"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"出了点问题。该应用已取消选择设备的请求。"</string>
@@ -4817,6 +4818,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"在合成器级别启用窗口模糊效果。需要重新启动设备。"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"隐私权"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"权限、帐号活动、个人数据"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"移除"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保留"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除这项建议吗？"</string>

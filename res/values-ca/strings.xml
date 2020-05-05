@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Desconnecta"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"No tens permís per canviar la configuració del Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincula un dispositiu nou"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> serà visible per a dispositius propers mentre la configuració del Bluetooth estigui oberta."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Adreça Bluetooth del telèfon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Adreça Bluetooth de la tauleta: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -96,10 +98,8 @@
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Toca per vincular amb el dispositiu <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Fitxers rebuts"</string>
     <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Fitxers rebuts per Bluetooth"</string>
-    <!-- no translation found for bluetooth_devices_card_off_title (1320149821945129127) -->
-    <skip />
-    <!-- no translation found for bluetooth_devices_card_off_summary (2276527382891105858) -->
-    <skip />
+    <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"El Bluetooth està desactivat"</string>
+    <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Toca per activar-lo"</string>
     <string name="device_picker" msgid="2427027896389445414">"Tria un dispositiu Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol activar el Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> vol desactivar el Bluetooth"</string>
@@ -3554,13 +3554,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permet interrupcions"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permet que l\'aplicació emeti un so, vibri o mostri notificacions emergents a la pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritat"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Es mostra com a bombolla a la part superior de la conversa."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> no admet opcions de configuració específiques de converses."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"A l\'àrea desplegable, replega les notificacions en una sola línia"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"T\'ajuda a concentrar-te sense so ni vibració"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Atrau la teva atenció amb so i vibració"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quan el dispositiu estigui desbloquejat, mostra les notificacions en forma de bàner a la part superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Totes les notificacions de: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificacions adaptatives"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notificacions al dia</item>
@@ -4640,8 +4643,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permet que l\'aplicació controli la Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permet que aquesta aplicació activi o desactivi la Wi-Fi, cerqui xarxes Wi-Fi, s\'hi connecti, n\'afegeixi o en suprimeixi, o que iniciï un punt d\'accés Wi-Fi només local"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reprodueix contingut multimèdia a"</string>
-    <!-- no translation found for media_output_label_title (1070976175129103096) -->
-    <skip />
+    <string name="media_output_label_title" msgid="1070976175129103096">"Reprodueix <xliff:g id="LABEL">%s</xliff:g> a"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Aquest dispositiu"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telèfon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tauleta"</string>
@@ -4795,7 +4797,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No està disponible quan està connectat a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Mostra\'n més"</string>
     <string name="see_less" msgid="2642392725363552793">"Mostra\'n menys"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Dispositiu per fer servir amb <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No s\'ha trobat cap dispositiu. Comprova que els dispositius estiguin activats i disponibles per connectar-s\'hi."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Torna-ho a provar"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"S\'ha produït un error. L\'aplicació ha cancel·lat la sol·licitud per seleccionar un dispositiu."</string>
@@ -4820,6 +4825,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Activa el desenfocament de finestres al nivell de compositor. Cal reiniciar el dispositiu."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privadesa"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, activitat del compte, dades personals"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Suprimeix"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Conserva"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Vols suprimir aquest suggeriment?"</string>

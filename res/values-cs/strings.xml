@@ -84,6 +84,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Odpojit"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Nemáte oprávnění měnit nastavení Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Spárovat nové zařízení"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Při zapnutém připojení Bluetooth je zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> viditelné pro zařízení v okolí."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Adresa Bluetooth telefonu: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Adresa Bluetooth tabletu: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1261,10 +1263,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Zapnout do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Vypnout do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Noční režim teď není zapnutý"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Poloha zařízení je potřeba k určení úsvitu a soumraku."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Nastavení polohy"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Zapnout"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Vypnout"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Zapnout do úsvitu"</string>
@@ -3316,8 +3316,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"jasné, RGB, sRGB, barva, přirozené, standardní"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"teplota barev, D65, D73, bílá, žlutá, modrá, teplé, studené"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"odemknutí přejetím prstem, heslo, gesto, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"připnutí obrazovky"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"pracovní výzva, práce, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"pracovní profil, spravovaný profil, sjednotit, sjednocení, práce, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gesta"</string>
@@ -3644,13 +3643,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Povolit vyrušení"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Umožněte aplikacím vydávat zvuky, vibrovat nebo zobrazovat oznámení na obrazovce"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorita"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Zobrazuje se v horní části sekce konverzace a má podobu bubliny."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> nepodporuje specifická nastavení pro konverzaci."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
+    <string name="convo_not_supported_summary" msgid="1794355603342685230">"Aplikace <xliff:g id="APP_NAME">%1$s</xliff:g> nepodporuje nastavení specifická pro konverzaci."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"V rozbalovacím panelu sbalit oznámení na jeden řádek"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Pomáhá vám soustředit se vypnutím zvuku a vibrací"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Upozorňuje vás pomocí zvuku a vibrací"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Když je zařízení odemčené, zobrazovat oznámení jako banner v horní části obrazovky"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Všechna oznámení aplikace <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptivní oznámení"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="few">~<xliff:g id="NUMBER_1">%d</xliff:g> oznámení za den</item>
@@ -3716,10 +3718,10 @@
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Tato aplikace může používat oprávnění osobní aplikace <xliff:g id="NAME">%1$s</xliff:g>, jako je přístup k poloze, úložišti nebo kontaktům."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Nejsou propojeny žádné aplikace"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="few">Propojeny jsou <xliff:g id="COUNT_1">%d</xliff:g> aplikace</item>
-      <item quantity="many">Propojeno je <xliff:g id="COUNT_1">%d</xliff:g> aplikace</item>
-      <item quantity="other">Propojeno je <xliff:g id="COUNT_1">%d</xliff:g> aplikací</item>
-      <item quantity="one">Propojena je <xliff:g id="COUNT_0">%d</xliff:g> aplikace</item>
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g>  propojené aplikace</item>
+      <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> propojené aplikace</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> propojených aplikací</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> propojená aplikace</item>
     </plurals>
     <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Chcete-li tyto aplikace propojit, nainstalujte pracovní aplikaci <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Chcete-li tyto aplikace propojit, nainstalujte osobní aplikaci <xliff:g id="NAME">%1$s</xliff:g>"</string>
@@ -3966,14 +3968,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Zadejte PIN administrátora"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Zapnuto"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Vypnuto"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Připnutí aplikace"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"Připnutí aplikace vám umožňuje nechat aktuální obrazovku zobrazenou, dokud ji neodepnete. Tuto funkci lze použít, například když chcete nechat důvěryhodného přítele hrát konkrétní hru. \n\nKdyž je aplikace připnutá, může otevírat další aplikace a mít přístup k soukromým datům. \n\nChcete-li s někým bezpečně sdílet zařízení, zkuste namísto toho použít profil hosta. \n\nPoužití připnutí aplikace: 	\n1.	Zapněte připnutí aplikace 	\n2.	Otevřete Přehled 	\n3.	Klepněte na ikonu aplikace v horní části obrazovky a potom na Připnout"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Když je aplikace připnutá: \n\n•	 Může mít přístup k soukromým datům \n		(například kontaktům a obsahu e-mailů) \n•	 Připnutá aplikace může otevírat další aplikace \n\nPřipnutí aplikace používejte pouze s lidmi, kterým důvěřujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Před uvolněním požádat o bezpečnostní gesto"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Před uvolněním požádat o PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Před uvolněním požádat o heslo"</string>
@@ -4966,7 +4964,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Při připojení k operátorovi <xliff:g id="CARRIER">%1$s</xliff:g> nedostupné"</string>
     <string name="see_more" msgid="7499355691042812723">"Zobrazit další"</string>
     <string name="see_less" msgid="2642392725363552793">"Zobrazit méně"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Zařízení, které chcete používat s aplikací <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Nebyla nalezena žádná zařízení. Zajistěte, aby zařízení byla zapnutá a dostupná k připojení."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Zkusit znovu"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Něco se stalo. Aplikace zrušila požadavek na výběr zařízení."</string>
@@ -4991,6 +4992,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Povoluje rozmazávání oken na úrovni kompozitoru. Vyžaduje restart zařízení."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Ochrana soukromí"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Oprávnění, aktivita na účtu, osobní údaje"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Odstranit"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Ponechat"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Odstranit tento návrh?"</string>
@@ -5059,7 +5064,7 @@
     <string name="work_policy_privacy_settings" msgid="2702644843505242596">"Informace o vašich pracovních zásadách"</string>
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Nastavení spravováno administrátorem IT"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
-    <string name="bug_report_handler_title" msgid="713439959113250125">"Obslužný nástroj pro zprávy o chybách"</string>
+    <string name="bug_report_handler_title" msgid="713439959113250125">"Nástroj pro zprávy o chybách"</string>
     <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Určuje, která aplikace na vašem zařízení zpracovává zkratku k odeslání zprávy o chybě."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Osobní"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Práce"</string>

@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"연결 해제"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"블루투스 설정을 변경할 권한이 없습니다."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"새 기기와 페어링"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"블루투스 설정이 열려 있는 동안 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>이(가) 주변의 기기에 표시됩니다."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"휴대전화 블루투스 주소: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"태블릿 블루투스 주소: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -585,8 +587,8 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 새 PIN 또는 비밀번호를 사용할 것을 제안합니다. 제안을 무시하면 앱이 제대로 작동하지 않을 수 있습니다."</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 새 패턴, PIN 또는 비밀번호를 사용할 것을 제안합니다. 제안을 무시하면 앱이 제대로 작동하지 않을 수 있습니다."</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 새 잠금 화면을 사용할 것을 제안합니다."</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"다시 시도하세요. <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>회 중 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>번째 시도입니다."</string>
-    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"데이터가 삭제됨"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"다시 시도하세요. 입력 횟수: <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>/<xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>회"</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"데이터 삭제 위험"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"다음번 시도에서 잘못된 패턴을 입력하면 이 기기의 데이터가 삭제됩니다."</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"다음번 시도에서 잘못된 PIN을 입력하면 이 기기의 데이터가 삭제됩니다."</string>
     <string name="lock_last_password_attempt_before_wipe_device" msgid="985126164175708507">"다음번 시도에서 잘못된 비밀번호를 입력하면 이 기기의 데이터가 삭제됩니다."</string>
@@ -1221,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g>까지 켜기"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g>까지 끄기"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"현재 야간 조명 사용 안함"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"일몰 및 일출 시간을 확인하려면 기기 위치 정보가 필요합니다."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"위치 설정"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"지금 켜기"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"지금 끄기"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"일출 시간까지 켜기"</string>
@@ -3230,8 +3230,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"생동감, RGB, sRGB, 색상, 내츄럴, 표준"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"색상, 온도, D65, D73, 흰색, 노란색, 파란색, 따뜻한, 차가운"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"슬라이드하여 비밀번호, 패턴, PIN을 잠금 해제"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"화면 고정"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"직장 보안 확인, 직장, 프로필"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"직장 프로필, 관리된 프로필, 통합, 통합형, 직장, 프로필"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"동작"</string>
@@ -3552,13 +3551,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"우선순위"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"대화 섹션 맨 위에 대화창으로 표시"</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서는 대화 관련 설정을 지원하지 않습니다."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"소리나 진동 없이 집중할 수 있도록 도와줍니다"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"소리나 진동으로 알립니다."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"모든 ‘<xliff:g id="APP_NAME">%1$s</xliff:g>’ 알림"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"적응형 알림"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">하루 최대 <xliff:g id="NUMBER_1">%d</xliff:g>개</item>
@@ -3846,14 +3848,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"관리자 PIN 입력"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"사용"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"사용 안함"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"앱 고정"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"앱을 고정하여 고정 해제할 때까지 계속 화면에 표시되도록 할 수 있습니다. 예를 들어 신뢰할 수 있는 친구가 특정 게임을 할 수 있도록 허용할 때 이 기능을 사용할 수 있습니다. \n\n고정된 앱을 통해 다른 앱이 열릴 수 있으며 개인 데이터가 표시될 수 있습니다. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"앱을 고정하여 고정 해제할 때까지 계속 화면에 표시되도록 할 수 있습니다. 예를 들어 신뢰할 수 있는 친구가 특정 게임을 할 수 있도록 허용할 때 이 기능을 사용할 수 있습니다. \n\n고정된 앱을 통해 다른 앱이 열릴 수 있으며 개인 데이터가 표시될 수 있습니다. \n\n기기를 다른 사람과 안전하게 공유하고 싶다면 게스트 프로필을 대신 사용해 보세요. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"앱이 고정되었을 때 다음 사항이 적용됩니다. \n\n•	 개인 데이터가 표시될 수 있습니다.\n		(연락처, 이메일 내용 등) \n•	 고정된 앱을 통해 다른 앱이 열릴 수 있습니다. \n\n신뢰할 수 있는 상대에게만 앱 고정을 사용하세요."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"고정 해제 이전에 잠금해제 패턴 요청"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"고정 해제 이전에 PIN 요청"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"고정 해제 이전에 비밀번호 요청"</string>
@@ -4792,7 +4790,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g>에 연결된 경우 사용할 수 없음"</string>
     <string name="see_more" msgid="7499355691042812723">"더보기"</string>
     <string name="see_less" msgid="2642392725363552793">"간략히 보기"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g>에서 사용할 기기"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"기기가 없습니다. 기기가 켜져 있으며 연결 가능한지 확인하세요."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"다시 시도"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"문제가 발생했습니다. 애플리케이션에서 기기 선택 요청을 취소했습니다."</string>
@@ -4817,6 +4818,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"컴포지터 수준에서 화면 흐리게 처리를 사용합니다. 기기를 재부팅해야 합니다."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"개인정보 보호"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"권한, 계정 활동, 개인 정보"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"삭제"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"삭제 안함"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"추천 항목을 삭제하시겠습니까?"</string>
