@@ -27,6 +27,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageStats;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.session.MediaController;
@@ -55,9 +58,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +75,7 @@ public class MediaOutputIndicatorSliceTest {
     private static final String TEST_DEVICE_1_NAME = "test_device_1_name";
     private static final String TEST_DEVICE_2_NAME = "test_device_2_name";
     private static final String TEST_PACKAGE_NAME = "com.test";
+    private static final String TEST_APPLICATION_LABEL = "APP Test Label";
 
     private static MediaOutputIndicatorWorker sMediaOutputIndicatorWorker;
 
@@ -90,6 +96,10 @@ public class MediaOutputIndicatorSliceTest {
     private MediaOutputIndicatorSlice mMediaOutputIndicatorSlice;
     private AudioManager mAudioManager;
     private MediaSession.Token mToken;
+    private ShadowPackageManager mShadowPackageManager;
+    private ApplicationInfo mAppInfo;
+    private PackageInfo mPackageInfo;
+    private PackageStats mPackageStats;
 
     @Before
     public void setUp() throws Exception {
@@ -118,8 +128,11 @@ public class MediaOutputIndicatorSliceTest {
 
     @Test
     public void getSlice_withConnectedDevice_verifyMetadata() {
+        initPackage();
+        mShadowPackageManager.addPackage(mPackageInfo, mPackageStats);
         mDevices.add(mDevice1);
         when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
+        when(sMediaOutputIndicatorWorker.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
         doReturn(mDevice1).when(sMediaOutputIndicatorWorker).getCurrentConnectedMediaDevice();
@@ -128,7 +141,9 @@ public class MediaOutputIndicatorSliceTest {
         final Slice mediaSlice = mMediaOutputIndicatorSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, mediaSlice);
 
-        assertThat(metadata.getTitle()).isEqualTo(mContext.getText(R.string.media_output_title));
+        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(
+                R.string.media_output_label_title, Utils.getApplicationLabel(mContext,
+                        TEST_PACKAGE_NAME)));
         assertThat(metadata.getSubtitle()).isEqualTo(TEST_DEVICE_1_NAME);
         assertThat(metadata.isErrorSlice()).isFalse();
     }
@@ -239,6 +254,18 @@ public class MediaOutputIndicatorSliceTest {
                 .getActiveLocalMediaController();
 
         assertThat(mMediaOutputIndicatorSlice.isVisible()).isFalse();
+    }
+
+    private void initPackage() {
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mAppInfo = new ApplicationInfo();
+        mAppInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        mAppInfo.packageName = TEST_PACKAGE_NAME;
+        mAppInfo.name = TEST_APPLICATION_LABEL;
+        mPackageInfo = new PackageInfo();
+        mPackageInfo.packageName = TEST_PACKAGE_NAME;
+        mPackageInfo.applicationInfo = mAppInfo;
+        mPackageStats = new PackageStats(TEST_PACKAGE_NAME);
     }
 
     @Implements(SliceBackgroundWorker.class)
