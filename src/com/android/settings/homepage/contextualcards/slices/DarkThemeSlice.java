@@ -16,17 +16,14 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import static android.provider.Settings.Global.LOW_POWER_MODE;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static androidx.slice.builders.ListBuilder.ICON_IMAGE;
 
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.app.UiModeManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
@@ -36,7 +33,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -51,8 +47,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
-
-import java.io.IOException;
 
 public class DarkThemeSlice implements CustomSliceable {
     private static final String TAG = "DarkThemeSlice";
@@ -97,11 +91,11 @@ public class DarkThemeSlice implements CustomSliceable {
         // Next time the Settings displays on screen again this card should no longer persist.
         if (DEBUG) {
             Log.d(TAG,
-                    "!sKeepSliceShow = " + !sKeepSliceShow + " !sSliceClicked = "
-                            + !sSliceClicked + " !isAvailable = " + !isAvailable(mContext));
+                    "sKeepSliceShow = " + sKeepSliceShow + ", sSliceClicked = " + sSliceClicked
+                            + ", isAvailable = " + isAvailable(mContext));
         }
-        if (mPowerManager.isPowerSaveMode() || ((!sKeepSliceShow || !sSliceClicked)
-                && !isAvailable(mContext))) {
+        if (mPowerManager.isPowerSaveMode()
+                || ((!sKeepSliceShow || !sSliceClicked) && !isAvailable(mContext))) {
             return new ListBuilder(mContext, CustomSliceRegistry.DARK_THEME_SLICE_URI,
                     ListBuilder.INFINITY)
                     .setIsError(true)
@@ -169,7 +163,7 @@ public class DarkThemeSlice implements CustomSliceable {
         // checking the current battery level
         final BatteryManager batteryManager = context.getSystemService(BatteryManager.class);
         final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        Log.d(TAG, "battery level=" + level);
+        Log.d(TAG, "battery level = " + level);
         return level <= BATTERY_LEVEL_THRESHOLD;
     }
 
@@ -188,7 +182,7 @@ public class DarkThemeSlice implements CustomSliceable {
     private boolean isNightModeScheduled() {
         final int mode = mUiModeManager.getNightMode();
         if (DEBUG) {
-            Log.d(TAG, "night mode : " + mode);
+            Log.d(TAG, "night mode = " + mode);
         }
         // Turn on from sunset to sunrise or turn on at custom time
         if (mode == UiModeManager.MODE_NIGHT_AUTO || mode == UiModeManager.MODE_NIGHT_CUSTOM) {
@@ -208,12 +202,10 @@ public class DarkThemeSlice implements CustomSliceable {
                         }
                     }
                 };
-        private final HomeKeyReceiver mHomeKeyReceiver;
 
         public DarkThemeWorker(Context context, Uri uri) {
             super(context, uri);
             mContext = context;
-            mHomeKeyReceiver = new HomeKeyReceiver();
         }
 
         @Override
@@ -221,55 +213,15 @@ public class DarkThemeSlice implements CustomSliceable {
             mContext.getContentResolver().registerContentObserver(
                     Settings.Global.getUriFor(LOW_POWER_MODE), false /* notifyForDescendants */,
                     mContentObserver);
-            final IntentFilter intentFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-            mContext.registerReceiver(mHomeKeyReceiver, intentFilter);
         }
 
         @Override
         protected void onSliceUnpinned() {
             mContext.getContentResolver().unregisterContentObserver(mContentObserver);
-            mContext.unregisterReceiver(mHomeKeyReceiver);
         }
 
         @Override
-        public void close() throws IOException {
-        }
-    }
-
-    /**
-     * A receiver for Home key and recent app key.
-     */
-    public static class HomeKeyReceiver extends BroadcastReceiver {
-        private static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
-        private static final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
-        private static final String SYSTEM_DIALOG_REASON_KEY = "reason";
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (TextUtils.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS, intent.getAction())) {
-                if (TextUtils.equals(getTargetKey(context),
-                        intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY))) {
-                    if (DEBUG) {
-                        Log.d(TAG, "HomeKeyReceiver : target key = " + getTargetKey(context));
-                    }
-                    if (DarkThemeSlice.isDarkThemeMode(context)) {
-                        FeatureFactory.getFactory(
-                                context).getSlicesFeatureProvider().newUiSession();
-                    }
-                }
-            }
-        }
-
-        private String getTargetKey(Context context) {
-            if (isGestureNavigationEnabled(context)) {
-                return SYSTEM_DIALOG_REASON_RECENT_APPS;
-            }
-            return SYSTEM_DIALOG_REASON_HOME_KEY;
-        }
-
-        private boolean isGestureNavigationEnabled(Context context) {
-            return NAV_BAR_MODE_GESTURAL == context.getResources().getInteger(
-                    com.android.internal.R.integer.config_navBarInteractionMode);
+        public void close() {
         }
     }
 }
