@@ -90,6 +90,11 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
         return buildPreferenceControllers(context, app, this);
     }
 
+    @Override
+    protected boolean isParalleledControllers() {
+        return true;
+    }
+
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
