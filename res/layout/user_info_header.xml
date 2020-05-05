@@ -15,6 +15,7 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -45,8 +46,7 @@
                 android:layout_gravity="center"
                 android:minWidth="48dp"
                 android:scaleType="centerInside"
-                android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"
-                 />
+                android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"/>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -60,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                tools:text="Richard"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"/>
@@ -88,6 +89,40 @@
                 android:layout_gravity="center"
                 android:background="?android:attr/selectableItemBackground" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/switch_pref"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:background="?android:attr/selectableItemBackground" >
+
+        <ImageView
+            android:id="@+id/switchIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_swap"
+            android:minWidth="48dp"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="@*android:dimen/preference_item_padding_inner"/>
+
+        <TextView
+            android:id="@+id/switchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            tools:text="Switch to Richard"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"/>
+
+    </LinearLayout>
+
     <View android:layout_width="match_parent"
           android:layout_height="2dp"
           android:background="@color/divider_color" />
