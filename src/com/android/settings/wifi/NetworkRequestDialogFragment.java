@@ -86,6 +86,8 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
         final TextView title = customTitle.findViewById(R.id.network_request_title_text);
         title.setText(getTitle());
+        final TextView summary = customTitle.findViewById(R.id.network_request_summary_text);
+        summary.setText(getSummary());
 
         final ProgressBar progressBar = customTitle.findViewById(
                 R.id.network_request_title_progress);
