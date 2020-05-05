@@ -23,10 +23,13 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+
 import java.util.List;
 
 /**
@@ -39,16 +42,7 @@ abstract public class NetworkRequestDialogBaseFragment extends InstrumentedDialo
     final static String EXTRA_APP_NAME = "com.android.settings.wifi.extra.APP_NAME";
 
     NetworkRequestDialogActivity mActivity = null;
-
-    protected String getTitle() {
-        final Intent intent = getActivity().getIntent();
-        String appName = "";
-        if (intent != null) {
-            appName = intent.getStringExtra(EXTRA_APP_NAME);
-        }
-
-        return getString(R.string.network_connection_request_dialog_title, appName);
-    }
+    private String mAppName = "";
 
     @Override
     public int getMetricsCategory() {
@@ -60,6 +54,11 @@ abstract public class NetworkRequestDialogBaseFragment extends InstrumentedDialo
         super.onAttach(context);
         if (context instanceof NetworkRequestDialogActivity) {
             mActivity = (NetworkRequestDialogActivity) context;
+        }
+
+        final Intent intent = getActivity().getIntent();
+        if (intent != null) {
+            mAppName = intent.getStringExtra(EXTRA_APP_NAME);
         }
     }
 
@@ -76,6 +75,14 @@ abstract public class NetworkRequestDialogBaseFragment extends InstrumentedDialo
         if (mActivity != null) {
             mActivity.onCancel();
         }
+    }
+
+    protected String getTitle() {
+        return getString(R.string.network_connection_request_dialog_title);
+    }
+
+    protected String getSummary() {
+        return getString(R.string.network_connection_request_dialog_summary, mAppName);
     }
 
     protected void onUserSelectionCallbackRegistration(
