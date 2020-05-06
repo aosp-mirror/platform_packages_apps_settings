@@ -149,11 +149,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
 
         if (holder.getItemViewType() != VIEW_TYPE_STICKY) {
             initDismissalActions(holder, card);
-        }
 
-        if (card.isPendingDismiss()) {
-            showDismissalView(holder);
-            mFlippedCardSet.add(holder);
+            if (card.isPendingDismiss()) {
+                showDismissalView(holder);
+                mFlippedCardSet.add(holder);
+            }
         }
     }
 
