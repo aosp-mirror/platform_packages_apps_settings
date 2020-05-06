@@ -47,8 +47,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * This is the controller for a data usage header that retrieves carrier data from the new
@@ -98,6 +100,8 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
     private long mCycleEnd;
 
     private Intent mManageSubscriptionIntent;
+
+    private Future<Long> mHistoricalUsageLevel;
 
     public DataUsageSummaryPreferenceController(Activity activity,
             Lifecycle lifecycle, PreferenceFragmentCompat fragment, int subscriptionId) {
@@ -206,13 +210,13 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             updateConfiguration(mContext, mSubId, subInfo);
         }
 
+        mHistoricalUsageLevel = ThreadUtils.postOnBackgroundThread(() ->
+                mDataUsageController.getHistoricalUsageLevel(mDefaultTemplate));
+
         final DataUsageController.DataUsageInfo info =
                 mDataUsageController.getDataUsageInfo(mDefaultTemplate);
 
         long usageLevel = info.usageLevel;
-        if (usageLevel <= 0L) {
-            usageLevel = mDataUsageController.getHistoricalUsageLevel(mDefaultTemplate);
-        }
 
         if (subInfo != null) {
             mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(mDefaultTemplate));
@@ -222,7 +226,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             summaryPreference.setWifiMode(/* isWifiMode */ true, /* usagePeriod */
                     info.period, /* isSingleWifi */ false);
             summaryPreference.setLimitInfo(null);
-            summaryPreference.setUsageNumbers(usageLevel,
+            summaryPreference.setUsageNumbers(displayUsageLevel(usageLevel),
                     /* dataPlanSize */ -1L,
                     /* hasMobileData */ true);
             summaryPreference.setChartEnabled(false);
@@ -235,11 +239,6 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         }
 
         refreshDataplanInfo(info, subInfo);
-        if ((mDataplanUse <= 0L) && (mSnapshotTime < 0)) {
-            Log.d(TAG, "Display data usage from history");
-            mDataplanUse = usageLevel;
-            mSnapshotTime = -1L;
-        }
 
         if (info.warningLevel > 0 && info.limitLevel > 0) {
             summaryPreference.setLimitInfo(TextUtils.expandTemplate(
@@ -258,6 +257,12 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             summaryPreference.setLimitInfo(null);
         }
 
+        if ((mDataplanUse <= 0L) && (mSnapshotTime < 0)) {
+            Log.d(TAG, "Display data usage from history");
+            mDataplanUse = displayUsageLevel(usageLevel);
+            mSnapshotTime = -1L;
+        }
+
         summaryPreference.setUsageNumbers(mDataplanUse, mDataplanSize, mHasMobileData);
 
         if (mDataBarSize <= 0) {
@@ -270,6 +275,17 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         }
         summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
                 mDataplanCount, mManageSubscriptionIntent);
+    }
+
+    private long displayUsageLevel(long usageLevel) {
+        if (usageLevel > 0) {
+            return usageLevel;
+        }
+        try {
+            usageLevel = mHistoricalUsageLevel.get();
+        } catch (Exception ex) {
+        }
+        return usageLevel;
     }
 
     // TODO(b/70950124) add test for this method once the robolectric shadow run script is

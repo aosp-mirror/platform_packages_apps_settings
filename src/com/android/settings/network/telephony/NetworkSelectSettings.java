@@ -217,16 +217,13 @@ public class NetworkSelectSettings extends DashboardFragment {
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
                     final boolean isSucceed = (boolean) msg.obj;
-                    if (isSucceed) {
-                        // Don't enable screen here. Wait until result of network re-scan.
-                        startNetworkQuery();
-                    } else {
-                        stopNetworkQuery();
-                        setProgressBarVisible(false);
-                        getPreferenceScreen().setEnabled(true);
-                        // For failure case, only update the summary of selected item.
-                        mSelectedPreference.setSummary(R.string.network_could_not_connect);
-                    }
+                    stopNetworkQuery();
+                    setProgressBarVisible(false);
+                    getPreferenceScreen().setEnabled(true);
+
+                    mSelectedPreference.setSummary(isSucceed
+                            ? R.string.network_connected
+                            : R.string.network_could_not_connect);
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     final List<CellInfo> results = (List<CellInfo>) msg.obj;
@@ -418,6 +415,7 @@ public class NetworkSelectSettings extends DashboardFragment {
                     // (it would be quite confusing why the connected network has no signal)
                     pref.setIcon(SignalStrength.NUM_SIGNAL_STRENGTH_BINS - 1);
                     mPreferenceCategory.addPreference(pref);
+                    break;
                 }
             }
         }

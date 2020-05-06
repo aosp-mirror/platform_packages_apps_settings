@@ -38,7 +38,7 @@ public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater
         implements Preference.OnPreferenceClickListener {
 
     private static final String TAG = "SavedBluetoothDeviceUpdater";
-    private static final boolean DBG = false;
+    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     private static final String PREF_KEY = "saved_bt";
 
