@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Desconectar"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"No tienes permiso para cambiar la configuración de Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sincronizar dispositivo nuevo"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Los dispositivos cercanos podrán ver tu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> si está abierta la configuración de Bluetooth."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Dirección Bluetooth del teléfono: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Dirección Bluetooth de la tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1221,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Desactivar hasta la(s) <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Luz nocturna no activada ahora"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Se requiere la ubicación del dispositivo para determinar los horarios del amanecer y el atardecer."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Configuración de la ubicación"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activar ahora"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Desactivar ahora"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activar hasta el amanecer"</string>
@@ -3230,8 +3230,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"vibrante, RGB, sRGB, color, natural, estándar"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"color, temperatura, D65, D73, blanco, amarillo, azul, cálido, frío"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"desliza para desbloquear, contraseña, patrón, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"fijar pantalla"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"desafíos de trabajo, trabajo, perfil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de trabajo, perfil administrado, unificar, unificación, trabajo, perfil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestos"</string>
@@ -3552,13 +3551,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupciones"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que la app emita sonidos, vibre y muestre notificaciones en pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridad"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Se muestra en la parte superior de la sección de conversaciones y aparece en formato de burbuja."</string>
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
+    <skip />
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> no admite opciones de configuración específicas de conversaciones."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la cortina desplegable, contraer las notificaciones en una línea"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Te ayuda a concentrarte sin sonar ni vibrar"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Capta tu atención con sonido o vibración"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, mostrar notificaciones como banners en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptables"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Aproximadamente <xliff:g id="NUMBER_1">%d</xliff:g> notificaciones por día</item>
@@ -3844,14 +3846,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Ingresa el PIN de administrador"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Fijar apps"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico. \n\nSi fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nPara fijar una app, sigue estos pasos: 	\n1.	Activa fijar apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
+    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico. \n\nSi fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba a usar un perfil de invitado. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa fijar apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Cuando fijas la app, ocurre lo siguiente: \n\n•		Esta podrá acceder a datos personales \n		(como contactos y contenido de los correos electrónicos). \n•	 Es posible que las apps fijadas abran otras apps. \n\nUsa la función fijar apps solo con personas de confianza."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar desbloqueo para quitar fijación"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para quitar fijación"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicitar contraseña para quitar fijación"</string>
@@ -4636,8 +4634,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permitir que la app controle Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permite que esta app active o desactive la conexión Wi-Fi, busque y se conecte a redes Wi-Fi, agregue o quite redes, o inicie un hotspot de acceso local exclusivo."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reproducir contenido multimedia en"</string>
-    <!-- no translation found for media_output_label_title (1070976175129103096) -->
-    <skip />
+    <string name="media_output_label_title" msgid="1070976175129103096">"Reproducir <xliff:g id="LABEL">%s</xliff:g> en"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"este dispositivo"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Teléfono"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4791,7 +4788,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando estás conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Ver más"</string>
     <string name="see_less" msgid="2642392725363552793">"Ver menos"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Dispositivo para usar con <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No se encontraron dispositivos. Asegúrate de que los dispositivos estén encendidos y puedan conectarse."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Volver a intentarlo"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Se produjo un error. La aplicación canceló la solicitud para elegir un dispositivo."</string>
@@ -4816,6 +4816,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Habilita el difuminado de ventanas en el nivel del compositor. Debes reiniciar el dispositivo."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidad"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, actividad de la cuenta, datos personales"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Quitar"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Guardar"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"¿Quieres quitar esta sugerencia?"</string>

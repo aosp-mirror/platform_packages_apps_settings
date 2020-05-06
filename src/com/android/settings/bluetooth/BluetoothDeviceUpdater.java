@@ -52,7 +52,7 @@ import java.util.Map;
 public abstract class BluetoothDeviceUpdater implements BluetoothCallback,
         LocalBluetoothProfileManager.ServiceListener {
     private static final String TAG = "BluetoothDeviceUpdater";
-    private static final boolean DBG = false;
+    private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     protected final MetricsFeatureProvider mMetricsFeatureProvider;
     protected final DevicePreferenceCallback mDevicePreferenceCallback;

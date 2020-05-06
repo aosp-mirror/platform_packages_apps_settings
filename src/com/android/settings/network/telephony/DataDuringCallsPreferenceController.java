@@ -49,10 +49,6 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     public DataDuringCallsPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
-        mChangeListener = new SubscriptionsChangeListener(mContext, this);
-        mMobileDataContentObserver = new MobileDataContentObserver(
-                new Handler(Looper.getMainLooper()));
-        mMobileDataContentObserver.setOnMobileDataChangedListener(()->refreshPreference());
     }
 
     public void init(Lifecycle lifecycle, int subId) {
@@ -63,14 +59,26 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
 
     @OnLifecycleEvent(ON_RESUME)
     public void onResume() {
+        if (mChangeListener == null) {
+            mChangeListener = new SubscriptionsChangeListener(mContext, this);
+        }
         mChangeListener.start();
+        if (mMobileDataContentObserver == null) {
+            mMobileDataContentObserver = new MobileDataContentObserver(
+                    new Handler(Looper.getMainLooper()));
+            mMobileDataContentObserver.setOnMobileDataChangedListener(() -> refreshPreference());
+        }
         mMobileDataContentObserver.register(mContext, mSubId);
     }
 
     @OnLifecycleEvent(ON_PAUSE)
     public void onPause() {
-        mChangeListener.stop();
-        mMobileDataContentObserver.unRegister(mContext);
+        if (mChangeListener != null) {
+            mChangeListener.stop();
+        }
+        if (mMobileDataContentObserver != null) {
+            mMobileDataContentObserver.unRegister(mContext);
+        }
     }
 
     @Override
@@ -103,6 +111,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (preference == null) {
+            return;
+        }
         preference.setVisible(isAvailable());
     }
 

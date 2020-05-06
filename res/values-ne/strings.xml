@@ -82,6 +82,8 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"विच्छेद गर्नुहोस्"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"तपाईं सँग ब्लुटुथ सेटिङहरू परिवर्तन गर्न अनुमति छैन।"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नयाँ यन्त्रलाई जोडा बनाउनुहोस्"</string>
+    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"ब्लुटुथ सेटिङहरू खुला हुँदा <xliff:g id="DEVICE_NAME">%1$s</xliff:g> लाई नजिकैका उपकरणहरू देख्न सक्नेछन्।"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"फोनको ब्लुटुथ ठेगाना: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ट्याब्लेटको ब्लुटुथ ठेगाना: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -3552,14 +3554,16 @@
     <string name="allow_interruption" msgid="5237201780159482716">"अवरोधहरूहरूलाई अनुमति दिनुहोस्"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"अनुप्रयोगलाई बज्न, कम्पन गर्न र/वा स्क्रिनमा सूचनाहरू पप गर्न दिनुहोस्"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"प्राथमिकता"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"वार्तालापको खण्डको सिरानमा बबलका रूपमा देखा पर्छ।"</string>
-    <!-- no translation found for convo_not_supported_summary (1794355603342685230) -->
+    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
     <skip />
+    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> मा वार्तालापविशेषका लागि सेटिङ उपलब्ध छैन।"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"पुल डाउन सेडमा सूचनाहरूलाई एउटा पङ्क्तिमा सङ्क्षिप्त पार्नुहोस्"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"तपाईंलाई आवाज वा कम्पनविना ध्यान केन्द्रित गर्न मद्दत गर्छ।"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ध्वनि वा कम्पनमार्फत तपाईंको ध्यान आकर्षित गर्छ।"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"यन्त्र अनलक गरिएका बेला सूचना देखाउँदा स्क्रिनको सिरानमा ब्यानरका रूपमा देखाउनुहोस्"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" का सबै सूचनाहरू"</string>
+    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
+    <skip />
     <string name="default_notification_assistant" msgid="243718059890346442">"अनुकूल पार्न मिल्ने सूचनाहरू"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">प्रति दिन लगभग <xliff:g id="NUMBER_1">%d</xliff:g> सूचनाहरू</item>
@@ -3736,56 +3740,48 @@
       <item quantity="other">अन्य <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
       <item quantity="one">अन्य १</item>
     </plurals>
-    <!-- no translation found for zen_mode_starred_contacts_summary_none (6320777044373994482) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"कुनै पनि होइन"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"सन्देशहरू"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"सन्देशहरू"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"अवरोध गर्न सक्ने सन्देशहरू"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"अनुमति दिइएका सन्देशहरू आउँदा घन्टी बजोस् भन्नाका खातिर यन्त्रमा घन्टी बज्ने मोड सक्रिय गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ का आगम कलहरूलाई रोक लगाइएको छ। तपाईं आफ्ना साथीभाइ, परिवारजन वा अन्य सूचीमा भएका अन्य मान्छेहरूलाई आफूसँग सम्पर्क राख्न दिने गरी सेटिङहरू समायोजन गर्न सक्नुहुन्छ।"</string>
-    <!-- no translation found for zen_mode_all_messages_summary (3756267858343104554) -->
-    <skip />
-    <!-- no translation found for zen_mode_all_calls_summary (7337907849083824698) -->
-    <skip />
-    <!-- no translation found for zen_mode_contacts_count_none (7928563147160462589) -->
-    <skip />
-    <!-- no translation found for zen_mode_contacts_count (3434092344686708445) -->
+    <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"\'बाधा नपुर्‍याउनुहोस्\' मोडले कुनै पनि सन्देश रोकिरहेको छैन"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"\'बाधा नपुर्‍याउनुहोस्\' मोडले कुनै पनि आगमन कल रोकिरहेको छैन"</string>
+    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"कुनै पनि होइन"</string>
+    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
+      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> सम्पर्क ठेगानाहरू</item>
+      <item quantity="one">१ सम्पर्क ठेगाना</item>
+    </plurals>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"जोसुकै"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"सम्पर्क ठेगानाहरू"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"ताराङ्कित सम्पर्क ठेगानाहरू"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"ताराङ्कित सम्पर्क ठेगाना तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"सम्पर्क ठेगानामा भएका तथा बारम्बार कल गर्ने व्यक्तिका कलहरू"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"बारम्बार कल गर्ने व्यक्तिका कलहरू मात्र"</string>
-    <!-- no translation found for zen_mode_none_calls (2047166006414016327) -->
-    <skip />
-    <!-- no translation found for zen_mode_none_messages (1386626352943268342) -->
-    <skip />
+    <string name="zen_mode_none_calls" msgid="2047166006414016327">"कुनै पनि होइन"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"कुनै पनि होइन"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"अलार्महरू"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"टाइमर, अलार्म, सुरक्षा प्रणाली र अन्य एपहरू"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"अलार्महरू"</string>
-    <!-- no translation found for zen_mode_alarms_list_first (2780418316613576610) -->
-    <skip />
+    <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"अलार्महरू"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"मिडियाका आवाजहरू"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"भिडियो, गेम र अन्य मिडियाका आवाजहरू"</string>
     <string name="zen_mode_media_list" msgid="2006413476596092020">"मिडिया"</string>
-    <!-- no translation found for zen_mode_media_list_first (7824427062528618442) -->
-    <skip />
+    <string name="zen_mode_media_list_first" msgid="7824427062528618442">"मिडिया"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"छुवाइसम्बन्धी ध्वनि"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"किबोर्ड र अन्य बटनहरूबाट निस्कने आवाजहरू"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"टच गर्दा आउने आवाज"</string>
-    <!-- no translation found for zen_mode_system_list_first (8590078626001067855) -->
-    <skip />
+    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"टच गर्दा आउने आवाज"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"रिमान्डरहरू"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"कार्य र रिमाइन्डरहरूबाट"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"रिमाइन्डरहरू"</string>
-    <!-- no translation found for zen_mode_reminders_list_first (1130470396012190814) -->
-    <skip />
+    <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"रिमाइन्डरहरू"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"पात्रोका कार्यक्रमहरू"</string>
     <string name="zen_mode_events_summary" msgid="3241903481309766428">"पात्रोका आगामी कार्यक्रमहरूबाट"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"खेलहरू"</string>
-    <!-- no translation found for zen_mode_events_list_first (7425369082835214361) -->
-    <skip />
+    <string name="zen_mode_events_list_first" msgid="7425369082835214361">"कार्यक्रमहरू"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"अनुप्रयोगहरूलाई ओभरराइड गर्ने अनुमति दिनुहोस्"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"अवरोध गर्न सक्ने एपहरू"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"थप एपहरू चयन गर्नुहोस्"</string>
@@ -4801,7 +4797,10 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> मा जडान हुँदा उपलब्ध छैन"</string>
     <string name="see_more" msgid="7499355691042812723">"थप हेर्नुहोस्"</string>
     <string name="see_less" msgid="2642392725363552793">"कम हेर्नुहोस्"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> प्रयोग गरिने यन्त्र"</string>
+    <!-- no translation found for network_connection_request_dialog_title (1896186380874289434) -->
+    <skip />
+    <!-- no translation found for network_connection_request_dialog_summary (7693038309792726170) -->
+    <skip />
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"कुनै पनि यन्त्र फेला परेन। यन्त्रहरू सक्रिय हुनुका साथै जडान गर्नका लागि उपलब्ध भएको कुरा सुनिश्चित गर्नुहोस्।"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"फेरि प्रयास गर्नुहोस्"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"केही चिज गडबड भयो। यो अनुप्रयोगले कुनै यन्त्र छनौट गर्नेसम्बन्धी अनुरोध रद्द गरेको छ।"</string>
@@ -4826,6 +4825,10 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"कम्पोजिटर स्तरमा विन्डो अस्पष्ट पार्छ। यन्त्र पुनः बुट गर्नु पर्ने हुन्छ।"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"गोपनीयता"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"अनुमतिहरू, खाताको क्रियाकलाप, व्यक्तिगत डेटा"</string>
+    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
+    <skip />
+    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
+    <skip />
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"हटाउनुहोस्"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"राख्नुहोस्"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"यो सुझाव हटाउने हो?"</string>
