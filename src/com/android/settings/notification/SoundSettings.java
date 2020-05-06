@@ -76,7 +76,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
     private RingtonePreference mRequestPreference;
     private UpdatableListPreferenceDialogFragment mDialogFragment;
     private String mHfpOutputControllerKey;
-    private String mVibrationPreferencesKey = "vibration_preference_screen";
 
     @Override
     public int getMetricsCategory() {
@@ -128,10 +127,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
 
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
-        if (TextUtils.equals(mVibrationPreferencesKey, preference.getKey())) {
-            super.onDisplayPreferenceDialog(preference);
-            return;
-        }
         final int metricsCategory;
         if (mHfpOutputControllerKey.equals(preference.getKey())) {
             metricsCategory = SettingsEnums.DIALOG_SWITCH_HFP_DEVICES;
