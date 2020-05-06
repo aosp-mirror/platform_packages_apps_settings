@@ -387,11 +387,11 @@ public final class AccessibilityGestureNavigationTutorial {
     private static CharSequence getSoftwareTitle(Context context) {
         final boolean isGestureNavigationEnabled =
                 AccessibilityUtil.isGestureNavigateEnabled(context);
-        final boolean isTouchExploreEnabled = AccessibilityUtil.isTouchExploreEnabled(context);
+        final int resId = isGestureNavigationEnabled
+                ? R.string.accessibility_tutorial_dialog_title_gesture
+                : R.string.accessibility_tutorial_dialog_title_button;
 
-        return (isGestureNavigationEnabled || isTouchExploreEnabled)
-                ? context.getText(R.string.accessibility_tutorial_dialog_title_gesture)
-                : context.getText(R.string.accessibility_tutorial_dialog_title_button);
+        return context.getText(resId);
     }
 
     private static ImageView createSoftwareImage(Context context) {
