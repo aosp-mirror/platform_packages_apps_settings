@@ -16,7 +16,9 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_GROUP_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
+import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_SLICE_URI;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -24,6 +26,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -81,7 +84,7 @@ public class PanelSlicesAdapter
 
     @Override
     public void onBindViewHolder(@NonNull SliceRowViewHolder sliceRowViewHolder, int position) {
-        sliceRowViewHolder.onBind(mSliceLiveData.get(position));
+        sliceRowViewHolder.onBind(mSliceLiveData.get(position), position);
     }
 
     /**
@@ -116,21 +119,37 @@ public class PanelSlicesAdapter
 
         @VisibleForTesting
         final SliceView sliceView;
+        @VisibleForTesting
+        final LinearLayout mSliceSliderLayout;
 
         public SliceRowViewHolder(View view) {
             super(view);
             sliceView = view.findViewById(R.id.slice_view);
             sliceView.setMode(SliceView.MODE_LARGE);
             sliceView.setShowTitleItems(true);
+            mSliceSliderLayout = view.findViewById(R.id.slice_slider_layout);
         }
 
-        public void onBind(LiveData<Slice> sliceLiveData) {
+        /**
+         * Called when the view is displayed.
+         */
+        public void onBind(LiveData<Slice> sliceLiveData, int position) {
             sliceLiveData.observe(mPanelFragment.getViewLifecycleOwner(), sliceView);
 
             // Do not show the divider above media devices switcher slice per request
             final Slice slice = sliceLiveData.getValue();
             if (slice == null || slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
                 mDividerAllowedAbove = false;
+            }
+
+            // Customize output switcher slice top padding
+            if (position == 0 && (slice.getUri().equals(MEDIA_OUTPUT_SLICE_URI)
+                    || slice.getUri().equals(MEDIA_OUTPUT_GROUP_SLICE_URI))) {
+                final int paddingTop = mPanelFragment.getResources().getDimensionPixelSize(
+                        R.dimen.output_switcher_slice_padding_top);
+                mSliceSliderLayout.setPadding(mSliceSliderLayout.getPaddingLeft(), paddingTop,
+                        mSliceSliderLayout.getPaddingRight(),
+                        mSliceSliderLayout.getPaddingBottom());
             }
 
             // Log Panel interaction
