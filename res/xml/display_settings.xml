@@ -37,7 +37,8 @@
         android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
         android:widgetLayout="@null"
         settings:widgetLayout="@null"
-        settings:controller="com.android.settings.display.DarkUIPreferenceController"/>
+        settings:controller="com.android.settings.display.DarkUIPreferenceController"
+        settings:keywords="@string/keywords_dark_ui_mode"/>
 
     <com.android.settings.display.NightDisplayPreference
         android:key="night_display"

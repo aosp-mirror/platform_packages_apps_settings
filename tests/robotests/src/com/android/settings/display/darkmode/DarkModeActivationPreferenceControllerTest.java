@@ -15,6 +15,19 @@
 
 package com.android.settings.display.darkmode;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -22,9 +35,12 @@ import android.content.res.Resources;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
+
 import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settingslib.widget.LayoutPreference;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,15 +49,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 import java.util.Locale;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.eq;
 
 @RunWith(RobolectricTestRunner.class)
 public class DarkModeActivationPreferenceControllerTest {
@@ -202,5 +209,10 @@ public class DarkModeActivationPreferenceControllerTest {
         mController.updateState(mPreference);
         verify(mTurnOffButton).setVisibility(eq(View.GONE));
         verify(mTurnOnButton).setVisibility(eq(View.GONE));
+    }
+
+    @Test
+    public void getAvailabilityStatus_returnsAVAILABLE_UNSEARCHABLE() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 }

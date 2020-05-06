@@ -156,6 +156,6 @@ public class DarkModeActivationPreferenceController extends BasePreferenceContro
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AVAILABLE_UNSEARCHABLE;
     }
 }
