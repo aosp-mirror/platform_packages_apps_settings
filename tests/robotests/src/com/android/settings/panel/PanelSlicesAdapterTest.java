@@ -150,7 +150,7 @@ public class PanelSlicesAdapterTest {
         final int position = 0;
         final ViewGroup view = new FrameLayout(mContext);
         final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, 0 /* view type*/);
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
 
         adapter.onBindViewHolder(viewHolder, position);
 
@@ -168,7 +168,7 @@ public class PanelSlicesAdapterTest {
         final int position = 0;
         final ViewGroup view = new FrameLayout(mContext);
         final SliceRowViewHolder viewHolder =
-                adapter.onCreateViewHolder(view, 0 /* view type*/);
+                adapter.onCreateViewHolder(view, PanelContent.VIEW_TYPE_SLIDER);
 
         adapter.onBindViewHolder(viewHolder, position);
 
@@ -178,7 +178,7 @@ public class PanelSlicesAdapterTest {
     }
 
     @Test
-    public void mediaOutputIndicatorSlice_shouldNotAddFirstItemPadding() {
+    public void mediaOutputIndicatorSlice_notSliderPanel_noSliderLayout() {
         addTestLiveData(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
 
         final PanelSlicesAdapter adapter =
@@ -190,7 +190,7 @@ public class PanelSlicesAdapterTest {
 
         adapter.onBindViewHolder(viewHolder, position);
 
-        assertThat(viewHolder.mSliceSliderLayout.getPaddingTop()).isEqualTo(0);
+        assertThat(viewHolder.mSliceSliderLayout).isNull();
     }
 
     @Test
