@@ -23,15 +23,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputSliceConstants;
@@ -45,7 +44,8 @@ import java.util.List;
  * {@link com.android.settings.notification.RemoteVolumeSeekBarPreference}
  **/
 public class RemoteVolumeGroupController extends BasePreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, LocalMediaManager.DeviceCallback {
+        Preference.OnPreferenceChangeListener, LifecycleObserver, OnDestroy,
+        LocalMediaManager.DeviceCallback {
 
     private static final String KEY_REMOTE_VOLUME_GROUP = "remote_media_group";
     private static final String TAG = "RemoteVolumePrefCtr";
@@ -92,11 +92,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         }
     }
 
-    /**
-     * onDestroy()
-     * {@link androidx.lifecycle.OnLifecycleEvent}
-     **/
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    @Override
     public void onDestroy() {
         mLocalMediaManager.unregisterCallback(this);
         mLocalMediaManager.stopScan();
