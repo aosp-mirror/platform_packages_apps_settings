@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.widget.Switch;
@@ -61,6 +62,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     private SwitchPreference mUseScreenLock;
     private FooterPreference mFooterPreference;
     private LockPatternUtils mLockPatternUtils;
+    private UserManager mUserManager;
 
     @Override
     public int getMetricsCategory() {
@@ -74,6 +76,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         activity.setTitle(R.string.screen_pinning_title);
         mLockPatternUtils = new LockPatternUtils(activity);
+        mUserManager = activity.getSystemService(UserManager.class);
 
         addPreferencesFromResource(R.xml.screen_pinning_settings);
         final PreferenceScreen root = getPreferenceScreen();
@@ -224,8 +227,20 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             mUseScreenLock.setTitle(getCurrentSecurityTitle());
         } else {
             mFooterPreference.setVisible(true);
+            mFooterPreference.setSummary(getAppPinningContent());
             mUseScreenLock.setVisible(false);
         }
+    }
+
+    private boolean isGuestModeSupported() {
+        return UserManager.supportsMultipleUsers()
+                && !mUserManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
+    }
+
+    private CharSequence getAppPinningContent() {
+        return isGuestModeSupported()
+                ? getActivity().getText(R.string.screen_pinning_guest_user_description)
+                : getActivity().getText(R.string.screen_pinning_description);
     }
 
     /**
