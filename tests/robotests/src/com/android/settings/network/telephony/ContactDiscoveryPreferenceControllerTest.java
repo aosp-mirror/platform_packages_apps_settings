@@ -48,6 +48,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -58,6 +59,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class ContactDiscoveryPreferenceControllerTest {
@@ -99,6 +102,8 @@ public class ContactDiscoveryPreferenceControllerTest {
 
         mPreferenceControllerUT = new ContactDiscoveryPreferenceController(mContext,
                 "ContactDiscovery");
+        // Ensure subscriptionInfo check doesn't fail.
+        SubscriptionUtil.setAvailableSubscriptionsForTesting(Collections.emptyList());
         mPreferenceControllerUT.init(mFragmentManager, TEST_SUB_ID, mLifecycle);
         mSwitchPreferenceUT = spy(new SwitchPreference(mContext));
         mSwitchPreferenceUT.setKey(mPreferenceControllerUT.getPreferenceKey());
