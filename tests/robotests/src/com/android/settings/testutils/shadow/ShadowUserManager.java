@@ -18,7 +18,6 @@ package com.android.settings.testutils.shadow;
 
 import android.annotation.UserIdInt;
 import android.content.pm.UserInfo;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
@@ -44,18 +43,13 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     private static boolean sIsSupportsMultipleUsers;
 
-    private final List<String> mBaseRestrictions = new ArrayList<>();
-    private final List<String> mUserRestrictions = new ArrayList<>();
-    private final List<String> mGuestRestrictions = new ArrayList<>();
+    private final List<String> mRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
     private final Set<Integer> mManagedProfiles = new HashSet<>();
     private boolean mIsQuietModeEnabled = false;
     private int[] profileIdsForUser = new int[0];
     private boolean mUserSwitchEnabled;
-
-    private @UserManager.UserSwitchabilityResult int mSwitchabilityStatus =
-            UserManager.SWITCHABILITY_STATUS_OK;
     private final Map<Integer, Integer> mSameProfileGroupIds = Maps.newHashMap();
 
     public void addProfile(UserInfo userInfo) {
@@ -88,32 +82,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     @Implementation
     protected boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
-        return mBaseRestrictions.contains(restrictionKey);
+        return mRestrictions.contains(restrictionKey);
     }
 
     public void addBaseUserRestriction(String restriction) {
-        mBaseRestrictions.add(restriction);
-    }
-
-    @Implementation
-    protected boolean hasUserRestriction(@UserManager.UserRestrictionKey String restrictionKey,
-            UserHandle userHandle) {
-        return mUserRestrictions.contains(restrictionKey);
-    }
-
-    public void addUserRestriction(String restriction) {
-        mUserRestrictions.add(restriction);
-    }
-
-    @Implementation
-    protected Bundle getDefaultGuestRestrictions() {
-        Bundle bundle = new Bundle();
-        mGuestRestrictions.forEach(restriction -> bundle.putBoolean(restriction, true));
-        return bundle;
-    }
-
-    public void addGuestUserRestriction(String restriction) {
-        mGuestRestrictions.add(restriction);
+        mRestrictions.add(restriction);
     }
 
     public static ShadowUserManager getShadow() {
@@ -192,22 +165,5 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void setSupportsMultipleUsers(boolean supports) {
         sIsSupportsMultipleUsers = supports;
-    }
-
-    @Implementation
-    protected UserInfo getUserInfo(@UserIdInt int userId) {
-        return mUserProfileInfos.stream()
-                .filter(userInfo -> userInfo.id == userId)
-                .findFirst()
-                .orElse(super.getUserInfo(userId));
-    }
-
-    @Implementation
-    protected @UserManager.UserSwitchabilityResult int getUserSwitchability() {
-        return mSwitchabilityStatus;
-    }
-
-    public void setSwitchabilityStatus(@UserManager.UserSwitchabilityResult int newStatus) {
-        mSwitchabilityStatus = newStatus;
     }
 }
