@@ -52,7 +52,8 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
     };
     private final IntentFilter mFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
     private final LocationManager mLocationManager;
-    private final BroadcastReceiver mLocationReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    final BroadcastReceiver mLocationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (mWifiDirectPref != null) {
