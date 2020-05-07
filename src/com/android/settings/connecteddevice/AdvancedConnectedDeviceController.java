@@ -15,10 +15,7 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settingslib.drawer.TileUtils.IA_SETTINGS_ACTION;
-
 import android.content.Context;
-import android.content.Intent;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -34,7 +31,6 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
 
     private static final String DRIVING_MODE_SETTINGS_ENABLED =
             "gearhead:driving_mode_settings_enabled";
-    private static final String GEARHEAD_PACKAGE = "com.google.android.projection.gearhead";
 
     public AdvancedConnectedDeviceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -59,7 +55,7 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
                 new NfcPreferenceController(context, NfcPreferenceController.KEY_TOGGLE_NFC);
 
         return getConnectedDevicesSummaryResourceId(nfcPreferenceController,
-                isDrivingModeAvailable(context), isAndroidAutoSettingAvailable(context));
+                isDrivingModeAvailable(context));
     }
 
     @VisibleForTesting
@@ -69,56 +65,25 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
     }
 
     @VisibleForTesting
-    static boolean isAndroidAutoSettingAvailable(Context context) {
-        final Intent intent = new Intent(IA_SETTINGS_ACTION);
-        intent.setPackage(GEARHEAD_PACKAGE);
-        return intent.resolveActivity(context.getPackageManager()) != null;
-    }
-
-    @VisibleForTesting
     static int getConnectedDevicesSummaryResourceId(NfcPreferenceController
-            nfcPreferenceController,
-            boolean isDrivingModeAvailable,
-            boolean isAndroidAutoAvailable) {
+            nfcPreferenceController, boolean isDrivingModeAvailable) {
         final int resId;
 
-        if (isAndroidAutoAvailable) {
-            if (nfcPreferenceController.isAvailable()) {
-                if (isDrivingModeAvailable) {
-                    // NFC available, driving mode available
-                    resId = R.string.connected_devices_dashboard_android_auto_summary;
-                } else {
-                    // NFC available, driving mode not available
-                    resId =
-                        R.string.connected_devices_dashboard_android_auto_no_driving_mode_summary;
-                }
+        if (nfcPreferenceController.isAvailable()) {
+            if (isDrivingModeAvailable) {
+                // NFC available, driving mode available
+                resId = R.string.connected_devices_dashboard_summary;
             } else {
-                if (isDrivingModeAvailable) {
-                    // NFC not available, driving mode available
-                    resId = R.string.connected_devices_dashboard_android_auto_no_nfc_summary;
-                } else {
-                    // NFC not available, driving mode not available
-                    resId =
-                        R.string.connected_devices_dashboard_android_auto_no_nfc_no_driving_mode;
-                }
+                // NFC available, driving mode not available
+                resId = R.string.connected_devices_dashboard_no_driving_mode_summary;
             }
         } else {
-            if (nfcPreferenceController.isAvailable()) {
-                if (isDrivingModeAvailable) {
-                    // NFC available, driving mode available
-                    resId = R.string.connected_devices_dashboard_summary;
-                } else {
-                    // NFC available, driving mode not available
-                    resId = R.string.connected_devices_dashboard_no_driving_mode_summary;
-                }
+            if (isDrivingModeAvailable) {
+                // NFC not available, driving mode available
+                resId = R.string.connected_devices_dashboard_no_nfc_summary;
             } else {
-                if (isDrivingModeAvailable) {
-                    // NFC not available, driving mode available
-                    resId = R.string.connected_devices_dashboard_no_nfc_summary;
-                } else {
-                    // NFC not available, driving mode not available
-                    resId = R.string.connected_devices_dashboard_no_driving_mode_no_nfc_summary;
-                }
+                // NFC not available, driving mode not available
+                resId = R.string.connected_devices_dashboard_no_driving_mode_no_nfc_summary;
             }
         }
 
