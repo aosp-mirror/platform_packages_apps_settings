@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
+import com.android.settings.network.ActiveSubsciptionsListener;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
@@ -44,6 +45,7 @@ import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenc
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,6 +71,10 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private UserManager mUserManager;
     private String mClickedPrefKey;
+
+    private ActiveSubsciptionsListener mActiveSubsciptionsListener;
+    private boolean mActiveSubsciptionsListenerStarting;
+    private int mActiveSubsciptionsListenerCount;
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -195,6 +201,38 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         session.close();
 
         onRestoreInstance(icicle);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mActiveSubsciptionsListener == null) {
+            mActiveSubsciptionsListenerStarting = true;
+            mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
+                    getContext().getMainLooper(), getContext(), mSubId) {
+                public void onChanged() {
+                    onSubscriptionDetailChanged();
+                }
+            };
+            mActiveSubsciptionsListenerStarting = false;
+        }
+        mActiveSubsciptionsListener.start();
+    }
+
+    private void onSubscriptionDetailChanged() {
+        if (mActiveSubsciptionsListenerStarting) {
+            Log.d(LOG_TAG, "Callback during onResume()");
+            return;
+        }
+        mActiveSubsciptionsListenerCount++;
+        if (mActiveSubsciptionsListenerCount != 1) {
+            return;
+        }
+
+        ThreadUtils.postOnMainThread(() -> {
+            mActiveSubsciptionsListenerCount = 0;
+            redrawPreferenceControllers();
+        });
     }
 
     @VisibleForTesting
