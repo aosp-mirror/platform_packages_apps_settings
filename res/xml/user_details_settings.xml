@@ -17,17 +17,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto">
 
-
-    <com.android.settingslib.RestrictedPreference
-            android:key="switch_user"
-            android:icon="@drawable/ic_swap" />
     <SwitchPreference
             android:key="enable_calling"
-            android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
     <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
-            android:icon="@drawable/ic_delete"
+            android:title="@string/user_remove_user"
             settings:userRestriction="no_remove_user"
             settings:useAdminDisabledSummary="true" />
 
