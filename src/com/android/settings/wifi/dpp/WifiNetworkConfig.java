@@ -48,6 +48,9 @@ public class WifiNetworkConfig {
     static final String FAKE_PASSWORD = "password";
     private static final String TAG = "WifiNetworkConfig";
 
+    // Security from WifiNetworkListFragment/WifiTrackerLib may be WPA3.
+    static final String SECURITY_WPA3 = "WPA3";
+
     private String mSecurity;
     private String mSsid;
     private String mPreSharedKey;
@@ -59,6 +62,9 @@ public class WifiNetworkConfig {
     WifiNetworkConfig(String security, String ssid, String preSharedKey,
             boolean hiddenSsid, int networkId, boolean isHotspot) {
         mSecurity = security;
+        if (TextUtils.equals(mSecurity, SECURITY_WPA3)) {
+            mSecurity = SECURITY_SAE;
+        }
         mSsid = ssid;
         mPreSharedKey = preSharedKey;
         mHiddenSsid = hiddenSsid;
