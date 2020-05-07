@@ -89,6 +89,9 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @Override
     protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
         if (!connected || dataRole != DATA_ROLE_DEVICE) {
+            if (mPreviousFunction == UsbManager.FUNCTION_RNDIS) {
+                mConnectivityManager.stopTethering(TETHERING_USB);
+            }
             mProfilesContainer.setEnabled(false);
         } else {
             // Functions are only available in device mode
@@ -129,6 +132,9 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                 mConnectivityManager.startTethering(TETHERING_USB, true /* showProvisioningUi */,
                         mOnStartTetheringCallback);
             } else {
+                if (mPreviousFunction == UsbManager.FUNCTION_RNDIS) {
+                    mConnectivityManager.stopTethering(TETHERING_USB);
+                }
                 mUsbBackend.setCurrentFunctions(function);
             }
         }

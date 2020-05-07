@@ -7312,6 +7312,9 @@
     <!-- Summary of multimedia messaging service settings.  [CHAR LIMIT=100] -->
     <string name="mms_message_summary">Send &amp; receive when mobile data is off</string>
 
+    <!-- Cell broacast receiver package name [DO NOT TRANSLATE] -->
+    <string name="cell_broadcast_receiver_package">com.android.cellbroadcastreceiver</string>
+
     <!-- Title of a preference for whether to allow data during calls that is shown when mobile
          data is turned off. This is needed for some multi-SIM scenarios, because the SIM that is
          default for data might not be available during a phone call. [CHAR LIMIT=60] -->
@@ -7485,14 +7488,6 @@
     <string name="connected_devices_dashboard_no_driving_mode_summary">Bluetooth, NFC</string>
     <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary">Bluetooth</string>
-    <!--Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="connected_devices_dashboard_android_auto_summary">Bluetooth, Android Auto, driving mode, NFC</string><!--
-    Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="connected_devices_dashboard_android_auto_no_nfc_summary">Bluetooth, Android Auto, driving mode</string>
-    <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary">Bluetooth, Android Auto, NFC</string>
-    <!-- Summary for Connected devices settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
-    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode">Bluetooth, Android Auto</string>
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary">Unavailable because NFC is off</string>
     <!-- Summary for Tap & pay settings, explaning a few important settings under it [CHAR LIMIT=NONE]-->
@@ -9250,10 +9245,10 @@
         \t\n3.\tTap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
-    <string name="screen_pinning_guest_mode_description">
+    <string name="screen_pinning_guest_user_description">
         App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game.
         \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible.
-        \n\nIf you want to securely share your device with someone, try using a guest profile instead.
+        \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
         \t\n1.\tTurn on app pinning
         \t\n2.\tOpen Overview
@@ -12092,4 +12087,7 @@
     <string name="no_5g_in_dsds_text" product="device">When using 2 SIMs, this device will be limited to 4G. <annotation id="url">Learn more</annotation>.</string>
     <!-- Help URI, 5G limitation in DSDS condition. [DO NOT TRANSLATE] -->
     <string name="help_uri_5g_dsds" translatable="false"></string>
+
+    <!-- Developer settings: app freezer title [CHAR LIMIT=50]-->
+    <string name="cached_apps_freezer">Suspend execution for cached apps</string>
 </resources>
