@@ -58,6 +58,7 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
     private final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
 
     private LocalBluetoothManager mLocalBluetoothManager;
+    private String mPackageName;
 
     @VisibleForTesting
     LocalMediaManager mLocalMediaManager;
@@ -82,11 +83,10 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
         if (mLocalMediaManager == null) {
             final MediaController controller = getActiveLocalMediaController();
-            String packageName = null;
             if (controller != null) {
-                packageName = controller.getPackageName();
+                mPackageName = controller.getPackageName();
             }
-            mLocalMediaManager = new LocalMediaManager(mContext, packageName, null);
+            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
 
         mLocalMediaManager.registerCallback(this);
@@ -166,6 +166,10 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     MediaDevice getCurrentConnectedMediaDevice() {
         return mLocalMediaManager.getCurrentConnectedDevice();
+    }
+
+    String getPackageName() {
+        return mPackageName;
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {
