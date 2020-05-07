@@ -97,15 +97,8 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     /** Key for extra passed in from calling fragment to indicate if this is a newly created user */
     public static final String EXTRA_NEW_USER = "new_user";
 
-    /**
-     * Key for extra passed in from calling fragment to indicate if
-     * switch to user should be shown
-     */
-    public static final String EXTRA_SHOW_SWITCH_USER = "enable_switch";
-
     private boolean mFirstTime = true;
     private boolean mNewUser;
-    protected boolean mShowSwitchUser;
     private boolean mAppListChanged;
     protected boolean mRestrictedProfile;
 
@@ -226,7 +219,6 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                     mUser = new UserHandle(args.getInt(EXTRA_USER_ID));
                 }
                 mNewUser = args.getBoolean(EXTRA_NEW_USER, false);
-                mShowSwitchUser = args.getBoolean(EXTRA_SHOW_SWITCH_USER, false);
             }
         }
 
