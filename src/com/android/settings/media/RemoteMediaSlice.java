@@ -37,6 +37,7 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.SubSettings;
+import com.android.settings.Utils;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -86,7 +87,6 @@ public class RemoteMediaSlice implements CustomSliceable {
             return listBuilder.build();
         }
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
-        final CharSequence outputTitle = mContext.getText(R.string.media_output_title);
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 R.drawable.ic_volume_remote);
         // To create an empty icon to indent the row
@@ -99,6 +99,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                         + maxVolume);
                 continue;
             }
+            final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
+                    Utils.getApplicationLabel(mContext, info.getClientPackageName()));
             listBuilder.addInputRange(new InputRangeBuilder()
                     .setTitleItem(icon, ListBuilder.ICON_IMAGE)
                     .setTitle(castVolume)
@@ -154,7 +156,8 @@ public class RemoteMediaSlice implements CustomSliceable {
                 0 /* requestCode */, intent, 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE,
-                mContext.getText(R.string.media_output_title));
+                mContext.getString(R.string.media_output_label_title,
+                        Utils.getApplicationLabel(mContext, packageName)));
         return primarySliceAction;
     }
 
