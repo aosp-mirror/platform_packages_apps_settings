@@ -58,7 +58,8 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         }
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
-        final CharSequence title = mContext.getText(R.string.media_output_title);
+        final CharSequence title = mContext.getString(R.string.media_output_label_title,
+                Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
                 0 /* requestCode */, getMediaOutputSliceIntent(), 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
