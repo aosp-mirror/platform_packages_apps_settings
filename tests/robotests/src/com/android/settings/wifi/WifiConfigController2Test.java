@@ -83,6 +83,12 @@ public class WifiConfigController2Test {
     // Valid PSK pass phrase
     private static final String GOOD_PSK = "abcdefghijklmnopqrstuvwxyz";
     private static final String GOOD_SSID = "abc";
+    private static final String VALID_HEX_PSK =
+            "123456789012345678901234567890123456789012345678901234567890abcd";
+    private static final String INVALID_HEX_PSK =
+            "123456789012345678901234567890123456789012345678901234567890ghij";
+    private static final String NUMBER_AND_CHARACTER_KEY = "123456abcd";
+    private static final String PARTIAL_NUMBER_AND_CHARACTER_KEY = "123456abc?";
     private static final int DHCP = 0;
 
     @Before
@@ -518,16 +524,7 @@ public class WifiConfigController2Test {
 
     @Test
     public void selectEapMethod_savedWifiEntry_shouldGetCorrectPosition() {
-        when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
-        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
-        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
-        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
-        when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
-        mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
-        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
-                WifiConfigUiBase2.MODE_MODIFY);
+        setUpModifyingSavedPeapConfigController();
         final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
         final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
         WifiConfiguration wifiConfiguration;
@@ -567,5 +564,200 @@ public class WifiConfigController2Test {
 
         assertThat(advButton.getContentDescription()).isEqualTo(
                 mContext.getString(R.string.wifi_advanced_toggle_description));
+    }
+
+    @Test
+    public void getWepConfig_withNumberAndCharacterKey_shouldContainTheSameKey() {
+        final TextView password = mView.findViewById(R.id.password);
+        password.setText(NUMBER_AND_CHARACTER_KEY);
+        mController.mWifiEntrySecurity = WifiEntry.SECURITY_WEP;
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.wepKeys[0]).isEqualTo(NUMBER_AND_CHARACTER_KEY);
+    }
+
+    @Test
+    public void getWepConfig_withPartialNumberAndCharacterKey_shouldContainDifferentKey() {
+        final TextView password = mView.findViewById(R.id.password);
+        password.setText(PARTIAL_NUMBER_AND_CHARACTER_KEY);
+        mController.mWifiEntrySecurity = WifiEntry.SECURITY_WEP;
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.wepKeys[0]).isNotEqualTo(PARTIAL_NUMBER_AND_CHARACTER_KEY);
+    }
+
+    @Test
+    public void getPskConfig_withValidHexKey_shouldContainTheSameKey() {
+        final TextView password = mView.findViewById(R.id.password);
+        password.setText(VALID_HEX_PSK);
+        mController.mWifiEntrySecurity = WifiEntry.SECURITY_PSK;
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.preSharedKey).isEqualTo(VALID_HEX_PSK);
+    }
+
+    @Test
+    public void getPskConfig_withInvalidHexKey_shouldContainDifferentKey() {
+        final TextView password = mView.findViewById(R.id.password);
+        password.setText(INVALID_HEX_PSK);
+        mController.mWifiEntrySecurity = WifiEntry.SECURITY_PSK;
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.preSharedKey).isNotEqualTo(INVALID_HEX_PSK);
+    }
+
+    @Test
+    public void getEapConfig_withPhase2Gtc_shouldContainGtcMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method PEAP
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.PEAP);
+
+        // Test phase2 GTC
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_PEAP_PHASE2_GTC);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.GTC);
+    }
+
+    @Test
+    public void getEapConfig_withPhase2Sim_shouldContainSimMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method PEAP
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.PEAP);
+
+        // Test phase2 SIM
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_PEAP_PHASE2_SIM);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.SIM);
+    }
+
+    @Test
+    public void getEapConfig_withPhase2Aka_shouldContainAkaMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method PEAP
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.PEAP);
+
+        // Test phase2 AKA
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_PEAP_PHASE2_AKA);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.AKA);
+    }
+
+    @Test
+    public void getEapConfig_withPhase2AkaPrime_shouldContainAkaPrimeMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method PEAP
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.PEAP);
+
+        // Test phase2 AKA PRIME
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_PEAP_PHASE2_AKA_PRIME);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(
+                Phase2.AKA_PRIME);
+    }
+
+
+    @Test
+    public void getEapConfig_withPeapPhase2Unknown_shouldContainNoneMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method PEAP
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.PEAP);
+
+        // Test phase2 Unknown
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(-1);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.NONE);
+    }
+
+    @Test
+    public void getEapConfig_withTTLSPhase2Pap_shouldContainPapMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method TTLS
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.TTLS);
+
+        // Test phase2 PAP
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_TTLS_PHASE2_PAP);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.PAP);
+    }
+
+    @Test
+    public void getEapConfig_withTTLSPhase2Mschap_shouldContainMschapMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method TTLS
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.TTLS);
+
+        // Test phase2 MSCHAP
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_TTLS_PHASE2_MSCHAP);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.MSCHAP);
+    }
+
+    @Test
+    public void getEapConfig_withTTLSPhase2Gtc_shouldContainGtcMethod() {
+        setUpModifyingSavedPeapConfigController();
+
+        // Test EAP method TTLS
+        final Spinner eapMethodSpinner = mView.findViewById(R.id.method);
+        eapMethodSpinner.setSelection(Eap.TTLS);
+
+        // Test phase2 GTC
+        final Spinner phase2Spinner = mView.findViewById(R.id.phase2);
+        phase2Spinner.setSelection(WifiConfigController2.WIFI_TTLS_PHASE2_GTC);
+
+        WifiConfiguration wifiConfiguration = mController.getConfig();
+
+        assertThat(wifiConfiguration.enterpriseConfig.getPhase2Method()).isEqualTo(Phase2.GTC);
+    }
+
+    private void setUpModifyingSavedPeapConfigController() {
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        final WifiConfiguration mockWifiConfig = mock(WifiConfiguration.class);
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        final WifiEnterpriseConfig mockWifiEnterpriseConfig = mock(WifiEnterpriseConfig.class);
+        when(mockWifiEnterpriseConfig.getEapMethod()).thenReturn(Eap.PEAP);
+        mockWifiConfig.enterpriseConfig = mockWifiEnterpriseConfig;
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_MODIFY);
     }
 }
