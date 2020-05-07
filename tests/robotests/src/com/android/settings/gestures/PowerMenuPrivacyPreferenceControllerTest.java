@@ -202,4 +202,14 @@ public class PowerMenuPrivacyPreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
+
+    @Test
+    public void getAvailabilityStatus_controlsDeletedSecure_retursAvailable() {
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
+
+        Settings.Secure.putString(mContentResolver, CONTROLS_ENABLED_KEY, null);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
 }
