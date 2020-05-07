@@ -60,7 +60,7 @@ public class AnimatedImagePreference extends Preference {
         }
 
         if (mMaxHeight > -1) {
-            imageView.setMaxWidth(mMaxHeight);
+            imageView.setMaxHeight(mMaxHeight);
         }
     }
 
