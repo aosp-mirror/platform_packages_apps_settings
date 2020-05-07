@@ -61,9 +61,11 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
@@ -218,7 +220,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     public void initialize() {
-        updateEid();
+        requestForUpdateEid();
 
         if (mSubscriptionInfo == null) {
             return;
@@ -560,25 +562,33 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     }
 
-    private void updateEid() {
+    @VisibleForTesting
+    void requestForUpdateEid() {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final AtomicReference<String> eid = getEid(mSlotIndex);
+            ThreadUtils.postOnMainThread(() -> updateEid(eid));
+        });
+    }
+
+    @VisibleForTesting
+    AtomicReference<String> getEid(int slotIndex) {
         boolean shouldHaveEid = false;
         String eid = null;
-
         if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
             // Get EID per-SIM in multi-SIM mode
-            Map<Integer, Integer> mapping = mTelephonyManager.getLogicalToPhysicalSlotMapping();
-            int pSlotId = mapping.getOrDefault(mSlotIndex,
+            final Map<Integer, Integer> mapping = mTelephonyManager
+                    .getLogicalToPhysicalSlotMapping();
+            final int pSlotId = mapping.getOrDefault(slotIndex,
                     SubscriptionManager.INVALID_SIM_SLOT_INDEX);
 
             if (pSlotId != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
+                final List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
 
                 for (UiccCardInfo info : infos) {
                     if (info.getSlotIndex() == pSlotId) {
                         if (info.isEuicc()) {
                             shouldHaveEid = true;
                             eid = info.getEid();
-
                             if (TextUtils.isEmpty(eid)) {
                                 eid = mEuiccManager.createForCardId(info.getCardId()).getEid();
                             }
@@ -592,12 +602,19 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             shouldHaveEid = true;
             eid = mEuiccManager.getEid();
         }
+        if ((!shouldHaveEid) && (eid == null)) {
+            return null;
+        }
+        return new AtomicReference<String>(eid);
+    }
 
-        if (!shouldHaveEid) {
+    @VisibleForTesting
+    void updateEid(AtomicReference<String> eid) {
+        if (eid == null) {
             mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
-        } else if (!TextUtils.isEmpty(eid)) {
-            mDialog.setText(EID_INFO_VALUE_ID, eid);
+        } else if (eid.get() != null) {
+            mDialog.setText(EID_INFO_VALUE_ID, eid.get());
         }
     }
 
