@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ModuleInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -147,5 +148,17 @@ public class AppInstallerInfoPreferenceControllerTest {
 
         verify(mPreference, never()).setEnabled(false);
         verify(mPreference).setIntent(any(Intent.class));
+    }
+
+    @Test
+    public void getAvailabilityStatus_isMainlineModule_shouldReturnDisabled()
+            throws PackageManager.NameNotFoundException {
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label");
+        mController.setPackageName("Package");
+        when(mPackageManager.getModuleInfo("Package", 0 /* flags */)).thenReturn(new ModuleInfo());
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.DISABLED_FOR_USER);
     }
 }
