@@ -27,6 +27,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageStats;
 import android.media.RoutingSessionInfo;
 
 import androidx.preference.Preference;
@@ -35,6 +38,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.media.LocalMediaManager;
@@ -46,7 +50,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +64,8 @@ public class RemoteVolumeGroupControllerTest {
     private static final String KEY_REMOTE_VOLUME_GROUP = "remote_media_group";
     private static final String TEST_SESSION_1_ID = "test_session_1_id";
     private static final String TEST_SESSION_1_NAME = "test_session_1_name";
+    private static final String TEST_PACKAGE_NAME = "com.test";
+    private static final String TEST_APPLICATION_LABEL = "APP Test Label";
     private static final int CURRENT_VOLUME = 30;
     private static final int MAX_VOLUME = 100;
 
@@ -75,6 +83,10 @@ public class RemoteVolumeGroupControllerTest {
     private Context mContext;
     private RemoteVolumeGroupController mController;
     private PreferenceCategory mPreferenceCategory;
+    private ShadowPackageManager mShadowPackageManager;
+    private ApplicationInfo mAppInfo;
+    private PackageInfo mPackageInfo;
+    private PackageStats mPackageStats;
 
     @Before
     public void setUp() {
@@ -94,6 +106,7 @@ public class RemoteVolumeGroupControllerTest {
         when(remoteSessionInfo.getName()).thenReturn(TEST_SESSION_1_NAME);
         when(remoteSessionInfo.getVolumeMax()).thenReturn(MAX_VOLUME);
         when(remoteSessionInfo.getVolume()).thenReturn(CURRENT_VOLUME);
+        when(remoteSessionInfo.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
         mRoutingSessionInfos.add(remoteSessionInfo);
         when(mLocalMediaManager.getActiveMediaSession()).thenReturn(mRoutingSessionInfos);
@@ -156,11 +169,15 @@ public class RemoteVolumeGroupControllerTest {
 
     @Test
     public void displayPreference_withActiveSession_checkSwitcherPreferenceTitle() {
+        initPackage();
+        mShadowPackageManager.addPackage(mPackageInfo, mPackageStats);
         mController.displayPreference(mScreen);
         final Preference preference = mPreferenceCategory.findPreference(
                 RemoteVolumeGroupController.SWITCHER_PREFIX + TEST_SESSION_1_ID);
 
-        assertThat(preference.getTitle()).isEqualTo(mContext.getText(R.string.media_output_title));
+        assertThat(preference.getTitle()).isEqualTo(mContext.getString(
+                R.string.media_output_label_title, Utils.getApplicationLabel(mContext,
+                        TEST_PACKAGE_NAME)));
     }
 
     @Test
@@ -170,5 +187,17 @@ public class RemoteVolumeGroupControllerTest {
                 RemoteVolumeGroupController.SWITCHER_PREFIX + TEST_SESSION_1_ID);
 
         assertThat(preference.getSummary()).isEqualTo(TEST_SESSION_1_NAME);
+    }
+
+    private void initPackage() {
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mAppInfo = new ApplicationInfo();
+        mAppInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        mAppInfo.packageName = TEST_PACKAGE_NAME;
+        mAppInfo.name = TEST_APPLICATION_LABEL;
+        mPackageInfo = new PackageInfo();
+        mPackageInfo.packageName = TEST_PACKAGE_NAME;
+        mPackageInfo.applicationInfo = mAppInfo;
+        mPackageStats = new PackageStats(TEST_PACKAGE_NAME);
     }
 }
