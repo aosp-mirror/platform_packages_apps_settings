@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -33,6 +34,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pGroup;
+import android.net.wifi.p2p.WifiP2pGroupList;
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
@@ -358,6 +360,161 @@ public class WifiP2pSettingsTest {
     @Test
     public void getMetrics_withUnknownId_shouldReturnZero() {
         assertThat(mFragment.getDialogMetricsCategory(-1 /* dialogId */)).isEqualTo(0);
+    }
+
+    @Test
+    public void onSaveInstanceState_withWiFiPeer_shouldGetP2pDeviceType() {
+        setupOneP2pPeer(WifiP2pDevice.CONNECTED);
+        mFragment.onPreferenceTreeClick(mWifiP2pPeer);
+        final Bundle outBundle = new Bundle();
+
+        mFragment.onSaveInstanceState(outBundle);
+
+        final Object object = outBundle.getParcelable(WifiP2pSettings.SAVE_DIALOG_PEER);
+        assertThat(object instanceof WifiP2pDevice).isTrue();
+    }
+
+    @Test
+    public void onSaveInstanceState_withDeviceNameText_shouldSaveName() {
+        final String fakeDeviceName = "fakeName";
+        final Bundle createBundle = new Bundle();
+        createBundle.putString(WifiP2pSettings.SAVE_DEVICE_NAME, fakeDeviceName);
+        mFragment.onActivityCreated(createBundle);
+        final Bundle outBundle = new Bundle();
+        final Dialog dialog = mFragment.onCreateDialog(WifiP2pSettings.DIALOG_RENAME);
+
+        mFragment.onSaveInstanceState(outBundle);
+
+        final String string = outBundle.getString(WifiP2pSettings.SAVE_DEVICE_NAME);
+        assertThat(string).isEqualTo(fakeDeviceName);
+    }
+
+    @Test
+    public void onSaveInstanceState_withSelectedGroup_shouldSaveGroupName() {
+        final String fakeGroupName = "fakeGroupName";
+        final WifiP2pPersistentGroup wifiP2pPersistentGroup = spy(
+                new WifiP2pPersistentGroup(mContext,
+                        mWifiP2pGroup));
+        doReturn(fakeGroupName).when(wifiP2pPersistentGroup).getGroupName();
+        mFragment.mSelectedGroup = wifiP2pPersistentGroup;
+        final Bundle outBundle = new Bundle();
+
+        mFragment.onSaveInstanceState(outBundle);
+
+        assertThat(outBundle.getString(WifiP2pSettings.SAVE_SELECTED_GROUP)).isEqualTo(
+                fakeGroupName);
+    }
+
+    @Test
+    public void persistentController_withOneGroup_shouldBeAvailable() {
+        final String fakeGroupName = new String("fakeGroupName");
+        doReturn(fakeGroupName).when(mWifiP2pGroup).getNetworkName();
+        final List<WifiP2pGroup> groupList = new ArrayList<>();
+        groupList.add(mWifiP2pGroup);
+        final WifiP2pGroupList wifiP2pGroupList = mock(WifiP2pGroupList.class);
+        doReturn(groupList).when(wifiP2pGroupList).getGroupList();
+        final Bundle bundle = new Bundle();
+        bundle.putString(WifiP2pSettings.SAVE_SELECTED_GROUP, fakeGroupName);
+        mFragment.onActivityCreated(bundle);
+
+        mFragment.onPersistentGroupInfoAvailable(wifiP2pGroupList);
+
+        assertThat(mFragment.mPersistentCategoryController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void persistentController_withNoGroup_shouldBeUnavailable() {
+        final WifiP2pGroupList wifiP2pGroupList = mock(WifiP2pGroupList.class);
+        final List<WifiP2pGroup> groupList = new ArrayList<>();
+        doReturn(groupList).when(wifiP2pGroupList).getGroupList();
+
+        mFragment.onPersistentGroupInfoAvailable(wifiP2pGroupList);
+
+        assertThat(mFragment.mPersistentCategoryController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void peersCategoryController_withOnePeerDevice_shouldBeAvailable() {
+        final WifiP2pDevice wifiP2pDevice = mock(WifiP2pDevice.class);
+        final ArrayList<WifiP2pDevice> deviceList = new ArrayList<>();
+        deviceList.add(wifiP2pDevice);
+        final WifiP2pDeviceList peers = mock(WifiP2pDeviceList.class);
+        doReturn(deviceList).when(peers).getDeviceList();
+
+        mFragment.onPeersAvailable(peers);
+
+        assertThat(mFragment.mPeerCategoryController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void peersCategoryController_withNoPeerDevice_shouldBeUnavailable() {
+        final ArrayList<WifiP2pDevice> deviceList = new ArrayList<>();
+        final WifiP2pDeviceList peers = mock(WifiP2pDeviceList.class);
+        doReturn(deviceList).when(peers).getDeviceList();
+
+        mFragment.onPeersAvailable(peers);
+
+        assertThat(mFragment.mPeerCategoryController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void thisDeviceController_onDeviceInfoAvailable_shouldUpdateDeviceName() {
+        final WifiP2pDevice wifiP2pDevice = mock(WifiP2pDevice.class);
+        final P2pThisDevicePreferenceController thisDevicePreferenceController = mock(
+                P2pThisDevicePreferenceController.class);
+        mFragment.mThisDevicePreferenceController = thisDevicePreferenceController;
+
+        mFragment.onDeviceInfoAvailable(wifiP2pDevice);
+
+        verify(thisDevicePreferenceController, times(1)).updateDeviceName(any());
+    }
+
+    @Test
+    public void p2pThisDeviceChange_shouldRequestDeviceInfoAgain() {
+        final Intent intent = new Intent(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+
+        mFragment.mReceiver.onReceive(mContext, intent);
+
+        verify(mWifiP2pManager, times(2)).requestDeviceInfo(any(), any());
+    }
+
+    @Test
+    public void p2pPersistentGroupChange_shouldRequestGroupInfo() {
+        final Intent intent = new Intent(WifiP2pManager.ACTION_WIFI_P2P_PERSISTENT_GROUPS_CHANGED);
+
+        mFragment.mReceiver.onReceive(mContext, intent);
+
+        verify(mWifiP2pManager, times(1)).requestPersistentGroupInfo(any(), any());
+    }
+
+    @Test
+    public void onActivityCreate_withNullP2pManager_shouldGetP2pManagerAgain() {
+        mFragment.mWifiP2pManager = null;
+
+        mFragment.onActivityCreated(new Bundle());
+
+        assertThat(mFragment.mWifiP2pManager).isNotNull();
+    }
+
+    @Test
+    public void onActivityCreate_withNullChannel_shouldSetP2pManagerNull() {
+        doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
+
+        mFragment.onActivityCreated(new Bundle());
+
+        assertThat(mFragment.mWifiP2pManager).isNull();
+    }
+
+    @Test
+    public void clickNegativeButton_whenDeleteGroupDialogShow_shouldSetGroupNull() {
+        final WifiP2pPersistentGroup wifiP2pPersistentGroup = new WifiP2pPersistentGroup(mContext,
+                mWifiP2pGroup);
+        mFragment.mSelectedGroup = wifiP2pPersistentGroup;
+        final Dialog dialog = mFragment.onCreateDialog(WifiP2pSettings.DIALOG_DELETE_GROUP);
+
+        mFragment.mDeleteGroupListener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
+
+        assertThat(mFragment.mSelectedGroup).isNull();
     }
 
     private void setupOneP2pPeer(int status) {
