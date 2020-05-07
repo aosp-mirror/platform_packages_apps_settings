@@ -91,16 +91,16 @@ public class WifiP2pSettings extends DashboardFragment
     @VisibleForTesting boolean mLastGroupFormed = false;
     private boolean mIsIgnoreInitConnectionInfoCallback = false;
 
-    private P2pPeerCategoryPreferenceController mPeerCategoryController;
-    private P2pPersistentCategoryPreferenceController mPersistentCategoryController;
-    private P2pThisDevicePreferenceController mThisDevicePreferenceController;
+    @VisibleForTesting P2pPeerCategoryPreferenceController mPeerCategoryController;
+    @VisibleForTesting P2pPersistentCategoryPreferenceController mPersistentCategoryController;
+    @VisibleForTesting P2pThisDevicePreferenceController mThisDevicePreferenceController;
 
     @VisibleForTesting static final int DIALOG_DISCONNECT  = 1;
     @VisibleForTesting static final int DIALOG_CANCEL_CONNECT = 2;
     @VisibleForTesting static final int DIALOG_RENAME = 3;
     @VisibleForTesting static final int DIALOG_DELETE_GROUP = 4;
 
-    private static final String SAVE_DIALOG_PEER = "PEER_STATE";
+    @VisibleForTesting static final String SAVE_DIALOG_PEER = "PEER_STATE";
     @VisibleForTesting static final String SAVE_DEVICE_NAME = "DEV_NAME";
     @VisibleForTesting static final String SAVE_SELECTED_GROUP = "GROUP_NAME";
 
