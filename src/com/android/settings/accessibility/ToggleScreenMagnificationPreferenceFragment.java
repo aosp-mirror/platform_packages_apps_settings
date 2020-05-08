@@ -25,6 +25,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -46,6 +47,7 @@ import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -258,13 +260,13 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
         if ((shortcutType & UserShortcutType.HARDWARE) == UserShortcutType.HARDWARE) {
             final CharSequence hardwareTitle = context.getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_hardware);
+                    R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
 
         if ((shortcutType & UserShortcutType.TRIPLETAP) == UserShortcutType.TRIPLETAP) {
             final CharSequence tripleTapTitle = context.getText(
-                    R.string.accessibility_shortcut_edit_dialog_title_triple_tap);
+                    R.string.accessibility_shortcut_triple_tap_keyword);
             list.add(tripleTapTitle);
         }
 
@@ -273,7 +275,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             list.add(softwareTitle);
         }
         final String joinStrings = TextUtils.join(/* delimiter= */", ", list);
-        return AccessibilityUtil.capitalize(joinStrings);
+
+        return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
+                null, joinStrings);
     }
 
     @Override
