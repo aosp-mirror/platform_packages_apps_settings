@@ -82,8 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Putuskan sambungan"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Anda tidak memiliki izin untuk mengubah setelan Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sambungkan perangkat baru"</string>
-    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
-    <skip />
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> dapat dilihat oleh perangkat lain di sekitar saat Setelan Bluetooth dibuka."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Alamat Bluetooth ponsel: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Alamat Bluetooth tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -288,7 +287,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktifkan widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Dinonaktifkan oleh admin"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Tampilkan opsi kunci total"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Tampilkan opsi tombol power yang menonaktifkan Smart Lock, buka kunci biometrik, dan notifikasi di layar kunci"</string>
+    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Tampilkan opsi tombol daya yang menonaktifkan Smart Lock, buka kunci biometrik, dan notifikasi di layar kunci"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Kunci layar saat kepercayaan hilang"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Jika diaktifkan, perangkat akan terkunci saat perangkat dipercaya terakhir kehilangan kepercayaan"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Tidak ada"</string>
@@ -587,7 +586,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan PIN atau sandi baru, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan pola, PIN, atau sandi baru, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan kunci layar baru"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Coba lagi. Mencoba <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> kali dari <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> kali."</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Coba lagi. Upaya ke-<xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> dari maksimal <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> kali."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Data akan dihapus"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Jika Anda memasukkan pola yang salah saat mencoba lagi, data perangkat ini akan dihapus"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"Jika Anda memasukkan PIN yang salah saat mencoba lagi, data perangkat ini akan dihapus"</string>
@@ -600,7 +599,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika Anda memasukkan sandi yang salah saat mencoba lagi, profil kerja dan datanya akan dihapus"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Terlalu sering mencoba dengan salah. Data perangkat ini akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Terlalu sering mencoba dengan salah. Pengguna ini akan dihapus."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu sering mencoba dengan salah. Profil kerja ini dan datanya akan dihapus."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak upaya salah. Profil kerja ini dan datanya akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Tutup"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Minimal berisi <xliff:g id="COUNT_1">%d</xliff:g> karakter</item>
@@ -928,7 +927,7 @@
     <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Verifikasi bahwa ini adalah Anda"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Sandi Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Sandi hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
-    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Sambung-otomatis"</string>
+    <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Hubungkan otomatis"</string>
     <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Izinkan ponsel untuk terhubung otomatis di dekat jaringan ini"</string>
     <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Izinkan tablet untuk terhubung otomatis di dekat jaringan ini"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Tambahkan perangkat"</string>
@@ -1047,8 +1046,8 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Gunakan hotspot untuk membuat jaringan Wi‑Fi bagi perangkat Anda yang lain. Hotspot menyediakan koneksi internet menggunakan koneksi data seluler Anda. Biaya data seluler tambahan mungkin berlaku."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Aplikasi dapat membuat hotspot untuk berbagi konten dengan perangkat di sekitar."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Nonaktifkan hotspot secara otomatis"</string>
-    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Saat tidak ada perangkat tersambung"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Otomatis nonaktifkan hotspot"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Saat tidak ada perangkat terhubung"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Menyalakan hotspot..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Mematikan hotspot..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktif"</string>
@@ -1651,7 +1650,7 @@
     <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
-    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Tidak membagikan internet ke perangkat lain"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Tidak berbagi internet dengan perangkat lain"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Jangan gunakan hotspot Wi-Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Bagikan internet hanya melalui USB"</string>
@@ -2128,17 +2127,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Memperbesar layar dengan cepat untuk menampilkan konten dengan lebih jelas.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; 2. Ketuk layar&lt;br/&gt; 3. Tarik menggunakan 2 jari untuk berpindah pada layar&lt;br/&gt; 4. Cubit menggunakan 2 jari untuk menyesuaikan zoom&lt;br/&gt; 5. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk memperbesar sementara:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulai pembesaran&lt;br/&gt; 2. Sentuh lama di bagian mana saja pada layar&lt;br/&gt; 3. Tarik jari untuk berpindah pada layar&lt;br/&gt; 4. Angkat jari untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Jika pembesaran diaktifkan, Anda dapat memperbesar tampilan layar.\n\n"<b>"Untuk memperbesar tampilan"</b>", mulai pembesaran, lalu ketuk di bagian mana saja pada layar.\n"<ul><li>"Tarik 2 jari atau lebih untuk melakukan scroll"</li>\n<li>"Cubit dengan 2 jari atau lebih untuk menyesuaikan pembesaran"</li></ul>\n\n<b>"Untuk memperbesar tampilan sementara"</b>", mulai pembesaran, lalu sentuh lama di bagian mana saja pada layar.\n"<ul><li>"• Tarik untuk menggeser layar"</li>\n<li>"• Angkat jari untuk memperkecil tampilan"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard atau menu navigasi."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Menggunakan tombol aksesibilitas untuk membuka"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Tahan tombol volume untuk membuka"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Ketuk tiga kali pada layar untuk membuka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Menggunakan gestur untuk membuka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Menggunakan gestur aksesibilitas baru"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Untuk mengaktifkan atau menonaktifkan fitur ini, ketuk tombol aksesibilitas <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> di bagian bawah layar.\n\nUntuk beralih ke fitur lain, sentuh lama tombol aksesibilitas."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Untuk mengaktifkan atau menonaktifkan fitur ini, tekan dan tahan kedua tombol volume."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Untuk memulai dan menghentikan pembesaran, ketuk tiga kali di mana saja pada layar Anda."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Untuk mengaktifkan atau menonaktifkan fitur ini, geser ke atas dari bawah layar dengan 2 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 2 jari dan tahan."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Untuk mengaktifkan atau menonaktifkan fitur ini, geser ke atas dari bawah layar dengan 3 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 3 jari dan tahan."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Untuk mengaktifkan atau menonaktifkan fitur aksesibilitas, geser ke atas dari bawah layar dengan 2 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 2 jari dan tahan."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Untuk mengaktifkan atau menonaktifkan fitur aksesibilitas, geser ke atas dari bawah layar dengan 3 jari.\n\nUntuk beralih ke fitur lain, geser ke atas dengan 3 jari dan tahan."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Oke"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Pintasan <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tombol aksesibilitas"</string>
@@ -2408,11 +2414,11 @@
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterai mungkin lebih cepat habis dari biasanya"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Penghemat Baterai aktif"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Beberapa fitur mungkin dibatasi"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Ponsel digunakan lebih lama dari biasanya"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Ponsel dipakai lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Perangkat digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterai mungkin lebih cepat habis daripada biasanya"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ponsel Anda digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ponsel dipakai lebih lama dari biasanya. Baterai mungkin lebih cepat habis dari perkiraan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Perangkat Anda digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Termasuk aktivitas latar belakang yang menggunakan banyak daya"</string>
@@ -3176,6 +3182,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, mode mengemudi"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, mode mengemudi, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, mode mengemudi"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Tidak tersedia karena NFC nonaktif"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakannya, instal aplikasi pembayaran terlebih dahulu"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Aplikasi &amp; notifikasi"</string>
@@ -3492,7 +3502,7 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Sembunyikan notifikasi senyap di status bar"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Cahaya kedip"</string>
     <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notifikasi di layar kunci"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Melewati layar kunci"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Lewati layar kunci"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Setelah Face Unlock, langsung buka layar yang terakhir digunakan"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Layar kunci, Layar kunci, Lewati, Abaikan"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Saat profil kerja dikunci"</string>
@@ -3551,16 +3561,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Izinkan notifikasi"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Izinkan aplikasi bersuara, bergetar, dan/atau menampilkan notifikasi di layar"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritas"</string>
-    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
-    <skip />
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Muncul di atas bagian percakapan dan ditampilkan sebagai balon"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> tidak mendukung setelan khusus percakapan."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Di bayangan pull-down, ciutkan notifikasi menjadi satu baris"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Membantu Anda tetap fokus tanpa suara atau getaran"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Menarik perhatian Anda dengan suara atau getaran"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Jika perangkat dibuka kuncinya, menampilkan notifikasi sebagai banner di bagian atas layar"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Semua notifikasi \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
-    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
-    <skip />
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Semua notifikasi <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notifikasi Adaptif"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikasi per hari</item>
@@ -3850,7 +3858,7 @@
     <string name="switch_off_text" msgid="1315547447393646667">"Nonaktif"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pemasangan pin aplikasi"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Pemasangan pin aplikasi memungkinkan Anda terus menampilkan aplikasi saat ini hingga pinnya dilepas. Fitur ini dapat digunakan, misalnya, untuk mengizinkan teman tepercaya memainkan game tertentu. \n\nSaat sebuah aplikasi dipasangi pin, aplikasi itu dapat membuka aplikasi lain dan data pribadi dapat diakses. \n\nUntuk menggunakan pemasangan pin aplikasi: 	\n1.	Aktifkan pemasangan pin aplikasi 	\n2.	Buka Ringkasan \n3.	Ketuk ikon aplikasi di bagian atas layar, lalu ketuk Pasang pin"</string>
-    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"Pemasangan pin aplikasi memungkinkan Anda terus menampilkan aplikasi saat ini hingga pinnya dilepas. Fitur ini dapat digunakan, misalnya, untuk mengizinkan teman tepercaya memainkan game tertentu. \n\nSaat sebuah aplikasi dipasangi pin, aplikasi itu dapat membuka aplikasi lain dan data pribadi dapat diakses. \n\nJika Anda ingin membagikan perangkat secara aman ke seseorang, coba gunakan profil tamu. \n\nUntuk menggunakan pemasangan pin aplikasi: 	\n1.	Aktifkan pemasangan pin aplikasi 	\n2.	Buka Ringkasan 	\n3.	Ketuk ikon aplikasi di bagian atas layar, lalu ketuk Pasang pin"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pemasangan pin aplikasi memungkinkan Anda terus menampilkan aplikasi saat ini hingga pinnya dilepas. Fitur ini dapat digunakan, misalnya, untuk mengizinkan teman tepercaya memainkan game tertentu. \n\nSaat sebuah aplikasi dipasangi pin, aplikasi itu dapat membuka aplikasi lain dan data pribadi dapat diakses. \n\nJika Anda ingin membagikan perangkat secara aman ke seseorang, coba gunakan pengguna tamu. \n\nUntuk menggunakan pemasangan pin aplikasi: 	\n1.	Aktifkan pemasangan pin aplikasi 	\n2.	Buka Ringkasan 	\n3.	Ketuk ikon aplikasi di bagian atas layar, lalu ketuk Pasang pin"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Saat aplikasi dipasangi pin: \n\n•	 Data pribadi dapat diakses \n		(seperti kontak dan konten email) \n•	 Aplikasi yang dipasangi pin dapat membuka aplikasi lain \n\nGunakan pemasangan pin hanya untuk orang yang Anda percayai."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Minta pola pembuka kunci sebelum melepas pin"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Minta PIN sebelum lepas pin"</string>
@@ -4636,7 +4644,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Izinkan aplikasi mengontrol Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Izinkan aplikasi ini mengaktifkan atau menonaktifkan Wi-Fi, memindai, dan menghubungkan ke jaringan Wi-Fi, menambahkan atau menghapus jaringan, atau memulai hotspot khusus lokal"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Putar media ke"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"Putar <xliff:g id="LABEL">%s</xliff:g> ke"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Putar <xliff:g id="LABEL">%s</xliff:g>"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Perangkat ini"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Ponsel"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4816,10 +4824,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Mengaktifkan blur jendela pada tingkat compositor. Memerlukan reboot perangkat."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privasi"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Izin, aktivitas akun, data pribadi"</string>
-    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
-    <skip />
-    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
-    <skip />
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Melanjutkan media"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Menampilkan dan mempertahankan pemutar media di Setelan Cepat. Memerlukan reboot."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Hapus"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Simpan"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Hapus saran ini?"</string>
@@ -4918,4 +4924,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Saat menggunakan 2 SIM, ponsel ini akan dibatasi ke 4G. "<annotation id="url">"Pelajari lebih lanjut"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Saat menggunakan 2 SIM, tablet ini akan dibatasi ke 4G. "<annotation id="url">"Pelajari lebih lanjut"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Saat menggunakan 2 SIM, perangkat ini akan dibatasi ke 4G. "<annotation id="url">"Pelajari lebih lanjut"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Tangguhkan eksekusi aplikasi yang di-cache"</string>
 </resources>

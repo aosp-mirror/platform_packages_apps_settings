@@ -82,8 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"解除連結"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"您沒有變更藍牙設定的權限。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
-    <!-- no translation found for keywords_add_bt_device (4533191164203174011) -->
-    <skip />
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"開啟藍牙設定時，附近的裝置可偵測到 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"手機的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"平板電腦的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -284,7 +283,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"在逾時後立即上鎖 (由<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>保持解鎖狀態時除外)"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"在逾時 <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>後上鎖 (由<xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>保持解鎖狀態時除外)"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"在鎖定畫面上顯示擁有者資訊"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"在上鎖畫面輸入文字"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"加入顯示在上鎖畫面的文字"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"啟用小工具"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"已由管理員停用"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"顯示鎖定選項"</string>
@@ -833,7 +832,7 @@
     <string name="wifi_switch_away_when_unvalidated" msgid="681353878530696197">"當 Wi‑Fi 無法連線至互聯網時，切換至流動數據網絡。"</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"自動切換至流動數據網絡"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"當 Wi‑Fi 無法連線至互聯網時，切換至流動數據網絡 (可能會增加數據用量費用)。"</string>
-    <string name="wifi_add_network" msgid="4178564862173751181">"新增網絡"</string>
+    <string name="wifi_add_network" msgid="4178564862173751181">"加入網絡"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi‑Fi 偏好設定"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi 會再次自動開啟"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fi 不會自動再次開啟"</string>
@@ -897,14 +896,14 @@
     <string name="wifi_subscription" msgid="4432423938285430113">"訂閱"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"查看或變更訂閱"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"隨機化處理 MAC"</string>
-    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"新增裝置"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"相機對準以下二維條碼，即可將裝置新增至「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
+    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"加入裝置"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"將下方方框對準二維條碼，即可將裝置加到「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"掃瞄二維條碼"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"將二維條碼置於下方中間，即可連接至「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"掃瞄二維條碼以加入 Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"分享 Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"掃瞄此二維條碼即可連線至「<xliff:g id="SSID">%1$s</xliff:g>」並分享密碼"</string>
-    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"掃描此二維條碼即可連線至「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"掃描此二維條碼，即可連接「<xliff:g id="SSID">%1$s</xliff:g>」"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"請再試一次。如果仍有問題，請聯絡裝置製造商"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"發生問題"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"確保裝置已插入、充電並開啟"</string>
@@ -924,7 +923,7 @@
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"找到裝置"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"正在與此裝置分享 Wi-Fi…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"連接中…"</string>
-    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"分享熱點"</string>
+    <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"共享熱點"</string>
     <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"驗證您的身分"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi 密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"熱點密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
@@ -932,7 +931,7 @@
     <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"允許手機在此網絡附近時自動連線"</string>
     <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"允許平板電腦在此網絡附近時自動連線"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"新增裝置"</string>
-    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二維條碼在此網絡新增裝置"</string>
+    <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用二維條碼，在此網絡中加入裝置"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"二維條碼格式無效"</string>
     <string name="retry" msgid="7542103800274026915">"重試"</string>
     <string name="wifi_shared" msgid="8850748923537589782">"與其他裝置使用者分享"</string>
@@ -996,7 +995,7 @@
     <string name="wifi_advanced_titlebar" msgid="1234150304285575798">"進階 Wi-Fi"</string>
     <string name="wifi_advanced_ssid_title" msgid="1561437650193980185">"SSID"</string>
     <string name="wifi_advanced_device_mac_address_title" msgid="6155800851233164411">"裝置 MAC 位址"</string>
-    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"隨機處理的 MAC 位址"</string>
+    <string name="wifi_advanced_randomized_mac_address_title" msgid="3930671320234553088">"隨機 MAC 位址"</string>
     <string name="wifi_advanced_ip_address_title" msgid="4265355419782184514">"IP 位址"</string>
     <string name="wifi_details_title" msgid="222735438574597493">"網絡詳細資料"</string>
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"子網絡遮罩"</string>
@@ -1223,8 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"開啟 (直至<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直至<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"目前沒有開啟「夜燈模式」"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位模式，裝置才能判斷日落和日出的時間。"</string>
-    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置資訊設定"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"系統需要裝置位置才可確定日落和日出時間。"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"開啟，直至日出"</string>
@@ -1275,7 +1274,7 @@
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"微光螢幕"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"何時顯示"</string>
     <string name="doze_title" msgid="1523090408230862316">"喚醒螢幕顯示通知"</string>
-    <string name="doze_summary" msgid="8252867381522942804">"它會在深色螢幕中開啟，以顯示新通知"</string>
+    <string name="doze_summary" msgid="8252867381522942804">"收到新通知時，關閉的螢幕會亮起"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"一律顯示時間和資料"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"此功能會增加耗電量"</string>
     <string name="title_font_size" msgid="570613010306330622">"字型大小"</string>
@@ -1652,7 +1651,7 @@
     <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"熱點、藍牙、以太網"</string>
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB、藍牙、以太網"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"熱點、USB、藍牙、以太網"</string>
-    <string name="tether_settings_summary_off" msgid="2526164899130351968">"目前沒有與其他裝置分享互聯網"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"目前沒有與其他裝置共用互聯網"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"網絡共享"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"不使用 Wi‑Fi 熱點"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"僅透過 USB 分享互聯網"</string>
@@ -2129,17 +2128,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"快速放大螢幕畫面，令內容更加清晰可見。&lt;br/&gt;&lt;br/&gt;&lt;b&gt;放大畫面的步驟如下：1. 用快速鍵啟用放大功能&lt;br/&gt; 2. 按一下畫面&lt;br/&gt; 3. 拖曳手指以移動畫面&lt;br/&gt; 4. 將兩指拉近或拉遠以調整縮放大小&lt;br/&gt; 5. 用快速鍵停用放大功能&lt;br/&gt;&lt;br/&gt;&lt;b&gt;暫時放大畫面的步驟如下：&lt;/b&gt;&lt;br/&gt; 1. 用快速鍵啟用放大功能&lt;br/&gt; 2. 按住畫面上任何地方&lt;br/&gt; 3. 拖曳手指以移動畫面&lt;br/&gt; 4. 放開手指即可停止放大畫面"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"開啟放大功能後，您可放大畫面。\n\n"<b>"如要縮放"</b>"，請開啟放大功能，然後輕按螢幕任何地方。\n"<ul><li>"用 2 隻或多隻手指拖曳，即可捲動螢幕"</li>\n<li>"用 2 隻或多隻手指縮放，即可調整縮放程度"</li></ul>\n\n<b>"如要暫時縮放"</b>"，請開啟放大功能，再按住螢幕任何地方。\n"<ul><li>"拖曳即可在螢幕上移動"</li>\n<li>"提起手指即可縮小至原大"</li></ul>\n\n"您無法在鍵盤或導覽列上使用放大功能。"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用無障礙功能按鈕即可開啟"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"㩒住音量鍵就可以開"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"㩒螢幕 3 下就可以開"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"使用新的無障礙手勢"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"如果要開啟或者關閉呢項功能，請輕按畫面底部的無障礙功能按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如果要切換唔同功能，請㩒住無障礙功能按鈕。"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"如果要開啟或者關閉呢項功能，請同時㩒住兩個音量鍵。"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"如果要啟用同停用放大功能，請喺螢幕上面嘅任何一個地方㩒三下。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"如果要開啟或者關閉呢項功能，請用 2 隻手指由螢幕底部向上掃。\n\n如果要切換唔同功能，請用 2 隻手指向上掃然後㩒住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"如果要開啟或者關閉呢項功能，請用 3 隻手指由螢幕底部向上掃。\n\n如果要切換唔同功能，請用 3 隻手指向上掃然後㩒住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"如果要開啟或者關閉無障礙功能，請用 2 隻手指由螢幕底部向上掃。\n\n如果要切換唔同功能，請用 2 隻手指向上掃然後㩒住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"如果要開啟或者關閉無障礙功能，請用 3 隻手指由螢幕底部向上掃。\n\n如果要切換唔同功能，請用 3 隻手指向上掃然後㩒住。"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"知道了"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙功能按鈕"</string>
@@ -2395,7 +2401,7 @@
     <string name="details_subtitle" msgid="2550872569652785527">"詳細使用狀況"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"調整電力使用"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"已包含套件"</string>
-    <string name="battery_tip_summary_title" msgid="321127485145626939">"應用程式正常運作中"</string>
+    <string name="battery_tip_summary_title" msgid="321127485145626939">"應用程式運作正常"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"手機的背景耗電量正常"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"平板電腦的背景耗電量正常"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"裝置的背景耗電量正常"</string>
@@ -2555,7 +2561,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"上次充滿電後的詳細用量"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"上次充滿電"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"電池在充滿電後的預計使用時間"</string>
-    <string name="battery_footer_summary" msgid="9125397752380281832">"電池用量資料只屬約數，將視乎使用情況而變動"</string>
+    <string name="battery_footer_summary" msgid="9125397752380281832">"電池用量資料為約數，並會根據使用情況有所變動"</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"在前景中執行"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"在背景中執行"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"電池用量"</string>
@@ -2720,7 +2726,7 @@
     <string name="notification_history_title" msgid="8821060912502593309">"通知記錄"</string>
     <string name="notification_history_today" msgid="5828496957208237230">"過去 24 小時"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"已延後"</string>
-    <string name="notification_history_dismiss" msgid="6180321217375722918">"最近已關閉"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"最近關閉的通知"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> 則通知</item>
       <item quantity="one"><xliff:g id="NUMBER_0">%d</xliff:g> 則通知</item>
@@ -3177,6 +3183,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"藍牙、駕駛模式"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"藍牙、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"藍牙"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"藍牙、Android Auto、駕駛模式、NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"藍牙、Android Auto、駕駛模式"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"藍牙、Android Auto、NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"由於 NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"應用程式和通知"</string>
@@ -3552,16 +3562,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"允許打擾"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允許應用程式發出音效、震動以及/或在螢幕上彈出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先次序"</string>
-    <!-- no translation found for notification_channel_summary_priority (7096292835591575858) -->
-    <skip />
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"在對話部分的頂部以小視窗顯示"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> 不支援對話專用設定。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"在下拉式面板中，將通知收合為一行"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"助您保持專注，不會發出聲音或震動"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"發出聲音或震動來吸引您的注意"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"裝置處於解鎖狀態時，系統會在螢幕頂部以橫額形式顯示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有「<xliff:g id="APP_NAME">%1$s</xliff:g>」通知"</string>
-    <!-- no translation found for notification_app_switch_label (4422902423925084193) -->
-    <skip />
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"所有「<xliff:g id="APP_NAME">%1$s</xliff:g>」通知"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調節通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~每天 <xliff:g id="NUMBER_1">%d</xliff:g> 個通知</item>
@@ -3603,12 +3611,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"畫中畫"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"允許畫中畫"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"當您離開正運作中的應用程式時，允許該應用程式建立畫中畫視窗 (例如方便您繼續觀看影片)。該視窗會顯示在您目前使用的其他應用程式上層。"</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"已連結的工作和個人應用程式"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"連結工作和個人應用程式"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"已連結"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"未連結"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"沒有已連結的應用程式"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"跨設定檔, 已連結的應用程式, 應用程式, 工作和個人"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"已連結的工作和個人應用程式"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"連結工作和個人應用程式"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"已連結"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"連結這些應用程式"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"已連結的應用程式會共用權限，並且可存取對方的資料。"</string>
@@ -3850,9 +3858,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"開啟"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
-    <string name="screen_pinning_guest_mode_description" msgid="5693881744751921914">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如要安全地與他人共用裝置，建議你改用訪客設定檔。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電子郵件內容)\n•		固定的應用程式可開啟其他應用程式\n\n請務必只針對你信任的人使用應用程式固定功能。"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到您取消固定為止。此功能可讓信任的朋友玩特定遊戲。\n\n固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能 \n2.	開啟「概覽」 \n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到您取消固定為止。此功能可讓信任的朋友玩特定遊戲。\n\n固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n如要安全地與他人共用裝置，建議您改用訪客使用者。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能 \n2.	開啟「概覽」 \n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電郵內容)\n•	 固定的應用程式可開啟其他應用程式\n\n僅與您信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須提供解鎖圖形"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定時必須輸入密碼"</string>
@@ -4371,7 +4379,7 @@
     <string name="premium_sms_warning" msgid="2192300872411073324">"付費短訊的費用可能高昂，並會增加您流動網絡供應商帳單的款項。如果您為應用程式開放權限，將可以透過該應用程式發送付費短訊。"</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"付費短訊權限"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"關閉"</string>
-    <string name="bluetooth_connected_summary" msgid="8043167194934315712">"已連接至 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="bluetooth_connected_summary" msgid="8043167194934315712">"已連接 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"已連接多部裝置"</string>
     <string name="demo_mode" msgid="6566167465451386728">"系統使用者介面示範模式"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"深色主題背景"</string>
@@ -4637,7 +4645,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允許應用程式控制 Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi，掃瞄和連線至 Wi-Fi 網絡、新增或移除網絡，或啟動僅限本機的熱點"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體的裝置"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"播放 <xliff:g id="LABEL">%s</xliff:g> 的輸出位置："</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"透過以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」中的媒體"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"此裝置"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"手機"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"平板電腦"</string>
@@ -4671,7 +4679,7 @@
     <string name="homepage_personal_settings" msgid="8312279476519359656">"建議"</string>
     <string name="choose_network_title" msgid="5355609223363859430">"選擇網絡"</string>
     <string name="network_disconnected" msgid="8281188173486212661">"連接已中斷"</string>
-    <string name="network_connected" msgid="7637745547242487795">"已連接"</string>
+    <string name="network_connected" msgid="7637745547242487795">"已連線"</string>
     <string name="network_connecting" msgid="6856124847029124041">"連接中…"</string>
     <string name="network_could_not_connect" msgid="676574629319069922">"無法連接"</string>
     <string name="empty_networks_list" msgid="6519489879480673428">"找不到網絡。"</string>
@@ -4817,10 +4825,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"在合成器層級啟用視窗模糊效果。裝置需要重新啟動。"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"私隱"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"權限、帳戶活動、個人資料"</string>
-    <!-- no translation found for quick_settings_media_player (5365779284386769352) -->
-    <skip />
-    <!-- no translation found for quick_settings_media_player_summary (7015497741849621452) -->
-    <skip />
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"繼續播放媒體內容"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"讓媒體播放器在「快速設定」中持續顯示 (需要重新啟動裝置)。"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"移除"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保留"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除這項建議嗎？"</string>
@@ -4869,7 +4875,7 @@
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"無法擷取系統堆轉儲"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"自動擷取系統堆轉儲"</string>
     <string name="automatic_system_heap_dump_summary" msgid="4060846186592886986">"當使用過多記憶體時，自動為 Android 系統擷取堆轉儲"</string>
-    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"解除連接"</string>
+    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"中斷連線"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"緊急通話"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"您的電訊商目前不支援透過 Wi-Fi 通話撥打緊急電話。\n裝置會自動切換至流動網絡以撥打緊急電話。\n您只可在流動網絡覆蓋的區域撥打緊急電話。"</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"使用 Wi‑Fi 撥打電話，以提升通話質素"</string>
@@ -4919,4 +4925,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"使用 2 張 SIM 卡時，此手機將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"使用 2 張 SIM 卡時，此平板電腦將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"使用 2 張 SIM 卡時，此裝置將只能使用 4G。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"暫停執行快取應用程式"</string>
 </resources>
