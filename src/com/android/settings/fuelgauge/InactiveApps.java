@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import androidx.preference.ListPreference;
@@ -41,21 +42,28 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class InactiveApps extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
-    private static final CharSequence[] SETTABLE_BUCKETS_NAMES =
+    private static final CharSequence[] FULL_SETTABLE_BUCKETS_NAMES =
             {"ACTIVE", "WORKING_SET", "FREQUENT", "RARE", "RESTRICTED"};
 
-    private static final CharSequence[] SETTABLE_BUCKETS_VALUES = {
+    private static final CharSequence[] REDUCED_SETTABLE_BUCKETS_NAMES =
+            Arrays.copyOfRange(FULL_SETTABLE_BUCKETS_NAMES, 0, 4);
+
+    private static final CharSequence[] FULL_SETTABLE_BUCKETS_VALUES = {
             Integer.toString(STANDBY_BUCKET_ACTIVE),
             Integer.toString(STANDBY_BUCKET_WORKING_SET),
             Integer.toString(STANDBY_BUCKET_FREQUENT),
             Integer.toString(STANDBY_BUCKET_RARE),
             Integer.toString(STANDBY_BUCKET_RESTRICTED)
     };
+
+    private static final CharSequence[] REDUCED_SETTABLE_BUCKETS_VALUES =
+            Arrays.copyOfRange(FULL_SETTABLE_BUCKETS_VALUES, 0, 4);
 
     private UsageStatsManager mUsageStats;
 
@@ -86,6 +94,13 @@ public class InactiveApps extends SettingsPreferenceFragment
         final Context context = getActivity();
         final PackageManager pm = context.getPackageManager();
         final String settingsPackage = context.getPackageName();
+        final boolean allowRestrictedBucket = Settings.Global.getInt(getContentResolver(),
+                Settings.Global.ENABLE_RESTRICTED_BUCKET,
+                Settings.Global.DEFAULT_ENABLE_RESTRICTED_BUCKET) == 1;
+        final CharSequence[] bucketNames = allowRestrictedBucket
+                ? FULL_SETTABLE_BUCKETS_NAMES : REDUCED_SETTABLE_BUCKETS_NAMES;
+        final CharSequence[] bucketValues = allowRestrictedBucket
+                ? FULL_SETTABLE_BUCKETS_VALUES : REDUCED_SETTABLE_BUCKETS_VALUES;
 
         Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
         launcherIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -96,8 +111,8 @@ public class InactiveApps extends SettingsPreferenceFragment
             p.setTitle(app.loadLabel(pm));
             p.setIcon(app.loadIcon(pm));
             p.setKey(packageName);
-            p.setEntries(SETTABLE_BUCKETS_NAMES);
-            p.setEntryValues(SETTABLE_BUCKETS_VALUES);
+            p.setEntries(bucketNames);
+            p.setEntryValues(bucketValues);
             updateSummary(p);
             // Don't allow Settings to change its own standby bucket.
             if (TextUtils.equals(packageName, settingsPackage)) {
