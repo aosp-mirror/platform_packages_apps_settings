@@ -195,7 +195,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
             controller.setCallback(mVolumeCallback);
             getSettingsLifecycle().addObserver(controller);
         }
-        getSettingsLifecycle().addObserver(use(RemoteVolumeGroupController.class));
     }
 
     // === Volumes ===
