@@ -145,5 +145,12 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.gesture_navigation_settings);
+            new BaseSearchIndexProvider(R.xml.gesture_navigation_settings) {
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return SystemNavigationPreferenceController.isGestureAvailable(context);
+                }
+            };
+
 }
