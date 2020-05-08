@@ -39,7 +39,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -131,5 +130,18 @@ public class WifiP2PPreferenceControllerTest {
         when(mLocationManager.isLocationEnabled()).thenReturn(false);
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference, times(2)).setEnabled(false);
+    }
+
+    @Test
+    public void updateState_withLocationDisabled_preferenceShouldBeDisable() {
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+        Intent dummyIntent = new Intent();
+        mController.displayPreference(mScreen);
+        verify(mWifiDirectPreference).setEnabled(true);
+
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+        mController.mLocationReceiver.onReceive(mContext, dummyIntent);
+        verify(mWifiDirectPreference).setEnabled(false);
     }
 }
