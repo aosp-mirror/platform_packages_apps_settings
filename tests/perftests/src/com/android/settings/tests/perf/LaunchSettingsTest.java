@@ -56,8 +56,10 @@ public class LaunchSettingsTest {
         }
     }
 
+    private static final String SCREEN_TIME_OUT = "7200000";
+    private static final String DEFAULT_SCREEN_TIMEOUT = "15000";
     private static final int TIME_OUT = 5000;
-    private static final int TEST_TIME = 10;
+    private static final int TEST_TIME = 100;
     private static final Pattern PATTERN = Pattern.compile("TotalTime:\\s[0-9]*");
     private static final Page[] PAGES;
 
@@ -67,7 +69,8 @@ public class LaunchSettingsTest {
                 new Page("android.settings.WIFI_SETTINGS", "Use Wi‑Fi", "Wi-Fi"),
                 new Page("android.settings.BLUETOOTH_SETTINGS", "Connected devices", "BlueTooth"),
                 new Page("android.settings.APPLICATION_SETTINGS", "App info", "Application"),
-                new Page("android.intent.action.POWER_USAGE_SUMMARY", "Battery", "Battery")
+                new Page("android.intent.action.POWER_USAGE_SUMMARY", "Battery", "Battery"),
+                new Page("android.settings.INTERNAL_STORAGE_SETTINGS", "Storage", "Storage")
         };
     }
 
@@ -75,6 +78,7 @@ public class LaunchSettingsTest {
     private UiDevice mDevice;
     private Instrumentation mInstrumentation;
     private Map<String, ArrayList<Integer>> mResult;
+    private String mDefaultScreenTimeout;
 
     @Before
     public void setUp() throws Exception {
@@ -82,6 +86,9 @@ public class LaunchSettingsTest {
         mDevice = UiDevice.getInstance(getInstrumentation());
         mInstrumentation = InstrumentationRegistry.getInstrumentation();
         mResult = new LinkedHashMap<>();
+        mDefaultScreenTimeout = mDevice.executeShellCommand(
+                "settings get system screen_off_timeout");
+        setScreenTimeOut(SCREEN_TIME_OUT);
         mDevice.pressHome();
         mDevice.waitForIdle(TIME_OUT);
 
@@ -94,6 +101,8 @@ public class LaunchSettingsTest {
     public void tearDown() throws Exception {
         putResultToBundle();
         mInstrumentation.sendStatus(0, mBundle);
+        resetScreenTimeout();
+        closeApp();
     }
 
     @Test
@@ -107,11 +116,11 @@ public class LaunchSettingsTest {
 
     private void executePreformanceTest(String action, String displayName, String title)
             throws Exception {
+        closeApp();
+        mDevice.waitForIdle(TIME_OUT);
         final String mString = mDevice.executeShellCommand("am start -W -a" + action);
         mDevice.wait(Until.findObject(By.text(displayName)), TIME_OUT);
         handleLaunchResult(title, mString);
-        closeApp();
-        mDevice.waitForIdle(TIME_OUT);
     }
 
     private void handleLaunchResult(String title, String s) {
@@ -149,5 +158,17 @@ public class LaunchSettingsTest {
 
     private String getAvg(ArrayList<Integer> launchResult) {
         return String.valueOf((int) launchResult.stream().mapToInt(i -> i).average().orElse(0));
+    }
+
+    private void setScreenTimeOut(String timeout) throws Exception {
+        mDevice.executeShellCommand("settings put system screen_off_timeout " + timeout);
+    }
+
+    private void resetScreenTimeout() throws Exception {
+        String timeout = DEFAULT_SCREEN_TIMEOUT;
+        if (!mDefaultScreenTimeout.isEmpty()) {
+            timeout = mDefaultScreenTimeout;
+        }
+        setScreenTimeOut(timeout);
     }
 }
