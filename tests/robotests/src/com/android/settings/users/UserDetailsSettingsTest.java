@@ -297,7 +297,8 @@ public class UserDetailsSettingsTest {
     public void initialize_userHasCallRestriction_shouldSetPhoneSwitchUnChecked() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
-        mUserManager.addUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
+        mUserManager.setUserRestriction(mUserInfo.getUserHandle(),
+                UserManager.DISALLOW_OUTGOING_CALLS, true);
 
         mFragment.initialize(mActivity, mArguments);
 

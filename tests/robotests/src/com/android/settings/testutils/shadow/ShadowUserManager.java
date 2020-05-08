@@ -45,7 +45,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     private static boolean sIsSupportsMultipleUsers;
 
     private final List<String> mBaseRestrictions = new ArrayList<>();
-    private final List<String> mUserRestrictions = new ArrayList<>();
     private final List<String> mGuestRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
     private final List<UserInfo> mUserProfileInfos = new ArrayList<>();
@@ -93,16 +92,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     public void addBaseUserRestriction(String restriction) {
         mBaseRestrictions.add(restriction);
-    }
-
-    @Implementation
-    protected boolean hasUserRestriction(@UserManager.UserRestrictionKey String restrictionKey,
-            UserHandle userHandle) {
-        return mUserRestrictions.contains(restrictionKey);
-    }
-
-    public void addUserRestriction(String restriction) {
-        mUserRestrictions.add(restriction);
     }
 
     @Implementation

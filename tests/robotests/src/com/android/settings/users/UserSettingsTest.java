@@ -277,6 +277,7 @@ public class UserSettingsTest {
 
     @Test
     public void updateUserList_canNotAddMoreUsers_shouldDisableAddUserWithSummary() {
+        mUserCapabilities.mCanAddUser = true;
         doReturn(false).when(mUserManager).canAddMoreUsers();
         doReturn(false).when(mAddUserPreference).isEnabled();
         doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
