@@ -86,7 +86,7 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
         final ContentResolver resolver = mContext.getContentResolver();
         boolean cardsAvailable = Settings.Secure.getInt(resolver, CARDS_AVAILABLE_KEY, 0) != 0;
         boolean cardsEnabled = Settings.Secure.getInt(resolver, CARDS_ENABLED_KEY, 0) != 0;
-        boolean controlsEnabled = Settings.Secure.getInt(resolver, CONTROLS_ENABLED_KEY, 0) != 0;
+        boolean controlsEnabled = Settings.Secure.getInt(resolver, CONTROLS_ENABLED_KEY, 1) != 0;
         return (cardsAvailable && cardsEnabled) || controlsEnabled;
     }
 

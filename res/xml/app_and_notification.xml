@@ -82,7 +82,7 @@
         settings:useAdminDisabledSummary="true">
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.cellbroadcastreceiver"
+            android:targetPackage="@string/cell_broadcast_receiver_package"
             android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
     </com.android.settingslib.RestrictedPreference>
 

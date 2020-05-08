@@ -584,6 +584,12 @@
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary" />
 
+        <ListPreference
+            android:key="cached_apps_freezer"
+            android:title="@string/cached_apps_freezer"
+            android:entries="@array/cached_apps_freezer_entries"
+            android:entryValues="@array/cached_apps_freezer_values" />
+
         <SwitchPreference
             android:key="show_notification_channel_warnings"
             android:title="@string/show_notification_channel_warnings"
