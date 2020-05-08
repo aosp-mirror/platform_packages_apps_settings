@@ -126,12 +126,13 @@ public class MobileNetworkActivity extends SettingsBaseActivity
                 : SUB_ID_NULL);
 
         final SubscriptionInfo subscription = getSubscription();
-        updateTitleAndNavigation(subscription);
         maybeShowContactDiscoveryDialog(subscription);
 
         // Since onChanged() will take place immediately when addActiveSubscriptionsListener(),
         // perform registration after mCurSubscriptionId been configured.
         registerActiveSubscriptionsListener();
+
+        updateSubscriptions(subscription);
     }
 
     @VisibleForTesting
