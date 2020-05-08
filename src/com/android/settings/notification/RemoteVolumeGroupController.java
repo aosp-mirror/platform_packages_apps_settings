@@ -30,6 +30,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.media.LocalMediaManager;
@@ -108,7 +109,6 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             mPreferenceCategory.setVisible(false);
             return;
         }
-        final CharSequence outputTitle = mContext.getText(R.string.media_output_title);
         final CharSequence castVolume = mContext.getText(R.string.remote_media_volume_option_title);
         mPreferenceCategory.setVisible(true);
 
@@ -116,6 +116,8 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
             if (mPreferenceCategory.findPreference(info.getId()) != null) {
                 continue;
             }
+            final CharSequence outputTitle = mContext.getString(R.string.media_output_label_title,
+                    Utils.getApplicationLabel(mContext, info.getClientPackageName()));
             // Add slider
             final RemoteVolumeSeekBarPreference seekBarPreference =
                     new RemoteVolumeSeekBarPreference(mContext);
