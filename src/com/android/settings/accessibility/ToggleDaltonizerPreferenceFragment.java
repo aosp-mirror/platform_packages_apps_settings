@@ -17,7 +17,7 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
-import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logServiceStatus;
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -168,7 +168,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        logServiceStatus(mComponentName.flattenToString(), enabled);
+        logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
 
