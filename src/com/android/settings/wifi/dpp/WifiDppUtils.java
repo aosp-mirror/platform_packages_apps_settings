@@ -83,10 +83,6 @@ public class WifiDppUtils {
     /** The data to recognize if it's a Wi-Fi hotspot for configuration */
     static final String EXTRA_IS_HOTSPOT = "isHotspot";
 
-    /** Used by {@link android.provider.Settings#ACTION_PROCESS_WIFI_EASY_CONNECT_URI} to
-     * indicate test mode UI should be shown. Test UI does not make API calls. Value is a boolean.*/
-    static final String EXTRA_TEST = "test";
-
     /**
      * Default status code for Easy Connect
      */
