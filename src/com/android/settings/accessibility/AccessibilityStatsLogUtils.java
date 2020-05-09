@@ -29,16 +29,15 @@ public final class AccessibilityStatsLogUtils {
      * Logs accessibility service name and its enabled status. Calls this when the user trigger
      * the accessibility service to be enabled/disabled.
      *
-     * @param packageName the package name of the service. Need to be the flattened {@link
-     *                    ComponentName}
-     * @param enabled     {@code true} if the service is enabled
+     * @param componentName component name of the service
+     * @param enabled       {@code true} if the service is enabled
      */
-    static void logServiceStatus(String packageName, boolean enabled) {
-        SettingsStatsLog.write(SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED, packageName,
-                convertToLoggingServiceStatus(enabled));
+    static void logAccessibilityServiceEnabled(ComponentName componentName, boolean enabled) {
+        SettingsStatsLog.write(SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED,
+                componentName.flattenToString(), convertToLoggingServiceEnabled(enabled));
     }
 
-    private static int convertToLoggingServiceStatus(boolean enabled) {
+    private static int convertToLoggingServiceEnabled(boolean enabled) {
         return enabled ? SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED__SERVICE_STATUS__ENABLED
                 : SettingsStatsLog.ACCESSIBILITY_SERVICE_REPORTED__SERVICE_STATUS__DISABLED;
     }
