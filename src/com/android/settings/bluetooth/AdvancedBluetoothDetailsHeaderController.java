@@ -63,6 +63,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         LifecycleObserver, OnStart, OnStop, OnDestroy, CachedBluetoothDevice.Callback {
     private static final String TAG = "AdvancedBtHeaderCtrl";
     private static final int LOW_BATTERY_LEVEL = 15;
+    private static final int CASE_LOW_BATTERY_LEVEL = 19;
     private static final boolean DBG = Log.isLoggable(TAG, Log.DEBUG);
 
     @VisibleForTesting
@@ -226,7 +227,7 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             final TextView textView = linearLayout.findViewById(R.id.bt_battery_summary);
             textView.setText(com.android.settings.Utils.formatPercentage(batteryLevel));
             textView.setVisibility(View.VISIBLE);
-            showBatteryIcon(linearLayout, batteryLevel, charging);
+            showBatteryIcon(linearLayout, batteryLevel, charging, batteryMetaKey);
         } else {
             // Hide it if it doesn't have battery information
             linearLayout.setVisibility(View.GONE);
@@ -237,8 +238,12 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         textView.setVisibility(View.VISIBLE);
     }
 
-    private void showBatteryIcon(LinearLayout linearLayout, int level, boolean charging) {
-        boolean enableLowBattery = level <= LOW_BATTERY_LEVEL && !charging;
+    private void showBatteryIcon(LinearLayout linearLayout, int level, boolean charging,
+            int batteryMetaKey) {
+        final int lowBatteryLevel =
+                batteryMetaKey == BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY
+                ? CASE_LOW_BATTERY_LEVEL : LOW_BATTERY_LEVEL;
+        final boolean enableLowBattery = level <= lowBatteryLevel && !charging;
         final ImageView imageView = linearLayout.findViewById(R.id.bt_battery_icon);
         if (enableLowBattery) {
             imageView.setImageDrawable(mContext.getDrawable(R.drawable.ic_battery_alert_24dp));
