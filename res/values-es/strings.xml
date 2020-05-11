@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Desconectar"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"No tienes permiso para cambiar los ajustes de Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Vincular nuevo dispositivo"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> será visible para dispositivos cercanos mientras los ajustes de Bluetooth estén abiertos."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Dirección de Bluetooth del teléfono: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Dirección de Bluetooth del tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -449,7 +450,7 @@
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has añadido el número máximo de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden añadir más huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar todas las huellas?"</string>
-    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Eliminar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
+    <string name="fingerprint_delete_title" msgid="1469865327307917858">"Quitar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres eliminar esta huella digital?"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"No podrás utilizar tus huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en las aplicaciones"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"No puedes utilizar tus huellas digitales para desbloquear el perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo"</string>
@@ -717,7 +718,7 @@
     <string name="bluetooth_advanced_titlebar" msgid="5369701494951467257">"Ajustes avanzados de Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="316627049372961941">"Cuando el Bluetooth está activado, tu dispositivo se puede comunicar con otros dispositivos con Bluetooth cercanos"</string>
     <string name="bluetooth_scanning_on_info_message" msgid="4069064120315578780">"Si el Bluetooth está activado, el dispositivo se puede comunicar con otros dispositivos Bluetooth cercanos.\n\nPara mejorar la experiencia de uso del dispositivo, las aplicaciones y los servicios pueden seguir buscando dispositivos cercanos en cualquier momento, aunque el Bluetooth esté desactivado. Esta opción se puede utilizar, por ejemplo, para mejorar los servicios y funciones basados en la ubicación, y puedes cambiarla en los "<annotation id="link">"ajustes de búsqueda"</annotation>"."</string>
-    <string name="ble_scan_notify_text" msgid="1358879010396045164">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden detectar dispositivos Bluetooth aunque esta conexión esté desactivada. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda de Bluetooth<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="ble_scan_notify_text" msgid="1358879010396045164">"Para mejorar la precisión de la ubicación, los servicios y las aplicaciones del sistema pueden seguir detectando dispositivos Bluetooth. Puedes cambiar esta opción en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda de Bluetooth<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"No se ha podido establecer conexión. Vuelve a intentarlo."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Detalles del dispositivo"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Dirección de Bluetooth del dispositivo: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -818,7 +819,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Para usar esta función, selecciona un proveedor de valoración de redes"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Para usar esta función, selecciona un proveedor de valoración de redes compatible"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Para mejorar la precisión de la ubicación, las aplicaciones y los servicios pueden seguir buscando redes Wi‑Fi en cualquier momento aunque esta conexión esté desactivada. Esta opción se puede utilizar, por ejemplo, para mejorar los servicios y funciones basados en la ubicación. Puedes cambiar este ajuste en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Para mejorar la precisión de la ubicación, las aplicaciones y los servicios pueden seguir buscando redes Wi‑Fi en cualquier momento incluso si el ajuste de Wi-Fi está desactivado. Esta opción se puede utilizar, por ejemplo, para mejorar los servicios y funciones basados en la ubicación. Puedes cambiar este ajuste en la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"Para mejorar la precisión de la ubicación, activa la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"No volver a mostrar"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Usar Wi-Fi en suspensión"</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Activar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Desactivar hasta las <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Luz nocturna desactivada"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Debe poderse acceder a la ubicación del dispositivo para conocer la hora de la salida y la puesta de sol."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Ajustes de ubicación"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Activar ahora"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Desactivar ahora"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Activar hasta el amanecer"</string>
@@ -2028,7 +2027,7 @@
     <string name="show_ime" msgid="4334255501724746849">"Usar teclado en pantalla"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Lo mantiene en pantalla mientras el teclado físico está activo"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Muestra accesos directos de teclado disponibles"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Muestra combinaciones de teclas disponibles"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Perfiles de trabajo y herramientas"</string>
     <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Teclado virtual para el trabajo"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
@@ -2107,7 +2106,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"El lector de pantalla está destinado principalmente a personas ciegas y con problemas de visión"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toca cualquier elemento de la pantalla para escucharlo"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencias de subtítulos"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliar"</string>
+    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliación"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Área de ampliación"</string>
     <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Habilitar la ampliación"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Selecciona qué áreas quieres ver al ampliar la pantalla"</string>
@@ -2118,27 +2117,34 @@
     <string name="accessibility_magnification_area_settings_window_screen" msgid="7431401975447232976">"Ampliar parte de la pantalla"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Ajustes de ampliación"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Ampliar con tres toques"</string>
-    <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliar con atajo"</string>
+    <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliación con acceso directo"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Amplía con una combinación de teclas y tres toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Información de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opciones"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Amplía la pantalla"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Toca tres veces para hacer zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toca un botón para ampliar"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Amplía rápidamente la pantalla para ver mejor el contenido.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Inicia la función de ampliación mediante el acceso directo.&lt;br/&gt; 2. Toca la pantalla.&lt;br/&gt; 3. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; 4. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; 5. Detén la función de ampliación mediante el acceso directo.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar contenido de forma temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Inicia la función de ampliación mediante el acceso directo.&lt;br/&gt; 2. Mantén pulsado cualquier punto de la pantalla.&lt;br/&gt; 3. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; 4. Levanta el dedo para dejar de ampliar."</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Amplía rápidamente la pantalla para ver mejor el contenido.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para iniciar la ampliación.&lt;br/&gt; 2. Toca la pantalla.&lt;br/&gt; 3. Arrastra dos dedos para moverte por la pantalla.&lt;br/&gt; 4. Pellizca con dos dedos para ajustar el zoom.&lt;br/&gt; 5. Detén la ampliación mediante el acceso directo.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar contenido de forma temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para la ampliación.&lt;br/&gt; 2. Mantén pulsado cualquier punto de la pantalla.&lt;br/&gt; 3. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; 4. Levanta el dedo para dejar de ampliar."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Si la ampliación está activada, puedes ampliar la pantalla.\n\n"<b>"Para ampliar"</b>", inicia la ampliación y toca la parte de la pantalla que quieras ampliar.\n"<ul><li>"Arrastra al menos dos dedos para desplazarte."</li>\n<li>"Pellizca la pantalla con al menos dos dedos para ajustar el zoom."</li></ul>\n\n<b>"Para ampliar elementos temporalmente"</b>", inicia la ampliación y mantén pulsada cualquier parte de la pantalla.\n"<ul><li>"Arrastra un dedo para desplazarte por la pantalla."</li>\n<li>"Levanta el dedo para reducir la imagen."</li></ul>\n\n"El teclado y la barra de navegación no se pueden ampliar."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa el botón de accesibilidad para abrir"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Mantén pulsado el botón de volumen para abrir"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tocar tres veces la pantalla para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usa el nuevo gesto de accesibilidad"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Para activar o desactivar esta función, toca el botón Accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>, situado en la parte inferior de la pantalla.\n\nPara cambiar de una función a otra, mantén pulsado el botón Accesibilidad."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Para activar o desactivar esta función, mantén pulsadas las dos teclas de volumen."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar o detener la función de ampliación, toca tres veces en cualquier parte de la pantalla."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Para activar o desactivar esta función, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara cambiar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Para activar o desactivar esta función, desliza tres dedos hacia arriba desde la parte inferior de la pantalla.\n\nPara cambiar de una función a otra, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Para activar o desactivar una función de accesibilidad, desliza hacia arriba con dos dedos, desde la parte inferior de la pantalla.\n\nPara cambiar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Para activar o desactivar una función de accesibilidad, desliza tres dedos hacia arriba, desde la parte inferior de la pantalla.\n\nPara cambiar de una función a otra, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Acceso directo a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón Accesibilidad"</string>
@@ -2151,7 +2157,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener pulsadas las teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triple toque en la pantalla"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toca la pantalla tres veces rápidamente (esta acción puede hacer que tu dispositivo funcione más lento)."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toca la pantalla tres veces rápidamente. Esta acción puede hacer que tu dispositivo funcione más lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Se ha definido <xliff:g id="SERVICE">%1$s</xliff:g> como preferencia de Accesibilidad. Para utilizar la ampliación, mantén pulsado el botón Accesibilidad y selecciona esa opción."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Se ha definido el gesto de accesibilidad para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar la función de ampliación, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla y mantenla pulsada. A continuación, selecciona la ampliación."</string>
@@ -2181,8 +2187,8 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Elige el tiempo que quieres tener para leer los mensajes que te piden que realices una acción, pero que se muestran solo temporalmente.\n\nEsta opción no funciona con todas las aplicaciones."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Retraso al mantener pulsado"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Invertir colores"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilizar inversión de color"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversión de color oscurece las pantallas de colores claros.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; La inversión de color también hace más claras las pantallas oscuras.&lt;/li&gt; &lt;li&gt; Los colores cambian en el contenido multimedia y en las imágenes.&lt;/li&gt; &lt;li&gt; Con el tema oscuro, puedes aplicar un fondo oscuro a las pantallas. El tema oscuro solo funciona con aplicaciones compatibles, mientras que la inversión de color funciona con todas las aplicaciones.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usar inversión de color"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversión de color oscurece las pantallas de colores claros.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; La inversión de color también hace más claras las pantallas oscuras.&lt;/li&gt; &lt;li&gt; Los colores cambiarán en el contenido multimedia y en las imágenes.&lt;/li&gt; &lt;li&gt; Con el tema oscuro, puedes aplicar un fondo oscuro a las pantallas. El tema oscuro solo funciona con aplicaciones compatibles, mientras que la inversión de color funciona con todas las aplicaciones.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automático (tiempo de permanencia)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"El clic automático funciona con un ratón conectado. Puedes definir que el cursor haga clic de forma automática cuando deje de moverse durante cierto tiempo."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Desactivado"</string>
@@ -2223,7 +2229,7 @@
       <item quantity="other">Se han guardado <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> audífonos</item>
       <item quantity="one">Se ha guardado <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> audífono</item>
     </plurals>
-    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Combinación de teclas activada"</string>
+    <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Acceso directo activado"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivada"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desactivado"</string>
@@ -2405,13 +2411,13 @@
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Mejorar la duración de la batería del dispositivo"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Activar el gestor de batería"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Activa el Ahorro de batería"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Puede que se agote la batería antes de lo normal"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Quizás se agote la batería antes de lo normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Ahorro de batería activado"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Es posible que algunas funciones estén limitadas"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Teléfono usado más de lo normal"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"El tablet se ha usado más de lo normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositivo se ha usado más de lo normal"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Puede que se agote la batería antes de lo normal"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Quizás se agote la batería antes de lo normal"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Tu teléfono se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tu tablet se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Tu dispositivo se ha usado más de lo normal y es posible te quedes sin batería antes de lo esperado.\n\nEstas son las aplicaciones que más batería consumen:"</string>
@@ -2809,7 +2815,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"En pausa al límite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincronización automática"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincr. autom. datos personales"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincr. autom. datos trabajo"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizar datos de trabajo automáticamente"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Cambiar ciclo…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Día del mes para restablecer ciclo de uso de datos:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ninguna aplicación ha usado datos en este periodo."</string>
@@ -2944,8 +2950,8 @@
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Falta un certificado. Prueba a editar el perfil."</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"Sistema"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Usuario"</string>
-    <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Inhabilitar"</string>
-    <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Habilitar"</string>
+    <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Desactivar"</string>
+    <string name="trusted_credentials_enable_label" msgid="5551204878588237991">"Activar"</string>
     <string name="trusted_credentials_remove_label" msgid="8975881053042174913">"Quitar"</string>
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Confiar"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"¿Quieres habilitar el certificado de CA del sistema?"</string>
@@ -3176,13 +3182,17 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, modo de conducción"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, modo de conducción y NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto y modo de conducción"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto y NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth y Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No está disponible porque la NFC está desactivada"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar esta opción, primero tienes que instalar una aplicación de pagos"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Aplicaciones y notificaciones"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplicaciones recientes y aplicaciones predeterminadas"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Las aplicaciones del perfil de trabajo no tienen acceso a las notificaciones."</string>
     <string name="account_dashboard_title" msgid="2735150283267749852">"Cuentas"</string>
-    <string name="account_dashboard_default_summary" msgid="2025250151574540063">"No se ha añadido ninguna cuenta"</string>
+    <string name="account_dashboard_default_summary" msgid="2025250151574540063">"Ninguna cuenta añadida"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Aplicaciones predeterminadas"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Idiomas, gestos, hora, copias de seguridad"</string>
     <string name="search_results_title" msgid="3360639917793022533">"Ajustes"</string>
@@ -3230,8 +3240,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"vibrante, RGB, sRGB, color, natural, estándar"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"temperatura, color, D65, D73, blanco, amarillo, azul, cálido, frío"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"deslizar para desbloquear, contraseña, patrón, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"fijar pantalla"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"reto de trabajo, perfil, trabajo"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"perfil de trabajo, perfil administrado, unificar, unificación, trabajo, perfil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestos"</string>
@@ -3450,13 +3459,13 @@
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"El historial de notificaciones está desactivado"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Activa el historial de notificaciones para ver las notificaciones recientes y las pospuestas"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"No hay ninguna notificación reciente"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Aquí aparecen las notificaciones recientes y pospuestas"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Aquí aparecerán las notificaciones recientes y pospuestas"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"ver ajustes de notificaciones"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"abrir notificación"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir que se pospongan las notificaciones"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar iconos de las notificaciones discretas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Los iconos de las notificaciones discretas no se muestran la barra de estado."</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Burbuja de notificación en el icono de la app"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Burbuja de notificación en el icono de la aplicación"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostrar barra de conversaciones recientes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbujas"</string>
     <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunas notificaciones pueden aparecer como burbujas en la pantalla"</string>
@@ -3536,7 +3545,7 @@
     <string name="important_bubble" msgid="7911698275408390846">"Convertir conversaciones prioritarias en burbujas"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Las conversaciones prioritarias se muestran en la parte superior del panel desplegable. También puedes configurarlas para que se muestren en burbujas y puedan interrumpirte aunque esté activado No molestar."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Aquí se mostrarán las conversaciones prioritarias y las modificadas"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Las conversaciones se mostrarán aquí cuando las marques como prioritarias o las modifiques de alguna otra manera. \n\nPara cambiar los ajustes de las conversaciones, haz lo siguiente: \nDesliza el dedo hacia abajo desde la parte superior de la pantalla para abrir el panel desplegable y, a continuación, mantén pulsada una conversación."</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Aquí se mostrarán las conversaciones cuando las marques como prioritarias o las modifiques de alguna manera. \n\nPara cambiar los ajustes de las conversaciones, haz lo siguiente: \nDesliza el dedo hacia abajo desde la parte superior de la pantalla para abrir el panel desplegable y, a continuación, mantén pulsada una conversación."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostrar en silencio y minimizar"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostrar en silencio"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Emitir sonido"</string>
@@ -3552,13 +3561,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupciones"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que la aplicación emita sonido, vibre o muestre notificaciones en la pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridad"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Aparece en la parte superior de la sección de conversaciones en forma de burbuja."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Se muestra en la parte superior de la sección de conversaciones y aparece en forma de burbuja"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> no es compatible con ajustes específicos de conversaciones."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la pantalla desplegable, mostrar las notificaciones en una sola línea"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Te ayuda a concentrarte sin sonido ni vibración"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Llama tu atención con sonido o vibración."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, muestra las notificaciones en la parte superior"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Aproximadamente <xliff:g id="NUMBER_1">%d</xliff:g> notificaciones al día</item>
@@ -3846,14 +3856,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introducir el PIN del administrador"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Fijar aplicaciones"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nAl fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a los datos personales. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nAl fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a los datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba a usar un usuario invitado. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Al fijar la aplicación: \n\n•		Es posible que se acceda a datos personales. \n		Entre estos datos se incluyen los contactos y el contenido de los correos. \n•		Es posible que las aplicaciones fijadas abran otras aplicaciones. \n\nUtiliza la función de fijar aplicaciones solo con personas de confianza."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar patrón de desbloqueo para desactivar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para desactivar"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicitar contraseña para desactivar"</string>
@@ -4117,7 +4123,7 @@
     <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras apps"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicaciones que se pueden mostrar sobre otras"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicaciones con permiso"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitido"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"No permitido"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar aplicaciones fuentes desconocidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Modificar ajustes del sistema"</string>
@@ -4381,13 +4387,13 @@
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Las aplicaciones que lo admitan también se cambiarán al tema oscuro"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entendido"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el tema oscuro"</string>
-    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ayudar a alargar la batería"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ayuda a alargar la batería"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Iconos para desarrolladores en ajustes rápidos"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones adb en el caso de sistemas que no se han vuelto a conectar durante un periodo predeterminado (7 días) o configurado por el usuario (mínimo 1 día)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Rastro de Winscope"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Sensores desactivados"</string>
-    <string name="managed_profile_settings_title" msgid="3400923723423564217">"Ajustes de perfil de trabajo"</string>
+    <string name="managed_profile_settings_title" msgid="3400923723423564217">"Ajustes del perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="7685402733942182110">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="2771343453017731940">"Permitir que tu organización busque contactos para identificar llamadas y contactos"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"Calendario con varios perfiles"</string>
@@ -4411,7 +4417,7 @@
     <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Utilizar el Administrador de Almacenamiento"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automático"</string>
     <string name="deletion_helper_manual_title" msgid="1068812971600327101">"Manual"</string>
-    <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Liberar espacio"</string>
+    <string name="deletion_helper_preference_title" msgid="6364023246849161274">"Liberar espacio ahora"</string>
     <string name="gesture_preference_title" msgid="8291899281322647187">"Gestos"</string>
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"Gestos rápidos para controlar el teléfono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"Gestos rápidos para controlar el tablet"</string>
@@ -4638,7 +4644,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Permitir que la aplicación controle la conexión Wi‑Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Permitir que esta aplicación active o desactive la conexión Wi‑Fi, busque redes Wi‑Fi y se conecte a ellas, añada o quite redes o inicie un punto de acceso local"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Reproducir contenido multimedia en"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"Reproducir <xliff:g id="LABEL">%s</xliff:g> en"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Reproducir <xliff:g id="LABEL">%s</xliff:g> en"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Este dispositivo"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Teléfono"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4658,7 +4664,7 @@
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Evitar sonar"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Pulsa el botón de encendido y el botón para subir el volumen a la vez para"</string>
-    <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Atajo para evitar que el dispositivo suene"</string>
+    <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Acceso directo para evitar que el dispositivo suene"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Vibrar"</string>
     <string name="prevent_ringing_option_mute" msgid="7446121133560945051">"Silenciar"</string>
     <string name="prevent_ringing_option_none" msgid="7776676007180834163">"No hacer nada"</string>
@@ -4792,7 +4798,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"No está disponible cuando se está conectado a <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Ver más"</string>
     <string name="see_less" msgid="2642392725363552793">"Ver menos"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Dispositivo para usar con <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Conectar a dispositivo"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"La aplicación <xliff:g id="APPNAME">%1$s</xliff:g> quiere usar una red Wi-Fi temporal para conectarse a tu dispositivo"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"No se ha encontrado ningún dispositivo. Comprueba que estén encendidos y listos para conectarse."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Reintentar"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Se ha producido un error. La aplicación ha cancelado la solicitud para elegir un dispositivo."</string>
@@ -4817,12 +4824,14 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Habilita el difuminado de ventanas a nivel de composición. Requiere reiniciar el dispositivo."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidad"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, actividad de la cuenta, datos personales"</string>
-    <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Eliminar"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Reanudar contenido multimedia"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Muestra y mantiene el reproductor multimedia en ajustes rápidos. Requiere reiniciar el dispositivo."</string>
+    <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Quitar"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Conservar"</string>
-    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"¿Eliminar esta sugerencia?"</string>
+    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"¿Quitar esta sugerencia?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Sugerencia eliminada"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Deshacer"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"Queda poco espacio de almacenamiento. <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado (disponible: <xliff:g id="FREE_SPACE">%2$s</xliff:g>)"</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"Queda poco espacio. <xliff:g id="PERCENTAGE">%1$s</xliff:g> usado - <xliff:g id="FREE_SPACE">%2$s</xliff:g> libre"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Enviar comentarios"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"¿Te gustaría darnos tu opinión sobre esta sugerencia?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> se ha copiado en el portapapeles."</string>
@@ -4903,7 +4912,7 @@
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usar esta opción, primero tienes que configurar un bloqueo de pantalla"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar control de dispositivos"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar tarjetas y pases"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para ir a los controles de los dispositivos conectados, mantén pulsado el botón de encendido"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acceder a los controles de los dispositivos conectados, mantén pulsado el botón de encendido"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Para acceder a tus métodos de pago y tarjetas de embarque (entre otras cosas), mantén pulsado el botón de encendido."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -4915,4 +4924,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Cuando este teléfono tenga dos tarjetas SIM, solo podrá utilizar 4G. "<annotation id="url">"Más información"</annotation></string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Cuando este tablet tenga dos tarjetas SIM, solo podrá utilizar 4G. "<annotation id="url">"Más información"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Cuando este dispositivo tenga dos tarjetas SIM, solo podrá utilizar 4G. "<annotation id="url">"Más información"</annotation></string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender ejecución de aplicaciones en caché"</string>
 </resources>

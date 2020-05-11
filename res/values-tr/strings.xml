@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Bağlantıyı kes"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Bluetooth ayarlarını değiştirmek için izniniz yok."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Yeni cihaz eşle"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, Bluetooth ayarları açıkken yakındaki cihazlar tarafından görülebilir."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Telefonun Bluetooth adresi: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Tabletin Bluetooth adresi: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -598,7 +599,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Bir sonraki denemenizde yanlış şifre girerseniz iş profiliniz ve verileri silinecek"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Çok fazla sayıda hatalı deneme yapıldı. Bu cihazın verileri silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Çok fazla sayıda hatalı deneme yapıldı. Bu kullanıcı silinecek."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Çok fazla sayıda hatalı denemede yapıldı. İş profiliniz ve verileri silinecek."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Çok fazla sayıda hatalı deneme yapıldı. İş profiliniz ve verileri silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Kapat"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">En az <xliff:g id="COUNT_1">%d</xliff:g> karakter olmalıdır</item>
@@ -939,7 +940,7 @@
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Birden fazla sertifika eklendi)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sistem sertifikalarını kullan"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Sağlama"</string>
-    <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Doğrulama"</string>
+    <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Doğrulama yapma"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Sertifika belirtilmedi. Bağlantınız gizli olmayacak."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Ağ adı çok uzun."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Alan adı belirtilmelidir."</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Şu saate kadar açık tut: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Şu saate kadar kapalı tut: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Gece Işığı şu anda açık değil"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Cihaz konumunun güneşin batışı ve doğuşu saatlerinizi belirlemesi gerekti."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Konum ayarları"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Şimdi aç"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Şimdi kapat"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Güneş doğana kadar açık tut"</string>
@@ -2125,20 +2124,20 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Ekranı yakınlaştırın"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Yakınlaştırmak için 3 defa dokunun"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Yakınlaştırmak için bir düğmeye dokunun"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"İçeriği daha net görüntülemek için ekranı hızlıca yakınlaştırın.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; 1. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; 2. Ekrana dokunun&lt;br/&gt; 3. Ekranda gezinmek için 2 parmağınızı sürükleyin&lt;br/&gt; 4. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; 5. Büyütmeyi durdurmak için kısayol kullanın&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Geçici bir süreliğine yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; 1. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; 2. Ekranda herhangi bir yere dokunup basılı tutun&lt;br/&gt; 3. Ekranda gezinmek için parmağınızı sürükleyin&lt;br/&gt; 4. Büyütmeyi durdurmak için parmağınızı kaldırın"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"İçeriği daha net görüntülemek için ekranı hızlıca yakınlaştırın.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; 1. Büyütmeyi başlatmak için kısayolu kullanın&lt;br/&gt; 2. Ekrana dokunun&lt;br/&gt; 3. Ekranda gezinmek için 2 parmağınızı sürükleyin&lt;br/&gt; 4. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; 5. Büyütmeyi durdurmak için kısayolu kullanın&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Geçici bir süreliğine yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; 1. Büyütmeyi başlatmak için kısayolu kullanın&lt;br/&gt; 2. Ekranda herhangi bir yere dokunup basılı tutun&lt;br/&gt; 3. Ekranda gezinmek için parmağınızı sürükleyin&lt;br/&gt; 4. Büyütmeyi durdurmak için parmağınızı kaldırın"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Büyütme açıldığında ekranınızda yakınlaştırma yapabilirsiniz.\n\n"<b>"Yakınlaştırmak için"</b>", büyütmeyi başlatın, ardından ekranda herhangi bir yere dokunun.\n"<ul><li>"Kaydırmak için 2 veya daha fazla parmağınızı sürükleyin"</li>\n<li>"Yakınlaştırmayı ayarlamak için 2 veya daha fazla parmağınızı birbirine yaklaştırın"</li></ul>\n\n<b>"Geçici olarak yakınlaştırmak için"</b>", büyütmeyi başlatın, ardından ekranda herhangi bir yere dokunup basılı tutun.\n"<ul><li>"Ekranda hareket etmek için sürükleyin"</li>\n<li>"Uzaklaştırmak için parmağınızı çekin"</li></ul>\n\n"Klavyede veya gezinme çubuğundayken yakınlaştırma yapamazsınız."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Açmak için erişilebilirlik düğmesini kullanın"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Açmak için ses düğmesini basılı tutun"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Açmak için ses düğmelerini basılı tutun"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Açmak için ekrana üç kez dokunun"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Açmak için hareketi kullanın"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Yeni erişilebilirlik hareketlerini kullanma"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Bu özelliği açmak veya kapatmak için ekranınızın altındaki erişilebilirlik düğmesine <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> dokunun.\n\nÖzellikler arasında geçiş yapmak için erişilebilirlik düğmesine dokunup basılı tutun."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Bu özelliği açmak veya kapatmak için ses tuşlarının ikisini birden basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Bu özelliği kullanmak için ekranınızın alt kısmındaki erişilebilirlik düğmesine <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> dokunun.\n\nÖzellikler arasında geçiş yapmak için erişilebilirlik düğmesine dokunup basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Bu özelliği kullanmak için ses tuşlarının ikisini birden basılı tutun."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Büyütmeyi başlatıp durdurmak için ekranınızda herhangi bir yere üç kez dokunun."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Bu özelliği açmak veya kapatmak için 2 parmağınızla ekranın altından yukarı doğru kaydırın.\n\nÖzellikler arasında geçiş yapmak için 2 parmağınızla yukarı kaydırıp basılı tutun."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Bu özelliği açmak veya kapatmak için 3 parmağınızla ekranın altından yukarı doğru kaydırın.\n\nÖzellikler arasında geçiş yapmak için 3 parmağınızla yukarı kaydırıp basılı tutun."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Erişilebilirlik özelliğini açmak veya kapatmak için 2 parmağınızla ekranın altından yukarı doğru kaydırın.\n\nÖzellikler arasında geçiş yapmak için 2 parmağınızla yukarı kaydırıp basılı tutun."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Erişilebilirlik özelliğini açmak veya kapatmak için 3 parmağınızla ekranın altından yukarı doğru kaydırın.\n\nÖzellikler arasında geçiş yapmak için 3 parmağınızla yukarı kaydırıp basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Bu özelliği kullanmak için 2 parmağınızla ekranın alt kısmından yukarı kaydırın.\n\nÖzellikler arasında geçiş yapmak için 2 parmağınızla yukarı kaydırıp basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Bu özelliği kullanmak için 3 parmağınızla ekranın alt kısmından yukarı kaydırın.\n\nÖzellikler arasında geçiş yapmak için 3 parmağınızla yukarı kaydırıp basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Bir erişilebilirlik özelliğini kullanmak için 2 parmağınızla ekranın alt kısmından yukarı kaydırın.\n\nÖzellikler arasında geçiş yapmak için 2 parmağınızla yukarı kaydırıp basılı tutun."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Bir erişilebilirlik özelliğini kullanmak için 3 parmağınızla ekranın alt kısmından yukarı kaydırın.\n\nÖzellikler arasında geçiş yapmak için 3 parmağınızla yukarı kaydırıp basılı tutun."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Anladım"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> kısayolu"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Erişilebilirlik düğmesi"</string>
@@ -3176,6 +3175,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, sürüş modu"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, sürüş modu, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, sürüş modu"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC kapalı olduğundan kullanılamaz"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Kullanmak için önce bir ödeme uygulaması yükleyin"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Uygulama ve bildirimler"</string>
@@ -3230,8 +3233,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"canlı, RGB, sRGB, renk, doğal, standart"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"renk, sıcaklık, D65, D73, beyaz, sarı, mavi, sıcak, soğuk"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"kilidini açmak için kaydırma, şifre, desen, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"ekran sabitleme"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"iş güvenlik sorusu, iş, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"iş profili, yönetilen profil, birleştir, birleştirme, iş, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"hareketler"</string>
@@ -3552,13 +3554,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Kesintilere izin ver"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Uygulamanın ses çıkarmasına, titreşim yapmasına ve/veya ekranda bildirimler göstermesine izin verin"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Öncelik"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Görüşme bölümünün üstünde baloncuk olarak gösterilir."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Görüşme bölümünün üstünde baloncuk olarak gösterilir."</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g>, görüşmeye özgü ayarları desteklemiyor."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Aşağı açılır gölgede, bildirimleri tek satır olacak şekilde daraltın"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ses veya titreşim olmadan odaklanmanıza yardımcı olur"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Ses veya titreşimle dikkatinizi çeker."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cihaz kilitli değilken, bildirimleri ekranın üst kısmında banner olarak göster"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Tüm \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" bildirimleri"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Tüm <xliff:g id="APP_NAME">%1$s</xliff:g> bildirimleri"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Uyarlanabilir Bildirimler"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Günde yaklaşık <xliff:g id="NUMBER_1">%d</xliff:g> bildirim</item>
@@ -3846,14 +3849,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Yönetici PIN\'ini girin"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Açık"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Kapalı"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Uygulama sabitleme"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Uygulama sabitleme, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir. \n\nBir uygulama sabitlendiğinde diğer uygulamaları açabilir. Kişisel verilere erişilebilir. \n\nUygulama sabitlemeyi kullanmak için: 	\n1.	Uygulama sabitlemeyi açın 	\n2.	Genel Bakış\'ı açın 	\n3.	Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Uygulama sabitleme özelliği, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir. \n\nBir uygulama sabitlendiğinde diğer uygulamaları açabilir. Kişisel verilere erişilebilir. \n\nCihazınızı güvenli bir şekilde başka biriyle paylaşmak isterseniz bunun yerine misafir kullanıcı özelliğini kullanın. \n\nUygulama sabitlemeyi kullanmak için: 	\n1.	Uygulama sabitlemeyi açın 	\n2.	Genel Bakış\'ı açın 	\n3.	Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Uygulama sabitlendiğinde: \n\n•	 Kişisel verilere erişilebilir \n		(ör. kişiler ve e-posta içerikleri) \n•		Sabitlenen uygulama diğer uygulamaları açabilir \n\nUygulama sabitlemeyi yalnızca güvendiğiniz kişilerle kullanın."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Sabitlemeyi kaldırmadan önce kilit açma desenini sor"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Sabitlemeyi kaldırmadan önce PIN\'i sor"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Sabitlemeyi kaldırmadan önce şifre sor"</string>
@@ -4015,7 +4014,7 @@
     <string name="high_power_off" msgid="317000444619279018">"Pil kullanımı optimize ediliyor"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Pil optimizasyonu kullanılamıyor"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Pil optimizasyonu uygulanmasın. Bu seçenek, pilinizi daha hızlı tüketebilir."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulamanın arka planda çalışmaya devam etsin mi?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulama arka planda çalışmaya devam etsin mi?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının her zaman arka planda çalıştırılmasına izin vermeniz pil ömrünü kısaltabilir. \n\nBunu daha sonra Ayarlar &gt; Uygulamalar ve bildirimler seçeneğinden değiştirebilirsiniz."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Son kez tamamen şarj olduktan sonra <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanıldı"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Güç yönetimi"</string>
@@ -4638,7 +4637,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Uygulamanın Kablosuz bağlantıyı kontrol etmesine izin ver"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Bu uygulamanın kablosuz bağlantıyı açmasına veya kapatmasına, kablosuz ağları taramasına, eklemesine veya kaldırmasına, kablosuz ağlara bağlanmasına ya da yalnızca yerel hotspot bağlantısı başlatmasına izin verin"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Medyayı oynatma yeri:"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"<xliff:g id="LABEL">%s</xliff:g> çalma yeri:"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> uygulamasındaki içeriğin oynatılacağı yer:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Bu cihaz"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4792,7 +4791,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> operatörüne bağlıyken kullanılamaz"</string>
     <string name="see_more" msgid="7499355691042812723">"Daha fazla"</string>
     <string name="see_less" msgid="2642392725363552793">"Daha az göster"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> ile kullanılacak cihaz"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Cihaza bağlanın"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> uygulaması cihazınıza bağlanmak için geçici bir kablosuz ağ kullanmak istiyor"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Hiçbir cihaz bulunamadı. Cihazların açık ve bağlanmaya hazır olduğundan emin olun."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Tekrar dene"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Bir sorun oluştu. Uygulama, cihaz seçme isteğini iptal etti."</string>
@@ -4817,6 +4817,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Oluşturma seviyesinde pencere bulanıklaştırmalarını etkinleştirir. Cihazın yeniden başlatılmasını gerektirir."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Gizlilik"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"İzinler, hesap etkinliği, kişisel veriler"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Medyayı devam ettir"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Medya oynatıcı Hızlı Ayarlar\'da gösterilir ve devam ettirilir. Yeniden başlatmayı gerektirir."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Kaldır"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Sakla"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Bu öneri kaldırılsın mı?"</string>
@@ -4915,4 +4917,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"2 SIM kullanırken bu telefon 4G ile sınırlı olur. "<annotation id="url">"Daha fazla bilgi"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIM kullanırken bu tablet 4G ile sınırlı olur. "<annotation id="url">"Daha fazla bilgi"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIM kullanırken bu cihaz 4G ile sınırlı olur. "<annotation id="url">"Daha fazla bilgi"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Önbelleğe alınan uygulamalarda yürütmeyi askıya al"</string>
 </resources>
