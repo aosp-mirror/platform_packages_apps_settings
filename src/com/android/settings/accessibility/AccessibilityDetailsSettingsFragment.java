@@ -139,9 +139,6 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                 AccessibilityUtils.getEnabledServicesFromSettings(getActivity());
         final boolean serviceEnabled = enabledServices.contains(componentName);
         String description = info.loadDescription(getActivity().getPackageManager());
-        if (TextUtils.isEmpty(description)) {
-            description = getString(R.string.accessibility_service_default_description);
-        }
 
         if (serviceEnabled && info.crashed) {
             // Update the summaries for services that have crashed.
