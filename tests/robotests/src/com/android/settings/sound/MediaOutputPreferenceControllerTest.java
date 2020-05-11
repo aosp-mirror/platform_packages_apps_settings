@@ -22,6 +22,7 @@ import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -33,7 +34,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageStats;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.VolumeProvider;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -60,8 +69,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
+import org.robolectric.shadows.ShadowPackageManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +93,8 @@ public class MediaOutputPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS_2 = "00:B2:B2:B2:B2:B2";
     private static final String TEST_DEVICE_ADDRESS_3 = "00:C3:C3:C3:C3:C3";
     private static final String TEST_DEVICE_ADDRESS_4 = "00:D4:D4:D4:D4:D4";
+    private static final String TEST_PACKAGE_NAME = "com.test.packagename";
+    private static final String TEST_APPLICATION_LABEL = "APP Test Label";
 
     @Mock
     private LocalBluetoothManager mLocalManager;
@@ -95,6 +108,10 @@ public class MediaOutputPreferenceControllerTest {
     private HearingAidProfile mHearingAidProfile;
     @Mock
     private AudioSwitchPreferenceController.AudioSwitchCallback mAudioSwitchPreferenceCallback;
+    @Mock
+    private MediaSessionManager mMediaSessionManager;
+    @Mock
+    private MediaController mMediaController;
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -111,6 +128,13 @@ public class MediaOutputPreferenceControllerTest {
     private MediaOutputPreferenceController mController;
     private List<BluetoothDevice> mProfileConnectedDevices;
     private List<BluetoothDevice> mHearingAidActiveDevices;
+    private List<MediaController> mMediaControllers = new ArrayList<>();
+    private MediaController.PlaybackInfo mPlaybackInfo;
+    private PlaybackState mPlaybackState;
+    private ShadowPackageManager mShadowPackageManager;
+    private ApplicationInfo mAppInfo;
+    private PackageInfo mPackageInfo;
+    private PackageStats mPackageStats;
 
     @Before
     public void setUp() {
@@ -122,6 +146,23 @@ public class MediaOutputPreferenceControllerTest {
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
+
+        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+        mPlaybackInfo = new MediaController.PlaybackInfo(
+                MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
+                VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
+                100,
+                10,
+                new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).build(),
+                null);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_PLAYING, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mMediaControllers.add(mMediaController);
 
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
@@ -227,6 +268,30 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_noActiveLocalPlayback_noTitle() {
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
+    public void updateState_withActiveLocalPlayback_checkTitle() {
+        initPackage();
+        mShadowPackageManager.addPackage(mPackageInfo, mPackageStats);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isEqualTo(
+                mContext.getString(R.string.media_output_label_title, TEST_APPLICATION_LABEL));
+    }
+
+    @Test
     public void click_launch_outputSwitcherSlice() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mController.handlePreferenceTreeClick(mPreference);
@@ -281,5 +346,17 @@ public class MediaOutputPreferenceControllerTest {
         when(mA2dpProfile.getActiveDevice()).thenReturn(null);
 
         assertThat(mController.findActiveDevice()).isNull();
+    }
+
+    private void initPackage() {
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+        mAppInfo = new ApplicationInfo();
+        mAppInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        mAppInfo.packageName = TEST_PACKAGE_NAME;
+        mAppInfo.name = TEST_APPLICATION_LABEL;
+        mPackageInfo = new PackageInfo();
+        mPackageInfo.packageName = TEST_PACKAGE_NAME;
+        mPackageInfo.applicationInfo = mAppInfo;
+        mPackageStats = new PackageStats(TEST_PACKAGE_NAME);
     }
 }
