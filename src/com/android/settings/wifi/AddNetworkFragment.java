@@ -34,7 +34,10 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 
-public class AddNetworkFragment extends InstrumentedFragment implements WifiConfigUiBase,
+/**
+ * A full screen UI component for users to edit and add a Wi-Fi network.
+ */
+public class AddNetworkFragment extends InstrumentedFragment implements WifiConfigUiBase2,
         View.OnClickListener {
 
     final static String WIFI_CONFIG_KEY = "wifi_config_key";
@@ -46,7 +49,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
-    private WifiConfigController mUIController;
+    private WifiConfigController2 mUIController;
     private Button mSubmitBtn;
     private Button mCancelBtn;
 
@@ -76,7 +79,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
         mSubmitBtn.setOnClickListener(this);
         mCancelBtn.setOnClickListener(this);
         ssidScannerButton.setOnClickListener(this);
-        mUIController = new WifiConfigController(this, rootView, null, getMode());
+        mUIController = new WifiConfigController2(this, rootView, null, getMode());
 
         return rootView;
     }
@@ -124,7 +127,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
     }
 
     @Override
-    public WifiConfigController getController() {
+    public WifiConfigController2 getController() {
         return mUIController;
     }
 
