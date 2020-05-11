@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"විසන්ධි කරන්න"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"බ්ලූටූත් සැකසීම් වෙනස් කිරීමට ඔබට අවසර නැත."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"නව උපාංගය යුගල කරන්න"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"බ්ලූටූත්"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"බ්ලූටූත් සැකසීම් විවෘත කරන අතරතුර ආසන්න උපකරණ වලට <xliff:g id="DEVICE_NAME">%1$s</xliff:g> දර්ශනය වේ."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"දුරකථනයේ බ්ලූටූත් ලිපිනය: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ටැබ්ලට් පරිගණකයේ බ්ලූටූත් ලිපිනය: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> තෙක් ක්‍රියාත්මක කරන්න"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> තෙක් ක්‍රියාවිරහිත කරන්න"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"දැනට රාත්‍රී ආලෝකය සක්‍රීය නැත"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"ඔබේ හිරු බසින සහ හිරු නගින වේලාව තීරණය කිරීමට උපාංග ස්ථානය අවශ්‍ය"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"ස්ථාන සැකසීම්"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"දැන් ක්‍රියාත්මක කරන්න"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"දැන් ක්‍රියාවිරහිත කරන්න"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"හිරු බැස යන තෙක් ක්‍රියාත්මක කරන්න"</string>
@@ -2128,17 +2127,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"අන්තර්ගතය වඩාත් පැහැදිලිව සංදර්ශනය කිරීමට තිරය මත ඉක්මනින් විශාලනය වැඩි කරන්න.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;විශාලනය වැඩි කිරීමට:&lt;/b&gt;&lt;br/&gt; 1. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න&lt;br/&gt; 2. තිරය තට්ටු කරන්න&lt;br/&gt; 3. තිරය වටා ගෙන යාමට ඇඟිලි 2කින් අදින්න&lt;br/&gt; 4. විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2කින් කොනහන්න&lt;br/&gt; 5. විශාලනය කිරීම නතර කිරීමට කෙටිමග භාවිත කරන්න&lt;br/&gt;&lt;br/&gt;&lt;b&gt;තාවකාලිකව විශාලනය වැඩි කිරීමට:&lt;/b&gt;&lt;br/&gt; 1. විශාලනය කිරීම ආරම්භ කිරීමට කෙටිමග භාවිත කරන්න&lt;br/&gt; 2. තිර‍යේ ඕනෑම තැනක ස්පර්ශ කර &amp; අල්ලා ගන්න&lt;br/&gt; 3. තිරය වටා ගෙන යාමට ඇඟිල්ල අදින්න&lt;br/&gt; 4. විශාලනය කිරීම නතර කිරීමට ඇඟිල්ල ඔසවන්න"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"විශාලනය ක්‍රියාත්මක කර ඇති විට, ඔබට ඔබේ තිරයේ දී විශාලනය වැඩි කළ හැකිය.\n\n"<b>"විශාලනය කිරීමට"</b>", විශාලනය ආරම්භ කර, අනතුරුව තිරයේ ඕනෑම තැනක තට්ටු කරන්න.\n"<ul><li>"අනුචලනය කිරීමට ඇඟිලි 2ක් හෝ ඊට වැඩි ගණනක් අදින්න"</li>\n<li>"විශාලනය සීරුමාරු කිරීමට ඇඟිලි 2ක් හෝ ඊට වැඩි ගණනක් කොනහන්න"</li></ul>\n\n<b>"තාවකාලිකව විශාලනය කිරීමට"</b>", විශාලනය ආරම්භ කර, අනතුරුව තිරයේ ඕනෑම තැනක ස්පර්ශ කර &amp; අල්ලාගෙන සිටින්න.\n"<ul><li>"තිරය වටා චලනය කිරීමට අදින්න"</li>\n<li>"විශාලනය අඩු කිරීමට ඇඟිල්ල ඔසවන්න"</li></ul>\n\n"ඔබට යතුරු පුවරුවේ හෝ සංචාලන තීරුවේ දී විශාලනය වැඩි කළ නොහැකිය."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"විවෘත කිරීමට ප්‍රවේශ්‍යතා බොත්තම භාවිත කරන්න"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"විවෘත කිරීමට හඬ පරිමා යතුර අල්ලාගෙන සිටින්න"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"විවෘත කිරීමට තිරය තෙවරක් තට්ටු කරන්න"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"විවෘත කිරීමට ඉංගිතය භාවිත කරන්න"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"නව ප්‍රවේශ්‍යතා ඉංගිතය භාවිත කරන්න"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"මෙම විශේෂාගය ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, ඔබේ තිරයේ පහළින් ඇති <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> ප්‍රවේශ්‍යතා බොත්තම තට්ටු කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ප්‍රවේශ්‍යතා බොත්තම ස්පර්ශ කර අල්ලාගෙන සිටින්න."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"මෙම යෙදුම ක්‍රියාත්මක හෝ ක්‍රියා විරහිත කිරීමට, හඬ පරිමා යතුරු දෙකම ඔබා අල්ලාගෙන සිටින්න."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"විශාලනය ආරම්භ කිරීමට සහ නතර කිරීමට, ඔබේ තිරයේ ඕනෑම තැනක තෙවරක් තට්ටු කරන්න."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"මෙම විශේෂාංගය ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, ඇඟිලි 2කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 2කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"මෙම විශේෂාංගය ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, ඇඟිලි 3කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 3කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"ප්‍රවේශ්‍යතා විශේෂාංගයක් ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, ඇඟිලි 2කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 2කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"ප්‍රවේශ්‍යතා විශේෂාංගයක් ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, ඇඟිලි 3කින් තිරයේ පහළ සිට ඉහළට ස්වයිප් කරන්න.\n\nවිශේෂාංග අතර මාරු වීමට, ඇඟිලි 3කින් ඉහළට ස්වයිප් කර අල්ලාගෙන සිටින්න."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"තේරුණා"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> කෙටිමඟ"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ප්‍රවේශ්‍යතා බොත්තම"</string>
@@ -3176,6 +3182,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"බ්ලූටූත්, රිය පැවීම් ප්‍රකාරය"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"බ්ලූටූත්, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"බ්ලූටූත්"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"බ්ලූටූත්, Android Auto, ධාවන ප්‍රකාරය, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"බ්ලූටූත්, Android Auto, ධාවන ප්‍රකාරය"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"බ්ලූටූත්, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"බ්ලූටූත්, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ක්‍රියාවිරහිත නිසා ලබා ගත නොහැකිය"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"භාවිත කිරීමට, පළමුව ගෙවීම් යෙදුමක් ස්ථාපනය කරන්න"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"යෙදුම් සහ දැනුම්දීම්"</string>
@@ -3230,8 +3240,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"දීප්තිමත්, rgb, srgb, වර්ණය, ස්වභාවික, සම්මත"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"වර්ණය, උෂ්ණත්වය, D65, D73, සුදු, කහ, නිල්, උණුසුම්, සිසිල්"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"අගුලු හැරීමට ස්ලයිඩ කරන්න, මුරපදය, රටාව, pin"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"තිර ඇමිණීම"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"වැඩ අභියෝගය, වැඩ, පැතිකඩ"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"කාර්යාල පැතිකඩ, කළමනාකරණය කළ පැතිකඩ, ඒකාබද්ධ, ඒකාබද්ධ කිරීම, කාර්යාල, පැතිකඩ"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ඉංගිති"</string>
@@ -3552,13 +3561,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"බාධා කිරීම්වලට ඉඩ දෙන්න"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"යෙදුමට ශබ්ද ඇති කිරීමට, කම්පනය වීමට, සහ/හෝ තිරය මත දැනුම්දීම් උත්පතනයට ඉඩ දෙන්න"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"ප්‍රමුඛතාව"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"සංවාද කොටසේ ඉහළම පෙන්වන අතර බුබුළක් ලෙස දිස් වේ."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"සංවාද කොටසේ ඉහළම පෙන්වන අතර බුබුළක් ලෙස දිස් වේ"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> සංවාදය නිශ්චිත සැකසීම්වලට සහාය නොදක්වයි."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"පහළට ඇදීමේ සෙවණැල්ලේ, දැනුම්දීම් එක පේළියට හකුළන්න"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"ඔබට ශබ්දය හෝ කම්පනය නොමැතිව අවධානය යොමු කිරීමට උදවු කරයි"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"ශබ්දය හෝ කම්පනය සමඟ ඔබේ අවධානය ලබා ගනී"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"උපාංගය අඟුලු අරිනු ලැබූ විට, තිරයේ මුදුනින් දැනුම්දීම් බැනරයක් ලෙස පෙන්වන්න"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"සියලු \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" දැනුම් දීම්"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"සියලු <xliff:g id="APP_NAME">%1$s</xliff:g> දැනුම් දීම්"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"අනුවර්තී දැනුම්දීම්"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">දිනකට දැනුම්දීම් ~<xliff:g id="NUMBER_1">%d</xliff:g> ක්</item>
@@ -3846,14 +3856,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"පරිපාලක PIN එක ඇතුල් කරන්න"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"ක්‍රියාත්මකයි"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"අක්‍රියයි"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"යෙදුම ඇමිණීම"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"යෙදුම ඇමිණීම ඔබ එය ඇමිණීමෙන් ඉවත් කරන තෙක් වත්මන් යෙදුම තබා ගැනීමට ඉඩ දේ. උදාහරණයක් වශයෙන් විශ්වාසි මිතුරෙකුට විශේෂිත ගේම් එකක් ක්‍රීඩා කිරීමට ඉඩ දීමට මෙම විශේෂාංගය භාවිත කළ හැකිය. \n\nයෙදුමක් ඇමුණු විට, ඇමුණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකි අතර පෞද්ගලික දත්ත ප්‍රවේශ විය හැකිය. \n\nයෙදුම ඇමිණීම භාවිත කිරීමට: 	\n1.	යෙදුම ඇමිණීම ක්‍රියාත්මක කරන්න 	\n2.	දළ විශ්ලේෂණය විවෘත කරන්න 	\n3.	තිරයේ ඉහළින් ඇති යෙදුම් අයිකනය තට්ටු කර අනතුරුව ඇමුණුම තට්ටු කරන්න"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"යෙදුම ඇමිණීම ඔබ එය ඇමිණීමෙන් ඉවත් කරන තෙක් වත්මන් යෙදුම තබා ගැනීමට ඉඩ දේ. උදාහරණයක් වශයෙන් විශ්වාසි මිතුරෙකුට විශේෂිත ගේම් එකක් ක්‍රීඩා කිරීමට ඉඩ දීමට මෙම විශේෂාංගය භාවිත කළ හැකිය. \n\nයෙදුමක් ඇමුණු විට, ඇමුණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකි අතර පෞද්ගලික දත්ත ප්‍රවේශ විය හැකිය. \n\nඔබට ඔබේ උපාංගය යම් කෙනෙකු සමග ආරක්ෂිතව බෙදා ගැනීමට අවශ්‍ය නම්, ඒ වෙනුවට ආරාධිත පරිශීලකයකු භාවිත කිරීමට උත්සාහ කරන්න. \n\nයෙදුම ඇමිණීම භාවිත කිරීමට: 	\n1.	යෙදුම ඇමිණීම ක්‍රියාත්මක කරන්න 	\n2.	දළ විශ්ලේෂණය විවෘත කරන්න 	\n3.	තිරයේ ඉහළින් ඇති යෙදුම් අයිකනය තට්ටු කර අනතුරුව ඇමුණුම තට්ටු කරන්න"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"යෙදුම අමුණා ඇති විට: \n\n•		පෞද්ගලික දත්ත ප්‍රවේශ විය හැකිය \n		(සම්බන්ධතා සහ ඉ-තැපැල් අන්තර්ගත යනාදි) \n•	ඇමුණූ යෙදුම වෙනත් යෙදුම් විවෘත කළ හැකිය \n\nඔබ විශ්වාස කරන පුද්ගලයන් සමග පමණක් යෙදුම ඇමිණීම භාවිත කරන්න."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"ගැලවීමට පෙර අගුළු අරින රටාව සඳහා අසන්න"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ගැලවීමට පෙර PIN විමසන්න"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"ගැලවීමට පෙර මුරපදය විමසන්න"</string>
@@ -4638,7 +4644,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Wi-Fi පාලනය කිරීමට යෙදුමට ඉඩ දෙන්න"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"මෙම යෙදුමට Wi-Fi ක්‍රියාත්මක හෝ ක්‍රියාවිරහිත කිරීමට, Wi-Fi ජාල වෙත සම්බන්ධ වීමට, ජාල එක් කිරීමට හෝ ඉවත් කිරීමට, හෝ ස්ථානීය-පමණි හොට්ස්පොට් එකක් ඇරඹීමට ඉඩ දෙන්න"</string>
     <string name="media_output_title" msgid="8283629315159510680">"මාධ්‍ය වාදනය කරන්න"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"මෙයට <xliff:g id="LABEL">%s</xliff:g> වාදනය කරන්න"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> මත වාදනය කරන්න"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"මෙම උපාංගය"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"දුරකථනය"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"ටැබ්ලට්"</string>
@@ -4792,7 +4798,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"<xliff:g id="CARRIER">%1$s</xliff:g> වෙත සම්බන්ධ වූ විට නොමැත"</string>
     <string name="see_more" msgid="7499355691042812723">"තව බලන්න"</string>
     <string name="see_less" msgid="2642392725363552793">"අඩුවෙන් බලන්න"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"<xliff:g id="APPNAME">%1$s</xliff:g> සමඟ භාවිත කළ යුතු උපාංගය"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"උපාංගයට සම්බන්ධ වන්න"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> යෙදුමට ඔබේ උපාංගයට සම්බන්ධ වීමට තාවකාලික Wi‑Fi ජාලයක් භාවිත කිරීමට අවශ්‍යය"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"උපාංග කිසිවක් හමු නොවිය. උපාංග සක්‍රීය කර තිබෙන අතර සම්බන්ධ කිරීමට ලද හැකි බව තහවුරු කර ගන්න."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"නැවත උත්සාහ කරන්න"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"යම් දෙයක් ඇත. යෙදුම උපාංගයක් තේරීමට කළ ඉල්ලීම අවලංගු කර ඇත."</string>
@@ -4817,6 +4824,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"සංයුක්ත මට්ටමේදී කවුළු නොපැහැදිලි කිරීම් සබලයි. උපාංගය යළි පණ ගැන්වීම අවශ්‍යය."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"රහස්‍යතාව"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"අවසර, ගිණුම් ක්‍රියාකාරකම, පුද්ගලික දත්ත"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"මාධ්‍ය නැවත ආරම්භ කිරීම"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"ක්ෂණික සැකසීම්වල මාධ්‍ය වාදකය පෙන්වන අතර නොවෙනස්ව පවතී. යළි පණ ගැන්වීම අවශ්‍යය."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"ඉවත් කරන්න"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"තබා ගන්න"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"මෙම යෝජනාව ඉවත් කරන්නද?"</string>
@@ -4915,4 +4924,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"2 SIMs භාවිත කරන විට, මෙම දුරකථනය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIMs භාවිත කරන විට, මෙම ටැබ්ලට් පරිගණකය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIMs භාවිත කරන විට, මෙම උපාංගය 4Gට සීමා වනු ඇත. "<annotation id="url">"තව දැන ගන්න"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"කෑෂ් කළ යෙදුම් සඳහා ක්‍රියාත්මක කිරීම අතහිටුවන්න"</string>
 </resources>
