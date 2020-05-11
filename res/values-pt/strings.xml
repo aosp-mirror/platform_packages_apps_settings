@@ -170,7 +170,7 @@
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Evitar proxy para"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Restaurar padrões"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Concluído"</string>
-    <string name="proxy_hostname_label" msgid="5504327742505848063">"Hostname do proxy"</string>
+    <string name="proxy_hostname_label" msgid="5504327742505848063">"Nome do host do proxy"</string>
     <string name="proxy_error" msgid="3615905975598084126">"Atenção"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"O nome de host digitado não é válido."</string>
@@ -283,7 +283,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Imediatamente após o tempo limite, exceto quando estiver desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> após o tempo limite, exceto quando estiver desbloqueado por <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Mostrar informações do proprietário na tela de bloqueio"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Adicionar texto à tela de bloqueio"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Adicionar texto na tela de bloqueio"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Ativar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Desativada pelo administrador"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Mostrar opção de bloqueio total"</string>
@@ -928,7 +928,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Senha do Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Senha do ponto de acesso: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conexão automática"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permita que o smartphone se conecte automaticamente quando estiver perto dessa rede"</string>
+    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permitir que o smartphone conecte automaticamente a essa rede quando estiver perto dela"</string>
     <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Permita que o tablet se conecte automaticamente quando estiver perto dessa rede"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Adicionar dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Use um código QR para adicionar um dispositivo a esta rede"</string>
@@ -1047,7 +1047,7 @@
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Use o ponto de acesso para criar uma rede Wi‑Fi para outros dispositivos. O ponto de acesso fornece Internet usando sua conexão de dados móveis. Pode haver cobrança adicional para dados móveis."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Os apps podem criar um ponto de acesso para compartilhamento de conteúdo com dispositivos nas proximidades."</string>
     <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Desativar ponto de acesso automaticamente"</string>
-    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Quando nenhum dispositivo está conectado"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Quando nenhum dispositivo estiver conectado"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Ativando o ponto de acesso..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Desativando o ponto de acesso..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"A rede <xliff:g id="NETWORK_SSID">%1$s</xliff:g> está ativa"</string>
@@ -1274,7 +1274,7 @@
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Visualização na tela"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Quando mostrar"</string>
     <string name="doze_title" msgid="1523090408230862316">"Ativar tela para notificações"</string>
-    <string name="doze_summary" msgid="8252867381522942804">"Quando a tela está escura, ela é ativada para novas notificações"</string>
+    <string name="doze_summary" msgid="8252867381522942804">"Quando a tela está escura, ela é ativada quando chegam notificações"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Sempre mostrar hora e informações"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Maior uso da bateria"</string>
     <string name="title_font_size" msgid="570613010306330622">"Tamanho da fonte"</string>
@@ -2127,24 +2127,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Aumente o zoom rapidamente na tela para ver o conteúdo com mais clareza.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para aumentar o zoom:&lt;/b&gt;&lt;br/&gt; 1. Use o atalho para iniciar a ampliação&lt;br/&gt; 2. Toque na tela&lt;br/&gt; 3. Arraste dois dedos para navegar pela tela&lt;br/&gt; 4. Faça um gesto de pinça com dois dedos para ajustar o zoom&lt;br/&gt; 5. Use o atalho para interromper a ampliação.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para aumentar o zoom temporariamente:&lt;/b&gt;&lt;br/&gt; 1. Use o atalho para iniciar a ampliação&lt;br/&gt; 2. Toque em qualquer lugar da tela e mantenha pressionado&lt;br/&gt; 3. Arraste o dedo para se mover pela tela&lt;br/&gt; 4. Solte para interromper a ampliação."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando a ampliação está ativada, você pode aumentar o zoom na tela.\n\n"<b>"Para aplicar zoom"</b>", inicie a ampliação e toque em qualquer lugar da tela.\n"<ul><li>"Arraste dois dedos ou mais para rolar a tela."</li>\n<li>"Faça um gesto de pinça com dois ou mais dedos para ajustar o zoom."</li></ul>\n\n<b>"Para aplicar zoom temporariamente"</b>", inicie a ampliação e depois toque em qualquer ponto na tela e mantenha-o pressionado.\n"<ul><li>"Arraste para mover a tela."</li>\n<li>"Levante o dedo para diminuir o zoom."</li></ul>\n\n"Não é possível aumentar o zoom no teclado e na barra de navegação."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usar o botão de acessibilidade para abrir"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantenha as teclas de volume pression. para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toque três vezes na tela para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usar o novo gesto de acessibilidade"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esse recurso, toque no botão de acessibilidade <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na parte inferior da tela.\n\nPara alternar entre os recursos, toque no botão de acessibilidade e o mantenha pressionado."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para usar esse recurso, toque nas duas teclas de volume e as mantenha pressionadas."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar ou interromper a ampliação, toque três vezes em qualquer lugar da tela."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esse recurso, deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre os recursos, deslize de baixo para cima com dois dedos, sem soltar."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Para usar esse recurso, deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre os recursos, deslize de baixo para cima com três dedos, sem soltar."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com dois dedos, sem soltar."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com três dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ok"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão de acessibilidade"</string>
@@ -2155,8 +2148,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com dois dedos, sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com três dedos, sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter as teclas de volume pressionadas"</string>
+    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Toque nas duas teclas de volume e as mantenha pressionadas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tocar na tela três vezes"</string>
+    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toque rapidamente na tela três vezes. Este atalho pode deixar o dispositivo mais lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avançado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botão Acessibilidade está definido para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar a ampliação, toque nesse botão, mantenha-o pressionado e selecione a ampliação."</string>
@@ -2414,7 +2411,7 @@
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"A bateria pode acabar antes do normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Economia de bateria ativada"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alguns recursos podem ser limitados"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Smartphone usado além do normal"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Smartphone usado mais que o normal"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet usado além do normal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Dispositivo usado além do normal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"A bateria pode acabar antes do esperado"</string>
@@ -3515,7 +3512,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificações confidenciais do perfil de trabalho"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar conteúdo confidencial do perfil de trabalho quando estiver bloqueado"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo o conteúdo das notificações"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar info confidencial apenas se desbloqueado"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar conteúdo confidencial quando desbloqueado"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar notificações"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como você quer que a tela de bloqueio seja exibida?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Tela de bloqueio"</string>
@@ -4316,7 +4313,7 @@
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Adicionar outra impressão digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloqueie com um dedo diferente"</string>
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"Ativar"</string>
-    <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Ativará em <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Será ativada em <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desativado"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Ativar agora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desativar agora"</string>
@@ -4460,7 +4457,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Para verificar a hora, as notificações e outras informações, pegue o smartphone."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Para verificar a hora, as notificações e outras informações, pegue o tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Para verificar a hora, as notificações e outras informações, pegue o dispositivo."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tocar para verificar o smartphone"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tocar na tela para verificar smartphone"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tocar para verificar o tablet"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tocar para verificar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para verificar a hora, as notificações e outras informações, toque na tela."</string>

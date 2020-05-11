@@ -79,7 +79,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="default" msgid="1934297101665686854">"Il telefono verrà scollegato da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="336622948210457991">"Il tablet verrà scollegato da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="6944790936166852428">"Il dispositivo verrà scollegato da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Scollega"</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Disconnetti"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Non sei autorizzato a modificare le impostazioni Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Accoppia nuovo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
@@ -900,10 +900,10 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Inquadra il codice QR qui sotto per aggiungere il dispositivo alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Scansiona codice QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Inquadra il codice QR nel riquadro sottostante per connetterti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Collegati alla rete Wi‑Fi eseguendo la scansione di un codice QR"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Connettiti alla rete Wi‑Fi eseguendo la scansione di un codice QR"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Condividi Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Esegui la scansione di questo codice QR per collegarti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\" e condividere la password"</string>
-    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Esegui la scansione di questo codice QR per collegarti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Esegui la scansione di questo codice QR per connetterti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\" e condividere la password"</string>
+    <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Esegui la scansione di questo codice QR per connetterti alla rete \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Riprova. Se il problema persiste, contatta il produttore del dispositivo"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Si è verificato un problema"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Assicurati che il dispositivo sia collegato alla corrente, carico e acceso"</string>
@@ -1650,7 +1650,7 @@
     <string name="tether_settings_summary_hotspot_and_bluetooth_and_ethernet" msgid="4104425838594994441">"Hotspot, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Hotspot, USB, Bluetooth, Ethernet"</string>
-    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Condivisione della connessione a Internet con altri dispositivi non attiva"</string>
+    <string name="tether_settings_summary_off" msgid="2526164899130351968">"Connessione a Internet non condivisa con altri dispositivi"</string>
     <string name="tethering_interface_options" msgid="7575535888135143650">"Tethering"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Non usare hotspot Wi‑Fi"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Condividi Internet solo tramite USB"</string>
@@ -1703,7 +1703,7 @@
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"Accesso recente alla posizione"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Vedi dettagli"</string>
-    <string name="location_no_recent_apps" msgid="6814206631456177033">"Nessuna applicazione ha richiesto la posizione di recente"</string>
+    <string name="location_no_recent_apps" msgid="6814206631456177033">"Nessuna app ha richiesto la posizione di recente"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nessuna app ha effettuato di recente l\'accesso alla posizone"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Elevato utilizzo della batteria"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Basso utilizzo della batteria"</string>
@@ -2155,8 +2155,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con due dita e tieni premuto."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra le funzionalità, scorri verso l\'alto con tre dita e tieni premuto."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tieni premuti i tasti del volume"</string>
+    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tieni premuti entrambi i tasti del volume."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tocca tre volte lo schermo"</string>
+    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Tocca velocemente lo schermo tre volte. Questa scorciatoia potrebbe rallentare il dispositivo."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzate"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Il pulsante Accessibilità è impostato su <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilizzare l\'ingrandimento, tocca e tieni premuto il pulsante Accessibilità, quindi seleziona l\'ingrandimento."</string>
@@ -4874,7 +4878,7 @@
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Impossibile acquisire dump dell\'heap del sistema"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Acquisisci automaticamente dump dell\'heap del sistema"</string>
     <string name="automatic_system_heap_dump_summary" msgid="4060846186592886986">"Acquisisci automaticamente un dump dell\'heap per il sistema Android quando utilizza troppa memoria"</string>
-    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Scollega"</string>
+    <string name="wifi_disconnect_button_text" msgid="5698154296678571998">"Disconnetti"</string>
     <string name="wfc_disclaimer_emergency_limitation_title_text" msgid="8276287227589397162">"Chiamate di emergenza"</string>
     <string name="wfc_disclaimer_emergency_limitation_desc_text" msgid="5503902001191552196">"Le chiamate di emergenza tramite Chiamate Wi-Fi non sono supportate dal tuo operatore.\nIl dispositivo passa automaticamente a una rete dati per fare una chiamata di emergenza.\nÈ possibile fare chiamate di emergenza soltanto in zone con copertura mobile."</string>
     <string name="wifi_calling_summary" msgid="8566648389959032967">"Utilizza il Wi-Fi per migliorare la qualità delle chiamate"</string>
