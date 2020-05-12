@@ -16,7 +16,7 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logServiceStatus;
+import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.ActivityOptions;
@@ -57,7 +57,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        logServiceStatus(mComponentName.flattenToString(), enabled);
+        logAccessibilityServiceEnabled(mComponentName, enabled);
         launchShortcutTargetActivity(getPrefContext().getDisplayId(), mComponentName);
     }
 
