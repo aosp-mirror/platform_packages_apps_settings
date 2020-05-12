@@ -40,7 +40,7 @@
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"Ռոումինգում չէ"</string>
     <string name="radioInfo_data_disconnected" msgid="362604130117666924">"Անջատված է"</string>
     <string name="radioInfo_data_connecting" msgid="7280819598028917888">"Միանում է"</string>
-    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Կապակցված է"</string>
+    <string name="radioInfo_data_connected" msgid="8816467971633020141">"Միացված է"</string>
     <string name="radioInfo_data_suspended" msgid="2001254415431299603">"Անջատված"</string>
     <string name="radioInfo_unknown" msgid="2892562356748600367">"Անհայտ"</string>
     <string name="sdcard_unmount" product="nosdcard" msgid="1816306320988638382">"Անջատել USB կրիչը"</string>
@@ -878,7 +878,7 @@
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"CA հավաստագիր"</string>
     <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Առցանց հավաստագրի կարգավիճակը"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Տիրույթ"</string>
-    <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Օգտատիրոջ վկայական"</string>
+    <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Օգտատիրոջ հավաստագիր"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Ինքնություն"</string>
     <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Անանուն ինքնություն"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Գաղտնաբառ"</string>
@@ -896,7 +896,7 @@
     <string name="wifi_subscription" msgid="4432423938285430113">"Բաժանորդագրություն"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Դիտել և փոխել բաժանորդագրությունը"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Պատահական ընտրված MAC"</string>
-    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ավելացնել սարք"</string>
+    <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Ավելացրեք սարք"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Սարքը «<xliff:g id="SSID">%1$s</xliff:g>» ցանցին ավելացնելու համար տեսախցիկը պահեք QR կոդի վրա"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Սկանավորեք QR կոդը"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"«<xliff:g id="SSID">%1$s</xliff:g>» ցանցին միանալու համար տեսախցիկը պահեք QR կոդի վրա"</string>
@@ -1698,8 +1698,8 @@
     <string name="location_app_level_permissions" msgid="45436724900423656">"Տեղադրության օգտագործում"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Տեղորոշումն անջատած է"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Տեղադրության տվյալները հասանելի են <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>/<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> հավելվածի</item>
-      <item quantity="other"> Տեղադրության տվյալները հասանելի են <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>/<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> հավելվածի</item>
+      <item quantity="one"> Տեղադրության տվյալները հասանելի են <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> հավելվածից <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>-ին</item>
+      <item quantity="other"> Տեղադրության տվյալները հասանելի են <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> հավելվածից <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>-ին</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"Տեղադրության տվյալների վերջին օգտագործումը"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Մանրամասն"</string>
@@ -2155,8 +2155,12 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Երկու մատով սահեցրեք էկրանի ներքևից վերև։\n\nՄի գործառույթից մյուսին անցնելու համար երկու մատը սահեցրեք վերև և պահեք։"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Երեք մատով սահեցրեք էկրանի ներքևից վերև։\n\nՄի գործառույթից մյուսին անցնելու համար երեք մատը սահեցրեք վերև և պահեք։"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Սեղմած պահեք ձայնի ուժգնության ստեղները"</string>
+    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Սեղմեք և պահեք ձայնի ուժգնության երկու կոճակները"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Եռակի հպեք էկրանին"</string>
+    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
+    <skip />
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Արագ հպեք էկրանին 3 անգամ։ Այս դյուրանցումը կարող է դանդաղեցնել սարքի աշխատանքը։"</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Լրացուցիչ"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Մատչելիության կոճակի համար կարգավորված է <xliff:g id="SERVICE">%1$s</xliff:g> ծառայությունը: Խոշորացումն օգտագործելու համար հպեք և պահեք Մատչելիության կոճակը, ապա ընտրեք խոշորացումը:"</string>
@@ -4378,8 +4382,8 @@
     <string name="premium_sms_warning" msgid="2192300872411073324">"Վճարովի SMS-ները կարող են լրացուցիչ ծախսեր առաջացնել: Հավելվածին թույտվություն տալու դեպքում կկարողանաք դրա միջոցով վճարովի SMS-ներ ուղարկել։"</string>
     <string name="premium_sms_access" msgid="5605970342699013212">"Վճարովի SMS"</string>
     <string name="bluetooth_disabled" msgid="835838280837359514">"Անջատված է"</string>
-    <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Կապակցված է <xliff:g id="ID_1">%1$s</xliff:g>-ին"</string>
-    <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Կապակցված է բազմակի շարժական սարքերի"</string>
+    <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Միացված է <xliff:g id="ID_1">%1$s</xliff:g>-ին"</string>
+    <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Միացված է բազմակի շարժական սարքերի"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Համակարգի միջերեսի ցուցադրական ռեժիմ"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Մուգ թեմա"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Միացնել (անջատվել է մարտկոցի տնտեսման համար)"</string>
@@ -4824,7 +4828,7 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Միացնում է պատուհանի շաղումը համատեղման մակարդակում։ Անհրաժեշտ է վերբեռնել սարքը։"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Գաղտնիություն"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Թույլտվություններ, հաշվի վիճակագրություն, անձնական տվյալներ"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Մեդիայի նվագարկման վերսկսում"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Մեդիաֆայլի նվագարկման վերսկսում"</string>
     <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Ցուցադրում և պահում է մեդիա նվագարկիչը Արագ կարգավորումներում։ Անհրաժեշտ է վերագործարկել սարքը։"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Հեռացնել"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Չհեռացնել"</string>
