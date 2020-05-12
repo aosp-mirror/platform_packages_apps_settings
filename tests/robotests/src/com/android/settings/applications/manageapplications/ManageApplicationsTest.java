@@ -56,6 +56,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowAppUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
@@ -76,7 +77,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUserManager.class)
+@Config(shadows = {ShadowUserManager.class, ShadowAppUtils.class})
 public class ManageApplicationsTest {
 
     @Mock
