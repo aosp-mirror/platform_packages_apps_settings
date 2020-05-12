@@ -35,6 +35,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A PreferenceController handling the logic for permissions of apps.
@@ -44,6 +45,7 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
 
     private static final String TAG = "PermissionPrefControl";
     private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
+    private static final long INVALID_SESSION_ID = 0;
 
     private final PackageManager mPackageManager;
 
@@ -124,6 +126,16 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
         final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
         intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
+        String action = mParent.getActivity().getIntent().getAction();
+        long sessionId = mParent.getActivity().getIntent().getLongExtra(
+                Intent.ACTION_AUTO_REVOKE_PERMISSIONS, INVALID_SESSION_ID);
+        if ((action != null && action.equals(Intent.ACTION_AUTO_REVOKE_PERMISSIONS))
+                || sessionId != INVALID_SESSION_ID) {
+            while (sessionId == INVALID_SESSION_ID) {
+                sessionId = new Random().nextLong();
+            }
+            intent.putExtra(Intent.ACTION_AUTO_REVOKE_PERMISSIONS, sessionId);
+        }
         try {
             mParent.getActivity().startActivityForResult(intent, mParent.SUB_INFO_FRAGMENT);
         } catch (ActivityNotFoundException e) {
