@@ -20,8 +20,12 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -43,15 +47,18 @@ import java.util.List;
  */
 public class MediaOutputPreferenceController extends AudioSwitchPreferenceController {
 
+    private MediaController mMediaController;
+
     public MediaOutputPreferenceController(Context context, String key) {
         super(context, key);
+        mMediaController = getActiveLocalMediaController();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        if (!Utils.isAudioModeOngoingCall(mContext)) {
+        if (!Utils.isAudioModeOngoingCall(mContext) && mMediaController != null) {
             mPreference.setVisible(true);
         }
     }
@@ -60,6 +67,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     public void updateState(Preference preference) {
         if (preference == null) {
             // In case UI is not ready.
+            return;
+        }
+
+        if (mMediaController == null) {
+            // No active local playback
             return;
         }
 
@@ -81,6 +93,9 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
                 || (connectedHADevices != null && !connectedHADevices.isEmpty()))) {
             activeDevice = findActiveDevice();
         }
+        mPreference.setTitle(mContext.getString(R.string.media_output_label_title,
+                com.android.settings.Utils.getApplicationLabel(mContext,
+                        mMediaController.getPackageName())));
         mPreference.setSummary((activeDevice == null) ?
                 mContext.getText(R.string.media_output_default_summary) :
                 activeDevice.getAlias());
@@ -125,5 +140,27 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return true;
         }
         return false;
+    }
+
+    @Nullable
+    MediaController getActiveLocalMediaController() {
+        final MediaSessionManager mMediaSessionManager = mContext.getSystemService(
+                MediaSessionManager.class);
+
+        for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+            final MediaController.PlaybackInfo pi = controller.getPlaybackInfo();
+            if (pi == null) {
+                return null;
+            }
+            final PlaybackState playbackState = controller.getPlaybackState();
+            if (playbackState == null) {
+                return null;
+            }
+            if (pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL
+                    && playbackState.getState() == PlaybackState.STATE_PLAYING) {
+                return controller;
+            }
+        }
+        return null;
     }
 }
