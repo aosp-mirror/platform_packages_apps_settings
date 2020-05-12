@@ -124,6 +124,9 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     List<Integer> mResultCodeArrayList;
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
+    // Worker thread used for WifiPickerTracker work
+    @VisibleForTesting
+    HandlerThread mWorkerThread;
 
     private boolean mIsSingleNetwork;
     private boolean mAnyNetworkSavedSuccess;
@@ -133,8 +136,6 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
     private UiConfigurationItemAdapter mUiConfigurationItemAdapter;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager mWifiManager;
-    // Worker thread used for WifiPickerTracker work
-    private HandlerThread mWorkerThread;
 
     private final Handler mHandler = new Handler() {
         @Override
@@ -200,6 +201,13 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
                 SCAN_INTERVAL_MILLIS,
                 this);
         return inflater.inflate(R.layout.wifi_add_app_networks, container, false);
+    }
+
+    @Override
+    public void onDestroy() {
+        mWorkerThread.quit();
+
+        super.onDestroy();
     }
 
     @Override
