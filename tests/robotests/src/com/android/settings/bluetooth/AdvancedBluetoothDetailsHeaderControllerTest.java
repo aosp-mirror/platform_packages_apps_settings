@@ -59,7 +59,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
     private static final int BATTERY_LEVEL_MAIN = 30;
     private static final int BATTERY_LEVEL_LEFT = 25;
     private static final int BATTERY_LEVEL_RIGHT = 45;
-    private static final int LOW_BATTERY_LEVEL = 5;
+    private static final int LOW_BATTERY_LEVEL = 15;
+    private static final int CASE_LOW_BATTERY_LEVEL = 19;
     private static final String ICON_URI = "content://test.provider/icon.png";
     private static final String MAC_ADDRESS = "04:52:C7:0B:D8:3C";
 
@@ -156,7 +157,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
                 String.valueOf(LOW_BATTERY_LEVEL).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_CASE_BATTERY)).thenReturn(
-                String.valueOf(BATTERY_LEVEL_MAIN).getBytes());
+                String.valueOf(CASE_LOW_BATTERY_LEVEL).getBytes());
         when(mBluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_UNTETHERED_LEFT_CHARGING)).thenReturn(
                 String.valueOf(false).getBytes());
@@ -173,7 +174,8 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_left),
                 R.drawable.ic_battery_alert_24dp);
         assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_right), /* resId= */-1);
-        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle), /* resId= */ -1);
+        assertBatteryIcon(mLayoutPreference.findViewById(R.id.layout_middle),
+                R.drawable.ic_battery_alert_24dp);
     }
 
     @Test
