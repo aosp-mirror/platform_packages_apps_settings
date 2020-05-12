@@ -140,11 +140,10 @@ public class PanelSlicesAdapter
             final Slice slice = sliceLiveData.getValue();
             if (slice == null || slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
                 mDividerAllowedAbove = false;
-            }
-
-            // Customize output switcher slice top padding
-            if (position == 0 && (slice.getUri().equals(MEDIA_OUTPUT_SLICE_URI)
+            } else if (position == 0 && (slice.getUri().equals(MEDIA_OUTPUT_SLICE_URI)
                     || slice.getUri().equals(MEDIA_OUTPUT_GROUP_SLICE_URI))) {
+                sliceView.setClickable(false);
+                // Customize output switcher slice top padding
                 final int paddingTop = mPanelFragment.getResources().getDimensionPixelSize(
                         R.dimen.output_switcher_slice_padding_top);
                 mSliceSliderLayout.setPadding(mSliceSliderLayout.getPaddingLeft(), paddingTop,
