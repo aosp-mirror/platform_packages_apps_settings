@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Afbryd"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Du har ikke tilladelse til at ændre Bluetooth-indstillinger."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Par ny enhed"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> er synlig for enheder i nærheden, når Bluetooth-indstillingerne er åbne."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Telefonens Bluetooth-adresse: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth-adresse for tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Aktivér indtil <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Deaktiver indtil <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nattelys er deaktiveret"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Enhedsplacering er påkrævet til bestemmelse af tidspunkter for solnedgang og solopgang."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Placeringsindstillinger"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Aktivér nu"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Deaktiver nu"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Aktivér indtil solopgang"</string>
@@ -1671,7 +1670,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Deler internetforbindelsen for <xliff:g id="DEVICE_NAME">%1$d</xliff:g> via Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Netdeling kan ikke bruges til mere end <xliff:g id="MAXCONNECTION">%1$d</xliff:g> enheder."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Netdelingen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil blive afbrudt."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet-netdeling"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Netdeling via Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Del telefonens internetforbindelse via USB Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din mobildataforbindelse. Apps kan også oprette et hotspot for at dele indhold med enheder i nærheden."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Brug hotspot og netdeling til at give andre enheder adgang til internettet via din Wi-Fi- eller mobildataforbindelse. Apps kan også oprette et hotspot til at dele indhold med enheder i nærheden."</string>
@@ -2128,17 +2127,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zoom hurtigt ind på skærmen for at se indhold mere tydeligt.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; 1. Brug genvejen til at starte forstørrelse&lt;br/&gt; 2. Tryk på skærmen&lt;br/&gt; 3. Naviger rundt på skærmen ved at trække med to fingre&lt;br/&gt; 4. Knib med to fingre for at zoome ind eller ud&lt;br/&gt; 5. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du midlertidigt ind:&lt;/b&gt;&lt;br/&gt; 1. Brug genvejen til at starte forstørrelse&lt;br/&gt; 2. Hold fingeren nede et vilkårligt sted på skærmen&lt;br/&gt; 3. Naviger rundt på skærmen ved at trække fingeren&lt;br/&gt; 4. Løft fingeren for at stoppe forstørrelse"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er aktiveret, kan du zoome ind på skærmen.\n\n"<b>"Hvis du vil zoome"</b>", skal du åbne forstørrelse og derefter trykke et vilkårligt sted på skærmen.\n"<ul><li>"Træk med to eller flere fingre for at rulle"</li>\n<li>"Knib sammen med to eller flere fingre for at justere zoomniveauet"</li></ul>\n\n<b>"Hvis du vil zoome midlertidigt"</b>", skal du åbne forstørrelse og holde fingeren nede et vilkårligt sted på skærmen.\n"<ul><li>"Træk for at udforske forskellige dele af skærmen"</li>\n<li>"Løft fingeren for at zoome ud"</li></ul>\n\n"Du kan ikke zoome ind på tastaturet eller navigationslinjen."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Brug knappen Hjælpefunktioner til at åbne"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Hold lydstyrkeknappen nede for at åbne"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tryk tre gange på skærmen for at åbne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Brug en bevægelse til at åbne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Brug den nye bevægelse for hjælpefunktioner"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Du kan aktivere eller deaktivere denne funktion ved at trykke på knappen Hjælpefunktioner <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> nederst på skærmen.\n\nDu kan skifte mellem funktioner ved at holde knappen Hjælpefunktioner nede."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Du kan aktivere eller deaktivere denne funktion ved at holde begge lydstyrkeknapper nede."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Du kan starte og stoppe forstørrelse ved at trykke tre gange på skærmen."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Du kan aktivere eller deaktivere denne funktion ved at stryge opad fra bunden af skærmen med to fingre.\n\nDu kan skifte mellem funktioner ved at stryge opad med to fingre og holde dem nede."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Du kan aktivere eller deaktivere denne funktion ved at stryge opad fra bunden af skærmen med tre fingre.\n\nDu kan skifte mellem funktioner ved at stryge opad med tre fingre og holde dem nede."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Du kan aktivere eller deaktivere en hjælpefunktion ved at stryge opad fra bunden af skærmen med to fingre.\n\nDu kan skifte mellem funktioner ved at stryge opad med to fingre og holde dem nede."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Du kan aktivere eller deaktivere en hjælpefunktion ved at stryge opad fra bunden af skærmen med tre fingre.\n\nDu kan skifte mellem funktioner ved at stryge opad med tre fingre og holde dem nede."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Genvej for <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Knappen Hjælpefunktioner"</string>
@@ -2405,13 +2411,13 @@
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Forlæng enhedens batteritid"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Aktivér batteriadministration"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Aktivér batterisparefunktionen"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Enheden løber muligvis tør for batteri hurtigere end forventet"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Enheden løber muligvis tør for batteri hurtigere end normalt"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Batterisparefunktion er aktiveret"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nogle funktioner kan være begrænsede"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefonen er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Din tablet er blevet brugt mere end normalt"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Enheden er blevet brugt mere end normalt"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Enheden løber muligvis tør for batteri hurtigere end forventet"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Enheden løber muligvis tør for batteri hurtigere end normalt"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Din telefon er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Din tablet er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Din enhed er blevet brugt mere end normalt. Dit batteri aflades muligvis hurtigere end forventet.\n\nHer kan du se apps sorteret efter batteriforbrug:"</string>
@@ -3176,6 +3182,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, køretilstand"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, køretilstand, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, køretilstand"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ikke tilgængelig, fordi NFC er deaktiveret"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Du skal først installere en app til betalinger"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps og notifikationer"</string>
@@ -3230,8 +3240,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"farverig, RGB, sRGB, farve, naturlig, standard"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"farve, temperatur, D65, D73, hvid, gul, blå, varm, kølig"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"stryg for at låse op, adgangskode, mønster, pinkode"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"skærmfastholdelse"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"arbejdsudfordring, arbejde, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"arbejdsprofil, administreret profil, samle, samling, arbejde, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"bevægelser"</string>
@@ -3552,13 +3561,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Tillad afbrydelser"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Lad appen give lyd, vibrere og/eller vise notifikationer på skærmen"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritet"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Vises som en boble øverst i samtalesektionen."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Vises som en boble øverst i samtalesektionen"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> understøtter ikke samtalespecifikke indstillinger"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Begræns notifikationer til én linje i notifikationspanelet"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ingen lyde eller vibrationer, der forstyrrer dig"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Fanger din opmærksomhed med lyd eller vibration"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheden er låst op, vises notifikationer som et banner øverst på skærmen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle notifikationer fra \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle notifikationer for <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Automatiske notifikationer"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> notifikation om dagen</item>
@@ -3600,12 +3610,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Integreret billede"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Tillad integreret billede"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Giv tilladelse til at denne app opretter et vindue med integreret billede, mens appen er åben, eller efter du lukker den (f.eks. for at fortsætte med at se en video). Dette vindue vises oven på andre apps, du bruger."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Samlet appvisning"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Tilknyttede apps"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Tilknyttet"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Ikke tilknyttet"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Der er ingen tilknyttede apps"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"på tværs af profiler tilknyttet app apps arbejde og personlige"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Samlet appvisning"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Tilknyttede apps"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Tilknyttet"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Tilknyt disse apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Tilknyttede apps deler tilladelser og har adgang til hinandens data."</string>
@@ -3846,14 +3856,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Angiv administratorpinkoden"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Til"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Fra"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Appfastgørelse"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Appfastgørelse gør det muligt at beholde den aktuelle app i visningen, indtil du frigør den. Denne funktion kan f.eks. anvendes til at give en ven, du har tillid til, mulighed for at spille et specifikt spil. \n\nNår en app fastgøres, kan den fastgjorte app muligvis åbne andre apps og få adgang til personoplysninger. \n\nSådan bruger du appfastgørelse: 	\n1.	Aktivér appfastgørelse 	\n2.	Open Oversigt 	\n3.	Tryk på appikonet øverst på skærmen, og tryk derefter på Fastgør"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Appfastgørelse gør det muligt at beholde den aktuelle app i visningen, indtil du frigør den. Denne funktion kan f.eks. anvendes til at give en ven, du har tillid til, mulighed for at spille et specifikt spil. \n\nNår en app fastgøres, kan den fastgjorte app muligvis åbne andre apps og få adgang til personoplysninger. \n\nHvis du vil dele din enhed med en anden på en sikker måde, kan du prøve at bruge en gæstebruger i stedet. \n\nSådan bruger du appfastgørelse: 	\n1.	Aktivér appfastgørelse 	\n2.	Åbn Oversigt 	\n3.	Tryk på appikonet øverst på skærmen, og tryk derefter på Fastgør"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Når en app er fastgjort: \n\n•	 Personoplysninger kan muligvis tilgås \n		(f.eks. kontakter og mailindhold) \n•	 Den fastgjorte app kan muligvis åbne andre apps \n\nBrug kun appfastgørelse til brugere, du har tillid til."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Bed om oplåsningsmønster inden frigørelse"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Bed om pinkode inden frigørelse"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Bed om adgangskode inden frigørelse"</string>
@@ -4638,7 +4644,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Giv appen tilladelse til at styre Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Giv denne app tilladelse til at aktivere og deaktivere Wi-Fi, søge efter og oprette forbindelse til Wi-Fi-netværk, tilføje og fjerne netværk eller starte et lokalt hotspot"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Afspil medier på"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"Afspil <xliff:g id="LABEL">%s</xliff:g> på"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Afspil <xliff:g id="LABEL">%s</xliff:g> på"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Denne enhed"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4792,7 +4798,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Utilgængelig ved forbindelse til <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Se mere"</string>
     <string name="see_less" msgid="2642392725363552793">"Se mindre"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Enhed, der skal bruges sammen med <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Opret forbindelse til enheden"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Appen <xliff:g id="APPNAME">%1$s</xliff:g> vil gerne have midlertidig adgang til dit Wi‑Fi network for at oprette forbindelse til din enhed"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Der blev ikke fundet nogen enheder. Sørg for, at enhederne er tændt, og at der kan oprettes forbindelse til dem."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Prøv igen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Der opstod et problem Appen har annulleret anmodningen om at vælge en enhed."</string>
@@ -4817,6 +4824,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Aktiverer vinduessløring på sammensætningsniveau. Kræver, at enheden genstartes."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privatliv"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Tilladelser, kontoaktivitet, personoplysninger"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Genoptagelse af medie"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Viser og beholder medieafspilleren i kvikmenuen. Kræver genstart."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Fjern"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Behold"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Vil du fjerne dette forslag?"</string>
@@ -4880,7 +4889,7 @@
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Indstillinger, som administreres af din it-administrator"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"Grafikprocessor"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Håndtering af fejlrapport"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Fastslår, hvilken app der håndterer genvejen til fejlrapporten på din enhed."</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Afgør, hvilken app der håndterer genvejen til fejlrapporten på din enhed."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Personlig"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Arbejde"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Systemstandard"</string>
@@ -4915,4 +4924,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Når du bruger to SIM-kort, kan denne telefon kun anvende 4G. "<annotation id="url">"Få flere oplysninger"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Når du bruger to SIM-kort, kan denne tablet kun anvende 4G. "<annotation id="url">"Få flere oplysninger"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Når du bruger to SIM-kort, kan denne enhed kun anvende 4G. "<annotation id="url">"Få flere oplysninger"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender udførelse for cachelagrede apps"</string>
 </resources>

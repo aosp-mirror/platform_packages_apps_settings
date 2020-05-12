@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Ondoa"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Huna ruhusa ya kubadilisha mipangilio ya Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Oanisha kifaa kipya"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> inaonekana kwenye vifaa vya karibu wakati mipangilio ya Bluetooth imewashwa."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Anwani ya Bluetooth ya simu: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Anwani ya Bluetooth ya kompyuta kibao: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -585,7 +586,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> inapendekeza uweke PIN au nenosiri jipya na huenda isifanye kazi kama kawaida bila kuwekwa"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> inapendekeza uweke mchoro, PIN au nenosiri jipya na huenda isifanye kazi kama kawaida bila kuwekwa"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> inapendekeza uweke mbinu mpya ya kufunga skrini"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Jaribu tena. Jaribio la <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> kati ya <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> zinazoruhusiwa."</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Jaribu tena. Jaribio la <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> kati ya <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Data yako itafutwa"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Ukiweka mchoro usio sahihi utakapojaribu tena, data iliyo kwenye kifaa hiki itafutwa"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"Ukiweka PIN isiyo sahihi utakapojaribu tena, data iliyo kwenye kifaa hiki itafutwa"</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Washa hadi <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Zima hadi <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Umezima Mwangaza wa Usiku"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Maelezo ya mahali kifaa kilipo yanahitajika ili kutambua saa zako za macheo na machweo."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Mipangilio ya mahali"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Washa sasa"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Zima sasa"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Washa hadi macheo"</string>
@@ -1696,7 +1695,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Huduma za mahali"</string>
     <string name="location_title" msgid="5819154746934945021">"Mahali pangu"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Wasifu wa kazi kutambua mahali"</string>
-    <string name="location_app_level_permissions" msgid="45436724900423656">"Ufikiaji wa eneo wa programu"</string>
+    <string name="location_app_level_permissions" msgid="45436724900423656">"Programu kufikia mahali"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Utambuzi wa mahali umezimwa"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> Programu <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> kati ya <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> zinaweza kufikia maelezo ya mahali</item>
@@ -2128,17 +2127,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Vuta karibu haraka kwenye skrini ili uonyeshe maudhui vizuri zaidi.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Ili uvute karibu:&lt;/b&gt;&lt;br/&gt; 1. Tumia njia ya mkato ili uanzishe ukuzaji&lt;br/&gt; 2. Gusa skrini&lt;br/&gt; 3. Buruta vidole viwili ili usogeze kwenye skrini&lt;br/&gt; 4. Bana kwa vidole viwili ili ubadilishe ukuzaji&lt;br/&gt; 5. Tumia njia ya mkato ili usimamishe ukuzaji&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Ili uvute karibu kwa muda:&lt;/b&gt;&lt;br/&gt; 1. Tumia njia ya mkato ili uanzishe ukuzaji&lt;br/&gt; 2. Gusa na ushikilie mahali popote kwenye skrini&lt;br/&gt; 3. Buruta kidole ili usogeze kwenye skrini&lt;br/&gt; 4. Inua kidole ili uache kukuza"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ukiwasha ukuzaji, unaweza kuvuta karibu kwenye skrini yako.\n\n"<b>"Ili ukuze"</b>", anzisha ukuzaji kisha uguse mahali popote kwenye skrini.\n"<ul><li>"Buruta vidole 2 au zaidi ili usogeze"</li>\n<li>"Bana vidole 2 au zaidi ili urekebishe ukuzaji"</li></ul>\n\n<b>"Ili ukuze kwa muda"</b>", anzisha ukuzaji kisha uguse na ushikilie mahali popote kwenye skrini.\n"<ul><li>"Buruta ili usogeze kwenye skrini"</li>\n<li>"Inua kidole ili usogeze mbali"</li></ul>\n\n"Huwezi kuvuta karibu kwenye kibodi au sehemu ya viungo muhimu."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Tumia kitufe cha ufikivu kufungua"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Shikilia kitufe cha sauti ili ufungue"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Shikilia vitufe vya sauti ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Gusa skrini mara tatu ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Tumia ishara ili ufungue"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Tumia ishara mpya ya ufikivu"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Ili uwashe au uzime kipengele hiki, gusa kitufe cha zana za ufikivu <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> katika sehemu ya chini ya skrini yako.\n\nIli ubadilishe kati ya vipengele, gusa na ushikilie kitufe cha zana za ufikivu."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Ili uwashe au uzime kipengele hiki, bonyeza na ushikilie vitufe vyote viwili vya sauti."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Ili utumie kipengele hiki, gusa kitufe cha zana za ufikivu cha <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> katika sehemu ya chini ya skrini yako.\n\nIli ubadilishe kati ya vipengele, gusa na ushikilie kitufe cha zana za ufikivu."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Ili utumie kipengele hiki, bonyeza na ushikilie vitufe vyote viwili vya sauti."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Ili uanzishe na kusimamisha ukuzaji, gusa mara tatu mahali popote kwenye skrini yako."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Ili uwashe au uzime kipengele hiki, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Ili uwashe au uzime kipengele hiki, telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Ili uwashe au uzime kipengele cha ufikivu, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Ili uwashe au uzime kipengele cha ufikivu, telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Ili utumie kipengele hiki, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Ili utumie kipengele hiki, telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Ili utumie kipengele cha ufikivu, telezesha vidole viwili juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole viwili juu na ushikilie."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Ili utumie kipengele cha ufikivu, telezesha vidole vitatu juu kutoka sehemu ya chini ya skrini.\n\nIli ubadilishe kati ya vipengele, telezesha vidole vitatu juu na ushikilie."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Nimeelewa"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Njia mkato ya <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Kitufe cha zana za ufikivu"</string>
@@ -2407,7 +2406,7 @@
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Washa Kiokoa Betri"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Huenda chaji ikaisha haraka zaidi"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Kiokoa Betri kimewashwa"</string>
-    <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Huenda ikadhibiti baadhi ya vipengele"</string>
+    <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Huenda baadhi ya vipengele vimedhibitiwa"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Simu imetumika sana kuliko kawaida"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Kompyuta kibao imetumika sana kuliko kawaida"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Kifaa kimetumika sana kuliko kawaida"</string>
@@ -2579,7 +2578,7 @@
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Kitawaka ikifika <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Weka ratiba"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Ongeza muda wa matumizi ya betri"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Zima kiokoa betri chaji ikijaa"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Zima kiokoa betri simu ikipata chaji"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Kiokoa betri hujizima simu yako inapofika <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Kiokoa betri hujizima kompyuta yako kibao inapokuwa na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Kiokoa betri hujizima kifaa chako kinapokuwa na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2719,7 +2718,7 @@
     <string name="notification_history_title" msgid="8821060912502593309">"Historia ya arifa"</string>
     <string name="notification_history_today" msgid="5828496957208237230">"Saa 24 zilizopita"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Imeahirishwa"</string>
-    <string name="notification_history_dismiss" msgid="6180321217375722918">"Imeondolewa hivi majuzi"</string>
+    <string name="notification_history_dismiss" msgid="6180321217375722918">"Zilizoondolewa hivi majuzi"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
       <item quantity="other">Arifa <xliff:g id="NUMBER_1">%d</xliff:g></item>
       <item quantity="one">Arifa <xliff:g id="NUMBER_0">%d</xliff:g></item>
@@ -3176,6 +3175,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, hali ya kuendesha gari"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, hali ya kuendesha gari, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, hali ya kuendesha gari"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Haipatikani kwa sababu NFC imezimwa"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Ili utumie, sakinisha kwanza programu ya kulipa"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Programu na arifa"</string>
@@ -3230,8 +3233,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"maridadi, RGB, sRGB, rangi, asili, kawaida"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"rangi, halijoto, D65, D73, nyeupe, njano, samawati, moto, baridi"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"telezesha kidole ili ufungue, nenosiri, mchoro, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"kubandika kwenye skirini"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"mashindano kazini, kazi, wasifu"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"wasifu wa kazini, wasifu uliodhibitiwa, unganisha, uunganishaji, kazi, wasifu"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"ishara"</string>
@@ -3552,13 +3554,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Ruhusu kukatizwa"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Ruhusu programu itoe sauti, iteteme au ionyeshe arifa kwenye skrini"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Kipaumbele"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Huonyeshwa sehemu ya juu ya mazungumzo na huonekana kama kiputo."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Huonyeshwa kwenye sehemu ya juu ya mazungumzo na huonekana kama kiputo"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> haitumii mipangilio mahususi ya mazungumzo."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Katika eneo la menyu kunjuzi, kunja arifa ziwe katika mstari mmoja"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Hukusaidia kuwa makini bila sauti au mtetemo"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Hupata umakinifu wako kwa sauti na mtetemo"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kifaa kinapofunguliwa, onyesha arifa kama bango katika sehemu ya juu ya skrini"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Arifa zote za \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Arifa zote za <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Arifa Zinazojirekebisha"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Takriban arifa <xliff:g id="NUMBER_1">%d</xliff:g> kwa siku</item>
@@ -3601,8 +3604,8 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Ruhusu picha ndani ya picha"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Ruhusu programu hii iunde kidirisha cha picha ndani ya picha wakati programu imefunguka au baada ya kuifunga (kwa mfano, ili uendelee kutazama video). Kidirisha hiki kitaonekana juu ya programu zingine unazotumia."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Programu za kazi na za binafsi pamoja"</string>
-    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Zimeunganishwa"</string>
-    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Hazijaunganishwa"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Imeunganishwa"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Haijaunganishwa"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Hakuna programu zilizounganishwa"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"sehemu ya wasifu programu zilizounganishwa programu za kazini na binafsi"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Programu za kazi na za binafsi pamoja"</string>
@@ -3846,14 +3849,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Weka PIN ya msimamizi"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Imewashwa"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Imezimwa"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Kubandika programu"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Huduma ya kubandika programu hukuruhusu kuendelea kuonyesha programu ya sasa hadi utakapoibandua. Kipengele hiki kinaweza kutumika, kwa mfano, kumruhusu rafiki unayemwamini kucheza mchezo mahususi. \n\nWakati programu imebandikwa, inaweza kufungua programu zingine na data binafsi inaweza kufikiwa. \n\nIli utumie huduma ya kubandika programu: \n1.	Washa huduma ya kubandika programu	\n2.	Fungua Muhtasari \n3.	Gusa aikoni ya programu katika sehemu ya juu ya skrini, kisha uguse Bandika"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Huduma ya kubandika programu hukuruhusu kuendelea kuonyesha programu ya sasa hadi utakapoibandua. Kipengele hiki kinaweza kutumika, kwa mfano, kumruhusu rafiki unayemwamini kucheza mchezo mahususi. \n\nWakati programu imebandikwa, inaweza kufungua programu zingine na data binafsi inaweza kufikiwa. \n\nIkiwa unataka kushiriki kwa usalama programu yako na mtu, jaribu kutumia mtumiaji mgeni badala yake. \n\nIli utumie huduma ya kubandika programu: \n1.	Washa huduma ya kubandika programu	\n2.	Fungua Muhtasari \n3.	Gusa aikoni ya programu katika sehemu ya juu ya skrini, kisha uguse Bandika"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wakati programu imebandikwa: \n\n• Data binafsi inaweza kufikiwa \n (kama vile maudhui ya barua pepe na anwani) \n•Programu iliyobandikwa inaweza kufungua programu zingine \n\nTumia huduma ya kubandika programu na watu unaowaamini pekee."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Omba mchoro wa kufungua kabla hujabandua"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Itisha PIN kabla hujabandua"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Omba nenosiri kabla hujabandua"</string>
@@ -4639,7 +4638,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Ruhusu programu idhibiti Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Ruhusu programu hii iwashe au izime Wi-Fi, itafute na iunganishe kwenye mitandao ya Wi-Fi, iongeze au iondoe mitandao, au ianzishe mtandao pepe wa eneo mahususi"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Cheza muziki kwenye"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"Cheza <xliff:g id="LABEL">%s</xliff:g> kwenye"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Cheza <xliff:g id="LABEL">%s</xliff:g> kwenye"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Kifaa hiki"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Simu"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Kompyuta kibao"</string>
@@ -4793,7 +4792,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Haipatikani inapounganishwa kwenye <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Angalia zaidi"</string>
     <string name="see_less" msgid="2642392725363552793">"Angalia chache"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Kifaa kitatumia <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Unganisha kwenye kifaa"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"<xliff:g id="APPNAME">%1$s</xliff:g> yako inataka kutumia mtandao wa muda wa Wi‑Fi kuunganisha kwenye kifaa chako"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Hakuna vifaa vilivyopatikana. Hakikisha kuwa umewasha vifaa na vinaweza kuunganishwa."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Jaribu tena"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Hitilafu fulani imetokea. Programu imeghairi ombi la kuchagua kifaa."</string>
@@ -4818,6 +4818,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Huruhusu hali ya kutia ukungu kwenye kidirisha katika kiwango cha kubuni picha. Inahitaji uwashe kifaa tena."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Faragha"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Ruhusa, shughuli za akaunti, data ya binafsi"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Kuendeleza kichezaji faili za sauti na video"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Huonyesha na kudumisha kichezaji faili za sauti na video katika Mipangilio ya Haraka. Inahitaji kuwashwa tena."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Ondoa"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Usiondoe"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Je, ungependa kuondoa pendekezo hili?"</string>
@@ -4916,4 +4918,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Unapotumia SIM mbili, simu hii itatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Unapotumia SIM mbili, kompyuta hii kibao itatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Unapotumia SIM mbili, kifaa hiki kitatumia 4G pekee. "<annotation id="url">"Pata maelezo zaidi"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Simamisha utekelezaji kwa programu zilizowekwa kwenye akiba"</string>
 </resources>

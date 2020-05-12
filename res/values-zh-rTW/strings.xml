@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"中斷連線"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"你沒有變更藍牙設定的權限。"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"配對新裝置"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"藍牙"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"藍牙設定開啟時，附近的裝置可偵測到「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"手機的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"平板電腦的藍牙位址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -943,7 +944,7 @@
     <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"你未指定任何憑證，因此無法為你設定私人連線。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"網路名稱太長。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必須指定網域。"</string>
-    <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要認證。"</string>
+    <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要憑證。"</string>
     <string name="wifi_wps_available_first_item" msgid="5780501151792036589">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="1717024103303480804">" (可使用 WPS)"</string>
     <string name="wifi_carrier_connect" msgid="4511538300946413213">"電信業者 Wi‑Fi 網路"</string>
@@ -1221,10 +1222,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持開啟狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜燈模式目前已關閉"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位模式，裝置才能判斷日落和日出的時間。"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置資訊設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"開啟，直到日出"</string>
@@ -1784,7 +1783,7 @@
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"輸入裝置 PIN 碼即可繼續"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"請輸入你的裝置密碼以繼續作業"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"請畫出你的 Work 解鎖圖案以繼續作業"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"請輸入你的 Work PIN 碼以繼續作業"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"請輸入你的工作資料夾 PIN 碼以繼續作業"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"請輸入你的 Work 密碼以繼續作業"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"為了提升安全性，請使用裝置解鎖圖案"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"為了提升安全性，請輸入裝置 PIN 碼"</string>
@@ -2128,17 +2127,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"快速放大螢幕畫面，以便更清楚地查看內容。&lt;br/&gt;&lt;br/&gt;&lt;b&gt;如要放大螢幕畫面，請按照以下步驟操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快速鍵啟用放大功能&lt;br/&gt; 2. 輕觸螢幕&lt;br/&gt; 3. 拖曳 2 指即可四處移動畫面&lt;br/&gt; 4. 使用 2 指撥動即可調整縮放等級&lt;br/&gt; 5. 使用快速鍵即可停用放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;如要暫時放大螢幕畫面，請按照以下步驟操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快速鍵啟用放大功能&lt;br/&gt; 2. 按住螢幕上的任一處&lt;br/&gt; 3. 拖曳手指即可四處移動畫面&lt;br/&gt; 4. 移開手指即可停用放大功能"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"放大功能啟用後，你可以放大畫面上的內容。\n\n"<b>"如要進行縮放"</b>"，請開啟放大功能，然後輕觸畫面上的任何位置。\n"<ul><li>"使用兩指或多指以拖曳的方式捲動畫面"</li>\n<li>"使用兩指或多指撥動以調整縮放大小"</li></ul>\n\n<b>"如要暫時放大畫面"</b>"，請開啟放大功能，然後輕觸並按住畫面上的任何位置。\n"<ul><li>"使用手指拖曳可瀏覽畫面的不同部分"</li>\n<li>"放開手指即可縮小"</li></ul>\n\n"你無法放大鍵盤和導覽列部分。"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用無障礙按鈕啟用無障礙服務"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"按住音量鍵即可開啟"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"輕觸螢幕三下即可開啟"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"使用手勢啟用無障礙服務"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"使用全新的無障礙手勢"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"如要開啟或關閉這項功能，請輕觸螢幕底部的無障礙工具按鈕 <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>。\n\n如要切換不同的功能，請輕觸並按住無障礙工具按鈕。"</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"如要開啟或關閉這項功能，請同時按住音量調高鍵和調低鍵。"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"如要啟用及停用放大功能，請在螢幕上的任何地方輕觸三下。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"如要開啟或關閉這項功能，請用 2 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 2 指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"如要開啟或關閉這項功能，請用 3 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 3 指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"如要開啟或關閉無障礙功能，請用 2 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 2 指向上滑動並按住。"</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"如要開啟或關閉無障礙功能，請用 3 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 3 指向上滑動並按住。"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"我知道了"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙工具按鈕"</string>
@@ -3176,6 +3182,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"藍牙，行車模式"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"藍牙、NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"藍牙"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"藍牙、Android Auto、行車模式、NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"藍牙、Android Auto、行車模式"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"藍牙、Android Auto、NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"應用程式和通知"</string>
@@ -3230,8 +3240,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"鮮活, RGB, sRGB, 色彩, 自然, 標準"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"色彩, 色溫, D65, D73, 白色, 黃色, 藍色, 暖色系, 冷色系"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"滑動解鎖, 密碼, 圖案, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"螢幕固定"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"Work 驗證、Work、設定檔"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"工作資料夾, 受管理設定檔, 整合, 整合, Work, 設定檔"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"手勢"</string>
@@ -3552,13 +3561,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"允許干擾"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允許應用程式發出音效、震動，以及/或在畫面上彈出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先順序"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"以對話框形式顯示在對話部分的頂端。"</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"以對話框形式顯示在對話部分的頂端"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」不支援對話專用設定。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"將下拉式通知欄中的通知收合為單一行"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"協助你不受音效或震動干擾"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"發出音效或震動吸引你的注意力"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"裝置處於解鎖狀態時，在螢幕頂端以橫幅形式顯示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有「<xliff:g id="APP_NAME">%1$s</xliff:g>」通知"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」的所有通知"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"自動調整通知"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">每天大約 <xliff:g id="NUMBER_1">%d</xliff:g> 則通知</item>
@@ -3846,14 +3856,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"輸入管理員 PIN 碼"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"開啟"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"關閉"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能\n2.	開啟總覽\n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"你可以使用應用程式固定功能，讓目前使用的應用程式持續顯示在螢幕上，直到你取消固定為止。請務必只針對你信任的人使用這項功能，例如讓信任的好友遊玩特定遊戲。\n\n固定應用程式後，該應用程式可以開啟其他應用程式，也能存取個人資料。\n\n如要安全地與他人共用裝置，建議你改用訪客使用者設定檔。\n\n使用應用程式固定功能的步驟如下：\n1.	開啟應用程式固定功能 	\n2.	開啟「總覽」 \n3.	輕觸畫面頂端的應用程式圖示，然後輕觸 [固定]"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電子郵件內容)\n•		固定的應用程式可開啟其他應用程式\n\n請務必只針對你信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須畫出解鎖圖案"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN 碼"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定時必須輸入密碼"</string>
@@ -4638,7 +4644,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"允許應用程式控制 Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"允許這個應用程式開啟或關閉 Wi-Fi、掃描及連上 Wi-Fi 網路、新增或移除網路，或啟動僅限本機的無線基地台"</string>
     <string name="media_output_title" msgid="8283629315159510680">"播放媒體"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"透過以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"透過以下裝置播放「<xliff:g id="LABEL">%s</xliff:g>」中的媒體"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"這個裝置"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"手機"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"平板電腦"</string>
@@ -4792,7 +4798,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"無法在連線到「<xliff:g id="CARRIER">%1$s</xliff:g>」時使用"</string>
     <string name="see_more" msgid="7499355691042812723">"顯示更多"</string>
     <string name="see_less" msgid="2642392725363552793">"顯示較少"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"搭配「<xliff:g id="APPNAME">%1$s</xliff:g>」使用的裝置"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"連線至裝置"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"「<xliff:g id="APPNAME">%1$s</xliff:g>」應用程式想透過臨時的 Wi-Fi 網路連線至你的裝置"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"找不到裝置。請確認裝置已經開啟並可進行連線。"</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"再試一次"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"網路連線發生錯誤，因此應用程式已取消選擇裝置的要求。"</string>
@@ -4817,6 +4824,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"在合成器層級啟用視窗模糊效果。裝置必須重新啟動。"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"隱私"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"權限、帳戶活動、個人資料"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"繼續播放媒體內容"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"讓媒體播放器在快速設定中保持顯示狀態 (需要重新啟動裝置)。"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"移除"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保留"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"要移除這項建議嗎？"</string>
@@ -4915,4 +4924,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"使用 2 張 SIM 卡時，這支手機只能連線到 4G 網路。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"使用 2 張 SIM 卡時，這部平板電腦只能連線到 4G 網路。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"使用 2 張 SIM 卡時，這部裝置只能連線到 4G 網路。"<annotation id="url">"瞭解詳情"</annotation>"。"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"暫停執行快取的應用程式"</string>
 </resources>

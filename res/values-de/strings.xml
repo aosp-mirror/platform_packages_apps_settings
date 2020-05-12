@@ -82,6 +82,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Trennen"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Du bist nicht zur Änderung der Bluetooth-Einstellungen berechtigt."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Neues Gerät koppeln"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ist bei aktiviertem Bluetooth für Geräte in der Nähe sichtbar."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Bluetooth-Adresse des Smartphones: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth-Adresse des Tablets: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -1222,10 +1223,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Bis <xliff:g id="ID_1">%1$s</xliff:g> aktivieren"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Bis <xliff:g id="ID_1">%1$s</xliff:g> deaktivieren"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nachtlicht nicht aktiviert"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Zur Bestimmung von Sonnenaufgang und -untergang ist der Gerätestandort erforderlich."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Standorteinstellungen"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Jetzt aktivieren"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Jetzt deaktivieren"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Bis Sonnenaufgang aktivieren"</string>
@@ -2129,17 +2128,24 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Du kannst auf dem Display schnell heranzoomen, um Inhalte besser zu sehen.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; 1. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; 2. Tippe auf das Display&lt;br/&gt; 3. Ziehe zwei Finger entlang des Displays, um dich darauf zu bewegen&lt;br/&gt; 4. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; 5. Beende die Vergrößerung über die Verknüpfung&lt;br/&gt;&lt;br/&gt;&lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; 1. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; 2. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; 3. Ziehe den Finger entlang des Displays, um dich darauf zu bewegen&lt;br/&gt; 4. Hebe den Finger, um die Vergrößerung zu beenden"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du dich im Bildschirm bewegen möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Zum Öffnen Schaltfläche \"Bedienungshilfen\" nutzen"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Zum Öffnen die Lautstärketaste gedrückt halten"</string>
+    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Zum Öffnen dreimal auf das Display tippen"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Zum Öffnen Touch-Geste verwenden"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Neue Touch-Geste für Bedienungshilfen verwenden"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Du kannst diese Funktion aktivieren oder deaktivieren, indem du unten auf dem Bildschirm auf die Schaltfläche \"Bedienungshilfen\" <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> tippst.\n\nWenn du zwischen den Funktionen wechseln möchtest, halte diese Schaltfläche gedrückt."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Wenn du diese Funktion aktivieren oder deaktivieren möchtest, halte beide Lautstärketasten gedrückt."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Tippe dreimal auf das Display, um die Vergrößerung zu starten oder zu beenden."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Du kannst diese Funktion aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit zwei Fingern nach oben wischst.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit zwei Fingern über das Display nach oben und halte."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Du kannst diese Funktion aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Du kannst eine Bedienungshilfe aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit zwei Fingern nach oben wischst.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit zwei Fingern über das Display nach oben und halte."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Du kannst eine Bedienungshilfe aktivieren und deaktivieren, indem du vom unteren Bildschirmrand mit drei Fingern nach oben wischst.\n\nWenn du zwischen den Funktionen wechseln möchtest, wische mit drei Fingern über das Display nach oben und halte."</string>
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
+    <skip />
+    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"\"<xliff:g id="SERVICE">%1$s</xliff:g>\"-Verknüpfung"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Schaltfläche \"Bedienungshilfe\""</string>
@@ -3177,6 +3183,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, Fahrmodus"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, Fahrmodus, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, Fahrmodus"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nicht verfügbar, weil NFC deaktiviert ist"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Installiere zuerst eine Zahlungs-App, damit du die Option verwenden kannst"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps &amp; Benachrichtigungen"</string>
@@ -3231,8 +3241,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"brillant, rgb, srgb, farbe, natürlich, standard"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"farbe, temperatur, d65, d73, weiß, gelb, blau, warm, kalt"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"zum entsperren über das display streichen, zum entsperren wischen, passwort, muster, pin"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"Bildschirmfixierung"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"herausforderung bei der arbeit, arbeit, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"arbeitsprofil, verwaltetes profil, gruppieren, gruppierung, arbeit, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gesten, bewegungen, touch-gesten"</string>
@@ -3525,13 +3534,13 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Unterhaltungen"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Unterhaltung"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Keine Unterhaltung"</string>
-    <string name="demote_conversation_summary" msgid="4319929331165604112">"Aus dem Bereich für Unterhaltungen entfernen"</string>
+    <string name="demote_conversation_summary" msgid="4319929331165604112">"Aus dem Bereich \"Unterhaltungen\" entfernen"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dies ist eine Unterhaltung"</string>
-    <string name="promote_conversation_summary" msgid="3890724115743515035">"Dem Bereich für Unterhaltungen hinzufügen"</string>
+    <string name="promote_conversation_summary" msgid="3890724115743515035">"Dem Bereich \"Unterhaltungen\" hinzufügen"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Unterhaltungen verwalten"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Vorrangige Unterhaltungen"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Oben im Bereich für Unterhaltungen und als unverankerte Bubbles anzeigen"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"Oben im Bereich für Unterhaltungen anzeigen"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Oben im Bereich \"Unterhaltungen\" und als unverankerte Bubbles anzeigen"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Oben im Bereich \"Unterhaltungen\" anzeigen"</string>
     <string name="other_conversations" msgid="8666033204953175307">"Geänderte Unterhaltungen"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Unterhaltungen, an denen Änderungen vorgenommen wurden"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Vorrangige Unterhaltungen als Bubble anzeigen"</string>
@@ -3553,13 +3562,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Unterbrechungen zulassen"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Die App darf Töne sowie Vibrationen erzeugen und/oder Pop-up-Benachrichtigungen auf dem Bildschirm einblenden"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorität"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Wird oben im Abschnitt für Unterhaltungen angezeigt und erscheint als Bubble."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Wird oben im Bereich \"Unterhaltungen\" als Bubble angezeigt"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> unterstützt keine unterhaltungsspezifischen Einstellungen."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Benachrichtigungen in der Benachrichtigungsleiste werden auf eine Zeile minimiert"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Benachrichtigungen werden ohne Ton oder Vibration angekündigt, um deine Konzentration nicht zu stören"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Benachrichtigungen werden mit einem Ton oder einer Vibration angekündigt, um dich auf sie aufmerksam zu machen"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Bei entsperrtem Gerät Benachrichtigungen als Banner oben auf dem Bildschirm anzeigen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle Benachrichtigungen von \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-Benachrichtigungen"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Adaptive Benachrichtigungen"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">Ungefähr <xliff:g id="NUMBER_1">%d</xliff:g> Benachrichtigungen pro Tag</item>
@@ -3847,14 +3857,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Administrator-PIN eingeben"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"An"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Aus"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Bildschirmfixierung"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Mit der Option \"Bildschirmfixierung\" kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du z. B. jemanden ein Spiel auf deinem Gerät spielen lassen, ohne dass die Person sonstigen Zugriff aufs Gerät hat. \n\nDie App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch personenbezogene Daten zugänglich gemacht werden können. \n\nSo verwendest du die Funktion \"Bildschirmfixierung\": 	\n1.	Aktiviere \"Bildschirmfixierung\"  \n2.	Tippe auf \"Übersicht\" 	\n3.	Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf \"Anpinnen\""</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Mit der Option \"Bildschirmfixierung\" kannst du festlegen, dass auf deinem Gerät vorübergehend nur eine App ausgeführt und angezeigt wird. Auf diese Weise kannst du z. B. jemanden ein Spiel auf deinem Gerät spielen lassen, ohne dass die Person sonstigen Zugriff aufs Gerät hat. \n\nDie App, die während der Bildschirmfixierung angezeigt wird, kann unter Umständen andere Apps öffnen, wodurch personenbezogene Daten zugänglich gemacht werden können. \n\nWenn du dein Gerät sicher mit jemandem teilen möchtest, kannst du stattdessen ein Gastprofil verwenden. \n\nSo verwendest du die Funktion \"Bildschirmfixierung\": 	\n1.	Aktiviere \"Bildschirmfixierung\" 	\n2.	Tippe auf \"Übersicht\" 	\n3.	Tippe auf das App-Symbol oben auf dem Bildschirm und dann auf \"Anpinnen\""</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wenn eine App auf dem Bildschirm fixiert ist, gilt Folgendes: \n\n•	 Zugriff auf personenbezogene Daten ist möglich \n		(z. B. auf Kontakte oder E-Mails) \n•	 Eine fixierte App kann andere Apps öffnen \n\nVerwende die Funktion \"Bildschirmfixierung\" nur dann, wenn du deinem Gegenüber vertraut."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Zum Loslösen nach Entsperrungsmuster fragen"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vor Beenden nach PIN fragen"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vor dem Beenden nach Passwort fragen"</string>
@@ -4444,20 +4450,20 @@
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Empfindlichkeit bei Touch-Geste \"Zurück\""</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Einstellungen für Touch-Gesten"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"bedienung über gesten, gestensteuerung, gestenbedienung, empfindlichkeit bei touch-geste zurück, empfindlichkeit geste zurück, empfindlichkeit zurückgeste, touch-geste zurück, geste zurück, zurückgeste"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Für Blick aufs Display doppeltippen"</string>
+    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Beim Doppeltippen Display aktivieren"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Doppeltippen für schnellen Blick auf das Display des Tablets"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Doppeltippen für schnellen Blick auf das Display des Geräts"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Wenn doppelt auf den Bildschirm getippt wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Für Blick aufs Display Smartphone in die Hand nehmen"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Beim Hochheben Display aktivieren"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Tablet hochnehmen, um das Display anzusehen"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Gerät hochnehmen, um das Display anzusehen"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Bildschirm aktivieren"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Wenn das Smartphone in die Hand genommen wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Wenn das Tablet in die Hand genommen wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Wenn das Gerät in die Hand genommen wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tippen, um Informationen auf dem Smartphone anzusehen"</string>
-    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Tippen, um Informationen auf dem Tablet anzusehen"</string>
-    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tippen, um Informationen auf dem Gerät anzusehen"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Beim Tippen Display aktivieren"</string>
+    <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Beim Tippen Display aktivieren"</string>
+    <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Beim Tippen Display aktivieren"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Wenn auf den Bildschirm getippt wird, werden die Uhrzeit, Benachrichtigungen und andere Informationen angezeigt."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Benachrichtigungen durch Wischen über Fingerabdrucksensor öffnen"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Fingerabdrucksensor verwenden"</string>
@@ -4639,7 +4645,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"App darf WLAN steuern"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Erlaubt der App das WLAN zu aktivieren oder zu deaktivieren, nach WLANs zu scannen und eine Verbindung zu ihnen herstellen, Netzwerke hinzuzufügen oder zu entfernen oder einen lokal beschränkten Hotspot zu starten"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Medien hier abspielen:"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"<xliff:g id="LABEL">%s</xliff:g> hier abspielen:"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> abspielen auf"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Dieses Gerät"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Smartphone"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4793,7 +4799,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Bei Verbindung mit <xliff:g id="CARRIER">%1$s</xliff:g> nicht verfügbar"</string>
     <string name="see_more" msgid="7499355691042812723">"Mehr anzeigen"</string>
     <string name="see_less" msgid="2642392725363552793">"Weniger anzeigen"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Gerät zur Nutzung mit <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Mit Gerät verbinden"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Die App \"<xliff:g id="APPNAME">%1$s</xliff:g>\" möchte sich über ein temporäres WLAN mit deinem Gerät verbinden"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Keine Geräte gefunden. Achte darauf, dass die Geräte eingeschaltet und zur Verbindung bereit sind."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Noch einmal versuchen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Ein Fehler ist aufgetreten. Die Anwendung hat die Anfrage zur Auswahl eines Geräts abgebrochen."</string>
@@ -4818,6 +4825,8 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Aktiviert das Weichzeichnen für Fenster auf Composition-Manager-Ebene. Erfordert einen Neustart des Geräts."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Datenschutz"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Berechtigungen, Kontoaktivität, personenbezogene Daten"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Fortsetzung der Medienwiedergabe"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Zeigt den Mediaplayer dauerhaft in den Schnelleinstellungen an. Erfordert einen Neustart."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Entfernen"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Behalten"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Diesen Vorschlag entfernen?"</string>
@@ -4881,10 +4890,10 @@
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"Einstellungen, die von deinem IT-Administrator verwaltet werden"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"Fehlerbericht-Handler"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Bestimmt, welche App die Verknüpfung zum Fehlerbericht auf deinem Gerät verarbeitet."</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"Bestimmt, welche App die Verknüpfung zum Fehlerbericht auf deinem Gerät verarbeitet"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"Persönlich"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Arbeit"</string>
-    <string name="system_default_app_subtext" msgid="5212055189703164839">"Systemstandardeinstellung"</string>
+    <string name="system_default_app_subtext" msgid="5212055189703164839">"System-Standard­einstellung"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Diese Auswahl ist nicht mehr gültig. Bitte versuch es noch einmal."</string>
     <string name="device_controls_sentence" msgid="4887752349920801907">"Gerätesteuerung"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"Gerätesteuerung"</string>
@@ -4901,7 +4910,7 @@
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Karten und Steuerelemente bei aktiviertem Sperrbildschirm anzeigen"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Auf dem Sperrbildschirm werden Steuerelemente angezeigt"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Karten und Steuerelemente bei aktiviertem Sperrbildschirm ausblenden"</string>
-    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Leg zuerst eine Displaysperre fest"</string>
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Wenn du diese Option verwenden möchtest, musst du zuerst eine Displaysperre festlegen"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Gerätesteuerung anzeigen"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Karten und Tickets anzeigen"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Wenn du die Steuerung verbundener Geräte öffnen möchtest, halte die Ein-/Aus-Taste gedrückt"</string>
@@ -4916,4 +4925,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Wenn du zwei SIM-Karten verwendest, kann sich dieses Smartphone nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen."</annotation></string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Wenn du zwei SIM-Karten verwendest, kann sich dieses Tablet nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen."</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Wenn du zwei SIM-Karten verwendest, kann sich dieses Gerät nur mit 4G verbinden. "<annotation id="url">"Weitere Informationen."</annotation></string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Ausführung für Apps im Cache sperren"</string>
 </resources>

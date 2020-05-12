@@ -29,7 +29,7 @@
       <item quantity="few"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraki vas ločijo od tega, da postanete razvijalec.</item>
       <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korakov vas loči od tega, da postanete razvijalec.</item>
     </plurals>
-    <string name="show_dev_on" msgid="2840850085134853754">"Zdaj ste razvijalec."</string>
+    <string name="show_dev_on" msgid="2840850085134853754">"Zdaj ste razvijalec"</string>
     <string name="show_dev_already" msgid="7041756429707644630">"Ni treba, ker ste že razvijalec."</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"Najprej omogočite možnosti za razvijalce."</string>
     <string name="header_category_wireless_networks" msgid="303445626075235229">"Brezžično in omrežja"</string>
@@ -84,6 +84,7 @@
     <string name="bluetooth_disconnect_dialog_ok" msgid="4173740094381092185">"Prekini povezavo"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Nimate dovoljenja za spreminjanje nastavitev za Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Seznanitev nove naprave"</string>
+    <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Naprava <xliff:g id="DEVICE_NAME">%1$s</xliff:g> je vidna napravam v bližini, ko so odprte nastavitve za Bluetooth."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Naslov Bluetooth telefona: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Naslov Bluetooth tabličnega računalnika: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -286,7 +287,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Takoj po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po preteku časovne omejitve, razen ko <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> poskrbi, da ostane odklenjen"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"Prikaži lastnikove podatke na zaklenjenem zaslonu"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"Dod. besedila na zakl. zaslon"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"Besedilo na zaklenjenem zaslonu"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Omogoči pripomočke"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Onemogočil skrbnik"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Prikaz možnosti za zaklep"</string>
@@ -466,11 +467,11 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Šifriraj tablični računalnik"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Šifriranje telefona"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Šifrirano"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju tabličnega računalnika ob vsakem vklopu odkleniti zaslon, če boste želeli tablični računalnik dešifrirati. Edini drugi način dešifriranja tabličnega računalnika je, da ga ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo akumulator napolnjen, tablični računalnik pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju telefona ob vsakem vklopu odkleniti zaslon, če boste želeli telefon dešifrirati. Edini drugi način dešifriranja je, da telefon ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo akumulator napolnjen, telefon pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju tabličnega računalnika ob vsakem vklopu odkleniti zaslon, če boste želeli tablični računalnik dešifrirati. Edini drugi način dešifriranja tabličnega računalnika je, da ga ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo baterija napolnjena, tablični računalnik pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju telefona ob vsakem vklopu odkleniti zaslon, če boste želeli telefon dešifrirati. Edini drugi način dešifriranja je, da telefon ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo baterija napolnjena, telefon pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Šifriraj tablični računalnik"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Šifriraj telefon"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Napolnite akumulator in poskusite znova."</string>
+    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Napolnite baterijo in poskusite znova."</string>
     <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Priključite polnilnik in poskusite znova."</string>
     <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Ni kode PIN ali gesla za zaklepanje zaslona"</string>
     <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Preden lahko začnete s šifriranjem, morate nastaviti kodo PIN ali geslo za zaklepanje zaslona."</string>
@@ -606,7 +607,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Če pri naslednjem poskusu vnesete napačno geslo, bodo delovni profil in podatki v njem izbrisani"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Preveč napačnih poskusov. Podatki v napravi bodo izbrisani."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Preveč napačnih poskusov. Uporabnik bo izbrisan."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Preveč napačnih poskusov. Delovni profil in podatki v njem bodo izbrisani."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Preveč neuspešnih poskusov. Delovni profil in podatki v njem bodo izbrisani."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Opusti"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Vsebovati mora vsaj <xliff:g id="COUNT_1">%d</xliff:g> znak</item>
@@ -860,8 +861,8 @@
     <string name="wifi_setting_sleep_policy_error" msgid="4512566787805720422">"Težava pri spreminjanju nastavitve"</string>
     <string name="wifi_suspend_efficiency_title" msgid="3589291227092825754">"Izboljšanje učinkovitosti"</string>
     <string name="wifi_suspend_optimizations" msgid="5840680940416640209">"Optimizacija Wi-Fi-ja"</string>
-    <string name="wifi_suspend_optimizations_summary" msgid="8204170804523356781">"Zmanjšanje porabe energije akumulatorja, ko je vklopljen Wi-Fi"</string>
-    <string name="wifi_limit_optimizations_summary" msgid="8461087338100462302">"Omejitev porabe akum. za Wi‑Fi"</string>
+    <string name="wifi_suspend_optimizations_summary" msgid="8204170804523356781">"Zmanjšanje porabe energije baterije, ko je vklopljen Wi-Fi"</string>
+    <string name="wifi_limit_optimizations_summary" msgid="8461087338100462302">"Omejitev porabe bat. za Wi‑Fi"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="681353878530696197">"Preklopi na prenos podatkov v mobilnih omrežjih, če omrežje Wi‑Fi nima več dostopa do interneta."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Samodejno preklopi na prenos podatkov v mobilnih omrežjih"</string>
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Uporaba prenosa podatkov v mobilnih omrežjih, če omrežje Wi-Fi nima dostopa do interneta. Pri tem bodo morda nastali stroški prenosa podatkov v mobilnih omrežjih."</string>
@@ -930,7 +931,7 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Ogled ali sprememba naročnine"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Naključno izbran MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodajanje naprave"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Spodnjo kodo QR nastavite na sredino, če želite napravo dodati v omrežje »<xliff:g id="SSID">%1$s</xliff:g>«."</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Kodo QR spodaj nastavite na sredino, če želite napravo dodati v omrežje »<xliff:g id="SSID">%1$s</xliff:g>«."</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Branje kode QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Kodo QR spodaj nastavite na sredino, da vzpostavite povezavo z omrežjem »<xliff:g id="SSID">%1$s</xliff:g>«."</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Če se želite pridružiti omrežju Wi‑Fi, preberite kodo QR"</string>
@@ -949,7 +950,7 @@
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Izbira omrežja"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"Če želite povezati napravo, izberite omrežje"</string>
     <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Želite to napravo dodati v omrežje »<xliff:g id="SSID">%1$s</xliff:g>«?"</string>
-    <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"Omrežje Wi‑Fi je v skupni rabi z napravo"</string>
+    <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"Omrežje Wi‑Fi je deljeno z napravo"</string>
     <string name="wifi_dpp_add_another_device" msgid="3307575293580739604">"Dodaj novo napravo"</string>
     <string name="wifi_dpp_choose_different_network" msgid="8963625819804792157">"Izberi drugo omrežje"</string>
     <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"Naprave ni bilo mogoče dodati"</string>
@@ -1222,7 +1223,7 @@
     <string name="auto_brightness_very_high_title" msgid="4935132626750630713">"Zelo visoka"</string>
     <string name="auto_brightness_subtitle" msgid="6839449395639517870">"Prednostna raven svetlosti"</string>
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"Ne prilagodi glede na razpoložljivo svetlobo"</string>
-    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"Povečana poraba akumulatorja"</string>
+    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"Povečana poraba baterije"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"Optimiziranje ravni svetlosti glede na razpoložljivo svetlobo. Ko je ta funkcija vklopljena, lahko še vedno začasno prilagodite svetlost."</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"Svetlost zaslona se bo samodejno prilagajala glede na okolje in dejavnosti. Če želite, da funkcija za prilagodljivo svetlost hitreje spozna vaše želje, lahko ročno premaknete drsnik."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Prikaz ravnovesja beline"</string>
@@ -1261,10 +1262,8 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Vklopi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Izklopi do <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nočna svetloba je izklopljena"</string>
-    <!-- no translation found for twilight_mode_location_off_dialog_message (4559150893687124801) -->
-    <skip />
-    <!-- no translation found for twilight_mode_launch_location (7799112373591153956) -->
-    <skip />
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Lokacija naprave je potrebna za določanje časa sončnega zahoda in vzhoda na vaši lokaciji."</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Nastavitve lokacije"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Vklopi zdaj"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Izklopi zdaj"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Vklopi do sončnega vzhoda"</string>
@@ -1379,7 +1378,7 @@
     <string name="device_info_not_available" msgid="4804474466616712326">"Ni na voljo"</string>
     <string name="device_status_activity_title" msgid="1812666241137263882">"Stanje"</string>
     <string name="device_status" msgid="7988547478034984649">"Stanje"</string>
-    <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"Stanje akumulatorja in omrežja ter drugi podatki"</string>
+    <string name="device_status_summary" product="tablet" msgid="8826216824111648900">"Stanje baterije in omrežja ter drugi podatki"</string>
     <string name="device_status_summary" product="default" msgid="8132661857066128832">"Telefonska številka, signal itn."</string>
     <string name="storage_settings" msgid="7472188817781592677">"Shramba"</string>
     <string name="storage_settings_for_app" msgid="229425418984637483">"Shramba in predpomnilnik"</string>
@@ -1582,8 +1581,8 @@
     <string name="storage_wizard_ready_v2_external_body" msgid="3896836008684280905">"Vsebino lahko premaknete v nosilec <xliff:g id="NAME">^1</xliff:g>"</string>
     <string name="storage_wizard_ready_v2_internal_body" msgid="5710665992219332454">"Če želite vsebino premakniti v nosilec <xliff:g id="NAME">^1</xliff:g>, pojdite na "<b>"Nastavitve &gt; Shramba"</b></string>
     <string name="storage_wizard_ready_v2_internal_moved_body" msgid="1269878056598666852">"Vsebina je bila premaknjena v nosilec <xliff:g id="NAME_0">^1</xliff:g>. \n\nČe želite upravljati nosilec <xliff:g id="NAME_1">^2</xliff:g>, pojdite v "<b>"Nastavitve &gt; Shramba"</b>"."</string>
-    <string name="battery_status_title" msgid="4661768220545945771">"Stanje akumulatorja"</string>
-    <string name="battery_level_title" msgid="1371765298786083448">"Raven napolnjenosti akumulatorja"</string>
+    <string name="battery_status_title" msgid="4661768220545945771">"Stanje baterije"</string>
+    <string name="battery_level_title" msgid="1371765298786083448">"Raven napolnjenosti baterije"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APN-ji"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Uredi dostopno točko"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"Ni nastavljeno"</string>
@@ -1713,7 +1712,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Deljenje internetne povezave naprave <xliff:g id="DEVICE_NAME">%1$d</xliff:g> prek Bluetootha"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Internetna povezava ni mogoča z več kot <xliff:g id="MAXCONNECTION">%1$d</xliff:g> naprav."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Internetna povezava z napravo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bo prekinjena."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Inter. povez. prek Ether."</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Internet prek etherneta"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="7573587396552412231">"Deljenje internetne povezave telefona prek povezave USB Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek svoje mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za skupno rabo vsebin z napravami v bližini."</string>
     <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Uporabite dostopno točko in povezavo z internetom prek mobilnega telefona, da zagotovite internet drugim napravam prek Wi-Fi-ja ali mobilne podatkovne povezave. Tudi aplikacije lahko ustvarijo dostopno točko za deljenje vsebin z napravami v bližini."</string>
@@ -1741,17 +1740,17 @@
     <string name="location_app_level_permissions" msgid="45436724900423656">"Dostop aplikacij do lokacije"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Zaznavanje lokacije je izklopljeno"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="one"> Dostop do lokacije ima toliko aplikacij: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="two"> Dostop do lokacije ima toliko aplikacij: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="few"> Dostop do lokacije ima toliko aplikacij: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
-      <item quantity="other"> Dostop do lokacije ima toliko aplikacij: <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od<xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g></item>
+      <item quantity="one"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
+      <item quantity="two"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
+      <item quantity="few"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
+      <item quantity="other"> Dostop do lokacije ima <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> od <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> aplikacij</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"Nedavni dostop do lokacije"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Ogled podrobnosti"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"V zadnjem času ni nobena aplikacija zahtevala lokacijskih podatkov"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Nobena aplikacija ni nedavno dostopala do lokacije"</string>
-    <string name="location_high_battery_use" msgid="4277318891200626524">"Visoka poraba akumulatorja"</string>
-    <string name="location_low_battery_use" msgid="5218950289737996431">"Nizka poraba akumulatorja"</string>
+    <string name="location_high_battery_use" msgid="4277318891200626524">"Visoka poraba baterije"</string>
+    <string name="location_low_battery_use" msgid="5218950289737996431">"Nizka poraba baterije"</string>
     <string name="location_scanning_screen_title" msgid="2346125609614249968">"Iskanje omrežij Wi‑Fi in naprav Bluetooth"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Iskanje omrežij Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Aplikacijam in storitvam omogoči, da kadar koli iščejo omrežja Wi-Fi, tudi ko je Wi-Fi izklopljen. To funkcijo lahko na primer uporabite, če želite izboljšati funkcije in storitve, ki pri delovanju uporabljajo lokacijo."</string>
@@ -2174,17 +2173,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Hitro povečanje prikaza na zaslonu za razločnejši prikaz vsebine.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Prikaz povečate tako:&lt;/b&gt;&lt;br/&gt; 1. Z bližnjico vklopite povečavo.&lt;br/&gt; 2. Dotaknite se zaslona.&lt;br/&gt; 3. Po zaslonu se pomikajte z vlečenjem dveh prstov.&lt;br/&gt; 4. Stopnjo povečave prilagodite tako, da prsta razmaknete ali primaknete.&lt;br/&gt; 5. Z bližnjico izklopite povečavo.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Prikaz začasno povečate tako:&lt;/b&gt;&lt;br/&gt; 1. Z bližnjico vklopite povečavo.&lt;br/&gt; 2. Dotaknite se poljubne točke na zaslonu in jo pridržite.&lt;br/&gt; 3. Po zaslonu se pomikajte z vlečenjem prsta.&lt;br/&gt; 4. Dvignite prst, da izklopite povečavo."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ko je povečava vklopljena, lahko povečate prikaz na zaslonu.\n\n"<b>"Če želite povečati prikaz"</b>", zaženite povečavo, nato pa se dotaknite poljubnega mesta na zaslonu.\n"<ul><li>"Povlecite z dvema ali več prsti po zaslonu, če se želite pomikati."</li>\n<li>"Primaknite ali razmaknite dva ali več prstov, če želite prilagoditi povečavo."</li></ul>\n\n<b>"Če želite začasno povečati prikaz"</b>", zaženite povečavo ter se dotaknite poljubnega mesta na zaslonu in ga pridržite.\n"<ul><li>"Povlecite, če se želite premikati po zaslonu."</li>\n<li>"Dvignite prst, če želite zmanjšati povečavo."</li></ul>\n\n"Povečava ni mogoča na tipkovnici ali v vrstici za krmarjenje."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Odpiranje z gumbom za ljudi s posebnimi potrebami"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="2435863802351001840">"Za odpiranje pridržite tipko za glasnost"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Za odpiranje pridržite tipki za glasnost"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Za odpiranje se trikrat dotaknite zaslona"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Odpiranje s potezo"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Uporaba nove poteze za ljudi s posebnimi potrebami"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="8864982210828939255">"Če želite vklopiti ali izklopiti to funkcijo, se na dnu zaslona dotaknite gumba za funkcije za ljudi s posebnimi potrebami <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nČe želite preklopiti med funkcijami, se dotaknite gumba za funkcije za ljudi s posebnimi potrebami in ga pridržite."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5751656938657156707">"Če želite vklopiti ali izklopiti to funkcijo, pritisnite obe tipki za glasnost in ju pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Če želite uporabljati to funkcijo, se na dnu zaslona dotaknite gumba za funkcije za ljudi s posebnimi potrebami <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>.\n\nČe želite preklopiti med funkcijami, se dotaknite gumba za funkcije za ljudi s posebnimi potrebami in ga pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Če želite uporabljati to funkcijo, pritisnite obe tipki za glasnost in ju pridržite."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Če želite vklopiti ali izklopiti povečavo, se trikrat dotaknite poljubnega mesta na zaslonu."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture" msgid="5214148968046642385">"Če želite vklopiti ali izklopiti to funkcijo, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="6325915885330338011">"Če želite vklopiti ali izklopiti to funkcijo, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="4374642468168411402">"Če želite vklopiti ali izklopiti funkcijo za ljudi s posebnimi potrebami, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
-    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="3416963434378747529">"Če želite vklopiti ali izklopiti funkcijo za ljudi s posebnimi potrebami, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Če želite uporabljati to funkcijo, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Če želite uporabljati to funkcijo, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Če želite uporabljati funkcijo za ljudi s posebnimi potrebami, z dvema prstoma povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, z dvema prstoma povlecite navzgor in pridržite."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Če želite uporabljati funkcijo za ljudi s posebnimi potrebami, s tremi prsti povlecite z dna zaslona navzgor.\n\nČe želite preklopiti med funkcijami, s tremi prsti povlecite navzgor in pridržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Razumem"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Bližnjica do storitve »<xliff:g id="SERVICE">%1$s</xliff:g>«"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Gumb za funkcije za ljudi s posebnimi potrebami"</string>
@@ -2415,7 +2414,7 @@
     <string name="print_search_box_hidden_utterance" msgid="5355387966141712567">"Iskalno polje je skrito"</string>
     <string name="printer_info_desc" msgid="1206872325746154206">"Več informacij o tem tiskalniku"</string>
     <string name="power_usage_summary_title" msgid="4198312848584882113">"Baterija"</string>
-    <string name="power_usage_summary" msgid="6857382582534984531">"Kaj porablja energijo akumulatorja"</string>
+    <string name="power_usage_summary" msgid="6857382582534984531">"Kaj porablja energijo baterije"</string>
     <string name="power_usage_not_available" msgid="3425302437465106036">"Podatki o porabi baterije niso na voljo."</string>
     <string name="power_usage_level_and_status" msgid="821521456989429593">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Preostali čas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
@@ -2431,9 +2430,9 @@
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Poraba energije od polne napolnjenosti baterije"</string>
     <string name="screen_usage_summary" msgid="1393184943010909471">"Trajanje vklopljenosti zaslona od polne napolnjenosti akumulatorja"</string>
     <string name="device_usage_list_summary" msgid="242243537371697285">"Poraba naprave od polne napolnjenosti akumulatorja"</string>
-    <string name="battery_since_unplugged" msgid="6991509383429936921">"Uporaba akumulatorja po odklopu"</string>
-    <string name="battery_since_reset" msgid="2930376112877476562">"Uporaba akumulatorja od ponastavitve"</string>
-    <string name="battery_stats_on_battery" msgid="1553011980384645514">"Čas napajanja iz akumulatorja: <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="battery_since_unplugged" msgid="6991509383429936921">"Uporaba baterije po odklopu"</string>
+    <string name="battery_since_reset" msgid="2930376112877476562">"Uporaba baterije od ponastavitve"</string>
+    <string name="battery_stats_on_battery" msgid="1553011980384645514">"Čas napajanja iz baterije: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="6918768703070999743">"<xliff:g id="TIME">%1$s</xliff:g> od odklopa"</string>
     <string name="battery_stats_charging_label" msgid="6204814386861342145">"Napajanje"</string>
     <string name="battery_stats_screen_on_label" msgid="8989312180491200138">"Zaslon vklopljen"</string>
@@ -2456,25 +2455,25 @@
     <string name="packages_subtitle" msgid="8687690644931499428">"Vključeni paketi"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Aplikacije delujejo normalno"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"Telefon ima običajno porabo baterije v ozadju"</string>
-    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Tablični računalnik ima običajno porabo energije akumulatorja v ozadju"</string>
-    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Naprava ima običajno porabo energije akumulatorja v ozadju"</string>
-    <string name="battery_tip_low_battery_title" msgid="7789690720316830767">"Akumulator je skoraj prazen"</string>
-    <string name="battery_tip_low_battery_summary" msgid="357649681960300945">"Akumulator ne more zagotoviti dolgega časa delovanja"</string>
-    <string name="battery_tip_smart_battery_title" product="default" msgid="2903272443772298636">"Izboljšajte čas delovanja akumulatorja telefona"</string>
-    <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Izboljšajte čas delovanja akumulatorja tabličnega računalnika"</string>
-    <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Izboljšajte čas delovanja akumulatorja naprave"</string>
-    <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Vklopite varčevanje z energijo akumulatorja"</string>
+    <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"Tablični računalnik ima običajno porabo energije baterije v ozadju"</string>
+    <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"Naprava ima običajno porabo energije baterije v ozadju"</string>
+    <string name="battery_tip_low_battery_title" msgid="7789690720316830767">"Baterija je skoraj prazna"</string>
+    <string name="battery_tip_low_battery_summary" msgid="357649681960300945">"Baterija ne more zagotoviti dolgega časa delovanja"</string>
+    <string name="battery_tip_smart_battery_title" product="default" msgid="2903272443772298636">"Izboljšajte čas delovanja baterije telefona"</string>
+    <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Izboljšajte čas delovanja baterije tabličnega računalnika"</string>
+    <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Izboljšajte čas delovanja baterije naprave"</string>
+    <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Vklopite varčevanje z energijo baterije"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Vklop varčevanja z baterijo"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterija se bo morda izpraznila prej kot običajno"</string>
-    <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Varčevanje z energijo akumulatorja je vklopljeno"</string>
+    <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Varčevanje z energijo baterije je vklopljeno"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Nekatere funkcije bodo morda omejene"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefon uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablični računalnik uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Napravo uporabljate več kot običajno"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterija se bo morda izpraznila prej kot običajno"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablični računalnik ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Napravo ste uporabljali več kot običajno. Akumulator se bo morda izpraznil prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije akumulatorja:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Telefon ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablični računalnik ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Napravo ste uporabljali več kot običajno. Baterija se bo morda izpraznila prej, kot ste pričakovali.\n\nAplikacije, ki porabijo največ energije baterije:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Vključuje dejavnost z visoko porabo energije v ozadju"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
       <item quantity="one">Omeji %1$d aplikacijo</item>
@@ -2517,22 +2516,22 @@
     <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo telefon predlagal ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo tablični računalnik predlagal ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Aplikacije porabljajo običajno količino energije baterije. V primeru prekomerne porabe energije vam bo naprava predlagala ustrezne ukrepe.\n\nČe bateriji zmanjkuje energije, lahko vedno vklopite varčevanje z energijo baterije."</string>
-    <string name="smart_battery_manager_title" msgid="3677620516657920364">"Varčevanje z energijo akumulatorja"</string>
+    <string name="smart_battery_manager_title" msgid="3677620516657920364">"Varčevanje z energijo baterije"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Samodejno upravljanje aplikacij"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Omejite porabljanje energije akumulatorja za aplikacije, ki jih ne uporabljate pogosto"</string>
-    <string name="smart_battery_footer" msgid="8407121907452993645">"Ko varčevanje z energijo akumulatorja zazna, da aplikacije porabljajo energijo akumulatorja, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Omejite porabljanje energije baterije za aplikacije, ki jih ne uporabljate pogosto"</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Ko varčevanje z energijo baterije zazna, da aplikacije porabljajo energijo baterije, lahko te aplikacije omejite. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Omejene aplikacije"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
-      <item quantity="one">Omejitev porabe energije akumulatorja za %1$d aplikacijo</item>
-      <item quantity="two">Omejitev porabe energije akumulatorja za %1$d aplikaciji</item>
-      <item quantity="few">Omejitev porabe energije akumulatorja za %1$d aplikacije</item>
-      <item quantity="other">Omejitev porabe energije akumulatorja za %1$d aplikacij</item>
+      <item quantity="one">Omejitev porabe energije baterije za %1$d aplikacijo</item>
+      <item quantity="two">Omejitev porabe energije baterije za %1$d aplikaciji</item>
+      <item quantity="few">Omejitev porabe energije baterije za %1$d aplikacije</item>
+      <item quantity="other">Omejitev porabe energije baterije za %1$d aplikacij</item>
     </plurals>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Omejeno ob <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Te aplikacije so porabljale energijo akumulatorja v ozadju. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
-    <string name="battery_auto_restriction_title" msgid="827206218118093357">"Uporaba varčevanja z energijo akumulatorja"</string>
-    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Zaznavanje, ko aplikacije porabljajo energijo akumulatorja"</string>
-    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Vklopljeno / Zaznavanje, ko aplikacije porabljajo energijo akumulatorja"</string>
+    <string name="restricted_app_detail_footer" msgid="3683577206409650564">"Te aplikacije so porabljale energijo baterije v ozadju. Omejene aplikacije morda ne bodo delovale pravilno, obvestila pa bodo morda zakasnjena."</string>
+    <string name="battery_auto_restriction_title" msgid="827206218118093357">"Uporaba varčevanja z energijo baterije"</string>
+    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Zaznavanje, ko aplikacije porabljajo energijo baterije"</string>
+    <string name="battery_manager_on" product="default" msgid="3197525907390349054">"Vklopljeno / Zaznavanje, ko aplikacije porabljajo energijo baterije"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Izklopljeno"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d aplikacija je omejena</item>
@@ -2542,22 +2541,22 @@
     </plurals>
     <string name="battery_header_title_alternate" msgid="8371821625994616659">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>""</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"Želite ustaviti aplikacijo?"</string>
-    <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefon ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja telefon prebujen.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
-    <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablični računalnik ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja tablični računalnik prebujen.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
-    <string name="dialog_stop_message" product="device" msgid="4252335402634772603">"Naprava ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja napravo prebujeno.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
-    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="604462000476810125">"Telefon ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja telefon.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
-    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="7737426241260791605">"Tablični računalnik ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja tablični računalnik.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
-    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="1820679795932901383">"Naprava ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja napravo.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja akumulatorja morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"Telefon ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja telefon prebujen.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"Tablični računalnik ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja tablični računalnik prebujen.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message" product="device" msgid="4252335402634772603">"Naprava ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> ohranja napravo prebujeno.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="604462000476810125">"Telefon ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja telefon.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="7737426241260791605">"Tablični računalnik ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja tablični računalnik.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="1820679795932901383">"Naprava ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja napravo.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g>.\n\nČe se težava ponovi, boste za podaljšanje časa delovanja baterije morda morali aplikacijo odstraniti."</string>
     <string name="dialog_stop_ok" msgid="1171516542217183180">"Ustavi aplikacijo"</string>
     <string name="dialog_background_check_title" msgid="8571605969100408762">"Želite izklopiti izvajanje v ozadju in zaustaviti aplikacijo?"</string>
-    <string name="dialog_background_check_message" product="default" msgid="6203374578970183277">"Telefon ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja telefon.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
-    <string name="dialog_background_check_message" product="tablet" msgid="1282389215667916176">"Tablični računalnik ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja tablični računalnik.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
-    <string name="dialog_background_check_message" product="device" msgid="8005524265739819577">"Naprava ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja napravo.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
+    <string name="dialog_background_check_message" product="default" msgid="6203374578970183277">"Telefon ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja telefon.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="1282389215667916176">"Tablični računalnik ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja tablični računalnik.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
+    <string name="dialog_background_check_message" product="device" msgid="8005524265739819577">"Naprava ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP_0">%1$s</xliff:g> nenehno prebuja napravo.\n\nTežavo lahko poskusite rešiti tako, da zaustavite aplikacijo <xliff:g id="APP_1">%1$s</xliff:g> in preprečite njeno izvajanje v ozadju."</string>
     <string name="dialog_background_check_ok" msgid="5792934035264144797">"Izklopi"</string>
     <string name="dialog_location_title" msgid="1323400468370901875">"Želite izklopiti ugotavljanje lokacije?"</string>
-    <string name="dialog_location_message" product="default" msgid="5597959072209122057">"Telefon ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
-    <string name="dialog_location_message" product="tablet" msgid="7165269165194599595">"Tablični računalnik ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
-    <string name="dialog_location_message" product="device" msgid="4606829479989940464">"Naprava ne more ustrezno upravljati porabe energije akumulatorja, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
+    <string name="dialog_location_message" product="default" msgid="5597959072209122057">"Telefon ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
+    <string name="dialog_location_message" product="tablet" msgid="7165269165194599595">"Tablični računalnik ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
+    <string name="dialog_location_message" product="device" msgid="4606829479989940464">"Naprava ne more ustrezno upravljati porabe energije baterije, ker aplikacija <xliff:g id="APP">%1$s</xliff:g> nenehno zahteva lokacijo, tudi ko aplikacije ne uporabljate.\n\nTežavo lahko odpravite tako, da izklopite ugotavljanje lokacije za to aplikacijo."</string>
     <string name="dialog_location_ok" msgid="6338680851382069716">"Izklopi"</string>
     <string name="power_screen" msgid="4596900105850963806">"Zaslon"</string>
     <string name="power_flashlight" msgid="8993388636332573202">"Svetilka"</string>
@@ -2588,7 +2587,7 @@
     <string name="usage_type_flashlight" msgid="5629235220169383309">"Svetilka"</string>
     <string name="usage_type_on_time" msgid="104642441471272535">"Trajanje osvetlitve"</string>
     <string name="usage_type_no_coverage" msgid="1385712176630900103">"Čas brez signala"</string>
-    <string name="usage_type_total_battery_capacity" msgid="3878234027503885998">"Skupna zmogljivost akumulatorja"</string>
+    <string name="usage_type_total_battery_capacity" msgid="3878234027503885998">"Skupna zmogljivost baterije"</string>
     <string name="usage_type_computed_power" msgid="5191902025833668752">"Izračunana poraba energije"</string>
     <string name="usage_type_actual_power" msgid="1221358930299037926">"Zaznana poraba energije"</string>
     <string name="battery_action_stop" msgid="6998228610098034316">"Prisilna ustavitev"</string>
@@ -2597,34 +2596,34 @@
     <string name="battery_action_display" msgid="6515712081248863749">"Nastavitve zaslona"</string>
     <string name="battery_action_wifi" msgid="1829212604573932607">"Nastavitve za Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="4723692623358386789">"Nastavitve Bluetooth"</string>
-    <string name="battery_desc_voice" msgid="6900799826084022585">"Energija akumulatorja, ki so jo porabili glasovni klici"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="5818742458684767043">"Uporaba akumulatorja, ko je tablični računalnik nedejaven"</string>
-    <string name="battery_desc_standby" product="default" msgid="2543075041964578103">"Poraba energije akumulatorja, kadar je telefon nedejaven"</string>
-    <string name="battery_desc_radio" msgid="454677140485133914">"Energija akumulatorja, ki jo je porabil radijski vmesnik"</string>
+    <string name="battery_desc_voice" msgid="6900799826084022585">"Energija baterije, ki so jo porabili glasovni klici"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="5818742458684767043">"Uporaba baterije, ko je tablični računalnik nedejaven"</string>
+    <string name="battery_desc_standby" product="default" msgid="2543075041964578103">"Poraba energije baterije, kadar je telefon nedejaven"</string>
+    <string name="battery_desc_radio" msgid="454677140485133914">"Energija baterije, ki jo je porabil radijski vmesnik"</string>
     <string name="battery_sugg_radio" msgid="5476234634503535270">"Na območjih brez mobilnega signala preklopite v način za letalo, da prihranite energijo"</string>
-    <string name="battery_desc_flashlight" msgid="6694895513133361404">"Energija akumulatorja, porabljena za bliskavico"</string>
-    <string name="battery_desc_camera" msgid="6152712271731518018">"Energija akumulatorja, ki jo porablja fotoaparat"</string>
-    <string name="battery_desc_display" msgid="7175017688954602685">"Energija akumulatorja, porabljena za osvetlitev zaslona"</string>
+    <string name="battery_desc_flashlight" msgid="6694895513133361404">"Energija baterije, porabljena za bliskavico"</string>
+    <string name="battery_desc_camera" msgid="6152712271731518018">"Energija baterije, ki jo porablja fotoaparat"</string>
+    <string name="battery_desc_display" msgid="7175017688954602685">"Energija baterije, porabljena za osvetlitev zaslona"</string>
     <string name="battery_sugg_display" msgid="3102137296547788111">"Zmanjšajte svetlost zaslona in/ali časovno omejitev za zaslon"</string>
-    <string name="battery_desc_wifi" msgid="5276669172548928768">"Energija akumulatorja, ki jo je porabil Wi‑Fi"</string>
+    <string name="battery_desc_wifi" msgid="5276669172548928768">"Energija baterije, ki jo je porabil Wi‑Fi"</string>
     <string name="battery_sugg_wifi" msgid="359757575108350109">"Izklopite Wi-Fi, ko ga ne uporabljate ali če ni na voljo"</string>
-    <string name="battery_desc_bluetooth" msgid="2237947137783306282">"Energija akumulatorja, ki jo je porabil Bluetooth"</string>
+    <string name="battery_desc_bluetooth" msgid="2237947137783306282">"Energija baterije, ki jo je porabil Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="8943564578546832037">"Izklopite funkcijo Bluetooth, kadar je ne uporabljate"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="6495519793211758353">"Poskusite vzpostaviti povezavo z drugo napravo Bluetooth"</string>
-    <string name="battery_desc_apps" msgid="4187483940383266017">"Energija akumulatorja, ki jo je porabila aplikacija"</string>
+    <string name="battery_desc_apps" msgid="4187483940383266017">"Energija baterije, ki jo je porabila aplikacija"</string>
     <string name="battery_sugg_apps_info" msgid="4796917242296658454">"Ustavi ali odstrani aplikacijo"</string>
-    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Izberite način za varčevanje z energijo akumulatorja"</string>
-    <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Aplikacija morda omogoča nastavitve za zmanjšanje porabe energije akumulatorja"</string>
-    <string name="battery_desc_users" msgid="1959428568888686847">"Energija akumulatorja, ki jo je porabil uporabnik"</string>
+    <string name="battery_sugg_apps_gps" msgid="7221335088647925110">"Izberite način za varčevanje z energijo baterije"</string>
+    <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"Aplikacija morda omogoča nastavitve za zmanjšanje porabe energije baterije"</string>
+    <string name="battery_desc_users" msgid="1959428568888686847">"Energija baterije, ki jo je porabil uporabnik"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Drugi viri porabe energije"</string>
-    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Poraba akumulatorja je približek porabe energije in ne vključuje vseh virov porabe akumulatorja. »Drugi viri« so razlika med izračunano približno porabo energije in dejansko porabo, zaznano pri akumulatorju."</string>
+    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"Poraba baterije je približek porabe energije in ne vključuje vseh virov porabe baterije. »Drugi viri« so razlika med izračunano približno porabo energije in dejansko porabo, zaznano pri bateriji."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Preveč šteta uporaba energije"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Trajanje uporabe: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_active_for" msgid="4416277218863232476">"Čas dejavnosti: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Uporaba zaslona: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> porabil: <xliff:g id="APP">%2$s</xliff:g>"</string>
-    <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> celotne napolnjenosti akumulatorja"</string>
+    <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> celotne napolnjenosti baterije"</string>
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Razčlenitev od zadnje napolnjenosti akumulatorja"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Zadnja polna napolnjenost"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Polno napolnjena naprava deluje približno"</string>
@@ -2652,7 +2651,7 @@
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Varčevanje z energijo baterije se vklopi, če je verjetno, da se bo baterija izpraznila pred naslednjim običajnim polnjenjem"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Vklop pri <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Nastavitev razporeda"</string>
-    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Podaljšanje časa delovanja akumulatorja"</string>
+    <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Podaljšanje časa delovanja baterije"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Izklop ob polni napolnjenosti"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Varčevanje z energijo baterije se izklopi, ko je telefon napolnjen na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Varčevanje z energijo baterije se izklopi, ko je tablični računalnik napolnjen na <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2660,10 +2659,10 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Vklop"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Uporaba varčevanja z energijo akumulatorja"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Uporaba varčevanja z energijo baterije"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Samodejni vklop"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nikoli"</string>
-    <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"pri <xliff:g id="PERCENT">%1$s</xliff:g> napolnjenosti akumulatorja"</string>
+    <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"pri <xliff:g id="PERCENT">%1$s</xliff:g> napolnjenosti baterije"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Odstotek napolnjenosti baterije"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Pokaži odstotek napolnjenosti baterije v vrstici stanja"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Statistični podatki o procesih"</string>
@@ -2819,7 +2818,7 @@
     <string name="background_data" msgid="321903213000101158">"Podatki v ozadju"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Aplikacije lahko kadar koli sinhronizirajo, pošiljajo in prejemajo podatke"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Želite onemogočiti podatke v ozadju?"</string>
-    <string name="background_data_dialog_message" msgid="7760280837612824670">"Če onemogočite podatke v ozadju, podaljšate življenjsko dobo akumulatorja in zmanjšate rabo podatkov. Nekatere aplikacije bodo mogoče še vedno potrebovale povezavo s podatki v ozadju."</string>
+    <string name="background_data_dialog_message" msgid="7760280837612824670">"Če onemogočite podatke v ozadju, podaljšate življenjsko dobo baterije in zmanjšate rabo podatkov. Nekatere aplikacije bodo mogoče še vedno potrebovale povezavo s podatki v ozadju."</string>
     <string name="sync_automatically" msgid="4874122892765430304">"Samodejna sinh. podatkov aplik."</string>
     <string name="sync_enabled" msgid="5794103781356455043">"Sinhroniz. je VKLOP."</string>
     <string name="sync_disabled" msgid="1636223106968593391">"Sinhron. je IZKLOP."</string>
@@ -2921,7 +2920,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Morebitne spremembe v računih, ki jih naredite v spletu, bodo samodejno kopirane v tablični računalnik.\n\nNekateri računi morda tudi samodejno kopirajo morebitne spremembe, ki jih naredite v tabličnem računalniku, v splet. Tako deluje Google Račun."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Morebitne spremembe v računih, ki jih naredite v spletu, bodo samodejno kopirane v telefon.\n\nNekateri računi morda tudi samodejno kopirajo morebitne spremembe, ki jih naredite v telefonu, v splet. Tako deluje Google Račun."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Želite izklopiti samodejno sinhroniziranje podatkov?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"S tem zmanjšate količino prenesenih podatkov in porabo akumulatorja, vendar boste morali vsak posamezen račun sinhronizirati ročno, da dobite najnovejše podatke. Prav tako ne boste dobili obvestil o posodobitvah."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"S tem zmanjšate količino prenesenih podatkov in porabo baterije, vendar boste morali vsak posamezen račun sinhronizirati ročno, da dobite najnovejše podatke. Prav tako ne boste dobili obvestil o posodobitvah."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Datum ponastavitve cikla merjenja prenosa"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Datum v posameznem mesecu:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Nastavi"</string>
@@ -3262,6 +3261,10 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, način vožnje"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
     <string name="connected_devices_dashboard_no_driving_mode_no_nfc_summary" msgid="1175254057213044560">"Bluetooth"</string>
+    <string name="connected_devices_dashboard_android_auto_summary" msgid="8179090809275818804">"Bluetooth, Android Auto, način vožnje, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, način vožnje"</string>
+    <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
+    <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Ni na voljo, ker je vmesnik NFC izklopljen"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Za uporabo najprej namestite aplikacijo za plačevanje"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Aplikacije in obvestila"</string>
@@ -3287,7 +3290,7 @@
     <string name="keywords_more_mobile_networks" msgid="5041272719326831744">"mobilno omrežje, mobilno, operater, brezžično, podatki, 4g, 3g, 2g, lte"</string>
     <string name="keywords_wifi_calling" msgid="4319184318421027136">"wifi, wi-fi, klic, klicanje"</string>
     <string name="keywords_display" msgid="874738809280751745">"zaslon, zaslon na dotik"</string>
-    <string name="keywords_display_brightness_level" msgid="850742707616318056">"zatemnitev zaslona, zaslon na dotik, akumulator, svetlo"</string>
+    <string name="keywords_display_brightness_level" msgid="850742707616318056">"zatemnitev zaslona, zaslon na dotik, akumulator, baterija, svetlo"</string>
     <string name="keywords_display_night_display" msgid="4711054330804250058">"zatemnitev zaslona, noč, obarvanje, preklop na nočni način, svetlost, barva zaslona, barva"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"ozadje, prilagajanje, prilagajanje zaslona"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"velikost besedila"</string>
@@ -3316,8 +3319,7 @@
     <string name="keywords_color_mode" msgid="1193896024705705826">"živo, RGB, sRGB, barva, naravno, standardno"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"barva, temperatura, D65, D73, bela, rumena, modra topla, hladna"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"podrsanje za odklepanje, geslo, vzorec, PIN"</string>
-    <!-- no translation found for keywords_app_pinning (1564144561464945019) -->
-    <skip />
+    <string name="keywords_app_pinning" msgid="1564144561464945019">"pripenjanje zaslona"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"delovna preizkušnja, delo, profil"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"delovni profil, upravljan profil, poenotiti, poenotenje, delo, profil"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"poteze"</string>
@@ -3338,8 +3340,8 @@
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"obvestilo na zaklenjenem zaslonu, obvestila"</string>
     <string name="keywords_face_settings" msgid="1360447094486865058">"obraz"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"prstni odtis, dodajanje prstnega odtisa"</string>
-    <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"zatemnitev zaslona, zaslon na dotik, akumulator, pametna svetlost, dinamična svetlost, samodejno prilagajanje svetlosti"</string>
-    <string name="keywords_display_adaptive_sleep" msgid="8003895686008403685">"zatemnitev zaslona, stanje pripravljenosti, akumulator, časovna omejitev, zaznavanje pogleda, prikaz, zaslon, nedejavnost"</string>
+    <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"zatemnitev zaslona, zaslon na dotik, baterija, pametna svetlost, dinamična svetlost, samodejno prilagajanje svetlosti"</string>
+    <string name="keywords_display_adaptive_sleep" msgid="8003895686008403685">"zatemnitev zaslona, stanje pripravljenosti, akumulator, baterija, časovna omejitev, zaznavanje pogleda, prikaz, zaslon, nedejavnost"</string>
     <string name="keywords_auto_rotate" msgid="7914655570000378975">"zavrteti, obrniti, vrtenje, pokončno, ležeče, postavitev, navpično, vodoravno"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"nadgradnja, android"</string>
     <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"ne moti, razpored, obvestila, blokirati, utišati, vibriranje, spanje, delo, zbranost, izklopiti zvok, dan, delavnik, vikend, noč med tednom, dogodek"</string>
@@ -3355,8 +3357,8 @@
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptično, vibriranje, zaslon, občutljivost"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptično, vibriranje, telefon, klic, občutljivost, zvonjenje"</string>
     <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptično, vibriranje, občutljivost"</string>
-    <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"varčevanje z energijo akumulatorja, lepljivo, trajno, varčevanje z energijo, akumulator"</string>
-    <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, vsakodnevni opravek, razpored, urnik, varčevanje z energijo akumulatorja, varčevanje z energijo, akumulator, samodejno, odstotek, delež"</string>
+    <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"varčevanje z energijo baterije, lepljivo, trajno, varčevanje z energijo, baterija"</string>
+    <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, vsakodnevni opravek, razpored, urnik, varčevanje z energijo baterije, varčevanje z energijo, baterija, samodejno, odstotek, delež"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, napredno klicanje, klicanje 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodajanje jezika, dodajte jezik"</string>
     <string name="default_sound" msgid="6604374495015245195">"Privzeti zvok"</string>
@@ -3644,13 +3646,14 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Dovoli prekinitve"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Dovoli aplikaciji, da predvaja zvok, vibrira in/ali prikaže obvestila na zaslonu"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prednost"</string>
-    <string name="notification_channel_summary_priority" msgid="6688477880223319982">"Prikazano je na vrhu razdelka s pogovorom in v oblačku."</string>
+    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Prikazano je na vrhu razdelka s pogovorom in v oblačku"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> ne podpira posebnih nastavitev za pogovore."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Na poteznem zaslonu z obvestili so obvestila strnjena v eno vrstico"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Nemoteč prikaz brez zvoka ali vibriranja"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Pritegne vašo pozornost z zvokom ali vibriranjem"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ko je naprava odklenjena, so obvestila prikazana kot pasica na vrhu zaslona"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Vsa obvestila aplikacije »<xliff:g id="APP_NAME">%1$s</xliff:g>«"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Vsa obvestila aplikacije <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Prilagodljiva obvestila"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="one">~<xliff:g id="NUMBER_1">%d</xliff:g> obvestilo na dan</item>
@@ -3698,15 +3701,15 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Slika v sliki"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Dovoli sliko v sliki"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Dovoli tej aplikaciji, da ustvari okno s sliko v sliki, medtem ko je aplikacija odprta ali potem ko jo zapustite (na primer, da nadaljujete z ogledom videoposnetka). To okno prekrije druge aplikacije, ki jih uporabljate."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Povezane službene in osebne aplikacije"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Povezane delovne in osebne aplikacije"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Povezano"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Ni povezano"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Ni povezanih aplikacij"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"za več profilov povezana aplikacija aplikacije delovne in osebne"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Povezane službene in osebne aplikacije"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Povezane delovne in osebne aplikacije"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Povezano"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Poveži te aplikacije"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Povezane aplikacije si delijo dovoljenja in imajo dostop do podatkov povezanih aplikacij."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Povezane aplikacije si delijo dovoljenja in imajo dostop do podatkov z njimi povezanih aplikacij."</string>
     <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Povežite samo aplikacije, ki jim lahko zaupate osebne podatke. Delovne aplikacije lahko vaše osebne podatke prikažejo skrbniku za IT."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Ali želite delovni aplikaciji <xliff:g id="NAME">%1$s</xliff:g> zaupati osebne podatke?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"Aplikacija <xliff:g id="NAME">%1$s</xliff:g> lahko vaše osebne podatke prikaže skrbniku za IT."</string>
@@ -3966,14 +3969,10 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Vnos skrbniške kode PIN"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Vklopljeno"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Izklopljeno"</string>
-    <!-- no translation found for screen_pinning_title (6927227272780208966) -->
-    <skip />
-    <!-- no translation found for screen_pinning_description (6927147836599784578) -->
-    <skip />
-    <!-- no translation found for screen_pinning_guest_mode_description (5693881744751921914) -->
-    <skip />
-    <!-- no translation found for screen_pinning_dialog_message (8144925258679476654) -->
-    <skip />
+    <string name="screen_pinning_title" msgid="6927227272780208966">"Pripenjanje aplikacije"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite varno deliti svojo napravo z drugimi, namesto tega uporabite gosta. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Ko je aplikacija pripeta: \n\n•	Dostopni so lahko osebni podatki \n		(na primer stiki in vsebina e-poštnih sporočil). \n•		Pripeta aplikacija lahko odpre druge aplikacije. \n\nPripenjanje aplikacije uporabite le za osebe, ki jim zaupate."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pred odpenjanjem vprašaj za vzorec za odklepanje"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Zahtevaj PIN pred odpenjanjem"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred odpenjanjem vprašaj za geslo"</string>
@@ -4155,7 +4154,7 @@
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Če omogočite aplikaciji »<xliff:g id="APP_NAME">%1$s</xliff:g>« stalno izvajanje v ozadju, lahko to skrajša čas delovanja na baterijsko napajanje. \n\nNastavitev lahko pozneje spremenite v Nastavitve &gt; Aplikacije in obvestila."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> uporabe od zadnje polne napolnjenosti"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Upravljanje napajanja"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"Akumulator ni bil uporabljen od zadnje polne napolnjenosti"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Baterija ni bila uporabljena od zadnje polne napolnjenosti"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Nastavitve aplikacij"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Prikaži sprejemnik upor. vmes. sistema"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Dodatna dovoljenja"</string>
@@ -4227,7 +4226,7 @@
     </plurals>
     <string name="running_frequency" msgid="7260225121706316639">"Frekvenca"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Največja uporaba"</string>
-    <string name="no_data_usage" msgid="4665617440434654132">"Ni bilo uporabe podatkov"</string>
+    <string name="no_data_usage" msgid="4665617440434654132">"Ni bilo prenosa podatkov"</string>
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Dovolite aplikaciji <xliff:g id="APP">%1$s</xliff:g> dostop do funkcije »ne moti«?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Aplikacija bo lahko vklopila/izklopila način »ne moti« in spreminjala povezane nastavitve."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Mora biti vklopljeno, ker je vklopljen dostop do obvestil"</string>
@@ -4235,9 +4234,9 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Vsa pravila za način »ne moti«, ki jih je ustvarila ta aplikacija, bodo odstranjena."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Brez optimizacije"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizacija"</string>
-    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Akumulator se lahko hitreje izprazni. Aplikaciji ne bo več preprečena poraba energije akumulatorja v ozadju."</string>
-    <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Priporočljivo za daljši čas delovanja akumulatorja"</string>
-    <string name="ignore_optimizations_title" msgid="3464172726254542889">"Naj bo aplikaciji <xliff:g id="APP">%s</xliff:g> dovoljeno prezreti optimizacije akumulatorja?"</string>
+    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Baterija se lahko hitreje izprazni. Aplikaciji ne bo več preprečena poraba energije baterije v ozadju."</string>
+    <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Priporočljivo za daljši čas delovanja baterije"</string>
+    <string name="ignore_optimizations_title" msgid="3464172726254542889">"Naj bo aplikaciji <xliff:g id="APP">%s</xliff:g> dovoljeno prezreti optimizacije baterije?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Nič"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Če za to aplikacijo izklopite dostop do podatkov o uporabi, lahko vaš skrbnik kljub temu spremlja podatke o uporabi za aplikacije v vašem delovnem profilu."</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"Št. uporabljenih znakov: <xliff:g id="COUNT_0">%1$d</xliff:g> od <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
@@ -4339,7 +4338,7 @@
     <string name="condition_zen_title" msgid="7674761111934567490">"Način »ne moti« je vklopljen"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Zvok telefona je izklopljen"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Z izjemami"</string>
-    <string name="condition_battery_title" msgid="6395113995454385248">"Varč. z energijo akum. je vkl."</string>
+    <string name="condition_battery_title" msgid="6395113995454385248">"Varč. z energijo bat. je vkl."</string>
     <string name="condition_battery_summary" msgid="8436806157833107886">"Funkcije so omejene"</string>
     <string name="condition_cellular_title" msgid="155474690792125747">"Mobilni podatki so izklopljeni"</string>
     <string name="condition_cellular_summary" msgid="1678098728303268851">"Dostop do interneta je na voljo le prek omrežja Wi‑Fi"</string>
@@ -4528,12 +4527,12 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Povezan z več napravami"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Predstavitveni način uporabniškega vmesnika sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Temna tema"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Vklopljeno / začasno onemogočeno zaradi varčevanja z energijo akumulatorja"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Začasno vklopljeno zaradi varčevanja z energijo akumulatorja"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="3936676430482852520">"Vklopljeno/začasno onemogočeno zaradi varčevanja z baterijo"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Začasno vklopljeno zaradi varčevanja z energijo baterije"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Podprte aplikacije bodo prav tako preklopile v temno temo"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"V redu"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Preizkusite temno temo"</string>
-    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomaga podaljšati čas delovanja baterije"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Podaljša čas delovanja baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Ploščice razvijalcev za hitre nastavitve"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Onemogočenje časovne omejitve pooblastila ADB"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Onemogočenje samodejnega preklica pooblastil ADB za sisteme, ki niso znova vzpostavili povezave v privzetem času (7 dni) ali v uporabniško konfiguriranem času (najmanj 1 dan)."</string>
@@ -4577,7 +4576,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Hitro odpiranje fotoaparata"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Če želite hitro odpreti fotoaparat, dvakrat pritisnite gumb za vklop. Deluje na vsakem zaslonu."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Hitro odpiranje fotoaparata"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Zasuk za preklop fotoaparata v način za sebke"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Zasuk fotoaparata za sebke"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Hitrejši vklop načina za sebke"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Krmarjenje po sistemu"</string>
@@ -4810,7 +4809,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Tej aplikaciji omogočite, da upravlja povezavo Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Tej aplikacij omogočite, da vklopi ali izklopi povezavo Wi-Fi, išče omrežja Wi-Fi in se z njimi poveže, doda ali odstrani omrežja ali pa zažene lokalno dostopno točko"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Predvajaj predstavnost v"</string>
-    <string name="media_output_label_title" msgid="1070976175129103096">"Predvajaj <xliff:g id="LABEL">%s</xliff:g> v:"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Predvajanje predstavnosti <xliff:g id="LABEL">%s</xliff:g> v"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Ta naprava"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablični računalnik"</string>
@@ -4824,9 +4823,9 @@
     <string name="media_output_switching" msgid="7488216595474868546">"Preklapljanje …"</string>
     <string name="take_call_on_title" msgid="1159417893879946757">"Sprejemanje klicev je vklopljeno"</string>
     <string name="cannot_change_apn_toast" msgid="296540724089240405">"Tega APN-ja ni mogoče spremeniti."</string>
-    <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Izboljšajte čas delovanja akumulatorja tablice"</string>
-    <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Izboljšajte čas delovanja akumulatorja naprave"</string>
-    <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Izboljšajte čas delovanja akumulatorja telefona"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="1525940496459255289">"Izboljšajte čas delovanja baterije tablice"</string>
+    <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Izboljšajte čas delovanja baterije naprave"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Izboljšajte čas delovanja baterije telefona"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
     <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Preprečevanje zvonjenja"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Sočasno pritisnite gumba za vklop in povečanje glasnosti za"</string>
@@ -4966,7 +4965,8 @@
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ni na voljo ob vzpostavljeni povezavi z operaterjem <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
     <string name="see_more" msgid="7499355691042812723">"Pokaži več"</string>
     <string name="see_less" msgid="2642392725363552793">"Pokaži manj"</string>
-    <string name="network_connection_request_dialog_title" msgid="4683049769192109232">"Naprava, ki bo uporabljena skupaj z aplikacijo <xliff:g id="APPNAME">%1$s</xliff:g>"</string>
+    <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Vzpostavitev povezave z napravo"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"Aplikacija <xliff:g id="APPNAME">%1$s</xliff:g> želi uporabiti začasno omrežje Wi-Fi za vzpostavitev povezave z napravo"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"Ni naprav. Preverite, ali so naprave vklopljene in na voljo za vzpostavitev povezave."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Poskusi znova"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Prišlo je do napake. Aplikacija je preklicala zahtevo za izbiro naprave."</string>
@@ -4991,12 +4991,14 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Omogoča zameglitve oken na ravni sestavljalnika. Zahteva vnovičen zagon naprave."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Zasebnost"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Dovoljenja, dejavnost v računu, osebni podatki"</string>
+    <string name="quick_settings_media_player" msgid="5365779284386769352">"Nadaljevanje predvajanja predstavnosti"</string>
+    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Prikaže in ohrani predvajalnik predstavnosti v hitrih nastavitvah. Zahteva vnovični zagon."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Odstrani"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Obdrži"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Želite odstraniti ta predlog?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Predlog je odstranjen"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Razveljavi"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"Primanjkuje prostora za shranjevanje. Uporabljeno: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, prosto: <xliff:g id="FREE_SPACE">%2$s</xliff:g>."</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"Malo shrambe: zasedeno <xliff:g id="PERCENTAGE">%1$s</xliff:g>, prosto <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Pošlji povratne informacije"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Nam želite poslati povratne informacije o tem predlogu?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"Vsebina <xliff:g id="COPY_CONTENT">%1$s</xliff:g> je kopirana v odložišče."</string>
@@ -5067,13 +5069,13 @@
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Ta izbira ni več veljavna. Poskusite znova."</string>
     <string name="device_controls_sentence" msgid="4887752349920801907">"Kontrolniki naprave"</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"kontrolniki naprave"</string>
-    <string name="cards_passes_sentence" msgid="1866311782387946944">"Kreditne in plačilne kartice"</string>
-    <string name="cards_passes_lower" msgid="2429722007109957877">"kreditne in plačilne kartice"</string>
+    <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartice in vstopnice"</string>
+    <string name="cards_passes_lower" msgid="2429722007109957877">"kartice in vstopnice"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Meni za vklop/izklop"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"Meni gumba za vklop"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"Prikaži kreditne in plačilne kartice"</string>
     <string name="power_menu_device_controls" msgid="5114816270328063924">"Prikaži kontrolnike naprave"</string>
-    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Prikaži kreditne in plačilne kartice ter kontrolnike naprave"</string>
+    <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"Prikaži kartice, vstopnice ter kontrolnike naprave"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"Zaklenjen zaslon"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"Ne prikaži nobene vsebine"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"Občutljiva vsebina"</string>
@@ -5095,4 +5097,5 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Ko uporabljate dve kartici SIM, lahko ta telefon vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ko uporabljate dve kartici SIM, lahko ta tablični računalnik vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ko uporabljate dve kartici SIM, lahko ta naprava vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Začasno onemogočenje izvajanja za predpomnjene aplikacije"</string>
 </resources>
