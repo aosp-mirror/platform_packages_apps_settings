@@ -24,7 +24,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,10 +171,9 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
 
         String description = info.loadDescription(getPackageManager());
-        if (TextUtils.isEmpty(description)) {
-            description = getString(R.string.accessibility_service_default_description);
-        }
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
+
+        extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 
         final String htmlDescription = info.loadHtmlDescription(getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
