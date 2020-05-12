@@ -472,7 +472,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         showDialog(DialogEnums.MAGNIFICATION_EDIT_SHORTCUT);
     }
 
-    private void updateShortcutPreferenceData() {
+    @Override
+    protected void updateShortcutPreferenceData() {
         // Get the user shortcut type from settings provider.
         mUserShortcutType = getUserShortcutTypeFromSettings(getPrefContext());
         if (mUserShortcutType != UserShortcutType.EMPTY) {
@@ -494,7 +495,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setTitle(title);
     }
 
-    private void updateShortcutPreference() {
+    @Override
+    protected void updateShortcutPreference() {
         final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
         mShortcutPreference.setChecked(
                 hasMagnificationValuesInSettings(getPrefContext(), shortcutTypes));
