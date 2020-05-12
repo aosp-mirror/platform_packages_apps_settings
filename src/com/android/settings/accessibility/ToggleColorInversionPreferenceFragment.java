@@ -57,6 +57,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_color_inversion_settings;
+    }
+
+    @Override
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         super.onRemoveSwitchPreferenceToggleSwitch();
         mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
