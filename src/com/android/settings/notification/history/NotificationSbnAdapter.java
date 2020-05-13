@@ -94,6 +94,7 @@ public class NotificationSbnAdapter extends
             holder.setTitle(getTitleString(sbn.getNotification()));
             holder.setSummary(getTextString(mContext, sbn.getNotification()));
             holder.setPostedTime(sbn.getPostTime());
+            holder.setDividerVisible(position < (mValues.size() -1));
             int userId = normalizeUserId(sbn);
             if (!mUserBadgeCache.containsKey(userId)) {
                 Drawable profile = mContext.getPackageManager().getUserBadgeForDensity(
