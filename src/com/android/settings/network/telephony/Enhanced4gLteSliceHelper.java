@@ -18,6 +18,8 @@ package com.android.settings.network.telephony;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -274,6 +276,7 @@ public class Enhanced4gLteSliceHelper {
      */
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
+        intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
     }
