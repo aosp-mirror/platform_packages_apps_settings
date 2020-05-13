@@ -14,119 +14,132 @@
      limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="6dp"
-    android:minHeight="48dp"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:orientation="vertical"
-    android:background="?android:attr/selectableItemBackground"
-    >
-
-    <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="6dp"
+              android:minHeight="48dp"
+              android:orientation="vertical"
+              android:background="?android:attr/selectableItemBackground"
+>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@*android:dimen/status_bar_icon_size"
-        android:paddingBottom="6dp">
-
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_height="@*android:dimen/status_bar_icon_size"
-            android:layout_width="@*android:dimen/status_bar_icon_size"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="8dp"
-            android:contentDescription="@null"
-            android:adjustViewBounds="true"
-            android:tint="?android:attr/textColorPrimary"
-            android:scaleType="fitCenter" />
-
-        <TextView
-            android:id="@+id/pkgname"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:marqueeRepeatLimit = "marquee_forever"
-            android:scrollHorizontally = "true"
-            android:textStyle="bold"
-            android:textAlignment="viewStart" />
-
-        <ImageView
-            android:id="@+id/alerted_icon"
-            android:layout_width="@*android:dimen/status_bar_icon_size"
-            android:layout_height="@*android:dimen/status_bar_icon_size"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="6dp"
-            android:paddingTop="1dp"
-            android:scaleType="fitCenter"
-            android:visibility="gone"
-            android:tint="?android:attr/textColorSecondary"
-            android:src="@drawable/ic_notifications_alert"
-        />
-
-        <ImageView
-            android:id="@+id/profile_badge"
-            android:layout_width="@*android:dimen/status_bar_icon_size"
-            android:layout_height="@*android:dimen/status_bar_icon_size"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="6dp"
-            android:paddingTop="1dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@*android:string/notification_work_profile_content_description"
-            android:layout_toStartOf="@id/timestamp"
-        />
-
-        <DateTimeView
-            android:id="@+id/timestamp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@*android:dimen/status_bar_icon_size"
-            android:layout_alignBottom="@android:id/widget_frame"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@android:id/widget_frame"
-            android:layout_centerVertical="true"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
-            android:textAlignment="viewEnd"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:orientation="vertical"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="6dp"
         >
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
-            android:textAlignment="viewStart"
-        />
+            android:minHeight="@*android:dimen/status_bar_icon_size"
+            android:paddingBottom="6dp">
 
-        <TextView
-            android:id="@+id/text"
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_height="@*android:dimen/status_bar_icon_size"
+                android:layout_width="@*android:dimen/status_bar_icon_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@null"
+                android:adjustViewBounds="true"
+                android:tint="?android:attr/textColorPrimary"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/pkgname"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:marqueeRepeatLimit = "marquee_forever"
+                android:scrollHorizontally = "true"
+                android:textStyle="bold"
+                android:textAlignment="viewStart" />
+
+            <ImageView
+                android:id="@+id/alerted_icon"
+                android:layout_width="@*android:dimen/status_bar_icon_size"
+                android:layout_height="@*android:dimen/status_bar_icon_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="6dp"
+                android:paddingTop="1dp"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                android:tint="?android:attr/textColorSecondary"
+                android:src="@drawable/ic_notifications_alert"
+            />
+
+            <ImageView
+                android:id="@+id/profile_badge"
+                android:layout_width="@*android:dimen/status_bar_icon_size"
+                android:layout_height="@*android:dimen/status_bar_icon_size"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="6dp"
+                android:paddingTop="1dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@*android:string/notification_work_profile_content_description"
+                android:layout_toStartOf="@id/timestamp"
+            />
+
+            <DateTimeView
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@*android:dimen/status_bar_icon_size"
+                android:layout_alignBottom="@android:id/widget_frame"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@android:id/widget_frame"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
+                android:textAlignment="viewEnd"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
-            android:textAlignment="viewStart"
-        />
+            android:orientation="vertical"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="6dp"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
+                android:textAlignment="viewStart"
+            />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
+                android:textAlignment="viewStart"
+            />
+
+        </LinearLayout>
 
     </LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="17dp"
+        android:background="@color/material_grey_300" />
 </LinearLayout>
