@@ -30,7 +30,6 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.Html;
@@ -97,7 +96,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private int mUserShortcutTypes = UserShortcutType.EMPTY;
     private CheckBox mSoftwareTypeCheckBox;
     private CheckBox mHardwareTypeCheckBox;
-    private SettingsContentObserver mSettingsContentObserver;
 
     // For html description of accessibility service, must follow the rule, such as
     // <img src="R.drawable.fileName"/>, a11y settings will get the resources successfully.
@@ -134,17 +132,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-        };
-
-        final List<String> shortcutFeatureKeys = new ArrayList<>();
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-        shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        mSettingsContentObserver = new SettingsContentObserver(new Handler(), shortcutFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateShortcutPreferenceData();
-                updateShortcutPreference();
-            }
         };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -242,7 +229,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-        mSettingsContentObserver.register(getContentResolver());
         updateShortcutPreferenceData();
         updateShortcutPreference();
     }
@@ -252,7 +238,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 
@@ -633,7 +618,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 getShortcutTypeSummary(getPrefContext()));
     }
 
-    protected void updateShortcutPreferenceData() {
+    private void updateShortcutPreferenceData() {
         if (mComponentName == null) {
             return;
         }
@@ -666,7 +651,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setTitle(title);
     }
 
-    protected void updateShortcutPreference() {
+    private void updateShortcutPreference() {
         if (mComponentName == null) {
             return;
         }
