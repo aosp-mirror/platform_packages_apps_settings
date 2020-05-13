@@ -255,11 +255,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         dialogTitle.setText(
                 getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel));
 
-        final TextView dialogSummary = dialogView.findViewById(
-                R.id.interact_across_profiles_consent_dialog_summary);
-        dialogSummary.setText(
-                getString(R.string.interact_across_profiles_consent_dialog_summary, mAppLabel));
-
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(getString(
                 R.string.interact_across_profiles_consent_dialog_app_data_summary, mAppLabel));
