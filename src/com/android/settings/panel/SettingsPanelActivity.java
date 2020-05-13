@@ -66,6 +66,7 @@ public class SettingsPanelActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getApplicationContext().getTheme().rebase();
         createOrUpdatePanel(true /* shouldForceCreation */);
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
     }
