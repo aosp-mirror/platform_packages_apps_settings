@@ -20,6 +20,7 @@ import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_PREFERENCE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.WIFI_CALLING_URI;
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -554,6 +555,7 @@ public class WifiCallingSliceHelper {
      */
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
+        intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
     }
