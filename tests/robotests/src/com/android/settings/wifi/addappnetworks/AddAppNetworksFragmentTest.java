@@ -19,7 +19,9 @@ package com.android.settings.wifi.addappnetworks;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.settings.SettingsEnums;
@@ -27,6 +29,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Bundle;
+import android.os.HandlerThread;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.widget.TextView;
@@ -245,6 +248,19 @@ public class AddAppNetworksFragmentTest {
         // Assert
         assertThat(mAddAppNetworksFragment.mUiToRequestedList.get(0).mLevel).isEqualTo(
                 SCANED_LEVEL0);
+    }
+
+    @Test
+    public void onDestroy_quitWorkerThread() {
+        mAddAppNetworksFragment.mWorkerThread = mock(HandlerThread.class);
+
+        try {
+            mAddAppNetworksFragment.onDestroy();
+        } catch (IllegalArgumentException e) {
+            // Ignore the exception from super class.
+        }
+
+        verify(mAddAppNetworksFragment.mWorkerThread).quit();
     }
 
     private void setUpOneScannedNetworkWithScanedLevel4() {
