@@ -20,6 +20,8 @@ package com.android.settings.slices;
 import static android.content.ContentResolver.SCHEME_CONTENT;
 import static android.content.pm.PackageManager.PERMISSION_DENIED;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.content.res.Configuration.UI_MODE_NIGHT_NO;
+import static android.content.res.Configuration.UI_MODE_NIGHT_YES;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,6 +41,7 @@ import android.app.slice.SliceManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.Settings;
@@ -96,7 +99,8 @@ import java.util.Set;
 @Config(shadows = {ShadowUserManager.class, ShadowUtils.class,
         SlicesDatabaseAccessorTest.ShadowApplicationPackageManager.class,
         ShadowBluetoothAdapter.class, ShadowLockPatternUtils.class,
-        SettingsSliceProviderTest.ShadowWifiScanWorker.class})
+        SettingsSliceProviderTest.ShadowWifiScanWorker.class,
+        SettingsSliceProviderTest.ShadowTheme.class})
 public class SettingsSliceProviderTest {
 
     private static final String KEY = "KEY";
@@ -162,6 +166,7 @@ public class SettingsSliceProviderTest {
     @After
     public void cleanUp() {
         ShadowThreadUtils.reset();
+        ShadowTheme.reset();
         DatabaseTestUtils.clearDb(mContext);
     }
 
@@ -261,6 +266,28 @@ public class SettingsSliceProviderTest {
         final Slice slice = mProvider.onBindSlice(blockedUri);
 
         assertThat(slice).isNull();
+    }
+
+    @Test
+    public void onBindSlice_nightModeChanged_shouldReloadTheme() {
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_YES;
+
+        final SliceData data = getDummyData();
+        mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        assertThat(ShadowTheme.isThemeRebased()).isTrue();
+    }
+
+    @Test
+    public void onBindSlice_nightModeNotChanged_shouldNotReloadTheme() {
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
+
+        SliceData data = getDummyData();
+        mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        assertThat(ShadowTheme.isThemeRebased()).isFalse();
     }
 
     @Test
@@ -720,6 +747,25 @@ public class SettingsSliceProviderTest {
 
         private static boolean isThreadPolicyOverridden() {
             return sSetThreadPolicyCount != 0;
+        }
+    }
+
+    @Implements(Theme.class)
+    public static class ShadowTheme {
+        private static boolean sThemeRebased;
+
+        @Resetter
+        public static void reset() {
+            sThemeRebased = false;
+        }
+
+        @Implementation
+        public void rebase() {
+            sThemeRebased = true;
+        }
+
+        static boolean isThemeRebased() {
+            return sThemeRebased;
         }
     }
 }

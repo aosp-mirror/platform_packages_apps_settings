@@ -24,7 +24,6 @@ import android.app.PendingIntent;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.BatteryManager;
@@ -107,7 +106,7 @@ public class DarkThemeSlice implements CustomSliceable {
         final IconCompat icon =
                 IconCompat.createWithResource(mContext, R.drawable.dark_theme);
 
-        final boolean isChecked = isDarkThemeMode(mContext);
+        final boolean isChecked = Utils.isNightMode(mContext);
         if (sPreChecked != isChecked) {
             // Dark(Night) mode changed and reset the sSliceClicked.
             resetValue(isChecked, false);
@@ -157,7 +156,7 @@ public class DarkThemeSlice implements CustomSliceable {
     @VisibleForTesting
     boolean isAvailable(Context context) {
         // check if dark theme mode is enabled or if dark theme scheduling is on.
-        if (isDarkThemeMode(context) || isNightModeScheduled()) {
+        if (Utils.isNightMode(context) || isNightModeScheduled()) {
             return false;
         }
         // checking the current battery level
@@ -165,13 +164,6 @@ public class DarkThemeSlice implements CustomSliceable {
         final int level = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         Log.d(TAG, "battery level = " + level);
         return level <= BATTERY_LEVEL_THRESHOLD;
-    }
-
-    @VisibleForTesting
-    static boolean isDarkThemeMode(Context context) {
-        final int currentNightMode =
-                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 
     private void resetValue(boolean preChecked, boolean clicked) {
