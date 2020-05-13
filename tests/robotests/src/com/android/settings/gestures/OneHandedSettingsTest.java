@@ -18,6 +18,8 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.Context;
+import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
 
 import org.junit.Before;
@@ -25,6 +27,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -32,10 +35,12 @@ import java.util.List;
 public class OneHandedSettingsTest {
 
     private OneHandedSettings mSettings;
+    private Context mContext;
 
     @Before
     public void setUp() {
         mSettings = new OneHandedSettings();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
@@ -46,5 +51,27 @@ public class OneHandedSettingsTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mSettings.getPreferenceScreenResId());
+    }
+
+    @Test
+    public void isPageSearchEnabled_setSupportOneHandedModeProperty_shouldReturnTrue() {
+        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
+
+        final Object obj = ReflectionHelpers.callInstanceMethod(
+                OneHandedSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
+                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
+        final boolean isEnabled = (Boolean) obj;
+        assertThat(isEnabled).isTrue();
+    }
+
+    @Test
+    public void isPageSearchEnabled_unsetSupportOneHandedModeProperty_shouldReturnFalse() {
+        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "false");
+
+        final Object obj = ReflectionHelpers.callInstanceMethod(
+                OneHandedSettings.SEARCH_INDEX_DATA_PROVIDER, "isPageSearchEnabled",
+                ReflectionHelpers.ClassParameter.from(Context.class, mContext));
+        final boolean isEnabled = (Boolean) obj;
+        assertThat(isEnabled).isFalse();
     }
 }
