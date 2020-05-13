@@ -25,10 +25,6 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -36,18 +32,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.VideoView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -81,83 +71,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final char COMPONENT_NAME_SEPARATOR = ':';
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
-    protected VideoPreference mVideoPreference;
-
-    protected class VideoPreference extends Preference {
-        private ImageView mVideoBackgroundView;
-        private OnGlobalLayoutListener mLayoutListener;
-
-        public VideoPreference(Context context) {
-            super(context);
-        }
-
-        @Override
-        public void onBindViewHolder(PreferenceViewHolder view) {
-            super.onBindViewHolder(view);
-            Resources res = getPrefContext().getResources();
-            final int backgroundAssetWidth = res.getDimensionPixelSize(
-                    R.dimen.screen_magnification_video_background_width);
-            final int videoAssetWidth = res
-                    .getDimensionPixelSize(R.dimen.screen_magnification_video_width);
-            final int videoAssetHeight = res
-                    .getDimensionPixelSize(R.dimen.screen_magnification_video_height);
-            final int videoAssetMarginTop = res.getDimensionPixelSize(
-                    R.dimen.screen_magnification_video_margin_top);
-            view.setDividerAllowedAbove(false);
-            view.setDividerAllowedBelow(false);
-            mVideoBackgroundView = (ImageView) view.findViewById(R.id.video_background);
-            final VideoView videoView = (VideoView) view.findViewById(R.id.video);
-
-            // Loop the video.
-            videoView.setOnPreparedListener(new OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    mediaPlayer.setLooping(true);
-                }
-            });
-
-            // Make sure the VideoView does not request audio focus.
-            videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
-
-            // Resolve and set the video content
-            Bundle args = getArguments();
-            if ((args != null) && args.containsKey(
-                    AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID)) {
-                videoView.setVideoURI(Uri.parse(String.format("%s://%s/%s",
-                        ContentResolver.SCHEME_ANDROID_RESOURCE,
-                        getPrefContext().getPackageName(),
-                        args.getInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID))));
-            }
-
-            // Make sure video controls (e.g. for pausing) are not displayed.
-            videoView.setMediaController(null);
-
-            // LayoutListener for adjusting the position of the VideoView on the background image.
-            mLayoutListener = new OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    final int backgroundViewWidth = mVideoBackgroundView.getWidth();
-
-                    LayoutParams videoLp = (LayoutParams) videoView.getLayoutParams();
-                    videoLp.width = videoAssetWidth * backgroundViewWidth / backgroundAssetWidth;
-                    videoLp.height = videoAssetHeight * backgroundViewWidth / backgroundAssetWidth;
-                    videoLp.setMargins(0,
-                            videoAssetMarginTop * backgroundViewWidth / backgroundAssetWidth, 0, 0);
-                    videoView.setLayoutParams(videoLp);
-                    videoView.invalidate();
-                    videoView.start();
-                }
-            };
-
-            mVideoBackgroundView.getViewTreeObserver().addOnGlobalLayoutListener(mLayoutListener);
-        }
-
-        @Override
-        protected void onPrepareForRemoval() {
-            mVideoBackgroundView.getViewTreeObserver()
-                    .removeOnGlobalLayoutListener(mLayoutListener);
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -169,6 +82,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mPackageName = getString(R.string.accessibility_screen_magnification_title);
+        mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(getPrefContext().getPackageName())
+                .appendPath(String.valueOf(R.drawable.accessibility_magnification_banner))
+                .build();
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
             removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
@@ -178,13 +95,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        mVideoPreference = new VideoPreference(getPrefContext());
-        mVideoPreference.setSelectable(false);
-        mVideoPreference.setPersistent(false);
-        mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
-        preferenceScreen.addPreference(mVideoPreference);
-
         initShortcutPreference();
 
         mSettingsPreference = new Preference(getPrefContext());
@@ -208,11 +118,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final AccessibilityManager am = getPrefContext().getSystemService(
                 AccessibilityManager.class);
         am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
-
-        VideoView videoView = (VideoView) getView().findViewById(R.id.video);
-        if (videoView != null) {
-            videoView.start();
-        }
 
         updateShortcutPreferenceData();
         updateShortcutPreference();
@@ -435,20 +340,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     protected void onInstallSwitchPreferenceToggleSwitch() {
         super.onInstallSwitchPreferenceToggleSwitch();
         mToggleServiceDividerSwitchPreference.setVisible(false);
-    }
-
-    @Override
-    protected void onProcessArguments(Bundle arguments) {
-        super.onProcessArguments(arguments);
-        if (arguments == null) {
-            return;
-        }
-
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID)) {
-            mVideoPreference.setVisible(true);
-        } else {
-            mVideoPreference.setVisible(false);
-        }
     }
 
     @Override
