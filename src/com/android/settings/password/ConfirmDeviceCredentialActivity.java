@@ -30,6 +30,7 @@ import android.hardware.biometrics.BiometricConstants;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
+import android.hardware.biometrics.PromptInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -183,7 +184,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         Intent intent = getIntent();
         mContext = this;
         mCheckDevicePolicyManager = intent
-                .getBooleanExtra(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
+                .getBooleanExtra(KeyguardManager.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS, false);
         mTitle = intent.getStringExtra(KeyguardManager.EXTRA_TITLE);
         mDetails = intent.getStringExtra(KeyguardManager.EXTRA_DESCRIPTION);
         String alternateButton = intent.getStringExtra(
@@ -210,20 +211,19 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
-        final Bundle bpBundle = new Bundle();
-        bpBundle.putString(BiometricPrompt.KEY_TITLE, mTitle);
-        bpBundle.putString(BiometricPrompt.KEY_DESCRIPTION, mDetails);
-        bpBundle.putBoolean(BiometricPrompt.EXTRA_DISALLOW_BIOMETRICS_IF_POLICY_EXISTS,
-                mCheckDevicePolicyManager);
+        final PromptInfo promptInfo = new PromptInfo();
+        promptInfo.setTitle(mTitle);
+        promptInfo.setDescription(mDetails);
+        promptInfo.setDisallowBiometricsIfPolicyExists(mCheckDevicePolicyManager);
 
         final @LockPatternUtils.CredentialType int credentialType = Utils.getCredentialType(
                 mContext, effectiveUserId);
         if (mTitle == null) {
-            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_TITLE,
+            promptInfo.setDeviceCredentialTitle(
                     getTitleFromCredentialType(credentialType, isManagedProfile));
         }
         if (mDetails == null) {
-            bpBundle.putString(BiometricPrompt.KEY_DEVICE_CREDENTIAL_SUBTITLE,
+            promptInfo.setSubtitle(
                     getDetailsFromCredentialType(credentialType, isManagedProfile));
         }
 
@@ -239,7 +239,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
-                showBiometricPrompt(bpBundle);
+                showBiometricPrompt(promptInfo);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -250,7 +250,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             if (isBiometricAllowed(effectiveUserId, mUserId)) {
                 // Don't need to check if biometrics / pin/pattern/pass are enrolled. It will go to
                 // onAuthenticationError and do the right thing automatically.
-                showBiometricPrompt(bpBundle);
+                showBiometricPrompt(promptInfo);
                 launchedBiometric = true;
             } else {
                 showConfirmCredentials();
@@ -340,7 +340,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 .hasPendingEscrowToken(realUserId);
     }
 
-    private void showBiometricPrompt(Bundle bundle) {
+    private void showBiometricPrompt(PromptInfo promptInfo) {
         mBiometricManager.setActiveUser(mUserId);
 
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
@@ -348,7 +348,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         boolean newFragment = false;
 
         if (mBiometricFragment == null) {
-            mBiometricFragment = BiometricFragment.newInstance(bundle);
+            mBiometricFragment = BiometricFragment.newInstance(promptInfo);
             newFragment = true;
         }
         mBiometricFragment.setCallbacks(mExecutor, mAuthenticationCallback);
