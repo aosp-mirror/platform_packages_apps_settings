@@ -75,8 +75,6 @@ public class MediaOutputGroupSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        // Reload theme for switching dark mode on/off
-        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
         final ListBuilder listBuilder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED);
         // Add "Group" row
