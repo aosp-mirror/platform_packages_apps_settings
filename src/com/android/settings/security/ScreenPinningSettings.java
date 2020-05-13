@@ -215,7 +215,6 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
 
     private void updateDisplay() {
         if (isLockToAppEnabled(getActivity())) {
-            mFooterPreference.setVisible(false);
             mUseScreenLock.setVisible(true);
             mUseScreenLock.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
                 @Override
@@ -226,7 +225,6 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
             mUseScreenLock.setChecked(isScreenLockUsed());
             mUseScreenLock.setTitle(getCurrentSecurityTitle());
         } else {
-            mFooterPreference.setVisible(true);
             mFooterPreference.setSummary(getAppPinningContent());
             mUseScreenLock.setVisible(false);
         }
