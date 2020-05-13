@@ -4944,7 +4944,7 @@
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, you can zoom in on your screen.\n\n<b>To zoom</b>, start magnification, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, start magnification, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with button. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_button">Use accessibility button to open</string>
-    <!-- Title for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=50] -->
+    <!-- Title for the accessibility tutorial dialog in accessibility service with volume keys. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_volume">Hold volume keys to open</string>
     <!-- Title for the accessibility tutorial dialog in accessibility service with triple tap. [CHAR LIMIT=100] -->
     <string name="accessibility_tutorial_dialog_title_triple">Triple tap screen to open</string>
@@ -8197,8 +8197,6 @@
 
     <!-- Configure Notifications: Title for the notification bubbles option. [CHAR LIMIT=60] -->
     <string name="notification_bubbles_title">Bubbles</string>
-    <!-- Developer setting summary for bubbles [CHAR LIMIT=NONE] -->
-    <string name="notification_bubbles_developer_setting_summary">Some notifications can appear as bubbles on the screen</string>
     <!-- Feature education for bubbles. [CHAR LIMIT=NONE] -->
     <string name="bubbles_feature_education">Some notifications and other content can appear as bubbles on the screen. To open a bubble, tap it. To dismiss it, drag it down the screen.</string>
     <!-- Title for the toggle shown on the app-level bubbles page  [CHAR LIMIT=60] -->
@@ -8666,7 +8664,7 @@
     <!-- Settings text. This text lets a user know that they should only connect work and personal apps
     if they trust the work app with their personal data. The work app could potentially show that data
     to the user's IT admin. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_summary_2">Only connect apps that you trust with your personal data. Work apps may expose your data to your IT admin.</string>
+    <string name="interact_across_profiles_summary_2">Only connect apps if you trust them not to share personal data with your IT admin.</string>
 
     <!-- Dialog title. This dialog is shown when a user tries to connect a work app to a personal
     app (e.g. their work Calendar to their personal Calendar), and it's confirming that they should
@@ -8677,7 +8675,7 @@
     app (e.g. their work Calendar to their personal Calendar), and it's confirming that they should
     connect the apps only if they trust the work app with their personal data.
     The placeholder is the app name. [CHAR LIMIT=NONE] -->
-    <string name="interact_across_profiles_consent_dialog_summary"><xliff:g id="name" example="Calendar">%1$s</xliff:g> may expose your personal data to your IT admin.</string>
+    <string name="interact_across_profiles_consent_dialog_summary">Only connect apps if you trust them not to share personal data with your IT admin.</string>
 
     <!-- Title of a section in a dialog. This section shows the app data that will be
     accessible when work and personal apps are connected. [CHAR LIMIT=NONE] -->
@@ -8708,12 +8706,12 @@
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     work profile in order to connect it to the corresponding personal app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_work_app_title">Install work <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
+    <string name="interact_across_profiles_install_work_app_title">To connect these apps, install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your work profile</string>
 
     <!-- Banner title. This banner lets a user know that they need to install an app in their
     personal profile in order to connect it to the corresponding work app.
     The placeholder would be the app name (e.g. Calendar). [CHAR LIMIT=NONE]-->
-    <string name="interact_across_profiles_install_personal_app_title">Install personal <xliff:g id="name" example="Calendar">%1$s</xliff:g> to connect these apps</string>
+    <string name="interact_across_profiles_install_personal_app_title">To connect these apps, install <xliff:g id="name" example="Calendar">%1$s</xliff:g> in your personal profile</string>
 
     <!-- Banner text. This banner lets a user know that they need to install an app in their
     work/personal profile in order to connect it to the corresponding personal app.
@@ -11819,11 +11817,6 @@
     <string name="privacy_dashboard_title">Privacy</string>
     <!-- Summary for the top level Privacy Settings [CHAR LIMIT=NONE]-->
     <string name="privacy_dashboard_summary">Permissions, account activity, personal data</string>
-
-    <!-- UI debug setting: show media player on quick settings title [CHAR LIMIT=60] -->
-    <string name="quick_settings_media_player">Media resumption</string>
-    <!-- UI debug setting: show media player on quick settings summary [CHAR_LIMIT=NONE] -->
-    <string name="quick_settings_media_player_summary">Shows and persists media player in Quick Settings. Requires reboot.</string>
 
     <!-- Label for button in contextual card for users to remove the card [CHAR LIMIT=30] -->
     <string name="contextual_card_dismiss_remove">Remove</string>
