@@ -86,9 +86,6 @@ public class WifiSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
-        // Reload theme for switching dark mode on/off
-        mContext.getTheme().applyStyle(R.style.Theme_Settings_Home, true /* force */);
-
         final boolean isWifiEnabled = isWifiEnabled();
         ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* accessPoint */);
         if (!isWifiEnabled) {
