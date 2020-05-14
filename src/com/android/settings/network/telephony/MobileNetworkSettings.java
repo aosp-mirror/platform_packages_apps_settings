@@ -73,7 +73,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private String mClickedPrefKey;
 
     private ActiveSubsciptionsListener mActiveSubsciptionsListener;
-    private boolean mActiveSubsciptionsListenerStarting;
+    private boolean mDropFirstSubscriptionChangeNotify;
     private int mActiveSubsciptionsListenerCount;
 
     public MobileNetworkSettings() {
@@ -207,20 +207,20 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     public void onResume() {
         super.onResume();
         if (mActiveSubsciptionsListener == null) {
-            mActiveSubsciptionsListenerStarting = true;
             mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
                     getContext().getMainLooper(), getContext(), mSubId) {
                 public void onChanged() {
                     onSubscriptionDetailChanged();
                 }
             };
-            mActiveSubsciptionsListenerStarting = false;
+            mDropFirstSubscriptionChangeNotify = true;
         }
         mActiveSubsciptionsListener.start();
     }
 
     private void onSubscriptionDetailChanged() {
-        if (mActiveSubsciptionsListenerStarting) {
+        if (mDropFirstSubscriptionChangeNotify) {
+            mDropFirstSubscriptionChangeNotify = false;
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
@@ -233,6 +233,14 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             mActiveSubsciptionsListenerCount = 0;
             redrawPreferenceControllers();
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mActiveSubsciptionsListener != null) {
+            mActiveSubsciptionsListener.stop();
+        }
+        super.onDestroy();
     }
 
     @VisibleForTesting

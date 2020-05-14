@@ -42,6 +42,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -1100,5 +1101,14 @@ public final class Utils extends com.android.settingslib.Utils {
         final boolean isSettingsIntelligence = TextUtils.equals(callingPackage,
                 context.getString(R.string.config_settingsintelligence_package_name));
         return isSettingsIntelligence;
+    }
+
+    /**
+     * Returns true if the night mode is enabled.
+     */
+    public static boolean isNightMode(Context context) {
+        final int currentNightMode =
+                context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
     }
 }
