@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.appinfo;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -123,21 +124,28 @@ public class AppPermissionPreferenceController extends AppInfoPreferenceControll
 
     private void startManagePermissionsActivity() {
         // start new activity to manage app permissions
-        final Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
-        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
-        intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
-        String action = mParent.getActivity().getIntent().getAction();
-        long sessionId = mParent.getActivity().getIntent().getLongExtra(
-                Intent.ACTION_AUTO_REVOKE_PERMISSIONS, INVALID_SESSION_ID);
-        if ((action != null && action.equals(Intent.ACTION_AUTO_REVOKE_PERMISSIONS))
-                || sessionId != INVALID_SESSION_ID) {
-            while (sessionId == INVALID_SESSION_ID) {
-                sessionId = new Random().nextLong();
+        final Intent permIntent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
+        permIntent.putExtra(Intent.EXTRA_PACKAGE_NAME, mParent.getAppEntry().info.packageName);
+        permIntent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
+        Activity activity = mParent.getActivity();
+        Intent intent = activity != null ? activity.getIntent() : null;
+        if (intent != null) {
+            String action = intent.getAction();
+            long sessionId = intent.getLongExtra(
+                    Intent.ACTION_AUTO_REVOKE_PERMISSIONS, INVALID_SESSION_ID);
+            if ((action != null && action.equals(Intent.ACTION_AUTO_REVOKE_PERMISSIONS))
+                    || sessionId != INVALID_SESSION_ID) {
+                // If intent is Auto revoke, and we don't already have a session ID, make one
+                while (sessionId == INVALID_SESSION_ID) {
+                    sessionId = new Random().nextLong();
+                }
+                permIntent.putExtra(Intent.ACTION_AUTO_REVOKE_PERMISSIONS, sessionId);
             }
-            intent.putExtra(Intent.ACTION_AUTO_REVOKE_PERMISSIONS, sessionId);
         }
         try {
-            mParent.getActivity().startActivityForResult(intent, mParent.SUB_INFO_FRAGMENT);
+            if (activity != null) {
+                activity.startActivityForResult(permIntent, mParent.SUB_INFO_FRAGMENT);
+            }
         } catch (ActivityNotFoundException e) {
             Log.w(TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
         }
