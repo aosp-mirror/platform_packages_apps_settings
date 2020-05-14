@@ -21,8 +21,12 @@ import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_U
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -118,5 +122,24 @@ public class SavedAccessPointsPreferenceController2Test {
         mController.displayPreference(mPreferenceScreen, new ArrayList<>());
 
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void onPreferenceClick_shouldCallShowWifiPage() {
+        mContext = spy(RuntimeEnvironment.application);
+        doNothing().when(mContext).startActivity(any());
+        doReturn(mContext).when(mSettings).getContext();
+
+        final String title = "ssid_title";
+        final String key = "key";
+        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
+        when(mockWifiEntry.getTitle()).thenReturn(title);
+        when(mockWifiEntry.getKey()).thenReturn(key);
+        final WifiEntryPreference preference = new WifiEntryPreference(mContext, mockWifiEntry);
+        preference.setKey(key);
+
+        mController.onPreferenceClick(preference);
+
+        verify(mSettings, times(1)).showWifiPage(key, title);
     }
 }
