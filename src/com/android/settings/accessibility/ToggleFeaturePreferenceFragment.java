@@ -126,15 +126,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                     getPrefContext());
             setPreferenceScreen(preferenceScreen);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
-            removeDialog(DialogEnums.EDIT_SHORTCUT);
-            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
-        };
 
         final List<String> shortcutFeatureKeys = new ArrayList<>();
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
@@ -145,6 +136,15 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 updateShortcutPreferenceData();
                 updateShortcutPreference();
             }
+        };
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            removeDialog(DialogEnums.EDIT_SHORTCUT);
+            mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };
         return super.onCreateView(inflater, container, savedInstanceState);
     }
