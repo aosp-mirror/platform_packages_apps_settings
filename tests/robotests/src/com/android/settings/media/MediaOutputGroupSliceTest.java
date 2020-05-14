@@ -212,11 +212,9 @@ public class MediaOutputGroupSliceTest {
     }
 
     @Test
-    public void onNotifyChange_sessionOperation_differentClient_verifyAddSession() {
-        mSelectableDevices.add(mDevice1);
+    public void onNotifyChange_sendSelectableDevice_verifyAddSession() {
         mSelectableDevices.add(mDevice2);
         mSelectedDevices.add(mDevice1);
-        when(mDevice2.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME2);
         when(mLocalMediaManager.getMediaDeviceById(mSelectableDevices, TEST_DEVICE_2_ID))
                 .thenReturn(mDevice2);
         sMediaDeviceUpdateWorker.onDeviceListUpdate(mSelectableDevices);
@@ -229,16 +227,13 @@ public class MediaOutputGroupSliceTest {
 
         verify(sMediaDeviceUpdateWorker).addDeviceToPlayMedia(mDevice2);
     }
-
     @Test
-    public void onNotifyChange_sessionOperation_sameClient_verifyRemoveSession() {
-        mSelectableDevices.add(mDevice1);
-        mSelectableDevices.add(mDevice2);
+    public void onNotifyChange_sendSelectedDevice_verifyRemoveSession() {
         mSelectedDevices.add(mDevice1);
-        when(mDevice2.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME);
-        when(mLocalMediaManager.getMediaDeviceById(mSelectableDevices, TEST_DEVICE_2_ID))
+        mSelectedDevices.add(mDevice2);
+        when(mLocalMediaManager.getMediaDeviceById(mSelectedDevices, TEST_DEVICE_2_ID))
                 .thenReturn(mDevice2);
-        sMediaDeviceUpdateWorker.onDeviceListUpdate(mSelectableDevices);
+        sMediaDeviceUpdateWorker.onDeviceListUpdate(mSelectedDevices);
         when(sMediaDeviceUpdateWorker.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
         final Intent intent = new Intent();
         intent.putExtra(MEDIA_DEVICE_ID, TEST_DEVICE_2_ID);
