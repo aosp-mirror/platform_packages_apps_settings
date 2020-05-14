@@ -62,6 +62,8 @@ import java.util.List;
 @Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class MediaOutputIndicatorWorkerTest {
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private static final String TEST_PACKAGE_NAME = "com.android.test";
+    private static final String TEST_PACKAGE_NAME2 = "com.android.test2";
 
     @Mock
     private BluetoothEventManager mBluetoothEventManager;
@@ -110,6 +112,33 @@ public class MediaOutputIndicatorWorkerTest {
     }
 
     @Test
+    public void onSlicePinned_packageUpdated_checkPackageName() {
+        initPlayback();
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+
+        mMediaOutputIndicatorWorker.onSlicePinned();
+        assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).matches(
+                TEST_PACKAGE_NAME);
+
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME2);
+        mMediaOutputIndicatorWorker.onSlicePinned();
+
+        assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).matches(
+                TEST_PACKAGE_NAME2);
+    }
+
+    @Test
+    public void onSlicePinned_noActiveController_noPackageName() {
+        mMediaControllers.clear();
+
+        mMediaOutputIndicatorWorker.onSlicePinned();
+
+        assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).isNull();
+    }
+
+    @Test
     public void onSliceUnpinned_unRegisterCallback() {
         mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         mMediaOutputIndicatorWorker.onSlicePinned();
@@ -138,6 +167,16 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void getActiveLocalMediaController_localMediaPlaying_returnController() {
+        initPlayback();
+
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+
+        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isEqualTo(
+                mMediaController);
+    }
+
+    private void initPlayback() {
         mPlaybackInfo = new MediaController.PlaybackInfo(
                 MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL,
                 VolumeProvider.VOLUME_CONTROL_ABSOLUTE,
@@ -148,12 +187,6 @@ public class MediaOutputIndicatorWorkerTest {
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_PLAYING, 0, 1)
                 .build();
-
-        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
-        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
-
-        assertThat(mMediaOutputIndicatorWorker.getActiveLocalMediaController()).isEqualTo(
-                mMediaController);
     }
 
     @Test
