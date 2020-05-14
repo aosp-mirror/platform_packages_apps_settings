@@ -74,7 +74,7 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
         if (String.valueOf(ColorDisplayManager.AUTO_MODE_TWILIGHT).equals(newValue)
                 && !mLocationManager.isLocationEnabled()) {
             TwilightLocationDialog.show(mContext);
-            return true;
+            return false;
         }
         return mColorDisplayManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
     }

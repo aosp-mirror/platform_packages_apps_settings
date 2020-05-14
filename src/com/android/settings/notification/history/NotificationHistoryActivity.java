@@ -266,9 +266,6 @@ public class NotificationHistoryActivity extends Activity {
             mSnoozedRv.setLayoutManager(lm);
             mSnoozedRv.setAdapter(
                     new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                    mSnoozedRv.getContext(), lm.getOrientation());
-            mSnoozedRv.addItemDecoration(dividerItemDecoration);
             mSnoozedRv.setNestedScrollingEnabled(false);
 
             if (snoozed == null || snoozed.length == 0) {
@@ -284,9 +281,6 @@ public class NotificationHistoryActivity extends Activity {
             mDismissedRv.setLayoutManager(dismissLm);
             mDismissedRv.setAdapter(
                 new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
-            DividerItemDecoration dismissDivider = new DividerItemDecoration(
-                mDismissedRv.getContext(), dismissLm.getOrientation());
-            mDismissedRv.addItemDecoration(dismissDivider);
             mDismissedRv.setNestedScrollingEnabled(false);
 
             if (dismissed == null || dismissed.length == 0) {

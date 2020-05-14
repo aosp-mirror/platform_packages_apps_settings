@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.SystemProperties;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -57,9 +58,19 @@ public class OneHandedEnablePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_byDefault_shouldAvailable() {
+    public void getAvailabilityStatus_setSupportOneHandedModeProperty_shouldAvailable() {
+        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "true");
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_unsetSupportOneHandedModeProperty_shouldUnsupported() {
+        SystemProperties.set(OneHandedEnablePreferenceController.SUPPORT_ONE_HANDED_MODE, "false");
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
