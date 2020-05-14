@@ -236,7 +236,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                             + ") is unavailable");
                     return;
                 }
-                if (TextUtils.equals(device.getClientPackageName(), getWorker().getPackageName())) {
+                if (getWorker().isSelectedMediaDevice(device)) {
                     getWorker().removeDeviceFromPlayMedia(device);
                 } else {
                     getWorker().addDeviceToPlayMedia(device);
