@@ -115,7 +115,6 @@ public class FingerprintStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(
                 mContext.getString(R.string.security_settings_fingerprint_preference_summary_none));
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
     }
 
     @Test
@@ -130,6 +129,5 @@ public class FingerprintStatusPreferenceControllerTest {
         assertThat(mPreference.getSummary()).isEqualTo(mContext.getResources().getQuantityString(
                 R.plurals.security_settings_fingerprint_preference_summary, 1, 1));
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getOnPreferenceClickListener()).isNotNull();
     }
 }
