@@ -174,6 +174,15 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSelectedMediaDevice();
     }
 
+    boolean isSelectedMediaDevice(MediaDevice device) {
+        for (MediaDevice selectedMediaDevice : getSelectedMediaDevice()) {
+            if (TextUtils.equals(selectedMediaDevice.getId(), device.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void adjustSessionVolume(String sessionId, int volume) {
         mLocalMediaManager.adjustSessionVolume(sessionId, volume);
     }
