@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Повече да не се показва"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Свързване"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Функцията за Wi-Fi е включена"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Установена е връзка с(ъс) <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Свързва се…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Свързването с мрежата не бе успешно"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Мрежата не е в обхват"</string>
@@ -1195,7 +1194,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5107880175176848307">"Докоснете, за да управлявате разрешенията за услугите за персонализиране на устройството"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Предотвратява изключването на екрана ви, ако гледате в него"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Функцията „Внимание към екрана“ използва предната камера, за да види дали някой гледа в екрана. Тя работи на устройството и изображенията не се съхраняват, нито се изпращат до Google."</string>
-    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Включване на функцията „Внимание към екрана“"</string>
+    <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Вкл. на функцията „Внимание към екрана“"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Екранът остава включен, докато гледате към него"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Нощно осветление"</string>
     <string name="night_display_text" msgid="4789324042428095383">"Функцията „Нощно осветление“ придава кехлибареножълт нюанс на екрана. Това подобрява видимостта му и четенето на него при слаба светлина и може да ви помогне да заспите по-лесно."</string>
@@ -2148,12 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Прекарайте два пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте два пръста нагоре и задръжте."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Прекарайте три пръста нагоре от долната част на екрана.\n\nЗа превключване между функциите прекарайте три пръста нагоре и задръжте."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Задържане на бутоните за силата на звука"</string>
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
-    <skip />
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"задържане на бутоните за силата на звука"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Натиснете и задръжте двата бутона за силата на звука"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Трикратно докосване на екрана"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"трикратно докосване на екрана"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Бързо докоснете екрана 3 пъти. Това може да забави работата на устройството ви."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Разширени"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Бутонът за достъпност е настроен за <xliff:g id="SERVICE">%1$s</xliff:g>. За да използвате функцията за увеличение, докоснете и задръжте бутона за достъпност, след което я изберете."</string>
@@ -2264,7 +2261,7 @@
     <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Изключено"</string>
     <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Слабо"</string>
     <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"средно"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"силно"</string>
+    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Силно"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Настройки"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Вкл."</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Изкл."</string>
@@ -2407,7 +2404,7 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Удължете живота на батерията на таблета си"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Удължете живота на батерията на устройството си"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Включете мениджъра на батерията"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Включете режима за запазване на батерията"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Вкл. режим за запазване на батерията"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Батерията може да се изтощи по-рано от обикновено"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Режимът за запазване на батерията е включен"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
@@ -3147,7 +3144,7 @@
     <string name="sim_editor_number" msgid="3209002966895156006">"Номер"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Цвят на SIM картата"</string>
     <string name="sim_card_select_title" msgid="8146523005929848793">"Избиране на SIM карта"</string>
-    <string name="color_orange" msgid="216547825489739010">"оранжево"</string>
+    <string name="color_orange" msgid="216547825489739010">"Оранжево"</string>
     <string name="color_purple" msgid="6603701972079904843">"Лилаво"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Няма поставени SIM карти"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Състояние на SIM картата"</string>
@@ -3465,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Точка за известия в иконата на прил."</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Показване на лента с последните разговори"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Балончета"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Някои известия могат да се показват като балончета на екрана"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Някои известия и друго съдържание могат да се показват като балончета на екрана. За да отворите балонче, докоснете го. За да го отхвърлите, плъзнете го в долната част на екрана."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Балончета"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Всички настройки за балончетата"</string>
@@ -3616,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Свързани"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Свързване на тези приложения"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Свързаните приложения споделят разрешенията си и имат достъп до данните си."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Свързвайте само приложения, на които можете да доверите личните си данни. Служебните приложения може да разкрият данните ви на системния ви администратор."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Свързвайте приложенията само ако им имате доверие, че няма да споделят личните ви данни със системния ви администратор."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Искате ли да доверите личните си данни на служебното приложение <xliff:g id="NAME">%1$s</xliff:g>?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> може да разкрие личните ви данни на системния ви администратор."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Свързвайте приложенията само ако им имате доверие, че няма да споделят личните ви данни със системния ви администратор."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Данни от приложенията"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Това приложение има достъп до данните в личното ви приложение <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Разрешения"</string>
@@ -3628,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> свързани приложения</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> свързано приложение</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Инсталирайте <xliff:g id="NAME">%1$s</xliff:g> за служебния си потребителски профил, за да свържете тези приложения"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Инсталирайте <xliff:g id="NAME">%1$s</xliff:g> за личния си потребителски профил, за да свържете тези приложения"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"За да свържете тези приложения, инсталирайте <xliff:g id="NAME">%1$s</xliff:g> в служебния си потребителски профил"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"За да свържете тези приложения, инсталирайте <xliff:g id="NAME">%1$s</xliff:g> в личния си потребителски профил"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Докоснете, за да инсталирате приложението"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Разрешаване на режима „Не безпокойте“"</string>
@@ -3851,7 +3847,7 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"Затваряне"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Въведете администраторския ПИН код"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Включено"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Вкл."</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Изключено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра. \n\nКогато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
@@ -4019,7 +4015,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Няма настройка за оптимизиране на батерията"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Да се изпълнява винаги на заден план?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план може да съкрати живота на батерията.\n\nМожете да промените това по-късно от „Настройки &gt; Приложения и известия“."</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план, може да съкрати живота на батерията.\n\nМожете да промените това по-късно от „Настройки &gt; Приложения и известия“."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Изразходване на <xliff:g id="PERCENTAGE">%1$s</xliff:g> от последното пълно зареждане"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Управление на захранването"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Батерията не е изразходвана от последното пълно зареждане"</string>
@@ -4457,7 +4453,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"За да проверите часа, известията и друга информация, вземете телефона си в ръка."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"За да проверите часа, известията и друга информация, вземете таблета си в ръка."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"За да проверите часа, известията и друга информация, вземете устройството си в ръка."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Докоснете за проверка на телефона"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Докосване за проверка на телефона"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Докоснете за проверка на таблета"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Докоснете за проверка на устройството"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да проверите часа, известията и друга информация, докоснете екрана."</string>
@@ -4821,8 +4817,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Активира замъгляването на прозорците на ниво компилатор. Изисква се рестартиране на устройството."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Поверителност"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Разрешения, активност в профила, лични данни"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Възобновяване на мултимедията"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Показва и задържа медийния плейър в бързите настройки. Изисква се рестартиране."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Премахване"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Запазване"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Да се премахне ли това предложение?"</string>
