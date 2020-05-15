@@ -16,6 +16,8 @@
 
 package com.android.settings.media;
 
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 
 import android.annotation.ColorInt;
@@ -61,7 +63,7 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         final CharSequence title = mContext.getString(R.string.media_output_label_title,
                 Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                0 /* requestCode */, getMediaOutputSliceIntent(), 0 /* flags */);
+                0 /* requestCode */, getMediaOutputSliceIntent(), FLAG_UPDATE_CURRENT);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(
                 primaryActionIntent, icon, ListBuilder.ICON_IMAGE, title);
         @ColorInt final int color = Utils.getColorAccentDefaultColor(mContext);
