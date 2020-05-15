@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Visa aldrig igen"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Anslut"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi har aktiverats"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Ansluten till <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Ansluter …"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Det gick inte att ansluta till nätverket."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Nätverket är inte inom räckvidd"</string>
@@ -1110,7 +1109,7 @@
     <string name="incoming_call_volume_title" msgid="8445408274513654261">"Ringsignal"</string>
     <string name="notification_volume_title" msgid="328053763590888609">"Avisering"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1798481722572489141">"Använd volymen för inkommande samtal vid avisering"</string>
-    <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Stöder inte arbetsprofiler"</string>
+    <string name="home_work_profile_not_supported" msgid="2605589489324241338">"Stöder inte jobbprofiler"</string>
     <string name="notification_sound_dialog_title" msgid="7431891669251806266">"Standardljud för meddelanden"</string>
     <string name="media_volume_title" msgid="5209147840160985178">"Media"</string>
     <string name="media_volume_summary" msgid="4671324482655564873">"Ställ in volym för musik och video"</string>
@@ -2106,7 +2105,7 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Skärmläsaren är främst avsedd för blinda eller personer med nedsatt syn"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Tryck på objekt på skärmen om du vill höra dem upplästa"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Inställningar för textning"</string>
-    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"förstoring"</string>
+    <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Förstoring"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Förstoringsområde"</string>
     <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Magnification enable"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Välj vilket förstoringsområde du vill använda när du förstorar skärmen"</string>
@@ -2127,24 +2126,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zooma in snabbt på skärmen för att se innehållet tydligare.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; 1. Starta förstoring med kortkommando&lt;br/&gt; 2. Tryck på skärmen&lt;br/&gt; 3. Dra två fingrar för att navigera på skärmen&lt;br/&gt; 4. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; 5. Stoppa förstoring med kortkommando&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; 1. Starta förstoring med kortkommando&lt;br/&gt; 2. Tryck länge var som helst på skärmen&lt;br/&gt; 3. Dra fingret för att navigera på skärmen&lt;br/&gt; 4. Stoppa förstoringen genom att lyfta fingret"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Skrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Öppna med tillgänglighetsknappen"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Öppna genom att hålla ned volymknapparna"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Öppna genom att trycka snabbt tre gånger"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Öppna med rörelse"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Använd en ny tillgänglighetsrörelse"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Tryck på tillgänglighetsknappen <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> längst ned på skärmen om du vill använda den här funktionen.\n\nByt funktion genom att trycka länge på tillgänglighetsknappen."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Håll båda volymknapparna nedtryckta om du vill använda den här funktionen."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Tryck snabbt tre gånger någonstans på skärmen för att starta och avsluta förstoring."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda den här funktionen.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Svep uppåt med två fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Svep uppåt med tre fingrar från skärmens nederkant om du vill använda en tillgänglighetsfunktion.\n\nByt funktion genom att svepa uppåt med tre fingrar och hålla kvar dem."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Kortkommando för <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Tillgänglighetsknapp"</string>
@@ -2155,8 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Svep uppåt med två fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Svep uppåt med tre fingrar från skärmens nederkant.\n\nByt funktion genom att svepa uppåt med två fingrar och hålla kvar dem."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Håll ned volymknapparna"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"håll ned volymknapparna"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Håll båda volymknapparna nedtryckta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tryck snabbt tre gånger på skärmen"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"tryck snabbt tre gånger på skärmen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Tryck snabbt på skärmen tre gånger. Detta kortkommando kan göra enheten långsammare."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avancerat"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"<xliff:g id="SERVICE">%1$s</xliff:g> har angetts för tillgänglighetsknappen. Om du vill använda förstoring trycker du länge på tillgänglighetsknappen och väljer förstoring."</string>
@@ -2723,7 +2717,7 @@
     <string name="admin_more_details" msgid="6698424974827333973">"Mer information"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Aviseringslogg"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"Aviseringshistorik"</string>
-    <string name="notification_history_today" msgid="5828496957208237230">"Senaste 24 timmarna"</string>
+    <string name="notification_history_today" msgid="5828496957208237230">"De senaste 24 timmarna"</string>
     <string name="notification_history_snooze" msgid="3980568893290512257">"Snoozade"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Senast stängda"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
@@ -2741,7 +2735,7 @@
     <string name="account_sync_settings_title" msgid="2684888109902800966">"Synkronisera"</string>
     <string name="sync_is_failing" msgid="6738004111400633331">"Det är för närvarande problem med synkronisering. Det fungerar igen om en stund."</string>
     <string name="add_account_label" msgid="7134707140831385869">"Lägg till konto"</string>
-    <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Arbetsprofilen är inte tillgänglig än"</string>
+    <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Jobbprofilen är inte tillgänglig än"</string>
     <string name="work_mode_label" msgid="1001415270126064436">"Jobbprofil"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Hanteras av organisationen"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"Appar och aviseringar är inaktiverade"</string>
@@ -3016,7 +3010,7 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Vill du ta bort dig själv?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Ska användaren raderas?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Vill du ta bort profilen?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Ta bort arbetsprofilen?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"Ta bort jobbprofilen?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"Ditt utrymme och din data tas bort från surfplattan. Det går inte att ångra den här åtgärden."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"Ditt utrymme och din data tas bort från mobilen. Det går inte att ångra den här åtgärden."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Alla appar och all data raderas."</string>
@@ -3443,7 +3437,7 @@
     <string name="other_sound_category_preference_title" msgid="8182757473602586634">"Andra ljud och vibrationer"</string>
     <string name="configure_notification_settings" msgid="1492820231694314376">"Aviseringar"</string>
     <string name="recent_notifications" msgid="1105631022180160436">"Nyligen skickat"</string>
-    <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Visa alla för senaste 7 dagarna"</string>
+    <string name="recent_notifications_see_all_title" msgid="3087299996651692987">"Visa alla för de senaste sju dagarna"</string>
     <string name="advanced_section_header" msgid="6003255455888626056">"Avancerat"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Jobbaviseringar"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Anpassade aviseringar"</string>
@@ -3468,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Aviseringsprick på appikonen"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Visa en remsa med de senaste konversationerna"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubblor"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Vissa aviseringar kan visas som bubblor på skärmen"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Vissa aviseringar och annat innehåll kan visas som bubblor på skärmen. Tryck på en bubbla för att öppna den. Om du vill stänga bubblan drar du den längst ned på skärmen."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubblor"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Alla inställningar för bubblor"</string>
@@ -3575,8 +3568,8 @@
       <item quantity="one">ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering om dagen</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar i veckan</item>
-      <item quantity="one">ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering i veckan</item>
+      <item quantity="other">Ca <xliff:g id="NUMBER_1">%d</xliff:g> aviseringar i veckan</item>
+      <item quantity="one">Ca <xliff:g id="NUMBER_0">%d</xliff:g> avisering i veckan</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldrig"</string>
     <string name="manage_notification_access_title" msgid="4714320299084782521">"Åtkomst till aviseringar"</string>
@@ -3610,18 +3603,18 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Bild-i-bild"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Tillåt bild-i-bild"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Tillåt att ett bild-i-bild-fönster skapas av appen medan den är öppen eller när du har slutat att använda den (till exempel när du fortsätter att titta på en video). Detta fönster visas ovanpå andra appar du använder."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Anslutna jobb/personliga appar"</string>
-    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Anslutna"</string>
-    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Inte anslutna"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Kopplade jobb- och privatappar"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Kopplad"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Inte kopplad"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Inga kopplade appar"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"mellan profiler kopplad app appar jobb och privat"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Anslutna jobbappar och personliga appar"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Kopplade jobb- och privatappar"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Har kopplats"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Koppla dessa appar"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Kopplade appar har samma behörighet och kan använda varandras data."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Koppla bara appar som kan anförtros privat data. Din data kan exponeras för IT-administratören i jobbappar."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Ska jobbappen <xliff:g id="NAME">%1$s</xliff:g> vara betrodd att använda personlig data?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> kan exponera personlig data för IT-administratören."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Appdata"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Appen har tillgång till data i den privata <xliff:g id="NAME">%1$s</xliff:g>-appen."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Behörigheter"</string>
@@ -3631,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> kopplade appar</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kopplad app</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Installera <xliff:g id="NAME">%1$s</xliff:g> i jobbprofilen för att ansluta apparna"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Installera <xliff:g id="NAME">%1$s</xliff:g> i din privata profil för att ansluta apparna"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Installera <xliff:g id="NAME">%1$s</xliff:g> i din jobbprofil om du vill koppla apparna"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Installera <xliff:g id="NAME">%1$s</xliff:g> i din privata profil om du vill koppla apparna"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tryck för att installera appen"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Stör ej-åtkomst"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Tillåt Stör ej"</string>
@@ -4072,8 +4065,8 @@
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Tillåt att assistentappen får åtkomst till innehåll på skärmen som text"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Använda skärmdump"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Tillåt att assistentappen får åtkomst till en bild på skärmen"</string>
-    <string name="assist_flash_title" msgid="5449512572885550108">"Lys upp skärmen"</string>
-    <string name="assist_flash_summary" msgid="3032289860177784594">"Lys upp skärmens kanter när assistentappen har tillgång till text på skärmen eller på en skärmdump"</string>
+    <string name="assist_flash_title" msgid="5449512572885550108">"Blinkande skärm"</string>
+    <string name="assist_flash_summary" msgid="3032289860177784594">"Skärmens kanter blinkar när assistentappen har tillgång till text på skärmen eller en skärmdump"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Med assistentappar kan du få hjälp som baseras på den information som visas på den aktuella skärmen. Vissa appar har stöd för både översikts- och röstinmatningstjänster som hjälper dig."</string>
     <string name="average_memory_use" msgid="717313706368825388">"Genomsnittlig minnesanvändning"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"Maximal minnesanvändning"</string>
@@ -4359,7 +4352,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"urklipp av skärm, flärp"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Enhetens standardinställning"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Det gick inte att använda överlagring"</string>
-    <string name="special_access" msgid="1767980727423395147">"Särskild åtkomst för app"</string>
+    <string name="special_access" msgid="1767980727423395147">"Särskild appåtkomst"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> appar får använda obegränsad data</item>
       <item quantity="one">1 app får använda obegränsad data</item>
@@ -4824,8 +4817,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Aktiverar oskärpa på fönster på kompositörsnivå. Enheten måste starta om."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Sekretess"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Behörigheter, kontoaktivitet, personuppgifter"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Återupptagning av media"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Visar och behåller mediespelaren i Snabbinställningar. Enheten måste starta om."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Ta bort"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Behåll"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Ska förslaget tas bort?"</string>

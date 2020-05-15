@@ -179,7 +179,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"El campo de puerto debe estar vacío si el campo de host también lo está."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"El puerto que has introducido no es válido."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"El navegador utiliza el proxy HTTP, pero otras aplicaciones no pueden usarlo."</string>
-    <string name="proxy_url_title" msgid="3502625766036404073">"URL PAC "</string>
+    <string name="proxy_url_title" msgid="3502625766036404073">"URL de archivo PAC "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Hacer ping a IPv4 de nombre de host (www.google.com):"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Hacer ping a IPv6 de nombre de host (www.google.com):"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"Prueba de cliente HTTP:"</string>
@@ -287,7 +287,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Habilitar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Inhabilitado por el administrador"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Mostrar opción de bloqueo de seguridad"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Muestra la opción del botón de encendido que desactiva Smart Lock, el desbloqueo por biometría y las notificaciones en la pantalla de bloqueo"</string>
+    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Muestra una opción al pulsar el botón de encendido que desactiva Smart Lock, el desbloqueo con huella digital y las notificaciones en la pantalla de bloqueo"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Bloquear pantalla si no hay confianza"</string>
     <string name="trust_lost_locks_screen_summary" msgid="718374221849537361">"Si se habilita esta opción, el dispositivo se bloqueará cuando el último agente de confianza pierda la confianza"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"Ninguno"</string>
@@ -876,7 +876,7 @@
     <string name="wifi_eap_method" msgid="3776009521349381742">"Método EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"Autenticación de fase 2"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"Certificado de CA"</string>
-    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Estado de certificado online"</string>
+    <string name="wifi_eap_ocsp" msgid="8713933962516871238">"Estado del certificado online"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Dominio"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Certificado de usuario"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Identidad"</string>
@@ -900,7 +900,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Encuadra el código QR abajo para añadir el dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Escanea el código QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Encuadra el código QR abajo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Escanea el código QR para conectarte al Wi‑Fi"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Escanea el código QR para conectarte a la red Wi‑Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Compartir Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"Escanea este código QR con otro dispositivo para conectarlo a \"<xliff:g id="SSID">%1$s</xliff:g>\" y compartir la contraseña"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Escanea este código QR con otro dispositivo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"No volver a mostrar"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Conectar"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Red Wi‑Fi activada"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Con conexión a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Conectando…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Error al conectar a la red"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"La red está fuera de rango"</string>
@@ -2094,7 +2093,7 @@
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Lectores de pantalla, pantalla, controles de interacción"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Ajustes de visión"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad posteriormente en Ajustes."</string>
-    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambiar el tamaño de la fuente"</string>
+    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambia el tamaño de la fuente"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio y texto en pantalla"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
@@ -2127,24 +2126,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Amplía rápidamente la pantalla para ver mejor el contenido.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para iniciar la ampliación.&lt;br/&gt; 2. Toca la pantalla.&lt;br/&gt; 3. Arrastra dos dedos para moverte por la pantalla.&lt;br/&gt; 4. Pellizca con dos dedos para ajustar el zoom.&lt;br/&gt; 5. Detén la ampliación mediante el acceso directo.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar contenido de forma temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para la ampliación.&lt;br/&gt; 2. Mantén pulsado cualquier punto de la pantalla.&lt;br/&gt; 3. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; 4. Levanta el dedo para dejar de ampliar."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Si la ampliación está activada, puedes ampliar la pantalla.\n\n"<b>"Para ampliar"</b>", inicia la ampliación y toca la parte de la pantalla que quieras ampliar.\n"<ul><li>"Arrastra al menos dos dedos para desplazarte."</li>\n<li>"Pellizca la pantalla con al menos dos dedos para ajustar el zoom."</li></ul>\n\n<b>"Para ampliar elementos temporalmente"</b>", inicia la ampliación y mantén pulsada cualquier parte de la pantalla.\n"<ul><li>"Arrastra un dedo para desplazarte por la pantalla."</li>\n<li>"Levanta el dedo para reducir la imagen."</li></ul>\n\n"El teclado y la barra de navegación no se pueden ampliar."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa el botón de accesibilidad para abrir"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén pulsadas las teclas de volumen para abrirla"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tocar tres veces la pantalla para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usa el nuevo gesto de accesibilidad"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esta función, toca el botón Accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>, situado en la parte inferior de la pantalla.\n\nPara pasar de una función a otra, mantén pulsado ese botón."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para usar esta función, mantén pulsadas las dos teclas de volumen."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar o detener la función de ampliación, toca tres veces en cualquier parte de la pantalla."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esta función, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Para usar esta función, desliza hacia arriba con tres dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con tres dedos y mantén pulsada la pantalla."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar una función de accesibilidad, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza hacia arriba con tres dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con tres dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Acceso directo a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón Accesibilidad"</string>
@@ -2155,8 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Desde la parte inferior de la pantalla, desliza hacia arriba con dos dedos.\n\nPara cambiar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Desde la parte inferior de la pantalla, desliza tres dedos hacia arriba.\n\nPara cambiar de una función a otra, desliza tres dedos hacia arriba y mantén pulsada la pantalla."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener pulsadas las teclas de volumen"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantén pulsadas las teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triple toque en la pantalla"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"toca tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toca la pantalla tres veces rápidamente. Esta acción puede hacer que tu dispositivo funcione más lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Se ha definido <xliff:g id="SERVICE">%1$s</xliff:g> como preferencia de Accesibilidad. Para utilizar la ampliación, mantén pulsado el botón Accesibilidad y selecciona esa opción."</string>
@@ -2400,7 +2394,7 @@
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Cómo reducir el uso de la batería"</string>
     <string name="packages_subtitle" msgid="8687690644931499428">"Paquetes incluidos"</string>
-    <string name="battery_tip_summary_title" msgid="321127485145626939">"Las aplicaciones funcionan correctamente"</string>
+    <string name="battery_tip_summary_title" msgid="321127485145626939">"Las aplicaciones funcionan con normalidad"</string>
     <string name="battery_tip_summary_summary" product="default" msgid="6077959765904507849">"El teléfono tiene un consumo normal de batería en segundo plano"</string>
     <string name="battery_tip_summary_summary" product="tablet" msgid="5063158368808711973">"El tablet tiene un consumo normal de batería en segundo plano"</string>
     <string name="battery_tip_summary_summary" product="device" msgid="4242899844618910548">"El dispositivo tiene un consumo normal de batería en segundo plano"</string>
@@ -2579,13 +2573,13 @@
     <string name="battery_saver" msgid="7737147344510595864">"Ahorro de batería"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Activar automáticamente"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Sin programación"</string>
-    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Según tu rutina"</string>
+    <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Basado en tu rutina"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Según el porcentaje"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"El modo Ahorro de batería se activa si es probable que te quedes sin batería antes de tu próxima carga normal."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Se activará cuando llegue al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Definir una programación"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer una programación"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Amplía la duración de la batería"</string>
-    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando se haya cargado"</string>
+    <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cuando la batería esté cargada"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"El modo Ahorro de batería se desactiva cuando el teléfono está al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"El modo Ahorro de batería se desactiva cuando el teléfono está al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"El modo Ahorro de batería se desactiva cuando el teléfono está al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -3322,8 +3316,8 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula automáticamente el contenido multimedia"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Ninguna"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horarios creados</item>
-      <item quantity="one">1 horario creado</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horarios establecidos</item>
+      <item quantity="one">1 horario establecido</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No molestar"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recibe notificaciones solo de personas y aplicaciones importantes"</string>
@@ -3468,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Burbuja de notificación en el icono de la aplicación"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostrar barra de conversaciones recientes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Burbujas"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunas notificaciones pueden aparecer como burbujas en la pantalla"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algunas notificaciones y otro tipo de contenido aparecerá como burbujas en la pantalla. Para abrir una burbuja, tócala. Para cerrarla, arrástrala hacia la parte de abajo de la pantalla."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Burbujas"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Todos los ajustes de Burbujas"</string>
@@ -3619,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectados"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar estas aplicaciones"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Las aplicaciones conectadas comparten permisos y pueden acceder a sus datos entre sí."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Conecta solo las aplicaciones en las que confíes, ya que pueden acceder a tus datos personales. Las aplicaciones de trabajo pueden exponer tus datos a tu administrador de TI."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"¿Otorgar acceso a la aplicación de trabajo <xliff:g id="NAME">%1$s</xliff:g> a tus datos personales?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"Es posible que <xliff:g id="NAME">%1$s</xliff:g> exponga tus datos personales a tu administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Conecta solo aplicaciones si confías en que no compartirán datos personales con tu administrador de TI."</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"¿Dar acceso a la aplicación de trabajo <xliff:g id="NAME">%1$s</xliff:g> a tus datos personales?"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Conecta solo aplicaciones si confías en que no compartirán datos personales con tu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Datos de aplicaciones"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esta aplicación puede acceder a los datos de tu aplicación personal <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permisos"</string>
@@ -3631,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicaciones conectadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicación conectada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Descarga <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo para conectar estas aplicaciones"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal para conectar estas aplicaciones"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca para descargar la aplicación"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acceso a No molestar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir No molestar"</string>
@@ -4109,7 +4102,7 @@
     <string name="app_list_preference_none" msgid="1635406344616653756">"Ninguna"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Al desactivar el acceso de uso de esta aplicación, no evitas que el administrador registre los datos de uso de las aplicaciones de tu perfil de trabajo"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> caracteres utilizados"</string>
-    <string name="draw_overlay" msgid="7902083260500573027">"Mostrar sobre otras apps"</string>
+    <string name="draw_overlay" msgid="7902083260500573027">"Mostrar sobre otras aplicaciones"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Mostrar sobre otras aplicaciones"</string>
     <string name="system_alert_window_apps_title" msgid="1537949185175079866">"Aplicaciones"</string>
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Mostrar sobre otras aplicaciones"</string>
@@ -4120,7 +4113,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permitir que esta aplicación lea, modifique y elimine todos los archivos de este dispositivo o de cualquier volumen de almacenamiento conectado. Si le das permiso, podrá acceder a archivos sin que lo sepas."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Puede acceder a todos los archivos"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"rv realidad virtual procesador estéreo servicio ayuda"</string>
-    <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras apps"</string>
+    <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras aplicaciones"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicaciones que se pueden mostrar sobre otras"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicaciones con permiso"</string>
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
@@ -4316,7 +4309,7 @@
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Añadir otra huella digital"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Desbloquear con un dedo diferente"</string>
     <string name="battery_saver_on_summary" msgid="4605146593966255848">"Activado"</string>
-    <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Se activará cuando esté al <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"Se activará cuando la batería esté al <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Desactivado"</string>
     <string name="battery_saver_button_turn_on" msgid="2206239048232352476">"Activar ahora"</string>
     <string name="battery_saver_button_turn_off" msgid="6371072408072481484">"Desactivar"</string>
@@ -4369,7 +4362,7 @@
     <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Borrar y convertir"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Restablecer límite de frecuencia de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Se ha restablecido el límite de frecuencia de ShortcutManager"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar los datos que aparecen en la pantalla de bloqueo"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Controla los datos que aparecen en la pantalla de bloqueo"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Mostrar u ocultar contenido de las notificaciones"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Todo"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Ayuda y consejos"</string>
@@ -4824,8 +4817,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Habilita el difuminado de ventanas a nivel de composición. Requiere reiniciar el dispositivo."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidad"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, actividad de la cuenta, datos personales"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Reanudar contenido multimedia"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Muestra y mantiene el reproductor multimedia en ajustes rápidos. Requiere reiniciar el dispositivo."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Quitar"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Conservar"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"¿Quitar esta sugerencia?"</string>

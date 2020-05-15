@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Não mostrar de novo"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Conectar"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi ativado"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Conectado a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Conectando…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Falha ao conectar à rede"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Rede fora do alcance"</string>
@@ -2148,8 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com dois dedos, sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima na tela com três dedos, sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Manter as teclas de volume pressionadas"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"manter as teclas de volume pressionadas"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Toque nas duas teclas de volume e as mantenha pressionadas"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Tocar na tela três vezes"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"tocar na tela três vezes"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toque rapidamente na tela três vezes. Este atalho pode deixar o dispositivo mais lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avançado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botão Acessibilidade está definido para <xliff:g id="SERVICE">%1$s</xliff:g>. Para usar a ampliação, toque nesse botão, mantenha-o pressionado e selecione a ampliação."</string>
@@ -2210,7 +2211,7 @@
     <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Nem todos os apps são compatíveis com essas preferências de legenda"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Botão de acessibilidade"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Deslizar de baixo para cima com dois dedos"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Manter as teclas de volume pressionadas"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Mantenha as teclas de volume pressionadas"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"Tocar na tela três vezes"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"Continuar"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Aparelhos auditivos"</string>
@@ -2808,7 +2809,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pausa no limite"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincron. dados automaticamente"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinc. autom. dados pessoais"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autossincronizar dados de trabalho"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizar dados de trabalho automaticamente"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Alterar ciclo..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dia do mês para redefinir o ciclo de uso dos dados:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Nenhum app usou dados durante o período."</string>
@@ -3461,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Ponto de notificação no ícone do app"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostrar faixa de conversas recentes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Balões"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algumas notificações podem ser exibidas como balões na tela"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Notificações e outros conteúdos podem aparecer como balões na tela. Para abrir um balão, toque nele. Para dispensá-lo, arraste-o para baixo."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balões"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Todas as configurações do balão"</string>
@@ -3538,7 +3538,7 @@
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritárias em balões"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Conversas prioritárias são mostradas na parte superior da aba suspensa. Você também pode configurá-las para que sejam mostradas em balões e interrompam o modo \"Não perturbe\"."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"As conversas prioritárias e modificadas aparecerão aqui"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Depois de marcar uma conversa como prioritária ou fazer qualquer outra mudança nas conversas, elas aparecerão aqui. \n\nPara mudar as configurações da conversa: \ndeslize o dedo de cima para baixo na tela para abrir a aba suspensa. Em seguida, toque na conversa e a mantenha pressionada."</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Depois de marcar uma conversa como prioritária ou fazer qualquer mudança nas conversas, elas aparecerão aqui. \n\nPara mudar as configurações da conversa: \ndeslize o dedo de cima para baixo na tela para abrir a aba suspensa. Em seguida, toque na conversa e a mantenha pressionada."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Mostrar de forma silenciosa e minimizada"</string>
     <string name="notification_importance_low" msgid="7562535765919565273">"Mostrar de forma silenciosa"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Emitir som"</string>
@@ -3612,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Conectado"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar esses apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Os apps conectados compartilham permissões e podem acessar dados uns dos outros."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Só conceda acesso a suas informações pessoais a apps em que você confia. Os apps de trabalho poderão expor seus dados ao administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Confiar seus dados pessoais ao app <xliff:g id="NAME">%1$s</xliff:g> de trabalho?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> pode expor seus dados pessoais ao administrador de TI."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dados do app"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esse app pode acessar dados do seu app <xliff:g id="NAME">%1$s</xliff:g> pessoal."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permissões"</string>
@@ -3624,8 +3624,8 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> app conectado</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps conectados</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instale o app <xliff:g id="NAME">%1$s</xliff:g> de trabalho para conectar esses apps"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instale o app <xliff:g id="NAME">%1$s</xliff:g> pessoal para conectar esses apps"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Para conectar esses apps, instale o app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil de trabalho"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Para conectar esses apps, instale o app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil pessoal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toque para instalar o app"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acesso ao Não perturbe"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir o Não perturbe"</string>
@@ -4415,10 +4415,10 @@
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"Gestos rápidos para controlar seu smartphone"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"Gestos rápidos para controlar seu tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"Gestos rápidos para controlar seu dispositivo"</string>
-    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir a câmera rapidamente"</string>
+    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir a câmera rápido"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Para abrir a câmera rapidamente, pressione o botão liga/desliga duas vezes. O recurso funciona em qualquer tela."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Abrir a câmera rapidamente"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Virar a câmera para o modo selfie"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Virar câmera para tirar selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Tirar selfies com mais rapidez"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navegação no sistema"</string>
@@ -4817,8 +4817,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Permite desfoques de janela no nível de compositor. É necessário reiniciar o dispositivo."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidade"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permissões, atividade da conta, dados pessoais"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Retomada de mídia"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Mostra e persiste o player de mídia nas \"Configurações rápidas\". É necessário reinicializar o dispositivo."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Remover"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Manter"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Remover esta sugestão?"</string>
@@ -4905,8 +4903,8 @@
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usar, primeiro defina um bloqueio de tela"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles do dispositivo"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar cartões e passes"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acessar os controles de dispositivos conectados, mantenha o botão liga/desliga pressionado"</string>
-    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Para acessar itens como suas formas de pagamento e cartões de embarque, toque no botão liga/desliga e mantenha-o pressionado."</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acessar os controles dos dispositivos conectados, mantenha o botão liga/desliga pressionado"</string>
+    <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Para acessar itens como suas formas de pagamento e cartões de embarque, toque e mantenha pressionado o botão liga/desliga."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
