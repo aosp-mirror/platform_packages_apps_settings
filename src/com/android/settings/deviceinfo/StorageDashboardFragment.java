@@ -63,7 +63,7 @@ public class StorageDashboardFragment extends DashboardFragment
         implements
         LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
-    private static final String SUMMARY_PREF_KEY = "pref_summary";
+    private static final String SUMMARY_PREF_KEY = "storage_summary";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
     private static final int VOLUME_SIZE_JOB_ID = 2;
