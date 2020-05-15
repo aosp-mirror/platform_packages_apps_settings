@@ -73,7 +73,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
     private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     @VisibleForTesting SavedNetworkTracker mSavedNetworkTracker;
-    private HandlerThread mWorkerThread;
+    @VisibleForTesting HandlerThread mWorkerThread;
 
     // Container Activity must implement this interface
     public interface OnChooseNetworkListener {
@@ -156,6 +156,13 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 MAX_SCAN_AGE_MILLIS,
                 SCAN_INTERVAL_MILLIS,
                 this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        mWorkerThread.quit();
+
+        super.onDestroyView();
     }
 
     @Override
