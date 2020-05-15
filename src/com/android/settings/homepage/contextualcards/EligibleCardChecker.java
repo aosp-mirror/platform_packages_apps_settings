@@ -18,6 +18,8 @@ package com.android.settings.homepage.contextualcards;
 
 import static android.app.slice.Slice.HINT_ERROR;
 
+import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
+
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -92,6 +94,11 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
         final Uri uri = card.getSliceUri();
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             return false;
+        }
+
+        if (card.getCategory() == STICKY_VALUE) {
+            Log.d(TAG, "Sticky card, skip checking. Uri = " + card.getSliceUri());
+            return true;
         }
 
         final Slice slice = bindSlice(uri);
