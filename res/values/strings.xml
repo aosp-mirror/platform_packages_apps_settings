@@ -8409,6 +8409,15 @@
     <!-- [CHAR LIMIT=100] link to page listing all conversations -->
     <string name="manage_conversations">Manage conversations</string>
 
+    <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, no conversations are priority -->
+    <string name="priority_conversation_count_zero">No priority conversations</string>
+
+    <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, some conversations are priority -->
+    <plurals name="priority_conversation_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> priority conversation</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> priority conversations</item>
+    </plurals>
+
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
 
