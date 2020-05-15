@@ -47,6 +47,14 @@
         android:order="-997"/>
 
     <Preference
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="-550"
+        settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
+        android:fragment="com.android.settings.notification.app.ConversationListSettings"
+    />
+
+    <Preference
         android:key="configure_notification_settings"
         android:title="@string/configure_notification_settings"
         android:order="-440"

@@ -29,13 +29,6 @@
     <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc" />
 
-    <!--Bubbles -->
-    <Preference
-        android:key="bubble_pref_link"
-        android:title="@string/notification_bubbles_title"
-        android:icon="@drawable/ic_create_bubble"
-        settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
-    </Preference>
 
     <!-- Conversations added here -->
     <PreferenceCategory
@@ -43,13 +36,28 @@
         android:key="conversations"
         android:visibility="gone"
         settings:allowDividerAbove="false"
-        settings:allowDividerBelow="false" />
+        settings:allowDividerBelow="false">
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="invalid_conversation_switch"
+            android:title="@string/conversation_section_switch_title" />
+        <Preference
+            android:key="invalid_conversation_info"/>
+    </PreferenceCategory>
+
+    <!--Bubbles -->
+    <Preference
+        android:key="bubble_pref_link"
+        android:title="@string/notification_bubbles_title"
+        android:icon="@drawable/ic_create_bubble"
+        settings:allowDividerAbove="false"
+        settings:controller="com.android.settings.notification.app.BubbleSummaryPreferenceController">
+    </Preference>
 
     <!-- Channels/Channel groups added here -->
     <PreferenceCategory
         android:key="channels"
         android:layout="@layout/empty_view"
-        settings:allowDividerAbove="false"
+        settings:allowDividerAbove="true"
         settings:allowDividerBelow="false" />
 
     <!-- Importance toggle -->
