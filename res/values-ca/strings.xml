@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"No ho mostris mai més"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Connecta"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"La xarxa Wi‑Fi està activada"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Connectat a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"S\'està connectant…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"No s\'ha pogut connectar a la xarxa"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"La xarxa està fora de l\'abast"</string>
@@ -1062,7 +1061,7 @@
     <string name="wifi_add_app_single_network_saving_summary" msgid="7366337245410388895">"S\'està desant…"</string>
     <string name="wifi_add_app_single_network_saved_summary" msgid="7135016314713158289">"S\'ha desat"</string>
     <string name="wifi_add_app_network_save_failed_summary" msgid="7223817782309294652">"No es pot desar. Torna-ho a provar."</string>
-    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Vols desar les xarxes?"</string>
+    <string name="wifi_add_app_networks_title" msgid="4384594865433042851">"Vols desar aquestes xarxes?"</string>
     <string name="wifi_add_app_networks_summary" product="default" msgid="2670215712788515167">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar aquestes xarxes al teu telèfon"</string>
     <string name="wifi_add_app_networks_summary" product="tablet" msgid="2088967184512169910">"<xliff:g id="APPNAME">%1$s</xliff:g> vol desar aquestes xarxes a la teva tauleta"</string>
     <string name="wifi_add_app_networks_saving_summary" msgid="577680250954742033">"S\'estan desant <xliff:g id="NUMBER">%d</xliff:g> xarxes…"</string>
@@ -1330,7 +1329,7 @@
     <string name="hardware_revision" msgid="3454709180861965025">"Versió del maquinari"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Id. de l\'equip"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Versió de banda base"</string>
-    <string name="kernel_version" msgid="3513538109381366881">"Versió del kernel"</string>
+    <string name="kernel_version" msgid="3513538109381366881">"Versió de kernel"</string>
     <string name="build_number" msgid="9009733242117579826">"Número de compilació"</string>
     <string name="module_version" msgid="1787518340082046658">"Actualització del sistema de Google Play"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"No disponible"</string>
@@ -2127,24 +2126,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Amplia la pantalla ràpidament per veure més clarament el contingut.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per ampliar-la:&lt;/b&gt;&lt;br/&gt; 1. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; 2. Toca la pantalla.&lt;br/&gt; 3. Arrossega 2 dits per moure\'t per la pantalla.&lt;br/&gt; 4. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; 5. Utilitza una drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per ampliar la pantalla temporalment:&lt;/b&gt;&lt;br/&gt; 1. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; 2. Mantén premut qualsevol punt de la pantalla.&lt;br/&gt; 3. Arrossega un dit per moure\'t per la pantalla.&lt;br/&gt; 4. Aixeca el dit per aturar l\'ampliació."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quan l\'opció d\'ampliació està activada, pots ampliar la pantalla.\n\n"<b>"Per ampliar-la"</b>", activa l\'opció i toca qualsevol punt de la pantalla.\n"<ul><li>"Arrossega dos o més dits per desplaçar-te."</li>\n<li>"Pinça amb dos o més dits per ajustar el zoom."</li></ul>\n\n<b>"Per fer zoom temporalment"</b>", activa l\'ampliació i mantén premut qualsevol punt de la pantalla.\n"<ul><li>"Arrossega per moure\'t per la pantalla."</li>\n<li>"Aixeca el dit per allunyar la pantalla."</li></ul>\n\n"No es pot ampliar el teclat ni la barra de navegació."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Utilitza el botó d\'accessibilitat per obrir"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Per obrir, mantén premudes les tecles de volum"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Per obrir, fes tres tocs a la pantalla"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Utilitza un gest per obrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Utilitza un nou gest d\'accessibilitat"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Per utilitzar aquesta funció, toca el botó d\'accessibilitat <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> a la part inferior de la pantalla.\n\nPer canviar entre funcions, mantén premut el botó d\'accessibilitat."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Per utilitzar aquesta funció, mantén premudes les dues tecles de volum."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Per iniciar o aturar l\'ampliació, fes tres tocs en qualsevol punt de la pantalla."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Per utilitzar aquesta funció, llisca cap amunt amb 2 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 2 dits i mantén premut."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Per utilitzar aquesta funció, llisca cap amunt amb 3 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 3 dits i mantén premut."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Per utilitzar una funció d\'accessibilitat, llisca cap amunt amb 2 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 2 dits i mantén premut."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Per utilitzar una funció d\'accessibilitat, llisca cap amunt amb 3 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 3 dits i mantén premut."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entesos"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Drecera a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botó d\'accessibilitat"</string>
@@ -2155,12 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Llisca cap amunt amb 2 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 2 dits i mantén premut."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Llisca cap amunt amb 3 dits des de la part inferior de la pantalla.\n\nPer canviar entre funcions, llisca cap amunt amb 3 dits i mantén premut."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantén premudes les tecles de volum"</string>
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
-    <skip />
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantén premudes les tecles de volum"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén premudes les dues tecles de volum"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Fes tres tocs a la pantalla"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"fes tres tocs a la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toca la pantalla 3 cops ràpidament. És possible que aquesta drecera alenteixi el dispositiu."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Configuració avançada"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"El botó d\'accessibilitat està configurat per a <xliff:g id="SERVICE">%1$s</xliff:g>. Per utilitzar la funció d\'ampliació, toca i mantén premut el botó d\'accessibilitat i, a continuació, selecciona l\'ampliació."</string>
@@ -2192,7 +2182,7 @@
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Retard en mantenir premut"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversió de colors"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilitza la inversió de colors"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversió de colors converteix les pantalles clares en fosques.&lt;br/&gt;&lt;br/&gt; Nota:&lt;ol&gt; &lt;li&gt; la inversió de colors també converteix les pantalles fosques en clares.&lt;/li&gt; &lt;li&gt; Els colors canviaran al contingut multimèdia i a les imatges.&lt;/li&gt; &lt;li&gt; El tema fosc permet mostrar un fons fosc i funciona amb les aplicacions compatibles. En canvi, la inversió de colors funciona en totes les aplicacions.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"La inversió de colors converteix les pantalles clares en fosques.&lt;br/&gt;&lt;br/&gt; Nota:&lt;ol&gt; &lt;li&gt; La inversió de colors també converteix les pantalles fosques en clares.&lt;/li&gt; &lt;li&gt; Els colors canviaran al contingut multimèdia i a les imatges.&lt;/li&gt; &lt;li&gt; El tema fosc permet mostrar un fons fosc i tan sols funciona amb les aplicacions compatibles. En canvi, la inversió de colors funciona en totes les aplicacions.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automàtic (temps de permanència)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"El clic automàtic funciona amb un ratolí connectat. Pots configurar el cursor del ratolí perquè faci clic automàticament quan deixi de moure\'s durant cert temps."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Desactivat"</string>
@@ -2234,9 +2224,9 @@
       <item quantity="one">S\'ha desat <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> audiòfon</item>
     </plurals>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Drecera activada"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivada"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desactivat"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Activat"</string>
-    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desactivat"</string>
+    <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desactivada"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"No funciona. Toca per obtenir més informació."</string>
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Aquest servei no funciona correctament."</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostra a configuració ràpida"</string>
@@ -2415,13 +2405,13 @@
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Millora la durada de la bateria del dispositiu"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Activa el gestor de bateria"</string>
     <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Activa l\'estalvi de bateria"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"És possible que la bateria s\'esgoti abans del que és habitual"</string>
+    <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Pot ser que la bateria s\'esgoti massa ràpid"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"S\'ha activat l\'estalvi de bateria"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"És possible que algunes funcions estiguin limitades"</string>
     <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"El telèfon s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"La tauleta s\'ha utilitzat més del que és habitual"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"El dispositiu s\'ha utilitzat més del que és habitual"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"És possible que la bateria s\'esgoti abans del que és habitual"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Pot ser que la bateria s\'esgoti massa ràpid"</string>
     <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"El telèfon s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAplicacions que han consumit més bateria:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"La tauleta s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAplicacions que han consumit més bateria:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"El dispositiu s\'ha fet servir més del que és habitual i és possible que la bateria s\'esgoti abans del previst.\n\nAplicacions que han consumit més bateria:"</string>
@@ -2819,7 +2809,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"En pausa al límit"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sincronització automàtica de dades"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincr. dades personals autom."</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincron. dades feina automàt."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincr. dades treball autom."</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Canvia el cicle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Dia del mes per restablir el cicle d\'ús de dades:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Cap aplicació no ha utilitzat dades en aquest període."</string>
@@ -3472,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Punt de notificació a la icona de l\'aplicació"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostra la barra de converses recents"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bombolles"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algunes notificacions poden mostrar-se en forma de bombolles a la pantalla"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algunes notificacions i altres tipus de contingut poden mostrar-se en forma de bombolles a la pantalla. Toca una bombolla per obrir-la. Per ignorar-la, arrossega-la fins a la part inferior de la pantalla."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bombolles"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Totes les opcions de configuració de les bombolles"</string>
@@ -3483,7 +3472,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Si actives les bombolles en aquesta aplicació, també s\'activaran al dispositiu.\n\nAixò afecta altres aplicacions i converses que poden mostrar-se en forma de bombolles."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activa"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Cancel·la"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Activat / Les converses poden aparèixer com a icones flotants"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Funció activada: les converses poden aparèixer com a icones flotants"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permet que les aplicacions es mostrin com a bombolles"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Algunes converses apareixeran com a icones flotants a sobre d\'altres aplicacions"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Totes les converses poden mostrar-se com a bombolles"</string>
@@ -3505,7 +3494,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Es mostra a l\'àrea desplegable, la barra d\'estat i la pantalla de bloqueig"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Amaga les notificacions silencioses a la barra d\'estat"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Llum intermitent"</string>
-    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notificacions en pantalla de bloqueig"</string>
+    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notificacions a la pantalla de bloqueig"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Omet la pantalla de bloqueig"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Després del desbloqueig facial, ves a l\'última pantalla utilitzada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantalla de bloqueig, bloqueig, ometre, saltar"</string>
@@ -3623,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Connectades"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Connecta aquestes aplicacions"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les aplicacions connectades comparteixen els permisos i les dades entre si."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Connecta només les aplicacions en les quals confiïs, ja que poden accedir a les teves dades personals. És possible que les aplicacions de treball exposin les teves dades a l\'administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Connecta només aplicacions si confies que no compartiran dades personals amb el teu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vols confiar les teves dades personals a l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> de treball?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"És possible que <xliff:g id="NAME">%1$s</xliff:g> exposi les teves dades personals a l\'administrador de TI."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Connecta només aplicacions si confies que no compartiran dades personals amb el teu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dades de les aplicacions"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Aquesta aplicació pot accedir a les dades de la teva aplicació <xliff:g id="NAME">%1$s</xliff:g> personal."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permisos"</string>
@@ -3635,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicacions connectades</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació connectada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al perfil professional per connectar aquestes aplicacions"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instal·la l\'aplicació <xliff:g id="NAME">%1$s</xliff:g> al perfil personal per connectar aquestes aplicacions"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Per connectar aquestes aplicacions, instal·la <xliff:g id="NAME">%1$s</xliff:g> al teu perfil de treball"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Per connectar aquestes aplicacions, instal·la <xliff:g id="NAME">%1$s</xliff:g> al teu perfil personal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca per obtenir l\'aplicació"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accés a No molestis"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permet l\'accés al mode No molestis"</string>
@@ -4077,7 +4066,7 @@
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Utilitza una captura de pantalla"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Permet que l\'aplicació d\'assistència accedeixi a una imatge de la pantalla"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Fes centellejar la pantalla"</string>
-    <string name="assist_flash_summary" msgid="3032289860177784594">"Fa centellejar les vores de la pantalla quan l\'aplicació d\'assistència accedeix al text d\'una pantalla o d\'una captura de pantalla"</string>
+    <string name="assist_flash_summary" msgid="3032289860177784594">"Fa centellejar les vores de la pantalla quan l\'aplicació d\'assistència accedeix al text de la pantalla o a la captura de pantalla"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Les aplicacions d\'assistència et poden ajudar en funció de la informació que es mostri a la pantalla. Algunes aplicacions admeten tant el menú d\'aplicacions com els serveis d\'entrada de veu per oferir-te una assistència integrada."</string>
     <string name="average_memory_use" msgid="717313706368825388">"Ús mitjà de la memòria"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"Ús màxim de la memòria"</string>
@@ -4391,7 +4380,7 @@
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Les aplicacions compatibles també canviaran al tema fosc"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entesos"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prova el tema fosc"</string>
-    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ajuda a augmentar la durada de la bateria"</string>
+    <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ajuda a allargar la bateria"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mosaics de configuració ràpida per a desenvolupadors"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Desactiva el temps d\'espera per a autoritzacions adb"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Desactiva la revocació automàtica d\'autoritzacions adb per als sistemes que no s\'han tornat a connectar durant el temps predeterminat (7 dies) o el temps configurat per l\'usuari (mínim 1 dia)."</string>
@@ -4426,7 +4415,7 @@
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"Gestos ràpids per controlar el telèfon"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"Gestos ràpids per controlar la tauleta"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"Gestos ràpids per controlar el dispositiu"</string>
-    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Obre la càmera ràpidament"</string>
+    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Obre la càmera ràpid"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Per obrir ràpidament la càmera, prem el botó d\'engegada dues vegades. Funciona des de qualsevol pantalla."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Obre la càmera ràpidament"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Gira la càmera per fer una selfie"</string>
@@ -4828,14 +4817,12 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Activa el desenfocament de finestres al nivell de compositor. Cal reiniciar el dispositiu."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privadesa"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, activitat del compte, dades personals"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Represa del contingut multimèdia"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"El reproductor multimèdia es mostra de manera permanent a la configuració ràpida. Cal reiniciar."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Suprimeix"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Conserva"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Vols suprimir aquest suggeriment?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"S\'ha suprimit el suggeriment"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Desfés"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"Queda poc espai d\'emmagatzematge: <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilitzat; <xliff:g id="FREE_SPACE">%2$s</xliff:g> lliures"</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"Queda poc espai: <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilitzat; <xliff:g id="FREE_SPACE">%2$s</xliff:g> lliures"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Envia suggeriments"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Vols enviar-nos algun comentari sobre aquest suggeriment?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"S\'ha copiat <xliff:g id="COPY_CONTENT">%1$s</xliff:g> al porta-retalls."</string>
