@@ -8385,6 +8385,12 @@
     <!-- [CHAR LIMIT=100] Header for an individual conversation-->
     <string name="conversation_category_title">Conversation</string>
 
+    <!-- [CHAR LIMIT=100] Title for switch that says whether this app can appear in the conversation notification section-->
+    <string name="conversation_section_switch_title">Conversation section</string>
+
+    <!-- [CHAR LIMIT=100] Summary for switch that says whether this app can appear in the conversation notification section-->
+    <string name="conversation_section_switch_summary">Allow <xliff:g id="app">%1$s</xliff:g> to appear in the conversation section</string>
+
     <!-- [CHAR LIMIT=NONE] Conversation preference summary, the parent channel this conversation was spawned from (separator) the parent channel group (e.g. an account name)-->
     <string name="notification_conversation_summary" translatable="false">"<xliff:g id="parent_category_name">%1$s</xliff:g> • <xliff:g id="parent_category_group_name">%2$s</xliff:g>"</string>
 
@@ -8402,6 +8408,15 @@
 
     <!-- [CHAR LIMIT=100] link to page listing all conversations -->
     <string name="manage_conversations">Manage conversations</string>
+
+    <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, no conversations are priority -->
+    <string name="priority_conversation_count_zero">No priority conversations</string>
+
+    <!-- [CHAR LIMIT=100] summary text on link to 'all conversations' page, some conversations are priority -->
+    <plurals name="priority_conversation_count">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> priority conversation</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> priority conversations</item>
+    </plurals>
 
     <!-- [CHAR LIMIT=100] preference category title -->
     <string name="important_conversations">Priority conversations</string>
