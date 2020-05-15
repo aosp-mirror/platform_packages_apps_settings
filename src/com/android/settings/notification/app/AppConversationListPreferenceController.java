@@ -46,7 +46,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
 
     protected List<ConversationChannelWrapper> mConversations = new ArrayList<>();
     protected PreferenceCategory mPreference;
-    private boolean mHasSentMsg;
+    private boolean mIsInInvalidMsgState;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -88,7 +88,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                mHasSentMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
+                mIsInInvalidMsgState = mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
                 ParceledListSlice<ConversationChannelWrapper> list =
                         mBackend.getConversations(mAppRow.pkg, mAppRow.uid);
                 if (list != null) {
@@ -121,20 +121,10 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         if (mPreference == null) {
             return;
         }
-        // TODO: if preference has children, compare with newly loaded list
-        mPreference.removeAll();
-        if (mConversations.isEmpty()) {
-            if (mHasSentMsg) {
-                mPreference.setVisible(true);
-                Preference notSupportedPref = new Preference(mContext);
-                notSupportedPref.setSummary(mContext.getString(
-                        R.string.convo_not_supported_summary, mAppRow.label));
-                mPreference.addPreference(notSupportedPref);
-            } else {
-                mPreference.setVisible(false);
-            }
-        } else {
-            mPreference.setVisible(true);
+
+        if (!mIsInInvalidMsgState && !mConversations.isEmpty()) {
+            // TODO: if preference has children, compare with newly loaded list
+            mPreference.removeAll();
             mPreference.setTitle(getTitleResId());
             populateConversations();
         }
