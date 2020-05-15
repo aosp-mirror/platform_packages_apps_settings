@@ -59,7 +59,7 @@ public class LaunchSettingsTest {
     private static final String SCREEN_TIME_OUT = "7200000";
     private static final String DEFAULT_SCREEN_TIMEOUT = "15000";
     private static final int TIME_OUT = 5000;
-    private static final int TEST_TIME = 100;
+    private static final int TEST_TIME = 10;
     private static final Pattern PATTERN = Pattern.compile("TotalTime:\\s[0-9]*");
     private static final Page[] PAGES;
 
