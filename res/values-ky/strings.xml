@@ -794,7 +794,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Wi‑Fi\'ды жандыруу"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Wi-Fi\'ды колдонуу"</string>
+    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Wi-Fi\'ды иштетүү"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi тууралоолору"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Зымсыз кошулуу түйүндөрүн орнотуу жана башкаруу"</string>
@@ -880,7 +880,7 @@
     <string name="wifi_eap_domain" msgid="8304301470752333203">"Домен"</string>
     <string name="wifi_eap_user_cert" msgid="3569182430929173220">"Колдонуучунун тастыктамасы"</string>
     <string name="wifi_eap_identity" msgid="3629406902174137028">"Идентификация"</string>
-    <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Аныктыгы жашыруун"</string>
+    <string name="wifi_eap_anonymous" msgid="8630332141751267000">"Белгисиз"</string>
     <string name="wifi_password" msgid="1458802324849513755">"Сырсөз"</string>
     <string name="wifi_show_password" msgid="6865993988238157923">"Сырсөздү көрсөтүү"</string>
     <string name="wifi_ap_band_config" msgid="1589020070150933055">"Wi-Fi жыштыгынын диапазону"</string>
@@ -902,7 +902,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына кошулуу үчүн, камераны төмөнкү QR кодго алып келиңиз"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi\'га кошулуу үчүн, QR кодун скандаңыз"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi\'ды бөлүшүү"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына туташып, сырсөз менен бөлүшүү үчүн, бул QR кодун скандаңыз"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына кошулуу үчүн башка түзмөктө QR кодун скандаңыз"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"\"<xliff:g id="SSID">%1$s</xliff:g>\" тармагына туташуу үчүн, бул QR кодун скандаңыз"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Кайталап көрүңүз. Эгер маселе чечилбесе, түзмөктү өндүрүүчүгө кайрылыңыз"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Бир жерден ката кетти"</string>
@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Кайра көрсөтүлбөсүн"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Туташуу"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi күйгүзүлдү"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> менен туташты"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Туташууда…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Түйүндгө байланышкан жок"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Тармак тейлөө аймагында эмес"</string>
@@ -2124,27 +2123,20 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Экранды чоңойтуу"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Өлчөмүн өзгөртүү үчүн 3 жолу таптаңыз"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Чоңойтуп/кичирейтүү үчүн баскычты басыңыз"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Экрандагы нерсени чоңойтуп жакшыраак көрө аласыз.<br/><br/><b>Чоңойтуп көрүү үчүн:</b><br/> 1. Чоңойтуу режимин иштетүү үчүн, ыкчам баскычын басыңыз&lt;br/&gt; 2. Экранды басыңыз&lt;br/&gt; 3. Экрандын башка бөлүгүнө 2 манжаңыз менен жылыңыз&lt;br/&gt; 4. Чоңойтуп/кичирейтүү үчүн эки манжаңызды бириктириңиз&lt;br/&gt; 5. Чоңойтуу режиминен чыгуу үчүн, ыкчам баскычты басыңыз<br/><br/><b>Убактылуу чоңойтуу үчүн:</b><br/> 1. Чоңойтуу режимин иштетүү үчүн, ыкчам баскычын басыңыз&lt;br/&gt; 2. Экрандын бир жерин коё бербей басып туруңуз&lt;br/&gt; 3. Экрандын башка бөлүгүнө манжаңыз менен жылыңыз&lt;br/&gt; 4. Көрүнүштүн баштапкы өлчөмүнө кайтуу үчүн, манжаңызды көтөрүп коюңуз"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Экрандагы нерсени чоңойтуп жакшыраак көрө аласыз. &lt;br/&gt;&lt;br/&gt;&lt;b&gt;Чоңойтуп көрүү үчүн:&lt;/b&gt;&lt;br/&gt; 1. Чоңойтуу режимин иштетүү үчүн, ыкчам баскычын басыңыз&lt;br/&gt; 2. Экранды басыңыз&lt;br/&gt; 3. Экрандын башка бөлүгүнө 2 манжаңыз менен жылыңыз&lt;br/&gt; 4. Чоңойтуп/кичирейтүү үчүн эки манжаңызды бириктириңиз&lt;br/&gt; 5. Чоңойтуу режиминен чыгуу үчүн, ыкчам баскычты басыңыз &lt;br/&gt;&lt;br/&gt;&lt;b&gt;Убактылуу чоңойтуу үчүн:&lt;/b&gt;&lt;br/&gt; 1. Чоңойтуу режимин иштетүү үчүн, ыкчам баскычын басыңыз&lt;br/&gt; 2. Экрандын бир жерин коё бербей басып туруңуз&lt;br/&gt; 3. Экрандын башка бөлүгүнө манжаңыз менен жылыңыз&lt;br/&gt; 4. Көрүнүштүн баштапкы өлчөмүнө кайтуу үчүн, манжаңызды көтөрүп коюңуз"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Бул функциянын жардамы менен, экрандагы нерсени чоңойтуп, кичирейте аласыз.\n\n"<b>"Чоңойткуңуз келсе"</b>", кызматты иштетип туруп, экрандын бир жерин басыңыз.\n"<ul><li>"Чоңойгон жерди ары-бери жылдырып көргүңүз келсе, экранды эки же үч манжаңыз менен сүрүңүз."</li>\n<li>"Чоңойтуп/кичирейтүү үчүн эки же үч манжаңызды бириктирип/ажыратыңыз."</li></ul>\n\n<b>"Убактылуу чоңойтуп/кичирейтүү үчүн"</b>" кызматты иштетип, экрандын бир жерин коё бербей басып туруңуз.\n"<ul><li>"Экранды жылдырып көрүү үчүн аны манжаңыз менен сүрүңүз."</li>\n<li>"Кызматты өчүрүү үчүн манжаңызды көтөрүңүз."</li></ul>\n\n"Баскычтопто же чабыттоо тилкесинде көрүнүш чоңойбойт."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Ачуу үчүн Атайын мүмкүнчүлүктөр баскычын басыңыз"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Ачуу үчүн үн баскычтарын коё бербей басып туруңуз"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Ачуу үчүн экранды үч жолу таптаңыз"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Ачуу үчүн жаңсаңыз"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Жаңы атайын мүмкүнчүлүктөр жаңсоосун колдонуңуз"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Бул функцияны колдонуу үчүн экрандын ылдый жагындагы атайын мүмкүнчүлүктөр баскычын <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> таптап коюңуз.\n\nБашка функцияга өтүү үчүн, Атайын мүмкүнчүлүктөр баскычын басып, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Бул функцияны колдонуу үчүн үндү чоңойтуп/кичирейтүү баскычтарын коё бербей басып туруңуз."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Чоңойтуп/кичирейтүүнү иштетүү же өчүрүү үчүн, экраныңыздын каалаган жерин үч жолу таптаңыз."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Бул функцияны колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Бул функцияны колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Бул атайын мүмкүнчүлүктөр функциясын колдонуу үчүн экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Түшүндүм"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> ыкчам баскычы"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Атайын мүмкүнчүлүктөр баскычы"</string>
@@ -2155,12 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Экранды 2 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 2 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Экранды 3 манжаңыз менен ылдый жагынан өйдө көздөй сүрүңүз.\n\nБашка функцияга өтүү үчүн, 3 манжаңыз менен өйдө сүрүп, кармап туруңуз."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Үндү катуулатуу/акырындатуу баскычтарын басуу"</string>
-    <!-- no translation found for accessibility_shortcut_hardware_keyword (3921915304537166064) -->
-    <skip />
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"үн баскычтарын басып туруу"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Үндү чоңойтуп/кичирейтүү баскычтарын коё бербей басып туруңуз"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Экранды үч жолу басуу"</string>
-    <!-- no translation found for accessibility_shortcut_triple_tap_keyword (6863958573135995927) -->
-    <skip />
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"экранды үч жолу таптоо"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Экранды 3 жолу тез таптаңыз (түзмөгүңүз жайыраак иштеп калышы мүмкүн)."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Өркүндөтүлгөн"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Атайын мүмкүнчүлүктөр баскычы <xliff:g id="SERVICE">%1$s</xliff:g> кызматы үчүн коюлган. Чоңойтуу функциясын колдонуу үчүн, Атайын мүмкүнчүлүктөр баскычын басып, кармап туруңуз да, чоңойтуу функциясын тандаңыз."</string>
@@ -2302,7 +2292,7 @@
     <string name="color_red" msgid="5210756997426500693">"Кызыл"</string>
     <string name="color_green" msgid="4400462091250882271">"Жашыл"</string>
     <string name="color_blue" msgid="4997784644979140261">"Көк"</string>
-    <string name="color_cyan" msgid="4341758639597035927">"Кызгылт көк"</string>
+    <string name="color_cyan" msgid="4341758639597035927">"Көгүш"</string>
     <string name="color_yellow" msgid="5957551912912679058">"Сары"</string>
     <string name="color_magenta" msgid="8943538189219528423">"Кочкул"</string>
     <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> кызматына түзмөгүңүздү толугу менен көзөмөлдөөгө уруксат бересизби?"</string>
@@ -2819,7 +2809,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Тындырылды (лимит)"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Дайындарды авто-шайкештирүү"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Жеке дайын-даректерди авто-шайкештирүү"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Жумуш дайындарын авто-шайкештирүү"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Жумуш маалыматын автошайкештирүү"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Циклди өзгөртүү…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Дайындарды колдонуу циклин баштапкы абалга келтире турган күн:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Бул мезгилде колдонмолор трафик сарптаган жок."</string>
@@ -3410,7 +3400,7 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ырааттама автоматтык түрдө иштетилет</item>
       <item quantity="one">1 ырааттама автоматтык түрдө иштетилет</item>
     </plurals>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"\"Тынчымды алба\" режимин эмне үзгүлтүккө учурата алат"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"\"Тынчымды алба\" режимин эмне үзгүлтүккө учуратышы мүмкүн"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Байланыштар"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Колдонмолор"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Ойготкучтар жана башка билдирмелер"</string>
@@ -3472,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Колдонмонун сүрөтчөсүндөгү билдирменин белгиси"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Акыркы жазышуулардын тилкесин көрсөтүү"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Калкып чыкма билдирмелер"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Айрым билдирмелер экранда калкып чыкма билдирмелер катары көрсөтүлөт"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Айрым билдирмелер экранга калкып чыкма билдирмелер түрүндө көрүнөт. Аны ачуу үчүн басып коюңуз. Ал эми жашыруу үчүн, экрандын төмөн жагына сүйрөп барыңыз."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Калкып чыкма билдирмелер"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Бардык калкып чыкма билдирмелердин жөндөөлөрү"</string>
@@ -3623,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Байланышып турат"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Бул колдонмолорду байланыштыруу"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Байланыштырылган колдонмолор уруксаттарды бөлүшүп, бири-бириндеги маалыматты көрүшөт."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Ишенимдүү колдонмолорду гана байланыштырыңыз. Жумуш колдонмолорундагы маалыматты IT администраторуңуз көрүшү мүмкүн."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"IT администраторуңуз менен маалыматты бөлүшүүнү каалабасаңыз, ишенимдүү колдонмолорду гана туташтырыңыз."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Жеке маалыматыңыз \"<xliff:g id="NAME">%1$s</xliff:g>\" колдонмосуна жеткиликтүү болсунбу?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"IT администратор <xliff:g id="NAME">%1$s</xliff:g> колдонмосундагы жеке маалыматыңызды көрүшү мүмкүн."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"IT администраторуңуз менен маалыматты бөлүшүүнү каалабасаңыз, ишенимдүү колдонмолорду гана туташтырыңыз."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Колдонмодогу маалымат"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Бул колдонмо жеке <xliff:g id="NAME">%1$s</xliff:g> колдонмоңуздагы маалыматты көрөт."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Уруксаттар"</string>
@@ -3635,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> колдонмо байланыштырылды</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> колдонмо байланыштырылды</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Бул колдонмолорду байланыштыруу үчүн, жумуш профилиңизге <xliff:g id="NAME">%1$s</xliff:g> колдонмосун орнотуп алыңыз"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Бул колдонмолорду байланыштыруу үчүн, жеке профилиңизге <xliff:g id="NAME">%1$s</xliff:g> колдонмосун орнотуп алыңыз"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Бул колдонмолорду туташтыруу үчүн жумуш профилиңизге <xliff:g id="NAME">%1$s</xliff:g> колдонмосун орнотуп алыңыз"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Бул колдонмолорду туташтыруу үчүн жеке профилиңизге <xliff:g id="NAME">%1$s</xliff:g> колдонмосун орнотуп алыңыз"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Колдонмону жүктөп алуу үчүн таптап коюңуз"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"\"Тынчымды алба\" функциясы"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\"Тынчымды алба\" режимине уруксат берүү"</string>
@@ -3802,7 +3791,7 @@
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Колдонмолор үчүн \"Тынчымды алба\" режими иштетилген болсо да, тандалган адамдар сиз менен баары бир байланыша беришет."</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> үзгүлтүккө учуратышы мүмкүн</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> үзгүлтүккө учурата алат</item>
+      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> үзгүлтүккө учуратышы мүмкүн</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Дагы <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Колдонмодогу өзгөчө жөндөөлөр"</string>
@@ -3812,7 +3801,7 @@
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Бардык билдирмелерге уруксат берүү"</string>
     <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
       <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> үзгүлтүккө учуратышы мүмкүн</item>
-      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> үзгүлтүккө учурата алат</item>
+      <item quantity="one"><xliff:g id="SOUND_CATEGORY">%s</xliff:g> үзгүлтүккө учуратышы мүмкүн</item>
     </plurals>
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Эч нерсе үзгүлтүккө учурата албайт"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"Дагы <xliff:g id="NUMBER">%d</xliff:g>"</string>
@@ -3862,7 +3851,7 @@
     <string name="switch_off_text" msgid="1315547447393646667">"Өчүк"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Колдонмону кадап коюу"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Бул функция иштетилгенде түзмөктө бир гана колдонмо ачык болуп турат. Мисалы, бул функциянын жардамы менен ишенген досуңузга белгилүү бир оюнду ойногонго уруксат берсеңиз болот. \n\nКадалган колдонмо башка колдонмолорду ачып, жеке дайындарга кире алат. \n\nКолдонмону кадап коюну колдонуу үчүн: 	\n1.	Колдонмону кадап коюуну күйгүзүңүз 	\n2.	Назарды ачыңыз 	\n3.	Экрандын жогору жагында жайгашкан колдонмонун сүрөтчөсүн басып, андан кийин Кадап коюну таптаңыз"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Бул функция иштетилгенде түзмөктө бир гана колдонмо ачык болуп турат. Мисалы, бул функциянын жардамы менен ишенген досуңузга белгилүү бир оюнду ойногонго уруксат берсеңиз болот. \n\nКадалган колдонмо башка колдонмолорду ачып, жеке дайындарга кире алат. \n\nТүзмөгүңүздү башка бирөө менен коопсуз бөлүшкүңүз келсе, конок катары колдонсоңуз болот. \n\nКолдонмону кадап коюну колдонуу үчүн: 	\n1.	Колдонмону кадап коюну күйгүзүңүз 	\n2.	Назарды ачыңыз 	\n3.	Экрандын жогору жагында жайгашкан колдонмонун сүрөтчөсүн басып, андан кийин Кадап коюну таптаңыз"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Бул функция иштетилгенде түзмөктө бир гана колдонмо ачык болуп турат. Мисалы, бул функциянын жардамы менен ишенген досуңузга белгилүү бир оюнду ойногонго уруксат берсеңиз болот. \n\nКадалган колдонмо башка колдонмолорду ачып, жеке дайындарга кире алат. \n\nТүзмөгүңүздү башка бирөө менен коопсуз бөлүшкүңүз келсе, конок катары колдонсоңуз болот. \n\nКолдонмону кадап коюну үчүн: 	\n1.	Колдонмону кадап коюну күйгүзүңүз 	\n2.	Жалпы маалыматты ачыңыз 	\n3.	Экрандын жогору жагында жайгашкан колдонмонун сүрөтчөсүн басып, андан кийин Кадап коюну таптаңыз"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Колдонмо кадалганда: \n\n•	 Жеке дайындар ачык болушу мүмкүн \n		(байланыштар жана электрондук почталардын мазмуну) \n•	 Кадалган колдонмо башка колдонмолорду ача алат \n\nКолдонмону кадап коюу функциясын ишенген адамдар менен гана колдонуңуз."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Бошотуудан мурун графикалык ачкыч суралсын"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Бошотуудан мурун PIN суралсын"</string>
@@ -4073,9 +4062,9 @@
     <string name="background_check_pref" msgid="5304564658578987535">"Фондо текшерүү"</string>
     <string name="background_check_title" msgid="225170874283229686">"Фондук режимде толук мүмкүнчүлүк"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Экрандагы текстти колдонуу"</string>
-    <string name="assist_access_context_summary" msgid="6951814413185646275">"Көмөкчү колдонмого экрандагы текстке мүмкүнчүлүк бересиз"</string>
+    <string name="assist_access_context_summary" msgid="6951814413185646275">"Көмөкчү колдонмого экрандагы текстти көрүү мүмкүнчүлүгүн бересиз"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Скриншот колдонуу"</string>
-    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Көмөкчү колдонмого экрандагы сүрөткө мүмкүнчүлүк бересиз"</string>
+    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Көмөкчү колдонмого экрандагы сүрөттү көрүү мүмкүнчүлүгүн бересиз"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Экран жаркылдасын"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Көмөкчү колдонмо скриншотту же текстти колдонуу мүмкүнчүлүгүн алганда, экрандын чети жаркылдайт"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Көмөкчү колдонмолор экрандагы маалымат менен иштейт. Айрым колдонмолордо үн буйруктары жана жүргүзгүч тактасы колдоого алынат."</string>
@@ -4829,14 +4818,12 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Түзүү деңгээлинде терезелерди бүдөмүктөтүүнү иштетет. Түзмөктү өчүрүп күйгүзүү талап кылынат."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Купуялык"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Уруксаттар, аккаунттун статистикасы, жеке маалымат"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Медиафайл токтогон жеринен уланат"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Медиа ойноткучту Ыкчам жөндөөлөрдөн дайым көрсөтүп турат. Өчүрүп күйгүзүү талап кылынат."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Өчүрүү"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Жок"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Бул сунуш өчүрүлсүнбү?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Сунуш өчүрүлдү"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Кайтаруу"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"Сактагычта бош орун аз калды. <xliff:g id="PERCENTAGE">%1$s</xliff:g> ээленген – <xliff:g id="FREE_SPACE">%2$s</xliff:g> бош"</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"Сактагычта орун калбай баратат. <xliff:g id="PERCENTAGE">%1$s</xliff:g> ээленген – <xliff:g id="FREE_SPACE">%2$s</xliff:g> бош"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Пикир билдирүү"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Бул сунуш боюнча бизге пикириңизди билдирбейт белеңиз?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> буферге көчүрүлдү."</string>
@@ -4917,7 +4904,7 @@
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Алгач экранды кулпулоо ыкмасын тандаңыз"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Түзмөктү башкаруу элементтерин көрсөтүү"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Насыя жана башка карталарды көрсөтүү"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Туташкан түзмөктөрдүн башкаруу элементтерине кирүү үчүн күйгүзүү/өчүрүү баскычын коё бербей басып туруңуз"</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Туташкан түзмөктөрдүн башкаруу элементтерине кирүү үчүн, күйгүзүү/өчүрүү баскычын коё бербей басып туруңуз"</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Төлөм ыкмаларына, билеттерге жана учакка отургузуу талондоруна өтүү үчүн, Күйгүзүү/өчүрүү баскычын коё бербей басып туруңуз."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
