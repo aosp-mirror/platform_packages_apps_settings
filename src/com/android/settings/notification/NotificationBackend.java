@@ -268,12 +268,29 @@ public class NotificationBackend {
         }
     }
 
-    public boolean hasSentMessage(String pkg, int uid) {
+    public boolean isInInvalidMsgState(String pkg, int uid) {
         try {
-            return sINM.hasSentMessage(pkg, uid);
+            return sINM.isInInvalidMsgState(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public boolean hasUserDemotedInvalidMsgApp(String pkg, int uid) {
+        try {
+            return sINM.hasUserDemotedInvalidMsgApp(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
+    public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted) {
+        try {
+             sINM.setInvalidMsgAppDemoted(pkg, uid, isDemoted);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
