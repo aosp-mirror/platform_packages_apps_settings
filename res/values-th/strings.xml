@@ -358,7 +358,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"เปิดใช้งานวิดเจ็ต"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"ปิดใช้โดยผู้ดูแลระบบ"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"แสดงตัวเลือกการปิดล็อก"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"แสดงตัวเลือกปุ่มเปิด/ปิดที่จะปิด Smart Lock การปลดล็อกด้วยข้อมูลไบโอเมตริก และการแจ้งเตือนในหน้าจอล็อก"</string>
+    <string name="lockdown_settings_summary" msgid="7422522013953398806">"แสดงตัวเลือกปุ่มเปิด/ปิดที่จะปิด Smart Lock, การปลดล็อกด้วยข้อมูลไบโอเมตริก และการแจ้งเตือนในหน้าจอล็อก"</string>
     <string name="trust_agents_extend_unlock_title" msgid="6704799119336718965">"เอเจนต์ความน่าเชื่อถือขยายเฉพาะการปลดล็อก"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="2567077920329962827">"หากเปิดใช้ เอเจนต์ความน่าเชื่อถือจะปลดล็อกอุปกรณ์ค้างไว้นานขึ้น แต่จะปลดล็อกอุปกรณ์ที่ล็อกอยู่ไม่ได้อีกต่อไป"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"หน้าจอล็อกเมื่อสภาพแวดล้อมไม่น่าเชื่อถือ"</string>
@@ -661,7 +661,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> จะแนะนำ PIN หรือรหัสผ่านใหม่ และแอปอาจไม่ทำงานตามที่คาดไว้หากไม่เลือกอย่างน้อย 1 รูปแบบ"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> จะแนะนำรูปแบบ, PIN หรือรหัสผ่านใหม่ และแอปอาจไม่ทำงานตามที่คาดไว้หากไม่เลือกอย่างน้อย 1 รูปแบบ"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> จะแนะนำการล็อกหน้าจอใหม่"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"ลองอีกครั้ง ความพยายามครั้งที่ <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> จาก <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"ลองอีกครั้ง ครั้งที่ <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> จาก <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>"</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"ระบบจะลบข้อมูลของคุณ"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"หากคุณป้อนรูปแบบไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบข้อมูลในอุปกรณ์เครื่องนี้"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"หากคุณป้อน PIN ไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบข้อมูลในอุปกรณ์เครื่องนี้"</string>
@@ -669,12 +669,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"หากคุณป้อนรูปแบบไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบผู้ใช้รายนี้"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"หากคุณป้อน PIN ไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบผู้ใช้รายนี้"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"หากคุณป้อนรหัสผ่านไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบผู้ใช้รายนี้"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"หากคุณป้อนรูปแบบไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้และข้อมูลในโปรไฟล์"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"หากคุณป้อน PIN ไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้และข้อมูลในโปรไฟล์"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"หากคุณป้อนรหัสผ่านไม่ถูกต้องในความพยายามครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้และข้อมูลในโปรไฟล์"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"หากคุณป้อนรูปแบบไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"หากคุณป้อน PIN ไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"หากคุณป้อนรหัสผ่านไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบข้อมูลในอุปกรณ์เครื่องนี้"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบผู้ใช้รายนี้"</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้และข้อมูลในโปรไฟล์"</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ป้อนหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"ปิด"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_1">%d</xliff:g> ตัว</item>
@@ -913,7 +913,7 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"ไม่จำเครือข่าย"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"แก้ไขเครือข่าย"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"เปิด Wi-Fi เพื่อดูเครือข่ายที่ใช้ได้"</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"กำลังค้นหาเครือข่าย WiFi…"</string>
+    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"กำลังค้นหาเครือข่าย Wi-Fi…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"คุณไม่ได้รับอนุญาตให้เปลี่ยนแปลงเครือข่าย WiFi"</string>
     <string name="wifi_more" msgid="8742256421693351035">"เพิ่มเติม"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"การตั้งค่าอัตโนมัติ (WPS)"</string>
@@ -938,7 +938,7 @@
     <string name="wifi_ip_address" msgid="8903577251845268209">"ที่อยู่ IP"</string>
     <string name="passpoint_label" msgid="6513669696739302866">"บันทึกผ่านทาง"</string>
     <string name="passpoint_content" msgid="5219226173518418335">"ข้อมูลรับรองของ <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="wifi_eap_method" msgid="3776009521349381742">"วิธีการ EAP"</string>
+    <string name="wifi_eap_method" msgid="3776009521349381742">"เมธอด EAP"</string>
     <string name="please_select_phase2" msgid="577633852089847142">"การตรวจสอบสิทธิ์เฟส 2"</string>
     <string name="wifi_eap_ca_cert" msgid="8033404008276298886">"ใบรับรอง CA"</string>
     <string name="wifi_eap_domain" msgid="8304301470752333203">"โดเมน"</string>
@@ -959,10 +959,10 @@
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"ความเป็นส่วนตัว"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"MAC แบบสุ่ม"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"เพิ่มอุปกรณ์"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ถือคิวอาร์โค้ดให้อยู่กลางช่องด้านล่างเพื่อเพิ่มอุปกรณ์ไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ให้คิวอาร์โค้ดอยู่กลางช่องด้านล่างเพื่อเพิ่มอุปกรณ์ไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"สแกนคิวอาร์โค้ด"</string>
-    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"ถือให้โค้ด QR อยู่กลางช่องด้านล่างเพื่อเชื่อมต่อไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"เข้าร่วม Wi‑Fi โดยการสแกนคิวอาร์โค้ด"</string>
+    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"ให้คิวอาร์โค้ดอยู่กลางช่องด้านล่างเพื่อเชื่อมต่อไปยัง “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"ร่วมใช้ Wi‑Fi โดยการสแกนคิวอาร์โค้ด"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"แชร์ Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"สแกนคิวอาร์โค้ดนี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>” และแชร์รหัสผ่าน"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"สแกนคิวอาร์โค้ดนี้เพื่อเชื่อมต่อกับ “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1029,7 +1029,7 @@
     <skip />
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"ไม่สามารถเชื่อมต่อกับเครือข่าย"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"เครือข่ายไม่อยู่ในพื้นที่ให้บริการ"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"ไม่จำ"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"ลบ"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"แก้ไข"</string>
     <string name="wifi_failed_forget_message" msgid="8272732599235525880">"ไม่สามารถเลิกการจดจำเครือข่าย"</string>
     <string name="wifi_save" msgid="2312643132472226807">"บันทึก"</string>
@@ -1384,7 +1384,7 @@
     <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (ช่องซิม %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="5724823197745786398">"หมายเลขโทรศัพท์ (ช่องซิม %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="4239876366511743428">"MDN ในซิม"</string>
-    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"หมายเลขโทรศัพท์ในซิม"</string>
+    <string name="status_number_sim_status" product="default" msgid="2772745542921910086">"หมายเลขโทรศัพท์ของซิม"</string>
     <string name="status_min_number" msgid="4492899165438225714">"นาที"</string>
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"รุ่น PRL"</string>
@@ -1706,7 +1706,7 @@
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"การเข้าถึงตำแหน่งล่าสุด"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"ดูรายละเอียด"</string>
-    <string name="location_no_recent_apps" msgid="6814206631456177033">"ไม่มีแอปใดทำการขอตำแหน่งเมื่อเร็วๆ นี้"</string>
+    <string name="location_no_recent_apps" msgid="6814206631456177033">"ไม่มีแอปใดขอตำแหน่งเมื่อเร็วๆ นี้"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"ไม่มีแอปที่เข้าถึงตำแหน่งเมื่อเร็วๆ นี้"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"ใช้แบตเตอรี่มาก"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"ใช้แบตเตอรี่น้อย"</string>
@@ -1856,7 +1856,7 @@
     <string name="auto_launch_label" msgid="4069860409309364872">"เปิดโดยค่าเริ่มต้น"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"ค่าเริ่มต้น"</string>
     <string name="screen_compatibility_label" msgid="7549658546078613431">"ความเข้ากันได้ของหน้าจอ"</string>
-    <string name="permissions_label" msgid="1708927634370314404">"การอนุญาต"</string>
+    <string name="permissions_label" msgid="1708927634370314404">"สิทธิ์"</string>
     <string name="cache_header_label" msgid="2441967971921741047">"แคช"</string>
     <string name="clear_cache_btn_text" msgid="8597272828928143723">"ล้างแคช"</string>
     <string name="cache_size_label" msgid="313456088966822757">"แคช"</string>
@@ -2156,7 +2156,7 @@
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"การสั่นและระดับการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"การสั่นเมื่อมีการแจ้งเตือน"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"การสั่นเมื่อมีเสียงเรียกเข้า"</string>
-    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองด้วยสัมผัส"</string>
+    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองการสัมผัส"</string>
     <string name="accessibility_service_master_switch_title" msgid="979099798342407249">"ใช้บริการ"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"ใช้การแก้สี"</string>
     <string name="accessibility_caption_master_switch_title" msgid="2950713524171781503">"ใช้คำบรรยาย"</string>
@@ -2267,8 +2267,8 @@
     <string name="print_settings" msgid="8519810615863882491">"การพิมพ์"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ปิด"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other">บริการการพิมพ์เปิดอยู่ <xliff:g id="COUNT">%1$d</xliff:g> รายการ</item>
-      <item quantity="one">บริการการพิมพ์เปิดอยู่ 1 รายการ</item>
+      <item quantity="other">บริการพิมพ์เปิดอยู่ <xliff:g id="COUNT">%1$d</xliff:g> รายการ</item>
+      <item quantity="one">บริการพิมพ์เปิดอยู่ 1 รายการ</item>
     </plurals>
     <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
       <item quantity="other">งานพิมพ์ <xliff:g id="COUNT">%1$d</xliff:g> รายการ</item>
@@ -2371,7 +2371,7 @@
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
       <item quantity="other">แอป %2$d แอปใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
-      <item quantity="one">แอป %1$s แอปใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
+      <item quantity="one">%1$s ใช้แบตเตอรี่ในเบื้องหลังเปลือง</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">แอปเหล่านี้ทำงานในเบื้องหลังไม่ได้</item>
@@ -2526,7 +2526,7 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"ตั้งกำหนดการ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ยืดอายุใช้งานแบตเตอรี่"</string>
     <string name="battery_saver_sticky_title_new" msgid="3916591594623849228">"ปิดเมื่อชาร์จเต็มแล้ว"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"โหมดประหยัดแบตเตอรี่จะปิดเมื่อแบตเตอรี่โทรศัพท์อยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"โหมดประหยัดแบตเตอรี่จะปิดเมื่อมีแบตเตอรี่โทรศัพท์อยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"โหมดประหยัดแบตเตอรี่จะปิดเมื่อแบตเตอรี่แท็บเล็ตอยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"โหมดประหยัดแบตเตอรี่จะปิดเมื่อแบตเตอรี่อุปกรณ์อยู่ที่ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
@@ -3276,7 +3276,7 @@
     <string name="zen_mode_settings_category" msgid="3531156898689133018">"เมื่อเปิดโหมดห้ามรบกวน"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"จำกัดการแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ไม่มีเสียงเวลาแจ้งเตือน"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"คุณจะเห็นการแจ้งเตือนในหน้าจอ"</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"คุณจะเห็นการแจ้งเตือนบนหน้าจอ"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"เมื่อมีการแจ้งเตือนเข้ามา โทรศัพท์จะไม่ส่งเสียงหรือสั่น"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"ไม่แสดงภาพหรือเสียงเวลาแจ้งเตือน"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"คุณจะไม่เห็นหรือได้ยินเสียงการแจ้งเตือน"</string>
@@ -3297,7 +3297,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"ซ่อนไอคอนแถบสถานะที่ด้านบนของหน้าจอ"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"ซ่อนจุดแสดงการแจ้งเตือนบนไอคอนแอป"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"ไม่ต้องปลุกระบบเพื่อแสดงการแจ้งเตือน"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"ซ่อนจากหน้าต่างแบบเลื่อนลง"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"ซ่อนจากหน้าต่างแจ้งเตือนแบบดึงลง"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"ไม่เลย"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"เมื่อหน้าจอปิดอยู่"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"เมื่อหน้าจอเปิดอยู่"</string>
@@ -3383,7 +3383,7 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"ตั้งค่าการแจ้งเตือนที่มีลำดับความสำคัญน้อยเป็นแจ้งเตือนเบาๆ โดยอัตโนมัติ"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"การดำเนินการและการตอบที่แนะนำ"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"แสดงการดำเนินการและการตอบที่แนะนำโดยอัตโนมัติ"</string>
-    <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้ใช้เลื่อนการแจ้งเตือน"</string>
+    <string name="snooze_options_title" msgid="2109795569568344617">"อนุญาตให้เลื่อนการแจ้งเตือน"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"ซ่อนไอคอนจากการแจ้งเตือนเบาๆ"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"ไอคอนจากการแจ้งเตือนเบาๆ จะไม่แสดงในแถบสถานะ"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"อนุญาตให้ใช้จุดแจ้งเตือน"</string>
@@ -3410,7 +3410,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"แสดงในหน้าต่างแบบเลื่อนลง แถบสถานะ และในหน้าจอล็อก"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"ไฟกะพริบ"</string>
     <string name="lock_screen_notifications_title" msgid="6215543388550190381">"หน้าจอล็อก"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"ข้ามการล็อกหน้าจอ"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"ข้ามหน้าจอล็อก"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"ไปที่หน้าจอที่ใช้ล่าสุดหลังปลดล็อกด้วยใบหน้า"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"หน้าจอล็อก, ข้าม, เลี่ยง"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"เมื่อโปรไฟล์งานล็อกอยู่"</string>
@@ -3616,7 +3616,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"ช่วยเตือน"</string>
     <string name="zen_mode_events" msgid="5695716091022098055">"อนุญาตกิจกรรม"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"อนุญาตให้แอปลบล้าง"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"ข้อยกเว้นแอป"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"แอปที่ยกเว้น"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
       <item quantity="other">การแจ้งเตือนจากแอป <xliff:g id="NUMBER">%1$d</xliff:g> แอปลบล้างโหมดห้ามรบกวนได้</item>
       <item quantity="one">การแจ้งเตือนจากแอป 1 แอปลบล้างโหมดห้ามรบกวนได้</item>
@@ -3818,7 +3818,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"การเพิ่มประสิทธิภาพแบตเตอรี่ไม่พร้อมใช้งาน"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"ไม่ใช้การเพิ่มประสิทธิภาพแบตเตอรี่ อาจทำให้แบตเตอรี่หมดเร็วยิ่งขึ้น"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"ให้แอปทำงานอยู่เบื้องหลังทุกครั้งไหม"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"การอนุญาตให้ <xliff:g id="APP_NAME">%1$s</xliff:g> ทำงานอยู่เบื้องหลังทุกครั้งอาจลดอายุการใช้งานแบตเตอรี่ \n\nคุณเปลี่ยนการตั้งค่านี้ได้ในภายหลังจากการตั้งค่า &gt; แอปและการแจ้งเตือน"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"การอนุญาตให้ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ทำงานอยู่เบื้องหลังทุกครั้งอาจลดอายุการใช้งานแบตเตอรี่ \n\nคุณเปลี่ยนการตั้งค่านี้ได้ในภายหลังจากการตั้งค่า &gt; แอปและการแจ้งเตือน"</string>
     <string name="battery_summary" msgid="2491764359695671207">"ใช้ <xliff:g id="PERCENTAGE">%1$s</xliff:g> ตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"การจัดการพลังงาน"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"ไม่มีการใช้แบตเตอรี่ตั้งแต่การชาร์จเต็มครั้งล่าสุด"</string>
@@ -3865,7 +3865,7 @@
     <string name="background_check_pref" msgid="5304564658578987535">"การตรวจสอบพื้นหลัง"</string>
     <string name="background_check_title" msgid="225170874283229686">"การเข้าถึงพื้นหลังอย่างเต็มรูปแบบ"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"ใช้ข้อความจากหน้าจอ"</string>
-    <string name="assist_access_context_summary" msgid="6951814413185646275">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงเนื้อหาบนหน้าจอเป็นข้อความ"</string>
+    <string name="assist_access_context_summary" msgid="6951814413185646275">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงเนื้อหาบนหน้าจอที่เป็นข้อความ"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"ใช้ภาพหน้าจอ"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"อนุญาตให้แอปผู้ช่วยสามารถเข้าถึงรูปภาพของหน้าจอ"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"กะพริบหน้าจอ"</string>

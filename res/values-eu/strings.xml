@@ -115,9 +115,9 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Ez daukazu Bluetooth-aren ezarpenak aldatzeko baimenik."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parekatu gailu batekin"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Bluetooth-aren ezarpenak irekita badaude, inguruko gailuek <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ikusi ahal izango dute."</string>
-    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Telefonoaren Bluetooth helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Tabletaren Bluetooth helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Gailuaren Bluetooth helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Telefonoa Bluetooth bidez konektatzeko helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Tableta Bluetooth bidez konektatzeko helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="2863536947810007600">"Gailua Bluetooth bidez konektatzeko helbidea: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="777406775955421784">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> deskonektatu nahi duzu?"</string>
     <string name="bluetooth_broadcasting" msgid="6379176741690311973">"Igorpena"</string>
     <string name="bluetooth_device" msgid="2217973503732544291">"Izenik gabeko Bluetooth bidezko gailua"</string>
@@ -178,7 +178,7 @@
     <string name="connected_device_available_call_title" msgid="7605773870782658083">"Deitzeko balio duten gailu erabilgarriak"</string>
     <string name="connected_device_connected_title" msgid="9204460090990817231">"Konektatuta daudenak"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Gordetako gailuak"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth konexioa aktibatuko da parekatu ahal izateko"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Bluetooth bidezko konexioa aktibatuko da parekatu ahal izateko"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Konexio-hobespenak"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"Aurrez konektatutako gailuak"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Aurretik konektatutakoak"</string>
@@ -203,11 +203,11 @@
     <string name="proxy_error" msgid="3615905975598084126">"Abisua"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"Ados"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"Idatzi duzun ostalari-izena ez da baliozkoa."</string>
-    <string name="proxy_error_invalid_exclusion_list" msgid="6096353559936226599">"Idatzi duzun salbuespen-zerrendak ez du formatu egokia. Idatzi domeinuen zerrenda, komaz bereizita."</string>
+    <string name="proxy_error_invalid_exclusion_list" msgid="6096353559936226599">"Idatzi duzun salbuespen-zerrendak ez du formatu egokia. Idatzi kanpo utzitako domeinuen zerrenda, komaz bereizita."</string>
     <string name="proxy_error_empty_port" msgid="4250295137005082992">"Atakaren eremua bete behar duzu."</string>
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Ataka eremuak hutsik egon behar du Ostalaria eremua ere hutsik badago."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Idatzi duzun ataka ez da baliozkoa."</string>
-    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Arakatzaileak HTTP proxya erabiltzen du baina ezin dute beste aplikazioek erabili."</string>
+    <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Arakatzaileak HTTP proxya erabiltzen du, baina ezin dute beste aplikazioek erabili."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"Proxya auto. konf. URLa: "</string>
     <string name="radio_info_subid" msgid="7327800379827284836">"Uneko azpiIDa:"</string>
     <string name="radio_info_dds" msgid="4170740686898792195">"Datu-konexioetarako SIM lehenetsiaren azpiIDa:"</string>
@@ -793,7 +793,7 @@
     <string name="ble_scan_notify_text" msgid="1358879010396045164">"Kokapenaren zehaztasuna hobetzeko, sistemaren aplikazioek eta zerbitzuek Bluetooth bidezko gailuak hautematen jarraituko dute. Hori aldatzeko, zoaz <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>gailuak bilatzeko ezarpenetara<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="bluetooth_connect_failed" msgid="7892663424429584925">"Ezin izan da konektatu. Saiatu berriro."</string>
     <string name="device_details_title" msgid="1155622417516195481">"Gailuaren xehetasunak"</string>
-    <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Gailuaren Bluetooth helbidea: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Gailua Bluetooth bidez konektatzeko helbidea: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Gailua ahaztu nahi duzu?"</string>
     <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Aurrerantzean, telefonoa ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Aurrerantzean, tableta ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
@@ -913,7 +913,7 @@
     <string name="wifi_menu_forget" msgid="6557142984528657361">"Ahaztu sarea"</string>
     <string name="wifi_menu_modify" msgid="7246143391161038875">"Aldatu sarea"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Sare erabilgarriak ikusteko, aktibatu wifi-konexioa."</string>
-    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Wi-Fi sareak bilatzen…"</string>
+    <string name="wifi_empty_list_wifi_on" msgid="5043989454000825717">"Wifi-sareak bilatzen…"</string>
     <string name="wifi_empty_list_user_restricted" msgid="454861411536708709">"Ez duzu wifi-sarea aldatzeko baimenik."</string>
     <string name="wifi_more" msgid="8742256421693351035">"Gehiago"</string>
     <string name="wifi_setup_wps" msgid="4303694722593999931">"Konf. automatikoa (WPS)"</string>
@@ -1143,7 +1143,7 @@
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Aktibatu Wi-Fi bidezko deiak"</string>
     <string name="wifi_calling_not_supported" msgid="3303917737849393175">"%1$s operadoreak ez ditu onartzen Wi‑Fi bidezko deiak"</string>
     <string name="carrier" msgid="1755020806290963951">"Operadorea"</string>
-    <string name="display_settings_title" msgid="626835071804834218">"Bistaratzea"</string>
+    <string name="display_settings_title" msgid="626835071804834218">"Pantaila"</string>
     <string name="sound_settings" msgid="5514582720435174014">"Soinua"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Bolumenak"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Musika-efektuak"</string>
@@ -1405,7 +1405,7 @@
     <string name="status_roaming" msgid="1253597174715663778">"Ibiltaritza"</string>
     <string name="status_operator" msgid="4335640583552058491">"Sarea"</string>
     <string name="status_wifi_mac_address" msgid="4447611754614388914">"Wifi-sarearen MAC helbidea"</string>
-    <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth bidezko konexioetarako helbidea"</string>
+    <string name="status_bt_address" msgid="6919660304578476547">"Bluetooth bidez konektatzeko helbidea"</string>
     <string name="status_serial_number" msgid="9060064164331466789">"Serie-zenbakia"</string>
     <string name="status_up_time" msgid="1274778533719495438">"Berrabiarazi ondoren abian izandako denbora"</string>
     <string name="status_awake_time" msgid="2573925324168081586">"Aktibo egondako denbora"</string>
@@ -1851,7 +1851,7 @@
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Gailuak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu haiek erabiltzeagatik gailuari agian gertatuko zaizkion kalteen edo datu-galeren erantzulea zeu izango zarela."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Ezarpen aurreratuak"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Gaitu ezarpenen aukera gehiago"</string>
-    <string name="application_info_label" msgid="1015706497694165866">"Aplikazioaren informazioa"</string>
+    <string name="application_info_label" msgid="1015706497694165866">"Aplikazioen informazioa"</string>
     <string name="storage_label" msgid="2522307545547515733">"Memoria"</string>
     <string name="auto_launch_label" msgid="4069860409309364872">"Ireki modu lehenetsian"</string>
     <string name="auto_launch_label_generic" msgid="5033137408273064599">"Balio lehenetsiak"</string>
@@ -2722,7 +2722,7 @@
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="NUMBER">%1$s</xliff:g>/<xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"Hautatu guztiak"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Datuen erabilera"</string>
-    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Datu-konexioa eta wifi-konexioa"</string>
+    <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Datu- eta wifi-konexioa"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"Beharbada operadoreak zenbatzen duen datu kopurua eta gailuak zenbatzen duena ez datoz bat."</string>
     <string name="data_usage_app" msgid="6367974637783240699">"Aplikazioen erabilera"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"APLIKAZIOAREN INFORMAZIOA"</string>
@@ -2744,7 +2744,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pausatu mugara iristean"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Sinkronizatu datuak automatikoki"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkr. datu pertsonalak auto."</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkr. laneko datuak auto."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkronizatu laneko datuak auto."</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Aldatu zikloa…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Datuen erabilera-zikloa berrezarri beharreko hilabeteko eguna:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ez dago epean daturik erabili duen aplikaziorik."</string>
@@ -3410,12 +3410,12 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Bistaratu goitibeherako barran, egoera-barran eta pantaila blokeatuan"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Argi keinukaria"</string>
     <string name="lock_screen_notifications_title" msgid="6215543388550190381">"Pantaila blokeatua"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Pantaila blokeatua saltatu"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Saltatu pantaila blokeatua"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Aurpegiaren bidez desblokeatu ondoren, joan zuzenean erabili duzun azken pantailara"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"pantaila blokeatua, blokeo pantaila, saltatu, zeharbidea"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Laneko profila blokeatu bada"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Pantaila blokeatuan agertzen diren jakinarazpenak"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Erakutsi alertak eta isilarazi jakinarazpenak"</string>
+    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Pantaila blokeatuko jakinarazpenak"</string>
+    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Erakutsi alertak eta soinurik gabeko jakinarazpenak"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Erakutsi alertak soilik"</string>
     <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Ez erakutsi jakinarazpenak"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Kontuzko jakinarazpenak"</string>
@@ -3661,8 +3661,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Idatzi administratzailearen PIN kodea"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Aktibatuta"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desaktibatuta"</string>
-    <string name="screen_pinning_title" msgid="5203530107022449124">"Pantaila ainguratzea"</string>
-    <string name="screen_pinning_description" msgid="5181462036494390860">"Ezarpen hau aktibatzen baduzu, pantailak aingura ditzakezu, aukeratzen duzun ikuspegi hori egon dadin ikusgai harik eta aingura kentzen diozun arte.\n\nHorretarako:\n\n1. Aktibatu pantaila ainguratzeko eginbidea.\n\n2. Ireki Ikuspegi orokorra.\n\n3. Sakatu pantailaren goialdeko aplikazio-ikonoa, eta sakatu Ainguratu."</string>
+    <string name="screen_pinning_title" msgid="5203530107022449124">"Pantaila ainguratzeko aukera"</string>
+    <string name="screen_pinning_description" msgid="5181462036494390860">"Ezarpen hau aktibatzen baduzu, pantailak aingura ditzakezu, aukeratzen duzun ikuspegi hori egon dadin ikusgai harik eta aingura kentzen diozun arte.\n\nHorretarako:\n\n1. Aktibatu pantaila ainguratzeko aukera.\n\n2. Ireki Ikuspegi orokorra.\n\n3. Sakatu pantailaren goialdeko aplikazio-ikonoa, eta sakatu Ainguratu."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Eskatu desblokeatzeko eredua aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Eskatu PIN kodea aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Eskatu pasahitza aingura kendu aurretik"</string>
@@ -3737,7 +3737,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> baimen gehigarri</item>
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ez du baimenik"</string>
-    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ez du baimenik eskatu"</string>
+    <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ez da baimenik eskatu"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Aplikazio guztiak"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalatutako aplikazioak"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Zuzeneko aplikazioak"</string>
@@ -3817,11 +3817,11 @@
     <string name="high_power_off" msgid="317000444619279018">"Bateria optimizatu egiten da"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Bateria-optimizazioa ez dago erabilgarri"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Ez aplikatu bateria-optimizazioa. Aukera horrekin, bizkorrago agortuko da bateria."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Beti atzeko planoan exekutatzeko baimena eman nahi diozu aplikazioari?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Aplikazioa beti atzeko planoan exekutatzea nahi duzu?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> aplikazioari atzeko planoan beti abiarazteko baimena emanez gero, baliteke bateriak gutxiago irautea. \n\nAukera hori aldatzeko, sakatu Ezarpenak &gt; Aplikazioak eta jakinarazpenak."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Bateriaren <xliff:g id="PERCENTAGE">%1$s</xliff:g> erabili du bateria guztiz kargatu zenetik"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Bateriaren kudeaketa"</string>
-    <string name="no_battery_summary" msgid="5769159953384122003">"Ez du bateriarik erabili bateria guztiz kargatu zenetik"</string>
+    <string name="no_battery_summary" msgid="5769159953384122003">"Ez da bateriarik erabili bateria guztiz kargatu zenetik"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Aplikazioaren ezarpenak"</string>
     <string name="system_ui_settings" msgid="936169564323330967">"Erakutsi sistemako erabiltzaile-interfazearen konfiguratzailea"</string>
     <string name="additional_permissions" msgid="4656871347558988462">"Baimen gehigarriak"</string>

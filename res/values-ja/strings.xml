@@ -881,7 +881,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"安定したインターネット接続があるときのみ Wi-Fi ネットワークを使用する"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"インターネット接続が安定したネットワークのみ使用する"</string>
     <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"オープン ネットワークに接続する"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"高品質の公共ネットワークに自動的に接続する"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"高品質のパブリック ネットワークに自動的に接続する"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"証明書のインストール"</string>
@@ -957,14 +957,14 @@
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Wi‑Fi アクセス ポイントの帯域幅を少なくとも 1 つ選択してください。"</string>
     <string name="wifi_ip_settings" msgid="6420498748726599133">"IP 設定"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"プライバシー"</string>
-    <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"ランダム化 MAC"</string>
+    <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"ランダム MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"デバイスの追加"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"「<xliff:g id="SSID">%1$s</xliff:g>」にデバイスを追加するには、下の枠に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR コードのスキャン"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続してパスワードを共有するには、この QR コードをスキャンしてください"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"パスワードを共有して「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンします"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="2112977774341648820">"QR コードを読み取れませんでした。コードを再度中央に捉えて、もう一度お試しください"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
@@ -979,7 +979,7 @@
     <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"Wi‑Fi をデバイスと共有しました"</string>
     <string name="wifi_dpp_add_another_device" msgid="3307575293580739604">"別のデバイスを追加"</string>
     <string name="wifi_dpp_choose_different_network" msgid="8963625819804792157">"別のネットワークを選択"</string>
-    <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"デバイスを追加できませんでした"</string>
+    <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"デバイスを追加できません"</string>
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"デバイスが見つかりました"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi‑Fi をこのデバイスと共有しています…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"接続しています…"</string>
@@ -2349,11 +2349,11 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"タブレットの電池寿命の改善"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"デバイスの電池寿命の改善"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"バッテリー マネージャを ON にしてください"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"バッテリー セーバーを ON にしてください"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"バッテリー セーバーを ON にする"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"電池が通常より早くなくなる可能性があります"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"バッテリー セーバー ON"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"一部の機能が制限される可能性があります"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"スマートフォンの電池使用量が通常より多くなっています"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"通常より多い電池使用量"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"タブレットの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"デバイスの電池使用量が通常より多くなっています"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"電池が通常より早くなくなる可能性があります"</string>
@@ -2371,7 +2371,7 @@
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
       <item quantity="other">%2$d 個のアプリでバックグラウンドの電池使用量が多くなっています</item>
-      <item quantity="one">%1$s 個のアプリでバックグラウンドの電池使用量が多くなっています</item>
+      <item quantity="one">%1$sでバックグラウンドの電池使用量が多くなっています</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">このアプリはバックグラウンドで実行できません</item>
@@ -2787,8 +2787,8 @@
     <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"データ使用量の警告の設定"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"データ使用量の上限の設定"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"データ使用量の上限の設定"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"バックグラウンドデータを制限しますか？"</string>
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"バックグラウンドのモバイルデータを制限すると、アプリやサービスによっては、Wi-Fi 未接続時に機能しない場合があります。"</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"バックグラウンドのモバイルデータを制限すると、アプリやサービスによっては、Wi‑Fi 未接続時に機能しない場合があります。\n\nこの設定はこのタブレット上のすべてのユーザーに影響します。"</string>
@@ -3463,8 +3463,8 @@
       <item quantity="one">約 <xliff:g id="NUMBER_0">%d</xliff:g> 件の通知 / 日</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">約 <xliff:g id="NUMBER_1">%d</xliff:g> 件の通知 / 週</item>
-      <item quantity="one">約 <xliff:g id="NUMBER_0">%d</xliff:g> 件の通知 / 週</item>
+      <item quantity="other">週に約 <xliff:g id="NUMBER_1">%d</xliff:g> 件の通知</item>
+      <item quantity="one">週に約 <xliff:g id="NUMBER_0">%d</xliff:g> 件の通知</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"なし"</string>
     <string name="manage_notification_access_title" msgid="4714320299084782521">"通知へのアクセス"</string>
@@ -3616,7 +3616,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"リマインダー"</string>
     <string name="zen_mode_events" msgid="5695716091022098055">"予定を許可"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"アプリのオーバーライドを許可"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"アプリの除外"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"アプリの例外"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
       <item quantity="other"><xliff:g id="NUMBER">%1$d</xliff:g> 個のアプリの通知がサイレント モードをオーバーライドできます</item>
       <item quantity="one">1 個のアプリの通知がサイレント モードをオーバーライドできます</item>
@@ -3976,7 +3976,7 @@
     <string name="backup_disabled" msgid="4503062265560959320">"バックアップは無効です"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Android <xliff:g id="VERSION">%1$s</xliff:g> に更新済み"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"アップデートを利用できます"</string>
-    <string name="disabled_by_policy_title" msgid="8296938784202750494">"操作が許可されていません"</string>
+    <string name="disabled_by_policy_title" msgid="8296938784202750494">"許可されていません"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"音量を変更することはできません"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="2776004460663768982">"発信は許可されていません"</string>
     <string name="disabled_by_policy_title_sms" msgid="6309460145439706922">"SMS は許可されていません"</string>
@@ -4243,14 +4243,14 @@
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"タブレットの画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"デバイスの画面をダブルタップして通知をチェック"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"画面をダブルタップして、時刻、通知などの情報を確認できます。"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"デバイスを持ち上げて通知を確認"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"スマートフォンを持ち上げて通知を確認"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"タブレットを持ち上げて通知をチェック"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"デバイスを持ち上げて通知をチェック"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"ディスプレイの復帰"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"スマートフォンを持ち上げることで、時刻、通知などの情報を確認できます。"</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"時刻、通知などの情報を確認するには、タブレットを持ち上げます。"</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"時刻、通知などの情報を確認するには、デバイスを持ち上げます。"</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"デバイスをタップして通知を確認"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"スマートフォンをタップしてチェック"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"タブレットをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"デバイスをタップしてチェックする"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"時刻、通知などの情報を確認するには、画面をタップします。"</string>
@@ -4545,7 +4545,7 @@
     <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"色（対応アプリで使用）"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"保存"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM を使用"</string>
-    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"オフ"</string>
+    <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"OFF"</string>
     <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"この SIM を無効にするには、SIM カードを取り出してください"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> を有効にするにはタップします"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g> に切り替えますか？"</string>
@@ -4608,13 +4608,13 @@
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"プライバシー"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"権限、アカウント アクティビティ、個人データ"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"削除"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保存"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"保持"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"このおすすめを削除しますか？"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"候補を非表示にしました"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"元に戻す"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"空き容量が少なくなっています。使用済み <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 空き容量 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"空き容量不足。使用済み <xliff:g id="PERCENTAGE">%1$s</xliff:g> - 空き容量 <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"フィードバックを送信"</string>
-    <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"このアドバイスについてフィードバックを送信しますか？"</string>
+    <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"この提案についてフィードバックを送信しますか？"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"クリップボードにコピーしました（<xliff:g id="COPY_CONTENT">%1$s</xliff:g>）"</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
     <string name="permission_bar_chart_empty_text" msgid="4856719891991325077">"権限を使用したアプリはありません"</string>

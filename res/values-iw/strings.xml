@@ -669,7 +669,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על סיסמה או קוד אימות חדשים. אחרת, ייתכן שהיא לא תפעל כצפוי"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על קו ביטול נעילה, סיסמה או קוד אימות חדשים. אחרת, ייתכן שהיא לא תפעל כצפוי"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> ממליצה על נעילת מסך חדשה"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"נסה שוב. ניסיון <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> מתוך <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"יש לנסות שוב. ניסיון <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> מתוך <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"הנתונים שלך יימחקו"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"אם תזין קו ביטול נעילה שגוי בניסיון הבא, הנתונים במכשיר יימחקו"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"אם תזין קוד גישה שגוי בניסיון הבא, הנתונים במכשיר יימחקו"</string>
@@ -677,13 +677,13 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"אם תזין קו ביטול נעילה שגוי בניסיון הבא, המשתמש הזה יימחק"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"אם תזין קוד גישה שגוי בניסיון הבא, המשתמש הזה יימחק"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"אם תזין סיסמה שגויה בניסיון הבא, המשתמש הזה יימחק"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"אם תזין קו ביטול נעילה שגוי בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"אם תזין קוד גישה שגוי בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"אם תזין סיסמה שגויה בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"בעקבות הזנה נוספת של קו ביטול נעילה שגוי בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"בעקבות הזנה נוספת של קוד גישה שגוי בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"בעקבות הזנה נוספת של סיסמה שגויה בניסיון הבא, פרופיל העבודה והנתונים המשויכים אליו יימחקו"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"נעשו יותר מדי ניסיונות שגויים. הנתונים במכשיר יימחקו."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"נעשו יותר מדי ניסיונות שגויים. המשתמש הזה יימחק."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"נעשו יותר מדי ניסיונות שגויים. פרופיל העבודה והנתונים המשויכים אליו יימחקו."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"סגור"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"סגירה"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="two">צריכה להכיל לפחות <xliff:g id="COUNT_1">%d</xliff:g> תווים</item>
       <item quantity="many">צריכה להכיל לפחות <xliff:g id="COUNT_1">%d</xliff:g> תווים</item>
@@ -1825,7 +1825,7 @@
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"הזן את קוד הגישה של המכשיר כדי להמשיך"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"הזן את סיסמת המכשיר כדי להמשיך"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"השתמש בקו ביטול הנעילה בעבודה כדי להמשיך"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"הזן את קוד הגישה בעבודה כדי להמשיך"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"יש להזין את קוד הגישה בעבודה כדי להמשיך"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"הזן את הסיסמה בעבודה כדי להמשיך"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"מטעמי אבטחה, עליך להזין את קו ביטול הנעילה"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"מטעמי אבטחה, עליך להזין את קוד הגישה"</string>

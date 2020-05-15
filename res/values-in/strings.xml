@@ -358,7 +358,7 @@
     <string name="security_enable_widgets_title" msgid="676199714313423099">"Aktifkan widget"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"Dinonaktifkan oleh admin"</string>
     <string name="lockdown_settings_title" msgid="8988970335658365075">"Tampilkan opsi kunci total"</string>
-    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Tampilkan opsi tombol power yang menonaktifkan Smart Lock, buka kunci biometrik, dan notifikasi di layar kunci"</string>
+    <string name="lockdown_settings_summary" msgid="7422522013953398806">"Tampilkan opsi tombol daya yang menonaktifkan Smart Lock, buka kunci biometrik, dan notifikasi di layar kunci"</string>
     <string name="trust_agents_extend_unlock_title" msgid="6704799119336718965">"Perangkat dipercaya memperpanjang buka kunci"</string>
     <string name="trust_agents_extend_unlock_summary" msgid="2567077920329962827">"Jika diaktifkan, perangkat dipercaya akan membuat perangkat tetap tidak terkunci untuk waktu yang lebih lama, namun tidak dapat lagi membuka perangkat yang terkunci."</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"Kunci layar saat kepercayaan hilang"</string>
@@ -661,7 +661,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan PIN atau sandi baru, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan pola, PIN, atau sandi baru, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan kunci layar baru"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Coba lagi. Mencoba <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> kali dari <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> kali."</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Coba lagi. Upaya ke-<xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> dari maksimal <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> kali."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Data akan dihapus"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Jika Anda memasukkan pola yang salah saat mencoba lagi, data perangkat ini akan dihapus"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"Jika Anda memasukkan PIN yang salah saat mencoba lagi, data perangkat ini akan dihapus"</string>
@@ -674,7 +674,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika Anda memasukkan sandi yang salah saat mencoba lagi, profil kerja dan datanya akan dihapus"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Terlalu sering mencoba dengan salah. Data perangkat ini akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Terlalu sering mencoba dengan salah. Pengguna ini akan dihapus."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu sering mencoba dengan salah. Profil kerja ini dan datanya akan dihapus."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak upaya salah. Profil kerja ini dan datanya akan dihapus."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Tutup"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Minimal berisi <xliff:g id="COUNT_1">%d</xliff:g> karakter</item>
@@ -881,7 +881,7 @@
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Jangan gunakan jaringan Wi-Fi, kecuali sambungan internetnya kuat"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Hanya gunakan jaringan yang memiliki koneksi internet kuat"</string>
     <string name="use_open_wifi_automatically_title" msgid="6969255613044224684">"Sambungkan ke jaringan terbuka"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Otomatis sambungkan ke jaringan publik berkualitas tinggi"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Otomatis hubungkan ke jaringan publik berkualitas tinggi"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Untuk menggunakan, pilih penyedia rating jaringan"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Untuk menggunakan, pilih penyedia rating jaringan yang kompatibel"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instal sertifikat"</string>
@@ -1102,7 +1102,7 @@
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="6620216295510397461">"Gunakan hotspot untuk membuat jaringan Wi‑Fi bagi perangkat Anda yang lain. Hotspot menyediakan koneksi internet menggunakan koneksi data seluler Anda. Biaya data seluler tambahan mungkin berlaku."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="3813311942370920903">"Aplikasi dapat membuat hotspot untuk berbagi konten dengan perangkat di sekitar."</string>
-    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Nonaktifkan hotspot secara otomatis"</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="8855711787485504882">"Otomatis nonaktifkan hotspot"</string>
     <string name="wifi_hotspot_auto_off_summary" msgid="7342409072397243649">"Hotspot Wi-Fi akan dinonaktifkan jika tidak ada perangkat yang terhubung"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Menyalakan hotspot..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Mematikan hotspot..."</string>
@@ -2000,7 +2000,7 @@
     <string name="language_settings" msgid="8700174277543875046">"Bahasa &amp; masukan"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Anda tidak memiliki izin untuk mengubah bahasa perangkat."</string>
     <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Bahasa &amp; masukan"</string>
-    <string name="input_assistance" msgid="3437568284144952104">"Fitur"</string>
+    <string name="input_assistance" msgid="3437568284144952104">"Alat"</string>
     <string name="keyboard_settings_category" msgid="5392847229300117064">"Keyboard &amp; metode masukan"</string>
     <string name="phone_language" msgid="5986939176239963826">"Bahasa"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2353,11 +2353,11 @@
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterai mungkin lebih cepat habis dari biasanya"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Penghemat Baterai aktif"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Beberapa fitur mungkin dibatasi"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Ponsel digunakan lebih lama dari biasanya"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Ponsel dipakai lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Perangkat digunakan lebih lama dari biasanya"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterai mungkin lebih cepat habis daripada biasanya"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ponsel Anda digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="4681734836472195966">"Ponsel dipakai lebih lama dari biasanya. Baterai mungkin lebih cepat habis dari perkiraan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="tablet" msgid="3934298305232120382">"Tablet digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"Perangkat Anda digunakan lebih sering dari biasanya. Baterai mungkin lebih cepat habis dari yang diperkirakan.\n\nAplikasi yang paling banyak menggunakan baterai:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Termasuk aktivitas latar belakang yang menggunakan banyak daya"</string>
@@ -2370,8 +2370,8 @@
       <item quantity="one">%1$s baru-baru ini dibatasi</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d aplikasi menggunakan banyak baterai di background</item>
-      <item quantity="one">%1$s menggunakan banyak baterai di background</item>
+      <item quantity="other">%2$d aplikasi menggunakan banyak baterai di latar belakang</item>
+      <item quantity="one">%1$s menggunakan banyak baterai di latar belakang</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Aplikasi ini tidak dapat berjalan di background</item>
@@ -2590,7 +2590,7 @@
     <string name="tts_install_voices_text" msgid="902408506519246362">"Lanjutkan aplikasi <xliff:g id="TTS_APP_NAME">%s</xliff:g> untuk menginstal suara"</string>
     <string name="tts_install_voices_open" msgid="919034855418197668">"Buka Aplikasi"</string>
     <string name="tts_install_voices_cancel" msgid="5179154684379560628">"Batal"</string>
-    <string name="tts_reset" msgid="9047681050813970031">"Setel ulang"</string>
+    <string name="tts_reset" msgid="9047681050813970031">"Reset"</string>
     <string name="tts_play" msgid="2945513377250757221">"Putar"</string>
     <string name="vpn_settings_title" msgid="9131315656202257272">"VPN"</string>
     <string name="credentials_title" msgid="7535942196886123656">"Penyimpanan kredensial"</string>
@@ -3111,7 +3111,7 @@
     </plurals>
     <string name="network_dashboard_title" msgid="788543070557731240">"Jaringan &amp; internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"seluler"</string>
-    <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"penggunaan kuota"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"penggunaan data"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Perangkat tersambung"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode mengemudi, NFC"</string>
@@ -3297,7 +3297,7 @@
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Sembunyikan ikon status bar di bagian atas layar"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Sembunyikan titik notifikasi di ikon aplikasi"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"Jangan aktifkan jika ada notifikasi"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Sembunyikan dari bayangan pull-down"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Sembunyikan dari menu notifikasi"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Tidak pernah"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Saat layar nonaktif"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Saat layar aktif"</string>
@@ -3410,7 +3410,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"Ditampilkan di bayangan pull-down, status bar &amp; di layar kunci"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Cahaya kedip"</string>
     <string name="lock_screen_notifications_title" msgid="6215543388550190381">"Layar kunci"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Melewati layar kunci"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Lewati layar kunci"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Setelah Face Unlock, langsung buka layar yang terakhir digunakan"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Layar kunci, Layar kunci, Lewati, Abaikan"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Saat profil kerja dikunci"</string>

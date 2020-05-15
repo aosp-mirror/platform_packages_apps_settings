@@ -452,7 +452,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Cihazınızın kilidini açmak, uygulamalarda oturum açmak ve ödemeleri onaylamak için yüz tanıma kilidini kullanın.\n\nDikkat edilecek noktalar:\nTelefona bakarsanız, istemediğiniz zamanlarda da telefonunuzun kilidi açılabilir.\n\nGözleriniz kapalıyken bile yüzünüzün hizasına tutulduğunda, telefonunuzun kilidi başka biri tarafından açılabilir.\n\nTelefonunuzun kilidi, ikiziniz gibi size çok benzeyen başka biri tarafından da açılabilir."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Yüz verileri silinsin mi?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"Yüz tanıma kilidi tarafından kullanılan yüz verileri kalıcı ve güvenli bir şekilde silinecek. Kaldırma işleminden sonra, telefonunuzun kilidini açmak, uygulamalarda oturum açmak ve ödemeleri onaylamak için PIN, desen veya şifrenize ihtiyacınız olur."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Telefonunuzun kilidini açmak için yüz tanıma kilidini kullanın"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Kilidi açmak için yüz tanıma kilidini kullanın"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Parmak izi"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Parmak izi yönetimi"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Parmak izi kullanımı:"</string>
@@ -674,7 +674,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Bir sonraki denemenizde yanlış şifre girerseniz iş profiliniz ve verileri silinecek"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Çok fazla sayıda hatalı deneme yapıldı. Bu cihazın verileri silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Çok fazla sayıda hatalı deneme yapıldı. Bu kullanıcı silinecek."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Çok fazla sayıda hatalı denemede yapıldı. İş profiliniz ve verileri silinecek."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Çok fazla sayıda hatalı deneme yapıldı. İş profiliniz ve verileri silinecek."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Kapat"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">En az <xliff:g id="COUNT_1">%d</xliff:g> karakter olmalıdır</item>
@@ -996,7 +996,7 @@
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Birden fazla sertifika eklendi)"</string>
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sistem sertifikalarını kullan"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Sağlama"</string>
-    <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Doğrulama"</string>
+    <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Doğrulama yapma"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Sertifika belirtilmedi. Bağlantınız gizli olmayacak."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Ağ adı çok uzun."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Alan adı belirtilmelidir."</string>
@@ -2370,8 +2370,8 @@
       <item quantity="one">%1$s yakın zamanda kısıtlandı</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d uygulama yüksek düzeyde arka plan pil kullanımına yol açıyor</item>
-      <item quantity="one">%1$s yüksek düzeyde arka plan pil kullanımına yol açıyor</item>
+      <item quantity="other">%2$d uygulama arka planda yüksek düzeyde pil kullanıyor</item>
+      <item quantity="one">%1$s arka planda yüksek düzeyde pil kullanıyor</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Bu uygulamalar arka planda çalışamaz</item>
@@ -2763,7 +2763,7 @@
     <string name="data_usage_tab_3g" msgid="6111070409752123049">"2G-3G"</string>
     <string name="data_usage_list_mobile" msgid="3738130489722964291">"Mobil"</string>
     <string name="data_usage_list_none" msgid="2091924522549134855">"Hiçbiri"</string>
-    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobil veriler"</string>
+    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobil veri"</string>
     <string name="data_usage_enable_3g" msgid="2818189799905446932">"2G-3G verileri"</string>
     <string name="data_usage_enable_4g" msgid="1526584080251993023">"4G verileri"</string>
     <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"Dolaşım"</string>
@@ -3817,7 +3817,7 @@
     <string name="high_power_off" msgid="317000444619279018">"Pil kullanımı optimize ediliyor"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Pil optimizasyonu kullanılamıyor"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Pil optimizasyonu uygulanmasın. Bu seçenek, pilinizi daha hızlı tüketebilir."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulamanın arka planda çalışmaya devam etsin mi?"</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulama arka planda çalışmaya devam etsin mi?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının her zaman arka planda çalıştırılmasına izin vermeniz pil ömrünü kısaltabilir. \n\nBunu daha sonra Ayarlar &gt; Uygulamalar ve bildirimler seçeneğinden değiştirebilirsiniz."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Son kez tamamen şarj olduktan sonra <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanıldı"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Güç yönetimi"</string>
@@ -4441,7 +4441,7 @@
     <string name="battery_suggestion_title" product="device" msgid="2280773774080720377">"Cihazın pil ömrünü uzatın"</string>
     <string name="battery_suggestion_title" product="default" msgid="4811554469047272537">"Telefonun pil ömrünü uzatın"</string>
     <string name="battery_suggestion_summary" msgid="8186720080540016197"></string>
-    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Zilin çalmasını önle"</string>
+    <string name="gesture_prevent_ringing_screen_title" msgid="8293094715267769349">"Zilin çalmasını engelle"</string>
     <string name="gesture_prevent_ringing_title" msgid="5978577898997523581">"Güç ve Sesi Artırma düğmelerine birlikte basın:"</string>
     <string name="gesture_prevent_ringing_sound_title" msgid="4529077822282099235">"Zilin çalmasını engelleme kısayolu"</string>
     <string name="prevent_ringing_option_vibrate" msgid="5456962289649581737">"Titret"</string>

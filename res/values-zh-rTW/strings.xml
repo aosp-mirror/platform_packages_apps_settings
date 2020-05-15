@@ -1783,7 +1783,7 @@
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"輸入裝置 PIN 碼即可繼續"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"請輸入你的裝置密碼以繼續作業"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"請畫出你的 Work 解鎖圖案以繼續作業"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"請輸入你的 Work PIN 碼以繼續作業"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"請輸入你的工作資料夾 PIN 碼以繼續作業"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"請輸入你的 Work 密碼以繼續作業"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"為了提升安全性，請使用裝置解鎖圖案"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"為了提升安全性，請輸入裝置 PIN 碼"</string>
@@ -2674,7 +2674,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"工作資料夾"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"由貴機構管理"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"已關閉應用程式和通知"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"移除工作設定檔"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"移除工作資料夾"</string>
     <string name="background_data" msgid="321903213000101158">"背景資料"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"應用程式隨時可以同步處理、傳送和接收資料"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"你要停用背景資料嗎？"</string>
@@ -3818,7 +3818,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"沒有電池效能最佳化設定"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"不套用電池效能最佳化設定，這可能會加快電池消耗速度。"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"要允許應用程式一律在背景執行嗎？"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"允許<xliff:g id="APP_NAME">%1$s</xliff:g>一律在背景執行可能會縮短電池續航時間。\n\n你可以稍後在「設定」應用程式和通知中變更這項設定。"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"允許<xliff:g id="APP_NAME">%1$s</xliff:g>一律在背景執行可能會縮短電池續航時間。\n\n你可以稍後前往「設定」&gt; 「應用程式和通知」中變更這項設定。"</string>
     <string name="battery_summary" msgid="2491764359695671207">"自上次充電完成後使用了 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"電源管理"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"自上次充電完成後並未使用"</string>
@@ -3839,7 +3839,7 @@
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"將檔案轉移到另一個裝置"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"如果 MTP 不受支援，則轉移相片或檔案 (PTP)"</string>
-    <string name="usb_use_tethering" msgid="2897063414491670531">"USB 數據連線"</string>
+    <string name="usb_use_tethering" msgid="2897063414491670531">"USB 網路共用"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"將這個裝置用做 MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"USB 用途"</string>
@@ -3859,7 +3859,7 @@
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"檔案傳輸和供電"</string>
-    <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB 數據連線和供電"</string>
+    <string name="usb_summary_tether_power" msgid="4853034392919904792">"USB 網路共用和供電"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP 和供電"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI 模式和供電"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"背景檢查"</string>
@@ -4236,14 +4236,14 @@
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"切換預設的主畫面應用程式"</string>
     <string name="information_label" msgid="6939310810756569298">"資訊"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
-    <string name="high_label" msgid="357503396626018487">"高"</string>
+    <string name="high_label" msgid="357503396626018487">"強"</string>
     <string name="back_sensitivity_dialog_message" msgid="613168204296434222">\n"如果你調高敏感度，可能會影響螢幕邊緣的應用程式手勢操作。"</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"系統偵測「返回」手勢的敏感度"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"輕觸兩下手機即可查看"</string>
+    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"輕觸兩下以查看手機"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"輕觸兩下平板電腦即可查看"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"輕觸兩下裝置即可查看"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"輕觸兩下螢幕即可查看時間、通知和其他資訊。"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"拿起手機即可查看"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"拿起以查看手機"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"拿起平板電腦即可查看"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"拿起裝置即可查看"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"喚醒螢幕"</string>

@@ -677,12 +677,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"Pokud při příštím pokusu zadáte nesprávné gesto, tento uživatel bude smazán"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Pokud při příštím pokusu zadáte nesprávný PIN, tento uživatel bude smazán"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Pokud při příštím pokusu zadáte nesprávné heslo, tento uživatel bude smazán"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Pokud při příštím pokusu zadáte nesprávné gesto, váš pracovní profil a přidružená data budou smazána"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Pokud při příštím pokusu zadáte nesprávný PIN, váš pracovní profil a přidružená data budou smazána"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Pokud při příštím pokusu zadáte nesprávné heslo, váš pracovní profil a přidružená data budou smazána"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Pokud při příštím pokusu zadáte nesprávné gesto, váš pracovní profil a přidružená data budou smazány"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Pokud při příštím pokusu zadáte nesprávný PIN, váš pracovní profil a přidružená data budou smazány"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Pokud při příštím pokusu zadáte nesprávné heslo, váš pracovní profil a přidružená data budou smazány"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Příliš mnoho neplatných pokusů. Data v tomto zařízení budou smazána."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Příliš mnoho neplatných pokusů. Tento uživatel bude smazán."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Příliš mnoho neplatných pokusů. Tento pracovní profil a přidružená data budou smazána."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Příliš mnoho neplatných pokusů. Tento pracovní profil a přidružená data budou smazány."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Zavřít"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="few">Musí obsahovat alespoň <xliff:g id="COUNT_1">%d</xliff:g> znaky</item>
@@ -2413,7 +2413,7 @@
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Baterie se možná vybije dříve než obvykle"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Spořič baterie je zapnutý"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Některé funkce mohou být omezeny"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefon byl využíván víc než obvykle"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefon využíván víc než obvykle"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet byl využíván víc než obvykle"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Zařízení bylo využíváno víc než obvykle"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Baterie se možná vybije dříve než obvykle"</string>
@@ -2434,10 +2434,10 @@
       <item quantity="one">%1$s aplikace byla nedávno omezena</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="few">%2$d aplikace způsobují vysoké využití baterie na pozadí</item>
-      <item quantity="many">%2$d aplikace způsobuje vysoké využití baterie na pozadí</item>
-      <item quantity="other">%2$d aplikací způsobuje vysoké využití baterie na pozadí</item>
-      <item quantity="one">%1$s aplikace způsobuje vysoké využití baterie na pozadí</item>
+      <item quantity="few">%2$d silně využívají baterii na pozadí</item>
+      <item quantity="many">%2$d silně využívají baterii na pozadí</item>
+      <item quantity="other">%2$d silně využívá baterii na pozadí</item>
+      <item quantity="one">%1$s silně využívá baterii na pozadí</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="few">Tyto aplikace nelze spustit na pozadí</item>
@@ -2818,7 +2818,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"Pozastaveno při limitu"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Autom. synchronizovat data"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autom. synch. osobní data"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autom. synch. pracovní data"</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosynchronizace pracovních dat"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Změnit cyklus..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Den v měsíci, kdy se má obnovit počítání datových přenosů:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"V tomto období nevyužily datové připojení žádné aplikace."</string>
@@ -3512,7 +3512,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Při uzamknutí zobrazovat citlivý obsah"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Citlivá oznámení v pracovním profilu"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Při uzamknutí zobrazovat citlivý obsah pracovního profilu"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazit veškerý obsah oznámení"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Zobrazovat veškerý obsah oznámení"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Zobrazovat citlivý obsah jen během odemknutí"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Oznámení vůbec nezobrazovat"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Jak chcete zobrazovat obrazovku uzamčení?"</string>
@@ -3720,7 +3720,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"připomenutí"</string>
     <string name="zen_mode_events" msgid="5695716091022098055">"Povolit události"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Povolit přepisování aplikací"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Výjimky aplikací"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Výjimky pro aplikace"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="3992144201138339160">
       <item quantity="few">Oznámení z <xliff:g id="NUMBER">%1$d</xliff:g> aplikací mohou režim Nerušit obejít</item>
       <item quantity="many">Oznámení z <xliff:g id="NUMBER">%1$d</xliff:g> aplikace mohou režim Nerušit obejít</item>
@@ -4104,7 +4104,7 @@
     <string name="backup_disabled" msgid="4503062265560959320">"Zálohování bylo zakázáno"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"Aktualizováno na Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"K dispozici je aktualizace"</string>
-    <string name="disabled_by_policy_title" msgid="8296938784202750494">"Akce není povolena."</string>
+    <string name="disabled_by_policy_title" msgid="8296938784202750494">"Akce není povolena"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"Hlasitost nelze změnit"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="2776004460663768982">"Volání není povoleno"</string>
     <string name="disabled_by_policy_title_sms" msgid="6309460145439706922">"Zprávy SMS nejsou povoleny"</string>
@@ -4321,7 +4321,7 @@
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Dočasně vypnuto spořičem baterie"</string>
     <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Na tmavý motiv se přepnou i podporované aplikace"</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Rozumím"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Vyzkoušejte tmavý motiv"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Vyzkoušet tmavý motiv"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomáhá prodloužit výdrž baterie"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Dlaždice rychlého nastavení pro vývojáře"</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Trasování Winscope"</string>
@@ -4772,11 +4772,11 @@
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Ochrana soukromí"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Oprávnění, aktivita na účtu, osobní údaje"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Odstranit"</string>
-    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Zachovat"</string>
+    <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Ponechat"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Odstranit tento návrh?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Návrh byl odebrán"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Zpět"</string>
-    <string name="low_storage_summary" msgid="1979492757417779718">"V úložišti je málo místa. Využito <xliff:g id="PERCENTAGE">%1$s</xliff:g> – volné místo: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
+    <string name="low_storage_summary" msgid="1979492757417779718">"Málo místa. Využito: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – volné: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Odeslat zpětnou vazbu"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Chtěli byste nám k tomuto návrhu poskytnout zpětnou vazbu?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> – zkopírováno do schránky"</string>

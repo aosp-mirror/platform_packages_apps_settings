@@ -208,7 +208,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Het poortveld moet leeg zijn als het hostveld leeg is."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"De poort die je hebt ingevoerd, is ongeldig."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"De HTTP-proxy wordt gebruikt door de browser, maar mogelijk niet door de andere apps."</string>
-    <string name="proxy_url_title" msgid="3502625766036404073">"PAC URL: "</string>
+    <string name="proxy_url_title" msgid="3502625766036404073">"PAC-URL: "</string>
     <string name="radio_info_subid" msgid="7327800379827284836">"Huidige subId:"</string>
     <string name="radio_info_dds" msgid="4170740686898792195">"SubId van standaardsimkaart voor data:"</string>
     <string name="radio_info_dl_kbps" msgid="2881272681619183358">"DL-bandbreedte (kbps):"</string>
@@ -452,7 +452,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="4460565590744451205">"Gebruik \'Ontgrendelen via gezichtsherkenning\' om je apparaat te ontgrendelen, bij apps in te loggen en betalingen te bevestigen.\n\nHoud rekening met het volgende:\nAls je naar de telefoon kijkt, kun je deze onbedoeld ontgrendelen.\n\nJe telefoon kan door iemand anders worden ontgrendeld als de telefoon voor je gezicht wordt gehouden, zelfs als je je ogen dicht hebt.\n\nJe telefoon kan worden ontgrendeld door iemand die veel op je lijkt, zoals een identieke tweelingbroer of -zus."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2596803378375165362">"Gezichtsinformatie verwijderen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="3458998128212675289">"De gezichtsinformatie die wordt gebruikt voor ontgrendelen via gezichtsherkenning, wordt definitief en op een veilige manier verwijderd. Nadat deze is verwijderd, heb je je pincode, patroon of wachtwoord nodig om je telefoon te ontgrendelen, in te loggen bij apps of betalingen te bevestigen."</string>
-    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Gebruik ontgrendelen via gezichtsherkenning om je telefoon te ontgrendelen"</string>
+    <string name="security_settings_face_settings_context_subtitle" msgid="9197485417007952865">"Ontgrendel je telefoon via gezichtsherkenning"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Vingerafdruk"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Vingerafdrukbeheer"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Vingerafdruk voor"</string>
@@ -1706,7 +1706,7 @@
     </plurals>
     <string name="location_category_recent_location_access" msgid="7880996987927703141">"Recente locatietoegang"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Details weergeven"</string>
-    <string name="location_no_recent_apps" msgid="6814206631456177033">"Er zijn geen apps die je locatie onlangs hebben aangevraagd"</string>
+    <string name="location_no_recent_apps" msgid="6814206631456177033">"Er zijn geen apps die je locatie onlangs hebben opgevraagd"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Er zijn geen apps die recent toegang hebben gehad tot je locatie"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Hoog accugebruik"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Laag batterijgebruik"</string>
@@ -2353,7 +2353,7 @@
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Batterij is mogelijk eerder leeg dan normaal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Batterijbesparing aan"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Sommige functies zijn mogelijk beperkt"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Telefoon heeft meer verbruikt dan normaal"</string>
+    <string name="battery_tip_high_usage_title" product="default" msgid="2375953293196088319">"Meer verbruikt dan normaal"</string>
     <string name="battery_tip_high_usage_title" product="tablet" msgid="8515903411746145740">"Tablet heeft meer verbruikt dan normaal"</string>
     <string name="battery_tip_high_usage_title" product="device" msgid="6577086402173910457">"Apparaat heeft meer verbruikt dan normaal"</string>
     <string name="battery_tip_high_usage_summary" msgid="5356399389711499862">"Batterij is mogelijk eerder leeg dan normaal"</string>
@@ -2370,8 +2370,8 @@
       <item quantity="one">%1$s is onlangs beperkt</item>
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
-      <item quantity="other">%2$d apps hebben een hoog batterijverbruik op de achtergrond</item>
-      <item quantity="one">%1$s heeft een hoog batterijverbruik op de achtergrond</item>
+      <item quantity="other">%2$d apps verbruiken veel op de achtergrond</item>
+      <item quantity="one">%1$s verbruikt veel op de achtergrond</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Deze apps kunnen niet op de achtergrond worden uitgevoerd</item>

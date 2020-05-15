@@ -960,7 +960,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Рандомизиран MAC адрес"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Добавяне на устройство"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"За да добавите устройството към „<xliff:g id="SSID">%1$s</xliff:g>“, центрирайте по-долу кода за бърза реакция"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Сканиране на кода за бърза реакция"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Сканиране на QR кода"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"За да се свържете с „<xliff:g id="SSID">%1$s</xliff:g>“, центрирайте по-долу кода за бърза реакция"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Присъединете се към  Wi‑Fi мрежата, като сканирате код за бърза реакция"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Споделяне на Wi‑Fi мрежата"</string>
@@ -975,11 +975,11 @@
     <string name="wifi_dpp_check_connection_try_again" msgid="6118892932595974823">"Проверете връзката и опитайте отново"</string>
     <string name="wifi_dpp_choose_network" msgid="3987007684129341427">"Избиране на мрежа"</string>
     <string name="wifi_dpp_choose_network_to_connect_device" msgid="4321618376432197593">"За да свържете устройството си, изберете мрежа"</string>
-    <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Да се добави ли това устройство към „<xliff:g id="SSID">%1$s</xliff:g>“?"</string>
+    <string name="wifi_dpp_add_device_to_wifi" msgid="5170095438763569255">"Да се добави ли това устройство към <xliff:g id="SSID">%1$s</xliff:g>?"</string>
     <string name="wifi_dpp_wifi_shared_with_device" msgid="4484366631307204949">"Wi-Fi мрежата бе споделена с устройството"</string>
     <string name="wifi_dpp_add_another_device" msgid="3307575293580739604">"Добавяне на друго устройство"</string>
     <string name="wifi_dpp_choose_different_network" msgid="8963625819804792157">"Избиране на друга мрежа"</string>
-    <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"Устройството не можа да се добави"</string>
+    <string name="wifi_dpp_could_not_add_device" msgid="6865710911186601933">"Устройството не бе добавено"</string>
     <string name="wifi_dpp_device_found" msgid="633646744759830603">"Открито е устройство"</string>
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi-Fi мрежата се споделя с това устройство…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Свързва се…"</string>
@@ -2206,7 +2206,7 @@
     <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Изключено"</string>
     <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Слабо"</string>
     <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"средно"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"силно"</string>
+    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Силно"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Настройки"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Вкл."</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Изкл."</string>
@@ -2349,7 +2349,7 @@
     <string name="battery_tip_smart_battery_title" product="tablet" msgid="6813017377960004819">"Удължете живота на батерията на таблета си"</string>
     <string name="battery_tip_smart_battery_title" product="device" msgid="4805599360437606335">"Удължете живота на батерията на устройството си"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Включете мениджъра на батерията"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Включете режима за запазване на батерията"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Вкл. режим за запазване на батерията"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"Батерията може да се изтощи по-рано от обикновено"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="4413270905575486715">"Режимът за запазване на батерията е включен"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Някои функции може да са ограничени"</string>
@@ -2371,7 +2371,7 @@
     </plurals>
     <plurals name="battery_tip_restrict_summary" formatted="false" msgid="3328499737453686910">
       <item quantity="other">%2$d приложения използват батерията интензивно на заден план</item>
-      <item quantity="one">%1$s приложение използва батерията интензивно на заден план</item>
+      <item quantity="one">Приложението %1$s използва батерията интензивно на заден план</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_summary" formatted="false" msgid="3036853535034350991">
       <item quantity="other">Тези приложения не могат да се изпълняват на заден план</item>
@@ -3085,7 +3085,7 @@
     <string name="sim_editor_number" msgid="3209002966895156006">"Номер"</string>
     <string name="sim_editor_color" msgid="9067029630083892961">"Цвят на SIM картата"</string>
     <string name="sim_card_select_title" msgid="8146523005929848793">"Избиране на SIM карта"</string>
-    <string name="color_orange" msgid="216547825489739010">"оранжево"</string>
+    <string name="color_orange" msgid="216547825489739010">"Оранжево"</string>
     <string name="color_purple" msgid="6603701972079904843">"Лилаво"</string>
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"Няма поставени SIM карти"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Състояние на SIM картата"</string>
@@ -3659,7 +3659,7 @@
     <string name="suggestion_button_text" msgid="4370673818678692873">"OK"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Въведете администраторския ПИН код"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"Включено"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"Вкл."</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Изключено"</string>
     <string name="screen_pinning_title" msgid="5203530107022449124">"Фикс. на екрани"</string>
     <string name="screen_pinning_description" msgid="5181462036494390860">"Когато настройката е включена, можете да фиксирате текущия екран така, че да се показва, докато не го освободите.\n\nЗа да използвате тази функция:\n\n1. Уверете се, че е включена.\n\n2. Отворете „Общ преглед“.\n\n3. Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
@@ -3818,7 +3818,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Няма настройка за оптимизиране на батерията"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Да се изпълнява винаги на заден план?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план може да съкрати живота на батерията.\n\nМожете да промените това по-късно от „Настройки &gt; Приложения и известия“."</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план, може да съкрати живота на батерията.\n\nМожете да промените това по-късно от „Настройки &gt; Приложения и известия“."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Изразходване на <xliff:g id="PERCENTAGE">%1$s</xliff:g> от последното пълно зареждане"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Управление на захранването"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Батерията не е изразходвана от последното пълно зареждане"</string>
@@ -4250,7 +4250,7 @@
     <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"За да проверите часа, известията и друга информация, вземете телефона си в ръка."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"За да проверите часа, известията и друга информация, вземете таблета си в ръка."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"За да проверите часа, известията и друга информация, вземете устройството си в ръка."</string>
-    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Докоснете за проверка на телефона"</string>
+    <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Докосване за проверка на телефона"</string>
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Докоснете за проверка на таблета"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Докоснете за проверка на устройството"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да проверите часа, известията и друга информация, докоснете екрана."</string>
