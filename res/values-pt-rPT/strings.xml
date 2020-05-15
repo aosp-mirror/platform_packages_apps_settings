@@ -299,8 +299,8 @@
     <string name="location_settings_master_switch_title" msgid="4232810467362584112">"Utilizar a localização"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Desativada"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Ativada – <xliff:g id="COUNT_1">%1$d</xliff:g> aplicações têm acesso à localização</item>
-      <item quantity="one">Ativada – <xliff:g id="COUNT_0">%1$d</xliff:g> aplicação tem acesso à localização</item>
+      <item quantity="other">Ativada – <xliff:g id="COUNT_1">%1$d</xliff:g> apps têm acesso à localização</item>
+      <item quantity="one">Ativada – <xliff:g id="COUNT_0">%1$d</xliff:g> app tem acesso à localização</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"A carregar…"</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Contas"</string>
@@ -819,7 +819,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Para utilizar, selecionar um fornecedor de classificação de rede"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Para utilizar, selecionar um fornecedor de classificação de rede compatível"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Para melhorar a precisão da localização, as aplicações e os serviços podem continuar a procurar redes Wi-Fi em qualquer altura, mesmo quando o Wi-Fi está desativado. Pode utilizar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>definições de análise<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Para melhorar a precisão da localização, as apps e os serviços podem continuar a procurar redes Wi-Fi em qualquer altura, mesmo quando o Wi-Fi está desativado. Pode utilizar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>definições de análise<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"Para melhorar a precisão da localização, ative a procura de redes Wi-Fi nas <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>definições de análise<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"Não mostrar de novo"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Manter Wi-Fi ligada durante suspensão"</string>
@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Não mostrar novamente"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Ligar"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi ativado"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Ligado a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"A ligar…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Não foi possível estabelecer ligação à rede"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"A rede não está ao alcance"</string>
@@ -2148,8 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Deslize rapidamente com dois dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com dois dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Deslize rapidamente com três dedos para cima a partir da parte inferior do ecrã.\n\nPara alternar entre funcionalidades, deslize rapidamente com três dedos para cima sem soltar."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantenha premidas as teclas de volume"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantenha premidas as teclas de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Prima sem soltar ambas as teclas de volume."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Toque três vezes no ecrã"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"toque três vezes no ecrã"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Toque rapidamente 3 vezes no ecrã. Este atalho pode tornar o dispositivo mais lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avançadas"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botão de acessibilidade está definido para o serviço <xliff:g id="SERVICE">%1$s</xliff:g>. Para utilizar a ampliação, toque sem soltar neste botão e, em seguida, selecione a ampliação."</string>
@@ -2166,7 +2167,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Ponteiro do rato grande"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="6692439394171709557">"Áudio mono"</string>
-    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Combinar canais ao reproduzir áudio"</string>
+    <string name="accessibility_toggle_master_mono_summary" msgid="6043673439531673935">"Combine canais ao reproduzir áudio"</string>
     <string name="accessibility_toggle_master_balance_title" msgid="895584329613310279">"Equilíbrio de áudio"</string>
     <string name="accessibility_toggle_master_balance_left_label" msgid="147010366022601825">"Esquerda"</string>
     <string name="accessibility_toggle_master_balance_right_label" msgid="5028519887058073990">"Direita"</string>
@@ -2180,7 +2181,7 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Escolha o tempo durante o qual pretende mostrar mensagens que lhe solicitam que tome medidas, mas que são visíveis apenas temporariamente.\n\nNem todas as aplicações são compatíveis com esta definição."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Atraso ao manter premida a tecla"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversão de cores"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilize a inversão de cores"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utilizar a inversão de cores"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"A inversão de cores escurece os ecrãs claros.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; A inversão de cores também torna os ecrãs escuros claros.&lt;/li&gt; &lt;li&gt; As cores são alteradas no conteúdo multimédia e nas imagens.&lt;/li&gt; &lt;li&gt; Pode utilizar o tema escuro para apresentar um fundo escuro. O tema escuro funciona com apps suportadas. A inversão de cores funciona em todas as apps.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clique automático (tempo de permanência)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"O clique automático funciona com um rato ligado. Pode definir o cursor do rato para clicar automaticamente quando o cursor deixar de se mover durante um determinado período de tempo."</string>
@@ -2223,7 +2224,7 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> aparelho auditivo guardado.</item>
     </plurals>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atalho ativado"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativar"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativado"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Ativado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desativado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Não está a funcionar. Toque para obter informações."</string>
@@ -2416,8 +2417,8 @@
     <string name="battery_tip_dialog_message" product="device" msgid="2620789680336796054">"O seu dispositivo tem sido utilizado com mais frequência do que o habitual. A bateria pode esgotar-se mais cedo do que o esperado.\n\nPrincipais aplicações por utilização da bateria:"</string>
     <string name="battery_tip_dialog_message_footer" msgid="986542164372177504">"Inclui atividade em segundo plano de potência elevada"</string>
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="3108195491484891588">
-      <item quantity="other">Restringir %1$d aplicações</item>
-      <item quantity="one">Restringir %1$d aplicação</item>
+      <item quantity="other">Restringir %1$d apps</item>
+      <item quantity="one">Restringir %1$d app</item>
     </plurals>
     <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5862649927574803958">
       <item quantity="other">%2$d aplicações restringidas recentemente</item>
@@ -3313,7 +3314,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Ativar sons"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Legendas instantâneas"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Multimédia com legendas automáticas"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Nenhuma."</string>
+    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Nenhum."</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horários definidos.</item>
       <item quantity="one">1 horário definido.</item>
@@ -3458,10 +3459,9 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Permitir a suspensão de notificações"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Ocultar os ícones das notificações discretas"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Os ícones das notificações discretas não são apresentados na barra de estado."</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Ponto de noti. no ícone da app"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Ponto de notificação no ícone da app"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Mostrar faixa de conversas recentes"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Balões"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Algumas notificações podem aparecer como balões no ecrã."</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Algumas notificações e outros conteúdos podem aparecer como balões no ecrã. Para abrir um balão, toque no mesmo. Para o ignorar, arraste-o para baixo no ecrã."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Balões"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Todas as definições de balões"</string>
@@ -3612,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Associadas"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Associar estas apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"As apps associadas partilham autorizações e podem aceder aos dados entre elas."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Associe apenas apps às quais confia os seus dados pessoais. As apps de trabalho poderão expor os seus dados ao administrador de TI."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Apenas associe apps que considere que não irão partilhar dados pessoais com o seu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Pretende confiar os seus dados pessoais à app de trabalho <xliff:g id="NAME">%1$s</xliff:g>?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"A app <xliff:g id="NAME">%1$s</xliff:g> poderá expor os seus dados pessoais ao seu administrador de TI."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Apenas associe apps que considere que não irão partilhar dados pessoais com o seu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dados de apps"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esta app pode aceder aos dados na sua app pessoal <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Autorizações"</string>
@@ -3624,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps associadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app associada</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Instale a app <xliff:g id="NAME">%1$s</xliff:g> de trabalho para associar estas apps"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Instale a app <xliff:g id="NAME">%1$s</xliff:g> pessoal para associar estas apps"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Para associar estas apps, instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil de trabalho"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Para associar estas apps, instale a app <xliff:g id="NAME">%1$s</xliff:g> no seu perfil pessoal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toque para obter a app."</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Acesso Não incomodar"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Permitir o modo Não incomodar"</string>
@@ -3845,7 +3845,7 @@
     <string name="notification_app_settings_button" msgid="4692549882609342128">"Definições de notificações"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"Ok"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Fechar"</string>
-    <string name="device_feedback" msgid="5351614458411688608">"Enviar comentários do dispositivo"</string>
+    <string name="device_feedback" msgid="5351614458411688608">"Enviar feedback do dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Introduzir o PIN do gestor"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Ativado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desativado"</string>
@@ -3968,7 +3968,7 @@
     <string name="default_for_work" msgid="537558180548617528">"Predefinição para o trabalho"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assistência e entrada por voz"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"App assistente digital"</string>
-    <string name="default_digital_assistant_title" msgid="5654663086385490838">"App assistente digital predef."</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"App de assistente digital predefinida"</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"Pretende tornar <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> o seu assistente?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"O assistente pode ler informações sobre aplicações utilizadas no seu sistema, incluindo informações visíveis no ecrã ou acessíveis nas aplicações."</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Aceitar"</string>
@@ -4014,8 +4014,8 @@
     <string name="high_power_off" msgid="317000444619279018">"Utilização otimizada da bateria"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Otimização da bateria não disponível"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Não aplique a otimização da bateria. A bateria pode descarregar mais rapidamente."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Permitir que a aplicação seja sempre executada em segundo plano?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Permitir que a aplicação <xliff:g id="APP_NAME">%1$s</xliff:g> seja sempre executada em segundo plano pode reduzir a autonomia da bateria. \n\nPode alterar esta definição mais tarde em Definições &gt; Apps e notificações."</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Permitir que a app seja sempre executada em segundo plano?"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Permitir que a app <xliff:g id="APP_NAME">%1$s</xliff:g> seja sempre executada em segundo plano pode reduzir a autonomia da bateria. \n\nPode alterar esta definição mais tarde em Definições &gt; Apps e notificações."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Utilizou <xliff:g id="PERCENTAGE">%1$s</xliff:g> desde o último carregamento completo"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Gestão de energia"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Não utilizou bateria desde o último carregamento completo"</string>
@@ -4119,13 +4119,13 @@
     <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitida"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"Não permitida"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar aplicações fontes desconhecidas"</string>
-    <string name="write_settings" msgid="6864794401614425894">"Modificar def. sistema"</string>
+    <string name="write_settings" msgid="6864794401614425894">"Modificar definições do sistema"</string>
     <string name="keywords_write_settings" msgid="6908708078855507813">"gravar modificar definições do sistema"</string>
     <string name="write_settings_summary" msgid="2085800775513476479">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicações autorizadas a modificar definições sistema"</string>
     <string name="filter_install_sources_apps" msgid="6930762738519588431">"Pode instalar outras aplicações"</string>
     <string name="filter_write_settings_apps" msgid="4754994984909024093">"Podem modificar as definições do sistema"</string>
     <string name="write_settings_title" msgid="3011034187823288557">"Podem modificar as definições do sistema"</string>
-    <string name="write_system_settings" msgid="5555707701419757421">"Modificar def. sistema"</string>
+    <string name="write_system_settings" msgid="5555707701419757421">"Modificar definições do sistema"</string>
     <string name="permit_write_settings" msgid="3113056800709924871">"Permitir alteração das definições do sistema"</string>
     <string name="write_settings_description" msgid="1474881759793261146">"Esta autorização permite que uma aplicação modifique as definições do sistema."</string>
     <string name="write_settings_on" msgid="8533286548451191112">"Sim"</string>
@@ -4438,7 +4438,7 @@
     <string name="high_label" msgid="357503396626018487">"Elevada"</string>
     <string name="left_edge" msgid="1513576842959071849">"Extremidade esquerda"</string>
     <string name="right_edge" msgid="1505309103265829121">"Extremidade direita"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Uma sensibilidade mais elevada pode entrar em conflito com quaisquer gestos de aplicações ao longo das extremidades do ecrã."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Uma sensibilidade mais elevada pode entrar em conflito com quaisquer gestos de apps ao longo das extremidades do ecrã."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Sensibilidade para voltar atrás"</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Definições de gestos"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navegação por gestos, sensibilidade do botão anterior, gesto para voltar"</string>
@@ -4817,15 +4817,13 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Permite efeitos esbatidos nas janelas ao nível do compositor. Exige um reinício do dispositivo."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidade"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Autorizações, atividade da conta, dados pessoais"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Retoma de conteúdo multimédia"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Apresenta e mantém o leitor de multimédia visível nas Definições rápidas. Exige um reinício."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Remover"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Manter"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Remover esta sugestão?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Sugestão removida"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Anular"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"Tem pouco espaço de armazenamento. <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilizados – <xliff:g id="FREE_SPACE">%2$s</xliff:g> livres."</string>
-    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Enviar comentários"</string>
+    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"Enviar feedback"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"Pretende enviar-nos comentários acerca desta sugestão?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> copiado para a área de transferência."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
@@ -4902,7 +4900,7 @@
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar cartões e controlos quando bloqueado"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Mostrar controlos quando estiver bloqueado"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar cartões e controlos quando bloqueado"</string>
-    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para utilizar, defina primeiro um bloqueio de ecrã."</string>
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para utilizar, defina primeiro um bloqueio de ecrã"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controlos de dispositivos"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar cartões e passes"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para aceder aos controlos dos dispositivos ligados, mantenha premido o botão ligar/desligar."</string>
