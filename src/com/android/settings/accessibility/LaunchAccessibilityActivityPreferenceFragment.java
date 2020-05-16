@@ -148,7 +148,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends
         final Bundle bundle = ActivityOptions.makeBasic().setLaunchDisplayId(displayId).toBundle();
 
         intent.setComponent(name);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             final int userId = UserHandle.myUserId();
             getPrefContext().startActivityAsUser(intent, bundle, UserHandle.of(userId));
