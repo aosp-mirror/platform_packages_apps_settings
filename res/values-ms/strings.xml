@@ -807,7 +807,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Beritahu untuk rangkaian awam"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Beritahu apabila rangkaian awam berkualiti tinggi tersedia"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Hidupkan Wi-Fi secara automatik"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi akan dihidupkan kembali berdekatan dengan rangkaian disimpan yang berkualiti tinggi, seperti rangkaian rumah"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi akan dihidupkan kembali apabila berdekatan dengan rangkaian disimpan yang berkualiti tinggi, seperti rangkaian rumah"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Tidak tersedia kerana lokasi dimatikan. Hidupkan "<annotation id="link">"lokasi"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Tidak tersedia kerana pengimbasan Wi-Fi dimatikan"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Untuk menggunakan ciri, pilih pembekal penilaian rangkaian"</string>
@@ -838,7 +838,7 @@
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fi tidak dihidupkan kembali secara automatik"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"Rangkaian Wi-Fi"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"Lagi pilihan"</string>
-    <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Langsung"</string>
+    <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="3498653582115656526">"Imbas"</string>
     <string name="wifi_menu_advanced" msgid="1940919392030994019">"Terperinci"</string>
     <string name="wifi_menu_configure" msgid="352423980467311427">"Konfigurasikan"</string>
@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Jangan tunjukkan lagi"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Sambung"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi dihidupkan"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Disambungkan kepada <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Menyambung…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Gagal menyambung ke rangkaian."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Rangkaian di luar liputan"</string>
@@ -1001,7 +1000,7 @@
     <string name="wifi_details_subnet_mask" msgid="1619151769276260512">"Tapisan subrangkaian"</string>
     <string name="wifi_details_dns" msgid="273231528073312579">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="1913151339341722443">"Alamat IPv6"</string>
-    <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Rangkaian yg dsimpan"</string>
+    <string name="wifi_saved_access_points_label" msgid="5691340724310548151">"Rangkaian disimpan"</string>
     <string name="wifi_subscribed_access_points_tab" msgid="7224061396195667208">"Langganan"</string>
     <!-- no translation found for wifi_saved_access_points_tab (2075914709522121708) -->
     <skip />
@@ -1017,7 +1016,7 @@
     <string name="wifi_dns2" msgid="8494337355389723965">"DNS 2"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Get laluan"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Panjang awalan rangkaian"</string>
-    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Langsung"</string>
+    <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Maklumat peranti"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Ingat sambungan ini"</string>
     <string name="wifi_p2p_menu_search" msgid="8383306178784876840">"Mencari peranti"</string>
@@ -2105,7 +2104,7 @@
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Pembaca skrin terutamanya untuk orang yang buta dan rabun"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Ketik item pada skrn anda untuk mendengar item itu dibaca"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Pilihan kapsyen"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"Pilihan sari kata"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Pembesaran"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Kawasan pembesaran"</string>
     <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Pembesaran didayakan"</string>
@@ -2127,24 +2126,17 @@
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zum masuk dengan pantas pada skrin untuk melihat kandungan dengan lebih jelas.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Untuk mengezum masuk:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Ketik skrin&lt;br/&gt; 3. Seret 2 jari untuk menerokai skrin&lt;br/&gt; 4. Cubit dengan 2 jari untuk melaraskan zum&lt;br/&gt; 5. Gunakan pintasan untuk menghentikan pembesaran&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Untuk mengezum masuk sementara:&lt;/b&gt;&lt;br/&gt; 1. Gunakan pintasan untuk memulakan pembesaran&lt;br/&gt; 2. Sentuh &amp; tahan di mana-mana pada skrin&lt;br/&gt; 3. Seret jari untuk menerokai skrin&lt;br/&gt; 4. Angkat jari untuk menghentikan pembesaran"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Apabila pembesaran dihidupkan, anda boleh mengezum masuk pada skrin.\n\n"<b>"Untuk mengezum"</b>", mulakan pembesaran, kemudian ketik di mana-mana pada skrin.\n"<ul><li>"Seret sekurang-kurangnya 2 jari untuk menatal"</li>\n<li>"Cubit menggunakan sekurang-kurangnya 2 jari untuk melaraskan zum"</li></ul>\n\n<b>"Untuk mengezum sementara"</b>", mulakan pembesaran, kemudian sentuh &amp; tahan di mana-mana pada skrin.\n"<ul><li>"Seret untuk beralih-alih di sekitar skrin"</li>\n<li>"Angkat jari untuk mengezum keluar"</li></ul>\n\n"Anda tidak boleh mengezum masuk pada papan kekunci atau bar navigasi."</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Gunakan butang kebolehaksesan untuk buka"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_title_volume (494810949830845234) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Tahan kekunci kelantangan untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Ketik skrin tiga kali untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gunakan gerak isyarat untuk buka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Gunakan gerak isyarat kebolehaksesan baharu"</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_button (7002398857479782303) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_volume (5033080515460519183) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Untuk menggunakan ciri ini, ketik butang kebolehcapaian <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> di bahagian bawah skrin anda.\n\nUntuk menukar antara ciri, sentuh &amp; tahan butang kebolehcapaian."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Untuk menggunakan ciri ini, tekan &amp; tahan kedua-dua kekunci kelantangan."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Untuk memulakan dan menghentikan pembesaran, ketik tiga kali di mana-mana bahagian skrin anda."</string>
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture (4148062210755434854) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_talkback (8142847782708562793) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings (40769674586981429) -->
-    <skip />
-    <!-- no translation found for accessibility_tutorial_dialog_message_gesture_settings_talkback (7292969929578621958) -->
-    <skip />
+    <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Untuk menggunakan ciri ini, leret ke atas dari bahagian bawah skrin dengan menggunakan 2 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 2 jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Untuk menggunakan ciri ini, leret ke atas dari bahagian bawah skrin dengan menggunakan 3 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 3 jari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Untuk menggunakan ciri kebolehcapaian, leret ke atas dari bahagian bawah skrin dengan menggunakan 2 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 2 hari dan tahan."</string>
+    <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Untuk menggunakan ciri kebolehcapaian, leret ke atas dari bahagian bawah skrin dengan menggunakan 3 jari.\n\nUntuk menukar antara ciri, leret ke atas dengan menggunakan 3 hari dan tahan."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"OK"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Pintasan <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Butang kebolehaksesan"</string>
@@ -2155,9 +2147,11 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Leret ke atas dari bahagian bawah skrin menggunakan 2 jari.\n\nUntuk beralih antara ciri, leret ke atas menggunakan 2 jari dan tahan."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Leret ke atas dari bahagian bawah skrin menggunakan 3 jari.\n\nUntuk beralih antara ciri, leret ke atas menggunakan 3 jari dan tahan."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Tahan kekunci kelantangan"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"tahan kekunci kelantangan"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Tekan &amp; tahan kedua-dua kekunci kelantangan"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Ketik tiga kali pada skrin"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Ketik skrin 3 kali dengan cepat. Pintasan ini mungkin memperlahankan peranti anda."</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"ketik tiga kali pada skrin"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Ketik skrin 3 kali dengan cepat. Pintasan ini mungkin memperlahan peranti anda."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Terperinci"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Butang Kebolehaksesan ditetapkan kepada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, sentuh &amp; tahan butang Kebolehaksesan, kemudian pilih pembesaran."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"Gerak isyarat kebolehaksesan ditetapkan pada <xliff:g id="SERVICE">%1$s</xliff:g>. Untuk menggunakan pembesaran, leret ke atas menggunakan dua jari dari bahagian bawah skrin dan tahan. Kemudian, pilih pembesaran."</string>
@@ -3319,7 +3313,7 @@
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Getaran"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Bunyi semasa kuasa dihidupkan"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Sari Kata Langsung"</string>
-    <string name="live_caption_summary" msgid="2898451867595161809">"Kapsyen media automatik"</string>
+    <string name="live_caption_summary" msgid="2898451867595161809">"Sari kata media automatik"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Tiada"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> jadual ditetapkan</item>
@@ -3452,14 +3446,14 @@
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Kedudukan pemberitahuan boleh suai"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Atur kedudukan pemberitahuan secara automatik mengikut kaitan"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Tindakan dan balasan yang dicadangkan"</string>
-    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Tunjukkan secara automatik tindakan &amp; balasan yang dicadangkan"</string>
+    <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Tunjukkan tindakan &amp; balasan yang dicadangkan secara automatik"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Tunjukkan pemberitahuan baru-baru ini dan pemberitahuan yang ditunda"</string>
     <string name="notification_history" msgid="8663811361243456201">"Sejarah pemberitahuan"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"Gunakan sejarah pemberitahuan"</string>
     <string name="notification_history_off_title_extended" msgid="853807652537281601">"Sejarah pemberitahuan dimatikan"</string>
     <string name="notification_history_off_summary" msgid="671359587084797617">"Hidupkan sejarah pemberitahuan untuk melihat pemberitahuan baru-baru ini dan pemberitahuan yang ditunda"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Tiada pemberitahuan terbaharu"</string>
-    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Pemberitahuan terbaharu dan pemberitahuan ditunda akan muncul di sini"</string>
+    <string name="history_toggled_on_summary" msgid="9034278971358282728">"Pemberitahuan terbaharu dan pemberitahuan ditunda akan dipaparkan di sini"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"lihat tetapan pemberitahuan"</string>
     <string name="notification_history_open_notification" msgid="2655071846911258371">"buka pemberitahuan"</string>
     <string name="snooze_options_title" msgid="2109795569568344617">"Benarkan penundaan pemberitahuan"</string>
@@ -3468,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Titik pemberitahuan pada ikon apl"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Tunjukkan jalur perbualan terbaharu"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Gelembung"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Sesetengah pemberitahuan boleh muncul sebagai gelembung pada skrin"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Sesetengah pemberitahuan dan kandungan lain boleh dipaparkan sebagai gelembung pada skrin. Untuk membuka gelembung, ketik pada gelembung itu. Untuk mengetepikan gelembung, seret gelembung itu ke bawah skrin."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Gelembung"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Semua tetapan Gelembung"</string>
@@ -3619,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Disambungkan"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Sambung apl ini"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Apl yang disambungkan berkongsi kebenaran dan boleh mengakses data satu sama lain."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Hanya sambungkan apl yang anda percayai dengan data peribadi anda. Apl kerja mungkin mendedahkan data anda kepada pentadbir IT anda."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Sambung apl hanya sekiranya anda mempercayai bahawa apl itu tidak akan berkongsi data peribadi dengan pentadbir IT anda."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Percayai <xliff:g id="NAME">%1$s</xliff:g> kerja dengan data peribadi anda?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> mungkin mendedahkan data peribadi anda kepada pentadbir IT."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Sambung apl hanya sekiranya anda mempercayai bahawa apl itu tidak akan berkongsi data peribadi dengan pentadbir IT anda."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Data apl"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Apl ini boleh mengakses data dalam apl <xliff:g id="NAME">%1$s</xliff:g> peribadi anda."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Kebenaran"</string>
@@ -3631,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apl disambungkan</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> apl disambungkan</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Pasang <xliff:g id="NAME">%1$s</xliff:g> kerja untuk menyambungkan apl ini"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Pasang <xliff:g id="NAME">%1$s</xliff:g> peribadi untuk menyambungkan apl ini"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Untuk menyambung apl ini, pasang <xliff:g id="NAME">%1$s</xliff:g> dalam profil kerja anda"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Untuk menyambung apl ini, pasang <xliff:g id="NAME">%1$s</xliff:g> dalam profil peribadi anda"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Ketik untuk mendapatkan apl"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Akses Jangan Ganggu"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Benarkan Jangan Ganggu"</string>
@@ -4069,9 +4062,9 @@
     <string name="background_check_pref" msgid="5304564658578987535">"Semakan latar belakang"</string>
     <string name="background_check_title" msgid="225170874283229686">"Akses latar belakang penuh"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Gunakan teks daripada skrin"</string>
-    <string name="assist_access_context_summary" msgid="6951814413185646275">"Benarkan apl bantu mengakses kandungan skrin sebagai teks"</string>
+    <string name="assist_access_context_summary" msgid="6951814413185646275">"Benarkan apl bantuan mengakses kandungan skrin sebagai teks"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Gunakan tangkapan skrin"</string>
-    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Benarkan apl bantu mengakses imej skrin"</string>
+    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Benarkan apl bantuan mengakses imej skrin"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Kelipkan skrin"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Kelipkan tepi skrin apabila apl bantuan mengakses teks daripada skrin atau tangkapan skrin"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Apl bantu dapat membantu anda berdasarkan maklumat daripada skrin yang sedang dilihat. Sesetengah apl menyokong perkhidmatan pelancar dan input suara untuk memberi anda bantuan bersepadu."</string>
@@ -4425,7 +4418,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Buka kamera dengan cepat"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Untuk membuka kamera dengan cepat, tekan butang kuasa dua kali. Berfungsi daripada sebarang skrin."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Buka kamera dengan cepat"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Balikkan kamera atau untuk mengambil swafoto"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Balikkan kamera untuk mengambil swafoto"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Ambil potret diri dengan lebih pantas"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navigasi sistem"</string>
@@ -4445,11 +4438,11 @@
     <string name="high_label" msgid="357503396626018487">"Tinggi"</string>
     <string name="left_edge" msgid="1513576842959071849">"Bahagian tepi sebelah kiri"</string>
     <string name="right_edge" msgid="1505309103265829121">"Bahagian tepi sebelah kanan"</string>
-    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Kepekaan yang lebih tinggi mungkin bercanggah dengan mana-mana gerak isyarat apl sepanjang bahagian tepi skrin."</string>
+    <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"Kepekaan yang lebih tinggi mungkin mempengaruhi fungsi gerak isyarat apl di tepi skrin."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Kepekaan Belakang"</string>
     <string name="gesture_settings_activity_title" msgid="6047431928567911330">"Tetapan Gerak Isyarat"</string>
     <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"navigasi gerak isyarat, kepekaan ke belakang, gerak isyarat ke belakang"</string>
-    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Ketik dua kali untuk menyemak telefon"</string>
+    <string name="ambient_display_title" product="default" msgid="5885136049497127396">"Ketik dua kali untuk memeriksa telefon"</string>
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Ketik dua kali untuk menyemak tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Ketik dua kali untuk menyemak peranti"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Untuk menyemak masa, pemberitahuan dan maklumat lain, ketik dua kali pada skrin anda."</string>
@@ -4824,11 +4817,9 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Mendayakan kabur tetingkap pada tahap pengatur huruf. Memerlukan but semula peranti."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privasi"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Kebenaran, aktiviti akaun, data peribadi"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Media bermula semula"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Pemain media ditunjukkan secara berterusan dalam Tetapan Pantas. Memerlukan but semula."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Alih keluar"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Simpan"</string>
-    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Alih keluarkan cadangan ini?"</string>
+    <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Alih keluar cadangan ini?"</string>
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"Cadangan dialih keluar"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"Buat asal"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"Storan tinggal sedikit. <xliff:g id="PERCENTAGE">%1$s</xliff:g> digunakan - <xliff:g id="FREE_SPACE">%2$s</xliff:g> kosong"</string>

@@ -86,7 +86,7 @@ public class BubblePreferenceController extends NotificationPreferenceController
     @Override
     public void updateState(Preference preference) {
         if (mIsAppPage && mAppRow != null) {
-            mHasSentInvalidMsg = mBackend.hasSentMessage(mAppRow.pkg, mAppRow.uid);
+            mHasSentInvalidMsg = mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
             mNumConversations = mBackend.getConversations(
                     mAppRow.pkg, mAppRow.uid).getList().size();
             // We're on the app specific bubble page which displays a tri-state

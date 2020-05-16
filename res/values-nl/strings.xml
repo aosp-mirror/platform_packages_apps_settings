@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Nooit meer laten zien"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"Verbinden"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wifi ingeschakeld"</string>
-    <!-- no translation found for wifi_connected_to_message (7470435873743756802) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"Verbonden met <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Verbinden…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Kan geen verbinding maken met het netwerk"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Netwerk is niet binnen bereik"</string>
@@ -2148,8 +2147,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Swipe met twee vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met twee vingers omhoog en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Swipe met drie vingers omhoog vanaf de onderkant van het scherm.\n\nSwipe met drie vingers omhoog en houd vast om tussen functies te schakelen."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Volumetoetsen ingedrukt houden"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"volumetoetsen ingedrukt houden"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Houd beide volumetoetsen ingedrukt"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Drie keer op het scherm tikken"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"drie keer op het scherm tikken"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="3081710523998838305">"Tik snel drie keer op het scherm. Deze snelkoppeling kan je apparaat vertragen."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Geavanceerd"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Toegankelijkheid is ingesteld op <xliff:g id="SERVICE">%1$s</xliff:g>. Als je vergroting wilt gebruiken, tik je op de knop Toegankelijkheid, houd je deze vast en selecteer je Vergroting."</string>
@@ -3461,7 +3462,6 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"Meldingsstipje op app-icoon"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Strook met recente gesprekken weergeven"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbels"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"Bepaalde meldingen kunnen in bubbels worden weergegeven op het scherm"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Bepaalde meldingen en andere content kunnen in bubbels worden weergegeven op het scherm. Tik op een bubbel om deze te openen. Sleep deze naar de onderkant van het scherm als je deze wilt sluiten."</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bubbels"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"Alle instellingen voor bubbels"</string>
@@ -3612,9 +3612,9 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Gekoppeld"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Deze apps koppelen"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Gekoppelde apps delen rechten en hebben toegang tot elkaars gegevens."</string>
-    <string name="interact_across_profiles_summary_2" msgid="3519987216379855865">"Koppel alleen apps die je met je persoonlijke gegevens vertrouwt. Werk-apps kunnen je gegevens toegankelijk maken voor je IT-beheerder."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Koppel apps alleen als je erop vertrouwt dat ze geen persoonlijke gegevens met je IT-beheerder delen."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"<xliff:g id="NAME">%1$s</xliff:g> voor het werk vertrouwen met je persoonlijke gegevens?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="1683419794750100336">"<xliff:g id="NAME">%1$s</xliff:g> kan je persoonlijke gegevens toegankelijk maken voor je IT-beheerder."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Koppel apps alleen als je erop vertrouwt dat ze geen persoonlijke gegevens met je IT-beheerder delen."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"App-gegevens"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Deze app heeft altijd toegang tot je persoonlijke <xliff:g id="NAME">%1$s</xliff:g>-app."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Rechten"</string>
@@ -3624,8 +3624,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps gekoppeld</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app gekoppeld</item>
     </plurals>
-    <string name="interact_across_profiles_install_work_app_title" msgid="4901842246952439197">"Zakelijke <xliff:g id="NAME">%1$s</xliff:g> installeren om deze apps te koppelen"</string>
-    <string name="interact_across_profiles_install_personal_app_title" msgid="5888651450930541550">"Persoonlijke <xliff:g id="NAME">%1$s</xliff:g> installeren om deze apps te koppelen"</string>
+    <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Installeer <xliff:g id="NAME">%1$s</xliff:g> in je werkprofiel om deze apps te koppelen"</string>
+    <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Installeer <xliff:g id="NAME">%1$s</xliff:g> in je persoonlijke profiel om deze apps te koppelen"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tik om de app te installeren"</string>
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Toegang tot \'Niet storen\'"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'Niet storen\' toestaan"</string>
@@ -4817,8 +4817,6 @@
     <string name="enable_blurs_on_windows_summary" msgid="8962906921531490386">"Schakelt venstervervaging in op compositieniveau. Hiervoor moet het apparaat opnieuw worden opgestart."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacy"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Rechten, accountactiviteit, persoonsgegevens"</string>
-    <string name="quick_settings_media_player" msgid="5365779284386769352">"Media hervatten"</string>
-    <string name="quick_settings_media_player_summary" msgid="7015497741849621452">"Hiermee wordt de mediaspeler vast weergegeven in \'Snelle instellingen\'. Vereist opnieuw opstarten."</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Verwijderen"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Behouden"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Deze suggestie verwijderen?"</string>
