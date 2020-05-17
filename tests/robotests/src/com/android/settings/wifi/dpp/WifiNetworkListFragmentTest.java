@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.os.HandlerThread;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -138,5 +139,18 @@ public class WifiNetworkListFragmentTest {
         mWifiNetworkListFragment.onPreferenceClick(preference);
 
         verify(mWifiNetworkListFragment.mOnChooseNetworkListener).onChooseNetwork(any());
+    }
+
+    @Test
+    public void onDestroy_quitWorkerThread() {
+        mWifiNetworkListFragment.mWorkerThread = mock(HandlerThread.class);
+
+        try {
+            mWifiNetworkListFragment.onDestroyView();
+        } catch (IllegalArgumentException e) {
+            // Ignore the exception from super class.
+        }
+
+        verify(mWifiNetworkListFragment.mWorkerThread).quit();
     }
 }
