@@ -297,8 +297,14 @@ public final class AccessibilityGestureNavigationTutorial {
 
         final ViewPager viewPager = contentView.findViewById(R.id.view_pager);
         viewPager.setAdapter(new TutorialPagerAdapter(tutorialPages));
+        viewPager.setContentDescription(context.getString(R.string.accessibility_tutorial_pager,
+                /* firstPage */ 1, tutorialPages.size()));
+        viewPager.setImportantForAccessibility(tutorialPages.size() > 1
+                ? View.IMPORTANT_FOR_ACCESSIBILITY_YES
+                : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         viewPager.addOnPageChangeListener(
-                new TutorialPageChangeListener(context, title, instruction, tutorialPages));
+                new TutorialPageChangeListener(context, viewPager, title, instruction,
+                        tutorialPages));
 
         return contentView;
     }
@@ -479,10 +485,12 @@ public final class AccessibilityGestureNavigationTutorial {
         private final TextSwitcher mTitle;
         private final TextSwitcher mInstruction;
         private final List<TutorialPage> mTutorialPages;
+        private final ViewPager mViewPager;
 
-        TutorialPageChangeListener(Context context, ViewGroup title, ViewGroup instruction,
-                List<TutorialPage> tutorialPages) {
+        TutorialPageChangeListener(Context context, ViewPager viewPager, ViewGroup title,
+                ViewGroup instruction, List<TutorialPage> tutorialPages) {
             this.mContext = context;
+            this.mViewPager = viewPager;
             this.mTitle = (TextSwitcher) title;
             this.mInstruction = (TextSwitcher) instruction;
             this.mTutorialPages = tutorialPages;
@@ -521,6 +529,11 @@ public final class AccessibilityGestureNavigationTutorial {
             }
             mTutorialPages.get(position).getIndicatorIcon().setEnabled(true);
             mLastTutorialPagePosition = position;
+
+            final int currentPageNumber = position + 1;
+            mViewPager.setContentDescription(
+                    mContext.getString(R.string.accessibility_tutorial_pager,
+                            currentPageNumber, mTutorialPages.size()));
         }
 
         @Override
