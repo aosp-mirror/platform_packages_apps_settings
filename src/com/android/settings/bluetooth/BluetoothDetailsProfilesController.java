@@ -28,6 +28,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -48,6 +49,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         implements Preference.OnPreferenceClickListener,
         LocalBluetoothProfileManager.ServiceListener {
     private static final String KEY_PROFILES_GROUP = "bluetooth_profiles";
+    private static final String KEY_BOTTOM_PREFERENCE = "bottom_preference";
+    private static final int ORDINAL = 99;
 
     @VisibleForTesting
     static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
@@ -55,7 +58,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private LocalBluetoothManager mManager;
     private LocalBluetoothProfileManager mProfileManager;
     private CachedBluetoothDevice mCachedDevice;
-    private PreferenceCategory mProfilesContainer;
+
+    @VisibleForTesting
+    PreferenceCategory mProfilesContainer;
 
     public BluetoothDetailsProfilesController(Context context, PreferenceFragmentCompat fragment,
             LocalBluetoothManager manager, CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -69,6 +74,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     @Override
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
+        mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -282,6 +288,16 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             if (pref != null) {
                 mProfilesContainer.removePreference(pref);
             }
+        }
+
+        Preference preference = mProfilesContainer.findPreference(KEY_BOTTOM_PREFERENCE);
+        if (preference == null) {
+            preference = new Preference(mContext);
+            preference.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+            preference.setEnabled(false);
+            preference.setKey(KEY_BOTTOM_PREFERENCE);
+            preference.setOrder(ORDINAL);
+            mProfilesContainer.addPreference(preference);
         }
     }
 
