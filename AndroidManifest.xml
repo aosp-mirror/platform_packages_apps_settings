@@ -270,25 +270,6 @@
         </activity>
 
         <activity
-            android:name="Settings$WifiSettings2Activity"
-            android:label="@string/wifi_settings"
-            android:icon="@drawable/ic_settings_wireless"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_SETTINGS2" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.wifi.WifiSettings2" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <activity
             android:name=".wifi.WifiPickerActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />

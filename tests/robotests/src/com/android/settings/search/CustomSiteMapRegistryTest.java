@@ -35,7 +35,7 @@ import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
-import com.android.settings.wifi.WifiSettings2;
+import com.android.settings.wifi.WifiSettings;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,8 +58,8 @@ public class CustomSiteMapRegistryTest {
     }
 
     @Test
-    public void shouldContainWifiSettings2Pairs() {
-        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(WifiSettings2.class.getName()))
+    public void shouldContainWifiSettingsPairs() {
+        assertThat(CustomSiteMapRegistry.CUSTOM_SITE_MAP.get(WifiSettings.class.getName()))
                 .isEqualTo(NetworkDashboardFragment.class.getName());
     }
 
