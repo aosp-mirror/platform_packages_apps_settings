@@ -42,15 +42,15 @@
             android:summary="@string/wifi_hotspot_auto_off_summary"/>
 
         <ListPreference
+            android:key="wifi_tether_network_ap_band_2"
+            android:title="@string/wifi_hotspot_ap_band_title"/>
+
+        <ListPreference
             android:key="wifi_tether_security_2"
             android:title="@string/wifi_security"
             android:summary="@string/summary_placeholder"
             android:entries="@array/wifi_tether_security"
             android:entryValues="@array/wifi_tether_security_values"/>
-
-        <ListPreference
-            android:key="wifi_tether_network_ap_band_2"
-            android:title="@string/wifi_hotspot_ap_band_title"/>
     </PreferenceCategory>
 
     <PreferenceCategory
