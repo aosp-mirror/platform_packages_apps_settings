@@ -264,6 +264,18 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         return 0;
     }
 
+    /**
+     * Whether preference is allowing to be displayed to the user.
+     *
+     * @param preference to check if it can be displayed to the user (not hidding in expand area).
+     * @return {@code true} when preference is allowing to be displayed to the user.
+     * {@code false} when preference is hidden in expand area and not been displayed to the user.
+     */
+    protected boolean isPreferenceExpanded(Preference preference) {
+        return ((mAdapter == null)
+                || (mAdapter.getPreferenceAdapterPosition(preference) != RecyclerView.NO_POSITION));
+    }
+
     protected void onDataSetChanged() {
         highlightPreferenceIfNeeded();
         updateEmptyView();
