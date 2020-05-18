@@ -73,7 +73,8 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
     protected void onSlicePinned() {
         mMediaDevices.clear();
         mIsTouched = false;
-        if (mLocalMediaManager == null) {
+        if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
+                mLocalMediaManager.getPackageName())) {
             mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
         }
 
