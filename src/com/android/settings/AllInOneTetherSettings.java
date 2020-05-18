@@ -98,9 +98,9 @@ public class AllInOneTetherSettings extends RestrictedDashboardFragment
     public static final String ETHERNET_TETHER_KEY = "enable_ethernet_tethering" + DEDUP_POSTFIX;
 
     @VisibleForTesting
-    static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
+    static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
     @VisibleForTesting
-    static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
+    static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
     @VisibleForTesting
     static final int EXPANDED_CHILD_COUNT_MAX = Integer.MAX_VALUE;
     private static final String TAG = "AllInOneTetherSettings";
