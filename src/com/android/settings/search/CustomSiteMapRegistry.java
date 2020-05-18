@@ -35,7 +35,7 @@ import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
-import com.android.settings.wifi.WifiSettings2;
+import com.android.settings.wifi.WifiSettings;
 
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class CustomSiteMapRegistry {
         CUSTOM_SITE_MAP.put(
                 WallpaperSuggestionActivity.class.getName(), DisplaySettings.class.getName());
         CUSTOM_SITE_MAP.put(
-                WifiSettings2.class.getName(), NetworkDashboardFragment.class.getName());
+                WifiSettings.class.getName(), NetworkDashboardFragment.class.getName());
         CUSTOM_SITE_MAP.put(PowerUsageAdvanced.class.getName(), PowerUsageSummary.class.getName());
         CUSTOM_SITE_MAP.put(RecentLocationRequestSeeAllFragment.class.getName(),
                 LocationSettings.class.getName());
