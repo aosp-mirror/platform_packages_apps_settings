@@ -179,7 +179,11 @@ public class ConversationPriorityPreference extends Preference {
             // a11y service won't always read the newly appearing text in the right order if the
             // selection happens too soon (readback happens on a different thread as layout). post
             // the selection to make that conflict less likely
-            parent.post(() -> mSilenceButton.setSelected(true));
+            parent.post(() -> {
+                mSilenceButton.setSelected(true);
+                mAlertButton.setSelected(false);
+                mPriorityButton.setSelected(false);
+            });
         } else {
             if (isPriority) {
                 alertSummary.setVisibility(GONE);
@@ -197,7 +201,11 @@ public class ConversationPriorityPreference extends Preference {
                 mAlertButton.setBackground(unselectedBackground);
                 mPriorityButton.setBackground(selectedBackground);
                 mSilenceButton.setBackground(unselectedBackground);
-                parent.post(() -> mPriorityButton.setSelected(true));
+                parent.post(() -> {
+                    mSilenceButton.setSelected(false);
+                    mAlertButton.setSelected(false);
+                    mPriorityButton.setSelected(true);
+                });
             } else {
                 alertSummary.setVisibility(VISIBLE);
                 alertIcon.setImageTintList(colorAccent);
@@ -214,7 +222,11 @@ public class ConversationPriorityPreference extends Preference {
                 mAlertButton.setBackground(selectedBackground);
                 mPriorityButton.setBackground(unselectedBackground);
                 mSilenceButton.setBackground(unselectedBackground);
-                parent.post(() -> mAlertButton.setSelected(true));
+                parent.post(() -> {
+                    mSilenceButton.setSelected(false);
+                    mAlertButton.setSelected(true);
+                    mPriorityButton.setSelected(false);
+                });
             }
         }
     }
