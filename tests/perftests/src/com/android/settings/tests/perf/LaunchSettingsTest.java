@@ -79,6 +79,7 @@ public class LaunchSettingsTest {
     private Instrumentation mInstrumentation;
     private Map<String, ArrayList<Integer>> mResult;
     private String mDefaultScreenTimeout;
+    private String mDefaultAirplaneModeStatus;
 
     @Before
     public void setUp() throws Exception {
@@ -88,7 +89,9 @@ public class LaunchSettingsTest {
         mResult = new LinkedHashMap<>();
         mDefaultScreenTimeout = mDevice.executeShellCommand(
                 "settings get system screen_off_timeout");
+        mDefaultAirplaneModeStatus = getAirplaneModeStatus();
         setScreenTimeOut(SCREEN_TIME_OUT);
+        setAirplaneMode();
         mDevice.pressHome();
         mDevice.waitForIdle(TIME_OUT);
 
@@ -102,6 +105,7 @@ public class LaunchSettingsTest {
         putResultToBundle();
         mInstrumentation.sendStatus(0, mBundle);
         resetScreenTimeout();
+        resetAirplaneMode();
         closeApp();
     }
 
@@ -123,12 +127,12 @@ public class LaunchSettingsTest {
         handleLaunchResult(title, mString);
     }
 
-    private void handleLaunchResult(String title, String s) {
-        Matcher mMatcher = PATTERN.matcher(s);
+    private void handleLaunchResult(String title, String shellCommandResult) {
+        Matcher mMatcher = PATTERN.matcher(shellCommandResult);
         if (mMatcher.find()) {
             mResult.get(title).add(Integer.valueOf(mMatcher.group().split("\\s")[1]));
         } else {
-            fail("Some pages can't be found");
+            fail(String.format("Not found %s.\n %s", title, shellCommandResult));
         }
     }
 
@@ -145,6 +149,10 @@ public class LaunchSettingsTest {
                     getMin(mResult.get(string)));
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "avg"),
                     getAvg(mResult.get(string)));
+            mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "all_results"),
+                    mResult.get(string).toString());
+            mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "results_count"),
+                    String.valueOf(mResult.get(string).size()));
         }
     }
 
@@ -170,5 +178,28 @@ public class LaunchSettingsTest {
             timeout = mDefaultScreenTimeout;
         }
         setScreenTimeOut(timeout);
+    }
+
+    private void setAirplaneMode() throws Exception {
+        if (mDefaultAirplaneModeStatus.equals("0\n")) {
+            clickAirplaneMode();
+        }
+    }
+
+    private void resetAirplaneMode() throws Exception {
+        if (!getAirplaneModeStatus().equals(mDefaultAirplaneModeStatus)) {
+            clickAirplaneMode();
+        }
+    }
+
+    private void clickAirplaneMode() throws Exception {
+        mDevice.executeShellCommand("am start -W -a android.settings.AIRPLANE_MODE_SETTINGS");
+        mDevice.waitForIdle(TIME_OUT);
+        mDevice.findObject(By.textContains("Airplane")).click();
+        mDevice.waitForIdle(TIME_OUT);
+    }
+
+    private String getAirplaneModeStatus() throws Exception {
+        return mDevice.executeShellCommand("settings get global airplane_mode_on");
     }
 }
