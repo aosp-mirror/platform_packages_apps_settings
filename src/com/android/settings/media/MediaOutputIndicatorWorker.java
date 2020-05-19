@@ -81,14 +81,17 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         mContext.registerReceiver(mReceiver, intentFilter);
         mLocalBluetoothManager.getEventManager().registerCallback(this);
 
-        if (mLocalMediaManager == null) {
-            final MediaController controller = getActiveLocalMediaController();
-            if (controller != null) {
-                mPackageName = controller.getPackageName();
-            }
-            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName, null);
+        final MediaController controller = getActiveLocalMediaController();
+        if (controller == null) {
+            mPackageName = null;
+        } else {
+            mPackageName = controller.getPackageName();
         }
-
+        if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
+                mLocalMediaManager.getPackageName())) {
+            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName,
+                    null /* notification */);
+        }
         mLocalMediaManager.registerCallback(this);
         mLocalMediaManager.startScan();
     }

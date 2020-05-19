@@ -54,8 +54,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
-    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 2;
-    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
+    private static final int EXPANDED_CHILD_COUNT_WITH_SECURITY_NON = 3;
+    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 4;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
