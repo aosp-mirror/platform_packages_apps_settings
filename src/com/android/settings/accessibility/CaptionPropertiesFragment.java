@@ -123,12 +123,12 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
 
     private CharSequence geTextAppearanceSummary(Context context) {
         final String[] fontSizeSummaries = context.getResources().getStringArray(
-                R.array.captioning_font_size_selector_titles);
+                R.array.captioning_font_size_selector_summaries);
 
         final float fontSize = mCaptioningManager.getFontScale();
         final int idx = Floats.indexOf(mFontSizeValuesArray, fontSize);
-        final String fontSizeSummary = fontSizeSummaries[idx == /* not exist */ -1 ? 0 : idx];
-        return context.getString(R.string.captioning_caption_appearance_summary, fontSizeSummary);
+
+        return fontSizeSummaries[idx == /* not exist */ -1 ? 0 : idx];
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

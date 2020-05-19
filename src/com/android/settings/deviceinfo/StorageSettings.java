@@ -618,12 +618,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     data.title = context.getString(R.string.storage_menu_free);
                     data.key = KEY_STORAGE_SETTINGS_FREE_SPACE;
                     data.screenTitle = context.getString(R.string.storage_menu_free);
-                    // We need to define all three in order for this to trigger properly.
                     data.intentAction = StorageManager.ACTION_MANAGE_STORAGE;
-                    data.intentTargetPackage =
-                            context.getString(R.string.config_deletion_helper_package);
-                    data.intentTargetClass =
-                            context.getString(R.string.config_deletion_helper_class);
                     result.add(data);
 
                     return result;
