@@ -35,12 +35,17 @@ import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
 import com.android.settings.testutils.shadow.ShadowAudioManager;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -51,15 +56,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowAudioManager.class)
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
+        ShadowBluetoothUtils.class})
 public class MediaDeviceUpdateWorkerTest {
 
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private static final Uri URI1 = Uri.parse("content://com.android.settings.slices/action/"
+            + "media_output?media_package_name=com.music1");
+    private static final Uri URI2 = Uri.parse("content://com.android.settings.slices/action/"
+            + "media_output?media_package_name=com.music2");
+    private static final String TEST_DEVICE_PACKAGE_NAME1 = "com.music1";
+    private static final String TEST_DEVICE_PACKAGE_NAME2 = "com.music2";
     private static final String TEST_DEVICE_1_ID = "test_device_1_id";
     private static final String TEST_DEVICE_2_ID = "test_device_2_id";
     private static final String TEST_DEVICE_3_ID = "test_device_3_id";
 
     private final List<MediaDevice> mMediaDevices = new ArrayList<>();
+
+    @Mock
+    private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private BluetoothEventManager mBluetoothEventManager;
 
     private MediaDeviceUpdateWorker mMediaDeviceUpdateWorker;
     private ContentResolver mResolver;
@@ -208,5 +225,22 @@ public class MediaDeviceUpdateWorkerTest {
 
         assertThat(mMediaDeviceUpdateWorker.getActiveRemoteMediaDevice()).containsExactly(
                 remoteSessionInfo);
+    }
+
+    @Test
+    public void onSlicePinned_packageUpdated_checkPackageName() {
+        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
+        when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
+        mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI1);
+        mMediaDeviceUpdateWorker.onSlicePinned();
+
+        assertThat(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName()).matches(
+                TEST_DEVICE_PACKAGE_NAME1);
+
+        mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI2);
+        mMediaDeviceUpdateWorker.onSlicePinned();
+
+        assertThat(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName()).matches(
+                TEST_DEVICE_PACKAGE_NAME2);
     }
 }
