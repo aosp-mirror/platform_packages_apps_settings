@@ -120,18 +120,10 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         if (!mCrossProfileApps.canConfigureInteractAcrossProfiles(mPackageName)) {
             logNonConfigurableAppMetrics();
         }
-        Bundle bundle = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGS);
-        if (bundle == null) {
-            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
-            return;
-        }
-        Intent intent = (Intent) bundle.get(INTENT_KEY);
-        if (intent == null) {
-            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
-            return;
-        }
-        if (ACTION_MANAGE_CROSS_PROFILE_ACCESS.equals(intent.getAction())) {
+        if (launchedByApp()) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_APP);
+        } else {
+            logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
         }
     }
 
@@ -270,6 +262,9 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                         logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_USER_CONSENTED);
                         enableInteractAcrossProfiles(true);
                         refreshUi();
+                        if (launchedByApp()) {
+                            setIntentAndFinish(/* appChanged= */ true);
+                        }
                     }
                 })
                 .setNegativeButton(R.string.deny, new DialogInterface.OnClickListener() {
@@ -463,5 +458,17 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.INTERACT_ACROSS_PROFILES;
+    }
+
+    private boolean launchedByApp() {
+        final Bundle bundle = getIntent().getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGS);
+        if (bundle == null) {
+            return false;
+        }
+        final Intent intent = (Intent) bundle.get(INTENT_KEY);
+        if (intent == null) {
+            return false;
+        }
+        return ACTION_MANAGE_CROSS_PROFILE_ACCESS.equals(intent.getAction());
     }
 }
