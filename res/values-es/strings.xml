@@ -431,7 +431,7 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Si proteges el tablet con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Si proteges el dispositivo con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Si proteges el teléfono con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
-    <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"¿No quieres configurar el PIN?"</string>
+    <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"¿No quieres configurar un PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"¿No quieres configurar la contraseña?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"¿No quieres configurar el patrón?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Configurar bloqueo de pantalla"</string>
@@ -594,12 +594,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"Si vuelves a introducir un patrón incorrecto, este usuario se eliminará"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Si vuelves a introducir un PIN incorrecto, este usuario se eliminará"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Si vuelves a introducir una contraseña incorrecta, este usuario se eliminará"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Si vuelves a introducir un patrón incorrecto, tu perfil de trabajo y sus datos se eliminarán"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Si vuelves a introducir un PIN incorrecto, tu perfil de trabajo y sus datos se eliminarán"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Si vuelves a introducir una contraseña incorrecta, tu perfil de trabajo y sus datos se eliminarán"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Si vuelves a introducir un patrón incorrecto en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Si vuelves a introducir un PIN incorrecto en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Si vuelves a introducir una contraseña incorrecta en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Se han producido demasiados intentos fallidos. Los datos de este dispositivo se eliminarán."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Se han producido demasiados intentos fallidos. Este usuario se eliminará."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Ha habido demasiados intentos fallidos. Se eliminarán este perfil de trabajo y sus datos."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Ha habido demasiados intentos incorrectos. Se eliminarán este perfil de trabajo y sus datos."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Cerrar"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Debe contener al menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
@@ -1752,7 +1752,7 @@
     <string name="settings_safetylegal_activity_title" msgid="2218587051061093358">"Información de seguridad"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="6571695168138207587">"No tienes conexión de datos. Para ver esta información, accede a %s desde cualquier ordenador conectado a Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Cargando…"</string>
-    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Establece el bloqueo de pantalla"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Establece un bloqueo de pantalla"</string>
     <string name="lockpassword_choose_your_password_message" msgid="4474728476383676731">"Por seguridad, establece una contraseña"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar la huella, añade una contraseña"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar la huella, añade un patrón"</string>
@@ -1761,7 +1761,7 @@
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Por seguridad, establece un patrón"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Vuelve a introducir tu contraseña"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Escribe tu contraseña del trabajo"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma el patrón"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma tu patrón"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Dibuja tu patrón del trabajo"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Vuelve a introducir tu PIN"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Introduce tu PIN del trabajo"</string>
@@ -2019,7 +2019,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado en pantalla"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Teclado virtual disponible"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestionar teclados en pantalla"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Ayuda del teclado"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
@@ -2028,7 +2029,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Muestra combinaciones de teclas disponibles"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Perfiles de trabajo y herramientas"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Teclado virtual para el trabajo"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidad del puntero"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mandos de videojuegos"</string>
@@ -2092,7 +2094,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Ajustes de accesibilidad"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Lectores de pantalla, pantalla, controles de interacción"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Ajustes de visión"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad posteriormente en Ajustes."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad más tarde en Ajustes."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambia el tamaño de la fuente"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio y texto en pantalla"</string>
@@ -2125,12 +2127,14 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toca un botón para ampliar"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Amplía rápidamente la pantalla para ver mejor el contenido.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para iniciar la ampliación.&lt;br/&gt; 2. Toca la pantalla.&lt;br/&gt; 3. Arrastra dos dedos para moverte por la pantalla.&lt;br/&gt; 4. Pellizca con dos dedos para ajustar el zoom.&lt;br/&gt; 5. Detén la ampliación mediante el acceso directo.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para ampliar contenido de forma temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; 1. Usa el acceso directo para la ampliación.&lt;br/&gt; 2. Mantén pulsado cualquier punto de la pantalla.&lt;br/&gt; 3. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; 4. Levanta el dedo para dejar de ampliar."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Si la ampliación está activada, puedes ampliar la pantalla.\n\n"<b>"Para ampliar"</b>", inicia la ampliación y toca la parte de la pantalla que quieras ampliar.\n"<ul><li>"Arrastra al menos dos dedos para desplazarte."</li>\n<li>"Pellizca la pantalla con al menos dos dedos para ajustar el zoom."</li></ul>\n\n<b>"Para ampliar elementos temporalmente"</b>", inicia la ampliación y mantén pulsada cualquier parte de la pantalla.\n"<ul><li>"Arrastra un dedo para desplazarte por la pantalla."</li>\n<li>"Levanta el dedo para reducir la imagen."</li></ul>\n\n"El teclado y la barra de navegación no se pueden ampliar."</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa el botón de accesibilidad para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén pulsadas las teclas de volumen para abrirla"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tocar tres veces la pantalla para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usa el nuevo gesto de accesibilidad"</string>
-    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esta función, toca el botón Accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>, situado en la parte inferior de la pantalla.\n\nPara pasar de una función a otra, mantén pulsado ese botón."</string>
+    <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esta función, toca el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>, situado en la parte inferior de la pantalla.\n\nPara pasar de una función a otra, mantén pulsado el botón de accesibilidad."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para usar esta función, mantén pulsadas las dos teclas de volumen."</string>
     <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Para iniciar o detener la función de ampliación, toca tres veces en cualquier parte de la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Para usar esta función, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
@@ -2907,7 +2911,7 @@
     <string name="vpn_done" msgid="5137858784289564985">"Cerrar"</string>
     <string name="vpn_save" msgid="683868204634860888">"Guardar"</string>
     <string name="vpn_connect" msgid="7102335248484045354">"Conectar"</string>
-    <string name="vpn_replace" msgid="1533147558671640341">"Sustituir"</string>
+    <string name="vpn_replace" msgid="1533147558671640341">"Reemplazar"</string>
     <string name="vpn_edit" msgid="5862301148429324911">"Editar perfil de VPN"</string>
     <string name="vpn_forget" msgid="2913950864877236737">"Olvidar"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Conectar a <xliff:g id="PROFILE">%s</xliff:g>"</string>
@@ -2915,7 +2919,7 @@
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="41856553718304367">"Versión <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Olvidar VPN"</string>
-    <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Sustituir VPN actual?"</string>
+    <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Reemplazar VPN actual?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"¿Configurar el modo de VPN siempre activada?"</string>
     <string name="vpn_first_always_on_vpn_message" msgid="2769478310633047870">"Si esta opción está activada, no tendrás acceso a Internet hasta que se conecte la red VPN"</string>
     <string name="vpn_replace_always_on_vpn_enable_message" msgid="9154843462740876652">"La nueva red VPN sustituirá a la actual y no tendrás acceso a Internet hasta que dicha VPN se conecte"</string>
@@ -3047,13 +3051,13 @@
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepto si hay otra aplicación de pago abierta"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"En un terminal contactless, paga con:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Cómo pagar en el terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación de pago. A continuación, solo tienes que sostener la parte trasera del teléfono sobre cualquier terminal con el símbolo de pago sin contacto."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación de pago. A continuación, solo tienes que sostener la parte trasera del teléfono sobre cualquier terminal con el símbolo de pago contactless."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Más..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Elegir aplicación de pago predeterminada"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualizar aplicación de pago predeterminada"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"En un terminal contactless, paga con <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En un terminal contactless, paga con <xliff:g id="APP_0">%1$s</xliff:g>.\n\nAsí, <xliff:g id="APP_1">%2$s</xliff:g> dejará de ser tu aplicación de pago predeterminada."</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En un terminal contactless, paga con <xliff:g id="APP_0">%1$s</xliff:g>.\n\nEsto reemplazará a <xliff:g id="APP_1">%2$s</xliff:g> como tu aplicación de pago predeterminada."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Elegir como predeterminada"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualizar"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricciones"</string>
@@ -3346,7 +3350,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Cuando recibas notificaciones, tu teléfono no sonará ni vibrará."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificaciones sin sonido ni elementos visuales"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No verás ni escucharás notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Las notificaciones no se mostrarán ni harán que el teléfono suene o vibre. Recuerda que las notificaciones críticas sobre la actividad y el estado del teléfono se seguirán mostrando.\n\nCuando desactives el modo No molestar, podrás deslizar el dedo desde la parte superior de la pantalla para leer las notificaciones que no hayas visto."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Las notificaciones no se mostrarán ni harán que el teléfono suene o vibre. Recuerda que las notificaciones críticas sobre la actividad y el estado del teléfono se seguirán mostrando.\n\nCuando desactives el modo No molestar, desliza el dedo desde la parte superior de la pantalla para leer las notificaciones que no hayas visto."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizado"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Habilitar configuración personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Quitar configuración personalizada"</string>
@@ -3359,11 +3363,11 @@
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"Silenciar sonido y vibración"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"No encender la pantalla"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"No hacer parpadear la luz"</string>
-    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"No mostrar notificaciones en pantalla"</string>
-    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ocultar iconos de la barra de estado en la parte superior de la pantalla"</string>
+    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"No mostrar notificaciones en la pantalla"</string>
+    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ocultar iconos de la barra de estado de la parte superior"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ocultar puntos de notificación en los iconos de las aplicaciones"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"No activar con notificaciones"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ocultar de la pantalla desplegable"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ocultar en el panel desplegable"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nunca"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Con la pantalla desactivada"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Con la pantalla activada"</string>
@@ -3390,7 +3394,7 @@
     <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Desactivado"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Activado"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Preguntar siempre"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Hasta que se desactive"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Hasta que lo desactives"</string>
     <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
       <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> horas</item>
       <item quantity="one">1 hora</item>
@@ -3428,8 +3432,8 @@
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sonido de notificación de trabajo predeterminado"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sonido de alarma de trabajo predeterminado"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Igual que el perfil personal"</string>
-    <string name="work_sync_dialog_title" msgid="2359563902332046231">"¿Sustituir sonidos?"</string>
-    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Sustituir"</string>
+    <string name="work_sync_dialog_title" msgid="2359563902332046231">"¿Reemplazar sonidos?"</string>
+    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Reemplazar"</string>
     <string name="work_sync_dialog_message" msgid="1328692374812258546">"Se utilizarán los sonidos de tu perfil personal en tu perfil de trabajo"</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"¿Añadir sonido personalizado?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"Este archivo se copiará en la carpeta <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
@@ -3525,11 +3529,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"No mostrar notificaciones nunca"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversaciones"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversación"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"No es una conversación"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Quitar de la sección de conversaciones"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Es una conversación"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Añadir a la sección de conversaciones"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gestiona las conversaciones"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"Conversaciones prioritarias"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostrar en la parte superior de la sección de conversaciones y en forma de burbuja"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostrar en la parte superior de la sección de conversaciones"</string>
@@ -3559,7 +3570,7 @@
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la pantalla desplegable, mostrar las notificaciones en una sola línea"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Te ayuda a concentrarte sin sonido ni vibración"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Llama tu atención con sonido o vibración."</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, muestra las notificaciones en la parte superior"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo está desbloqueado, muestra las notificaciones en la parte superior"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
@@ -3850,8 +3861,8 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Activado"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Desactivado"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fijar aplicaciones"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nAl fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a los datos personales. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nAl fijar una aplicación, es posible que se abran otras aplicaciones y que se pueda acceder a los datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba a usar un usuario invitado. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nEs posible que una aplicación fijada puede abrir otras aplicaciones y que se pueda acceder a datos personales. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Al fijar una aplicación, se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue a un juego específico. \n\nEs posible que una aplicación fijada puede abrir otras aplicaciones y que se pueda acceder a datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, prueba a usar un usuario invitado. \n\nPara fijar una aplicación, sigue estos pasos: 	\n1.	Activa la función de fijar aplicaciones. 	\n2.	Abre Aplicaciones recientes. 	\n3.	Toca el icono de la aplicación situado en la parte superior de la pantalla y, a continuación, toca Fijar."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Al fijar la aplicación: \n\n•		Es posible que se acceda a datos personales. \n		Entre estos datos se incluyen los contactos y el contenido de los correos. \n•		Es posible que las aplicaciones fijadas abran otras aplicaciones. \n\nUtiliza la función de fijar aplicaciones solo con personas de confianza."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar patrón de desbloqueo para desactivar"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para desactivar"</string>
@@ -4116,7 +4127,7 @@
     <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras aplicaciones"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicaciones que se pueden mostrar sobre otras"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicaciones con permiso"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitido"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"No permitido"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar aplicaciones fuentes desconocidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Modificar ajustes del sistema"</string>

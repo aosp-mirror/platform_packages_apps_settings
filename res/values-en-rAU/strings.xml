@@ -2019,7 +2019,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Keyboards"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"On-screen keyboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Available virtual keyboard"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Manage on-screen keyboards"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Keyboard assistance"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
@@ -2028,7 +2029,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Keyboard shortcuts"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Display available shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Virtual keyboard for work"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Pointer speed"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
@@ -2125,6 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Quickly zoom in on the screen to display content more clearly.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; 1. Use shortcut to start magnification&lt;br/&gt; 2. Tap the screen&lt;br/&gt; 3. Drag two fingers to move around screen&lt;br/&gt; 4. Pinch with two fingers to adjust zoom&lt;br/&gt; 5. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; 1. Use shortcut to start magnification&lt;br/&gt; 2. Touch and hold anywhere on the screen&lt;br/&gt; 3. Drag finger to move around screen&lt;br/&gt; 4. Lift finger to stop magnification"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold anywhere on the screen.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use accessibility button to open"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volume keys to open"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triple-tap screen to open"</string>
@@ -3525,11 +3528,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Never show notifications"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversations"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversation"</string>
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Conversation section"</string>
+    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Allow <xliff:g id="APP">%1$s</xliff:g> to appear in the conversation section"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Not a conversation"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Remove from the conversation section"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"This is a conversation"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Add to the conversation section"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Manage conversations"</string>
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"No priority conversations"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> priority conversations</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> priority conversation</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Priority conversations"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Show at top of conversation section and appear as floating bubbles"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Show at top of conversation section"</string>
@@ -3851,7 +3861,7 @@
     <string name="switch_off_text" msgid="1315547447393646667">"Off"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"App pinning"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game. \n\nWhen an app is pinned, the pinned app may open other apps and personal data may be accessible. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap Pin"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game. \n\nWhen an app is pinned, the pinned app may open other apps, and personal data may be accessible. \n\nIf you want to securely share your device with someone, try using a guest user instead. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap \'Pin\'"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"App pinning allows you to keep the current app in view until you unpin it. This feature can be used, for example, to let a trusted friend play a specific game. \n\nWhen an app is pinned, the pinned app may open other apps, and personal data may be accessible. \n\nIf you want to share your device securely with someone, try using a guest user instead. \n\nTo use app pinning: 	\n1.	Turn on app pinning 	\n2.	Open Overview 	\n3.	Tap the app icon at the top of the screen, then tap \'Pin\'"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"When app is pinned: \n\n• Personal data may be accessible \n(such as contacts and email content) \n• Pinned app may open other apps \n\nOnly use app pinning with people that you trust."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Ask for unlock pattern before unpinning"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Ask for PIN before unpinning"</string>

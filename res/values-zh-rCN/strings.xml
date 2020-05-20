@@ -586,8 +586,8 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的 PIN 码或密码，否则，该应用可能无法按预期运行"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的解锁图案、PIN 码或密码，否则，该应用可能无法按预期运行"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的屏幕锁定方式"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"请重试。您目前已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多可尝试 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
-    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"您的数据将遭到删除"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"请重试。已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"您的数据将被删除"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"如果您下次绘制的解锁图案仍然有误，系统将删除此设备上的数据"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"如果您下次输入的 PIN 码仍然有误，系统将删除此设备上的数据"</string>
     <string name="lock_last_password_attempt_before_wipe_device" msgid="985126164175708507">"如果您下次输入的密码仍然有误，系统将删除此设备上的数据"</string>
@@ -669,7 +669,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个应用正在运行</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"可信代理"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"要开始使用，请先设置屏幕锁定方式"</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"需先设置屏幕锁定方式才能使用"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"无"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个可信代理正在运行</item>
@@ -1759,11 +1759,11 @@
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"为了安全起见，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"要使用指纹，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"为了安全起见，请设置解锁图案"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"重新输入密码"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"再次输入密码"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"请输入您的工作密码"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"确认您的图案"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"确认您的解锁图案"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"请绘制您的工作解锁图案"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"重新输入 PIN 码"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"再次输入 PIN 码"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"请输入您的工作资料 PIN 码"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"密码不匹配"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN 码不匹配！"</string>
@@ -2019,7 +2019,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"键盘"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"屏幕键盘"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"可用虚拟键盘"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"管理屏幕键盘"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"键盘辅助功能"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"实体键盘"</string>
@@ -2028,7 +2029,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"键盘快捷键"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"显示可用的快捷键"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"工作用的虚拟键盘"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"默认"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"指针速度"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"游戏控制器"</string>
@@ -2125,6 +2127,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"点按按钮即可放大"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"您可以快速放大屏幕以便让内容显示更清晰。&lt;br/&gt;&lt;br/&gt; &lt;b&gt;要放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快捷方式启动放大功能&lt;br/&gt; 2. 点按屏幕&lt;br/&gt; 3. 用两根手指拖动以在屏幕上移动&lt;br/&gt; 4. 双指张合以调整缩放级别&lt;br/&gt; 5. 使用快捷方式停止放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;要暂时放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快捷方式启动放大功能&lt;br/&gt; 2. 轻触并按住屏幕上的任意位置&lt;br/&gt; 3. 用一根手指拖动以在屏幕上移动&lt;br/&gt; 4. 抬起手指以停止放大功能"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"开启放大功能后，您就可以放大屏幕上的内容。\n\n"<b>"要放大内容"</b>"，请先启动放大功能，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性放大内容"</b>"，请先启动放大功能，然后轻触并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您无法针对键盘或导航栏使用放大功能。"</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用“无障碍”按钮打开"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"按住两个音量键即可打开"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"点按屏幕 3 次即可打开"</string>
@@ -3346,7 +3350,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"手机在收到通知时既不会发出提示音也不会振动。"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"不显示通知，也不发出通知提示音"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"您将不会看到通知或听到通知提示音"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"您的手机将不会显示任何新通知或现有通知，也不会因此发出振动或提示音。请注意，系统仍会显示与手机活动和状态相关的重要通知。\n\n关闭“勿扰”模式后，您可以通过从屏幕顶部向下滑动来查找错过的通知。"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"您的手机将不会显示任何新通知或现有通知，也不会因此发出振动或提示音。请注意，系统仍会显示与手机活动和状态相关的重要通知。\n\n关闭勿扰模式后，只要从屏幕顶部向下滑动即可查看错过的通知。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"自定义"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"启用自定义设置"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"移除自定义设置"</string>
@@ -3525,11 +3529,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"一律不显示通知"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"对话"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"对话"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"非对话"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"从对话部分中移除"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"管理对话"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"优先对话"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以悬浮对话泡形式显示在对话部分顶部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"显示在对话部分顶部"</string>
@@ -3553,7 +3564,7 @@
     <string name="notification_alert_title" msgid="5605374030042727533">"提醒"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"优先级"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"优先"</string>
     <string name="notification_channel_summary_priority" msgid="7096292835591575858">"以对话泡形式显示在对话部分顶部"</string>
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g>不支持对话专用设置。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"将下拉通知栏中的通知合拢为一行"</string>
@@ -4327,7 +4338,7 @@
     <string name="notification_log_details_group_summary" msgid="4364622087007803822">"（摘要）"</string>
     <string name="notification_log_details_visibility" msgid="6811292866832243357">"公开范围"</string>
     <string name="notification_log_details_public_version" msgid="3057653571018432759">"公开版本"</string>
-    <string name="notification_log_details_priority" msgid="4772047133062255513">"优先级"</string>
+    <string name="notification_log_details_priority" msgid="4772047133062255513">"优先"</string>
     <string name="notification_log_details_importance" msgid="8516198274667183446">"重要程度"</string>
     <string name="notification_log_details_explanation" msgid="6966274549873070059">"说明"</string>
     <string name="notification_log_details_badge" msgid="648647240928645446">"可显示状态标记"</string>
@@ -4881,7 +4892,7 @@
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"由 IT 管理员管理的设置"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"错误报告处理程序"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定用于处理设备上错误报告快捷方式的应用。"</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"确定要使用哪款应用来处理设备上的错误报告快捷方式。"</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"个人"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"工作"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"系统默认"</string>
@@ -4901,7 +4912,7 @@
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"锁定状态下显示银行卡和控件"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"锁定时显示控件"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"锁定状态下隐藏银行卡和控件"</string>
-    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"先设置屏幕锁定方式，然后才能使用"</string>
+    <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"需先设置屏幕锁定方式才能使用"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"显示设备控制器"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"显示银行卡和卡券"</string>
     <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"按住电源按钮即可访问已关联设备的控制器"</string>
