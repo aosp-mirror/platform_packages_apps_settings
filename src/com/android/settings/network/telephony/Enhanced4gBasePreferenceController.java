@@ -55,6 +55,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
     Preference mPreference;
     private PhoneCallStateListener mPhoneStateListener;
     private boolean mShow5gLimitedDialog;
+    boolean mIsNrEnabledFromCarrierConfig;
     private boolean mHas5gCapability;
     @VisibleForTesting
     Integer mCallState;
@@ -95,6 +96,8 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
         mShow5gLimitedDialog = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_VOLTE_5G_LIMITED_ALERT_DIALOG_BOOL);
+        mIsNrEnabledFromCarrierConfig = carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_NR_ENABLED_BOOL);
         return this;
     }
 
@@ -244,7 +247,7 @@ public class Enhanced4gBasePreferenceController extends TelephonyTogglePreferenc
 
     private boolean isDialogNeeded() {
         Log.d(TAG, "Has5gCapability:" + mHas5gCapability);
-        return mShow5gLimitedDialog && mHas5gCapability;
+        return mShow5gLimitedDialog && mHas5gCapability && mIsNrEnabledFromCarrierConfig;
     }
 
     private void show5gLimitedDialog(ImsMmTelManager imsMmTelManager) {
