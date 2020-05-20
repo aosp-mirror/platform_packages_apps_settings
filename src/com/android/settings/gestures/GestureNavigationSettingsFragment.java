@@ -18,6 +18,8 @@ package com.android.settings.gestures;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.WindowManager;
@@ -45,8 +47,7 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
     private WindowManager mWindowManager;
     private BackGestureIndicatorView mIndicatorView;
 
-    private static final float[] BACK_GESTURE_INSET_SCALES = {0.75f, 1.0f, 1.33f, 1.66f};
-
+    private float[] mBackGestureInsetScales;
     private float mDefaultBackGestureInset;
 
     public GestureNavigationSettingsFragment() {
@@ -59,14 +60,17 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
 
         mIndicatorView = new BackGestureIndicatorView(getActivity());
         mWindowManager = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
-
-        mDefaultBackGestureInset = getActivity().getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.config_backGestureInset);
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
+
+        final Resources res = getActivity().getResources();
+        mDefaultBackGestureInset = res.getDimensionPixelSize(
+                com.android.internal.R.dimen.config_backGestureInset);
+        mBackGestureInsetScales = getFloatArray(res.obtainTypedArray(
+                com.android.internal.R.array.config_backGestureInsetScales));
 
         initSeekBarPreference(LEFT_EDGE_SEEKBAR_KEY);
         initSeekBarPreference(RIGHT_EDGE_SEEKBAR_KEY);
@@ -121,8 +125,8 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         // Find the closest value to initScale
         float minDistance = Float.MAX_VALUE;
         int minDistanceIndex = -1;
-        for (int i = 0; i < BACK_GESTURE_INSET_SCALES.length; i++) {
-            float d = Math.abs(BACK_GESTURE_INSET_SCALES[i] - initScale);
+        for (int i = 0; i < mBackGestureInsetScales.length; i++) {
+            float d = Math.abs(mBackGestureInsetScales[i] - initScale);
             if (d < minDistance) {
                 minDistance = d;
                 minDistanceIndex = i;
@@ -131,17 +135,27 @@ public class GestureNavigationSettingsFragment extends DashboardFragment {
         pref.setProgress(minDistanceIndex);
 
         pref.setOnPreferenceChangeListener((p, v) -> {
-            final int width = (int) (mDefaultBackGestureInset * BACK_GESTURE_INSET_SCALES[(int) v]);
+            final int width = (int) (mDefaultBackGestureInset * mBackGestureInsetScales[(int) v]);
             mIndicatorView.setIndicatorWidth(width, key == LEFT_EDGE_SEEKBAR_KEY);
             return true;
         });
 
         pref.setOnPreferenceChangeStopListener((p, v) -> {
             mIndicatorView.setIndicatorWidth(0, key == LEFT_EDGE_SEEKBAR_KEY);
-            final float scale = BACK_GESTURE_INSET_SCALES[(int) v];
+            final float scale = mBackGestureInsetScales[(int) v];
             Settings.Secure.putFloat(getContext().getContentResolver(), settingsKey, scale);
             return true;
         });
+    }
+
+    private static float[] getFloatArray(TypedArray array) {
+        int length = array.length();
+        float[] floatArray = new float[length];
+        for (int i = 0; i < length; i++) {
+            floatArray[i] = array.getFloat(i, 1.0f);
+        }
+        array.recycle();
+        return floatArray;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
