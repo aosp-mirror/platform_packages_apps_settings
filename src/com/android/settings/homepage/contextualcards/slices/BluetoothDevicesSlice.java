@@ -294,10 +294,15 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
         // Create row builders based on paired devices.
         for (CachedBluetoothDevice device : getPairedBluetoothDevices()) {
+            String summary = device.getConnectionSummary();
+            if (summary == null) {
+                summary = mContext.getString(
+                        R.string.connected_device_previously_connected_screen_title);
+            }
             final ListBuilder.RowBuilder rowBuilder = new ListBuilder.RowBuilder()
                     .setTitleItem(getBluetoothDeviceIcon(device), ListBuilder.ICON_IMAGE)
                     .setTitle(device.getName())
-                    .setSubtitle(device.getConnectionSummary());
+                    .setSubtitle(summary);
 
             if (mAvailableMediaBtDeviceUpdater.isFilterMatched(device)
                     || mSavedBtDeviceUpdater.isFilterMatched(device)) {
