@@ -594,12 +594,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"మీరు తర్వాత ప్రయత్నంలో తప్పు నమూనాను నమోదు చేస్తే, ఈ వినియోగదారు తొలగించబడతారు"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"మీరు తర్వాత ప్రయత్నంలో తప్పు పిన్‌ను నమోదు చేస్తే, ఈ వినియోగదారు తొలగించబడతారు"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"మీరు తర్వాత ప్రయత్నంలో తప్పు పాస్‌వర్డ్‌ను నమోదు చేస్తే, ఈ వినియోగదారు తొలగించబడతారు"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"మీరు తర్వాత ప్రయత్నంలో తప్పు నమూనాను నమోదు చేస్తే, మీ కార్యాలయ ప్రొఫైల్‌ మరియు దీని డేటా తొలగించబడతాయి"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"మీరు తర్వాత ప్రయత్నంలో తప్పు నమూనాను నమోదు చేస్తే, మీ కార్యాలయ ప్రొఫైల్, దీని డేటా తొలగించబడతాయి"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"మీరు తర్వాత ప్రయత్నంలో తప్పు పిన్‌ను నమోదు చేస్తే, మీ కార్యాలయ ప్రొఫైల్‌ మరియు దీని డేటా తొలగించబడతాయి"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"మీరు తర్వాత ప్రయత్నంలో తప్పు పాస్‌వర్డ్‌ను నమోదు చేస్తే, మీ కార్యాలయ ప్రొఫైల్‌ మరియు దీని డేటా తొలగించబడతాయి"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ పరికరం యొక్క డేటా తొలగించబడుతుంది."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ వినియోగదారు తొలగించబడతారు."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ కార్యాలయ ప్రొఫైల్ మరియు దీని డేటా తొలగించబడతాయి."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"చాలా ఎక్కువ తప్పు ప్రయత్నాలు చేసారు. ఈ కార్యాలయ ప్రొఫైల్, దీని డేటా తొలగించబడతాయి."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"తీసివేయండి"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">కనీసం <xliff:g id="COUNT_1">%d</xliff:g> అక్షరాలు తప్పక ఉండాలి</item>
@@ -967,8 +967,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"మళ్లీ ఎప్పటికి చూపవద్దు"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"కనెక్ట్ చేయి"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi‑Fi ఆన్ చేయబడింది"</string>
-    <!-- no translation found for wifi_connected_to_message (8976048616505112896) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>కు కనెక్ట్ అయ్యింది"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"కనెక్ట్ అవుతోంది…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"నెట్‌వర్క్‌కు కనెక్ట్ చేయడం విఫలమైంది"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"నెట్‌వర్క్ పరిధిలో లేదు"</string>
@@ -1696,7 +1695,7 @@
     <string name="location_title" msgid="5819154746934945021">"నా స్థానం"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"ఆఫీస్ ప్రొఫైల్ కోసం లొకేషన్"</string>
     <string name="location_app_level_permissions" msgid="45436724900423656">"యాప్‌లు - లొకేషన్‌ యాక్సెస్"</string>
-    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"స్థానం ఆఫ్‌లో ఉంది"</string>
+    <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"లొకేష‌న్ ఆఫ్‌లో ఉంది"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="other"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> యాప్‌లలో <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g>కి లొకేషన్‌కు యాక్సెస్ ఉంది</item>
       <item quantity="one"> <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> యాప్‌లలో <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g>కి లొకేషన్‌కు యాక్సెస్ ఉంది</item>
@@ -1760,11 +1759,11 @@
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"భద్రత కోసం పిన్‌ని సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"వేలిముద్రకు పిన్ సెట్ చేయండి"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"భద్రత కోసం ఆకృతిని సెట్ చేయండి"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"మీ పాస్‌వర్డ్‌ను మళ్ళీ నమోదు చేయండి"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"మీ పాస్‌వర్డ్‌ను మళ్ళీ ఎంటర్ చేయండి"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"మీ కార్యాలయ పాస్‌వర్డ్‌ను నమోదు చేయండి"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"మీ నమూనాను నిర్ధారించండి"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"మీ కార్యాలయ నమూనాను నమోదు చేయి"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"మీ పిన్‌ను మళ్లీ నమోదు చేయండి"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"మీ పిన్‌ను మళ్లీ ఎంటర్ చేయండి"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"మీ కార్యాలయ పిన్‌ను నమోదు చేయండి"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"పాస్‌‌వర్డ్‌లు సరిపోలలేదు"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"పిన్‌లు సరిపోలలేదు"</string>
@@ -1800,7 +1799,7 @@
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"పిన్ తప్పు"</string>
     <string name="lockpassword_invalid_password" msgid="1588184930542221687">"పాస్‌వర్డ్ తప్పు"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="8109305107409924083">"ఆకృతి తప్పు"</string>
-    <string name="lock_settings_title" msgid="665707559508132349">"పరికర భద్రత"</string>
+    <string name="lock_settings_title" msgid="665707559508132349">"డివైజ్‌ భద్రత"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"అన్‌లాక్ నమూనాను మార్చు"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"అన్‌లాక్ పిన్‌ను మార్చండి"</string>
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"అన్‌లాక్ ఆకృతిని గీయండి"</string>
@@ -2020,7 +2019,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"భాష"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"కీబోర్డ్‌లు"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"స్క్రీన్‌పై కీబోర్డ్"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"అందుబాటులో ఉన్న వర్చువల్ కీబోర్డ్"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"స్క్రీన్‌పై కీబోర్డ్స్ మేనేజ్ చేయి"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"కీబోర్డ్ సహాయం"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"భౌతిక కీబోర్డ్"</string>
@@ -2029,7 +2029,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"కీబోర్డ్ షార్ట్‌కట్‌లు"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"అందుబాటులో ఉన్న షార్ట్‌కట్‌లను ప్రదర్శిస్తుంది"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"కార్యాలయ ప్రొఫైల్ కీబోర్డ్‌లు &amp; సాధనాలు"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"ఆఫీసు ప్రొఫైల్ కోసం వర్చువల్ కీబోర్డ్"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"డిఫాల్ట్"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"పాయింటర్ వేగం"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"గేమ్ కంట్రోలర్"</string>
@@ -2126,6 +2127,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"జూమ్ చేయడం కోసం బటన్‌ని నొక్కండి"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"కంటెంట్‌ను మరింత స్పష్టంగా డిస్‌ప్లే చేయడానికి స్క్రీన్‌ను దగ్గరగా జూమ్ చేయడం త్వరితంగా చేయగలుగుతారు.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;దగ్గరగా జూమ్ చేయడానికి ఈ విధంగా చేయండి:&lt;/b&gt;&lt;br/&gt;	1. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&amp;gtt; 2. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&amp;gtt; 3. స్క్రీన్ చుట్టూ కదిలేందుకు 2 వేళ్లతో లాగండి&lt;br/&gt; 4. జూమ్ చేయడాన్ని సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; 5. మాగ్నిఫికేషన్‌ను ఆపివేయడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt;&lt;b&gt;తాత్కాలికంగా దగ్గరగా జూమ్ చేయడానికి ఈ విధంగా చేయండి:&lt;/b&gt;&lt;br/&gt; 1. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&amp;gtt; 2. స్క్రీన్‌పై ఎక్కడైనా తాకి &amp; అలాగే పట్టుకోండి&lt;br/&gt; 3. స్క్రీన్ చుట్టూ కదిలేందుకు వేలితో లాగండి&lt;br/&gt; 4. మాగ్నిఫికేషన్‌ను ఆపివేయడానికి వేలును స్క్రీన్‌పై నుండి తీసివేయండి"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"మాగ్నిఫికేషన్‌ను ఆన్ చేసినప్పుడు, మీ స్క్రీన్‌పైన దగ్గరకు జూమ్ చేయవచ్చు.\n\n"<b>"జూమ్ చేయడానికి"</b>", మాగ్నిఫికేషన్‌ను ప్రారంభించి, తర్వాత స్క్రీన్‌పై ఎక్కడైనా నొక్కండి.\n"<ul><li>"స్క్రోల్ చేయడానికి 2 లేదా అంతకంటే ఎక్కువ వేళ్లతో లాగండి"</li>\n<li>"జూమ్‌ను సర్దుబాటు చేయడానికి 2 లేదా అంతకంటే ఎక్కువ వేళ్లను దగ్గరకు లేదా దూరానికి లాగండి"</li></ul>\n\n<b>"తాత్కాలికంగా జూమ్ చేయడానికి"</b>", మాగ్నిఫికేషన్‌ను ప్రారంభించి, తర్వాత స్క్రీన్‌ను ఎక్కడైనా తాకి &amp; పట్టుకోండి.\n"<ul><li>"స్క్రీన్ పైన కదలడానికి లాగండి"</li>\n<li>"దూరంగా జూమ్ చేయడానికి వేలిని పైకి ఎత్తండి"</li></ul>\n\n"కీబోర్డ్‌లో లేదా నావిగేషన్ బార్‌లో మీరు దగ్గరగా జూమ్ చేయలేరు."</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"తెరవడానికి యాక్సెసిబిలిటీ బటన్‌ను ఉపయోగించండి"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"తెరవడానికి వాల్యూమ్ కీలను పట్టుకుని అలాగే ఉండండి"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"తెరవడానికి స్క్రీన్‌పై మూడు సార్లు ట్యాప్ చేయండి"</string>
@@ -2201,8 +2204,8 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"నోటిఫికేషన్ వైబ్రేషన్"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"రింగ్ వైబ్రేషన్"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"స్పర్శ ప్రతిస్పందన"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ను ఉపయోగించు"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>ను తెరువు"</string>
+    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>‌ను ఉపయోగించు"</string>
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>‌ను తెరువు"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"\'కలర్‌ను సరిచేయడం\' అనే ఫీచర్‌ను ఉపయోగించు"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"క్యాప్షన్‌లను చూపించు"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"మద్దతు ఉన్న యాప్ కోసం మాత్రమే"</string>
@@ -3043,7 +3046,7 @@
     <string name="nfc_payment_default" msgid="3769788268378614608">"చెల్లింపు డిఫాల్ట్"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"సెట్ చేయలేదు"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="788899906312142803">"డిఫాల్ట్ ఉపయోగించు"</string>
+    <string name="nfc_payment_use_default" msgid="788899906312142803">"డిఫాల్ట్‌ను ఉపయోగించు"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"ఎల్లప్పుడూ"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"మరో చెల్లింపు యాప్ తెరిచి ఉన్నప్పుడు మినహా"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"స్పర్శరహిత టెర్మినల్ వద్ద, దీని ద్వారా చెల్లించండి:"</string>
@@ -3342,7 +3345,7 @@
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"దృశ్యమానత సంకేతాలను అనుమతించండి"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"దాగి వుండే నోటిఫికేషన్‌లకు ప్రదర్శన ఎంపికలు"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"\'అంతరాయం కలిగించవద్దు\' మోడ్ ఆన్‌లో ఉన్నప్పుడు"</string>
-    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"నోటిఫికేషన్‌ల నుండి శబ్దం లేదు"</string>
+    <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"నోటిఫికేషన్‌ల శబ్దం రాదు"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"మీ స్క్రీన్‌పై మీకు నోటిఫికేషన్‌లు కనిపిస్తాయి"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"నోటిఫికేషన్‌లు వచ్చినప్పుడు మీ ఫోన్ శబ్దం చేయదు లేదా వైబ్రేట్‌ అవదు"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"నోటిఫికేషన్‌లు కనిపించవు, వినిపించవు"</string>
@@ -3351,7 +3354,7 @@
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"అనుకూలం"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"అనుకూల సెట్టింగ్‌ని ప్రారంభించండి"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"అనుకూల సెట్టింగ్‌ని తీసివేయండి"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"నోటిఫికేషన్‌ల నుండి శబ్దం లేదు"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"నోటిఫికేషన్‌ల శబ్దం రాదు"</string>
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"పాక్షికంగా దాచబడింది"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"నోటిఫికేషన్‌లు కనిపించవు, వినిపించవు"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"అనుకూల పరిమితులు"</string>
@@ -3361,7 +3364,7 @@
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"స్క్రీన్‌ను ఆన్ చేయవద్దు"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"లైట్‌ను బ్లింక్ చేయవద్దు"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"స్క్రీన్‌పై నోటిఫికేషన్‌లను చూపవద్దు"</string>
-    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"స్క్రీన్ ఎగువన స్థితి బార్ చిహ్నాలను దాచు"</string>
+    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"స్క్రీన్ ఎగువున స్టేట‌స్ బార్ చిహ్నాలను దాచు"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"యాప్ చిహ్నాలలో నోటిఫికేషన్ డాట్‌లను దాచు"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"నోటిఫికేషన్‌ల కోసం యాక్టివేట్ చేయొద్దు"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"కిందకు-లాగే షేడ్‌ నుండి దాచు"</string>
@@ -3418,7 +3421,7 @@
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"పూర్తయింది"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"సెట్టింగ్‌లు"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"నోటిఫికేషన్‌లు కనిపించవు, వినిపించవు"</string>
-    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"నోటిఫికేషన్‌ల నుండి శబ్దం లేదు"</string>
+    <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"నోటిఫికేషన్‌ల శబ్దం రాదు"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"మీరు నోటిఫికేషన్‌లను చూడలేరు లేదా వినలేరు. నక్షత్రం గుర్తు ఉన్న పరిచయాల మరియు రిపీట్ కాలర్‌‌ల నుండి కాల్‌లు అనుమతించబడతాయి."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(ప్రస్తుత సెట్టింగ్)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"అంతరాయం కలిగించవద్దు నోటిఫికేషన్‌ సెట్టింగ్‌లను మార్చాలా?"</string>
@@ -3526,11 +3529,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"ఎన్నడూ నోటిఫికేషన్‌లను చూపవద్దు"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"సంభాషణలు"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"సంభాషణ"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"సంభాషణ కాదు"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"సంభాషణ విభాగం నుండి తీసివేయండి"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"ఇది ఒక సంభాషణ"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"సంభాషణ విభాగానికి జోడించండి"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"సంభాషణలను మేనేజ్ చేయండి"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"ప్రాధాన్య సంభాషణలు"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"సంభాషణల విభాగంలో ఎగువున చూపబడుతుంది, తేలుతున్న బబుల్స్‌లా కనిపిస్తుంది"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"సంభాషణ విభాగంలో ఎగువున చూపబడుతుంది"</string>
@@ -4826,7 +4836,7 @@
     <string name="contextual_card_removed_message" msgid="5755438207494260867">"సూచన తీసివేయబడింది"</string>
     <string name="contextual_card_undo_dismissal_text" msgid="5200381837316691406">"చర్యరద్దు"</string>
     <string name="low_storage_summary" msgid="1979492757417779718">"నిల్వ తక్కువగా ఉంది: <xliff:g id="PERCENTAGE">%1$s</xliff:g> వినియోగించబడింది - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ఖాళీగా ఉంది"</string>
-    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"అభిప్రాయాన్ని పంపు"</string>
+    <string name="contextual_card_feedback_send" msgid="7409408664417908922">"ఫీడ్‌బ్యాక్‌ను పంపు"</string>
     <string name="contextual_card_feedback_confirm_message" msgid="3186334562157665381">"ఈ సూచనపై మీ అభిప్రాయాన్ని మాతో పంచుకోవాలనుకుంటున్నారా?"</string>
     <string name="copyable_slice_toast" msgid="1008251852798990606">"<xliff:g id="COPY_CONTENT">%1$s</xliff:g> క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది."</string>
     <string name="search_bar_account_avatar_content_description" msgid="880523277036898350"></string>
@@ -4883,7 +4893,7 @@
     <string name="work_policy_privacy_settings_summary" msgid="690118670737638405">"మీ IT నిర్వాహకుల ద్వారా సెట్టింగ్‌లు నిర్వహించబడతాయి"</string>
     <string name="track_frame_time_keywords" msgid="7885340257945922239">"GPU"</string>
     <string name="bug_report_handler_title" msgid="713439959113250125">"బగ్ నివేదిక హ్యాండ్లర్"</string>
-    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"మీ పరికరంలో బగ్ నివేదిక షార్ట్‌కట్‌ను ఏ యాప్ నిర్వహించాలో నిర్ణయిస్తుంది."</string>
+    <string name="bug_report_handler_picker_footer_text" msgid="4935758328366585673">"మీ డివైజ్‌లో బగ్ నివేదిక షార్ట్‌కట్‌ను ఏ యాప్ నిర్వహించాలో నిర్ణయిస్తుంది."</string>
     <string name="personal_profile_app_subtext" msgid="5586060806997067676">"వ్యక్తిగతం"</string>
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"ఆఫీస్"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"సిస్టమ్ ఆటోమేటిక్ సెట్టింగ్"</string>
