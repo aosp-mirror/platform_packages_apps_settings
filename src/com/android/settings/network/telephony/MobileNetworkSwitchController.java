@@ -22,23 +22,18 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
-
-import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.SubscriptionsChangeListener;
-import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.widget.LayoutPreference;
-
-import java.util.List;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.SubscriptionUtil;
+import com.android.settings.network.SubscriptionsChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 /** This controls a switch to allow enabling/disabling a mobile network */
 public class MobileNetworkSwitchController extends BasePreferenceController implements
@@ -118,11 +113,8 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
 
     @Override
     public int getAvailabilityStatus() {
-        if (FeatureFlagPersistent.isEnabled(mContext, FeatureFlags.NETWORK_INTERNET_V2)) {
-            return AVAILABLE_UNSEARCHABLE;
-        } else {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
+        return AVAILABLE_UNSEARCHABLE;
+
     }
 
     @Override

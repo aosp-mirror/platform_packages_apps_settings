@@ -28,8 +28,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -40,12 +38,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SettingsBaseActivity;
-import com.android.settings.development.featureflags.FeatureFlagPersistent;
 import com.android.settings.network.SubscriptionUtil;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,11 +108,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            setContentView(R.layout.mobile_network_settings_container_v2);
-        } else {
-            setContentView(R.layout.mobile_network_settings_container);
-        }
+        setContentView(R.layout.mobile_network_settings_container_v2);
         setActionBar(findViewById(R.id.mobile_action_bar));
         mPhoneChangeReceiver = new PhoneChangeReceiver(this, new PhoneChangeReceiver.Client() {
             @Override
@@ -186,10 +176,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
 
         mSubscriptionInfos = mSubscriptionManager.getActiveSubscriptionInfoList(true);
 
-        if (!FeatureFlagPersistent.isEnabled(this, FeatureFlags.NETWORK_INTERNET_V2)) {
-            updateBottomNavigationView();
-        }
-
         if (savedInstanceState == null) {
             switchFragment(new MobileNetworkSettings(), getSubscriptionId());
         }
@@ -241,28 +227,6 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
             return subscription.getSubscriptionId();
         }
         return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-    }
-
-    @VisibleForTesting
-    void updateBottomNavigationView() {
-        final BottomNavigationView navigation = findViewById(R.id.bottom_nav);
-
-        if (CollectionUtils.size(mSubscriptionInfos) <= 1) {
-            navigation.setVisibility(View.GONE);
-        } else {
-            final Menu menu = navigation.getMenu();
-            menu.clear();
-            for (int i = 0, size = mSubscriptionInfos.size(); i < size; i++) {
-                final SubscriptionInfo subscriptionInfo = mSubscriptionInfos.get(i);
-                menu.add(0, subscriptionInfo.getSubscriptionId(), i,
-                        subscriptionInfo.getDisplayName())
-                        .setIcon(R.drawable.ic_settings_sim);
-            }
-            navigation.setOnNavigationItemSelectedListener(item -> {
-                switchFragment(new MobileNetworkSettings(), item.getItemId());
-                return true;
-            });
-        }
     }
 
     @VisibleForTesting
