@@ -155,6 +155,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_5gWorldPhone_GlobalHasNr() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL, true);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA);
         mController.init(mLifecycle, SUB_ID);
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
@@ -168,6 +169,7 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_selectedOn5gItem() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL, true);
         mockEnabledNetworkMode(TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mockAccessFamily(TelephonyManager.NETWORK_MODE_NR_LTE_TDSCDMA_GSM_WCDMA);
         mController.init(mLifecycle, SUB_ID);
