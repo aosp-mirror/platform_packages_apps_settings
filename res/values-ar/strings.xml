@@ -446,7 +446,7 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="4810191157587317521">"يمكنك حماية هاتفك بتفعيل خيار قفل الشاشة حتى لا يتمكَّن أي شخص من استخدامه في حال فقدانه أو سرقته. وتحتاج أيضًا إلى خيار قفل الشاشة لإعداد بصمة الإصبع. انقر على \"إلغاء\" ثُم حدِّد رقم تعريف شخصيًا أو نقشًا أو كلمة مرور."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"لن يتمكّن أحد من استخدام جهازك اللوحي في حال فقدانه أو سرقته عند حمايته بتفعيل أحد خيارات قفل الشاشة. وتحتاج أيضًا إلى تفعيل أحد خيارات قفل الشاشة لإعداد ميزة \"فتح القفل بالوجه\". وللرجوع، انتقِل إلى \"إلغاء\"."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"لن يتمكّن أحد من استخدام جهازك في حال فقدانه أو سرقته عندما تحميه بتفعيل أحد خيارات قفل الشاشة. وتحتاج أيضًا إلى تفعيل أحد خيارات قفل الشاشة لإعداد ميزة \"فتح القفل بالوجه\". وللرجوع، انتقِل إلى \"إلغاء\"."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"لن يتمكّن أحد من استخدام هاتفك في حال فقدانه أو سرقته عند حمايته بتفعيل أحد خيارات قفل الشاشة. وتحتاج أيضًا إلى تفعيل أحد خيارات قفل الشاشة لإعداد ميزة \"فتح القفل بالوجه\". وللرجوع، انتقِل إلى \"إلغاء\"."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"لن يتمكّن أحد من استخدام هاتفك في حال فقدانه أو سرقته عند حمايته بتفعيل أحد خيارات قفل الشاشة. وتحتاج أيضًا إلى تفعيل أحد خيارات قفل الشاشة لإعداد ميزة \"فتح القفل بالوجه\". للرجوع، انقر على \"إلغاء\"."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"أتريد تخطي إعداد رقم التعريف الشخصي؟"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"أتريد تخطّي إعداد كلمة المرور؟"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"هل تريد تخطّي إعداد النقش؟"</string>
@@ -602,7 +602,7 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"يوصي تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> باستخدام قفل شاشة جديد برقم تعريف شخصي أو كلمة مرور، وقد لا يعمل على النحو المتوقع بدونه."</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"يوصي تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> باستخدام قفل شاشة جديد بنقش أو رقم تعريف شخصي أو كلمة مرور، وقد لا يعمل على النحو المتوقع بدونه."</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"يوصي تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> باستخدام قفل شاشة جديد."</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"أعد المحاولة. المحاولة <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> من <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"أعِد المحاولة. المحاولة <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> من <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"سيتم حذف بياناتك"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"عند إدخال نقش غير صحيح في المحاولة التالية، سيتم حذف بيانات هذا الجهاز"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"عند إدخال رقم تعريف شخصي غير صحيح في المحاولة التالية، سيتم حذف بيانات هذا الجهاز"</string>
@@ -1035,8 +1035,7 @@
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"عدم الإظهار مرة أخرى"</string>
     <string name="wifi_connect" msgid="2481467560349907397">"اتصال"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"‏تم تفعيل Wi‑Fi."</string>
-    <!-- no translation found for wifi_connected_to_message (8976048616505112896) -->
-    <skip />
+    <string name="wifi_connected_to_message" msgid="8976048616505112896">"متّصل بـ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"جارٍ الاتصال…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"تعذّر التوصيل بالشبكة"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"الشبكة ليست في النطاق."</string>
@@ -1867,8 +1866,8 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"هل نسيت كلمة المرور؟"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"هل نسيت النقش؟"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"هل نسيت رقم التعريف الشخصي؟"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"استخدم النقش الذي حددته على جهازك للمتابعة."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"أدخل رقم التعريف الشخصي للجهاز للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"استخدِم النقش الذي اخترته على جهازك للمتابعة."</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"أدخِل رقم التعريف الشخصي للجهاز للمتابعة."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"أدخل كلمة مرور الجهاز للمتابعة."</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"استخدم نقش ملفك الشخصي للعمل للمتابعة."</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"أدخل رقم التعريف الشخصي لملفك الشخصي للعمل للمتابعة."</string>
@@ -1891,7 +1890,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"أمان الجهاز"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"تغيير نقش فتح القفل"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"‏تغيير رمز PIN لإلغاء التأمين"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"ارسم نقش من اختيارك لفتح القفل"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"ارسم نقشًا من اختيارك لفتح القفل"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"اضغط على \"القائمة\" للمساعدة."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"ارفع إصبعك عن الشاشة عند الانتهاء"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"يجب ربط <xliff:g id="NUMBER">%d</xliff:g> نقاط على الأقل. يُرجى إعادة المحاولة."</string>
@@ -2112,7 +2111,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"اللغة"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"لوحات المفاتيح"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"لوحة المفاتيح على الشاشة"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"لوحة المفاتيح الافتراضية المتاحة"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"إدارة لوحات المفاتيح على الشاشة"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"مساعدة لوحة المفاتيح"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"لوحة المفاتيح الفعلية"</string>
@@ -2121,7 +2121,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"اختصارات لوحة المفاتيح"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"عرض الاختصارات المتاحة"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"لوحات مفاتيح وأدوات الملف الشخصي للعمل"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"لوحة المفاتيح الافتراضية للعمل"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"تلقائي"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"سرعة المؤشر"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"وحدة التحكم في الألعاب"</string>
@@ -2218,6 +2219,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"انقر على أحد الأزرار للتكبير"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"‏يمكنك تكبير المحتوى بسرعة على الشاشة لرؤيته بشكل أكثر وضوحًا.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;لتكبير المحتوى، نفِّذ الخطوات التالية:&lt;/b&gt;&lt;br/&gt; 1- استخدِم الاختصار لبدء تكبير المحتوى&lt;br/&gt; 2. انقر على الشاشة&lt;br/&gt; 3- حرِك إصبعين للتنقّل على الشاشة&lt;br/&gt; 4. باعِد أو قارِب بإصبعين لتعديل مستوى التكبير/التصغير&lt;br/&gt; 5. استخدِم الاختصار لإيقاف تكبير المحتوى&lt;br/&gt;&lt;br/&gt;&lt;b&gt;لتكبير المحتوى مؤقتًا، نفِّذ الخطوات التالية:&lt;/b&gt;&lt;br/&gt; 1. استخدِم الاختصار لبدء تكبير المحتوى&lt;br/&gt; 2. انقر مع الاستمرار على أي مكان على الشاشة&lt;br/&gt; 3. حرِك إصبعك للتنقّل على الشاشة&lt;br/&gt; 4. ارفع إصبعك من على الشاشة لإيقاف تكبير المحتوى."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"عند تفعيل ميزة \"التكبير\"، يمكنك تكبير حجم المحتوى على الشاشة.\n\n"<b>"للتكبير"</b>"، يمكنك تفعيل ميزة \"التكبير\" والنقر بعد ذلك على أي مكان في الشاشة.\n"<ul><li>"يمكنك سحب إصبعين أو أكثر للتمرير."</li>\n<li>"يمكنك ضمّ إصبعين أو أكثر لتعديل حجم المحتوى."</li></ul>\n\n<b>"للتكبير مؤقتًا"</b>"، يمكنك تفعيل ميزة التكبير والنقر مع الاستمرار على أي مكان في الشاشة.\n"<ul><li>"يمكنك السحب للتنقّل داخل الشاشة."</li>\n<li>"يمكنك رفع إصبعك للتصغير."</li></ul>\n\n"لن يكون بإمكانك التكبير على لوحة المفاتيح أو شريط التنقل."</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"استخدام زر \"سهولة الاستخدام\" في الفتح"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"اضغط مع الاستمرار على مفتاحَي مستوى الصوت للفتح"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"انقر على الشاشة ثلاث مرات لفتحها."</string>
@@ -2455,7 +2458,7 @@
     <string name="print_no_printers_found" msgid="4833082484646109486">"لم يتم العثور على طابعات"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"الإعدادات"</string>
     <string name="print_menu_item_add_printers" msgid="7958192149202584039">"إضافة طابعات"</string>
-    <string name="print_feature_state_on" msgid="7132063461008624685">"تشغيل"</string>
+    <string name="print_feature_state_on" msgid="7132063461008624685">"مفعّلة"</string>
     <string name="print_feature_state_off" msgid="1466195699995209446">"غير مفعّلة"</string>
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"إضافة خدمة"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"إضافة طابعة"</string>
@@ -3211,12 +3214,12 @@
     <string name="nfc_payment_default" msgid="3769788268378614608">"التطبيق التلقائي للدفع"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"لم يتم الضبط"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="788899906312142803">"استخدام التلقائي"</string>
+    <string name="nfc_payment_use_default" msgid="788899906312142803">"استخدام التطبيق التلقائي"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"دائمًا"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"إلا إذا كان هناك تطبيق دفع آخر مفتوحًا"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"عند إحدى محطات الدفع بدون تلامس الأجهزة، يمكنك الدفع باستخدام:"</string>
-    <string name="nfc_how_it_works_title" msgid="1363791241625771084">"الدفع عند الجهاز الطرفي"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"يمكنك إعداد تطبيق للدفع، وبعد ذلك لن يلزمك سوى توصيل الجزء الخلفي من الهاتف بأي جهاز طرفي يحتوي على رمز عدم لمس الجهاز."</string>
+    <string name="nfc_how_it_works_title" msgid="1363791241625771084">"طريقة الدفع"</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"بعد إعداد تطبيق للدفع، ما عليك سوى توجيه الجزء الخلفي من هاتفك إلى أي محطة دفع تتضمّن علامة \"بدون تلامس الأجهزة\"."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"حسنًا"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"المزيد..."</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"ضبط التطبيق التلقائي للدفع"</string>
@@ -3523,7 +3526,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"عند ظهور إشعارات، لن يُصدر هاتفك صوتًا أو يهتزّ."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"بدون تنبيهات مرئيّة أو صوتية من الإشعارات"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"لن ترى أو تسمع الإشعارات"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"لن يهتز هاتفك للإشعارات الجديدة أو الحالية ولن يعرضها ولن يُصدِر تنبيهات صوتية لها. ملاحظة: ستستمر الإشعارات المهمّة عن نشاط الهاتف وحالته في الظهور.\n\nعندما توقِف وضع \"عدم الإزعاج\"، يمكنك العثور على الإشعارات الفائتة من خلال التمرير سريعًا للأسفل من أعلى الشاشة."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"عند تلقّي إشعارات جديدة أو حالية، لن يهتز هاتفك ولن يعرضها ولن يُصدِر تنبيهات صوتية لها. ستستمر الإشعارات المهمّة عن نشاط الهاتف وحالته في الظهور.\n\nبعد إيقاف ميزة \"عدم الإزعاج\"، يمكنك العثور على الإشعارات الفائتة من خلال التمرير سريعًا للأسفل من أعلى الشاشة."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"الإعدادات المخصّصة"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"تفعيل الإعداد المخصّص"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"إزالة الإعداد المخصّص"</string>
@@ -3531,15 +3534,15 @@
     <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"إخفاء الإشعارات جزئيًا"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"بدون تنبيهات مرئيّة أو صوتية من الإشعارات"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"القيود المخصّصة"</string>
-    <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"عندما تكون الشاشة مُشغَّلة"</string>
-    <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"عندما تكون الشاشة مطفأة"</string>
+    <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"عندما تكون الشاشة مفعّلة"</string>
+    <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"عندما تكون الشاشة غير مفعّلة"</string>
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"كتم الصوت وإيقاف الاهتزاز"</string>
-    <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"عدم تشغيل الشاشة"</string>
+    <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"عدم تفعيل الشاشة"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"عدم تشغيل وميض الضوء"</string>
     <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"عدم عرض إشعارات منبثقة على الشاشة"</string>
     <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"إخفاء رموز شريط الحالة في أعلى الشاشة"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"إخفاء نقاط الإشعارات على رموز التطبيقات"</string>
-    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"عدم تشغيل الشاشة عند تلقّي إشعارات"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"عدم تفعيل الشاشة عند تلقّي إشعارات"</string>
     <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"إخفاء من مركز الإشعارات المنسدل"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"أبدًا"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"عندما تكون الشاشة مطفأة"</string>
@@ -3663,7 +3666,7 @@
     <string name="bubble_app_setting_all" msgid="312524752846978277">"يمكن إظهار فقاعات محادثات لكل المحادثات"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"يمكن إظهار فقاعات المحادثات للمحادثات المحدَّدة"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"عدم السماح بأي فقاعات"</string>
-    <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"المحادثات"</string>
+    <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"محادثات"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"يمكن إظهار فقاعات المحادثات لكل المحادثات إلا"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"إجراءات التمرير السريع"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"التمرير سريعًا باتجاه اليسار للتجاهل، وباتجاه اليمين لعرض القائمة"</string>
@@ -3708,13 +3711,20 @@
     <string name="notification_importance_title" msgid="1545158655988342703">"السُلوك"</string>
     <string name="notification_importance_unspecified" msgid="1543165530748339700">"السماح بالصوت"</string>
     <string name="notification_importance_blocked" msgid="4933285639639899394">"عدم عرض الإشعارات"</string>
-    <string name="conversations_category_title" msgid="5586541340846847798">"المحادثات"</string>
+    <string name="conversations_category_title" msgid="5586541340846847798">"محادثات"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"المحادثة"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"ليست محادثة"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"إزالة من قسم المحادثات"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"هذه محادثة."</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"إضافة إلى قسم المحادثات"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"إدارة المحادثات"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"المحادثات ذات الأولوية"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"تظهر في أعلى قسم المحادثات وتظهر كفقاعات عائمة."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"تظهر في أعلى قسم المحادثات."</string>
@@ -3743,7 +3753,7 @@
     <string name="convo_not_supported_summary" msgid="1794355603342685230">"لا يدعم تطبيق <xliff:g id="APP_NAME">%1$s</xliff:g> الإعدادات الخاصة بالمحادثة."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"في الظل المنسدل، يمكنك تصغير الإشعارات إلى سطر واحد."</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"يساعدك هذا الإشعار على التركيز بدون صوت أو اهتزاز."</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"يلفت هذا الإشعار انتباهك باستخدام الصوت والاهتزاز."</string>
+    <string name="notification_channel_summary_default" msgid="2919219975379032181">"يلفت هذا الإشعار انتباهك من خلال صوت أو اهتزاز."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صور بانر أعلى الشاشة."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3800,12 +3810,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"نافذة ضمن النافذة"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"السماح بنافذة صورة داخل صورة"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"يمكنك السماح لهذا التطبيق بإنشاء نافذة صورة داخل صورة أثناء فتح التطبيق أو بعد مغادرته (على سبيل المثال، لمتابعة مشاهدة فيديو)، علمًا بأن هذه النافذة تظهر أمام التطبيقات الأخرى التي تستخدمها."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"تطبيقات العمل والتطبيقات الشخصية المرتبطة"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"الربط بين تطبيقات العمل والتطبيقات الشخصية"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"مرتبطة"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"غير مرتبطة"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"ما مِن تطبيقات مرتبطة."</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"جميع الملفات تطبيق مرتبط تطبيقات عمل شخصية"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"تطبيقات العمل والتطبيقات الشخصية المرتبطة"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"الربط بين تطبيقات العمل والتطبيقات الشخصية"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"تم ربط التطبيقات"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ربط هذه التطبيقات"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"تشارك التطبيقات المرتبطة الأذونات ويمكنها الوصول إلى بيانات بعضها."</string>
@@ -3929,7 +3939,7 @@
     <string name="summary_divider_text" msgid="8836285171484563986">"، "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g> إلى <xliff:g id="END">%2$s</xliff:g>"</string>
-    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"المحادثات"</string>
+    <string name="zen_mode_conversations_title" msgid="5491912973456026379">"محادثات"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"المحادثات التي يمكنها مقاطعة عمل الميزة"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"كل المحادثات"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"المحادثات ذات الأولوية"</string>
@@ -3996,7 +4006,7 @@
     <string name="zen_mode_system" msgid="7301665021634204942">"أصوات اللمس"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"الأصوات من لوحة المفاتيح والأزرار الأخرى"</string>
     <string name="zen_mode_system_list" msgid="2256218792042306434">"أصوات اللمس"</string>
-    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"أصوات اللمس"</string>
+    <string name="zen_mode_system_list_first" msgid="8590078626001067855">"اللمس"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"التذكيرات"</string>
     <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"من المهام والتنبيهات"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"التذكيرات"</string>
@@ -4078,9 +4088,9 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"التغيير إلى التنبيهات فقط حتى <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"تغيير إلى المقاطعة دائمًا"</string>
-    <string name="zen_mode_screen_on" msgid="7312758100468915319">"عندما تكون الشاشة قيد التفعيل"</string>
+    <string name="zen_mode_screen_on" msgid="7312758100468915319">"عندما تكون الشاشة مفعّلة"</string>
     <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"السماح للإشعارات التي تم كتم صوتها بواسطة وضع \"الرجاء عدم الإزعاج\" بالظهور بسرعة على الشاشة وعرض رمز شريط الحالة"</string>
-    <string name="zen_mode_screen_off" msgid="7069798697669366075">"عندما تكون الشاشة متوقفة"</string>
+    <string name="zen_mode_screen_off" msgid="7069798697669366075">"عندما تكون الشاشة غير مفعّلة"</string>
     <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"السماح للإشعارات التي يتجاهلها وضع \"الرجاء عدم الإزعاج\" بتشغيل الشاشة وإحداث وميض ضوئي"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"السماح للإشعارات التي يتجاهلها وضع \"الرجاء عدم الإزعاج\" بتشغيل الشاشة"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"إعدادات الإشعارات"</string>
@@ -4088,8 +4098,8 @@
     <string name="suggestion_button_close" msgid="6865170855573283759">"إغلاق"</string>
     <string name="device_feedback" msgid="5351614458411688608">"إرسال تعليقات حول هذا الجهاز"</string>
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"إدخال رقم التعريف الشخصي للمشرف"</string>
-    <string name="switch_on_text" msgid="5664542327776075105">"مفعّل"</string>
-    <string name="switch_off_text" msgid="1315547447393646667">"غير مفعّل"</string>
+    <string name="switch_on_text" msgid="5664542327776075105">"مفعّلة"</string>
+    <string name="switch_off_text" msgid="1315547447393646667">"غير مفعّلة"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"تثبيت التطبيقات"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"تسمح لك ميزة تثبيت التطبيق بالحفاظ على التطبيق الحالي في حيز رؤيتك إلى أن تتم إزالة تثبيته. على سبيل المثال، يمكن استخدام هذه الميزة للسماح لصديق موثوق فيه بلعب لعبة معيّنة. \n\nعندما يتم تثبيت تطبيق، يمكن للتطبيق المثبت فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nلاستخدام ميزة تثبيت التطبيقات، يجب تنفيذ ما يلي: 	\n1-	تفعيل ميزة تثبيت التطبيقات 	\n2-	فتح \"نظرة عامة\" 	\n3-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"تسمح لك ميزة تثبيت التطبيق بالحفاظ على التطبيق الحالي في حيز رؤيتك إلى أن تتم إزالة تثبيته. على سبيل المثال، يمكن استخدام هذه الميزة للسماح لصديق موثوق فيه بلعب لعبة معيّنة. \n\nعندما يتم تثبيت تطبيق، يمكن للتطبيق المثبت فتح التطبيقات الأخرى والوصول إلى البيانات الشخصية. \n\nإذا أردت مشاركة جهازك بأمان مع أحد الأشخاص، اجعله يستخدم حساب ضيف بدلاً من استخدام حسابك. \n\nلاستخدام ميزة تثبيت التطبيقات، يجب تنفيذ ما يلي: 	\n1-	تفعيل ميزة تثبيت التطبيقات 	\n2-	فتح \"نظرة عامة\" 	\n3-	النقر على رمز التطبيق في أعلى الشاشة ثم النقر على \"تثبيت\""</string>
@@ -4947,7 +4957,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"‏تتبّع جميع مجموعات وفترات تكرار GNSS التي لا تحتوي على دورات عمل"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"عرض مربع حوار الأعطال دائمًا"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"عرض مربع الحوار في كل مرة يتعطل فيها تطبيق"</string>
-    <string name="angle_enabled_app" msgid="6044941043384239076">"‏تحديد التطبيق الذي يستخدم ANGLE"</string>
+    <string name="angle_enabled_app" msgid="6044941043384239076">"‏اختيار التطبيق الذي يستخدم ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"‏لم يتم تعيين تطبيق لاستخدام ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"‏التطبيق الذي يستخدم ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="graphics_driver_dashboard_title" msgid="5661084817492587796">"الإعدادات المفضّلة لبرنامج تشغيل الرسومات"</string>
