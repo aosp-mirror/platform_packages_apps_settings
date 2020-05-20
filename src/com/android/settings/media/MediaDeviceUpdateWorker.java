@@ -128,10 +128,11 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
 
     public void connectDevice(MediaDevice device) {
         ThreadUtils.postOnBackgroundThread(() -> {
-            mLocalMediaManager.connectDevice(device);
-            ThreadUtils.postOnMainThread(() -> {
-                notifySliceChange();
-            });
+            if (mLocalMediaManager.connectDevice(device)) {
+                ThreadUtils.postOnMainThread(() -> {
+                    notifySliceChange();
+                });
+            }
         });
     }
 
