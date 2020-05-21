@@ -103,10 +103,10 @@ public class ConversationHeaderPreferenceControllerTest {
     @Test
     public void testGetLabel() {
         ShortcutInfo si = mock(ShortcutInfo.class);
-        when(si.getShortLabel()).thenReturn("hello");
+        when(si.getLabel()).thenReturn("hello");
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, null, null, si, null);
-        assertEquals(si.getShortLabel(), mController.getLabel());
+        assertEquals(si.getLabel(), mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
         mController.onResume(appRow, channel, null, null, null, null);
