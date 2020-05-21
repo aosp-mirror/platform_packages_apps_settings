@@ -31,6 +31,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
+import android.util.Slog;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -294,15 +295,19 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
         List<NotifyingApp> displayableApps = new ArrayList<>(SHOW_RECENT_APP_COUNT);
         int count = 0;
         for (NotifyingApp app : mApps) {
-            final ApplicationsState.AppEntry appEntry = mApplicationsState.getEntry(
-                    app.getPackage(), app.getUserId());
-            if (appEntry == null) {
-                continue;
-            }
-            displayableApps.add(app);
-            count++;
-            if (count >= SHOW_RECENT_APP_COUNT) {
-                break;
+            try {
+                final ApplicationsState.AppEntry appEntry = mApplicationsState.getEntry(
+                        app.getPackage(), app.getUserId());
+                if (appEntry == null) {
+                    continue;
+                }
+                displayableApps.add(app);
+                count++;
+                if (count >= SHOW_RECENT_APP_COUNT) {
+                    break;
+                }
+            } catch (Exception e) {
+                Slog.e(TAG, "Failed to find app " + app.getPackage() + "/" + app.getUserId(), e);
             }
         }
         return displayableApps;

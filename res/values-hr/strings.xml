@@ -396,7 +396,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Upotreba otiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Jednostavno dodirnite senzor otiska prsta da biste otključali telefon, autorizirali kupnje ili se prijavili u aplikacije. Pazite čije otiske dodajete. Svaki otisak koji dodate može se upotrijebiti za sve te radnje.\n\nNapomena: otisak prsta nije toliko siguran kao snažan uzorak ili PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Otključajte telefon ili odobrite kupnje otiskom prsta.\n\nNapomena: ovaj uređaj ne možete otključati otiskom prsta. Za više informacija obratite se administratoru organizacije."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Otključajte telefon ili odobrite kupnje otiskom prsta.\n\nNapomena: otisak prst može biti manje siguran od snažnog uzorka ili PIN-a."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Otključajte telefon ili odobrite kupnje otiskom prsta.\n\nNapomena: otisak prsta može biti manje siguran od snažnog uzorka ili PIN-a."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Odustani"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Nastavi"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Preskoči"</string>
@@ -598,9 +598,9 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"Ako pri sljedećem pokušaju unesete netočan uzorak, ovaj će se korisnik izbrisati"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Ako pri sljedećem pokušaju unesete netočan PIN, ovaj će se korisnik izbrisati"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Ako pri sljedećem pokušaju unesete netočnu zaporku, ovaj će se korisnik izbrisati"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Ako pri sljedećem pokušaju unesete netočan uzorak, izbrisat će se vaš poslovni profil i njegovi podaci"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ako pri sljedećem pokušaju unesete netočan PIN, izbrisat će se vaš poslovni profil i njegovi podaci"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ako pri sljedećem pokušaju unesete netočnu zaporku, izbrisat će se vaš poslovni profil i njegovi podaci"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Ako pri sljedećem pokušaju unesete netočan uzorak, izbrisat će se vaš poslovni profil i njegovi podaci."</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ako pri sljedećem pokušaju unesete netočan PIN, izbrisat će se vaš poslovni profil i njegovi podaci."</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ako pri sljedećem pokušaju unesete netočnu zaporku, izbrisat će se vaš poslovni profil i njegovi podaci."</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Previše netočnih pokušaja. S uređaja će se izbrisati podaci."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Previše netočnih pokušaja. Ovaj će se korisnik izbrisati."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Previše netočnih pokušaja. Ovaj će se poslovni profil izbrisati zajedno sa svim svojim podacima."</string>
@@ -684,7 +684,7 @@
       <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> aktivne aplikacije</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aktivnih aplikacija</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="6410149930029992356">"Pouzdani predstavnici"</string>
+    <string name="manage_trust_agents" msgid="6410149930029992356">"Agenti za pouzdanost"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Za upotrebu prvo postavite zaključavanje zaslona"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Ništa"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
@@ -1783,10 +1783,10 @@
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Radi sigurnosti postavite uzorak"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Ponovni unos zaporke"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Unesite poslovnu zaporku"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Potvrdite uzorak"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Potvrda uzorka"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Unesite poslovni uzorak"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Ponovni unos PIN-a"</string>
-    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Unesite poslovni PIN"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Unos poslovnog PIN-a"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Zaporke se ne podudaraju"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-ovi se ne podudaraju"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Ponovo iscrtajte obrazac"</string>
@@ -2042,7 +2042,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Jezik"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tipkovnice"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tipkovnica na zaslonu"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Dostupna virtualna tipkovnica"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljajte tipkovnicama na zaslonu"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Pomoć za tipkovnicu"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizička tipkovnica"</string>
@@ -2051,7 +2052,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tipkovni prečaci"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Prikaz dostupnih prečaca"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice i alati radnog profila"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Virtualna tipkovnica za posao"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Zadano"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Brzina pokazivača"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Upravljač igrama"</string>
@@ -2116,7 +2118,7 @@
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Čitači zaslona, zaslon, kontrole interakcije"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Postavke za vid"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Ovaj uređaj možete prilagoditi svojim potrebama. Značajke pristupačnosti možete promijeniti kasnije u postavkama."</string>
-    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Promjena veličine fonta"</string>
+    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Promijenite veličinu fonta"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Čitači zaslona"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Zvuk i tekst na zaslonu"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Zaslon"</string>
@@ -2148,6 +2150,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Dodirnite gumb za zumiranje"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Brzo povećajte prikaz na zaslonu za jasniji prikaz sadržaja.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Da biste povećali prikaz:&lt;/b&gt;&lt;br/&gt; 1. Upotrijebite prečac da biste pokrenuli povećavanje.&lt;br/&gt; 2. Dodirnite zaslon.&lt;br/&gt; 3. Povlačite dva prsta da biste se pomicali po zaslonu.&lt;br/&gt; 4. Spojite dva prsta da biste prilagodili povećanje.&lt;br/&gt; 5. Upotrijebite prečac da biste zaustavili povećavanje.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Da biste privremeno povećali prikaz:&lt;/b&gt;&lt;br/&gt; 1. Upotrijebite prečac da biste pokrenuli povećavanje.&lt;br/&gt; 2. Dodirnite i zadržite bilo gdje na zaslonu.&lt;br/&gt; 3. Povlačite prstom da biste se pomicali po zaslonu.&lt;br/&gt; 4. Podignite prst da biste zaustavili povećavanje."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Kad je povećanje uključeno, možete povećati prikaz na zaslonu.\n\n"<b>"Da biste zumirali"</b>", pokrenite povećanje, a zatim dodirnite bilo gdje na zaslonu.\n"<ul><li>"Povlačite s dva prsta ili više njih da biste se pomicali."</li>\n<li>"Spojite dva prsta ili više njih da biste prilagodili zumiranje."</li></ul>\n\n<b>"Da biste nešto privremeno zumirali"</b>", pokrenite povećanje, a zatim dodirnite bilo gdje na zaslonu i zadržite pritisak.\n"<ul><li>"Povlačite prstom da biste se kretali zaslonom."</li>\n<li>"Podignite prst da biste smanjili prikaz."</li></ul>\n\n"Tipkovnica i navigacijska traka ne mogu se povećati."</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Otvaranje pomoću gumba pristupačnosti"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Zadržite tipke za glasnoću za otvaranje"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Triput dodirnite zaslon za otvaranje"</string>
@@ -2223,7 +2227,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibracija za obavijesti"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibracija pri zvonjenju"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Reakcija na dodir"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Koristi aplikaciju <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Koristi uslugu <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Otvori <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Korekcija boje"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Prikaži titlove"</string>
@@ -2740,7 +2744,7 @@
     <string name="remove_and_uninstall_device_admin" msgid="707912012681691559">"Deaktiviraj i deinstaliraj"</string>
     <string name="select_device_admin_msg" msgid="5501360309040114486">"Aplikacije administratora uređaja"</string>
     <string name="no_device_admins" msgid="8888779888103079854">"Nema dostupnih aplikacija administratora uređaja"</string>
-    <string name="no_trust_agents" msgid="8659098725864191600">"Pouzdani predstavnici nisu dostupni"</string>
+    <string name="no_trust_agents" msgid="8659098725864191600">"Agenti za pouzdanost nisu dostupni"</string>
     <string name="add_device_admin_msg" msgid="7730006568970042119">"Aktivirati apl. administratora uređaja?"</string>
     <string name="add_device_admin" msgid="6252128813507932519">"Aktiviraj aplikaciju administratora ovog uređaja"</string>
     <string name="device_admin_add_title" msgid="6087481040932322289">"Administrator uređaja"</string>
@@ -3079,7 +3083,7 @@
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Aplikacije s ograničenjima"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Proširi postavke za aplikaciju"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Beskontaktna plaćanja"</string>
-    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Način rada"</string>
+    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Način funkcioniranja"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Plaćajte telefonom u trgovinama"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Zadano plaćanje"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Nije postavljeno"</string>
@@ -3571,11 +3575,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Nikad ne prikazuj obavijesti"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Razgovori"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Razgovor"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"Nije razgovor"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Uklanjanje iz odjeljka razgovora"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Ovo je razgovor"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dodavanje u odjeljak razgovora"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Upravljajte razgovorima"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"Prioritetni razgovori"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Prikazuje se pri vrhu odjeljka razgovora i kao pomični oblačići"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Prikazuje se pri vrhu odjeljka razgovora"</string>
