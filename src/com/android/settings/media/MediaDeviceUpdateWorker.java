@@ -176,9 +176,13 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         return mLocalMediaManager.getSelectedMediaDevice();
     }
 
-    boolean isSelectedMediaDevice(MediaDevice device) {
-        for (MediaDevice selectedMediaDevice : getSelectedMediaDevice()) {
-            if (TextUtils.equals(selectedMediaDevice.getId(), device.getId())) {
+    List<MediaDevice> getDeselectableMediaDevice() {
+        return mLocalMediaManager.getDeselectableMediaDevice();
+    }
+
+    boolean isDeviceIncluded(Collection<MediaDevice> deviceCollection, MediaDevice targetDevice) {
+        for (MediaDevice device : deviceCollection) {
+            if (TextUtils.equals(device.getId(), targetDevice.getId())) {
                 return true;
             }
         }
