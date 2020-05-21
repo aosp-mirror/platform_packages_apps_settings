@@ -169,12 +169,12 @@ public class ConversationListPreferenceControllerTest {
         ccw.setPkg("pkg");
         ccw.setUid(1);
         ShortcutInfo si = mock(ShortcutInfo.class);
-        when(si.getShortLabel()).thenReturn("conversation name");
+        when(si.getLabel()).thenReturn("conversation name");
         ccw.setShortcutInfo(si);
         ccw.setGroupLabel("group");
         ccw.setParentChannelLabel("parent");
 
-        assertThat(mController.getTitle(ccw).toString()).isEqualTo(si.getShortLabel());
+        assertThat(mController.getTitle(ccw).toString()).isEqualTo(si.getLabel());
     }
 
     @Test
