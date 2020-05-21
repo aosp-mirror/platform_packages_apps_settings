@@ -32,6 +32,7 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,6 +48,7 @@ import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,8 +64,9 @@ public class NotificationSbnAdapter extends
     private @ColorInt int mBackgroundColor;
     private boolean mInNightMode;
     private @UserIdInt int mCurrentUser;
+    private List<Integer> mEnabledProfiles = new ArrayList<>();
 
-    public NotificationSbnAdapter(Context context, PackageManager pm) {
+    public NotificationSbnAdapter(Context context, PackageManager pm, UserManager um) {
         mContext = context;
         mPm = pm;
         mUserBadgeCache = new HashMap<>();
@@ -74,6 +77,12 @@ public class NotificationSbnAdapter extends
         mInNightMode = (currentConfig.uiMode & Configuration.UI_MODE_NIGHT_MASK)
                 == Configuration.UI_MODE_NIGHT_YES;
         mCurrentUser = ActivityManager.getCurrentUser();
+        int[] enabledUsers = um.getEnabledProfileIds(mCurrentUser);
+        for (int id : enabledUsers) {
+            if (!um.isQuietModeEnabled(UserHandle.of(id))) {
+                mEnabledProfiles.add(id);
+            }
+        }
         setHasStableIds(true);
     }
 
@@ -115,10 +124,9 @@ public class NotificationSbnAdapter extends
     }
 
     public void onRebuildComplete(List<StatusBarNotification> notifications) {
-        // summaries are low content; don't bother showing them
         for (int i = notifications.size() - 1; i >= 0; i--) {
             StatusBarNotification sbn = notifications.get(i);
-            if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+            if (!shouldShowSbn(sbn)) {
                 notifications.remove(i);
             }
         }
@@ -127,11 +135,23 @@ public class NotificationSbnAdapter extends
     }
 
     public void addSbn(StatusBarNotification sbn) {
-        if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+        if (!shouldShowSbn(sbn)) {
             return;
         }
         mValues.add(0, sbn);
         notifyDataSetChanged();
+    }
+
+    private boolean shouldShowSbn(StatusBarNotification sbn) {
+        // summaries are low content; don't bother showing them
+        if (sbn.isGroup() && sbn.getNotification().isGroupSummary()) {
+            return false;
+        }
+        // also don't show profile notifications if the profile is currently disabled
+        if (!mEnabledProfiles.contains(normalizeUserId(sbn))) {
+            return false;
+        }
+        return true;
     }
 
     private @NonNull CharSequence loadPackageLabel(String pkg) {

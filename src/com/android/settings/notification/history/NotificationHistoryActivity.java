@@ -265,7 +265,7 @@ public class NotificationHistoryActivity extends Activity {
             LinearLayoutManager lm = new LinearLayoutManager(NotificationHistoryActivity.this);
             mSnoozedRv.setLayoutManager(lm);
             mSnoozedRv.setAdapter(
-                    new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+                    new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm, mUm));
             mSnoozedRv.setNestedScrollingEnabled(false);
 
             if (snoozed == null || snoozed.length == 0) {
@@ -280,7 +280,7 @@ public class NotificationHistoryActivity extends Activity {
                 new LinearLayoutManager(NotificationHistoryActivity.this);
             mDismissedRv.setLayoutManager(dismissLm);
             mDismissedRv.setAdapter(
-                new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm));
+                new NotificationSbnAdapter(NotificationHistoryActivity.this, mPm, mUm));
             mDismissedRv.setNestedScrollingEnabled(false);
 
             if (dismissed == null || dismissed.length == 0) {
