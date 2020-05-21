@@ -51,8 +51,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         implements LocalMediaManager.DeviceCallback {
 
-    private final Context mContext;
-    private final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
+    protected final Context mContext;
+    protected final Collection<MediaDevice> mMediaDevices = new CopyOnWriteArrayList<>();
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final String mPackageName;
 
