@@ -405,7 +405,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Naprej"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Preskoči"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Naprej"</string>
-    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Preskok nast. prstnega odtisa?"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Brez prstnega odtisa?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Nastavitev prstnega odtisa vam bo vzela le minuto ali dve. Če nastavitev preskočite, lahko prstni odtis dodate pozneje v nastavitvah."</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Preskok zaklepanja zaslona?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Funkcije za zaščito naprave ne bodo vklopljene. Če tablični računalnik izgubite, vam ga ukradejo ali ponastavijo na tovarniške nastavitve, drugim osebam ne boste mogli preprečiti njegove uporabe."</string>
@@ -438,7 +438,7 @@
     <string name="fingerprint_lock_screen_setup_skip_dialog_text" product="default" msgid="4810191157587317521">"Telefon zaščitite z možnostjo zaklepanja zaslona, tako da ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Možnost zaklepanja zaslona potrebujete tudi za nastavitev prstnega odtisa. Dotaknite se »Prekliči«, nato pa nastavite kodo PIN, vzorec ali geslo."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Če tablični računalnik zaščitite z možnostjo zaklepanja zaslona, ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Če napravo zaščitite z možnostjo zaklepanja zaslona, je ne bo mogel uporabljati nihče drug, če jo izgubite ali vam jo ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
-    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Če telefon zaščitite z možnostjo zaklepanja zaslona, ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
+    <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Če telefon zaščitite z zaklepanjem zaslona, ga ne bo mogel uporabljati nihče drug, če ga izgubite ali vam ga ukradejo. Zaklepanje zaslona potrebujete tudi za nastavitev odklepanja z obrazom. Za vrnitev se dotaknite »Prekliči«."</string>
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"Ne želite nastaviti kode PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Ne želite nastaviti gesla?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Ne želite nastaviti vzorca?"</string>
@@ -1822,11 +1822,11 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Ste pozabili geslo?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Ste pozabili vzorec?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Ste pozabili svoj PIN?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Če želite nadaljevati, uporabite vzorec za napravo"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Če želite nadaljevati, vnesite kodo PIN za napravo"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Za nadaljevanje uporabite vzorec za odklepanje naprave"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Za nadaljevanje vnesite kodo PIN za napravo"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Če želite nadaljevati, vnesite geslo za napravo"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Če želite nadaljevati, uporabite vzorec za delovni profil"</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Če želite nadaljevati, vnesite kodo PIN za delovni profil"</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Za nadaljevanje vnesite kodo PIN za delovni profil"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Če želite nadaljevati, vnesite geslo za delovni profil"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Zaradi večje varnosti vnesite vzorec za to napravo"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Zaradi večje varnosti vnesite kodo PIN za to napravo"</string>
@@ -2065,7 +2065,8 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Jezik"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tipkovnice"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Zaslonska tipkovnica"</string>
-    <string name="available_virtual_keyboard_category" msgid="2191399236305207950">"Razpoložljiva navidezna tipkovnica"</string>
+    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
+    <skip />
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljanje zaslonskih tipkovnic"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Pomoč za tipkovnico"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizična tipkovnica"</string>
@@ -2074,7 +2075,8 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Bližnjične tipke"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Prikaz razpoložljivih bližnjic"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tipkovnice in orodja delovnega profila"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="3423496805741863134">"Navidezna tipkovnica za delo"</string>
+    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
+    <skip />
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Privzeto"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Hitrost kazalca"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Krmilnik za igre"</string>
@@ -2137,7 +2139,7 @@
     <string name="accessibility_settings" msgid="4713215774904704682">"Za osebe s posebnimi potrebami"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Nastavitve pripomočkov za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Bralniki zaslona, prikaz, interakcija"</string>
-    <string name="vision_settings_title" msgid="8919983801864103069">"Nastavitve vidnosti"</string>
+    <string name="vision_settings_title" msgid="8919983801864103069">"Nastavitve za slepe in slabovidne"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"To napravo lahko prilagodite svojim potrebam. Te funkcije za ljudi s posebnimi potrebami lahko pozneje spremenite v nastavitvah."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Spremenite velikost pisave"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Bralniki zaslona"</string>
@@ -2171,6 +2173,8 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Če želite povečati, se dotaknite gumba"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Hitro povečanje prikaza na zaslonu za razločnejši prikaz vsebine.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Prikaz povečate tako:&lt;/b&gt;&lt;br/&gt; 1. Z bližnjico vklopite povečavo.&lt;br/&gt; 2. Dotaknite se zaslona.&lt;br/&gt; 3. Po zaslonu se pomikajte z vlečenjem dveh prstov.&lt;br/&gt; 4. Stopnjo povečave prilagodite tako, da prsta razmaknete ali primaknete.&lt;br/&gt; 5. Z bližnjico izklopite povečavo.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Prikaz začasno povečate tako:&lt;/b&gt;&lt;br/&gt; 1. Z bližnjico vklopite povečavo.&lt;br/&gt; 2. Dotaknite se poljubne točke na zaslonu in jo pridržite.&lt;br/&gt; 3. Po zaslonu se pomikajte z vlečenjem prsta.&lt;br/&gt; 4. Dvignite prst, da izklopite povečavo."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ko je povečava vklopljena, lahko povečate prikaz na zaslonu.\n\n"<b>"Če želite povečati prikaz"</b>", zaženite povečavo, nato pa se dotaknite poljubnega mesta na zaslonu.\n"<ul><li>"Povlecite z dvema ali več prsti po zaslonu, če se želite pomikati."</li>\n<li>"Primaknite ali razmaknite dva ali več prstov, če želite prilagoditi povečavo."</li></ul>\n\n<b>"Če želite začasno povečati prikaz"</b>", zaženite povečavo ter se dotaknite poljubnega mesta na zaslonu in ga pridržite.\n"<ul><li>"Povlecite, če se želite premikati po zaslonu."</li>\n<li>"Dvignite prst, če želite zmanjšati povečavo."</li></ul>\n\n"Povečava ni mogoča na tipkovnici ali v vrstici za krmarjenje."</string>
+    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
+    <skip />
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Odpiranje z gumbom za ljudi s posebnimi potrebami"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Za odpiranje pridržite tipki za glasnost"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Za odpiranje se trikrat dotaknite zaslona"</string>
@@ -3617,11 +3621,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Nikoli ne pokaži obvestil"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Pogovori"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Pogovor"</string>
+    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
+    <skip />
+    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"Ni pogovor"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Odstranitev iz razdelka s pogovorom"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"To je pogovor"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dodajanje v razdelek s pogovorom"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Upravljanje pogovorov"</string>
+    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
+    <skip />
+    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
     <string name="important_conversations" msgid="1233893707189659401">"Prednostni pogovori"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Prikaz na vrhu razdelka s pogovorom in v plavajočih oblačkih"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Prikaz na vrhu razdelka s pogovorom"</string>
