@@ -150,7 +150,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         ShortcutInfo si = conversation.getShortcutInfo();
 
         pref.setTitle(si != null
-                ? si.getShortLabel()
+                ? si.getLabel()
                 : conversation.getNotificationChannel().getName());
         pref.setSummary(conversation.getNotificationChannel().getGroup() != null
                 ? mContext.getString(R.string.notification_conversation_summary,

@@ -116,7 +116,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
     CharSequence getTitle(ConversationChannelWrapper conversation) {
         ShortcutInfo si = conversation.getShortcutInfo();
         return si != null
-                ? si.getShortLabel()
+                ? si.getLabel()
                 : conversation.getNotificationChannel().getName();
     }
 
@@ -154,8 +154,8 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                         return o1.getNotificationChannel().getId().compareTo(
                                 o2.getNotificationChannel().getId());
                     }
-                    return sCollator.compare(o1.getShortcutInfo().getShortLabel(),
-                            o2.getShortcutInfo().getShortLabel());
+                    return sCollator.compare(o1.getShortcutInfo().getLabel(),
+                            o2.getShortcutInfo().getLabel());
                 }
             };
 }
