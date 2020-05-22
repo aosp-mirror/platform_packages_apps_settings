@@ -17,12 +17,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="48dp"
-    android:paddingBottom="6dp"
-    android:paddingTop="6dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:orientation="vertical"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/colorBackgroundFloating"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification.Title"
+            android:textAppearance="@style/TextAppearance.NotificationHistory.Title"
             android:layout_toStartOf="@id/alerted_icon"
             android:textAlignment="viewStart"/>
 
@@ -64,7 +65,7 @@
             android:layout_centerVertical="true"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
+            android:textAppearance="@style/TextAppearance.NotificationHistory.AppName"
             android:textAlignment="viewEnd"
         />
     </LinearLayout>
@@ -77,7 +78,7 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:paddingTop="3dp"
-        android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Notification"
+        android:textAppearance="@style/TextAppearance.NotificationHistory.Text"
         android:textAlignment="viewStart" />
 
 </LinearLayout>
