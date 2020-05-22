@@ -51,6 +51,11 @@ public class NoConversationsPreferenceController extends ConversationListPrefere
     }
 
     @Override
+    Preference getSummaryPreference() {
+        return null;
+    }
+
+    @Override
     boolean matchesFilter(ConversationChannelWrapper conversation) {
         return false;
     }

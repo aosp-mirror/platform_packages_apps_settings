@@ -34,6 +34,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -224,6 +225,11 @@ public class ConversationListPreferenceControllerTest {
         @Override
         public String getPreferenceKey() {
             return "test";
+        }
+
+        @Override
+        Preference getSummaryPreference() {
+            return null;
         }
     }
 }
