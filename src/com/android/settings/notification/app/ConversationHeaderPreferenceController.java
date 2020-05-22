@@ -124,7 +124,7 @@ public class ConversationHeaderPreferenceController extends NotificationPreferen
     @VisibleForTesting
     CharSequence getLabel() {
         return mConversationInfo != null
-                ? mConversationInfo.getShortLabel()
+                ? mConversationInfo.getLabel()
                 : mChannel.getName();
     }
 }
