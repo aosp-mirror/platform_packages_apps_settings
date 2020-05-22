@@ -23,6 +23,7 @@ import android.service.notification.ConversationChannelWrapper;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 
 import java.util.Collections;
@@ -47,6 +48,14 @@ public class PriorityConversationsPreferenceController extends
     @Override
     public boolean isAvailable() {
         return true;
+    }
+
+    @Override
+    Preference getSummaryPreference() {
+        Preference pref = new Preference(mContext);
+        pref.setOrder(1);
+        pref.setSummary(R.string.important_conversations_summary_bubbles);
+        return pref;
     }
 
     @Override
