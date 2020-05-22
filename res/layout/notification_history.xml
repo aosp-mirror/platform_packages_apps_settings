@@ -136,12 +136,12 @@
                     android:layout_width="wrap_content"
                     android:text="@string/notification_history_snooze"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
                     android:paddingBottom="16dp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:elevation="3dp"
+                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,11 +161,11 @@
                     android:layout_width="wrap_content"
                     android:text="@string/notification_history_dismiss"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
                     android:paddingBottom="16dp" />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
-                        android:elevation="3dp"
+                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -183,19 +183,18 @@
                     android:layout_width="wrap_content"
                     android:text="@string/notification_history_today"
                     android:textColor="?android:attr/textColorPrimary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="@style/TextAppearance.HomepageCardTitle"
                     android:paddingBottom="16dp" />
                 <LinearLayout
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="3dp"
+                    android:elevation="1dp"
                     android:orientation="vertical"
                     android:background="@drawable/rounded_bg">
                     <!-- app based recycler views added here -->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
