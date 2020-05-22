@@ -20,6 +20,7 @@ import static android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED;
 
 import static androidx.core.view.accessibility.AccessibilityEventCompat.TYPE_VIEW_ACCESSIBILITY_FOCUSED;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.INotificationManager;
@@ -27,6 +28,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
+import android.graphics.Outline;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -37,9 +40,11 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.util.Slog;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,6 +87,23 @@ public class NotificationHistoryActivity extends Activity {
         findViewById(R.id.today_list).setVisibility(
                 notifications.isEmpty() ? View.GONE : View.VISIBLE);
         mCountdownLatch.countDown();
+        mTodayView.setClipToOutline(true);
+        mTodayView.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                final TypedArray ta = NotificationHistoryActivity.this.obtainStyledAttributes(
+                        new int[]{android.R.attr.dialogCornerRadius});
+                final float dialogCornerRadius = ta.getDimension(0, 0);
+                ta.recycle();
+                TypedValue v = new TypedValue();
+                NotificationHistoryActivity.this.getTheme().resolveAttribute(
+                        com.android.internal.R.attr.listDivider, v, true);
+                int bottomPadding = NotificationHistoryActivity.this.getDrawable(v.resourceId)
+                        .getIntrinsicHeight();
+                outline.setRoundRect(0, 0, view.getWidth(), (view.getHeight() - bottomPadding),
+                        dialogCornerRadius);
+            }
+        });
         // for each package, new header and recycler view
         for (NotificationHistoryPackage nhp : notifications) {
             View viewForPackage = LayoutInflater.from(this)
@@ -138,6 +160,13 @@ public class NotificationHistoryActivity extends Activity {
         mHistoryOn = findViewById(R.id.history_on);
         mHistoryEmpty = findViewById(R.id.history_on_empty);
         mSwitchBar = findViewById(R.id.switch_bar);
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
+        }
     }
 
     @Override
@@ -198,6 +227,12 @@ public class NotificationHistoryActivity extends Activity {
             mCountdownFuture.cancel(true);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        finish();
+        return true;
     }
 
     private void bindSwitch() {
