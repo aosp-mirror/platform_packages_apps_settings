@@ -73,24 +73,33 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
             containerGroup.setVisible(false);
         } else {
             containerGroup.setVisible(true);
+            Preference summaryPref = getSummaryPreference();
+            if (summaryPref != null) {
+                containerGroup.addPreference(summaryPref);
+            }
         }
     }
+
+    abstract Preference getSummaryPreference();
 
     abstract boolean matchesFilter(ConversationChannelWrapper conversation);
 
     protected void populateConversations(List<ConversationChannelWrapper> conversations,
             PreferenceGroup containerGroup) {
+        int order = 100;
         for (ConversationChannelWrapper conversation : conversations) {
             if (conversation.getNotificationChannel().isDemoted()
                     || !matchesFilter(conversation)) {
                 continue;
             }
-            containerGroup.addPreference(createConversationPref(conversation));
+            containerGroup.addPreference(createConversationPref(conversation, order++));
         }
     }
 
-    protected Preference createConversationPref(final ConversationChannelWrapper conversation) {
+    protected Preference createConversationPref(final ConversationChannelWrapper conversation,
+            int order) {
         Preference pref = new Preference(mContext);
+        pref.setOrder(order);
 
         pref.setTitle(getTitle(conversation));
         pref.setSummary(getSummary(conversation));
