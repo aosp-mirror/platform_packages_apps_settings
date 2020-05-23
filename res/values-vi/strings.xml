@@ -351,7 +351,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"Bạn có thể thêm tới <xliff:g id="COUNT">%d</xliff:g> khuôn mặt"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Bạn đã thêm số khuôn mặt tối đa"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Không thể thêm khuôn mặt khác nữa"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Chưa đăng ký xong"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Chưa đăng ký được"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Đã đến giới hạn thời gian đăng ký khuôn mặt. Hãy thử lại."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Quy trình đăng ký khuôn mặt không hoạt động."</string>
@@ -398,7 +398,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Bỏ qua"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Tiếp theo"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Bạn muốn bỏ qua vân tay?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Bạn chỉ mất một hoặc hai phút để thiết lập vân tay. Nếu bỏ qua bước này, bạn có thể thêm vân tay vào lúc khác trong cài đặt."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Bạn chỉ mất một hoặc hai phút để thiết lập vân tay. Nếu bỏ qua bước này, bạn có thể thêm vân tay vào lúc khác trong phần cài đặt."</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Bạn muốn bỏ qua phương thức khóa màn hình?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng máy tính bảng này nếu máy tính bảng bị mất, bị đánh cắp hoặc bị đặt lại."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Các tính năng bảo vệ thiết bị sẽ không được bật. Bạn sẽ không thể ngăn người khác sử dụng thiết bị này nếu thiết bị bị mất, bị đánh cắp hoặc bị đặt lại."</string>
@@ -438,7 +438,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Xong"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Rất tiếc, đó không phải là cảm biến"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Chạm vào cảm biến ở mặt sau điện thoại. Dùng ngón tay trỏ."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Chưa đăng ký xong"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Chưa đăng ký được"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Thời gian đăng ký vân tay đã hết hạn. Hãy thử lại."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Đăng ký dấu vân tay không hoạt động. Hãy thử lại hoặc sử dụng ngón tay khác."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Thêm vân tay khác"</string>
@@ -1187,6 +1187,10 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Độ sáng màn hình sẽ tự động điều chỉnh theo môi trường và hoạt động của bạn. Bạn có thể di chuyển thanh trượt theo cách thủ công để giúp độ sáng thích ứng tìm hiểu tùy chọn của bạn."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Cân bằng trắng của màn hình"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
+    <skip />
+    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Chú ý đến màn hình"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Bật / Màn hình sẽ không tắt nếu bạn đang nhìn vào màn hình"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Tắt"</string>
@@ -2019,8 +2023,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Ngôn ngữ"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Bàn phím"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Bàn phím ảo"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Bàn phím ảo có sẵn"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Quản lý bàn phím ảo"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Trợ giúp về bàn phím"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Bàn phím vật lý"</string>
@@ -2029,8 +2032,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Phím tắt"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Hiển thị các phím tắt có sẵn"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Công cụ và bàn phím hồ sơ công việc"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Bàn phím ảo cho công việc"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Mặc định"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Tốc độ con trỏ"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Trình điều khiển trò chơi"</string>
@@ -2127,8 +2129,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Nhấn vào nút để thu phóng"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Phóng to một cách nhanh chóng trên màn hình để thấy rõ nội dung hơn.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Cách phóng to:&lt;/b&gt;&lt;br/&gt; 1. Dùng phím tắt để bắt đầu phóng to&lt;br/&gt; 2. Nhấn vào màn hình&lt;br/&gt; 3. Kéo 2 ngón tay để di chuyển xung quanh màn hình&lt;br/&gt; 4. Chụm 2 ngón tay để điều chỉnh mức thu phóng&lt;br/&gt; 5. Dùng phím tắt để dừng phóng to&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Cách phóng to tạm thời:&lt;/b&gt;&lt;br/&gt; 1. Dùng phím tắt để bắt đầu phóng to&lt;br/&gt; 2. Chạm và giữ một vị trí bất kỳ trên màn hình&lt;br/&gt; 3. Kéo ngón tay để di chuyển xung quanh màn hình&lt;br/&gt; 4. Nhấc ngón tay lên để dừng phóng to"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Khi tính năng phóng to đang bật, bạn có thể phóng to trên màn hình.\n\n"<b>"Để thu phóng"</b>", hãy mở tính năng phóng to rồi nhấn vào vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo 2 hoặc nhiều ngón tay để cuộn"</li>\n<li>"Chụm 2 hoặc nhiều ngón tay để điều chỉnh mức thu phóng"</li></ul>\n\n<b>"Để thu phóng tạm thời"</b>", hãy mở tính năng phóng to rồi chạm và giữ vị trí bất kỳ trên màn hình.\n"<ul><li>"Kéo để di chuyển quanh màn hình"</li>\n<li>"Nhấc ngón tay để thu nhỏ"</li></ul>\n\n"Bạn không thể phóng to trên bàn phím hoặc thanh điều hướng."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Trang <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Dùng nút hỗ trợ tiếp cận để mở"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Giữ các phím âm lượng để mở"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Nhấn 3 lần vào màn hình để mở"</string>
@@ -3529,18 +3530,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Không bao giờ hiển thị thông báo"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Cuộc trò chuyện"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Cuộc trò chuyện"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Phần cuộc trò chuyện"</string>
+    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Cho phép <xliff:g id="APP">%1$s</xliff:g> xuất hiện trong phần cuộc trò chuyện"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Không phải là cuộc trò chuyện"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Xóa khỏi mục cuộc trò chuyện"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Đây là một cuộc trò chuyện"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Thêm vào mục cuộc trò chuyện"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Quản lý cuộc trò chuyện"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Không có cuộc trò chuyện ưu tiên"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> cuộc trò chuyện ưu tiên</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> cuộc trò chuyện ưu tiên</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Cuộc trò chuyện ưu tiên"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Hiển thị dưới dạng bong bóng nổi ở đầu phần cuộc trò chuyện"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Hiển thị ở đầu phần cuộc trò chuyện"</string>
