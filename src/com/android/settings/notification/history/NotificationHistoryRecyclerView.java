@@ -2,10 +2,7 @@ package com.android.settings.notification.history;
 
 import android.annotation.Nullable;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.view.View;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -26,7 +23,8 @@ public class NotificationHistoryRecyclerView extends RecyclerView {
         this(context, attrs, 0);
     }
 
-    public NotificationHistoryRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
+    public NotificationHistoryRecyclerView(Context context, @Nullable AttributeSet attrs,
+            int defStyle) {
         super(context, attrs, defStyle);
 
         setLayoutManager(new LinearLayoutManager(getContext()));
