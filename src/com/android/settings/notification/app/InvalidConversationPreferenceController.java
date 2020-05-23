@@ -59,8 +59,7 @@ public class InvalidConversationPreferenceController extends NotificationPrefere
         pref.setDisabledByAdmin(mAdmin);
         pref.setEnabled(!pref.isDisabledByAdmin());
         pref.setChecked(!mBackend.hasUserDemotedInvalidMsgApp(mAppRow.pkg, mAppRow.uid));
-        preference.setSummary(mContext.getString(
-                R.string.conversation_section_switch_summary, mAppRow.label));
+        preference.setSummary(mContext.getString(R.string.conversation_section_switch_summary));
     }
 
     @Override
