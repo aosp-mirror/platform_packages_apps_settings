@@ -439,7 +439,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"죄송합니다. 센서가 아닙니다."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"휴대전화 뒷면에 있는 센서를 터치하세요. 검지를 사용하세요."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"등록이 완료되지 않았습니다."</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"지문 등록 제한 시간에 도달했습니다. 다시 시도하세요."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"지문 등록 시간이 초과되었습니다. 다시 시도하세요."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"지문 등록이 되지 않았습니다. 다시 시도하거나 다른 손가락을 사용하세요."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"다른 지문 추가"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"다음"</string>
@@ -599,7 +599,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"다음번 시도에서 잘못된 비밀번호를 입력하면 직장 프로필 및 관련 데이터가 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"잘못된 시도 횟수가 너무 많습니다. 이 기기의 데이터가 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"잘못된 시도 횟수가 너무 많습니다. 이 사용자는 삭제됩니다."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"잘못된 시도 횟수가 너무 많습니다. 이 직장 프로필 및 관련 데이터는 삭제됩니다."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"입력 횟수를 초과했습니다. 이 직장 프로필 및 관련 데이터는 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"닫기"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>자 이상이어야 합니다.</item>
@@ -1187,6 +1187,10 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"화면 밝기가 환경 및 활동에 맞게 자동으로 조정됩니다. 슬라이더를 수동으로 이동하여 밝기 자동 조절 기능이 사용자의 환경설정을 학습하도록 할 수 있습니다."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"디스플레이 화이트 밸런스"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
+    <skip />
+    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"화면 시선 감지"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"사용/화면을 보고 있으면 꺼지지 않음"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"사용 안함"</string>
@@ -2019,8 +2023,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"언어"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"키보드"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"터치 키보드"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"키보드 지원"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
@@ -2029,8 +2032,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"단축키"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"사용할 수 있는 단축키 표시"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"업무용 터치 키보드"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"포인터 속도"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"게임 컨트롤러"</string>
@@ -2127,8 +2129,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"버튼을 탭하여 확대/축소"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"화면을 빠르게 확대하여 콘텐츠를 더 명확하게 표시합니다.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;확대하는 방법:&lt;/b&gt;&lt;br/&gt; 1. 확대 시작 단축키를 사용합니다.&lt;br/&gt; 2. 화면을 탭합니다.&lt;br/&gt; 3. 두 손가락을 드래그하여 화면에서 이동합니다.&lt;br/&gt; 4. 두 손가락을 모아서 배율을 조정합니다.&lt;br/&gt; 5. 단축키로 확대를 멈춥니다.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;일시적으로 확대하는 방법:&lt;/b&gt;&lt;br/&gt; 1. 확대 시작 단축키를 사용합니다.&lt;br/&gt; 2. 화면의 한 부분을 길게 터치합니다.&lt;br/&gt; 3. 손가락을 드래그하여 화면에서 이동합니다.&lt;br/&gt; 4. 손가락을 떼어 확대를 멈춥니다."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"확대 기능을 사용 설정하면 화면을 확대할 수 있습니다.\n\n"<b>"화면을 확대하려면"</b>" 확대 기능을 시작한 다음 화면에서 아무 곳이나 탭합니다.\n"<ul><li>"스크롤하려면 2개 이상의 손가락으로 드래그합니다."</li>\n<li>"확대/축소 수준을 조정하려면 2개 이상의 손가락을 모읍니다."</li></ul>\n\n<b>"화면을 일시적으로 확대하려면"</b>" 확대를 시작한 다음 화면에서 아무 곳이나 길게 터치합니다.\n"<ul><li>"화면에서 이동하려면 드래그합니다."</li>\n<li>"축소하려면 손가락을 뗍니다."</li></ul>\n\n"키보드 또는 탐색 메뉴는 확대할 수 없습니다."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>페이지 중 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>페이지"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"접근성 버튼을 사용하여 열기"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"볼륨 키를 길게 눌러 열기"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"화면을 세 번 탭하여 열기"</string>
@@ -3529,18 +3530,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"알림 표시 안함"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"대화"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"대화"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"대화 섹션"</string>
+    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"<xliff:g id="APP">%1$s</xliff:g> 앱을 허용하여 대화 섹션에 표시"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"대화 아님"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"대화 섹션에서 삭제"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"대화입니다."</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"대화 섹션에 추가"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"대화 관리"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"우선순위 대화 없음"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other">우선순위 대화 <xliff:g id="COUNT_1">%d</xliff:g>개</item>
+      <item quantity="one">우선순위 대화 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"우선순위 대화"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"대화 섹션 상단에 떠다니는 버블로 표시"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"대화 섹션의 상단에 표시"</string>

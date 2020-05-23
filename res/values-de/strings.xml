@@ -1188,6 +1188,10 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Die Helligkeit des Displays passt sich automatisch an deine Umgebung und deine Aktivitäten an. Mit dem Schieberegler kannst du manuell nachjustieren und die Funktion \"Automatische Helligkeit\" merkt sich deine Präferenz."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Weißabgleich des Bildschirms"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
+    <skip />
+    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Aufmerksamkeitserkennung"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"An / Der Bildschirm wird nicht ausgeschaltet, solange du auf ihn blickst"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Aus"</string>
@@ -2128,8 +2132,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Zum Zoomen auf eine Schaltfläche tippen"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Du kannst auf dem Display schnell heranzoomen, um Inhalte besser zu sehen.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;So zoomst du heran:&lt;/b&gt;&lt;br/&gt; 1. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; 2. Tippe auf das Display&lt;br/&gt; 3. Ziehe zwei Finger entlang des Displays, um dich darauf zu bewegen&lt;br/&gt; 4. Ziehe zwei Finger auseinander oder zusammen, um den Zoom anzupassen&lt;br/&gt; 5. Beende die Vergrößerung über die Verknüpfung&lt;br/&gt;&lt;br/&gt;&lt;b&gt;So zoomst du vorübergehend heran:&lt;/b&gt;&lt;br/&gt; 1. Starte die Vergrößerung über die Verknüpfung&lt;br/&gt; 2. Halte eine beliebige Stelle auf dem Display gedrückt&lt;br/&gt; 3. Ziehe den Finger entlang des Displays, um dich darauf zu bewegen&lt;br/&gt; 4. Hebe den Finger, um die Vergrößerung zu beenden"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Wenn die Vergrößerung aktiviert ist, kannst du Elemente auf dem Bildschirm heranzoomen.\n\n"<b>"Wenn du zoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm.\n"<ul><li>"Zum Scrollen ziehe mit zwei oder mehr Fingern"</li>\n<li>"Zum Anpassen des Zooms ziehe zwei oder mehr Finger zusammen bzw. auseinander"</li></ul>\n\n<b>"Wenn du vorübergehend heranzoomen möchtest"</b>", starte die Vergrößerung und tippe dann auf eine beliebige Stelle auf dem Bildschirm und halte sie gedrückt.\n"<ul><li>"Wenn du dich im Bildschirm bewegen möchtest, ziehe den Bildschirm"</li>\n<li>"Zum Herauszoomen hebe den Finger"</li></ul>\n\n"In die Tastatur oder Navigationsleiste kann nicht hineingezoomt werden."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Seite <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> von <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Zum Öffnen Schaltfläche \"Bedienungshilfen\" nutzen"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Zum Öffnen die Lautstärketasten gedrückt halten"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Zum Öffnen dreimal auf das Display tippen"</string>
@@ -3530,18 +3533,18 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Nie Benachrichtigungen anzeigen"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Unterhaltungen"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Unterhaltung"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Bereich \"Unterhaltungen\""</string>
+    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Anzeige der App \"<xliff:g id="APP">%1$s</xliff:g>\" im Bereich \"Unterhaltungen\" zulassen"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Keine Unterhaltung"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Aus dem Bereich \"Unterhaltungen\" entfernen"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dies ist eine Unterhaltung"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Dem Bereich \"Unterhaltungen\" hinzufügen"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Unterhaltungen verwalten"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Keine vorrangigen Unterhaltungen"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> vorrangige Unterhaltungen</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> vorrangige Unterhaltung</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Vorrangige Unterhaltungen"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Oben im Bereich \"Unterhaltungen\" und als unverankerte Bubbles anzeigen"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Oben im Bereich \"Unterhaltungen\" anzeigen"</string>
