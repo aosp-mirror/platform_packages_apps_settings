@@ -439,7 +439,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"အိုး။ ဒါ အာရုံခံကိရိယာမဟုတ်ဘူး"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"သင့်ဖုန်း ကျောဘက်ရှိ အာရုံခံကိရိယာကို ထိပါ။ လက်ညှိုးကို အသုံးပြုပါ။"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"စာရင်းသွင်းမှု မပြီးစီးခဲ့ပါ"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"လက်ဗွေ ပေးသွင်းမှု ကန့်သတ်ချိန် ကုန်သွားပြီ။ ထပ်စမ်းကြည့်ပါ။"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"လက်ဗွေစာရင်းသွင်းမှု ကန့်သတ်ချိန် ကုန်သွားပြီ။ ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"လက်ဗွေထည့်သွင်းမှု အဆင်မပြေပါ။ အခြားလက်ချောင်းကို သုံးပါ သို့မဟုတ် ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"နောက်တစ်ခု ထည့်ရန်"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ရှေ့သို့"</string>
@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"သင်၏ မျက်နှာပြင်တောက်ပမှုသည် ပတ်ဝန်းကျင်နှင့် လုပ်ဆောင်ချက်များကိုလိုက်၍ အလိုအလျောက် ချိန်ညှိသွားပါမည်။ သင့်ရွေးချယ်မှုများကို အလိုက်သင့် တောက်ပမှုပြောင်းလဲခြင်းစနစ်က ပိုမိုလေ့လာနိုင်စေရန် ရွှေ့တုန်းကို သင်ကိုယ်တိုင် ရွှေ့နိုင်ပါသည်။"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ဖန်သားပြင် အဖြူ ချိန်ညှိခြင်း"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"အကြောင်းအရာအချို့အတွက် ပြန်လည်စတင်နှုန်းကို ၆၀ မှ ၉၀ Hz သို့ အလိုအလျောက် တိုးပေးသည်။ ဘက်ထရီ အသုံးပြုမှု တိုးလာပါမည်။"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ဖန်သားပြင်ကို အာရုံစိုက်ခြင်း"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ဖွင့်ထားသည် / ၎င်းကို သင်ကြည့်နေလျှင် မျက်နှာပြင် ပိတ်မည်မဟုတ်ပါ"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ပိတ်ထားသည်"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ဘာသာစကား"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"လက်ကွက်များ"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"မျက်နှာပြင် လက်ကွက်"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ရနိုင်သော မျက်နှာပြင်လက်ကွက်"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"မျက်နှာပြင် လက်ကွက်များ စီမံခြင်း"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"ကီးဘုတ် အကူ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ကီးဘုတ် ခလုတ်ခုံ"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"လက်ကွက်ဖြတ်လမ်းများ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"ရနိုင်သည့် ဖြတ်လမ်းများ ပြပါ"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"အလုပ်ပရိုဖိုင် လက်ကွက်နှင့် တူးလ်များ"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"အလုပ်အတွက် မျက်နှာပြင်လက်ကွက်"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"မူရင်း"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"မြားရွေ့နှုန်း"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ဂိမ်းထိန်းချုပ်ခြင်း"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ဇူးမ်အသုံးပြုရန် ခလုတ်ကို တို့ပါ"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"အကြောင်းအရာကို ပိုမိုရှင်းလင်းစွာ မြင်ရရန် ဖန်သားပြင်ပေါ်တွင် အမြန် ဇူးမ်ဆွဲပါ။&lt;br/&gt;&lt;br/&gt;&lt;b&gt;ဇူးမ်ဆွဲရန်-&lt;/b&gt;&lt;br/&gt; ၁။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; ၂။ ဖန်သားပြင်ကို တို့ပါ&lt;br/&gt; ၃။ ဖန်သားပြင်ပေါ်တွင် ရွှေ့ကြည့်ရန် လက် ၂ ချောင်းဖြင့် ဖိဆွဲပါ&lt;br/&gt; ၄။ ဇူးမ်ချိန်ညှိရန် လက်နှစ်ချောင်းဖြင့် ချဲ့ချုံ့ပါ&lt;br/&gt; ၅။ ချဲ့ခြင်းကို ရပ်ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt;&lt;br/&gt;&lt;b&gt;ယာယီ ဇူးမ်ဆွဲရန်-:&lt;/b&gt;&lt;br/&gt; ၁။ စတင်ချဲ့ရန် ဖြတ်လမ်းလင့်ခ်ကို သုံးပါ&lt;br/&gt; ၂။ ဖန်သားပြင်ပေါ် တစ်နေရာရာတွင် ထိပြီး ဖိထားပါ&lt;br/&gt; ၃။ ဖန်သားပြင်တစ်လျှောက် ရွှေ့ကြည့်ရန် ဖိဆွဲပါ&lt;br/&gt; ၄။ ချဲ့ခြင်း ရပ်ရန် လက်ချောင်းကို ကြွပါ"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"မှန်ဘီလူးကို ဖွင့်ထားသည့်အခါ သင့်ဖန်သားပြင်ပေါ်တွင် ဇူးမ်ဆွဲနိုင်ပါသည်။\n\n"<b>"ဇူးမ်ဆွဲရန်"</b>" မှန်ဘီလူးကို ဖွင့်ပြီး ဖန်သားပြင်ပေါ်ရှိ နေရာတစ်ခုတွင် တို့ပါ။\n"<ul><li>"လှိမ့်ရွှေ့ရန် အနည်းဆုံး လက်ချောင်း ၂ ချောင်းဖြင့် ဖိဆွဲပါ"</li>\n<li>"ဇူးမ်ကို ချိန်ညှိရန် အနည်းဆုံး လက်ချောင်း ၂ ချောင်းဖြင့် ဆွဲကပ်ပါ"</li></ul>\n\n<b>"ယာယီဇူးမ်ဆွဲရန်"</b>" မှန်ဘီလူးကို ဖွင့်ပြီး ဖန်သားပြင်ပေါ်ရှိ တစ်နေနေရာတွင် ဖိထားပါ။\n"<ul><li>"ဖန်သားပြင်တစ်လျှောက် ရွှေ့ကြည့်ရန် ဖိဆွဲပါ"</li>\n<li>"ဇူးမ်ဖြုတ်ရန် လက်ချောင်းကို မ လိုက်ပါ"</li></ul>\n\n"ကီးဘုတ် သို့မဟုတ် လမ်းညွှန်ဘားကို ဇူးမ်ဆွဲ၍ မရပါ။"</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"စာမျက်နှာ <xliff:g id="NUM_PAGES">%2$d</xliff:g> မျက်နှာအနက် <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> မျက်နှာ"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ဖွင့်ရန် အသုံးလွယ်မှုခလုတ်ကို သုံးပါ"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"ဖွင့်ရန် အသံခလုတ်များကို နှိပ်ထားခြင်း"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"ဖွင့်ရန် သုံးချက်တို့ခြင်း"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"မျက်နှာမှတ်သော့ဖွင့်ပြီးပါက နောက်ဆုံးသုံးခဲ့သည့် မျက်နှာပြင်သို့ သွားပါ"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"လော့ခ်ချ မျက်နှာပြင်၊ လော့ခ်ချမျက်နှာပြင်၊ ကျော်ရန်"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"အလုပ်ပရိုဖိုင်လော့ခ်ချထားချိန်"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"လော့ခ်မျက်နှာပြင်ပေါ်ရှိ အကြောင်းကြားချက်များ"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"အရေးကြီးသည်များကိုသာ ပြပြီး အကြောင်းကြားချက်များ အသံတိတ်ရန်"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"အရေးကြီးသည့် အကြောင်းကြားချက်များသာ ပြရန်"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"အကြောင်းကြားချက်များကို မပြပါနှင့်"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"လော့ခ်ချထားချိန် မျက်နှာပြင်ရှိ အကြောင်းကြားချက်များ"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"အကြောင်းကြားချက်များအားလုံး ပြရန်"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"အရေးကြီးသော အကြောင်းကြားချက်များ ပြရန်"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"အကြောင်းကြားချက်များ မပြပါနှင့်"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"အရေးကြီးသည့် အကြောင်းကြားချက်များ"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"လော့ခ်ချထားစဉ် အရေးကြီးသည့် အကြောင်းအရာကို ပြရန်"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"အရေးကြီးသည့် အလုပ်ပရိုဖိုင် အကြောင်းကြားချက်များ"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"အကြောင်းကြားချက်များကို ဘယ်တော့မှ မပြပါနှင့်"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"စကားဝိုင်းများ"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"စကားဝိုင်း"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"စကားဝိုင်းကဏ္ဍ"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"စကားဝိုင်းကဏ္ဍ အသုံးပြုရန် အက်ပ်ကိုခွင့်ပြုသည်"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"စကားဝိုင်းမဟုတ်ပါ"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"စကားဝိုင်းကဏ္ဍမှ ဖယ်ရှားရန်"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"ဤအရာသည် စကားဝိုင်းဖြစ်သည်"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"စကားဝိုင်းကဏ္ဍသို့ ထည့်ရန်"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"စကားဝိုင်းများကို စီမံရန်"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"ဦးစားပေး စကားဝိုင်း မရှိပါ"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other">ဦးစားပေး စကားဝိုင်း <xliff:g id="COUNT_1">%d</xliff:g> ခု</item>
+      <item quantity="one">ဦးစားပေး စကားဝိုင်း <xliff:g id="COUNT_0">%d</xliff:g> ခု</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"ဦးစားပေး စကားဝိုင်းများ"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"စကားဝိုင်းကဏ္ဍ၏ ထိပ်တွင်ပြပြီး ပူဖောင်းကွက်အဖြစ် မြင်ရသည်"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"စကားဝိုင်းကဏ္ဍ၏ ထိပ်တွင်ပြရန်"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"ပြုပြင်ထားသော စကားဝိုင်းများ"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"အခြားစကားဝိုင်း"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"သင်အပြောင်းအလဲ ပြုလုပ်ထားသော စကားဝိုင်းများ"</string>
     <string name="important_bubble" msgid="7911698275408390846">"ဦးစားပေး စကားဝိုင်းများကို ပူဖောင်းကွက်အဖြစ် ပြသခြင်း"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"ဦးစားပေး စကားဝိုင်းများက ဆွဲချစာရင်း၏ ထိပ်တွင် ပေါ်လာသည်။ \'မနှောင့်ယှက်ရ\' တွင် ပူဖောင်းကွက်အဖြစ် ကြားဖြတ်ပြသရန်လည်း သတ်မှတ်နိုင်သည်။"</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"ဖန်သားပြင်ပေါ်တွင် ပြရန်"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"ပိတ်ထားပါ"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"အသံတိတ်ရန်"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"သတိပေးခြင်း"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"မူလ"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"ကြားဖြတ်သတိပေးချက်များကို ခွင့်ပြုရန်"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"အက်ပ်အား အသံမြည်ခြင်း၊ တုန်ခါခြင်းနှင့်/ သို့မဟုတ် မျက်နှာပြင်ပေါ်တွင် သတိပေးချက်များဖော်ပြခွင့် ပေးပါ"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"ဦးစားပေး"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"စကားဝိုင်းကဏ္ဍ၏ ထိပ်ပိုင်းတွင် ပြပြီး ပူဖောင်းကွက်အဖြစ် မြင်ရသည်"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> က စကားဝိုင်းအလိုက် ဆက်တင်များကို မပံ့ပိုးပါ။"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"စကားဝိုင်းကဏ္ဍ၏ ထိပ်ပိုင်းတွင် ပြပြီး ပူဖောင်းကွက်အဖြစ် မြင်ရသည်၊ လော့ခ်ချထားချိန် မျက်နှာပြင်တွင် ပရိုဖိုင်ပုံကို ပြသည်"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> က စကားဝိုင်းဝန်ဆောင်မှု အများစုကို မပံ့ပိုးပါ။ စကားဝိုင်းကို ဦးစားပေးအဖြစ် သတ်မှတ်၍မရပါ၊ ထို့ပြင် စကားဝိုင်းများကို မျောနေသောပူဖောင်းကွက်များအဖြစ် မြင်ရမည်မဟုတ်ပါ။"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"ဆွဲချသည့် အရိပ်တွင် အကြောင်းကြားချက်များကို လိုင်းတစ်လိုင်းအဖြစ် လျှော့ပြသည်"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"အသံ သို့မဟုတ် တုန်ခါမှု မပါဘဲ အာရုံစိုက်နိုင်စေရန် ကူညီပေးသည်"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"အသံ သို့မဟုတ် တုန်ခါမှုဖြင့် အာရုံစိုက်လာအောင် ပြုလုပ်သည်"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"အသံ သို့မဟုတ် တုန်ခါမှုမရှိပါ"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"အသံ သို့မဟုတ် တုန်ခါမှုမရှိပါ၊ စကားဝိုင်းကဏ္ဍ၏ အောက်ပိုင်းတွင် မြင်ရသည်"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"ဖုန်းဆက်တင်များပေါ် အခြေခံပြီး အသံမြည်နိုင်သည် သို့မဟုတ် တုန်ခါနိုင်သည်"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"စက်ကို လော့ခ်ဖွင့်ထားပါက အကြောင်းကြားချက်များကို မျက်နှာပြင်၏ထိပ်တွင် နဖူးစည်းအဖြစ် ပြသပါ"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" အကြောင်းကြားချက်အားလုံး"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> အကြောင်းကြားချက် အားလုံး"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"မီးကို မှိတ်တုတ်မှိတ်တုတ်လုပ်ရန်"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"တုန်ခါမှု"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"အသံ"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"အရေးကြီး"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"ဦးစားပေး"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"ပင်မသို့ ထည့်ရန်"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"ဖျက်ရန်"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"အမည်ပြောင်းရန်"</string>
