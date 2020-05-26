@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Skärmens ljusstyrka justeras automatiskt efter miljö och aktivitet. Du kan träna Anpassad ljusstyrka med dina egna inställningar genom att flytta reglaget manuellt."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Skärmens vitbalans"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Höjer uppdateringsfrekvensen dynamiskt från 60 till 90 Hz för visst innehåll. Ökar batteriförbrukningen."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Blickavkänning"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"På/Skärmen stängs inte av om du tittar på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Av"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tangentbord"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skärmtangentbord"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tillgängligt skärmtangentbord"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Hantera skärmtangentbord"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Hjälp med tangentbord"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysiskt tangentbord"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Kortkommandon"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Visa tillgängliga genvägar"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tangentbord och verktyg för jobbprofilen"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Skärmtangentbord för arbete"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Standard"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Markörens hastighet"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Spelkontroller"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryck på en knapp för att zooma"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Zooma in snabbt på skärmen för att se innehållet tydligare.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Så här zoomar du in:&lt;/b&gt;&lt;br/&gt; 1. Starta förstoring med kortkommando&lt;br/&gt; 2. Tryck på skärmen&lt;br/&gt; 3. Dra två fingrar för att navigera på skärmen&lt;br/&gt; 4. Nyp med två fingrar för att justera zoomnivån&lt;br/&gt; 5. Stoppa förstoring med kortkommando&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Så här zoomar du in tillfälligt:&lt;/b&gt;&lt;br/&gt; 1. Starta förstoring med kortkommando&lt;br/&gt; 2. Tryck länge var som helst på skärmen&lt;br/&gt; 3. Dra fingret för att navigera på skärmen&lt;br/&gt; 4. Stoppa förstoringen genom att lyfta fingret"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"När förstoring har aktiverats kan du zooma in på skärmen.\n\n"<b>"Om du vill zooma"</b>" aktiverar du förstoring och trycker var som helst på skärmen.\n"<ul><li>"Skrolla genom att dra med minst två fingrar."</li>\n<li>"Justera zoomen genom att nypa med minst två fingrar."</li></ul>\n\n<b>"Om du vill zooma tillfälligt"</b>" aktiverar du förstoring och trycker länge var som helst på skärmen.\n"<ul><li>"Flytta runt på skärmen genom att dra."</li>\n<li>"Zooma ut genom att lyfta fingret."</li></ul>\n\n"Det går inte att zooma in på tangentbordet eller navigeringsfältet."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Sida <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Öppna med tillgänglighetsknappen"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Öppna genom att hålla ned volymknapparna"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Öppna genom att trycka snabbt tre gånger"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Öppna den senast använda skärmen när ansiktslåset låses upp"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låsskärm, Hoppa över, Kringgå"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"När jobbprofilen är låst"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Aviseringar på låsskärmen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Visa aviseringar med och utan ljud"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Visa endast aviseringar med ljud"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Visa inga aviseringar"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Aviseringar på låsskärmen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Visa konversationer, standard och ljudlösa"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Dölj ljudlösa konversationer och aviseringar"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Visa inga aviseringar"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Känsliga aviseringar"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Visa känsligt innehåll på låsskärmen"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Känsliga aviseringar i jobbprofilen"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Visa aldrig aviseringar"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Konversationer"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Konversation"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Konversationsavsnittet"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Tillåt appen att använder konversationsavsnittet"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Inte en konversation"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Ta bort från konversationsavsnittet"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Det här är en konversation"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Lägg till i konversationsavsnittet"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Hantera konversationer"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Inga prioriterade konversationer"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> prioriterad konversation</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> prioriterad konversation</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Prioriterade konversationer"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Visa högst upp bland konversationerna och som flytande bubblor"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Visa högst upp bland konversationerna"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Ändrade konversationer"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Övriga konversationer"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Konversationer som du har ändrat"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Visa prioriterade konversationer i bubblor"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterade konversationer visas högst upp i aviseringspanelen. Du kan även ställa in så att de visas i bubblor och kringgår Stör ej."</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Visa på skärmen"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Blockera"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Tyst"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Med avisering"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Standard"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Tillåt avbrott"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Tillåt att appen spelar upp ljud, vibrerar och/eller visar popup-aviseringar på skärmen"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritet"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Visas högst upp bland konversationerna som en bubbla"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> har inte stöd för konversationsspecifika inställningar."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Visas högst upp bland konversationerna som en flytande bubbla, visar profilbilden på låsskärmen"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"De flesta funktioner för konversationer stöds inte av <xliff:g id="APP_NAME">%1$s</xliff:g>. Det går inte att markera en konversation som prioriterad och konversationer visas inte som flytande bubblor."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Komprimera aviseringar på den övre panelen på en rad"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Inga ljud eller vibrationer som stör koncentrationen"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Påkallar uppmärksamhet med ljud eller vibrationer"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Inga ljud eller vibrationer"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Inga ljud eller vibrationer och visas längre ned bland konversationerna"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringa eller vibrera beroende på inställningarna på telefonen"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"När enheten är olåst visas aviseringar i en banner högst upp på skärmen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alla aviseringar från <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Blinkande ljus"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibration"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Ljud"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Viktigt"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Prioritet"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Lägg till i hemmet"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Radera"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Byt namn"</string>
