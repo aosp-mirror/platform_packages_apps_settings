@@ -750,21 +750,29 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
 
 
     @VisibleForTesting
-    void updateScanResultsToUi(List<WifiEntry> allEntries) {
+    void updateScanResultsToUi() {
         if (mUiToRequestedList == null) {
             // Nothing need to be updated.
             return;
         }
 
+        List<WifiEntry> reachableWifiEntries = null;
+        if (mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+            reachableWifiEntries = mWifiPickerTracker.getWifiEntries();
+            final WifiEntry connectedWifiEntry = mWifiPickerTracker.getConnectedWifiEntry();
+            if (connectedWifiEntry != null) {
+                reachableWifiEntries.add(connectedWifiEntry);
+            }
+        }
+
         // Update the signal level of the UI networks.
         for (UiConfigurationItem uiConfigurationItem : mUiToRequestedList) {
             uiConfigurationItem.mLevel = 0;
-            if (allEntries != null) {
-                final Optional<WifiEntry> matchedWifiEntry = allEntries.stream()
+            if (reachableWifiEntries != null) {
+                final Optional<WifiEntry> matchedWifiEntry = reachableWifiEntries.stream()
                         .filter(wifiEntry -> TextUtils.equals(
                                 uiConfigurationItem.mWifiNetworkSuggestion.getSsid(),
                                 wifiEntry.getSsid()))
-                        .filter(wifiEntry -> !wifiEntry.isSaved())
                         .findFirst();
                 uiConfigurationItem.mLevel =
                         matchedWifiEntry.isPresent() ? matchedWifiEntry.get().getLevel() : 0;
@@ -797,9 +805,7 @@ public class AddAppNetworksFragment extends InstrumentedFragment implements
      */
     @Override
     public void onWifiEntriesChanged() {
-        updateScanResultsToUi(
-                (mWifiPickerTracker.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
-                        ? mWifiPickerTracker.getWifiEntries() : null);
+        updateScanResultsToUi();
     }
 
     @Override
