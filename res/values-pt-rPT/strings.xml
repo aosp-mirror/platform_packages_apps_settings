@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"A luminosidade do ecrã vai ajustar-se automaticamente ao ambiente e às atividades. Pode mover o controlo de deslize manualmente para ajudar a luminosidade adaptável a aprender as suas preferências."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Apresentar equilíb. de brancos"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para algum conteúdo. Aumenta a utilização da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenção ao ecrã"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ativada/O ecrã não se desliga se estiver a olhar para o mesmo"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Desativado"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado no ecrã"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado no ecrã disponível"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerir teclados no ecrã"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Assistência do teclado"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atalhos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Mostrar atalhos disponíveis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de trabalho"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado no ecrã para trabalho"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predefinição"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidade do ponteiro"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de Jogos"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tocar num botão para utilizar o zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Aumente o zoom rapidamente no ecrã para ver o conteúdo mais claramente.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para aumentar o zoom:&lt;/b&gt;&lt;br/&gt; 1. Utilize o atalho para iniciar a ampliação.&lt;br/&gt; 2. Toque no ecrã.&lt;br/&gt; 3. Arraste 2 dedos para se deslocar pelo ecrã.&lt;br/&gt; 4. Junte/afaste 2 dedos para ajustar o zoom.&lt;br/&gt; 5. Utilize o atalho para parar a ampliação.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para aumentar o zoom temporariamente:&lt;/b&gt;&lt;br/&gt; 1. Utilize o atalho para iniciar a ampliação.&lt;br/&gt; 2. Toque sem soltar em qualquer parte do ecrã.&lt;br/&gt; 3. Arraste o dedo para se deslocar pelo ecrã.&lt;br/&gt; 4. Levante o dedo para parar a ampliação."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Quando a ampliação estiver ativada, pode aumentar o zoom no ecrã.\n\n"<b>"Para utilizar o zoom"</b>", inicie a ampliação e, em seguida, toque em qualquer parte do ecrã.\n"<ul><li>"Arraste 2 ou mais dedos para se deslocar."</li>\n<li>"Junte 2 ou mais dedos para ajustar o zoom."</li></ul>\n\n<b>"Para utilizar o zoom temporariamente"</b>", inicie a ampliação e, em seguida, toque sem soltar em qualquer parte do ecrã.\n"<ul><li>"Arraste o dedo para se mover pelo ecrã."</li>\n<li>"Levante o dedo para diminuir o zoom."</li></ul>\n\n"Não é possível aumentar o zoom no teclado nem na barra de navegação."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Página <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Utilize o botão de acessibilidade para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantenha premidas as teclas de volume para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toque três vezes no ecrã para abrir"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Após Desbloqueio facial, aceda ao último ecrã utilizado"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ecrã de bloqueio, ignorar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quando perfil trabalho bloq."</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notificações no ecrã de bloqueio"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Mostrar notificações de alerta e silenciosas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Mostrar apenas notificações de alerta"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Não mostrar notificações"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificações no ecrã de bloqueio"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predefinidas e silenciosas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar notificações e conversas silenciosas"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Não mostrar notificações"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificações confidenciais"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar conteúdo confidencial quando estiver bloqueado"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificações confidenciais do perfil de trabalho"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Nunca mostrar notificações"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversas"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversa"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Secção de conversas"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Permita que a app utilize a secção de conversas."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Não é uma conversa"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Remova da secção de conversas"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Isto é uma conversa"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adicione à secção de conversas"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gerir conversas"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Nenhuma conversa com prioridade"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversas com prioridade</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversa com prioridade</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas com prioridade"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Aparecem na parte superior da secção de conversas e surgem como balões flutuantes."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Aparecem na parte superior da secção de conversas."</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Conversas modificadas"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas às quais efetuou alterações."</string>
     <string name="important_bubble" msgid="7911698275408390846">"Apresentar conversas com prioridade como balão"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas com prioridade são apresentadas na parte superior do painel pendente. Também pode defini-las como balões e para interromperem o modo Não incomodar."</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Aparecer no ecrã"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Bloquear"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Silencioso"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Alertar"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Predefinição"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupções"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permitir que a aplicação emita som, vibre e/ou apresente notificações no ecrã"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Aparece na parte superior da secção de conversas e surge como um balão."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"A app <xliff:g id="APP_NAME">%1$s</xliff:g> não suporta definições específicas de conversas."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece na parte superior da secção de conversas, surge como um balão flutuante e apresenta a imagem do perfil no ecrã de bloqueio."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"A <xliff:g id="APP_NAME">%1$s</xliff:g> não suporta a maioria das funcionalidades de conversas. Não é possível definir uma conversa como prioritária e as conversas não vão aparecer como balões flutuantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No painel pendente, reduza as notificações para uma linha"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Ajuda-o a concentrar-se sem som ou vibração"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama a sua atenção com som ou vibração"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sem som ou vibração"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sem som ou vibração e aparece na parte inferior na secção de conversas."</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Pode tocar ou vibrar com base nas definições do telemóvel."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Com o dispositivo desbloqueado, as notificações são apresentadas como uma faixa no topo do ecrã."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificações da app \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificações da app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Emitir luz intermitente"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibração"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Som"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Importante"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Prioridade"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Adicione ao ecrã principal"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Eliminar"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Mudar o nome"</string>
