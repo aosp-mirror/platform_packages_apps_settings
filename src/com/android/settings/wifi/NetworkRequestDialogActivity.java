@@ -31,6 +31,7 @@ import android.os.Message;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -57,12 +58,12 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     final static String EXTRA_IS_SPECIFIED_SSID =
         "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
 
-    private NetworkRequestDialogBaseFragment mDialogFragment;
+    @VisibleForTesting NetworkRequestDialogBaseFragment mDialogFragment;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
     private boolean mIsSpecifiedSsid;
     private boolean mShowingErrorDialog;
     private WifiConfiguration mMatchedConfig;
-    private ProgressDialog mProgressDialog;
+    @VisibleForTesting ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
