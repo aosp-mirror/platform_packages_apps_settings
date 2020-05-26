@@ -301,6 +301,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (mPinDialog != null) {
             mPinDialog.setEnabled(sir != null);
+            if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                mPinDialog.getDialog().dismiss();
+            }
         }
         if (mPinToggle != null) {
             mPinToggle.setEnabled(sir != null);
