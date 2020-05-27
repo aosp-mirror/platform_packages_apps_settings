@@ -200,15 +200,17 @@ public class PanelFragment extends Fragment {
         loadAllSlices();
 
         final IconCompat icon = mPanel.getIcon();
+        final CharSequence title = mPanel.getTitle();
         if (icon == null) {
             mTitleView.setVisibility(View.VISIBLE);
             mPanelHeader.setVisibility(View.GONE);
-            mTitleView.setText(mPanel.getTitle());
+            mTitleView.setText(title);
         } else {
             mTitleView.setVisibility(View.GONE);
             mPanelHeader.setVisibility(View.VISIBLE);
+            mPanelHeader.setAccessibilityPaneTitle(title);
             mTitleIcon.setImageIcon(icon.toIcon(getContext()));
-            mHeaderTitle.setText(mPanel.getTitle());
+            mHeaderTitle.setText(title);
             mHeaderSubtitle.setText(mPanel.getSubTitle());
             if (mPanel.getHeaderIconIntent() != null) {
                 mTitleIcon.setOnClickListener(getHeaderIconListener());

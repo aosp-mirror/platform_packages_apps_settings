@@ -351,7 +351,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"तपाईं अधिकतम <xliff:g id="COUNT">%d</xliff:g> अनुहारहरू थप्न सक्नुहुन्छ"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"तपाईंले थप्न मिल्ने अधिकतम सङ्ख्या बराबरका अनुहारहरू थप्नुभएको छ"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"थप अनुहारहरू थप्न सकिँदैन"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"दर्ता गर्ने कार्य पूर्ण भएन"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"फिंगरप्रिन्ट सेभ भइसकेको छैन"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"ठिक छ"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"अनुहार दर्ताको समय सीमा पुग्यो। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"अनुहार दर्ता गर्ने प्रक्रियाले काम गरेन।"</string>
@@ -438,7 +438,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"सम्पन्न भयो"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"आच्यौं, त्यो सेन्सर होइन नि त"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तपाईंको फोनको पछाडि भागमा रहेको सेन्सरमा छुनुहोस्। चोर औंला प्रयोग गर्नुहोस्‌।"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"सेभ भइसकेको छैन"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"फिंगरप्रिन्ट सेभ भइसकेको छैन"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"फिंगरप्रिन्ट दर्ताको समय सीमा पुग्यो। पुन: प्रयास गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिन्ट दर्ताले काम गरेन। पुन: प्रयास गर्नुहोस् वा अरू औँलाको प्रयोग गर्नुहोस्।"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"अर्को थप्नुहोस्"</string>
@@ -1187,6 +1187,10 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"तपाईंको स्क्रिनको उज्यालोपन तपाईंको वातावरण र गतिविधिहरूअनुसार स्वतः समायोजन हुने छ। तपाईं म्यानुअल रूपमा स्लाइडर सारेर अनुकूलित उज्यालोपनलाई आफ्ना प्राथमिकताहरू सिक्नमा मद्दत गर्न सक्नुहुन्छ।"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"श्वेत सन्तुलन देखाउनुहोस्"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
+    <skip />
+    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"स्क्रिनमा हेरिरहेको पहिचान गर्ने सुविधा"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"सक्रिय / तपाईं स्क्रिनमा हेर्दै हुनुहुन्छ भने यो बन्द हुने छैन"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"निष्क्रिय"</string>
@@ -2019,8 +2023,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"किबोर्डहरू"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"अनस्क्रिन किबोर्ड"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"उपलब्ध अनस्क्रिन किबोर्ड"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"अनस्क्रिन किबोर्डहरूको व्यवस्थापन गर्नुहोस्"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"किबोर्डमा सहायता"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"वास्तविक किबोर्ड"</string>
@@ -2029,8 +2032,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"किबोर्डका सर्टकटहरू"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"उपलब्ध सर्टकटहरूलाई प्रदर्शन गर्नुहोस्"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल किबोर्ड र उपकरणहरू"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"कार्यालयमा प्रयोग गरिने अनस्क्रिन किबोर्ड"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"पूर्वनिर्धारित"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"सूचक गति"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"खेल नियन्त्रक"</string>
@@ -2127,8 +2129,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"जुम गर्न बटनमा ट्याप गर्नुहोस्"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"सामग्री अझ स्पष्ट रूपमा हेर्न स्क्रिनमा द्रुत रूपमा जुम इन गर्नुहोस्।&lt;br/&gt;&lt;br/&gt; &lt;b&gt;जुम इन गर्न:&lt;/b&gt;&lt;br/&gt; १. सर्टकट प्रयोग गरेर म्याग्निफिकेसन सुविधा सक्रिय गर्नुहोस्&lt;br/&gt; २. स्क्रिनमा ट्याप गर्नुहोस्&lt;br/&gt; ३. स्क्रिनमा सामग्री यताउता सार्न २ औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; ४. जुम समायोजन गर्न २ औँलाले पिन्च गर्नुहोस्&lt;br/&gt; ५. सर्टकट प्रयोग गरेर म्याग्निफिकेसन सुविधा निष्क्रिय पार्नुहोस्&lt;br/&gt;&lt;br/&gt;&lt;b&gt;केही समयका लागि जुम इन गर्न:&lt;/b&gt;&lt;br/&gt; १. सर्टकट प्रयोग गरेर म्याग्निफिकेसन सुविधा सक्रिय गर्नुहोस्&lt;br/&gt; २. स्क्रिनमा कतै केही बेरसम्म छोइराख्नुहोस्&lt;br/&gt; ३. स्क्रिनमा सामग्री यताउता सार्न औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; ४. म्याग्निफिकेसन सुविधा निष्क्रिय पार्न औँला उठाउनुहोस्"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"म्याग्निफिकेसन सुविधा सक्रिय गरेपछि, तपाईं आफ्नो स्क्रिनमा जुम इन गर्न सक्नुहुन्छ।\n\n"<b>"जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा ट्याप गर्नुहोस्।\n"<ul><li>"स्क्रोल गर्न २ वा सोभन्दा बढी औँलाले ड्र्याग गर्नुहोस्"</li>\n<li>"जुम समायोजन गर्न २ वा सोभन्दा बढी औँलाले पिन्च गर्नुहोस्"</li></ul>\n\n<b>"केहीबेरका लागि जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा केहीबेर छोइरहनुहोस्।\n"<ul><li>"स्क्रिनमा यताउता जान ड्र्याग गर्नुहोस्"</li>\n<li>"जुम आउट गर्न औँला उचाल्नुहोस्"</li></ul>\n\n"तपाईं किबोर्ड वा नेभिगेसन पट्टीमा जुम इन गर्न सक्नुहुन्न।"</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> मध्ये <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> औँ पृष्ठ"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"खोल्नका लागि पहुँचसम्बन्धी बटनको प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"खोल्नका लागि भोल्युम कुञ्जीहरू थिचिराख्नुहोस्"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"यसलाई खोल्न स्क्रिनमा तीन पटक ट्याप गर्नुहोस्"</string>
@@ -3503,10 +3504,14 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"फेस अनलक प्रयोग गरी अनलक गरेपछि सीधै पछिल्लो पटक प्रयोग गरिएको स्क्रिनमा जानुहोस्"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"लक स्क्रिन, लकस्क्रिन, छाड्नुहोस्, बाइपास गर्नुहोस्"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"कार्य प्रोफाइल लक हुँदा"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"लकस्क्रिनका सूचनाहरू"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"सतर्क गर्ने र मौन सूचनाहरू देखाउनुहोस्"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"सतर्क गराउने सूचनाहरू मात्र देखाउनुहोस्"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"सूचनाहरू नदेखाउनुहोस्"</string>
+    <!-- no translation found for lock_screen_notifs_title (3412042692317304449) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_all (1300418674456749664) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_alerting (6584682657382684566) -->
+    <skip />
+    <!-- no translation found for lock_screen_notifs_show_none (1941044980403067101) -->
+    <skip />
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"संवेदनशील सूचनाहरू"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"लक हुँदा संवेदनशील सामग्री देखाउनुहोस्"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"कार्य प्रोफाइलसम्धी संवेदनशील सूचनाहरू"</string>
@@ -3529,22 +3534,23 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"सूचनाहरू कहिल्यै नदेखाउनुहोस्"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"वार्तालापहरू"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"वार्तालाप"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"कुराकानी नामक खण्ड"</string>
+    <!-- no translation found for conversation_section_switch_summary (6123587625929439674) -->
     <skip />
     <string name="demote_conversation_title" msgid="6355383023376508485">"वार्तालाप होइन"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"वार्तालाप खण्डबाट हटाउनुहोस्"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"यो वार्तालाप हो"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"वार्तालापको खण्डमा थप्नुहोस्"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"वार्तालापहरूको व्यवस्थापन गर्नुहोस्"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"कुनै पनि महत्त्वपूर्ण वार्तालाप छैन"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> वटा महत्त्वपूर्ण वार्तालापहरू</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> वटा महत्त्वपूर्ण वार्तालाप</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"महत्वपूर्ण वार्तालापहरू"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"वार्तालाप खण्डको सिरानमा र तैरने बबलका रूपमा देखाइयोस्"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"वार्तालाप खण्डको सिरानमा देखाइयोस्"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"संशोधित वार्तालापहरू"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"अन्य वार्तालापहरू"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"तपाईंले केही कुराहरू परिवर्तन गर्नुभएका वार्तालापहरू"</string>
     <string name="important_bubble" msgid="7911698275408390846">"महत्त्वपूर्ण वार्तालापहरू बबलमा देखाइयोस्"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"महत्त्वपूर्ण वार्तालापहरू पुल डाउन सेडका सिरानमा देखिन्छन्। तपाईं वार्तालापहरूलाई बबलका रूपमा देखिने र बाधा नपुर्‍याउनुहोस् नामक मोड निष्क्रिय पार्ने गरी सेट गर्न पनि सक्नुहुन्छ।"</string>
@@ -3561,15 +3567,22 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"स्क्रिनमा देखाउनुहोस्"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"रोक लगाउनुहोस्"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"मौन"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"सतर्क गराउने"</string>
+    <!-- no translation found for notification_alert_title (1632401211722199217) -->
+    <skip />
     <string name="allow_interruption" msgid="5237201780159482716">"अवरोधहरूहरूलाई अनुमति दिनुहोस्"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"एपलाई बज्न, कम्पन गर्न र/वा स्क्रिनमा सूचनाहरू पप गर्न दिनुहोस्"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"प्राथमिकता"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"वार्तालाप खण्डको सिरानमा बबलका रूपमा देखा पर्छ"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> मा वार्तालापविशेषका लागि सेटिङ उपलब्ध छैन।"</string>
+    <!-- no translation found for notification_channel_summary_priority (7225362351439076913) -->
+    <skip />
+    <!-- no translation found for convo_not_supported_summary (4285471045268268048) -->
+    <skip />
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"पुल डाउन सेडमा सूचनाहरूलाई एउटा पङ्क्तिमा सङ्क्षिप्त पार्नुहोस्"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"तपाईंलाई आवाज वा कम्पनविना ध्यान केन्द्रित गर्न मद्दत गर्छ।"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"ध्वनि वा कम्पनमार्फत तपाईंको ध्यान आकर्षित गर्छ।"</string>
+    <!-- no translation found for notification_channel_summary_low (5549662596677692000) -->
+    <skip />
+    <!-- no translation found for notification_conversation_summary_low (6352818857388412326) -->
+    <skip />
+    <!-- no translation found for notification_channel_summary_default (3674057458265438896) -->
+    <skip />
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"यन्त्र अनलक गरिएका बेला सूचना देखाउँदा स्क्रिनको सिरानमा ब्यानरका रूपमा देखाउनुहोस्"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" का सबै सूचनाहरू"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> सम्बन्धी सबै सूचनाहरू"</string>
@@ -3681,7 +3694,8 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"झिम झिम बत्ती बल्ने"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"कम्पन"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"आवाज"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"महत्त्वपूर्ण"</string>
+    <!-- no translation found for notification_conversation_important (4365437037763608045) -->
+    <skip />
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"गृह स्क्रिनमा थप्नुहोस्"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"मेट्नुहोस्"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"पुनःनामाकरण गर्नुहोस्"</string>

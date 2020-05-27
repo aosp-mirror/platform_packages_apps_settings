@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から 90 Hz に変更します。電池使用量が増えます。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"OFF"</string>
@@ -1246,7 +1248,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークテーマでは黒い背景を使用するため、一部の画面で電池が長持ちします。画面が OFF になるまでダークテーマが ON にならないように設定できます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 経過後"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁紙"</string>
     <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"スタイルと壁紙"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"デフォルト"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"言語"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"キーボード"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"画面キーボード"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"利用可能な画面キーボード"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"画面キーボードを管理"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"キーボード補助機能"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"物理キーボード"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"キーボード ショートカット"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"使用可能なショートカットを表示します"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"仕事用プロファイルのキーボードとツール"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"仕事用の画面キーボード"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"デフォルト"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ゲーム用コントローラ"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"ボタンをタップしてズームします"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"画面を素早くズームインして、コンテンツをよりはっきりと確認できます。&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面をタップします&lt;br/&gt; 3. 2 本の指でドラッグして画面上を移動します&lt;br/&gt; 4. 2 本の指でピンチ操作してズームを調整します&lt;br/&gt; 5. ショートカットを使って拡大を停止します&lt;br/&gt;&lt;br/&gt; &lt;b&gt;一時的にズームインするには:&lt;/b&gt;&lt;br/&gt; 1. ショートカットを使って拡大を開始します&lt;br/&gt; 2. 画面を長押しします&lt;br/&gt; 3. 指をドラッグして画面上を移動します&lt;br/&gt; 4. 指を離して拡大を停止します"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"[拡大] を ON にすると、画面で拡大操作を行えます。\n\n"<b>"ズーム"</b>"するには、[拡大] を ON にして画面をタップします。\n"<ul><li>"2 本以上の指をドラッグしてスクロール"</li>\n<li>"2 本以上の指でピンチ操作してズームを調整"</li></ul>\n\n<b>"一時的にズーム"</b>"するには、[拡大] を ON にして画面を長押しします。\n"<ul><li>"ドラッグで画面上を移動"</li>\n<li>"指を放してズームアウト"</li></ul>\n\n"キーボードやナビゲーション バーでは拡大操作は行えません。"</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>/<xliff:g id="NUM_PAGES">%2$d</xliff:g> ページ目"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ユーザー補助機能ボタンで開く"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"音量大と音量小の両方ボタンを長押しして開く"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"画面をトリプルタップして開く"</string>
@@ -2205,7 +2204,7 @@
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"着信時のバイブレーション"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
     <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> を使用"</string>
-    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> を開く"</string>
+    <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"色補正の使用"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"字幕を表示"</string>
     <string name="accessibility_caption_master_switch_summary" msgid="4908774362453838764">"サポートされているアプリのみ"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"顔認証後、最後に使用していた画面に直接移動する"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ロック 画面, ロック画面, スキップ, バイパス"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"仕事用プロファイルのロック時"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"ロック画面上の通知"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"アラートやサイレント通知を表示する"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"アラートのみを表示する"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"通知を表示しない"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ロック画面上の通知"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"会話、デフォルト、サイレントを表示する"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"サイレントの会話と通知を非表示にする"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"通知を表示しない"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"機密性の高い通知"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"ロック中に機密性の高いコンテンツを表示する"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"機密性の高い仕事用プロファイルの通知"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"通知を表示しない"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"会話"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"会話"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"会話セクション"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"会話セクションの使用をアプリに許可します"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"会話ではない"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"会話セクションから削除します"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"これは会話です"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"会話を管理する"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"優先度の高い会話: なし"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other">優先度の高い会話: <xliff:g id="COUNT_1">%d</xliff:g> 件</item>
+      <item quantity="one">優先度の高い会話: <xliff:g id="COUNT_0">%d</xliff:g> 件</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"優先度の高い会話"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"会話セクションの一番上に表示され、ふきだしとして表示することもできます"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"設定を変更した会話"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"設定に変更を加えた会話"</string>
     <string name="important_bubble" msgid="7911698275408390846">"優先度の高い会話をふきだしとして表示"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先度の高い会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでふきだしとして表示されるよう、設定することもできます。"</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"ポップアップ"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"ブロック"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"サイレント"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"アラートを受け取る"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"デフォルト"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"割り込みの許可"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"優先度"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"会話セクションの一番上にバブルとして表示されます"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> は会話専用の設定をサポートしていません。"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にふきだしとして表示され、プロフィール写真がロック画面に表示されます"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することができず、会話はふきだしとして表示されません。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"音やバイブレーションが作動しないため、通知に煩わされずに済みます"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"音やバイブレーションで通知をお知らせします"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"着信音もバイブレーションも無効です"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"着信音もバイブレーションも無効になり会話セクションの下に表示されます"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"スマートフォンの設定を基に着信音またはバイブレーションが有効になります"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"デバイスのロックが解除されているとき、画面上部にバナーとして通知を表示します"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」のすべての通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> のすべての通知"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"点滅"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"バイブレーション"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"音"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"重要"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"優先"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"ホームに追加"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"削除"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"名前を変更"</string>
