@@ -1227,10 +1227,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет автоматически регулироваться в зависимости от окружающих условий и ваших действий. Вы можете вручную перемещать ползунок, чтобы помочь запомнить ваши предпочтения адаптивной яркости."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс белого на экране"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
-    <skip />
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавный экран"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматически изменять частоту обновления экрана с 60 до 90 Гц для некоторых типов контента (при этом батарея разряжается быстрее)"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивный спящий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Включено (экран не будет отключаться, если вы смотрите на него)"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Отключено"</string>
@@ -3596,10 +3594,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Сразу переходить к последнему открытому экрану после фейсконтроля"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заблокированный экран, пропустить, перейти"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Рабочий профиль заблокирован"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Уведомления на заблокированном экране"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Показывать оповещения и беззвучные уведомления"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Показывать только оповещения"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Не показывать уведомления"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Уведомления на заблокированном экране"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показывать все разговоры"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Скрывать беззвучные разговоры и уведомления"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не показывать уведомления"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Уведомления, содержащие конфиденциальные данные"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Показывать конфиденциальные данные на заблокированном экране"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Уведомления с конфиденциальными данными из рабочего профиля"</string>
@@ -3623,7 +3621,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Разговоры"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Чат"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Список разговоров"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Разрешить приложению \"<xliff:g id="APP">%1$s</xliff:g>\" появляться в списке разговоров"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Разрешить приложению использовать список разговоров"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Это не чат"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Удалить из списка разговоров"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Это чат"</string>
@@ -3639,7 +3637,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Важные разговоры"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Показывать в верхней части списка разговоров и в виде всплывающих чатов"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Показывать в верхней части списка разговоров"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Измененные разговоры"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Другие разговоры"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Разговоры, в которые вы вносили изменения."</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показывать всплывающие чаты для важных разговоров"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Важные разговоры появляются в верхней части панели уведомлений. Для них можно включить всплывающие чаты, а также разрешить показ сообщений в режиме \"Не беспокоить\"."</string>
@@ -3656,15 +3654,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Всплывающее окно"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Блокировка"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Без звука"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Оповещения"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"По умолчанию"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Разрешить оповещения"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Приоритет"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Появляется в верхней части списка разговоров и в виде всплывающего чата"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" не поддерживает настройки разговора."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Появляется в верхней части списка разговоров и как всплывающий чат, а также показывает фото профиля на заблокированном экране"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" не поддерживает большинство функций разговоров. Вы не можете отметить разговоры как важные, и они не будут появляться в виде всплывающих чатов."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Объединять уведомления в одну строку на панели уведомлений"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Уведомления приходят без звука и вибрации"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Уведомления приходят со звуком или вибрацией"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Без звука или вибрации"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Без звука или вибрации, появляется в нижней части списка разговоров"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Звонок или вибрация в зависимости от настроек телефона"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"При разблокированном устройстве показывать уведомления в виде баннера в верхней части экрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Все уведомления приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Показывать все уведомления приложения \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
@@ -3790,7 +3789,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Световая индикация"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Вибрация"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Звук"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Важный"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Важные"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Добавить на главный экран"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Удалить"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Переименовать"</string>

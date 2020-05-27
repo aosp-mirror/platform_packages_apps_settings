@@ -1187,10 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Lysstyrken på skjermen din justeres automatisk etter omgivelser og aktiviteter. Du kan flytte glidebryteren manuelt for få tilpasset lysstyrke til å registrere preferansene dine."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Vis hvitbalanse"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
-    <skip />
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Øker oppdateringsfrekvensen automatisk fra 60 til 90 Hz for noe innhold. Øker batteribruken."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Skjermoppmerksomhet"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"På / skjermen slås ikke av hvis du ser på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Av"</string>
@@ -3504,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Gå direkte til den forrige skjermen etter ansiktsopplåsing"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Låseskjerm, låseskjerm, hopp over, omgå"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Når jobbprofilen er låst"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Varsler på låseskjermen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Vis varsler med varsling og lydløse varsler"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Vis bare varsler med varsling"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Ikke vis varsler"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Varsler på låseskjermen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Vis samtaler, både standard og lydløse"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Skjul lydløse samtaler og varsler"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ikke vis noen varsler"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Sensitive varsler"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Vis sensitivt innhold når skjermen er låst"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Sensitive varsler fra jobbprofilen"</string>
@@ -3531,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Samtaler"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Samtale"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Samtaledel"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Tillat at <xliff:g id="APP">%1$s</xliff:g> vises i samtaledelen"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Tillat at appen bruker samtaledelen"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Ikke en samtale"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Fjern fra samtaledelen"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Dette er en samtale"</string>
@@ -3545,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Prioriterte samtaler"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Vis øverst i samtaledelen som flytende bobler"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Vis øverst i samtaledelen"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Endrede samtaler"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Andre samtaler"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Samtaler du har endret"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Lag boble for prioriterte samtaler"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterte samtaler vises øverst i nedtrekkspanelet. Du kan også få dem til å lage bobler og avbryte «Ikke forstyrr»."</string>
@@ -3562,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Vis i forgrunnen"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Blokkér"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Lydløs"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Varsling"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Standard"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Tillat forstyrrelser"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"La appen lage lyd, vibrere og/eller vise varsler på skjermen"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritet"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Vises øverst i en samtaledel og vises som en boble"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> støtter ikke samtalespesifikke innstillinger."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Vises øverst i samtaledelen, vises som en flytende boble, viser profilbildet på låseskjermen"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> støtter ikke de fleste samtalefunksjoner. Du kan ikke angi samtaler som prioriterte, og samtaler vises ikke som flytende bobler."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"I nedtrekkspanelet reduserer du varsler til én linje"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Hjelper deg med å fokusere uten lyd eller vibrering"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Får oppmerksomheten din med lyd eller vibrering"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ingen lyd eller vibrering"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ingen lyd eller vibrering, og vises lavere i samtaledelen"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringe eller vibrere basert på telefoninnstillingene"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Alle «<xliff:g id="APP_NAME">%1$s</xliff:g>»-varsler"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Alle <xliff:g id="APP_NAME">%1$s</xliff:g>-varsler"</string>
@@ -3682,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Blinkende lys"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibrering"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Lyd"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Viktig"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Prioritet"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Legg til på startskjermen"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Slett"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Gi nytt navn"</string>
