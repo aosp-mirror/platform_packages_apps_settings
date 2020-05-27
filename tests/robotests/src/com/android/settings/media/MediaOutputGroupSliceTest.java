@@ -90,6 +90,7 @@ public class MediaOutputGroupSliceTest {
 
     private final List<MediaDevice> mSelectableDevices = new ArrayList<>();
     private final List<MediaDevice> mSelectedDevices = new ArrayList<>();
+    private final List<MediaDevice> mDeselectableDevices = new ArrayList<>();
 
     private Context mContext;
     private MediaOutputGroupSlice mMediaOutputGroupSlice;
@@ -227,14 +228,19 @@ public class MediaOutputGroupSliceTest {
 
         verify(sMediaDeviceUpdateWorker).addDeviceToPlayMedia(mDevice2);
     }
+
     @Test
-    public void onNotifyChange_sendSelectedDevice_verifyRemoveSession() {
+    public void onNotifyChange_sendDeselectableDevice_verifyRemoveSession() {
         mSelectedDevices.add(mDevice1);
         mSelectedDevices.add(mDevice2);
+        mDeselectableDevices.add(mDevice1);
+        mDeselectableDevices.add(mDevice2);
         when(mLocalMediaManager.getMediaDeviceById(mSelectedDevices, TEST_DEVICE_2_ID))
                 .thenReturn(mDevice2);
         sMediaDeviceUpdateWorker.onDeviceListUpdate(mSelectedDevices);
         when(sMediaDeviceUpdateWorker.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(sMediaDeviceUpdateWorker.getDeselectableMediaDevice()).thenReturn(
+                mDeselectableDevices);
         final Intent intent = new Intent();
         intent.putExtra(MEDIA_DEVICE_ID, TEST_DEVICE_2_ID);
         intent.putExtra(CUSTOMIZED_ACTION, ACTION_MEDIA_SESSION_OPERATION);
@@ -242,6 +248,26 @@ public class MediaOutputGroupSliceTest {
         mMediaOutputGroupSlice.onNotifyChange(intent);
 
         verify(sMediaDeviceUpdateWorker).removeDeviceFromPlayMedia(mDevice2);
+    }
+
+    @Test
+    public void onNotifyChange_sendNonDeselectableDevice_notRemoveSession() {
+        mSelectedDevices.add(mDevice1);
+        mSelectedDevices.add(mDevice2);
+        mDeselectableDevices.add(mDevice1);
+        when(mLocalMediaManager.getMediaDeviceById(mSelectedDevices, TEST_DEVICE_2_ID))
+                .thenReturn(mDevice2);
+        sMediaDeviceUpdateWorker.onDeviceListUpdate(mSelectedDevices);
+        when(sMediaDeviceUpdateWorker.getSelectedMediaDevice()).thenReturn(mSelectedDevices);
+        when(sMediaDeviceUpdateWorker.getDeselectableMediaDevice()).thenReturn(
+                mDeselectableDevices);
+        final Intent intent = new Intent();
+        intent.putExtra(MEDIA_DEVICE_ID, TEST_DEVICE_2_ID);
+        intent.putExtra(CUSTOMIZED_ACTION, ACTION_MEDIA_SESSION_OPERATION);
+
+        mMediaOutputGroupSlice.onNotifyChange(intent);
+
+        verify(sMediaDeviceUpdateWorker, never()).removeDeviceFromPlayMedia(mDevice2);
     }
 
     @Test
