@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"ຄວາມສະຫວ່າງໜ້າຈໍຂອງທ່ານຈະຖືກປັບໂດຍອັດຕະໂນມັດໂດຍອ້າງອີງຈາກສະພາບແວດລ້ອມ ແລະ ກິດຈະກຳທີ່ທ່ານເຮັດ. ທ່ານສາມາດຍ້າຍຕົວເລື່ອນດ້ວຍຕົນເອງເພື່ອຊ່ວຍໃຫ້ລະບົບຮຽນຮູ້ການຕັ້ງຄ່າຂອງທ່ານໄດ້."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ສະແດງສົມດຸນສີຂາວ"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ເພີ່ມຣີເຟຣຊເຣດຈາກ 60 ເປັນ 90 Hz ສຳລັບບາງເນື້ອຫາໂດຍອັດຕະໂນມັດ. ເພີ່ມການນຳໃຊ້ແບັດເຕີຣີ."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ການເອົາໃຈໃສ່ໜ້າຈໍ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ເປີດ / ໜ້າຈໍຈະບໍ່ປິດຫາກທ່ານເບິ່ງມັນຢູ່"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ປິດ"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ພາສາ"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"ແປ້ນພິມ"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ແປ້ນພິມໃນໜ້າຈໍ"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ແປ້ນພິມໃນໜ້າຈໍທີ່ສາມາດໃຊ້ໄດ້"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ຈັດການແປ້ນພິມໃນໜ້າຈໍ"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"ການຊ່ວຍເຫຼືອແປ້ນພິມ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ແປ້ນພິມພາຍນອກ"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"ປຸ່ມລັດແປ້ນພິມ"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"ສະແດງປຸ່ມລັດທີ່ໃຊ້ໄດ້"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ແປ້ນພິມໂປຣໄຟລ໌ວຽກ ແລະ ເຄື່ອງມື"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ແປ້ນພິມໃນໜ້າຈໍສຳລັບວຽກ"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ຄວາມໄວລູກສອນ"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ມືເກມ"</string>
@@ -3502,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"ຫຼັງຈາກປົດລັອກດ້ວຍໜ້າແລ້ວ, ໃຫ້ໄປທີ່ໜ້າຈໍທີ່ໃຊ້ຫຼ້າສຸດໂດຍກົງ"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ໜ້າຈໍລັອກ, ຂ້າມ, ອ້ອມ"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"ເມື່ອລັອກໂປຣໄຟລ໌ບ່ອນເຮັດວຽກ"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"ການແຈ້ງເຕືອນຢູ່ໜ້າຈໍລັອກ"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"ສະແດງການເຕືອນ ແລະ ປິດສຽງການແຈ້ງເຕືອນ"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"ສະແດງການເຕືອນເທົ່ານັ້ນ"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"ຢ່າງສະແດງການແຈ້ງເຕືອນ"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"ການແຈ້ງເຕືອນຢູ່ໜ້າຈໍລັອກ"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"ສະແດງການສົນທະນາ, ຄ່າເລີ່ມຕົ້ນ ແລະ ການປິດສຽງ"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ເຊື່ອງການສົນທະນາ ແລະ ການແຈ້ງເຕືອນທີ່ບໍ່ມີສຽງໄວ້"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"ຢ່າສະແດງການແຈ້ງເຕືອນໃດໆ"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"ການແຈ້ງເຕືອນທີ່ລະອຽດອ່ອນ"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"ສະແດງເນື້ອຫາທີ່ລະອຽດອ່ອນເມື່ອລັອກແລ້ວ"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"ການແຈ້ງເຕືອນໂປຣໄຟລ໌ວຽກທີ່ລະອຽດອ່ອນ"</string>
@@ -3529,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"ການສົນທະນາ"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"ການສົນທະນາ"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"ພາກສ່ວນການສົນທະນາ"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"ອະນຸຍາດ <xliff:g id="APP">%1$s</xliff:g> ໃຫ້ປາກົດໃນພາກສ່ວນການສົນທະນາ"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"ອະນຸຍາດໃຫ້ແອັບໃຊ້ພາກສ່ວນການສົນທະນາ"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"ບໍ່ແມ່ນການສົນທະນາ"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"ລຶບອອກຈາກພາກສ່ວນການສົນທະນາ"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"ນີ້ແມ່ນການສົນທະນາ"</string>
@@ -3543,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"ການສົນທະນາສຳຄັນ"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"ສະແດງຢູ່ເທິງສຸດຂອງພາກສ່ວນການສົນທະນາ ແລະ ປາກົດເປັນ bubble ລອຍ"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"ສະແດງຢູ່ເທິງສຸດຂອງພາກສ່ວນການສົນທະນາ"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"ການສົນທະນາທີ່ມີການແກ້ໄຂ"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"ການສົນທະນາອື່ນໆ"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"ການສົນທະນາທີ່ທ່ານປ່ຽນແປງ"</string>
     <string name="important_bubble" msgid="7911698275408390846">"ຕັ້ງການສົນທະນາສຳຄັນເປັນ Bubble"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"ການສົນທະນາສຳຄັນຈະສະແດງຢູ່ເທິງສຸດຂອງແຖບແບບເລື່ອນລົງ. ນອກຈາກນັ້ນ, ທ່ານຍັງສາມາດຕັ້ງໃຫ້ພວກມັນສະແດງເປັນ Bubble ແລະ ລົບກວນໂໝດຫ້າມລົບກວນໄດ້ນຳ."</string>
@@ -3560,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"ເປີດຢູ່ໜ້າຈໍ"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"ບລັອກ"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"ປິດສຽງ"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"ການເຕືອນ"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"ຄ່າເລີ່ມຕົ້ນ"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"ອະນຸຍາດໃຫ້ລົບກວນໄດ້"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"ໃຫ້ແອັບເປີດສຽງ, ສັ່ນເຕືອນ ແລະ/ຫຼື ສະແດງການແຈ້ງເຕືອນຢູ່ໜ້າຈໍ"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"ຄວາມສຳຄັນ"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"ສະແດງຢູ່ເທິງສຸດຂອງພາກສ່ວນການສົນທະນາ ແລະ ສະແດງເປັນຟອງ"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> ບໍ່ຮອງຮັບການຕັ້ງຄ່າສະເພາະຂອງການສົນທະນາ"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"ສະແດງຢູ່ເທິງສຸດຂອງພາກສ່ວນການສົນທະນາ, ປາກົດເປັນ bubble ແບບລອຍ, ສະແດງຮູບໂປຣໄຟລ໌ຢູ່ໜ້າຈໍລັອກ"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ບໍ່ຮອງຮັບຄຸນສົມບັດການສົນທະນາສ່ວນໃຫຍ່. ທ່ານບໍ່ສາມາດກຳນົດການສົນທະນາໃຫ້ເປັນຄວາມສຳຄັນສູງໄດ້ ແລະ ການສົນທະນາຈະບໍ່ປາກົດເປັນ bubble ແບບລອຍ."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"ໃນແຖບທີ່ເລື່ອນລົງມາ, ໃຫ້ຫຍໍ້ການແຈ້ງເຕືອນເປັນແຖວດຽວ"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"ຊ່ວຍທ່ານມີສະມາທິໂດຍບໍ່ໃຊ້ສຽງ ຫຼື ການສັ່ນເຕືອນ"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"ດຶງຄວາມສົນໃຈຂອງທ່ານດ້ວຍສຽງ ຫຼື ການສັ່ນເຕືອນ"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"ບໍ່ມີສຽງ ຫຼື ການສັ່ນເຕືອນ"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ບໍ່ມີສຽງ ຫຼື ການສັ່ນເຕືອນ ແລະ ປາກົດຢູ່ທາງລຸ່ມຂອງພາກສ່ວນການສົນທະນາ"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"ອາດສົ່ງສຽງ ຫຼື ສັ່ນເຕືອນໂດຍອ້າງອີງຈາກການຕັ້ງຄ່າໂທລະສັບ"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"ເມື່ອປົດລັອກອຸປະກອນແລ້ວ, ໃຫ້ສະແດງການແຈ້ງເຕືອນເປັນປ້າຍຢູ່ເທິງສຸດຂອງໜ້າຈໍ"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"ການສົນທະນາ \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" ທັງໝົດ"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"ການແຈ້ງເຕືອນ <xliff:g id="APP_NAME">%1$s</xliff:g> ທັງໝົດ"</string>
@@ -3680,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"ກະພິບໄຟ"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"ການສັ່ນເຕືອນ"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"ສຽງ"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"ສຳຄັນ"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"ຄວາມສຳຄັນ"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"ເພີ່ມໃສ່ໜ້າຫຼັກ"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"ລຶບ"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"ປ່ຽນຊື່"</string>

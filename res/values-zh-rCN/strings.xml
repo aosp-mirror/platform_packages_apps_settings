@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"系统会根据您的环境和活动自动调节屏幕亮度。您可以手动移动滑块，帮助“自动调节亮度”功能了解您偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"显示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自动将某些内容的刷新频率从 60 Hz 调高到 90 Hz。这么做会增加耗电量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"屏幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"开启 / 您看着屏幕时，它将不会关闭"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"关闭"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"键盘"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"屏幕键盘"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"可用的屏幕键盘"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"管理屏幕键盘"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"键盘辅助功能"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"实体键盘"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"键盘快捷键"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"显示可用的快捷键"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"工作资料键盘和工具"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"工作用的屏幕键盘"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"默认"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"指针速度"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"游戏控制器"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"点按按钮即可放大"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"您可以快速放大屏幕以便让内容显示更清晰。&lt;br/&gt;&lt;br/&gt; &lt;b&gt;要放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快捷方式启动放大功能&lt;br/&gt; 2. 点按屏幕&lt;br/&gt; 3. 用两根手指拖动以在屏幕上移动&lt;br/&gt; 4. 双指张合以调整缩放级别&lt;br/&gt; 5. 使用快捷方式停止放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;要暂时放大屏幕，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt; 1. 使用快捷方式启动放大功能&lt;br/&gt; 2. 轻触并按住屏幕上的任意位置&lt;br/&gt; 3. 用一根手指拖动以在屏幕上移动&lt;br/&gt; 4. 抬起手指以停止放大功能"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"开启放大功能后，您就可以放大屏幕上的内容。\n\n"<b>"要放大内容"</b>"，请先启动放大功能，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性放大内容"</b>"，请先启动放大功能，然后轻触并按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您无法针对键盘或导航栏使用放大功能。"</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"第 <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> 页，共 <xliff:g id="NUM_PAGES">%2$d</xliff:g> 页"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"使用“无障碍”按钮打开"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"按住两个音量键即可打开"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"点按屏幕 3 次即可打开"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"进行人脸解锁后，直接转到上次离开时的画面"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"锁定屏幕, 锁屏, 跳过, 绕过"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"当工作资料遭到锁定时"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"锁定屏幕上的通知"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"显示提醒和无声通知"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"仅显示提醒通知"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"不再显示通知"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"锁定屏幕上的通知"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"显示默认对话和已设为静音的对话"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"隐藏已设为静音的对话和通知"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"不显示任何通知"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"敏感通知"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"锁定时显示敏感内容"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"敏感工作资料通知"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"一律不显示通知"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"对话"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"对话"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"对话部分"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"允许此应用显示在对话部分"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"非对话"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"从对话部分中移除"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"这是对话"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"添加到对话部分"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"管理对话"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"没有优先对话"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 个优先对话</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个优先对话</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"优先对话"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以悬浮对话泡形式显示在对话部分顶部"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"显示在对话部分顶部"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"经过修改的对话"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"其他对话"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"您已更改的对话"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以对话泡形式显示优先对话"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"优先对话会显示在下拉通知栏顶部。您也可将优先对话设置为以对话泡形式显示，并允许系统在“勿扰”模式下显示此类对话泡。"</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"在屏幕上弹出"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"屏蔽"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"静音"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"提醒"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"默认"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"优先"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"以对话泡形式显示在对话部分顶部"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g>不支持对话专用设置。"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"以悬浮对话泡形式显示在对话部分顶部，如果设备处于锁定状态，在锁定屏幕上显示个人资料照片"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>不支持大部分对话功能。您无法设置优先对话，并且对话不会以悬浮对话泡形式显示。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"将下拉通知栏中的通知合拢为一行"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"不会发出提示音或振动，可帮助您保持专注"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"通过提示音或振动吸引您的注意"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"不发出提示音也不振动"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"不发出提示音也不振动，显示在对话部分的靠下位置"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"可能会响铃或振动（取决于手机设置）"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"当设备处于解锁状态时，在屏幕顶端以横幅形式显示通知"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"所有“<xliff:g id="APP_NAME">%1$s</xliff:g>”通知"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>的所有通知"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"闪烁指示灯"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"振动"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"提示音"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"重要"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"优先"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"添加到主屏幕"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"删除"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"重命名"</string>

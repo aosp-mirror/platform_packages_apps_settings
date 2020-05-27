@@ -598,9 +598,9 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"Dacă la următoarea încercare introduceți un model incorect, acest utilizator va fi șters"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Dacă la următoarea încercare introduceți un cod PIN incorect, acest utilizator va fi șters"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Dacă la următoarea încercare introduceți o parolă incorectă, acest utilizator va fi șters"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Dacă la următoarea încercare introduceți un model incorect, profilul de serviciu și datele sale vor fi șterse"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Dacă la următoarea încercare introduceți un cod PIN incorect, profilul de serviciu și datele sale vor fi șterse"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Dacă la următoarea încercare introduceți o parolă incorectă, profilul de serviciu și datele sale vor fi șterse"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Dacă la următoarea încercare introduceți un model incorect, profilul de serviciu și datele dvs. vor fi șterse"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Dacă la următoarea încercare introduceți un cod PIN incorect, profilul de serviciu și datele dvs. vor fi șterse"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Dacă la următoarea încercare introduceți o parolă incorectă, profilul de serviciu și datele dvs. vor fi șterse"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Prea multe încercări incorecte. Datele de pe acest dispozitiv vor fi șterse."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Prea multe încercări incorecte. Acest utilizator va fi șters."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Prea multe încercări incorecte. Acest profil de serviciu și datele sale vor fi șterse."</string>
@@ -1207,6 +1207,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Luminozitatea ecranului se va adapta automat la mediul și activitățile dvs. Puteți să mutați manual glisorul pentru a ajuta luminozitatea adaptivă să vă învețe preferințele."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balansul de alb al ecranului"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Ridică automat rata de actualizare de la 60 la 90 Hz pentru unele tipuri de conținut. Mărește utilizarea bateriei."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenție la ecran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activat/Ecranul nu se va închide dacă vă uitați la el"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Dezactivat"</string>
@@ -2042,8 +2044,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Limbă"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tastaturi"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tastatură pe ecran"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tastatura pe ecran disponibilă"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestionați tastaturile pe ecran"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Asistență pentru tastatură"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tastatură fizică"</string>
@@ -2052,8 +2053,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Comenzi rapide de la tastatură"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Afișați comenzile rapide disponibile"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Tastaturi și instrumente pt. profilul de serviciu"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Tastatura pe ecran pentru serviciu"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Prestabilit"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Viteza indicatorului"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controler de joc"</string>
@@ -2150,8 +2150,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Atingeți un buton pentru a micșora/mări"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Măriți rapid ecranul pentru a vedea conținutul mai clar.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pentru a mări:&lt;/b&gt;&lt;br/&gt; 1. folosiți comanda rapidă ca să începeți mărirea;&lt;br/&gt; 2. atingeți ecranul;&lt;br/&gt; 3. glisați cu două degete ca să vă deplasați pe ecran;&lt;br/&gt; 4. ciupiți cu două degete ca să ajustați nivelul de zoom;&lt;br/&gt; 5. folosiți comanda rapidă ca să încetați mărirea.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Ca să măriți temporar:&lt;/b&gt;&lt;br/&gt; 1. folosiți comanda rapidă ca să începeți mărirea;&lt;br/&gt; 2. atingeți lung oriunde pe ecran;&lt;br/&gt; 3. trageți cu degetul ca să vă deplasați pe ecran;&lt;br/&gt; 4. ridicați degetul ca să opriți mărirea."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Când mărirea este activată, puteți mări ecranul curent.\n\n"<b>"Pentru a mări"</b>", începeți mărirea, apoi atingeți oriunde pe ecran.\n"<ul><li>"Trageți cu două sau mai multe degete pentru a derula"</li>\n<li>"Ciupiți cu două sau mai multe degete pentru a regla nivelul de zoom"</li></ul>\n\n<b>"Pentru a mări temporar"</b>", începeți mărirea, apoi atingeți lung oriunde pe ecran.\n"<ul><li>"Trageți pentru a vă mișca pe ecran"</li>\n<li>"Ridicați degetul pentru a micșora"</li></ul>\n\n"Nu puteți mări pe tastatură și pe bara de navigare."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> din <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Folosiți butonul de accesibilitate pentru a deschide"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Apăsați lung tastele de volum pentru a deschide"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Atingeți ecranul de trei ori ca să deschideți"</string>
@@ -3549,10 +3548,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"După deblocarea facială, accesați direct ultimul ecran folosit"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ecran de blocare, Ecran de blocare, Omitere, Evitare"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Când este blocat profilul de serviciu"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notificări pe ecranul de blocare"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Afișați notificări de alertare și silențioase"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Afișați doar notificări de alertare"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Nu afișați notificările"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificări pe ecranul de blocare"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afișează conversațiile prestabilite și silențioase"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ascunde conversațiile și notificările silențioase"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Nu afișa notificări"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificări sensibile"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Afișați conținut sensibil când ecranul este blocat"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificări sensibile pentru profilul de lucru"</string>
@@ -3575,22 +3574,23 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Nu afișați niciodată notificările"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversații"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversație"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Secțiunea de conversație"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Permiteți aplicației să folosească secțiunea de conversație"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Nu este o conversație"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Eliminați din secțiunea cu conversații"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Aceasta este o conversație"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Adăugați în secțiunea cu conversații"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Gestionați conversațiile"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Nu există conversații cu prioritate"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="few"><xliff:g id="COUNT_1">%d</xliff:g> conversații cu prioritate</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> de conversații cu prioritate</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversație cu prioritate</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversații cu prioritate"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Se afișează în partea de sus a secțiunii de conversație și apar în baloane flotante"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Se afișează în partea de sus a secțiunii de conversație"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Conversații modificate"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Alte conversații"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversații pe care le-ați modificat"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Afișează în balon conversațiile cu prioritate"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Conversațiile cu prioritate apar în partea de sus a panoului de notificări tras în jos. Le puteți seta să se afișeze în baloane și să întrerupă funcția Nu deranja."</string>
@@ -3607,15 +3607,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Evidențiere pe ecran"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Blocați"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Silențios"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Alertare"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Prestabilite"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Permiteți întreruperi"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permiteți aplicației să emită sunete, să vibreze și/sau să trimită notificări pe ecran"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritate"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Se afișează în partea de sus a secțiunii de conversație și apare ca un balon"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> nu acceptă setările pentru conversații."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Se afișează în partea de sus a secțiunii de conversație, apare ca un balon flotant, afișează fotografia de profil pe ecranul de blocare"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> nu acceptă majoritatea funcțiilor pentru conversații. Nu puteți să setați o conversație ca având prioritate și conversațiile nu vor apărea în baloane flotante."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"În fereastra trasă în jos, restrângeți notificările la un rând"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Vă ajută să vă concentrați fără sunet sau vibrare"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Vă atrage atenția cu sunet sau vibrare"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Fără sunet sau vibrații"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Fără sunet sau vibrații și apare în partea de jos a secțiunii de conversație"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Poate să sune sau să vibreze, în funcție de setările telefonului"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Când dispozitivul este deblocat, afișează notificările ca un banner în partea de sus a ecranului"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Toate notificările din „<xliff:g id="APP_NAME">%1$s</xliff:g>”"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Toate notificările din <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3734,7 +3735,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Lumină intermitentă"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibrație"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Sunet"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Important"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Cu prioritate"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Adăugați la casă"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Ștergeți"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Redenumiți"</string>

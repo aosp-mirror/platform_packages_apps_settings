@@ -395,7 +395,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για ξεκλείδωμα του τηλεφώνου ή για έγκριση αγορών.\n\nΣημείωση: Το δακτυλικό σας αποτύπωμα μπορεί να είναι λιγότερο ασφαλές από ένα ισχυρό μοτίβο ή PIN."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Ακύρωση"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Συνέχεια"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Παράλειψη"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Παράβλεψη"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Επόμενο"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Παράβλεψη δακτ. αποτυπώματος;"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Απαιτούνται ένα έως δύο λεπτά για τη ρύθμιση δακτυλικού αποτυπώματος. Εάν παραβλέψετε αυτό το βήμα, μπορείτε να προσθέσετε το δακτυλικό αποτύπωμά σας αργότερα στις ρυθμίσεις."</string>
@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Η φωτεινότητα της οθόνης σας θα προσαρμοστεί αυτόματα στο περιβάλλον και τις δραστηριότητές σας. Μπορείτε να μετακινήσετε χειροκίνητα το ρυθμιστικό, για να ενημερωθεί η προσαρμοστική φωτεινότητα σχετικά με τις ρυθμίσεις σας."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Εμφάνιση ισορροπίας λευκού"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Αυξάνει αυτόματα τον ρυθμό ανανέωσης από τα 60 στα 90 Hz για ορισμένο περιεχόμενο. Αυξάνει τη χρήση της μπαταρίας."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Παρακολούθηση οθόνης"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ενεργό/Η οθόνη δεν θα απενεργοποιείται εάν την κοιτάτε"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Ανενεργή"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Γλώσσα"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Πληκτρολόγια"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Πληκτρολόγιο οθόνης"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Διαθέσιμο πληκτρολόγιο οθόνης"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Διαχείριση πληκτρολογίων οθόνης"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Βοήθεια πληκτρολογίου"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Φυσικό πληκτρολόγιο"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Εμφάνιση διαθέσιμων συντομεύσεων"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Πληκτρολόγιο και εργαλεία προφίλ εργασίας"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Πληκτρολόγιο οθόνης για εργασία"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Προεπιλογή"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Ταχύτητα δείκτη"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Χειριστήριο παιχνιδιού"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Πατήστε ένα κουμπί για εστίαση"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Μεγεθύνετε γρήγορα την οθόνη για να κάνετε πιο ευδιάκριτο το περιεχόμενο.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Για μεγέθυνση:&lt;/b&gt;&lt;br/&gt; 1. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; 2. Πατήστε την οθόνη&lt;br/&gt; 3. Σύρετε δύο δάχτυλα για κίνηση στην οθόνη&lt;br/&gt; 4. Πλησιάστε δύο δάχτυλα μεταξύ τους για προσαρμογή της εστίασης&lt;br/&gt; 5. Χρησιμοποιήσετε τη συντόμευση για να διακόψετε τη μεγιστοποίηση&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Για προσωρινή μεγέθυνση:&lt;/b&gt;&lt;br/&gt; 1. Χρησιμοποιήστε τη συντόμευση για να ξεκινήσετε τη μεγιστοποίηση&lt;br/&gt; 2. Αγγίξτε παρατεταμένα οπουδήποτε στην οθόνη&lt;br/&gt; 3. Σύρετε το δάχτυλό σας για κίνηση στην οθόνη&lt;br/&gt; 4. Σηκώστε το δάχτυλό σας για διακοπή της μεγιστοποίησης."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Όταν η μεγέθυνση είναι ενεργοποιημένη, μπορείτε να μεγεθύνετε την οθόνη σας.\n\n"<b>"Για εστίαση "</b>", ανοίξτε τη μεγέθυνση και, στη συνέχεια, πατήστε οπουδήποτε στην οθόνη σας.\n"<ul><li>"Σύρετε 2 ή περισσότερα δάχτυλα για κύλιση"</li>\n<li>"Πλησιάστε 2 ή περισσότερα δάχτυλα για να προσαρμόσετε την εστίαση"</li></ul>\n\n<b>"Για προσωρινή εστίαση"</b>", ανοίξτε τη μεγέθυνση και, στη συνέχεια, αγγίξτε παρατεταμένα οπουδήποτε στην οθόνη.\n"<ul><li>"Σύρετε για να μετακινηθείτε στην οθόνη"</li>\n<li>"Ανασηκώστε το δάχτυλο για σμίκρυνση"</li></ul>\n\n"Δεν μπορείτε να κάνετε μεγέθυνση στο πληκτρολόγιο ή τη γραμμή πλοήγησης."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Σελίδα <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> από <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Χρήση κουμπιού προσβασιμότητας για άνοιγμα"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Παρατεταμένο πάτημα πλήκτρων έντασης για άνοιγμα"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Πατήστε τρεις φορές για να ανοίξει η οθόνη"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Μετά το Face Unlock, απευθείας μετάβαση στην τελευταία οθόνη"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Οθόνη κλειδώματος, Κλειδωμένη οθόνη, Παράβλεψη, Παράκαμψη"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Με κλειδωμένο προφίλ εργασίας"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Ειδοποιήσεις στη οθόνη κλειδώματος"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Εμφάνιση προειδοποιήσεων και αθόρυβων ειδοποιήσεων"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Εμφάνιση μόνο προειδοποιήσεων"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Να μην εμφανίζονται ειδοποιήσεις"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ειδοποιήσεις στην οθόνη κλειδώματος"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Εμφάνιση προεπιλεγμένων και αθόρυβων συζητήσεων"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Απόκρυψη των αθόρυβων συζητήσεων και ειδοποιήσεων"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Να μην εμφανίζεται καμία ειδοποίηση"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Ευαίσθητες ειδοποιήσεις"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Εμφάνιση ευαίσθητου περιεχομένου κατά το κλείδωμα"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Ευαίσθητες ειδοποιήσεις προφίλ εργασίας"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Να μην εμφανίζονται ποτέ ειδοποιήσεις"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Συζητήσεις"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Συνομιλία"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Ενότητα συζητήσεων"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Να επιτρέπεται στην εφαρμογή η χρήση της ενότητας συζητήσεων."</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Δεν είναι συνομιλία"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Κατάργηση από την ενότητα συζητήσεων"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Αυτή είναι μια συνομιλία"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Προσθήκη στην ενότητα συζήτησης"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Διαχείριση συζητήσεων"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Δεν υπάρχουν συζητήσεις προτεραιότητας"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> συζητήσεις προτεραιότητας</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> συζήτηση προτεραιότητας</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Συζητήσεις προτεραιότητας"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Να προβάλλονται στο επάνω μέρος της ενότητας συνομιλιών ως αιωρούμενα συννεφάκια."</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Εμφάνιση στο επάνω μέρος της ενότητας συνομιλιών"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Τροποποιημένες συνομιλίες"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Άλλες συζητήσεις"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Οι συνομιλίες στις οποίες έχετε κάνει αλλαγές"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Εμφάνιση των συνομιλιών προτεραιότητας σε συννεφάκι"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Οι συνομιλίες προτεραιότητας εμφανίζονται στο επάνω μέρος του αναπτυσσόμενου πλαισίου σκίασης. Μπορείτε επίσης να τις ρυθμίσετε ώστε να εμφανίζονται σε συννεφάκι και να διακόψετε τη λειτουργία Μην ενοχλείτε."</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Εμφάνιση στην οθόνη"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Αποκλεισμός"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Σίγαση"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Ειδοποίηση"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Προεπιλογή"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Να επιτρέπονται οι διακοπές"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Επιτρέψτε στην εφαρμογή να εμφανίζει ειδοποιήσεις με ήχο, δόνηση ή/και αναδυόμενο παράθυρο στην οθόνη"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Προτεραιότητα"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Εμφανίζεται στην κορυφή της ενότητας συζήτησης ως συννεφάκι."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> δεν υποστηρίζει ρυθμίσεις για συγκεκριμένη συνομιλία."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Εμφανίζεται στο επάνω μέρος της ενότητας συζητήσεων, προβάλλεται ως κινούμενο συννεφάκι, εμφανίζει τη φωτογραφία προφίλ στην οθόνη κλειδώματος"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"Η εφαρμογή <xliff:g id="APP_NAME">%1$s</xliff:g> δεν υποστηρίζει τις περισσότερες λειτουργίες συζήτησης. Δεν μπορείτε να ορίσετε μια συζήτηση ως προτεραιότητα και οι συζητήσεις δεν θα εμφανίζονται ως κινούμενα συννεφάκια."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Στο αναπτυσσόμενο πλαίσιο σκίασης, σύμπτυξη ειδοποιήσεων σε μία γραμμή"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Σας βοηθά να συγκεντρωθείτε χωρίς ήχο και δόνηση"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Τραβά την προσοχή σας με ήχο ή δόνηση"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Χωρίς ήχο ή δόνηση"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Χωρίς ήχο ή δόνηση και εμφανίζεται χαμηλά στην ενότητα συζητήσεων"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Ενδέχεται να κουδουνίζει ή να δονείται βάσει των ρυθμίσεων του τηλεφώνου"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Όταν η συσκευή είναι ξεκλειδωμένη, οι ειδοποιήσεις εμφανίζονται ως banner επάνω στην οθόνη"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Όλες οι ειδοποιήσεις \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Όλες οι ειδοποιήσεις <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Φως που αναβοσβήνει"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Δόνηση"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Ήχος"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Σημαντικό"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Προτεραιότητα"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Προσθήκη στην αρχική οθόνη"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Διαγραφή"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Μετονομασία"</string>

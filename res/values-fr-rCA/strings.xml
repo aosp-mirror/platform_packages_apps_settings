@@ -392,7 +392,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilisez votre empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="242123866344666054">"Il vous suffit de toucher le lecteur d\'empreintes digitales pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications. Toutes les personnes dont les empreintes digitales sont ajoutées sur votre téléphone peuvent effectuer ces opérations. Sélectionnez donc ces personnes avec soin.\n\nRemarque : Votre empreinte digitale peut être moins sécurisée qu\'un schéma ou un NIP fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou autoriser des achats.\n\nRemarque : Vous ne pouvez pas utiliser vos empreintes digitales pour déverrouiller cet appareil. Pour obtenir plus d\'information, communiquez avec l\'administrateur de votre organisation."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou autoriser des achats.\n\nRemarque : Vos empreintes digitales peuvent être moins sécurisées qu\'un schéma ou un NIP fiables."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="5979556434735281585">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou autoriser des achats.\n\nRemarque : Votre empreinte digitale peut être moins sécurisée qu\'un schéma ou un NIP fiables."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuler"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="5683573189775460816">"Continuer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Passer"</string>
@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"La luminosité de votre écran s\'adapte automatiquement à votre environnement et à vos activités. Vous pouvez déplacer le curseur manuellement pour aider la luminosité adaptative à apprendre vos préférences."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Afficher la balance des blancs"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmente automatiquement la fréquence d\'actualisation de 60 Hz à 90 Hz pour certains contenus. Cette fonctionns sollicite davantage la pile de l\'appareil."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Écran attentif"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activé : L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Désactivé"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Claviers"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Clavier à l\'écran"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran accessible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Aide du clavier"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Raccourcis clavier"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Afficher les raccourcis"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Claviers et outils pour le profil professionnel"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Clavier à l\'écran pour le travail"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Par défaut"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Vitesse du pointeur"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Manette de jeu"</string>
@@ -3502,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Après le déverr. par rec. faciale, aller au dernier écran util."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Écran de verrouillage, écran verrouillé, ignorer, contourner"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Lorsque le profil professionnel est verrouillé"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notifications sur l\'écran verrouillé"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Afficher les notifications d\'alerte et silencieuses"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Afficher seulement les notifications d\'alerte"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Ne pas afficher les notifications"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afficher les conversations, par défaut et silencieuses"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Masquer les conversations et les notifications silencieuses"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"N\'afficher aucune notification"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notifications sensibles"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Afficher le contenu sensible lorsque l\'écran est verrouillé"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notifications sensibles du profil professionnel"</string>
@@ -3529,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversations"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversation"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Section des conversations"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Autoriser <xliff:g id="APP">%1$s</xliff:g> à s\'afficher dans la section des conversations"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Autoriser l\'application à utiliser la section des conversations"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Ce n\'est pas une conversation"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Supprimer de la section des conversations"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"C\'est une conversation"</string>
@@ -3543,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Conversations prioritaires"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Afficher dans le haut de la section des conversations comme bulles flottantes"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Afficher dans le haut de la section des conversations"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Conversations modifiées"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Autres conversations"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversations auxquelles vous avez apporté des modifications"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Afficher les conversations prioritaires en bulles"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Les conversations prioritaires s\'affichent dans le haut du volet déroulant. Vous pouvez aussi les configurer pour qu\'elles s\'affichent dans des bulles et interrompent le mode Ne pas déranger."</string>
@@ -3560,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Afficher sur l\'écran"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Bloquer"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Mode silencieux"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Alertes"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Par défaut"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Autoriser les interruptions"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Autoriser l\'application à émettre des sons, à vibrer et à afficher des notifications à l\'écran"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Priorité"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"S\'affiche en haut de la section des conversations sous forme de bulle"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> ne prend pas en charge les paramètres propres aux conversations."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"S\'affiche en haut de la section des conversations sous forme de bulle flottante et affiche la photo du profil sur l\'écran de verrouillage"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ne prend pas en charge la majorité des fonctionnalités de conversations. Vous ne pouvez pas définir une conversation comme prioritaire, et les conversations ne s\'afficheront pas comme bulles flottantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Dans le volet déroulant, afficher les notifications sur une seule ligne"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Vous aide à vous concentrer, sans son ni vibration"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Attire votre attention à l\'aide de sons et de vibrations"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Aucun son ni vibration"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Aucun son ni vibration, et s\'affiche plus bas dans la section des conversations"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Peut sonner ou vibrer, selon les paramètres du téléphone"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Lorsque l\'appareil est déverrouillé, afficher les notifications dans une bannière dans le haut de l\'écran"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Toutes les notifications de « <xliff:g id="APP_NAME">%1$s</xliff:g> »"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Toutes les notifications de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3680,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Faire clignoter le voyant"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibration"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Son"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Important"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Priorité"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Ajouter au domicile"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Supprimer"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Renommer"</string>
