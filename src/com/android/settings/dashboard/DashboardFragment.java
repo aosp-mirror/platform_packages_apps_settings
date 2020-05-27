@@ -314,6 +314,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
+     * Get current PreferenceController(s)
+     */
+    protected Collection<List<AbstractPreferenceController>> getPreferenceControllers() {
+        return mPreferenceControllers.values();
+    }
+
+    /**
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {

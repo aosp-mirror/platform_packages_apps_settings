@@ -48,6 +48,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 @Config(shadows = ShadowAlertDialog.class)
 public class ContactDiscoveryDialogFragmentTest {
     private static final int TEST_SUB_ID = 2;
+    private static final String TEST_CARRIER = "TestMobile";
 
     @Mock private ImsManager mImsManager;
     @Mock private ImsRcsManager mImsRcsManager;
@@ -60,7 +61,8 @@ public class ContactDiscoveryDialogFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(FragmentActivity.class).setup().get();
-        mDialogFragmentUT = spy(ContactDiscoveryDialogFragment.newInstance(TEST_SUB_ID));
+        mDialogFragmentUT = spy(ContactDiscoveryDialogFragment.newInstance(TEST_SUB_ID,
+                TEST_CARRIER));
         doReturn(mImsManager).when(mDialogFragmentUT).getImsManager(any());
         doReturn(mImsRcsManager).when(mImsManager).getImsRcsManager(TEST_SUB_ID);
         doReturn(mRcsUceAdapter).when(mImsRcsManager).getUceAdapter();

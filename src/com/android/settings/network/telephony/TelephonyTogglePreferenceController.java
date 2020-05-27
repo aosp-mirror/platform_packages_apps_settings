@@ -23,12 +23,16 @@ import android.telephony.SubscriptionManager;
 
 import com.android.settings.core.TogglePreferenceController;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * {@link TogglePreferenceController} that used by all preferences that requires subscription id.
  */
 public abstract class TelephonyTogglePreferenceController extends TogglePreferenceController
-        implements TelephonyAvailabilityCallback {
+        implements TelephonyAvailabilityCallback, TelephonyAvailabilityHandler {
     protected int mSubId;
+    private AtomicInteger mAvailabilityStatus = new AtomicInteger(0);
+    private AtomicInteger mSetSessionCount = new AtomicInteger(0);
 
     public TelephonyTogglePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -37,8 +41,24 @@ public abstract class TelephonyTogglePreferenceController extends TogglePreferen
 
     @Override
     public int getAvailabilityStatus() {
-        return MobileNetworkUtils.getAvailability(mContext, mSubId, this::getAvailabilityStatus);
+        if (mSetSessionCount.get() <= 0) {
+            mAvailabilityStatus.set(MobileNetworkUtils
+                    .getAvailability(mContext, mSubId, this::getAvailabilityStatus));
+        }
+        return mAvailabilityStatus.get();
     }
+
+    @Override
+    public void setAvailabilityStatus(int status) {
+        mAvailabilityStatus.set(status);
+        mSetSessionCount.getAndIncrement();
+    }
+
+    @Override
+    public void unsetAvailabilityStatus() {
+        mSetSessionCount.getAndDecrement();
+    }
+
 
     /**
      * Get carrier config based on specific subscription id.
