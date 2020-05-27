@@ -98,7 +98,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
     @Override
     public int getAvailabilityStatus(int subId) {
         PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(subId);
-        boolean shouldShowPresence = bundle.getBoolean(
+        boolean shouldShowPresence = bundle != null && bundle.getBoolean(
                 CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/);
         return shouldShowPresence ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
