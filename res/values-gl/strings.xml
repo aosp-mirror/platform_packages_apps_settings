@@ -1187,6 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"O brillo da pantalla axustarase automaticamente segundo o ambiente e as actividades que leves a cabo. Podes mover o control desprazable de forma manual para que o brillo automático recoñeza as túas preferencias."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Balance de brancos da pantalla"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Incrementa automaticamente a frecuencia de actualización de 60 a 90 Hz en determinados tipos de contido. Aumenta o uso da batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado/A pantalla non se apagará se miras para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Opción desactivada"</string>
@@ -2019,8 +2021,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado en pantalla"</string>
-    <!-- no translation found for available_virtual_keyboard_category (6930012948152749337) -->
-    <skip />
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado en pantalla dispoñible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Xestionar teclados en pantalla"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Asistencia de teclado"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
@@ -2029,8 +2030,7 @@
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Atallos de teclado"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Mostra os atallos dispoñibles"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas do perfil de traballo"</string>
-    <!-- no translation found for virtual_keyboards_for_work_title (786459157034008675) -->
-    <skip />
+    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado en pantalla para o traballo"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminado"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Velocidade do punteiro"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Mando do xogo"</string>
@@ -2127,8 +2127,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Toca un botón para achegar o zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2023126829553044999">"Achega rapidamente o contido da pantalla para mostralo con máis claridade.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para achegar o contido usando o zoom, sigue estes pasos:&lt;/b&gt;&lt;br/&gt; 1. Utiliza o atallo para iniciar a ampliación&lt;br/&gt; 2. Toca a pantalla&lt;br/&gt; 3. Arrastra 2 dedos para moverte pola pantalla&lt;br/&gt; 4. Belisca con 2 dedos para axustar o zoom&lt;br/&gt; 5. Utiliza o atallo para deter a ampliación&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Para achegar o contido temporalmente usando o zoom, sigue estes pasos:&lt;/b&gt;&lt;br/&gt; 1. Utiliza o atallo para iniciar a ampliación&lt;br/&gt; 2. Mantén premida calquera parte da pantalla&lt;br/&gt; 3. Arrastra o dedo para moverte pola pantalla&lt;br/&gt; 4. Levanta o dedo para deter a ampliación"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Ao activar a ampliación, podes achegar o contido da pantalla.\n\n"<b>"Para utilizar o zoom"</b>", inicia a ampliación e toca calquera parte da pantalla.\n"<ul><li>"Arrastra 2 ou máis dedos para desprazarte."</li>\n<li>"Belisca con 2 ou máis dedos para axustar o zoom."</li></ul>\n\n<b>"Para utilizar o zoom de forma temporal"</b>", inicia a ampliación e mantén premida calquera parte da pantalla.\n"<ul><li>"Arrastra o dedo para moverte pola pantalla."</li>\n<li>"Levanta o dedo para afastar a imaxe ou o texto."</li></ul>\n\n"Ten en conta que non se pode ampliar o teclado nin a barra de navegación."</string>
-    <!-- no translation found for accessibility_tutorial_pager (8461939455728454061) -->
-    <skip />
+    <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Páxina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Utilizar o botón de accesibilidade para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén premidas as teclas de volume para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toca tres veces a pantalla para abrir"</string>
@@ -2159,7 +2158,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Avanzado"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"O botón Accesibilidade está configurado en <xliff:g id="SERVICE">%1$s</xliff:g>. Para utilizar a ampliación, mantén tocado o botón Accesibilidade e, a continuación, selecciona a ampliación."</string>
     <string name="accessibility_screen_magnification_gesture_navigation_warning" msgid="991017769735632046">"O xesto de accesibilidade definiuse para o servizo <xliff:g id="SERVICE">%1$s</xliff:g>. Para utilizar a ampliación, pasa dous dedos cara arriba desde a parte inferior da pantalla e mantena premida. Despois selecciona a ampliación."</string>
-    <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Atallo mediante as teclas de volume"</string>
+    <string name="accessibility_global_gesture_preference_title" msgid="3713636732641882959">"Atallo da tecla de volume"</string>
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"Servizo de atallo"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"Configuración de atallos"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Atallo desde a pantalla de bloqueo"</string>
@@ -3503,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Tras o desbloqueo facial, vai á última pantalla usada"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Pantalla de bloqueo, bloquear pantalla, omitir, saltar"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Perfil de traballo bloqueado"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Notificacións na pantalla de bloqueo"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Mostrar notificacións de silencio e alertas"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Mostrar só notificacións de alertas"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Non mostrar notificacións"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notificacións na pantalla de bloqueo"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Mostrar conversas predeterminadas e silenciadas"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ocultar conversas e notificacións silenciadas"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Non mostrar ningunha notificación"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notificacións sobre contido confidencial"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostra contido confidencial na pantalla de bloqueo"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificacións de contido confidencial no perfil de traballo"</string>
@@ -3529,22 +3528,22 @@
     <string name="notification_importance_blocked" msgid="4933285639639899394">"Non mostra nunca as notificacións"</string>
     <string name="conversations_category_title" msgid="5586541340846847798">"Conversas"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Conversa"</string>
-    <!-- no translation found for conversation_section_switch_title (3332885377659473775) -->
-    <skip />
-    <!-- no translation found for conversation_section_switch_summary (2513479452656556753) -->
-    <skip />
+    <string name="conversation_section_switch_title" msgid="3332885377659473775">"Sección de conversas"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Permitir que a aplicación use a sección de conversas"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Non é unha conversa"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Quitar da sección de conversas"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Esta é unha conversa"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"Engadir á sección de conversas"</string>
     <string name="manage_conversations" msgid="4440289604887824337">"Xestiona as conversas"</string>
-    <!-- no translation found for priority_conversation_count_zero (3862289535537564713) -->
-    <skip />
-    <!-- no translation found for priority_conversation_count (4229447176780862649) -->
+    <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Non hai conversas prioritarias"</string>
+    <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversas prioritarias</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> conversa prioritaria</item>
+    </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritarias"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostra as conversas prioritarias como burbullas flotantes situadas na parte superior da sección de conversas"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Mostra as conversas prioritarias na parte superior da sección de conversas"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Conversas modificadas"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que modificases"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritarias nunha burbulla"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"As conversas prioritarias móstranse na parte superior do panel despregable. Tamén podes configuralas para que se inclúan en burbullas e interrompan o modo Non molestar."</string>
@@ -3561,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Mostrar na pantalla"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Bloquear"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Silenciosas"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Con alertas"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Configuración predeterminada"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Permitir interrupcións"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que a aplicación emita son, vibre e mostre notificacións na pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Móstrase na parte superior da sección da conversa en forma de burbulla."</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> non admite opcións de configuración específicas para conversas."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Móstrase na parte superior da sección de conversas en forma de burbulla flotante e aparece a imaxe do perfil na pantalla de bloqueo"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"A aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> non é compatible coa maior parte das funcións das conversas. Non poderás marcar as conversas como prioritarias nin tampouco mostralas en forma de burbullas flotantes."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"No panel despregable, contrae as notificacións e móstraas nunha liña"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Axúdache a centrarte sen son nin vibración"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Chama a túa atención con son ou vibración"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sen son nin vibración"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Non soa nin vibra, e aparece máis abaixo na sección de conversas"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Podería soar ou vibrar en función da configuración do teléfono"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Ao desbloquear o dispositivo, as notificacións móstranse nun cartel na parte superior da pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificacións da aplicación <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificacións de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3681,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Luz intermitente"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Vibración"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Son"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Importante"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Prioridade"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Engadir ao inicio"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Eliminar"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Cambiar nome"</string>
