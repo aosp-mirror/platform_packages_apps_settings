@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -54,6 +55,7 @@ public class AppPicker extends ListActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
         mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
@@ -68,12 +70,30 @@ public class AppPicker extends ListActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            handleBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         MyApplicationInfo app = mAdapter.getItem(position);
         Intent intent = new Intent();
         if (app.info != null) intent.setAction(app.info.packageName);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private void handleBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 1) {
+            super.onBackPressed();
+        } else {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
     }
 
     class MyApplicationInfo {
@@ -162,6 +182,7 @@ public class AppPicker extends ListActivity {
                 holder.summary.setText("");
             }
             holder.disabled.setVisibility(View.GONE);
+            holder.widget.setVisibility(View.GONE);
             return convertView;
         }
     }
