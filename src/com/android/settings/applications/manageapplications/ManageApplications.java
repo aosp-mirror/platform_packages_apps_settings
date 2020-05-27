@@ -119,7 +119,6 @@ import com.android.settings.widget.LoadingViewController;
 import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.ChangeWifiStateDetails;
 import com.android.settingslib.HelpUtils;
-import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -1462,12 +1461,10 @@ public class ManageApplications extends InstrumentedFragment
                 ApplicationsState.AppEntry entry = mEntries.get(position);
                 synchronized (entry) {
                     holder.setTitle(entry.label);
-                    holder.itemView.setContentDescription(
-                            AppUtils.getAppContentDescription(
-                                    mContext,
-                                    entry.info.packageName,
-                                    UserHandle.getUserId(entry.info.uid)));
-                    holder.setIcon(Utils.getBadgedIcon(mContext, entry.info));
+                    mState.ensureLabelDescription(entry);
+                    holder.itemView.setContentDescription(entry.labelDescription);
+                    mState.ensureIcon(entry);
+                    holder.setIcon(entry.icon);
                     updateSummary(holder, entry);
                     updateSwitch(holder, entry);
                     holder.updateDisableView(entry.info);
