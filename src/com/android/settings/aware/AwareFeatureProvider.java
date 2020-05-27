@@ -29,4 +29,8 @@ public interface AwareFeatureProvider {
 
     /** Show information dialog. */
     void showRestrictionDialog(Fragment parent);
+
+    /** Return Quick Gestures Summary. */
+    CharSequence getGestureSummary(Context context, boolean sensorSupported,
+            boolean assistGestureEnabled, boolean assistGestureSilenceEnabled);
 }
