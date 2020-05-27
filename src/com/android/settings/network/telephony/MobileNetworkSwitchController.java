@@ -75,13 +75,14 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
         mSwitchBar.setSwitchBarText(R.string.mobile_network_use_sim_on,
                 R.string.mobile_network_use_sim_off);
 
-        mSwitchBar.addOnSwitchChangeListener((switchView, isChecked) -> {
+        mSwitchBar.getSwitch().setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use
             // mSubscriptionManager#isSubscriptionEnabled
             if (mSubscriptionManager.isActiveSubscriptionId(mSubId) != isChecked
                     && (!mSubscriptionManager.setSubscriptionEnabled(mSubId, isChecked))) {
-                mSwitchBar.setChecked(!isChecked);
+                return true;
             }
+            return false;
         });
         update();
     }
@@ -106,7 +107,7 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
             mSwitchBar.hide();
         } else {
             mSwitchBar.show();
-            mSwitchBar.setChecked(mSubscriptionManager.isActiveSubscriptionId(mSubId));
+            mSwitchBar.setCheckedInternal(mSubscriptionManager.isActiveSubscriptionId(mSubId));
         }
     }
 
