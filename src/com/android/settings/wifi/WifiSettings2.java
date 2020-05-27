@@ -763,8 +763,13 @@ public class WifiSettings2 extends RestrictedSettingsFragment
             LongPressWifiEntryPreference pref =
                     (LongPressWifiEntryPreference) getCachedPreference(key);
             if (pref != null) {
-                pref.setOrder(index++);
-                continue;
+                if (pref.getWifiEntry() == wifiEntry) {
+                    pref.setOrder(index++);
+                    continue;
+                } else {
+                    // Create a new preference if the underlying WifiEntry object has changed
+                    removePreference(key);
+                }
             }
 
             pref = createLongPressWifiEntryPreference(wifiEntry);
