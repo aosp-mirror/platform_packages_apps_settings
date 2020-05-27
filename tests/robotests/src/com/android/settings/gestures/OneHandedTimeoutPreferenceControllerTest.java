@@ -83,7 +83,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_setTimeout_shouldReturnSummary() {
+    public void getSummary_setTimeoutNever_shouldReturnNeverSummary() {
         final String[] timeoutTitles = mContext.getResources().getStringArray(
                 R.array.one_handed_timeout_title);
 
@@ -92,11 +92,18 @@ public class OneHandedTimeoutPreferenceControllerTest {
 
         assertThat(mController.getSummary()).isEqualTo(
                 timeoutTitles[OneHandedSettingsUtils.OneHandedTimeout.NEVER.ordinal()]);
+    }
+
+    @Test
+    public void getSummary_setTimeoutShort_shouldReturnShortSummary() {
+        final String[] timeoutTitles = mContext.getResources().getStringArray(
+                R.array.one_handed_timeout_title);
 
         OneHandedSettingsUtils.setSettingsOneHandedModeTimeout(mContext,
                 OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue());
 
-        assertThat(mController.getSummary()).isEqualTo(
-                timeoutTitles[OneHandedSettingsUtils.OneHandedTimeout.SHORT.ordinal()]);
+        assertThat(mController.getSummary()).isEqualTo(String.format(
+                mContext.getResources().getString(R.string.one_handed_timeout_summary),
+                timeoutTitles[OneHandedSettingsUtils.OneHandedTimeout.SHORT.ordinal()]));
     }
 }
