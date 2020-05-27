@@ -29,6 +29,7 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -38,7 +39,9 @@ import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,6 +165,14 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_BUGREPORT_HANDLER;
+    }
+
+
+    @Override
+    public void bindPreferenceExtra(RadioButtonPreference pref,
+            String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
+        super.bindPreferenceExtra(pref, key, info, defaultKey, systemDefaultKey);
+        pref.setAppendixVisibility(View.GONE);
     }
 
     @VisibleForTesting
