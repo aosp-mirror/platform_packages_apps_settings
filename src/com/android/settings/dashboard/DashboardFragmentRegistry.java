@@ -125,5 +125,9 @@ public class DashboardFragmentRegistry {
         for (Map.Entry<String, String> parentToKey : PARENT_TO_CATEGORY_KEY_MAP.entrySet()) {
             CATEGORY_KEY_TO_PARENT_MAP.put(parentToKey.getValue(), parentToKey.getKey());
         }
+
+        // For injection index, redirect CATEGORY_ACCOUNT_DETAIL to AccountDashboardFragment.
+        CATEGORY_KEY_TO_PARENT_MAP.put(CategoryKey.CATEGORY_ACCOUNT_DETAIL,
+                AccountDashboardFragment.class.getName());
     }
 }
