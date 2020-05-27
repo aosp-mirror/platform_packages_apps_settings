@@ -108,6 +108,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private int mUserId;
     private int mCredentialMode;
     private boolean mGoingToBackground;
+    private boolean mWaitingForBiometricCallback;
 
     private Executor mExecutor = (runnable -> {
         mHandler.post(runnable);
@@ -117,6 +118,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         @Override
         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
             if (!mGoingToBackground) {
+                mWaitingForBiometricCallback = false;
                 if (errorCode == BiometricPrompt.BIOMETRIC_ERROR_USER_CANCELED
                         || errorCode == BiometricPrompt.BIOMETRIC_ERROR_CANCELED) {
                     finish();
@@ -124,11 +126,15 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     // All other errors go to some version of CC
                     showConfirmCredentials();
                 }
+            } else if (mWaitingForBiometricCallback) { // mGoingToBackground is true
+                mWaitingForBiometricCallback = false;
+                finish();
             }
         }
 
         @Override
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
+            mWaitingForBiometricCallback = false;
             mTrustManager.setDeviceLockedForUser(mUserId, false);
             final boolean isStrongAuth = result.getAuthenticationType()
                     == BiometricPrompt.AUTHENTICATION_RESULT_TYPE_DEVICE_CREDENTIAL;
@@ -143,6 +149,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
 
         @Override
         public void onAuthenticationFailed() {
+            mWaitingForBiometricCallback = false;
             mDevicePolicyManager.reportFailedBiometricAttempt(mUserId);
         }
 
@@ -262,6 +269,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             finish();
         } else if (launchedBiometric) {
             // Keep this activity alive until BiometricPrompt goes away
+            mWaitingForBiometricCallback = true;
         } else {
             Log.d(TAG, "No pattern, password or PIN set.");
             setResult(Activity.RESULT_OK);
@@ -320,7 +328,9 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         super.onPause();
         if (!isChangingConfigurations()) {
             mGoingToBackground = true;
-            finish();
+            if (!mWaitingForBiometricCallback) {
+                finish();
+            }
         } else {
             mGoingToBackground = false;
         }
