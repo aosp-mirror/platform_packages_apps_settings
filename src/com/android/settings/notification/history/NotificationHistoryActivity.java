@@ -140,7 +140,15 @@ public class NotificationHistoryActivity extends Activity {
 
             final NotificationHistoryRecyclerView rv =
                     viewForPackage.findViewById(R.id.notification_list);
-            rv.setAdapter(new NotificationHistoryAdapter(mNm, rv));
+            rv.setAdapter(new NotificationHistoryAdapter(mNm, rv,
+                    newCount -> {
+                        count.setText(getResources().getQuantityString(
+                                R.plurals.notification_history_count,
+                                newCount, newCount));
+                        if (newCount == 0) {
+                            viewForPackage.setVisibility(View.GONE);
+                        }
+                    }));
             ((NotificationHistoryAdapter) rv.getAdapter()).onRebuildComplete(
                     new ArrayList<>(nhp.notifications));
 
