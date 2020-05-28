@@ -20,6 +20,7 @@ import static com.android.internal.net.VpnProfile.isLegacyType;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.net.Proxy;
 import android.net.ProxyInfo;
 import android.os.Bundle;
@@ -43,6 +44,9 @@ import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Dialog showing information about a VPN configuration. The dialog
@@ -129,6 +133,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
         // Second, copy values from the profile.
         mName.setText(mProfile.name);
+        setTypesByFeature(mType);
         mType.setSelection(mProfile.type);
         mServer.setText(mProfile.server);
         if (mProfile.saveLogin) {
@@ -485,6 +490,25 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             return false;
         }
         return true;
+    }
+
+    private void setTypesByFeature(Spinner typeSpinner) {
+        String[] types = getContext().getResources().getStringArray(R.array.vpn_types);
+        if (!getContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_IPSEC_TUNNELS)) {
+            final List<String> typesList = new ArrayList<>(Arrays.asList(types));
+
+            // This must be removed from back to front in order to ensure index consistency
+            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_RSA);
+            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_PSK);
+            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS);
+
+            types = typesList.toArray(new String[0]);
+        }
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                getContext(), android.R.layout.simple_spinner_item, types);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpinner.setAdapter(adapter);
     }
 
     private void loadCertificates(Spinner spinner, String prefix, int firstId, String selected) {

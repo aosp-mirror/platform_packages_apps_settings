@@ -34,4 +34,10 @@ public class AwareFeatureProviderImpl implements AwareFeatureProvider {
     @Override
     public void showRestrictionDialog(Fragment parent) {
     }
+
+    @Override
+    public CharSequence getGestureSummary(Context context, boolean sensorSupported,
+            boolean assistGestureEnabled, boolean assistGestureSilenceEnabled) {
+        return null;
+    }
 }

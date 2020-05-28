@@ -43,6 +43,7 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settingslib.media.MediaDevice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -122,6 +123,10 @@ public class MediaOutputGroupSlice implements CustomSliceable {
 
     private void addRow(ListBuilder listBuilder, List<MediaDevice> mediaDevices, boolean selected) {
         final boolean adjustVolumeUserRestriction = getWorker().hasAdjustVolumeUserRestriction();
+        List<MediaDevice> deselectableMediaDevices = new ArrayList<>();
+        if (selected) {
+            deselectableMediaDevices = getWorker().getDeselectableMediaDevice();
+        }
         for (MediaDevice device : mediaDevices) {
             final int maxVolume = device.getMaxVolume();
             final IconCompat titleIcon = Utils.createIconWithDrawable(device.getIcon());
@@ -147,7 +152,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                         .setMax(device.getMaxVolume())
                         .setValue(device.getCurrentVolume());
                 // Add endItem with different icons
-                if (mediaDevices.size() == 1 && selected) {
+                if (selected && (!getWorker().isDeviceIncluded(deselectableMediaDevices, device)
+                        || mediaDevices.size() == 1)) {
                     builder.addEndItem(disabledIconSliceAction);
                 } else {
                     builder.addEndItem(enabledIconSliceAction);
@@ -158,7 +164,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                         .setTitleItem(titleIcon, ListBuilder.ICON_IMAGE)
                         .setTitle(title);
                 // Add endItem with different icons
-                if (mediaDevices.size() == 1 && selected) {
+                if (selected && (!getWorker().isDeviceIncluded(deselectableMediaDevices, device)
+                        || mediaDevices.size() == 1)) {
                     rowBuilder.addEndItem(disabledIconSliceAction);
                 } else {
                     rowBuilder.addEndItem(enabledIconSliceAction);
@@ -209,7 +216,8 @@ public class MediaOutputGroupSlice implements CustomSliceable {
             Log.e(TAG, "Unable to handle notification. The device is unavailable");
             return;
         }
-        final MediaDevice device = getWorker().getMediaDeviceById(id);
+        final MediaDeviceUpdateWorker worker = getWorker();
+        final MediaDevice device = worker.getMediaDeviceById(id);
         switch (intent.getIntExtra(CUSTOMIZED_ACTION, ERROR)) {
             case ACTION_VOLUME_ADJUSTMENT:
                 final int newPosition = intent.getIntExtra(EXTRA_RANGE_VALUE, ERROR);
@@ -219,7 +227,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                 }
                 // Group volume adjustment
                 if (TextUtils.equals(id, GROUP_DEVICES)) {
-                    getWorker().adjustSessionVolume(newPosition);
+                    worker.adjustSessionVolume(newPosition);
                 } else {
                     if (device == null) {
                         Log.e(TAG, "Unable to adjust volume. The device(" + id
@@ -227,7 +235,7 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                         return;
                     }
                     // Single device volume adjustment
-                    getWorker().adjustVolume(device, newPosition);
+                    worker.adjustVolume(device, newPosition);
                 }
                 break;
             case ACTION_MEDIA_SESSION_OPERATION:
@@ -236,10 +244,13 @@ public class MediaOutputGroupSlice implements CustomSliceable {
                             + ") is unavailable");
                     return;
                 }
-                if (getWorker().isSelectedMediaDevice(device)) {
-                    getWorker().removeDeviceFromPlayMedia(device);
+                if (worker.isDeviceIncluded(worker.getSelectableMediaDevice(), device)) {
+                    worker.addDeviceToPlayMedia(device);
+                } else if (worker.isDeviceIncluded(worker.getDeselectableMediaDevice(), device)) {
+                    worker.removeDeviceFromPlayMedia(device);
                 } else {
-                    getWorker().addDeviceToPlayMedia(device);
+                    // Do nothing
+                    Log.d(TAG, device.getName() + " is not selectable nor deselectable");
                 }
                 break;
         }

@@ -20,7 +20,7 @@
     android:key="manage_external_storage_permission_details"
     android:title="@string/manage_external_storage_title">
 
-    <SwitchPreference
+    <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="app_ops_settings_switch"
         android:title="@string/permit_manage_external_storage"/>
 

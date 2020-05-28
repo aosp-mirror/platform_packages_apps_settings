@@ -49,13 +49,16 @@ public class NotificationHistoryAdapter extends
 
     private INotificationManager mNm;
     private List<HistoricalNotification> mValues;
+    private OnItemDeletedListener mListener;
 
     public NotificationHistoryAdapter(INotificationManager nm,
-            NotificationHistoryRecyclerView listView) {
+            NotificationHistoryRecyclerView listView,
+            OnItemDeletedListener listener) {
         mValues = new ArrayList<>();
         setHasStableIds(true);
         listView.setOnItemSwipeDeleteListener(this);
         mNm = nm;
+        mListener = listener;
     }
 
     @Override
@@ -134,6 +137,11 @@ public class NotificationHistoryAdapter extends
                 Slog.e(TAG, "Failed to delete item", e);
             }
         }
+        mListener.onItemDeleted(mValues.size());
         notifyItemRemoved(position);
+    }
+
+    interface OnItemDeletedListener {
+        void onItemDeleted(int newCount);
     }
 }
