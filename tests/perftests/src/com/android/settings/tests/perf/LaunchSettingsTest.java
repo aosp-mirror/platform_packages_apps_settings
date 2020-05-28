@@ -62,6 +62,7 @@ public class LaunchSettingsTest {
     private static final int TEST_TIME = 10;
     private static final Pattern PATTERN = Pattern.compile("TotalTime:\\s[0-9]*");
     private static final Page[] PAGES;
+    private static final String TAG = "SettingsPerfTests";
 
     static {
         PAGES = new Page[]{
@@ -144,11 +145,17 @@ public class LaunchSettingsTest {
     private void putResultToBundle() {
         for (String string : mResult.keySet()) {
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "max"),
-                    getMax(mResult.get(string)));
+                    getMax(string));
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "min"),
-                    getMin(mResult.get(string)));
+                    getMin(string));
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "avg"),
-                    getAvg(mResult.get(string)));
+                    getAvg(string));
+            mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "25 Percentile"),
+                    getPercentile(string, 25));
+            mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "50 Percentile"),
+                    getPercentile(string, 50));
+            mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "75 Percentile"),
+                    getPercentile(string, 75));
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "all_results"),
                     mResult.get(string).toString());
             mBundle.putString(String.format("LaunchSettingsTest_%s_%s", string, "results_count"),
@@ -156,16 +163,30 @@ public class LaunchSettingsTest {
         }
     }
 
-    private String getMax(ArrayList<Integer> launchResult) {
-        return String.format("%s", launchResult.isEmpty() ? "null" : Collections.max(launchResult));
+    private String getMax(String page) {
+        if (mResult.get(page).size() == TEST_TIME) {
+            return String.format("%s", Collections.max(mResult.get(page)));
+        }
+        Log.e(TAG, String.format("Fail to get max of %s.", page));
+        return "0";
+
     }
 
-    private String getMin(ArrayList<Integer> launchResult) {
-        return String.format("%s", launchResult.isEmpty() ? "null" : Collections.min(launchResult));
+    private String getMin(String page) {
+        if (mResult.get(page).size() == TEST_TIME) {
+            return String.format("%s", Collections.min(mResult.get(page)));
+        }
+        Log.e(TAG, String.format("Fail to get min of %s.", page));
+        return "0";
     }
 
-    private String getAvg(ArrayList<Integer> launchResult) {
-        return String.valueOf((int) launchResult.stream().mapToInt(i -> i).average().orElse(0));
+    private String getAvg(String page) {
+        if (mResult.get(page).size() == TEST_TIME) {
+            return String.valueOf((int) mResult.get(page).stream().mapToInt(
+                    i -> i).average().orElse(0));
+        }
+        Log.e(TAG, String.format("Fail to get avg of %s.", page));
+        return "0";
     }
 
     private void setScreenTimeOut(String timeout) throws Exception {
@@ -201,5 +222,15 @@ public class LaunchSettingsTest {
 
     private String getAirplaneModeStatus() throws Exception {
         return mDevice.executeShellCommand("settings get global airplane_mode_on");
+    }
+
+    private String getPercentile(String page, double position) {
+        Collections.sort(mResult.get(page));
+        if (mResult.get(page).size() == TEST_TIME) {
+            return String.valueOf(
+                    mResult.get(page).get((int) (Math.ceil(TEST_TIME * position / 100)) - 1));
+        }
+        Log.e(TAG, String.format("Fail to get percentile of %s.", page));
+        return "0";
     }
 }
