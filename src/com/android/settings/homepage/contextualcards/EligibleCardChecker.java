@@ -43,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class EligibleCardChecker implements Callable<ContextualCard> {
 
     private static final String TAG = "EligibleCardChecker";
-    private static final long LATCH_TIMEOUT_MS = 200;
+    private static final long LATCH_TIMEOUT_MS = 300;
 
     private final Context mContext;
 
