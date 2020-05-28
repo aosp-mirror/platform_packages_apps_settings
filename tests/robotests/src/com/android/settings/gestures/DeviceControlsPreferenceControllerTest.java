@@ -19,6 +19,7 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 
 import com.android.settings.core.BasePreferenceController;
@@ -28,12 +29,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class DeviceControlsPreferenceControllerTest {
 
     private Context mContext;
     private DeviceControlsPreferenceController mController;
+    private ShadowPackageManager mShadowPackageManager;
 
     private static final String KEY_GESTURE_PANEL = "gesture_device_controls";
     private static final String ENABLED_SETTING =
@@ -42,6 +46,7 @@ public class DeviceControlsPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
         mController = new DeviceControlsPreferenceController(mContext, KEY_GESTURE_PANEL);
     }
 
@@ -60,9 +65,19 @@ public class DeviceControlsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_panelAvailable() {
+    public void getAvailabilityStatus_hasSystemFeature_panelAvailable() {
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_hasntSystemFeature_panelUnsupported() {
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
