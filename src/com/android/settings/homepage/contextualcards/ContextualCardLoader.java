@@ -57,7 +57,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private static final String TAG = "ContextualCardLoader";
-    private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 250;
+    private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 300;
 
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
