@@ -1187,10 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Näytön kirkkaus mukautuu automaattisesti ympäristöösi ja toimintaasi. Voit auttaa mukautuvaa kirkkautta oppimaan mieltymyksesi siirtämällä liukusäädintä."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Näytä valkotasapaino"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
-    <skip />
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Nostaa tietyn sisällön päivitysvälin automaattisesti 60 hertsistä 90:een. Lisää akun käyttöä."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Huomionäyttö"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Päällä / näyttö ei sammu, kun katsot sitä"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Pois päältä"</string>
@@ -3504,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Siirry Face Unlockin jälkeen suoraan viimeisimmälle näytölle"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Lukitusnäyttö, ohita"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Kun työprofiili on lukittu"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Ilmoitukset lukitusnäytöllä"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Näytä ääni-ilmoitukset ja hiljaiset ilmoitukset"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Näytä vain ääni-ilmoitukset"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Älä näytä ilmoituksia"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ilmoitukset lukitusnäytöllä"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Näytä keskustelut, oletukset ja äänettömät"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Piilota äänettömät keskustelut ja ilmoitukset"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Älä näytä mitään ilmoituksia"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Arkaluontoiset ilmoitukset"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Näytä arkaluontoinen sisältö, kun laite on lukittu"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Arkaluontoinen työprofiilin sisältö"</string>
@@ -3531,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Keskustelut"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Keskustelu"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Keskusteluosio"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Salli, että <xliff:g id="APP">%1$s</xliff:g> näkyy keskusteluosiossa"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Anna sovelluksen käyttää keskusteluosiota"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Muu kuin keskustelu"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Poista keskusteluosiosta"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Tämä on keskustelu"</string>
@@ -3545,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Tärkeät keskustelut"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Näkyy keskustelukohdan yläosassa ja kuplana"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Näkyy keskustelukohdan yläosassa"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Muokatut keskustelut"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Muut keskustelut"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Keskustelut, joihin teit muutoksia"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Näytä kuplia tärkeistä keskusteluista"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Tärkeät keskustelut näkyvät vedettävän ilmoitusalueen yläreunassa. Voit myös valita, että ne näkyvät kuplina ja keskeyttävät Älä häiritse ‑tilan."</string>
@@ -3562,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Näkyy näytöllä"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Estä"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Äänetön"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Hälyttää"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Oletus"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Salli keskeytykset"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Anna sovelluksen toistaa ääniä, väristä ja näyttää ilmoituksia näytöllä."</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Tärkeä"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Näkyy keskustelukohdan yläosassa kuplana"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> ei tue keskustelukohtaisia asetuksia."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Näkyy keskusteluosion yläosassa kelluvana kuplana, profiilikuva näkyy lukitusnäytöllä"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ei tue useimpia keskusteluominaisuuksia. Et voi asettaa keskustelua tärkeäksi ja keskustelut eivät näy kuplina."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Tiivistä ilmoitukset yksirivisiksi avattavalla ilmoitusalueella."</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Keskittyminen on helpompaa ilman ääntä tai värinää"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Kiinnittää huomion äänellä tai värinällä"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ei ääntä tai värinää"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ei ääntä tai värinää ja näkyy alempana keskusteluosiossa"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Voi soida tai väristä puhelimen asetuksista riippuen"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kun laitteen lukitus on avattuna, näytä ilmoitukset bannerina sivun yläreunassa."</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Kaikki ilmoitukset: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Kaikki ilmoitukset: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3682,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Vilkuta valoa"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Värinä"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Ääni"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Tärkeä"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Tärkeä"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Lisää aloitusnäytölle"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Poista"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Nimeä uudelleen"</string>

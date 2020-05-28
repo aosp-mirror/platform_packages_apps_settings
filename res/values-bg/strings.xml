@@ -1187,10 +1187,8 @@
     <string name="auto_brightness_description" msgid="6807117118142381193">"Яркостта на екрана ще се коригира автоматично спрямо средата и активностите ви. Можете да преместите плъзгача ръчно, за да помогнете на функцията за адаптивна яркост да научи предпочитанията ви."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс на бялото на дисплея"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <!-- no translation found for peak_refresh_rate_title (1878771412897140903) -->
-    <skip />
-    <!-- no translation found for peak_refresh_rate_summary (1527087897198455042) -->
-    <skip />
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавно показване"</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично увеличава честотата на опресняване от 60 на 90 Hz за част от съдържанието. По-интензивно използване на батерията."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Внимание към екрана"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Вкл. – Екранът няма да се изключи, ако гледате в него"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Изключено"</string>
@@ -3504,10 +3502,10 @@
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"След отключване с лице отваряне на последния използван екран"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"заключен екран, пропускане, заобикаляне"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"При закл. служ. потреб. профил"</string>
-    <string name="lock_screen_notifs_title" msgid="4936392753621150992">"Известия на заключения екран"</string>
-    <string name="lock_screen_notifs_show_all" msgid="4558869576369331619">"Показване на сигнализиращите и беззвучните известия"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6209541068503094236">"Показване само на сигнализиращите известия"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1324270762051331273">"Без показване на известията"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Известия на заключения екран"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показване на разговорите – стандартните и беззвучните"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Скриване на беззвучните разговори и известия"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Без показване на известията"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Поверителни известия"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Показване на деликатно съдържание при заключен екран"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Поверителни известия от служебния потребителски профил"</string>
@@ -3531,7 +3529,7 @@
     <string name="conversations_category_title" msgid="5586541340846847798">"Разговори"</string>
     <string name="conversation_category_title" msgid="6777135786004214149">"Разговор"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"Секция с разговори"</string>
-    <string name="conversation_section_switch_summary" msgid="2513479452656556753">"Разрешаване на <xliff:g id="APP">%1$s</xliff:g> да се показва в секцията с разговори"</string>
+    <string name="conversation_section_switch_summary" msgid="6123587625929439674">"Разрешаване на приложението да използва секцията с разговори"</string>
     <string name="demote_conversation_title" msgid="6355383023376508485">"Не е разговор"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"Премахване от секцията с разговори"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"Това е разговор"</string>
@@ -3545,7 +3543,7 @@
     <string name="important_conversations" msgid="1233893707189659401">"Разговори с приоритет"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Показване най-горе в секцията с разговори и поставяне в плаващи балончета"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Показване най-горе в секцията с разговори"</string>
-    <string name="other_conversations" msgid="8666033204953175307">"Променени разговори"</string>
+    <string name="other_conversations" msgid="7218658664423361043">"Други разговори"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Разговори, в които сте направили промени"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показване на балонче за приоритетните разговори"</string>
     <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Приоритетните разговори се показват най-горе в падащия панел. Можете също да зададете да се поставят в балонче и да ви прекъсват, когато използвате режима „Не безпокойте“."</string>
@@ -3562,15 +3560,16 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Показване на изскачащ прозорец на екрана"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Блокиране"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Тих режим"</string>
-    <string name="notification_alert_title" msgid="5605374030042727533">"Сигнализиране"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Стандартно"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Разрешаване на прекъсвания"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Разрешаване на приложението да издава звук, да вибрира и/или да показва изскачащи прозорци с известия на екрана"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Приоритет"</string>
-    <string name="notification_channel_summary_priority" msgid="7096292835591575858">"Показва се като балонче в горната част на секцията с разговори"</string>
-    <string name="convo_not_supported_summary" msgid="1794355603342685230">"<xliff:g id="APP_NAME">%1$s</xliff:g> не поддържа свързаните с разговорите настройки."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Показва се като плаващо балонче в горната част на секцията с разговори и показва снимката на потребителския профил на заключения екран"</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> не поддържа по-голяма част от функциите за разговорите. Не можете да зададете разговор като приоритетен и разговорите няма да се показват като плаващи балончета."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Свиване на известията в падащия панел, така че да се показват на един ред"</string>
-    <string name="notification_channel_summary_low" msgid="4842529455460294865">"Помага ви да се фокусирате без звук или вибриране"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Привлича вниманието ви със звук или вибриране"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Без звук или вибриране"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Без звук или вибриране и се показва по-долу в секцията с разговори"</string>
+    <string name="notification_channel_summary_default" msgid="3674057458265438896">"Може да звъни или да вибрира въз основа на настройките за телефона"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Когато устройството е отключено, известията се показват като банер в горната част на екрана"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Всички известия от <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Всички известия от <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3682,7 +3681,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Премигваща светлина"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Вибриране"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Звук"</string>
-    <string name="notification_conversation_important" msgid="3502749563429704283">"Важно"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"С приоритет"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Добавяне към началния екран"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"Изтриване"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Преименуване"</string>
