@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
 
-import com.android.settings.R;
+import com.android.settingslib.RestrictedSwitchPreference;
 
-public class AppSwitchPreference extends SwitchPreference {
+/**
+ * This widget with enabled filterTouchesWhenObscured attribute use to replace
+ * the {@link RestrictedSwitchPreference} in the Special access app pages for
+ * security.
+ */
+public class FilterTouchesRestrictedSwitchPreference extends RestrictedSwitchPreference {
+    public FilterTouchesRestrictedSwitchPreference(Context context, AttributeSet attrs,
+            int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 
-    public AppSwitchPreference(Context context) {
+    public FilterTouchesRestrictedSwitchPreference(Context context, AttributeSet attrs,
+            int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    public FilterTouchesRestrictedSwitchPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public FilterTouchesRestrictedSwitchPreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.preference_app);
     }
 
     @Override
