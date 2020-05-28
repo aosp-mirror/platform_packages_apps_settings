@@ -288,7 +288,7 @@ public class DeviceAdminAdd extends Activity {
             // setup.
             final String supervisor = getString(
                     com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent);
-            if (supervisor == null) {
+            if (TextUtils.isEmpty(supervisor)) {
                 Log.w(TAG, "Unable to set profile owner post-setup, no default supervisor"
                         + "profile owner defined");
                 finish();
@@ -297,7 +297,7 @@ public class DeviceAdminAdd extends Activity {
 
             final ComponentName supervisorComponent = ComponentName.unflattenFromString(
                     supervisor);
-            if (who.compareTo(supervisorComponent) != 0) {
+            if (supervisorComponent == null || who.compareTo(supervisorComponent) != 0) {
                 Log.w(TAG, "Unable to set non-default profile owner post-setup " + who);
                 finish();
                 return;
