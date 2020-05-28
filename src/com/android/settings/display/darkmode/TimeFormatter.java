@@ -19,6 +19,7 @@ import android.content.Context;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Formats LocalTime to the locale time string format
@@ -28,11 +29,15 @@ public class TimeFormatter {
     private final DateTimeFormatter mFormatter;
     public TimeFormatter(Context context) {
         mContext = context;
-        mFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+        Locale locale = mContext.getResources().getConfiguration().locale;
+        if (locale == null) {
+            locale = Locale.getDefault();
+        }
+        mFormatter = DateTimeFormatter.ofPattern("hh:mm a", locale);
     }
 
     public String of(LocalTime time) {
-        return is24HourFormat() ? time.toString() : mFormatter.format(time);
+        return mFormatter.format(time);
     }
 
     public boolean is24HourFormat() {
