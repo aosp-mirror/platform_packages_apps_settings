@@ -18,15 +18,11 @@ package com.android.settings.homepage.contextualcards;
 
 import static android.app.slice.Slice.HINT_ERROR;
 
-import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.net.Uri;
@@ -66,32 +62,6 @@ public class EligibleCardCheckerTest {
         final Slice slice = wifiSlice.getSlice();
 
         assertThat(mEligibleCardChecker.isSliceToggleable(slice)).isTrue();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_stickyCard_returnTrue() {
-        final ContextualCard card = new ContextualCard.Builder()
-                .setName("test_card")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setCategory(STICKY_VALUE)
-                .setSliceUri(CustomSliceRegistry.FLASHLIGHT_SLICE_URI)
-                .build();
-
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(card)).isTrue();
-    }
-
-    @Test
-    public void isCardEligibleToDisplay_stickyCard_shouldNotPrebind() {
-        final ContextualCard card = new ContextualCard.Builder()
-                .setName("test_card")
-                .setCardType(ContextualCard.CardType.SLICE)
-                .setCategory(STICKY_VALUE)
-                .setSliceUri(CustomSliceRegistry.FLASHLIGHT_SLICE_URI)
-                .build();
-
-        mEligibleCardChecker.isCardEligibleToDisplay(card);
-
-        verify(mEligibleCardChecker, never()).bindSlice(CustomSliceRegistry.FLASHLIGHT_SLICE_URI);
     }
 
     @Test
