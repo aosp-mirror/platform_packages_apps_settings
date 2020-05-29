@@ -19,8 +19,6 @@ package com.android.settings.homepage.contextualcards;
 import android.content.Context;
 import android.database.Cursor;
 
-import androidx.slice.Slice;
-
 /** Feature provider for the contextual card feature. */
 public interface ContextualCardFeatureProvider {
     /** Get contextual cards from the card provider */
@@ -35,7 +33,4 @@ public interface ContextualCardFeatureProvider {
      * @return The number of rows updated
      */
     int markCardAsDismissed(Context context, String cardName);
-
-    /** Log package when user clicks contextual notification channel card. */
-    void logNotificationPackage(Slice slice);
 }
