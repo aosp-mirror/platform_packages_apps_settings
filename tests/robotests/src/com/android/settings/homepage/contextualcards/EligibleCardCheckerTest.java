@@ -114,6 +114,17 @@ public class EligibleCardCheckerTest {
                 .isFalse();
     }
 
+    @Test
+    public void isCardEligibleToDisplay_sliceNotNull_cacheSliceToCard() {
+        final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
+        final Slice slice = wifiSlice.getSlice();
+        doReturn(slice).when(mEligibleCardChecker).bindSlice(any(Uri.class));
+
+        mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(TEST_SLICE_URI));
+
+        assertThat(mEligibleCardChecker.mCard.getSlice()).isNotNull();
+    }
+
     private ContextualCard getContextualCard(Uri sliceUri) {
         return new ContextualCard.Builder()
                 .setName("test_card")
