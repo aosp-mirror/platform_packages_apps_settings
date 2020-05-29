@@ -38,11 +38,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
-public final class WifiNoInternetDialog extends AlertActivity implements
+/**
+ * To display a dialog that asks the user whether to connect to a network that is not validated.
+ */
+public class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "WifiNoInternetDialog";
 
@@ -50,7 +55,7 @@ public final class WifiNoInternetDialog extends AlertActivity implements
     private Network mNetwork;
     private String mNetworkName;
     private ConnectivityManager.NetworkCallback mNetworkCallback;
-    private CheckBox mAlwaysAllow;
+    @VisibleForTesting CheckBox mAlwaysAllow;
     private String mAction;
     private boolean mButtonClicked;
 
