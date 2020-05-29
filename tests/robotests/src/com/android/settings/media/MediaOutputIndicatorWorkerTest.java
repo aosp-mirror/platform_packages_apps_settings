@@ -103,7 +103,13 @@ public class MediaOutputIndicatorWorkerTest {
     @Test
     public void onSlicePinned_registerCallback() {
         mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
+        initPlayback();
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+        when(mLocalMediaManager.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
 
         verify(mBluetoothEventManager).registerCallback(mMediaOutputIndicatorWorker);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
@@ -119,11 +125,14 @@ public class MediaOutputIndicatorWorkerTest {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
 
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
         assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).matches(
                 TEST_PACKAGE_NAME);
 
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME2);
+        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
 
         assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).matches(
                 TEST_PACKAGE_NAME2);
@@ -134,14 +143,35 @@ public class MediaOutputIndicatorWorkerTest {
         mMediaControllers.clear();
 
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
 
         assertThat(mMediaOutputIndicatorWorker.mLocalMediaManager.getPackageName()).isNull();
+    }
+
+    private void waitForLocalMediaManagerInit() {
+        for (int i = 0; i < 20; i++) {
+            if (mMediaOutputIndicatorWorker.mLocalMediaManager != null) {
+                return;
+            }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Test
     public void onSliceUnpinned_unRegisterCallback() {
         mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
+        initPlayback();
+        when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+        when(mLocalMediaManager.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
         mMediaOutputIndicatorWorker.onSliceUnpinned();
 
         verify(mBluetoothEventManager).unregisterCallback(mMediaOutputIndicatorWorker);
@@ -153,6 +183,7 @@ public class MediaOutputIndicatorWorkerTest {
     @Test
     public void onReceive_shouldNotifyChange() {
         mMediaOutputIndicatorWorker.onSlicePinned();
+        waitForLocalMediaManagerInit();
         // onSlicePinned will registerCallback() and get first callback. Callback triggers this at
         // the first time.
         verify(mResolver, times(1)).notifyChange(URI, null);
