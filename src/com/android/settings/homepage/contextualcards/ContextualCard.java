@@ -23,6 +23,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.annotation.LayoutRes;
+import androidx.slice.Slice;
 
 import com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer;
 
@@ -66,6 +67,7 @@ public class ContextualCard {
     private final int mViewType;
     private final boolean mIsPendingDismiss;
     private final boolean mHasInlineAction;
+    private final Slice mSlice;
 
     public String getName() {
         return mName;
@@ -127,6 +129,10 @@ public class ContextualCard {
         return mHasInlineAction;
     }
 
+    public Slice getSlice() {
+        return mSlice;
+    }
+
     public Builder mutate() {
         return mBuilder;
     }
@@ -147,6 +153,7 @@ public class ContextualCard {
         mViewType = builder.mViewType;
         mIsPendingDismiss = builder.mIsPendingDismiss;
         mHasInlineAction = builder.mHasInlineAction;
+        mSlice = builder.mSlice;
     }
 
     ContextualCard(Cursor c) {
@@ -179,6 +186,8 @@ public class ContextualCard {
         mBuilder.setIsPendingDismiss(mIsPendingDismiss);
         mHasInlineAction = false;
         mBuilder.setHasInlineAction(mHasInlineAction);
+        mSlice = null;
+        mBuilder.setSlice(mSlice);
     }
 
     @Override
@@ -225,6 +234,7 @@ public class ContextualCard {
         private int mViewType;
         private boolean mIsPendingDismiss;
         private boolean mHasInlineAction;
+        private Slice mSlice;
 
         public Builder setName(String name) {
             mName = name;
@@ -293,6 +303,14 @@ public class ContextualCard {
 
         public Builder setHasInlineAction(boolean hasInlineAction) {
             mHasInlineAction = hasInlineAction;
+            return this;
+        }
+
+        /**
+         * Cache a slice created at pre-check time for later usage.
+         */
+        public Builder setSlice(Slice slice) {
+            mSlice = slice;
             return this;
         }
 
