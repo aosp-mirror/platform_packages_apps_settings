@@ -18,7 +18,6 @@ package com.android.settings.homepage.contextualcards;
 
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
-import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI;
 import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
 
 import android.app.settings.SettingsEnums;
@@ -201,7 +200,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     cards.add(card);
                 }
             } catch (ExecutionException | InterruptedException | TimeoutException e) {
-                Log.w(TAG, "Failed to get eligible state for card, likely timeout. Skipping", e);
+                Log.w(TAG, "Failed to get eligible state for card: " + e.toString());
             }
         }
         return cards;
@@ -209,8 +208,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     private boolean isLargeCard(ContextualCard card) {
         return card.getSliceUri().equals(CONTEXTUAL_WIFI_SLICE_URI)
-                || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI)
-                || card.getSliceUri().equals(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI);
+                || card.getSliceUri().equals(BLUETOOTH_DEVICES_SLICE_URI);
     }
 
     public interface CardContentLoaderListener {
