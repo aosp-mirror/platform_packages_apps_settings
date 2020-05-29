@@ -47,6 +47,7 @@ import com.android.settings.homepage.contextualcards.CardContentProvider;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardRenderer;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
+import com.android.settings.homepage.contextualcards.slices.SliceFullCardRendererHelper.SliceViewHolder;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Map;
@@ -100,6 +101,11 @@ public class SliceContextualCardRenderer implements ContextualCardRenderer, Life
         if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) {
             Log.w(TAG, "Invalid uri, skipping slice: " + uri);
             return;
+        }
+
+        // Show cached slice first before slice binding completed to avoid jank.
+        if (holder.getItemViewType() != VIEW_TYPE_HALF_WIDTH) {
+            ((SliceViewHolder) holder).sliceView.setSlice(card.getSlice());
         }
 
         LiveData<Slice> sliceLiveData = mSliceLiveDataMap.get(uri);
