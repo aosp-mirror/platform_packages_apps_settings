@@ -20,7 +20,7 @@
     android:key="notification_access_permission_detail_settings"
     android:title="@string/manage_notification_access_title">
 
-    <SwitchPreference
+    <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="notification_access_switch"
         android:title="@string/notification_access_detail_switch"/>
 

@@ -43,10 +43,10 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.FilterTouchesSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -168,32 +168,32 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         if (mFooterPreference != null) {
             mFooterPreference.setVisible(mAdmins.isEmpty());
         }
-        final Map<String, SwitchPreference> preferenceCache = new ArrayMap<>();
+        final Map<String, FilterTouchesSwitchPreference> preferenceCache = new ArrayMap<>();
         final Context prefContext = mPreferenceGroup.getContext();
         final int childrenCount = mPreferenceGroup.getPreferenceCount();
         for (int i = 0; i < childrenCount; i++) {
             final Preference pref = mPreferenceGroup.getPreference(i);
-            if (!(pref instanceof SwitchPreference)) {
+            if (!(pref instanceof FilterTouchesSwitchPreference)) {
                 continue;
             }
-            final SwitchPreference appSwitch = (SwitchPreference) pref;
+            final FilterTouchesSwitchPreference appSwitch = (FilterTouchesSwitchPreference) pref;
             preferenceCache.put(appSwitch.getKey(), appSwitch);
         }
         for (DeviceAdminListItem item : mAdmins) {
             final String key = item.getKey();
-            SwitchPreference pref = preferenceCache.remove(key);
+            FilterTouchesSwitchPreference pref = preferenceCache.remove(key);
             if (pref == null) {
-                pref = new SwitchPreference(prefContext);
+                pref = new FilterTouchesSwitchPreference(prefContext);
                 mPreferenceGroup.addPreference(pref);
             }
             bindPreference(item, pref);
         }
-        for (SwitchPreference unusedCacheItem : preferenceCache.values()) {
+        for (FilterTouchesSwitchPreference unusedCacheItem : preferenceCache.values()) {
             mPreferenceGroup.removePreference(unusedCacheItem);
         }
     }
 
-    private void bindPreference(DeviceAdminListItem item, SwitchPreference pref) {
+    private void bindPreference(DeviceAdminListItem item, FilterTouchesSwitchPreference pref) {
         pref.setKey(item.getKey());
         pref.setTitle(item.getName());
         pref.setIcon(item.getIcon());
