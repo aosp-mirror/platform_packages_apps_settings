@@ -82,6 +82,7 @@ public class DarkModeActivationPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mService = mock(UiModeManager.class);
         when(mContext.getResources()).thenReturn(res);
+        when(res.getConfiguration()).thenReturn(mConfigNightNo);
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mService);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
