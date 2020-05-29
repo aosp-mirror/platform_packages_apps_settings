@@ -128,7 +128,12 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
         mLogHandler.post(() -> {
             mSettingsLogList.add(settingsLog);
         });
-        mLogHandler.scheduleSendLog();
+        if (action == SettingsEnums.ACTION_CONTEXTUAL_CARD_DISMISS) {
+            // Directly send this event to notify SI instantly that the card is dismissed
+            mLogHandler.sendLog();
+        } else {
+            mLogHandler.scheduleSendLog();
+        }
     }
 
     @VisibleForTesting
@@ -136,7 +141,7 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
         final int size = settingsLogs.size();
         final ByteArrayOutputStream bout = new ByteArrayOutputStream();
         final DataOutputStream output = new DataOutputStream(bout);
-        // Data is "size, length, bytearray, length, bytearray ..."
+        // The data format is "size, length, byte array, length, byte array ..."
         try {
             output.writeInt(size);
             for (SettingsLog settingsLog : settingsLogs) {
@@ -159,13 +164,18 @@ public class SettingsIntelligenceLogWriter implements LogWriter {
 
     private class SendLogHandler extends Handler {
 
-        public SendLogHandler(Looper looper) {
+        SendLogHandler(Looper looper) {
             super(looper);
         }
 
-        public void scheduleSendLog() {
+        void scheduleSendLog() {
             removeCallbacks(mSendLogsRunnable);
             postDelayed(mSendLogsRunnable, MESSAGE_DELAY);
+        }
+
+        void sendLog() {
+            removeCallbacks(mSendLogsRunnable);
+            post(mSendLogsRunnable);
         }
     }
 
