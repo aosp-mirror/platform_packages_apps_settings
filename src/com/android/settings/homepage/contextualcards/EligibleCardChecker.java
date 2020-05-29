@@ -96,14 +96,17 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
         final Slice slice = bindSlice(uri);
 
-        if (isSliceToggleable(slice)) {
-            mCard = card.mutate().setHasInlineAction(true).build();
-        }
-
         if (slice == null || slice.hasHint(HINT_ERROR)) {
             Log.w(TAG, "Failed to bind slice, not eligible for display " + uri);
             return false;
         }
+
+        mCard = card.mutate().setSlice(slice).build();
+
+        if (isSliceToggleable(slice)) {
+            mCard = card.mutate().setHasInlineAction(true).build();
+        }
+
         return true;
     }
 
