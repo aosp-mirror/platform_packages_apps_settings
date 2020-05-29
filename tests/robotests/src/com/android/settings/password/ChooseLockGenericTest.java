@@ -34,6 +34,7 @@ import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Global;
@@ -48,7 +49,6 @@ import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowPersistentDataBlockManager;
 import com.android.settings.testutils.shadow.ShadowStorageManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -62,6 +62,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowPersistentDataBlockManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(
@@ -97,6 +99,17 @@ public class ChooseLockGenericTest {
 
         initActivity(null);
         assertThat(mActivity.isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onCreate_deviceNotProvisioned_persistentDataServiceNotAvailable_shouldNotFinish() {
+        Global.putInt(application.getContentResolver(), Global.DEVICE_PROVISIONED, 0);
+        ShadowPersistentDataBlockManager.setDataBlockSize(1000);
+        ShadowApplication.getInstance().setSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE,
+                null);
+
+        initActivity(null);
+        assertThat(mActivity.isFinishing()).isFalse();
     }
 
     @Test

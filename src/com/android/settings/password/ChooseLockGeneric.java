@@ -297,7 +297,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
 
             // Can only run during setup if factory reset protection has already been cleared
-            return (pdbm != null && pdbm.getDataBlockSize() == 0);
+            // or if the device does not support FRP.
+            return (pdbm == null || pdbm.getDataBlockSize() == 0);
         }
 
         protected Class<? extends ChooseLockGeneric.InternalActivity> getInternalActivityClass() {
