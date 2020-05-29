@@ -16,40 +16,17 @@
 
 package com.android.settings.homepage.contextualcards;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import static com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice.PREFS;
-import static com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice.PREF_KEY_INTERACTED_PACKAGES;
-import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI;
-import static com.android.settings.slices.CustomSliceRegistry.FLASHLIGHT_SLICE_URI;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
 import android.annotation.Nullable;
-import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.ArraySet;
 
-import androidx.core.graphics.drawable.IconCompat;
-import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.SliceAction;
 import androidx.slice.widget.SliceLiveData;
 
-import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.applications.AppInfoBase;
 import com.android.settings.intelligence.ContextualCardProto;
 
 import org.junit.After;
@@ -61,14 +38,12 @@ import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
 public class ContextualCardFeatureProviderImplTest {
 
     private Context mContext;
     private ContextualCardFeatureProviderImpl mImpl;
-    private SharedPreferences mSharedPreferences;
     private CardDatabaseHelper mCardDatabaseHelper;
     private SQLiteDatabase mDatabase;
 
@@ -76,7 +51,6 @@ public class ContextualCardFeatureProviderImplTest {
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mImpl = new ContextualCardFeatureProviderImpl(mContext);
-        mSharedPreferences = mContext.getSharedPreferences(PREFS, MODE_PRIVATE);
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
         mCardDatabaseHelper = CardDatabaseHelper.getInstance(mContext);
@@ -87,7 +61,6 @@ public class ContextualCardFeatureProviderImplTest {
     public void tearDown() {
         CardDatabaseHelper.getInstance(mContext).close();
         CardDatabaseHelper.sCardDatabaseHelper = null;
-        removeInteractedPackageFromSharedPreference();
     }
 
     @Test
@@ -128,37 +101,12 @@ public class ContextualCardFeatureProviderImplTest {
         assertThat(rowsUpdated).isEqualTo(0);
     }
 
-    @Test
-    public void logNotificationPackage_isContextualNotificationChannel_shouldLogPackage() {
-        final String packageName = "com.android.test.app";
-        final Slice slice = buildSlice(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI, packageName);
-
-        mImpl.logNotificationPackage(slice);
-
-        final Set<String> interactedPackages = mSharedPreferences.getStringSet(
-                PREF_KEY_INTERACTED_PACKAGES, new ArraySet<>());
-        assertThat(interactedPackages.contains(packageName)).isTrue();
-    }
-
-    @Test
-    public void logNotificationPackage_isNotContextualNotificationChannel_shouldNotLogPackage() {
-        final String packageName = "com.android.test.app";
-        final Slice slice = buildSlice(FLASHLIGHT_SLICE_URI, packageName);
-
-        mImpl.logNotificationPackage(slice);
-
-        final Set<String> interactedPackages = mSharedPreferences.getStringSet(
-                PREF_KEY_INTERACTED_PACKAGES, new ArraySet<>());
-        assertThat(interactedPackages.contains(packageName)).isFalse();
-    }
-
     private static void insertFakeCard(
             SQLiteDatabase db, String name, double score, String uri, @Nullable Long time) {
         final ContentValues value = new ContentValues();
         value.put(CardDatabaseHelper.CardColumns.NAME, name);
         value.put(CardDatabaseHelper.CardColumns.SCORE, score);
         value.put(CardDatabaseHelper.CardColumns.SLICE_URI, uri);
-
         value.put(CardDatabaseHelper.CardColumns.TYPE, ContextualCard.CardType.SLICE);
         value.put(CardDatabaseHelper.CardColumns.CATEGORY,
                 ContextualCardProto.ContextualCard.Category.DEFAULT.getNumber());
@@ -172,32 +120,5 @@ public class ContextualCardFeatureProviderImplTest {
         }
 
         db.insert(CardDatabaseHelper.CARD_TABLE, null, value);
-    }
-
-    private Slice buildSlice(Uri sliceUri, String packageName) {
-        final Bundle args = new Bundle();
-        args.putString(AppInfoBase.ARG_PACKAGE_NAME, packageName);
-        final Intent intent = new Intent("action");
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-
-        final PendingIntent pendingIntent = spy(
-                PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */));
-        doReturn(intent).when(pendingIntent).getIntent();
-        final IconCompat icon = IconCompat.createWithResource(mContext, R.drawable.empty_icon);
-        final SliceAction action = SliceAction.createDeeplink(pendingIntent, icon,
-                ListBuilder.SMALL_IMAGE, "title");
-
-        return new ListBuilder(mContext, sliceUri, ListBuilder.INFINITY)
-                .addRow(new ListBuilder.RowBuilder()
-                        .addEndItem(icon, ListBuilder.ICON_IMAGE)
-                        .setTitle("title")
-                        .setPrimaryAction(action))
-                .build();
-    }
-
-    private void removeInteractedPackageFromSharedPreference() {
-        if (mSharedPreferences.contains(PREF_KEY_INTERACTED_PACKAGES)) {
-            mSharedPreferences.edit().remove(PREF_KEY_INTERACTED_PACKAGES).apply();
-        }
     }
 }
