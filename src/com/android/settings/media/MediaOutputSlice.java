@@ -287,11 +287,16 @@ public class MediaOutputSlice implements CustomSliceable {
 
         if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE
                 && !device.isConnected()) {
-            if (device.getState() == LocalMediaManager.MediaDeviceState.STATE_CONNECTING) {
+            final int state = device.getState();
+            if (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING
+                    || state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED) {
                 rowBuilder.setTitle(deviceName);
                 rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                         ListBuilder.ICON_IMAGE, deviceName));
-                rowBuilder.setSubtitle(mContext.getText(R.string.media_output_switching));
+                rowBuilder.setSubtitle(
+                        (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING)
+                                ? mContext.getText(R.string.media_output_switching)
+                                : mContext.getText(R.string.bluetooth_connect_failed));
             } else {
                 // Append status to title only for the disconnected Bluetooth device.
                 final SpannableString spannableTitle = new SpannableString(
