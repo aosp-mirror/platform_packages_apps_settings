@@ -17,10 +17,12 @@
 package com.android.settings.homepage.contextualcards.slices;
 
 import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_FULL_WIDTH;
+import static com.android.settings.homepage.contextualcards.slices.SliceContextualCardRenderer.VIEW_TYPE_STICKY;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
@@ -39,6 +41,7 @@ import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
 import com.android.settings.homepage.contextualcards.ContextualCardsFragment;
 import com.android.settings.homepage.contextualcards.ControllerRendererPool;
+import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -81,13 +84,36 @@ public class SliceContextualCardRendererTest {
     @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
         final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
-        RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
         mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
 
         assertThat(
                 ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView.getSlice())
                 .isNull();
+    }
+
+    @Test
+    public void bindView_viewTypeFullWidth_shouldSetCachedSlice() {
+        final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
+
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+
+        assertThat(
+                ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView.getSlice())
+                .isNotNull();
+    }
+
+    @Test
+    public void bindView_viewTypeSticky_shouldSetCachedSlice() {
+        final RecyclerView.ViewHolder viewHolder = spy(getStickyViewHolder());
+        doReturn(VIEW_TYPE_STICKY).when(viewHolder).getItemViewType();
+
+        mRenderer.bindView(viewHolder, buildContextualCard(TEST_SLICE_URI));
+
+        assertThat(
+                ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView.getSlice())
+                .isNotNull();
     }
 
     @Test
@@ -246,12 +272,23 @@ public class SliceContextualCardRendererTest {
         return mRenderer.createViewHolder(view, VIEW_TYPE_FULL_WIDTH);
     }
 
+    private RecyclerView.ViewHolder getStickyViewHolder() {
+        final RecyclerView recyclerView = new RecyclerView(mActivity);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+        final View view = LayoutInflater.from(mActivity).inflate(VIEW_TYPE_STICKY, recyclerView,
+                false);
+
+        return mRenderer.createViewHolder(view, VIEW_TYPE_STICKY);
+    }
+
     private ContextualCard buildContextualCard(Uri sliceUri) {
+        final Slice slice = new ContextualWifiSlice(mActivity).getSlice();
         return new ContextualCard.Builder()
                 .setName("test_name")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(sliceUri)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
+                .setSlice(slice)
                 .build();
     }
 }
