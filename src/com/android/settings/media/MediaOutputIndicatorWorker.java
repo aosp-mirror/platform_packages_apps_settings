@@ -38,6 +38,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -81,25 +82,29 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         mContext.registerReceiver(mReceiver, intentFilter);
         mLocalBluetoothManager.getEventManager().registerCallback(this);
 
-        final MediaController controller = getActiveLocalMediaController();
-        if (controller == null) {
-            mPackageName = null;
-        } else {
-            mPackageName = controller.getPackageName();
-        }
-        if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
-                mLocalMediaManager.getPackageName())) {
-            mLocalMediaManager = new LocalMediaManager(mContext, mPackageName,
-                    null /* notification */);
-        }
-        mLocalMediaManager.registerCallback(this);
-        mLocalMediaManager.startScan();
+        ThreadUtils.postOnBackgroundThread(() -> {
+            final MediaController controller = getActiveLocalMediaController();
+            if (controller == null) {
+                mPackageName = null;
+            } else {
+                mPackageName = controller.getPackageName();
+            }
+            if (mLocalMediaManager == null || !TextUtils.equals(mPackageName,
+                    mLocalMediaManager.getPackageName())) {
+                mLocalMediaManager = new LocalMediaManager(mContext, mPackageName,
+                        null /* notification */);
+            }
+            mLocalMediaManager.registerCallback(this);
+            mLocalMediaManager.startScan();
+        });
     }
 
     @Override
     protected void onSliceUnpinned() {
-        mLocalMediaManager.unregisterCallback(this);
-        mLocalMediaManager.stopScan();
+        if (mLocalMediaManager != null) {
+            mLocalMediaManager.unregisterCallback(this);
+            mLocalMediaManager.stopScan();
+        }
 
         if (mLocalBluetoothManager == null) {
             Log.e(TAG, "Bluetooth is not supported on this device");
