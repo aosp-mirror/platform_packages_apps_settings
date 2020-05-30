@@ -33,11 +33,9 @@ import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
 import com.android.settings.homepage.contextualcards.slices.BatteryFixSlice;
 import com.android.settings.homepage.contextualcards.slices.BluetoothDevicesSlice;
 import com.android.settings.homepage.contextualcards.slices.ContextualAdaptiveSleepSlice;
-import com.android.settings.homepage.contextualcards.slices.ContextualNotificationChannelSlice;
 import com.android.settings.homepage.contextualcards.slices.DarkThemeSlice;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 import com.android.settings.homepage.contextualcards.slices.LowStorageSlice;
-import com.android.settings.homepage.contextualcards.slices.NotificationChannelSlice;
 import com.android.settings.location.LocationSlice;
 import com.android.settings.media.MediaOutputGroupSlice;
 import com.android.settings.media.MediaOutputIndicatorSlice;
@@ -95,16 +93,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("bluetooth_devices")
-            .build();
-
-    /**
-     * Backing Uri for Contextual Notification channel Slice.
-     */
-    public static final Uri CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("contextual_notification_channel")
             .build();
 
     /**
@@ -179,15 +167,6 @@ public class CustomSliceRegistry {
             .authority(SettingsSliceProvider.SLICE_AUTHORITY)
             .appendEncodedPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath("mobile_data")
-            .build();
-    /**
-     * Backing Uri for Notification channel Slice.
-     */
-    public static final Uri NOTIFICATION_CHANNEL_SLICE_URI = new Uri.Builder()
-            .scheme(ContentResolver.SCHEME_CONTENT)
-            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
-            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
-            .appendPath("notification_channel")
             .build();
     /**
      * Backing Uri for the storage slice.
@@ -333,8 +312,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(BATTERY_FIX_SLICE_URI, BatteryFixSlice.class);
         sUriToSlice.put(BLUETOOTH_DEVICES_SLICE_URI, BluetoothDevicesSlice.class);
         sUriToSlice.put(CONTEXTUAL_ADAPTIVE_SLEEP_URI, ContextualAdaptiveSleepSlice.class);
-        sUriToSlice.put(CONTEXTUAL_NOTIFICATION_CHANNEL_SLICE_URI,
-                ContextualNotificationChannelSlice.class);
         sUriToSlice.put(CONTEXTUAL_WIFI_SLICE_URI, ContextualWifiSlice.class);
         sUriToSlice.put(FACE_ENROLL_SLICE_URI, FaceSetupSlice.class);
         sUriToSlice.put(FLASHLIGHT_SLICE_URI, FlashlightSlice.class);
@@ -343,7 +320,6 @@ public class CustomSliceRegistry {
         sUriToSlice.put(MEDIA_OUTPUT_INDICATOR_SLICE_URI, MediaOutputIndicatorSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_SLICE_URI, MediaOutputSlice.class);
         sUriToSlice.put(MOBILE_DATA_SLICE_URI, MobileDataSlice.class);
-        sUriToSlice.put(NOTIFICATION_CHANNEL_SLICE_URI, NotificationChannelSlice.class);
         sUriToSlice.put(STORAGE_SLICE_URI, StorageSlice.class);
         sUriToSlice.put(WIFI_SLICE_URI, WifiSlice.class);
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
