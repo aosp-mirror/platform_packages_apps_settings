@@ -26,7 +26,6 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
-import com.android.settings.fuelgauge.batterytip.detectors.RestrictAppDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -74,7 +73,9 @@ public class BatteryTipLoader extends AsyncLoaderCompat<List<BatteryTip>> {
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new SummaryDetector(policy, batteryInfo.averageTimeToDischarge).detect());
-        tips.add(new RestrictAppDetector(context, policy).detect());
+        // Disable this feature now since it introduces false positive cases. We will try to improve
+        // it in the future.
+        // tips.add(new RestrictAppDetector(context, policy).detect());
 
         Collections.sort(tips);
         return tips;
