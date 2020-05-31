@@ -46,7 +46,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
 
     protected List<ConversationChannelWrapper> mConversations = new ArrayList<>();
     protected PreferenceCategory mPreference;
-    private boolean mIsInInvalidMsgState;
 
     public AppConversationListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
@@ -71,7 +70,8 @@ public class AppConversationListPreferenceController extends NotificationPrefere
                 return false;
             }
         }
-        return true;
+        return mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid) || mBackend.isInInvalidMsgState(
+                mAppRow.pkg, mAppRow.uid);
     }
 
     @Override
@@ -88,7 +88,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                mIsInInvalidMsgState = mBackend.isInInvalidMsgState(mAppRow.pkg, mAppRow.uid);
                 ParceledListSlice<ConversationChannelWrapper> list =
                         mBackend.getConversations(mAppRow.pkg, mAppRow.uid);
                 if (list != null) {
@@ -122,7 +121,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
             return;
         }
 
-        if (!mIsInInvalidMsgState && !mConversations.isEmpty()) {
+        if (!mConversations.isEmpty()) {
             // TODO: if preference has children, compare with newly loaded list
             mPreference.removeAll();
             mPreference.setTitle(getTitleResId());

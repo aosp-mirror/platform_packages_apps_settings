@@ -37,12 +37,12 @@
         android:visibility="gone"
         settings:allowDividerAbove="false"
         settings:allowDividerBelow="false">
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="invalid_conversation_switch"
-            android:title="@string/conversation_section_switch_title" />
-        <Preference
-            android:key="invalid_conversation_info"/>
     </PreferenceCategory>
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="invalid_conversation_switch"
+        android:title="@string/conversation_section_switch_title" />
+    <Preference
+        android:key="invalid_conversation_info"/>
 
     <!--Bubbles -->
     <Preference
