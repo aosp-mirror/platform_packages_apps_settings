@@ -8241,6 +8241,10 @@
     <string name="bubble_app_setting_selected_conversation_title">Conversations</string>
     <!-- Bubble app settings: Title above a list of conversations that have been excluded from bubbling [CHAR LIMIT=100] -->
     <string name="bubble_app_setting_excluded_conversation_title">All conversations can bubble except</string>
+    <!-- Bubble app settings: Content description - action to make a conversation no longer bubble -->
+    <string name="bubble_app_setting_unbubble_conversation">Turn off bubbles for this conversation</string>
+    <!-- Bubble app settings: Content description - action to make a conversation bubble -->
+    <string name="bubble_app_setting_bubble_conversation">Turn on bubbles for this conversation</string>
 
     <!-- Configure notifications: title for swipe direction [CHAR LIMIT=60] -->
     <string name="swipe_direction_title">Swipe actions</string>
@@ -9149,7 +9153,7 @@
      allowed to bypass Do Not Disturb. For example, "Nest, Messages, and 2 more can interrupt". -->
     <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
-    <string name="zen_mode_bypassing_apps_title">App exceptions</string>
+    <string name="zen_mode_bypassing_apps_title">Apps</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
     <string name="zen_mode_bypassing_apps_all_summary">All notifications</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
@@ -11909,20 +11913,6 @@
         <item quantity="one">1 app has full access to your device</item>
         <item quantity="other"><xliff:g id="service_count">%1$d</xliff:g> apps have full access to your device</item>
     </plurals>
-
-    <!-- Title for notification channel slice. [CHAR LIMIT=NONE] -->
-    <string name="manage_app_notification">Manage <xliff:g id="app_name" example="Settings">%1$s</xliff:g> notifications</string>
-    <!-- Title for no suggested app in notification channel slice. [CHAR LIMIT=NONE] -->
-    <string name="no_suggested_app">No suggested application</string>
-    <!-- Summary for the channels count is equal or less than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
-    <plurals name="notification_few_channel_count_summary">
-        <item quantity="one"><xliff:g id="notification_channel_count" example="1">%1$d</xliff:g> notification channel.</item>
-        <item quantity="other"><xliff:g id="notification_channel_count" example="3">%1$d</xliff:g> notification channels.</item>
-    </plurals>
-    <!-- Summary for the channels count is more than 3 in notification channel slice. [CHAR LIMIT=NONE] -->
-    <string name="notification_many_channel_count_summary"><xliff:g id="notification_channel_count" example="4">%1$d</xliff:g> notification channels. Tap to manage all.</string>
-    <!-- Summary for recently installed app in contextual notification channel slice. [CHAR LIMIT=NONE] -->
-    <string name="recently_installed_app">You recently installed this app.</string>
 
     <!-- Title for the Switch output dialog (settings panel) with media related devices [CHAR LIMIT=50] -->
     <string name="media_output_panel_title">Switch output</string>

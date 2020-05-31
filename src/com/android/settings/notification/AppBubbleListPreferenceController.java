@@ -111,6 +111,7 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     public Preference createConversationPref(final ConversationChannelWrapper conversation) {
         final ConversationPreference pref = new ConversationPreference(mContext);
         populateConversationPreference(conversation, pref);
+        pref.setOnClickBubblesConversation(mAppRow.bubblePreference == BUBBLE_PREFERENCE_ALL);
         pref.setOnClickListener((v) -> {
             conversation.getNotificationChannel().setAllowBubbles(DEFAULT_ALLOW_BUBBLE);
             mBackend.updateChannel(mAppRow.pkg, mAppRow.uid, conversation.getNotificationChannel());
@@ -127,6 +128,7 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
     public static class ConversationPreference extends Preference implements View.OnClickListener {
 
         View.OnClickListener mOnClickListener;
+        boolean mOnClickBubbles;
 
         ConversationPreference(Context context) {
             super(context);
@@ -137,7 +139,14 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
         public void onBindViewHolder(final PreferenceViewHolder holder) {
             super.onBindViewHolder(holder);
             ImageView view =  holder.itemView.findViewById(R.id.button);
+            view.setContentDescription(mOnClickBubbles
+                    ? getContext().getString(R.string.bubble_app_setting_bubble_conversation)
+                    : getContext().getString(R.string.bubble_app_setting_unbubble_conversation));
             view.setOnClickListener(mOnClickListener);
+        }
+
+        public void setOnClickBubblesConversation(boolean enablesBubbles) {
+            mOnClickBubbles = enablesBubbles;
         }
 
         public void setOnClickListener(View.OnClickListener listener) {

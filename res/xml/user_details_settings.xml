@@ -26,6 +26,10 @@
             android:icon="@drawable/ic_phone"
             android:title="@string/user_enable_calling_sms" />
     <com.android.settingslib.RestrictedPreference
+            android:key="app_and_content_access"
+            android:icon="@drawable/ic_lock_closed"
+            android:title="@string/user_restrictions_title" />
+    <com.android.settingslib.RestrictedPreference
             android:key="remove_user"
             android:icon="@drawable/ic_delete"
             settings:userRestriction="no_remove_user"
