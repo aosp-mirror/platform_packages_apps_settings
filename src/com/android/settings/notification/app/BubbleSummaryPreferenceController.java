@@ -49,7 +49,7 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
         if (!super.isAvailable()) {
             return false;
         }
-        if (mAppRow == null && mChannel == null) {
+        if (mAppRow == null) {
             return false;
         }
         if (mChannel != null) {
@@ -62,7 +62,7 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
                 return mAppRow != null;
             }
         }
-        return isGloballyEnabled();
+        return isGloballyEnabled() && mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid);
     }
 
     @Override
