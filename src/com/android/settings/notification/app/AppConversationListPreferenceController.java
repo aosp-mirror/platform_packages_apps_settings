@@ -116,7 +116,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         return R.string.conversations_category_title;
     }
 
-    private void populateList() {
+    protected void populateList() {
         if (mPreference == null) {
             return;
         }
