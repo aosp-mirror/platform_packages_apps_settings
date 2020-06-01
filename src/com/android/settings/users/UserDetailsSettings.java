@@ -36,6 +36,7 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
@@ -56,6 +57,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
+    private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
 
     /** Integer extra containing the userId to manage */
     static final String EXTRA_USER_ID = "user_id";
@@ -68,6 +70,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     Preference mSwitchUserPref;
     private SwitchPreference mPhonePref;
+    @VisibleForTesting
+    Preference mAppAndContentAccessPref;
     @VisibleForTesting
     Preference mRemoveUserPref;
 
@@ -109,6 +113,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 switchUser();
             }
             return true;
+        } else if (preference == mAppAndContentAccessPref) {
+            openAppAndContentAccessScreen(false);
         }
         return false;
     }
@@ -170,11 +176,14 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (userId == USER_NULL) {
             throw new IllegalStateException("Arguments to this fragment must contain the user id");
         }
+        boolean isNewUser =
+                arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false);
         mUserInfo = mUserManager.getUserInfo(userId);
 
         mSwitchUserPref = findPreference(KEY_SWITCH_USER);
         mPhonePref = findPreference(KEY_ENABLE_TELEPHONY);
         mRemoveUserPref = findPreference(KEY_REMOVE_USER);
+        mAppAndContentAccessPref = findPreference(KEY_APP_AND_CONTENT_ACCESS);
 
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
@@ -184,16 +193,24 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
             removePreference(KEY_REMOVE_USER);
+            removePreference(KEY_APP_AND_CONTENT_ACCESS);
         } else {
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY);
             }
 
-            if (!mUserInfo.isGuest()) {
-                mPhonePref.setChecked(!mUserManager.hasUserRestriction(
-                        UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
-                mRemoveUserPref.setTitle(R.string.user_remove_user);
+            if (mUserInfo.isRestricted()) {
+                removePreference(KEY_ENABLE_TELEPHONY);
+                if (isNewUser) {
+                    // for newly created restricted users we should open the apps and content access
+                    // screen to initialize the default restrictions
+                    openAppAndContentAccessScreen(true);
+                }
             } else {
+                removePreference(KEY_APP_AND_CONTENT_ACCESS);
+            }
+
+            if (mUserInfo.isGuest()) {
                 // These are not for an existing user, just general Guest settings.
                 // Default title is for calling and SMS. Change to calling-only here
                 mPhonePref.setTitle(R.string.user_enable_calling);
@@ -201,6 +218,10 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 mPhonePref.setChecked(
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
                 mRemoveUserPref.setTitle(R.string.user_exit_guest_title);
+            } else {
+                mPhonePref.setChecked(!mUserManager.hasUserRestriction(
+                        UserManager.DISALLOW_OUTGOING_CALLS, new UserHandle(userId)));
+                mRemoveUserPref.setTitle(R.string.user_remove_user);
             }
             if (RestrictedLockUtilsInternal.hasBaseUserRestriction(context,
                     UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
@@ -209,6 +230,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
             mRemoveUserPref.setOnPreferenceClickListener(this);
             mPhonePref.setOnPreferenceChangeListener(this);
+            mAppAndContentAccessPref.setOnPreferenceClickListener(this);
         }
     }
 
@@ -282,5 +304,21 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private void removeUser() {
         mUserManager.removeUser(mUserInfo.id);
         finishFragment();
+    }
+
+    /**
+     * @param isNewUser indicates if a user was created recently, for new users
+     *                  AppRestrictionsFragment should set the default restrictions
+     */
+    private void openAppAndContentAccessScreen(boolean isNewUser) {
+        Bundle extras = new Bundle();
+        extras.putInt(AppRestrictionsFragment.EXTRA_USER_ID, mUserInfo.id);
+        extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, isNewUser);
+        new SubSettingLauncher(getContext())
+                .setDestination(AppRestrictionsFragment.class.getName())
+                .setArguments(extras)
+                .setTitleRes(R.string.user_restrictions_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 }

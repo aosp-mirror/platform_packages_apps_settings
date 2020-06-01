@@ -18,8 +18,10 @@ package com.android.settings.users;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -77,7 +79,9 @@ public class EditUserInfoController {
     }
 
     public void clear() {
-        mEditUserPhotoController.removeNewUserPhotoBitmapFile();
+        if (mEditUserPhotoController != null) {
+            mEditUserPhotoController.removeNewUserPhotoBitmapFile();
+        }
         mEditUserInfoDialog = null;
         mSavedPhoto = null;
     }
@@ -115,7 +119,7 @@ public class EditUserInfoController {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         mWaitingForActivityResult = false;
 
-        if (mEditUserInfoDialog != null) {
+        if (mEditUserPhotoController != null && mEditUserInfoDialog != null) {
             mEditUserPhotoController.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -136,6 +140,14 @@ public class EditUserInfoController {
         userNameView.setText(currentUserName);
 
         final ImageView userPhotoView = (ImageView) content.findViewById(R.id.user_photo);
+
+        boolean canChangePhoto = mUserManager != null &&
+                canChangePhoto(activity, mUserManager.getUserInfo(user.getIdentifier()));
+        if (!canChangePhoto) {
+            // some users can't change their photos so we need to remove suggestive
+            // background from the photoView
+            userPhotoView.setBackground(null);
+        }
         Drawable drawable = null;
         if (mSavedPhoto != null) {
             drawable = CircleFramedDrawable.getInstance(activity, mSavedPhoto);
@@ -143,7 +155,10 @@ public class EditUserInfoController {
             drawable = currentUserIcon;
         }
         userPhotoView.setImageDrawable(drawable);
-        mEditUserPhotoController = createEditUserPhotoController(fragment, userPhotoView, drawable);
+        if (canChangePhoto) {
+            mEditUserPhotoController =
+                    createEditUserPhotoController(fragment, userPhotoView, drawable);
+        }
         mEditUserInfoDialog = new AlertDialog.Builder(activity)
                 .setTitle(title)
                 .setView(content)
@@ -157,21 +172,22 @@ public class EditUserInfoController {
                             if (!TextUtils.isEmpty(userName)) {
                                 if (currentUserName == null
                                         || !userName.toString().equals(
-                                                currentUserName.toString())) {
+                                        currentUserName.toString())) {
                                     if (callback != null) {
                                         callback.onLabelChanged(mUser, userName.toString());
                                     }
                                 }
                             }
                             // Update the photo if changed.
-                            Drawable drawable = mEditUserPhotoController.getNewUserPhotoDrawable();
-                            if (drawable != null && !drawable.equals(currentUserIcon)) {
-                                if (callback != null) {
+                            if (mEditUserPhotoController != null) {
+                                Drawable drawable =
+                                        mEditUserPhotoController.getNewUserPhotoDrawable();
+                                if (drawable != null && !drawable.equals(currentUserIcon)) {
+                                    if (callback != null) {
                                         callback.onPhotoChanged(mUser, drawable);
+                                    }
                                 }
                             }
-                            fragment.getActivity().removeDialog(
-                                    RestrictedProfileSettings.DIALOG_ID_EDIT_USER_INFO);
                         }
                         clear();
                         if (completeCallback != null) {
@@ -204,6 +220,13 @@ public class EditUserInfoController {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         return mEditUserInfoDialog;
+    }
+
+    @VisibleForTesting
+    boolean canChangePhoto(Context context, UserInfo user) {
+        return PhotoCapabilityUtils.canCropPhoto(context) &&
+                (PhotoCapabilityUtils.canChoosePhoto(context)
+                        || PhotoCapabilityUtils.canTakePhoto(context));
     }
 
     @VisibleForTesting
