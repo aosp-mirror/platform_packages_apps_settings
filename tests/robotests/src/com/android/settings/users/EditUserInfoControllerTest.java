@@ -28,7 +28,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.graphics.drawable.Drawable;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -62,6 +64,8 @@ public class EditUserInfoControllerTest {
     @Mock
     private Drawable mCurrentIcon;
 
+    private boolean mCanChangePhoto;
+
     private FragmentActivity mActivity;
     private TestEditUserInfoController mController;
 
@@ -78,6 +82,11 @@ public class EditUserInfoControllerTest {
             mPhotoController = mock(EditUserPhotoController.class, Answers.RETURNS_DEEP_STUBS);
             return mPhotoController;
         }
+
+        @Override
+        boolean canChangePhoto(Context context, UserInfo user) {
+            return mCanChangePhoto;
+        }
     }
 
     @Before
@@ -86,6 +95,7 @@ public class EditUserInfoControllerTest {
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         when(mFragment.getActivity()).thenReturn(mActivity);
         mController = new TestEditUserInfoController();
+        mCanChangePhoto = true;
     }
 
     @Test
@@ -255,5 +265,18 @@ public class EditUserInfoControllerTest {
                 .onPhotoChanged(any(), eq(newPhoto));
         verify(dialogCompleteCallback, times(1)).onPositive();
         verify(dialogCompleteCallback, times(0)).onNegativeOrCancel();
+    }
+
+    @Test
+    public void createDialog_canNotChangePhoto_nullPhotoController() {
+        mCanChangePhoto = false;
+
+        mController.createDialog(
+                mFragment, mCurrentIcon, "test",
+                "title", null,
+                android.os.Process.myUserHandle(),
+                null);
+
+        assertThat(mController.mPhotoController).isNull();
     }
 }

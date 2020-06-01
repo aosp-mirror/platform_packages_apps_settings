@@ -32,9 +32,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -47,6 +49,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
@@ -61,6 +65,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -76,6 +81,7 @@ public class UserDetailsSettingsTest {
     private static final String KEY_SWITCH_USER = "switch_user";
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
+    private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
 
@@ -90,6 +96,8 @@ public class UserDetailsSettingsTest {
     private SwitchPreference mPhonePref;
     @Mock
     private Preference mRemoveUserPref;
+    @Mock
+    private Preference mAppAndContentAccessPref;
 
     private FragmentActivity mActivity;
     private Context mContext;
@@ -114,14 +122,15 @@ public class UserDetailsSettingsTest {
 
         ReflectionHelpers.setField(mFragment, "mUserManager", userManager);
         doReturn(mActivity).when(mFragment).getActivity();
-        doReturn(mContext).when(mFragment).getContext();
+        doReturn(mActivity).when(mFragment).getContext();
 
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
-        doReturn("").when(mActivity).getString(anyInt(), anyString());
 
         doReturn(mSwitchUserPref).when(mFragment).findPreference(KEY_SWITCH_USER);
         doReturn(mPhonePref).when(mFragment).findPreference(KEY_ENABLE_TELEPHONY);
         doReturn(mRemoveUserPref).when(mFragment).findPreference(KEY_REMOVE_USER);
+        doReturn(mAppAndContentAccessPref)
+                .when(mFragment).findPreference(KEY_APP_AND_CONTENT_ACCESS);
     }
 
     @After
@@ -167,6 +176,24 @@ public class UserDetailsSettingsTest {
         verify(mSwitchUserPref).setTitle("Switch to " + mUserInfo.name);
         verify(mSwitchUserPref).setOnPreferenceClickListener(mFragment);
         verify(mFragment, never()).removePreference(KEY_SWITCH_USER);
+    }
+
+    @Test
+    public void initialize_userSelected_shouldNotShowAppAndContentPref() {
+        setupSelectedUser();
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment).removePreference(KEY_APP_AND_CONTENT_ACCESS);
+    }
+
+    @Test
+    public void initialize_guestSelected_shouldNotShowAppAndContentPref() {
+        setupSelectedGuest();
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment).removePreference(KEY_APP_AND_CONTENT_ACCESS);
     }
 
     @Test
@@ -249,6 +276,16 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void initialize_nonAdmin_shouldNotShowAppAndContentPref() {
+        setupSelectedUser();
+        mUserManager.setIsAdminUser(false);
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment).removePreference(KEY_APP_AND_CONTENT_ACCESS);
+    }
+
+    @Test
     public void initialize_adminSelectsSecondaryUser_shouldShowRemovePreference() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -258,6 +295,57 @@ public class UserDetailsSettingsTest {
         verify(mRemoveUserPref).setOnPreferenceClickListener(mFragment);
         verify(mRemoveUserPref).setTitle(R.string.user_remove_user);
         verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
+    }
+
+    @Test
+    public void initialize_adminSelectsNewRestrictedUser_shouldOpenAppContentScreen() {
+        setupSelectedRestrictedUser();
+        mUserManager.setIsAdminUser(true);
+        mArguments.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, true);
+
+        mFragment.initialize(mActivity, mArguments);
+
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AppRestrictionsFragment.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments).isNotNull();
+        assertThat(arguments.getInt(AppRestrictionsFragment.EXTRA_USER_ID, 0))
+                .isEqualTo(mUserInfo.id);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
+                .isEqualTo(true);
+    }
+
+    @Test
+    public void initialize_adminSelectsRestrictedUser_shouldSetupPreferences() {
+        setupSelectedRestrictedUser();
+        mUserManager.setIsAdminUser(true);
+        doReturn(true).when(mTelephonyManager).isVoiceCapable();
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
+        verify(mFragment, never()).removePreference(KEY_SWITCH_USER);
+        verify(mFragment, never()).removePreference(KEY_APP_AND_CONTENT_ACCESS);
+        verify(mFragment).removePreference(KEY_ENABLE_TELEPHONY);
+        verify(mSwitchUserPref).setTitle("Switch to " + mUserInfo.name);
+        verify(mAppAndContentAccessPref).setOnPreferenceClickListener(mFragment);
+        verify(mSwitchUserPref).setOnPreferenceClickListener(mFragment);
+        verify(mRemoveUserPref).setOnPreferenceClickListener(mFragment);
+    }
+
+    @Test
+    public void initialize_adminSelectsExistingRestrictedUser_shouldNotStartAppAndContentAccess() {
+        setupSelectedRestrictedUser();
+        mUserManager.setIsAdminUser(true);
+        mArguments.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false);
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mActivity, never()).startActivity(any(Intent.class));
     }
 
     @Test
@@ -344,6 +432,7 @@ public class UserDetailsSettingsTest {
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_OK);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
         mFragment.mUserInfo = mUserInfo;
 
         mFragment.onPreferenceClick(mSwitchUserPref);
@@ -357,6 +446,7 @@ public class UserDetailsSettingsTest {
         mUserManager.setSwitchabilityStatus(SWITCHABILITY_STATUS_USER_SWITCH_DISALLOWED);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
         mFragment.mUserInfo = mUserInfo;
 
         mFragment.onPreferenceClick(mSwitchUserPref);
@@ -371,6 +461,7 @@ public class UserDetailsSettingsTest {
         mUserManager.setIsAdminUser(true);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
         doNothing().when(mFragment).showDialog(anyInt());
 
         mFragment.onPreferenceClick(mRemoveUserPref);
@@ -386,6 +477,7 @@ public class UserDetailsSettingsTest {
         mUserManager.setIsAdminUser(false);
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
         doNothing().when(mFragment).showDialog(anyInt());
 
         mFragment.onPreferenceClick(mRemoveUserPref);
@@ -395,11 +487,36 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
+    public void onPreferenceClick_selectRestrictedUser_appAndContentAccessClicked_startActivity() {
+        setupSelectedRestrictedUser();
+        mFragment.mUserInfo = mUserInfo;
+        mUserManager.setIsAdminUser(true);
+        mFragment.mSwitchUserPref = mSwitchUserPref;
+        mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
+
+        mFragment.onPreferenceClick(mAppAndContentAccessPref);
+
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AppRestrictionsFragment.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments.getInt(AppRestrictionsFragment.EXTRA_USER_ID, 0))
+                .isEqualTo(mUserInfo.id);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, true))
+                .isEqualTo(false);
+    }
+
+    @Test
     public void onPreferenceClick_unknownPreferenceClicked_doNothing() {
         setupSelectedUser();
         mFragment.mUserInfo = mUserInfo;
         mFragment.mSwitchUserPref = mSwitchUserPref;
         mFragment.mRemoveUserPref = mRemoveUserPref;
+        mFragment.mAppAndContentAccessPref = mAppAndContentAccessPref;
 
         mFragment.onPreferenceClick(mock(UserPreference.class));
 
@@ -461,6 +578,15 @@ public class UserDetailsSettingsTest {
         mUserInfo = new UserInfo(23, "Guest", null,
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_GUEST,
                 UserManager.USER_TYPE_FULL_GUEST);
+
+        mUserManager.addProfile(mUserInfo);
+    }
+
+    private void setupSelectedRestrictedUser() {
+        mArguments.putInt("user_id", 21);
+        mUserInfo = new UserInfo(21, "Bob", null,
+                UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_RESTRICTED,
+                UserManager.USER_TYPE_FULL_RESTRICTED);
 
         mUserManager.addProfile(mUserInfo);
     }
