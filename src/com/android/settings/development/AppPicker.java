@@ -46,10 +46,14 @@ public class AppPicker extends ListActivity {
             = "com.android.settings.extra.REQUESTIING_PERMISSION";
     public static final String EXTRA_DEBUGGABLE = "com.android.settings.extra.DEBUGGABLE";
     public static final String EXTRA_NON_SYSTEM = "com.android.settings.extra.NON_SYSTEM";
+    public static final String EXTRA_INCLUDE_NOTHING = "com.android.settings.extra.INCLUDE_NOTHING";
+
+    public static final int RESULT_NO_MATCHING_APPS = -2;
 
     private String mPermissionName;
     private boolean mDebuggableOnly;
     private boolean mNonSystemOnly;
+    private boolean mIncludeNothing;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -58,9 +62,11 @@ public class AppPicker extends ListActivity {
         mPermissionName = getIntent().getStringExtra(EXTRA_REQUESTIING_PERMISSION);
         mDebuggableOnly = getIntent().getBooleanExtra(EXTRA_DEBUGGABLE, false);
         mNonSystemOnly = getIntent().getBooleanExtra(EXTRA_NON_SYSTEM, false);
+        mIncludeNothing = getIntent().getBooleanExtra(EXTRA_INCLUDE_NOTHING, true);
 
         mAdapter = new AppListAdapter(this);
         if (mAdapter.getCount() <= 0) {
+            setResult(RESULT_NO_MATCHING_APPS);
             finish();
         } else {
             setListAdapter(mAdapter);
@@ -140,9 +146,11 @@ public class AppPicker extends ListActivity {
                 mPackageInfoList.add(info);
             }
             Collections.sort(mPackageInfoList, sDisplayNameComparator);
-            MyApplicationInfo info = new MyApplicationInfo();
-            info.label = context.getText(R.string.no_application);
-            mPackageInfoList.add(0, info);
+            if (mIncludeNothing) {
+                MyApplicationInfo info = new MyApplicationInfo();
+                info.label = context.getText(R.string.no_application);
+                mPackageInfoList.add(0, info);
+            }
             addAll(mPackageInfoList);
         }
 

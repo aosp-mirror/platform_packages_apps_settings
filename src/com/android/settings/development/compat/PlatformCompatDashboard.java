@@ -20,6 +20,7 @@ import static com.android.internal.compat.OverrideAllowedState.ALLOWED;
 import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_COMPAT_CHANGE_APP;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.compat.Compatibility.ChangeConfig;
 import android.content.Context;
@@ -124,6 +125,14 @@ public class PlatformCompatDashboard extends DashboardFragment {
                 } catch (PackageManager.NameNotFoundException e) {
                     startAppPicker();
                 }
+            } else if (resultCode == AppPicker.RESULT_NO_MATCHING_APPS) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.platform_compat_dialog_title_no_apps)
+                        .setMessage(R.string.platform_compat_dialog_text_no_apps)
+                        .setPositiveButton(R.string.okay, (dialog, which) -> finish())
+                        .setOnDismissListener(dialog -> finish())
+                        .setCancelable(false)
+                        .show();
             }
             return;
         }
@@ -254,7 +263,8 @@ public class PlatformCompatDashboard extends DashboardFragment {
     }
 
     private void startAppPicker() {
-        final Intent intent = new Intent(getContext(), AppPicker.class);
+        final Intent intent = new Intent(getContext(), AppPicker.class)
+                .putExtra(AppPicker.EXTRA_INCLUDE_NOTHING, false);
         // If build is neither userdebug nor eng, only include debuggable apps
         final boolean debuggableBuild = mAndroidBuildClassifier.isDebuggableBuild();
         if (!debuggableBuild) {
