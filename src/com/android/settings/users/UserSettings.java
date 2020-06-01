@@ -485,23 +485,13 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onManageUserClicked(int userId, boolean newUser) {
         mAddingUser = false;
         UserInfo userInfo = mUserManager.getUserInfo(userId);
-        if (userInfo.isRestricted() && mUserCaps.mIsAdmin) {
-            Bundle extras = new Bundle();
-            extras.putInt(RestrictedProfileSettings.EXTRA_USER_ID, userId);
-            extras.putBoolean(RestrictedProfileSettings.EXTRA_NEW_USER, newUser);
-            extras.putBoolean(RestrictedProfileSettings.EXTRA_SHOW_SWITCH_USER, canSwitchUserNow());
-            new SubSettingLauncher(getContext())
-                    .setDestination(RestrictedProfileSettings.class.getName())
-                    .setArguments(extras)
-                    .setTitleRes(R.string.user_restrictions_title)
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-        } else if (userId == UserHandle.myUserId()) {
+        if (userId == UserHandle.myUserId()) {
             // Jump to owner info panel
             OwnerInfoSettings.show(this);
         } else {
             Bundle extras = new Bundle();
             extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
+            extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
             new SubSettingLauncher(getContext())
                     .setDestination(UserDetailsSettings.class.getName())
                     .setArguments(extras)
@@ -963,10 +953,10 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_summary_restricted_not_set_up);
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
+                    // Disallow setting up user which results in user switching when the
+                    // restriction is set.
+                    pref.setEnabled(!mUserCaps.mDisallowSwitchUser && canSwitchUserNow());
                 }
-                // Disallow setting up user which results in user switching when the restriction is
-                // set.
-                pref.setEnabled(!mUserCaps.mDisallowSwitchUser && canSwitchUserNow());
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
             }
@@ -1137,17 +1127,14 @@ public class UserSettings extends SettingsPreferenceFragment
                 showDialog(DIALOG_CONFIRM_EXIT_GUEST);
                 return true;
             }
-            // If this is a limited user, launch the user info settings instead of profile editor
-            if (mUserManager.isRestrictedProfile()) {
-                onManageUserClicked(UserHandle.myUserId(), false);
-            } else {
-                showDialog(DIALOG_USER_PROFILE_EDITOR);
-            }
+            showDialog(DIALOG_USER_PROFILE_EDITOR);
         } else if (pref instanceof UserPreference) {
             int userId = ((UserPreference) pref).getUserId();
             // Get the latest status of the user
             UserInfo user = mUserManager.getUserInfo(userId);
-            if (!user.isInitialized()) {
+            if (!user.isInitialized() && isSecondaryUser(user)) {
+                // for uninitialized secondary users we should show a prompt dialog before
+                // starting the setup
                 mHandler.sendMessage(mHandler.obtainMessage(
                         MESSAGE_SETUP_USER, user.id, user.serialNumber));
             } else {
@@ -1279,4 +1266,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             };
 
+    private boolean isSecondaryUser(UserInfo user) {
+        return UserManager.USER_TYPE_FULL_SECONDARY.equals(user.userType);
+    }
 }
