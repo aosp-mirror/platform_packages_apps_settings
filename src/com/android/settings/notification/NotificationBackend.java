@@ -268,6 +268,15 @@ public class NotificationBackend {
         }
     }
 
+    public boolean hasSentValidMsg(String pkg, int uid) {
+        try {
+            return sINM.hasSentValidMsg(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
+        }
+    }
+
     public boolean isInInvalidMsgState(String pkg, int uid) {
         try {
             return sINM.isInInvalidMsgState(pkg, uid);

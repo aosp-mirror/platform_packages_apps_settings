@@ -31,6 +31,8 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -59,6 +61,7 @@ public class BubbleSummaryPreferenceControllerTest {
     private Context mContext;
     @Mock
     private NotificationBackend mBackend;
+    NotificationBackend.AppRow mAppRow;
 
     private BubbleSummaryPreferenceController mController;
 
@@ -67,6 +70,10 @@ public class BubbleSummaryPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
+        when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(true);
+        mAppRow = new NotificationBackend.AppRow();
+        mAppRow.pkg = "pkg";
+        mAppRow.uid = 0;
         mController = spy(new BubbleSummaryPreferenceController(mContext, mBackend));
     }
 
@@ -85,20 +92,27 @@ public class BubbleSummaryPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_nullChannelNOTIFICATION_BUBBLESisOn_shouldReturnTrue() {
+    public void isAvailable_NOTIFICATION_BUBBLESisOn_shouldReturnTrue() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(mAppRow, null, null, null, null, null);
 
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_nullChannelNOTIFICATION_BUBBLESisOff_shouldReturnFalse() {
+    public void isAvailable_NOTIFICATION_BUBBLESisOn_neverSentMsg_shouldReturnFalse() {
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
+        mController.onResume(mAppRow, null, null, null, null, null);
+        when(mBackend.hasSentValidMsg(anyString(), anyInt())).thenReturn(false);
+
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void isAvailable_NOTIFICATION_BUBBLESisOff_shouldReturnFalse() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null, null, null);
+        mController.onResume(mAppRow, null, null, null, null, null);
 
         assertFalse(mController.isAvailable());
     }
@@ -107,10 +121,9 @@ public class BubbleSummaryPreferenceControllerTest {
     public void isAvailable_nonNullChannelNOTIFICATION_BUBBLESisOff_shouldReturnFalse() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES,
                 SYSTEM_WIDE_OFF);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(mAppRow, channel, null, null, null, null);
 
         assertFalse(mController.isAvailable());
     }
@@ -118,20 +131,18 @@ public class BubbleSummaryPreferenceControllerTest {
     @Test
     public void isAvailable_defaultChannelNOTIFICATION_BUBBLESisOn_shouldReturnTrue() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null, null, null);
+        mController.onResume(mAppRow, channel, null, null, null, null);
 
         assertTrue(mController.isAvailable());
     }
 
     @Test
     public void updateState_setsIntent() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
-        mController.onResume(appRow, null, null, null, null, null);
+        mAppRow.bubblePreference = BUBBLE_PREFERENCE_ALL;
+        mController.onResume(mAppRow, null, null, null, null, null);
 
         Preference pref = new Preference(mContext);
         mController.updateState(pref);
