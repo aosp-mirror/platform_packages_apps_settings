@@ -22,13 +22,14 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+
+import com.android.settings.development.OverlaySettingsPreferenceController;
 
 
 /**
@@ -45,7 +46,7 @@ public class HideNonSystemOverlayMixin implements LifecycleObserver {
 
     @VisibleForTesting
     boolean isEnabled() {
-        return !Build.IS_DEBUGGABLE;
+        return !OverlaySettingsPreferenceController.isOverlaySettingsEnabled(mActivity);
     }
 
     @OnLifecycleEvent(ON_START)

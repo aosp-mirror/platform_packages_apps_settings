@@ -539,6 +539,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothHDAudioPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore, fragment));
         controllers.add(new SharedDataPreferenceController(context));
+        controllers.add(new OverlaySettingsPreferenceController(context));
 
         return controllers;
     }
