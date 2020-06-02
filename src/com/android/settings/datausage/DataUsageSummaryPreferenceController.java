@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 import com.android.settings.widget.EntityHeaderController;
@@ -134,7 +135,7 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
 
         if (subInfo != null) {
             mDataUsageTemplate = R.string.cell_data_template;
-            mDefaultTemplate = DataUsageUtils.getMobileTemplate(context, subscriptionId);
+            mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
         } else if (DataUsageUtils.hasWifiRadio(context)) {
             mDataUsageTemplate = R.string.wifi_data_template;
             mDefaultTemplate = NetworkTemplate.buildTemplateWifiWildcard();
