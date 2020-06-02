@@ -33,6 +33,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -166,7 +167,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements DataUsage
     private void addMobileSection(int subId, SubscriptionInfo subInfo) {
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_cellular);
-        category.setTemplate(DataUsageUtils.getMobileTemplate(getContext(), subId),
+        category.setTemplate(DataUsageLib.getMobileTemplate(getContext(), subId),
                 subId, services);
         category.pushTemplates(services);
         if (subInfo != null && !TextUtils.isEmpty(subInfo.getDisplayName())) {
