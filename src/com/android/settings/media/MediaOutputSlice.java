@@ -106,7 +106,9 @@ public class MediaOutputSlice implements CustomSliceable {
             final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
             if (devices.size() == 1) {
                 // Zero state
-                addRow(connectedDevice, connectedDevice, listBuilder);
+                for (MediaDevice device : devices) {
+                    addRow(device, device, listBuilder);
+                }
                 listBuilder.addRow(getPairNewRow());
             } else {
                 final boolean isTouched = worker.getIsTouched();

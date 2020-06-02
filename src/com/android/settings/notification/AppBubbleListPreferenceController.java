@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
@@ -52,6 +53,13 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
 
     public AppBubbleListPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        // loading convos is async; hide header until we know we have conversations to show
+        preference.setVisible(false);
+        super.updateState(preference);
     }
 
     @Override
@@ -132,6 +140,15 @@ public class AppBubbleListPreferenceController extends AppConversationListPrefer
             }
         });
         return pref;
+    }
+
+    @Override
+    protected void populateList() {
+        super.populateList();
+        if (mPreference == null) {
+            return;
+        }
+        mPreference.setVisible(mPreference.getPreferenceCount() > 0);
     }
 
     /** Simple preference with a 'x' button at the end. */
