@@ -45,7 +45,7 @@ public class NotificationHistoryViewHolder extends RecyclerView.ViewHolder {
 
     void setTitle(CharSequence title) {
         mTitle.setText(title);
-        mTitle.setVisibility(title != null ? View.VISIBLE : View.GONE);
+        mTitle.setVisibility(title != null ? View.VISIBLE : View.INVISIBLE);
     }
 
     void setPostedTime(long postedTime) {

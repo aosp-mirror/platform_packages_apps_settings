@@ -32,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="@*android:dimen/status_bar_icon_size"
-            android:paddingBottom="6dp">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
 
             <ImageView
                 android:id="@+id/icon"
@@ -62,11 +63,10 @@
 
             <ImageView
                 android:id="@+id/alerted_icon"
-                android:layout_width="@*android:dimen/status_bar_icon_size"
-                android:layout_height="@*android:dimen/status_bar_icon_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="6dp"
-                android:paddingTop="1dp"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
                 android:tint="?android:attr/textColorSecondary"
@@ -75,11 +75,9 @@
 
             <ImageView
                 android:id="@+id/profile_badge"
-                android:layout_width="@*android:dimen/status_bar_icon_size"
-                android:layout_height="@*android:dimen/status_bar_icon_size"
-                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="6dp"
-                android:paddingTop="1dp"
                 android:scaleType="fitCenter"
                 android:contentDescription="@*android:string/notification_work_profile_content_description"
                 android:layout_toStartOf="@id/timestamp"
@@ -89,11 +87,7 @@
                 android:id="@+id/timestamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="@*android:dimen/status_bar_icon_size"
-                android:layout_alignBottom="@android:id/widget_frame"
                 android:layout_alignParentEnd="true"
-                android:layout_alignTop="@android:id/widget_frame"
-                android:layout_centerVertical="true"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.NotificationHistory.AppName"
