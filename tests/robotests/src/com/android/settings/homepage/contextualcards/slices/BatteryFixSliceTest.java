@@ -32,9 +32,11 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.EarlyWarningTip;
+import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
 import com.android.settings.slices.SliceBackgroundWorker;
 
@@ -95,8 +97,14 @@ public class BatteryFixSliceTest {
     @Test
     public void getSlice_unimportantSlice_shouldSkip() {
         final List<BatteryTip> tips = new ArrayList<>();
+        final List<AppInfo> appList = new ArrayList<>();
+        appList.add(new AppInfo.Builder()
+                .setPackageName("com.android.settings")
+                .setScreenOnTimeMs(10000L)
+                .build());
         tips.add(new LowBatteryTip(BatteryTip.StateType.INVISIBLE, false, ""));
         tips.add(new EarlyWarningTip(BatteryTip.StateType.HANDLED, false));
+        tips.add(new HighUsageTip(1000L, appList));
         ShadowBatteryTipLoader.setBatteryTips(tips);
 
         BatteryFixSlice.refreshBatteryTips(mContext);
