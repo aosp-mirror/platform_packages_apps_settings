@@ -36,6 +36,8 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
+import androidx.slice.SliceProvider;
+import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -79,6 +81,7 @@ public class SliceContextualCardRendererTest {
         mLifecycleOwner = new ContextualCardsFragment();
         mRenderer = new SliceContextualCardRenderer(mActivity, mLifecycleOwner,
                 mControllerRendererPool);
+        SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
     }
 
     @Test
