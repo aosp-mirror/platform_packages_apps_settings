@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
@@ -42,6 +43,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class PowerMenuPrivacyPreferenceControllerTest {
@@ -55,6 +58,7 @@ public class PowerMenuPrivacyPreferenceControllerTest {
 
     private Context mContext;
     private ContentResolver mContentResolver;
+    private ShadowPackageManager mShadowPackageManager;
     private PowerMenuPrivacyPreferenceController mController;
 
     @Mock
@@ -66,6 +70,8 @@ public class PowerMenuPrivacyPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
+
         mContentResolver = mContext.getContentResolver();
         FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
@@ -119,23 +125,39 @@ public class PowerMenuPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void getSummary_cardsAvailable_isPower_menu_privacy_showString() {
+    public void getSummary_cardsControlsAvailable_isPower_menu_privacy_showString() {
         Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.power_menu_privacy_show));
     }
 
     @Test
-    public void getSummary_cardsUnavailable_isPower_menu_privacy_show_controlsString() {
+    public void
+        getSummary_cardsUnavailableControlsAvailable_isPower_menu_privacy_show_controlsString() {
         Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 0);
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
 
         assertThat(mController.getSummary()).isEqualTo(
                 mContext.getText(R.string.power_menu_privacy_show_controls));
     }
 
     @Test
+    public void
+        getSummary_cardsAvailableControlsUnavailable_isPower_menu_privacy_show_cardsString() {
+        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, false);
+
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getText(R.string.power_menu_privacy_show_cards));
+    }
+
+    @Test
     public void updateState_onPreferenceRefreshed_preferenceEnabledAndSummaryChanged() {
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
+        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
+
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(anyBoolean());
@@ -143,58 +165,10 @@ public class PowerMenuPrivacyPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_allOff_returnsDisabled() {
-        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 0);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 0);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-    }
-
-    @Test
-    public void getAvailabilityStatus_cardsUnavailableControlsOff_returnsDisabled() {
-        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 0);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 0);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.DISABLED_DEPENDENT_SETTING);
-    }
-
-    @Test
-    public void testAvailabilityStatus_cardsOnControlsOff_returnsAvailable() {
-        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 0);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_cardsOffControlsOn_returnsAvailable() {
-        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 0);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 1);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_allOn_returnsAvailable() {
-        Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 1);
-        Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 1);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
     public void getAvailabilityStatus_allOnNotSecure_returnsDisabled() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
 
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
         Settings.Secure.putInt(mContentResolver, CARDS_AVAILABLE_KEY, 1);
         Settings.Secure.putInt(mContentResolver, CARDS_ENABLED_KEY, 1);
         Settings.Secure.putInt(mContentResolver, CONTROLS_ENABLED_KEY, 1);
@@ -205,9 +179,8 @@ public class PowerMenuPrivacyPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_controlsDeletedSecure_retursAvailable() {
-        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
-
         Settings.Secure.putString(mContentResolver, CONTROLS_ENABLED_KEY, null);
+        mShadowPackageManager.setSystemFeature(PackageManager.FEATURE_CONTROLS, true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE);

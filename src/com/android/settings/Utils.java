@@ -116,6 +116,8 @@ public final class Utils extends com.android.settingslib.Utils {
 
     private static final String TAG = "Settings";
 
+    public static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
+
     /**
      * Set the preference's title to the matching activity's label.
      */
