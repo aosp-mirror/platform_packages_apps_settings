@@ -18,6 +18,7 @@ package com.android.settings.gestures;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -57,13 +58,20 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
     public CharSequence getSummary() {
         boolean cardsAvailable = Settings.Secure.getInt(mContext.getContentResolver(),
                 CARDS_AVAILABLE_KEY, 0) != 0;
+        boolean controlsAvailable = isControlsAvailable();
         final int res;
         if (!isSecure()) {
             res = R.string.power_menu_privacy_not_secure;
-        } else if (cardsAvailable) {
+        } else if (cardsAvailable && controlsAvailable) {
             res = R.string.power_menu_privacy_show;
-        } else {
+        } else if (!cardsAvailable && controlsAvailable) {
             res = R.string.power_menu_privacy_show_controls;
+        } else if (cardsAvailable) {
+            res = R.string.power_menu_privacy_show_cards;
+        } else {
+            // In this case, neither cards nor controls are available. This preference should not
+            // be accessible as the power menu setting is not accessible
+            return "";
         }
         return mContext.getText(res);
     }
@@ -87,7 +95,7 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
         boolean cardsAvailable = Settings.Secure.getInt(resolver, CARDS_AVAILABLE_KEY, 0) != 0;
         boolean cardsEnabled = Settings.Secure.getInt(resolver, CARDS_ENABLED_KEY, 0) != 0;
         boolean controlsEnabled = Settings.Secure.getInt(resolver, CONTROLS_ENABLED_KEY, 1) != 0;
-        return (cardsAvailable && cardsEnabled) || controlsEnabled;
+        return (cardsAvailable && cardsEnabled) || (isControlsAvailable() && controlsEnabled);
     }
 
     private boolean isSecure() {
@@ -96,5 +104,9 @@ public class PowerMenuPrivacyPreferenceController extends TogglePreferenceContro
                 .getLockPatternUtils(mContext);
         int userId = UserHandle.myUserId();
         return utils.isSecure(userId);
+    }
+
+    private boolean isControlsAvailable() {
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CONTROLS);
     }
 }
