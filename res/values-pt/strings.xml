@@ -3170,7 +3170,7 @@
       <item quantity="one">Mostrar %d item oculto</item>
       <item quantity="other">Mostrar %d itens ocultos</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Rede e internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Rede e Internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"rede móvel"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"uso de dados"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"ponto de acesso"</string>
@@ -3483,6 +3483,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Nada pode gerar balões"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Conversas"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Todas as conversas podem aparecer como balões, exceto"</string>
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Desativar balões para esta conversa"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Ativar balões para esta conversa"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Ações de deslizar"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Deslize para a direita para dispensar e para esquerda para mostrar o menu"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Deslize para esquerda para dispensar ou para direita para mostrar o menu"</string>
@@ -3541,7 +3543,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversas prioritárias</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritárias"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Aparecer na parte superior da seção de conversa como balões flutuantes"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostrar na parte superior da seção de conversa na forma de balões"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Aparecer na parte superior da seção de conversa"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que você modificou"</string>
@@ -3565,7 +3567,7 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permitir que o app emita um som, vibre e/ou mostre notificações na tela"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridade"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece na parte superior de uma seção de conversa, em forma de balão, mostrando a foto do perfil na tela de bloqueio"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> não é compatível com a maioria dos recursos de conversa. Não é possível definir uma conversa como prioridade, e as conversas não aparecerão como balões flutuantes."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"O app <xliff:g id="APP_NAME">%1$s</xliff:g> não é compatível com a maioria dos recursos de conversa. Não é possível definir uma conversa como prioritária, e as conversas não aparecerão em forma de balões."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Na aba suspensa, recolher notificações para uma única linha"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Som e vibração desativados"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"O som e a vibração estão desativados, e o balão aparece na parte inferior da seção de conversa"</string>
@@ -3624,12 +3626,12 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar esses apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Os apps conectados compartilham permissões e podem acessar dados uns dos outros."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Confiar seus dados pessoais ao app <xliff:g id="NAME">%1$s</xliff:g> de trabalho?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Confiar seus dados pessoais ao app de trabalho <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dados do app"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esse app pode acessar dados do seu app <xliff:g id="NAME">%1$s</xliff:g> pessoal."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Esse app pode acessar dados do seu app pessoal <xliff:g id="NAME">%1$s</xliff:g>."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permissões"</string>
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esse app pode usar permissões do seu app <xliff:g id="NAME">%1$s</xliff:g> pessoal, como acesso ao local, armazenamento ou contatos."</string>
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esse app pode usar permissões do seu app pessoal <xliff:g id="NAME">%1$s</xliff:g>, como acesso ao local, armazenamento ou contatos."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Nenhum app conectado"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> app conectado</item>
@@ -3671,7 +3673,7 @@
     <string name="notification_badge_title" msgid="6854537463548411313">"Permitir ponto de notificação"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Mostrar ponto de notificação"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignorar o Não perturbe"</string>
-    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Permitir que essas notificações sejam mostradas mesmo quando o Não perturbe estiver ativado"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Permitir que as notificações sejam mostradas mesmo quando o Não perturbe estiver ativado"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Tela de bloqueio"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Bloqueadas"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Prioridade"</string>
@@ -3805,7 +3807,7 @@
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> podem interromper</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"mais <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Exceções de apps"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Todas as notificações"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Algumas notificações"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificações que podem interromper"</string>
@@ -4860,14 +4862,6 @@
       <item quantity="one"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> app com acesso total ao seu dispositivo</item>
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> apps com acesso total ao seu dispositivo</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"Gerenciar notificações do <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"Nenhum aplicativo sugerido"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canal de notificação.</item>
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canais de notificação.</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> canais de notificação. Toque para gerenciar todos."</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"Você instalou este app recentemente."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Alterar saída"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Tocando atualmente no <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (desconectado)"</string>
@@ -4920,6 +4914,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Conteúdo sensível"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar cartões e controles quando estiver bloqueado"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Mostrar controles com a tela bloqueada"</string>
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Mostrar cards com a tela bloqueada"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar cartões e controles quando estiver bloqueado"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usar, primeiro defina um bloqueio de tela"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles do dispositivo"</string>
@@ -4937,4 +4932,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ao usar dois chips, este tablet será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ao usar dois chips, este dispositivo será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender execução para apps em cache"</string>
+    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
+    <skip />
+    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
+    <skip />
 </resources>
