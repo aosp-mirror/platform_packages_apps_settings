@@ -33,6 +33,7 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.network.ProxySubscriptionManager;
 
 import java.util.List;
@@ -183,7 +184,7 @@ public final class DataUsageUtils extends com.android.settingslib.net.DataUsageU
      */
     public static NetworkTemplate getDefaultTemplate(Context context, int defaultSubId) {
         if (SubscriptionManager.isValidSubscriptionId(defaultSubId) && hasMobileData(context)) {
-            return getMobileTemplate(context, defaultSubId);
+            return DataUsageLib.getMobileTemplate(context, defaultSubId);
         } else if (hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         } else {
