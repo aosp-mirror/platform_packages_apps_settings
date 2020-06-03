@@ -3053,10 +3053,10 @@
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación para efectuar pagos. A continuación, solo tienes que sostener la parte posterior del teléfono sobre cualquier terminal con el símbolo de pago sin contacto."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Más…"</string>
-    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Configurar app de pagos predeterminada"</string>
+    <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Establecer app de pagos predeterminada"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Actualizar app de pagos predeterminada"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"En una terminal para pagar sin contacto, usar <xliff:g id="APP">%1$s</xliff:g>"</string>
-    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En una terminal para pagar sin contacto, usa <xliff:g id="APP_0">%1$s</xliff:g>.\n\nEsto reemplazará a <xliff:g id="APP_1">%2$s</xliff:g> como app de pagos predeterminada."</string>
+    <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"En una terminal para pagar sin contacto, usa <xliff:g id="APP_0">%1$s</xliff:g>.\n\nEsto reemplazará a <xliff:g id="APP_1">%2$s</xliff:g> como la app de pagos predeterminada."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Establecer como predeterminada"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Actualizar"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restricciones"</string>
@@ -3483,6 +3483,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"No se pueden crear burbujas"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Conversaciones"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Todas las conversaciones pueden crear burbujas, excepto"</string>
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Desactiva las burbujas para esta conversación"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Activa las burbujas para esta conversación"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Acciones al deslizar el dedo"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Desliza el dedo hacia la derecha para cerrar la notificación o hacia la izquierda para mostrar el menú"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Desliza el dedo hacia la izquierda para cerrar la notificación y hacia la derecha para mostrar el menú"</string>
@@ -3803,7 +3805,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> puede interrumpir</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> más"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Excepciones de apps"</string>
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Todas las notificaciones"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Algunas notificaciones"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificaciones que pueden interrumpir"</string>
@@ -4858,14 +4860,6 @@
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> apps tienen acceso completo a tu dispositivo</item>
       <item quantity="one">1 app tiene acceso completo a tu dispositivo</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"Administrar notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"No hay una aplicación sugerida"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> canales de notificación.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> canal de notificación.</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> canales de notificación. Presiona para administrarlos todos."</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"Instalaste esta app recientemente."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Cambiar de salida"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Reproduciendo en <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (desconectado)"</string>
@@ -4918,6 +4912,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Contenido sensible"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostrar tarjetas y controles cuando está bloqueado"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Mostrar controles en pantalla bloqueada"</string>
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Mostrar tarjetas en la pantalla bloqueada"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ocultar tarjetas y controles cuando está bloqueado"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usarlo, debes establecer un bloqueo de pantalla"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles de dispositivos"</string>
@@ -4935,4 +4930,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Esta tablet se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Este dispositivo se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspende la ejecución de apps almacenadas en caché"</string>
+    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
+    <skip />
+    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
+    <skip />
 </resources>
