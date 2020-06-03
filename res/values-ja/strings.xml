@@ -3465,12 +3465,12 @@
     <string name="notification_badging_title" msgid="5469616894819568917">"アプリアイコン上の通知ドット"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"最近の会話のストリップの表示"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"バブル"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルとして表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルで表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
     <string name="bubbles_conversation_app_link" msgid="5468779786387915337">"すべてのバブル設定"</string>
-    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルとして表示"</string>
+    <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"この会話をバブルで表示"</string>
     <string name="bubbles_conversation_toggle_summary" msgid="720229032254323578">"他のアプリに重ねてフローティング アイコンとして表示"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルで表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1794193899792284007">"このデバイスでバブルを ON にしますか？"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"このアプリのバブルを ON にすると、デバイスでもバブルが ON になります。\n\nこの設定は、バブルが許可されているその他のアプリや会話に影響します。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"ON にする"</string>
@@ -3478,11 +3478,15 @@
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"ON / 会話をフローティング アイコンとして表示できます"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"アプリにバブルの表示を許可"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"一部の会話はフローティング アイコンとして他のアプリの上に重ねて表示されます"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"すべての会話をバブルにできる"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"選択した会話をバブルにできる"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"何もバブルにできない"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"すべての会話をバブルで表示する"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"選択した会話をバブルで表示する"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"何もバブルで表示しない"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"会話"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"バブルから除外したすべての会話"</string>
+    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
+    <skip />
     <string name="swipe_direction_title" msgid="4260320464727178413">"スワイプの動作"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"右にスワイプで通知を閉じ、左にスワイプでメニューを表示"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"左にスワイプで通知を閉じ、右にスワイプでメニューを表示"</string>
@@ -3805,7 +3809,8 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> が割り込み可能</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"他 <xliff:g id="NUMBER">%d</xliff:g> 個"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"アプリの例外"</string>
+    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
+    <skip />
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"すべての通知"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"一部の通知"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"割り込み可能な通知"</string>
@@ -4850,14 +4855,6 @@
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> 個のアプリにデバイスへのフルアクセスを許可しています</item>
       <item quantity="one">1 個のアプリにデバイスへのフルアクセスを許可しています</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"<xliff:g id="APP_NAME">%1$s</xliff:g> の通知の管理"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"おすすめのアプリはありません"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> 件の通知チャンネルがあります</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> 件の通知チャンネルがあります。</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> 件の通知チャンネルがあります。すべて管理するにはタップしてください。"</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"このアプリを最近インストールしました。"</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"出力の切り替え"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"現在 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> で再生しています"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>（未接続）"</string>
@@ -4910,6 +4907,8 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"デリケートなコンテンツ"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ロック時にカードとコントロールを表示"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"ロック中にコントロールを表示"</string>
+    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ロック時にカードとコントロールを表示しない"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"使用するには、まず画面ロックを設定してください"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"デバイス コントロールを表示"</string>
@@ -4927,4 +4926,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"キャッシュに保存されたアプリの実行を停止"</string>
+    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
+    <skip />
+    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
+    <skip />
 </resources>
