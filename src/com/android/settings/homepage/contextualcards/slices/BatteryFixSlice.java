@@ -73,6 +73,8 @@ public class BatteryFixSlice implements CustomSliceable {
         UNIMPORTANT_BATTERY_TIPS = new ArrayMap<>();
         UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.SUMMARY,
                 Arrays.asList(BatteryTip.StateType.NEW, BatteryTip.StateType.HANDLED));
+        UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.HIGH_DEVICE_USAGE,
+                Arrays.asList(BatteryTip.StateType.NEW, BatteryTip.StateType.HANDLED));
         UNIMPORTANT_BATTERY_TIPS.put(BatteryTip.TipType.BATTERY_SAVER,
                 Arrays.asList(BatteryTip.StateType.HANDLED));
     }

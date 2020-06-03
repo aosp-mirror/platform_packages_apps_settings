@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -99,7 +100,7 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             return null;
         }
-        return DataUsageUtils.getMobileTemplate(context, subId);
+        return DataUsageLib.getMobileTemplate(context, subId);
     }
 
     private NetworkTemplate getNetworkTemplate() {

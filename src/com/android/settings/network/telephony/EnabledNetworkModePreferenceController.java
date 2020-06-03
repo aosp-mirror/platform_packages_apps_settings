@@ -168,6 +168,7 @@ public class EnabledNetworkModePreferenceController extends
         private Context mContext;
         private TelephonyManager mTelephonyManager;
 
+        private boolean mAllowed5gNetworkType;
         private boolean mIsGlobalCdma;
         private boolean mIs5gEntryDisplayed;
         private boolean mShow4gForLTE;
@@ -205,6 +206,9 @@ public class EnabledNetworkModePreferenceController extends
             final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
             final boolean isNrEnabledFromCarrierConfig = carrierConfig != null
                     && carrierConfig.getBoolean(CarrierConfigManager.KEY_NR_ENABLED_BOOL);
+            mAllowed5gNetworkType = checkSupportedRadioBitmask(
+                    mTelephonyManager.getAllowedNetworkTypes(),
+                    TelephonyManager.NETWORK_TYPE_BITMASK_NR);
             mSupported5gRadioAccessFamily = isNrEnabledFromCarrierConfig
                     && checkSupportedRadioBitmask(mTelephonyManager.getSupportedRadioAccessFamily(),
                     TelephonyManager.NETWORK_TYPE_BITMASK_NR);
@@ -568,7 +572,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         /**
-         * Add 5G option. Only show the UI when device supported 5G.
+         * Add 5G option. Only show the UI when device supported 5G and allowed 5G.
          */
         private void add5gEntry(int value) {
             boolean isNRValue = value >= TelephonyManagerConstants.NETWORK_MODE_NR_ONLY;
@@ -581,13 +585,15 @@ public class EnabledNetworkModePreferenceController extends
                 mIs5gEntryDisplayed = false;
                 Log.d(LOG_TAG, "Hide 5G option. "
                         + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
+                        + " allowed5GNetworkType: " + mAllowed5gNetworkType
                         + " isNRValue: " + isNRValue);
             }
         }
 
         private void addGlobalEntry() {
             Log.d(LOG_TAG, "addGlobalEntry. "
-                    + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily);
+                    + " supported5GRadioAccessFamily: " + mSupported5gRadioAccessFamily
+                    + " allowed5GNetworkType: " + mAllowed5gNetworkType);
             mEntries.add(mContext.getString(R.string.network_global));
             if (showNrList()) {
                 mEntriesValue.add(
@@ -599,7 +605,7 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         private boolean showNrList() {
-            return mSupported5gRadioAccessFamily;
+            return mSupported5gRadioAccessFamily && mAllowed5gNetworkType;
         }
 
         /**
