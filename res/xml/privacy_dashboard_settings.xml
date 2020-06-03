@@ -31,6 +31,14 @@
         settings:allowDividerAbove="true"
         settings:controller="com.android.settings.privacy.WorkPolicyInfoPreferenceController"/>
 
+    <!-- Connected work and personal apps -->
+    <Preference
+        android:key="interact_across_profiles_privacy"
+        android:title="@string/interact_across_profiles_title"
+        android:fragment="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesController" />
+
     <!-- Accessibility usage -->
     <Preference
         android:key="privacy_accessibility_usage"
