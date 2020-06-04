@@ -49,11 +49,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.logging.UiEventLogger;
 import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,8 +70,11 @@ public class NotificationSbnAdapter extends
     private boolean mInNightMode;
     private @UserIdInt int mCurrentUser;
     private List<Integer> mEnabledProfiles = new ArrayList<>();
+    private boolean mIsSnoozed;
+    private UiEventLogger mUiEventLogger;
 
-    public NotificationSbnAdapter(Context context, PackageManager pm, UserManager um) {
+    public NotificationSbnAdapter(Context context, PackageManager pm, UserManager um,
+            boolean isSnoozed, UiEventLogger uiEventLogger) {
         mContext = context;
         mPm = pm;
         mUserBadgeCache = new HashMap<>();
@@ -89,6 +92,9 @@ public class NotificationSbnAdapter extends
             }
         }
         setHasStableIds(true);
+        // If true, this is the panel for snoozed notifs, otherwise the one for dismissed notifs.
+        mIsSnoozed = isSnoozed;
+        mUiEventLogger = uiEventLogger;
     }
 
     @Override
@@ -116,8 +122,9 @@ public class NotificationSbnAdapter extends
                 mUserBadgeCache.put(userId, profile);
             }
             holder.setProfileBadge(mUserBadgeCache.get(userId));
-            holder.addOnClick(sbn.getPackageName(), sbn.getUserId(),
-                    sbn.getNotification().contentIntent);
+            holder.addOnClick(position, sbn.getPackageName(), sbn.getUid(), sbn.getUserId(),
+                    sbn.getNotification().contentIntent, sbn.getInstanceId(), mIsSnoozed,
+                    mUiEventLogger);
             holder.itemView.setOnLongClickListener(v -> {
                 Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                         .putExtra(EXTRA_APP_PACKAGE, sbn.getPackageName())

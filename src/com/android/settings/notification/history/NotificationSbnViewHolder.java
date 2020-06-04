@@ -20,7 +20,6 @@ import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
@@ -34,6 +33,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.logging.InstanceId;
+import com.android.internal.logging.UiEventLogger;
 import com.android.settings.R;
 
 public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
@@ -91,13 +92,22 @@ public class NotificationSbnViewHolder extends RecyclerView.ViewHolder {
         mDivider.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    void addOnClick(String pkg, int userId, PendingIntent pi) {
+    void addOnClick(int position, String pkg, int uid, int userId, PendingIntent pi,
+            InstanceId instanceId,
+            boolean isSnoozed, UiEventLogger uiEventLogger) {
         Intent appIntent = itemView.getContext().getPackageManager()
                 .getLaunchIntentForPackage(pkg);
         boolean isPendingIntentValid = pi != null && PendingIntent.getActivity(
                 itemView.getContext(), 0, pi.getIntent(), PendingIntent.FLAG_NO_CREATE) != null;
         if (isPendingIntentValid || appIntent != null) {
             itemView.setOnClickListener(v -> {
+                uiEventLogger.logWithInstanceIdAndPosition(
+                        isSnoozed
+                                ? NotificationHistoryActivity.NotificationHistoryEvent
+                                .NOTIFICATION_HISTORY_SNOOZED_ITEM_CLICK
+                                : NotificationHistoryActivity.NotificationHistoryEvent
+                                .NOTIFICATION_HISTORY_RECENT_ITEM_CLICK,
+                        uid, pkg, instanceId, position);
                 if (pi != null) {
                     try {
                         pi.send();
