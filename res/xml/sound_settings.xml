@@ -96,7 +96,8 @@
         android:key="vibrate_for_calls"
         android:title="@string/vibrate_when_ringing_title"
         android:order="-130"
-        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"/>
+        settings:controller="com.android.settings.sound.VibrateForCallsPreferenceController"
+        settings:keywords="@string/keywords_vibrate_for_calls"/>
 
     <!-- Interruptions -->
     <com.android.settingslib.RestrictedPreference
