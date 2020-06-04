@@ -41,7 +41,8 @@
         android:title="@string/wifi_display_settings_title"
         android:icon="@drawable/ic_cast_24dp"
         android:order="-6"
-        settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"/>
+        settings:controller="com.android.settings.wfd.WifiDisplayPreferenceController"
+        settings:keywords="@string/keywords_wifi_display_settings"/>
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.nfc.AndroidBeam"
