@@ -2372,12 +2372,8 @@
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Bu ilova batareya sarfini optimallashtirish uchun sozlanmagani sababli uni cheklash imkonsiz.\n\nIlovani cheklash uchun avval batareya sarfini optimallashtirish funksiyasini yoqing."</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"Toʻliq quvvatlanganidan beri ekrandan foydalanish"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"Toʻliq quvvatlanganidan beri batareya sarfi"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for screen_usage_summary (1393184943010909471) -->
-    <skip />
-    <!-- String.format failed for translation -->
-    <!-- no translation found for device_usage_list_summary (242243537371697285) -->
-    <skip />
+    <string name="screen_usage_summary" msgid="1393184943010909471">"100%% quvvatlanganidan beri ekranning yoniq turgan vaqti"</string>
+    <string name="device_usage_list_summary" msgid="242243537371697285">"100%% quvvatlanganidan beri qurilmadan foydalanish"</string>
     <string name="battery_since_unplugged" msgid="6991509383429936921">"Quvvat manbaidan uzilganidan keyin sarflangan batareya quvvati"</string>
     <string name="battery_since_reset" msgid="2930376112877476562">"Statistika tozalandan keyingi batareya sarfi"</string>
     <string name="battery_stats_on_battery" msgid="1553011980384645514">"Batareyada qolgan vaqt: <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -2558,13 +2554,9 @@
     <string name="battery_screen_usage" msgid="90008745183187461">"Ekrandan foydalanish: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="APP">%2$s</xliff:g> – <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> batareya quvvati"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_detail_since_full_charge (5650946565524184582) -->
-    <skip />
+    <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"100%% quvvatlanganidan beri batareya sarfi"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Oxirgi toʻliq quvvatlanish"</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_full_charge_last (465146408601016923) -->
-    <skip />
+    <string name="battery_full_charge_last" msgid="465146408601016923">"100%% quvvat bilan ishlash vaqti"</string>
     <string name="battery_footer_summary" msgid="9125397752380281832">"Batareyaning qolgan vaqti taxminiy va u foydalanish intensivligiga qarab farq qilishi mumkin"</string>
     <string name="battery_detail_foreground" msgid="3312280147931093967">"Faol rejimda"</string>
     <string name="battery_detail_background" msgid="3333915023706228000">"Fon rejimida"</string>
@@ -2888,7 +2880,7 @@
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Bepul"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Aloqa operatorining hisob-kitobi qurilmanikidan farq qilishi mumkin."</string>
     <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Favqulodda chaqiruv"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Chaqiruvga qaytish"</string>
+    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Suhbatga qaytish"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Tarmoq nomi"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Turi"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Server manzili"</string>
@@ -3491,6 +3483,10 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Bulutcha shaklidagi bildirishnomalarni taqiqlash"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Suhbatlar"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Barcha suhbatlar bulutchalarga olinadi, istisnolar:"</string>
+    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
+    <skip />
+    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
+    <skip />
     <string name="swipe_direction_title" msgid="4260320464727178413">"Varaqlash ishoralari"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Yopish uchun oʻngga, menyuni ochish uchun chapga suring"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Yopish uchun chapga, menyuni ochish uchun oʻngga suring"</string>
@@ -3511,8 +3507,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran qulfi, qulflash, tashlab ketish, aylanib oʻtish"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ish profili qulflanganda"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ekran qulfida bildirishnomalar"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Suhbatlarni chiqarish, asosiy va ovozsiz"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Ovozsiz suhbatlar va bildirishnomalarni berkitish"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sokin suhbatlar va bildirishnomalarni berkitish"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Hech qanday bildirishnoma chiqarilmasin"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Maxfiy bildirishnomalar"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Qulflangan holatida maxfiy kontentni chiqarish"</string>
@@ -3568,15 +3564,15 @@
     <string name="notification_importance_high_title" msgid="394129291760607808">"Ekranga qalqib chiqish"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Bloklash"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Tovushsiz"</string>
-    <string name="notification_alert_title" msgid="1632401211722199217">"Asosiy"</string>
+    <string name="notification_alert_title" msgid="1632401211722199217">"Standart"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Bildirishnomalarga ruxsat berish"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Ilovaga ovozli signal va tebranishni yoqishi hamda ekranga bildirishnomalarni chiqarishiga imkon beradi"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Muhim"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Suhbatlar ruknining tepasida qalqib chiquvchi bulutcha shaklida chiqadi, ekran qulfida profil rasmi chiqadi"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasi suhbatlarga oid asosiy funksiyalar bilan ishlamaydi. Suhbatlarni muhimliligi asosida sozlay olmaysiz va suhbatlar qalqib chiquvchi bulutchalar shaklida chiqmaydi."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Pastga tortilgan paneldagi bildirishnomalarni bir qatorga terish"</string>
-    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ovozsiz yoki tebranmaydi"</string>
-    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ovozsiz yoki tebranishsiz hamda suhbatlar ruknining pastida chiqadi"</string>
+    <string name="notification_channel_summary_low" msgid="5549662596677692000">"Tovush yoki tebranishsiz"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Tovush yoki tebranishsiz hamda suhbatlar ruknining pastida chiqadi"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Telefon sozlamalari asosida jiringlashi yoki tebranishi mumkin"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Telefon qulfi yechilsa, bildirishnomalar ekranning yuqori qismida banner sifatida chiqsin"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Barcha “<xliff:g id="APP_NAME">%1$s</xliff:g>” bildirishnomalari"</string>
@@ -3689,7 +3685,7 @@
     <string name="notification_show_lights_title" msgid="5564315979007438583">"Indikator"</string>
     <string name="notification_vibrate_title" msgid="1422330728336623351">"Tebranish"</string>
     <string name="notification_channel_sound_title" msgid="9018031231387273476">"Tovush"</string>
-    <string name="notification_conversation_important" msgid="4365437037763608045">"Muhimligi"</string>
+    <string name="notification_conversation_important" msgid="4365437037763608045">"Muhim"</string>
     <string name="notification_conversation_add_to_home" msgid="8136269431130231389">"Bosh ekranga kiritish"</string>
     <string name="zen_mode_rule_delete_button" msgid="7642063606919058862">"O‘chirish"</string>
     <string name="zen_mode_rule_rename_button" msgid="4158377587795511144">"Qayta nomlash"</string>
@@ -3813,7 +3809,8 @@
       <item quantity="one">Bezovta qilinmasin rejimi <xliff:g id="APP_NAME_0">%s</xliff:g> uchun ishlamaydi</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Yana <xliff:g id="NUMBER">%d</xliff:g> ta"</string>
-    <string name="zen_mode_bypassing_apps_title" msgid="4142154650779609193">"Ilova istisnolari"</string>
+    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
+    <skip />
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Barcha bildirishnomalar"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Ayrim bildirishnomalar"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Bezovta qila oladigan bildirishnomalar"</string>
@@ -4035,9 +4032,7 @@
     <string name="high_power_desc" msgid="2753076899835765338">"Batareya quvvati tejalmaydi. Batareya quvvati tez sarflanishi mumkin."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Ilova doim fonda ishlashiga ruxsat berilsinmi?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasiga doim fonda ishlashiga ruxsat berilsa, batareya quvvati tezroq sarflanadi. \n\nBuni keyinroq Sozlamalar &gt; Ilovalar va bildirishnomalar orqali o‘zgartirishingiz mumkin."</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for battery_summary (2491764359695671207) -->
-    <skip />
+    <string name="battery_summary" msgid="2491764359695671207">"100%% quvvatlanganidan beri <xliff:g id="PERCENTAGE">%1$s</xliff:g> quvvat sarflandi"</string>
     <string name="battery_power_management" msgid="7507188088567087384">"Quvvat boshqaruvi"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Toʻliq quvvatlanganidan beri quvvat sarflanmadi"</string>
     <string name="app_notification_preferences" msgid="2004680717999108725">"Ilova sozlamalari"</string>
@@ -4860,14 +4855,6 @@
       <item quantity="other"><xliff:g id="SERVICE_COUNT">%1$d</xliff:g> ta ilova qurilmangizdan butunlay foydalana oladi</item>
       <item quantity="one">1 ta ilova qurilmangizdan butunlay foydalana oladi</item>
     </plurals>
-    <string name="manage_app_notification" msgid="8272999309499332742">"<xliff:g id="APP_NAME">%1$s</xliff:g> bildirishnomalarini boshqarish"</string>
-    <string name="no_suggested_app" msgid="2482015948111074654">"Hech qanday tavsiya qilingan ilova mavjud emas"</string>
-    <plurals name="notification_few_channel_count_summary" formatted="false" msgid="6610904178351403728">
-      <item quantity="other"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_1">%1$d</xliff:g> ta bildirishnomalar kanali.</item>
-      <item quantity="one"><xliff:g id="NOTIFICATION_CHANNEL_COUNT_0">%1$d</xliff:g> ta bildirishnomalar kanali.</item>
-    </plurals>
-    <string name="notification_many_channel_count_summary" msgid="6324166979527102233">"<xliff:g id="NOTIFICATION_CHANNEL_COUNT">%1$d</xliff:g> ta bildirishnomalar kanali. Barchasini boshqarish uchun bosing."</string>
-    <string name="recently_installed_app" msgid="2899861390925377564">"Bu ilovani hozirgina oʻrnatdingiz."</string>
     <string name="media_output_panel_title" msgid="5920946795078065159">"Audiochiqishni almashtirish"</string>
     <string name="media_output_panel_summary_of_playing_device" msgid="6998758947764222915">"Hozirda <xliff:g id="DEVICE_NAME">%1$s</xliff:g> qurilmasida ijro etilmoqda"</string>
     <string name="media_output_disconnected_status" msgid="5567111639832431865">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> (uzilgan)"</string>
@@ -4920,6 +4907,8 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Maxfiy kontent"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Qulflanganda kartalar va boshqaruv elementlarini chiqarish"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Qulflanganda boshqaruv tugmalarini chiqarish"</string>
+    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
+    <skip />
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Qulflanganda kartalar va boshqaruv elementlarini berkitish"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Avval ekran qulfini sozlang"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Qurilma boshqaruv elementlarini chiqarish"</string>
@@ -4937,4 +4926,8 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 ta SIM kartadan foydalansangiz, bu planshetda 4G aloqasi cheklanadi. "<annotation id="url">"Batafsil"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 ta SIM kartadan foydalansangiz, bu qurilmada 4G aloqasi cheklanadi. "<annotation id="url">"Batafsil"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Keshdagi ilovalar ishga tushirilishini bloklash"</string>
+    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
+    <skip />
+    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
+    <skip />
 </resources>
