@@ -36,6 +36,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.logging.UiEventLogger;
 import com.android.settings.R;
 
 import java.util.ArrayList;
@@ -50,15 +51,17 @@ public class NotificationHistoryAdapter extends
     private INotificationManager mNm;
     private List<HistoricalNotification> mValues;
     private OnItemDeletedListener mListener;
-
+    private UiEventLogger mUiEventLogger;
     public NotificationHistoryAdapter(INotificationManager nm,
             NotificationHistoryRecyclerView listView,
-            OnItemDeletedListener listener) {
+            OnItemDeletedListener listener,
+            UiEventLogger uiEventLogger) {
         mValues = new ArrayList<>();
         setHasStableIds(true);
         listView.setOnItemSwipeDeleteListener(this);
         mNm = nm;
         mListener = listener;
+        mUiEventLogger = uiEventLogger;
     }
 
     @Override
@@ -76,6 +79,8 @@ public class NotificationHistoryAdapter extends
         holder.setSummary(hn.getText());
         holder.setPostedTime(hn.getPostedTimeMs());
         holder.itemView.setOnClickListener(v -> {
+            mUiEventLogger.logWithPosition(NotificationHistoryActivity.NotificationHistoryEvent
+                    .NOTIFICATION_HISTORY_OLDER_ITEM_CLICK, hn.getUid(), hn.getPackage(), position);
             Intent intent =  new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                     .putExtra(EXTRA_APP_PACKAGE, hn.getPackage())
                     .putExtra(EXTRA_CHANNEL_ID, hn.getChannelId())
@@ -136,6 +141,9 @@ public class NotificationHistoryAdapter extends
             } catch (RemoteException e) {
                 Slog.e(TAG, "Failed to delete item", e);
             }
+            mUiEventLogger.logWithPosition(NotificationHistoryActivity.NotificationHistoryEvent
+                        .NOTIFICATION_HISTORY_OLDER_ITEM_DELETE, hn.getUid(), hn.getPackage(),
+                    position);
         }
         mListener.onItemDeleted(mValues.size());
         notifyItemRemoved(position);
