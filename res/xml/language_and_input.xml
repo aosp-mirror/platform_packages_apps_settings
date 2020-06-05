@@ -33,7 +33,8 @@
         <Preference
             android:key="virtual_keyboard_pref"
             android:title="@string/virtual_keyboard_category"
-            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment" />
+            android:fragment="com.android.settings.inputmethod.VirtualKeyboardFragment"
+            settings:keywords="@string/keywords_virtual_keyboard"/>
         <Preference
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
