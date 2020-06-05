@@ -40,6 +40,7 @@ import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
 import android.telephony.euicc.EuiccManager;
@@ -136,6 +137,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
             };
 
     private SubscriptionInfo mSubscriptionInfo;
+    private TelephonyDisplayInfo mTelephonyDisplayInfo;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -267,7 +269,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         mTelephonyManager.listen(mPhoneStateListener,
                 PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
                         | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
-                        | PhoneStateListener.LISTEN_SERVICE_STATE);
+                        | PhoneStateListener.LISTEN_SERVICE_STATE
+                        | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
@@ -457,6 +460,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateNetworkType() {
+        // TODO: all of this should be based on TelephonyDisplayInfo instead of just the 5G logic
         if (mSubscriptionInfo == null) {
             final String unknownNetworkType =
                     getNetworkTypeName(TelephonyManager.NETWORK_TYPE_UNKNOWN);
@@ -471,11 +475,21 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         final int subId = mSubscriptionInfo.getSubscriptionId();
         final int actualDataNetworkType = mTelephonyManager.getDataNetworkType();
         final int actualVoiceNetworkType = mTelephonyManager.getVoiceNetworkType();
+        final int overrideNetworkType = mTelephonyDisplayInfo == null
+                ? TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE
+                : mTelephonyDisplayInfo.getOverrideNetworkType();
+
         if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualDataNetworkType) {
             dataNetworkTypeName = getNetworkTypeName(actualDataNetworkType);
         }
         if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualVoiceNetworkType) {
             voiceNetworkTypeName = getNetworkTypeName(actualVoiceNetworkType);
+        }
+
+        if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
+                || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
+            dataNetworkTypeName = "NR NSA";
+            voiceNetworkTypeName = "NR NSA";
         }
 
         boolean show4GForLTE = false;
@@ -692,6 +706,12 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 updateServiceState(serviceState);
                 updateRoamingStatus(serviceState);
             }
+
+            @Override
+            public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
+                mTelephonyDisplayInfo = displayInfo;
+                updateNetworkType();
+            }
         };
     }
 
@@ -737,7 +757,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 //          case TelephonyManager.NETWORK_TYPE_LTE_CA:
 //              return "LTE_CA";
             case TelephonyManager.NETWORK_TYPE_NR:
-                return "NR";
+                return "NR SA";
             default:
                 return "UNKNOWN";
         }
