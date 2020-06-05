@@ -619,6 +619,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     data.key = KEY_STORAGE_SETTINGS_FREE_SPACE;
                     data.screenTitle = context.getString(R.string.storage_menu_free);
                     data.intentAction = StorageManager.ACTION_MANAGE_STORAGE;
+                    data.keywords = context.getString(R.string.keywords_storage_menu_free);
                     result.add(data);
 
                     return result;

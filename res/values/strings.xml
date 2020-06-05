@@ -1716,6 +1716,8 @@
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
+    <!-- Wifi Display settings. The keywords of the setting. [CHAR LIMIT=NONE] -->
+    <string name="keywords_wifi_display_settings">mirror</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
     <string name="wifi_display_enable_menu_item">Enable wireless display</string>
     <!-- Wifi Display settings. Text that appears when scanning for devices is finished and no nearby device was found [CHAR LIMIT=40]-->
@@ -3283,6 +3285,8 @@
     <string name="storage_menu_free">Free up space</string>
     <!-- Storage setting. Menu option for accessing the storage manager settings. [CHAR LIMIT=30] -->
     <string name="storage_menu_manage">Manage storage</string>
+    <!-- Storage setting. Keywords for Free up space. [CHAR LIMIT=NONE] -->
+    <string name="keywords_storage_menu_free">clean, storage</string>
 
     <!-- Storage setting.  Title for USB transfer settings [CHAR LIMIT=30]-->
     <string name="storage_title_usb">USB computer connection</string>
@@ -4285,7 +4289,10 @@
     <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
-    <string name="see_all_apps_title">See all <xliff:g id="count" example="3">%1$d</xliff:g> apps</string>
+    <plurals name="see_all_apps_title">
+        <item quantity="one">See all apps</item>
+        <item quantity="other">See all %1$d apps</item>
+    </plurals>
 
     <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
     <string name="forgot_password_title">Contact your IT admin</string>
@@ -4692,6 +4699,8 @@
     <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="virtual_keyboard_category">On-screen keyboard</string>
+    <!-- Keywords for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="keywords_virtual_keyboard">Gboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
     <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
@@ -7747,6 +7756,9 @@
 
     <!-- Sound: Title for the option managing whether or not to vibrate when ringing. [CHAR LIMIT=30] -->
     <string name="vibrate_when_ringing_title">Vibrate for calls</string>
+
+    <!-- Sound: Keywords for Vibrate for calls. [CHAR LIMIT=NONE] -->
+    <string name="keywords_vibrate_for_calls">Vibration</string>
 
     <!-- Sound: Option for vibrate when ringing setting: Never vibrate. [CHAR LIMIT=40] -->
     <string name="vibrate_when_ringing_option_never_vibrate">Never vibrate</string>
