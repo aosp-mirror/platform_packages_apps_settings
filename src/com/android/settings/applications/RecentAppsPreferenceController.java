@@ -117,7 +117,8 @@ public class RecentAppsPreferenceController extends BasePreferenceController
             @Override
             protected void onCountComplete(int num) {
                 mAppEntitiesController.setHeaderDetails(
-                        mContext.getString(R.string.see_all_apps_title, num));
+                        mContext.getResources().getQuantityString(R.plurals.see_all_apps_title,
+                                num, num));
                 mAppEntitiesController.apply();
             }
         }.execute();
