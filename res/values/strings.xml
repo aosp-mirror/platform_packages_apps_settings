@@ -4289,7 +4289,10 @@
     <!-- Category title listing recently used apps [CHAR_LIMIT=50]-->
     <string name="recent_app_category_title">Recently opened apps</string>
     <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
-    <string name="see_all_apps_title">See all <xliff:g id="count" example="3">%1$d</xliff:g> apps</string>
+    <plurals name="see_all_apps_title">
+        <item quantity="one">See all apps</item>
+        <item quantity="other">See all %1$d apps</item>
+    </plurals>
 
     <!-- Title of the dialog that asks the user to contact the IT admin to reset password [CHAR LIMIT=40] -->
     <string name="forgot_password_title">Contact your IT admin</string>
@@ -4902,8 +4905,6 @@
     <string name="accessibility_screen_magnification_title">Magnification</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification area</string>
-    <!-- Title for the accessibility preference screen to edit magnification enable mode. [CHAR LIMIT=35] -->
-    <string name="accessibility_magnification_enable_mode_title">Magnification enable</string>
     <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
     <string name="accessibility_magnification_area_settings_message">Choose the magnification area(s) you want to use when magnifying the screen</string>
     <!-- Summary for the accessibility preference screen to edit full screen. [CHAR LIMIT=none] -->
@@ -10883,6 +10884,8 @@
     <string name="one_handed_timeout_long">12 seconds</string>
     <!-- Timeout summary [CHAR LIMIT=60] -->
     <string name="one_handed_timeout_summary"><xliff:g id="timeout" example="4 seconds">After %1$s of inactivity</xliff:g></string>
+    <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
+    <string name="keywords_one_handed">reachability</string>
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notifications, and other info, double-tap your screen.</string>
