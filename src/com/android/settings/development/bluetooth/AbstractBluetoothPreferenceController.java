@@ -19,6 +19,7 @@ package com.android.settings.development.bluetooth;
 import android.bluetooth.BluetoothA2dp;
 import android.content.Context;
 
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settings.development.BluetoothServiceConnectionListener;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -31,7 +32,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
  */
 public abstract class AbstractBluetoothPreferenceController extends
         DeveloperOptionsPreferenceController implements BluetoothServiceConnectionListener,
-        LifecycleObserver, OnDestroy {
+        LifecycleObserver, OnDestroy, PreferenceControllerMixin {
 
     protected volatile BluetoothA2dp mBluetoothA2dp;
 
