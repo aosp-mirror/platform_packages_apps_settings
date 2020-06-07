@@ -18,9 +18,10 @@ package com.android.settings.network;
 
 import static android.net.TetheringConstants.EXTRA_ADD_TETHER_TYPE;
 import static android.net.TetheringConstants.EXTRA_PROVISION_CALLBACK;
-import static android.net.TetheringConstants.EXTRA_RUN_PROVISION;
 import static android.net.TetheringManager.TETHERING_WIFI;
 
+import static com.android.settings.network.TetherProvisioningActivity.EXTRA_TETHER_SUBID;
+import static com.android.settings.network.TetherProvisioningActivity.EXTRA_TETHER_UI_PROVISIONING_APP_NAME;
 import static com.android.settings.network.TetherProvisioningActivity.PROVISION_REQUEST;
 
 import static org.junit.Assert.assertEquals;
@@ -72,7 +73,7 @@ public class TetherProvisioningActivityTest {
                 new Intent(Settings.ACTION_TETHER_PROVISIONING_UI)
                         .putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI)
                         .putExtra(EXTRA_PROVISION_CALLBACK, receiver)
-                        .putExtra(TetherProvisioningActivity.EXTRA_SUBID, 10000))) {
+                        .putExtra(TetherProvisioningActivity.EXTRA_TETHER_SUBID, 10000))) {
             assertEquals(TetheringManager.TETHER_ERROR_PROVISIONING_FAILED, receiver.get());
             //assertEquals(Lifecycle.State.DESTROYED, scenario.getState());
         }
@@ -82,12 +83,13 @@ public class TetherProvisioningActivityTest {
     public void testOnCreate_FinishWithUnavailableProvisioningApp() throws Exception {
         final WrappedReceiver receiver = new WrappedReceiver();
         final int subId = SubscriptionManager.getActiveDataSubscriptionId();
+        final String[] emptyProvisioningApp = { "", "" };
         try (ActivityScenario<TetherProvisioningActivity> scenario = ActivityScenario.launch(
                 new Intent(Settings.ACTION_TETHER_PROVISIONING_UI)
                         .putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI)
                         .putExtra(EXTRA_PROVISION_CALLBACK, receiver)
-                        .putExtra(TetherProvisioningActivity.EXTRA_SUBID, subId)
-                        .putExtra(EXTRA_RUN_PROVISION, new String[] { "", "" }))) {
+                        .putExtra(EXTRA_TETHER_SUBID, subId)
+                        .putExtra(EXTRA_TETHER_UI_PROVISIONING_APP_NAME, emptyProvisioningApp))) {
             assertEquals(TetheringManager.TETHER_ERROR_PROVISIONING_FAILED, receiver.get());
             assertEquals(Lifecycle.State.DESTROYED, scenario.getState());
         }
@@ -105,8 +107,8 @@ public class TetherProvisioningActivityTest {
                 new Intent(Settings.ACTION_TETHER_PROVISIONING_UI)
                         .putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI)
                         .putExtra(EXTRA_PROVISION_CALLBACK, receiver)
-                        .putExtra(TetherProvisioningActivity.EXTRA_SUBID, subId)
-                        .putExtra(EXTRA_RUN_PROVISION, provisionApp))) {
+                        .putExtra(EXTRA_TETHER_SUBID, subId)
+                        .putExtra(EXTRA_TETHER_UI_PROVISIONING_APP_NAME, provisionApp))) {
             scenario.onActivity(activity -> {
                 assertFalse(activity.isFinishing());
                 activity.onActivityResult(PROVISION_REQUEST, Activity.RESULT_OK, null /* intent */);
