@@ -270,42 +270,4 @@ public class UsbDetailsFunctionsControllerTest {
 
         verify(mUsbBackend).setCurrentFunctions(UsbManager.FUNCTION_PTP);
     }
-
-    @Test
-    public void refresh_previousFunctionIsRndis_stopTethering() {
-        mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_RNDIS;
-
-        mDetailsFunctionsController.refresh(false, 0, 0, 0);
-
-        verify(mConnectivityManager).stopTethering(TETHERING_USB);
-    }
-
-    @Test
-    public void refresh_previousFunctionIsNotRndis_doNothing() {
-        mDetailsFunctionsController.mPreviousFunction = UsbManager.FUNCTION_MIDI;
-
-        mDetailsFunctionsController.refresh(false, 0, 0, 0);
-
-        verify(mConnectivityManager, never()).stopTethering(TETHERING_USB);
-    }
-
-    @Test
-    public void onRadioButtonClicked_previousFunctionIsRndis_stopTethering() {
-        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
-        doReturn(UsbManager.FUNCTION_RNDIS).when(mUsbBackend).getCurrentFunctions();
-
-        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
-
-        verify(mConnectivityManager).stopTethering(TETHERING_USB);
-    }
-
-    @Test
-    public void onRadioButtonClicked_previousFunctionIsNotRndis_doNothing() {
-        mRadioButtonPreference.setKey(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_PTP));
-        doReturn(UsbManager.FUNCTION_MIDI).when(mUsbBackend).getCurrentFunctions();
-
-        mDetailsFunctionsController.onRadioButtonClicked(mRadioButtonPreference);
-
-        verify(mConnectivityManager, never()).stopTethering(TETHERING_USB);
-    }
 }
