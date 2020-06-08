@@ -51,6 +51,7 @@ public class SeekBarPreference extends RestrictedPreference
     private boolean mShouldBlink;
     private int mAccessibilityRangeInfoType = AccessibilityNodeInfo.RangeInfo.RANGE_TYPE_INT;
     private CharSequence mSeekBarContentDescription;
+    private CharSequence mSeekBarStateDescription;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -123,6 +124,9 @@ public class SeekBarPreference extends RestrictedPreference
             mSeekBar.setContentDescription(mSeekBarContentDescription);
         } else if (!TextUtils.isEmpty(title)) {
             mSeekBar.setContentDescription(title);
+        }
+        if (!TextUtils.isEmpty(mSeekBarStateDescription)) {
+            mSeekBar.setStateDescription(mSeekBarStateDescription);
         }
         if (mSeekBar instanceof DefaultIndicatorSeekBar) {
             ((DefaultIndicatorSeekBar) mSeekBar).setDefaultProgress(mDefaultProgress);
@@ -301,6 +305,18 @@ public class SeekBarPreference extends RestrictedPreference
         mSeekBarContentDescription = contentDescription;
         if (mSeekBar != null) {
             mSeekBar.setContentDescription(contentDescription);
+        }
+    }
+
+    /**
+     * Specify the state description for this seek bar represents.
+     *
+     * @param stateDescription the state description of seek bar
+     */
+    public void setSeekBarStateDescription(CharSequence stateDescription) {
+        mSeekBarStateDescription = stateDescription;
+        if (mSeekBar != null) {
+            mSeekBar.setStateDescription(stateDescription);
         }
     }
 
