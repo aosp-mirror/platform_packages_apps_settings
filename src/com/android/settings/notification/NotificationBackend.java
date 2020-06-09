@@ -17,8 +17,10 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -544,7 +546,8 @@ public class NotificationBackend {
 
         LauncherApps.ShortcutQuery query = new LauncherApps.ShortcutQuery()
                 .setPackage(pkg)
-                .setQueryFlags(FLAG_MATCH_DYNAMIC | FLAG_MATCH_PINNED)
+                .setQueryFlags(FLAG_MATCH_DYNAMIC
+                        | FLAG_MATCH_PINNED_BY_ANY_LAUNCHER | FLAG_MATCH_CACHED)
                 .setShortcutIds(Arrays.asList(id));
         List<ShortcutInfo> shortcuts = la.getShortcuts(
                 query, UserHandle.of(UserHandle.getUserId(uid)));
