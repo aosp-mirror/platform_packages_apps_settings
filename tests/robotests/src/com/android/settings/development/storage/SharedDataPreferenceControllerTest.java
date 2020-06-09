@@ -113,7 +113,8 @@ public class SharedDataPreferenceControllerTest {
         accessors.add(two);
 
         final List<BlobInfo> tmp = new ArrayList<>();
-        tmp.add(new BlobInfo(10, System.currentTimeMillis(), "testing blob 1", accessors));
+        tmp.add(new BlobInfo(10, System.currentTimeMillis(), "testing blob 1", 54 * 1024 * 1024,
+                                accessors));
         return tmp;
     }
 }
