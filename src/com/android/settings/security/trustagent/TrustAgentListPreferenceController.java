@@ -44,6 +44,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.List;
 
@@ -134,34 +135,68 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         updateTrustAgents();
     }
 
+
+    @Override
+    public void updateDynamicRawDataToIndex(List<SearchIndexableRaw> rawData) {
+        if (!isAvailable()) {
+            return;
+        }
+
+        final List<TrustAgentManager.TrustAgentComponentInfo> agents = getActiveTrustAgents(
+                mContext);
+        if (agents == null) {
+            return;
+        }
+
+        for (int i = 0, size = agents.size(); i < size; i++) {
+            final SearchIndexableRaw raw = new SearchIndexableRaw(mContext);
+            final TrustAgentManager.TrustAgentComponentInfo agent = agents.get(i);
+
+            raw.key = PREF_KEY_TRUST_AGENT + i;
+            raw.title = agent.title;
+            rawData.add(raw);
+        }
+    }
+
+    /**
+     * @return The active trust agents from TrustAgentManager.
+     */
+    private List<TrustAgentManager.TrustAgentComponentInfo> getActiveTrustAgents(Context context) {
+        return mTrustAgentManager.getActiveTrustAgents(context, mLockPatternUtils);
+    }
+
     private void updateTrustAgents() {
         if (mSecurityCategory == null) {
             return;
         }
+        // If for some reason the preference is no longer available, don't proceed to add.
+        if (!isAvailable()) {
+            return;
+        }
+        final List<TrustAgentManager.TrustAgentComponentInfo> agents = getActiveTrustAgents(
+                mContext);
+        if (agents == null) {
+            return;
+        }
+
         // First remove all old trust agents.
-        while (true) {
-            final Preference oldAgent = mSecurityCategory.findPreference(PREF_KEY_TRUST_AGENT);
+        for (int i = 0, size = agents.size(); i < size; i++) {
+            String key = PREF_KEY_TRUST_AGENT + i;
+            final Preference oldAgent = mSecurityCategory.findPreference(key);
             if (oldAgent == null) {
                 break;
             } else {
                 mSecurityCategory.removePreference(oldAgent);
             }
         }
-        // If for some reason the preference is no longer available, don't proceed to add.
-        if (!isAvailable()) {
-            return;
-        }
+
         // Then add new ones.
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
-        final List<TrustAgentManager.TrustAgentComponentInfo> agents =
-                mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils);
-        if (agents == null) {
-            return;
-        }
-        for (TrustAgentManager.TrustAgentComponentInfo agent : agents) {
+        for (int i = 0, size = agents.size(); i < size; i++) {
             final RestrictedPreference trustAgentPreference =
                     new RestrictedPreference(mSecurityCategory.getContext());
-            trustAgentPreference.setKey(PREF_KEY_TRUST_AGENT);
+            TrustAgentManager.TrustAgentComponentInfo agent = agents.get(i);
+            trustAgentPreference.setKey(PREF_KEY_TRUST_AGENT + i);
             trustAgentPreference.setTitle(agent.title);
             trustAgentPreference.setSummary(agent.summary);
             // Create intent for this preference.
