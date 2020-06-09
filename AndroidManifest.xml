@@ -3181,7 +3181,7 @@
 
         <activity android:name="Settings$BluetoothDeviceDetailActivity"
                   android:label="@string/device_details_title"
-                  android:permission="android.permission.BLUETOOTH_PRIVILEGED">
+                  android:permission="android.permission.BLUETOOTH_ADMIN">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.BLUETOOTH_DEVICE_DETAIL_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
