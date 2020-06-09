@@ -63,6 +63,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             "interact_across_profiles_settings_switch";
     private static final String INTERACT_ACROSS_PROFILES_HEADER = "interact_across_profiles_header";
     public static final String INSTALL_APP_BANNER_KEY = "install_app_banner";
+    public static final String INTERACT_ACROSS_PROFILE_EXTRA_SUMMARY_KEY =
+            "interact_across_profiles_extra_summary";
     public static final String EXTRA_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args";
     public static final String INTENT_KEY = "intent";
 
@@ -79,6 +81,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
     private boolean mInstalledInWork;
     private String mAppLabel;
     private Intent mInstallAppIntent;
+    private boolean mIsPageLaunchedByApp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,6 +109,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mInstallBanner = findPreference(INSTALL_APP_BANNER_KEY);
         mInstallBanner.setOnPreferenceClickListener(this);
 
+        mIsPageLaunchedByApp = launchedByApp();
+
         // refreshUi checks that the user can still configure the appOp, return to the
         // previous page if it can't.
         if (!refreshUi()) {
@@ -113,14 +118,23 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
         addAppTitleAndIcons(mPersonalProfile, mWorkProfile);
         styleActionBar();
+        maybeShowExtraSummary();
         logPageLaunchMetrics();
+    }
+
+    private void maybeShowExtraSummary() {
+        Preference extraSummary = findPreference(INTERACT_ACROSS_PROFILE_EXTRA_SUMMARY_KEY);
+        if (extraSummary == null) {
+            return;
+        }
+        extraSummary.setVisible(mIsPageLaunchedByApp);
     }
 
     private void logPageLaunchMetrics() {
         if (!mCrossProfileApps.canConfigureInteractAcrossProfiles(mPackageName)) {
             logNonConfigurableAppMetrics();
         }
-        if (launchedByApp()) {
+        if (mIsPageLaunchedByApp) {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_APP);
         } else {
             logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_LAUNCHED_FROM_SETTINGS);
@@ -262,7 +276,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                         logEvent(DevicePolicyEnums.CROSS_PROFILE_SETTINGS_PAGE_USER_CONSENTED);
                         enableInteractAcrossProfiles(true);
                         refreshUi();
-                        if (launchedByApp()) {
+                        if (mIsPageLaunchedByApp) {
                             setIntentAndFinish(/* appChanged= */ true);
                         }
                     }
