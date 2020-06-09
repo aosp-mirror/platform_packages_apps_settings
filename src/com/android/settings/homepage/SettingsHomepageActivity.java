@@ -90,5 +90,9 @@ public class SettingsHomepageActivity extends FragmentActivity {
         // The top padding is the height of action bar(48dp) + top/bottom margins(16dp)
         final int paddingTop = searchBarHeight + searchBarMargin * 2;
         view.setPadding(0 /* left */, paddingTop, 0 /* right */, 0 /* bottom */);
+
+        // Prevent inner RecyclerView gets focus and invokes scrolling.
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
     }
 }
