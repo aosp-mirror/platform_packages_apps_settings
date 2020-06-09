@@ -39,4 +39,9 @@ class SharedDataUtils {
         CALENDAR.setTimeInMillis(millis);
         return FORMATTER.format(CALENDAR.getTime());
     }
+
+    static String formatSize(long sizeBytes) {
+        final double sizeInMb = sizeBytes / (1024.0 * 1024.0);
+        return String.format("%.2f MB", sizeInMb);
+    }
 }
