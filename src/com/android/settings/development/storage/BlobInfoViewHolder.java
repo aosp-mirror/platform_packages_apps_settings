@@ -30,6 +30,7 @@ class BlobInfoViewHolder {
     TextView blobLabel;
     TextView blobId;
     TextView blobExpiry;
+    TextView blobSize;
 
     static BlobInfoViewHolder createOrRecycle(LayoutInflater inflater, View convertView) {
         if (convertView != null) {
@@ -42,6 +43,7 @@ class BlobInfoViewHolder {
         holder.blobLabel = convertView.findViewById(R.id.blob_label);
         holder.blobId = convertView.findViewById(R.id.blob_id);
         holder.blobExpiry = convertView.findViewById(R.id.blob_expiry);
+        holder.blobSize = convertView.findViewById(R.id.blob_size);
         convertView.setTag(holder);
         return holder;
     }
