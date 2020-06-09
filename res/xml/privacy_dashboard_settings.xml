@@ -52,10 +52,9 @@
     <Preference
         android:key="privacy_manage_perms"
         android:title="@string/app_permissions"
-        android:summary="@string/summary_placeholder"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
         settings:allowDividerAbove="true"
-        settings:searchable="false"
-        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
+        settings:searchable="false">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
     </Preference>
 
