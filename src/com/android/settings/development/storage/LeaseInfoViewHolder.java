@@ -18,6 +18,7 @@ package com.android.settings.development.storage;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -27,6 +28,7 @@ import com.android.settings.R;
  */
 class LeaseInfoViewHolder {
     View rootView;
+    ImageView appIcon;
     TextView leasePackageName;
     TextView leaseDescription;
     TextView leaseExpiry;
@@ -39,6 +41,7 @@ class LeaseInfoViewHolder {
 
         final LeaseInfoViewHolder holder = new LeaseInfoViewHolder();
         holder.rootView = convertView;
+        holder.appIcon = convertView.findViewById(R.id.app_icon);
         holder.leasePackageName = convertView.findViewById(R.id.lease_package);
         holder.leaseDescription = convertView.findViewById(R.id.lease_desc);
         holder.leaseExpiry = convertView.findViewById(R.id.lease_expiry);
