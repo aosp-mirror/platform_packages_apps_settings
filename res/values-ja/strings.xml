@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"接続できる Bluetooth オーディオ デバイスの上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"接続できる Bluetooth オーディオ デバイス数の上限の選択"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"キャスト"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ミラー"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ワイヤレス ディスプレイの有効化"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"周辺にデバイスが見つかりません"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"接続中"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"外部メディア"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"空き容量を増やす"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ストレージを管理"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"クリーン, ストレージ"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USBでパソコンに接続"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"次で接続:"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"メディアデバイス（MTP）"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"提供元不明のアプリ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"アプリの提供元をすべて許可する"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近開いたアプリ"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"<xliff:g id="COUNT">%1$d</xliff:g> 個のアプリをすべて表示"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">%1$d 個のアプリをすべて表示</item>
+      <item quantity="one">アプリをすべて表示</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT 管理者にお問い合わせください"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN、パターン、またはパスワードのリセットを依頼できます"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"不明なアプリをインストールするとタブレットや個人データが攻撃を受ける可能性が高くなります。この提供元からアプリをインストールすることにより、アプリの使用により生じる可能性があるタブレットへの損害やデータの損失について、ユーザーご自身が単独で責任を負うことに同意するものとします。"</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"言語"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"キーボード"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"画面キーボード"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"利用可能な画面キーボード"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"画面キーボードを管理"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"キーボード補助機能"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"デフォルトの通知音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"デフォルトのアラーム音"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"着信時のバイブレーション"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"バイブレーション"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"バイブレーション OFF"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"常にバイブレーションを使用"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"まずバイブレーションで徐々に着信音"</string>
@@ -3482,7 +3489,7 @@
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"選択した会話をバブルで表示する"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"何もバブルで表示しない"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"会話"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"バブルから除外したすべての会話"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"次を除いてすべての会話をバブルで表示する"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"この会話のふきだしを OFF にする"</string>
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"この会話のふきだしを ON にする"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"スワイプの動作"</string>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"これらのアプリを接続"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"アプリを接続すると権限が共有され、互いのデータにアクセスできるようになります。"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"IT 管理者と個人データが共有されないことが信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"アプリの接続はデバイスのプライバシー設定からいつでも解除できます。"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の<xliff:g id="NAME">%1$s</xliff:g>に個人データの使用を許可しますか？"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"IT 管理者と個人データが共有されないことが信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"アプリデータ"</string>
@@ -3744,7 +3752,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"通話"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"割り込み可能な通話"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"許可した通話で必ず音が鳴るようにするには、デバイスが着信音に設定されていることをご確認ください"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"許可した通話で必ず音が鳴るようにするには、デバイスの設定が着信音になっていることをご確認ください"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。設定を調整することで、友だち、家族などの連絡先からの着信のブロックを解除できます。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"スター付きの連絡先"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3756,7 +3764,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"メッセージ"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"メッセージ"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"割り込み可能なメッセージ"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"許可したメッセージで必ず音が鳴るようにするには、デバイスが着信音に設定されていることをご確認ください"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"許可したメッセージで必ず音が鳴るようにするには、デバイスの設定が着信音になっていることをご確認ください"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、受信メッセージはブロックされます。設定を調整することで、友だち、家族などの連絡先からの受信メッセージのブロックを解除できます。"</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"すべてのメッセージが届く"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"すべての通話が届く"</string>
@@ -3863,8 +3871,8 @@
     <string name="switch_on_text" msgid="5664542327776075105">"ON"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"OFF"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能をオンにします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスしたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲストユーザーを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲストユーザーを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります \n	 （連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、信頼できる人とのみ使用してください。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"画面固定の解除前にPINを要求"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"権限が付与されていません"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"リクエストされた権限はありません"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"アプリのデータアクセスを管理します"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"すべてのアプリ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"インストール済みアプリ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4922,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"SIM を 2 つ使用している場合、このタブレットの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"SIM を 2 つ使用している場合、このデバイスの接続は 4G に制限されます。"<annotation id="url">"詳細"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"キャッシュに保存されたアプリの実行を停止"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"設定での画面オーバーレイを許可する"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
 </resources>

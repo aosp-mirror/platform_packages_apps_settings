@@ -785,6 +785,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"‏מקסימום התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"‏בחירת מספר מקסימלי של התקני אודיו המחוברים באמצעות Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"‏העברה (csat)"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"‏הפעל תצוגת WiFi"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"לא נמצאו מכשירים בקרבת מקום."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"מתחבר"</string>
@@ -1477,6 +1478,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"עיין"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"פינוי שטח אחסון"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"נהל אחסון"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ניקוי, שטח אחסון"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"‏חיבור USB למחשב"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"חבר בתור"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"‏מכשיר מדיה (MTP)"</string>
@@ -1890,7 +1892,12 @@
     <string name="install_applications" msgid="3921609656584369901">"מקורות לא ידועים"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"אפליקציות ממקורות שונים"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"אפליקציות שפתחת לאחרונה"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"הצגת כל <xliff:g id="COUNT">%1$d</xliff:g> האפליקציות"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="two">‏הצגת כל %1$d האפליקציות</item>
+      <item quantity="many">‏הצגת כל %1$d האפליקציות</item>
+      <item quantity="other">‏הצגת כל %1$d האפליקציות</item>
+      <item quantity="one">הצגת כל האפליקציות</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"‏יש ליצור קשר עם מנהל ה-IT"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"ניתן לקבל ממנו עזרה באיפוס קוד האימות, קו ביטול הנעילה או הסיסמה"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"הטאבלט והנתונים האישיים שלך פגיעים יותר להתקפות של אפליקציות לא מוכרות. על ידי התקנת אפליקציות ממקור זה, אתה מסכים לכך שאתה האחראי לכל נזק לטאבלט או לכל אובדן של נתונים שעשויים להיגרם כתוצאה מהשימוש באפליקציות אלה."</string>
@@ -2067,6 +2074,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"שפה"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"מקלדות"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"מקלדת שמופיעה במסך"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"מקלדת שמופיעה במסך זמינה"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ניהול של מקלדות שמופיעות במסך"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"סיוע למקלדת"</string>
@@ -3383,6 +3391,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"צליל ברירת המחדל להתראות"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"צליל לשעון מעורר"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"רטט לשיחות"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"רטט"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"אף פעם לא להפעיל רטט"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"רטט תמיד"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"רטט בהתחלה ומעבר לצלצול בהדרגה"</string>
@@ -3726,6 +3735,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"אני רוצה לקשר בין האפליקציות האלה"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"לאפליקציות מקושרות יש הרשאות משותפות, ויש להן גישה לנתונים שבכל אחת מהן."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"‏יש לקשר רק אפליקציות שניתן לבטוח בהן שלא ייעשה באמצעותן שיתוף של מידע אישי עם מנהל ה-IT."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"האם תסכים/י לחשוף את המידע האישי שלך באפליקציה <xliff:g id="NAME">%1$s</xliff:g>, שמיועדת לעבודה?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"‏יש לקשר רק אפליקציות שניתן לבטוח בהן שלא ייעשה באמצעותן שיתוף של מידע אישי עם מנהל ה-IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"נתוני האפליקציה"</string>
@@ -3987,7 +3998,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"הקפאת אפליקציה"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"הקפאת אפליקציה מאפשרת לך לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההקפאה. ניתן להשתמש בתכונה, למשל, כשנותנים לחבר מהימן לשחק במשחק מסוים. \n\nלאחר הקפאת אפליקציה כלשהי, ייתכן שייפתחו אפליקציות אחרו מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי להשתמש בהקפאת אפליקציה: 	\n1.	מפעילים את הקפאת האפליקציה 	\n2.	פותחים את הסקירה הכללית 	\n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הקפאה\'"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"הקפאת אפליקציה מאפשרת לך לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההקפאה. ניתן להשתמש בתכונה, למשל, כשנותנים לחבר מהימן לשחק במשחק מסוים. \n\nלאחר הקפאת אפליקציה כלשהי, ייתכן שייפתחו אפליקציות אחרו מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במשתמש אורח במקום זאת. \n\nכדי להשתמש בהקפאת אפליקציה: ←\n1.	מפעילים את הקפאת האפליקציה ←\n2.	פותחים את הסקירה הכללית ←\n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הקפאה\'"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"לאחר הקפאת אפליקציה: \n\n•	 ייתכן שתתאפשר גיש למידע האישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 ייתכן שייפתחו אפליקציות אחרות מהאפליקציה שהוקפאה \n\nיש להשתמש בהקפאת אפליקציה רק עם אנשים מהימנים."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"לאחר שמקפיאים אפליקציה: \n\n•	 ייתכן שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוקפאה עשויה לפתוח אפליקציות אחרות \n\nיש להשתמש בהקפאת אפליקציה רק עם אנשים מהימנים."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"בקש קו ביטול נעילה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"בקש קוד גישה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"בקש סיסמה לפני ביטול הצמדה"</string>
@@ -4073,6 +4084,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"לא הוענקו הרשאות"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"לא התבקשו הרשאות"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות אינסטנט"</string>
@@ -5102,8 +5115,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"‏כשמשתמשים בשני כרטיסי SIM, טאבלט זה יוגבל ל-4G. "<annotation id="url">"מידע נוסף"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"‏כשמשתמשים בשני כרטיסי SIM, מכשיר זה יוגבל ל-4G. "<annotation id="url">"מידע נוסף"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"השעיית הביצוע לאפליקציות שנשמרו במטמון"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
 </resources>

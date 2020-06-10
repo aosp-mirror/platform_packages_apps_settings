@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Hámarksfjöldi tengdra Bluetooth-hljómtækja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Velja hámarksfjölda tengdra Bluetooth-hljómtækja"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Útsending"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegla"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Leyfa þráðlausan skjá"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Engin nálæg tæki fundust."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Tengist"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Kanna"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Losa geymslupláss"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Hafa umsjón með geymslurými"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"hreinsa, geymsla"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-tenging tölvu"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Tengja sem"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Margmiðlunartæki (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Óþekktur uppruni"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Leyfa forrit frá öllum"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nýlega opnuð forrit"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Sjá öll <xliff:g id="COUNT">%1$d</xliff:g> forritin"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Sjá öll %1$d forrit</item>
+      <item quantity="other">Sjá öll %1$d forrit</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Hafðu samband við kerfisstjóra"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Hann getur hjálpað þér að endurstilla PIN-númerið, mynstrið eða aðgangsorðið"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Þú samþykkir að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af uppsetningu forrita frá þessari veitu."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Tungumál"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Lyklaborð"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skjályklaborð"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tiltækt skjályklaborð"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Stjórna skjályklaborðum"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Lyklaborðsaðstoð"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sjálfgefið hljóð tilkynninga"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sjálfgefið hljóð í vekjara"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Titra við hringingu"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Titringur"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Titra aldrei"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Titra alltaf"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Titra og hækka hringitón smám saman"</string>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Tengja þessi forrit"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Tengd forrit deila heimildum og hafa aðgang að gögnum hvert hjá öðru."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Tengdu aðeins forrit ef þú treystir því að þau deili ekki persónuupplýsingum með kerfisstjóranum þínum."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Hægt að aftengja forrit hvenær sem er í persónuverndarstillingum tækisins."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Viltu treysta vinnuforritinu <xliff:g id="NAME">%1$s</xliff:g> fyrir persónulegum gögnum þínum?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Tengdu aðeins forrit ef þú treystir því að þau deili ekki persónuupplýsingum með kerfisstjóranum þínum."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Forritsgögn"</string>
@@ -3712,7 +3720,7 @@
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"Öll dagatöl"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"Þar sem svarið er"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"„Já“, „Kannski“ eða „Ekki svarað“"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"„Já“ eða „Kannski“"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"Já eða Kannski"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"Já"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"Regla fannst ekki."</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"Kveikt / <xliff:g id="MODE">%1$s</xliff:g>"</string>
@@ -3744,7 +3752,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Símtöl"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"símtöl"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Símtöl sem mega trufla"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Til að tryggja að það heyrist í leyfðum símtölum skaltu athuga hvort tækið er stillt á að hringja"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Til að tryggja að það heyrist í leyfðum símtölum skaltu athuga hvort tækið sé stillt á að hringja"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Lokað er fyrir móttekin símtöl fyrir „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Hægt er að breyta stillingum til að leyfa símtöl frá vinum, fjölskyldumeðlimum eða öðrum tengiliðum."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjörnumerktir tengiliðir"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3756,7 +3764,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"skilaboð"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Skilaboð"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Skilaboð sem mega trufla"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Til að tryggja að það heyrist í leyfðum skilaboðum skaltu athuga hvort tækið er stillt á að hringja"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Til að tryggja að það heyrist í leyfðum skilaboðum skaltu athuga hvort tækið sé stillt á að hringja"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Lokað er fyrir móttekin skilaboð fyrir „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“. Hægt er að breyta stillingum til að leyfa símtöl frá vinum, fjölskyldumeðlimum eða öðrum tengiliðum."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Þú færð öll skilaboð"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Þú færð öll símtöl"</string>
@@ -3865,7 +3873,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Forritsfesting"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Forritsfesting gerir þér kleift að láta núverandi forrit vera sýnilegt á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Forritsfesting gerir þér kleift að láta núverandi forrit vera sýnilegt á skjánum þar til þú losar það. Þú getur til dæmis notað þennan eiginleika til að leyfa vini að spila ákveðinn leik. \n\nÞegar forrit er fest getur festa forritið opnað önnur forrit og persónuupplýsingar gætu verið aðgengilegar. \n\nEf þú vilt deila tækinu þínu með einhverjum á öruggan hátt skaltu prófa að nota gestanotanda. \n\nTil að nota forritsfestingu: 	\n1.	Kveiktu á forritsfestingu 	\n2.	Opnaðu Yfirlit 	\n3.	Ýttu á forritstáknið efst á skjánum og ýttu svo á Festa"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Þegar forrit er fest: \n\n•		Geta persónuupplýsingar verið aðgengilegar \n		(til dæmis tengiliðir og innihald tölvupósts) \n•	 Getur fest forrit opnað önnur forrit \n\nNotaðu aðeins forritafestingu með fólki sem þú treystir."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Þegar forrit er fest: \n\n•		Geta persónuupplýsingar verið aðgengilegar \n		(til dæmis tengiliðir og innihald tölvupósts) \n•	 Getur fest forrit opnað önnur forrit \n\nNotaðu aðeins forritsfestingu með fólki sem þú treystir."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Biðja um opnunarmynstur til að losa"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Biðja um PIN-númer til að losa"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Biðja um aðgangsorð til að losa"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Engar heimildir veittar"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Engar heimildarbeiðnir"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Stjórnaðu aðgangi forrita að gögnum"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Öll forrit"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Uppsett forrit"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Skyndiforrit"</string>
