@@ -21,11 +21,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.TetheringConstants;
+import android.net.TetheringManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.UserHandle;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.Utils;
 
@@ -36,17 +40,18 @@ import com.android.settings.Utils;
  * with {@link android.permission.TETHER_PRIVILEGED}.
  */
 public class TetherProvisioningActivity extends Activity {
-    private static final int PROVISION_REQUEST = 0;
     private static final String TAG = "TetherProvisioningAct";
     private static final String EXTRA_TETHER_TYPE = "TETHER_TYPE";
-    private static final String EXTRA_SUBID = "subId";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private ResultReceiver mResultReceiver;
+    @VisibleForTesting
+    static final int PROVISION_REQUEST = 0;
+    @VisibleForTesting
+    static final String EXTRA_SUBID = "subId";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mResultReceiver = (ResultReceiver)getIntent().getParcelableExtra(
                 ConnectivityManager.EXTRA_PROVISION_CALLBACK);
 
@@ -58,16 +63,22 @@ public class TetherProvisioningActivity extends Activity {
         final int subId = SubscriptionManager.getActiveDataSubscriptionId();
         if (tetherSubId != subId) {
             Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
+            mResultReceiver.send(TetheringManager.TETHER_ERROR_PROVISIONING_FAILED, null);
+            finish();
             return;
         }
-        final Resources res = Utils.getResourcesForSubId(this, subId);
-        final String[] provisionApp = res.getStringArray(
-                com.android.internal.R.array.config_mobile_hotspot_provision_app);
-
+        String[] provisionApp = getIntent().getStringArrayExtra(
+                TetheringConstants.EXTRA_RUN_PROVISION);
+        if (provisionApp == null || provisionApp.length < 2) {
+            final Resources res = Utils.getResourcesForSubId(this, subId);
+            provisionApp = res.getStringArray(
+                    com.android.internal.R.array.config_mobile_hotspot_provision_app);
+        }
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
         intent.putExtra(EXTRA_TETHER_TYPE, tetherType);
         intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
+        intent.putExtra(ConnectivityManager.EXTRA_PROVISION_CALLBACK, mResultReceiver);
         if (DEBUG) {
             Log.d(TAG, "Starting provisioning app: " + provisionApp[0] + "." + provisionApp[1]);
         }
@@ -75,7 +86,7 @@ public class TetherProvisioningActivity extends Activity {
         if (getPackageManager().queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
             Log.e(TAG, "Provisioning app is configured, but not available.");
-            mResultReceiver.send(ConnectivityManager.TETHER_ERROR_PROVISION_FAILED, null);
+            mResultReceiver.send(TetheringManager.TETHER_ERROR_PROVISIONING_FAILED, null);
             finish();
             return;
         }
@@ -89,8 +100,8 @@ public class TetherProvisioningActivity extends Activity {
         if (requestCode == PROVISION_REQUEST) {
             if (DEBUG) Log.d(TAG, "Got result from app: " + resultCode);
             int result = resultCode == Activity.RESULT_OK ?
-                    ConnectivityManager.TETHER_ERROR_NO_ERROR :
-                    ConnectivityManager.TETHER_ERROR_PROVISION_FAILED;
+                    TetheringManager.TETHER_ERROR_NO_ERROR :
+                    TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
             mResultReceiver.send(result, null);
             finish();
         }

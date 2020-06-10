@@ -205,20 +205,30 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         final Intent intent = getIntent();
         if (intent != null) {
             final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID, SUB_ID_NULL);
-            if (subId != SUB_ID_NULL) {
-                for (SubscriptionInfo subscription :
-                        SubscriptionUtil.getAvailableSubscriptions(this)) {
-                    if (subscription.getSubscriptionId() == subId) {
-                        return subscription;
-                    }
-                }
-            }
+            SubscriptionInfo info = getSubscriptionInfo(subId);
+            if (info != null) return info;
         }
-
         if (CollectionUtils.isEmpty(mSubscriptionInfos)) {
             return null;
         }
         return mSubscriptionInfos.get(0);
+    }
+
+    /**
+     * @return the subscription associated with a given subscription ID or null if none can be
+     * found.
+     */
+    SubscriptionInfo getSubscriptionInfo(int subId) {
+        if (subId == SUB_ID_NULL) {
+            return null;
+        }
+
+        for (SubscriptionInfo subscription : SubscriptionUtil.getAvailableSubscriptions(this)) {
+            if (subscription.getSubscriptionId() == subId) {
+                return subscription;
+            }
+        }
+        return null;
     }
 
     /**
@@ -340,6 +350,11 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
     }
 
     private void maybeShowContactDiscoveryDialog(int subId) {
+        SubscriptionInfo info = getSubscriptionInfo(subId);
+        CharSequence carrierName = "";
+        if (info != null) {
+            carrierName = info.getDisplayName();
+        }
         // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
         // associated dialog only if the opt-in has not been granted yet.
         boolean showOptInDialog = doesIntentContainOptInAction(getIntent())
@@ -350,7 +365,7 @@ public class MobileNetworkActivity extends SettingsBaseActivity {
         ContactDiscoveryDialogFragment fragment = getContactDiscoveryFragment(subId);
         if (showOptInDialog) {
             if (fragment == null) {
-                fragment = ContactDiscoveryDialogFragment.newInstance(subId);
+                fragment = ContactDiscoveryDialogFragment.newInstance(subId, carrierName);
             }
             // Only try to show the dialog if it has not already been added, otherwise we may
             // accidentally add it multiple times, causing multiple dialogs.
