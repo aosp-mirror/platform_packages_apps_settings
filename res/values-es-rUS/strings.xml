@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Máximo de dispositivos de audio Bluetooth conectados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecciona una cantidad máxima de dispositivos de audio Bluetooth conectados"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmitir"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplicar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Habilitar pantalla inalámbrica"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"No se encontraron dispositivos cercanos."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Conectando"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explorar"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Liberar espacio"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Administrar el almacenamiento"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"limpiar, almacenar"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Conexión con comput. por USB"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Conectarse como"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Dispositivo multimedia (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Fuentes desconocidas"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Permitir todas las fuentes"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Apps abiertas recientemente"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Ver las <xliff:g id="COUNT">%1$d</xliff:g> apps"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Ver todas las %1$d apps</item>
+      <item quantity="one">Ver todas las apps</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Comunícate con tu administrador de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Te puede ayudar a restablecer el PIN, el patrón o la contraseña"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tu tablet y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra tu tablet y la pérdida de datos debido al uso de estas apps."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado en pantalla"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado en pantalla disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Administrar teclados en pantalla"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Ayuda del teclado"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sonido de notificaciones predeterminado"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sonido de alarma predeterminado"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrar para llamadas"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibración"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Nunca vibrar"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Siempre vibrar"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Primero vibrar, luego sonar gradualmente"</string>
@@ -3332,11 +3339,11 @@
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Borrar"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Editar"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Programas"</string>
-    <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Programar"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programación"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Programa"</string>
+    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programa"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar en ciertos momentos"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir reglas de No interrumpir"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Programación"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Programa"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Usar programa"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Habilitar interrupciones con sonido"</string>
@@ -3568,11 +3575,11 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioridad"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Aparece en la parte superior de la sección de conversaciones, en forma de burbuja flotante, y muestra la foto de perfil en la pantalla de bloqueo"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> no es compatible con la mayoría de las funciones de conversaciones. No podrás establecer una conversación como prioritaria y las conversaciones no aparecerán como burbujas flotantes."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la cortina desplegable, contraer las notificaciones en una línea"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"En el panel desplegable, mostrar las notificaciones en una línea"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sin sonido ni vibración"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"No suena ni vibra, y aparece en una parte inferior de la sección de conversaciones"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Puede sonar o vibrar en función de la configuración del teléfono"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, mostrar notificaciones como banners en la parte superior de la pantalla"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, mostrar notificaciones como banner en la parte superior de la pantalla"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas las notificaciones de \"<xliff:g id="APP_NAME">%1$s</xliff:g>\""</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas las notificaciones de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptables"</string>
@@ -3624,6 +3631,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar estas apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Las apps conectadas comparten permisos y cada una puede acceder a los datos de la otra."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Solo conecta apps si confías en que no compartirán datos personales con tu administrador de TI."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"¿Quieres confiarle tus datos personales a la app de trabajo <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Solo conecta apps si confías en que no compartirán datos personales con tu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Datos de apps"</string>
@@ -3692,7 +3701,7 @@
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Agregar programa del evento"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Agregar programa de tiempo"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Borrar programa"</string>
-    <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Elegir tipo de programa"</string>
+    <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Elegir el tipo de programa"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"¿Quieres borrar la regla \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Borrar"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Desconocido"</string>
@@ -3742,7 +3751,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Llamadas"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"llamadas"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Llamadas que pueden interrumpir"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Para asegurarte de que el dispositivo suene cuando recibes llamadas permitidas, verifica si está configurado para sonar"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"A fin de asegurarte de que el dispositivo suene cuando recibes llamadas permitidas, verifica que esté configurado para emitir un sonido"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Se bloquearán las llamadas entrantes durante \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Puedes ajustar la configuración para permitir que tus amigos, familia y otros contactos se comuniquen contigo."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contactos destacados"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3863,7 +3872,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Fijar apps"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico. \n\nSi fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nPara fijar una app, sigue estos pasos: 	\n1.	Activa fijar apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Al fijar una app, esta se mantiene visible hasta que dejas de fijarla. Esta función se puede utilizar, por ejemplo, para dejar que alguien de confianza juegue un juego específico. \n\nSi fijas una app, esta podrá abrir otras apps y acceder a tus datos personales. \n\nSi quieres compartir tu dispositivo con alguien de forma segura, usa un perfil de invitado. \n\nPara fijar una app, sigue estos pasos: 	\n1.	Activa Fijar apps. 	\n2.	Abre Recientes. 	\n3.	Presiona el icono de la app que se encuentra en la parte superior de la pantalla y, luego, Fijar."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Cuando fijas la app, ocurre lo siguiente: \n\n•		Esta podrá acceder a datos personales \n		(como contactos y contenido de los correos electrónicos). \n•	 Es posible que las apps fijadas abran otras apps. \n\nUsa la función fijar apps solo con personas de confianza."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Cuando fijas la app, ocurre lo siguiente: \n\n•		Esta podrá acceder a datos personales \n		(como contactos y contenido de los correos electrónicos). \n•	 Es posible que las apps fijadas abran otras apps. \n\nUsa la función para fijar apps solo con personas de confianza."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Solicitar desbloqueo para quitar fijación"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Solicitar PIN para quitar fijación"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Solicitar contraseña para quitar fijación"</string>
@@ -3941,6 +3950,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"No se otorgaron permisos"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"No se solicitaron permisos"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas las apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Apps instaladas"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Apps instantáneas"</string>
@@ -4178,7 +4189,7 @@
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Almacenamiento interno: <xliff:g id="PERCENTAGE">%1$s</xliff:g> en uso (<xliff:g id="FREE_SPACE">%2$s</xliff:g> libre)"</string>
     <string name="display_summary" msgid="5526061030874717172">"Suspender después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactividad"</string>
     <string name="display_dashboard_summary" msgid="5102247404958535634">"Fondo de pantalla, suspender, tamaño de fuente"</string>
-    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"Estilos, fondos de pantalla, tiempo de espera de la pantalla y tamaño de fuente"</string>
+    <string name="display_dashboard_summary_with_style" msgid="2792175367835485163">"Estilos, fondos de pantalla, tiempo de espera de la pantalla, tamaño de fuente"</string>
     <string name="display_dashboard_nowallpaper_summary" msgid="6198590533661927162">"Suspender, tamaño de fuente"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"Suspender después de 10 minutos de inactividad"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Se usó un promedio de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memoria"</string>
@@ -4907,7 +4918,7 @@
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Para usarlo, debes establecer un bloqueo de pantalla"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostrar controles de dispositivos"</string>
     <string name="cards_passes_setting_toggle" msgid="3380984848045396695">"Mostrar tarjetas y pases"</string>
-    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acceder a los controles de dispositivos conectados, mantén presionado el botón de inicio."</string>
+    <string name="device_controls_setting_subtitle" msgid="4388544861427973600">"Para acceder a los controles de dispositivos conectados, mantén presionado el botón de encendido."</string>
     <string name="cards_passes_setting_subtitle" msgid="4427459738229697469">"Para acceder a tus formas de pago, tarjetas de embarque, etc., mantén pulsado el botón de encendido."</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -4920,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Esta tablet se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Este dispositivo se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspende la ejecución de apps almacenadas en caché"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir pantallas superpuestas en Configuración"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que las apps que pueden mostrar contenido sobre otras se superpongan a las pantallas de Configuración"</string>
 </resources>

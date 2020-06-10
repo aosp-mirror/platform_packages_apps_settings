@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"დაკავშირებულ Bluetooth აუდიო-მოწყობილობათა მაქსიმალური რიცხვი"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"აირჩიეთ დაკავშირებულ Bluetooth აუდიო-მოწყობილობათა მაქსიმალური რიცხვი"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ტრანსლირება"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"გამოსახულების ასლი"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"უსადენო ეკრანის ჩართვა"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"ახლომახლო მოწყობილობების მოძიება ვერ მოხერხდა."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"მიმდინარეობს დაკავშირება"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"მიმოხილვა"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"მეხსიერების გამოთავისუფლება"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"მეხსიერების მართვა"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"გასუფთავება, მეხსიერება"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB კავშირი კომპიუტერთან"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"დაკავშირება როგორც"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"მედია-მოწყობილობა (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"უცნობი წყაროები"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"აპის ყველა წყაროს დაშვება"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ახლახან გახსნილი აპები"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"<xliff:g id="COUNT">%1$d</xliff:g>-ვე აპის ნახვა"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">%1$d-ვე აპის ნახვა</item>
+      <item quantity="one">ყველა აპის ნახვა</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"მიმართეთ თქვენს IT ადმინს"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"ისინი შეძლებენ PIN-კოდის, ნიმუშის ან პაროლის გადაყენებას"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"თქვენი ტაბლეტი და პირადი მონაცემები უცნობი აპების შემოტევების წინაშე მეტად დაუცველია. აპების ამ წყაროდან ინსტალაციის შემთხვევაში, თქვენ თანახმა ხართ, პასუხისმგებელი იყოთ ამ აპების გამოყენების შედეგად ტაბლეტისთვის მიყენებულ ზიანსა და მონაცემების დაკარგვაზე."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ენა"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"კლავიატურები"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ეკრანული კლავიატურა"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ხელმისაწვდომი ეკრანული კლავიატურა"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ეკრანული კლავიატურების მართვა"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"კლავიატურის დახმარება"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"მაღვიძარას ნაგულ. ხმა"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"ვიბრაცია ზარებისას"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"ვიბრაცია"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ვიბრაციის არასოდეს გამოყენება"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"ვიბრაციის ყოველთვის გამოყენება"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"ვიბრაცია, შემდეგ კი ზრდადი ზარი"</string>
@@ -3574,7 +3581,7 @@
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"დარეკვა ან ვიბრაცია ტელეფონის პარამეტრების მიხედვით"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"როცა მოწყობილობა განბლოკილია, შეტყობინებები გამოჩნდეს ეკრანის ზედა ნაწილზე გადაჭიმული ბანერის სახით"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"„<xliff:g id="APP_NAME">%1$s</xliff:g>“-ის ყველა შეტყობინება"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ვე შეტყობინება"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>-ის ყველა შეტყობინება"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"ადაპტაციური შეტყობინებები"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> შეტყობინება დღეში</item>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ამ აპების დაკავშირება"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"დაკავშირებულ აპებს საზიარო ნებართვები აქვს და შეუძლია ერთმანეთის მონაცემებზე წვდომა"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"აპები მხოლოდ იმ შემთხვევაში დააკავშირეთ, თუ იცით, რომ ამით თქვენი პერსონალური მონაცემები თქვენს IT ადმინისტრატორთან არ გაზიარდება."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"შეგიძლიათ ნებისმიერ დროს გაწყვიტოთ აპებს შორის კავშირი თქვენი მოწყობილობის კონფიდენციალურობის პარამეტრებიდან."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"ანდობთ სამსახურის აპ „<xliff:g id="NAME">%1$s</xliff:g>“-ს თქვენ პერსონალურ მონაცემებს?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"აპები მხოლოდ იმ შემთხვევაში დააკავშირეთ, თუ იცით, რომ ამით თქვენი პერსონალური მონაცემები თქვენს IT ადმინისტრატორთან არ გაზიარდება."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"აპის მონაცემები"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ნებართვები არ არის გაცემული"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ნებართვებზე მოთხოვნები არ არის"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"მართეთ აპების წვდომა თქვენს მონაცემებზე"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ყველა აპი"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"დაინსტალირებული აპები"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"მყისიერი აპები"</string>
@@ -4922,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"ორი SIM-ბარათის გამოყენებისას ეს ტაბლეტი 4G-ზე მაღალ ქსელს ვერ დაუკავშირდება. "<annotation id="url">"შეიტყვეთ მეტი"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"ორი SIM-ბარათის გამოყენებისას ეს მოწყობილობა 4G-ზე მაღალ ქსელს ვერ დაუკავშირდება. "<annotation id="url">"შეიტყვეთ მეტი"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"გაფორმების შეჩერება ქეშირებული აპებისთვის"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"პარამეტრებზე ეკრანის გადაფარვის დაშვება"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"პარამეტრების ეკრანების გადაფარვის დაშვება აპებისთვის, რომლებსაც სხვა აპების ზემოდან გამოჩენა შეუძლია"</string>
 </resources>
