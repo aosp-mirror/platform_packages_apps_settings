@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum qoşulmuş Bluetooth audio cihazı"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum sayda qoşulmuş Bluetooth audio cihazları seçin"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Yayım"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"güzgü"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Naqilsiz displeyi aktivləşdirin"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Yaxınlıqda heç bir cihaz tapılmadı."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Qoşulur..."</string>
@@ -1099,7 +1100,7 @@
     <string name="wifi_calling_not_supported" msgid="3303917737849393175">"Wi‑Fi zəngi %1$s üçün dəstəklənmir"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> ilə bağlantı kəsildi"</string>
     <string name="carrier" msgid="1755020806290963951">"Operator"</string>
-    <string name="display_settings_title" msgid="626835071804834218">"Göstər"</string>
+    <string name="display_settings_title" msgid="626835071804834218">"Ekran"</string>
     <string name="sound_settings" msgid="5514582720435174014">"Səs"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Həcmlər"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Musiqi effektləri"</string>
@@ -1149,7 +1150,7 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"İş hesabı - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Şəxsi hesab - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Axtarış"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Göstər"</string>
+    <string name="display_settings" msgid="7197750639709493852">"Ekran"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Avtodönüşlü ekran"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Rənglər"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Təbii"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Kəşf edin"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Yer boşaldın"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Yaddaşı idarə edin"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"təmizləyin, yaddaş"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB kompüter bağlantısı"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Qoşulmanı seçin"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Media cihaz (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Naməlum mənbələr"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tətbiq mənbələrinə icazə verin"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Ən son istifadə edilən tətbiqlər"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Bütün <xliff:g id="COUNT">%1$d</xliff:g> tətbiqə baxın"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Bütün %1$d tətbiqə baxın</item>
+      <item quantity="one">Bütün tətbiqlərə baxın</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"İT admini ilə əlaqə saxlayın"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN, model və ya parolu sıfırlamanıza yardım edə bilər"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Planşet və şəxsi datanız naməlum tətbiqlərin hücumuna qarşı daha həssasdır. Bu mənbədən tətbiq quraşdırmaqla planşetinə dəyə biləcək zərər və ya həmin tətbiqlərin istifadəsi nəticəsində baş verən data itkisinə görə məsuliyyət daşıdığınızı qəbul edirsiniz."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Dil"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Klaviaturalar"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Ekran klaviaturası"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Əlçatan Ekran klaviaturası"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Ekran klaviaturalarını idarə edin"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Klaviatura yardımı"</string>
@@ -2098,7 +2104,7 @@
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Şriftin ölçüsünü dəyişin"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Ekran oxuyucuları"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio və ekran mətni"</string>
-    <string name="display_category_title" msgid="6638191682294461408">"Görüntü"</string>
+    <string name="display_category_title" msgid="6638191682294461408">"Ekran"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Qarşılıqlı əlaqə nəzarəti"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"Endirilmiş tətbiqlər"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"Eksperimental"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Defolt bildiriş səsi"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Defolt zəngli saat səsi"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Zənglər üçün vibrasiya"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibrasiya"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Heç vaxt vibrasiya etməsin"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Həmişə vibrasiya etsin"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Əvvəlcə vibrasiya etsin, sonra tədricən zəng çalsın"</string>
@@ -3483,10 +3490,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Heç birində qabarcıq göstərilmir"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Söhbətlər"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Bundan başqa bütün söhbətlərə yumrucuq əlavə edilə bilər"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Bu söhbət üçün qabaqcıqları deaktiv edin"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Bu söhbət üçün qabaqcıqları aktiv edin"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Sürüşdürmə əməliyyatları"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Kənarlaşdırmaq üçün sağa, menyunu göstərmək üçün sola sürüşdürün"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Kənarlaşdırmaq üçün sola, menyunu göstərmək üçün sağa sürüşdürün"</string>
@@ -3628,6 +3633,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Bu tətbiqləri qoşun"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Qoşulmuş tətbiqlər icazələri paylaşır və bir-birinin datasına daxil ola bilir."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Yalnız şəxsi datanızı İT admininizlə paylaşmayacağına etibar etdiyiniz tətbiqləri qoşun."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Şəxsi datanızı <xliff:g id="NAME">%1$s</xliff:g> iş tətbiqinə etibar edirsiniz?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Yalnız şəxsi datanızı İT admininizlə paylaşmayacağına etibar etdiyiniz tətbiqləri qoşun."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Tətbiq datası"</string>
@@ -3809,8 +3816,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> bölə bilər</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"daha <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Tətbiqlər"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Bütün bildirişlər"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Bəzi bildirişlər"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Bölə bilən bildirişlər"</string>
@@ -3946,6 +3952,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"İcazə verilməyib"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"İcazə sorğusu göndərilməyib"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Bütün proqramlar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Quraşdırılmış tətbiqlər"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Ani tətbiqlər"</string>
@@ -4907,8 +4915,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Həssas məzmun"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Kilidli olduqda kartları və nizamlayıcıları göstərin"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Kilidli olduqda nizamlayıcıları göstərin"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Kilidləndikdə kartları göstərin"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Kilidli olduqda kartları və nizamlayıcıları gizlədin"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"İstifadə etmək üçün ilk öncə ekran kilidini ayarlayın"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Cihaz idarəetmələrini göstərin"</string>
@@ -4926,8 +4933,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIM kart istifadə edərkən bu planşet 4G ilə məhdud olacaq. "<annotation id="url">"Ətraflı məlumat"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIM kart istifadə edərkən bu cihaz 4G ilə məhdud olacaq. "<annotation id="url">"Ətraflı məlumat"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Keşlənmiş tətbiqlər üçün icranı dayandırın"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarlarda ekranların üst-üstə yerləşdirilməsinə icazə verin"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Digər tətbiqlər üzərində görüntülənə biləcək tətbiqlərə Ayarlar ekranlarını üst-üstə yerləşdirməyə icazə verin"</string>
 </resources>

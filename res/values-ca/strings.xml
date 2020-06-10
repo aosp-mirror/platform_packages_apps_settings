@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre màxim de dispositius d\'àudio Bluetooth connectats"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecciona el nombre màxim de dispositius d\'àudio Bluetooth connectats"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emet"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"projectar"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activa pantalla sense fil"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"No s\'ha trobat cap dispositiu a prop."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"S\'està connectant"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explora"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Allibera espai"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gestiona l\'emmagatzematge"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"esborrar, emmagatzematge"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Connexió USB a l\'ordinador"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Connexió com a"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Dispositiu multimèdia (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Fonts desconegudes"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Permet totes les fonts d\'apl."</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Aplicacions obertes fa poc"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Mostra totes les aplicacions (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Mostra les %1$d aplicacions</item>
+      <item quantity="one">Mostra totes les aplicacions</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Contacta amb l\'administrador de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Et poden ajudar a restablir el PIN, el patró o la contrasenya"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"La tauleta i les dades personals són més vulnerables a atacs d\'aplicacions desconegudes. En instal·lar aplicacions d\'aquesta font, acceptes que ets responsable de qualsevol dany a la tauleta i qualsevol pèrdua de dades que es pugui produir per l\'ús d\'aquestes aplicacions."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclats"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclat en pantalla"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclat en pantalla disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestiona els teclats en pantalla"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Assistència per al teclat"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"So de notificació predeterminat"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"So d\'alarma predeterminat"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibra en trucades"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibració"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"No vibris mai"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibra sempre"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibra i després sona amb augment gradual"</string>
@@ -3476,17 +3483,15 @@
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activa"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Cancel·la"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Funció activada: les converses poden aparèixer com a icones flotants"</string>
-    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permet que les aplicacions es mostrin com a bombolles"</string>
+    <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permet que les aplicacions mostrin bombolles"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Algunes converses apareixeran com a icones flotants a sobre d\'altres aplicacions"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Totes les converses poden mostrar-se com a bombolles"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Les converses seleccionades poden mostrar-se com a bombolles"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"No es pot mostrar cap bombolla"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Converses"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Totes les converses poden mostrar-se en forma de bombolles excepte"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Desactiva les bombolles per a aquesta conversa"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Activa les bombolles per a aquesta conversa"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Accions en lliscar"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Llisca cap a la dreta per ignorar o cap a l\'esquerra per mostrar el menú"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Llisca cap a l\'esquerra per ignorar o cap a la dreta per mostrar el menú"</string>
@@ -3569,7 +3574,7 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permet que l\'aplicació emeti un so, vibri o mostri notificacions emergents a la pantalla"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Prioritat"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Es mostra com a bombolla flotant a la part superior de la secció de converses i mostra la foto de perfil a la pantalla de bloqueig"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> no admet la majoria de funcions de converses. No pots definir una conversa com a prioritària i les converses no es mostraran com a bombolles flotants."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> no admet la majoria de funcions de converses. No pots definir una conversa com a prioritària, i les converses no es mostraran com a bombolles flotants."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"A l\'àrea desplegable, replega les notificacions en una sola línia"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sense so ni vibració"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sense so ni vibració i es mostra més avall a la secció de converses"</string>
@@ -3628,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Connecta aquestes aplicacions"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les aplicacions connectades comparteixen els permisos i les dades entre si."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Connecta només aplicacions si confies que no compartiran dades personals amb el teu administrador de TI."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Pots desconnectar aplicacions en qualsevol moment a la configuració de privadesa del dispositiu."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vols confiar les teves dades personals a l\'aplicació de treball <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Connecta només aplicacions si confies que no compartiran dades personals amb el teu administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dades de les aplicacions"</string>
@@ -3809,8 +3815,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> pot interrompre</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> més"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplicacions"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Totes les notificacions"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Algunes notificacions"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificacions que et poden interrompre"</string>
@@ -3858,7 +3863,7 @@
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"Quan la pantalla estigui desactivada"</string>
     <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"Permet que les notificacions silenciades pel mode No molestis encenguin la pantalla i facin parpellejar el llum"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"Permet que les notificacions silenciades pel mode No molestis encenguin la pantalla"</string>
-    <string name="notification_app_settings_button" msgid="4692549882609342128">"Configuració de les notificacions"</string>
+    <string name="notification_app_settings_button" msgid="4692549882609342128">"Configuració de notificacions"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"D\'acord"</string>
     <string name="suggestion_button_close" msgid="6865170855573283759">"Tanca"</string>
     <string name="device_feedback" msgid="5351614458411688608">"Envia suggeriments sobre el dispositiu"</string>
@@ -3946,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"No s\'ha concedit cap permís"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"No s\'ha sol·licitat cap permís"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controla l\'accés de les apps a les dades"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Totes les aplicacions"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicacions instal·lades"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicacions instantànies"</string>
@@ -4907,8 +4913,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Contingut sensible"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Mostra les targetes i els controls quan estigui bloquejat"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Mostra els controls a la pantalla de bloqueig"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Mostra les targetes a la pantalla de bloqueig"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Amaga les targetes i els controls quan estigui bloquejat"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Per utilitzar aquesta opció, has de definir un bloqueig de pantalla"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Mostra els controls de dispositius"</string>
@@ -4926,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Quan s\'utilitzen 2 SIM, la connexió de la tauleta es limita a 4G. "<annotation id="url">"Obtén més informació"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Quan s\'utilitzen 2 SIM, la connexió del dispositiu es limita a 4G. "<annotation id="url">"Obtén més informació"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspèn l\'execució d\'aplicacions amb memòria cau"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Permet les superposicions de pantalla a Configuració"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Permet que les aplicacions que poden mostrar-se sobre altres aplicacions se superposin sobre les pantalles de Configuració"</string>
 </resources>
