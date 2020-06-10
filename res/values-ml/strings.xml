@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"കണക്റ്റ് ചെയ്‌ത പരമാവധി Bluetooth ഓഡിയോ ഉപകരണങ്ങൾ"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"കണക്റ്റ് ചെയ്‌ത പരമാവധി Bluetooth ഓഡിയോ ഉപകരണങ്ങളുടെ എണ്ണം തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"കാസ്‌റ്റ് ചെയ്യുക"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"മിറർ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"വയർലസ്‌ഡിസ്പ്ലേ സജീവമാക്കൂ"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"സമീപത്ത് ഉപകരണങ്ങളൊന്നും കണ്ടെത്തിയില്ല."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"കണക്റ്റ് ചെയ്യുന്നു"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"അടുത്തറിയുക"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ഇടം സൃഷ്ടിക്കുക"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"സ്റ്റോറേജ്  നിയന്ത്രിക്കുക"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ക്ലീൻ, സ്‌റ്റോറേജ്"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB കമ്പ്യൂട്ടർ കണക്ഷൻ"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"ഇതായി കണ‌ക്റ്റുചെയ്യുക"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"മീഡിയ ഉപകരണം (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"അജ്ഞാത ഉറവിടങ്ങൾ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"എല്ലാ അപ്ലിക്കേഷൻ ഉറവിടങ്ങളും അനുവദിക്കുക"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ഈയടുത്ത് തുറന്ന ആപ്പുകൾ"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"എല്ലാ <xliff:g id="COUNT">%1$d</xliff:g> ആപ്പുകളും കാണൂ"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">എല്ലാ %1$d ആപ്പുകളും കാണൂ</item>
+      <item quantity="one">എല്ലാ ആപ്പുകളും കാണൂ</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"നിങ്ങളുടെ ഐടി അഡ്‌മിനെ ബന്ധപ്പെടുക"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‌വേഡ് റീസെറ്റ് ചെയ്യാൻ നിങ്ങളെ അവർക്ക് സഹായിക്കാനാകും"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ഭാഷ"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"കീബോർഡുകൾ"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ്"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് ലഭ്യമാണ്"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് മാനേജ് ചെയ്യുക"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"കീബോർഡ് സഹായം"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"ഡിഫോൾട്ട് അറിയിപ്പ് ശബ്‌ദം"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"ഡിഫോൾട്ട് അലാറം ശബ്ദം"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"കോളുകൾക്ക് വൈബ്രേറ്റ് ചെയ്യുക"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"വൈബ്രേഷൻ"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ഒരിക്കലും വൈബ്രേറ്റ് ചെയ്യരുത്"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"എല്ലായ്‌പ്പോഴും വൈബ്രേറ്റ് ചെയ്യുക"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"വൈബ്രേറ്റ് ചെയ്‌ത് പതിയെ റിംഗ് ചെയ്യുക"</string>
@@ -3479,14 +3486,12 @@
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"ബബിളുകൾ കാണിക്കാൻ ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ചില സംഭാഷണങ്ങൾ മറ്റ് ആപ്പുകളുടെ മുകളിൽ ഫ്ലോട്ടിംഗ് ഐക്കണുകളായി ദൃശ്യമാകും"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"എല്ലാ സംഭാഷണങ്ങൾക്കും ബബിൾ ചെയ്യാനാവും"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"തിരഞ്ഞെടുത്ത സംഭാഷണങ്ങൾക്ക് ബബിൾ ചെയ്യാനാവും"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"തിരഞ്ഞെടുത്തവയ്ക്ക് ബബിൾ ചെയ്യാനാവും"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"ഒന്നിനും ബബിൾ ചെയ്യാനാവില്ല"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"സംഭാഷണങ്ങൾ"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ഇനിപ്പറയുന്നവ ഒഴികെയുള്ള എല്ലാ സംഭാഷണങ്ങൾക്കും ബബിൾ ചെയ്യാനാകും"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"ഈ സംഭാഷണത്തിന് ബബിളുകൾ ഓഫാക്കുക"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"ഈ സംഭാഷണത്തിന് ബബിളുകൾ ഓണാക്കുക"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"സ്വൈപ്പ് പ്രവർത്തനങ്ങൾ"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"നിരസിക്കാൻ വലത്തോട്ടോ, മെനു കാണിക്കാൻ ഇടത്തോട്ടോ സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"നിരസിക്കാൻ ഇടത്തോട്ടോ, മെനു കാണിക്കാൻ വലത്തോട്ടോ സ്വൈപ്പ് ചെയ്യുക"</string>
@@ -3628,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ഈ ആപ്പുകൾ കണക്‌റ്റ് ചെയ്യുക"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"കണക്റ്റ് ചെയ്ത ആപ്പുകൾ അനുമതികൾ പങ്കിടുന്നു, അവയ്ക്ക് പരസ്പരം ഡാറ്റ ആക്സസ് ചെയ്യാനുമാവും."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"വ്യക്തിപരമായ ഡാറ്റ ഐടി അഡ്‌മിനുമായി പങ്കിടില്ലെന്ന് നിങ്ങൾ വിശ്വസിക്കുന്ന ആപ്പുകൾ മാത്രം കണക്റ്റ് ചെയ്യുക."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"ഉപകരണത്തിന്റെ സ്വകാര്യ ക്രമീകരണത്തിൽ ഏത് സമയത്തും നിങ്ങൾക്ക് ആപ്പുകൾ വിച്‌ഛേദിക്കാം."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"നിങ്ങളുടെ വ്യക്തിപരമായ ഡാറ്റയുടെ കാര്യത്തിൽ ഔദ്യോഗിക <xliff:g id="NAME">%1$s</xliff:g> എന്നതിനെ വിശ്വസിക്കണോ?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"വ്യക്തിപരമായ ഡാറ്റ ഐടി അഡ്‌മിനുമായി പങ്കിടില്ലെന്ന് നിങ്ങൾ വിശ്വസിക്കുന്ന ആപ്പുകൾ മാത്രം കണക്റ്റ് ചെയ്യുക."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ആപ്പ് ഡാറ്റ"</string>
@@ -3709,9 +3715,9 @@
     <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"പ്രത്യേക ഇവന്റുകൾ നടക്കുന്ന സമയത്ത് \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കുന്നതിന് സ്വയമേവയുള്ള നയം സജ്ജമാക്കുക"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"ഈ ഇവന്റുകളിൽ"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"<xliff:g id="CALENDAR">%1$s</xliff:g> ഇവന്റുകളിൽ"</string>
-    <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"ഏത് കലണ്ടറിലും"</string>
+    <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"ഏത് കലണ്ടർ ഇവന്റുകളിലും"</string>
     <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"മറുപടി <xliff:g id="REPLY">%1$s</xliff:g> ആയിരിക്കുമ്പോൾ"</string>
-    <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"ഏത് കലണ്ടറിലും"</string>
+    <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"ഏത് കലണ്ടർ ഇവന്റുകളിലും"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"മറുപടി ഇനിപ്പറയുന്നവയാണെങ്കിൽ"</string>
     <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"അതെ, ഒരുപക്ഷേ/ മറുപടി നൽകിയില്ല"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"അതെ അല്ലെങ്കിൽ ഒരുപക്ഷേ"</string>
@@ -3722,7 +3728,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"ദിവസം"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"ഒന്നുമില്ല"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"എല്ലാ ദിവസവും"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"അലാറമിന് അവസാനിക്കുന്ന സമയം അസാധുവാക്കാൻ കഴിയും"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"അലാറത്തിന് അവസാനിക്കുന്ന സമയം അസാധുവാക്കാൻ കഴിയും"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"ഒരു അലാറം റിംഗ് ചെയ്യുമ്പോൾ, ഷെഡ്യൂൾ ഓഫാകുന്നു"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"\'ശല്യപ്പെടുത്തരുത്\' എന്ന് അർത്ഥമാക്കുന്ന പെരുമാറ്റം"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"ഡിഫോൾട്ട് ക്രമീകരണം ഉപയോഗിക്കുക"</string>
@@ -3754,9 +3760,9 @@
       <item quantity="one">മറ്റൊരാൾ</item>
     </plurals>
     <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"ഒന്നുമില്ല"</string>
-    <string name="zen_mode_messages" msgid="7315084748885170585">"Messages"</string>
+    <string name="zen_mode_messages" msgid="7315084748885170585">"സന്ദേശങ്ങള്‍"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"സന്ദേശങ്ങൾ"</string>
-    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"സന്ദേശങ്ങൾ"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന സന്ദേശങ്ങൾ"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"അനുവദനീയമായ സന്ദേശങ്ങൾക്ക് ശബ്‌ദം വരുന്നുണ്ടെന്ന് ഉറപ്പാക്കാൻ, റിംഗ് ചെയ്യുക എന്നതിലേക്ക് ഉപകരണം സജ്ജീകരിച്ചിട്ടുണ്ടോയെന്ന് പരിശോധിക്കുക"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ എന്നതിനുള്ള ഇന്‍‌കമിംഗ് സന്ദേശങ്ങൾ ബ്ലോക്ക് ചെയ്‌തിരിക്കുന്നു. സുഹൃത്തുക്കളേയും കുടുംബാംഗങ്ങളേയും മറ്റ് കോണ്‍‌ടാക്‌റ്റുകളേയും നിങ്ങളിലേക്ക് എത്തിച്ചേരാന്‍ അനുവദിക്കുന്നതിന്‌ ക്രമീകരണങ്ങളിൽ മാറ്റം വരുത്താനാവും."</string>
@@ -3767,7 +3773,7 @@
       <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> കോൺടാക്റ്റുകൾ</item>
       <item quantity="one">ഒരു കോൺടാക്റ്റ്</item>
     </plurals>
-    <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ആരിൽ നിന്നും"</string>
+    <string name="zen_mode_from_anyone" msgid="6027004263046694174">"ആർക്കും വിളിക്കാം"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"കോൺടാക്റ്റുകൾ"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"നക്ഷത്രചിഹ്നമിട്ട കോൺടാക്‌റ്റുകൾ"</string>
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"നക്ഷത്രമിട്ടിട്ടുള്ള കോൺടാക്‌റ്റുകളിൽ നിന്നും ആവർത്തിച്ച് വിളിക്കുന്നവരിൽ നിന്നും"</string>
@@ -3809,8 +3815,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> എന്നതിന് തടസ്സപ്പെടുത്താൻ കഴിയും</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> എണ്ണം കൂടി"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"ആപ്പുകൾ"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"എല്ലാ അറിയിപ്പുകളും"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"ചില അറിയിപ്പുകൾ"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"തടസ്സപ്പെടുത്താൻ കഴിയുന്ന അറിയിപ്പുകൾ"</string>
@@ -3870,7 +3875,7 @@
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"അൺപിൻ ചെയ്യുന്നത് വരെ നിലവിലെ ആപ്പ് കാണുന്ന വിധത്തിൽ നിലനിർത്താൻ ആപ്പ് പിൻ ചെയ്യൽ നിങ്ങളെ അനുവദിക്കുന്നു. ഉദാഹരണത്തിന്, ഒരു നിർദ്ദിഷ്‌ട ഗെയിം കളിക്കാൻ വിശ്വസ്‌ത സുഹൃത്തിനെ അനുവദിക്കുന്നതിന് ഈ ഫീച്ചർ ഉപയോഗിക്കാം. \n\nആപ്പ് പിൻ ചെയ്യുമ്പോൾ, പിൻ ചെയ്‌ത ആപ്പ് മറ്റ് ആപ്പുകൾ തുറക്കുകയും വ്യക്‌തിപരമായ ഡാറ്റ ആക്‌സസ് ചെയ്യുകയും ചെയ്‌തേക്കാം. \n\nനിങ്ങളുടെ ഉപകരണം മറ്റൊരാളുമായി സുരക്ഷിതമായി പങ്കിടണമെന്നുണ്ടെങ്കിൽ, പകരം ഒരു അതിഥി ഉപയോക്താവ് ഓപ്ഷൻ ഉപയോഗിക്കാൻ ശ്രമിക്കുക. \n\nആപ്പ് പിൻ ചെയ്യൽ ഉപയോഗിക്കാൻ: 	\n1.	ആപ്പ് പിൻ ചെയ്യൽ ഓണാക്കുക 	\n2.	അവലോകനം തുറക്കുക 	\n3.	സ്ക്രീനിന്റെ മുകളിലുള്ള ആപ്പ് ഐക്കണിൽ ടാപ്പ് ചെയ്യുക, തുടർന്ന് \'പിൻ ചെയ്യുക\' ടാപ്പ് ചെയ്യുക"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"ആപ്പ് പിൻ ചെയ്യുമ്പോൾ: \n\n•		വ്യക്തിപരമായ ഡാറ്റ ആക്‌സസ് ചെയ്‌തേക്കാം \n		(ഇമെയിൽ ഉള്ളടക്കവും കോൺടാക്റ്റുകളും പോലുള്ളവ) \n•		പിൻ ചെയ്‌ത ആപ്പ് മറ്റ് ആപ്പുകൾ തുറന്നേക്കാം \n\nനിങ്ങൾക്ക് വിശ്വാസമുള്ള ആളുകൾക്കൊപ്പം മാത്രം ആപ്പ് പിൻ ചെയ്യൽ ഉപയോഗിക്കുക."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"അൺപിന്നിനുമുമ്പ് അൺലോക്ക് പാറ്റേൺ ആവശ്യപ്പെടൂ"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ചെയ്യുംമുമ്പ് പിൻ ചോദിക്കൂ"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"അൺപിൻ ചെയ്യുംമുമ്പ് പിൻ ചോദിക്കുക"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"അൺപിന്നിനുമുമ്പ് പാസ്‌വേഡ് ആവശ്യപ്പെടൂ"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"അൺപിൻ ചെയ്യുമ്പോൾ ഉപകരണം ലോക്കുചെയ്യുക"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"സിം ഇല്ലാതാക്കൽ സ്ഥിരീകരിക്കുക"</string>
@@ -3946,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"അനുമതികളൊന്നും അനുവദിച്ചില്ല"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"അനുമതികളൊന്നും അഭ്യർത്ഥിച്ചില്ല"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ഡാറ്റയിലേക്കുള്ള ആപ്പ് ആക്‌സസ് നിയന്ത്രിക്കുക"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"എല്ലാ ആപ്സും"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ഇൻസ്‌റ്റാൾ ചെയ്‌ത ആപ്പുകൾ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ഇൻസ്‌റ്റ‌ന്റ് ആപ്പ്"</string>
@@ -4907,8 +4913,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"സൂക്ഷ്മമായി കൈകാര്യം ചെയ്യേണ്ട ഉള്ളടക്കം"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"ലോക്കായിരിക്കുമ്പോൾ കാർഡുകളും നിയന്ത്രണങ്ങളും കാണിക്കുക"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ നിയന്ത്രണങ്ങൾ കാണുക"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ കാർഡുകൾ കാണിക്കുക"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"ലോക്കായിരിക്കുമ്പോൾ കാർഡുകളും നിയന്ത്രണങ്ങളും മറയ്‌ക്കുക"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"ഉപയോഗിക്കാൻ, ആദ്യം സ്‌ക്രീൻ ലോക്ക് സജ്ജീകരിക്കുക"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"ഉപകരണ നിയന്ത്രണങ്ങൾ കാണിക്കുക"</string>
@@ -4926,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ടാബ്‌ലെറ്റിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ഉപകരണത്തിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"കാഷെ ചെയ്ത ആപ്പിനുള്ള നിർവ്വഹണം തൽക്കാലം റദ്ദാക്കൂ"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Settings ആപ്പിൽ സ്‌ക്രീൻ ഓവർലേ അനുവദിക്കുക"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings സ്‌ക്രീനുകളിൽ ഓവർലേ ചെയ്യാൻ മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ കാണിക്കാനാകുന്ന ആപ്പുകളെ അനുവദിക്കുക"</string>
 </resources>

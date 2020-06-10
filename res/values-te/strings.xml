@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"గరిష్ఠంగా కనెక్ట్ అయిన బ్లూటూత్ ఆడియో పరికరాలు"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"గరిష్ఠ సంఖ్యలో కనెక్ట్ అయిన బ్లూటూత్ ఆడియో పరికరాలను ఎంచుకోండి"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ప్రసారం చేయండి"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"మిర్రర్"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"వైర్‌లెస్ ప్రదర్శనను ప్రారంభించు"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"సమీపంలో పరికరాలేవీ దొరకలేదు."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"కనెక్ట్ అవుతోంది"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"అన్వేషించు"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"స్థలాన్ని ఖాళీ చేయి"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"నిల్వను నిర్వహించు"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"శుభ్రం చేయడం, స్టోరేజ్"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB కంప్యూటర్ కనెక్షన్"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"ఇలా కనెక్ట్ చేయండి"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"మీడియా పరికరం (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"తెలియని మూలాలు"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"అన్ని అనువ. మూలాలను అనుమతించు"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ఇటీవల తెరిచిన యాప్‌లు"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"మొత్తం <xliff:g id="COUNT">%1$d</xliff:g> యాప్‌లను చూడండి"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">అన్ని %1$d యాప్‌లను చూడండి</item>
+      <item quantity="one">అన్ని యాప్‌లను చూడండి</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"మీ IT నిర్వాహకులను సంప్రదించండి"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"పిన్‌ను, ఆకృతిని, లేదా పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి వారు సహాయపడతారు"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"మీ టాబ్లెట్ మరియు వ్యక్తిగత డేటా తెలియని మూలాల్లోని అనువర్తనాల ద్వారా దాడికి గురి కావడానికి ఎక్కువ అవకాశం ఉంటుంది. ఈ మూలం నుండి అనువర్తనాలను ఇన్‌స్టాల్ చేయడం ద్వారా, ఈ అనువర్తనాలను ఉపయోగించడం ద్వారా మీ టాబ్లెట్‌కు సంభవించే ఏదైనా నష్టానికి లేదా కోల్పోయే డేటాకి బాధ్యత వహించడానికి మీరు అంగీకరిస్తున్నారు."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"భాష"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"కీబోర్డ్‌లు"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"స్క్రీన్‌పై కీబోర్డ్"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"స్క్రీన్‌పై కీబోర్డ్ అందుబాటులోఉంది"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"స్క్రీన్‌పై కీబోర్డ్స్ మేనేజ్ చేయి"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"కీబోర్డ్ సహాయం"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"డిఫాల్ట్ నోటిఫికేషన్ ధ్వని"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"డిఫాల్ట్ అలారం ధ్వని"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"కాల్స్ వచ్చినప్పుడు వైబ్రేట్ అవ్వు"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"వైబ్రేషన్"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ఎప్పుడూ వైబ్రేట్ చేయవద్దు"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"ఎల్లప్పుడూ వైబ్రేట్ చేయి"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"మొదట వైబ్రేట్ చేసి, క్రమంగా రింగ్ పెంచు"</string>
@@ -3483,10 +3490,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"ఏవీ బబుల్ కావు"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"సంభాషణలు"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ఈ కిందవి తప్ప అన్ని సంభాషణలు బబుల్ చేయగలవు"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"ఈ సంభాషణ కోసం బబుల్స్‌ను ఆఫ్ చేయండి"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"ఈ సంభాషణ కోసం బబుల్స్‌ను ఆన్ చేయండి"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"స్వైప్ చర్యలు"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"తీసివేయడానికి కుడికి, మెనూను చూపడానికి ఎడమకు స్వైప్ చేయండి"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"తీసివేయడానికి ఎడమకు, మెనూను చూపడానికి కుడికి స్వైప్ చేయండి"</string>
@@ -3628,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ఈ యాప్‌లను కనెక్ట్ చేయండి"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"కనెక్ట్ చేసిన యాప్‌లకు అనుమతులు కూడా ఇవ్వబడతాయి, అలాగే ఒకదాని డేటాను మ‌రొక‌టి యాక్సెస్ చేయగలుగుతాయి."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"మీ IT అడ్మిన్‌తో అవి వ్యక్తిగత డేటాను షేర్ చేయవని మీరు విశ్వసించే యాప్‌లను మాత్రమే కనెక్ట్ చేయండి."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"మీరు యాప్‌లను మీ పరికర గోప్యతా సెట్టింగ్‌లలో ఎప్పుడైనా డిస్‌కనెక్ట్ చేయవచ్చు."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"మీ వ్యక్తిగత డేటాకు సంబంధించి <xliff:g id="NAME">%1$s</xliff:g>ని విశ్వసిస్తారా?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"మీ IT అడ్మిన్‌తో అవి వ్యక్తిగత డేటాను షేర్ చేయవని మీరు విశ్వసించే యాప్‌లను మాత్రమే కనెక్ట్ చేయండి."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"యాప్ డేటా"</string>
@@ -3809,8 +3815,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> అంతరాయం కలిగించవచ్చు</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"మరో <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"యాప్‌లు"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"అన్ని నోటిఫికేషన్‌లు"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"కొన్ని నోటిఫికేషన్‌లు"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"అంతరాయం కలిగించ గల నోటిఫికేషన్‌లు"</string>
@@ -3948,6 +3953,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"అనుమతులు మంజూరు కాలేదు"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"అనుమతులేవీ రిక్వెస్ట్ చేయలేదు"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"మీ డేటాకు యాప్ యాక్సెస్‌ను నియంత్రించండి"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"అన్ని యాప్‌లు"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ఇన్‌స్టాల్ చేసిన యాప్‌లు"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"తక్షణ యాప్‌లు"</string>
@@ -4909,8 +4915,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"గోప్యమైన కంటెంట్"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"లాక్ చేయబడి ఉన్నప్పుడు కార్డ్‌లను, నియంత్రణలను చూపు"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"లాక్ చేసి ఉన్నప్పుడు నియంత్రణలు చూపించు"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"లాక్ చేసి ఉన్నప్పుడు కార్డ్‌లను చూపించండి"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"లాక్ చేయబడి ఉన్నప్పుడు కార్డ్‌లను, నియంత్రణలను దాచు"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"ఉపయోగించడానికి, ముందుగా స్క్రీన్ లాక్‌ను సెట్ చేయండి"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"పరికరం నియంత్రణలను చూపించు"</string>
@@ -4928,8 +4933,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIMలను ఉపయోగిస్తున్నప్పుడు, ఈ టాబ్లెట్ 4Gకి పరిమితం చేయబడుతుంది. "<annotation id="url">"మరింత తెలుసుకోండి"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIMలను ఉపయోగిస్తున్నప్పుడు, ఈ పరికరం 4Gకి పరిమితం చేయబడుతుంది. "<annotation id="url">"మరింత తెలుసుకోండి"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"కాష్ చేయబడిన యాప్‌ల అమలును సస్పెండ్ చేయండి"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"సెట్టింగ్‌లలో స్క్రీన్ ఓవర్‌లేలను అనుమతించండి"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"సెట్టింగ్‌లలోకి వెళ్లి, ఇతర యాప్‌లపై స్క్రీన్ ఓవర్‌లే పద్ధతిలో కనిపించదగ్గ యాప్‌లకు అనుమతినివ్వండి"</string>
 </resources>
