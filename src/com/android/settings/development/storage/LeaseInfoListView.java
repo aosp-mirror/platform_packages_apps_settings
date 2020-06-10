@@ -23,8 +23,10 @@ import android.app.blob.BlobStoreManager;
 import android.app.blob.LeaseInfo;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -90,6 +92,7 @@ public class LeaseInfoListView extends ListActivity {
     private LinearLayout getHeaderView() {
         final LinearLayout headerView = (LinearLayout) mInflater.inflate(
                 R.layout.blob_list_item_view , null);
+        headerView.setEnabled(false); // disable clicking
         final TextView blobLabel = headerView.findViewById(R.id.blob_label);
         final TextView blobId = headerView.findViewById(R.id.blob_id);
         final TextView blobExpiry = headerView.findViewById(R.id.blob_expiry);
@@ -137,9 +140,12 @@ public class LeaseInfoListView extends ListActivity {
     }
 
     private class LeaseListAdapter extends ArrayAdapter<LeaseInfo> {
+        private Context mContext;
+
         LeaseListAdapter(Context context) {
             super(context, 0);
 
+            mContext = context;
             final List<LeaseInfo> leases = mBlobInfo.getLeases();
             if (CollectionUtils.isEmpty(leases)) {
                 return;
@@ -152,8 +158,17 @@ public class LeaseInfoListView extends ListActivity {
             final LeaseInfoViewHolder holder = LeaseInfoViewHolder.createOrRecycle(
                     mInflater, convertView);
             convertView = holder.rootView;
+            convertView.setEnabled(false); // disable clicking
 
             final LeaseInfo lease = getItem(position);
+            Drawable appIcon;
+            try {
+                appIcon = mContext.getPackageManager().getApplicationIcon(lease.getPackageName());
+            } catch (PackageManager.NameNotFoundException e) {
+                // set to system default app icon
+                appIcon = mContext.getDrawable(android.R.drawable.sym_def_app_icon);
+            }
+            holder.appIcon.setImageDrawable(appIcon);
             holder.leasePackageName.setText(lease.getPackageName());
             holder.leaseDescription.setText(getDescriptionString(lease));
             holder.leaseExpiry.setText(getString(R.string.accessor_expires_text,
