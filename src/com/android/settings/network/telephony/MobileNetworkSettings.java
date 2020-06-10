@@ -32,10 +32,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.development.featureflags.FeatureFlagPersistent;
@@ -48,16 +51,19 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class MobileNetworkSettings extends RestrictedDashboardFragment {
+public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     private static final String LOG_TAG = "NetworkSettings";
     public static final int REQUEST_CODE_EXIT_ECM = 17;
@@ -117,14 +123,14 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                 MobileNetworkUtils.getSearchableSubscriptionId(context));
+        Log.i(LOG_TAG, "display subId: " + mSubId);
 
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-            mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return Arrays.asList(
-                    new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
-                            this, mSubId));
+        if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return Arrays.asList();
         }
-        return Arrays.asList();
+        return Arrays.asList(
+                new DataUsageSummaryPreferenceController(getActivity(), getSettingsLifecycle(),
+                        this, mSubId));
     }
 
     @Override
@@ -185,12 +191,17 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         Log.i(LOG_TAG, "onCreate:+");
+
+        final TelephonyStatusControlSession session =
+                setTelephonyAvailabilityStatus(getPreferenceControllersAsList());
+
         super.onCreate(icicle);
         final Context context = getContext();
-
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mTelephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+
+        session.close();
 
         onRestoreInstance(icicle);
     }
@@ -250,8 +261,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             final MenuItem item = menu.add(Menu.NONE, R.id.edit_sim_name, Menu.NONE,
                     R.string.mobile_network_sim_name);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
@@ -262,8 +272,7 @@ public class MobileNetworkSettings extends RestrictedDashboardFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        if (FeatureFlagPersistent.isEnabled(getContext(), FeatureFlags.NETWORK_INTERNET_V2) &&
-                mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+        if (SubscriptionManager.isValidSubscriptionId(mSubId)) {
             if (menuItem.getItemId() == R.id.edit_sim_name) {
                 RenameMobileNetworkDialogFragment.newInstance(mSubId).show(
                         getFragmentManager(), RenameMobileNetworkDialogFragment.TAG);

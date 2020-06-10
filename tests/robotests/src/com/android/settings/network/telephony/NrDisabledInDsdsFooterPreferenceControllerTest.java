@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
@@ -42,6 +43,8 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     private Context mContext;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
     private NrDisabledInDsdsFooterPreferenceController mController;
 
     @Before
@@ -49,6 +52,8 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(Context.TELEPHONY_SERVICE);
+        doReturn(mSubscriptionManager).when(mContext).getSystemService(
+                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(anyInt());
         mController = new NrDisabledInDsdsFooterPreferenceController(mContext, PREF_KEY);
     }
@@ -62,7 +67,7 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     public void isAvailable_dataOnAndDsdsAnd5GSupported_Available() {
         when(mTelephonyManager.getSupportedRadioAccessFamily())
                 .thenReturn(TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-        when(mTelephonyManager.getActiveModemCount()).thenReturn(2);
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[] {1, 2});
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         mController.init(SUB_ID);
         assertThat(mController.isAvailable()).isTrue();
@@ -72,7 +77,7 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     public void isAvailable_5gNotSupported_notAvailable() {
         when(mTelephonyManager.getSupportedRadioAccessFamily())
                 .thenReturn(TelephonyManager.NETWORK_TYPE_BITMASK_LTE);
-        when(mTelephonyManager.getActiveModemCount()).thenReturn(2);
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[] {1, 2});
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         mController.init(SUB_ID);
         assertThat(mController.isAvailable()).isFalse();
@@ -82,7 +87,7 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     public void isAvailable_mobileDataOff_notAvailable() {
         when(mTelephonyManager.getSupportedRadioAccessFamily())
                 .thenReturn(TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-        when(mTelephonyManager.getActiveModemCount()).thenReturn(2);
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[] {1, 2});
         when(mTelephonyManager.isDataEnabled()).thenReturn(false);
         mController.init(SUB_ID);
         assertThat(mController.isAvailable()).isFalse();
@@ -92,7 +97,7 @@ public class NrDisabledInDsdsFooterPreferenceControllerTest {
     public void isAvailable_singleSimMode_notAvailable() {
         when(mTelephonyManager.getSupportedRadioAccessFamily())
                 .thenReturn(TelephonyManager.NETWORK_TYPE_BITMASK_NR);
-        when(mTelephonyManager.getActiveModemCount()).thenReturn(1);
+        when(mSubscriptionManager.getActiveSubscriptionIdList()).thenReturn(new int[] {1});
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
         mController.init(SUB_ID);
         assertThat(mController.isAvailable()).isFalse();

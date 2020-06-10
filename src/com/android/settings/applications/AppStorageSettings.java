@@ -311,11 +311,10 @@ public class AppStorageSettings extends AppInfoWithHeader
             if (appHasSpaceManagementUI) {
                 mButtonsPref.setButton1Text(R.string.manage_space_text);
             } else {
-                mButtonsPref
-                        .setButton1Text(R.string.clear_user_data_text)
-                        .setButton1Icon(R.drawable.ic_settings_delete);
+                mButtonsPref.setButton1Text(R.string.clear_user_data_text);
             }
-            mButtonsPref.setButton1OnClickListener(v -> handleClearDataClick());
+            mButtonsPref.setButton1Icon(R.drawable.ic_settings_delete)
+                    .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
         if (mAppsControlDisallowedBySystem) {

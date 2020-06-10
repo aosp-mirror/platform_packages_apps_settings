@@ -89,7 +89,8 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
                     /* initialPid= */ -1,
                     getCallingAppPackageName(activityToken),
                     userId,
-                    message);
+                    message,
+                    false);
         } catch (RemoteException e) {
             Log.v(TAG, "Could not talk to activity manager.", e);
         }

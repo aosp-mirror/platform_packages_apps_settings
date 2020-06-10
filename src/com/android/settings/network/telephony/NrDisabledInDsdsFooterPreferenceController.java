@@ -17,10 +17,17 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.Intent;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.preference.Preference;
+
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.HelpUtils;
+
 
 /**
  * Class to show the footer that can't connect to 5G when device is in DSDS mode.
@@ -44,6 +51,29 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
     }
 
     @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        if (preference != null) {
+            preference.setTitle(getFooterText());
+        }
+    }
+
+    private CharSequence getFooterText() {
+        final Intent helpIntent = HelpUtils.getHelpIntent(mContext,
+                mContext.getString(R.string.help_uri_5g_dsds),
+                mContext.getClass().getName());
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(mContext,
+                "url", helpIntent);
+
+        if (linkInfo.isActionable()) {
+            return AnnotationSpan.linkify(mContext.getText(R.string.no_5g_in_dsds_text), linkInfo);
+        } else {
+            return mContext.getText(R.string.no_5g_in_dsds_text);
+        }
+    }
+
+    @Override
     public int getAvailabilityStatus() {
         if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             return CONDITIONALLY_UNAVAILABLE;
@@ -52,13 +82,18 @@ public class NrDisabledInDsdsFooterPreferenceController extends BasePreferenceCo
         final TelephonyManager teleManager = ((TelephonyManager)
                 mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .createForSubscriptionId(mSubId);
+        final SubscriptionManager subManager = ((SubscriptionManager)
+                mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE));
+        final int[] activeSubIdList = subManager.getActiveSubscriptionIdList();
+        final int activeSubCount = activeSubIdList == null ? 0 : activeSubIdList.length;
         // Show the footer only when DSDS is enabled, and mobile data is enabled on this SIM, and
         // 5G is supported on this device.
-        if (!teleManager.isDataEnabled() || teleManager.getActiveModemCount() < 2
-                || !is5GSupportedByRadio(teleManager)) {
+        if (teleManager.isDataEnabled() && activeSubCount >= 2 && is5GSupportedByRadio(teleManager)
+                && !teleManager.canConnectTo5GInDsdsMode()) {
+            return AVAILABLE;
+        } else {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        return AVAILABLE;
     }
 
     private boolean is5GSupportedByRadio(TelephonyManager tm) {
