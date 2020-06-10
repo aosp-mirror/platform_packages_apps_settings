@@ -93,11 +93,13 @@ public class LeaseInfoListView extends ListActivity {
         final TextView blobLabel = headerView.findViewById(R.id.blob_label);
         final TextView blobId = headerView.findViewById(R.id.blob_id);
         final TextView blobExpiry = headerView.findViewById(R.id.blob_expiry);
+        final TextView blobSize = headerView.findViewById(R.id.blob_size);
 
         blobLabel.setText(mBlobInfo.getLabel());
         blobLabel.setTypeface(Typeface.DEFAULT_BOLD);
         blobId.setText(getString(R.string.blob_id_text, mBlobInfo.getId()));
         blobExpiry.setVisibility(View.GONE);
+        blobSize.setText(SharedDataUtils.formatSize(mBlobInfo.getSizeBytes()));
         return headerView;
     }
 
