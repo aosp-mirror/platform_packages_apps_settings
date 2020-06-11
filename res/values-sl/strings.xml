@@ -785,6 +785,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Izberite največje dovoljeno število povezanih zvočnih naprav Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Predvajanje"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrcaljenje"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Omogočanje brezžičnega zaslona"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"V bližini ni naprav."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Povezovanje"</string>
@@ -1477,6 +1478,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Razišči"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Sprostitev prostora"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Upravljanje shrambe"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"brisanje, shramba"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Povezava USB z računalnikom"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Vzpostavi povezavo kot"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Predstavnostna naprava (MTP)"</string>
@@ -1890,7 +1892,12 @@
     <string name="install_applications" msgid="3921609656584369901">"Neznani viri"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Dovoli vse vire aplikacij"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedavno odprte aplikacije"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Prikaži vse aplikacije (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Prikaz vseh aplikacij (%1$d)</item>
+      <item quantity="two">Prikaz vseh aplikacij (%1$d)</item>
+      <item quantity="few">Prikaz vseh aplikacij (%1$d)</item>
+      <item quantity="other">Prikaz vseh aplikacij (%1$d)</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Obrnite se na skrbnika za IT"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Lahko vam pomaga ponastaviti kodo PIN, vzorec ali geslo"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Neznane aplikacije lažje napadejo tablični računalnik in osebne podatke v njem. Če namestite aplikacije iz tega vira, se strinjate, da ste sami odgovorni za morebitno škodo, nastalo v tabličnem računalniku, ali izgubo podatkov, ki je lahko posledica uporabe teh aplikacij."</string>
@@ -2067,6 +2074,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Jezik"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tipkovnice"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Zaslonska tipkovnica"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Razpoložljiva zaslonska tipkovnica"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljanje zaslonskih tipkovnic"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Pomoč za tipkovnico"</string>
@@ -2155,7 +2163,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Nastavitve podnapisov"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Povečava"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Območje povečave"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Omogočanje povečave"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Izberite eno ali več območij povečave, na katerih naj se izvede povečava zaslona"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Celotni zaslon"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Del zaslona"</string>
@@ -3383,6 +3390,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Privzeti zvok obvestila"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Privzeti zvok alarma"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibriranje za klice"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibriranje"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Brez vibriranja"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vedno vibriranje"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Najprej vibriranje, nato postopno zvonjenje"</string>
@@ -3418,7 +3426,7 @@
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Časovni razporedi"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Brisanje razporedov"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Izbriši"</string>
-    <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Urejanje"</string>
+    <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Uredi"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Razporedi"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Razpored"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Časovni razpored"</string>
@@ -3569,16 +3577,14 @@
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Prekliči"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno / pogovori so lahko prikazani kot lebdeče ikone"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Omogočanje aplikacijam, da prikažejo oblačke"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nekateri pogovori bodo prikazani kot lebdeče ikone nad drugimi aplikacijami"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nekateri pogovori bodo prikazani kot lebdeče ikone na drugih aplikacijah"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Vsi pogovori so lahko prikazani v oblačkih"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Izbrani pogovori so lahko prikazani v oblačkih"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Nič ne sme biti prikazano v oblačkih"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Pogovori"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Vsi pogovori so lahko prikazani v oblačkih razen"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Izklop oblačkov za ta pogovor"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Vklop oblačkov za ta pogovor"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Dejanja vlečenja"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Povlecite desno za opustitev ali levo za prikaz menija"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Povlecite levo za opustitev ali desno za prikaz menija"</string>
@@ -3728,6 +3734,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Poveži te aplikacije"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Povezane aplikacije si delijo dovoljenja in imajo dostop do podatkov z njimi povezanih aplikacij."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Aplikaciji povežite le, če ste prepričani, da ne bosta delili osebnih podatkov s skrbnikom za IT."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Ali želite delovni aplikaciji <xliff:g id="NAME">%1$s</xliff:g> zaupati osebne podatke?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Aplikaciji povežite le, če ste prepričani, da ne bosta delili osebnih podatkov s skrbnikom za IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Podatki aplikacij"</string>
@@ -3832,7 +3840,7 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Vsak dan"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarm lahko razveljavi končni čas"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Razpored se izklopi, ko zazvoni alarm"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Vedenje načina »ne moti«"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Vedenje načina »Ne moti«"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Uporabi privzete nastavitve"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Ustvarite nastavitve po meri za ta razpored"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Za »<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>«"</string>
@@ -3925,8 +3933,7 @@
       <item quantity="other">Preglasitev dovoljena za: <xliff:g id="APP_NAMES">%s</xliff:g></item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Še <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplikacije"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Vsa obvestila"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Nekatera obvestila"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Obvestila, ki lahko preglasijo"</string>
@@ -3988,9 +3995,9 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Vklopljeno"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Izklopljeno"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pripenjanje aplikacije"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite varno deliti svojo napravo z drugimi, namesto tega uporabite gosta. \n\nČe želite uporabiti pripenjanje aplikacije, storite to: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Ko je aplikacija pripeta: \n\n•	Dostopni so lahko osebni podatki \n		(na primer stiki in vsebina e-poštnih sporočil). \n•		Pripeta aplikacija lahko odpre druge aplikacije. \n\nPripenjanje aplikacije uporabite le za osebe, ki jim zaupate."</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite uporabiti pripenjanje aplikacije: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Pripenjanje aplikacije omogoča, da trenutna aplikacija ostane vidna, dokler je ne odpnete. To funkcijo lahko na primer uporabite, če želite prijatelju, ki mu zaupate, dovoliti igranje določene igre. \n\nKo je aplikacija pripeta, lahko ta odpre druge aplikacije, prav tako pa so lahko dostopni osebni podatki. \n\nČe želite varno deliti svojo napravo z drugimi, namesto tega uporabite gosta. \n\nČe želite uporabiti pripenjanje aplikacije: 	\n1.	Vklopite pripenjanje aplikacije. 	\n2.	Odprite »Pregled«. 	\n3.	Dotaknite se ikone aplikacije na vrhu zaslona, nato pa se dotaknite »Pripni«."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Ko je aplikacija pripeta: \n\n• Dostopni so lahko osebni podatki \n (na primer stiki in vsebina e-poštnih sporočil). \n• Pripeta aplikacija lahko odpre druge aplikacije. \n\nPripenjanje aplikacij uporabite le za osebe, ki jim zaupate."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pred odpenjanjem vprašaj za vzorec za odklepanje"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Zahtevaj PIN pred odpenjanjem"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred odpenjanjem vprašaj za geslo"</string>
@@ -4076,6 +4083,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ni odobrenih dovoljenj"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ni zahtevanih dovoljenj"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Vse aplikacije"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Nameščene aplikacije"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Nenamestljive aplikacije"</string>
@@ -4630,6 +4639,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekund"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"dosegljivost"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Če želite preveriti uro, obvestila in druge informacije, se dvakrat dotaknite zaslona."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Preverjanje telefona s prijemom"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Primite tablični računalnik, da ga preverite"</string>
@@ -5097,8 +5107,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Občutljiva vsebina"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Prikaži kartice in kontrolnike na zaklenjenem zaslonu"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Prikaži kontrolnike na zaklenjenem zaslonu"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Prikaz kartic, ko je zaslon zaklenjen"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Skrij kartice in kontrolnike na zaklenjenem zaslonu"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Za uporabo najprej nastavite zaklepanje zaslona"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Prikaži kontrolnike naprave"</string>
@@ -5116,8 +5125,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ko uporabljate dve kartici SIM, lahko ta tablični računalnik vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ko uporabljate dve kartici SIM, lahko ta naprava vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Začasno onemogočenje izvajanja za predpomnjene aplikacije"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Dovoli prekrivanje zaslonov z nastavitvami"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Dovoli aplikacijam, ki lahko prekrivajo druge aplikacije, prekrivanje zaslonov v aplikaciji Nastavitve"</string>
 </resources>

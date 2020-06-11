@@ -67,7 +67,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"검색 가능 제한시간"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"잠금 시 음성 다이얼링"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"화면 잠금 시 블루투스 다이얼러 사용 방지"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"블루투스 장치"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"블루투스 기기"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"기기 이름"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"기기 설정"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"프로필 설정"</string>
@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"연결된 블루투스 오디오 기기의 최대 개수"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"연결된 블루투스 오디오 기기의 최대 개수 선택"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"전송"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"미러링"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"무선 디스플레이 사용"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"근처에 기기가 없습니다."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"연결 중"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"탐색"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"기기 여유 공간 확보"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"저장용량 관리"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"삭제, 저장용량"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB 컴퓨터 연결"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"다음으로 연결"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"미디어 기기(MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"알 수 없는 소스"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"모든 앱 소스 허용"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"최근 실행한 앱"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"앱 <xliff:g id="COUNT">%1$d</xliff:g>개 모두 보기"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">앱 %1$d개 모두 보기</item>
+      <item quantity="one">앱 모두 보기</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"IT 관리자에게 문의하세요"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PIN, 패턴 또는 비밀번호 재설정에 도움을 받을 수 있습니다."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"태블릿과 개인 데이터는 알 수 없는 앱의 공격에 더욱 취약합니다. 이 소스에서 가져온 앱을 설치하면 앱 사용으로 인해 발생할 수 있는 태블릿의 손상 및 데이터 손실에 책임을 진다는 데 동의하게 됩니다."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"언어"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"키보드"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"터치 키보드"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"키보드 지원"</string>
@@ -2109,7 +2115,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"자막 환경설정"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"확대"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"확대 영역"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"확대 사용 설정"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"화면 확대 시 사용할 확대 영역 선택"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"전체 화면"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"화면 일부"</string>
@@ -3297,6 +3302,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"기본 알림 소리"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"기본 알람 소리"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"전화 수신 시 진동"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"진동"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"진동 안함"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"항상 진동"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"먼저 진동한 다음 점차 벨소리 크게"</string>
@@ -3480,13 +3486,11 @@
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"일부 대화가 다른 앱 위에 플로팅 아이콘으로 표시됩니다."</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"모든 대화를 대화창으로 표시할 수 있음"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"선택한 대화를 대화창으로 표시할 수 있음"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"어떤 대화도 버블로 표시하지 않음"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"어떤 대화도 대화창으로 표시하지 않음"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"대화"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"다음을 제외한 모든 대화에서 대화창 사용 가능"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"이 대화의 대화창 사용 중지"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"이 대화의 대화창 사용 설정"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"스와이프 동작"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"오른쪽으로 스와이프하여 닫기, 왼쪽으로 스와이프하여 메뉴 표시"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"왼쪽으로 스와이프하여 닫기, 오른쪽으로 스와이프하여 메뉴 표시"</string>
@@ -3507,7 +3511,7 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"잠금 화면, 잠금화면, 건너뛰기, 우회"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"직장 프로필이 잠긴 경우"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"잠금 화면에 표시할 알림"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"기본값 및 무음으로 설정된 대화 표시"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"모든 대화와 기본 및 무음 알림 표시"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"무음 대화 및 알림 숨기기"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"모든 알림 표시하지 않음"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"민감한 알림"</string>
@@ -3545,7 +3549,7 @@
       <item quantity="one">우선순위 대화 <xliff:g id="COUNT_0">%d</xliff:g>개</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"우선순위 대화"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"대화 섹션 상단에 떠다니는 버블로 표시"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"대화 섹션 상단에 플로팅 대화창으로 표시"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"대화 섹션의 상단에 표시"</string>
     <string name="other_conversations" msgid="7218658664423361043">"기타 대화"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"변경한 대화"</string>
@@ -3569,8 +3573,8 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"우선순위"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"대화 섹션 상단의 플로팅 대화창 또는 잠금 화면의 프로필 사진으로 표시됩니다."</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 대부분의 대화 기능을 지원하지 않습니다. 대화를 우선순위로 지정할 수 없으며 대화가 플로팅 대화창으로 표시되지 않습니다."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 대부분의 대화 기능을 지원하지 않습니다. 대화의 우선순위 설정이 불가하며 대화가 플로팅 대화창으로 표시되지 않습니다."</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 최소화합니다."</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"소리 또는 진동 없음"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"소리나 진동이 울리지 않으며 대화 섹션 하단에 표시됨"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"휴대전화 설정에 따라 벨소리나 진동이 울릴 수 있음"</string>
@@ -3618,18 +3622,20 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"PIP 모드"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"PIP 모드 허용"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"앱이 열려 있을 때나 사용자가 앱에서 나갔을 때 이 앱에서 PIP 창을 표시하도록 허용합니다(예: 동영상 시청을 계속하기 위해). 이 창은 사용 중인 다른 앱 위에 표시됩니다."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"직장 및 개인 통합 앱"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"직장 및 개인 앱 연결"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"연결됨"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"연결되지 않음"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"연결된 앱이 없음"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"프로필 간 연결된 앱 앱 직장 및 개인"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"직장 및 개인 통합 앱"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"직장 및 개인 앱 연결"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"연결됨"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"앱 연결"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"연결된 앱이 권한을 공유하고 서로의 데이터에 액세스할 수 있습니다."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"IT 관리자와 내 개인 정보를 공유하지 않는다고 신뢰하는 앱만 연결하세요."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"직장의 <xliff:g id="NAME">%1$s</xliff:g> 앱이 개인 정보에 액세스해도 괜찮습니까?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"IT 관리자와 내 개인 정보를 공유하지 않는다고 신뢰하는 앱만 연결하세요."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"연결된 앱은 권한을 공유하고 서로의 데이터에 액세스할 수도 있습니다."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"앱이 내 개인 정보를 IT 관리자와 공유하지 않을 것이라고 믿는 경우에만 연결하세요."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"직장용 <xliff:g id="NAME">%1$s</xliff:g> 앱이 개인 정보에 액세스해도 괜찮습니까?"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"앱이 내 개인 정보를 IT 관리자와 공유하지 않을 것이라고 믿는 경우에만 연결하세요."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"앱 데이터"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"이 앱은 개인용 <xliff:g id="NAME">%1$s</xliff:g> 앱의 데이터에 액세스할 수 있습니다."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"권한"</string>
@@ -3713,7 +3719,7 @@
     <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"응답: <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"모든 캘린더"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"응답"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"예, 미정, 또는 응답하지 않음"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"예, 미정 또는 응답하지 않음"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"예 또는 미정"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"예"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"규칙을 찾을 수 없습니다."</string>
@@ -3732,7 +3738,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>~<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>부터 <xliff:g id="END">%2$s</xliff:g>까지"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"대화"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"예외 대화"</string>
+    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"방해할 수 있는 대화"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"모든 대화"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"우선순위 대화"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"없음"</string>
@@ -3741,12 +3747,12 @@
       <item quantity="one">대화 1개</item>
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"없음"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"예외 사용자"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"방해할 수 있는 사용자"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"통화"</string>
-    <string name="zen_mode_calls" msgid="7653245854493631095">"통화"</string>
+    <string name="zen_mode_calls" msgid="7653245854493631095">"전화"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"전화"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"예외 전화"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"허용된 통화를 놓치지 않도록 기기가 벨소리로 설정되어 있는지 확인하세요."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"허용된 전화를 놓치지 않도록 기기가 벨소리로 설정되어 있는지 확인하세요."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"별표 표시한 연락처"</string>
     <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
@@ -3809,8 +3815,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> 예외</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"외 <xliff:g id="NUMBER">%d</xliff:g>개"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"앱"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"모든 알림"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"일부 알림"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"예외 알림"</string>
@@ -3946,6 +3951,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"부여된 권한이 없습니다."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"요청한 권한 없음"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"모든 앱"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"설치된 앱"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"인스턴트 앱"</string>
@@ -4470,6 +4477,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12초"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"한 손 사용 가능 여부"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"시간, 알림, 기타 정보를 확인하려면 화면을 두 번 탭하세요."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"들어 올려 휴대전화 확인"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"들어서 태블릿 확인"</string>
@@ -4910,15 +4918,14 @@
     <string name="power_menu_setting_name" msgid="7843519296976254765">"전원 메뉴"</string>
     <string name="power_menu_setting_title" msgid="7716546106215378956">"전원 버튼 메뉴"</string>
     <string name="power_menu_cards_passes" msgid="1707852019651773645">"카드 및 패스 보기"</string>
-    <string name="power_menu_device_controls" msgid="5114816270328063924">"기기 제어 표시"</string>
+    <string name="power_menu_device_controls" msgid="5114816270328063924">"기기 컨트롤 표시"</string>
     <string name="power_menu_cards_passes_device_controls" msgid="8645794247280620106">"카드, 패스 및 기기 제어 표시"</string>
     <string name="power_menu_lock_screen_category" msgid="1478249026305417128">"잠금 화면"</string>
     <string name="power_menu_none" msgid="4620640577918731270">"아무 콘텐츠도 표시 안함"</string>
     <string name="power_menu_privacy" msgid="7900052501075197854">"민감한 콘텐츠"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"잠겨 있을 때 카드 및 컨트롤 표시"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"잠금 상태일 때 컨트롤 표시"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"잠금 상태일 때 카드 표시"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"잠겨 있을 때 카드 및 컨트롤 숨기기"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"이 기능을 사용하려면 먼저 화면 잠금을 설정하세요."</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"기기 제어 표시"</string>
@@ -4936,8 +4943,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"SIM 2개를 사용하는 경우 이 태블릿은 4G로 제한됩니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"SIM 2개를 사용하는 경우 이 기기는 4G로 제한됩니다. "<annotation id="url">"자세히 알아보기"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"캐시된 앱 실행 정지"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"설정에서 화면 오버레이 허용"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"다른 앱 위에 표시할 수 있는 앱이 설정 화면을 오버레이하도록 허용합니다."</string>
 </resources>

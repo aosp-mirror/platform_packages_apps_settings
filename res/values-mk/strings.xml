@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимален број аудиоуреди поврзани преку Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Изберете го максималниот број аудиоуреди поврзани преку Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Емитувај"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"огледало"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Овозможи приказ на безжични мрежи"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Не се пронајдени уреди во близина."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Се поврзува"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Разгледајте"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Ослободи простор"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Управувајте со капацитетот"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"чист, простор"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB врска со компјутер"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Поврзи како"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Медиумски уред (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Непознати извори"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Дозв. ги сите изв. на аплик."</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Неодамна отворени апликации"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Видете ги сите апликации (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Покажи ги сите %1$d апликации</item>
+      <item quantity="other">Покажи ги сите %1$d апликации</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Контактирајте со IT-администраторот"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Може да ви помогне да го ресетирате вашиот PIN, шемата или лозинката"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Вашиот таблет и личните податоци се повеќе подложни на напади од апликации од непознати извори. Ако инсталирате апликации од изворов, се согласувате дека сте одговорни за каква било штета на таблетот или губењето податоци што може да произлезат од користењето на овие апликации."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Јазик"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Тастатури"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Тастатура на екран"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Достапна тастатура на екран"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управувајте со тастатури на екран"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Помош за тастатура"</string>
@@ -2109,7 +2115,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Поставки за титлови"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Зголемување"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Област на зголемување"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Овозможи зголемување"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Изберете ја областа на зголемување што сакате да ја користите кога се зголемува екранот"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Цел екран"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Дел од екранот"</string>
@@ -3297,6 +3302,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Стандарден звук за известување"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Стандарден звук за аларм"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Вибрирај за повици"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Вибрации"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Никогаш не вибрирај"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Секогаш вибрирај"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Прво вибрирај, па ѕвони постепено"</string>
@@ -3483,10 +3489,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Ниеден разговор не може да биде во балонче"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Разговори"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Сите разговори може да прикажуваат балончиња, освен"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Исклучете меурчиња за разговоров"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Вклучете меурчиња за разговоров"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Дејства со повлекување"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Влечи надесно за да го отфрлам; налево за да го прикажам менито"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Влечи налево за да го отфрлам; надесно за да го прикажам менито"</string>
@@ -3507,9 +3511,9 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Заклучен екран, прескокни, заобиколи"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"При заклучен работен профил"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Известувања на заклучен екран"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Покажи разговори, стандардни и тивки"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Сокриј ги тивките разговори и нотификации"</string>
-    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не покажувај какви било известувања"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Покажи разговори, стандардни и безгласни"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Сокриј ги безгласните разговори и нотификации"</string>
+    <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не покажувај никакви известувања"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Чувствителни известувања"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Прикажувај чувствителни содржини кога е заклучен"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Чувствителни известувања на работниот профил"</string>
@@ -3563,13 +3567,13 @@
     <string name="notification_importance_default_title" msgid="8875198696330289686">"Висока"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"Појави ги на екранот"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Блокирај"</string>
-    <string name="notification_silence_title" msgid="4085829874452944989">"Тивко"</string>
+    <string name="notification_silence_title" msgid="4085829874452944989">"Безгласно"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"Стандардно"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Дозволете прекини"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Дозволете апликацијата да испушта звуци, да вибрира и/или пак, појавни известувања на екранот"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Приоритет"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Се појавува на горниот дел од секцијата на разговорот во вид на лебдечко меурче, покажувајќи ја профилната слика на заклучениот екран"</string>
-    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> не ги подржува повеќето одлики за разговор. Не можете да поставите разговор како приоритет и разговорите нема да се појавуваат во вид на лебдечки меурчиња."</string>
+    <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> не ги поддржува повеќето функции за разговор. Не можете да поставите разговор како приоритет и разговорите нема да се појавуваат во вид на лебдечки меурчиња."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Собери ги известувањата во еден ред во списокот со известувања"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Без звук или вибрации"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Без звук или вибрации и се појавува под делот за разговор"</string>
@@ -3628,6 +3632,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Поврзи ги апликацииве"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Поврзаните апликации споделуваат дозволи и може да пристапуваат до податоците од апликациите со коишто се поврзани."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Поврзувајте апликации само ако имате доверба дека нема да споделуваат лични податоци со IT-администраторот."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Дали ќе ѝ ги доверите личните податоци на работната апликација <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Поврзувајте апликации само ако имате доверба дека нема да споделуваат лични податоци со IT-администраторот."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Податоци од апликациите"</string>
@@ -3697,7 +3703,7 @@
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Додај распоред за време"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Избришете го распоредот"</string>
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Изберете тип распоред"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Избриши правило за „<xliff:g id="RULE">%1$s</xliff:g>“?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Да се избрише правилото „<xliff:g id="RULE">%1$s</xliff:g>“?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Избриши"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Непознато"</string>
     <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Поставкиве не може да се променат во моментов. Дадена апликација (<xliff:g id="APP_NAME">%1$s</xliff:g>) го вклучи режимот „Не вознемирувај“ автоматски со приспособено однесување."</string>
@@ -3809,8 +3815,7 @@
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> може да го прекинуваат</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"уште <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Апликации"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Сите известувања"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Некои известувања"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Известувања што може да прекинуваат"</string>
@@ -3946,6 +3951,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Не се доделени дозволи"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Не се побарани дозволи"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Сите апликации"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Инсталирани апликации"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Инстант апликации"</string>
@@ -4470,6 +4477,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 секунди"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"дофатливост"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"За да ги проверите времето, известувањата и другите информации, допрете двапати на екранот."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Подигни за проверка на телефонот"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Подигнете за да го проверите таблетот"</string>
@@ -4917,8 +4925,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Чувствителни содржини"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Прикажувај ги картичките и контролите кога е заклучен"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Прикажувај контроли кога е заклучен"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Прикажувај картички кога е заклучен"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Сокривај ги картичките и контролите кога е заклучен"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"За да користите, прво поставете заклучување екран"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Прикажувај контроли за уредите"</string>
@@ -4936,8 +4943,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ако користите две SIM-картички, таблетов ќе биде ограничен на 4G. "<annotation id="url">"Дознајте повеќе"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ако користите две SIM-картички, уредов ќе биде ограничен на 4G. "<annotation id="url">"Дознајте повеќе"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Прекинете го извршувањето на кешираните апликации"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволи преклопување на екраните на Поставки"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволи апликации што може да прикажуваат врз други апликации да ги преклопуваат екраните на Поставки"</string>
 </resources>

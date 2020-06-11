@@ -768,6 +768,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Pievienoto Bluetooth audioierīču maksimālais skaits"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Pievienoto Bluetooth audioierīču maksimālā skaita atlase"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Apraide"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spogulis"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Bezvadu attēlošanas iespējošana"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Tuvumā nav atrasta neviena ierīce."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Notiek savienojuma izveide."</string>
@@ -1456,6 +1457,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Pārlūkot"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Atbrīvot vietu"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Pārvaldīt krātuvi"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"notīrīt, krātuve"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB savienojums ar datoru"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Izveidot savienojumu kā"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Multivides ierīce (MTP)"</string>
@@ -1868,7 +1870,11 @@
     <string name="install_applications" msgid="3921609656584369901">"Nezināmi avoti"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Atļaut visus lietotņu avotus"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nesen atvērtās lietotnes"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Visu lietotņu (<xliff:g id="COUNT">%1$d</xliff:g>) skatīšana"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="zero">Skatīt visas %1$d lietotnes</item>
+      <item quantity="one">Skatīt visu %1$d lietotni</item>
+      <item quantity="other">Skatīt visas %1$d lietotnes</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Sazinieties ar savu IT administratoru"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Administrators var palīdzēt atiestatīt PIN, kombināciju vai paroli."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Jūsu planšetdators un personīgie dati ir neaizsargātāki pret nezināmu lietotņu uzbrukumiem. Instalējot no šī avota iegūtas lietotnes, jūs piekrītat, ka esat atbildīgs par jebkādiem planšetdatora bojājumiem vai datu zudumu, kas varētu rasties šo lietotņu izmantošanas dēļ."</string>
@@ -2044,6 +2050,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Valoda"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tastatūras"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Ekrāna tastatūra"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Pieejamā ekrāna tastatūra"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Pārvaldīt ekrāna tastatūru"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Palīdzība par tastatūru"</string>
@@ -2132,7 +2139,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Subtitru preferences"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Palielinājums"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Palielināšanas apgabals"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Palielināšanas iespējošana"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Izvēlieties vienu vai vairākus palielināmos apgabalus ekrāna palielināšanai"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Pilnekrāna režīms"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Ekrāna daļa"</string>
@@ -3340,6 +3346,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Paziņojuma noklusējuma skaņa"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Signāla noklusējuma skaņa"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrozvans"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibrācija"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Nekad nevibrēt"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vienmēr vibrēt"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vispirms vibrēt, tad pakāpeniski zvanīt"</string>
@@ -3529,10 +3536,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Saturu nevar rādīt burbuļos"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Sarunas"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Burbuļos var attēlot visas sarunas, izņemot"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Izslēgt burbuļus šai sarunai"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Ieslēgt burbuļus šai sarunai"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Vilkšanas darbības"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Vilkt pa labi, lai paslēptu izvēlni, vilkt pa kreisi, lai rādītu izvēlni"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Velciet pa kreisi, lai paslēptu izvēlni, velciet pa labi, lai to parādītu"</string>
@@ -3678,6 +3683,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Saistīt šīs lietotnes"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Saistītās lietotnes koplieto atļaujas un var piekļūt viena otras datiem."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Saistiet tikai uzticamas lietotnes, jo jūsu personas dati var tikt atklāti IT administratoram."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Varat jebkurā laikā atsaistīt lietotnes savas ierīces konfidencialitātes iestatījumos."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vai uzticat darba lietotnei <xliff:g id="NAME">%1$s</xliff:g> savus personīgos datus?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Saistiet tikai uzticamas lietotnes, jo jūsu personas dati var tikt atklāti IT administratoram."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Lietotņu dati"</string>
@@ -3867,8 +3873,7 @@
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> atļauts pārtraukt</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Vēl <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Lietotnes"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Visi paziņojumi"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Daži paziņojumi"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Paziņojumi, kas var traucēt"</string>
@@ -4011,6 +4016,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nav piešķirta neviena atļauja."</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nav pieprasīta neviena atļauja."</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Pārvaldiet lietotņu piekļuvi jūsu datiem"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Visas lietotnes"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalētās lietotnes"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Tūlītējās lietotnes"</string>
@@ -4550,6 +4556,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 sekundes"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"sasniedzamība"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Lai skatītu laiku, paziņojumus un citu informāciju, divreiz pieskarieties ekrānam."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Tālruņa pārbaude paceļot"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Planšetdatora pacelšana, lai skatītu paziņojumus"</string>
@@ -5007,8 +5014,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Sensitīvs saturs"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Rādīt kartes un vadīklas, kad bloķēta"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Rādīt vadīklas, kad ekrāns ir bloķēts"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Rādīt kartītes, kad ekrāns ir bloķēts"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Paslēpt kartes un vadīklas, kad bloķēta"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Lai to izmantotu, vispirms ir jāiestata ekrāna bloķēšana."</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Rādīt ierīču vadīklas"</string>
@@ -5026,8 +5032,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ja izmantojat 2 SIM kartes, šajā planšetdatorā varēs izveidot savienojumu tikai ar 4G. "<annotation id="url">"Uzziniet vairāk"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ja izmantojat 2 SIM kartes, šajā ierīcē varēs izveidot savienojumu tikai ar 4G. "<annotation id="url">"Uzziniet vairāk"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Kešatmiņā saglabāto lietotņu izpildes apturēšana"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Atļaut ekrānu pārklāšanu iestatījumos"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Atļaut lietotnēm, ko var rādīt pāri citām lietotnēm, pārklāt iestatījumu ekrānus"</string>
 </resources>
