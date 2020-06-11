@@ -77,9 +77,9 @@ public class EligibleCardCheckerTest {
 
     @Test
     public void isCardEligibleToDisplay_invalidScheme_returnFalse() {
-        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
+        final Uri invalidUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
 
-        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(sliceUri)))
+        assertThat(mEligibleCardChecker.isCardEligibleToDisplay(getContextualCard(invalidUri)))
                 .isFalse();
     }
 
