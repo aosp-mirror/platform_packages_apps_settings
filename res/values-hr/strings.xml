@@ -768,6 +768,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalan broj povezanih Bluetooth audiouređaja"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Odaberite maksimalan broj povezanih Bluetooth audiouređaja"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Emitiranje"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"zrcalo"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Omogući bežični prikaz"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"U blizini nema uređaja."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Povezivanje"</string>
@@ -1456,6 +1457,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Istraži"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Oslobodi prostor"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Upravljaj pohranom"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"čisti, pohrana"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Povezivanje USB-a i računala"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Poveži kao"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Uređaj za medije (MTP)"</string>
@@ -1868,7 +1870,11 @@
     <string name="install_applications" msgid="3921609656584369901">"Nepoznati izvori"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Dopusti sve izvore aplikacija"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedavno otvorene aplikacije"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Pogledajte sve aplikacije (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Pogledajte %1$d aplikaciju</item>
+      <item quantity="few">Pogledajte sve %1$d aplikacije</item>
+      <item quantity="other">Pogledajte svih %1$d aplikacija</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Obratite se IT administratoru"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Može vam pomoći s poništavanjem PIN-a, uzorka ili zaporke"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Vaš tablet i osobni podaci izloženiji su napadima nepoznatih aplikacija. Instaliranjem aplikacija iz takvog izvora prihvaćate odgovornost za svu štetu nastalu na tabletu  ili gubitak podataka uzrokovan upotrebom tih aplikacija."</string>
@@ -2044,6 +2050,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Jezik"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tipkovnice"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tipkovnica na zaslonu"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostupna tipkovnica na zaslonu"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Upravljajte tipkovnicama na zaslonu"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Pomoć za tipkovnicu"</string>
@@ -3340,6 +3347,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Zadani zvuk obavijesti"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Zadani zvuk alarma"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibriraj za pozive"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibracija"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Nikada ne vibriraj"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Uvijek vibriraj"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Najprije vibriraj, zatim postupno zvoni"</string>
@@ -3521,7 +3529,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Uključivanjem oblačića za ovu aplikaciju uključit će se i oblačići za vaš uređaj.\n\nTo utječe na druge aplikacije ili razgovore kojima je dopušteno otvaranje oblačića."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Uključi"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Odustani"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Uključeno/Razgovori mogu se prikazivati kao pomične ikone"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Uključeno / Razgovori se mogu prikazivati kao pomične ikone"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Dopusti aplikacijama prikaz oblačića"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Neki razgovori prikazivat će se kao pomične ikone povrh drugih aplikacija"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Svi razgovori mogu se prikazivati u oblačiću"</string>
@@ -3676,6 +3684,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Poveži aplikacije"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Povezane aplikacije dijele dopuštenja i mogu međusobno pristupati podacima."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Aplikacije povežite samo ako ste uvjereni da neće dijeliti osobne podatke s IT administratorom."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"U bilo kojem trenutku možete prekinuti vezu aplikacija u postavkama privatnosti uređaja."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Želite li povjeriti svoje osobne podatke poslovnoj aplikaciji <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Aplikacije povežite samo ako ste uvjereni da neće dijeliti osobne podatke s IT administratorom."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Podaci aplikacije"</string>
@@ -3807,7 +3816,7 @@
       <item quantity="few">Još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osobe</item>
       <item quantity="other">Još <xliff:g id="NUM_PEOPLE">%d</xliff:g> osoba</item>
     </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Ništa"</string>
+    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Nitko"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Poruke"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"poruke"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Poruke"</string>
@@ -3828,10 +3837,10 @@
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Kontakti označeni zvjezdicom i ponovni pozivatelji"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Kontakti i ponovni pozivatelji"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Samo ponovni pozivatelji"</string>
-    <string name="zen_mode_none_calls" msgid="2047166006414016327">"Ništa"</string>
+    <string name="zen_mode_none_calls" msgid="2047166006414016327">"Nitko"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Ništa"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmi"</string>
-    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"od odbrojavanja, alarma, sigurnosnih sustava i drugih aplikacija"</string>
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Alarmi odbrojavanja, sata, sigurnosnih sustava i drugih aplikacija"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarmi"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Alarmi"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Zvukovi medija"</string>
@@ -3924,8 +3933,8 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Uključeno"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Isključeno"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Prikačivanje aplikacije"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Prikačivanje aplikacije omogućuje da vaša trenutačna aplikacija bude vidljiva dok je ne otkvačite. Tu značajku možete koristiti kako biste, na primjer, prijatelju kojem vjerujete dopustili da igra određenu igru. \n\nKad je aplikacija prikvačena, može otvarati druge aplikacije i osobni podaci mogu biti dostupni. \n\nKako upotrebljavati prikvačivanje aplikacije: 	\n1.	Uključite prikvačivanje aplikacije 	\n2.	Otvorite Pregled 	\n3.	Dodirnite ikonu aplikacije na vrhu zaslona, a potom dodirnite Prikvači"</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Prikvačivanje aplikacije omogućuje da vaša trenutačna aplikacija bude vidljiva dok je ne otkvačite. Tu značajku možete koristiti kako biste, na primjer, prijatelju kojem vjerujete dopustili da igra određenu igru. \n\nKad je aplikacija prikvačena, može otvarati druge aplikacije i osobni podaci mogu biti dostupni. \n\nAko želite s nekim sigurno dijeliti svoj uređaj, pokušajte koristiti profil gosta. \n\nDa biste koristili prikvačivanje aplikacije 	\n1.	Uključite prikvačivanje aplikacije 	\n2.	Otvorite Pregled 	\n3.	Dodirnite ikonu aplikacije pri vrhu zaslona, a potom dodirnite Prikvači"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Prikačivanje aplikacije omogućuje da vaša trenutačna aplikacija bude vidljiva dok je ne otkvačite. Tu značajku možete koristiti kako biste, na primjer, prijatelju kojem vjerujete dopustili da igra određenu igru. \n\nKad je aplikacija prikvačena, može otvarati druge aplikacije i osobni podaci mogu biti dostupni. \n\nKako upotrebljavati prikvačivanje aplikacije: 	\n1.	Uključite prikvačivanje aplikacije. 	\n2.	Otvorite Pregled. 	\n3.	Dodirnite ikonu aplikacije na vrhu zaslona, a potom dodirnite Prikvači."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Prikvačivanje aplikacije omogućuje da vaša trenutačna aplikacija bude vidljiva dok je ne otkvačite. Tu značajku možete koristiti kako biste, na primjer, prijatelju kojem vjerujete dopustili da igra određenu igru. \n\nKad je aplikacija prikvačena, može otvarati druge aplikacije i osobni podaci mogu biti dostupni. \n\nAko želite s nekim sigurno dijeliti svoj uređaj, pokušajte koristiti profil gosta. \n\nDa biste koristili prikvačivanje aplikacije. 	\n1.	Uključite prikvačivanje aplikacije 	\n2.	Otvorite Pregled. 	\n3.	Dodirnite ikonu aplikacije pri vrhu zaslona, a potom dodirnite Prikvači."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Kad je aplikacija prikvačena: \n\n•		osobni podaci mogu biti dostupni \n		(primjerice, kontakti i sadržaj e-pošte) \n•		prikvačena aplikacija može otvarati druge aplikacije \n\nPrikvačivanje aplikacije koristite samo s osobama kojima vjerujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Traži uzorak za otključavanje radi otkvačivanja"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Traži PIN radi otkvačivanja"</string>
@@ -4008,6 +4017,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nije odobreno nijedno dopuštenje"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nije zatraženo nijedno dopuštenje"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Upravljajte pristupom aplikacija svojim podacima"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Sve aplikacije"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalirane aplikacije"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant aplikacije"</string>

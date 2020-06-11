@@ -193,7 +193,6 @@ public class WifiConfigController2 implements TextWatcher,
     private ProxySettings mProxySettings = ProxySettings.UNASSIGNED;
     private ProxyInfo mHttpProxy = null;
     private StaticIpConfiguration mStaticIpConfiguration = null;
-    private boolean mRequestFocus = true;
 
     private String[] mLevels;
     private int mMode;
@@ -208,17 +207,10 @@ public class WifiConfigController2 implements TextWatcher,
 
     public WifiConfigController2(WifiConfigUiBase2 parent, View view, WifiEntry wifiEntry,
             int mode) {
-        this (parent, view, wifiEntry, mode, true /* requestFocus */);
-    }
-
-    public WifiConfigController2(WifiConfigUiBase2 parent, View view, WifiEntry wifiEntry,
-            int mode, boolean requestFocus) {
         mConfigUi = parent;
-
         mView = view;
         mWifiEntry = wifiEntry;
         mContext = mConfigUi.getContext();
-        mRequestFocus = requestFocus;
 
         // Init Wi-Fi manager
         mWifiManager = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
@@ -443,10 +435,8 @@ public class WifiConfigController2 implements TextWatcher,
             enableSubmitIfAppropriate();
         }
 
-        // After done view show and hide, request focus from parameter.
-        if (mRequestFocus) {
-            mView.findViewById(R.id.l_wifidialog).requestFocus();
-        }
+        // After done view show and hide, request focus
+        mView.findViewById(R.id.l_wifidialog).requestFocus();
     }
 
     @VisibleForTesting
