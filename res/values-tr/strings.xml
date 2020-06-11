@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum sayıda bağlı Bluetooth ses cihazı"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum sayıda bağlı Bluetooth ses cihazı seç"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Yayınlama"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ayna"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Kablosuz görüntülemeyi etkinleştir"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Yakınlarda cihaz bulunamadı."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Bağlanılıyor"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Keşfet"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Yer aç"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Depolamayı yönet"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"temiz, depolama alanı"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB bilgisayar bağlantısı"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Şu şekilde bağlan:"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Medya cihazı (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Bilinmeyen kaynaklar"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tüm uyg. kaynaklarına izin ver"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Son açılan uygulamalar"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"<xliff:g id="COUNT">%1$d</xliff:g> uygulamanın tümünü göster"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Tüm %1$d uygulamaları göster</item>
+      <item quantity="one">Tüm uygulamaları göster</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"BT yöneticinizle iletişim kurun"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Kendisi PIN, desen veya şifrenizi sıfırlamanıza yardımcı olabilir."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tabletiniz ve kişisel verileriniz, bilinmeyen uygulamalardan gelen saldırılara karşı daha savunmasızdır. Bu kaynaktan uygulama yükleyerek, bu uygulamaları kullanmanız sonucunda tabletinizin başına gelebilecek her tür hasardan ve veri kaybından kendinizin sorumlu olduğunu kabul etmiş olursunuz."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Dil"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Klavyeler"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Ekran klavyesi"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Kullanılabilir dokunmatik klavye"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Ekran klavyelerini yönet"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Klavye yardımı"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Varsayılan bildirim sesi"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Varsayılan alarm sesi"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Çağrılarda titreştir"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Titreşim"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Asla titreştirme"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Her zaman titreştir"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Önce titreştir, sonra sesi yavaşça yükselt"</string>
@@ -3506,7 +3513,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"İş profili kilitli olduğunda"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Kilit ekranındaki bildirimler"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Varsayılan ve sessiz görüşmeleri göster"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sesiz görüşmeleri ve bildirimleri gizle"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sessiz görüşmeleri ve bildirimleri gizle"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Hiçbir bildirimi gösterme"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Hassas bildirimler"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Ekran kilitliyken hassas içeriği göster"</string>
@@ -3625,9 +3632,11 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Bağlı"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Bu uygulamaları bağla"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Bağlı uygulamalar izinleri paylaşır ve birbirlerinin verilerine erişebilir."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Uygulamaları yalnızca kişisel verileri BT yöneticinizle paylaşmayacağına güveniyorsanız bağlayın."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Kişisel verileriniz için <xliff:g id="NAME">%1$s</xliff:g> adlı iş uygulamasına güvenilsin mi?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Uygulamaları yalnızca kişisel verileri BT yöneticinizle paylaşmayacağına güveniyorsanız bağlayın."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Uygulamaları yalnızca kişisel verilerinizi BT yöneticinizle paylaşmayacaklarına güveniyorsanız bağlayın."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"<xliff:g id="NAME">%1$s</xliff:g> adlı iş uygulamasının kişisel verilerinize ulaşmasına izin verilsin mi?"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Uygulamaları yalnızca kişisel verilerinizi BT yöneticinizle paylaşmayacaklarına güveniyorsanız bağlayın."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Uygulama verileri"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Bu uygulama, <xliff:g id="NAME">%1$s</xliff:g> adlı kişisel uygulamanızdaki verilere erişebilir."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"İzinler"</string>
@@ -3863,7 +3872,7 @@
     <string name="switch_on_text" msgid="5664542327776075105">"Açık"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Kapalı"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Uygulama sabitleme"</string>
-    <string name="screen_pinning_description" msgid="6927147836599784578">"Uygulama sabitleme, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir. \n\nBir uygulama sabitlendiğinde diğer uygulamaları açabilir. Kişisel verilere erişilebilir. \n\nUygulama sabitlemeyi kullanmak için: 	\n1.	Uygulama sabitlemeyi açın 	\n2.	Genel Bakış\'ı açın 	\n3.	Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
+    <string name="screen_pinning_description" msgid="6927147836599784578">"Uygulama sabitleme, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir. \n\nSabitlenen uygulama diğer uygulamaları açabilir, kişisel verilere erişilebilir. \n\nUygulama sabitlemeyi kullanmak için: 	\n1.	Uygulama sabitlemeyi açın 	\n2.	Genel Bakış\'ı açın 	\n3.	Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Uygulama sabitleme özelliği, geçerli uygulamayı sabitleme kaldırılana kadar görünür durumda tutmanıza olanak tanır. Bu özellik, örneğin, güvendiğiniz bir arkadaşınızın belli bir oyunu oynamasını sağlamak için kullanılabilir. \n\nBir uygulama sabitlendiğinde diğer uygulamaları açabilir. Kişisel verilere erişilebilir. \n\nCihazınızı güvenli bir şekilde başka biriyle paylaşmak isterseniz bunun yerine misafir kullanıcı özelliğini kullanın. \n\nUygulama sabitlemeyi kullanmak için: 	\n1.	Uygulama sabitlemeyi açın 	\n2.	Genel Bakış\'ı açın 	\n3.	Ekranın üst tarafındaki uygulama simgesine dokunup ardından Sabitle\'ye dokunun"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Uygulama sabitlendiğinde: \n\n•	 Kişisel verilere erişilebilir \n		(ör. kişiler ve e-posta içerikleri) \n•		Sabitlenen uygulama diğer uygulamaları açabilir \n\nUygulama sabitlemeyi yalnızca güvendiğiniz kişilerle kullanın."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Sabitlemeyi kaldırmadan önce kilit açma desenini sor"</string>
@@ -3943,6 +3952,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Hiçbir izin verilmedi"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Hiçbir izin istenmedi"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Tüm uygulamalar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Yüklü uygulamalar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Hazır uygulamalar"</string>
@@ -4650,7 +4661,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Uygulamanın Kablosuz bağlantıyı kontrol etmesine izin ver"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Bu uygulamanın kablosuz bağlantıyı açmasına veya kapatmasına, kablosuz ağları taramasına, eklemesine veya kaldırmasına, kablosuz ağlara bağlanmasına ya da yalnızca yerel hotspot bağlantısı başlatmasına izin verin"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Medyayı oynatma yeri:"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> uygulamasındaki içeriğin oynatılacağı yer:"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> ses çıkışı:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Bu cihaz"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablet"</string>
@@ -4922,8 +4933,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 SIM kullanırken bu tablet 4G ile sınırlı olur. "<annotation id="url">"Daha fazla bilgi"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 SIM kullanırken bu cihaz 4G ile sınırlı olur. "<annotation id="url">"Daha fazla bilgi"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Önbelleğe alınan uygulamalarda yürütmeyi askıya al"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarların üzerinde ekran yer paylaşımına izin ver"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Diğer uygulamaların üzerinde görüntülenebilecek uygulamaların Ayarlar ekranlarıyla yer paylaşımlı olarak gösterilmesine izin verir"</string>
 </resources>
