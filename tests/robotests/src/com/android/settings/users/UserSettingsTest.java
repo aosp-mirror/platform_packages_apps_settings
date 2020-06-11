@@ -33,13 +33,16 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -53,6 +56,8 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedLockUtils;
@@ -70,6 +75,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowIntent;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
@@ -587,6 +593,30 @@ public class UserSettingsTest {
         verify(mUserManager).getUserIcon(ACTIVE_USER_ID);
         // updateUserList should be called another time after loading the icons
         verify(mUserManager, times(2)).getUsers(true);
+    }
+
+    @Test
+    public void onPreferenceClick_addGuestClicked_createGuestAndOpenDetails() {
+        UserInfo createdGuest = getGuest(false);
+        removeFlag(createdGuest, UserInfo.FLAG_INITIALIZED);
+        doReturn(createdGuest).when(mUserManager).createGuest(mActivity, "Guest");
+        doReturn(mActivity).when(mFragment).getContext();
+
+        mFragment.onPreferenceClick(mAddGuestPreference);
+
+        verify(mUserManager).createGuest(mActivity, "Guest");
+        Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);
+        assertThat(startedIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(UserDetailsSettings.class.getName());
+        Bundle arguments = startedIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        assertThat(arguments).isNotNull();
+        assertThat(arguments.getInt(UserDetailsSettings.EXTRA_USER_ID, 0))
+                .isEqualTo(createdGuest.id);
+        assertThat(arguments.getBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, false))
+                .isEqualTo(true);
     }
 
     @Test
