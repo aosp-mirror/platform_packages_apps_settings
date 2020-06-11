@@ -138,4 +138,21 @@ public final class UserDialogs {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
+
+    /**
+     * Creates a dialog to confirm that the user is ok to start setting up a new user.
+     *
+     * @param onConfirmListener Callback object for positive action
+     */
+    public static Dialog createSetupUserDialog(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(com.android.settingslib.R.string.user_setup_dialog_title)
+                .setMessage(com.android.settingslib.R.string.user_setup_dialog_message)
+                .setPositiveButton(com.android.settingslib.R.string.user_setup_button_setup_now,
+                        onConfirmListener)
+                .setNegativeButton(com.android.settingslib.R.string.user_setup_button_setup_later,
+                        null)
+                .create();
+    }
 }

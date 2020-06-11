@@ -34,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -91,7 +94,7 @@ public class UserDetailsSettingsTest {
     private ShadowUserManager mUserManager;
 
     @Mock
-    private Preference mSwitchUserPref;
+    private RestrictedPreference mSwitchUserPref;
     @Mock
     private SwitchPreference mPhonePref;
     @Mock
@@ -101,6 +104,7 @@ public class UserDetailsSettingsTest {
 
     private FragmentActivity mActivity;
     private Context mContext;
+    private UserCapabilities mUserCapabilities;
     private UserDetailsSettings mFragment;
     private Bundle mArguments;
     private UserInfo mUserInfo;
@@ -111,6 +115,8 @@ public class UserDetailsSettingsTest {
 
         mActivity = spy(ActivityController.of(new FragmentActivity()).get());
         mContext = spy(RuntimeEnvironment.application);
+        mUserCapabilities = UserCapabilities.create(mContext);
+        mUserCapabilities.mUserSwitcherEnabled = true;
         mFragment = spy(new UserDetailsSettings());
         mArguments = new Bundle();
 
@@ -121,6 +127,7 @@ public class UserDetailsSettingsTest {
         doReturn(mTelephonyManager).when(mActivity).getSystemService(Context.TELEPHONY_SERVICE);
 
         ReflectionHelpers.setField(mFragment, "mUserManager", userManager);
+        ReflectionHelpers.setField(mFragment, "mUserCaps", mUserCapabilities);
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mActivity).when(mFragment).getContext();
 
@@ -424,6 +431,33 @@ public class UserDetailsSettingsTest {
 
         verify(mPhonePref).setTitle(R.string.user_enable_calling);
         verify(mPhonePref).setChecked(false);
+    }
+
+    @Test
+    public void initialize_switchUserDisallowed_shouldSetAdminDisabledOnSwitchPreference() {
+        setupSelectedUser();
+        mUserCapabilities.mDisallowSwitchUser = true;
+        DevicePolicyManager devicePolicyManager = mock(DevicePolicyManager.class);
+        doReturn(devicePolicyManager).when(mActivity)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+        doReturn(mock(ComponentName.class)).when(devicePolicyManager)
+                .getDeviceOwnerComponentOnAnyUser();
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mSwitchUserPref).setDisabledByAdmin(any(RestrictedLockUtils.EnforcedAdmin.class));
+    }
+
+    @Test
+    public void initialize_switchUserAllowed_shouldSetSwitchPreferenceEnabled() {
+        setupSelectedUser();
+        mUserCapabilities.mDisallowSwitchUser = false;
+
+        mFragment.initialize(mActivity, mArguments);
+
+        verify(mSwitchUserPref).setDisabledByAdmin(null);
+        verify(mSwitchUserPref).setSelectable(true);
+        verify(mSwitchUserPref).setOnPreferenceClickListener(mFragment);
     }
 
     @Test
