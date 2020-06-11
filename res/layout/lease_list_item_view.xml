@@ -18,35 +18,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:padding="@dimen/list_preferred_item_padding">
 
-    <!-- TODO (varunshah@): add an image view for the app icon -->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="@dimen/secondary_app_icon_size"
+        android:layout_height="@dimen/secondary_app_icon_size"/>
 
-    <TextView
-        android:id="@+id/lease_package"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textDirection="locale"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:singleLine="true"
-        android:textAppearance="?android:attr/textAppearanceListItem"/>
-
-    <TextView
-        android:id="@+id/lease_desc"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"/>
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:padding="@dimen/list_preferred_item_padding">
 
-    <TextView
-        android:id="@+id/lease_expiry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorSecondary"/>
+        <TextView
+            android:id="@+id/lease_package"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItem"/>
+
+        <TextView
+            android:id="@+id/lease_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorSecondary"/>
+
+        <TextView
+            android:id="@+id/lease_expiry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorSecondary"/>
+    </LinearLayout>
 </LinearLayout>
