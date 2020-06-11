@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"已连接蓝牙音频设备的数量上限"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"选择已连接蓝牙音频设备的数量上限"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"投射"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"镜像"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"开启无线显示"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"未在附近找到设备。"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"正在连接"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"浏览"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"释放空间"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"管理存储空间"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"清理, 存储空间"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB计算机连接"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"连接方式"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"媒体设备(MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"未知来源"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"允许所有应用来源"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"最近打开的应用"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"查看全部 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">查看全部 %1$d 个应用</item>
+      <item quantity="one">查看所有应用</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"请联系您的 IT 管理员"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"他们可以帮助您重置 PIN 码、解锁图案或密码"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"您的平板电脑和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的平板电脑损坏或数据丢失承担责任。"</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"键盘"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"屏幕键盘"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"可用的屏幕键盘"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"管理屏幕键盘"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"键盘辅助功能"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"默认通知提示音"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"默认闹钟提示音"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"来电振动"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"振动"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"一律不振动"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"一律振动"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"先振动再响铃（铃声逐渐增大）"</string>
@@ -3327,16 +3334,16 @@
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"限制打扰"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"开启勿扰模式"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"闹钟和媒体音效例外"</string>
-    <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间安排"</string>
+    <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间表"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"删除时间表"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"删除"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"修改"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"时间表"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"时间表"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"时间安排"</string>
+    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"时间表"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"在特定的时间将手机设为静音"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"设置“勿扰”规则"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"时间安排"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"时间表"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"使用时间表"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"可以发出声音的例外项"</string>
@@ -3407,7 +3414,7 @@
     <string name="zen_category_people" msgid="8252926021894933047">"联系人"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"应用"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"闹钟和其他例外项"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"时间安排"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"时间表"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"在快捷设置中开启时的持续时长"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"开启勿扰模式后，除了您在上方允许的项目外，所有音效和振动均会设为静音。"</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"自定义设置"</string>
@@ -3626,6 +3633,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"关联这些应用"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"关联的应用会共享权限并且可以相互访问数据。"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"如果您不确定应用是否会与 IT 管理员共享您的个人数据，请勿关联该应用。"</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"您信任“<xliff:g id="NAME">%1$s</xliff:g>”工作应用并要允许其访问您的个人数据吗？"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"如果您不确定应用是否会与 IT 管理员共享您的个人数据，请勿关联该应用。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"应用数据"</string>
@@ -3865,9 +3874,9 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"固定应用"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"通过固定应用功能，您可以固定显示当前应用，直到取消固定该应用为止。例如，您可以利用此功能让信任的好友玩某款游戏。\n\n固定某个应用后，该应用可打开其他应用，也能访问您的个人数据。\n\n如果您想安全地与他人共用您的设备，请尝试改用访客用户个人资料。\n\n如需使用固定应用功能，请按以下步骤操作：	\n1.	开启固定应用功能 \n2.	打开“概览” \n3.	点按屏幕顶部的应用图标，然后点按“固定”"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定应用后：\n\n•		该应用可访问您的个人数据\n		（例如通讯录和电子邮件内容）\n•		已固定的应用可打开其他应用\n\n只针对您信任的人使用固定应用功能。"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定应用后：\n\n•		该应用可访问您的个人数据\n		（例如通讯录和电子邮件内容）\n•		已固定的应用可打开其他应用\n\n请务必只为您非常信任的人开启固定应用功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定屏幕前要求绘制解锁图案"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定屏幕前要求输入 PIN 码"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定前要求输入 PIN 码"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"删除 SIM 卡前需先进行确认"</string>
@@ -3943,6 +3952,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"未授予任何权限"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"未请求任何权限"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"所有应用"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安装的应用"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"免安装应用"</string>
@@ -4922,8 +4933,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"使用 2 个 SIM 卡时，此平板电脑只能使用 4G 网络。"<annotation id="url">"了解详情"</annotation>"。"</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"使用 2 个 SIM 卡时，此设备只能使用 4G 网络。"<annotation id="url">"了解详情"</annotation>"。"</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"暂停执行已缓存的应用"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"允许在“设置”上重叠显示"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"允许可在其他应用上层显示的应用重叠显示在“设置”屏幕上"</string>
 </resources>

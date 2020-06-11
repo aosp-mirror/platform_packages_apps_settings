@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ਵੱਧ ਤੋਂ ਵੱਧ ਕਨੈਕਟ ਕੀਤੇ ਬਲੂਟੁੱਥ ਆਡੀਓ ਡੀਵਾਈਸ"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ਵੱਧ ਤੋਂ ਵੱਧ ਕਨੈਕਟ ਕੀਤੇ ਬਲੂਟੁੱਥ ਆਡੀਓ ਡੀਵਾਈਸ ਚੁਣੋ"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ਕਾਸਟ ਕਰੋ"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"ਸ਼ੀਸ਼ਾ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"ਵਾਇਰਲੈਸ ਡਿਸਪਲੇ ਚਾਲੂ ਕਰੋ"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"ਨੇੜੇ ਕੋਈ ਡੀਵਾਈਸ ਨਹੀਂ ਮਿਲਿਆ।"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"ਕਨੈਕਟ ਕਰ ਰਿਹਾ ਹੈ"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"ਐਕਸਪਲੋਰ ਕਰੋ"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ਜਗ੍ਹਾ ਖਾਲੀ ਕਰੋ"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"ਸਟੋਰੇਜ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ਸਾਫ਼ ਕਰੋ, ਸਟੋਰੇਜ"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB ਕੰਪਿਊਟਰ ਕਨੈਕਸ਼ਨ"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"ਇਸਦੇ ਤੌਰ ਤੇ ਕਨੈਕਟ ਕਰੋ"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"ਮੀਡੀਆ ਡੀਵਾਈਸ (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"ਅਗਿਆਤ ਸਰੋਤ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"ਸਾਰੇ ਐਪ ਸਰੋਤਾਂ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ਹਾਲ ਹੀ ਵਿੱਚ ਖੋਲ੍ਹੀਆਂ ਗਈਆਂ ਐਪਾਂ"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"ਸਾਰੀਆਂ <xliff:g id="COUNT">%1$d</xliff:g> ਐਪਾਂ ਦੇਖੋ"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">%1$d ਐਪ ਦੇਖੋ</item>
+      <item quantity="other">ਸਾਰੀਆਂ %1$d ਐਪਾਂ ਦੇਖੋ</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"ਆਪਣੇ IT ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"ਉਹ ਤੁਹਾਨੂੰ ਆਪਣਾ ਪਿੰਨ, ਪੈਟਰਨ ਜਾਂ ਪਾਸਵਰਡ ਰੀਸੈੱਟ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਦੇ ਹਨ"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ਤੁਹਾਡਾ ਟੈਬਲੈੱਟ ਅਤੇ ਨਿੱਜੀ ਡਾਟਾ ਅਗਿਆਤ ਐਪਾਂ ਤੋਂ ਹਮਲੇ ਪ੍ਰਤੀ ਵਧੇਰੇ ਕਮਜ਼ੋਰ ਹੈ। ਇਸ ਸਰੋਤ ਤੋਂ ਐਪਾਂ ਸਥਾਪਿਤ ਕਰਕੇ, ਤੁਸੀਂ ਸਹਿਮਤੀ ਦਿੰਦੇ ਹੋ ਕਿ ਆਪਣੇ ਟੈਬਲੈੱਟ ਨੂੰ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਨੁਕਸਾਨ ਜਾਂ ਡਾਟੇ ਦੇ ਗੁੰਮ ਹੋਣ ਲਈ ਤੁਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਹੋ, ਜੋ ਸ਼ਾਇਦ ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਵਰਤਣ ਦੇ ਨਤੀਜੇ ਵਜੋਂ ਹੋ ਸਕਦਾ ਹੈ।"</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ਭਾਸ਼ਾ"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"ਕੀ-ਬੋਰਡ"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ਆਨ-ਸਕ੍ਰੀਨ ਕੀ-ਬੋਰਡ"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ਆਨ-ਸਕ੍ਰੀਨ ਕੀ-ਬੋਰਡ ਉਪਲਬਧ ਹੈ"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ਆਨ-ਸਕ੍ਰੀਨ ਕੀ-ਬੋਰਡਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"ਕੀ-ਬੋਰਡ ਸਹਾਇਤਾ"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੂਚਨਾ ਧੁਨੀ"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"ਪੂਰਵ-ਨਿਰਧਾਰਤ ਅਲਾਰਮ ਧੁਨੀ"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"ਕਾਲਾਂ ਲਈ ਥਰਥਰਾਹਟ"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"ਥਰਥਰਾਹਟ"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ਕਦੇ ਥਰਥਰਾਹਟ ਨਾ ਕਰੋ"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"ਹਮੇਸ਼ਾ ਥਰਥਰਾਹਟ ਕਰੋ"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"ਪਹਿਲਾਂ ਥਰਥਰਾਹਟ ਫਿਰ ਹੌਲੀ-ਹੌਲੀ ਘੰਟੀ ਵਜਾਓ"</string>
@@ -3477,10 +3484,10 @@
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"ਰੱਦ ਕਰੋ"</string>
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"ਚਾਲੂ / ਗੱਲਾਂਬਾਤਾਂ ਤੈਰਦੇ ਹੋਏ ਪ੍ਰਤੀਕਾਂ ਦੇ ਰੂਪ ਵਿੱਚ ਦਿਸ ਸਕਦੀਆਂ ਹਨ"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"ਐਪਾਂ ਨੂੰ ਬਬਲ ਦਿਖਾਉਣ ਦਿਓ"</string>
-    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ਕੁਝ ਗੱਲਾਂਬਾਤਾਂ ਫਲੋਟਿੰਗ ਪ੍ਰਤੀਕਾਂ ਦੇ ਰੂਪ ਵਿੱਚ ਹੋਰ ਐਪਾਂ ਦੇ ਸਿਖਰ \'ਤੇ ਦਿਸਣਗੀਆਂ"</string>
+    <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ਕੁਝ ਗੱਲਾਂਬਾਤਾਂ ਤੈਰਦੇ ਹੋਏ ਪ੍ਰਤੀਕਾਂ ਦੇ ਰੂਪ ਵਿੱਚ ਹੋਰ ਐਪਾਂ ਦੇ ਸਿਖਰ \'ਤੇ ਦਿਸਣਗੀਆਂ"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"ਸਾਰੀਆਂ ਗੱਲਾਂਬਾਤਾਂ \'ਤੇ ਬਬਲ ਲਾਏ ਜਾ ਸਕਦੇ ਹਨ"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"ਚੋਣਵੀਆਂ ਗੱਲਾਂਬਾਤਾਂ \'ਤੇ ਬਬਲ ਲਾਏ ਜਾ ਸਕਦੇ ਹਨ"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"ਕਿਸੇ ਗੱਲਬਾਤ \'ਤੇ ਬੁਲਬੁਲੇ ਨਹੀਂ ਲਾਏ ਜਾ ਸਕਦੇ"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"ਕਿਸੇ ਗੱਲਬਾਤ \'ਤੇ ਬਬਲ ਨਹੀਂ ਲਾਏ ਜਾ ਸਕਦੇ"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"ਗੱਲਾਂਬਾਤਾਂ"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ਇਸ ਨੂੰ ਛੱਡ ਕੇ ਸਾਰੀਆਂ ਗੱਲਾਂਬਾਤਾਂ \'ਤੇ ਬਬਲ ਲਾਏ ਜਾ ਸਕਦੇ ਹਨ"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"ਇਸ ਗੱਲਬਾਤ ਲਈ ਬਬਲ ਬੰਦ ਕਰੋ"</string>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ਇਹਨਾਂ ਐਪਾਂ ਨੂੰ ਕਨੈਕਟ ਕਰੋ"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"ਕਨੈਕਟ ਕੀਤੀਆਂ ਐਪਾਂ ਇਜਾਜ਼ਤਾਂ ਨੂੰ ਸਾਂਝਾ ਕਰਦੀਆਂ ਹਨ ਅਤੇ ਇੱਕ ਦੂਜੇ ਦੇ ਡਾਟੇ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦੀਆਂ ਹਨ।"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"ਸਿਰਫ਼ ਉਹ ਐਪਾਂ ਕਨੈਕਟ ਕਰੋ ਜਿਨ੍ਹਾਂ \'ਤੇ ਤੁਹਾਨੂੰ ਇਹ ਭਰੋਸਾ ਹੈ ਕਿ ਉਹ ਤੁਹਾਡੇ ਆਈ.ਟੀ. ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਨਿੱਜੀ ਡਾਟਾ ਸਾਂਝਾ ਨਹੀਂ ਕਰਨਗੀਆਂ।"</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"ਤੁਸੀਂ ਆਪਣੇ ਡੀਵਾਈਸ ਦੀ ਪਰਦੇਦਾਰੀ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਐਪਾਂ ਨੂੰ ਕਿਸੇ ਵੇਲੇ ਵੀ ਡਿਸਕਨੈਕਟ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"ਕੀ ਕੰਮ ਸੰਬੰਧੀ <xliff:g id="NAME">%1$s</xliff:g> \'ਤੇ ਆਪਣੇ ਨਿੱਜੀ ਡਾਟੇ ਸੰਬੰਧੀ ਭਰੋਸਾ ਕਰਦੇ ਹੋ?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"ਸਿਰਫ਼ ਉਹ ਐਪਾਂ ਕਨੈਕਟ ਕਰੋ ਜਿਨ੍ਹਾਂ \'ਤੇ ਤੁਹਾਨੂੰ ਇਹ ਭਰੋਸਾ ਹੈ ਕਿ ਉਹ ਤੁਹਾਡੇ ਆਈ.ਟੀ. ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਨਿੱਜੀ ਡਾਟਾ ਸਾਂਝਾ ਨਹੀਂ ਕਰਨਗੀਆਂ।"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ਐਪ ਡਾਟਾ"</string>
@@ -3754,7 +3762,7 @@
     <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"ਕੋਈ ਨਹੀਂ"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Messages"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"ਸੁਨੇਹੇ"</string>
-    <string name="zen_mode_messages_title" msgid="1777598523485334405">"Messages"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"ਸੁਨੇਹੇ"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"ਸੁਨੇਹੇ ਜੋ ਵਿਘਨ ਪਾ ਸਕਦੇ ਹਨ"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"ਇਹ ਪੱਕਾ ਕਰਨ ਲਈ ਕਿ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਸੁਨੇਹਿਆਂ ਲਈ ਧੁਨੀ ਵਜਦੀ ਹੈ, ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡਾ ਡੀਵਾਈਸ ਘੰਟੀ \'ਤੇ ਸੈੱਟ ਹੈ"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ ਲਈ ਇਨਕਮਿੰਗ ਸੁਨੇਹੇ ਬਲਾਕ ਕੀਤੇ ਗਏ ਹਨ। ਤੁਸੀਂ ਆਪਣੇ ਦੋਸਤਾਂ, ਪਰਿਵਾਰਕ ਮੈਂਬਰਾਂ ਜਾਂ ਹੋਰ ਸੰਪਰਕਾਂ ਨੂੰ ਤੁਹਾਨੂੰ ਸੰਪਰਕ ਕਰਨ ਦੇਣ ਲਈ ਸੈਟਿੰਗਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰ ਸਕਦੇ ਹੋ।"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ਕੋਈ ਅਨੁਮਤੀਆਂ ਨਹੀਂ ਦਿੱਤੀਆਂ"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ਕਿਸੇ ਇਜਾਜ਼ਤਾਂ ਦੀ ਬੇਨਤੀ ਨਹੀਂ ਕੀਤੀ ਗਈ"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"ਐਪ ਦੀ ਤੁਹਾਡੇ ਡਾਟੇ ਤੱਕ ਪਹੁੰਚ ਕੰਟਰੋਲ ਕਰੋ"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ਸਾਰੀਆਂ ਐਪਾਂ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ਸਥਾਪਤ ਐਪਾਂ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ਤਤਕਾਲ ਐਪਾਂ"</string>
@@ -4650,7 +4659,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"ਐਪ ਨੂੰ ਵਾਈ‑ਫਾਈ ਕੰਟਰੋਲ ਕਰਨ ਦਿਓ"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"ਇਸ ਐਪ ਨੂੰ ਵਾਈ-ਫਾਈ ਚਾਲੂ ਜਾਂ ਬੰਦ ਕਰਨ ਦਿਓ, ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕਾਂ ਨੂੰ ਸਕੈਨ ਅਤੇ ਉਹਨਾਂ ਨਾਲ ਕਨੈਕਟ ਕਰਨ ਦਿਓ, ਨੈੱਟਵਰਕ ਸ਼ਾਮਲ ਕਰਨ ਜਾਂ ਹਟਾਉਣ ਦਿਓ, ਜਾਂ ਇੱਕ ਸਿਰਫ਼-ਸਥਾਨਕ ਹੌਟਸਪੌਟ ਸ਼ੁਰੂ ਕਰਨ ਦਿਓ"</string>
     <string name="media_output_title" msgid="8283629315159510680">"ਇਸ \'ਤੇ ਮੀਡੀਆ ਚਲਾਓ"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> \'ਤੇ ਚਲਾਓ"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> ਨੂੰ ਇਸ \'ਤੇ ਚਲਾਓ"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"ਇਹ ਡੀਵਾਈਸ"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"ਫ਼ੋਨ"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"ਟੈਬਲੈੱਟ"</string>

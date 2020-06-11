@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maxantal för ljudenheter anslutna via Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Välj ett maxantal för ljudenheter anslutna via Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Casta"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"spegling"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Aktivera Wi-Fi-skärmdelning"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Hittade inga enheter i närheten."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Ansluter"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Utforska"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Frigör utrymme"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Hantera lagring"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"rensa, lagringsutrymme"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-anslutning till dator"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Anslut som"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Mediaenhet (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Okända källor"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tillåt alla appkällor"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Senast öppnade appar"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Visa alla <xliff:g id="COUNT">%1$d</xliff:g> appar"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Visa alla %1$d appar</item>
+      <item quantity="one">Visa alla appar</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakta IT-administratören"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Administratören kan hjälpa dig att återställa pinkoden, lösenordet eller det grafiska lösenordet"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Surfplattan och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på surfplattan eller förlust av data som kan uppstå när du använder dessa appar."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tangentbord"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skärmtangentbord"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tillgängligt skärmtangentbord"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Hantera skärmtangentbord"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Hjälp med tangentbord"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Standardljud för aviseringar"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Standardljud för alarm"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrera vid samtal"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibration"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Vibrera aldrig"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibrera alltid"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrera först, ring sedan allt starkare"</string>
@@ -3333,10 +3340,10 @@
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Redigera"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Scheman"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Schema"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schemaläggning"</string>
+    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Schemalägg"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Stäng av mobilljud vid vissa tider"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Ange regler för Stör ej"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Schemaläggning"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Schemalägg"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Använd schema"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillåt avbrott med ljud"</string>
@@ -3475,14 +3482,14 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Om du aktiverar bubblor för appen aktiveras de även för enheten.\n\nDetta påverkar andra appar eller konversationer som kan visas i bubblor."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Aktivera"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Avbryt"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"På/Konversationer kan visas som flytande ikoner"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"På/konversationer kan visas som flytande ikoner"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Tillåt appar att visa bubblor"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Vissa konversationer visas som flytande ikoner ovanpå andra appar"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Alla konversationer får visas i bubblor"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Valda konversationer får visas i bubblor"</string>
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Inget får visas i bubblor"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Konversationer"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alla konversationer kan visas i bubblor utom"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alla konversationer får visas i bubblor utom"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Inaktivera bubblor för den här konversationen"</string>
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Aktivera bubblor för den här konversationen"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Svepningsåtgärder"</string>
@@ -3626,6 +3633,8 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Koppla dessa appar"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Kopplade appar har samma behörighet och kan använda varandras data."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
+    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
+    <skip />
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Ska jobbappen <xliff:g id="NAME">%1$s</xliff:g> vara betrodd att använda personlig data?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Koppla bara appar om du litar på att de inte delar personuppgifter med IT-administratören."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Appdata"</string>
@@ -3822,7 +3831,7 @@
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Vissa får avbryta"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Alla får avbryta"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Återuppringning"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Tillåt återuppringning"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Tillåt upprepade samtal"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"vem som helst"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"kontakter"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"stjärnmärkta kontakter"</string>
@@ -3867,7 +3876,7 @@
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Genom att fästa en app kan du se till att den alltid är överst tills du lossar den igen. Du kan använda funktionen t.ex. om du vill låta någon du litar på prova på ett spel. \n\nDet kan gå att öppna andra appar med appen du har fäst och personliga uppgifter kan bli tillgängliga. \n\nOm du vill dela enheten med någon på ett säkert sätt kan du använda en gästanvändare i stället. \n\nSå här fäster du appar: 	\n1.	Aktivera Fästa appar 	\n2.	Öppna översikten 	\n3.	Tryck på appikonen högst upp på skärmen och sedan på Fäst"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Följande gäller när du fäster appar: \n\n•	 Personliga uppgifter kan bli tillgängliga\n		(t.ex. kontakter och innehåll i e-post) \n•	 Det kan gå att öppna andra appar med appen som har fästs \n\nLåt bara personer du litar på använda fästa appar."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Kräv grafiskt lösenordet innan skärmen lossas"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Be om pinkod innan skärmen lossas"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Be om pinkod innan appen lossas"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Be om lösenord innan skärmen lossas"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Lås enheten när skärmen lossas"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Bekräfta borttagning av SIM"</string>
@@ -3943,6 +3952,8 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Inga behörigheter har beviljats"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Inga behörigheter har begärts"</string>
+    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Alla appar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerade appar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Snabbappar"</string>

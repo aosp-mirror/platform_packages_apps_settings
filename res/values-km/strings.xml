@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស​"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"ជ្រើសរើស​ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"ភ្ជាប់"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"កញ្ចក់"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"បើក​ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"រក​មិន​ឃើញ​ឧបករណ៍​ដែល​នៅ​ជិត។"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"តភ្ជាប់"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"រុករក"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"បង្កើនទំហំផ្ទុក"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"គ្រប់គ្រងទំហំផ្ទុក"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"សម្អាត, ទំហំផ្ទុក"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"ការ​តភ្ជាប់​កុំព្យូទ័រ​តាម​យូអេសប៊ី"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"តភ្ជាប់​ជា"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"ឧបករណ៍​មេឌៀ (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"មិនស្គាល់ប្រភព"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"អនុញ្ញាតប្រភពកម្មវិធីទាំងអស់"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"កម្មវិធីដែលទើបបើកថ្មីៗ"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"មើលកម្មវិធី​ទាំង <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">មើលឃើញ​កម្មវិធី​ទាំង %1$d</item>
+      <item quantity="one">មើលឃើញ​កម្មវិធី​ទាំងអស់</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"ទាក់ទងអ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យារបស់អ្នក"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"អ្នកគ្រប់គ្រងផ្នែកព័ត៌មានវិទ្យាអាចជួយអ្នកក្នុងការកំណត់កូដ PIN, លំនាំ ឬពាក្យសម្ងាត់របស់អ្នកឡើងវិញ"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីពីប្រភពនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតណាមួយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យ ដែលអាចបណ្តាលមកពីការប្រើប្រាស់កម្មវិធីទាំងនោះ។"</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ភាសា"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"ក្ដារចុច"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ក្ដារចុច​លើអេក្រង់"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ក្ដារចុចលើអេក្រង់​ដែលអាចប្រើបាន"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"គ្រប់គ្រង​ក្ដារចុច​លើអេក្រង់"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"ជំនួយក្តារចុច"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"សំឡេង​ជូន​ដំណឹង​លំនាំដើម"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"សំឡេងម៉ោងរោទ៍លំនាំដើម"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"ញ័រ​សម្រាប់ការហៅទូរសព្ទ"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"ការ​ញ័រ"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"កុំ​ញ័រ"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"ញ័រ​ជានិច្ច"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"ញ័រ​ជាមុនសិន ទើប​រោទ៍​បន្តិចម្តងៗ​តាមក្រោយ"</string>
@@ -3480,7 +3487,7 @@
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"ការសន្ទនា​មួយចំនួន​នឹងបង្ហាញជា​រូបអណ្ដែត​នៅពីលើ​កម្មវិធី​ផ្សេងទៀត"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"ការសន្ទនា​ទាំងអស់​អាចបង្ហាញជា​ពពុះបាន"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"ការសន្ទនា​ដែលបានជ្រើសរើស​អាចបង្ហាញជា​ពពុះបាន"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"គ្មានអ្វី​ដែលអាច​បង្ហាញជា​សារលេចឡើងបានទេ"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"គ្មានអ្វី​ដែលអាច​បង្ហាញជា​ពពុះបានទេ"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"ការសន្ទនា"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"ការសន្ទនា​ទាំងអស់​អាចបង្ហាញជាពពុះបាន លើកលែង​តែ"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"បិទ​ពពុះ​សម្រាប់​ការសន្ទនា​នេះ"</string>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ភ្ជាប់​កម្មវិធី​ទាំងនេះ"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"កម្មវិធីដែល​បានភ្ជាប់​ប្រើការ​អនុញ្ញាតរួមគ្នា និង​អាចចូលប្រើ​ទិន្នន័យ​របស់គ្នា​ទៅវិញ​ទៅមកបាន។"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"ភ្ជាប់កម្មវិធី លុះត្រាតែអ្នកជឿជាក់ថាកម្មវិធីទាំងនោះមិនចែករំលែកទិន្នន័យផ្ទាល់ខ្លួនជាមួយ​អ្នកគ្រប់គ្រង​ផ្នែកព័ត៌មានវិទ្យា​របស់អ្នកតែប៉ុណ្ណោះ។"</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"អ្នកអាចផ្ដាច់​កម្មវិធីបានគ្រប់ពេល​នៅក្នុងការកំណត់​ឯកជនភាព​របស់ឧបករណ៍អ្នក។"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"ទុកចិត្តឱ្យ <xliff:g id="NAME">%1$s</xliff:g> សម្រាប់ការងារ​ចូលប្រើ​ទិន្នន័យ​ផ្ទាល់ខ្លួន​របស់អ្នក​ដែរទេ?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"ភ្ជាប់កម្មវិធី លុះត្រាតែអ្នកជឿជាក់ថាកម្មវិធីទាំងនោះមិនចែករំលែកទិន្នន័យផ្ទាល់ខ្លួនជាមួយ​អ្នកគ្រប់គ្រង​ផ្នែកព័ត៌មានវិទ្យា​របស់អ្នកតែប៉ុណ្ណោះ។"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ទិន្នន័យកម្មវិធី"</string>
@@ -3711,8 +3719,8 @@
     <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"នៅពេលឆ្លើយតបថា <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"ប្រតិទិនណាមួយ"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"នៅពេលឆ្លើយតបថា"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"យល់ព្រម ប្រហែល ឬមិនឆ្លើយតប"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"យល់ព្រម ឬប្រហែល"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"បាទ/ចាស ប្រហែល ឬមិនឆ្លើយតប"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"បាទ/ចាស ឬប្រហែល"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"បាទ/ចាស"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"រកមិនឃើញច្បាប់ទេ។"</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"បើក / <xliff:g id="MODE">%1$s</xliff:g>"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"គ្មានការផ្តល់សិទ្ធិអនុញ្ញាតទេ"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"គ្មានការអនុញ្ញាត​ដែលបានស្នើសុំទេ"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"គ្រប់គ្រងសិទ្ធិចូលប្រើទិន្នន័យរបស់អ្នកពីកម្មវិធី"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"កម្មវិធីទាំងអស់"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"កម្មវិធី​ដែល​បាន​ដំឡើង"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"កម្មវិធី​ប្រើ​ភ្លាមៗ"</string>
@@ -4922,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"នៅពេល​ប្រើស៊ីម 2 ថេប្លេតនេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"។"</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"នៅពេល​ប្រើស៊ីម 2 ឧបករណ៍នេះនឹងត្រូវបានកំណត់ឱ្យប្រើ 4G។ "<annotation id="url">"ស្វែង​យល់​បន្ថែម"</annotation>"។"</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ផ្អាកប្រតិបត្តិការសម្រាប់កម្មវិធីដែលបានផ្ទុកទិន្នន័យ"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"អនុញ្ញាត​ការត្រួតគ្នាលើ​អេក្រង់នៅលើ​ការកំណត់"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"អនុញ្ញាតឱ្យ​កម្មវិធីដែលអាច​បង្ហាញនៅលើកម្មវិធី​ផ្សេងទៀត​ដាក់អេក្រង់ការកំណត់​ត្រួតគ្នា"</string>
 </resources>

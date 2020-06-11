@@ -683,7 +683,7 @@
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> qurilmasiga ulansinmi?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth orqali ulanish kodi"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Ulanish kodini kiriting va keyin “Return” yoki “Enter” tugmasini bosing"</string>
-    <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"PIN-kod harflar va belgilardan iborat bo‘ladi"</string>
+    <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Harflar yoki maxsus belgilardan iborat PIN kod"</string>
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"Odatda 0000 yoki 1234"</string>
     <string name="bluetooth_pin_values_hint_16_digits" msgid="5603928271430883558">"16 ta raqam bo‘lishi lozim"</string>
     <string name="bluetooth_enter_pin_other_device" msgid="6737778699899780717">"Ushbu PIN kodni boshqa qurilmada ham terish lozim bo‘lishi mumkin."</string>
@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimum ulangan Bluetooth audio qurilmalar"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Maksimum nechta Bluetooth audio qurilma ulash mumkinligi belgilang"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Translatsiya"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"koʻzgu"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Simsiz monitorni yoqish"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Hech qanday qurilma topilmadi."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Ulanmoqda"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Ochish"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Joy ochish"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Xotirani boshqarish"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"tozalash, xotira"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Kompyuter bilan USB ulanish"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Quyidagicha ulanish"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Media qurilma (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Noma’lum manbalar"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Barcha manbalarga ruxsat"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Yaqinda ochilgan ilovalar"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Barcha ilovalar (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Barcha %1$d ta ilova</item>
+      <item quantity="one">Barcha ilovalar</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"AT administratoriga murojaat qiling"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Ular sizga PIN kod, grafik kalit yoki parolni tiklashda yordam beradi"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Planshetingiz va shaxsiy ma‘lumotlaringiz notanish ilovalar xujumiga zaif bo‘ladi. Bunday ilovalarni ushbu manbadan o‘rnatish bilan ularning planshetizga yetkazadigan shikast va ma‘lumotlaringizni o‘chirib yuborishiga javobgarlikni o‘z zimmangizga olasiz."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Til"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Klaviaturalar"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Ekrandagi klaviatura"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Ekrandagi klaviatura mavjud"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Ekrandagi klaviaturani boshqarish"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Klaviatura yuzasidan yordam"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Standart bildirishnoma tovushi"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Standart signal tovushi"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Chaqiruv vaqtida tebranish"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Tebranish"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Tebranmasin"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Doim tebransin"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Tebranib, keyin balandlashib jiringlasin"</string>
@@ -3574,7 +3581,7 @@
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Telefon sozlamalari asosida jiringlashi yoki tebranishi mumkin"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Telefon qulfi yechilsa, bildirishnomalar ekranning yuqori qismida banner sifatida chiqsin"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Barcha “<xliff:g id="APP_NAME">%1$s</xliff:g>” bildirishnomalari"</string>
-    <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasining barcha bildirishnomalari"</string>
+    <string name="notification_app_switch_label" msgid="4422902423925084193">"Barcha <xliff:g id="APP_NAME">%1$s</xliff:g> bildirishnomalari"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Moslashuvchan bildirishnomalar"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
       <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> ta bildirishnoma (kuniga)</item>
@@ -3626,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Bu ilovalarni ulash"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Ulangan ilovalar ruxsat va maʼlumotlarni almashishi mumkin."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Faqat ishonchli ilovalarni ulang. Shaxsiy maʼlumotlaringizni AT administratoringiz koʻra oladi."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Istalgan vaqt qurilmaning maxfiylik sozlamalari orqali ilovalarni uzish mumkin."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Shaxsiy maʼlumotlaringizni <xliff:g id="NAME">%1$s</xliff:g> ishga oid ilovasiga ishonasizmi?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Faqat ishonchli ilovalarni ulang. Shaxsiy maʼlumotlaringizni AT administratoringiz koʻra oladi."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Ilovaga tegishli maʼlumotlar"</string>
@@ -3943,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Hech qanday ruxsat berilmagan"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Hech qanday ruxsat so‘ralmagan"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Ilova uchun maʼlumotlaringizga ruxsatni boshqarish"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Barcha ilovalar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Oʻrnatilgan ilovalar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Darhol ochiladigan ilovalar"</string>
@@ -4890,8 +4899,8 @@
     <string name="work_profile_app_subtext" msgid="5043419461440127879">"Ish"</string>
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Tizim standarti"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Bu variant endi yaroqsiz. Qaytadan urining."</string>
-    <string name="device_controls_sentence" msgid="4887752349920801907">"Qurilma boshqaruv elementlari"</string>
-    <string name="quick_controls_lower" msgid="6675573610027367819">"qurilma boshqaruv elementlari"</string>
+    <string name="device_controls_sentence" msgid="4887752349920801907">"Qurilmalarni boshqarish"</string>
+    <string name="quick_controls_lower" msgid="6675573610027367819">"qurilmalarni boshqarish"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kartalar va talonlar"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kartalar va talonlar"</string>
     <string name="power_menu_setting_name" msgid="7843519296976254765">"Quvvat menyusi"</string>
