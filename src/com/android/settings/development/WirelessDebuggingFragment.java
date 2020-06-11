@@ -113,11 +113,9 @@ public class WirelessDebuggingFragment extends DashboardFragment
             } else if (AdbManager.WIRELESS_DEBUG_STATE_CHANGED_ACTION.equals(action)) {
                 int status = intent.getIntExtra(AdbManager.WIRELESS_STATUS_EXTRA,
                         AdbManager.WIRELESS_STATUS_DISCONNECTED);
-                if (status == AdbManager.WIRELESS_STATUS_CONNECTED) {
-                    int port = intent.getIntExtra(AdbManager.WIRELESS_DEBUG_PORT_EXTRA, 0);
-                    Log.i(TAG, "Got adbwifi port=" + port);
-                } else {
-                    Log.i(TAG, "adbwifi server disconnected");
+                if (status == AdbManager.WIRELESS_STATUS_CONNECTED
+                        || status == AdbManager.WIRELESS_STATUS_DISCONNECTED) {
+                    sAdbIpAddressPreferenceController.updateState(mIpAddrPreference);
                 }
             } else if (AdbManager.WIRELESS_DEBUG_PAIRING_RESULT_ACTION.equals(action)) {
                 Integer res = intent.getIntExtra(
