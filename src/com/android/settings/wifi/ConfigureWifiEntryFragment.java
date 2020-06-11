@@ -113,8 +113,7 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
         mSubmitBtn.setOnClickListener(view -> handleSubmitAction());
         mCancelBtn.setOnClickListener(view -> handleCancelAction());
 
-        mUiController = new WifiConfigController2(this, rootView, mWifiEntry,
-                getMode(), false /* requestFocus */);
+        mUiController = new WifiConfigController2(this, rootView, mWifiEntry, getMode());
 
         /**
          * For this add WifiEntry UI, need to remove the Home button, so set related feature as
