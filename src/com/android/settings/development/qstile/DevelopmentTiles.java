@@ -432,4 +432,31 @@ public abstract class DevelopmentTiles extends TileService {
                     enabled ? ADB_SETTING_ON : ADB_SETTING_OFF);
         }
     }
+
+    /**
+     * Tile to control the "Show taps" developer setting
+     */
+    public static class ShowTaps extends DevelopmentTiles {
+        private static final int SETTING_VALUE_ON = 1;
+        private static final int SETTING_VALUE_OFF = 0;
+        private Context mContext;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            mContext = getApplicationContext();
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SHOW_TOUCHES, SETTING_VALUE_OFF) == SETTING_VALUE_ON;
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                Settings.System.SHOW_TOUCHES, isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        }
+    }
 }
