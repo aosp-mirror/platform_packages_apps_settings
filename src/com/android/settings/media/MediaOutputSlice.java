@@ -229,7 +229,11 @@ public class MediaOutputSlice implements CustomSliceable {
                 listBuilder.addRow(builder);
             }
         } else {
-            listBuilder.addRow(getMediaDeviceRow(device));
+            if (device.getState() == LocalMediaManager.MediaDeviceState.STATE_CONNECTING) {
+                listBuilder.addRange(getTransferringMediaDeviceRow(device));
+            } else {
+                listBuilder.addRow(getMediaDeviceRow(device));
+            }
         }
     }
 
@@ -279,6 +283,19 @@ public class MediaOutputSlice implements CustomSliceable {
         return devices;
     }
 
+    private ListBuilder.RangeBuilder getTransferringMediaDeviceRow(MediaDevice device) {
+        final IconCompat deviceIcon = getDeviceIconCompat(device);
+        final SliceAction sliceAction = SliceAction.create(getBroadcastIntent(mContext,
+                device.getId(), device.hashCode()), deviceIcon, ListBuilder.ICON_IMAGE,
+                mContext.getText(R.string.media_output_switching));
+
+        return new ListBuilder.RangeBuilder()
+                .setTitleItem(deviceIcon, ListBuilder.ICON_IMAGE)
+                .setMode(ListBuilder.RANGE_MODE_INDETERMINATE)
+                .setTitle(device.getName())
+                .setPrimaryAction(sliceAction);
+    }
+
     private ListBuilder.RowBuilder getMediaDeviceRow(MediaDevice device) {
         final String deviceName = device.getName();
         final PendingIntent broadcastAction =
@@ -290,15 +307,11 @@ public class MediaOutputSlice implements CustomSliceable {
         if (device.getDeviceType() == MediaDevice.MediaDeviceType.TYPE_BLUETOOTH_DEVICE
                 && !device.isConnected()) {
             final int state = device.getState();
-            if (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING
-                    || state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED) {
+            if (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED) {
                 rowBuilder.setTitle(deviceName);
                 rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                         ListBuilder.ICON_IMAGE, deviceName));
-                rowBuilder.setSubtitle(
-                        (state == LocalMediaManager.MediaDeviceState.STATE_CONNECTING)
-                                ? mContext.getText(R.string.media_output_switching)
-                                : mContext.getText(R.string.bluetooth_connect_failed));
+                rowBuilder.setSubtitle(mContext.getText(R.string.bluetooth_connect_failed));
             } else {
                 // Append status to title only for the disconnected Bluetooth device.
                 final SpannableString spannableTitle = new SpannableString(
@@ -316,14 +329,8 @@ public class MediaOutputSlice implements CustomSliceable {
             rowBuilder.setTitle(deviceName);
             rowBuilder.setPrimaryAction(SliceAction.create(broadcastAction, deviceIcon,
                     ListBuilder.ICON_IMAGE, deviceName));
-            switch (device.getState()) {
-                case LocalMediaManager.MediaDeviceState.STATE_CONNECTING:
-                    rowBuilder.setSubtitle(mContext.getText(R.string.media_output_switching));
-                    break;
-                case LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED:
-                    rowBuilder.setSubtitle(mContext.getText(
-                            R.string.media_output_switch_error_text));
-                    break;
+            if (device.getState() == LocalMediaManager.MediaDeviceState.STATE_CONNECTING_FAILED) {
+                rowBuilder.setSubtitle(mContext.getText(R.string.media_output_switch_error_text));
             }
         }
 

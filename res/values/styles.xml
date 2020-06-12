@@ -533,6 +533,10 @@
         <item name="rowStyle">@style/SliceRow.Slider</item>
     </style>
 
+    <style name="Widget.SliceView.Panel.Slider.LargeIcon">
+        <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
+    </style>
+
     <style name="SliceRow">
         <!-- 2dp start padding for the start icon -->
         <item name="titleItemStartPadding">2dp</item>
@@ -574,6 +578,15 @@
         <!-- Align text with slider -->
         <item name="titleStartPadding">11dp</item>
         <item name="subContentStartPadding">11dp</item>
+
+        <!-- Padding for indeterminate progress bar -->
+        <item name="progressBarStartPadding">12dp</item>
+        <item name="progressBarEndPadding">16dp</item>
+    </style>
+
+    <style name="SliceRow.Slider.LargeIcon">
+        <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
+        <item name="iconSize">12dp</item>
     </style>
 
     <style name="DisclaimerPositiveButton" parent="@style/SudGlifButton.Primary">
