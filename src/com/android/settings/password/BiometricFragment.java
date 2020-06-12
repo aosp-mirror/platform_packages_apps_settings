@@ -114,7 +114,8 @@ public class BiometricFragment extends InstrumentedFragment {
 
     private void cleanup() {
         if (getActivity() != null) {
-            getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().remove(this)
+                    .commitAllowingStateLoss();
         }
     }
 
