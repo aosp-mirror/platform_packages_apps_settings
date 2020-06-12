@@ -785,6 +785,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Максимальное количество подключенных Bluetooth-аудиоустройств"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Укажите максимальное количество подключенных Bluetooth-аудиоустройств"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Трансляция"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"дублирование"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Включить"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Устройства не найдены."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Подключение…"</string>
@@ -1476,7 +1477,8 @@
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Настроить"</string>
     <string name="storage_menu_explore" msgid="3048031115521594488">"Открыть"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Освободите место"</string>
-    <string name="storage_menu_manage" msgid="7465522758801346408">"Управление хранилищем"</string>
+    <string name="storage_menu_manage" msgid="7465522758801346408">"Управление"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"очистить, хранилище"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-подключение к компьютеру"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Подключить как"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Медиа-устройство (MTP)"</string>
@@ -1890,7 +1892,12 @@
     <string name="install_applications" msgid="3921609656584369901">"Неизвестные источники"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Разрешить из всех источников"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Недавно открытые приложения"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Показать все приложения (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Показать все приложения (%1$d)</item>
+      <item quantity="few">Показать все приложения (%1$d)</item>
+      <item quantity="many">Показать все приложения (%1$d)</item>
+      <item quantity="other">Показать все приложения (%1$d)</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Обратитесь к системному администратору"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Он поможет сбросить PIN-код, графический ключ или пароль."</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Ваши личные данные и данные планшета более уязвимы для атак приложений из неизвестных источников. Устанавливая приложения из этого источника, вы соглашаетесь с тем, что несете полную ответственность за любой ущерб, нанесенный планшету, и потерю данных, связанные с использованием этих приложений."</string>
@@ -2067,6 +2074,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Язык"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Клавиатуры"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Экранная клавиатура"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Доступная экранная клавиатура"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управление экранными клавиатурами"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Подсказки клавиатуры"</string>
@@ -3383,6 +3391,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Звук уведомления по умолчанию"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Звук будильника по умолчанию"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Вибрация при звонке"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Вибрация"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Без вибрации"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"С вибрацией"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Вибрация, а затем нарастающий звонок"</string>
@@ -3570,15 +3579,13 @@
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Включено (разговоры могут появляться в виде плавающих значков)"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Разрешить приложениям показывать всплывающие чаты"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Некоторые разговоры будут появляться поверх всех окон в виде плавающих значков"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"Разрешить всплывающие чаты от всех разговоров"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"Разрешить всплывающие чаты для всех разговоров"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Разрешить всплывающие чаты для некоторых разговоров"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Запретить все всплывающие уведомления"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Запретить всплывающие чаты"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Разговоры"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Для этих разговоров не будут появляться всплывающие чаты"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Отключить всплывающие чаты для этого разговора"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Включить всплывающие чаты для этого разговора"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Жесты пролистывания"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Проведите вправо, чтобы закрыть уведомление, или влево, чтобы открыть меню"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Проведите  влево, чтобы закрыть уведомление, или вправо, чтобы открыть меню"</string>
@@ -3600,7 +3607,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Рабочий профиль заблокирован"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Уведомления на заблокированном экране"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Показывать все разговоры"</string>
-    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Скрывать беззвучные разговоры и уведомления"</string>
+    <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Скрывать беззвучные чаты и уведомления"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Не показывать уведомления"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Уведомления, содержащие конфиденциальные данные"</string>
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Показывать конфиденциальные данные на заблокированном экране"</string>
@@ -3728,6 +3735,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Связать эти приложения"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Связанные приложения используют общие разрешения и могут обмениваться данными."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Связывайте только те приложения, которым доверяете, так как ваши персональные данные могут стать доступны системному администратору."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Вы можете отменить связь между приложениями в любое время на странице \"Конфиденциальность\" в настройках устройства."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Вы доверяете свои личные данные рабочему приложению \"<xliff:g id="NAME">%1$s</xliff:g>\"?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Связывайте только те приложения, которым доверяете, так как ваши персональные данные могут стать доступны системному администратору."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Данные приложений"</string>
@@ -3805,7 +3813,7 @@
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Время"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Удалить расписание"</string>
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Тип расписания"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Удалить правило \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Удалить расписание \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Удалить"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Неизвестен"</string>
     <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Сейчас эти настройки изменить нельзя. Режим \"Не беспокоить\" с персонализированными параметрами был включен приложением \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
@@ -3834,8 +3842,8 @@
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Отключение при срабатывании будильника"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Настройки режима \"Не беспокоить\""</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Использовать настройки по умолчанию"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Установить особые настройки для этого расписания"</string>
-    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Для правила \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Задать особые настройки"</string>
+    <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Для расписания \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"с <xliff:g id="START">%1$s</xliff:g> по <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3852,10 +3860,10 @@
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Нет"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Для кого не действует режим \"Не беспокоить\""</string>
-    <string name="zen_mode_calls_title" msgid="2078578043677037740">"Звонки"</string>
+    <string name="zen_mode_calls_title" msgid="2078578043677037740">"Вызовы"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Вызовы"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"звонков"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Звонки, для которых не действует режим \"Не беспокоить\""</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Вызовы, для которых не действует режим \"Не беспокоить\""</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Чтобы не пропустить важные звонки, убедитесь, что на устройстве включен звук."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Входящие вызовы заблокированы правилом \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Вы можете изменить настройки, чтобы принимать звонки от друзей, членов семьи и других контактов."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Помеченные контакты"</string>
@@ -3873,7 +3881,7 @@
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Чтобы не пропустить важные сообщения, убедитесь, что на устройстве включен звук."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Когда действует правило \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\", входящие сообщения блокируются. Вы можете изменить настройки, чтобы принимать сообщения от друзей, членов семьи и других контактов."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Режим \"Не беспокоить\" не действует для всех сообщений"</string>
-    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Режим \"Не беспокоить\" не действует для всех звонков"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Режим \"Не беспокоить\" не действует для всех вызовов"</string>
     <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Нет"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="one"><xliff:g id="NUM_CONTACTS">%d</xliff:g> контакт</item>
@@ -3925,8 +3933,7 @@
       <item quantity="other">Режим \"Не беспокоить\" не действует для следующих приложений: <xliff:g id="APP_NAMES">%s</xliff:g></item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"ещё <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Приложения"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Все уведомления"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Некоторые уведомления"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Уведомления, для которых не действует режим \"Не беспокоить\""</string>
@@ -3990,7 +3997,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Закрепление приложения"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Эта функция позволяет закрепить окно определенного приложения на экране. Ее можно использовать, например, если вы хотите дать другу поиграть в игру на вашем устройстве.\n\nЗакрепленное приложение может открывать другие приложения и получать доступ к персональным данным.\n\nЧтобы использовать эту функцию, выполните следующие действия: 	\n1.	Включите функцию в настройках. 	\n2.	Нажмите \"Обзор\". 	\n3.	Нажмите на значок приложения вверху экрана и выберите \"Закрепить\"."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Эта функция позволяет закрепить окно определенного приложения на экране. Ее можно использовать, например, если вы хотите дать другу поиграть в игру на вашем устройстве.\n\nЗакрепленное приложение может открывать другие приложения и получать доступ к персональным данным.\n\nПоэтому, если вы хотите дать устройство другому человеку и не беспокоиться о безопасности данных, рекомендуем включить гостевой режим. \n\nЧтобы закрепить приложение: 	\n1.	Включите функцию в настройках. 	\n2.	Нажмите \"Обзор\". 	\n3.	Нажмите на значок приложения вверху экрана и выберите \"Закрепить\"."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Закрепленное приложение может:\n\n•		получать доступ к персональным данным \n		(например, контактам и содержимому писем);\n•		открывать другие приложения.\n\nИспользуйте эту функцию, только с теми людьми, которым вы доверяете."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Закрепленное приложение может:\n\n• получать доступ к персональным данным (например, контактам и содержимому писем);\n• открывать другие приложения.\n\n\nИспользуйте эту функцию, только с теми людьми, которым вы доверяете."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Запрашивать графический ключ"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Запрашивать PIN-код"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
@@ -4076,6 +4083,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"У приложения нет разрешений"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Приложение не запрашивало разрешения"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Настройки доступа приложений к вашим данным"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Все приложения"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установленные приложения"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Приложения с мгновенным запуском"</string>
@@ -5087,8 +5095,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Конфиденциальные данные"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Показывать карты и элементы управления при заблокированном экране"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Показывать элементы управления на заблокированном экране"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Показывать карты на заблокированном экране"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Не показывать карты и элементы управления при заблокированном экране"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Сначала необходимо настроить блокировку экрана"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Показывать виджеты управления устройством"</string>
@@ -5106,8 +5113,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"При одновременном использовании двух SIM-карт подключение на этом планшете будет ограничено сетями 4G. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"При одновременном использовании двух SIM-карт подключение на этом устройстве будет ограничено сетями 4G. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Приостановить работу кешированных приложений"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Разрешить экранный оверлей в настройках"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешить приложениям, которые могут показываться поверх других, накладываться на экраны настроек"</string>
 </resources>

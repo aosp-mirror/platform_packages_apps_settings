@@ -251,7 +251,7 @@
     <string name="roaming_reenable_title" msgid="770824950144026180">"Vil du tillate data-roaming?"</string>
     <string name="networks" msgid="5184501333492775095">"Operatør"</string>
     <string name="sum_carrier_select" msgid="1669911795517995916">"Velg en nettverksoperatør"</string>
-    <string name="date_and_time_settings_title" msgid="2305454529709812364">"Dato og tid"</string>
+    <string name="date_and_time_settings_title" msgid="2305454529709812364">"Dato og klokkeslett"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Angi dato og klokkeslett"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Angi dato, klokkeslett, tidssone og formater"</string>
     <string name="date_time_auto" msgid="8227898528525208628">"Bruk nettverkets klokkeslett"</string>
@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Maksimalt antall Bluetooth-lydenheter"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Velg maksimalt antall tilkoblede Bluetooth-lydenheter"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"speil"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Slå på trådløs skjermdeling"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Finner ingen enheter i nærheten."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Kobler til"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Utforsk"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Frigjør lagringsplass"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Administrer lagring"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"rengjør, lagring"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB-tilkoblingen til datamaskinen"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Koble til som"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Medieenhet (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Ukjente kilder"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Tillat alle appkilder"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nylig åpnede apper"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Se alle de <xliff:g id="COUNT">%1$d</xliff:g> appene"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">Se alle %1$d appene</item>
+      <item quantity="one">Se alle appene</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakt IT-administratoren din"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"De kan hjelpe deg med å tilbakestille PIN-koden, mønsteret eller passordet"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Nettbrettet ditt og personopplysningene dine er mer sårbare for angrep hvis du bruker ukjente apper. Ved å installere apper fra denne kilden godtar du at du selv er ansvarlig for enhver skade på nettbrettet eller tap av data som kan oppstå, fra bruk av slike apper."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tastaturer"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skjermtastatur"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tilgjengelig skjermtastatur"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Administrer skjermtastaturer"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Tastaturhjelp"</string>
@@ -3297,6 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Standard varsellyd"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Standard alarmlyd"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrasjon for anrop"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibrering"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Vibrer aldri"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibrer alltid"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrer først, ring så gradvis høyere"</string>
@@ -3483,10 +3490,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Ingenting kan lage bobler"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Samtaler"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alle samtaler kan vises i bobler, unntatt"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Slå av bobler for denne samtalen"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Slå på bobler for denne samtalen"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Sveipehandlinger"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Sveip til høyre for å avvise eller til venstre for å vise menyen"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Sveip til venstre for å avvise eller til høyre for å vise menyen"</string>
@@ -3628,6 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Koble til disse appene"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Tilkoblede apper deler tillatelser og får tilgang til hverandres data."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Knytt bare til apper hvis du stoler på at de ikke deler personlige data med IT-administratoren din."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Du kan når som helst fjerne tilknytning av apper i personverninnstillingene for enheten din."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Vil du gi jobbappen <xliff:g id="NAME">%1$s</xliff:g> tilgang til de personlige dataene dine?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Knytt bare til apper hvis du stoler på at de ikke deler personlige data med IT-administratoren din."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Appdata"</string>
@@ -3809,8 +3815,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> kan forstyrre</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> flere"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apper"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Alle varsler"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Noen varsler"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Varsler som kan forstyrre"</string>
@@ -3946,6 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ingen tillatelser er gitt"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ingen tillatelser er forespurt"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrollér apptilgang til dataene dine"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle apper"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerte apper"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant-apper"</string>
@@ -4907,8 +4913,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Sensitivt innhold"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Vis kort og kontroller når de er låst"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Vis kontroller når skjermen er låst"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Vis kort når skjermen er låst"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Skjul kort og kontroller når de er låst"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Vis enhetsstyring"</string>
@@ -4926,8 +4931,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Nettbrettet er begrenset til 4G når du bruker to SIM-kort. "<annotation id="url">"Finn ut mer"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Enheten er begrenset til 4G når du bruker to SIM-kort. "<annotation id="url">"Finn ut mer"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Sperr kjøring midlertidig for bufrede apper"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Tillat skjermoverlegg over Innstillinger"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Tillat apper som kan vises over andre apper, å legge seg over Innstillinger-skjermer"</string>
 </resources>
