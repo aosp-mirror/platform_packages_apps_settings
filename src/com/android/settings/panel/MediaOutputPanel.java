@@ -246,7 +246,7 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
 
     @Override
     public int getViewType() {
-        return PanelContent.VIEW_TYPE_SLIDER;
+        return PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
     }
 
     private final MediaController.Callback mCb = new MediaController.Callback() {
