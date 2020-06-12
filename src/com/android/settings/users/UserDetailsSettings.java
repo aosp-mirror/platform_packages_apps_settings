@@ -39,6 +39,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedPreference;
 
 import java.util.List;
 
@@ -65,10 +66,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_CONFIRM_ENABLE_CALLING = 2;
     private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
+    private static final int DIALOG_SETUP_USER = 4;
 
     private UserManager mUserManager;
+    private UserCapabilities mUserCaps;
+
     @VisibleForTesting
-    Preference mSwitchUserPref;
+    RestrictedPreference mSwitchUserPref;
     private SwitchPreference mPhonePref;
     @VisibleForTesting
     Preference mAppAndContentAccessPref;
@@ -90,6 +94,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
         final Context context = getActivity();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mUserCaps = UserCapabilities.create(context);
         addPreferencesFromResource(R.xml.user_details_settings);
 
         initialize(context, getArguments());
@@ -106,15 +111,20 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         if (preference == mRemoveUserPref) {
             if (canDeleteUser()) {
                 showDialog(DIALOG_CONFIRM_REMOVE);
+                return true;
             }
-            return true;
         } else if (preference == mSwitchUserPref) {
             if (canSwitchUserNow()) {
-                switchUser();
+                if (shouldShowSetupPromptDialog()) {
+                    showDialog(DIALOG_SETUP_USER);
+                } else {
+                    switchUser();
+                }
+                return true;
             }
-            return true;
         } else if (preference == mAppAndContentAccessPref) {
             openAppAndContentAccessScreen(false);
+            return true;
         }
         return false;
     }
@@ -139,6 +149,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING_AND_SMS;
+            case DIALOG_SETUP_USER:
+                return SettingsEnums.DIALOG_USER_SETUP;
             default:
                 return 0;
         }
@@ -160,6 +172,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
                 return UserDialogs.createEnablePhoneCallsAndSmsDialog(getActivity(),
                         (dialog, which) -> enableCallsAndSms(true));
+            case DIALOG_SETUP_USER:
+                return UserDialogs.createSetupUserDialog(getActivity(),
+                        (dialog, which) -> {
+                            if (canSwitchUserNow()) {
+                                switchUser();
+                            }
+                        });
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -188,7 +207,14 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         mSwitchUserPref.setTitle(
                 context.getString(com.android.settingslib.R.string.user_switch_to_user,
                         mUserInfo.name));
-        mSwitchUserPref.setOnPreferenceClickListener(this);
+
+        if (mUserCaps.mDisallowSwitchUser) {
+            mSwitchUserPref.setDisabledByAdmin(RestrictedLockUtilsInternal.getDeviceOwner(context));
+        } else {
+            mSwitchUserPref.setDisabledByAdmin(null);
+            mSwitchUserPref.setSelectable(true);
+            mSwitchUserPref.setOnPreferenceClickListener(this);
+        }
 
         if (!mUserManager.isAdminUser()) { // non admin users can't remove users and allow calls
             removePreference(KEY_ENABLE_TELEPHONY);
@@ -320,5 +346,17 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 .setTitleRes(R.string.user_restrictions_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
+    }
+
+    private boolean isSecondaryUser(UserInfo user) {
+        return UserManager.USER_TYPE_FULL_SECONDARY.equals(user.userType);
+    }
+
+    private boolean shouldShowSetupPromptDialog() {
+        // TODO: FLAG_INITIALIZED is set when a user is switched to for the first time,
+        //  but what we would really need here is a flag that shows if the setup process was
+        //  completed. After the user cancels the setup process, mUserInfo.isInitialized() will
+        //  return true so there will be no setup prompt dialog shown to the user anymore.
+        return isSecondaryUser(mUserInfo) && !mUserInfo.isInitialized();
     }
 }
