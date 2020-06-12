@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"यह चुनें कि ब्लूटूथ के ज़रिए ज़्यादा से ज़्यादा कितने ऑडियो डिवाइस जुड़ सकते हैं"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"कास्ट करें"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"स्क्रीन शेयर करें"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"बिना वायर के स्क्रीन दिखाना (वायरलेस डिसप्ले) चालू करें"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"आस-पास कोई भी डिवाइस नहीं मिला."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"कनेक्ट हो रहा है"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"एक्सप्लोर करें"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"जगह खाली करें"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"मेमोरी प्रबंधित करें"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"हटाएं, डिवाइस की मेमोरी"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB कंप्‍यूटर कनेक्‍शन"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"इस रूप में कनेक्ट करें"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"मीडिया डिवाइस (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"नामालूम स्रोत"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"सभी ऐप्लिकेशन स्रोतों को अनुमति दें"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"हाल ही में खोले गए ऐप्लिकेशन"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"सभी <xliff:g id="COUNT">%1$d</xliff:g> ऐप्लिकेशन देखें"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">सभी %1$d ऐप्लिकेशन देखें</item>
+      <item quantity="other">सभी %1$d ऐप्लिकेशन देखें</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"अपने आईटी एडमिन से संपर्क करें"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"आप अपने पिन, पैटर्न या पासवर्ड को रीसेट करने के लिए आईटी एडमिन की मदद ले सकते हैं"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"आपके टैबलेट और व्यक्तिगत डेटा पर अनजान ऐप्लिकेशन की ओर से हमला किए जाने का जोखिम ज़्यादा है. इस स्रोत से आने वाले ऐप्लिकेशन इंस्टॉल करके, आप सहमति देते हैं कि उनके उपयोग के कारण आपके टैबलेट को होने वाले किसी भी नुकसान या डेटा की हानि के लिए आप ही ज़िम्मेदार हैं."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"कीबोर्ड"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ऑन-स्क्रीन कीबोर्ड"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ऑन-स्क्रीन कीबोर्ड उपलब्ध है"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ऑन-स्क्रीन कीबोर्ड प्रबंधित करें"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"कीबोर्ड सहायता"</string>
@@ -2109,7 +2115,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"कैप्शन की प्राथमिकताएं"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"बड़ा करना"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"स्क्रीन का बड़ा किया गया हिस्सा"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"स्क्रीन बड़ी करने का मोड चालू करें"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"उस हिस्से को चुनें जिसे आप स्क्रीन पर बड़ा करके देखना चाहते हैं"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"फ़ुल स्क्रीन"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"स्क्रीन का हिस्सा"</string>
@@ -3297,6 +3302,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना की डिफ़ॉल्ट टोन"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्म की डिफ़ॉल्ट आवाज़"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"कॉल आने पर वाइब्रेट होना"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"वाइब्रेशन"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"वाइब्रेट न हो"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"वाइब्रेट हो"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"पहले वाइब्रेट हो, फिर धीरे-धीरे घंटी बजे"</string>
@@ -3483,10 +3489,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"इस ऐप्लिकेशन से कोई बातचीत बबल नहीं हो सकती"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"बातचीत"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"इन्हें छोड़कर सभी बातचीत बबल की जा सकती हैं"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"इस बातचीत के लिए बबल्स बंद करें"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"इस बातचीत के लिए बबल्स चालू करें"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"स्वाइप करने पर होने वाली कार्रवाइयां"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"खारिज करने के लिए दाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए बाईं ओर"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"खारिज करने के लिए बाईं ओर स्वाइप करें और मेन्यू दिखाने के लिए दाईं ओर"</string>
@@ -3628,6 +3632,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"इन ऐप्लिकेशन को कनेक्ट करें"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"कनेक्ट किए गए ऐप्लिकेशन आपस में अनुमतियां शेयर करते हैं. साथ ही, ये एक-दूसरे का डेटा भी ऐक्सेस कर सकते हैं."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"सिर्फ़ ऐसे ऐप्लिकेशन से कनेक्ट करें जो आईटी एडमिन के साथ आपका निजी डेटा शेयर नहीं करेंगे."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"आप जब चाहें, अपने डिवाइस की निजता सेटिंग में जाकर ऐप्लिकेशन डिसकनेक्ट कर सकते हैं."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"क्या आप अपने निजी डेटा को लेकर ऑफ़िस के <xliff:g id="NAME">%1$s</xliff:g> पर भरोसा करते हैं?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"सिर्फ़ ऐसे ऐप्लिकेशन से कनेक्ट करें जो आईटी एडमिन के साथ आपका निजी डेटा शेयर नहीं करेंगे."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ऐप्लिकेशन का डेटा"</string>
@@ -3809,8 +3814,7 @@
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> \'परेशान न करें\' मोड को बायपास कर सकते हैं</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"<xliff:g id="NUMBER">%d</xliff:g> और"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"ऐप्लिकेशन"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"सभी सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"कुछ सूचनाएं"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"वे सूचनाएं जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
@@ -3946,6 +3950,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कोई अनुमति नहीं दी गई"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"किसी अनुमति का अनुरोध नहीं किया गया"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"यह कंट्रोल करें कि कौनसा ऐप किस डेटा को ऐक्सेस कर सकता है"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सभी ऐप"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इंस्‍टॉल किए गए ऐप"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"झटपट ऐप"</string>
@@ -4470,6 +4475,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 सेकंड"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"रीचेबिलिटी"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"समय, सूचनाएं और दूसरी जानकारी देखने के लिए, फ़ोन की स्क्रीन पर दो बार टैप करें."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"फ़ोन चेक करने के लिए उसे उठाएं"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"टैबलेट देखने के लिए लिफ़्ट करें"</string>
@@ -4917,8 +4923,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"संवेदनशील सामग्री"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"जब डिवाइस लॉक हो, तो कार्ड और कंट्रोल दिखाएं"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"स्क्रीन लॉक होने पर कंट्रोल दिखाएं"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"लॉक होने पर कार्ड दिखाएं"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"जब डिवाइस लॉक हो, तब कार्ड और कंट्रोल छिपाएं"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"इस्तेमाल करने के लिए, सबसे पहले स्क्रीन लॉक सेट करें"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"डिवाइस कंट्रोल दिखाएं"</string>
@@ -4936,8 +4941,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"इस टैबलेट में अगर दो सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"इस डिवाइस में अगर दो सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ऐप से कैश किए गए डेटा को एक्सीक्यूट करने से रोकें"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"\'सेटिंग\' पर स्क्रीन ओवरले करने की अनुमति दें"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"\'सेटिंग\' में जाकर उन ऐप्लिकेशन को स्क्रीन ओवरले करने की अनुमति दें जो दूसरे ऐप्लिकेशन के ऊपर दिख सकते हैं"</string>
 </resources>

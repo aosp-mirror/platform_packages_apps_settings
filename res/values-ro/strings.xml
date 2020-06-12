@@ -768,6 +768,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selectați numărul maxim de dispozitive audio Bluetooth conectate"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Proiectare"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"oglindă"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activați ecranul wireless"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Nu s-au găsit dispozitive în apropiere."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Se conectează"</string>
@@ -1456,6 +1457,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explorați"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Eliberați spațiu"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gestionați spațiul de stocare"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"curățare, stocare"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Conectare la computer prin USB"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Conectați-vă ca"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Dispozitiv media (MTP)"</string>
@@ -1868,7 +1870,11 @@
     <string name="install_applications" msgid="3921609656584369901">"Surse necunoscute"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Permite aplic. din orice surse"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Aplicații deschise recent"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Afișați toate cele <xliff:g id="COUNT">%1$d</xliff:g> aplicații"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="few">Vedeți toate cele %1$d aplicații</item>
+      <item quantity="other">Vedeți toate cele %1$d de aplicații</item>
+      <item quantity="one">Vedeți toate aplicațiile</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Contactați administratorul IT"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Acesta vă poate ajuta să resetați codul PIN, modelul sau parola"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tableta și datele dvs. personale sunt mai vulnerabile la un atac din partea aplicațiilor necunoscute. Dacă instalați aplicații din această sursă, acceptați că sunteți singura persoană responsabilă pentru deteriorarea tabletei sau pentru pierderea datelor, care pot avea loc în urma utilizării acestor aplicații."</string>
@@ -2044,6 +2050,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Limbă"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Tastaturi"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tastatură pe ecran"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tastatura pe ecran disponibilă"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gestionați tastaturile pe ecran"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Asistență pentru tastatură"</string>
@@ -2132,7 +2139,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferințe pentru subtitrări"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Mărire"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Zona de mărire"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Mărire activată"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Alegeți zonele pe care doriți să le măriți atunci când măriți ecranul"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Ecran complet"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"O parte a ecranului"</string>
@@ -3340,6 +3346,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Sunet de notificare prestabilit"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Sunet de alarmă prestabilit"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrații pentru apeluri"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibrație"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Fără vibrații"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibrații întotdeauna"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Întâi vibrații, apoi sună din ce în ce mai tare"</string>
@@ -3529,10 +3536,8 @@
     <string name="bubble_app_setting_none" msgid="8643594711863996418">"Nimic nu poate apărea în balon"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Conversații"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Toate conversațiile pot apărea în balon, mai puțin"</string>
-    <!-- no translation found for bubble_app_setting_unbubble_conversation (1769789500566080427) -->
-    <skip />
-    <!-- no translation found for bubble_app_setting_bubble_conversation (1461981680982964285) -->
-    <skip />
+    <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Dezactivați baloanele pentru această conversație"</string>
+    <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Activați baloanele pentru această conversație"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Acțiuni de glisare"</string>
     <string name="swipe_direction_ltr" msgid="5137180130142633085">"Glisați la dreapta pentru a respinge și la stânga pentru a afișa meniul"</string>
     <string name="swipe_direction_rtl" msgid="1707391213940663992">"Glisați la stânga pentru a respinge și la dreapta pentru a afișa meniul"</string>
@@ -3678,6 +3683,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectați aceste aplicații"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Aplicațiile conectate au permisiuni în comun și își pot accesa reciproc datele."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Conectați aplicațiile doar dacă aveți încredere că nu-i vor permite administratorului IT accesul la datele cu caracter personal."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Puteți deconecta oricând aplicații din setările de confidențialitate ale dispozitivului."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Aveți încredere să permiteți accesul aplicației pentru lucru <xliff:g id="NAME">%1$s</xliff:g> la datele dvs. cu caracter personal?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Conectați aplicațiile doar dacă aveți încredere că nu-i vor permite administratorului IT accesul la datele cu caracter personal."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Datele aplicațiilor"</string>
@@ -3789,7 +3795,7 @@
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"Conversații care îl pot întrerupe"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Toate conversațiile"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversații cu prioritate"</string>
-    <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Fără"</string>
+    <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Niciuna"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
       <item quantity="few"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversații</item>
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> de conversații</item>
@@ -3809,7 +3815,7 @@
       <item quantity="other">încă <xliff:g id="NUM_PEOPLE">%d</xliff:g> de persoane</item>
       <item quantity="one">încă o persoană</item>
     </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Fără"</string>
+    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Niciuna"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mesaje"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"mesaje"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mesaje"</string>
@@ -3818,7 +3824,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Pentru „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”, mesajele primite sunt blocate. Puteți să modificați setările ca să le permiteți prietenilor, familiei sau altor persoane de contact să ia legătura cu dumneavoastră."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Toate mesajele ajung la dvs."</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Toate apelurile ajung la dvs."</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Fără"</string>
+    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Niciuna"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="few"><xliff:g id="NUM_CONTACTS">%d</xliff:g> persoane de contact</item>
       <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> de persoane de contact</item>
@@ -3830,8 +3836,8 @@
     <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"De la persoanele de contact marcate cu stea și de la apelanții care revin"</string>
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"De la persoanele de contact și apelanții care revin"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Doar de la apelanții care revin"</string>
-    <string name="zen_mode_none_calls" msgid="2047166006414016327">"Fără"</string>
-    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Fără"</string>
+    <string name="zen_mode_none_calls" msgid="2047166006414016327">"Niciunul"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Niciunul"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarme"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"De la temporizatoare, alarme, sisteme de securitate și alte aplicații"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"alarme"</string>
@@ -3867,8 +3873,7 @@
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> îl poate întrerupe</item>
     </plurals>
     <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Încă <xliff:g id="NUMBER">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_bypassing_apps_title (371050263563164059) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplicații"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Toate notificările"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Anumite notificări"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notificări care îl pot întrerupe"</string>
@@ -4011,6 +4016,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nicio permisiune acordată"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nicio permisiune solicitată"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controlați accesul aplicațiilor la date"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Toate aplicațiile"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicații instalate"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicații instantanee"</string>
@@ -4550,6 +4556,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 secunde"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"accesibilitate"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Ca să verificați ora, notificările și alte informații, atingeți ecranul de două ori."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Ridicați pentru a verifica telefonul"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Ridicați pentru a verifica tableta"</string>
@@ -5007,8 +5014,7 @@
     <string name="power_menu_privacy" msgid="7900052501075197854">"Conținut sensibil"</string>
     <string name="power_menu_privacy_show" msgid="2112741022037054383">"Afișează cardurile și comenzile când este blocat"</string>
     <string name="power_menu_privacy_show_controls" msgid="8294874046577167797">"Afișează comenzile când ecranul este blocat"</string>
-    <!-- no translation found for power_menu_privacy_show_cards (8937303188629541026) -->
-    <skip />
+    <string name="power_menu_privacy_show_cards" msgid="8937303188629541026">"Afișează cardurile când ecranul este blocat"</string>
     <string name="power_menu_privacy_hide" msgid="1617102911157977095">"Ascunde cardurile și comenzile când este blocat"</string>
     <string name="power_menu_privacy_not_secure" msgid="6247119934128206924">"Pentru utilizare, setați mai întâi un ecran de blocare"</string>
     <string name="device_controls_setting_toggle" msgid="8972005569207737469">"Afișați comenzile dispozitivelor"</string>
@@ -5026,8 +5032,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Când folosiți două carduri SIM, tableta va fi limitată la 4G. "<annotation id="url">"Aflați mai multe"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Când folosiți două carduri SIM, dispozitivul va fi limitat la 4G. "<annotation id="url">"Aflați mai multe"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspendați execuția pentru aplicațiile din cache"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Permiteți suprapunerile pe ecrane din Setări"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Permiteți aplicații care se pot afișa deasupra altora prin suprapunerea pe ecranele de Setări"</string>
 </resources>

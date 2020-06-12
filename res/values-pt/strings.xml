@@ -751,6 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Número máximo de dispositivos de áudio Bluetooth conectados"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Selecione o número máximo de dispositivos de áudio Bluetooth conectados"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Transmitir"</string>
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"espelho"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Ativar tela sem fio"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Nenhum dispositivo encontrado por perto."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Conectando"</string>
@@ -1435,6 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explorar"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Liberar espaço"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gerenciar armazenamento"</string>
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"limpeza, armazenamento"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Conexão USB do computador"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Conectar como"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Dispositivo de mídia (MTP)"</string>
@@ -1846,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Fontes desconhecidas"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Permitir todas as origens"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Apps abertos recentemente"</string>
-    <string name="see_all_apps_title" msgid="8363320482315507386">"Ver todos os <xliff:g id="COUNT">%1$d</xliff:g> apps"</string>
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Ver todos os apps</item>
+      <item quantity="other">Ver todos os %1$d apps</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Entre em contato com o admin. de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Ele pode ajudar você a redefinir seu PIN, seu padrão ou sua senha"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Seu tablet e seus dados pessoais estão mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer dano causado ao seu tablet ou pela perda de dados que possa resultar do uso desses apps."</string>
@@ -2021,6 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado na tela"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado na tela disponível"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerenciar teclados na tela"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Assistência do teclado"</string>
@@ -2109,7 +2115,6 @@
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferências de legenda"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ampliação"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Área de ampliação"</string>
-    <string name="accessibility_magnification_enable_mode_title" msgid="4390488034396824276">"Ampliação ativada"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="4821458740248772054">"Escolha a área de ampliação que você quer usar ao ampliar a tela"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Tela cheia"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="5630032596384610913">"Parte da tela"</string>
@@ -3297,6 +3302,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Som de notificação padrão"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Som de alarme padrão"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibrar para chamadas"</string>
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibração"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Nunca vibrar"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Sempre vibrar"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrar primeiro e usar o toque gradual"</string>
@@ -3626,6 +3632,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Conectar esses apps"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Os apps conectados compartilham permissões e podem acessar dados uns dos outros."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Você pode desconectar apps a qualquer momento nas configurações de privacidade do seu dispositivo."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Confiar seus dados pessoais ao app de trabalho <xliff:g id="NAME">%1$s</xliff:g>?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Só conecte apps em que você confia e que não compartilharão seus dados pessoais com o administrador de TI."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dados do app"</string>
@@ -3943,6 +3950,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nenhuma permissão concedida"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nenhuma permissão solicitada"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Controlar acesso de apps aos seus dados"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todos os apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Apps instalados"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Apps instantâneos"</string>
@@ -4467,6 +4475,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12 segundos"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
+    <string name="keywords_one_handed" msgid="969440592493034101">"acessibilidade"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Para verificar a hora, as notificações e outras informações, toque duas vezes na tela."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Levantar o smartphone para verificá-lo"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Levantar o tablet para verificá-lo"</string>
@@ -4932,8 +4941,6 @@
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ao usar dois chips, este tablet será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ao usar dois chips, este dispositivo será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation>"."</string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender execução para apps em cache"</string>
-    <!-- no translation found for overlay_settings_title (1032863083496396365) -->
-    <skip />
-    <!-- no translation found for overlay_settings_summary (2745336273786148166) -->
-    <skip />
+    <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir sobreposições de tela no app Config."</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Permita que apps que podem ser sobrepostos a outros sejam abertos sobre telas de configuração"</string>
 </resources>
