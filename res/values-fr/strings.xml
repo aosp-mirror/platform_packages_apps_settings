@@ -751,8 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionner le nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
-    <!-- no translation found for keywords_wifi_display_settings (5753883229564422679) -->
-    <skip />
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplication d\'écran"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Aucun appareil détecté à proximité."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Connexion…"</string>
@@ -1437,8 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explorer"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Libérer de l\'espace"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gérer l\'espace de stockage"</string>
-    <!-- no translation found for keywords_storage_menu_free (2275406357317597106) -->
-    <skip />
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"nettoyer, espace de stockage"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Connexion USB à l\'ordinateur"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Connecter en tant que"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Périphérique multimédia (MTP)"</string>
@@ -1770,7 +1768,7 @@
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmez votre schéma"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Saisissez schéma professionnel"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Saisissez de nouveau votre code"</string>
-    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Saisissez votre code PIN professionnel"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Saisissez votre code professionnel"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Les codes ne correspondent pas"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Dessinez de nouveau votre schéma"</string>
@@ -1850,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Sources inconnues"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Autoriser toutes sources appli"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Applications ouvertes récemment"</string>
-    <!-- no translation found for see_all_apps_title (6864581406735745400) -->
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">See all %1$d apps</item>
+      <item quantity="other">Afficher les %1$d applications</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Contacter votre administrateur informatique"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Il peut vous aider à réinitialiser votre code, votre schéma ou votre mot de passe"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Votre tablette et vos données personnelles sont très vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre tablette ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
@@ -2025,8 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Claviers"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Clavier à l\'écran"</string>
-    <!-- no translation found for keywords_virtual_keyboard (1494726424879503434) -->
-    <skip />
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Assistance relative au clavier"</string>
@@ -3303,8 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Son de notification par défaut"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Son de l\'alarme par défaut"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibreur pour les appels"</string>
-    <!-- no translation found for keywords_vibrate_for_calls (1019870409730074899) -->
-    <skip />
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibreur"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Ne jamais déclencher le vibreur"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Toujours déclencher le vibreur"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibreur, puis sonnerie progressive"</string>
@@ -3835,7 +3834,7 @@
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"tout le monde"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"contacts"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"contacts favoris"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"appelants fréquents"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"appels répétés"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> et <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
@@ -4660,7 +4659,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Autoriser l\'application à contrôler le Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Autoriser cette application à activer ou désactiver le Wi-Fi, à rechercher les réseaux Wi-Fi et à s\'y connecter, à ajouter ou supprimer des réseaux ou à lancer un point d\'accès local"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Diffuser des contenus multimédias sur"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"Lire <xliff:g id="LABEL">%s</xliff:g> sur"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Diffuser <xliff:g id="LABEL">%s</xliff:g> sur"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Cet appareil"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Téléphone"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablette"</string>
