@@ -102,8 +102,6 @@ public class UserSettings extends SettingsPreferenceFragment
 
     /** UserId of the user being removed */
     private static final String SAVE_REMOVING_USER = "removing_user";
-    /** UserId of the user that was just added */
-    private static final String SAVE_ADDING_USER = "adding_user";
 
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
@@ -119,8 +117,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
     private static final int DIALOG_ADD_USER = 2;
-    private static final int DIALOG_SETUP_USER = 3;
-    private static final int DIALOG_SETUP_PROFILE = 4;
+    // Dialogs with id 3 and 4 got removed
     private static final int DIALOG_USER_CANNOT_MANAGE = 5;
     private static final int DIALOG_CHOOSE_USER_TYPE = 6;
     private static final int DIALOG_NEED_LOCKSCREEN = 7;
@@ -130,8 +127,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE = 11;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
-    private static final int MESSAGE_SETUP_USER = 2;
-    private static final int MESSAGE_CONFIG_USER = 3;
+    private static final int MESSAGE_USER_CREATED = 2;
 
     private static final int USER_TYPE_USER = 1;
     private static final int USER_TYPE_RESTRICTED_PROFILE = 2;
@@ -160,7 +156,6 @@ public class UserSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
-    private int mAddedUserId = 0;
     private boolean mAddingUser;
     private String mAddingUserName;
     private UserCapabilities mUserCaps;
@@ -187,11 +182,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 case MESSAGE_UPDATE_LIST:
                     updateUserList();
                     break;
-                case MESSAGE_SETUP_USER:
+                case MESSAGE_USER_CREATED:
                     onUserCreated(msg.arg1);
-                    break;
-                case MESSAGE_CONFIG_USER:
-                    onManageUserClicked(msg.arg1, true);
                     break;
             }
         }
@@ -254,9 +246,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
 
         if (icicle != null) {
-            if (icicle.containsKey(SAVE_ADDING_USER)) {
-                mAddedUserId = icicle.getInt(SAVE_ADDING_USER);
-            }
             if (icicle.containsKey(SAVE_REMOVING_USER)) {
                 mRemovingUserId = icicle.getInt(SAVE_REMOVING_USER);
             }
@@ -334,7 +323,6 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mEditUserInfoController.onSaveInstanceState(outState);
-        outState.putInt(SAVE_ADDING_USER, mAddedUserId);
         outState.putInt(SAVE_REMOVING_USER, mRemovingUserId);
     }
 
@@ -482,37 +470,22 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onManageUserClicked(int userId, boolean newUser) {
+    private void onUserCreated(int userId) {
         mAddingUser = false;
         UserInfo userInfo = mUserManager.getUserInfo(userId);
-        if (userId == UserHandle.myUserId()) {
-            // Jump to owner info panel
-            OwnerInfoSettings.show(this);
-        } else {
-            Bundle extras = new Bundle();
-            extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
-            extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
-            new SubSettingLauncher(getContext())
-                    .setDestination(UserDetailsSettings.class.getName())
-                    .setArguments(extras)
-                    .setTitleText(userInfo.name)
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-        }
+        openUserDetails(userInfo, true);
     }
 
-    private void onUserCreated(int userId) {
-        mAddedUserId = userId;
-        mAddingUser = false;
-        if (!isResumed()) {
-            Log.w(TAG, "Cannot show dialog after onPause");
-            return;
-        }
-        if (mUserManager.getUserInfo(userId).isRestricted()) {
-            showDialog(DIALOG_SETUP_PROFILE);
-        } else {
-            showDialog(DIALOG_SETUP_USER);
-        }
+    private void openUserDetails(UserInfo userInfo, boolean newUser) {
+        Bundle extras = new Bundle();
+        extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
+        extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
+        new SubSettingLauncher(getContext())
+                .setDestination(UserDetailsSettings.class.getName())
+                .setArguments(extras)
+                .setTitleText(userInfo.name)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     @Override
@@ -565,37 +538,6 @@ public class UserSettings extends SettingsPreferenceFragment
                                                     KEY_ADD_USER_LONG_MESSAGE_DISPLAYED,
                                                     true).apply();
                                         }
-                                    }
-                                })
-                        .setNegativeButton(android.R.string.cancel, null)
-                        .create();
-                return dlg;
-            }
-            case DIALOG_SETUP_USER: {
-                Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(com.android.settingslib.R.string.user_setup_dialog_title)
-                        .setMessage(com.android.settingslib.R.string.user_setup_dialog_message)
-                        .setPositiveButton(
-                                com.android.settingslib.R.string.user_setup_button_setup_now,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switchUserNow(mAddedUserId);
-                                    }
-                                })
-                        .setNegativeButton(
-                                com.android.settingslib.R.string.user_setup_button_setup_later,
-                                null)
-                        .create();
-                return dlg;
-            }
-            case DIALOG_SETUP_PROFILE: {
-                Dialog dlg = new AlertDialog.Builder(context)
-                        .setMessage(
-                                com.android.settingslib.R.string.user_setup_profile_dialog_message)
-                        .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        switchUserNow(mAddedUserId);
                                     }
                                 })
                         .setNegativeButton(android.R.string.cancel, null)
@@ -764,10 +706,6 @@ public class UserSettings extends SettingsPreferenceFragment
                 return SettingsEnums.DIALOG_USER_CANNOT_MANAGE;
             case DIALOG_ADD_USER:
                 return SettingsEnums.DIALOG_USER_ADD;
-            case DIALOG_SETUP_USER:
-                return SettingsEnums.DIALOG_USER_SETUP;
-            case DIALOG_SETUP_PROFILE:
-                return SettingsEnums.DIALOG_USER_SETUP_PROFILE;
             case DIALOG_CHOOSE_USER_TYPE:
                 return SettingsEnums.DIALOG_USER_CHOOSE_TYPE;
             case DIALOG_NEED_LOCKSCREEN:
@@ -853,33 +791,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
                     if (userType == USER_TYPE_USER) {
                         mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                        // Skip setting up user which results in user switching when the
-                        // restriction is set.
-                        if (!mUserCaps.mDisallowSwitchUser) {
-                            mHandler.sendMessage(mHandler.obtainMessage(
-                                    MESSAGE_SETUP_USER, user.id, user.serialNumber));
-                        }
-                    } else {
-                        mHandler.sendMessage(mHandler.obtainMessage(
-                                MESSAGE_CONFIG_USER, user.id, user.serialNumber));
                     }
+
+                    mHandler.sendMessage(mHandler.obtainMessage(
+                            MESSAGE_USER_CREATED, user.id, user.serialNumber));
+
                     mPendingUserIcon = null;
                     mPendingUserName = null;
                 }
             }
         });
-    }
-
-    private void switchUserNow(int userId) {
-        if (!canSwitchUserNow()) {
-            return;
-        }
-
-        try {
-            ActivityManager.getService().switchUser(userId);
-        } catch (RemoteException re) {
-            Log.e(TAG, "Error while switching to other user.");
-        }
     }
 
     /**
@@ -1125,21 +1046,14 @@ public class UserSettings extends SettingsPreferenceFragment
         if (pref == mMePreference) {
             if (isCurrentUserGuest()) {
                 showDialog(DIALOG_CONFIRM_EXIT_GUEST);
-                return true;
-            }
-            showDialog(DIALOG_USER_PROFILE_EDITOR);
-        } else if (pref instanceof UserPreference) {
-            int userId = ((UserPreference) pref).getUserId();
-            // Get the latest status of the user
-            UserInfo user = mUserManager.getUserInfo(userId);
-            if (!user.isInitialized() && isSecondaryUser(user)) {
-                // for uninitialized secondary users we should show a prompt dialog before
-                // starting the setup
-                mHandler.sendMessage(mHandler.obtainMessage(
-                        MESSAGE_SETUP_USER, user.id, user.serialNumber));
             } else {
-                onManageUserClicked(userId, false);
+                showDialog(DIALOG_USER_PROFILE_EDITOR);
             }
+            return true;
+        } else if (pref instanceof UserPreference) {
+            UserInfo userInfo = mUserManager.getUserInfo(((UserPreference) pref).getUserId());
+            openUserDetails(userInfo, false);
+            return true;
         } else if (pref == mAddUser) {
             // If we allow both types, show a picker, otherwise directly go to
             // flow for full user.
@@ -1148,10 +1062,12 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 onAddUserClicked(USER_TYPE_USER);
             }
+            return true;
         } else if (pref == mAddGuest) {
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
-            switchUserNow(guest.id);
+            openUserDetails(guest, true);
+            return true;
         }
         return false;
     }
@@ -1265,8 +1181,4 @@ public class UserSettings extends SettingsPreferenceFragment
                     return niks;
                 }
             };
-
-    private boolean isSecondaryUser(UserInfo user) {
-        return UserManager.USER_TYPE_FULL_SECONDARY.equals(user.userType);
-    }
 }
