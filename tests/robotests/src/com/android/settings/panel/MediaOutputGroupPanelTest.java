@@ -72,4 +72,9 @@ public class MediaOutputGroupPanelTest {
     public void getSeeMoreIntent_isNull() {
         assertThat(mPanel.getSeeMoreIntent()).isNull();
     }
+
+    @Test
+    public void getViewType_checkType() {
+        assertThat(mPanel.getViewType()).isEqualTo(PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
+    }
 }

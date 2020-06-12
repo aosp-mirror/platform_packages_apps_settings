@@ -312,4 +312,9 @@ public class MediaOutputPanelTest {
 
         verify(mCallback).forceClose();
     }
+
+    @Test
+    public void getViewType_checkType() {
+        assertThat(mPanel.getViewType()).isEqualTo(PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON);
+    }
 }
