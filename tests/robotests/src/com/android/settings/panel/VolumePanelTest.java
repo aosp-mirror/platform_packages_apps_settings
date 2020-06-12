@@ -70,4 +70,9 @@ public class VolumePanelTest {
     public void getSeeMoreIntent_notNull() {
         assertThat(mPanel.getSeeMoreIntent()).isNotNull();
     }
+
+    @Test
+    public void getViewType_checkType() {
+        assertThat(mPanel.getViewType()).isEqualTo(PanelContent.VIEW_TYPE_SLIDER);
+    }
 }
