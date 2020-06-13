@@ -751,8 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"जडान भएका ब्लुटुथ अडियो यन्त्रहरूको अधिकतम सङ्ख्या"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"जडान भएका ब्लुटुथ अडियो यन्त्रहरूको अधिकतम सङ्ख्या चयन गर्नुहोस्"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
-    <!-- no translation found for keywords_wifi_display_settings (5753883229564422679) -->
-    <skip />
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"स्क्रिन मिरर गर्नुहोस्"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"वायरलेस प्रदर्शन सक्षम गर्नुहोस्"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"नजिकै कुनै उपकरण भेटिएन।"</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"जडान हुँदै"</string>
@@ -1437,8 +1436,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"अन्वेषण गर्नुहोस्"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ठाउँ खाली गर्नुहोस्"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"भण्डारणको व्यवस्थापन गर्नुहोस्"</string>
-    <!-- no translation found for keywords_storage_menu_free (2275406357317597106) -->
-    <skip />
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ठाउँ खाली गर्नुहोस्, भण्डारण"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB कम्प्युटर जडान"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"यस रूपमा जडान गर्नुहोस्"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"मिडिया उपकरण (MTP)"</string>
@@ -1850,7 +1848,10 @@
     <string name="install_applications" msgid="3921609656584369901">"अज्ञात स्रोतहरू"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"सबै एप स्रोतहरू अनुमति"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"हालै खोलिएका एपहरू"</string>
-    <!-- no translation found for see_all_apps_title (6864581406735745400) -->
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">सबै %1$d एपहरू हेर्नुहोस्</item>
+      <item quantity="one">सबै एपहरू हेर्नुहोस्</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"आफ्ना IT प्रशासकसँग सम्पर्क गर्नुहोस्"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"उनीहरूले तपाईंलाई आफ्नो PIN, ढाँचा र पासवर्ड रिसेट गर्न मद्दत गर्न सक्छन्"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"तपाईंको ट्याब्लेट र व्यक्तिगत डेटा अज्ञात अनुप्रयोगहरूबाट हुने आक्रमणमा पर्न सक्ने जोखिम अझ बढी हुन्छ। यो स्रोतबाट प्राप्त हुने अनुप्रयोगहरूको स्थापना गरेर, तिनीहरूको प्रयोगबाट तपाईंको ट्याब्लेटमा हुनसक्ने क्षति वा डेटाको नोक्सानीको जिम्मेवार तपाईं आफैँ हुनुहुन्छ भन्ने कुरामा तपाईं सहमत हुनुहुन्छ।"</string>
@@ -2025,8 +2026,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"किबोर्डहरू"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"अनस्क्रिन किबोर्ड"</string>
-    <!-- no translation found for keywords_virtual_keyboard (1494726424879503434) -->
-    <skip />
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"उपलब्ध अनस्क्रिन किबोर्ड"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"अनस्क्रिन किबोर्डहरूको व्यवस्थापन गर्नुहोस्"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"किबोर्डमा सहायता"</string>
@@ -3303,8 +3303,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना सम्बन्धी पूर्वनिर्धारित ध्वनि"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्मको पूर्वनिर्धारित ध्वनि"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"कलका बेला कम्पन गर्नुहोस्"</string>
-    <!-- no translation found for keywords_vibrate_for_calls (1019870409730074899) -->
-    <skip />
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"कम्पन"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"कहिल्यै पनि कम्पन नगर्नुहोस्"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"सधैँ कम्पन गर्नुहोस्"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"सुरुमा कम्पन गरी त्यसपछि घन्टी बजाउनुहोस्"</string>
@@ -3634,8 +3633,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"यी एपहरू जोड्नुहोस्"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"जोडिएका एपहरूले एक अर्कालाई दिइएका अनुमतिहरू तथा एक अर्काका डेटा प्रयोग गर्न सक्छन्।"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"तपाईंलाई जुन एपले तपाईंका IT एड्मिनसँग तपाईंको व्यक्तिगत डेटा सेयर गर्दैनन् जस्तो लाग्छ ती एप मात्र जोड्नुहोस्।"</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"तपाईं आफ्नो यन्त्रको गोपनीयतासम्बन्धी सेटिङमा गई जुनसुकै बेला एपहरू डिसकनेक्ट गर्न सक्नुहुन्छ।"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"कार्यालयको <xliff:g id="NAME">%1$s</xliff:g> लाई तपाईंका व्यक्तिगत डेटा प्रयोग गर्न दिने हो?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"तपाईंलाई जुन एपले तपाईंका IT एड्मिनसँग तपाईंको व्यक्तिगत डेटा सेयर गर्दैनन् जस्तो लाग्छ ती एप मात्र जोड्नुहोस्।"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"एपको डेटा"</string>
@@ -3953,8 +3951,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"कुनै अनुमतिहरू प्रदान गरिएको छैन"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"कुनै अनुमतिहरू अनुरोध गरिएको छैन"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"एपले तपाईंको डेटा कसरी प्रयोग गर्न सक्छ भन्ने कुरा नियन्त्रण गर्नुहोस्"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सबै एपहरू"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"स्थापना गरिएका एपहरू"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"तात्कालिक एपहरू"</string>
