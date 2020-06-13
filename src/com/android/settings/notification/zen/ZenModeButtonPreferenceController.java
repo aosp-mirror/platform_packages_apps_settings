@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.zen;
 
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.Settings;
@@ -40,8 +42,9 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
     private static final String TAG = "EnableZenModeButton";
     private final FragmentManager mFragment;
 
-    // DND can also be toggled from QS. If DND wasn't toggled by this preference, don't requestFocus
-    private boolean mButtonTriggered = false;
+    // DND can also be toggled from QS. If DND wasn't toggled by this preference, don't
+    // reroute focus.
+    private boolean mRefocusButton = false;
     private Button mZenButtonOn;
     private Button mZenButtonOff;
 
@@ -75,7 +78,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             mZenButtonOff = ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
             mZenButtonOff.setOnClickListener(v -> {
-                mButtonTriggered = true;
+                mRefocusButton = true;
                 writeMetrics(preference, false);
                 mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
             });
@@ -91,9 +94,9 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
                 mZenButtonOff.setVisibility(View.VISIBLE);
                 mZenButtonOn.setVisibility(View.GONE);
-                if (mButtonTriggered) {
-                    mButtonTriggered = false;
-                    mZenButtonOff.requestFocus();
+                if (mRefocusButton) {
+                    mRefocusButton = false;
+                    mZenButtonOff.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
                 }
                 break;
             case Settings.Global.ZEN_MODE_OFF:
@@ -101,16 +104,16 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
                 mZenButtonOff.setVisibility(View.GONE);
                 updateZenButtonOnClickListener(preference);
                 mZenButtonOn.setVisibility(View.VISIBLE);
-                if (mButtonTriggered) {
-                    mButtonTriggered = false;
-                    mZenButtonOn.requestFocus();
+                if (mRefocusButton) {
+                    mRefocusButton = false;
+                    mZenButtonOn.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
                 }
         }
     }
 
     private void updateZenButtonOnClickListener(Preference preference) {
         mZenButtonOn.setOnClickListener(v -> {
-            mButtonTriggered = true;
+            mRefocusButton = true;
             writeMetrics(preference, true);
             int zenDuration = getZenDuration();
             switch (zenDuration) {
