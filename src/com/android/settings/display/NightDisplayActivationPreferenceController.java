@@ -16,6 +16,8 @@
 
 package com.android.settings.display;
 
+import static android.view.accessibility.AccessibilityEvent.TYPE_VIEW_FOCUSED;
+
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
 import android.text.TextUtils;
@@ -39,20 +41,16 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     private NightDisplayTimeFormatter mTimeFormatter;
     private LayoutPreference mPreference;
 
-    // Night light can also be toggled from QS. If night light wasn't toggled by this preference,
-    // don't requestFocus
-    private boolean mButtonTriggered = false;
     private Button mTurnOffButton;
     private Button mTurnOnButton;
 
     private final OnClickListener mListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            mButtonTriggered = true;
             mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
             mColorDisplayManager.setNightDisplayActivated(
                     !mColorDisplayManager.isNightDisplayActivated());
-            updateStateInternal();
+            updateStateInternal(true);
         }
     };
 
@@ -93,7 +91,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public final void updateState(Preference preference) {
-        updateStateInternal();
+        updateStateInternal(false);
     }
 
     /** FOR SLICES */
@@ -113,7 +111,7 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
         return mTimeFormatter.getAutoModeSummary(mContext, mColorDisplayManager);
     }
 
-    private void updateStateInternal() {
+    private void updateStateInternal(boolean selfChanged) {
         if (mTurnOnButton == null || mTurnOffButton == null) {
             return;
         }
@@ -143,17 +141,15 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
             mTurnOnButton.setVisibility(View.GONE);
             mTurnOffButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setText(buttonText);
-            if (mButtonTriggered) {
-                mButtonTriggered = false;
-                mTurnOffButton.requestFocus();
+            if (selfChanged) {
+                mTurnOffButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
             }
         } else {
             mTurnOnButton.setVisibility(View.VISIBLE);
             mTurnOffButton.setVisibility(View.GONE);
             mTurnOnButton.setText(buttonText);
-            if (mButtonTriggered) {
-                mButtonTriggered = false;
-                mTurnOnButton.requestFocus();
+            if (selfChanged) {
+                mTurnOnButton.sendAccessibilityEvent(TYPE_VIEW_FOCUSED);
             }
         }
     }
