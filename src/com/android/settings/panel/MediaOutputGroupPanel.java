@@ -159,6 +159,6 @@ public class MediaOutputGroupPanel implements PanelContent, LocalMediaManager.De
 
     @Override
     public int getViewType() {
-        return PanelContent.VIEW_TYPE_SLIDER;
+        return PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
     }
 }
