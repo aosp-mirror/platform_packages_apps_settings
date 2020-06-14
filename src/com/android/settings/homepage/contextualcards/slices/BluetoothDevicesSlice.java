@@ -81,15 +81,12 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     private static boolean sBluetoothEnabling;
 
     private final Context mContext;
-    private final AvailableMediaBluetoothDeviceUpdater mAvailableMediaBtDeviceUpdater;
-    private final SavedBluetoothDeviceUpdater mSavedBtDeviceUpdater;
+    private AvailableMediaBluetoothDeviceUpdater mAvailableMediaBtDeviceUpdater;
+    private SavedBluetoothDeviceUpdater mSavedBtDeviceUpdater;
 
     public BluetoothDevicesSlice(Context context) {
         mContext = context;
-        mAvailableMediaBtDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(mContext,
-                null /* fragment */, null /* devicePreferenceCallback */);
-        mSavedBtDeviceUpdater = new SavedBluetoothDeviceUpdater(mContext,
-                null /* fragment */, null /* devicePreferenceCallback */);
+        BluetoothUpdateWorker.initLocalBtManager(context);
     }
 
     @Override
@@ -119,16 +116,8 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         // Add the header of Bluetooth on
         listBuilder.addRow(getBluetoothOnHeader());
 
-        // Get row builders of Bluetooth devices.
-        final List<ListBuilder.RowBuilder> rows = getBluetoothRowBuilders();
-
-        // Determine the displayable row count.
-        final int displayableCount = Math.min(rows.size(), DEFAULT_EXPANDED_ROW_COUNT);
-
-        // Add device rows up to the count.
-        for (int i = 0; i < displayableCount; i++) {
-            listBuilder.addRow(rows.get(i));
-        }
+        // Add row builders of Bluetooth devices.
+        getBluetoothRowBuilders().forEach(row -> listBuilder.addRow(row));
 
         return listBuilder.build();
     }
@@ -181,19 +170,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     List<CachedBluetoothDevice> getPairedBluetoothDevices() {
         final List<CachedBluetoothDevice> bluetoothDeviceList = new ArrayList<>();
 
-        // If Bluetooth is disable, skip to get the Bluetooth devices.
+        // If Bluetooth is disable, skip getting the Bluetooth devices.
         if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
             Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is disabled.");
             return bluetoothDeviceList;
         }
 
-        // Get the Bluetooth devices from LocalBluetoothManager.
-        final LocalBluetoothManager localBtManager =
-                com.android.settings.bluetooth.Utils.getLocalBtManager(mContext);
+        final LocalBluetoothManager localBtManager = BluetoothUpdateWorker.getLocalBtManager();
         if (localBtManager == null) {
-            Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is unsupported.");
+            Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is not ready.");
             return bluetoothDeviceList;
         }
+
         final Collection<CachedBluetoothDevice> cachedDevices =
                 localBtManager.getCachedDeviceManager().getCachedDevicesCopy();
 
@@ -292,8 +280,21 @@ public class BluetoothDevicesSlice implements CustomSliceable {
 
     private List<ListBuilder.RowBuilder> getBluetoothRowBuilders() {
         final List<ListBuilder.RowBuilder> bluetoothRows = new ArrayList<>();
+        final List<CachedBluetoothDevice> pairedDevices = getPairedBluetoothDevices();
+        if (pairedDevices.isEmpty()) {
+            return bluetoothRows;
+        }
+
+        // Initialize updaters without being blocked after paired devices is available because
+        // LocalBluetoothManager is ready.
+        lazyInitUpdaters();
+
         // Create row builders based on paired devices.
-        for (CachedBluetoothDevice device : getPairedBluetoothDevices()) {
+        for (CachedBluetoothDevice device : pairedDevices) {
+            if (bluetoothRows.size() >= DEFAULT_EXPANDED_ROW_COUNT) {
+                break;
+            }
+
             String summary = device.getConnectionSummary();
             if (summary == null) {
                 summary = mContext.getString(
@@ -319,6 +320,18 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         }
 
         return bluetoothRows;
+    }
+
+    private void lazyInitUpdaters() {
+        if (mAvailableMediaBtDeviceUpdater == null) {
+            mAvailableMediaBtDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(mContext,
+                    null /* fragment */, null /* devicePreferenceCallback */);
+        }
+
+        if (mSavedBtDeviceUpdater == null) {
+            mSavedBtDeviceUpdater = new SavedBluetoothDeviceUpdater(mContext,
+                    null /* fragment */, null /* devicePreferenceCallback */);
+        }
     }
 
     @VisibleForTesting
