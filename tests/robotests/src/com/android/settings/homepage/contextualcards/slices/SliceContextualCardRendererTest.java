@@ -86,10 +86,10 @@ public class SliceContextualCardRendererTest {
 
     @Test
     public void bindView_invalidScheme_sliceShouldBeNull() {
-        final Uri sliceUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
+        final Uri invalidUri = Uri.parse("contet://com.android.settings.slices/action/flashlight");
         final RecyclerView.ViewHolder viewHolder = getSliceViewHolder();
 
-        mRenderer.bindView(viewHolder, buildContextualCard(sliceUri));
+        mRenderer.bindView(viewHolder, buildContextualCard(invalidUri));
 
         assertThat(
                 ((SliceFullCardRendererHelper.SliceViewHolder) viewHolder).sliceView.getSlice())
