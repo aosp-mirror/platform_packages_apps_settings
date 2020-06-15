@@ -99,12 +99,15 @@ public class AppInstallerInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable() {
+    public void getAvailabilityStatus_hasAppLabel_shouldReturnAvailable()
+            throws PackageManager.NameNotFoundException {
+        final String packageName = "Package1";
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");
-        mController.setPackageName("Package1");
+        mController.setPackageName(packageName);
         mController.setParentFragment(mFragment);
+        mockMainlineModule(packageName, false /* isMainlineModule */);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
@@ -153,12 +156,31 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_isMainlineModule_shouldReturnDisabled()
             throws PackageManager.NameNotFoundException {
+        final String packageName = "Package";
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label");
-        mController.setPackageName("Package");
-        when(mPackageManager.getModuleInfo("Package", 0 /* flags */)).thenReturn(new ModuleInfo());
+        mController.setPackageName(packageName);
+        mockMainlineModule(packageName, true /* isMainlineModule */);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_FOR_USER);
+    }
+
+    private void mockMainlineModule(String packageName, boolean isMainlineModule)
+            throws PackageManager.NameNotFoundException {
+        final PackageInfo packageInfo = new PackageInfo();
+        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.sourceDir = "apex";
+        packageInfo.applicationInfo = applicationInfo;
+
+        if (isMainlineModule) {
+            when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenReturn(
+                    new ModuleInfo());
+        } else {
+            when(mPackageManager.getPackageInfo(packageName, 0 /* flags */)).thenReturn(
+                    packageInfo);
+            when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenThrow(
+                    new PackageManager.NameNotFoundException());
+        }
     }
 }

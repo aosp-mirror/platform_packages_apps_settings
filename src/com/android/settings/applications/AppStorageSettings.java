@@ -54,6 +54,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageWizardMoveConfirm;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
@@ -317,7 +318,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                     .setButton1OnClickListener(v -> handleClearDataClick());
         }
 
-        if (mAppsControlDisallowedBySystem) {
+        if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
             mButtonsPref.setButton1Enabled(false);
         }
     }
@@ -575,7 +576,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                         .setButton2OnClickListener(v -> handleClearCacheClick());
             }
         }
-        if (mAppsControlDisallowedBySystem) {
+        if (mAppsControlDisallowedBySystem || AppUtils.isMainlineModule(mPm, mPackageName)) {
             mButtonsPref.setButton1Enabled(false).setButton2Enabled(false);
         }
     }
