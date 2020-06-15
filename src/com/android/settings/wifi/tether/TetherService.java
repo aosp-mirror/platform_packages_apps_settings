@@ -16,13 +16,24 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.TetheringConstants.EXTRA_ADD_TETHER_TYPE;
+import static android.net.TetheringConstants.EXTRA_PROVISION_CALLBACK;
+import static android.net.TetheringConstants.EXTRA_REM_TETHER_TYPE;
+import static android.net.TetheringConstants.EXTRA_RUN_PROVISION;
+import static android.net.TetheringManager.TETHERING_BLUETOOTH;
+import static android.net.TetheringManager.TETHERING_ETHERNET;
+import static android.net.TetheringManager.TETHERING_INVALID;
+import static android.net.TetheringManager.TETHERING_USB;
+import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.TetheringManager.TETHER_ERROR_NO_ERROR;
+import static android.net.TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
+import static android.net.TetheringManager.TETHER_ERROR_UNKNOWN_IFACE;
+import static android.telephony.SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX;
+import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+
 import android.app.Activity;
 import android.app.Service;
 import android.app.usage.UsageStatsManager;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothPan;
-import android.bluetooth.BluetoothProfile;
-import android.bluetooth.BluetoothProfile.ServiceListener;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +42,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.os.IBinder;
 import android.os.ResultReceiver;
 import android.telephony.SubscriptionManager;
@@ -89,17 +100,16 @@ public class TetherService extends Service {
         mCurrentTethers = stringToTethers(prefs.getString(KEY_TETHERS, ""));
         mCurrentTypeIndex = 0;
         mPendingCallbacks = new ArrayMap<>(3);
-        mPendingCallbacks.put(ConnectivityManager.TETHERING_WIFI, new ArrayList<ResultReceiver>());
-        mPendingCallbacks.put(ConnectivityManager.TETHERING_USB, new ArrayList<ResultReceiver>());
-        mPendingCallbacks.put(
-                ConnectivityManager.TETHERING_BLUETOOTH, new ArrayList<ResultReceiver>());
+        mPendingCallbacks.put(TETHERING_WIFI, new ArrayList<ResultReceiver>());
+        mPendingCallbacks.put(TETHERING_USB, new ArrayList<ResultReceiver>());
+        mPendingCallbacks.put(TETHERING_BLUETOOTH, new ArrayList<ResultReceiver>());
+        mPendingCallbacks.put(TETHERING_ETHERNET, new ArrayList<ResultReceiver>());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.hasExtra(EXTRA_SUBID)) {
-            final int tetherSubId = intent.getIntExtra(EXTRA_SUBID,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            final int tetherSubId = intent.getIntExtra(EXTRA_SUBID, INVALID_SUBSCRIPTION_ID);
             final int subId = getTetherServiceWrapper().getActiveDataSubscriptionId();
             if (tetherSubId != subId) {
                 Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
@@ -109,18 +119,16 @@ public class TetherService extends Service {
                 return START_NOT_STICKY;
             }
         }
-        if (intent.hasExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE)) {
-            int type = intent.getIntExtra(ConnectivityManager.EXTRA_ADD_TETHER_TYPE,
-                    ConnectivityManager.TETHERING_INVALID);
-            ResultReceiver callback =
-                    intent.getParcelableExtra(ConnectivityManager.EXTRA_PROVISION_CALLBACK);
+        if (intent.hasExtra(EXTRA_ADD_TETHER_TYPE)) {
+            int type = intent.getIntExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_INVALID);
+            ResultReceiver callback = intent.getParcelableExtra(EXTRA_PROVISION_CALLBACK);
             if (callback != null) {
                 List<ResultReceiver> callbacksForType = mPendingCallbacks.get(type);
                 if (callbacksForType != null) {
                     callbacksForType.add(callback);
                 } else {
                     // Invalid tether type. Just ignore this request and report failure.
-                    callback.send(ConnectivityManager.TETHER_ERROR_UNKNOWN_IFACE, null);
+                    callback.send(TETHER_ERROR_UNKNOWN_IFACE, null);
                     stopSelf();
                     return START_NOT_STICKY;
                 }
@@ -132,10 +140,9 @@ public class TetherService extends Service {
             }
         }
 
-        if (intent.hasExtra(ConnectivityManager.EXTRA_REM_TETHER_TYPE)) {
+        if (intent.hasExtra(EXTRA_REM_TETHER_TYPE)) {
             if (!mInProvisionCheck) {
-                int type = intent.getIntExtra(ConnectivityManager.EXTRA_REM_TETHER_TYPE,
-                        ConnectivityManager.TETHERING_INVALID);
+                int type = intent.getIntExtra(EXTRA_REM_TETHER_TYPE, TETHERING_INVALID);
                 int index = mCurrentTethers.indexOf(type);
                 if (DEBUG) Log.d(TAG, "Removing tether " + type + ", index " + index);
                 if (index >= 0) {
@@ -146,7 +153,7 @@ public class TetherService extends Service {
             }
         }
 
-        if (intent.getBooleanExtra(ConnectivityManager.EXTRA_RUN_PROVISION, false)) {
+        if (intent.getBooleanExtra(EXTRA_RUN_PROVISION, false)) {
             startProvisioning(mCurrentTypeIndex);
         } else if (!mInProvisionCheck) {
             // If we aren't running any provisioning, no reason to stay alive.
@@ -207,32 +214,9 @@ public class TetherService extends Service {
         return buffer.toString();
     }
 
-    private void disableWifiTethering() {
-        ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        cm.stopTethering(ConnectivityManager.TETHERING_WIFI);
-    }
-
-    private void disableUsbTethering() {
-        ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        cm.setUsbTethering(false);
-    }
-
-    private void disableBtTethering() {
-        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        if (adapter != null) {
-            adapter.getProfileProxy(this, new ServiceListener() {
-                @Override
-                public void onServiceDisconnected(int profile) { }
-
-                @Override
-                public void onServiceConnected(int profile, BluetoothProfile proxy) {
-                    ((BluetoothPan) proxy).setBluetoothTethering(false);
-                    adapter.closeProfileProxy(BluetoothProfile.PAN, proxy);
-                }
-            }, BluetoothProfile.PAN);
-        }
+    private void disableTethering(final int tetheringType) {
+        final TetheringManager tm = (TetheringManager) getSystemService(Context.TETHERING_SERVICE);
+        tm.stopTethering(tetheringType);
     }
 
     private void startProvisioning(int index) {
@@ -255,7 +239,7 @@ public class TetherService extends Service {
         Intent intent = new Intent(provisionAction);
         int type = mCurrentTethers.get(index);
         intent.putExtra(TETHER_CHOICE, type);
-        intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, subId);
+        intent.putExtra(EXTRA_SUBSCRIPTION_INDEX, subId);
         intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND
                 | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
 
@@ -285,8 +269,8 @@ public class TetherService extends Service {
         if (callbacksForType == null) {
             return;
         }
-        int errorCode = result == RESULT_OK ? ConnectivityManager.TETHER_ERROR_NO_ERROR :
-                ConnectivityManager.TETHER_ERROR_PROVISION_FAILED;
+        int errorCode = result == RESULT_OK ? TETHER_ERROR_NO_ERROR :
+                TETHER_ERROR_PROVISIONING_FAILED;
         for (ResultReceiver callback : callbacksForType) {
           if (DEBUG) Log.d(TAG, "Firing result: " + errorCode + " to callback");
           callback.send(errorCode, null);
@@ -309,19 +293,7 @@ public class TetherService extends Service {
                 int checkType = mCurrentTethers.get(mCurrentTypeIndex);
                 mInProvisionCheck = false;
                 int result = intent.getIntExtra(EXTRA_RESULT, RESULT_DEFAULT);
-                if (result != RESULT_OK) {
-                    switch (checkType) {
-                        case ConnectivityManager.TETHERING_WIFI:
-                            disableWifiTethering();
-                            break;
-                        case ConnectivityManager.TETHERING_BLUETOOTH:
-                            disableBtTethering();
-                            break;
-                        case ConnectivityManager.TETHERING_USB:
-                            disableUsbTethering();
-                            break;
-                    }
-                }
+                if (result != RESULT_OK) disableTethering(checkType);
                 fireCallbacksForType(checkType, result);
 
                 if (++mCurrentTypeIndex >= mCurrentTethers.size()) {
