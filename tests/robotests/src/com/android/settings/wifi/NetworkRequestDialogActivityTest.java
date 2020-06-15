@@ -126,4 +126,13 @@ public class NetworkRequestDialogActivityTest {
 
         verify(mActivity).finish();
     }
+
+    @Test
+    public void updateAccessPointList_onUserSelectionConnectFailure_shouldFinishActivity() {
+        final WifiConfiguration config = new WifiConfiguration();
+        config.SSID = "Test AP 3";
+        mActivity.onUserSelectionConnectFailure(config);
+
+        verify(mActivity).finish();
+    }
 }
