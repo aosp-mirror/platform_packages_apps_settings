@@ -164,7 +164,8 @@ public class NetworkScanHelperTest {
     }
 
     private void startNetworkScan_incremental(boolean waitForCompletion) {
-        mNetworkScanHelper.startNetworkScan();
+        mNetworkScanHelper.startNetworkScan(
+                NetworkScanHelper.NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS);
         if (!waitForCompletion) {
             mNetworkScanHelper.stopNetworkQuery();
         }
