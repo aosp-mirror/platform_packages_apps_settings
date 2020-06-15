@@ -16,15 +16,15 @@
 
 package com.android.settings.wifi.tether;
 
-import static android.net.ConnectivityManager.EXTRA_ADD_TETHER_TYPE;
-import static android.net.ConnectivityManager.EXTRA_PROVISION_CALLBACK;
-import static android.net.ConnectivityManager.EXTRA_RUN_PROVISION;
-import static android.net.ConnectivityManager.TETHERING_BLUETOOTH;
-import static android.net.ConnectivityManager.TETHERING_INVALID;
-import static android.net.ConnectivityManager.TETHERING_USB;
-import static android.net.ConnectivityManager.TETHERING_WIFI;
-import static android.net.ConnectivityManager.TETHER_ERROR_NO_ERROR;
-import static android.net.ConnectivityManager.TETHER_ERROR_PROVISION_FAILED;
+import static android.net.TetheringConstants.EXTRA_ADD_TETHER_TYPE;
+import static android.net.TetheringConstants.EXTRA_PROVISION_CALLBACK;
+import static android.net.TetheringConstants.EXTRA_RUN_PROVISION;
+import static android.net.TetheringManager.TETHERING_BLUETOOTH;
+import static android.net.TetheringManager.TETHERING_INVALID;
+import static android.net.TetheringManager.TETHERING_USB;
+import static android.net.TetheringManager.TETHERING_WIFI;
+import static android.net.TetheringManager.TETHER_ERROR_NO_ERROR;
+import static android.net.TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
 import static org.mockito.Matchers.any;
@@ -47,7 +47,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.net.ConnectivityManager;
+import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -88,7 +88,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
     private ProvisionReceiver mProvisionReceiver;
     private Receiver mResultReceiver;
 
-    @Mock private ConnectivityManager mConnectivityManager;
+    @Mock private TetheringManager mTetheringManager;
     @Mock private PackageManager mPackageManager;
     @Mock private WifiManager mWifiManager;
     @Mock private SharedPreferences mPrefs;
@@ -208,9 +208,9 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         runProvisioningForType(TETHERING_WIFI);
 
         assertTrue(waitForProvisionRequest(TETHERING_WIFI));
-        assertTrue(waitForProvisionResponse(TETHER_ERROR_PROVISION_FAILED));
+        assertTrue(waitForProvisionResponse(TETHER_ERROR_PROVISIONING_FAILED));
 
-        verify(mConnectivityManager).stopTethering(ConnectivityManager.TETHERING_WIFI);
+        verify(mTetheringManager).stopTethering(TETHERING_WIFI);
     }
 
     public void testFailureStopsTethering_Usb() {
@@ -219,9 +219,9 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         runProvisioningForType(TETHERING_USB);
 
         assertTrue(waitForProvisionRequest(TETHERING_USB));
-        assertTrue(waitForProvisionResponse(TETHER_ERROR_PROVISION_FAILED));
+        assertTrue(waitForProvisionResponse(TETHER_ERROR_PROVISIONING_FAILED));
 
-        verify(mConnectivityManager).setUsbTethering(eq(false));
+        verify(mTetheringManager).stopTethering(TETHERING_USB);
     }
 
     public void testIgnoreOutdatedRequest() {
@@ -345,8 +345,8 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
         @Override
         public Object getSystemService(String name) {
-            if (CONNECTIVITY_SERVICE.equals(name)) {
-                return mConnectivityManager;
+            if (TETHERING_SERVICE.equals(name)) {
+                return mTetheringManager;
             } else if (WIFI_SERVICE.equals(name)) {
                 return mWifiManager;
             }
