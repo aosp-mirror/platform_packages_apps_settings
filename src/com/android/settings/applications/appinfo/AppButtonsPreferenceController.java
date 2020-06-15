@@ -744,7 +744,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
     }
 
     private boolean isSystemModule() {
-        return mAppEntry != null && AppUtils.isSystemModule(mContext, mAppEntry.info.packageName);
+        return mAppEntry != null
+                && (AppUtils.isSystemModule(mContext, mAppEntry.info.packageName)
+                || AppUtils.isMainlineModule(mPm, mAppEntry.info.packageName));
     }
 
     /**
