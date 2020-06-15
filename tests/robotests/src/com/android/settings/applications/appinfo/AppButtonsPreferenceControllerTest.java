@@ -543,6 +543,19 @@ public class AppButtonsPreferenceControllerTest {
         assertThat(i.getBooleanExtra(KEY_REMOVE_TASK_WHEN_FINISHING, false)).isFalse();
     }
 
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void isAvailable_nonMainlineModule_isTrue() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowAppUtils.class)
+    public void isAvailable_mainlineModule_isFalse() {
+        ShadowAppUtils.addMainlineModule(mController.mPackageName);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
     /**
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
@@ -597,14 +610,20 @@ public class AppButtonsPreferenceControllerTest {
     public static class ShadowAppUtils {
 
         public static Set<String> sSystemModules = new ArraySet<>();
+        public static Set<String> sMainlineModules = new ArraySet<>();
 
         @Resetter
         public static void reset() {
             sSystemModules.clear();
+            sMainlineModules.clear();
         }
 
         public static void addHiddenModule(String pkg) {
             sSystemModules.add(pkg);
+        }
+
+        public static void addMainlineModule(String pkg) {
+            sMainlineModules.add(pkg);
         }
 
         @Implementation
@@ -615,6 +634,11 @@ public class AppButtonsPreferenceControllerTest {
         @Implementation
         protected static boolean isSystemModule(Context context, String packageName) {
             return sSystemModules.contains(packageName);
+        }
+
+        @Implementation
+        protected static boolean isMainlineModule(PackageManager pm, String packageName) {
+            return sMainlineModules.contains(packageName);
         }
     }
 }

@@ -16,9 +16,9 @@
 
 package com.android.settings.applications;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -28,6 +28,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ModuleInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -51,6 +55,8 @@ public class AppStorageSettingsTest {
     private AppStorageSettings mSettings;
     private Button mLeftButton;
     private Button mRightButton;
+    @Mock
+    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -58,6 +64,8 @@ public class AppStorageSettingsTest {
         mLeftButton = new Button(RuntimeEnvironment.application);
         mRightButton = new Button(RuntimeEnvironment.application);
         mSettings = spy(new AppStorageSettings());
+        mSettings.mPm = mPackageManager;
+        mSettings.mPackageName = "Package";
         mSettings.mSizeController = mSizesController;
         mButtonsPref = createMock();
         mSettings.mButtonsPref = mButtonsPref;
@@ -77,7 +85,9 @@ public class AppStorageSettingsTest {
     }
 
     @Test
-    public void updateUiWithSize_noAppStats_shouldDisableClearButtons() {
+    public void updateUiWithSize_noAppStats_shouldDisableClearButtons()
+            throws PackageManager.NameNotFoundException {
+        mockMainlineModule(mSettings.mPackageName, false /* isMainlineModule */);
         mSettings.updateUiWithSize(null);
 
         verify(mSizesController).updateUi(nullable(Context.class));
@@ -86,12 +96,15 @@ public class AppStorageSettingsTest {
     }
 
     @Test
-    public void updateUiWithSize_hasDataAndCache_shouldEnableClearButtons() {
+    public void updateUiWithSize_hasDataAndCache_shouldEnableClearButtons()
+            throws PackageManager.NameNotFoundException {
         final AppStorageStats stats = mock(AppStorageStats.class);
         when(stats.getCacheBytes()).thenReturn(5000L);
         when(stats.getDataBytes()).thenReturn(10000L);
         doNothing().when(mSettings).handleClearCacheClick();
         doNothing().when(mSettings).handleClearDataClick();
+        mockMainlineModule(mSettings.mPackageName, false /* isMainlineModule */);
+
 
         mSettings.updateUiWithSize(stats);
         verify(mButtonsPref).setButton1Enabled(true);
@@ -103,6 +116,22 @@ public class AppStorageSettingsTest {
         mRightButton.performClick();
         verify(mSettings).handleClearDataClick();
         verify(mSettings).handleClearCacheClick();
+    }
+
+    @Test
+    public void updateUiWithSize_mainlineModule_shouldDisableClearButtons()
+            throws PackageManager.NameNotFoundException {
+        final AppStorageStats stats = mock(AppStorageStats.class);
+        when(stats.getCacheBytes()).thenReturn(5000L);
+        when(stats.getDataBytes()).thenReturn(10000L);
+        doNothing().when(mSettings).handleClearCacheClick();
+        doNothing().when(mSettings).handleClearDataClick();
+        mockMainlineModule(mSettings.mPackageName, true /* isMainlineModule */);
+
+
+        mSettings.updateUiWithSize(stats);
+        verify(mButtonsPref).setButton1Enabled(false);
+        verify(mButtonsPref).setButton2Enabled(false);
     }
 
     private ActionButtonsPreference createMock() {
@@ -120,6 +149,24 @@ public class AppStorageSettingsTest {
         when(pref.setButton2OnClickListener(any(View.OnClickListener.class))).thenReturn(pref);
 
         return pref;
+    }
+
+    private void mockMainlineModule(String packageName, boolean isMainlineModule)
+            throws PackageManager.NameNotFoundException {
+        final PackageInfo packageInfo = new PackageInfo();
+        final ApplicationInfo applicationInfo = new ApplicationInfo();
+        applicationInfo.sourceDir = "apex";
+        packageInfo.applicationInfo = applicationInfo;
+
+        if (isMainlineModule) {
+            when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenReturn(
+                    new ModuleInfo());
+        } else {
+            when(mPackageManager.getPackageInfo(packageName, 0 /* flags */)).thenReturn(
+                    packageInfo);
+            when(mPackageManager.getModuleInfo(packageName, 0 /* flags */)).thenThrow(
+                    new PackageManager.NameNotFoundException());
+        }
     }
 }
 
