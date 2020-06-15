@@ -256,6 +256,11 @@
             android:title="@string/overlay_settings_title"
             android:summary="@string/overlay_settings_summary" />
 
+        <SwitchPreference
+            android:key="pref_key_peak_refresh_rate"
+            android:title="@string/force_high_refresh_rate_toggle"
+            android:summary="@string/force_high_refresh_rate_desc" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
