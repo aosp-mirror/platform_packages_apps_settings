@@ -51,7 +51,7 @@ public final class BluetoothPairingService extends Service {
 
     private BluetoothDevice mDevice;
 
-    public static Intent getPairingDialogIntent(Context context, Intent intent) {
+    public static Intent getPairingDialogIntent(Context context, Intent intent, int initiator) {
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                 BluetoothDevice.ERROR);
@@ -65,6 +65,7 @@ public final class BluetoothPairingService extends Service {
             int pairingKey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY,
                     BluetoothDevice.ERROR);
             pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_KEY, pairingKey);
+            pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_INITIATOR, initiator);
         }
         pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
         pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -124,7 +125,8 @@ public final class BluetoothPairingService extends Service {
                 .setLocalOnly(true);
 
         PendingIntent pairIntent = PendingIntent.getActivity(this, 0,
-                getPairingDialogIntent(this, intent),
+                getPairingDialogIntent(this, intent,
+                        BluetoothDevice.EXTRA_PAIRING_INITIATOR_BACKGROUND),
                 PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_UPDATE_CURRENT);
 
         PendingIntent dismissIntent = PendingIntent.getBroadcast(this, 0,

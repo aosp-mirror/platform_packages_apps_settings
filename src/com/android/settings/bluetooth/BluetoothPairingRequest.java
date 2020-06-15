@@ -37,9 +37,6 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
     if (!action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
       return;
     }
-    // convert broadcast intent into activity intent (same action string)
-    Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context, intent);
-
     PowerManager powerManager =
         (PowerManager)context.getSystemService(Context.POWER_SERVICE);
     BluetoothDevice device =
@@ -51,6 +48,10 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
     if (powerManager.isInteractive() && shouldShowDialog) {
       // Since the screen is on and the BT-related activity is in the foreground,
       // just open the dialog
+      // convert broadcast intent into activity intent (same action string)
+      Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context, intent,
+              BluetoothDevice.EXTRA_PAIRING_INITIATOR_FOREGROUND);
+
       context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
     } else {
       // Put up a notification that leads to the dialog
