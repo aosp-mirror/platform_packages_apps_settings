@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony;
 
+import android.annotation.IntDef;
 import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
@@ -25,9 +26,21 @@ import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 import android.util.Log;
 
+import com.android.internal.telephony.CellNetworkScanResult;
+
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.util.concurrent.SettableFuture;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 /**
  * A helper class that builds the common interface and performs the network scan for two different
@@ -70,6 +83,33 @@ public class NetworkScanHelper {
         void onError(int errorCode);
     }
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS, NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS})
+    public @interface NetworkQueryType {}
+
+    /**
+     * Performs the network scan using {@link TelephonyManager#getAvailableNetworks()}. The network
+     * scan results won't be returned to the caller until the network scan is completed.
+     *
+     * <p> This is typically used when the modem doesn't support the new network scan api
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}.
+     */
+    public static final int NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS = 1;
+
+    /**
+     * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)} The network scan
+     * results will be returned to the caller periodically in a small time window until the network
+     * scan is completed. The complete results should be returned in the last called of
+     * {@link NetworkScanCallback#onResults(List)}.
+     *
+     * <p> This is recommended to be used if modem supports the new network scan api
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}
+     */
+    public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS = 2;
+
     /** The constants below are used in the async network scan. */
     private static final boolean INCREMENTAL_RESULTS = true;
     private static final int SEARCH_PERIODICITY_SEC = 5;
@@ -82,6 +122,9 @@ public class NetworkScanHelper {
     private final Executor mExecutor;
 
     private NetworkScan mNetworkScanRequester;
+
+    /** Callbacks for sync network scan */
+    private ListenableFuture<List<CellInfo>> mNetworkScanFuture;
 
     public NetworkScanHelper(TelephonyManager tm, NetworkScanCallback callback, Executor executor) {
         mTelephonyManager = tm;
@@ -139,37 +182,62 @@ public class NetworkScanHelper {
     }
 
     /**
-     * Request a network scan.
+     * Performs a network scan for the given type {@code type}.
+     * {@link #NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS} is recommended if modem supports
+     * {@link TelephonyManager#requestNetworkScan(
+     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)}.
      *
-     * Performs the network scan using {@link TelephonyManager#requestNetworkScan(
-     * NetworkScanRequest, Executor, TelephonyScanManager.NetworkScanCallback)} The network scan
-     * results will be returned to the caller periodically in a small time window until the network
-     * scan is completed. The complete results should be returned in the last called of
-     * {@link NetworkScanCallback#onResults(List)}.
+     * @param type used to tell which network scan API should be used.
      */
-    public void startNetworkScan() {
-        if (mNetworkScanRequester != null) {
-            return;
-        }
-        mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
-                createNetworkScanForPreferredAccessNetworks(),
-                mExecutor,
-                mInternalNetworkScanCallback);
-        if (mNetworkScanRequester == null) {
-            onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+    public void startNetworkScan(@NetworkQueryType int type) {
+        if (type == NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS) {
+            mNetworkScanFuture = SettableFuture.create();
+            Futures.addCallback(mNetworkScanFuture, new FutureCallback<List<CellInfo>>() {
+                @Override
+                public void onSuccess(List<CellInfo> result) {
+                    onResults(result);
+                    onComplete();
+                }
+
+                @Override
+                public void onFailure(Throwable t) {
+                    if (t instanceof CancellationException) {
+                        return;
+                    }
+                    int errCode = Integer.parseInt(t.getMessage());
+                    onError(errCode);
+                }
+            }, MoreExecutors.directExecutor());
+            mExecutor.execute(new NetworkScanSyncTask(
+                    mTelephonyManager, (SettableFuture) mNetworkScanFuture));
+        } else if (type == NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS) {
+            if (mNetworkScanRequester != null) {
+                return;
+            }
+            mNetworkScanRequester = mTelephonyManager.requestNetworkScan(
+                    createNetworkScanForPreferredAccessNetworks(),
+                    mExecutor,
+                    mInternalNetworkScanCallback);
+            if (mNetworkScanRequester == null) {
+                onError(NetworkScan.ERROR_RADIO_INTERFACE_ERROR);
+            }
         }
     }
 
     /**
-     * Stops the network scan.
-     *
-     * Use this method to stop an ongoing scan. When user requests a new scan, a {@link NetworkScan}
-     * object will be returned, and the user can stop the scan by calling this method.
+     * The network scan of type {@link #NETWORK_SCAN_TYPE_WAIT_FOR_ALL_RESULTS} can't be stopped,
+     * however, the result of the current network scan won't be returned to the callback after
+     * calling this method.
      */
     public void stopNetworkQuery() {
         if (mNetworkScanRequester != null) {
             mNetworkScanRequester.stopScan();
             mNetworkScanRequester = null;
+        }
+
+        if (mNetworkScanFuture != null) {
+            mNetworkScanFuture.cancel(true /* mayInterruptIfRunning */);
+            mNetworkScanFuture = null;
         }
     }
 
@@ -183,6 +251,23 @@ public class NetworkScanHelper {
 
     private void onError(int errCode) {
         mNetworkScanCallback.onError(errCode);
+    }
+
+    /**
+     * Converts the status code of {@link CellNetworkScanResult} to one of the
+     * {@link NetworkScan.ScanErrorCode}.
+     * @param errCode status code from {@link CellNetworkScanResult}.
+     *
+     * @return one of the scan error code from {@link NetworkScan.ScanErrorCode}.
+     */
+    private static int convertToScanErrorCode(int errCode) {
+        switch (errCode) {
+            case CellNetworkScanResult.STATUS_RADIO_NOT_AVAILABLE:
+                return NetworkScan.ERROR_RADIO_INTERFACE_ERROR;
+            case CellNetworkScanResult.STATUS_RADIO_GENERIC_FAILURE:
+            default:
+                return NetworkScan.ERROR_MODEM_ERROR;
+        }
     }
 
     private final class NetworkScanCallbackImpl extends TelephonyScanManager.NetworkScanCallback {
@@ -200,6 +285,37 @@ public class NetworkScanHelper {
         public void onError(@NetworkScan.ScanErrorCode int errCode) {
             Log.d(TAG, "async scan onError() errorCode = " + errCode);
             NetworkScanHelper.this.onError(errCode);
+        }
+    }
+
+    private static final class NetworkScanSyncTask implements Runnable {
+        private final SettableFuture<List<CellInfo>> mCallback;
+        private final TelephonyManager mTelephonyManager;
+
+        NetworkScanSyncTask(
+                TelephonyManager telephonyManager, SettableFuture<List<CellInfo>> callback) {
+            mTelephonyManager = telephonyManager;
+            mCallback = callback;
+        }
+
+        @Override
+        public void run() {
+            final CellNetworkScanResult result = mTelephonyManager.getAvailableNetworks();
+            if (result.getStatus() == CellNetworkScanResult.STATUS_SUCCESS) {
+                final List<CellInfo> cellInfos = result.getOperators()
+                        .stream()
+                        .map(operatorInfo
+                                -> CellInfoUtil.convertOperatorInfoToCellInfo(operatorInfo))
+                        .collect(Collectors.toList());
+                Log.d(TAG, "Sync network scan completed, cellInfos = "
+                        + CellInfoUtil.cellInfoListToString(cellInfos));
+                mCallback.set(cellInfos);
+            } else {
+                final Throwable error = new Throwable(
+                        Integer.toString(convertToScanErrorCode(result.getStatus())));
+                mCallback.setException(error);
+                Log.d(TAG, "Sync network scan error, ex = " + error);
+            }
         }
     }
 }
