@@ -617,6 +617,19 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         }
 
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            if (mCurrentCredential != null) {
+                mCurrentCredential.zeroize();
+            }
+            // Force a garbage collection immediately to remove remnant of user password shards
+            // from memory.
+            System.gc();
+            System.runFinalization();
+            System.gc();
+        }
+
         protected Intent getRedactionInterstitialIntent(Context context) {
             return RedactionInterstitial.createStartIntent(context, mUserId);
         }
