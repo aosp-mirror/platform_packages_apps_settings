@@ -324,11 +324,6 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         }
     }
 
-    @Override
-    public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
-        // Do nothing when selection is failed, let user could try again easily.
-    }
-
     @VisibleForTesting
     final class FilterWifiTracker {
         private final List<String> mAccessPointKeys;

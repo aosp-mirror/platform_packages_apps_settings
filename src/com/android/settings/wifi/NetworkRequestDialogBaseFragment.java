@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 
 import androidx.annotation.NonNull;
@@ -90,8 +89,5 @@ abstract public class NetworkRequestDialogBaseFragment extends InstrumentedDialo
     }
 
     protected void onMatch(List<ScanResult> scanResults) {
-    }
-
-    protected void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
     }
 }
