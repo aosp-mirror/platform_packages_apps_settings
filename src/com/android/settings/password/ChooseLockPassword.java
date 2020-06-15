@@ -530,6 +530,19 @@ public class ChooseLockPassword extends SettingsActivity {
             }
         }
 
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            if (mCurrentCredential != null) {
+                mCurrentCredential.zeroize();
+            }
+            // Force a garbage collection immediately to remove remnant of user password shards
+            // from memory.
+            System.gc();
+            System.runFinalization();
+            System.gc();
+        }
+
         protected int getStageType() {
             return mForFingerprint ? Stage.TYPE_FINGERPRINT :
                     mForFace ? Stage.TYPE_FACE :
