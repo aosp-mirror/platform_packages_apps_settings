@@ -217,6 +217,17 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
         }
 
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            mPasswordEntry.setText(null);
+            // Force a garbage collection immediately to remove remnant of user password shards
+            // from memory.
+            System.gc();
+            System.runFinalization();
+            System.gc();
+        }
+
         private int getDefaultHeader() {
             if (mFrp) {
                 return mIsAlpha ? R.string.lockpassword_confirm_your_password_header_frp
