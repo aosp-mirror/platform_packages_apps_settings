@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RoutingSessionInfo;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -136,11 +135,6 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final MediaDevice device = mLocalMediaManager.getMediaDeviceById(preference.getKey());
-        if (device == null) {
-            Log.e(TAG, "Unable to find " + preference.getKey() + " to set volume");
-            return false;
-        }
         ThreadUtils.postOnBackgroundThread(() -> {
             mLocalMediaManager.adjustSessionVolume(preference.getKey(), (int) newValue);
         });
@@ -184,6 +178,5 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
 
     @Override
     public void onSelectedDeviceStateChanged(MediaDevice device, int state) {
-
     }
 }
