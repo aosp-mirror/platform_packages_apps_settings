@@ -92,7 +92,8 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
-            preference.getContext().startActivity(new Intent().setComponent(getComponentName()));
+            preference.getContext().startActivity(new Intent().setComponent(getComponentName())
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             return true;
         }
         return super.handlePreferenceTreeClick(preference);
