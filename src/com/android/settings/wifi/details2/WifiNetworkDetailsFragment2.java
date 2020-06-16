@@ -142,8 +142,10 @@ public class WifiNetworkDetailsFragment2 extends DashboardFragment implements
                                 getContext().getSystemService(Context.USER_SERVICE);
                         final int profileOwnerUserId = Utils.getManagedProfileId(
                                 um, UserHandle.myUserId());
-                        admin = new EnforcedAdmin(dpm.getProfileOwnerAsUser(profileOwnerUserId),
-                                null, UserHandle.of(profileOwnerUserId));
+                        if (profileOwnerUserId != UserHandle.USER_NULL) {
+                            admin = new EnforcedAdmin(dpm.getProfileOwnerAsUser(profileOwnerUserId),
+                                    null, UserHandle.of(profileOwnerUserId));
+                        }
                     }
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), admin);
                 } else {
