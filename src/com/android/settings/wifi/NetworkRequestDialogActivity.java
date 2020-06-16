@@ -216,13 +216,12 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
 
     @Override
     public void onUserSelectionConnectFailure(WifiConfiguration wificonfiguration) {
-        if (mIsSpecifiedSsid) {
-            showSingleSsidRequestDialog(
-                    WifiInfo.sanitizeSsid(mMatchedConfig.SSID), true /* isTryAgain */);
-            return;
+        if (!isFinishing()) {
+            Toast.makeText(this, R.string.network_connection_connect_failure, Toast.LENGTH_SHORT)
+                    .show();
+            setResult(RESULT_OK);
+            finish();
         }
-
-        mDialogFragment.onUserSelectionConnectFailure(wificonfiguration);
     }
 
     // Called when user click "Connect" button. Called by
