@@ -43,7 +43,7 @@ public class AppInstallerInfoPreferenceController extends AppInfoPreferenceContr
             return DISABLED_FOR_USER;
         }
 
-        if (AppUtils.isMainlineModule(mContext, mPackageName)) {
+        if (AppUtils.isMainlineModule(mContext.getPackageManager(), mPackageName)) {
             return DISABLED_FOR_USER;
         }
 

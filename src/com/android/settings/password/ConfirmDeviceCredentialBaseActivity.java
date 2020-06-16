@@ -158,6 +158,16 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Force a garbage collection immediately to remove remnant of user password shards
+        // from memory.
+        System.gc();
+        System.runFinalization();
+        System.gc();
+    }
+
+    @Override
     public void finish() {
         super.finish();
         if (getIntent().getBooleanExtra(
