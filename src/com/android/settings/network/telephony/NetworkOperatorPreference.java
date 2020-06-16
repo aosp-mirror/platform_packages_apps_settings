@@ -57,6 +57,7 @@ public class NetworkOperatorPreference extends Preference {
     private List<String> mForbiddenPlmns;
     private int mLevel = LEVEL_NONE;
     private boolean mShow4GForLTE;
+    private boolean mUseNewApi;
 
     public NetworkOperatorPreference(Context context, CellInfo cellinfo,
             List<String> forbiddenPlmns, boolean show4GForLTE) {
@@ -75,6 +76,8 @@ public class NetworkOperatorPreference extends Preference {
         super(context);
         mForbiddenPlmns = forbiddenPlmns;
         mShow4GForLTE = show4GForLTE;
+        mUseNewApi = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableNewAutoSelectNetworkUI);
     }
 
     /**
@@ -215,7 +218,7 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     private void updateIcon(int level) {
-        if (level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
+        if (!mUseNewApi || level < 0 || level >= NUM_SIGNAL_STRENGTH_BINS) {
             return;
         }
         final Context context = getContext();
