@@ -818,7 +818,7 @@
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Разрешить обмен данными, когда телефон находится рядом с NFC-устройством"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Включите NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"Связь малого радиуса действия (NFC) позволяет обмениваться данными с другими устройствами поблизости, например кассовыми терминалами, устройствами доступа, интерактивной рекламой и метками."</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Требовать разблокировки устройства для использования NFC"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Запрашивать разблокировку устройства для использования NFC"</string>
     <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Разрешить оплату покупок и проезда с помощью NFC только при разблокированном экране"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Готов к передаче контента приложений по NFC"</string>
@@ -1230,6 +1230,10 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавный экран"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматически изменять частоту обновления экрана с 60 до 90 Гц для некоторых типов контента (при этом батарея разряжается быстрее)"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
+    <skip />
+    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивный спящий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Включено (экран не будет отключаться, если вы смотрите на него)"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Отключено"</string>
@@ -1836,7 +1840,7 @@
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Введите PIN-код"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Введите пароль устройства"</string>
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Укажите графический ключ от рабочего профиля"</string>
-    <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Введите PIN-код рабочего профиля"</string>
+    <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Для дополнительной защиты введите PIN-код рабочего профиля."</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Введите пароль от рабочего профиля"</string>
     <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний графический ключ."</string>
     <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Настройки вашего телефона были сброшены. Чтобы использовать его, введите свой прежний PIN-код."</string>
@@ -2203,7 +2207,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Нажмите кнопку специальных возможностей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> в нижней части экрана.\n\nДля переключения между функциями нажмите и удерживайте эту кнопку."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Проведите вверх от нижнего края экрана двумя пальцами.\n\nДля переключения между функциями проведите по экрану вверх двумя пальцами и задержите их."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Проведите вверх от нижнего края экрана тремя пальцами.\n\nДля переключения между функциями проведите по экрану вверх тремя пальцами и задержите их."</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Удерживание кнопок регулировки громкости"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Удерживайте кнопки регулировки громкости"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"удерживание кнопок регулировки громкости"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Нажмите и удерживайте обе кнопки регулировки громкости."</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Тройное нажатие на экран"</string>
@@ -3170,7 +3174,8 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Менеджер звонков"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Экстренные оповещения"</string>
+    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
+    <skip />
     <string name="network_operators_settings" msgid="5105453353329748954">"Операторы связи"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Названия точек доступа"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -4001,7 +4006,7 @@
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Запрашивать графический ключ"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Запрашивать PIN-код"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Запрашивать пароль"</string>
-    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при откл. блокировки в приложении"</string>
+    <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Блокировать устройство при отключении функции"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Подтверждение удаления SIM-карты"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Запрашивать подтверждение личности перед удалением скачанной SIM-карты"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Профилем управляет"</string>
@@ -4096,7 +4101,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"Дополнительные настройки"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Настроить приложения"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Неизвестное приложение"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"Управление разрешениями"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"Разрешения"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"Приложения, которым разрешен доступ (<xliff:g id="APPS">%1$s</xliff:g>)"</string>
     <string name="app_permissions_summary_more" msgid="6247952473615352350">"Приложения, использующие <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Включение нажатием"</string>
@@ -4997,6 +5002,8 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Повторить попытку"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Произошла ошибка. Приложение отменило запрос на выбор устройства."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Подключено"</string>
+    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
+    <skip />
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Показать все"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Поиск устройства…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Подключение к устройству…"</string>
