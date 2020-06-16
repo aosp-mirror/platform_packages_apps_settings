@@ -785,7 +785,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC を ON にする"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC がこのデバイスと他の付近のデバイスまたはターゲット（決済デバイス、アクセス リーダー、インタラクティブ広告またはタグなど）の間でデータのやり取りを行います。"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC の使用にロック解除を要求"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"画面がアンロックされている場合のみ NFC 決済と公共交通機関での利用を許可します"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"画面がロック解除されている場合のみ NFC 決済と公共交通機関での利用を許可します"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android ビーム"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"アプリコンテンツをNFCで転送できます"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"OFF"</string>
@@ -1190,6 +1190,10 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から 90 Hz に変更します。電池使用量が増えます。"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
+    <skip />
+    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
+    <skip />
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"OFF"</string>
@@ -2150,7 +2154,7 @@
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 本の指で上にスワイプ"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 本の指で上にスワイプ"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"ユーザー補助機能ボタンをタップします"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"ユーザー補助機能ボタンをタップ"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"画面の下部にあるユーザー補助機能ボタン <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> をタップします。\n\n機能を切り替えるには、ユーザー補助機能ボタンを長押しします。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"2 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、2 本指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本指で上にスワイプしたまま長押しします。"</string>
@@ -3083,7 +3087,8 @@
     <string name="call_manager_title" msgid="3397433159509629466">"通話マネージャ"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"緊急速報メール"</string>
+    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
+    <skip />
     <string name="network_operators_settings" msgid="5105453353329748954">"携帯通信会社"</string>
     <string name="access_point_names" msgid="5768430498022188057">"アクセスポイント名"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -4475,7 +4480,7 @@
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"12秒"</string>
     <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
     <skip />
-    <string name="keywords_one_handed" msgid="969440592493034101">"到達性"</string>
+    <string name="keywords_one_handed" msgid="969440592493034101">"片手モード"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"画面をダブルタップして、時刻、通知などの情報を確認できます。"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"スマートフォンを持ち上げて通知を確認"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"タブレットを持ち上げて通知をチェック"</string>
@@ -4829,6 +4834,8 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"再試行"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"エラーが発生しました。アプリはデバイス選択リクエストをキャンセルしました。"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"接続しました"</string>
+    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
+    <skip />
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"すべて表示"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"デバイスを検索しています…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"デバイスに接続しています…"</string>
