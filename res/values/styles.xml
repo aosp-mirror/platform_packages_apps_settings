@@ -564,9 +564,6 @@
     </style>
 
     <style name="SliceRow.Slider">
-        <!-- 4dp start padding for the start icon -->
-        <item name="titleItemStartPadding">4dp</item>
-
         <!-- Padding between content and the start icon is 0dp -->
         <item name="contentStartPadding">0dp</item>
         <item name="contentEndPadding">36dp</item>
@@ -586,6 +583,8 @@
     </style>
 
     <style name="SliceRow.Slider.LargeIcon">
+        <!-- 10dp start padding for the start icon -->
+        <item name="titleItemStartPadding">10dp</item>
         <!-- Layout is 48dp and actual icon size is 48-(iconSize/2) -->
         <item name="iconSize">12dp</item>
     </style>
