@@ -27,6 +27,7 @@ import android.util.ArrayMap;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.display.AdaptiveSleepPreferenceController;
+import com.android.settings.display.AlwaysOnDisplaySlice;
 import com.android.settings.flashlight.FlashlightSlice;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.homepage.contextualcards.deviceinfo.StorageSlice;
@@ -303,6 +304,16 @@ public class CustomSliceRegistry {
             .appendPath(MediaOutputSliceConstants.KEY_REMOTE_MEDIA)
             .build();
 
+    /**
+     * Backing Uri for the Always On Slice.
+     */
+    public static final Uri ALWAYS_ON_SLICE_URI = new Uri.Builder()
+            .scheme(ContentResolver.SCHEME_CONTENT)
+            .authority(SettingsSliceProvider.SLICE_AUTHORITY)
+            .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+            .appendPath("always_on_display")
+            .build();
+
     @VisibleForTesting
     static final Map<Uri, Class<? extends CustomSliceable>> sUriToSlice;
 
@@ -325,6 +336,7 @@ public class CustomSliceRegistry {
         sUriToSlice.put(DARK_THEME_SLICE_URI, DarkThemeSlice.class);
         sUriToSlice.put(REMOTE_MEDIA_SLICE_URI, RemoteMediaSlice.class);
         sUriToSlice.put(MEDIA_OUTPUT_GROUP_SLICE_URI, MediaOutputGroupSlice.class);
+        sUriToSlice.put(ALWAYS_ON_SLICE_URI, AlwaysOnDisplaySlice.class);
     }
 
     public static Class<? extends CustomSliceable> getSliceClassByUri(Uri uri) {
