@@ -40,7 +40,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TetherSettings;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.TetherUtil;
@@ -108,9 +107,6 @@ public class TetherPreferenceController extends AbstractPreferenceController imp
         if (mPreference != null && !mAdminDisallowedTetherConfig) {
             mPreference.setTitle(
                     com.android.settingslib.Utils.getTetheringLabel(mConnectivityManager));
-
-            // Grey out if provisioning is not available.
-            mPreference.setEnabled(!TetherSettings.isProvisioningNeededButUnavailable(mContext));
         }
     }
 
