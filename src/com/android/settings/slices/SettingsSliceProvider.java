@@ -243,7 +243,7 @@ public class SettingsSliceProvider extends SliceProvider {
                         .createWifiCallingPreferenceSlice(sliceUri);
             }
 
-            SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
+            final SliceData cachedSliceData = mSliceWeakDataCache.get(sliceUri);
             if (cachedSliceData == null) {
                 loadSliceInBackground(sliceUri);
                 return getSliceStub(sliceUri);
@@ -466,14 +466,14 @@ public class SettingsSliceProvider extends SliceProvider {
         final SliceBackgroundWorker worker = SliceBackgroundWorker.getInstance(
                 getContext(), sliceable, uri);
         mPinnedWorkers.put(uri, worker);
-        worker.onSlicePinned();
+        worker.pin();
     }
 
     private void stopBackgroundWorker(Uri uri) {
         final SliceBackgroundWorker worker = mPinnedWorkers.get(uri);
         if (worker != null) {
             Log.d(TAG, "Stopping background worker for: " + uri);
-            worker.onSliceUnpinned();
+            worker.unpin();
             mPinnedWorkers.remove(uri);
         }
     }
