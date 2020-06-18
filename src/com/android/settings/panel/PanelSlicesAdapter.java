@@ -175,7 +175,7 @@ public class PanelSlicesAdapter
 
         @Override
         public boolean isDividerAllowedBelow() {
-            return true;
+            return mPanelFragment.getPanelViewType() != PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
         }
     }
 }
