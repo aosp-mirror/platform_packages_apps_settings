@@ -43,6 +43,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 
+import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
@@ -63,10 +64,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowWifiManager.class,
-        WifiScanWorkerTest.ShadowWifiTracker.class,
-})
+@Config(shadows = {ShadowSliceBackgroundWorker.class, ShadowWifiManager.class,
+        WifiScanWorkerTest.ShadowWifiTracker.class})
 public class WifiScanWorkerTest {
 
     private Context mContext;
