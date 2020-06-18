@@ -219,7 +219,7 @@
         <activity
             android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:label="@string/connected_devices_dashboard_title"
-            android:icon="@drawable/ic_devices_other">
+            android:icon="@drawable/ic_homepage_connected_device">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -254,7 +254,7 @@
         <activity
             android:name="Settings$WifiSettingsActivity"
             android:label="@string/wifi_settings"
-            android:icon="@drawable/ic_settings_wireless"
+            android:icon="@drawable/ic_homepage_network"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_SETTINGS" />
@@ -273,7 +273,7 @@
         <activity
             android:name="Settings$WifiSettings2Activity"
             android:label="@string/wifi_settings"
-            android:icon="@drawable/ic_settings_wireless"
+            android:icon="@drawable/ic_homepage_network"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIFI_SETTINGS2" />
@@ -492,7 +492,7 @@
         <activity
             android:name="Settings$TetherSettingsActivity"
             android:label="@string/tether_settings_title_all"
-            android:icon="@drawable/ic_settings_wireless">
+            android:icon="@drawable/ic_homepage_network">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.TETHER_SETTINGS" />
@@ -738,7 +738,7 @@
         <activity
             android:name="Settings$ZenModeSettingsActivity"
             android:label="@string/zen_mode_settings_title"
-            android:icon="@drawable/ic_notifications"
+            android:icon="@drawable/ic_homepage_notification"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_SETTINGS" />
@@ -909,7 +909,7 @@
             android:name="Settings$NightDisplaySettingsActivity"
             android:label="@string/night_display_title"
             android:enabled="@*android:bool/config_nightDisplayAvailable"
-            android:icon="@drawable/ic_settings_night_display">
+            android:icon="@drawable/ic_homepage_night_display">
             <intent-filter android:priority="32">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -1225,7 +1225,7 @@
         <activity
             android:name="Settings$LocationSettingsActivity"
             android:label="@string/location_settings_title"
-            android:icon="@drawable/ic_settings_location"
+            android:icon="@drawable/ic_homepage_location"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
@@ -2179,7 +2179,7 @@
         <activity
             android:name="Settings$PowerUsageSummaryActivity"
             android:label="@string/power_usage_summary_title"
-            android:icon="@drawable/ic_settings_battery">
+            android:icon="@drawable/ic_homepage_battery">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
