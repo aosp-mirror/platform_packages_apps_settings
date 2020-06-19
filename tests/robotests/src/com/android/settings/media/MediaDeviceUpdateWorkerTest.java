@@ -34,6 +34,7 @@ import android.media.MediaRoute2ProviderService;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
 
+import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
@@ -57,7 +58,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
-        ShadowBluetoothUtils.class})
+        ShadowBluetoothUtils.class, ShadowSliceBackgroundWorker.class})
 public class MediaDeviceUpdateWorkerTest {
 
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
