@@ -19,14 +19,11 @@ package com.android.settings.homepage.contextualcards;
 import static com.android.settings.homepage.contextualcards.ContextualCardLoader.CARD_CONTENT_LOADER_ID;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.STICKY_VALUE;
 import static com.android.settings.intelligence.ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE;
-import static com.android.settings.slices.CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI;
-import static com.android.settings.slices.CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI;
 
 import static java.util.stream.Collectors.groupingBy;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.format.DateUtils;
@@ -55,7 +52,6 @@ import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,8 +81,6 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
     static final String KEY_CONTEXTUAL_CARDS = "key_contextual_cards";
 
     private static final String TAG = "ContextualCardManager";
-    private static final List<Uri> STICKY_CARDS =
-            Arrays.asList(CONTEXTUAL_WIFI_SLICE_URI, BLUETOOTH_DEVICES_SLICE_URI);
 
     private final Context mContext;
     private final Lifecycle mLifecycle;
@@ -364,29 +358,11 @@ public class ContextualCardManager implements ContextualCardLoader.CardContentLo
 
     private List<ContextualCard> getCardsWithStickyViewType(List<ContextualCard> cards) {
         final List<ContextualCard> result = new ArrayList<>(cards);
-        int replaceCount = 0;
         for (int index = 0; index < result.size(); index++) {
             final ContextualCard card = cards.get(index);
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2)) {
-                if (card.getCategory() == STICKY_VALUE) {
-                    result.set(index, card.mutate().setViewType(
-                            SliceContextualCardRenderer.VIEW_TYPE_STICKY).build());
-                }
-                continue;
-            }
-
-            if (replaceCount > STICKY_CARDS.size() - 1) {
-                break;
-            }
-
-            if (card.getCardType() != ContextualCard.CardType.SLICE) {
-                continue;
-            }
-
-            if (STICKY_CARDS.contains(card.getSliceUri())) {
+            if (card.getCategory() == STICKY_VALUE) {
                 result.set(index, card.mutate().setViewType(
                         SliceContextualCardRenderer.VIEW_TYPE_STICKY).build());
-                replaceCount++;
             }
         }
         return result;
