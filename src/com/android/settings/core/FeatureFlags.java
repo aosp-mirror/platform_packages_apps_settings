@@ -29,5 +29,4 @@ public class FeatureFlags {
     public static final String CONTROLLER_ENHANCEMENT = "settings_controller_loading_enhancement";
     public static final String CONDITIONAL_CARDS = "settings_conditionals";
     public static final String TETHER_ALL_IN_ONE = "settings_tether_all_in_one";
-    public static final String CONTEXTUAL_HOME2 = "settings_contextual_home2";
 }
