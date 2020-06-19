@@ -610,6 +610,11 @@
             android:title="@string/asst_capability_ranking_title"
             settings:controller="com.android.settings.notification.AssistantCapabilityPreferenceController" />
 
+        <SwitchPreference
+            android:key="asst_feedback_indicator"
+            android:title="@string/asst_feedback_indicator_title"
+            settings:controller="com.android.settings.notification.AssistantFeedbackPreferenceController" />
+
         <Preference
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
