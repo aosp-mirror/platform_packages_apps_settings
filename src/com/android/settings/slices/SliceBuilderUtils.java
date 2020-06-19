@@ -220,9 +220,11 @@ public class SliceBuilderUtils {
 
     public static Intent getContentIntent(Context context, SliceData sliceData) {
         final Uri contentUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
+        final String screenTitle = TextUtils.isEmpty(sliceData.getScreenTitle()) ? null
+                : sliceData.getScreenTitle().toString();
         final Intent intent = buildSearchResultPageIntent(context,
                 sliceData.getFragmentClassName(), sliceData.getKey(),
-                sliceData.getScreenTitle().toString(), 0 /* TODO */);
+                screenTitle, 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
         return intent;
@@ -399,7 +401,8 @@ public class SliceBuilderUtils {
 
         keywords.add(data.getTitle());
 
-        if (!TextUtils.equals(data.getTitle(), data.getScreenTitle())) {
+        if (!TextUtils.isEmpty(data.getScreenTitle())
+                && !TextUtils.equals(data.getTitle(), data.getScreenTitle())) {
             keywords.add(data.getScreenTitle().toString());
         }
 
