@@ -610,7 +610,6 @@ public class ContextualCardManagerTest {
 
     @Test
     public void getCardsWithViewType_hasOneStickySlice_shouldHaveOneStickyCard() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, true);
         final List<ContextualCard> cards = new ArrayList<>();
         cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
         cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
@@ -625,89 +624,6 @@ public class ContextualCardManagerTest {
         assertThat(result).hasSize(cards.size());
         assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
         assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
-    }
-
-    @Test
-    public void getCardsWithViewType_hasWifiSlice_shouldHaveOneStickyCard() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
-        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cardListWithWifi = buildCategoriedCards(cards, categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithWifi);
-
-        assertThat(result).hasSize(cards.size());
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
-        assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
-    }
-
-    @Test
-    public void getCardsWithViewType_hasBluetoothDeviceSlice_shouldHaveOneStickyCard() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
-        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cardListWithBT = buildCategoriedCards(cards, categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithBT);
-
-        assertThat(result).hasSize(cards.size());
-        assertThat(result.get(0).getViewType()).isEqualTo(VIEW_TYPE_STICKY);
-        assertThat(result.get(1).getViewType()).isEqualTo(VIEW_TYPE_FULL_WIDTH);
-    }
-
-    @Test
-    public void getCardsWithViewType_hasWifiAndBtDeviceSlice_shouldHaveTwoStickyCards() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
-        final List<ContextualCard> cards = new ArrayList<>();
-        cards.add(buildContextualCard(CustomSliceRegistry.CONTEXTUAL_WIFI_SLICE_URI.toString()));
-        cards.add(buildContextualCard(CustomSliceRegistry.BLUETOOTH_DEVICES_SLICE_URI.toString()));
-        cards.add(buildContextualCard(CustomSliceRegistry.LOW_STORAGE_SLICE_URI.toString()));
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cardListWithWifiBT = buildCategoriedCards(cards, categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithWifiBT);
-
-        assertThat(result).hasSize(cards.size());
-        assertThat(result.stream()
-                .filter(card -> card.getViewType() == VIEW_TYPE_STICKY)
-                .count())
-                .isEqualTo(2);
-    }
-
-    @Test
-    public void getCardsWithViewType_noWifiOrBtDeviceSlice_shouldNotHaveStickyCard() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.CONTEXTUAL_HOME2, false);
-        final List<Integer> categories = Arrays.asList(
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.IMPORTANT_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE,
-                ContextualCardProto.ContextualCard.Category.SUGGESTION_VALUE
-        );
-        final List<ContextualCard> cardListWithoutWifiBT =
-                buildCategoriedCards(getContextualCardList(), categories);
-
-        final List<ContextualCard> result = mManager.getCardsWithViewType(cardListWithoutWifiBT);
-
-        assertThat(result).hasSize(cardListWithoutWifiBT.size());
-        assertThat(result.stream()
-                .filter(card -> card.getViewType() == VIEW_TYPE_STICKY)
-                .count())
-                .isEqualTo(0);
     }
 
     @Test
