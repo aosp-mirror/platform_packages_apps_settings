@@ -39,6 +39,7 @@ import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 
+import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
@@ -59,7 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class,
+        ShadowSliceBackgroundWorker.class})
 public class MediaOutputIndicatorWorkerTest {
     private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private static final String TEST_PACKAGE_NAME = "com.android.test";
