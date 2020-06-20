@@ -86,6 +86,11 @@
         <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
         <include layout="@layout/panel_slice_list"/>
 
+        <include
+            android:id="@+id/footer_divider"
+            layout="@layout/horizontal_divider"
+            android:visibility="gone"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
