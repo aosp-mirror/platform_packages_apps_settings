@@ -351,8 +351,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     }
 
     private void showBiometricPrompt(PromptInfo promptInfo) {
-        mBiometricManager.setActiveUser(mUserId);
-
         mBiometricFragment = (BiometricFragment) getSupportFragmentManager()
                 .findFragmentByTag(TAG_BIOMETRIC_FRAGMENT);
         boolean newFragment = false;

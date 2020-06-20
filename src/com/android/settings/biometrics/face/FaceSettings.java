@@ -224,7 +224,6 @@ public class FaceSettings extends DashboardFragment {
         if (requestCode == CONFIRM_REQUEST) {
             mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
