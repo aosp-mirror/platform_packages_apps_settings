@@ -27,6 +27,10 @@ import static android.net.TetheringManager.TETHER_ERROR_NO_ERROR;
 import static android.net.TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_PROVISIONING_RESPONSE;
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_SILENT_PROVISIONING_ACTION;
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_SUBID;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -228,8 +232,10 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI);
         intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(EXTRA_TETHER_SILENT_PROVISIONING_ACTION, TEST_NO_UI_ACTION);
         intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
-        intent.putExtra(TetherService.EXTRA_SUBID, 1 /* Tested subId number */);
+        intent.putExtra(EXTRA_TETHER_SUBID, 1 /* Tested subId number */);
+        intent.putExtra(EXTRA_TETHER_PROVISIONING_RESPONSE, TEST_RESPONSE_ACTION);
         startService(intent);
 
         SystemClock.sleep(PROVISION_TIMEOUT);
@@ -242,8 +248,10 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ADD_TETHER_TYPE, type);
         intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(EXTRA_TETHER_SILENT_PROVISIONING_ACTION, TEST_NO_UI_ACTION);
         intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
-        intent.putExtra(TetherService.EXTRA_SUBID, INVALID_SUBSCRIPTION_ID);
+        intent.putExtra(EXTRA_TETHER_SUBID, INVALID_SUBSCRIPTION_ID);
+        intent.putExtra(EXTRA_TETHER_PROVISIONING_RESPONSE, TEST_RESPONSE_ACTION);
         startService(intent);
     }
 

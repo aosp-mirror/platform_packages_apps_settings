@@ -18,7 +18,6 @@ package com.android.settings.network;
 
 import static android.net.TetheringConstants.EXTRA_ADD_TETHER_TYPE;
 import static android.net.TetheringConstants.EXTRA_PROVISION_CALLBACK;
-import static android.net.TetheringConstants.EXTRA_RUN_PROVISION;
 import static android.net.TetheringManager.TETHERING_INVALID;
 import static android.net.TetheringManager.TETHER_ERROR_NO_ERROR;
 import static android.net.TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
@@ -28,7 +27,6 @@ import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.UserHandle;
@@ -36,8 +34,6 @@ import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-
-import com.android.settings.Utils;
 
 /**
  * Activity which acts as a proxy to the tether provisioning app for sanity checks and permission
@@ -53,7 +49,10 @@ public class TetherProvisioningActivity extends Activity {
     @VisibleForTesting
     static final int PROVISION_REQUEST = 0;
     @VisibleForTesting
-    static final String EXTRA_SUBID = "subId";
+    static final String EXTRA_TETHER_SUBID = "android.net.extra.TETHER_SUBID";
+    @VisibleForTesting
+    public static final String EXTRA_TETHER_UI_PROVISIONING_APP_NAME =
+            "android.net.extra.TETHER_UI_PROVISIONING_APP_NAME";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,8 @@ public class TetherProvisioningActivity extends Activity {
 
         final int tetherType = getIntent().getIntExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_INVALID);
 
-        final int tetherSubId = getIntent().getIntExtra(EXTRA_SUBID, INVALID_SUBSCRIPTION_ID);
+        final int tetherSubId = getIntent().getIntExtra(
+                EXTRA_TETHER_SUBID, INVALID_SUBSCRIPTION_ID);
         final int subId = SubscriptionManager.getActiveDataSubscriptionId();
         if (tetherSubId != subId) {
             Log.e(TAG, "This Provisioning request is outdated, current subId: " + subId);
@@ -70,11 +70,11 @@ public class TetherProvisioningActivity extends Activity {
             finish();
             return;
         }
-        String[] provisionApp = getIntent().getStringArrayExtra(EXTRA_RUN_PROVISION);
-        if (provisionApp == null || provisionApp.length < 2) {
-            final Resources res = Utils.getResourcesForSubId(this, subId);
-            provisionApp = res.getStringArray(
-                    com.android.internal.R.array.config_mobile_hotspot_provision_app);
+        String[] provisionApp = getIntent().getStringArrayExtra(
+                EXTRA_TETHER_UI_PROVISIONING_APP_NAME);
+        if (provisionApp == null || provisionApp.length != 2) {
+            Log.e(TAG, "Unexpected provision app configuration");
+            return;
         }
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(provisionApp[0], provisionApp[1]);
