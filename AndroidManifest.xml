@@ -3393,6 +3393,17 @@
                        android:value="true" />
         </activity>
 
+        <activity android:name="Settings$MediaControlsSettingsActivity"
+                  android:exported="true"
+                  android:label="@strings/media_controls_title">
+            <intent-filter>
+                <action android:name="android.settings.ACTION_MEDIA_CONTROLS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.sound.MediaControlsSettings" />
+        </activity>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
