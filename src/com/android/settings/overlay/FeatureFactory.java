@@ -31,6 +31,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.fuelgauge.BatteryStatusFeatureProvider;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider;
@@ -102,6 +103,12 @@ public abstract class FeatureFactory {
     public abstract MetricsFeatureProvider getMetricsFeatureProvider();
 
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context);
+
+    /**
+     * Retrieve implementation for Battery Status feature.
+     */
+    public abstract BatteryStatusFeatureProvider getBatteryStatusFeatureProvider(
+            Context context);
 
     public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
 

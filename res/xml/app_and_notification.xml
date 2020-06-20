@@ -57,9 +57,9 @@
     <Preference
         android:key="configure_notification_settings"
         android:title="@string/configure_notification_settings"
+        android:summary="@string/notification_screen_summary"
         android:order="-440"
-        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"
-        settings:controller="com.android.settings.notification.ConfigureNotificationPreferenceController"/>
+        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"/>
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
