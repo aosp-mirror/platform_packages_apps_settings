@@ -27,6 +27,10 @@ import static android.net.TetheringManager.TETHER_ERROR_NO_ERROR;
 import static android.net.TetheringManager.TETHER_ERROR_PROVISIONING_FAILED;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_PROVISIONING_RESPONSE;
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_SILENT_PROVISIONING_ACTION;
+import static com.android.settings.wifi.tether.TetherService.EXTRA_TETHER_SUBID;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -46,7 +50,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -74,13 +77,11 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
     private static final String TEST_RESPONSE_ACTION = "testProvisioningResponseAction";
     private static final String TEST_NO_UI_ACTION = "testNoUiProvisioningRequestAction";
     private static final int BOGUS_RECEIVER_RESULT = -5;
-    private static final int TEST_CHECK_PERIOD = 100;
     private static final int MS_PER_HOUR = 60 * 60 * 1000;
     private static final int SHORT_TIMEOUT = 100;
     private static final int PROVISION_TIMEOUT = 1000;
 
     private TetherService mService;
-    private MockResources mResources;
     private MockTetherServiceWrapper mWrapper;
     int mLastReceiverResultCode = BOGUS_RECEIVER_RESULT;
     private int mLastTetherRequestType = TETHERING_INVALID;
@@ -105,7 +106,6 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         super.setUp();
         MockitoAnnotations.initMocks(this);
 
-        mResources = new MockResources();
         mContext = new TestContextWrapper(getContext());
         setContext(mContext);
 
@@ -228,8 +228,10 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ADD_TETHER_TYPE, TETHERING_WIFI);
         intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(EXTRA_TETHER_SILENT_PROVISIONING_ACTION, TEST_NO_UI_ACTION);
         intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
-        intent.putExtra(TetherService.EXTRA_SUBID, 1 /* Tested subId number */);
+        intent.putExtra(EXTRA_TETHER_SUBID, 1 /* Tested subId number */);
+        intent.putExtra(EXTRA_TETHER_PROVISIONING_RESPONSE, TEST_RESPONSE_ACTION);
         startService(intent);
 
         SystemClock.sleep(PROVISION_TIMEOUT);
@@ -242,8 +244,10 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ADD_TETHER_TYPE, type);
         intent.putExtra(EXTRA_RUN_PROVISION, true);
+        intent.putExtra(EXTRA_TETHER_SILENT_PROVISIONING_ACTION, TEST_NO_UI_ACTION);
         intent.putExtra(EXTRA_PROVISION_CALLBACK, mResultReceiver);
-        intent.putExtra(TetherService.EXTRA_SUBID, INVALID_SUBSCRIPTION_ID);
+        intent.putExtra(EXTRA_TETHER_SUBID, INVALID_SUBSCRIPTION_ID);
+        intent.putExtra(EXTRA_TETHER_PROVISIONING_RESPONSE, TEST_RESPONSE_ACTION);
         startService(intent);
     }
 
@@ -294,39 +298,10 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
         }
     }
 
-    private static class MockResources extends android.test.mock.MockResources {
-        @Override
-        public int getInteger(int id) {
-            switch(id) {
-                case com.android.internal.R.integer.config_mobile_hotspot_provision_check_period:
-                    return TEST_CHECK_PERIOD;
-                default:
-                    return 0;
-            }
-        }
-
-        @Override
-        public String getString(int id) {
-            switch(id) {
-                case com.android.internal.R.string.config_mobile_hotspot_provision_response:
-                    return TEST_RESPONSE_ACTION;
-                case com.android.internal.R.string.config_mobile_hotspot_provision_app_no_ui:
-                    return TEST_NO_UI_ACTION;
-                default:
-                    return null;
-            }
-        }
-    }
-
     private class TestContextWrapper extends ContextWrapper {
 
         public TestContextWrapper(Context base) {
             super(base);
-        }
-
-        @Override
-        public Resources getResources() {
-            return mResources;
         }
 
         @Override
