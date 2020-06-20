@@ -110,9 +110,13 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
     @VisibleForTesting
     Slice bindSlice(Uri uri) {
         final SliceViewManager manager = SliceViewManager.getInstance(mContext);
-        manager.pinSlice(uri);
+        final SliceViewManager.SliceCallback callback = slice -> { };
+
+        // Register a trivial callback to pin the slice
+        manager.registerSliceCallback(uri, callback);
         final Slice slice = manager.bindSlice(uri);
-        manager.unpinSlice(uri);
+        manager.unregisterSliceCallback(uri, callback);
+
         return slice;
     }
 
