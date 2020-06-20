@@ -24,6 +24,7 @@ import static com.android.settings.network.telephony.MobileNetworkUtils.getRafFr
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -44,6 +45,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -335,6 +337,49 @@ public class EnabledNetworkModePreferenceControllerTest {
         assertThat(Integer.parseInt(mPreference.getValue())).isEqualTo(
                 TelephonyManagerConstants.NETWORK_MODE_GSM_ONLY);
         assertThat(mPreference.getSummary()).isEqualTo("2G");
+    }
+
+    @Test
+    public void checkResource_stringArrayLength() {
+        String[] entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_values);
+        assertEquals(4, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_no_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_cdma_only_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_tdscdma_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_gsm_lte_values);
+        assertEquals(1, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_gsm_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_except_lte_values);
+        assertEquals(2, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.enabled_networks_values);
+        assertEquals(3, entryValues.length);
+
+        entryValues = mContext.getResources().getStringArray(
+                R.array.preferred_network_mode_values_world_mode);
+        assertEquals(3, entryValues.length);
     }
 
     private void mockEnabledNetworkMode(int networkMode) {
