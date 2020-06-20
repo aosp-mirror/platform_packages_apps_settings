@@ -40,9 +40,6 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
     @Override
     protected void startEnrollment() {
         super.startEnrollment();
-        if (mUserId != UserHandle.USER_NULL) {
-            mFingerprintManager.setActiveUser(mUserId);
-        }
         mFingerprintManager.enroll(mToken, mEnrollmentCancel,
                 0 /* flags */, mUserId, mEnrollmentCallback);
     }
