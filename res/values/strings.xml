@@ -8806,6 +8806,9 @@
     <!-- [CHAR LIMIT=NONE] App notification settings: link to app notification settings-->
     <string name="app_settings_link">Additional settings in the app</string>
 
+    <!-- [CHAR LIMIT=NONE] Apps & notification settings: summary on the link to notification settings-->
+    <string name="notification_screen_summary">Notification history, bubbles, recently sent</string>
+
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
     <string name="app_notification_listing_summary_zero">On for all apps</string>
     <!-- [CHAR LIMIT=45] App notification listing summary, blocked apps -->
@@ -11319,6 +11322,10 @@
     <string name="platform_compat_default_disabled_title">Default disabled changes</string>
     <!-- Title for target SDK gated app compat changes category (do not translate 'targetSdkVersion') [CHAR LIMIT=50] -->
     <string name="platform_compat_target_sdk_title">Enabled for targetSdkVersion &gt; <xliff:g id="number" example="29">%d</xliff:g></string>
+    <!-- Title for the dialog shown when no debuggable apps are available [CHAR LIMIT=20] -->
+    <string name="platform_compat_dialog_title_no_apps">No apps available</string>
+    <!-- Explanatory text shown when no debuggable apps are available [CHAR LIMIT=NONE] -->
+    <string name="platform_compat_dialog_text_no_apps">App compatibility changes can only be modified for debuggable apps. Install a debuggable app and try again.</string>
 
     <!-- Slices Strings -->
 
@@ -12125,4 +12132,19 @@
     <string name="overlay_settings_title">Allow screen overlays on Settings</string>
     <!-- Summary for allowing screen overlays on Settings app. [CHAR LIMIT=NONE]-->
     <string name="overlay_settings_summary">Allow apps that can display over other apps to overlay Settings screens</string>
+
+    <!-- Title for media control settings [CHAR LIMIT=50]-->
+    <string name="media_controls_title">Media</string>
+    <!-- Summary for media control settings [CHAR LIMIT=50]-->
+    <string name="media_controls_summary">Hide player when the media session has ended</string>
+    <!-- Description of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=NONE]-->
+    <string name="media_controls_resume_description">The player allows you to resume a session from the expanded Quick Settings panel.</string>
+    <!-- Subtext for media settings when the player will be hidden [CHAR LIMIT=50] -->
+    <string name="media_controls_hide_player">Hide player</string>
+    <!-- Subtext for media settings when the player will be shown [CHAR LIMIT=50] -->
+    <string name="media_controls_show_player">Show player</string>
+    <!-- Subtext for media settings when no players can be shown [CHAR LIMIT=50] -->
+    <string name="media_controls_no_players">No players available</string>
+    <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
+    <string name="keywords_media_controls">media</string>
 </resources>
