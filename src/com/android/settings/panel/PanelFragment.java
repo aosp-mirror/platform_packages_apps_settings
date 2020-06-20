@@ -96,6 +96,7 @@ public class PanelFragment extends Fragment {
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
+    private View mFooterDivider;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -192,6 +193,7 @@ public class PanelFragment extends Fragment {
         mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
+        mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -247,6 +249,13 @@ public class PanelFragment extends Fragment {
                 mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
             }
         }
+
+        if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            mFooterDivider.setVisibility(View.VISIBLE);
+        } else {
+            mFooterDivider.setVisibility(View.GONE);
+        }
+
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 

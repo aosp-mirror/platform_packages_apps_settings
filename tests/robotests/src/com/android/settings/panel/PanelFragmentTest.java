@@ -17,6 +17,9 @@
 
 package com.android.settings.panel;
 
+import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER;
+import static com.android.settings.panel.PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -207,6 +210,54 @@ public class PanelFragmentTest {
 
         assertThat(panelHeader.getVisibility()).isEqualTo(View.GONE);
         assertThat(titleView.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void sliderLargeIconPanelType_displayFooterDivider() {
+        mFakePanelContent.setViewType(VIEW_TYPE_SLIDER_LARGE_ICON);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+        final View footerDivider = panelFragment.mLayoutView.findViewById(R.id.footer_divider);
+        // Check visibility
+        assertThat(footerDivider.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void sliderPanelType_notDisplayFooterDivider() {
+        mFakePanelContent.setViewType(VIEW_TYPE_SLIDER);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+        final View footerDivider = panelFragment.mLayoutView.findViewById(R.id.footer_divider);
+        // Check visibility
+        assertThat(footerDivider.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void defaultPanelType_notDisplayFooterDivider() {
+        mFakePanelContent.setViewType(0 /* viewType */);
+        final ActivityController<FakeSettingsPanelActivity> activityController =
+                Robolectric.buildActivity(FakeSettingsPanelActivity.class);
+        activityController.setup();
+        final PanelFragment panelFragment = (PanelFragment)
+                Objects.requireNonNull(activityController
+                        .get()
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.main_content));
+        final View footerDivider = panelFragment.mLayoutView.findViewById(R.id.footer_divider);
+        // Check visibility
+        assertThat(footerDivider.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
