@@ -241,8 +241,8 @@
     <string name="cellular_data_summary" msgid="6551434804367912367">"モバイル ネットワークでのデータ使用を許可"</string>
     <string name="allow_data_usage_title" msgid="2645963379925196671">"ローミング時にデータ使用を許可"</string>
     <string name="roaming" msgid="3055365654530847985">"ローミング"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続する"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続する"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続"</string>
     <string name="roaming_reenable_message" msgid="5150423860521673540">"データローミングをOFFにしたままホームネットワークの外に出たためデータ接続が切断されました。"</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"ONにする"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ローミング料金が発生する場合があります。"</string>
@@ -903,7 +903,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"パスワードを共有して「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンします"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"この QR コードをスキャンすると、パスワードが共有されて「<xliff:g id="SSID">%1$s</xliff:g>」に接続できます"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"エラーが発生しました"</string>
@@ -1251,7 +1251,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークテーマでは黒い背景を使用するため、一部の画面で電池が長持ちします。画面が OFF になるまでダークテーマが ON にならないように設定できます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁紙"</string>
     <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"スタイルと壁紙"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"デフォルト"</string>
@@ -3545,7 +3545,7 @@
     <string name="demote_conversation_summary" msgid="4319929331165604112">"会話セクションから削除します"</string>
     <string name="promote_conversation_title" msgid="4731148769888238722">"これは会話です"</string>
     <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加"</string>
-    <string name="manage_conversations" msgid="4440289604887824337">"会話を管理する"</string>
+    <string name="manage_conversations" msgid="4440289604887824337">"会話を管理します"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"優先度の高い会話: なし"</string>
     <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
       <item quantity="other">優先度の高い会話: <xliff:g id="COUNT_1">%d</xliff:g> 件</item>
@@ -3665,6 +3665,8 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"このアプリの通知はありません"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"アプリ内のその他の設定"</string>
+    <!-- no translation found for notification_screen_summary (5984915275134654822) -->
+    <skip />
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"すべてのアプリで ON"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個のアプリで OFF</item>
@@ -4649,6 +4651,10 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"アプリの互換性の変更を切り替え"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"デフォルトで有効な変更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"デフォルトで無効な変更"</string>
+    <!-- no translation found for platform_compat_dialog_title_no_apps (4387656000745989506) -->
+    <skip />
+    <!-- no translation found for platform_compat_dialog_text_no_apps (5715226015751055812) -->
+    <skip />
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"このスマートフォンでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"このタブレットでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"このデバイスでは設定がサポートされていません"</string>
@@ -4936,4 +4942,18 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"キャッシュに保存されたアプリの実行を停止"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"設定での画面オーバーレイを許可する"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
+    <!-- no translation found for media_controls_title (403271085636252597) -->
+    <skip />
+    <!-- no translation found for media_controls_summary (5032071475867165587) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (2333689676163363582) -->
+    <skip />
+    <!-- no translation found for media_controls_hide_player (2751439192580884015) -->
+    <skip />
+    <!-- no translation found for media_controls_show_player (8504571042365814021) -->
+    <skip />
+    <!-- no translation found for media_controls_no_players (3493023121892175946) -->
+    <skip />
+    <!-- no translation found for keywords_media_controls (8345490568291778638) -->
+    <skip />
 </resources>

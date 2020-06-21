@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Течен приказ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматски ја зголемува зачестеноста на освежување од 60 на 90 Hz за некои содржини. Го зголемува користењето на батеријата."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Течен приказ"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Највисока стапка на освежување за подобрена реакција на допир и квалитет на анимацијата. Го зголемува користењето на батеријата."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Вклучен екран"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Вклучено/Екранот нема да се исклучи додека гледате во него"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Исклучено"</string>
@@ -3088,8 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Управник со повици"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Безжични предупредувања за итни случаи"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Оператори на мрежа"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Имиња на пристапни точки"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3647,8 +3644,8 @@
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Апликацијава може да ги користи дозволите за вашата лична апликација <xliff:g id="NAME">%1$s</xliff:g>, како пристапот до локацијата, капацитетот или контактите."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"Нема поврзани апликации"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> апликација е поврзана</item>
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> апликации се поврзани</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> поврзана апликација</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> поврзани апликации</item>
     </plurals>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"За да ги поврзете апликацииве, инсталирајте <xliff:g id="NAME">%1$s</xliff:g> во работниот профил"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"За да ги поврзете апликацииве, инсталирајте <xliff:g id="NAME">%1$s</xliff:g> во личниот профил"</string>
@@ -3668,6 +3665,8 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Апликацијава не објави ниедно известување"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дополнителни поставки во апликацијата"</string>
+    <!-- no translation found for notification_screen_summary (5984915275134654822) -->
+    <skip />
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Вклучено за сите апликации"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Исклучено за <xliff:g id="COUNT_1">%d</xliff:g> апликација</item>
@@ -3814,7 +3813,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Додајте апликации"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Сите известувања"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Некои известувања"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Избраните луѓе ќе можат да стапат во контакт со вас, дури и ако не дозволувате апликациите да ве прекинуваат"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Избраните луѓе ќе може да стапат во контакт со вас, дури и ако не дозволувате апликациите да ве прекинуваат"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> може да го прекинуваат</item>
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> може да го прекинуваат</item>
@@ -4652,6 +4651,10 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Префрлете ги измените за компатибилност на апликацијата"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Стандардно овозможени промени"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Стандардно оневозможени промени"</string>
+    <!-- no translation found for platform_compat_dialog_title_no_apps (4387656000745989506) -->
+    <skip />
+    <!-- no translation found for platform_compat_dialog_text_no_apps (5715226015751055812) -->
+    <skip />
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Поставката не е поддржана на телефонов"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Поставката не е поддржана на таблетов"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Поставката не е поддржана на уредов"</string>
@@ -4824,8 +4827,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Обидете се повторно"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Нешто се случи. Апликацијата го откажа барањето за избор на уред."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Поврзувањето е успешно"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Поврзувањето беше неуспешно"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Прикажи ги сите"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Се бара уредот…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Се поврзува со уредот…"</string>
@@ -4940,4 +4942,18 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Прекинете го извршувањето на кешираните апликации"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволи преклопување на екраните на Поставки"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволи апликации што може да прикажуваат врз други апликации да ги преклопуваат екраните на Поставки"</string>
+    <!-- no translation found for media_controls_title (403271085636252597) -->
+    <skip />
+    <!-- no translation found for media_controls_summary (5032071475867165587) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (2333689676163363582) -->
+    <skip />
+    <!-- no translation found for media_controls_hide_player (2751439192580884015) -->
+    <skip />
+    <!-- no translation found for media_controls_show_player (8504571042365814021) -->
+    <skip />
+    <!-- no translation found for media_controls_no_players (3493023121892175946) -->
+    <skip />
+    <!-- no translation found for keywords_media_controls (8345490568291778638) -->
+    <skip />
 </resources>
