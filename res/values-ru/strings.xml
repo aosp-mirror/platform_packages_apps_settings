@@ -1230,10 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавный экран"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматически изменять частоту обновления экрана с 60 до 90 Гц для некоторых типов контента (при этом батарея разряжается быстрее)"</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плавный экран"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Высокая частота обновления экрана улучшает ответ на касания и делает анимацию более плавной. При этом батарея разряжается быстрее."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивный спящий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Включено (экран не будет отключаться, если вы смотрите на него)"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Отключено"</string>
@@ -1243,8 +1241,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Когда адаптивный спящий режим включен, устройство определяет через фронтальную камеру, смотрит ли кто-то на экран. Эта функция работает только на вашем устройстве. Изображения не сохраняются и не отправляются в Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Включить адаптивный спящий режим"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не отключать экран, пока вы смотрите на него"</string>
-    <string name="night_display_title" msgid="8532432776487216581">"Ночной режим"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"В ночном режиме экран приобретает желтоватый оттенок. Это снижает напряжение глаз при тусклом свете и может помочь вам быстрее заснуть."</string>
+    <string name="night_display_title" msgid="8532432776487216581">"Ночная подсветка"</string>
+    <string name="night_display_text" msgid="4789324042428095383">"С ночной подсветкой экран приобретает желтоватый оттенок. Это снижает напряжение глаз при тусклом свете и может помочь вам быстрее заснуть."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Расписание"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Нет"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"В выбранное время"</string>
@@ -1267,7 +1265,7 @@
     <string name="night_display_activation_off_twilight" msgid="2853594955401726956">"Отключить до заката"</string>
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Включить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Отключить до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_not_currently_on" msgid="6600205753103093827">"Ночной режим сейчас выключен"</string>
+    <string name="night_display_not_currently_on" msgid="6600205753103093827">"Ночная подсветка сейчас выключена"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Чтобы определять время заката и рассвета, требуется доступ к геоданным."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Доступ к геоданным"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Включить"</string>
@@ -3174,8 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Менеджер звонков"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Экстренные оповещения по беспроводным сетям"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Операторы связи"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Названия точек доступа"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3774,6 +3771,8 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Для этого приложения нет уведомлений."</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Доп. настройки в приложении"</string>
+    <!-- no translation found for notification_screen_summary (5984915275134654822) -->
+    <skip />
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Включено для всех приложений"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Отключено для <xliff:g id="COUNT_1">%d</xliff:g> приложения</item>
@@ -4382,9 +4381,9 @@
     <string name="condition_device_muted_summary" msgid="3772178424510397327">"Для звонков и уведомлений"</string>
     <string name="condition_device_vibrate_title" msgid="9058943409545158583">"Только вибрация"</string>
     <string name="condition_device_vibrate_summary" msgid="7537724181691903202">"Для звонков и уведомлений"</string>
-    <string name="night_display_suggestion_title" msgid="5418911386429667704">"Расписание ночного режима"</string>
+    <string name="night_display_suggestion_title" msgid="5418911386429667704">"Расписание ночной подсветки"</string>
     <string name="night_display_suggestion_summary" msgid="4218017907425509769">"Автоматически изменять оттенок экрана по вечерам."</string>
-    <string name="condition_night_display_title" msgid="1072880897812554421">"Ночной режим включен"</string>
+    <string name="condition_night_display_title" msgid="1072880897812554421">"Ночная подсветка включена"</string>
     <string name="condition_night_display_summary" msgid="3278349775875166984">"Экран имеет желтый оттенок"</string>
     <string name="condition_grayscale_title" msgid="9029271080007984542">"Оттенки серого"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Показывать только в серых тонах"</string>
@@ -4828,6 +4827,10 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Показывать изменение настроек совместимости приложений"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Изменения, включенные по умолчанию"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Изменения, отключенные по умолчанию"</string>
+    <!-- no translation found for platform_compat_dialog_title_no_apps (4387656000745989506) -->
+    <skip />
+    <!-- no translation found for platform_compat_dialog_text_no_apps (5715226015751055812) -->
+    <skip />
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Настройка не поддерживается на этом телефоне."</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Настройка не поддерживается на этом планшете."</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Настройка не поддерживается на этом устройстве."</string>
@@ -5002,8 +5005,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Повторить попытку"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Произошла ошибка. Приложение отменило запрос на выбор устройства."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Подключено"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Ошибка подключения."</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Показать все"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Поиск устройства…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Подключение к устройству…"</string>
@@ -5122,4 +5124,18 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Приостановить работу кешированных приложений"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Разрешить экранный оверлей в настройках"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешить приложениям, которые могут показываться поверх других, накладываться на экраны настроек"</string>
+    <!-- no translation found for media_controls_title (403271085636252597) -->
+    <skip />
+    <!-- no translation found for media_controls_summary (5032071475867165587) -->
+    <skip />
+    <!-- no translation found for media_controls_resume_description (2333689676163363582) -->
+    <skip />
+    <!-- no translation found for media_controls_hide_player (2751439192580884015) -->
+    <skip />
+    <!-- no translation found for media_controls_show_player (8504571042365814021) -->
+    <skip />
+    <!-- no translation found for media_controls_no_players (3493023121892175946) -->
+    <skip />
+    <!-- no translation found for keywords_media_controls (8345490568291778638) -->
+    <skip />
 </resources>
