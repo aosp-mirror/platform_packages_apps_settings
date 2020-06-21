@@ -194,8 +194,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         if (mIsSpecifiedSsid) {
             // Prevent from throwing same dialog, because onMatch() will be called many times.
             if (mMatchedConfig == null) {
-                mMatchedConfig = WifiUtils.getWifiConfig(
-                    null /* accesspoint */, scanResults.get(0), null /* password */);
+                mMatchedConfig = WifiUtils.getWifiConfig(null /* wifiEntry */, scanResults.get(0));
                 showSingleSsidRequestDialog(
                         WifiInfo.sanitizeSsid(mMatchedConfig.SSID), false /* isTryAgain */);
             }

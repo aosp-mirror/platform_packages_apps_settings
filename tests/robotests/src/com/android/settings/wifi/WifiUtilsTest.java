@@ -18,19 +18,17 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import android.net.wifi.WifiConfiguration;
+
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-
-import static org.mockito.Mockito.spy;
-
-import android.content.Context;
-import android.net.wifi.WifiConfiguration;
-import android.os.Bundle;
-
-import com.android.settingslib.wifi.AccessPoint;
-
-import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class WifiUtilsTest {
@@ -56,14 +54,12 @@ public class WifiUtilsTest {
     }
 
     @Test
-    public void getWifiConfigByAccessPoint_shouldReturnCorrectConfig() {
-        String testSSID = "WifiUtilsTest";
-        Bundle bundle = new Bundle();
-        bundle.putString("key_ssid", testSSID);
-        Context context = spy(RuntimeEnvironment.application);
-        AccessPoint accessPoint = new AccessPoint(context, bundle);
+    public void getWifiConfigByWifiEntry_shouldReturnCorrectConfig() {
+        final String testSSID = "WifiUtilsTest";
+        final WifiEntry wifiEntry = mock(WifiEntry.class);
+        when(wifiEntry.getSsid()).thenReturn(testSSID);
 
-        WifiConfiguration config = WifiUtils.getWifiConfig(accessPoint, null, null);
+        final WifiConfiguration config = WifiUtils.getWifiConfig(wifiEntry, null /* scanResult */);
 
         assertThat(config).isNotNull();
         assertThat(config.SSID).isEqualTo(AccessPoint.convertToQuotedString(testSSID));
@@ -71,6 +67,7 @@ public class WifiUtilsTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void getWifiConfigWithNullInput_ThrowIllegalArgumentException() {
-        WifiConfiguration config = WifiUtils.getWifiConfig(null, null, null);
+        WifiConfiguration config = WifiUtils.getWifiConfig(null /* wifiEntry */,
+                null /* scanResult */);
     }
 }

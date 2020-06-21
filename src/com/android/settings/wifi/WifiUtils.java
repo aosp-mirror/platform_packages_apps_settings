@@ -31,6 +31,7 @@ import android.text.TextUtils;
 
 import com.android.settings.Utils;
 import com.android.settingslib.wifi.AccessPoint;
+import com.android.wifitrackerlib.WifiEntry;
 
 import java.nio.charset.StandardCharsets;
 
@@ -132,135 +133,101 @@ public class WifiUtils {
 
     /**
      * Provides a simple way to generate a new {@link WifiConfiguration} obj from
-     * {@link ScanResult} or {@link AccessPoint}. Either {@code accessPoint} or {@code scanResult
+     * {@link ScanResult} or {@link WifiEntry}. Either {@code wifiEntry} or {@code scanResult
      * } input should be not null for retrieving information, otherwise will throw
      * IllegalArgumentException.
-     * This method prefers to take {@link AccessPoint} input in priority. Therefore this method
-     * will take {@link AccessPoint} input as preferred data extraction source when you input
-     * both {@link AccessPoint} and {@link ScanResult}, and ignore {@link ScanResult} input.
+     * This method prefers to take {@link WifiEntry} input in priority. Therefore this method
+     * will take {@link WifiEntry} input as preferred data extraction source when you input
+     * both {@link WifiEntry} and {@link ScanResult}, and ignore {@link ScanResult} input.
      *
      * Duplicated and simplified method from {@link WifiConfigController#getConfig()}.
      * TODO(b/120827021): Should be removed if the there is have a common one in shared place (e.g.
      * SettingsLib).
      *
-     * @param accessPoint Input data for retrieving WifiConfiguration.
+     * @param wifiEntry Input data for retrieving WifiConfiguration.
      * @param scanResult  Input data for retrieving WifiConfiguration.
      * @return WifiConfiguration obj based on input.
      */
-    public static WifiConfiguration getWifiConfig(AccessPoint accessPoint, ScanResult scanResult,
-            String password) {
-        if (accessPoint == null && scanResult == null) {
+    public static WifiConfiguration getWifiConfig(WifiEntry wifiEntry, ScanResult scanResult) {
+        if (wifiEntry == null && scanResult == null) {
             throw new IllegalArgumentException(
-                    "At least one of AccessPoint and ScanResult input is required.");
+                    "At least one of WifiEntry and ScanResult input is required.");
         }
 
         final WifiConfiguration config = new WifiConfiguration();
         final int security;
 
-        if (accessPoint == null) {
+        if (wifiEntry == null) {
             config.SSID = AccessPoint.convertToQuotedString(scanResult.SSID);
-            security = getAccessPointSecurity(scanResult);
+            security = getWifiEntrySecurity(scanResult);
         } else {
-            if (!accessPoint.isSaved()) {
-                config.SSID = AccessPoint.convertToQuotedString(
-                        accessPoint.getSsidStr());
+            if (wifiEntry.getWifiConfiguration() == null) {
+                config.SSID = AccessPoint.convertToQuotedString(wifiEntry.getSsid());
             } else {
-                config.networkId = accessPoint.getConfig().networkId;
-                config.hiddenSSID = accessPoint.getConfig().hiddenSSID;
+                config.networkId = wifiEntry.getWifiConfiguration().networkId;
+                config.hiddenSSID = wifiEntry.getWifiConfiguration().hiddenSSID;
             }
-            security = accessPoint.getSecurity();
+            security = wifiEntry.getSecurity();
         }
 
         switch (security) {
-            case AccessPoint.SECURITY_NONE:
+            case WifiEntry.SECURITY_NONE:
                 config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OPEN);
                 break;
 
-            case AccessPoint.SECURITY_WEP:
+            case WifiEntry.SECURITY_WEP:
                 config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_WEP);
-                if (!TextUtils.isEmpty(password)) {
-                    int length = password.length();
-                    // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
-                    if ((length == 10 || length == 26 || length == 58)
-                            && password.matches("[0-9A-Fa-f]*")) {
-                        config.wepKeys[0] = password;
-                    } else {
-                        config.wepKeys[0] = '"' + password + '"';
-                    }
-                }
                 break;
 
-            case AccessPoint.SECURITY_PSK:
+            case WifiEntry.SECURITY_PSK:
                 config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_PSK);
-                if (!TextUtils.isEmpty(password)) {
-                    if (password.matches("[0-9A-Fa-f]{64}")) {
-                        config.preSharedKey = password;
-                    } else {
-                        config.preSharedKey = '"' + password + '"';
-                    }
-                }
                 break;
 
-            case AccessPoint.SECURITY_EAP:
-            case AccessPoint.SECURITY_EAP_SUITE_B:
-                if (security == AccessPoint.SECURITY_EAP_SUITE_B) {
-                    // allowedSuiteBCiphers will be set according to certificate type
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
-                } else {
-                    config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
-                }
-
-                if (!TextUtils.isEmpty(password)) {
-                    config.enterpriseConfig.setPassword(password);
-                }
+            case WifiEntry.SECURITY_EAP_SUITE_B:
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP_SUITE_B);
                 break;
-            case AccessPoint.SECURITY_SAE:
+
+            case WifiEntry.SECURITY_EAP:
+                config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_EAP);
+                break;
+
+            case WifiEntry.SECURITY_SAE:
                 config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_SAE);
-                if (!TextUtils.isEmpty(password)) {
-                    config.preSharedKey = '"' + password + '"';
-                }
                 break;
 
-            case AccessPoint.SECURITY_OWE:
+            case WifiEntry.SECURITY_OWE:
                 config.setSecurityParams(WifiConfiguration.SECURITY_TYPE_OWE);
                 break;
 
             default:
                 break;
         }
-
         return config;
     }
-
 
     /**
      * Gets security value from ScanResult.
      *
-     * Duplicated method from {@link AccessPoint#getSecurity(ScanResult)}.
-     * TODO(b/120827021): Should be removed if the there is have a common one in shared place (e.g.
-     * SettingsLib).
-     *
      * @param result ScanResult
-     * @return Related security value based on {@link AccessPoint}.
+     * @return Related security value based on {@link WifiEntry}.
      */
-    public static int getAccessPointSecurity(ScanResult result) {
+    public static int getWifiEntrySecurity(ScanResult result) {
         if (result.capabilities.contains("WEP")) {
-            return AccessPoint.SECURITY_WEP;
+            return WifiEntry.SECURITY_WEP;
         } else if (result.capabilities.contains("SAE")) {
-            return AccessPoint.SECURITY_SAE;
+            return WifiEntry.SECURITY_SAE;
         } else if (result.capabilities.contains("PSK")) {
-            return AccessPoint.SECURITY_PSK;
+            return WifiEntry.SECURITY_PSK;
         } else if (result.capabilities.contains("EAP_SUITE_B_192")) {
-            return AccessPoint.SECURITY_EAP_SUITE_B;
+            return WifiEntry.SECURITY_EAP_SUITE_B;
         } else if (result.capabilities.contains("EAP")) {
-            return AccessPoint.SECURITY_EAP;
+            return WifiEntry.SECURITY_EAP;
         } else if (result.capabilities.contains("OWE")) {
-            return AccessPoint.SECURITY_OWE;
+            return WifiEntry.SECURITY_OWE;
         }
 
-        return AccessPoint.SECURITY_NONE;
+        return WifiEntry.SECURITY_NONE;
     }
-
 
     public static final int CONNECT_TYPE_OTHERS = 0;
     public static final int CONNECT_TYPE_OPEN_NETWORK = 1;
