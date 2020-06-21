@@ -224,7 +224,6 @@ public class FaceSettings extends DashboardFragment {
         if (requestCode == CONFIRM_REQUEST) {
             mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
                 if (data != null) {
                     mToken = data.getByteArrayExtra(
@@ -323,16 +322,18 @@ public class FaceSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return isAvailable(context);
+                    if (isAvailable(context)) {
+                        return hasEnrolledBiometrics(context);
+                    }
+
+                    return false;
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     if (isAvailable(context)) {
-                        final FaceManager faceManager = context.getSystemService(FaceManager.class);
-                        final boolean hasEnrolled = faceManager.hasEnrolledTemplates(
-                                UserHandle.myUserId());
+                        final boolean hasEnrolled = hasEnrolledBiometrics(context);
                         keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK
                                 : PREF_KEY_DELETE_FACE_DATA);
                     }
@@ -352,6 +353,14 @@ public class FaceSettings extends DashboardFragment {
                         isAttentionSupported = featureProvider.isAttentionSupported(context);
                     }
                     return isAttentionSupported;
+                }
+
+                private boolean hasEnrolledBiometrics(Context context) {
+                    final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
+                    if (faceManager != null) {
+                        return faceManager.hasEnrolledTemplates(UserHandle.myUserId());
+                    }
+                    return false;
                 }
             };
 }
