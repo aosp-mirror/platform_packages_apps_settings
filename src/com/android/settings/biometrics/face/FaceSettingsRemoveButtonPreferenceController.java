@@ -165,7 +165,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 .findViewById(R.id.security_settings_face_settings_remove_button);
         mButton.setOnClickListener(this);
 
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             mButton.setEnabled(false);
         } else {
             mButton.setEnabled(!mRemoving);
