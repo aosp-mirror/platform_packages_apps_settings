@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -46,6 +45,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.search.SearchIndexableRaw;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TrustAgentListPreferenceController extends AbstractPreferenceController
@@ -66,6 +66,9 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     private Intent mTrustAgentClickIntent;
     private PreferenceCategory mSecurityCategory;
 
+    @VisibleForTesting
+    final List<String> mTrustAgentsKeyList;
+
     public TrustAgentListPreferenceController(Context context, SecuritySettings host,
             Lifecycle lifecycle) {
         super(context);
@@ -74,6 +77,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         mHost = host;
         mLockPatternUtils = provider.getLockPatternUtils(context);
         mTrustAgentManager = provider.getTrustAgentManager();
+        mTrustAgentsKeyList = new ArrayList();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -113,7 +117,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+        if (!mTrustAgentsKeyList.contains(preference.getKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
         final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(
@@ -189,6 +193,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
                 mSecurityCategory.removePreference(oldAgent);
             }
         }
+        mTrustAgentsKeyList.clear();
 
         // Then add new ones.
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
@@ -196,6 +201,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
             final RestrictedPreference trustAgentPreference =
                     new RestrictedPreference(mSecurityCategory.getContext());
             TrustAgentManager.TrustAgentComponentInfo agent = agents.get(i);
+            mTrustAgentsKeyList.add(PREF_KEY_TRUST_AGENT + i);
             trustAgentPreference.setKey(PREF_KEY_TRUST_AGENT + i);
             trustAgentPreference.setTitle(agent.title);
             trustAgentPreference.setSummary(agent.summary);
