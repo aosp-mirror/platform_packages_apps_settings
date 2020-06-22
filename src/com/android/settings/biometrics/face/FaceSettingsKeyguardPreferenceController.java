@@ -53,7 +53,7 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
 
     @Override
     public boolean isChecked() {
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             return false;
         } else if (getRestrictingAdmin() != null) {
             return false;
@@ -77,7 +77,7 @@ public class FaceSettingsKeyguardPreferenceController extends FaceSettingsPrefer
     public void updateState(Preference preference) {
         EnforcedAdmin admin;
         super.updateState(preference);
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             preference.setEnabled(false);
         } else if ((admin = getRestrictingAdmin()) != null) {
             ((RestrictedSwitchPreference) preference).setDisabledByAdmin(admin);

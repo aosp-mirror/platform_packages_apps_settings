@@ -95,9 +95,20 @@ public class FaceSettings extends DashboardFragment {
     private final FaceSettingsEnrollButtonPreferenceController.Listener mEnrollListener = intent ->
             startActivityForResult(intent, ENROLL_REQUEST);
 
-    public static boolean isAvailable(Context context) {
+    /**
+     * @param context
+     * @return true if the Face hardware is detected.
+     */
+    public static boolean isFaceHardwareDetected(Context context) {
         FaceManager manager = Utils.getFaceManagerOrNull(context);
-        return manager != null && manager.isHardwareDetected();
+        boolean isHardwareDetected = false;
+        if (manager == null) {
+            Log.d(TAG, "FaceManager is null");
+        } else {
+            isHardwareDetected = manager.isHardwareDetected();
+            Log.d(TAG, "FaceManager is not null. Hardware detected: " + isHardwareDetected);
+        }
+        return manager != null && isHardwareDetected;
     }
 
     @Override
@@ -126,7 +137,7 @@ public class FaceSettings extends DashboardFragment {
         super.onCreate(savedInstanceState);
 
         final Context context = getPrefContext();
-        if (!isAvailable(context)) {
+        if (!isFaceHardwareDetected(context)) {
             Log.w(TAG, "no faceManager, finish this");
             finish();
             return;
@@ -273,7 +284,7 @@ public class FaceSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        if (!isAvailable(context)) {
+        if (!isFaceHardwareDetected(context)) {
             return null;
         }
         mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
@@ -314,7 +325,7 @@ public class FaceSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    if (isAvailable(context)) {
+                    if (isFaceHardwareDetected(context)) {
                         return buildPreferenceControllers(context, null /* lifecycle */);
                     } else {
                         return null;
@@ -323,7 +334,7 @@ public class FaceSettings extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (isAvailable(context)) {
+                    if (isFaceHardwareDetected(context)) {
                         return hasEnrolledBiometrics(context);
                     }
 
@@ -333,7 +344,10 @@ public class FaceSettings extends DashboardFragment {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    if (isAvailable(context)) {
+                    final boolean isFaceHardwareDetected = isFaceHardwareDetected(context);
+                    Log.d(TAG, "Get non indexable keys. isFaceHardwareDetected: "
+                            + isFaceHardwareDetected + ", size:" + keys.size());
+                    if (isFaceHardwareDetected) {
                         final boolean hasEnrolled = hasEnrolledBiometrics(context);
                         keys.add(hasEnrolled ? PREF_KEY_ENROLL_FACE_UNLOCK
                                 : PREF_KEY_DELETE_FACE_DATA);
