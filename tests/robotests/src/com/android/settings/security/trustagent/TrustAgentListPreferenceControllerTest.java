@@ -16,10 +16,8 @@
 
 package com.android.settings.security.trustagent;
 
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_SECURITY_CATEGORY;
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_TRUST_AGENT;
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_SECURITY_CATEGORY;
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_TRUST_AGENT;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -173,6 +171,26 @@ public class TrustAgentListPreferenceControllerTest {
     }
 
     @Test
+    public void onResume_controllerShouldHasKey() {
+        final List<TrustAgentManager.TrustAgentComponentInfo> agents = new ArrayList<>();
+        final TrustAgentManager.TrustAgentComponentInfo agent =
+                mock(TrustAgentManager.TrustAgentComponentInfo.class);
+        agent.title = "Test_title";
+        agent.summary = "test summary";
+        agent.componentName = new ComponentName("pkg", "agent");
+        agent.admin = null;
+        agents.add(agent);
+        when(mTrustAgentManager.getActiveTrustAgents(mActivity, mLockPatternUtils))
+                .thenReturn(agents);
+        final String key = PREF_KEY_TRUST_AGENT + 0;
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        assertThat(mController.mTrustAgentsKeyList).containsExactly(key);
+    }
+
+    @Test
     public void updateDynamicRawDataToIndex_shouldIndexAgents() {
         final List<TrustAgentManager.TrustAgentComponentInfo> agents = new ArrayList<>();
         final TrustAgentManager.TrustAgentComponentInfo agent =
@@ -190,5 +208,4 @@ public class TrustAgentListPreferenceControllerTest {
 
         assertThat(indexRaws).hasSize(1);
     }
-
 }
