@@ -43,7 +43,7 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
+import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -249,7 +249,7 @@ public class WifiConfigController2Test {
     @Test
     public void loadCertificates_undesiredCertificates_shouldNotLoadUndesiredCertificates() {
         final Spinner spinner = new Spinner(mContext);
-        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController.UNDESIRED_CERTIFICATES);
+        when(mKeyStore.list(anyString())).thenReturn(WifiConfigController2.UNDESIRED_CERTIFICATES);
 
         mController.loadCertificates(spinner,
                 "prefix",
@@ -392,7 +392,7 @@ public class WifiConfigController2Test {
     public void loadMacRandomizedValue_shouldPersistentAsDefault() {
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int prefPersist =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
                         WifiConfiguration.RANDOMIZATION_PERSISTENT);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
@@ -420,7 +420,7 @@ public class WifiConfigController2Test {
 
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int expectedPrefValue =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
                         macRandomizedValue);
 
         assertThat(privacySetting.getVisibility()).isEqualTo(View.VISIBLE);
@@ -438,7 +438,7 @@ public class WifiConfigController2Test {
     public void saveMacRandomizedValue_ChangedToNone_shouldGetNone() {
         final Spinner privacySetting = mView.findViewById(R.id.privacy_settings);
         final int prefMacNone =
-                WifiPrivacyPreferenceController.translateMacRandomizedValueToPrefValue(
+                WifiPrivacyPreferenceController2.translateMacRandomizedValueToPrefValue(
                         WifiConfiguration.RANDOMIZATION_NONE);
         privacySetting.setSelection(prefMacNone);
 

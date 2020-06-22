@@ -40,7 +40,6 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -67,7 +66,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
@@ -294,14 +292,8 @@ public class WifiConfigController2 implements TextWatcher,
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
 
-                int prefMacValue;
-                if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                    prefMacValue = WifiPrivacyPreferenceController2
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                } else {
-                    prefMacValue = WifiPrivacyPreferenceController
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                }
+                final int prefMacValue = WifiPrivacyPreferenceController2
+                        .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
                 mPrivacySettingsSpinner.setSelection(prefMacValue);
 
                 if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
@@ -814,15 +806,9 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         if (mPrivacySettingsSpinner != null) {
-            int macValue;
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                macValue = WifiPrivacyPreferenceController2.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            } else {
-                macValue = WifiPrivacyPreferenceController.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            }
-            config.macRandomizationSetting = macValue;
+            config.macRandomizationSetting = WifiPrivacyPreferenceController2
+                    .translatePrefValueToMacRandomizedValue(mPrivacySettingsSpinner
+                            .getSelectedItemPosition());
         }
 
         return config;
