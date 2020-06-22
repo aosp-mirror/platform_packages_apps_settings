@@ -143,7 +143,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     final Map<Uri, SliceBackgroundWorker> mPinnedWorkers = new ArrayMap<>();
 
-    private boolean mNightMode;
+    private Boolean mNightMode;
 
     public SettingsSliceProvider() {
         super(READ_SEARCH_INDEXABLES);
@@ -153,8 +153,6 @@ public class SettingsSliceProvider extends SliceProvider {
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         mSliceWeakDataCache = new WeakHashMap<>();
-        mNightMode = Utils.isNightMode(getContext());
-        getContext().setTheme(R.style.Theme_SettingsBase);
         return true;
     }
 
@@ -207,7 +205,10 @@ public class SettingsSliceProvider extends SliceProvider {
             }
 
             final boolean nightMode = Utils.isNightMode(getContext());
-            if (mNightMode != nightMode) {
+            if (mNightMode == null) {
+                mNightMode = nightMode;
+                getContext().setTheme(R.style.Theme_SettingsBase);
+            } else if (mNightMode != nightMode) {
                 Log.d(TAG, "Night mode changed, reload theme");
                 mNightMode = nightMode;
                 getContext().getTheme().rebase();
