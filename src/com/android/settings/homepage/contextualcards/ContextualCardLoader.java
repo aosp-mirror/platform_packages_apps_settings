@@ -38,14 +38,14 @@ import com.android.settings.homepage.contextualcards.logging.ContextualCardLogUt
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.AsyncLoaderCompat;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+import java.util.stream.Collectors;
 
 public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>> {
 
@@ -56,7 +56,7 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
     static final int CARD_CONTENT_LOADER_ID = 1;
 
     private static final String TAG = "ContextualCardLoader";
-    private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 300;
+    private static final long ELIGIBILITY_CHECKER_TIMEOUT_MS = 400;
 
     private final ContentObserver mObserver = new ContentObserver(
             new Handler(Looper.getMainLooper())) {
@@ -184,23 +184,37 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     List<ContextualCard> filterEligibleCards(List<ContextualCard> candidates) {
+        final ExecutorService executor = Executors.newFixedThreadPool(candidates.size());
         final List<ContextualCard> cards = new ArrayList<>();
-        final List<Future<ContextualCard>> eligibleCards = new ArrayList<>();
+        List<Future<ContextualCard>> eligibleCards = new ArrayList<>();
 
-        for (ContextualCard card : candidates) {
-            final EligibleCardChecker checker = new EligibleCardChecker(mContext, card);
-            eligibleCards.add(ThreadUtils.postOnBackgroundThread(checker));
+        final List<EligibleCardChecker> checkers = candidates.stream()
+                .map(card -> new EligibleCardChecker(mContext, card))
+                .collect(Collectors.toList());
+        try {
+            eligibleCards = executor.invokeAll(checkers, ELIGIBILITY_CHECKER_TIMEOUT_MS,
+                    TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            Log.w(TAG, "Failed to get eligible states for all cards", e);
         }
+        executor.shutdown();
+
         // Collect future and eligible cards
-        for (Future<ContextualCard> cardFuture : eligibleCards) {
+        for (int i = 0; i < eligibleCards.size(); i++) {
+            final Future<ContextualCard> cardFuture = eligibleCards.get(i);
+            if (cardFuture.isCancelled()) {
+                Log.w(TAG, "Timeout getting eligible state for card: "
+                        + candidates.get(i).getSliceUri());
+                continue;
+            }
+
             try {
-                final ContextualCard card = cardFuture.get(ELIGIBILITY_CHECKER_TIMEOUT_MS,
-                        TimeUnit.MILLISECONDS);
+                final ContextualCard card = cardFuture.get();
                 if (card != null) {
                     cards.add(card);
                 }
-            } catch (ExecutionException | InterruptedException | TimeoutException e) {
-                Log.w(TAG, "Failed to get eligible state for card: " + e.toString());
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to get eligible state for card", e);
             }
         }
         return cards;
