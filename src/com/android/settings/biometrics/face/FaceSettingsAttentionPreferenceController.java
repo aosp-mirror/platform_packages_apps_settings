@@ -93,7 +93,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     @Override
     public boolean isChecked() {
-        if (!FaceSettings.isAvailable(mContext)) {
+        if (!FaceSettings.isFaceHardwareDetected(mContext)) {
             return true;
         }
         // Set to disabled until we know the true value.
