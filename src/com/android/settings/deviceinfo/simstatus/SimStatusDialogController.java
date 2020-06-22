@@ -489,7 +489,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
                 || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
             dataNetworkTypeName = "NR NSA";
-            voiceNetworkTypeName = "NR NSA";
         }
 
         boolean show4GForLTE = false;
