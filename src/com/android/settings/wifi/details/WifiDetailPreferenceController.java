@@ -214,20 +214,23 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         public void onReceive(Context context, Intent intent) {
             switch (intent.getAction()) {
                 case WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION:
-                    if (!intent.getBooleanExtra(WifiManager.EXTRA_MULTIPLE_NETWORKS_CHANGED,
-                            false /* defaultValue */)) {
-                        // only one network changed
-                        WifiConfiguration wifiConfiguration = intent
-                                .getParcelableExtra(WifiManager.EXTRA_WIFI_CONFIGURATION);
-                        if (mAccessPoint.matches(wifiConfiguration)) {
-                            mWifiConfig = wifiConfiguration;
-                        }
-                    }
+                    updateMatchingWifiConfig();
                     // fall through
                 case WifiManager.NETWORK_STATE_CHANGED_ACTION:
                 case WifiManager.RSSI_CHANGED_ACTION:
                     refreshPage();
                     break;
+            }
+        }
+
+        private void updateMatchingWifiConfig() {
+            // use getPrivilegedConfiguredNetworks() to get Passpoint & other ephemeral networks
+            for (WifiConfiguration wifiConfiguration :
+                    mWifiManager.getPrivilegedConfiguredNetworks()) {
+                if (mAccessPoint.matches(wifiConfiguration)) {
+                    mWifiConfig = wifiConfiguration;
+                    break;
+                }
             }
         }
     };
