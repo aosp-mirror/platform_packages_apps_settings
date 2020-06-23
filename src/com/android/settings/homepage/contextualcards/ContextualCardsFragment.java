@@ -109,6 +109,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         mCardsContainer.setLayoutManager(mLayoutManager);
         mContextualCardsAdapter = new ContextualCardsAdapter(context, this /* lifecycleOwner */,
                 mContextualCardManager);
+        mCardsContainer.setItemAnimator(null);
         mCardsContainer.setAdapter(mContextualCardsAdapter);
         mContextualCardManager.setListener(mContextualCardsAdapter);
         mCardsContainer.setListener(this);
