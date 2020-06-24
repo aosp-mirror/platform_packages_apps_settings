@@ -232,13 +232,20 @@ public class MediaDeviceUpdateWorkerTest {
     public void onSlicePinned_packageUpdated_checkPackageName() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         when(mLocalBluetoothManager.getEventManager()).thenReturn(mBluetoothEventManager);
+
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI1);
+        mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+        when(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName())
+                .thenReturn(TEST_DEVICE_PACKAGE_NAME1);
         mMediaDeviceUpdateWorker.onSlicePinned();
 
         assertThat(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName()).matches(
                 TEST_DEVICE_PACKAGE_NAME1);
 
         mMediaDeviceUpdateWorker = new MediaDeviceUpdateWorker(mContext, URI2);
+        mMediaDeviceUpdateWorker.mLocalMediaManager = mock(LocalMediaManager.class);
+        when(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName())
+                .thenReturn(TEST_DEVICE_PACKAGE_NAME2);
         mMediaDeviceUpdateWorker.onSlicePinned();
 
         assertThat(mMediaDeviceUpdateWorker.mLocalMediaManager.getPackageName()).matches(
