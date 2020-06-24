@@ -127,10 +127,12 @@ public class SlicesDatabaseAccessor {
         int numResults = resultCursor.getCount();
 
         if (numResults == 0) {
+            resultCursor.close();
             throw new IllegalStateException("Invalid Slices key from path: " + path);
         }
 
         if (numResults > 1) {
+            resultCursor.close();
             throw new IllegalStateException(
                     "Should not match more than 1 slice with path: " + path);
         }
