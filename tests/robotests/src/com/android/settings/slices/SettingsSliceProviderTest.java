@@ -270,10 +270,12 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void onBindSlice_nightModeChanged_shouldReloadTheme() {
-        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_YES;
-
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         final SliceData data = getDummyData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_YES;
         mProvider.onBindSlice(data.getUri());
 
         assertThat(ShadowTheme.isThemeRebased()).isTrue();
@@ -282,9 +284,11 @@ public class SettingsSliceProviderTest {
     @Test
     public void onBindSlice_nightModeNotChanged_shouldNotReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
-
         SliceData data = getDummyData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+
+        mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
         mProvider.onBindSlice(data.getUri());
 
         assertThat(ShadowTheme.isThemeRebased()).isFalse();
