@@ -116,7 +116,11 @@ public class MediaOutputPanel implements PanelContent, LocalMediaManager.DeviceC
         if (metadata != null) {
             final Bitmap bitmap = metadata.getDescription().getIconBitmap();
             if (bitmap != null) {
-                return IconCompat.createWithBitmap(bitmap);
+                final Bitmap roundBitmap = Utils.convertCornerRadiusBitmap(mContext, bitmap,
+                        (float) mContext.getResources().getDimensionPixelSize(
+                                R.dimen.output_switcher_panel_icon_corner_radius));
+
+                return IconCompat.createWithBitmap(roundBitmap);
             }
         }
         Log.d(TAG, "Media meta data does not contain icon information");
