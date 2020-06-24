@@ -145,12 +145,12 @@ public class PanelSlicesAdapter
             } else if (position == 0 && (slice.getUri().equals(MEDIA_OUTPUT_SLICE_URI)
                     || slice.getUri().equals(MEDIA_OUTPUT_GROUP_SLICE_URI))) {
                 sliceView.setClickable(false);
-                // Customize output switcher slice top padding
-                final int paddingTop = mPanelFragment.getResources().getDimensionPixelSize(
+                // Customize output switcher slice padding
+                final int padding = mPanelFragment.getResources().getDimensionPixelSize(
                         R.dimen.output_switcher_slice_padding_top);
-                mSliceSliderLayout.setPadding(mSliceSliderLayout.getPaddingLeft(), paddingTop,
+                mSliceSliderLayout.setPadding(mSliceSliderLayout.getPaddingLeft(), padding,
                         mSliceSliderLayout.getPaddingRight(),
-                        mSliceSliderLayout.getPaddingBottom());
+                        padding);
             }
 
             // Log Panel interaction
