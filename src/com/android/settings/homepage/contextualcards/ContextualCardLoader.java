@@ -184,6 +184,10 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
 
     @VisibleForTesting
     List<ContextualCard> filterEligibleCards(List<ContextualCard> candidates) {
+        if (candidates.isEmpty()) {
+            return candidates;
+        }
+
         final ExecutorService executor = Executors.newFixedThreadPool(candidates.size());
         final List<ContextualCard> cards = new ArrayList<>();
         List<Future<ContextualCard>> eligibleCards = new ArrayList<>();
