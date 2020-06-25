@@ -121,10 +121,12 @@ public class MediaOutputIndicatorWorkerTest {
 
     @Test
     public void onSlicePinned_packageUpdated_checkPackageName() {
+        mMediaOutputIndicatorWorker.mLocalMediaManager = mLocalMediaManager;
         initPlayback();
         when(mMediaController.getPlaybackInfo()).thenReturn(mPlaybackInfo);
         when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+        when(mLocalMediaManager.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
 
         mMediaOutputIndicatorWorker.onSlicePinned();
         waitForLocalMediaManagerInit();
@@ -132,7 +134,7 @@ public class MediaOutputIndicatorWorkerTest {
                 TEST_PACKAGE_NAME);
 
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME2);
-        mMediaOutputIndicatorWorker.mLocalMediaManager = null;
+        when(mLocalMediaManager.getPackageName()).thenReturn(TEST_PACKAGE_NAME2);
         mMediaOutputIndicatorWorker.onSlicePinned();
         waitForLocalMediaManagerInit();
 
