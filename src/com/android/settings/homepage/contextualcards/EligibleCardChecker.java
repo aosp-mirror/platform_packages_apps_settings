@@ -22,7 +22,6 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -33,7 +32,6 @@ import androidx.slice.core.SliceAction;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -117,12 +115,7 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
         // Register a trivial callback to pin the slice
         manager.registerSliceCallback(uri, callback);
         final Slice slice = manager.bindSlice(uri);
-
-        // Workaround of unpinning slice in the same SerialExecutor of AsyncTask as SliceCallback's
-        // observer.
-        ThreadUtils.postOnMainThread(() ->
-                AsyncTask.execute(() -> manager.unregisterSliceCallback(uri, callback))
-        );
+        manager.unregisterSliceCallback(uri, callback);
 
         return slice;
     }
