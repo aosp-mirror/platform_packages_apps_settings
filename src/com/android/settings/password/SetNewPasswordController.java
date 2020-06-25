@@ -135,7 +135,7 @@ final class SetNewPasswordController {
 
     private Bundle getFingerprintChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFingerprintManager.preEnroll();
+        long challenge = mFingerprintManager.generateChallengeBlocking();
         chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
@@ -148,7 +148,7 @@ final class SetNewPasswordController {
 
     private Bundle getFaceChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFaceManager.generateChallenge();
+        long challenge = mFaceManager.generateChallengeBlocking();
         chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
