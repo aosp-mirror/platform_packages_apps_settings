@@ -92,8 +92,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabWidget;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
@@ -1112,5 +1115,26 @@ public final class Utils extends com.android.settingslib.Utils {
         final int currentNightMode =
                 context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    /**
+     * Returns a bitmap with rounded corner.
+     *
+     * @param context application context.
+     * @param source bitmap to apply round corner.
+     * @param cornerRadius corner radius value.
+     */
+    public static Bitmap convertCornerRadiusBitmap(@NonNull Context context,
+            @NonNull Bitmap source, @NonNull float cornerRadius) {
+        final Bitmap roundedBitmap = Bitmap.createBitmap(source.getWidth(), source.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        final RoundedBitmapDrawable drawable =
+                RoundedBitmapDrawableFactory.create(context.getResources(), source);
+        drawable.setAntiAlias(true);
+        drawable.setCornerRadius(cornerRadius);
+        final Canvas canvas = new Canvas(roundedBitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return roundedBitmap;
     }
 }
