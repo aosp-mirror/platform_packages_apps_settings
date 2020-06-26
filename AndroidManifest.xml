@@ -3282,6 +3282,7 @@
             android:label="@string/show_touches"
             android:icon="@drawable/tile_icon_show_taps"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="true"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
