@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"ለስላሳ ማሳያ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ለአንዳንድ ይዘት የማደሻ ፍጥነቱን በራስ-ሰር ከ60 ወደ 90 ኸርዝ ያሳድገዋል። የባትሪ ፍጆታን ይጨምራል።"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"ለስላሳ ማሳያ"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"ለተሻሻለ የንክኪ አጸፋ እና የእነማ ጥራት በጣም ከፍተኛው ዕድሳት ፍጥነት የባትሪ ፍጆታን ይጨምራል።"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"የማያ ገጽ ትኩረት"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"በርቷል / ማያ ገጽ እርስዎ እየተመለከቱት ያሉ ከሆነ አይጠፋም"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ጠፍቷል"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"የጥሪ አቀናባሪ"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"አስቸኳይ ማንቂያዎች"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"ገመድ-አልባ የድንገተኛ አደጋ ማንቂያዎች"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"የአውታረ መረብ ትእምርተ ከዋኝ"</string>
     <string name="access_point_names" msgid="5768430498022188057">"የመዳረሻ ነጥብ ስሞች"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3633,8 +3635,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"እነዚህን መተግበሪያዎች ያገናኙ"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"የተገናኙ መተግበሪያዎች ፈቃዶችን ይጋራሉ እና የእርስ በእርስ ውሂባቸውን መድረስ ይችላሉ።"</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"የግል ውሂብዎን ለአይቲ አስተዳዳሪዎ እንደማያጋሩ የሚያምኗቸው ከሆነ ብቻ መተግበሪያዎችን ያገናኙ።"</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"በእርስዎ የመሣሪያ ግላዊነት ቅንብሮች በማንኛውም ጊዜ የመተግበሪያዎችዎን ግንኙነት ማቋረጥ ይችላሉ።"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"የሥራ <xliff:g id="NAME">%1$s</xliff:g>ን በእርስዎ የግል ውሂብ ላይ ይታመን?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"የግል ውሂብዎን ለአይቲ አስተዳዳሪዎ እንደማያጋሩ የሚያምኗቸው ከሆነ ብቻ መተግበሪያዎችን ያገናኙ።"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"የመተግበሪያ ውሂብ"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"ይህ መተግበሪያ ምንም ማሳወቂያዎችን አልለጠፈም"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"በመተግበሪያው ውስጥ ያሉ ተጨማሪ ቅንብሮች"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"የማሳወቂያ ታሪክ፣ አረፋዎች፣ በቅርቡ ተልከዋል"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"ለሁሉም መተግበሪያዎች በርቷል"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">ለ<xliff:g id="COUNT_1">%d</xliff:g> መተግበሪያዎች ጠፍቷል</item>
@@ -3952,8 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"ምንም ፈቃዶች አልተሰጡም"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"ምንም ፈቃዶች አልተጠየቁም"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"መተግበሪያ ያለው የውሂብዎ መዳረሻን ይቆጣጠሩ"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ሁሉም መተግበሪያዎች"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"የተጫኑ መተግበሪያዎች"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ቅጽበታዊ መተግበሪያዎች"</string>
@@ -4649,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"የመተግበሪያ ተኳኋኝነት ለውጦችን ይቀያይሩ"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ነባሪ የነቁ ለውጦች"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ነባሪ የተሰናከሉ ለውጦች"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"ምንም መተግበሪያዎች አይገኙም"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"የመተግበሪያ ተኳኋኝነት ለውጦች ሊታረሙ ለሚችሉ መተግበሪያዎች ብቻ ነው ሊቀየሩ የሚችሉት። ሊታረም የሚችል መተግበሪያን ይጫኑ እና እንደገና ይሞክሩ"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ቅንብር በዚህ ስልክ ላይ አይደገፍም"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ቅንብር በዚህ ጡባዊ ላይ አይደገፍም"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"በዚህ መሣሪያ ላይ መልሶ ማጫወት አይደገፍም"</string>
@@ -4821,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"እንደገና ይሞክሩ"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"የሆነ ነገር መጥቷል። መተግበሪያው መሣሪያን የመምረጥ ጥያቄውን ሰርዞታል።"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"ግንኙነት ተሳክቷል"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"ግንኙነት አልተሳካም"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"ሁሉንም አሳይ"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"መሣሪያ በመፈለግ ላይ…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"ወደ መሣሪያ በማገናኘት ላይ…"</string>
@@ -4935,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ለተሸጎጡ መተግበሪያዎች አፈጻጸምን አግድ"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"በቅንብሮች ላይ የማያ ገጽ ተደራቢዎችን ይፍቀዱ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"የቅንብሮች ማያ ገጾችን ለመደራረብ በሌሎች መተግበሪያዎች ላይ የሚያሳዩ መተግበሪያዎችን ይፍቀዱ"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"ሚዲያ"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"የሚዲያ ክፍለ-ጊዜ ሲያልቅ ተጫዋችን ደብቅ"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"አጫዋቹ ከተዘረጋው የፈጣን ቅንብሮች ፓነል አንድ ክፍለ-ጊዜ ከቆመበት እንዲቀጥሉ ይፈቅድልዎታል።"</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"ተጫዋች ደብቅ"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"ተጫዋች አሳይ"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"ምንም ተጫዋቾች አይገኙም"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"ሚዲያ"</string>
 </resources>

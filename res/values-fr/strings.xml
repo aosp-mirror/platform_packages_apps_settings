@@ -751,8 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"Nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"Sélectionner le nombre maximal d\'appareils audio Bluetooth connectés"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"Cast"</string>
-    <!-- no translation found for keywords_wifi_display_settings (5753883229564422679) -->
-    <skip />
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"duplication d\'écran"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"Activer l\'affichage sans fil"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"Aucun appareil détecté à proximité."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"Connexion…"</string>
@@ -1191,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmente automatiquement la fréquence d\'actualisation de 60 à 90 Hz pour certains contenus. Accroît l\'utilisation de la batterie."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Affichage fluide"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Fréquence d\'actualisation la plus élevée pour améliorer la réactivité au toucher et la qualité d\'animation. Accroît l\'utilisation de la batterie."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Regard sur écran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activé - L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Désactivé"</string>
@@ -1437,8 +1438,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"Explorer"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Libérer de l\'espace"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gérer l\'espace de stockage"</string>
-    <!-- no translation found for keywords_storage_menu_free (2275406357317597106) -->
-    <skip />
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"nettoyer, espace de stockage"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"Connexion USB à l\'ordinateur"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"Connecter en tant que"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"Périphérique multimédia (MTP)"</string>
@@ -1770,7 +1770,7 @@
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirmez votre schéma"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Saisissez schéma professionnel"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Saisissez de nouveau votre code"</string>
-    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Saisissez votre code PIN professionnel"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Saisissez votre code professionnel"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Les codes ne correspondent pas"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Dessinez de nouveau votre schéma"</string>
@@ -1850,7 +1850,10 @@
     <string name="install_applications" msgid="3921609656584369901">"Sources inconnues"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Autoriser toutes sources appli"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Applications ouvertes récemment"</string>
-    <!-- no translation found for see_all_apps_title (6864581406735745400) -->
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="one">Afficher l\'application</item>
+      <item quantity="other">Afficher les %1$d applications</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Contacter votre administrateur informatique"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Il peut vous aider à réinitialiser votre code, votre schéma ou votre mot de passe"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Votre tablette et vos données personnelles sont très vulnérables aux attaques provenant d\'applications inconnues. En installant des applications provenant de cette source, vous acceptez d\'être le seul responsable de tout dommage causé à votre tablette ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
@@ -2025,8 +2028,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Claviers"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Clavier à l\'écran"</string>
-    <!-- no translation found for keywords_virtual_keyboard (1494726424879503434) -->
-    <skip />
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran disponible"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gérer les claviers à l\'écran"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Assistance relative au clavier"</string>
@@ -2111,7 +2113,7 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Fonctionnalités expérimentales"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"Le lecteur d\'écran est destiné principalement aux personnes atteintes de cécité ou de troubles de la vue."</string>
-    <string name="select_to_speak_summary" msgid="1995285446766920925">"Appuyer sur des éléments à l\'écran pour qu\'ils soient lus à voix haute"</string>
+    <string name="select_to_speak_summary" msgid="1995285446766920925">"Appuyez sur des éléments à l\'écran pour qu\'ils soient lus à voix haute"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Préférences pour les sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Agrandissement"</string>
     <string name="accessibility_magnification_mode_title" msgid="879250866604403721">"Zone à agrandir"</string>
@@ -2730,7 +2732,7 @@
     <string name="notification_history_snooze" msgid="3980568893290512257">"Notifications répétées"</string>
     <string name="notification_history_dismiss" msgid="6180321217375722918">"Notifications ignorées récemment"</string>
     <plurals name="notification_history_count" formatted="false" msgid="1859304685071321991">
-      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> notifications</item>
+      <item quantity="one"><xliff:g id="NUMBER_1">%d</xliff:g> notification</item>
       <item quantity="other"><xliff:g id="NUMBER_1">%d</xliff:g> notifications</item>
     </plurals>
     <string name="sound_category_call_ringtone_vibrate_title" msgid="9090693401915654528">"Sonnerie et vibreur pour les appels"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Gestionnaire d\'appels"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Alertes d\'urgence"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Alertes d\'urgence sans fil"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Opérateurs de réseaux"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Noms des points d\'accès"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3303,8 +3305,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"Son de notification par défaut"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"Son de l\'alarme par défaut"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"Vibreur pour les appels"</string>
-    <!-- no translation found for keywords_vibrate_for_calls (1019870409730074899) -->
-    <skip />
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibreur"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Ne jamais déclencher le vibreur"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Toujours déclencher le vibreur"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibreur, puis sonnerie progressive"</string>
@@ -3327,8 +3328,8 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Sous-titres automatiques"</string>
     <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Aucune"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> planification définie</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> planifications définies</item>
+      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> horaire défini</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horaires définis</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ne recevoir des notifications que des personnes et applications importantes"</string>
@@ -3340,7 +3341,7 @@
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Supprimer"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"Modifier"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"Horaires"</string>
-    <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Horaires"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Horaire"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Programme"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Tél. en silence à certains moments"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Définir les règles du mode Ne pas déranger"</string>
@@ -3408,14 +3409,14 @@
     </plurals>
     <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minute"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> planification peut être activée automatiquement</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> planifications peuvent être activées automatiquement</item>
+      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> horaire peut être activé automatiquement</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> horaires peuvent être activés automatiquement</item>
     </plurals>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Ce qui peut interrompre le mode Ne pas déranger"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personnes"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Applications"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmes et autres interruptions"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"Planifications"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Horaires"</string>
     <string name="zen_category_duration" msgid="7515850842082631460">"Durée du mode en Configuration rapide"</string>
     <string name="zen_sound_footer" msgid="4090291351903631977">"Lorsque le mode Ne pas déranger est activé, le son et le vibreur sont désactivés, sauf pour les éléments autorisés ci-dessus."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Paramètres personnalisés"</string>
@@ -3507,7 +3508,7 @@
     <string name="gentle_notifications_display_summary_shade_status_lock" msgid="2068738866725616212">"S\'affichent dans le volet des notifications, la barre d\'état et sur l\'écran de verrouillage"</string>
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"Masquer les notifications silencieuses dans la barre d\'état"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"Clignotement"</string>
-    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notif. sur l\'écran de verr."</string>
+    <string name="lock_screen_notifications_title" msgid="3063951257121435570">"Notifications sur écran de verrouillage"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ignorer l\'écran de verrouillage"</string>
     <string name="lockscreen_bypass_summary" msgid="6688592486830491144">"Après le déverrouillage via Face Unlock, accéder au dernier écran utilisé"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Écran de verrouillage, verrouiller l\'écran, passer, ignorer"</string>
@@ -3547,7 +3548,7 @@
     <string name="manage_conversations" msgid="4440289604887824337">"Gérer les conversations"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Aucune conversation prioritaire"</string>
     <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
-      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> priority conversations</item>
+      <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> conversation prioritaire</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> conversations prioritaires</item>
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversations prioritaires"</string>
@@ -3632,11 +3633,11 @@
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Applis personnelles et professionnelles associées"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Associées"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Associer ces applications"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les applications associées partagent leurs autorisations et peuvent accéder aux données de l\'autre."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Ne connectez vos applications que si vous estimez qu\'elles ne partageront pas vos données personnelles avec votre administrateur informatique."</string>
-    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Vous pouvez déconnecter des applications à tout moment dans les paramètres de confidentialité de votre appareil."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Les applications associées partagent leurs autorisations et peuvent accéder aux données l\'une de l\'autre."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"N\'associez vos applications que si vous estimez qu\'elles ne partageront pas vos données personnelles avec votre administrateur informatique."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Vous pouvez annuler l\'association entre deux applications à tout moment dans les paramètres de confidentialité de votre appareil."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Autoriser l\'application <xliff:g id="NAME">%1$s</xliff:g> professionnelle à accéder à vos données personnelles ?"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Ne connectez vos applications que si vous estimez qu\'elles ne partageront pas vos données personnelles avec votre administrateur informatique."</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"N\'associez vos applications que si vous estimez qu\'elles ne partageront pas vos données personnelles avec votre administrateur informatique."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Données des applications"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Cette application peut accéder aux données de votre application <xliff:g id="NAME">%1$s</xliff:g> personnelle."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Autorisations"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Cette application n\'a publié aucune notification"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Paramètres supplémentaires dans l\'application"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Historique des notifications, bulles, éléments récemment envoyés"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Activées pour toutes les applications"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Désactivé pour <xliff:g id="COUNT_1">%d</xliff:g> application</item>
@@ -3701,9 +3703,9 @@
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"Ce nom de plage horaire est déjà utilisé"</string>
     <string name="zen_mode_add_rule" msgid="4217731747959400770">"Ajouter"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Ajouter une plage horaire liée à un événement"</string>
-    <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Ajouter planification basée sur l\'heure"</string>
+    <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Ajouter une plage horaire selon l\'heure"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Supprimer la planification"</string>
-    <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Sélectionner le type de plage horaire"</string>
+    <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Sélectionnez le type de plage horaire"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Supprimer la règle \"<xliff:g id="RULE">%1$s</xliff:g>\" ?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Supprimer"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Inconnu"</string>
@@ -3744,7 +3746,7 @@
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Conversations prioritaires"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Aucune"</string>
     <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversations</item>
+      <item quantity="one"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversation</item>
       <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> conversations</item>
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Aucune"</string>
@@ -3804,13 +3806,13 @@
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Les événements"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser des applications à ignorer ce mode"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Applications qui peuvent interrompre le mode Ne pas déranger"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Sélectionner plus d\'applications"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Sélectionnez plus d\'applications"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Aucune application sélectionnée"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Aucune application ne peut interrompre le mode Ne pas déranger"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Ajouter des applications"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Toutes les notifications"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Certaines notifications"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Les personnes sélectionnées peuvent vous contacter, même si vous n\'autorisez pas les applications à vous interrompre"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Les personnes sélectionnées peuvent vous contacter, même si vous n\'autorisez pas les applications à interrompre le mode Ne pas déranger"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="one"><xliff:g id="APP_NAMES">%s</xliff:g> peut interrompre le mode Ne pas déranger</item>
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> peuvent interrompre le mode Ne pas déranger</item>
@@ -3819,10 +3821,10 @@
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Applications"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Toutes les notifications"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Certaines notifications"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifications qui peuvent vous interrompre"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifications qui peuvent interrompre le mode Ne pas déranger"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Autoriser toutes les notifications"</string>
     <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> can interrupt</item>
+      <item quantity="one"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> peut interrompre le mode Ne pas déranger</item>
       <item quantity="other"><xliff:g id="SOUND_CATEGORIES">%s</xliff:g> peuvent interrompre le mode Ne pas déranger</item>
     </plurals>
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Rien ne peut interrompre le mode Ne pas déranger"</string>
@@ -3835,7 +3837,7 @@
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"tout le monde"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"contacts"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"contacts favoris"</string>
-    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"appelants fréquents"</string>
+    <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"appels répétés"</string>
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> et <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
@@ -3874,7 +3876,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Épinglage d\'application"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Avec l\'épinglage d\'application, l\'application actuelle reste affichée jusqu\'à ce que vous la retiriez. Cette fonctionnalité vous permet par exemple de laisser une personne de confiance jouer à un jeu spécifique. \n\nLes données à caractère personnel peuvent être accessibles, et d\'autres applications peuvent être ouvertes depuis une application épinglée. \n\nPour utiliser l\'épinglage d\'application, procédez comme suit : 	\n1.	Activez l\'épinglage d\'application. 	\n2.	Ouvrez \"Aperçu\". 	\n3.	Appuyez sur l\'icône de l\'application en haut de l\'écran, puis sur \"Épingler\"."</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Avec l\'épinglage d\'application, l\'application actuelle reste affichée jusqu\'à ce que vous la retiriez. Cette fonctionnalité vous permet, par exemple, de laisser une personne de confiance jouer à un jeu spécifique. \n\nLes données à caractère personnel peuvent être accessibles, et d\'autres applications peuvent être ouvertes depuis une application épinglée. \n\nSi vous souhaitez partager votre appareil de manière sécurisée, essayez plutôt d\'utiliser un profil invité. \n\nPour utiliser l\'épinglage d\'application, procédez comme suit : 	\n1.	Activez l\'épinglage d\'application. 	\n2.	Ouvrez \"Aperçu\". 	\n3.	Appuyez sur l\'icône de l\'application en haut de l\'écran, puis sur \"Épingler\"."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Lorsqu\'une application est épinglée : \n\n•	 Les données à caractère personnel peuvent être accessibles \n		(comme les contacts et le contenu des e-mails) \n•		D\'autres applications peuvent être ouvertes depuis l\'application épinglée \n\nN\'utilisez l\'épinglage d\'application qu\'avec des personnes de confiance."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Lorsqu\'une application est épinglée : \n\n•	 Les données à caractère personnel peuvent être accessibles \n (comme les contacts et le contenu des e-mails) \n•		D\'autres applications peuvent être ouvertes depuis l\'application épinglée \n\nN\'utilisez l\'épinglage d\'application qu\'avec des personnes de confiance."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Demander le schéma de déverrouillage avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Demander le code avant d\'annuler l\'épinglage"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Demander le mot de passe avant d\'annuler l\'épinglage"</string>
@@ -3983,7 +3985,7 @@
     <string name="app_link_open_ask" msgid="2422450109908936371">"Toujours demander"</string>
     <string name="app_link_open_never" msgid="5299808605386052350">"Ne pas autoriser l\'application à ouvrir les liens compatibles"</string>
     <plurals name="app_link_open_always_summary" formatted="false" msgid="1816161439007251694">
-      <item quantity="one">App claims to handle <xliff:g id="COUNT_1">%d</xliff:g> links</item>
+      <item quantity="one">L\'application revendique <xliff:g id="COUNT_1">%d</xliff:g> lien</item>
       <item quantity="other">L\'application revendique <xliff:g id="COUNT_1">%d</xliff:g> liens</item>
     </plurals>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"L\'application revendique les liens suivants :"</string>
@@ -4648,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activer/Désactiver les changements de compatibilité des applications"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Modifications activées par défaut"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Modifications désactivées par défaut"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Aucune appli dispo"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Vous ne pouvez modifier la compatibilité des applications que si celles-ci sont débogables. Installez une application débogable, puis réessayez."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Le paramètre n\'est pas disponible sur ce téléphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Le paramètre n\'est pas disponible sur cette tablette"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Le paramètre n\'est pas disponible sur cet appareil."</string>
@@ -4660,7 +4664,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Autoriser l\'application à contrôler le Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Autoriser cette application à activer ou désactiver le Wi-Fi, à rechercher les réseaux Wi-Fi et à s\'y connecter, à ajouter ou supprimer des réseaux ou à lancer un point d\'accès local"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Diffuser des contenus multimédias sur"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"Lire <xliff:g id="LABEL">%s</xliff:g> sur"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"Diffuser <xliff:g id="LABEL">%s</xliff:g> sur"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Cet appareil"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Téléphone"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Tablette"</string>
@@ -4820,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Réessayer"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Un problème est survenu. L\'application a annulé la demande de sélection d\'un appareil."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Connexion réussie"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Échec de la connexion"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Tout afficher"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Recherche de l\'appareil…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connexion à l\'appareil…"</string>
@@ -4934,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspendre l\'exécution pour applis mises en cache"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser superpositions d\'écran dans paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autoriser les applications pouvant se superposer à d\'autres à se superposer aux écrans de paramètres"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Masquer le lecteur à la fin de la session multimédia"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Le lecteur vous permet de reprendre une session depuis la fenêtre de configuration rapide une fois celle-ci développée."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Masquer le lecteur"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Afficher le lecteur"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Aucun lecteur disponible"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"Multimédia"</string>
 </resources>

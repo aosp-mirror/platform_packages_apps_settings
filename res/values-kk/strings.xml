@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Кейбір мазмұндар үшін жаңарту жиілігі 60-тан 90 Гц-ке автоматты түрде артады. Батарея заряды тезірек таусылады."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Жақсартылған датчик сезгіштігі және анимация сапасына арналған ең жоғарғы жаңарту жиілігі. Батарея заряды тезірек таусылады."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Зейінді экран"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Қосулы кезде экранға қарап тұрсаңыз, ол өшпейді."</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Өшірулі"</string>
@@ -2151,7 +2153,7 @@
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"\"Арнайы мүмкіндіктер\" түймесі"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"2 саусақпен жоғары қарай сырғыту"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"3 саусақпен жоғары қарай сырғытыңыз"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"\"Арнайы мүмкіндіктер\" түймесін түртіңіз"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"\"Арнайы мүмкіндіктер\" түймесін түрту"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Экранның төменгі жағындағы \"Арнайы мүмкіндіктер\" түймесін <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> түртіңіз.\n\nБір функциядан екіншісіне ауысу үшін \"Арнайы мүмкіндіктер\" түймесін түртіп, оны ұстап тұрыңыз."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Экранның төменгі жағынан 2 саусағыңызбен жоғарыға сырғытыңыз.\n\nБір функциядан екіншісіне ауысу үшін 2 саусақпен жоғары қарай сырғытып, ұстап тұрыңыз."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Экранның төменгі жағынан 3 саусағыңызбен жоғарыға сырғытыңыз.\n\nБір функциядан екіншісіне ауысу үшін 3 саусақпен жоғары қарай сырғытып, ұстап тұрыңыз."</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Қоңыраулар реттегіші"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Төтенше жағдай туралы хабарламалар"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Төтенше жағдай туралы сымсыз хабарландырулар"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Желі операторлары"</string>
     <string name="access_point_names" msgid="5768430498022188057">"APN"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3551,7 +3553,7 @@
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Маңызды әңгімелер"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Чат бөлімінің үстінде көрсету және қалқымалы хабар ретінде шығару"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"Чат бөлімінің жоғарғы жағында көрсетіледі."</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Әңгімелер бөлімінің жоғарғы жағында көрсетіледі."</string>
     <string name="other_conversations" msgid="7218658664423361043">"Басқа әңгімелер"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Өзгертулер енгізілген чаттар"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Маңызды чаттарды қалқымалы ету"</string>
@@ -3633,8 +3635,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Осы қолданбаларды байланыстыру"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Байланыстырылған қолданбалар рұқсаттарды бөліседі және бір-бірінің деректерін пайдалана алады."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Жеке деректеріңізді әкімшімен бөліспейтін сенімді қолданбаларды ғана байланыстырыңыз."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Қолданбаларды құрылғының құпиялылық параметрлерінен кез келген уақытта ажырата аласыз."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Жеке деректеріңізді пайдаланатын <xliff:g id="NAME">%1$s</xliff:g> жұмыс қолданбасы сенімді ме?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Жеке деректеріңізді әкімшімен бөліспейтін сенімді қолданбаларды ғана байланыстырыңыз."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Қолданба деректері"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Бұл қолданба ешқандай хабарландыруды жарияламады"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Қолданбадағы қосымша параметрлер"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Хабарландыру тарихы, қалқыма хабарлар, жақында жіберілгендер"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Барлық қолданбалар үшін қосулы"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> қолданба үшін өшірулі</item>
@@ -3952,8 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Ешқандай рұқсат берілмеген"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Ешқандай рұқсат сұралмаған"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Қолданбалардың деректерге қатысты рұқсаты"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Қолданбалар"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Орнатылған қолданбалар"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Лездік қолданбалар"</string>
@@ -4649,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Қолданбалардың үйлесімділігін реттеудегі өзгерісті көрсету"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Қосылған әдепкі өзгерістер"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Өшірілген әдепкі өзгерістер"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Қолданбалар жоқ"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Үйлесімділік параметрлері түзетілетін қолданбаларда ғана реттеледі. Түзетілетін қолданбаларды орнатып, әрекетті қайталап көріңіз."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Бұл телефонда параметрге қолдау көрсетілмейді"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Бұл планшетте параметрге қолдау көрсетілмейді"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Бұл құрылғыда параметрге қолдау көрсетілмейді"</string>
@@ -4821,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Қайталау"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Байланыс қатесі шықты. Қолданба құрылғыны таңдау сұрауынан бас тартты."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Байланыс орнатылды."</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Байланыс орнатылмады."</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Барлығын көрсету"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Құрылғы ізделуде…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Құрылғыға қосылуда…"</string>
@@ -4935,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Кэштелген қолданбалардың орындалуын уақытша тоқтату"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Параметрлер экранының үстін жабуға рұқсат ету"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Басқа қолданбалардың үстінен шыға алатын қолданбаларға параметрлер экрандарының бетіне қабаттасуға рұқсат ету"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Мультимедиа"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Мультимедиа сеансы аяқталғанда ойнатқышты жасыру"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Ойнатқыш кеңейтілген \"Жылдам параметрлер\" панелінен жалғастыруға мүмкіндік береді."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Ойнатқышты жасыру"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Ойнатқышты көрсету"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Ойнатқыштар жоқ"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"мультимeдиа"</string>
 </resources>

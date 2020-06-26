@@ -1230,6 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏קצב הרענון עולה באופן אוטומטי מ-60 ל-Hz‏90 לחלק מהתוכן. פעולה זו מגבירה את השימוש בסוללה."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"תצוגה חלקה"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"קצב הרענון הגבוה ביותר לתגובה משופרת למגע ולאיכות אנימציה טובה יותר. פעולה זו מגבירה את השימוש בסוללה."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"המסך נשאר דלוק"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"כבוי"</string>
@@ -2551,7 +2553,7 @@
       <item quantity="other">‏%1$d אפליקציות מוגבלות</item>
       <item quantity="one">אפליקציה מוגבלת אחת</item>
     </plurals>
-    <string name="battery_header_title_alternate" msgid="8371821625994616659"><small>" "<font size="20">"<xliff:g id="UNIT">%</xliff:g>"</font></small>"<xliff:g id="NUMBER">^1</xliff:g>"</string>
+    <string name="battery_header_title_alternate" msgid="8371821625994616659"><small>" "<font size="20">"<xliff:g id="NUMBER">^1</xliff:g>"</font></small>"<xliff:g id="UNIT">%</xliff:g>"</string>
     <string name="dialog_stop_title" msgid="5972757101865665655">"לעצור את האפליקציה?"</string>
     <string name="dialog_stop_message" product="default" msgid="2063536418875183799">"הניהול של צריכת הסוללה בטלפון לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> לא מאפשרת למכשיר להיכנס למצב שינה.\n\nכדי לפתור את הבעיה, ניתן להפסיק את פעולת האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את התקנת האפליקציה כדי לשפר את ביצועי הסוללה."</string>
     <string name="dialog_stop_message" product="tablet" msgid="426862716783569739">"הניהול של צריכת הסוללה בטאבלט לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> לא מאפשרת למכשיר להיכנס למצב שינה.\n\nכדי לפתור את הבעיה, ניתן להפסיק את פעולת האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את התקנת האפליקציה כדי לשפר את ביצועי הסוללה."</string>
@@ -3170,7 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Call Manager"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"התרעות חירום"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"התראות אלחוטיות על מקרי חירום"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ספקי רשתות"</string>
     <string name="access_point_names" msgid="5768430498022188057">"‏שמות של נקודות גישה (APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3735,8 +3737,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"אני רוצה לקשר בין האפליקציות האלה"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"לאפליקציות מקושרות יש הרשאות משותפות, ויש להן גישה לנתונים שבכל אחת מהן."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"‏יש לקשר רק אפליקציות שניתן לבטוח בהן שלא ייעשה באמצעותן שיתוף של מידע אישי עם מנהל ה-IT."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"תמיד אפשר לנתק אפליקציות בהגדרות הפרטיות של המכשיר."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"האם תסכים/י לחשוף את המידע האישי שלך באפליקציה <xliff:g id="NAME">%1$s</xliff:g>, שמיועדת לעבודה?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"‏יש לקשר רק אפליקציות שניתן לבטוח בהן שלא ייעשה באמצעותן שיתוף של מידע אישי עם מנהל ה-IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"נתוני האפליקציה"</string>
@@ -3770,6 +3771,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"האפליקציה הזו לא שלחה התראות"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"הגדרות נוספות באפליקציה"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"היסטוריית התראות, בועות, התראות שנשלחו לאחרונה"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"מופעל לכל האפליקציות"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="two">כבוי עבור <xliff:g id="COUNT_1">%d</xliff:g> אפליקציות</item>
@@ -4084,8 +4086,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"לא הוענקו הרשאות"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"לא התבקשו הרשאות"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"שליטה בגישת האפליקציה לנתונים שלך"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות אינסטנט"</string>
@@ -4825,6 +4826,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת מצב השינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"השינויים מופעלים כברירת מחדל"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"השינויים מושבתים כברירת מחדל"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"אין אפליקציות זמינות"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"ניתן לבצע שינויים בתאימות האפליקציה רק עבור אפליקציות שניתנות לניפוי באגים. יש להתקין אפליקציה שניתנת לניפוי באגים ולנסות שוב."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ההגדרה אינה נתמכת בטלפון זה"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ההגדרה אינה נתמכת בטאבלט זה"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ההגדרה אינה נתמכת במכשיר זה"</string>
@@ -4999,6 +5002,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"לניסיון חוזר"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"משהו קרה. האפליקציה ביטלה את הבקשה לבחירת מכשיר."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"החיבור הצליח"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"החיבור נכשל"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"הצגת הכול"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"מתבצע חיפוש אחר מכשיר…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"מתבצעת התחברות למכשיר…"</string>
@@ -5117,4 +5121,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"השעיית הביצוע לאפליקציות שנשמרו במטמון"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"הנגן יוסתר כשסשן המדיה יסתיים"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"הנגן מאפשר לך להמשיך סשן מחלונית מורחבת של הגדרות מהירות."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"אין נגנים זמינים"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
 </resources>

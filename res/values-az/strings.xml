@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Rahat Displey"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Bəzi məzmun üçün yeniləmə dərəcəsini 60 Hs-dən 90 Hs-ə avtomatik yüksəldir. Batareya istifadəsini artırır."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Rahat Displey"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Təkmilləşdirilmiş toxunuş həssaslığı və animasiya keyfiyyəti üçün yüksək yeniləmə dərəcəsi. Batareya istifadəsini artırır."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ekran həssaslığı"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktiv/ Ekrana baxırsınızsa, sönməyəcək"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Deaktiv"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Çağrı Meneceri"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Həyəcan siqnalı"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Simsiz təcili siqnallar"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Şəbəkə operatorları"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Giriş nöqtəsi adları"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3633,8 +3635,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Bu tətbiqləri qoşun"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Qoşulmuş tətbiqlər icazələri paylaşır və bir-birinin datasına daxil ola bilir."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Yalnız şəxsi datanızı İT admininizlə paylaşmayacağına etibar etdiyiniz tətbiqləri qoşun."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Tətbiqləri istənilən vaxt cihazın məxfilik ayarlarında ayıra bilərsiniz."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Şəxsi datanızı <xliff:g id="NAME">%1$s</xliff:g> iş tətbiqinə etibar edirsiniz?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Yalnız şəxsi datanızı İT admininizlə paylaşmayacağına etibar etdiyiniz tətbiqləri qoşun."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Tətbiq datası"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Bu tətbiq heç bir bildiriş paylaşmayıb"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tətbiqdə əlavə ayarlar"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Bildiriş tarixçəsi, qabarcıqlar, son göndərilənlər"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Bütün tətbiqlər üçün aktiv"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> tətbiqdə deaktivdir</item>
@@ -3952,8 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"İcazə verilməyib"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"İcazə sorğusu göndərilməyib"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Datanıza tətbiq girişinə nəzarət edin"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Bütün proqramlar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Quraşdırılmış tətbiqlər"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Ani tətbiqlər"</string>
@@ -4649,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Tətbiq uyğunluq dəyişikliklərini dəyişdirin"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Dəyişikliklər standart olaraq aktivdir"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Dəyişikliklər standart olaraq deaktivdir"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Heç bir tətbiq əlçatan deyil"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Tətbiq uyğunluğu üzrə dəyişikliklər yalnız sazlana bilən tətbiqlər üçün tətbiq edilə bilər. Sazlana bilən tətbiq quraşdırın və yenidən cəhd edin."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Ayar bu telefonda dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Ayar bu planşetdə dəstəklənmir"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Ayar bu cihazda dəstəklənmir"</string>
@@ -4821,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Yenidən cəhd edin"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Xəta baş verdi. Bu tətbiq cihaz seçmək üçün sorğunu ləğv etdi."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Qoşuldu"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Bağlantı alınmadı"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Hamısına baxın"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Cihaz axtarılır..."</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Cihaza qoşulur…"</string>
@@ -4935,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Keşlənmiş tətbiqlər üçün icranı dayandırın"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarlarda ekranların üst-üstə yerləşdirilməsinə icazə verin"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Digər tətbiqlər üzərində görüntülənə biləcək tətbiqlərə Ayarlar ekranlarını üst-üstə yerləşdirməyə icazə verin"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Media sessiyası bitdikdə oyunçunu gizlədin"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Oyunçu genişləndirilmiş Sürətli Ayarlar panelindən sessiyaya davam etməyə icazə verir."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Oyunçunu gizlədin"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Oyunçunu göstərin"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Əlçatan oyunçu yoxdur"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>
