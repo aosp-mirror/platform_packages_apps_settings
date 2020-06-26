@@ -818,7 +818,7 @@
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Дозволити обмін даними, коли телефон торкнеться пристрою NFC"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Увімкнути NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"За допомогою NFC цей пристрій обмінюється даними з іншими пристроями чи об’єктами поруч, зокрема з платіжними терміналами, пристроями зчитування даних для доступу, інтерактивними оголошеннями та тегами."</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Використовувати NFC лише на розблокованому пристрої"</string>
+    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC лише після розблокування"</string>
     <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Дозволити оплату й передавання через NFC, лише коли екран розблоковано"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Передавання даних Android"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Вміст додатка готовий до передачі через NFC"</string>
@@ -1230,6 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавне відображення"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично збільшує частоту оновлення певного вмісту з 60 до 90 Гц. Підвищує використання заряду акумулятора."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плавне відображення"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвища частота оновлення для кращого реагування на дотики й вищої якості анімації. Підвищує використання заряду акумулятора."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивний сплячий режим"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ввімкнено: екран не вимикатиметься, доки ви на нього дивитесь"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Вимкнено"</string>
@@ -1240,7 +1242,7 @@
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Увімкнути адаптивний сплячий режим"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не вимикати екран, поки ви на нього дивитеся"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Нічний екран"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"У нічному режимі екран набуває бурштинового відтінку. Це знімає напруження очей при тьмяному освітленні та допомагає легше заснути."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"Завдяки жовтуватому відтінку нічний екран допомагає знизити напруження очей в умовах тьмяного освітлення та легше заснути."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Розклад"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Ніколи"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Вмикається у вибраний час"</string>
@@ -2200,7 +2202,7 @@
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Провести двома пальцями вгору"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Провести трьома пальцями вгору"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Натиснути кнопку спеціальних можливостей"</string>
-    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Натиснути кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте кнопку спеціальних можливостей."</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Натисніть кнопку спеціальних можливостей <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> унизу екрана.\n\nЩоб переключитися між функціями, натисніть і утримуйте кнопку спеціальних можливостей."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Провести двома пальцями знизу вгору по екрану.\n\nЩоб переключитися між функціями, проведіть двома пальцями вгору й утримуйте екран."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"Провести по екрану знизу вгору трьома пальцями.\n\nЩоб переключитися між функціями, проведіть по екрану знизу вгору трьома пальцями й утримуйте їх."</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Утримувати клавіші гучності"</string>
@@ -3143,7 +3145,7 @@
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"У терміналі для безконтактного платежу використовувати додаток:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Оплата через термінал"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Виберіть додаток для платежів. Тоді просто прикладіть телефон тильною стороною до будь-якого термінала зі значком безконтактної оплати."</string>
-    <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Зрозуміло"</string>
+    <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Більше…"</string>
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Установити платіжний додаток за умовчанням"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Змінити платіжний додаток за умовчанням"</string>
@@ -3170,7 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Менеджер викликів"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Екстрені сповіщення"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Бездротові екстрені сповіщення"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Оператори мережі"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Назви точок доступу"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3733,10 +3735,9 @@
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Зв\'язані робочі й особисті додатки"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Підключено"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Зв\'язати ці додатки"</string>
-    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Підключені додатки мають спільні дозволи й можуть отримувати доступ до даних один одного."</string>
+    <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Зв\'язані додатки мають спільні дозволи й можуть отримувати доступ до даних один одного."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Зв\'язуйте додатки, лише якщо впевнені, що вони не передаватимуть ваші персональні дані ІТ-адміністратору."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Ви можете будь-коли скасувати зв\'язки додатків у налаштуваннях конфіденційності пристрою."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Довіряти робочому додатку <xliff:g id="NAME">%1$s</xliff:g> персональні дані?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Зв\'язуйте додатки, лише якщо впевнені, що вони не передаватимуть ваші персональні дані ІТ-адміністратору."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Дані додатка"</string>
@@ -3770,6 +3771,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Цей додаток не надсилав сповіщень"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Додаткові налаштування в додатку"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Історія сповіщень, спливаючі й нещодавно надіслані сповіщення"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Увімкнено для всіх додатків"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Вимкнено для <xliff:g id="COUNT_1">%d</xliff:g> додатка</item>
@@ -4084,8 +4086,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Немає дозволів"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Немає запитів на дозволи"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Контролюйте доступ додатка до даних"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Усі додатки"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установлені додатки"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Додатки з миттєвим запуском"</string>
@@ -4825,6 +4826,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Увімкнути або вимкнути зміни сумісності додатка"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Зміни, увімкнені за умовчанням"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Зміни, вимкнені за умовчанням"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Немає додатків"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Налаштування сумісності можна змінювати лише для налагоджуваних додатків. Установіть налагоджуваний додаток і спробуйте ще раз."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Налаштування не підтримується на цьому телефоні"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Налаштування не підтримується на цьому планшеті"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Налаштування не підтримується на цьому пристрої"</string>
@@ -4999,6 +5002,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Повторити спробу"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Щось трапилося. Додаток скасував запит на вибір пристрою."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Підключено"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Помилка з\'єднання"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Показати всі"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Пошук пристрою…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Підключення до пристрою…"</string>
@@ -5117,4 +5121,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Призупинити кешовані додатки"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволити показ поверх інших вікон у налаштуваннях"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволити додаткам, що можуть показуватися поверх інших додатків, накладатися на екрани налаштувань"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Медіа"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Приховати програвач після завершення медіасеансу"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Програвач дає змогу відновлювати сеанси з розгорнутої панелі Швидких налаштувань."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Приховати програвач"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Показати програвач"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Немає доступних програвачів"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"медіа"</string>
 </resources>

@@ -751,8 +751,7 @@
     <string name="bluetooth_max_connected_audio_devices_string" msgid="3114156958598821615">"കണക്റ്റ് ചെയ്‌ത പരമാവധി Bluetooth ഓഡിയോ ഉപകരണങ്ങൾ"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"കണക്റ്റ് ചെയ്‌ത പരമാവധി Bluetooth ഓഡിയോ ഉപകരണങ്ങളുടെ എണ്ണം തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_display_settings_title" msgid="6451625615274960175">"കാസ്‌റ്റ് ചെയ്യുക"</string>
-    <!-- no translation found for keywords_wifi_display_settings (5753883229564422679) -->
-    <skip />
+    <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"മിറർ"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"വയർലസ്‌ഡിസ്പ്ലേ സജീവമാക്കൂ"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"സമീപത്ത് ഉപകരണങ്ങളൊന്നും കണ്ടെത്തിയില്ല."</string>
     <string name="wifi_display_status_connecting" msgid="530880182560077334">"കണക്റ്റ് ചെയ്യുന്നു"</string>
@@ -1191,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ചില ഉള്ളടക്കങ്ങളുടെ പുതുക്കൽ നിരക്ക് 60 Hz-ൽ നിന്നും 90 Hz-ലേക്ക് സ്വയമേവ ഉയർത്തുന്നു. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"മെച്ചപ്പെട്ട സ്‌പർശന പ്രതികരണശേഷി, ആനിമേഷൻ നിലവാരം എന്നിവയ്‌ക്കുള്ള ഉയർന്ന പുതുക്കൽ നിരക്ക്. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"സ്ക്രീൻ ശ്രദ്ധ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ഓണാണ് / നിങ്ങൾ അതിൽ നോക്കുന്നുണ്ടെങ്കിൽ സ്ക്രീൻ ഓഫാക്കില്ല"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"ഓഫാണ്"</string>
@@ -1437,8 +1438,7 @@
     <string name="storage_menu_explore" msgid="3048031115521594488">"അടുത്തറിയുക"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"ഇടം സൃഷ്ടിക്കുക"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"സ്റ്റോറേജ്  നിയന്ത്രിക്കുക"</string>
-    <!-- no translation found for keywords_storage_menu_free (2275406357317597106) -->
-    <skip />
+    <string name="keywords_storage_menu_free" msgid="2275406357317597106">"ക്ലീൻ, സ്‌റ്റോറേജ്"</string>
     <string name="storage_title_usb" msgid="1332488715547400452">"USB കമ്പ്യൂട്ടർ കണക്ഷൻ"</string>
     <string name="usb_connection_category" msgid="2288543238378907242">"ഇതായി കണ‌ക്റ്റുചെയ്യുക"</string>
     <string name="usb_mtp_title" msgid="9068009584556422314">"മീഡിയ ഉപകരണം (MTP)"</string>
@@ -1850,7 +1850,10 @@
     <string name="install_applications" msgid="3921609656584369901">"അജ്ഞാത ഉറവിടങ്ങൾ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"എല്ലാ അപ്ലിക്കേഷൻ ഉറവിടങ്ങളും അനുവദിക്കുക"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"ഈയടുത്ത് തുറന്ന ആപ്പുകൾ"</string>
-    <!-- no translation found for see_all_apps_title (6864581406735745400) -->
+    <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
+      <item quantity="other">എല്ലാ %1$d ആപ്പുകളും കാണൂ</item>
+      <item quantity="one">എല്ലാ ആപ്പുകളും കാണൂ</item>
+    </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"നിങ്ങളുടെ ഐടി അഡ്‌മിനെ ബന്ധപ്പെടുക"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"പിൻ, പാറ്റേൺ അല്ലെങ്കിൽ പാസ്‌വേഡ് റീസെറ്റ് ചെയ്യാൻ നിങ്ങളെ അവർക്ക് സഹായിക്കാനാകും"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
@@ -2025,8 +2028,7 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ഭാഷ"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"കീബോർഡുകൾ"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ്"</string>
-    <!-- no translation found for keywords_virtual_keyboard (1494726424879503434) -->
-    <skip />
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് ലഭ്യമാണ്"</string>
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് മാനേജ് ചെയ്യുക"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"കീബോർഡ് സഹായം"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"കോൾ മാനേജർ"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"അടിയന്തര അലേർട്ടുകൾ"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"വയർലെസ് അടിയന്തര മുന്നറിയിപ്പുകൾ"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"നെറ്റ്‌വർക്ക് ഓപ്പറേറ്റർമാർ"</string>
     <string name="access_point_names" msgid="5768430498022188057">"ആക്‌സസ്സ് പോയിന്റ് പേരുകൾ"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3303,8 +3305,7 @@
     <string name="notification_sound_default" msgid="8630353701915294299">"ഡിഫോൾട്ട് അറിയിപ്പ് ശബ്‌ദം"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"ഡിഫോൾട്ട് അലാറം ശബ്ദം"</string>
     <string name="vibrate_when_ringing_title" msgid="3436203665622843196">"കോളുകൾക്ക് വൈബ്രേറ്റ് ചെയ്യുക"</string>
-    <!-- no translation found for keywords_vibrate_for_calls (1019870409730074899) -->
-    <skip />
+    <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"വൈബ്രേഷൻ"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"ഒരിക്കലും വൈബ്രേറ്റ് ചെയ്യരുത്"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"എല്ലായ്‌പ്പോഴും വൈബ്രേറ്റ് ചെയ്യുക"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"വൈബ്രേറ്റ് ചെയ്‌ത് പതിയെ റിംഗ് ചെയ്യുക"</string>
@@ -3634,7 +3635,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"ഈ ആപ്പുകൾ കണക്‌റ്റ് ചെയ്യുക"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"കണക്റ്റ് ചെയ്ത ആപ്പുകൾ അനുമതികൾ പങ്കിടുന്നു, അവയ്ക്ക് പരസ്പരം ഡാറ്റ ആക്സസ് ചെയ്യാനുമാവും."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"വ്യക്തിപരമായ ഡാറ്റ ഐടി അഡ്‌മിനുമായി പങ്കിടില്ലെന്ന് നിങ്ങൾ വിശ്വസിക്കുന്ന ആപ്പുകൾ മാത്രം കണക്റ്റ് ചെയ്യുക."</string>
-    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"ഉപകരണത്തിന്റെ സ്വകാര്യ ക്രമീകരണത്തിൽ ഏത് സമയത്തും നിങ്ങൾക്ക് ആപ്പുകൾ വിച്‌ഛേദിക്കാം."</string>
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"ഉപകരണത്തിന്റെ സ്വകാര്യതാ ക്രമീകരണത്തിൽ ഏത് സമയത്തും നിങ്ങൾക്ക് ആപ്പുകൾ വിച്‌ഛേദിക്കാം."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"നിങ്ങളുടെ വ്യക്തിപരമായ ഡാറ്റയുടെ കാര്യത്തിൽ ഔദ്യോഗിക <xliff:g id="NAME">%1$s</xliff:g> എന്നതിനെ വിശ്വസിക്കണോ?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"വ്യക്തിപരമായ ഡാറ്റ ഐടി അഡ്‌മിനുമായി പങ്കിടില്ലെന്ന് നിങ്ങൾ വിശ്വസിക്കുന്ന ആപ്പുകൾ മാത്രം കണക്റ്റ് ചെയ്യുക."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"ആപ്പ് ഡാറ്റ"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"ഈ ആപ്പ് അറിയിപ്പുകളൊന്നും പോസ്‌റ്റുചെയ്‌തിട്ടില്ല"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"ആപ്പിലെ അധിക ക്രമീകരണം"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"അറിയിപ്പ് ചരിത്രം, ബബിൾ, അടുത്തിടെ അയച്ചവ"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"എല്ലാ ആപ്പുകൾക്കും ഓണാണ്"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ആപ്പുകൾക്ക് ഓഫ്</item>
@@ -4648,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"ആപ്പ് അനുയോജ്യതാ മാറ്റങ്ങൾ മാറ്റുക"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനക്ഷമമാക്കിയ മാറ്റങ്ങൾ"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ഡിഫോൾട്ട് ആയ, പ്രവർത്തനരഹിതമാക്കിയ മാറ്റങ്ങൾ"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"ആപ്പുകൾ ലഭ്യമല്ല"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"ഡീബഗ് ചെയ്യാവുന്ന ആപ്പുകൾക്ക് വേണ്ടി മാത്രമേ ആപ്പ് അനുയോജ്യതാ മാറ്റങ്ങൾ പരിഷ്‌കരിക്കാൻ കഴിയൂ. ഡീബഗ് ചെയ്യാവുന്ന ആപ്പ് ഇന്‍സ്റ്റാള്‍ ചെയ്‌ത് വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ക്രമീകരണം ഈ ഫോണിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ക്രമീകരണം ഈ ടാബ്‌ലെറ്റിൽ പിന്തുണക്കുന്നില്ല"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ഈ ഉപകരണത്തിൽ ക്രമീകരണം പിന്തുണയ്‌ക്കുന്നില്ല"</string>
@@ -4815,11 +4819,12 @@
     <string name="see_more" msgid="7499355691042812723">"കൂടുതൽ കാണുക"</string>
     <string name="see_less" msgid="2642392725363552793">"കുറച്ച് കാണുക"</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"ഉപകരണത്തിലേക്ക് കണക്റ്റ് ചെയ്യുക"</string>
-    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"നിങ്ങളുടെ ഉപകരണത്തിലേക്ക് കണക്‌റ്റ് ചെയ്യാൻ താൽക്കാലിക വെെഫെെ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കാൻ <xliff:g id="APPNAME">%1$s</xliff:g> ആപ്പ് താൽപ്പര്യപ്പെടുന്നു"</string>
+    <string name="network_connection_request_dialog_summary" msgid="7693038309792726170">"നിങ്ങളുടെ ഉപകരണത്തിലേക്ക് കണക്‌റ്റ് ചെയ്യുന്നതിന് താൽക്കാലിക വെെഫെെ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കാൻ <xliff:g id="APPNAME">%1$s</xliff:g> ആപ്പ് താൽപ്പര്യപ്പെടുന്നു"</string>
     <string name="network_connection_timeout_dialog_message" msgid="598509083077743772">"ഉപകരണങ്ങളൊന്നും കണ്ടെത്തിയില്ല. ഉപകരണം ഓണാണെന്നും കണക്റ്റ് ചെയ്യാൻ ലഭ്യമാണെന്നും ഉറപ്പാക്കുക."</string>
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"വീണ്ടും ശ്രമിക്കുക"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"എന്തോ സംഭവിച്ചു. ഒരു ഉപകരണം തിരഞ്ഞെടുക്കാനുള്ള അഭ്യർത്ഥന ആപ്പ് റദ്ദാക്കിയിരിക്കുന്നു."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"കണക്ഷൻ വിജയകരം"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"കണക്റ്റ് ചെയ്യാനായില്ല"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"എല്ലാം കാണിക്കുക"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"ഉപകരണത്തിനായി തിരയുന്നു…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"ഉപകരണത്തിലേക്ക് കണക്റ്റ് ചെയ്യുന്നു…"</string>
@@ -4931,7 +4936,14 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ഫോണിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ടാബ്‌ലെറ്റിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"2 സിമ്മുകൾ ഉപയോഗിക്കുമ്പോൾ ഈ ഉപകരണത്തിൽ 4G മാത്രമേ ലഭിക്കൂ. "<annotation id="url">"കൂടുതലറിയുക"</annotation>"."</string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"കാഷെ ചെയ്ത ആപ്പിനുള്ള നിർവ്വഹണം തൽക്കാലം റദ്ദാക്കൂ"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"കാഷെ ചെയ്ത ആപ്പിനുള്ള നിർവഹണം തൽക്കാലം റദ്ദാക്കൽ"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings ആപ്പിൽ സ്‌ക്രീൻ ഓവർലേ അനുവദിക്കുക"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings സ്‌ക്രീനുകളിൽ ഓവർലേ ചെയ്യാൻ മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ കാണിക്കാനാകുന്ന ആപ്പുകളെ അനുവദിക്കുക"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"മീഡിയ സെഷൻ അവസാനിക്കുമ്പോൾ പ്ലേയർ മറയ്‌ക്കുക"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"വികസിപ്പിച്ച ദ്രുത ക്രമീകരണ പാനലിൽ നിന്ന് സെഷൻ പുനരാരംഭിക്കാൻ പ്ലേയർ നിങ്ങളെ അനുവദിക്കുന്നു."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"പ്ലേയർ മറയ്‌ക്കുക"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"പ്ലേയർ കാണിക്കുക"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"പ്ലേയറുകളൊന്നും ലഭ്യമല്ല"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"മീഡിയ"</string>
 </resources>

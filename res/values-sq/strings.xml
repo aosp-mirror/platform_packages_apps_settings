@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Ekrani me butësi"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Rrit automatikisht shpejtësinë e rifreskimit nga 60 në 90 Hz për disa përmbajtje. Rrit përdorimin e baterisë."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Shpejtësia më e lartë e rifreskimit për përmirësimin e reagueshmërisë së prekjes dhe cilësisë së animacioneve. Rrit përdorimin e baterisë."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Vëmendja ndaj ekranit"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aktiv / Ekrani nuk do të fiket nëse shikon tek ai"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Joaktiv"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Menaxheri i telefonatave"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Sinjalizimet e urgjencës"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Sinjalizimet me valë të urgjencës"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Operatorët e rrjetit"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Emrat e pikës së qasjes"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3633,8 +3635,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Lidh këto aplikacione"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Aplikacionet e lidhura ndajnë leje dhe mund të kenë qasje te të dhënat e njëri-tjetrit."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Lidhi aplikacionet vetëm nëse u beson se nuk do t\'i ndajnë të dhënat personale me administratorin tënd të teknologjisë së informacionit."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Mund t\'i shkëputësh aplikacionet në çdo kohë te cilësimet e privatësisë së pajisjes."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Të besohet aplikacioni <xliff:g id="NAME">%1$s</xliff:g> i punës me të dhënat e tua personale?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Lidhi aplikacionet vetëm nëse u beson se nuk do t\'i ndajnë të dhënat personale me administratorin tënd të teknologjisë së informacionit."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Të dhënat e aplikacioneve"</string>
@@ -3664,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Ky aplikacion nuk ka postuar asnjë njoftim"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Cilësime shtesë në aplikacion"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Historiku i njoftimeve, flluskat, dërguar së fundi"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Aktiv për të gjitha aplikacionet"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Joaktiv për <xliff:g id="COUNT_1">%d</xliff:g> aplikacione</item>
@@ -3810,7 +3812,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Shto aplikacione"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Të gjitha njoftimet"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Disa njoftime"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Zgjidh personat që sërish mund të të kontaktojnë, edhe nëse nuk i lejon aplikacionet të të ndërpresin"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Persona të zgjedhur mund të të kontaktojnë ende, edhe nëse nuk i lejon aplikacionet të të ndërpresin"</string>
     <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
       <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> mund ta ndërpresin</item>
       <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> mund ta ndërpresë</item>
@@ -3952,8 +3954,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nuk është dhënë leje"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nuk është kërkuar leje"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrollo qasjen e apl. te të dhënat e tua"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Të gjitha apl."</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplikacionet e instaluara"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplikacionet e çastit"</string>
@@ -4649,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Aktivizo ose çaktivizo ndryshimet e përputhshmërisë së aplikacionit"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Ndryshimet të aktivizuara si parazgjedhje"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Ndryshimet të çaktivizuara si parazgjedhje"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Nuk ofrohet asnjë aplikacion"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Ndryshimet e pajtueshmërisë së aplikacionit mund të modifikohen vetëm për aplikacionet e korrigjueshme. Instalo një aplikacion të korrigjueshëm dhe provo përsëri."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Cilësimi nuk mbështetet në këtë telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Cilësimi nuk mbështetet në këtë tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Cilësimi nuk mbështetet në këtë pajisje"</string>
@@ -4821,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Provo sërish"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Ndodhi diçka. Aplikacioni ka anuluar kërkesën për të zgjedhur një pajisje."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Lidhja ishte e suksesshme"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Lidhja dështoi"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Shfaq të gjitha"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Po kërkohet për pajisjen…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Po lidhet me pajisjen…"</string>
@@ -4935,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Pezullo ekzekutimin për aplikacionet në memorien specifike"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Lejo mbivendosjet e ekranit te \"Cilësimet\""</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Lejo aplikacionet të cilat mund të shfaqen mbi aplikacione të tjera të mbivendosen mbi ekranet e \"Cilësimeve\""</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Fshihe luajtësin kur sesioni i medias të ketë përfunduar"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Luajtësi të lejon ta vazhdosh më vonë një sesion nga paneli i zgjeruar i \"Cilësimeve të shpejta\"."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Fshih luajtësin"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Shfaq luajtësin"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Nuk ofrohet asnjë luajtës"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>

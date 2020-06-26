@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"স্মুথ ডিসপ্লে"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"কিছু কন্টেন্টের রিফ্রেশ রেট অটোমেটিক ৬০ থেকে ৯০ Hz পর্যন্ত বেড়ে যায়। ব্যাটারির ব্যবহার বেড়ে যায়।"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"স্মুথ ডিসপ্লে"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"সর্বাধিক রিফ্রেশ রেট সেট করে টাচ রেসপন্সিভনেস এবং অ্যানিমেশন কোয়ালিটি উন্নত করুন। ব্যাটারির খরচ বেড়ে যায়।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"স্ক্রিন অ্যাটেনশন"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"চালু আছে / আপনি এটির দিকে তাকিয়ে থাকলে স্ক্রিন বন্ধ হবে না"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"বন্ধ আছে"</string>
@@ -2126,7 +2128,7 @@
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"তিনবার ট্যাপ করে বড় করে দেখুন"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"শর্টকাটের সাহায্যে বড় করে দেখা"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"শর্টকাটের মাধ্যমে ও তিনবার ট্যাপ করে বড় করুন"</string>
-    <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> সম্পর্কে"</string>
+    <string name="accessibility_introduction_title" msgid="8834950581512452348">"\'<xliff:g id="SERVICE">%1$s</xliff:g>\' সম্পর্কে"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"বিকল্প"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"স্ক্রিনে জুম বাড়ান"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"জুম করতে ৩ বার ট্যাপ করুন"</string>
@@ -2147,7 +2149,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"অ্যাক্সেসিবিলিটি ফিচার ব্যবহার করার জন্য, স্ক্রিনের নিচ থেকে উপরের দিকে ২টি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে যেতে, ২টি আঙ্গুল দিয়ে নিচের থেকে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"অ্যাক্সেসিবিলিটি ফিচার ব্যবহার করার জন্য, স্ক্রিনের নিচ থেকে উপরের দিকে ৩টি আঙ্গুল দিয়ে সোয়াইপ করুন।\n\nএকটি ফিচার থেকে অন্যটিতে যেতে, ৩টি আঙ্গুল দিয়ে নিচের থেকে উপরের দিকে সোয়াইপ করে ধরে থাকুন।"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"বুঝেছি"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"<xliff:g id="SERVICE">%1$s</xliff:g> শর্টকাট"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"\'<xliff:g id="SERVICE">%1$s</xliff:g>\' শর্টকাট"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"অ্যাক্সেসিবিলিটি বোতাম"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"২টি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করুন"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"৩টি আঙ্গুল দিয়ে উপরের দিকে সোয়াইপ করুন"</string>
@@ -3034,11 +3036,11 @@
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"এই সেশনের সব অ্যাপ্লিকেশান ও ডেটা মুছে ফেলা হবে।"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"সরান"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ফোন কলের সুবিধা চালু করুন"</string>
-    <string name="user_enable_calling_sms" msgid="8546430559552381324">"ফোন কলগুলিকে এবং SMS চালু করবেন?"</string>
+    <string name="user_enable_calling_sms" msgid="8546430559552381324">"ফোন কল এবং এসএমএস চালু করবেন?"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ব্যবহারকারীর অ্যাকাউন্ট মুছে দিন"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"ফোন কলগুলিকে চালু করবেন?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"কলের ইতিহাস এই ব্যবহারকারীর সাথে শেয়ার করা হবে।"</string>
-    <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"ফোন কলগুলিকে এবং SMS চালু করবেন?"</string>
+    <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"ফোন কল এবং এসএমএস চালু করবেন?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"কল ও SMS ইতিহাস এই ব্যবহারকারীর সাথে শেয়ার করা হবে।"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"জরুরি তথ্য"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"<xliff:g id="USER_NAME">%1$s</xliff:g>-এর তথ্য ও পরিচিতি"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"কল ম্যানেজার"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"জরুরি সতর্কতা"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"ওয়্যারলেস জরুরি সতর্কতা"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"নেটওয়ার্ক অপারেটরগুলি"</string>
     <string name="access_point_names" msgid="5768430498022188057">"অ্যাক্সেস পয়েন্টের নামগুলি"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3551,7 +3553,7 @@
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"গুরুত্বপূর্ণ কথোপকথন"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"কথোপকথনের বিভাগের উপরে দেখুন এবং ফ্লোটিং বাবলের মতো দেখাবে"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"কথোপকথনের বিভাগের উপরে দেখুন"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"কথোপকথন বিভাগের একদম উপরে দেখুন"</string>
     <string name="other_conversations" msgid="7218658664423361043">"অন্যান্য কথোপকথন"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"কথোপকথনে আপনার করা পরিবর্তন"</string>
     <string name="important_bubble" msgid="7911698275408390846">"গুরুত্বপূর্ণ কথোপকথন বাবল করুন"</string>
@@ -3663,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"এই অ্যাপটি দ্বারা কোন বিজ্ঞপ্তি পোস্ট করা হয়নি"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"অ্যাপের আরও সেটিংস"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"বিজ্ঞপ্তির ইতিহাস, বাবল, সম্প্রতি পাঠানো"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"সমস্ত অ্যাপের জন্য চালু আছে"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g>টি অ্যাপের জন্য বন্ধ করা আছে</item>
@@ -4647,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"অ্যাপ মানানসই করা সম্পর্কিত পরিবর্তন টগল করুন"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ডিফল্ট হিসেবে চালু করা পরিবর্তন"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ডিফল্ট হিসেবে বন্ধ করে দেওয়া পরিবর্তন"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"অ্যাপ উপলভ্য নেই"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"অ্যাপ মানানসই করা সম্পর্কিত পরিবর্তন শুধুমাত্র ডিবাগ করা যাবে এমন অ্যাপগুলির ক্ষেত্রে প্রযোজ্য। ডিবাগ করা যাবে এমন একটি অ্যাপ ইনস্টল করে আবার চেষ্টা করুন।"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"এই ফোনে সেটিং সমর্থিত নয়"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"এই ট্যাবলেটে সেটিং সমর্থিত নয়"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"এই ডিভাইসে সেটিং সমর্থিত নয়"</string>
@@ -4819,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"আবার চেষ্টা করুন"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"কোনও সমস্যা হয়েছে। ডিভাইস বেছে নেওয়ার আবেদনটি এই অ্যাপ্লিকেশনের মাধ্যমে বাতিল করা হয়েছে।"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"কানেক্ট করা হয়েছে"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"কানেক্ট করা যায়নি"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"সব দেখুন"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"ডিভাইস সার্চ করা হচ্ছে…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"ডিভাইসে কানেক্ট করা হচ্ছে…"</string>
@@ -4933,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ক্যাশে করা অ্যাপের জন্য এক্সিকিউশন সাসপেন্ড করুন"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"সেটিংসে স্ক্রিন ওভারলে করার অনুমতি দিন"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"যেসব অ্যাপ অন্যান্য অ্যাপের উপর কন্টেন্ট দেখাতে পারে সেগুলিকে সেটিংস স্ক্রিনের উপর ওভারলে করার অনুমতি দিন"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"মিডিয়া"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"মিডিয়া সেশন শেষ হয়ে গেলে প্লেয়ার লুকান"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"আপনি প্লেয়ার ব্যবহার করে বড় করা দ্রুত সেটিংস প্যানেল থেকে সেশন আবার শুরু করতে পারবেন।"</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"প্লেয়ার লুকান"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"প্লেয়ার দেখুন"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"কোনও প্লেয়ার উপলভ্য নেই"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"মিডিয়া"</string>
 </resources>

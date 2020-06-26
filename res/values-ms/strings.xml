@@ -1190,6 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Meningkatkan kadar muat semula daripada 60 kepada 90 Hz untuk sesetengah kandungan secara automatik. Meningkatkan penggunaan bateri."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Kadar muat semula tertinggi untuk keresponsifan sentuhan &amp; kualiti animasi yang dipertingkat. Meningkatkan penggunaan bateri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Perhatian skrin"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Hidup / Skrin tidak akan dimatikan jika anda melihat pada skrin"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Mati"</string>
@@ -3084,7 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Panggil Pengurus"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Makluman kecemasan"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Makluman kecemasan wayarles"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Pengendali rangkaian"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Nama titik capaian"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3551,7 +3553,7 @@
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Perbualan keutamaan"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Tunjukkan di sebelah atas bahagian perbualan dan kelihatan seperti gelembung yang terapung"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"Tunjukkan di atas bahagian perbualan"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Muncul di atas bahagian perbualan"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Perbualan lain"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Perbualan yang telah anda buat perubahan"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Gelembungkan perbualan keutamaan"</string>
@@ -3663,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Apl ini belum menyiarkan sebarang pemberitahuan"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tetapan tambahan dalam apl"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Sejarah pemberitahuan, gelembung, yang baru dihantar"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Hidupkan untuk semua apl"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Dimatikan untuk <xliff:g id="COUNT_1">%d</xliff:g> apl</item>
@@ -4647,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Togol perubahan keserasian apl"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Perubahan didayakan tetapan lalai"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Perubaan dilumpuhkan tetapan lalai"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Tiada apl tersedia"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Perubahan keserasian aplikasi hanya boleh diubah suai untuk apl boleh dinyahpepijat. Pasang apl boleh dinyahpepijat dan cuba lagi."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Tetapan tidak disokong pada telefon ini"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Tetapan tidak disokong pada tablet ini"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Tetapan tidak disokong pada peranti ini"</string>
@@ -4819,6 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Cuba lagi"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Sesuatu telah berlaku. Aplikasi telah membatalkan permintaan untuk memilih peranti."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Sambungan berjaya"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Sambungan gagal"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Tunjukkan semua"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Mencari peranti…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Menyambung ke peranti…"</string>
@@ -4933,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Gantung pelaksanaan untuk apl cache"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Benarkan tindanan skrin pada Tetapan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Benarkan apl yang boleh dipaparkan di atas apl lain untuk menindan skrin Tetapan"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Sembunyikan pemain apabila sesi media tamat"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Pemain membolehkan anda menyambung semula sesi daripada panel Tetapan Pantas yang dikembangkan."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Sembunyikan pemain"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Tunjukkan pemain"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Tiada pemain tersedia"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>
