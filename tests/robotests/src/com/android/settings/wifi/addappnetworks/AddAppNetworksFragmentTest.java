@@ -265,6 +265,9 @@ public class AddAppNetworksFragmentTest {
 
     @Test
     public void onDestroy_quitWorkerThread() {
+        addOneSpecifiedRegularNetworkSuggestion(mNewWpaSuggestionEntry);
+        setUpBundle(mFakedSpecifiedNetworksList);
+        setupFragment();
         mAddAppNetworksFragment.mWorkerThread = mock(HandlerThread.class);
 
         try {
