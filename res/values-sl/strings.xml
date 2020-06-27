@@ -1230,10 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Tekoč prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Samodejno povečanje hitrosti osveževanja s 60 na 90 Hz za nekatere vsebine. Poveča porabo energije baterije."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Tekoč prikaz"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Višja hitrost osveževanja za izboljšano odzivnost na dotik in kakovost animacij. Povečana poraba energije baterije."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Zaznavanje pogleda na zaslon"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Vklopljeno / zaslon se ne bo izklopil, če ga gledate"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Izklopljeno"</string>
@@ -3174,8 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Upravitelj klicev"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Brezžična nujna opozorila"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Omrežni operaterji"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Imena dostopnih točk (APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3737,7 +3734,7 @@
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"za več profilov povezana aplikacija aplikacije delovne in osebne"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Povezane delovne in osebne aplikacije"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"Povezano"</string>
-    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Poveži te aplikacije"</string>
+    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Poveži ti aplikaciji"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Povezane aplikacije si delijo dovoljenja in imajo dostop do podatkov z njimi povezanih aplikacij."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Aplikaciji povežite le, če ste prepričani, da ne bosta delili osebnih podatkov s skrbnikom za IT."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Povezavo med aplikacijami lahko kadar koli prekinete v nastavitvah zasebnosti za napravo."</string>
@@ -3774,6 +3771,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Ta aplikacija ni objavila nobenih obvestil"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatne nastavitve v aplikaciji"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Zgodovina obvestil, oblački, nedavno poslano"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Vklopljeno za vse aplikacije"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Izklopljeno za <xliff:g id="COUNT_1">%d</xliff:g> aplikacijo</item>
@@ -4828,6 +4826,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Vklop/izklop sprememb združljivosti aplikacij"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Privzeto omogočene spremembe"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Privzeto onemogočene spremembe"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Ni aplikacij"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Spremembe združljivosti aplikacij je mogoče spreminjati samo za aplikacije z možnostjo odpravljanja napak. Namestite aplikacijo z možnostjo odpravljanja napak in poskusite znova."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Telefon ne podpira nastavitve"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Tablični računalnik ne podpira nastavitve"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Naprava ne podpira nastavitve"</string>
@@ -5002,8 +5002,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Poskusi znova"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Prišlo je do napake. Aplikacija je preklicala zahtevo za izbiro naprave."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Uspešna vzpostavitev povezave"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Povezava ni bila vzpostavljena"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Pokaži vse"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Iskanje naprave …"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Vzpostavljanje povezave z napravo …"</string>
@@ -5119,7 +5118,14 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Ko uporabljate dve kartici SIM, lahko ta telefon vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Ko uporabljate dve kartici SIM, lahko ta tablični računalnik vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Ko uporabljate dve kartici SIM, lahko ta naprava vzpostavi povezavo samo z omrežjem 4G. "<annotation id="url">"Več o tem"</annotation>"."</string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"Začasno onemogočenje izvajanja za predpomnjene aplikacije"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"Ustavitev izvajanja za predpomnjene aplikacije"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Dovoli prekrivanje zaslonov z nastavitvami"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Dovoli aplikacijam, ki lahko prekrivajo druge aplikacije, prekrivanje zaslonov v aplikaciji Nastavitve"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Predstavnost"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Skrije predvajalnik po končani seji predstavnosti"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Predvajalnik vam omogoča nadaljevanje seje prek razširjenega podokna s hitrimi nastavitvami."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži predvajalnik"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Na voljo ni noben predvajalnik"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"predstavnost"</string>
 </resources>
