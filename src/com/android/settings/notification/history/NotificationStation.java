@@ -458,6 +458,18 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     .append(bold(getString(R.string.notification_log_channel)))
                     .append(delim)
                     .append(info.channel.toString());
+            sb.append("\n")
+                    .append(bold("getShortcutInfo"))
+                    .append(delim)
+                    .append(String.valueOf(rank.getShortcutInfo()));
+            sb.append("\n")
+                    .append(bold("isConversation"))
+                    .append(delim)
+                    .append(rank.isConversation() ? "true" : "false");
+            sb.append("\n")
+                    .append(bold("isBubble"))
+                    .append(delim)
+                    .append(rank.isBubble() ? "true" : "false");
             if (info.active) {
                 sb.append("\n")
                         .append(bold(getString(
@@ -592,6 +604,18 @@ public class NotificationStation extends SettingsPreferenceFragment {
                             R.string.notification_log_details_content_view)))
                     .append(delim)
                     .append(n.contentView.toString());
+        }
+        if (n.getBubbleMetadata() != null) {
+            sb.append("\n")
+                    .append(bold("bubbleMetadata"))
+                    .append(delim)
+                    .append(String.valueOf(n.getBubbleMetadata()));
+        }
+        if (n.getShortcutId() != null) {
+            sb.append("\n")
+                    .append(bold("shortcutId"))
+                    .append(delim)
+                    .append(String.valueOf(n.getShortcutId()));
         }
 
         if (DUMP_EXTRAS) {
