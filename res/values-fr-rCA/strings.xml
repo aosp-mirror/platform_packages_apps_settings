@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmente automatiquement la fréquence d\'actualisation de 60 Hz à 90 Hz pour certains contenus. Cette fonctionns sollicite davantage la pile de l\'appareil."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Affichage fluide"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Taux d\'actualisation supérieur pour une amélioration de la réactivité tactile et de la fluidité des animations. Cette fonction sollicite davantage la pile de l\'appareil."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Écran attentif"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activé : L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Désactivé"</string>
@@ -3088,8 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Gestionnaire d\'appels"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Alertes d\'urgence sans fil"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Fournisseurs de services cellulaires"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Noms des points d\'accès"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3668,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Cette application n\'a publié aucune notification"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Paramètres supplémentaires dans l\'application"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Historique des notifications, bulles, éléments récemment envoyés"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Activé pour toutes les applications"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Désactivé pour <xliff:g id="COUNT_1">%d</xliff:g> application</item>
@@ -4652,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Basculer les changements de compatibilité des applications"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Changements activés par défaut"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Changements désactivés par défaut"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Aucune application"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Les modifications de compatibilité des applications peuvent uniquement être modifiées pour les applications débogables. Installez une application débogable, puis réessayez."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Le paramètre n\'est pas compatible avec ce téléphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Le paramètre n\'est pas compatible avec cette tablette"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Le paramètre n\'est pas compatible avec cet appareil"</string>
@@ -4824,8 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Réessayer"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Une erreur s\'est produite. L\'application a annulé la demande de sélection d\'un appareil."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Connexion réussie"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Échec de connexion"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Tout afficher"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Recherche d\'appareil en cours…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connexion à l\'appareil en cours…"</string>
@@ -4940,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspendre l\'exécution pour les applications en cache"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser les superpos. d\'écran pour les paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autorisez les applications qui peuvent se superposer à d\'autres à afficher du contenu par-dessus les écrans des paramètres"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Commandes multimédias"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Masquer le lecteur à la fin de la session multimédia"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Le lecteur vous permet de reprendre une session à partir du panneau Paramètres rapides développé."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Masquer le lecteur"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Afficher le lecteur"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Aucun lecteur n\'a été trouvé"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"commandes multimédias"</string>
 </resources>

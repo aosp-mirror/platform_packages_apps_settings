@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Ayrim kontent uchun ekranning yangilanish chastotasi 60-90 Gs orasida almashib turadi. Batareya tezroq sarflanadi."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Ekran sensorining javob qaytarishi va animatsiyalar sifati uchun eng yuqori yangilanish chastotasi Batareya tezroq sarflanadi."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Moslashuvchan kutish rejimi"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Yoniq / Ekranga qarab turganingizda u yoniq holatda qoladi"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Yoqilmagan"</string>
@@ -3088,8 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Qo‘ng‘iroqlar boshqaruvchisi"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Simsiz favqulodda ogohlantirishlar"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Tarmoq operatorlari"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Ulanish nuqtalari"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3668,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Bu ilova hech qanday bildirishnoma joylamagan"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Ilovadagi boshqa sozlamalar"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Bildirishnoma tarixi, pufaklar, oxirgi yuborilganlar"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Barcha ilovalar uchun yoniq"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ta ilova uchun yoqilmagan</item>
@@ -3809,7 +3807,7 @@
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Ilovalarga Bezovta qilinmasin rejimiga amal qilmasligiga ruxsat berish"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Bezovta qilinmasin rejimi ishlamaydigan ilovalar"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Boshqa ilovalarni tanlang"</string>
-    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Hech narsa tanlanmadi"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Hech qanday ilova tanlanmagan"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Bezovta qilinmasin rejimi barcha ilovalar uchun ishlaydi"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Ilovalarni kiritish"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Barcha bildirishnomalar"</string>
@@ -4652,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Ilova mosligiga oʻzgartirishlarni koʻrsatish"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Standart yoniq oʻzgartirishlar"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Standart yoqilmagan oʻzgartirishlar"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Mos ilova topilmadi"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Ilova mosligini faqat nosozliklari aniqlanadigan ilovalarda oʻzgartirish mumkin. Nosozliklari aniqlanadigan ilovani oʻrnating va qayta urining."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Parametr bu telefonda ishlamaydi"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Parametr bu planshetda ishlamaydi"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Parametr bu qurilmada ishlamaydi"</string>
@@ -4824,8 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Qaytadan urinish"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Xatolik yuz berdi. Ilova qurilmani tanlash talabini bekor qildi."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Muvaffaqiyatli ulandi!"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Ulanishda xatolik yuz berdi"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Hammasi"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Qurilma qidirilmoqda…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Qurilmaga ulanilmoqda…"</string>
@@ -4940,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Keshdagi ilovalar ishga tushirilishini bloklash"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Sozlamalar orqali ustki ilovalarga ruxsat berish"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Boshqa ilovalar ustidan ochiladigan ilovalarga ruxsat berish"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Media seansi tamomlanganda pleyer berkitilsin"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Pleyer ochiq turgan Tezkor sozlamalar paneli orqali seansni davom ettirish imkonini beradi."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Pleyerni berkitish"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Pleyerni chiqarish"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Hech qanday pleyer mavjud emas"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>

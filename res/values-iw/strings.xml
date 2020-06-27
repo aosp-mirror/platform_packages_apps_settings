@@ -1230,10 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏קצב הרענון עולה באופן אוטומטי מ-60 ל-Hz‏90 לחלק מהתוכן. פעולה זו מגבירה את השימוש בסוללה."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"תצוגה חלקה"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"קצב הרענון הגבוה ביותר לתגובה משופרת למגע ולאיכות אנימציה טובה יותר. פעולה זו מגבירה את השימוש בסוללה."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"המסך נשאר דלוק"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"כבוי"</string>
@@ -3174,8 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Call Manager"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"התראות אלחוטיות על מקרי חירום"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ספקי רשתות"</string>
     <string name="access_point_names" msgid="5768430498022188057">"‏שמות של נקודות גישה (APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3774,6 +3771,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"האפליקציה הזו לא שלחה התראות"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"הגדרות נוספות באפליקציה"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"היסטוריית התראות, בועות, התראות שנשלחו לאחרונה"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"מופעל לכל האפליקציות"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="two">כבוי עבור <xliff:g id="COUNT_1">%d</xliff:g> אפליקציות</item>
@@ -4828,6 +4826,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"החלפת מצב השינויים בתאימות האפליקציה"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"השינויים מופעלים כברירת מחדל"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"השינויים מושבתים כברירת מחדל"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"אין אפליקציות זמינות"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"ניתן לבצע שינויים בתאימות האפליקציה רק עבור אפליקציות שניתנות לניפוי באגים. יש להתקין אפליקציה שניתנת לניפוי באגים ולנסות שוב."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ההגדרה אינה נתמכת בטלפון זה"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ההגדרה אינה נתמכת בטאבלט זה"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ההגדרה אינה נתמכת במכשיר זה"</string>
@@ -5002,8 +5002,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"לניסיון חוזר"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"משהו קרה. האפליקציה ביטלה את הבקשה לבחירת מכשיר."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"החיבור הצליח"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"החיבור נכשל"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"הצגת הכול"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"מתבצע חיפוש אחר מכשיר…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"מתבצעת התחברות למכשיר…"</string>
@@ -5122,4 +5121,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"השעיית הביצוע לאפליקציות שנשמרו במטמון"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"הנגן יוסתר כשסשן המדיה יסתיים"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"הנגן מאפשר לך להמשיך סשן מחלונית מורחבת של הגדרות מהירות."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"הסתרת הנגן"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"הצגת הנגן"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"אין נגנים זמינים"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"מדיה"</string>
 </resources>

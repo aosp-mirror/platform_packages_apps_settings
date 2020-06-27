@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ავტომატურად ზრდის განახლების სიხშირეს 60-დან და 90 ჰც-მდე გარკვეული კონტენტისთვის. გაზრდის ბატარეის მოხმარებას."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"განახლების უმაღლესი სიხშირე შეხებაზე გაუმჯობესებული რეაგირებისთვის და უფრო ერთგვაროვანი ანიმაციისთვის. გაზრდის ბატარეის მოხმარებას."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ეკრანისკენ მიმართული ყურადღება"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ჩართულია / ეკრანი არ გამოირთვება, თუ მას უყურებთ"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"გამორთულია"</string>
@@ -3088,8 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"ზარების მენეჯერი"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"უსადენო საგანგებო გაფრთხილებები"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ქსელის ოპერატორები"</string>
     <string name="access_point_names" msgid="5768430498022188057">"წვდომის წერტილის სახელი (APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3668,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"ამ აპს შეტყობინებები არ გამოუქვეყნებია"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"დამატებითი პარამეტრები აპში"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"შეტყობინებათა ისტორია, ბუშტები, ახლახან გაგზავნილი"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"ჩართულია ყველა აპისთვის"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">გამორთულია <xliff:g id="COUNT_1">%d</xliff:g> აპისთვის</item>
@@ -4652,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"აპის თავსებადობის ცვლილებების გადართვა"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ნაგულისხმევი ჩართული ცვლილებები"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ნაგულისხმევი გათიშული ცვლილებები"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"ხელმისაწვდომი აპები არ არის"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"აპის თავსებადობის ცვლილებები მხოლოდ გამართვადი აპლიკაციებისთვის შეიძლება განხორციელდეს დააინსტალირეთ გამართვადი აპი და ხელახლა ცადეთ."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ეს პარამეტრი ამ ტელეფონზე მხარდაუჭერელია"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ეს პარამეტრი ამ ტაბლეტზე მხარდაუჭერელია"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ეს პარამეტრი ამ მოწყობილობაზე მხარდაუჭერელია"</string>
@@ -4824,8 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"ხელახლა ცდა"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"წარმოიქმნა შეფერხება. აპლიკაციამ გააუქმა მოწყობილობის არჩევის მოთხოვნა."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"წარმატებით დაკავშირდა"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"დაკავშირება ვერ მოხერხდა"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"ყველას ჩვენება"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"მიმდინარეობს მოწყობილობის ძიება…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"უკავშირდება მოწყობილობას…"</string>
@@ -4937,7 +4936,14 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"ორი SIM-ბარათის გამოყენებისას ეს ტელეფონი 4G-ზე მაღალ ქსელს ვერ დაუკავშირდება. "<annotation id="url">"შეიტყვეთ მეტი"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"ორი SIM-ბარათის გამოყენებისას ეს ტაბლეტი 4G-ზე მაღალ ქსელს ვერ დაუკავშირდება. "<annotation id="url">"შეიტყვეთ მეტი"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"ორი SIM-ბარათის გამოყენებისას ეს მოწყობილობა 4G-ზე მაღალ ქსელს ვერ დაუკავშირდება. "<annotation id="url">"შეიტყვეთ მეტი"</annotation>"."</string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"გაფორმების შეჩერება ქეშირებული აპებისთვის"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"აღსრულების შეჩერება ქეშირებული აპებისთვის"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"პარამეტრებზე ეკრანის გადაფარვის დაშვება"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"პარამეტრების ეკრანების გადაფარვის დაშვება აპებისთვის, რომლებსაც სხვა აპების ზემოდან გამოჩენა შეუძლია"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"დამკვრელი დაიმალოს მედიასესიის დასრულებისას"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"დამკვრელი საშუალებას გაძლევთ, განაგრძოთ სესია სწრაფი პარამეტრების გაფართოებული პანელიდან."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"დამკვრელის დამალვა"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"დამკვრელის ჩვენება"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"დამკვრელები მიუწვდომელია"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"მედია"</string>
 </resources>
