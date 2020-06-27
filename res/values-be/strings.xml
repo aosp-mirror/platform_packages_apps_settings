@@ -1230,6 +1230,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плаўнае адлюстраванне"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Аўтаматычна павялічвае частату абнаўлення пэўнага змесціва з 60 да 90 Гц. Павышае выкарыстанне зараду акумулятара."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плаўнае адлюстраванне"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвышэйшая частата абнаўлення для лепшага рэагавання на дотыкі і вышэйшай якасці анімацыі. Павышае выкарыстанне зараду акумулятара."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптыўны рэжым"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Укл. / Калі глядзець на экран, ён не будзе выключацца"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Выключана"</string>
@@ -1239,8 +1241,8 @@
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"Адаптыўны рэжым з дапамогай пярэдняй камеры вызначае, калі хто-небудзь глядзіць на экран. Функцыя працуе толькі на прыладзе: відарысы не захоўваюцца і не адпраўляюцца ў Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Уключыць адаптыўны рэжым"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Не дазваляць экрану выключацца, калі на яго глядзяць"</string>
-    <string name="night_display_title" msgid="8532432776487216581">"Начны рэжым"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"У начным рэжыме экран будзе мець бурштынавае адценне. Так вам будзе зручней глядзець на экран пры цьмяным асвятленні, а таксама лягчэй заснуць."</string>
+    <string name="night_display_title" msgid="8532432776487216581">"Начная падсветка"</string>
+    <string name="night_display_text" msgid="4789324042428095383">"У рэжыме Начной падсветкі экран будзе мець бурштынавае адценне. Так вам будзе зручней глядзець на экран пры цьмяным асвятленні, а таксама лягчэй заснуць."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Расклад"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Ніколі"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Уключаецца ў вызначаны час"</string>
@@ -1263,7 +1265,7 @@
     <string name="night_display_activation_off_twilight" msgid="2853594955401726956">"Выключыць да вечара"</string>
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Уключыць да <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Выключыць да <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_not_currently_on" msgid="6600205753103093827">"Начны рэжым не ўключаны"</string>
+    <string name="night_display_not_currently_on" msgid="6600205753103093827">"Начная падсветка не ўключана"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Уключыце геалакацыю для вызначэння часу захаду і ўсходу сонца."</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Налады месцазнаходжання"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Уключыць"</string>
@@ -3170,7 +3172,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Call Manager (Менеджар выклікаў)"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <string name="cell_broadcast_settings" msgid="6414938308090183446">"Абвесткі аб надзвычайных сітуацыях"</string>
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Аварыйныя абвесткі па бесправадных сетках"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Сеткавыя аператары"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Назвы пунктаў доступу"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3735,8 +3737,7 @@
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"Падключыць гэтыя праграмы"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Падключаныя праграмы абагульваюць дазволы і могуць мець доступ да даных адна адной."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Падключайце праграмы, толькі калі вы ўпэўнены, што яны не абагульваюць асабістыя даныя з вашым ІТ-адміністратарам."</string>
-    <!-- no translation found for interact_across_profiles_summary_3 (444428694843299854) -->
-    <skip />
+    <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Выключыць праграмы можна ў любы час у наладах прыватнасці на прыладзе."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Даверыць праграме \"<xliff:g id="NAME">%1$s</xliff:g>\" працаваць з вашымі асабістымі данымі?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Падключайце праграмы, толькі калі вы ўпэўнены, што яны не абагульваюць асабістыя даныя з вашым ІТ-адміністратарам."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Даныя праграмы"</string>
@@ -3770,6 +3771,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Гэта праграма не размяшчала ніякіх апавяшчэнняў"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Дадатковыя налады ў праграме"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Гісторыя апавяшчэнняў, усплывальныя апавяшчэнні, нядаўна адпраўленыя апавяшчэнні"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Уключана для ўсіх праграм"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Выключана для <xliff:g id="COUNT_1">%d</xliff:g> праграмы</item>
@@ -4084,8 +4086,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Няма дазволаў"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Няма запытаў дазволаў"</string>
-    <!-- no translation found for runtime_permissions_summary_control_app_access (3744591396348990500) -->
-    <skip />
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Кіруйце доступам праграм да вашых даных"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Усе праграмы"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Усталяваныя праграмы"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Імгненныя праграмы"</string>
@@ -4379,9 +4380,9 @@
     <string name="condition_device_muted_summary" msgid="3772178424510397327">"Для выклікаў і апавяшчэнняў"</string>
     <string name="condition_device_vibrate_title" msgid="9058943409545158583">"Толькі вібрацыя"</string>
     <string name="condition_device_vibrate_summary" msgid="7537724181691903202">"Для выклікаў і апавяшчэнняў"</string>
-    <string name="night_display_suggestion_title" msgid="5418911386429667704">"Глядзець графік начнога рэжыму"</string>
+    <string name="night_display_suggestion_title" msgid="5418911386429667704">"Задаць расклад Начной падсветкі"</string>
     <string name="night_display_suggestion_summary" msgid="4218017907425509769">"Аўтаматычна мяняць колер экрана ўвечары"</string>
-    <string name="condition_night_display_title" msgid="1072880897812554421">"Начны рэжым уключаны"</string>
+    <string name="condition_night_display_title" msgid="1072880897812554421">"Начная падсветка ўключана"</string>
     <string name="condition_night_display_summary" msgid="3278349775875166984">"Бурштынавы колер экрана"</string>
     <string name="condition_grayscale_title" msgid="9029271080007984542">"Адценні шэрага"</string>
     <string name="condition_grayscale_summary" msgid="1306034149271251292">"Паказ толькі ў шэрым колеры"</string>
@@ -4825,6 +4826,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Пераключыць на змяненні ў сумяшчальнасці праграм"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Стандартныя ўключаныя змяненні"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Стандартныя адключаныя змяненні"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Праграмы недаступныя"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Змяненні ў сумяшчальнасці праграм могуць быць прыменены толькі да праграм з магчымасцю адладкі. Усталюйце такую праграму і паўтарыце спробу."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Налада не падтрымліваецца на гэтым тэлефоне"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Налада не падтрымліваецца на гэтым планшэце"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Налада не падтрымліваецца на гэтай прыладзе"</string>
@@ -4999,6 +5002,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Паўтарыць спробу"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Нешта здарылася. Праграма скасавала запыт на выбар прылады."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Падключэнне выканана"</string>
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Памылка падключэння"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Паказаць усе"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Ідзе пошук прылады…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Ідзе падключэнне да прылады…"</string>
@@ -5117,4 +5121,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Прыпыніць выкананне для кэшаваных праграм"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дазволіць экранныя накладкі на Налады"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дазвольце праграмам, якія могуць паказвацца паверх іншых, накладацца на экраны Налад"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Мультымедыя"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Схаваць прайгравальнік пасля завяршэння сеанса"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Прайгравальнік дазваляе вам узнавіць сеанс з разгорнутай панэлі \"Хуткія налады\"."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Схаваць прайгравальнік"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Паказаць прайгравальнік"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Няма даступных прайгравальнікаў"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"мультымедыя"</string>
 </resources>
