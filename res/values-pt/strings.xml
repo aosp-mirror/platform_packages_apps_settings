@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automaticamente a taxa de atualização de 60 para 90 Hz para alguns conteúdos. Maior uso da bateria."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Maior taxa de atualização para melhoria na resposta tátil e na qualidade das animações. Maior uso da bateria."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Reconhecimento de tela em uso"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Ativado / A tela não será desativada se você estiver olhando para ela"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Desativada"</string>
@@ -2237,7 +2235,7 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> aparelhos auditivos salvos</item>
     </plurals>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Atalho ativado"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativado"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Desativada"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Ativado"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"Desativado"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"Não está funcionando. Toque para ver informações."</string>
@@ -3088,8 +3086,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Gerenciador de chamadas"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Alertas de emergência sem fio"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Operadores de rede"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Nomes dos pontos de acesso"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3556,7 +3553,7 @@
     </plurals>
     <string name="important_conversations" msgid="1233893707189659401">"Conversas prioritárias"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Mostrar na parte superior da seção de conversa na forma de balões"</string>
-    <string name="important_conversations_summary" msgid="3184022761562676418">"Aparecer na parte superior da seção de conversa"</string>
+    <string name="important_conversations_summary" msgid="3184022761562676418">"Aparecem na parte superior da seção de conversa"</string>
     <string name="other_conversations" msgid="7218658664423361043">"Outras conversas"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversas que você modificou"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Mostrar conversas prioritárias em balões"</string>
@@ -3605,7 +3602,7 @@
       <item quantity="other">%d apps podem ler notificações</item>
     </plurals>
     <string name="notification_assistant_title" msgid="6983941403582134437">"Notificações adaptáveis"</string>
-    <string name="no_notification_assistant" msgid="2533323397091834096">"Nenhum"</string>
+    <string name="no_notification_assistant" msgid="2533323397091834096">"Nenhuma"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nenhum app instalado solicitou o acesso a notificações."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acesso às notificações"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
@@ -3668,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Este app não postou nenhuma notificação"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Configurações adicionais no app"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Histórico de notificações, balões, mensagens enviadas recentemente"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Ativadas para todos os apps"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Desativadas para <xliff:g id="COUNT_1">%d</xliff:g> app</item>
@@ -4652,6 +4650,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Alternar mudanças de compatibilidade do app"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Mudanças ativadas padrão"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Mudanças desativadas padrão"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Nenhum app dispon."</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"As mudanças na compatibilidade de apps só podem ser modificadas para apps depuráveis. Instale um app depurável e tente novamente."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"A configuração não está disponível neste smartphone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"A configuração não está disponível neste tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"A configuração não está disponível neste dispositivo"</string>
@@ -4824,8 +4824,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Tentar novamente"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Algo deu errado. O aplicativo cancelou a solicitação para selecionar um dispositivo."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Conexão realizada"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Falha na conexão"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Mostrar tudo"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Procurando dispositivo…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Conectando ao dispositivo…"</string>
@@ -4940,4 +4939,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspender execução para apps em cache"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir sobreposições de tela no app Config."</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permita que apps que podem ser sobrepostos a outros sejam abertos sobre telas de configuração"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Mídia"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Ocultar player quando a sessão de mídia terminar"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"O player permite que você retome uma sessão do painel \"Configurações rápidas\" expandido."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Ocultar player"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Mostrar player"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Nenhum player disponível"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"mídia"</string>
 </resources>

@@ -798,11 +798,11 @@
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Prikaz trenutne brzine osvježavanja ekrana"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Omogućavanje razmjene podataka kada tablet dodirne NFC uređaj"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Dozvoli razmjenu podataka kada telefon dodirne NFC uređaj"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Dozvolite razmjenu podataka kada telefon dodirne NFC uređaj"</string>
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Uključite NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC razmjenjuje podatke između ovog i drugih uređaja ili ciljeva u blizini, kao što su terminali za plaćanje, čitači pristupa i interaktivni oglasi ili oznake."</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Zahtijevaj otključavanje uređaja za NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Dozvoli korištenje NFC-a za plaćanje i u javnom prijevozu samo kada je ekran otključan"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Dozvolite korištenje NFC-a za plaćanje i u javnom prijevozu samo kada je ekran otključan"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Spremno za prijenos sadržaja aplikacije putem NFC-a"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Isključeno"</string>
@@ -1210,10 +1210,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Glatki prikaz"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Automatski povećava interval osvježavanja sa 60 na 90 Hz za određeni sadržaj. Povećava potrošnju baterije."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Glatki prikaz"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Najveća brzina osvježavanja za poboljšanu reakciju na dodir i kvalitet animacije. Povećava potrošnju baterije."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Svjesni ekran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Uključeno / ekran se neće isključiti ako gledate u njega"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Isključeno"</string>
@@ -3081,8 +3079,8 @@
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Sve aplikacije i podaci iz ove sesije će biti izbrisani."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Ukloniti"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Uključi telefonske pozive"</string>
-    <string name="user_enable_calling_sms" msgid="8546430559552381324">"Uključivanje telefonskih poziva i SMS-ova"</string>
-    <string name="user_remove_user" msgid="8468203789739693845">"Brisanje korisnika"</string>
+    <string name="user_enable_calling_sms" msgid="8546430559552381324">"Uključi telefonske pozive i SMS-ove"</string>
+    <string name="user_remove_user" msgid="8468203789739693845">"Izbriši korisnika"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Uključiti telefonske pozive?"</string>
     <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Historija poziva će se dijeliti s ovim korisnikom."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Uključiti telefonske pozive i SMS-ove?"</string>
@@ -3131,8 +3129,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Upravitelj za pozive"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Hitna upozorenja putem bežične mreže"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Mrežni operateri"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Nazivi pristupnih tačaka"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3721,6 +3718,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Ova aplikacija nije objavila nikakva obavještenja"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Dodatne postavke u aplikaciji"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Historija obavještenja, oblačići, nedavno poslano"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Uključeno za sve aplikacije"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Isključeno za <xliff:g id="COUNT_1">%d</xliff:g> aplikaciju</item>
@@ -3866,7 +3864,7 @@
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Događaji"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dozvolite aplikacijama da zanemaruju"</string>
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije koje vas mogu prekinuti"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite više aplikacija"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite još aplikacija"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nije odabrana nijedna aplikacija"</string>
     <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Nijedna aplikacija ne može prekinuti"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Dodajte aplikacije"</string>
@@ -4022,7 +4020,7 @@
     </plurals>
     <string name="runtime_permissions_summary_no_permissions_granted" msgid="7456745929035665029">"Nema dodijeljenih odobrenja"</string>
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Nema zatraženih odobrenja"</string>
-    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrolirajte pristup aplik. podacima"</string>
+    <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Kontrolirajte pristup aplikacije podacima"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Sve aplikacije"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Instalirane aplikacije"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant aplikacije"</string>
@@ -4740,6 +4738,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uključivanje/isključivanje izmjena kompatibilnosti aplikacije"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Zadano omogućene izmjene"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Zadano onemogućene izmjene"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Nema dostupnih apl."</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Promjene kompatibilnosti aplikacije je moguće izmijeniti isključivo kod aplikacija kod kojih je moguće izvršiti otklanjanje grešaka. Instalirajte aplikaciju kod koje je moguće izvršiti otklanjanje grešaka i pokušajte ponovo."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Postavka nije podržana na ovom telefonu"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Postavka nije podržana na ovom tabletu"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Postavka nije podržana na ovom uređaju"</string>
@@ -4913,8 +4913,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Pokušaj ponovo"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Nešto se dogodilo. Ova aplikacija je otkazala zahtjev za odabir uređaja."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Uspješno povezivanje"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Veza nije uspjela"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Prikaži sve"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Traženje uređaja…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Povezivanje s uređajem…"</string>
@@ -5031,4 +5030,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Obustavi izvršenja za aplikacije u keš memoriji"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Dozvolite preklapanja ekrana na Postavkama"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Dozvolite aplikacijama koje mogu prikazivati preko drugih aplikacija da preklapaju ekrane Postavki"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Mediji"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Sakrij plejer kada se sesija medija završi"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Ovaj plejer omogućava da nastavite sesiju iz proširene ploče Brze postavke."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Sakrij plejer"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži plejer"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Nema dostupnih plejera"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"mediji"</string>
 </resources>
