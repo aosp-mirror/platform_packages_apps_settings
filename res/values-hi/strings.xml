@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"स्मूद डिसप्ले"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"कुछ कॉन्टेंट के लिए, यह अपने-आप ही रीफ़्रेश दर को 60 हर्ट्ज़ से बढ़ाकर 90 हर्ट्ज़ कर देता है. इसमें बैटरी ज़्यादा खर्च होती है."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"स्मूद डिसप्ले"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"रीफ़्रेश होने की सबसे ज़्यादा दर जिसके लागू होने के बाद छूकर की जाने वाली कार्रवाइयां तेज़ हो जाती हैं. साथ ही, ऐनिमेशन की क्वालिटी बेहतर हो जाती है. इसमें बैटरी ज़्यादा खर्च होती है."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"स्क्रीन चालू रखने की सुविधा"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"चालू / अगर आप स्क्रीन को देख रहे हैं, तो वह बंद नहीं होगी"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"बंद"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"कॉल प्रबंधक"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"वायरलेस इमरजेंसी अलर्ट"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"नेटवर्क ऑपरेटर"</string>
     <string name="access_point_names" msgid="5768430498022188057">"ऐक्सेस पॉइंट का नाम"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"कम ज़रूरी सूचनाओं को बिना आवाज़ वाली सूचनाओं के तौर पर अपने आप सेट करें"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"ज़रूरत के हिसाब से सूचनाओं को रैंक दें"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"कोई सूचना कितने काम की है, इस हिसाब से उसे अपने-आप रैंक करें"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"ज़रूरत के हिसाब से सूचनाओं के बारे में सुझाव दें या शिकायत करें"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"यह सेटिंग, सूचनाओं की प्राथमिकताओं में किए गए बदलावों के बारे में बताती है और सिस्टम के बारे में राय/सुझाव देने के विकल्प दिखाती है"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"सुझाई गई कार्रवाइयां और जवाब"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"सुझाई गई कार्रवाइयां और जवाब अपने आप दिखाएं"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"हाल ही में मिली और स्नूज़ की गई सूचनाएं दिखाएं"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"इस ऐप्लिकेशन ने कोई भी सूचना पोस्ट नहीं की है"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"ऐप्लिकेशन में मौजूद दूसरी सेटिंग"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"सूचनाओं का इतिहास, बबल्स, और हाल ही में भेजी गई सूचनाएं"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"सभी ऐप्लिकेशन में सूचना पाने की सुविधा चालू है"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ऐप्लिकेशन में सूचना पाने की सुविधा बंद है</item>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"काम करने के लिए ऐप्लिकेशन में किए गए बदलावों को टॉगल करें"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"डिफ़ॉल्ट रूप से चालू किए गए बदलाव"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"डिफ़ॉल्ट रूप से बंद किए गए बदलाव"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"डीबग करने लायक कोई ऐप्लिकेशन उपलब्ध नहीं है"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"ऐप्लिकेशन के साथ काम करने के लिए किए जाने वाले बदलाव, सिर्फ़ डीबग करने लायक ऐप्लिकेशन में किए जा सकते हैं. डीबग करने लायक किसी ऐप्लिकेशन को इंस्टॉल करें और फिर से कोशिश करें."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"इस फ़ोन पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"इस टैबलेट पर सेटिंग नहीं की जा सकती"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"इस डिवाइस पर सेटिंग नहीं की जा सकती"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"फिर से कोशिश करें"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"कुछ गड़बड़ी हुई है ऐप्लिकेशन ने डिवाइस चुनने का अनुरोध रद्द कर दिया है."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"कनेक्शन कामयाब रहा"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"कनेक्ट नहीं किया जा सका"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"सभी दिखाएं"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"डिवाइस खोजा जा रहा है…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"डिवाइस से कनेक्ट किया जा रहा है…"</string>
@@ -4947,7 +4948,14 @@
     <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"इस फ़ोन में अगर दो सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"इस टैबलेट में अगर दो सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation>"."</string>
     <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"इस डिवाइस में अगर दो सिम इस्तेमाल किए जाते हैं, तो 5G नेटवर्क की सुविधा काम नहीं करेगी. हालांकि, आप 4G तक के नेटवर्क इस्तेमाल कर सकते हैं. "<annotation id="url">"ज़्यादा जानें"</annotation>"."</string>
-    <string name="cached_apps_freezer" msgid="1057519579761550350">"ऐप से कैश किए गए डेटा को एक्सीक्यूट करने से रोकें"</string>
+    <string name="cached_apps_freezer" msgid="1057519579761550350">"कैश किए गए ऐप्लिकेशन चलने से रोकना"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"\'सेटिंग\' पर स्क्रीन ओवरले करने की अनुमति दें"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"\'सेटिंग\' में जाकर उन ऐप्लिकेशन को स्क्रीन ओवरले करने की अनुमति दें जो दूसरे ऐप्लिकेशन के ऊपर दिख सकते हैं"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"मीडिया सेशन के खत्म होने पर, प्लेयर छिपाएं"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"आप मीडिया प्लेयर का इस्तेमाल करके, फटाफट सेटिंग के बड़े किए गए पैनल से सेशन फिर से शुरू कर सकते हैं."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"मीडिया प्लेयर को छिपाएं"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"मीडिया प्लेयर दिखाएं"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"कोई मीडिया प्लेयर उपलब्ध नहीं है"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"मीडिया"</string>
 </resources>

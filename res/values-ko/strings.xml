@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"스무스 디스플레이"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"일부 콘텐츠의 새로고침 빈도를 자동으로 60Hz에서 90Hz로 늘립니다. 이렇게 하면 배터리 사용량이 증가합니다."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"스무스 디스플레이"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"향상된 터치 반응 속도 및 애니메이션 품질에 맞는 가장 높은 새로고침 빈도입니다. 배터리 사용량이 증가합니다."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"화면 시선 감지"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"사용/화면을 보고 있으면 꺼지지 않음"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"사용 안함"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"통화 관리자"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"무선 긴급 경보"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"네트워크 이동통신사"</string>
     <string name="access_point_names" msgid="5768430498022188057">"액세스 포인트 이름(APN)"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3411,8 +3408,8 @@
     </plurals>
     <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g>분"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 설정될 수 있습니다.</item>
-      <item quantity="one">1개의 예약이 자동으로 설정될 수 있습니다.</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
+      <item quantity="one">1개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
     </plurals>
     <string name="zen_category_behavior" msgid="3214056473947178507">"방해 금지 모드 예외 항목"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"사람"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"우선순위가 낮은 알림을 조용한 알림으로 자동 설정합니다."</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"적응형 알림 순위 지정"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"관련성에 따라 자동으로 알림 순위 지정"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"적응형 알림 의견"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"알림의 수정사항을 표시하며 시스템에 의견을 제공하는 옵션을 보여줍니다."</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"추천 작업 및 답장"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"추천 작업 및 답장을 자동으로 표시합니다."</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"최근 알림 및 일시 중지된 알림 표시"</string>
@@ -3577,7 +3576,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"우선순위"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"대화 섹션 상단의 플로팅 대화창 또는 잠금 화면의 프로필 사진으로 표시됩니다."</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"대화 섹션 상단에 표시, 플로팅 대화창으로 표시, 그리고 잠금 화면에 프로필 사진이 표시됩니다."</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>에서 대부분의 대화 기능을 지원하지 않습니다. 대화의 우선순위 설정이 불가하며 대화가 플로팅 대화창으로 표시되지 않습니다."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 최소화합니다."</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"소리 또는 진동 없음"</string>
@@ -3627,12 +3626,12 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"PIP 모드"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"PIP 모드 허용"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"앱이 열려 있을 때나 사용자가 앱에서 나갔을 때 이 앱에서 PIP 창을 표시하도록 허용합니다(예: 동영상 시청을 계속하기 위해). 이 창은 사용 중인 다른 앱 위에 표시됩니다."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"직장 및 개인 앱 연결"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"연결된 직장 및 개인 앱"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"연결됨"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"연결되지 않음"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"연결된 앱이 없음"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"프로필 간 연결된 앱 앱 직장 및 개인"</string>
-    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"직장 및 개인 앱 연결"</string>
+    <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"연결된 직장 및 개인 앱"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"연결됨"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"앱 연결"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"연결된 앱은 권한을 공유하고 서로의 데이터에 액세스할 수도 있습니다."</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"이 앱에서 게시한 알림이 없음"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"앱 내 추가 설정"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"알림 기록, 대화창, 최근 받은 알림"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"모든 앱에서 사용"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">앱 <xliff:g id="COUNT_1">%d</xliff:g>개의 알림이 사용 중지됨</item>
@@ -3742,7 +3742,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>~<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>부터 <xliff:g id="END">%2$s</xliff:g>까지"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"대화"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"방해할 수 있는 대화"</string>
+    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"예외 대화"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"모든 대화"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"우선순위 대화"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"없음"</string>
@@ -3751,8 +3751,8 @@
       <item quantity="one">대화 1개</item>
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"없음"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"방해할 수 있는 사용자"</string>
-    <string name="zen_mode_calls_title" msgid="2078578043677037740">"통화"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"예외 사용자"</string>
+    <string name="zen_mode_calls_title" msgid="2078578043677037740">"전화"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"전화"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"전화"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"예외 전화"</string>
@@ -3798,7 +3798,7 @@
     <string name="zen_mode_system_list" msgid="2256218792042306434">"터치음"</string>
     <string name="zen_mode_system_list_first" msgid="8590078626001067855">"터치음"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"리마인더"</string>
-    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"작업 및 알림"</string>
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"작업 및 리마인더"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"리마인더"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"리마인더"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"캘린더 일정"</string>
@@ -3830,7 +3830,7 @@
     </plurals>
     <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"예외 소리 없음"</string>
     <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"외 <xliff:g id="NUMBER">%d</xliff:g>개"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"예외 없음"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"예외 사용자 없음"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"일부 사용자만 예외"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"모든 사람 예외"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"반복 발신자"</string>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"앱 호환성 변경사항 전환"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"기본적으로 사용 설정된 앱의 변경사항"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"기본적으로 사용 중지된 앱의 변경사항"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"사용 가능한 앱 없음"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"디버그 가능한 앱의 경우에만 앱 호환성 변경사항을 수정할 수 있습니다. 디버그 가능한 앱을 설치하고 다시 시도해 보세요."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"휴대전화에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"태블릿에서 지원되지 않는 설정"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"기기에서 지원되지 않는 설정"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"다시 시도"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"문제가 발생했습니다. 애플리케이션에서 기기 선택 요청을 취소했습니다."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"연결되었습니다."</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"연결 실패"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"모두 표시"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"기기 검색 중…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"기기에 연결하는 중…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"캐시된 앱 실행 정지"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"설정에서 화면 오버레이 허용"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"다른 앱 위에 표시할 수 있는 앱이 설정 화면을 오버레이하도록 허용합니다."</string>
+    <string name="media_controls_title" msgid="403271085636252597">"미디어"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"미디어 세션이 종료되면 플레이어를 숨깁니다."</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"플레이어를 사용하여 펼쳐진 빠른 설정 패널에서 세션을 다시 시작할 수 있습니다."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"플레이어를 숨깁니다."</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"플레이어를 표시합니다."</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"사용 가능한 플레이어가 없습니다."</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"미디어"</string>
 </resources>

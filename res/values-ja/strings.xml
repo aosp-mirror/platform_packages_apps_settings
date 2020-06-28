@@ -241,8 +241,8 @@
     <string name="cellular_data_summary" msgid="6551434804367912367">"モバイル ネットワークでのデータ使用を許可"</string>
     <string name="allow_data_usage_title" msgid="2645963379925196671">"ローミング時にデータ使用を許可"</string>
     <string name="roaming" msgid="3055365654530847985">"ローミング"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続する"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続する"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続"</string>
     <string name="roaming_reenable_message" msgid="5150423860521673540">"データローミングをOFFにしたままホームネットワークの外に出たためデータ接続が切断されました。"</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"ONにする"</string>
     <string name="roaming_warning" msgid="7703647889040229013">"ローミング料金が発生する場合があります。"</string>
@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"コンテンツに応じて、リフレッシュ レートを自動的に 60 Hz から 90 Hz に変更します。電池使用量が増えます。"</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"スムーズ ディスプレイ"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"最高のリフレッシュ レートを適用します。タップの反応とアニメーションの品質が向上します。電池使用量が増えます。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"スクリーン アテンション"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ON / 見ている間は画面が OFF になりません"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"OFF"</string>
@@ -1253,7 +1251,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークテーマでは黒い背景を使用するため、一部の画面で電池が長持ちします。画面が OFF になるまでダークテーマが ON にならないように設定できます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁紙"</string>
     <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"スタイルと壁紙"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"デフォルト"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"通話マネージャ"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"緊急速報メール"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"携帯通信会社"</string>
     <string name="access_point_names" msgid="5768430498022188057">"アクセスポイント名"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"優先度の低い通知を自動的に通知音なしに設定します"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"通知のランキングの自動調整"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"関連性を基準に通知のランキングを自動的に調整する"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"通知の自動調整に関するフィードバック"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"通知に加えた調整と、システムにフィードバックを提供するオプションが表示されます"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"操作や返信の候補"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"操作や返信の候補が自動的に表示されます"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"最近の通知とスヌーズに設定した通知を表示します"</string>
@@ -3543,11 +3542,11 @@
     <string name="conversation_category_title" msgid="6777135786004214149">"会話"</string>
     <string name="conversation_section_switch_title" msgid="3332885377659473775">"会話セクション"</string>
     <string name="conversation_section_switch_summary" msgid="6123587625929439674">"会話セクションの使用をアプリに許可します"</string>
-    <string name="demote_conversation_title" msgid="6355383023376508485">"会話ではない"</string>
+    <string name="demote_conversation_title" msgid="6355383023376508485">"会話として表示させない"</string>
     <string name="demote_conversation_summary" msgid="4319929331165604112">"会話セクションから削除します"</string>
-    <string name="promote_conversation_title" msgid="4731148769888238722">"これは会話です"</string>
-    <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加"</string>
-    <string name="manage_conversations" msgid="4440289604887824337">"会話を管理する"</string>
+    <string name="promote_conversation_title" msgid="4731148769888238722">"会話として表示させる"</string>
+    <string name="promote_conversation_summary" msgid="3890724115743515035">"会話セクションに追加します"</string>
+    <string name="manage_conversations" msgid="4440289604887824337">"会話を管理します"</string>
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"優先度の高い会話: なし"</string>
     <plurals name="priority_conversation_count" formatted="false" msgid="4229447176780862649">
       <item quantity="other">優先度の高い会話: <xliff:g id="COUNT_1">%d</xliff:g> 件</item>
@@ -3558,8 +3557,8 @@
     <string name="important_conversations_summary" msgid="3184022761562676418">"会話セクションの一番上に表示"</string>
     <string name="other_conversations" msgid="7218658664423361043">"他の会話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"設定に変更を加えた会話"</string>
-    <string name="important_bubble" msgid="7911698275408390846">"優先度の高い会話をふきだしとして表示"</string>
-    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先度の高い会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでふきだしとして表示されるよう、設定することもできます。"</string>
+    <string name="important_bubble" msgid="7911698275408390846">"優先度の高い会話をバブルとして表示"</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先度の高い会話はプルダウン シェードの一番上に表示されます。サイレント モードに割り込んでバブルとして表示されるよう、設定することもできます。"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"優先度の高い会話や設定を変更した会話がここに表示されます"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"会話の優先度を高く設定したり、設定を変更をしたりすると、ここに表示されます。\n\n会話の設定を変更するには: \n画面の上から下にスワイプし、プルダウン シェードを開いて、会話を長押しします。"</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"ポップアップで知らせて最小化"</string>
@@ -3576,8 +3575,8 @@
     <string name="notification_alert_title" msgid="1632401211722199217">"デフォルト"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"割り込みの許可"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"音やバイブレーションによる通知、または画面のポップアップ通知をアプリに許可します"</string>
-    <string name="notification_priority_title" msgid="5554834239080425229">"優先度"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にふきだしとして表示され、プロフィール写真がロック画面に表示されます"</string>
+    <string name="notification_priority_title" msgid="5554834239080425229">"優先"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"会話セクションの一番上にバブルとして表示され、プロフィール写真がロック画面に表示されます"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g> はほとんどの会話機能に対応していません。会話の優先度を高く設定することができず、会話はふきだしとして表示されません。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"プルダウン シェードで、通知を折りたたんで 1 行で表示します"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"着信音もバイブレーションも無効です"</string>
@@ -3636,10 +3635,10 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"接続済み"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"これらのアプリを接続"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"アプリを接続すると権限が共有され、互いのデータにアクセスできるようになります。"</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"IT 管理者と個人データが共有されないことが信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"個人データが IT 管理者と共有されないことが信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"アプリの接続はデバイスのプライバシー設定からいつでも解除できます。"</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"仕事用の<xliff:g id="NAME">%1$s</xliff:g>に個人データの使用を許可しますか？"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"IT 管理者と個人データが共有されないことが信頼できるアプリのみを接続してください。"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"個人データが IT 管理者と共有されないことが信頼できるアプリのみを接続してください。"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"アプリデータ"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"このアプリは、個人用アプリである<xliff:g id="NAME">%1$s</xliff:g>内のデータにアクセスできます。"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"権限"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"このアプリの通知はありません"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"アプリ内のその他の設定"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"通知の履歴、バブル、最近送信された通知"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"すべてのアプリで ON"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個のアプリで OFF</item>
@@ -3877,7 +3877,7 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"アプリ固定"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
     <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"アプリ固定機能を使用すると、固定を解除するまで現在のアプリを表示したままにすることができます。たとえば、この機能を使用して、信頼できる友だちが特定のゲームをプレイすることを許可できます。\n\nアプリを固定した場合、そのアプリが他のアプリを開いたり、個人データにアクセスされたりする可能性があります。\n\nデバイスを他のユーザーと安全に共有するには、代わりにゲストユーザーを使用してみてください。\n\nアプリ固定機能を使用するには: 	\n1.	アプリ固定機能を ON にします 	\n2.	[概要] を開きます 	\n3.	画面上部のアプリアイコンをタップし、[固定] をタップします"</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります \n	 （連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、信頼できる人とのみ使用してください。"</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"アプリが固定されている場合: \n\n•	 個人データにアクセスされる可能性があります（連絡先、メールの内容など） \n•	 固定されたアプリが他のアプリを開く可能性があります \n\nアプリ固定機能は、信頼できる人とのみ使用してください。\n"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"画面固定の解除前にロック解除パターンを要求"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"画面固定の解除前にPINを要求"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"画面固定の解除前にパスワードを要求"</string>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"アプリの互換性の変更を切り替え"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"デフォルトで有効な変更"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"デフォルトで無効な変更"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"利用できるアプリはありません"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"アプリの互換性の変更は、デバッグ可能アプリでのみ行えます。デバッグ可能アプリをインストールしてから、もう一度お試しください。"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"このスマートフォンでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"このタブレットでは設定がサポートされていません"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"このデバイスでは設定がサポートされていません"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"再試行"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"エラーが発生しました。アプリはデバイス選択リクエストをキャンセルしました。"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"接続しました"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"接続できませんでした"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"すべて表示"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"デバイスを検索しています…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"デバイスに接続しています…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"キャッシュに保存されたアプリの実行を停止"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"設定での画面オーバーレイを許可する"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"メディア セッションの終了にプレーヤーを非表示にする"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"プレーヤーを使用すると、クイック設定の展開パネルからセッションを再開できます。"</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"プレーヤーを表示"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"プレーヤーなし"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
 </resources>
