@@ -785,7 +785,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"បើក NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC ផ្លាស់ប្តូរទិន្នន័យរវាងឧបករណ៍នេះ និងឧបករណ៍ដែលនៅក្បែរ ឬគោលដៅ ដូចជា៖ កន្លែងបង់ប្រាក់ អ្នកអានដែលអាចចូដំណើរការ ពាណិជ្ជកម្ម ឬស្លាកដែលមានអន្តរសកម្ម។"</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"តម្រូវ​ឱ្យ​ដោះសោ​ឧបករណ៍​សម្រាប់ NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"អនុញ្ញាត​ឱ្យប្រើ​ការទូទាត់សម្រាប់​មធ្យោបាយ​ធ្វើដំណើរ និង​ការទូទាត់​តាមរយៈ NFC តែ​នៅពេល​អេក្រង់​មិនជាប់សោ​ប៉ុណ្ណោះ"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"អនុញ្ញាត​ឱ្យប្រើ​សម្រាប់​មធ្យោបាយ​ធ្វើដំណើរ និង​ការទូទាត់​តាមរយៈ NFC តែ​នៅពេល​អេក្រង់​មិនជាប់សោ​ប៉ុណ្ណោះ"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android បញ្ជូន"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"រួចរាល់​ដើម្បី​បញ្ជូន​ខ្លឹមសារ​កម្មវិធី​តាម NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"បិទ"</string>
@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"បង្កើន​អត្រា​ផ្ទុកឡើងវិញ​ដោយស្វ័យប្រវត្តិ​ពី 60 ទៅ 90 Hz សម្រាប់​ខ្លឹមសារ​មួយចំនួន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"អត្រា​ផ្ទុកឡើងវិញ​ខ្ពស់បំផុតសម្រាប់​គុណភាពនៃ​រូបមានចលនា និង​ការឆ្លើយតបនៃ​ការចុចប្រសើរជាងមុន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ការដឹងថាកំពុងនៅប្រើ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"បើក / អេក្រង់​នឹងមិន​បិទទេ ប្រសិនបើ​អ្នក​កំពុង​មើល​អេក្រង់"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"បិទ"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"កម្មវិធី​គ្រប់គ្រង​ការ​ហៅ"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"ការជូនដំណឹង​ពេលមានអាសន្ន​តាមរយៈ​ឧបករណ៍​ចល័ត"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"ប្រតិបត្តិ​ករ​​​បណ្ដាញ"</string>
     <string name="access_point_names" msgid="5768430498022188057">"ឈ្មោះ​ចំណុច​ចូល​ដំណើរការ"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"កំណត់​ការជូនដំណឹង​អាទិភាពទាប​ទៅជាការជូនដំណឹង​ស្ងាត់ៗ​ដោយស្វ័យប្រវត្តិ"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"ការ​ចាត់ថ្នាក់​ការជូន​ដំណឹង​ដែល​មាន​ភាព​បត់បែន"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"ចាត់ថ្នាក់​ការជូន​ដំណឹង​តាម​ភាព​ពាក់ព័ន្ធ​ដោយ​ស្វ័យ​ប្រវត្តិ"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"មតិកែលម្អ​អំពីការជូនដំណឹង​ដែលមានភាពបត់បែន"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"បង្ហាញ​ការកែតម្រូវដែលបានធ្វើឡើង​ចំពោះការជូនដំណឹង និងបង្ហាញ​ជម្រើស​ក្នុងការ​ផ្ដល់មតិកែលម្អ​ទៅប្រព័ន្ធ"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"ការឆ្លើយតប និង​សកម្មភាព​ដែលបានណែនាំ"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"បង្ហាញការឆ្លើយតប និង​សកម្មភាព​ដែលបានណែនាំដោយស្វ័យប្រវត្តិ"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"បង្ហាញ​ការជូនដំណឹង​ថ្មីៗ និង​ការជូនដំណឹង​ដែលបាន​ផ្អាក"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"កម្មវិធី​នេះ​មិន​បាន​បង្ហោះ​ការជូនដំណឹង​ណាមួយ​ឡើយ"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"ការកំណត់បន្ថែមនៅក្នុងកម្មវិធីនេះ"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"ប្រវត្តិ​ការជូនដំណឹង សារលេចឡើង ការជូនដំណឹង​ដែលបាន​ផ្ញើថ្មីៗ"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"បើក​សម្រាប់​កម្មវិធីទាំងអស់"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">បិទ​សម្រាប់​កម្មវិធី <xliff:g id="COUNT_1">%d</xliff:g></item>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"បិទ/បើក​ការផ្លាស់ប្ដូរ​ភាពត្រូវគ្នា​នៃ​កម្មវិធី"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"ការផ្លាស់ប្ដូរ​ដែលបានបើក​តាម​លំនាំដើម"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"ការផ្លាស់ប្ដូរ​ដែលបានបិទ​តាម​លំនាំដើម"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"មិនមាន​កម្មវិធីទេ"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"ការផ្លាស់ប្ដូរ​ភាពត្រូវគ្នា​នៃ​កម្មវិធី​អាចត្រូវបាន​កែប្រែសម្រាប់​តែកម្មវិធី​ដែលអាចជួសជុល​បានប៉ុណ្ណោះ។ ដំឡើង​កម្មវិធី​ដែលអាចជួសជុលបាន រួចព្យាយាមម្ដងទៀត។"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"ការកំណត់​មិន​អាច​ប្រើ​នៅ​លើ​ទូរសព្ទ​នេះ​បាន​ទេ"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"ការកំណត់​មិន​អាច​ប្រើនៅ​លើ​ថេប្លេត​នេះ​បាន​​ទេ"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"ការកំណត់​មិន​អាច​ប្រើ​​នៅ​លើ​ឧបករណ៍​នេះ​បានទេ"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"ព្យាយាមម្ដងទៀត"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"មាន​បញ្ហា​អ្វីមួយ។ កម្មវិធី​បាន​បោះបង់សំណើ​ក្នុងការ​ជ្រើសរើស​ឧបករណ៍។"</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"ការតភ្ជាប់​ទទួលបាន​ជោគជ័យ​ហើយ"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"ការតភ្ជាប់​មិនបាន​សម្រេចទេ"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"បង្ហាញ​ទាំងអស់"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"កំពុងស្វែងរក​ឧបករណ៍…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"កំពុងភ្ជាប់​ឧបករណ៍…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ផ្អាកប្រតិបត្តិការសម្រាប់កម្មវិធីដែលបានផ្ទុកទិន្នន័យ"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"អនុញ្ញាត​ការត្រួតគ្នាលើ​អេក្រង់នៅលើ​ការកំណត់"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"អនុញ្ញាតឱ្យ​កម្មវិធីដែលអាច​បង្ហាញនៅលើកម្មវិធី​ផ្សេងទៀត​ដាក់អេក្រង់ការកំណត់​ត្រួតគ្នា"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"មេឌៀ"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"លាក់​កម្មវិធីចាក់ នៅពេលវគ្គ​មេឌៀបានបញ្ចប់"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"កម្មវិធីចាក់​អនុញ្ញាតឱ្យអ្នក​បន្តវគ្គពីផ្ទាំង​ការកំណត់រហ័ស​ដែលបានពង្រីក។"</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"លាក់​កម្មវិធីចាក់"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"បង្ហាញ​កម្មវិធីចាក់"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"មិនមាន​កម្មវិធីចាក់ទេ"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"មេឌៀ"</string>
 </resources>

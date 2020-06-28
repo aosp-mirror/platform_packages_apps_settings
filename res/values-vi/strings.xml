@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Hình ảnh mượt"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Tự động tăng tốc độ làm mới từ 60 lên 90 Hz đối với một số nội dung. Làm tăng mức sử dụng pin."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Hình ảnh mượt"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Tốc độ làm mới cao nhất giúp cải thiện khả năng phản hồi khi chạm và chất lượng ảnh động. Làm tăng mức sử dụng pin."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Chú ý đến màn hình"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Bật / Màn hình sẽ không tắt nếu bạn đang nhìn vào màn hình"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Tắt"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Trình quản lý cuộc gọi"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Cảnh báo khẩn cấp không dây"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Nhà cung cấp dịch vụ mạng"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Tên điểm truy cập"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Tự động đặt thông báo có mức ưu tiên thấp thành Nhẹ nhàng"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Thứ tự thông báo thích ứng"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Tự động sắp xếp các thông báo theo mức độ liên quan"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Phản hồi về tính năng thông báo thích ứng"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Cho biết những điều chỉnh được thực hiện đối với thông báo và hiển thị tùy chọn gửi ý kiến phản hồi cho hệ thống"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Câu trả lời và hành động đề xuất"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Tự động hiển thị câu trả lời và hành động đề xuất"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Hiển thị các thông báo gần đây và thông báo đã tạm ẩn"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Ứng dụng này chưa đăng bất kỳ thông báo nào"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Tùy chọn cài đặt bổ sung trong ứng dụng"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Lịch sử thông báo, bong bóng trò chuyện, các ứng dụng gửi thông báo gần đây"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Đang bật cho tất cả ứng dụng"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Tắt cho <xliff:g id="COUNT_1">%d</xliff:g> ứng dụng</item>
@@ -3802,7 +3802,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"lời nhắc"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"Lời nhắc"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"Sự kiện trên lịch"</string>
-    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Từ các sự kiện lịch sắp tới"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Từ các sự kiện sắp tới trên lịch"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"sự kiện"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Sự kiện"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Cho phép ứng dụng ghi đè"</string>
@@ -4373,10 +4373,10 @@
     <string name="notification_log_details_none" msgid="1090852853755089991">"không có"</string>
     <string name="notification_log_details_ranking_null" msgid="6607596177723101524">"Thiếu đối tượng xếp hạng."</string>
     <string name="notification_log_details_ranking_none" msgid="2484105338466675261">"Đối tượng xếp hạng không chứa khóa này."</string>
-    <string name="theme_customization_device_default" msgid="7641813022590999286">"Theo mặc định của thiết bị"</string>
+    <string name="theme_customization_device_default" msgid="7641813022590999286">"Theo giá trị mặc định của thiết bị"</string>
     <string name="display_cutout_emulation" msgid="1421648375408281244">"Vết cắt trên màn hình"</string>
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"cắt hiển thị, vết cắt"</string>
-    <string name="overlay_option_device_default" msgid="7986355499809313848">"Theo mặc định của thiết bị"</string>
+    <string name="overlay_option_device_default" msgid="7986355499809313848">"Theo giá trị mặc định của thiết bị"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Không áp dụng được lớp phủ"</string>
     <string name="special_access" msgid="1767980727423395147">"Quyền truy cập đặc biệt"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Bật/tắt chế độ thay đổi về khả năng tương thích của ứng dụng"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Các thay đổi được bật theo mặc định"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Các thay đổi bị tắt theo mặc định"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Không có ứng dụng"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Bạn chỉ có thể sửa đổi các thay đổi về khả năng tương thích của ứng dụng đối với các ứng dụng có thể gỡ lỗi. Hãy cài đặt một ứng dụng có thể gỡ lỗi rồi thử lại."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Điện thoại này không hỗ trợ cài đặt"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Máy tính bảng này không hỗ trợ cài đặt"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Thiết bị này không hỗ trợ cài đặt."</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Thử lại"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Đã xảy ra lỗi. Ứng dụng đã hủy yêu cầu chọn thiết bị."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Kết nối thành công"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Không kết nối được"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Hiển thị tất cả"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Đang tìm kiếm thiết bị..."</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Đang kết nối với thiết bị..."</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Tạm ngưng thực thi cho các ứng dụng được lưu vào bộ nhớ đệm"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Cho phép phủ lên màn hình Cài đặt"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Những ứng dụng có thể hiển thị bên trên các ứng dụng khác sẽ được phép phủ lên màn hình Cài đặt"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Nội dung nghe nhìn"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Ẩn trình phát khi phiên phát nội dung nghe nhìn đã kết thúc"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Trình phát cho phép bạn tiếp tục một phiên từ bảng Cài đặt nhanh mở rộng."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Ẩn trình phát"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Hiện trình phát"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Không có trình phát nào"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"nội dung nghe nhìn"</string>
 </resources>

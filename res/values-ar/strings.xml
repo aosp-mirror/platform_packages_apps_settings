@@ -1217,8 +1217,8 @@
     <string name="dock_audio_summary_none" product="default" msgid="9056359991181743485">"لم يتم إرساء الهاتف"</string>
     <string name="dock_audio_summary_unknown" msgid="5486086330763810318">"إعدادات الإرساء المرفق"</string>
     <string name="dock_not_found_title" msgid="4721157149003423417">"لم يتم العثور على الإرساء"</string>
-    <string name="dock_not_found_text" product="tablet" msgid="9192097687086523411">"يلزمك إرساء الجهاز اللوحي قبل تهيئة إعدادات الإرساء الصوتية."</string>
-    <string name="dock_not_found_text" product="default" msgid="2247163115146852069">"يلزمك إرساء الهاتف قبل تهيئة إعدادات الإرساء الصوتية."</string>
+    <string name="dock_not_found_text" product="tablet" msgid="9192097687086523411">"يلزمك إرساء الجهاز اللوحي قبل ضبط إعدادات الإرساء الصوتية."</string>
+    <string name="dock_not_found_text" product="default" msgid="2247163115146852069">"يلزمك إرساء الهاتف قبل ضبط إعدادات الإرساء الصوتية."</string>
     <string name="dock_sounds_enable_title" msgid="2974614136344237932">"صوت إدراج الإرساء"</string>
     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="468592489565539336">"تشغيل صوت أثناء إدراج الجهاز اللوحي أو إزالته من المرسى"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8121670617316301768">"تشغيل الصوت عند إدراج أو إزالة الهاتف من الإرساء"</string>
@@ -1270,10 +1270,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"العرض السلس"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"تعمل هذه الميزة على رفع معدل إعادة التحميل تلقائيًا من 60 إلى 90 هرتز لبعض أنواع المحتوى، ما يؤدي إلى زيادة استخدام البطارية."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"العرض السلس"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"أعلى معدل إعادة تحميل لتحسين استجابة اللمس وجودة الصور المتحركة. يؤدي هذا إلى زيادة استخدام البطارية."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"استعراض الشاشة"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"تفعيل / لن يتم إيقاف الشاشة إذا كنت تنظر إليها."</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"غير مفعّل"</string>
@@ -1633,7 +1631,7 @@
     <string name="battery_status_title" msgid="4661768220545945771">"حالة البطارية"</string>
     <string name="battery_level_title" msgid="1371765298786083448">"مستوى البطارية"</string>
     <string name="apn_settings" msgid="4295467389400441299">"أسماء نقاط الوصول"</string>
-    <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الدخول"</string>
+    <string name="apn_edit" msgid="2003683641840248741">"تعديل نقطة الوصول"</string>
     <string name="apn_not_set" msgid="8246646433109750293">"لم يتم الضبط"</string>
     <string name="apn_name" msgid="6677695784108157953">"الاسم"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
@@ -3259,8 +3257,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"مدير المكالمات"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"تنبيهات الطوارئ اللاسلكية"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"مشغلو الشبكة"</string>
     <string name="access_point_names" msgid="5768430498022188057">"أسماء نقاط الوصول"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3647,6 +3644,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"ضبط إشعارات الأولوية المنخفضة تلقائيًا على \"التنبيهات الهادئة\""</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"ترتيب تكيُّفي للإشعارات"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"ترتيب الإشعارات تلقائيًا حسب مدى الصلة بالموضوع"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"تعليقات عن الإشعارات التكيُّفية"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"الإشارة إلى التعديلات التي تم إجراؤها على الإشعارات وإظهار خيار لتقديم تعليقات إلى النظام"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"الإجراءات والردود المقترَحة"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"عرض الإجراءات والردود المقترحة تلقائيًا"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"عرض الإشعارات الحديثة والمؤجلة"</string>
@@ -3879,6 +3878,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"لم ينشر هذا التطبيق أي إشعارات"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"الإعدادات الإضافية في التطبيق"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"سجلّ الإشعارات، فقاعات المحادثات، الإشعارات المرسَلة مؤخرًا"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"مفعّلة لجميع التطبيقات"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="zero">إيقاف الإشعارات في <xliff:g id="COUNT_1">%d</xliff:g> تطبيق</item>
@@ -3901,7 +3901,7 @@
     <string name="app_notification_block_title" msgid="3880322745749900296">"حظر الكل"</string>
     <string name="app_notification_block_summary" msgid="1804611676339341551">"عدم عرض هذه الإشعارات"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"عرض الإشعارات"</string>
-    <string name="notification_content_block_summary" msgid="329171999992248925">"‏عدم عرض الإشعارات في مركز الإشعارات أو على الأجهزة المرتبطة بحساب Google"</string>
+    <string name="notification_content_block_summary" msgid="329171999992248925">"عدم عرض الإشعارات في مركز الإشعارات أو على الأجهزة الملحقة"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"السماح بنقطة الإشعار"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"إظهار نقطة الإشعار"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"إلغاء وضع \"عدم الإزعاج\""</string>
@@ -5013,6 +5013,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"التبديل بين تغييرات توافق التطبيقات"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"التغييرات التي يتم تفعيلها تلقائيًا"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"التغييرات التي يتم إيقافها تلقائيًا"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"ما مِن تطبيقات متاحة"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"يمكن تعديل تغييرات التوافق فقط للتطبيقات التي تتيح تصحيح الأخطاء فيها. ما عليك سوى تثبيت تطبيق يمكن تصحيح الأخطاء فيه، ثم إعادة المحاولة."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"الإعداد غير متوافق مع هذا الهاتف"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"الإعداد غير متوافق مع هذا الجهاز اللوحي"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"الإعداد غير متوافق مع هذا الجهاز"</string>
@@ -5190,8 +5192,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"إعادة المحاولة"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"حدث خطأ. ألغى التطبيق طلب اختيار أحد الأجهزة."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"تمّ الاتصال."</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"تعذّر الاتصال."</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"عرض الكل"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"جارٍ البحث عن جهاز…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"جارٍ الاتصال بجهاز…"</string>
@@ -5314,4 +5315,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"تعليق التنفيذ للتطبيقات المخزَّنة مؤقتًا"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"السماح بالظهور فوق المحتوى على الشاشة في \"الإعدادات\""</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"السماح للتطبيقات التي يمكن عرضها على التطبيقات الأخرى بالظهور فوق المحتوى على شاشات \"الإعدادات\"."</string>
+    <string name="media_controls_title" msgid="403271085636252597">"الوسائط"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"إخفاء المشغِّل عندما تنتهي جلسة الوسائط"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"يسمح لك المشغِّل باستئناف جلسة من اللوحة الموسَّعة \"الإعدادات السريعة\"."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"إخفاء المشغِّل"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"إظهار المشغِّل"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"ما مِن مشغِّلات متاحة"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"الوسائط"</string>
 </resources>

@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Bazı içerikler için yenileme hızını otomatik olarak 60 Hz\'den 90 Hz\'e yükseltir. Pil kullanımını artırır."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Geliştirilmiş dokunma duyarlılığı ve animasyon kalitesi için en yüksek yenileme hızı. Pil kullanımını artırır."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ekrana dikkat verme"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Açık / Bakıyorsanız ekran kapanmaz"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Kapat"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Çağrı Yöneticisi"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Kablosuz acil durum uyarıları"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Ağ operatörleri"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Erişim noktası adları"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Düşük öncelikli bildirimleri otomatik olarak Sessiz moda ayarla"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Uyarlamalı bildirim sıralama"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Bildirimleri alaka düzeyine göre otomatik olarak sırala"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Uyarlamalı bildirimlerle ilgili geri bildirim"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Bildirimlerde yapılan düzenlemeleri belirtin ve sisteme geri bildirim sağlama seçeneğini gösterin"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Önerilen işlemler ve yanıtlar"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Önerilen işlemleri ve yanıtları otomatik olarak göster"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Son ve ertelenen bildirimleri göster"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Bu uygulama herhangi bir bildirim yayınlamadı"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Uygulamadaki ek ayarlar"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Bildirim geçmişi, baloncuklar, en son gönderilenler"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Tüm uygulamalar için açık"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> uygulama için kapalı</item>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Uygulama uyumluluk değişikliklerini aç/kapat"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Varsayılan olarak etkin değişiklikler"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Varsayılan olarak devre dışı değişiklikler"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Mevcut uygulama yok"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Uygulama uyumluluğuyla ilgili değişiklikler sadece hata ayıklaması yapılabilecek uygulamalar için değiştirilebilir. Hata ayıklaması yapılabilecek bir uygulama yükleyip tekrar deneyin"</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Ayar bu telefonda desteklenmiyor"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Ayar bu tablette desteklenmiyor"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Ayar bu cihazda desteklenmiyor"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Tekrar dene"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Bir sorun oluştu. Uygulama, cihaz seçme isteğini iptal etti."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Bağlantı başarılı"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Bağlantı başarısız oldu"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Tümünü göster"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Cihaz aranıyor…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Cihaza bağlanıyor…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Önbelleğe alınan uygulamalarda yürütmeyi askıya al"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarların üzerinde ekran yer paylaşımına izin ver"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Diğer uygulamaların üzerinde görüntülenebilecek uygulamaların Ayarlar ekranlarıyla yer paylaşımlı olarak gösterilmesine izin verir"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Medya"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Medya oturumu sona erdiğinde oynatıcıyı gizle"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Oynatıcı, genişletilmiş Hızl Ayarlar panelinden bir oturumu devam ettirmenize olanak sağlar."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Oynatıcıyı gizle"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Oynatıcıyı göster"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Kullanılabilir oynatıcı yok"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"medya"</string>
 </resources>

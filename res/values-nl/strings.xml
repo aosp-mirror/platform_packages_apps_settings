@@ -785,7 +785,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC inschakelen"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC wisselt gegevens uit tussen dit apparaat en andere apparaten of doelen in de buurt, zoals betaalterminals, toegangslezers en interactieve advertenties of tags."</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Apparaatontgrendeling vereisen voor NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Alleen betaling en overdracht via NFC toestaan als het scherm is ontgrendeld"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Betaling en overdracht via NFC alleen toestaan als het scherm is ontgrendeld"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Klaar om app-content te verzenden via NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Uit"</string>
@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Hiermee wordt de vernieuwingssnelheid automatisch verhoogd van 60 naar 90 Hz voor bepaalde content. Het batterijgebruik neemt toe."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"De hoogste vernieuwingssnelheid voor verbeterde responsiviteit voor aanraking en animatiekwaliteit. Het batterijgebruik neemt toe."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Schermaandacht"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Aan / Scherm schakelt niet uit als je ernaar kijkt"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Uit"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Oproepbeheer"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Noodwaarschuwingen"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Netwerkproviders"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Namen van toegangspunten"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Meldingen met lagere prioriteit automatisch instellen op Subtiel"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Aanpasbare rangschikking van meldingen"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Meldingen automatisch rangschikken op relevantie"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Aanpasbare meldingsfeedback"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Aanpassingen aan meldingen aangeven en de optie weergeven om feedback te geven aan het systeem"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Voorgestelde acties en antwoorden"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Voorgestelde acties en antwoorden automatisch weergeven"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Recente en gesnoozede meldingen weergeven"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Deze app heeft geen meldingen geplaatst"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Extra instellingen in de app"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Meldingsgeschiedenis, bubbels, onlangs gestuurd"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Ingeschakeld voor alle apps"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Uitgeschakeld voor <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
@@ -3752,10 +3752,10 @@
     </plurals>
     <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Geen"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Wie mag onderbreken"</string>
-    <string name="zen_mode_calls_title" msgid="2078578043677037740">"Gesprekken"</string>
-    <string name="zen_mode_calls" msgid="7653245854493631095">"Gesprekken"</string>
+    <string name="zen_mode_calls_title" msgid="2078578043677037740">"Oproepen"</string>
+    <string name="zen_mode_calls" msgid="7653245854493631095">"Oproepen"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"gesprekken"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Gesprekken die mogen onderbreken"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Oproepen die mogen onderbreken"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Zorg dat je apparaat niet in de stille modus staat, zodat je zeker weet dat het hoorbaar overgaat bij toegestane gesprekken"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Voor \'<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\' worden inkomende gesprekken geblokkeerd. Je kunt de instellingen aanpassen zodat je vrienden, gezinsleden of andere contacten je kunnen bereiken."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Contacten met ster"</string>
@@ -3771,7 +3771,7 @@
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Zorg dat je apparaat niet in de stille modus staat, zodat je zeker weet dat je een geluidsmelding krijgt bij toegestane berichten"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Voor \'<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\' worden inkomende berichten geblokkeerd. Je kunt de instellingen aanpassen zodat je vrienden, gezinsleden of andere contacten je kunnen bereiken."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Je ontvangt alle berichten"</string>
-    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Je ontvangt alle gesprekken"</string>
+    <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Je ontvangt alle oproepen"</string>
     <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Geen"</string>
     <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
       <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> contacten</item>
@@ -3876,9 +3876,9 @@
     <string name="switch_off_text" msgid="1315547447393646667">"Uit"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"App vastzetten"</string>
     <string name="screen_pinning_description" msgid="6927147836599784578">"Als je een app vastzet, kun je de huidige app blijven weergeven totdat je deze losmaakt. Je kunt deze functie bijvoorbeeld gebruiken om een vriend die je vertrouwt een specifieke game te laten spelen. \n\nAls een app is vastgezet, kan de vastgezette app mogelijk andere apps openen en zijn er misschien persoonlijke gegevens toegankelijk. \n\nEen app vastzetten: 	\n1.	Schakel \'App vastzetten\' in. 	\n2.	Open \'Overzicht\'. 	\n3.	Tik bovenaan het scherm op het app-icoon en daarna op \'Vastzetten\'."</string>
-    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Als je een app vastzet, kun je de huidige app in beeld houden totdat je deze losmaakt. Je kunt deze functie bijvoorbeeld gebruiken om een vriend die je vertrouwt, een specifieke game te laten spelen. \n\nAls een app is vastgezet, kan de vastgezette app mogelijk andere apps openen en zijn er misschien persoonlijke gegevens toegankelijk. \n\nAls je je apparaat op een veilige manier met iemand wilt delen, probeer je een gastgebruiker. \n\nEen app vastzetten: 	\n1.	Schakel \'App vastzetten\' in. 	\n2.	Open \'Overzicht\'. 	\n3.	Tik bovenaan het scherm op het app-icoon en daarna op \'Vastzetten\'."</string>
+    <string name="screen_pinning_guest_user_description" msgid="4772752097527490014">"Als je een app vastzet, kun je de huidige app in beeld houden totdat je deze weer losmaakt. Je kunt deze functie bijvoorbeeld gebruiken om een vriend die je vertrouwt, een specifieke game te laten spelen. \n\nAls een app is vastgezet, kan de vastgezette app mogelijk andere apps openen en zijn er misschien persoonlijke gegevens toegankelijk. \n\nAls je je apparaat op een veilige manier met iemand wilt delen, gebruik dan liever een gastgebruiker. \n\nEen app vastzetten: 	\n1.	Schakel \'App vastzetten\' in. 	\n2.	Open \'Overzicht\'. 	\n3.	Tik bovenaan het scherm op het app-icoon en daarna op \'Vastzetten\'."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Als een app is vastgezet: \n\n•	 Persoonlijke gegevens kunnen toegankelijk zijn \n		(zoals contacten en e-mailcontent). \n•	 De vastgezette app kan mogelijk andere apps openen. \n\nGebruik deze functie alleen met mensen die je vertrouwt."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Vraag patroon voor losmaken"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Vraag om ontgrendelingspatroon voor losmaken"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vraag pin voor losmaken"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vraag wachtwoord voor losmaken"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Apparaat vergrendelen wanneer items worden losgemaakt"</string>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"App-compatibiliteitswijzigingen schakelen"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Standaard ingeschakelde wijzigingen"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Standaard uitgeschakelde wijzigingen"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Geen apps"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Wijzigingen in app-compatibiliteit kunnen alleen worden aangepast voor apps waarin fouten kunnen worden opgespoord. Installeer een app waarin fouten kunnen worden opgespoord en probeer het opnieuw."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Instelling wordt niet ondersteund op deze telefoon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Instelling wordt niet ondersteund op deze tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Instelling wordt niet ondersteund op dit apparaat"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Opnieuw proberen"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Er is een probleem opgetreden. De app heeft het verzoek om een apparaat te kiezen geannuleerd."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Verbinding gemaakt"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Verbinding mislukt"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Alles tonen"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Zoeken naar apparaat…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Verbinding maken met apparaat…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Uitvoering opschorten voor gecachte apps"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Schermoverlays toestaan voor Instellingen"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Toestaan dat apps die vóór andere apps kunnen worden weergegeven, vóór instellingsschermen worden weergegeven"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Speler verbergen als de mediasessie is afgelopen"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Met de speler kun je een sessie hervatten vanuit het uitgevouwen deelvenster \'Snelle instellingen\'."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Speler verbergen"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Speler weergeven"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Geen spelers beschikbaar"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>
