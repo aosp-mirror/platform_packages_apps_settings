@@ -411,7 +411,7 @@
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"Skip"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"Cancel"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Touch the sensor"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"It’s on the back of your phone. Use your index finger."</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"It\'s on the back of your phone. Use your index finger."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration with device and fingerprint sensor location"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Name"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
@@ -452,7 +452,7 @@
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Remove all fingerprints?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Remove \'<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\'"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Do you want to delete this fingerprint?"</string>
-    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"You won\'t be able to use your fingerprints to unlock your phone, authorise purchases or sign in to apps"</string>
+    <string name="fingerprint_last_delete_message" msgid="93311579320049852">"You won\'t be able to use your fingerprints to unlock your phone, authorise purchases, or sign in to apps"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"You won\'t be able to use your fingerprints to unlock your work profile, authorise purchases or sign in to work apps"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Yes, remove"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Encryption"</string>
@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Automatically raises the refresh rate from 60 to 90 Hz for some content. Increases battery usage."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Highest refresh rate for improved touch responsiveness and animation quality. Increases battery usage."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Screen attention"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"On/Screen won’t turn off if you’re looking at it"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Off"</string>
@@ -1593,21 +1591,21 @@
     <string name="reset_dashboard_title" msgid="7423200250697886918">"Reset options"</string>
     <string name="reset_dashboard_summary" msgid="4390780188264852956">"Network, apps or device can be reset"</string>
     <string name="reset_dashboard_summary_onlyApps" msgid="3304252260039419584">"Apps can be reset"</string>
-    <string name="reset_network_title" msgid="1395494440355807616">"Reset Wi-Fi, mobile &amp; Bluetooth"</string>
+    <string name="reset_network_title" msgid="1395494440355807616">"Reset wi-fi, mobile and Bluetooth"</string>
     <string name="reset_network_desc" msgid="1112523764899788246">"This will reset all network settings, including:\n\n"<li>"Wi‑Fi"</li>\n<li>"Mobile data"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="6152167073280852849">"Erase downloaded SIMs"</string>
-    <string name="reset_esim_desc" msgid="4256518544336245086">"To download replacement SIMs, contact your operator. This won’t cancel any mobile service plans."</string>
+    <string name="reset_esim_desc" msgid="4256518544336245086">"To download replacement SIMs, contact your carrier. This won\'t cancel any mobile service plans."</string>
     <string name="reset_network_button_text" msgid="2281476496459610071">"Reset settings"</string>
-    <string name="reset_network_final_desc" msgid="5304365082065278425">"Reset all network settings? You can’t undo this action."</string>
-    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reset all network settings and delete downloaded SIMs? You can’t undo this action."</string>
+    <string name="reset_network_final_desc" msgid="5304365082065278425">"Reset all network settings? You can\'t undo this action."</string>
+    <string name="reset_network_final_desc_esim" msgid="8342882682282693844">"Reset all network settings and erase downloaded SIMs? You can\'t undo this action."</string>
     <string name="reset_network_final_button_text" msgid="2433867118414000462">"Reset settings"</string>
     <string name="reset_network_confirm_title" msgid="913014422184481270">"Reset?"</string>
     <string name="network_reset_not_available" msgid="1966334631394607829">"Network reset is not available for this user"</string>
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Network settings have been reset"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Can’t delete SIMs"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Downloaded SIMs can’t be deleted due to an error.\n\nRestart your device and try again."</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"Erase all data (factory reset)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"Erase all data (factory reset)"</string>
+    <string name="master_clear_title" msgid="5309249309235959383">"Delete all data (factory reset)"</string>
+    <string name="master_clear_short_title" msgid="5331449583601739360">"Delete all data (factory reset)"</string>
     <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"This will erase all data from your tablet’s "<b>"internal storage"</b>", including:\n\n"<li>"Your Google Account"</li>\n<li>"System and app data and settings"</li>\n<li>"Downloaded apps"</li></string>
     <string name="master_clear_desc" product="default" msgid="8447637796694856323">"This will erase all data from your phone’s "<b>"internal storage"</b>", including:\n\n"<li>"Your Google Account"</li>\n<li>"System and app data and settings"</li>\n<li>"Downloaded apps"</li></string>
     <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"You are currently signed in to the following accounts:\n"</string>
@@ -1623,8 +1621,8 @@
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Erase all the data on the SD card, such as music or photos"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"Erase all data"</string>
     <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"Erase all data"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"All of your personal information and downloaded apps will be deleted. You can’t undo this action."</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can’t undo this action."</string>
+    <string name="master_clear_final_desc" msgid="5218005891800878932">"All of your personal information and downloaded apps will be deleted. You can\'t undo this action."</string>
+    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can\'t undo this action."</string>
     <string name="master_clear_final_button_text" msgid="1721164700940719292">"Erase everything"</string>
     <string name="master_clear_failed" msgid="6458678864313618526">"No reset was performed because the System Clear service isn\'t available."</string>
     <string name="master_clear_confirm_title" msgid="632482173088680058">"Erase all data?"</string>
@@ -2341,7 +2339,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> print jobs</item>
       <item quantity="one">1 print job</item>
     </plurals>
-    <string name="print_settings_title" msgid="7680498284751129935">"Printing services"</string>
+    <string name="print_settings_title" msgid="7680498284751129935">"Print services"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"No services installed"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"No printers found"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Settings"</string>
@@ -2456,12 +2454,12 @@
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="215449637818582819">"This app will be able to use battery in the background. Your battery may run out sooner than expected."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="7940183167721998470">"Remove"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="4968135709160207507">"Cancel"</string>
-    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
+    <string name="battery_tip_dialog_summary_message" product="default" msgid="6097167058237891756">"Your apps are using a normal amount of battery. If apps use too much battery, your phone will suggest actions to take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="tablet" msgid="573297655597451123">"Your apps are using a normal amount of battery. If apps use too much battery, your tablet will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="battery_tip_dialog_summary_message" product="device" msgid="8222461068860745749">"Your apps are using a normal amount of battery. If apps use too much battery, your device will suggest actions that you can take.\n\nYou can always turn on Battery Saver if you’re running low on battery."</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Battery Manager"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Manage apps automatically"</string>
-    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limit battery for apps that you don’t use often"</string>
+    <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limit battery for apps that you don\'t use often"</string>
     <string name="smart_battery_footer" msgid="8407121907452993645">"When Battery Manager detects that apps are draining battery, you’ll have the option to restrict these apps. Restricted apps may not work properly and notifications may be delayed."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Restricted apps"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
@@ -2865,7 +2863,7 @@
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Set data usage limit"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Limiting data usage"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Your tablet will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your tablet, and your operator may account for usage differently, consider setting a conservative limit."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Your phone will turn off mobile data once it reaches the limit that you set.\n\nSince data usage is measured by your phone, and your operator may account for usage differently, consider setting a conservative limit."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Your phone will turn off mobile data once it reaches the limit you set.\n\nSince data usage is measured by your phone, and your carrier may account for usage differently, consider setting a conservative limit."</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Restrict background data?"</string>
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"If you restrict background mobile data, some apps and services won’t work unless you’re connected to Wi‑Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"If you restrict background mobile data, some apps and services won’t work unless you’re connected to Wi‑Fi.\n\nThis setting affects all users on this tablet."</string>
@@ -3071,7 +3069,7 @@
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restrictions"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remove restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Change PIN"</string>
-    <string name="help_label" msgid="2896538416436125883">"Help &amp; feedback"</string>
+    <string name="help_label" msgid="2896538416436125883">"Help and feedback"</string>
     <string name="support_summary" msgid="1034146931237148885">"Help articles, phone &amp; chat, getting started"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account for content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
@@ -3087,8 +3085,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Call Manager"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Wireless emergency alerts"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Network operators"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Access point names"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3180,7 +3177,7 @@
       <item quantity="other">Show %d hidden items</item>
       <item quantity="one">Show %d hidden item</item>
     </plurals>
-    <string name="network_dashboard_title" msgid="788543070557731240">"Network and Internet"</string>
+    <string name="network_dashboard_title" msgid="788543070557731240">"Network and internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"mobile"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"data usage"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
@@ -3459,6 +3456,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Automatically set lower priority notifications to Gentle"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Adaptive notification ranking"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automatically rank notifications by relevance"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Adaptive notification feedback"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indicate adjustments made to notifications and show the option to provide feedback to the system"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Suggested actions and replies"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automatically show suggested actions and replies"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Show recent and snoozed notifications"</string>
@@ -3667,6 +3666,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"This app has not posted any notifications"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Additional settings in the app"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Notification history, bubbles, recently sent"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"On for all apps"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Off for <xliff:g id="COUNT_1">%d</xliff:g> apps</item>
@@ -4273,7 +4273,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> mobile data"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"<xliff:g id="AMOUNT">^1</xliff:g> Wi-Fi data"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet data"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"Data warning &amp; limit"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"Data warning and limit"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Mobile data usage cycle"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"<xliff:g id="ID_1">^1</xliff:g> data warning"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"<xliff:g id="ID_1">^1</xliff:g> data limit"</string>
@@ -4431,7 +4431,7 @@
     </plurals>
     <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Manage storage"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"To help free up storage space, storage manager removes backed up photos and videos from your device."</string>
-    <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Remove photos &amp; videos"</string>
+    <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Remove photos and videos"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Storage manager"</string>
     <string name="automatic_storage_manager_master_switch_title" msgid="8492707479615609185">"Use Storage Manager"</string>
     <string name="deletion_helper_automatic_title" msgid="597196990024769472">"Automatic"</string>
@@ -4594,7 +4594,7 @@
     <string name="app_names_concatenation_template_2" msgid="8320181646458855457">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>"</string>
     <string name="app_names_concatenation_template_3" msgid="7019703249717854148">"<xliff:g id="FIRST_APP_NAME">%1$s</xliff:g>, <xliff:g id="SECOND_APP_NAME">%2$s</xliff:g>, <xliff:g id="THIRD_APP_NAME">%3$s</xliff:g>"</string>
     <string name="storage_photos_videos" msgid="6926197783745481869">"Photos and videos"</string>
-    <string name="storage_music_audio" msgid="1185624135490182822">"Music &amp; audio"</string>
+    <string name="storage_music_audio" msgid="1185624135490182822">"Music and audio"</string>
     <string name="storage_games" msgid="1176568610086802469">"Games"</string>
     <string name="storage_other_apps" msgid="5902520888043081176">"Other apps"</string>
     <string name="storage_files" msgid="7968460921272772299">"Files"</string>
@@ -4627,7 +4627,7 @@
     <string name="storage_manager_indicator_on" msgid="8380330763647785309">"On"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"Instant app"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Turn off the storage manager?"</string>
-    <string name="storage_movies_tv" msgid="7897612625450668593">"Movie &amp; TV apps"</string>
+    <string name="storage_movies_tv" msgid="7897612625450668593">"Movie and TV apps"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Operator Provisioning Info"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Trigger Operator Provisioning"</string>
     <string name="zen_suggestion_title" msgid="4555260320474465668">"Update Do Not Disturb"</string>
@@ -4661,6 +4661,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Toggle app compatibility changes"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Default enabled changes"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Default disabled changes"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"No apps available"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"App compatibility changes can only be modified for debuggable apps. Install a debuggable app and try again."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Setting isn’t supported on this phone"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Setting isn’t supported on this tablet"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Setting isn’t supported on this device"</string>
@@ -4834,8 +4836,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Try again"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Something came up. The application has cancelled the request to choose a device."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Connection successful"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Connection failed"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Show all"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Searching for device…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Connecting to device…"</string>
@@ -4950,4 +4951,11 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspend execution for cached apps"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Allow screen overlays on settings"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Allow apps that can display over other apps to overlay settings screens"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Hide player when the media session has ended"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"The player allows you to resume a session from the expanded Quick Settings panel."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Hide player"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Show player"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"No players available"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>
