@@ -178,11 +178,6 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final View advancedView = dialog.findViewById(R.id.advanced_shortcut);
         updateAlertDialogCheckState();
 
-        // Window magnification mode doesn't support advancedView.
-        if (isWindowMagnification(getPrefContext())) {
-            advancedView.setVisibility(View.GONE);
-            return;
-        }
         // Shows the triple tap checkbox directly if clicked.
         if (mTripleTapTypeCheckBox.isChecked()) {
             advancedView.setVisibility(View.GONE);
