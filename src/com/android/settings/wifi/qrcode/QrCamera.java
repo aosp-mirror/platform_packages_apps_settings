@@ -299,6 +299,13 @@ public class QrCamera extends Handler {
                         break;
                     }
                 }
+                if (mCamera == null && numberOfCameras > 0) {
+                    Log.i(TAG, "Can't find back camera. Opening a different camera");
+                    Camera.getCameraInfo(0, cameraInfo);
+                    releaseCamera();
+                    mCamera = Camera.open(0);
+                    mCameraOrientation = cameraInfo.orientation;
+                }
             } catch (RuntimeException e) {
                 Log.e(TAG, "Fail to open camera: " + e);
                 mCamera = null;
@@ -308,7 +315,7 @@ public class QrCamera extends Handler {
 
             try {
                 if (mCamera == null) {
-                    throw new IOException("Cannot find available back camera");
+                    throw new IOException("Cannot find available camera");
                 }
                 mCamera.setPreviewTexture(surface);
                 setCameraParameter();
