@@ -631,21 +631,23 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshMacAddress() {
-        String macAddress = mWifiEntry.getMacAddress();
-        if (macAddress == null) {
+        final String macAddress = mWifiEntry.getMacAddress();
+        if (TextUtils.isEmpty(macAddress)) {
             mMacAddressPref.setVisible(false);
             return;
         }
 
         mMacAddressPref.setVisible(true);
+
+        mMacAddressPref.setTitle((mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC)
+                ? R.string.wifi_advanced_randomized_mac_address_title
+                : R.string.wifi_advanced_device_mac_address_title);
+
         if (macAddress.equals(WifiInfo.DEFAULT_MAC_ADDRESS)) {
             mMacAddressPref.setSummary(R.string.device_info_not_available);
         } else {
             mMacAddressPref.setSummary(macAddress);
         }
-
-        // MAC Address Pref Title
-        refreshMacTitle();
     }
 
     private void updatePreference(Preference pref, String detailText) {
@@ -928,24 +930,6 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         } else {
             mWifiEntry.disconnect(this);
         }
-    }
-
-    private void refreshMacTitle() {
-        if (!mWifiEntry.isSaved()) {
-            return;
-        }
-
-        // For saved Passpoint network, framework doesn't have the field to keep the MAC choice
-        // persistently, so Passpoint network will always use the default value so far, which is
-        // randomized MAC address, so don't need to modify title.
-        if (mWifiEntry.isSubscription()) {
-            return;
-        }
-
-        mMacAddressPref.setTitle(
-                (mWifiEntry.getPrivacy() == WifiEntry.PRIVACY_RANDOMIZED_MAC)
-                        ? R.string.wifi_advanced_randomized_mac_address_title
-                        : R.string.wifi_advanced_device_mac_address_title);
     }
 
     /**
