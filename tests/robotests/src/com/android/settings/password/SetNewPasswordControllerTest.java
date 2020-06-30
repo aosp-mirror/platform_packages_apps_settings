@@ -80,10 +80,10 @@ public final class SetNewPasswordControllerTest {
                 CURRENT_USER_ID, mPackageManager, mFingerprintManager, mFaceManager,
                 mDevicePolicyManager, mUi);
 
-        when(mFingerprintManager.preEnroll()).thenReturn(FINGERPRINT_CHALLENGE);
+        when(mFingerprintManager.generateChallengeBlocking()).thenReturn(FINGERPRINT_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FINGERPRINT))).thenReturn(true);
 
-        when(mFaceManager.generateChallenge()).thenReturn(FACE_CHALLENGE);
+        when(mFaceManager.generateChallengeBlocking()).thenReturn(FACE_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FACE))).thenReturn(true);
     }
 

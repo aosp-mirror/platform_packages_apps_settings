@@ -31,4 +31,9 @@ public class ShadowFingerprintManager extends org.robolectric.shadows.ShadowFing
     protected List<Fingerprint> getEnrolledFingerprints(int userId) {
         return getEnrolledFingerprints();
     }
+
+    @Implementation
+    protected long generateChallengeBlocking() {
+        return 0L;
+    }
 }

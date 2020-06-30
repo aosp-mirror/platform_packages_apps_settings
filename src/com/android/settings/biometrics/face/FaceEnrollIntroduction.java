@@ -176,7 +176,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         if (mFaceManager == null) {
             return 0;
         }
-        return mFaceManager.generateChallenge();
+        return mFaceManager.generateChallengeBlocking();
     }
 
     @Override
