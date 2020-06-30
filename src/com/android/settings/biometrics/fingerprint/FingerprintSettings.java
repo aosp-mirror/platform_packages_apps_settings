@@ -594,10 +594,7 @@ public class FingerprintSettings extends SubSettings {
         public void onDestroy() {
             super.onDestroy();
             if (getActivity().isFinishing()) {
-                int result = mFingerprintManager.postEnroll();
-                if (result < 0) {
-                    Log.w(TAG, "postEnroll failed: result = " + result);
-                }
+                mFingerprintManager.revokeChallenge();
             }
         }
 
@@ -638,7 +635,7 @@ public class FingerprintSettings extends SubSettings {
 
         private void launchChooseOrConfirmLock() {
             Intent intent = new Intent();
-            long challenge = mFingerprintManager.preEnroll();
+            long challenge = mFingerprintManager.generateChallengeBlocking();
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
             if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
                     getString(R.string.security_settings_fingerprint_preference_title),
