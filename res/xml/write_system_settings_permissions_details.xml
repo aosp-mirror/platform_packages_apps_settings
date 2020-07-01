@@ -18,7 +18,7 @@
     android:key="write_system_settings_permission_detail_settings"
     android:title="@string/write_settings">
 
-    <SwitchPreference
+    <com.android.settings.widget.FilterTouchesSwitchPreference
         android:key="app_ops_settings_switch"
         android:title="@string/permit_write_settings"/>
 
