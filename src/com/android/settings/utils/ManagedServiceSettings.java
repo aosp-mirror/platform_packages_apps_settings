@@ -30,7 +30,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
@@ -41,6 +40,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.widget.FilterTouchesSwitchPreference;
 
 import java.util.Collections;
 import java.util.List;
@@ -105,14 +105,15 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         for (ServiceInfo service : services) {
             final ComponentName cn = new ComponentName(service.packageName, service.name);
             final String title = service.loadLabel(mPM).toString();
-            final SwitchPreference pref = new SwitchPreference(getPrefContext());
+            final FilterTouchesSwitchPreference pref = new FilterTouchesSwitchPreference(
+                    getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(service.loadIcon(mPM));
             pref.setTitle(title);
             pref.setChecked(mServiceListing.isEnabled(cn));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
-                            service.packageName, managedProfileId)) {
+                    service.packageName, managedProfileId)) {
                 pref.setSummary(R.string.work_profile_notification_access_blocked_summary);
             }
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
