@@ -18,7 +18,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.Menu;
@@ -34,6 +33,7 @@ import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.FilterTouchesSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -238,7 +238,8 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         return app != null && UserHandle.isApp(app.info.uid);
     }
 
-    private class AccessPreference extends SwitchPreference implements DataSaverBackend.Listener {
+    private class AccessPreference extends FilterTouchesSwitchPreference implements
+            DataSaverBackend.Listener {
         private final AppEntry mEntry;
         private final DataUsageState mState;
 

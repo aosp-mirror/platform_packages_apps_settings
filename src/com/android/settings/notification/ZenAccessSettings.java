@@ -40,7 +40,6 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
@@ -55,6 +54,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.FilterTouchesSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -135,7 +135,8 @@ public class ZenAccessSettings extends EmptyTextSettings {
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
-            final SwitchPreference pref = new SwitchPreference(getPrefContext());
+            final FilterTouchesSwitchPreference pref = new FilterTouchesSwitchPreference(
+                    getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);
@@ -179,7 +180,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
                     requestingPackages.add(info.packageName);
                 }
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             Log.e(TAG, "Cannot reach packagemanager", e);
         }
         return requestingPackages;
