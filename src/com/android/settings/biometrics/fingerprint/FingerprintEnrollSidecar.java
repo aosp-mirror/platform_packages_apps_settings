@@ -40,8 +40,7 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
     @Override
     protected void startEnrollment() {
         super.startEnrollment();
-        mFingerprintManager.enroll(mToken, mEnrollmentCancel,
-                0 /* flags */, mUserId, mEnrollmentCallback);
+        mFingerprintManager.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback);
     }
 
     private FingerprintManager.EnrollmentCallback mEnrollmentCallback
