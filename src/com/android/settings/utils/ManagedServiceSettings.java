@@ -33,7 +33,6 @@ import android.content.pm.ServiceInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
@@ -46,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.widget.FilterTouchesSwitchPreference;
 
 import java.util.Collections;
 import java.util.List;
@@ -127,7 +127,8 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 Log.e(TAG, "can't find package name", e);
             }
             final String summary = service.loadLabel(mPm).toString();
-            final SwitchPreference pref = new SwitchPreference(getPrefContext());
+            final FilterTouchesSwitchPreference pref = new FilterTouchesSwitchPreference(
+                    getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));
@@ -141,7 +142,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             pref.setChecked(isServiceEnabled(cn));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
-                            service.packageName, managedProfileId)) {
+                    service.packageName, managedProfileId)) {
                 pref.setSummary(R.string.work_profile_notification_access_blocked_summary);
             }
             pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {

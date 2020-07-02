@@ -18,7 +18,7 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/install_other_apps">
 
-    <com.android.settingslib.RestrictedSwitchPreference
+    <com.android.settings.widget.FilterTouchesRestrictedSwitchPreference
         android:key="external_sources_settings_switch"
         android:title="@string/external_source_switch_title" />
 
