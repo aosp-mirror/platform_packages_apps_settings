@@ -151,7 +151,6 @@ public class FingerprintEnrollFindSensorTest {
                 any(byte[].class),
                 any(CancellationSignal.class),
                 anyInt(),
-                anyInt(),
                 callbackCaptor.capture());
 
         return callbackCaptor.getValue();
