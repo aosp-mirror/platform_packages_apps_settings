@@ -99,7 +99,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"검색 가능 제한시간"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"잠금 시 음성 다이얼링"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"화면 잠금 시 블루투스 다이얼러 사용 방지"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"블루투스 장치"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"블루투스 기기"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"기기 이름"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"기기 설정"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"프로필 설정"</string>
@@ -514,7 +514,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"죄송합니다. 센서가 아닙니다."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"휴대전화 뒷면에 있는 센서를 터치하세요. 검지를 사용하세요."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"등록이 완료되지 않았습니다."</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"지문 등록 제한 시간에 도달했습니다. 다시 시도하세요."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"지문 등록 시간이 초과되었습니다. 다시 시도하세요."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"지문 등록이 되지 않았습니다. 다시 시도하거나 다른 손가락을 사용하세요."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"다른 지문 추가"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"다음"</string>
@@ -674,7 +674,7 @@
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"다음번 시도에서 잘못된 비밀번호를 입력하면 직장 프로필 및 관련 데이터가 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"잘못된 시도 횟수가 너무 많습니다. 이 기기의 데이터가 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"잘못된 시도 횟수가 너무 많습니다. 이 사용자는 삭제됩니다."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"잘못된 시도 횟수가 너무 많습니다. 이 직장 프로필 및 관련 데이터는 삭제됩니다."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"입력 횟수를 초과했습니다. 이 직장 프로필 및 관련 데이터는 삭제됩니다."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"닫기"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g>자 이상이어야 합니다.</item>
@@ -3331,8 +3331,8 @@
     </plurals>
     <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g>분"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 설정될 수 있습니다.</item>
-      <item quantity="one">1개의 예약이 자동으로 설정될 수 있습니다.</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
+      <item quantity="one">1개의 예약이 자동으로 사용 설정될 수 있습니다.</item>
     </plurals>
     <string name="zen_category_behavior" msgid="4456460102057665854">"기기를 음소거하되 예외 허용"</string>
     <string name="zen_category_exceptions" msgid="6329803391764042865">"예외"</string>
@@ -3452,7 +3452,7 @@
     <string name="notification_alert_title" msgid="5605374030042727533">"알림"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"알림 허용"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"앱의 소리, 진동, 화면 알림 표시 허용"</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 접습니다."</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"풀다운 창에서 알림을 한 줄로 최소화합니다."</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"소리나 진동 없이 집중할 수 있도록 도와줍니다"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"소리나 진동으로 알립니다."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"기기가 잠금 해제되었을 때 화면 상단에 알림 배너 표시"</string>
@@ -3566,7 +3566,7 @@
     <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"응답: <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"모든 캘린더"</string>
     <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"응답"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"예, 미정, 또는 응답하지 않음"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"예, 미정 또는 응답하지 않음"</string>
     <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"예 또는 미정"</string>
     <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"예"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"규칙을 찾을 수 없습니다."</string>
@@ -3585,7 +3585,7 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>~<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>부터 <xliff:g id="END">%2$s</xliff:g>까지"</string>
     <string name="zen_mode_calls" msgid="5370870795759692899">"통화 허용"</string>
-    <string name="zen_mode_calls_title" msgid="2078578043677037740">"통화"</string>
+    <string name="zen_mode_calls_title" msgid="2078578043677037740">"전화"</string>
     <string name="zen_mode_calls_footer" msgid="4486295365803001814">"허용된 통화를 놓치지 않도록 기기가 벨소리, 진동, 무음 중 무엇으로 설정되어 있는지 확인하세요."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"예약된 시간(‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\')에 수신 전화가 차단됩니다. 설정을 조정하여 친구, 가족 또는 연락처에 등록된 다른 사용자의 연락을 허용할 수 있습니다."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"별표 표시한 연락처"</string>

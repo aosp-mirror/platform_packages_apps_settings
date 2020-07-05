@@ -506,7 +506,7 @@
     <string name="face_lock_screen_setup_skip_dialog_text" product="tablet" msgid="7387535629289108475">"Si proteges el tablet con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="device" msgid="4995287019957131123">"Si proteges el dispositivo con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
     <string name="face_lock_screen_setup_skip_dialog_text" product="default" msgid="7086796722966738156">"Si proteges el teléfono con una opción de bloqueo de pantalla, nadie podrá usarlo si lo pierdes o te lo roban. También necesitas una opción de bloqueo de pantalla para configurar el desbloqueo facial. Para volver, toca Cancelar."</string>
-    <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"¿No quieres configurar el PIN?"</string>
+    <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"¿No quieres configurar un PIN?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"¿No quieres configurar la contraseña?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"¿No quieres configurar el patrón?"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"Configurar bloqueo de pantalla"</string>
@@ -526,7 +526,7 @@
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden añadir más huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar todas las huellas?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"Quitar \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\""</string>
-    <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Quieres eliminar esta huella digital?"</string>
+    <string name="fingerprint_delete_message" msgid="1454995433333496541">"¿Eliminar esta huella digital?"</string>
     <string name="fingerprint_last_delete_message" msgid="93311579320049852">"No podrás utilizar tus huellas digitales para desbloquear el teléfono, autorizar compras o iniciar sesión en las aplicaciones"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="3460246522493987163">"No puedes utilizar tus huellas digitales para desbloquear el perfil de trabajo, autorizar compras o iniciar sesión en aplicaciones de trabajo"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Sí, quitar"</string>
@@ -620,7 +620,7 @@
     <string name="unlock_setup_wizard_fingerprint_details" msgid="5974580769186206478">"Una vez que hayas configurado un bloqueo de pantalla, podrás configurar también la huella digital en Ajustes &gt; Seguridad."</string>
     <string name="unlock_disable_lock_title" msgid="2564279819907932759">"Desactivar bloqueo pantalla"</string>
     <string name="unlock_disable_frp_warning_title" msgid="1520689401825045809">"¿Quitar protección del dispositivo?"</string>
-    <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"¿Quieres quitar la protección del perfil?"</string>
+    <string name="unlock_disable_frp_warning_title_profile" msgid="1005284289723910461">"¿Quitar la protección del perfil?"</string>
     <string name="unlock_disable_frp_warning_content_pattern" msgid="669384600341275312">"Las funciones de protección del dispositivo no funcionarán sin tu patrón."</string>
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8160948976853039106">"Las funciones de protección del dispositivo no funcionarán sin el patrón.<xliff:g id="EMPTY_LINE">
 
@@ -669,12 +669,12 @@
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"Si vuelves a introducir un patrón incorrecto, este usuario se eliminará"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Si vuelves a introducir un PIN incorrecto, este usuario se eliminará"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Si vuelves a introducir una contraseña incorrecta, este usuario se eliminará"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Si vuelves a introducir un patrón incorrecto, tu perfil de trabajo y sus datos se eliminarán"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Si vuelves a introducir un PIN incorrecto, tu perfil de trabajo y sus datos se eliminarán"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Si vuelves a introducir una contraseña incorrecta, tu perfil de trabajo y sus datos se eliminarán"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Si vuelves a introducir un patrón incorrecto en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Si vuelves a introducir un PIN incorrecto en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Si vuelves a introducir una contraseña incorrecta en el siguiente intento, se eliminarán tu perfil de trabajo y sus datos"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Se han producido demasiados intentos fallidos. Los datos de este dispositivo se eliminarán."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Se han producido demasiados intentos fallidos. Este usuario se eliminará."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Ha habido demasiados intentos fallidos. Se eliminarán este perfil de trabajo y sus datos."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Ha habido demasiados intentos incorrectos. Se eliminarán este perfil de trabajo y sus datos."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Cerrar"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Debe contener al menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
@@ -850,7 +850,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Activar NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"La tecnología NFC permite intercambiar datos entre este dispositivo y otros dispositivos u objetivos cercanos, como terminales de pago, lectores de acceso y etiquetas o anuncios interactivos."</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"Proteger NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Permite usar NFC en pagos y transporte público solo con la pantalla desbloqueada"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"Permite usar pagos y transporte público por NFC solo con la pantalla desbloqueada"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Listo para compartir contenido de aplicaciones por NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Desactivado"</string>
@@ -1575,7 +1575,7 @@
     <string name="battery_level_title" msgid="1371765298786083448">"Nivel de batería"</string>
     <string name="apn_settings" msgid="4295467389400441299">"APNs"</string>
     <string name="apn_edit" msgid="2003683641840248741">"Editar punto de acceso"</string>
-    <string name="apn_not_set" msgid="8246646433109750293">"Sin establecer"</string>
+    <string name="apn_not_set" msgid="8246646433109750293">"Sin definir"</string>
     <string name="apn_name" msgid="6677695784108157953">"Nombre"</string>
     <string name="apn_apn" msgid="5812828833797458602">"APN"</string>
     <string name="apn_http_proxy" msgid="1052464912365838007">"Proxy"</string>
@@ -1759,7 +1759,7 @@
     <string name="confirm_device_credential_pin" msgid="5708034681954992002">"Usar PIN"</string>
     <string name="confirm_device_credential_pattern" msgid="39207099645510263">"Usar patrón"</string>
     <string name="confirm_device_credential_password" msgid="2471269024934865534">"Usar contraseña"</string>
-    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Establece el bloqueo de pantalla"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="7587198092214670356">"Establece un bloqueo de pantalla"</string>
     <string name="lockpassword_choose_your_password_message" msgid="4474728476383676731">"Por seguridad, establece una contraseña"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar la huella, añade una contraseña"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar la huella, añade un patrón"</string>
@@ -1767,7 +1767,7 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Para usar la huella, añade un PIN"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"Por seguridad, establece un patrón"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Vuelve a introducir tu contraseña"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma el patrón"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Confirma tu patrón"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Vuelve a introducir tu PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Las contraseñas no coinciden"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Los números PIN no coinciden"</string>
@@ -2091,8 +2091,8 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Ajustes de accesibilidad"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"Lectores de pantalla, pantalla, controles de interacción"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Ajustes de visión"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad posteriormente en Ajustes."</string>
-    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambia el tamaño de la fuente"</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad más tarde en Ajustes."</string>
+    <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambiar el tamaño de la fuente"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"Lectores de pantalla"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"Audio y texto en pantalla"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Pantalla"</string>
@@ -2842,7 +2842,7 @@
     <string name="vpn_done" msgid="5137858784289564985">"Cerrar"</string>
     <string name="vpn_save" msgid="683868204634860888">"Guardar"</string>
     <string name="vpn_connect" msgid="7102335248484045354">"Conectar"</string>
-    <string name="vpn_replace" msgid="1533147558671640341">"Sustituir"</string>
+    <string name="vpn_replace" msgid="1533147558671640341">"Reemplazar"</string>
     <string name="vpn_edit" msgid="5862301148429324911">"Editar perfil de VPN"</string>
     <string name="vpn_forget" msgid="2913950864877236737">"Olvidar"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Conectar a <xliff:g id="PROFILE">%s</xliff:g>"</string>
@@ -2850,7 +2850,7 @@
     <string name="vpn_disconnect" msgid="7753808961085867345">"Desconectar"</string>
     <string name="vpn_version" msgid="41856553718304367">"Versión <xliff:g id="VERSION">%s</xliff:g>"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Olvidar VPN"</string>
-    <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Sustituir VPN actual?"</string>
+    <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"¿Reemplazar VPN actual?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"¿Configurar el modo de VPN siempre activada?"</string>
     <string name="vpn_first_always_on_vpn_message" msgid="2769478310633047870">"Si esta opción está activada, no tendrás acceso a Internet hasta que se conecte la red VPN"</string>
     <string name="vpn_replace_always_on_vpn_enable_message" msgid="9154843462740876652">"La nueva red VPN sustituirá a la actual y no tendrás acceso a Internet hasta que dicha VPN se conecte"</string>
@@ -2885,7 +2885,7 @@
     <string name="trusted_credentials_trust_label" msgid="4841047312274452474">"Confiar"</string>
     <string name="trusted_credentials_enable_confirmation" msgid="6686528499458144754">"¿Quieres habilitar el certificado de CA del sistema?"</string>
     <string name="trusted_credentials_disable_confirmation" msgid="5131642563381656676">"¿Quieres inhabilitar el certificado de CA del sistema?"</string>
-    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"¿Quieres eliminar el certificado de CA de usuario de forma permanente?"</string>
+    <string name="trusted_credentials_remove_confirmation" msgid="3420345440353248381">"¿Eliminar el certificado de CA de usuario de forma permanente?"</string>
     <string name="credential_contains" msgid="407972262032275476">"Esta entrada incluye:"</string>
     <string name="one_userkey" msgid="4417212932385103517">"una clave de usuario"</string>
     <string name="one_usercrt" msgid="1865069301105101370">"un certificado de usuario"</string>
@@ -2999,7 +2999,7 @@
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Excepto si hay otra aplicación de pago abierta"</string>
     <string name="nfc_payment_pay_with" msgid="10107565447713526">"En terminales Toca y paga, pagar con:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Cómo pagar en el terminal"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación de pago. A continuación, solo tienes que sostener la parte trasera del teléfono sobre cualquier terminal con el símbolo de pago sin contacto."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura una aplicación de pago. A continuación, solo tienes que sostener la parte trasera del teléfono sobre cualquier terminal con el símbolo de pago contactless."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Entendido"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Más..."</string>
     <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"¿Establecer como preferencia?"</string>
@@ -3218,7 +3218,7 @@
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volumen de alarma"</string>
     <string name="ring_volume_option_title" msgid="1628784257083776131">"Volumen del tono"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volumen de notificaciones"</string>
-    <string name="ringtone_title" msgid="3271453110387368088">"Tono del teléfono"</string>
+    <string name="ringtone_title" msgid="3271453110387368088">"Tono de llamada del teléfono"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sonido de notificación predeterminado"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sonido proporcionado de app"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"Sonido de notificación predeterminado"</string>
@@ -3239,7 +3239,7 @@
     <string name="emergency_tone_alert" msgid="1977698889522966589">"Tonos"</string>
     <string name="emergency_tone_vibrate" msgid="6282296789406984698">"Vibraciones"</string>
     <string name="boot_sounds_title" msgid="5033062848948884111">"Sonidos de encendido"</string>
-    <string name="live_caption_title" msgid="8617086825712756983">"Subtítulos instantáneos"</string>
+    <string name="live_caption_title" msgid="8617086825712756983">"Subtítulos automáticos"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula automáticamente el contenido multimedia"</string>
     <string name="zen_mode_settings_summary_off" msgid="7844433300559059480">"Nunca"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="3254890503929315009">
@@ -3280,7 +3280,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Cuando recibas notificaciones, tu teléfono no sonará ni vibrará."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Notificaciones sin sonido ni elementos visuales"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"No verás ni escucharás notificaciones"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Las notificaciones no se mostrarán ni harán que el teléfono suene o vibre. Recuerda que las notificaciones críticas sobre la actividad y el estado del teléfono se seguirán mostrando.\n\nCuando desactives el modo No molestar, podrás deslizar el dedo desde la parte superior de la pantalla para leer las notificaciones que no hayas visto."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Las notificaciones no se mostrarán ni harán que el teléfono suene o vibre. Recuerda que las notificaciones críticas sobre la actividad y el estado del teléfono se seguirán mostrando.\n\nCuando desactives el modo No molestar, desliza el dedo desde la parte superior de la pantalla para leer las notificaciones que no hayas visto."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizado"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Habilitar configuración personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Quitar configuración personalizada"</string>
@@ -3293,11 +3293,11 @@
     <string name="zen_mode_block_effect_sound" msgid="7929909410442858327">"Silenciar sonido y vibración"</string>
     <string name="zen_mode_block_effect_intent" msgid="7621578645742903531">"No encender la pantalla"</string>
     <string name="zen_mode_block_effect_light" msgid="1997222991427784993">"No hacer parpadear la luz"</string>
-    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"No mostrar notificaciones en pantalla"</string>
-    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ocultar iconos de la barra de estado en la parte superior de la pantalla"</string>
+    <string name="zen_mode_block_effect_peek" msgid="2525844009475266022">"No mostrar notificaciones en la pantalla"</string>
+    <string name="zen_mode_block_effect_status" msgid="5765965061064691918">"Ocultar iconos de la barra de estado de la parte superior"</string>
     <string name="zen_mode_block_effect_badge" msgid="332151258515152429">"Ocultar puntos de notificación en los iconos de las aplicaciones"</string>
     <string name="zen_mode_block_effect_ambient" msgid="1247740599476031543">"No activar con notificaciones"</string>
-    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ocultar de la pantalla desplegable"</string>
+    <string name="zen_mode_block_effect_list" msgid="7549367848660137118">"Ocultar en el panel desplegable"</string>
     <string name="zen_mode_block_effect_summary_none" msgid="6688519142395714659">"Nunca"</string>
     <string name="zen_mode_block_effect_summary_screen_off" msgid="6989818116297061488">"Con la pantalla desactivada"</string>
     <string name="zen_mode_block_effect_summary_screen_on" msgid="4876016548834916087">"Con la pantalla activada"</string>
@@ -3324,7 +3324,7 @@
     <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Desactivado"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Activado"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Preguntar siempre"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Hasta que se desactive"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Hasta que lo desactives"</string>
     <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
       <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> horas</item>
       <item quantity="one">1 hora</item>
@@ -3366,8 +3366,8 @@
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sonido de notificación de trabajo predeterminado"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Sonido de alarma de trabajo predeterminado"</string>
     <string name="work_sound_same_as_personal" msgid="1836913235401642334">"Igual que el perfil personal"</string>
-    <string name="work_sync_dialog_title" msgid="2359563902332046231">"¿Sustituir sonidos?"</string>
-    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Sustituir"</string>
+    <string name="work_sync_dialog_title" msgid="2359563902332046231">"¿Reemplazar sonidos?"</string>
+    <string name="work_sync_dialog_yes" msgid="9161415252411868574">"Reemplazar"</string>
     <string name="work_sync_dialog_message" msgid="1328692374812258546">"Se utilizarán los sonidos de tu perfil personal en tu perfil de trabajo"</string>
     <string name="ringtones_install_custom_sound_title" msgid="3885712267015760638">"¿Añadir sonido personalizado?"</string>
     <string name="ringtones_install_custom_sound_content" msgid="5844996763705884979">"Este archivo se copiará en la carpeta <xliff:g id="FOLDER_NAME">%s</xliff:g>"</string>
@@ -3454,8 +3454,8 @@
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Permite que la aplicación emita sonido, vibre o muestre notificaciones en la pantalla"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"En la pantalla desplegable, mostrar las notificaciones en una sola línea"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Te ayuda a concentrarte sin sonido ni vibración"</string>
-    <string name="notification_channel_summary_default" msgid="2919219975379032181">"Llama tu atención con sonido o vibración."</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Con el dispositivo desbloqueado, muestra las notificaciones en la parte superior"</string>
+    <string name="notification_channel_summary_default" msgid="2919219975379032181">"El móvil suena o vibra para llamar tu atención"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Cuando el dispositivo está desbloqueado, muestra las notificaciones en la parte superior"</string>
     <string name="notification_switch_label" msgid="2950240358797111509">"Mostrar notificaciones"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificaciones adaptativas"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
@@ -3529,7 +3529,7 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"No mostrar nunca notificaciones en el panel de notificaciones ni en dispositivos periféricos"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Permitir burbuja de notificación"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Mostrar burbuja de notificación"</string>
-    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Omitir No molestar"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Ignorar modo No molestar"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Permitir notificaciones cuando el modo No molestar esté activado"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Pantalla de bloqueo"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Bloqueada"</string>
@@ -3550,7 +3550,7 @@
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Añadir programación horaria"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Eliminar programación"</string>
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Elige un tipo de programación"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"¿Quieres eliminar la regla \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"¿Eliminar regla \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Eliminar"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Desconocida"</string>
     <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Estas opciones no se pueden modificar en este momento. Una aplicación (<xliff:g id="APP_NAME">%1$s</xliff:g>) ha activado automáticamente el modo No molestar con funcionamiento personalizado."</string>
@@ -3576,10 +3576,10 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ninguno"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Todos los días"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"La alarma puede anular la hora de finalización"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"La programación se desactiva cuando suena una alarma"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"La programación se desactiva si suena una alarma"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Comportamiento del modo No molestar"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Usar configuración predeterminada"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Crear opciones de configuración personalizadas para esta programación"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Crear ajustes personalizados para esta programación"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"En la programación \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>-<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3916,7 +3916,7 @@
     <string name="overlay_settings" msgid="2030836934139139469">"Mostrar sobre otras aplicaciones"</string>
     <string name="system_alert_window_summary" msgid="1435856750594492891">"<xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g> aplicaciones que se pueden mostrar sobre otras"</string>
     <string name="filter_overlay_apps" msgid="2483998217116789206">"Aplicaciones con permiso"</string>
-    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitidas"</string>
+    <string name="app_permission_summary_allowed" msgid="1155115629167757278">"Permitido"</string>
     <string name="app_permission_summary_not_allowed" msgid="2673793662439097900">"No permitido"</string>
     <string name="keywords_install_other_apps" msgid="563895867658775580">"instalar aplicaciones fuentes desconocidas"</string>
     <string name="write_settings" msgid="6864794401614425894">"Modificar ajustes del sistema"</string>
@@ -4363,14 +4363,14 @@
     <string name="storage_volume_total" msgid="7102720999351050601">"usados de <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_percent_full" msgid="7211888326013020857">"usado"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"Borrar aplicación"</string>
-    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"¿Quieres quitar esta aplicación instantánea?"</string>
+    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"¿Quitar esta aplicación instantánea?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Abrir"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Juegos"</string>
     <string name="audio_files_title" msgid="5981409295669041303">"Archivos de audio"</string>
     <string name="app_info_storage_title" msgid="4076977173803093808">"Espacio usado"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(opción desinstalada para <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="5809886172032644498">"(opción inhabilitada para <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="autofill_app" msgid="7595308061826307921">"Servicio Autocompletar"</string>
+    <string name="autofill_app" msgid="7595308061826307921">"Autocompletar"</string>
     <string name="autofill_keywords" msgid="6260653325195017912">"automático, completar, autocompletar"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Asegúrate de que confías en esta aplicación&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Autocompletar de Google&gt;%1$s&lt;/xliff:g&gt; utiliza el contenido que se muestra en la pantalla para determinar el texto que se puede autocompletar."</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"Autocompletar"</string>

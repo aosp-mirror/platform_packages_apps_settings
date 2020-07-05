@@ -34,7 +34,7 @@
     <string name="radio_info_data_connection_enable" msgid="7500945447906187613">"Aktifkan Sambungan Data"</string>
     <string name="radio_info_data_connection_disable" msgid="8604841967700865652">"Nonaktifkan Sambungan Data"</string>
     <string name="volte_provisioned_switch_string" msgid="8934098342370970223">"VoLTE Disediakan"</string>
-    <string name="vt_provisioned_switch_string" msgid="4355464240965212513">"Video Call Disediakan"</string>
+    <string name="vt_provisioned_switch_string" msgid="4355464240965212513">"Panggilan Video Disediakan"</string>
     <string name="wfc_provisioned_switch_string" msgid="4422170900830707226">"Panggilan Wi-Fi Disediakan"</string>
     <string name="eab_provisioned_switch_string" msgid="7587292685146545260">"EAB/Presence Disediakan"</string>
     <string name="cbrs_data_switch_string" msgid="2896574015153905035">"Data Cbrs"</string>
@@ -53,7 +53,7 @@
     <string name="radio_info_ims_reg_status_not_registered" msgid="4077921618888195960">"Tidak Terdaftar"</string>
     <string name="radio_info_ims_feature_status_available" msgid="8993855603692847184">"Tersedia"</string>
     <string name="radio_info_ims_feature_status_unavailable" msgid="6863496498730629050">"Tidak tersedia"</string>
-    <string name="radio_info_ims_reg_status" msgid="7485500436613134869">"Pendaftaran IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nSuara melalui LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nSuara melalui Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nVideo Call: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nAntarmuka UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
+    <string name="radio_info_ims_reg_status" msgid="7485500436613134869">"Pendaftaran IMS: <xliff:g id="STATUS">%1$s</xliff:g>\nSuara melalui LTE: <xliff:g id="AVAILABILITY_0">%2$s</xliff:g>\nSuara melalui Wi-Fi: <xliff:g id="AVAILABILITY_1">%3$s</xliff:g>\nPanggilan Video: <xliff:g id="AVAILABILITY_2">%4$s</xliff:g>\nAntarmuka UT: <xliff:g id="AVAILABILITY_3">%5$s</xliff:g>"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"Dalam Layanan"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"Di Luar Area Layanan"</string>
     <string name="radioInfo_service_emergency" msgid="6838935881091760942">"Panggilan Darurat Saja"</string>
@@ -514,7 +514,7 @@
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, bukan itu sensornya"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Sentuh sensor di bagian belakang ponsel. Gunakan jari telunjuk Anda."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Pendaftaran tidak selesai"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Batas waktu pendaftaran sidik jari tercapai. Coba lagi."</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Waktu pendaftaran sidik jari habis. Coba lagi."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Pendaftaran sidik jari tidak berhasil. Coba lagi atau gunakan jari lain."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tambahkan yang lain"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Berikutnya"</string>
@@ -1133,7 +1133,7 @@
     <string name="wifi_calling_mode_wifi_preferred_summary" msgid="3240387177966098351">"Jika Wi-Fi tidak tersedia, gunakan jaringan seluler"</string>
     <string name="wifi_calling_mode_cellular_preferred_summary" msgid="3746914244902314059">"Jika jaringan seluler tidak tersedia, gunakan Wi-Fi"</string>
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Telepon melalui Wi-Fi. Jika Wi-Fi terputus, panggilan akan berakhir."</string>
-    <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Jika panggilan Wi-Fi aktif, ponsel dapat merutekan panggilan telepon melalui jaringan Wi-Fi atau jaringan operator, bergantung pada preferensi dan sinyal mana yang lebih kuat. Sebelum mengaktifkan fitur ini, sebaiknya tanyakan info biaya dan detail lainnya ke operator.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
+    <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Jika panggilan Wi-Fi aktif, ponsel dapat mengarahkan panggilan telepon melalui jaringan Wi-Fi atau jaringan operator, bergantung pada preferensi dan sinyal mana yang lebih kuat. Sebelum mengaktifkan fitur ini, sebaiknya tanyakan info biaya dan detail lainnya ke operator.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="3490633500025717573">"Alamat Darurat"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Digunakan sebagai lokasi Anda ketika Anda melakukan panggilan darurat melalui Wi‑Fi"</string>
@@ -2012,7 +2012,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"Setelan keyboard fisik"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Tekan Spasi dua kali untuk memasukkan \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Tampilkan sandi"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"Tampilkan karakter secara singkat saat Anda mengetik"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"Tampilkan karakter sejenak saat Anda mengetik"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Pemeriksa ejaan ini mungkin dapat mengumpulkan semua teks yang Anda ketik, termasuk data pribadi seperti sandi dan nomor kartu kredit. Pemeriksa ejaan ini berasal dari aplikasi <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Gunakan pemeriksa ejaan ini?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Setelan"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Bahasa"</string>
@@ -2113,7 +2113,7 @@
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ketuk tombol untuk zoom"</string>
     <string name="accessibility_screen_magnification_summary" msgid="2831926970059739911"><b>"Untuk melakukan zoom"</b>", ketuk layar 3 kali dengan cepat.\n"<ul><li>"Tarik menggunakan 2 jari atau lebih untuk men-scroll"</li>\n<li>"Cubit menggunakan 2 jari atau lebih untuk menyesuaikan zoom"</li></ul>\n\n<b>"Untuk melakukan zoom sementara"</b>", ketuk layar 3 kali dengan cepat dan tahan jari pada ketukan ketiga.\n"<ul><li>"Tarik untuk memindahkan zoom ke bagian layar yang lain"</li>\n<li>"Angkat jari untuk memperkecil"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard dan menu navigasi."</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="5603519616005297803">"Jika pembesaran diaktifkan, Anda dapat memperbesar tampilan layar.\n\n"<b>"Untuk memperbesar tampilan"</b>", mulai pembesaran, lalu ketuk di bagian mana saja pada layar.\n"<ul><li>"• Tarik 2 jari atau lebih untuk melakukan scroll"</li>\n<li>"• Cubit dengan 2 jari atau lebih untuk menyesuaikan pembesaran"</li></ul>\n\n<b>"Untuk memperbesar tampilan sementara"</b>", mulai pembesaran, lalu sentuh lama di bagian mana saja pada layar.\n"<ul><li>"• Tarik untuk menggeser layar"</li>\n<li>"• Angkat jari untuk memperkecil layar"</li></ul>\n\n"Anda tidak dapat memperbesar keyboard atau menu navigasi."</string>
-    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Menggunakan tombol aksesibilitas untuk membuka"</string>
+    <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Gunakan tombol aksesibilitas untuk membuka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Menggunakan gestur untuk membuka"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Menggunakan gestur aksesibilitas baru"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="5055636663540877171">"Untuk mengaktifkan atau menonaktifkan layanan ini, ketuk tombol aksesibilitas<xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>di bagian bawah layar.\n\nUntuk beralih ke layanan lain, sentuh lama tombol aksesibilitas."</string>
@@ -2936,7 +2936,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Tidak disiapkan - Profil kerja"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"Anda (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_nickname" msgid="3763630194459958977">"Nama julukan"</string>
+    <string name="user_nickname" msgid="3763630194459958977">"Nama panggilan"</string>
     <string name="user_add_user_type_title" msgid="6473578279332446184">"Tambahkan"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"Anda dapat menambahkan maksimal <xliff:g id="USER_COUNT">%1$d</xliff:g> pengguna"</string>
     <string name="user_add_user_item_summary" msgid="8558824384636151562">"Pengguna memiliki aplikasi dan konten mereka sendiri"</string>
@@ -3113,7 +3113,7 @@
     <string name="network_dashboard_summary_mobile" msgid="4020746665765996480">"seluler"</string>
     <string name="network_dashboard_summary_data_usage" msgid="2531133412846140766">"penggunaan data"</string>
     <string name="network_dashboard_summary_hotspot" msgid="3798394197274240682">"hotspot"</string>
-    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Perangkat tersambung"</string>
+    <string name="connected_devices_dashboard_title" msgid="19868275519754895">"Perangkat terhubung"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"Bluetooth, mode mengemudi, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"Bluetooth, mode mengemudi"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"Bluetooth, NFC"</string>
@@ -3231,7 +3231,7 @@
     <string name="docking_sounds_title" msgid="5341616179210436159">"Memasang suara di dok"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Suara sentuhan"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Getaran saat disentuh"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Info via sentuhan untuk ketukan, dan lainnya"</string>
+    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Info via sentuhan untuk ketukan, keyboard, dan lainnya"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dok pemutaran speaker"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Semua audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Hanya audio media"</string>
@@ -4564,7 +4564,7 @@
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operator"</string>
     <string name="carrier_settings_version" msgid="4738147451583140935">"Versi setelan"</string>
     <string name="call_category" msgid="641461844504128789">"Memanggil"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Video call operator"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Panggilan video operator"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Pilih sistem"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Mengubah mode roaming CDMA"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Pilih sistem"</string>

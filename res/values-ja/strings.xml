@@ -99,7 +99,7 @@
     <string name="bluetooth_visibility_timeout" msgid="7611781967900196353">"表示のタイムアウト"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="7405038248936935186">"ボイスダイヤルをロック"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4959591522483403402">"画面がロックされているときはBluetoothボイスダイヤルを使用しない"</string>
-    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetoothデバイス"</string>
+    <string name="bluetooth_devices" msgid="1063177983261608277">"Bluetooth デバイス"</string>
     <string name="bluetooth_device_name" msgid="1294669733490268384">"デバイス名"</string>
     <string name="bluetooth_device_details" msgid="630702184344217832">"デバイスの設定"</string>
     <string name="bluetooth_profile_details" msgid="1269419918127093325">"プロファイル設定"</string>
@@ -312,8 +312,8 @@
     <string name="cellular_data_summary" msgid="6551434804367912367">"モバイル ネットワークでのデータ使用を許可"</string>
     <string name="allow_data_usage_title" msgid="2645963379925196671">"ローミング時にデータ使用を許可"</string>
     <string name="roaming" msgid="3055365654530847985">"ローミング"</string>
-    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続する"</string>
-    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続する"</string>
+    <string name="roaming_enable" msgid="7845716016861535340">"ローミング中にデータサービスに接続"</string>
+    <string name="roaming_disable" msgid="729512894708689604">"ローミング中にデータサービスに接続"</string>
     <string name="roaming_reenable_message" msgid="5150423860521673540">"データローミングをOFFにしたままホームネットワークの外に出たためデータ接続が切断されました。"</string>
     <string name="roaming_turn_it_on_button" msgid="6999283810847157816">"ONにする"</string>
     <string name="roaming_warning" msgid="8108744874738165518">"高額な通信料が発生することがあります。"</string>
@@ -850,7 +850,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC を ON にする"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC がこのデバイスと他の付近のデバイスまたはターゲット（決済デバイス、アクセス リーダー、インタラクティブ広告またはタグなど）の間でデータのやり取りを行います。"</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"NFC の保護"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"画面がアンロックされている場合のみ NFC 決済と公共交通機関での利用を許可します"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"画面がロック解除されている場合のみ NFC 決済と公共交通機関での利用を許可します"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android ビーム"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"アプリコンテンツをNFCで転送できます"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"OFF"</string>
@@ -964,7 +964,7 @@
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、下記の中心に QR コードを合わせてください"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Wi‑Fi に接続するには、QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Wi‑Fi の共有"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"パスワードを共有して「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンします"</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="4405316188694088689">"この QR コードをスキャンすると、パスワードが共有されて「<xliff:g id="SSID">%1$s</xliff:g>」に接続できます"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"「<xliff:g id="SSID">%1$s</xliff:g>」に接続するには、この QR コードをスキャンしてください"</string>
     <string name="wifi_dpp_could_not_detect_valid_qr_code" msgid="2112977774341648820">"QR コードを読み取れませんでした。コードを再度中央に捉えて、もう一度お試しください"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"もう一度お試しください。問題が解決しない場合は、デバイスのメーカーにお問い合わせください"</string>
@@ -1282,7 +1282,7 @@
     <string name="dark_ui_text" msgid="4392646155331126666">"ダークテーマでは黒い背景を使用するため、一部の画面で電池が長持ちします。画面が OFF になるまでダークテーマが ON にならないように設定できます。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
-    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 経過後"</string>
+    <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"壁紙"</string>
     <string name="style_and_wallpaper_settings_title" msgid="7580575814098427579">"スタイルと壁紙"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"デフォルト"</string>
@@ -2713,7 +2713,7 @@
     <string name="enter_pattern" msgid="1747316785866742960">"Androidを起動するには、パターンを入力します"</string>
     <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"パターンが正しくありません"</string>
     <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"パスワードが正しくありません"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PINが正しくありません"</string>
+    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PIN が正しくありません"</string>
     <string name="checking_decryption" msgid="6111642972615688237">"確認しています…"</string>
     <string name="starting_android" msgid="6694154070215356186">"Androidを起動しています…"</string>
     <string name="delete" msgid="8330605554706263775">"削除"</string>
@@ -3388,10 +3388,10 @@
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"通知音なしの通知のアイコンはステータスバーに表示されません"</string>
     <string name="notification_badging_title" msgid="3149547223586336353">"通知ドットの許可"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"バブル"</string>
-    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にバブルとして表示できます"</string>
-    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルとして表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
+    <string name="notification_bubbles_developer_setting_summary" msgid="3675697756601760093">"一部の通知を画面にバブルで表示できます"</string>
+    <string name="bubbles_feature_education" msgid="4088275802688887634">"一部の通知や他のコンテンツを画面にバブルで表示できます。バブルはタップすると開き、画面の下へドラッグすると消えます。"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"バブル"</string>
-    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルとして表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
+    <string name="bubbles_app_toggle_summary" msgid="1574515698567947948">"一部の通知をバブルで表示することを <xliff:g id="APP_NAME">%1$s</xliff:g> に許可します"</string>
     <string name="bubbles_feature_disabled_dialog_title" msgid="1233382767099262132">"バブルの有効化"</string>
     <string name="bubbles_feature_disabled_dialog_text" msgid="6969068442520056407">"このアプリのバブルを有効にするには、デバイスでバブルを有効にしておく必要があります。この設定は、バブルを以前に有効にした他のアプリにも反映されます。"</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="597665528889599104">"デバイスで有効にする"</string>

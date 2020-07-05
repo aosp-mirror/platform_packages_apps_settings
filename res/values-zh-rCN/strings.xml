@@ -661,8 +661,8 @@
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的 PIN 码或密码，否则，该应用可能无法按预期运行"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的解锁图案、PIN 码或密码，否则，该应用可能无法按预期运行"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g>建议使用新的屏幕锁定方式"</string>
-    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"请重试。您目前已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多可尝试 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
-    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"您的数据将遭到删除"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"请重试。已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"您的数据将被删除"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"如果您下次绘制的解锁图案仍然有误，系统将删除此设备上的数据"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"如果您下次输入的 PIN 码仍然有误，系统将删除此设备上的数据"</string>
     <string name="lock_last_password_attempt_before_wipe_device" msgid="985126164175708507">"如果您下次输入的密码仍然有误，系统将删除此设备上的数据"</string>
@@ -741,7 +741,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 个应用正在运行</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"可信代理"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"要开始使用，请先设置屏幕锁定方式"</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"需先设置屏幕锁定方式才能使用"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"无"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> 个可信代理正在运行</item>
@@ -1766,9 +1766,9 @@
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"为了安全起见，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"要使用指纹，请设置 PIN 码"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"为了安全起见，请设置解锁图案"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"重新输入密码"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"确认您的图案"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"重新输入 PIN 码"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"再次输入密码"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"确认您的解锁图案"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"再次输入 PIN 码"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"密码不匹配"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN 码不匹配！"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"再次绘制图案"</string>
@@ -3256,16 +3256,16 @@
     <string name="zen_mode_behavior_total_silence" msgid="1164689054595494194">"完全静音"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4004871349051049634">"不发出提示音（<xliff:g id="CATEGORIES">%1$s</xliff:g>除外）"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="8855473182829400759">"静音（闹钟和媒体音频除外）"</string>
-    <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间安排"</string>
+    <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"时间表"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"删除时间表"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"删除"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"修改"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"时间表"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"时间表"</string>
-    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"时间安排"</string>
+    <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"时间表"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"在特定的时间将手机设为静音"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"设置“勿扰”规则"</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"时间安排"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"时间表"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"使用时间表"</string>
     <string name="zen_mode_option_important_interruptions" msgid="1258558302247351758">"仅限优先事项"</string>
     <string name="zen_mode_option_alarms" msgid="5757128948796316657">"仅限闹钟"</string>
@@ -3280,7 +3280,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"手机在收到通知时既不会发出提示音也不会振动。"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"不显示通知，也不发出通知提示音"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"您将不会看到通知或听到通知提示音"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"您的手机将不会显示任何新通知或现有通知，也不会因此发出振动或提示音。请注意，系统仍会显示与手机活动和状态相关的重要通知。\n\n关闭“勿扰”模式后，您可以通过从屏幕顶部向下滑动来查找错过的通知。"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"您的手机将不会显示任何新通知或现有通知，也不会因此发出振动或提示音。请注意，系统仍会显示与手机活动和状态相关的重要通知。\n\n关闭勿扰模式后，只要从屏幕顶部向下滑动即可查看错过的通知。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"自定义"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"启用自定义设置"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"移除自定义设置"</string>
@@ -3664,7 +3664,7 @@
     <string name="screen_pinning_title" msgid="5203530107022449124">"固定屏幕"</string>
     <string name="screen_pinning_description" msgid="5181462036494390860">"开启此设置后，您可以使用固定屏幕功能来固定显示当前的屏幕，直到您取消固定为止。\n\n要使用固定屏幕功能，请执行以下操作：\n\n1. 确保固定屏幕功能已开启\n\n2. 打开“概览”\n\n3. 点按屏幕顶部的应用图标，然后点按“固定”"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定屏幕前要求绘制解锁图案"</string>
-    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定屏幕前要求输入 PIN 码"</string>
+    <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定前要求输入 PIN 码"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"取消固定屏幕前要求输入密码"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"取消固定屏幕时锁定设备"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"此工作资料由以下应用管理："</string>
@@ -4125,7 +4125,7 @@
     <string name="notification_log_details_group_summary" msgid="4364622087007803822">"（摘要）"</string>
     <string name="notification_log_details_visibility" msgid="6811292866832243357">"公开范围"</string>
     <string name="notification_log_details_public_version" msgid="3057653571018432759">"公开版本"</string>
-    <string name="notification_log_details_priority" msgid="4772047133062255513">"优先级"</string>
+    <string name="notification_log_details_priority" msgid="4772047133062255513">"优先"</string>
     <string name="notification_log_details_importance" msgid="8516198274667183446">"重要程度"</string>
     <string name="notification_log_details_explanation" msgid="6966274549873070059">"说明"</string>
     <string name="notification_log_details_badge" msgid="648647240928645446">"可显示状态标记"</string>
