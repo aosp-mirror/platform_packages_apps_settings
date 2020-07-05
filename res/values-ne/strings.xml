@@ -240,7 +240,7 @@
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"HTTP क्लाइन्टको परीक्षण:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"पिङ सम्बन्धी परीक्षण सञ्चालन गर्नुहोस्"</string>
     <string name="radio_info_smsc_label" msgid="8791850754231448677">"SMSC:"</string>
-    <string name="radio_info_smsc_update_label" msgid="5188170141348184882">"अद्यावधिक गर्नुहोस्"</string>
+    <string name="radio_info_smsc_update_label" msgid="5188170141348184882">"अपडेट गर्नुहोस्"</string>
     <string name="radio_info_smsc_refresh_label" msgid="8649680071647954564">"पुनःताजा गर्नुहोस्"</string>
     <string name="radio_info_toggle_dns_check_label" msgid="8385222188363594645">"DNS को जाँचलाई टगल गर्नुहोस्"</string>
     <string name="oem_radio_info_label" msgid="4435487925582197844">"OEM-विशिष्ट जानकारी/सेटिङहरू"</string>
@@ -426,7 +426,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"तपाईं अधिकतम <xliff:g id="COUNT">%d</xliff:g> अनुहारहरू थप्न सक्नुहुन्छ"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"तपाईंले थप्न मिल्ने अधिकतम सङ्ख्या बराबरका अनुहारहरू थप्नुभएको छ"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"थप अनुहारहरू थप्न सकिँदैन"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"दर्ता गर्ने कार्य पूर्ण भएन"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"फिंगरप्रिन्ट सेभ भइसकेको छैन"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"ठिक छ"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"अनुहार दर्ताको समय सीमा पुग्यो। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"अनुहार दर्ता गर्ने प्रक्रियाले काम गरेन।"</string>
@@ -513,7 +513,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"सम्पन्न भयो"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"आच्यौं, त्यो सेन्सर होइन नि त"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तपाईंको फोनको पछाडि भागमा रहेको सेन्सरमा छुनुहोस्। चोर औंला प्रयोग गर्नुहोस्‌।"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"सेभ भइसकेको छैन"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"फिंगरप्रिन्ट सेभ भइसकेको छैन"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"फिंगरप्रिन्ट दर्ताको समय सीमा पुग्यो। पुन: प्रयास गर्नुहोस्।"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिन्ट दर्ताले काम गरेन। पुन: प्रयास गर्नुहोस् वा अरू औँलाको प्रयोग गर्नुहोस्।"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"अर्को थप्नुहोस्"</string>
@@ -662,19 +662,19 @@
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> ले कुनै नयाँ ढाँचा, PIN वा पासवर्ड सिफारिस गर्छ र उक्त ढाँचा, PIN वा पासवर्डविना यसले अपेक्षाअनुरूप काम नगर्न सक्छ"</string>
     <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> ले नयाँ स्क्रिन लक सिफारिस गर्छ"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"फेरि प्रयास गर्नुहोस्। <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> मध्ये <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> प्रयास"</string>
-    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"तपाईंको डेटालाई मेटाइनेछ"</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"तपाईंको डेटा मेटाइने छ"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने यो यन्त्रको डेटा मेटाइनेछ"</string>
     <string name="lock_last_pin_attempt_before_wipe_device" msgid="2815681042623708775">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने यो यन्त्रको डेटा मेटाइनेछ"</string>
     <string name="lock_last_password_attempt_before_wipe_device" msgid="985126164175708507">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने यो यन्त्रको डेटा मेटाइनेछ।"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="8283944727199433440">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने यो प्रयोगकर्ताको डेटालाई मेटाइनेछ"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने यो प्रयोगकर्ताको डेटालाई मेटाइनेछ"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने यो प्रयोगकर्तालाई मेटाइनेछ"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
-    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"अनलक गर्ने अत्यधिक गलत प्रयासहरू भए। यो यन्त्रको डेटा मेटाइनेछ।"</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"धेरै पकट गलत प्रयास गरियो। यो प्रयोगकर्तालाई मेटाइनेछ"</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"धेरै पकट गलत प्रयास गरियो। यो कार्य प्रोफाइल र यसको डेटालाई मेटाइनेछ।"</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"धेरै पटक गलत प्रयास गरियो। यो कार्य प्रोफाइल र यसको डेटा मेटाइने छ।"</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"खारेज गर्नुहोस्"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">अनिवार्य रूपमा कम्तीमा <xliff:g id="COUNT_1">%d</xliff:g> वर्णहरू हुनु पर्छ</item>
@@ -850,7 +850,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"NFC सक्रिय गर्नुहोस्"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC ले यो यन्त्र र भुक्तानीको टर्मिनल, पहुँच सम्बन्धी रिडर र अन्तरक्रियात्मक विज्ञापन वा ट्यागहरू जस्ता अन्य नजिकका यन्त्र वा लक्ष्यहरू बीच डेटा आदानप्रदान गर्छ।"</string>
     <string name="nfc_secure_settings_title" msgid="8947380729696717356">"NFC सुरक्षित पार्नुहोस्"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"स्क्रिन अनलक भएका बेलामा मात्र NFC भुक्तानी र ट्रान्जिटको प्रयोगलाई अनुमति दिनुहोस्"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="4591286109299690373">"स्क्रिन अनलक भएका बेलामा मात्र NFC भुक्तानी र ट्रान्जिट प्रयोग गर्ने अनुमति दिनुहोस्"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"एन्ड्रोइड बिम"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFCको माध्यमबाट एप सामग्री प्रसारित गर्नको लागि तयार"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"बन्द"</string>
@@ -1767,11 +1767,11 @@
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"फिंगरप्रिन्ट प्रयोग गर्न PIN सेट गर्नुहोस्"</string>
     <string name="lockpassword_choose_your_pattern_message" msgid="5815780503576680412">"सुरक्षाका लागि ढाँचा सेट गर्नुहोस्"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"आफ्नो पासवर्ड पुन: प्रविष्टि गर्नुहोस्"</string>
-    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"तपाईँको ढाँचा निश्चित गर्नुहोस्"</string>
+    <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"तपाईँको ढाँचा पुष्टि गर्नुहोस्"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"आफ्नो PIN पुन: प्रविष्टि गर्नुहोस्"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"पासवर्ड मेल खाँदैन"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN मिल्दैन"</string>
-    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"प्याटर्न फेरि बनाउनुहोस्"</string>
+    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"आफ्नो ढाँचा फेरि कोर्नुहोस्"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"चयन अनलक गर्नुहोस्"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"पासवर्ड सेट भएको छ"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"PIN सेट भएको छ।"</string>
@@ -1803,7 +1803,7 @@
     <string name="lock_settings_title" msgid="665707559508132349">"यन्त्र सुरक्षा"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5853706275279878879">"अनलक ढाँचा परिवर्तन गर्नुहोस्"</string>
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"PIN अनलक बदल्नुहोस्"</string>
-    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"अनलक प्याटर्न बनाउनुहोस्"</string>
+    <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"अनलक ढाँचा कोर्नुहोस्"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"मद्दतका लागि मेनुमा थिच्नुहोस्।"</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"सकिएपछि औँला उचाल्नुहोस्।"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"कम्तीमा <xliff:g id="NUMBER">%d</xliff:g>वटा थोप्लाहरू जोड्नुहोस्। फेरि प्रयास गर्नुहोस्:"</string>
@@ -2091,7 +2091,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"उपलब्धता सेटिङहरू"</string>
     <string name="accessibility_settings_summary" msgid="2195085206729325737">"स्क्रिन रिडरहरू, प्रदर्शन, अन्तर्क्रिया नियन्त्रणहरू"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"दृश्यका सेटिङहरू"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"तपाईंले आफ्नो आवश्यकताहरूसँग मेल खाने बनाउन यस यन्त्रलाई आफू अनुकूल गर्न सक्नुहुन्छ। यी पहुँच सुविधाहरू सेटिङमा पछि परिवर्तन गर्न सकिनेछ।"</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"तपाईंले आफ्नो आवश्यकताहरूसँग मेल खाने बनाउन यस यन्त्रलाई आफू अनुकूल गर्न सक्नुहुन्छ। यी पहुँच सुविधाहरू सेटिङमा पछि परिवर्तन गर्न सकिने छ।"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"फन्ट साइज बदल्नुहोस्"</string>
     <string name="screen_reader_category_title" msgid="6195867428854871553">"स्क्रिन रिडरहरू"</string>
     <string name="audio_and_captions_category_title" msgid="5049122378290004050">"अडियो तथा स्क्रिनमा देखिने पाठ सन्देश"</string>
@@ -2129,8 +2129,8 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="5918442016264847021">"लक स्क्रिनबाट अनुमति दिनुहोस्"</string>
     <string name="accessibility_shortcut_description" msgid="9051481607998911585">"सर्टकट सक्रिय हुँदा पहुँचसम्बन्धी सुविधा सुरु गर्न तपाईं दुवै भोल्युम कुञ्जीहरूलाई ३ सेकेन्डसम्म थिच्न सक्नुहुन्छ।"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"हाइ कन्ट्रास्ट पाठ"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"स्क्रिन आवर्धन स्वतः अद्यावधिक गर्नुहोस्"</string>
-    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"एप ट्रान्जिसनहरूमा स्क्रिन आवर्धन अद्यावधिक गर्नुहोस्"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"स्क्रिन आवर्धन स्वतः अपडेट गर्नुहोस्"</string>
+    <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"एप ट्रान्जिसनहरूमा स्क्रिन आवर्धन अपडेट गर्नुहोस्"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पावर बटनले कल काट्छ"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"ठुलो माउस पोइन्टर"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"एनिमेसनहरू हटाउनुहोस्"</string>
@@ -2236,7 +2236,7 @@
     <string name="color_black" msgid="9006830401670410387">"कालो"</string>
     <string name="color_red" msgid="5210756997426500693">"रातो"</string>
     <string name="color_green" msgid="4400462091250882271">"हरियो"</string>
-    <string name="color_blue" msgid="4997784644979140261">"नीलो"</string>
+    <string name="color_blue" msgid="4997784644979140261">"निलो"</string>
     <string name="color_cyan" msgid="4341758639597035927">"सायन"</string>
     <string name="color_yellow" msgid="5957551912912679058">"पहेँलो"</string>
     <string name="color_magenta" msgid="8943538189219528423">"म्याजेन्टा"</string>
@@ -3167,7 +3167,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"एपहरू, पूर्वनिर्धारित"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"अनुकूलनहरूलाई बेवास्ता गर्नुहोस्, डोज, एप स्ट्यान्डबाइ"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"चम्किलो RGB, sRGB, रङ्ग, प्राकृतिक, मानक"</string>
-    <string name="keywords_color_temperature" msgid="8159539138837118453">"रङ्ग, तापक्रम, D65, D73, सेतो, पहेँलो, नीलो, न्यानो, शीतल"</string>
+    <string name="keywords_color_temperature" msgid="8159539138837118453">"रङ्ग, तापक्रम, D65, D73, सेतो, पहेँलो, निलो, न्यानो, शीतल"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"अनलक गर्न स्लाइड गर्नुहोस्, पासवर्ड, ढाँचा, PIN"</string>
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"कार्य चुनौती, कार्य, प्रोफाइल"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"कार्यको प्रोफाइल, व्यवस्थापन गरिएको प्रोफाइल, एकरूपता ल्याउनु, एकरूपता, कार्य, प्रोफाइल"</string>
@@ -4388,10 +4388,10 @@
     <string name="storage_manager_indicator_on" msgid="8380330763647785309">"सक्रिय"</string>
     <string name="install_type_instant" msgid="7685381859060486009">"तात्कालिक एप"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"भण्डारण व्यवस्थापक निष्क्रिय पार्ने हो?"</string>
-    <string name="storage_movies_tv" msgid="7897612625450668593">"चलचित्र तथा TV एपहरू"</string>
+    <string name="storage_movies_tv" msgid="7897612625450668593">"चलचित्र तथा टिभी एपहरू"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"सेवा प्रदायकको प्रावधान सम्बन्धी जानकारी"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"सेवा प्रदायकको प्रावधानलाई ट्रिगर गर्नुहोस्"</string>
-    <string name="zen_suggestion_title" msgid="4555260320474465668">"बाधा नपुर्‍याउनुहोस्‌ नामक सेवालाई अद्यावधिक गर्नुहोस्‌"</string>
+    <string name="zen_suggestion_title" msgid="4555260320474465668">"बाधा नपुर्‍याउनुहोस्‌ नामक सेवालाई अपडेट गर्नुहोस्‌"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"केन्द्रित रहन सूचनाहरू पज गर्नुहोस्"</string>
     <string name="disabled_low_ram_device" msgid="5456316412719852286">"यस यन्त्रमा यो सुविधा उपलब्ध छैन"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"सुविधा उपलब्ध छैन"</string>

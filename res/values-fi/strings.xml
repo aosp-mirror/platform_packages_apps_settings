@@ -249,7 +249,7 @@
     <string name="band_mode_set" msgid="494968379352406359">"Aseta"</string>
     <string name="band_mode_failed" msgid="7171137302312882111">"Epäonnistui"</string>
     <string name="band_mode_succeeded" msgid="4987605828933549780">"Onnistui"</string>
-    <string name="sdcard_changes_instructions" msgid="2331969501845866957">"Muutokset tulevat voimaan, kun USB-kaapeli kytketään uudelleen."</string>
+    <string name="sdcard_changes_instructions" msgid="2331969501845866957">"Muutokset tulevat voimaan, kun USB-johto kytketään uudelleen."</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="129059989000252994">"Ota USB-massamuisti käyttöön"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="5298511430610207103">"Tavuja yhteensä:"</string>
     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="6189761476582690998">"USB-tallennustila ei käytössä."</string>
@@ -426,7 +426,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> kasvoa"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Et voi lisätä useampia kasvoja"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Enimmäismäärä kasvoja lisätty"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Rekisteröitymistä ei suoritettu loppuun"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Käyttöönottoa ei suoritettu loppuun asti"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Kasvojen rekisteröinnin aikaraja on saavutettu. Yritä uudelleen."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Kasvojen rekisteröinti epäonnistui."</string>
@@ -473,7 +473,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="370010932190960403">"Ohita"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="7155412679784724630">"Seuraava"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Ohitetaanko sormenjälki?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Sormenjälkitunnistus kestää vain minuutin tai pari. Jos ohitat tämän, voit lisätä sormenjäljen myöhemmin asetuksissa."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Sormenjälkitunnistuksen käyttöönotossa menee vain minuutti tai pari. Jos ohitat sen nyt, voit lisätä sormenjälkesi myöhemmin asetuksista."</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ohitetaanko näytön lukitus?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Laitteen suojausominaisuuksia ei oteta käyttöön. Et voi estää tabletin käyttöä, jos se varastetaan, katoaa tai sen tiedot pyyhitään."</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4618501606519351904">"Laitteen suojausominaisuuksia ei oteta käyttöön. Et voi estää laitteen käyttöä, jos se varastetaan, katoaa tai sen tiedot pyyhitään."</string>
@@ -513,8 +513,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hups, anturi ei ole siinä."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kosketa puhelimen takaosan tunnistinta etusormella."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Rekisteröitymistä ei suoritettu loppuun"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Sormenjäljen rekisteröinnin aikaraja on saavutettu. Yritä uudelleen."</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun asti"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Sormenjäljen käyttöönoton enimmäisaika ylittyi. Yritä uudelleen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Sormenjäljen rekisteröinti ei onnistunut. Yritä uudelleen tai käytä eri sormea."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lisää toinen"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Seuraava"</string>
@@ -670,12 +670,12 @@
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="972834567684477451">"Jos annat väärän PIN-koodin seuraavalla yrityskerralla, tämä käyttäjä poistetaan."</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="3797239847079686727">"Jos annat väärän salasanan seuraavalla yrityskerralla, tämä käyttäjä poistetaan."</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Jos annat väärän kuvion seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
-    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jos annat väärän PIN-koodin seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jos syötät väärän PIN-koodin seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jos annat väärän salasanan seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
     <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Liian monta virheellistä yritystä. Laitteen tiedot poistetaan."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Liian monta virheellistä yritystä. Tämä käyttäjä poistetaan."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Liian monta virheellistä yritystä. Tämä työprofiili ja sen tiedot poistetaan."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Hylkää"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Ohita"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> merkkiä.</item>
       <item quantity="one">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> merkki.</item>
@@ -741,7 +741,7 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aktiivinen sovellus</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Luotettavat tahot"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Käytä asettamalla ensin näytön lukitus."</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Käyttääksesi tätä valitse ensin näytön lukitus"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"–"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> aktiivista luotettavaa tahoa</item>
@@ -873,7 +873,7 @@
     <string name="wifi_notify_open_networks" msgid="3040435584744232163">"Avaa verkkoilmoitus"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Ilmoita, kun käytettävissä on laadukkaita julkisia verkkoja."</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Laita Wi-Fi päälle automaattisesti"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi laitetaan automaattisesti päälle, kun lähistöllä on kotiverkkosi tai muita laadukkaita tallennettuja verkkoja."</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wi-Fi laitetaan automaattisesti päälle, kun lähistöllä on kotiverkkosi tai muita laadukkaita tallennettuja verkkoja"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ei käytettävissä, koska sijainti on poistettu käytöstä. Ota "<annotation id="link">"sijainti"</annotation>" käyttöön."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Ei käytettävissä, koska Wi‑Fi-haku on pois päältä."</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Valitse verkon arviointipalvelu, jotta voit käyttää tätä."</string>
@@ -1779,11 +1779,11 @@
     <string name="lockpassword_choose_your_password_header_for_face" msgid="5359649947642749079">"Määritä salasana Face Unlockia varten"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" msgid="9220480399170764760">"Valitse kuvio Face Unlockia varten"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="2285401208117502869">"Määritä PIN-koodi Face Unlockia varten"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Jatka piirtämällä laitteesi kuvio."</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Jatka antamalla laitteesi PIN-koodi."</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Jatka piirtämällä kuvio"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Jatka lisäämällä laitteesi PIN-koodi"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Jatka antamalla laitteesi salasana."</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Jatka piirtämällä työprofiilisi kuvio."</string>
-    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Jatka antamalla työprofiilisi PIN-koodi."</string>
+    <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Jatka lisäämällä työprofiilisi PIN-koodi"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Jatka antamalla työprofiilisi salasana."</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Turvallisuussyistä pyydämme antamaan laitteen kuvion."</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Turvallisuussyistä pyydämme antamaan laitteen PIN-koodin."</string>
@@ -2989,7 +2989,7 @@
     <string name="apps_with_restrictions_header" msgid="5277698582872267931">"Rajoitetut sovellukset"</string>
     <string name="apps_with_restrictions_settings_button" msgid="2648355133416902221">"Laajenna sovelluksen asetuksia"</string>
     <string name="nfc_payment_settings_title" msgid="400718454435230486">"Napauttamalla maksaminen"</string>
-    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Toimintatapa"</string>
+    <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Miten se toimii"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Maksa puhelimella myymälöissä"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Oletusmaksusovellus"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Ei asetettu"</string>
@@ -2999,7 +2999,7 @@
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Paitsi jos jokin toinen maksusovellus on auki"</string>
     <string name="nfc_payment_pay_with" msgid="10107565447713526">"Maksa napauttamalla maksamisen päätteellä tällä sovelluksella:"</string>
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Maksaminen päätteellä"</string>
-    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Määritä maksusovellus. Sen jälkeen sinun tarvitsee vain pitää puhelimen takaosaa etämaksut hyväksyvää maksupäätettä vasten."</string>
+    <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Asenna maksusovellus. Maksa ostoksesi pitämällä puhelimen takaosaa lähimaksupäätettä vasten."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"Selvä"</string>
     <string name="nfc_more_title" msgid="4202405349433865488">"Lisää…"</string>
     <string name="nfc_payment_set_default_label" msgid="9046299254316590677">"Valitaanko asetukseksi?"</string>
@@ -3276,10 +3276,10 @@
     <string name="zen_mode_settings_category" msgid="3531156898689133018">"Kun älä häiritse -tila on käytössä"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="5881948256821375291">"Rajoita ilmoituksia"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ei ilmoitusääniä"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Näet ilmoituksia näytöllä."</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Näet ilmoitukset näytölläsi"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Puhelin ei anna äänimerkkiä eikä värise ilmoituksen saapuessa."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ei ilmoitusgrafiikoita tai ‑ääntä"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Et näe tai kuule ilmoituksia."</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Et näe tai kuule ilmoituksia"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Puhelin ei näytä uusia tai aiempia ilmoituksia eikä kerro niistä värinällä tai äänellä. Tärkeät ilmoitukset puhelimen toiminnasta ja tilasta näkyvät edelleen.\n\nKun poistut Älä häiritse ‑tilasta, löydät ohitetut ilmoitukset pyyhkäisemällä alaspäin näytön yläreunasta."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Oma"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Ota oma asetus käyttöön"</string>
@@ -3356,7 +3356,7 @@
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Asetukset"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Ei ilmoitusgrafiikoita tai ‑ääntä"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Ei ilmoitusääniä"</string>
-    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Et näe tai kuule ilmoituksia. Tähdellä merkityiltä yhteyshenkilöiltä ja toistuvilta soittajilta tulevat puhelut sallitaan."</string>
+    <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Et näe tai kuule ilmoituksia. Tähdellä merkityiltä yhteyshenkilöiltä ja usein soittavilta tulevat puhelut sallitaan."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(nykyinen asetus)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Muutetaanko Älä häiritse ‑ilmoitusasetuksia?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Työprofiilin äänet"</string>
@@ -3452,10 +3452,10 @@
     <string name="notification_alert_title" msgid="5605374030042727533">"Hälyttää"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"Salli keskeytykset"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Anna sovelluksen toistaa ääniä, väristä ja näyttää ilmoituksia näytöllä."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"Tiivistä ilmoitukset yksirivisiksi avattavalla ilmoitusalueella."</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"Tiivistä ilmoitukset yksirivisiksi avattavalla ilmoitusalueella"</string>
     <string name="notification_channel_summary_low" msgid="4842529455460294865">"Keskittyminen on helpompaa ilman ääntä tai värinää"</string>
     <string name="notification_channel_summary_default" msgid="2919219975379032181">"Kiinnittää huomion äänellä tai värinällä"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kun laitteen lukitus on avattu, näytä ilmoitukset bannerina sivun yläreunassa."</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Kun laitteen lukitus on avattuna, näytä ilmoitukset bannerina sivun yläreunassa"</string>
     <string name="notification_switch_label" msgid="2950240358797111509">"Näytä ilmoitukset"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Mukautuvat ilmoitukset"</string>
     <plurals name="notifications_sent_daily" formatted="false" msgid="1479283620504341566">
@@ -3550,7 +3550,7 @@
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Lisää aikapohjainen aikataulu"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Poista aikataulu"</string>
     <string name="zen_mode_choose_rule_type" msgid="7656308563653982975">"Valitse aikataulutyyppi"</string>
-    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Poistetaanko sääntö <xliff:g id="RULE">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Poistetaanko tämä sääntö (<xliff:g id="RULE">%1$s</xliff:g>)?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Poista"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Tuntematon"</string>
     <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Näitä asetuksia ei voi muuttaa juuri nyt. Sovellus <xliff:g id="APP_NAME">%1$s</xliff:g> otti Älä häiritse ‑tilan automaattisesti käyttöön muokatulla toiminnalla."</string>
@@ -3575,11 +3575,11 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Päivät"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ei mitään"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Joka päivä"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Herätys voi ohittaa päättymisajan"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Aikataulu poistuu käytöstä, kun hälytys soi"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Herätys voi kumota päättymisajan"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Aikataulu menee pois päältä herätyksen yhteydessä"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Älä häiritse ‑tilan toiminta"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Käytä oletusasetuksia"</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Luo tälle aikataululle omia asetuksia"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Valitse omat asetukset tälle aikataululle"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3600,9 +3600,9 @@
     <string name="zen_mode_from_anyone" msgid="7484461089733953376">"Keneltä tahansa"</string>
     <string name="zen_mode_from_contacts" msgid="3844421288733778469">"Vain yhteystiedoilta"</string>
     <string name="zen_mode_from_starred" msgid="3173969343266078914">"Vain tähdellä merkityiltä yhteystiedoilta"</string>
-    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Tähdellä merkityiltä yhteyshenkilöiltä ja toistuvilta soittajilta"</string>
-    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Yhteyshenkilöiltä ja toistuvilta soittajilta"</string>
-    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Vain toistuvilta soittajilta"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Tähdellä merkityiltä yhteyshenkilöiltä ja usein soittavilta"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Yhteyshenkilöiltä ja usein soittavilta"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Vain usein soittavilta"</string>
     <string name="zen_mode_from_none" msgid="8456745188276131873">"–"</string>
     <string name="zen_mode_from_none_calls" msgid="419514492513274710">"Älä salli puheluja"</string>
     <string name="zen_mode_from_none_messages" msgid="122458013195428548">"Älä salli viestejä."</string>
@@ -3625,9 +3625,9 @@
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"kuka tahansa"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"yhteyshenkilöt"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"tähdellä merkityt yhteyshenkilöt"</string>
-    <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Toistuvat soitot"</string>
+    <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Usein soittavat"</string>
     <string name="zen_mode_repeat_callers_list" msgid="181819778783743847">"toistuvat puhelut"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Salli toistuvat soitot"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Salli usein soittavat"</string>
     <string name="zen_mode_calls_summary_one" msgid="6384227957828089023">"Salli puhelut: <xliff:g id="CALLER_TYPE">%1$s</xliff:g>"</string>
     <string name="zen_mode_calls_summary_two" msgid="4020474684516812002">"Salli puhelut: <xliff:g id="CALLER_TYPE">%1$s</xliff:g> ja <xliff:g id="CALLERT_TPYE">%2$s</xliff:g>"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="2986979589055491521">"Jos sama henkilö soittaa uudelleen <xliff:g id="MINUTES">%d</xliff:g> minuutin kuluessa"</string>
@@ -3752,7 +3752,7 @@
     <string name="advanced_apps" msgid="7643010673326578815">"Lisäasetukset"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Sovellusten konfigurointi"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Tuntematon sovellus"</string>
-    <string name="app_permissions" msgid="8666537659217653626">"Käyttöoikeuksien ylläpitäjä"</string>
+    <string name="app_permissions" msgid="8666537659217653626">"Käyttöoikeuksien ylläpito"</string>
     <string name="app_permissions_summary" msgid="2709819220672938860">"Sovellukset, joilla on lupa käyttää seuraavia: <xliff:g id="APPS">%1$s</xliff:g>"</string>
     <string name="tap_to_wake" msgid="3313433536261440068">"Herätä napauttamalla"</string>
     <string name="tap_to_wake_summary" msgid="6641039858241611072">"Herätä laite napauttamalla näyttöä kahdesti."</string>
