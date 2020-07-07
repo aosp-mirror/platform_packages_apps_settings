@@ -1210,10 +1210,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Ridică automat rata de actualizare de la 60 la 90 Hz pentru unele tipuri de conținut. Mărește utilizarea bateriei."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Cea mai ridicată rată de actualizare, pentru receptivitate la atingere îmbunătățită și animații de calitate. Mărește utilizarea bateriei."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atenție la ecran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activat/Ecranul nu se va închide dacă vă uitați la el"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Dezactivat"</string>
@@ -1352,7 +1350,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versiune Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Actualizare de securitate Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Model"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Model: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Model și hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versiune de hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID echipament"</string>
@@ -3130,8 +3127,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Manager de apeluri"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Alerte de urgență wireless"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Operatori de rețea"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Numele punctelor de acces"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3506,6 +3502,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Setați automat ca Discrete notificările cu prioritate redusă"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Poziționare adaptivă a notificărilor"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Poziționați automat notificările după relevanță"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback pentru notificările adaptabile"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Indicați ajustările notificărilor și afișați opțiunea de a oferi feedback pentru sistem"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Acțiuni și răspunsuri sugerate"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Afișați automat acțiunile și răspunsurile sugerate"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Afișați notificările recente și pe cele amânate"</string>
@@ -3720,6 +3718,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Această aplicație nu a postat nicio notificare"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Setări suplimentare în aplicație"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Istoricul notificărilor, baloane, trimise recent"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Activate pentru toate aplicațiile"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="few">Dezactivate pentru <xliff:g id="COUNT_1">%d</xliff:g> aplicații</item>
@@ -4749,6 +4748,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Activați/dezactivați modificările compatibilității aplicației"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Modificări activate prestabilite"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Modificări dezactivate prestabilite"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Nicio aplicație"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Compatibilitatea aplicațiilor poate fi modificată numai pentru aplicațiile care pot fi remediate. Instalați o aplicație care poate fi remediată și încercați din nou."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Setarea nu este acceptată pe telefon"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Setarea nu este acceptată pe tabletă"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Setarea nu este acceptată pe dispozitiv"</string>
@@ -4923,8 +4924,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Reîncercați"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"A intervenit ceva. Această aplicație a anulat solicitarea de a alege un dispozitiv."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Conectare reușită"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Nu s-a conectat"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Afișați-le pe toate"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Se caută dispozitivul…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Se conectează la dispozitiv…"</string>
@@ -5035,10 +5035,17 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Nu mai proiectați"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Dezactivați VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"În plus, astfel veți dezactiva conexiunea 5G.\nÎn timpul unui apel vocal, nu puteți folosi internetul și unele aplicații pot să nu funcționeze."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Când folosiți două carduri SIM, telefonul va fi limitat la 4G. "<annotation id="url">"Aflați mai multe"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Când folosiți două carduri SIM, tableta va fi limitată la 4G. "<annotation id="url">"Aflați mai multe"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Când folosiți două carduri SIM, dispozitivul va fi limitat la 4G. "<annotation id="url">"Aflați mai multe"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Când folosiți două carduri SIM, telefonul va fi limitat la 4G. "<annotation id="url">"Aflați mai multe"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Când folosiți două carduri SIM, tableta va fi limitată la 4G. "<annotation id="url">"Aflați mai multe"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Când folosiți două carduri SIM, dispozitivul va fi limitat la 4G. "<annotation id="url">"Aflați mai multe"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspendați execuția pentru aplicațiile din cache"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permiteți suprapunerile pe ecrane din Setări"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permiteți aplicații care se pot afișa deasupra altora prin suprapunerea pe ecranele de Setări"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Ascunde playerul după încheierea sesiunii media"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Cu ajutorul playerului, puteți relua o sesiune din panoul extins Setări rapide."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Ascunde playerul"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Afișează playerul"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Niciun player disponibil"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"media"</string>
 </resources>

@@ -1329,7 +1329,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Versión de Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Actualización de seguridad de Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Modelo"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Modelo: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Modelo y hardware"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Versión de hardware"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ID del equipo"</string>
@@ -3598,8 +3597,10 @@
     <string name="manage_notification_access_title" msgid="4714320299084782521">"Acceso a notificaciones"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"El acceso a las notificaciones del perfil de trabajo está bloqueado"</string>
     <string name="manage_notification_access_summary_zero" msgid="7528633634628627431">"Las aplicaciones no pueden leer las notificaciones."</string>
-    <!-- String.format failed for translation -->
-    <!-- no translation found for manage_notification_access_summary_nonzero (3703008881487586312) -->
+    <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="3703008881487586312">
+      <item quantity="other">%d aplicaciones pueden leer notificaciones.</item>
+      <item quantity="one">%d aplicación puede leer notificaciones.</item>
+    </plurals>
     <string name="notification_assistant_title" msgid="6983941403582134437">"Notificaciones adaptables"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Ninguna"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ninguna aplicación instalada solicitó acceso a las notificaciones."</string>
@@ -4943,9 +4944,9 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Detener transmisión"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"¿Deseas desactivar VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"También se desactivará tu conexión 5G.\nDurante una llamada de voz, no puedes usar Internet y es posible que algunas apps no funcionen."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Este teléfono se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Esta tablet se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Este dispositivo se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Obtén más información"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Este teléfono se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Más información"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Esta tablet se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Más información"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Este dispositivo se limitará a 4G cuando se usen 2 tarjetas SIM. "<annotation id="url">"Más información"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspende la ejecución de apps almacenadas en caché"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir pantallas superpuestas en Configuración"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permite que las apps que pueden mostrar contenido sobre otras se superpongan a las pantallas de Configuración"</string>

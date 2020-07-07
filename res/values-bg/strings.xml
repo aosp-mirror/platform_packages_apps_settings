@@ -1190,10 +1190,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавно показване"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично увеличава честотата на опресняване от 60 на 90 Hz за част от съдържанието. По-интензивно използване на батерията."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плавно показване"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Най-висока честота на опресняване за по-добро реагиране при докосване и качество на анимациите. По-интензивно използване на батерията."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Внимание към екрана"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Вкл. – Екранът няма да се изключи, ако гледате в него"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Изключено"</string>
@@ -1331,7 +1329,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Версия на Android"</string>
     <string name="security_patch" msgid="4071756145347865382">"Актуализация за сигурността на Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модел"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Модел: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Модел и хардуер"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Версия на хардуера"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Идент. № на оборудването"</string>
@@ -2212,7 +2209,7 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Вибриране при известия"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вибриране при звънене"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Обратна връзка при докосване"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Използване на <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Използване на „<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>“"</string>
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Отваряне на <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Използване на корекция на цветовете"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Показване на надписите"</string>
@@ -3087,8 +3084,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Мениджър на обажданията"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Безжични сигнали при спешни случаи"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Мрежови оператори"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Имена на точките за достъп"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3459,6 +3455,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Известията с по-нисък приоритет автоматично се задават като ненатрапчиви"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Адаптивно класиране на известията"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Автоматично класиране на известията по уместност"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Отзиви за адаптивните известия"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Посочва приложените към известията корекции и показва опцията за изпращане на отзиви до системата"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Предложени действия и отговори"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Автоматично показване на предложените действия и отговори"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Показване на скорошните и отложените известия"</string>
@@ -3667,6 +3665,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Все още няма публикувани известия от това приложение"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Допълнителни настройки в приложението"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"История на известията, балончета, наскоро изпратени"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Включено за всички приложения"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="other">Изключено за <xliff:g id="COUNT_1">%d</xliff:g> приложения</item>
@@ -4661,6 +4660,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Включване/изключване на промените в съвместимостта на приложенията"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Промени, свързани с активирането по подразбиране"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Промени, свързани с деактивирането по подразбиране"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Няма приложения"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Промени в съвместимостта на приложенията могат да се извършват само за приложения с възможност за отстраняване на грешки. Инсталирайте такова и опитайте отново."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Настройката не се поддържа на този телефон"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Настройката не се поддържа на този таблет"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Настройката не се поддържа на това устройство"</string>
@@ -4834,8 +4835,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Нов опит"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Нещо стана. Приложението анулира заявката за избиране на устройство."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Връзката е успешна"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Връзката не бе успешна"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Показване на всички"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Търси се устройство…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Установява се връзка с устройството…"</string>
@@ -4944,10 +4944,17 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Спиране на предаването"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Да се изключи ли VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Връзката ви с 5G също ще бъде изключена.\nПо време на гласово обаждане не можете да използвате интернет и някои приложения може да не работят."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Когато използвате 2 SIM карти, този телефон ще бъде ограничен до 4G. "<annotation id="url">"Научете повече"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Когато използвате 2 SIM карти, този таблет ще бъде ограничен до 4G. "<annotation id="url">"Научете повече"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Когато използвате 2 SIM карти, това устройство ще бъде ограничено до 4G. "<annotation id="url">"Научете повече"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Когато използвате 2 SIM карти, този телефон ще бъде ограничен до 4G. "<annotation id="url">"Научете повече"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Когато използвате 2 SIM карти, този таблет ще бъде ограничен до 4G. "<annotation id="url">"Научете повече"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Когато използвате 2 SIM карти, това устройство ще бъде ограничено до 4G. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Спиране на изпълнението на кешираните приложения"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Разрешаване на екранни наслагвания в/у „Настройки“"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешаване на приложенията, които могат да се показват върху други приложения, да се наслагват върху екрана на „Настройки“"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Мултимедия"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Скриване на плейъра при прикл. сесия за мултимедия"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Плейърът ви позволява да възобновите дадена сесия от разгънатия панел с бързи настройки."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Скриване на плейъра"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Показване на плейъра"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Няма налични плейъри"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"мултимедия"</string>
 </resources>
