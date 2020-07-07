@@ -1210,10 +1210,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Течни приказ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Аутоматски подиже учесталост освежавања са 60 на 90 Hz за одређени садржај. Повећава потрошњу батерије."</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (7458268305727889355) -->
-    <skip />
-    <!-- no translation found for force_high_refresh_rate_desc (7794566420873814875) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Течни приказ"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Највећа учесталост освежавања за побољшан одзив на додир и квалитет анимације. Повећава потрошњу батерије."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Пажња екрана"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Укључено/екран се неће искључити ако гледате у њега"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Искључено"</string>
@@ -1352,7 +1350,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Android верзија"</string>
     <string name="security_patch" msgid="4071756145347865382">"Безбедносно ажурирање за Android"</string>
     <string name="model_info" msgid="8997566254717810904">"Модел"</string>
-    <string name="model_summary" msgid="2246651782442466213">"Модел: %1$s"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Модел и хардвер"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Верзија хардвера"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"ИД опреме"</string>
@@ -3130,8 +3127,7 @@
     <string name="call_manager_title" msgid="3397433159509629466">"Менаџер позива"</string>
     <!-- no translation found for call_manager_summary (2558839230880919191) -->
     <skip />
-    <!-- no translation found for cell_broadcast_settings (2416980110093867199) -->
-    <skip />
+    <string name="cell_broadcast_settings" msgid="2416980110093867199">"Бежична упозорења о хитним случајевима"</string>
     <string name="network_operators_settings" msgid="5105453353329748954">"Мрежни оператери"</string>
     <string name="access_point_names" msgid="5768430498022188057">"Називи приступних тачака"</string>
     <string name="enhanced_4g_lte_mode_title" msgid="6624700245232361149">"VoLTE"</string>
@@ -3506,6 +3502,8 @@
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Аутоматски подешава обавештења нижег приоритета на Дискретно"</string>
     <string name="asst_capability_ranking_title" msgid="312998580233257581">"Прилагодљиво рангирање обавештења"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Аутоматски рангира обавештења према релевантности"</string>
+    <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Повратне информације о прилагодљивим обавештењима"</string>
+    <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Означите подешавања обавештења и прикажите опцију за слање повратних информација систему"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Предложене радње и одговори"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Аутоматски приказује предложене радње и одговоре"</string>
     <string name="notification_history_summary" msgid="5434741516307706892">"Погледајте недавна и одложена обавештења"</string>
@@ -3720,6 +3718,7 @@
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Ова апликација није поставила ниједно обавештење"</string>
     <string name="app_settings_link" msgid="6725453466705333311">"Додатна подешавања у апликацији"</string>
+    <string name="notification_screen_summary" msgid="5984915275134654822">"Историја обавештења, облачићи, недавно послато"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Укључено за све апликације"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
       <item quantity="one">Искључено за <xliff:g id="COUNT_1">%d</xliff:g> апликацију</item>
@@ -4749,6 +4748,8 @@
     <string name="platform_compat_dashboard_summary" msgid="4036546607938791337">"Укључите/искључите промене компатибилности апликације"</string>
     <string name="platform_compat_default_enabled_title" msgid="8973137337738388024">"Подразумеване омогућене промене"</string>
     <string name="platform_compat_default_disabled_title" msgid="3975847180953793602">"Подразумеване онемогућене промене"</string>
+    <string name="platform_compat_dialog_title_no_apps" msgid="4387656000745989506">"Нема апликација"</string>
+    <string name="platform_compat_dialog_text_no_apps" msgid="5715226015751055812">"Промене компатибилности апликација могу да се измене само за апликације са отклоњивим грешкама. Инсталирајте апликацију са отклоњивим грешкама и пробајте поново."</string>
     <string name="unsupported_setting_summary" product="default" msgid="1085229417771470172">"Подешавање није подржано на овом телефону"</string>
     <string name="unsupported_setting_summary" product="tablet" msgid="7402414129786489664">"Подешавање није подржано на овом таблету"</string>
     <string name="unsupported_setting_summary" product="device" msgid="3422953459122926833">"Подешавање није подржано на овом уређају"</string>
@@ -4923,8 +4924,7 @@
     <string name="network_connection_timeout_dialog_ok" msgid="6022675321823723755">"Пробај поново"</string>
     <string name="network_connection_errorstate_dialog_message" msgid="3360714322047603239">"Дошло је до неког проблема. Апликација је отказала захтев за избор уређаја."</string>
     <string name="network_connection_connect_successful" msgid="2587314077675642476">"Повезивање је успело"</string>
-    <!-- no translation found for network_connection_connect_failure (6803313816657494319) -->
-    <skip />
+    <string name="network_connection_connect_failure" msgid="6803313816657494319">"Повезивање није успело"</string>
     <string name="network_connection_request_dialog_showall" msgid="6392059758456994944">"Прикажи све"</string>
     <string name="network_connection_searching_message" msgid="8521819623516926482">"Тражи се уређај…"</string>
     <string name="network_connection_connecting_message" msgid="433189540877274889">"Повезује се са уређајем…"</string>
@@ -5035,10 +5035,17 @@
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Заустави пребацивање"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Желите ли да искључите VoLTE?"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"Тиме ћете искључити и 5G везу.\nТоком гласовног позива не можете да користите интернет и неке апликације можда неће радити."</string>
-    <string name="no_5g_in_dsds_text" product="default" msgid="4515609502932757256">"Овај телефон је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="tablet" msgid="7460150915372077523">"Овај таблет је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
-    <string name="no_5g_in_dsds_text" product="device" msgid="8206029713556021714">"Овај уређај је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation>"."</string>
+    <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Овај телефон је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Овај таблет је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation></string>
+    <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Овај уређај је ограничен на 4G када користите 2 SIM картице. "<annotation id="url">"Сазнајте више"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Суспендуј извршење за кеширане апликације"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволи прекривање садржаја екрана Подешавања"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозолите апликацијама које могу да се приказују преко других апликација да прекривају садржај екрана Подешавања"</string>
+    <string name="media_controls_title" msgid="403271085636252597">"Медији"</string>
+    <string name="media_controls_summary" msgid="5032071475867165587">"Сакријте плејер када се сесија медија заврши"</string>
+    <string name="media_controls_resume_description" msgid="2333689676163363582">"Плејер вам дозвољава да наставите сесију из проширеног окна за брза подешавања."</string>
+    <string name="media_controls_hide_player" msgid="2751439192580884015">"Сакриј плејер"</string>
+    <string name="media_controls_show_player" msgid="8504571042365814021">"Прикажи плејер"</string>
+    <string name="media_controls_no_players" msgid="3493023121892175946">"Није доступан ниједан плејер"</string>
+    <string name="keywords_media_controls" msgid="8345490568291778638">"медији"</string>
 </resources>
