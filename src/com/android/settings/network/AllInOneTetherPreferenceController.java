@@ -37,6 +37,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -91,6 +92,12 @@ public class AllInOneTetherPreferenceController extends BasePreferenceController
         mAdminDisallowedTetherConfig = checkIfRestrictionEnforced(
                 context, DISALLOW_CONFIG_TETHERING, UserHandle.myUserId()) != null;
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(mPreferenceKey);
     }
 
     @Override
