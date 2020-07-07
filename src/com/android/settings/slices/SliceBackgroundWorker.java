@@ -33,6 +33,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -190,7 +191,8 @@ public abstract class SliceBackgroundWorker<E> implements Closeable {
 
         private static NotifySliceChangeHandler sHandler;
 
-        private final Map<Uri, Long> mLastUpdateTimeLookup = new ArrayMap<>();
+        private final Map<Uri, Long> mLastUpdateTimeLookup = Collections.synchronizedMap(
+                new ArrayMap<>());
 
         private static NotifySliceChangeHandler getInstance() {
             if (sHandler == null) {
