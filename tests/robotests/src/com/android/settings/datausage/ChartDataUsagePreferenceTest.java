@@ -124,7 +124,7 @@ public class ChartDataUsagePreferenceTest {
             tonight - TimeUnit.DAYS.toMillis(2), tonight - TimeUnit.DAYS.toMillis(1), 83849690L));
         mNetworkCycleData.add(createNetworkCycleData(
             tonight - TimeUnit.DAYS.toMillis(1), tonight, 1883657L));
-        // add dummy usage data for next 5 days
+        // add test usage data for next 5 days
         mNetworkCycleData.add(createNetworkCycleData(
             tonight, tonight + TimeUnit.DAYS.toMillis(1), 0L));
         mNetworkCycleData.add(createNetworkCycleData(
@@ -149,7 +149,7 @@ public class ChartDataUsagePreferenceTest {
 
         verify(usageView).addPath(pointsCaptor.capture());
         final SparseIntArray points = pointsCaptor.getValue();
-        // should only have 7 points: 1 dummy point indicating the start of data, starting point 0,
+        // should only have 7 points: 1 test point indicating the start of data, starting point 0,
         // and 5 actual data point for each day
         assertThat(points.size()).isEqualTo(7);
         assertThat(points.keyAt(0)).isEqualTo(-1);

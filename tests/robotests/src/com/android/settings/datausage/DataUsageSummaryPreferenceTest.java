@@ -61,7 +61,7 @@ public class DataUsageSummaryPreferenceTest {
 
     private static final long CYCLE_DURATION_MILLIS = 1000000000L;
     private static final long UPDATE_LAG_MILLIS = 10000000L;
-    private static final String DUMMY_CARRIER = "z-mobile";
+    private static final String FAKE_CARRIER = "z-mobile";
 
     private Activity mActivity;
     private PreferenceViewHolder mHolder;
@@ -99,7 +99,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withLaunchIntent_launchButtonShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -108,7 +108,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withoutLaunchIntent_launchButtonNotShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 null /* launchIntent */);
 
         bindViewHolder();
@@ -117,7 +117,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withDataPlans_carrierInfoShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -126,7 +126,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withNoDataPlans_carrierInfoNotShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -140,12 +140,12 @@ public class DataUsageSummaryPreferenceTest {
         final long updateTime = System.currentTimeMillis()
                 - TimeUnit.DAYS.toMillis(baseUnit) - TimeUnit.HOURS.toMillis(smudge);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " days ago");
+                .isEqualTo("Updated by " + FAKE_CARRIER + " " + baseUnit + " days ago");
     }
 
     @Test
@@ -155,12 +155,12 @@ public class DataUsageSummaryPreferenceTest {
         final long updateTime = System.currentTimeMillis()
                 - TimeUnit.HOURS.toMillis(baseUnit) - TimeUnit.MINUTES.toMillis(smudge);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " hr ago");
+                .isEqualTo("Updated by " + FAKE_CARRIER + " " + baseUnit + " hr ago");
     }
 
     @Test
@@ -170,24 +170,24 @@ public class DataUsageSummaryPreferenceTest {
         final long updateTime = System.currentTimeMillis()
                 - TimeUnit.MINUTES.toMillis(baseUnit) - TimeUnit.SECONDS.toMillis(smudge);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " " + baseUnit + " min ago");
+                .isEqualTo("Updated by " + FAKE_CARRIER + " " + baseUnit + " min ago");
     }
 
     @Test
     public void testCarrierUpdateTime_shouldFormatLessThanMinuteCorrectly() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.SECONDS.toMillis(45);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
         assertThat(mCarrierInfo.getText().toString())
-                .isEqualTo("Updated by " + DUMMY_CARRIER + " just now");
+                .isEqualTo("Updated by " + FAKE_CARRIER + " just now");
     }
 
     @Test
@@ -218,7 +218,7 @@ public class DataUsageSummaryPreferenceTest {
     public void setUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -231,7 +231,7 @@ public class DataUsageSummaryPreferenceTest {
     @Test
     public void testSetUsageInfo_withStaleCarrierUpdate_setsCarrierInfoWarningColorAndFont() {
         final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(7);
-        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -244,7 +244,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withNoDataPlans_usageTitleNotShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -253,7 +253,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withMultipleDataPlans_usageTitleShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 2 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 2 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -264,7 +264,7 @@ public class DataUsageSummaryPreferenceTest {
     public void testSetUsageInfo_cycleRemainingTimeIsLessOneDay() {
         // just under one day
         final long cycleEnd = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(23);
-        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -276,7 +276,7 @@ public class DataUsageSummaryPreferenceTest {
     @Test
     public void testSetUsageInfo_cycleRemainingTimeNegativeDaysLeft_shouldDisplayNoneLeft() {
         final long cycleEnd = System.currentTimeMillis() - 1L;
-        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -290,7 +290,7 @@ public class DataUsageSummaryPreferenceTest {
         final int daysLeft = 3;
         final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
                 + TimeUnit.HOURS.toMillis(1);
-        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
 
         bindViewHolder();
@@ -369,7 +369,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageAndRemainingInfo_withUsageInfo_dataUsageAndRemainingShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(
                 BillingCycleSettings.MIB_IN_BYTES,
@@ -386,7 +386,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withDataOverusage() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(
                 11 * BillingCycleSettings.MIB_IN_BYTES,
@@ -402,7 +402,7 @@ public class DataUsageSummaryPreferenceTest {
 
     @Test
     public void testSetUsageInfo_withUsageInfo_dataUsageShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(
                 BillingCycleSettings.MIB_IN_BYTES, -1L, true /* hasMobileData */);
@@ -419,7 +419,7 @@ public class DataUsageSummaryPreferenceTest {
         intent.setPackage("test-owner.example.com");
         intent.putExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX, 42);
 
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 intent);
 
         bindViewHolder();
@@ -448,7 +448,7 @@ public class DataUsageSummaryPreferenceTest {
         doReturn(dataUsed).when(mHolder).findViewById(R.id.data_usage_view);
         doReturn(dataRemaining).when(mHolder).findViewById(R.id.data_remaining_view);
 
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, FAKE_CARRIER, 1 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(
                 BillingCycleSettings.MIB_IN_BYTES,
@@ -484,7 +484,7 @@ public class DataUsageSummaryPreferenceTest {
                 + TimeUnit.HOURS.toMillis(1);
         final FragmentActivity activity = Robolectric.setupActivity(FragmentActivity.class);
         mSummaryPreference = spy(mSummaryPreference);
-        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, FAKE_CARRIER, 0 /* numPlans */,
                 new Intent());
         mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
         final String cycleText = "The quick fox";
