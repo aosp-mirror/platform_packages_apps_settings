@@ -24,6 +24,7 @@ import static com.android.settings.network.TetherEnabler.TETHERING_WIFI_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -34,6 +35,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+
+import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -109,13 +113,13 @@ public class AllInOneTetherPreferenceControllerTest {
         });
     }
 
-    @Mock
     private Context mContext;
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
     private MasterSwitchPreference mPreference;
 
+    private static final String PREF_KEY = "tether";
     private AllInOneTetherPreferenceController mController;
     private final int mTetherState;
     private final int mSummaryResId;
@@ -127,11 +131,16 @@ public class AllInOneTetherPreferenceControllerTest {
 
     @Before
     public void setUp() {
+        mContext = ApplicationProvider.getApplicationContext();
         MockitoAnnotations.initMocks(this);
         mController = spy(AllInOneTetherPreferenceController.class);
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
-        ReflectionHelpers.setField(mController, "mPreference", mPreference);
+        ReflectionHelpers.setField(mController, "mPreferenceKey", PREF_KEY);
+        PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(PREF_KEY)).thenReturn(mPreference);
+        doReturn(mController.AVAILABLE).when(mController).getAvailabilityStatus();
+        mController.displayPreference(screen);
     }
 
     @Test
@@ -169,5 +178,8 @@ public class AllInOneTetherPreferenceControllerTest {
     public void getSummary_afterTetherStateChanged() {
         mController.onTetherStateUpdated(mTetherState);
         assertThat(mController.getSummary()).isEqualTo(mContext.getString(mSummaryResId));
+
+        verify(mController).updateState(mPreference);
+        verify(mPreference).setSummary(mContext.getString(mSummaryResId));
     }
 }
