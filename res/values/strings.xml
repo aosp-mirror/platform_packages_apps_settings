@@ -7820,14 +7820,14 @@
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
 
-    <!-- Sound: Summary for the Do not Disturb option when there are no automatic rules enabled. [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_settings_summary_off">None</string>
-
-    <!-- Sound: Summary for the Do not Disturb option when at least one automatic rule is enabled. [CHAR LIMIT=NONE]-->
-    <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 schedule set</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> schedules set</item>
-    </plurals>
+    <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_settings_schedules_summary">
+        {count, plural,
+            =0    {None}
+            =1    {1 schedule set}
+            other {# schedules set}
+        }
+    </string>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
@@ -8000,12 +8000,6 @@
     <!-- Sound settings screen, summary format of do not disturb when on with extra info. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on_with_info">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
 
-    <!-- Sound settings screen, summary format of do not disturb when off with extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 schedule can turn on automatically">%1$s</xliff:g></string>
-
-    <!-- Sound settings screen, summary format of do not disturb when off with no extra information. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_sound_summary_off">Off</string>
-
     <!-- Sound settings screen, summary format of do not disturb when on with no extra information. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on">On</string>
 
@@ -8016,19 +8010,29 @@
     <string name="zen_mode_duration_summary_forever">Until you turn off</string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_duration_summary_time_hours">
-        <item quantity="one">1 hour</item>
-        <item quantity="other"><xliff:g id="num_hours" example="3">%d</xliff:g> hours</item>
-    </plurals>
+    <string name="zen_mode_duration_summary_time_hours">
+        {count, plural,
+            =1    {1 hour}
+            other {# hours}
+        }
+    </string>
 
     <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when toggled on -->
-    <string name="zen_mode_duration_summary_time_minutes"><xliff:g id="num_minutes" example="5">%d</xliff:g> minutes</string>
+    <string name="zen_mode_duration_summary_time_minutes">
+        {count, plural,
+            =1    {1 minute}
+            other {# minutes}
+        }
+    </string>
 
-    <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
-    <plurals name="zen_mode_sound_summary_summary_off_info">
-        <item quantity="one">1 schedule can turn on automatically</item>
-        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> schedules can turn on automatically</item>
-    </plurals>
+    <!-- Summary for the Sound Do not Disturb option when DND isn't currently on. [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_sound_summary_off">
+        {count, plural,
+            =0    {Off}
+            =1    {Off / 1 schedule can turn on automatically}
+            other {Off / # schedules can turn on automatically}
+        }
+    </string>
 
     <!-- Do not disturb settings, main screen, category header [CHAR LIMIT=120]-->
     <string name="zen_category_behavior">What can interrupt Do Not Disturb</string>
@@ -9027,12 +9031,14 @@
     <string name="zen_mode_from_all_conversations">All conversations</string>
     <string name="zen_mode_from_important_conversations">Priority conversations</string>
     <string name="zen_mode_from_no_conversations">None</string>
-    <plurals name="zen_mode_conversations_count">
-        <item quantity="one">1 conversation</item>
-        <item quantity="other"><xliff:g id="conversations" example="3">%d</xliff:g> conversations</item>
-    </plurals>
-    <!-- [CHAR LIMIT=40] Zen mode settings: No conversations are allowed to bypass DND -->
-    <string name="zen_mode_conversations_count_none">None</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Number of conversations allowed to bypass DND -->
+    <string name="zen_mode_conversations_count">
+        {count, plural,
+            =0    {None}
+            =1    {1 conversation}
+            other {# conversations}
+        }
+    </string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Header for calls and messages section of conversations
     setting page -->
     <string name="zen_mode_people_calls_messages_section_title">Who can interrupt</string>
@@ -9053,12 +9059,15 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Starred contacts preference title -->
     <string name="zen_mode_starred_contacts_title">Starred contacts</string>
     <!-- Zen mode settings: Starred contacts summary [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts">
-        <item quantity="one">1 other</item>
-        <item quantity="other"><xliff:g id="num_people" example="3">%d</xliff:g> others</item>
-    </plurals>
-    <!-- [CHAR LIMIT=40] Zen mode settings: Starred contacts summary when there are no starred contacts -->
-    <string name="zen_mode_starred_contacts_summary_none">None</string>
+    <string name="zen_mode_starred_contacts_summary_contacts">
+        {count, plural, offset:2
+            =0    {None}
+            =1    {{contact_1}}
+            =2    {{contact_1} and {contact_2}}
+            =3    {{contact_1}, {contact_2}, and {contact_3}}
+            other {{contact_1}, {contact_2}, and # others}
+        }
+    </string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Messages option -->
     <string name="zen_mode_messages">Messages</string>
@@ -9077,15 +9086,14 @@
     <string name="zen_mode_all_messages_summary">All messages can reach you</string>
     <!-- Zen mode settings: All calls can bypass DND summary [CHAR LIMIT=NONE -->
     <string name="zen_mode_all_calls_summary">All calls can reach you</string>
-
-    <!-- Zen mode settings: There are no contacts on the device [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_contacts_count_none">None</string>
     <!-- Zen mode settings: Senders in contacts can bypass DND summary summary [CHAR LIMIT=NONE] -->
-    <plurals name="zen_mode_contacts_count">
-        <item quantity="one">1 contact</item>
-        <item quantity="other"><xliff:g id="num_contacts" example="120">%d</xliff:g> contacts</item>
-    </plurals>
-
+    <string name="zen_mode_contacts_count">
+        {count, plural,
+            =0    {None}
+            =1    {1 contact}
+            other {# contacts}
+        }
+    </string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From anyone -->
     <string name="zen_mode_from_anyone">Anyone</string>
     <!-- [CHAR LIMIT=40] Zen mode settings: Calls or messages option value: From contacts only -->
@@ -9170,14 +9178,16 @@
     <string name="zen_mode_bypassing_apps_summary_some">Some notifications</string>
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Footer for DND bypassing apps settings -->
     <string name="zen_mode_bypassing_apps_footer">Selected people can still reach you, even if you don\u2019t allow apps to interrupt</string>
-    <!-- [CHAR LIMIT=120] Zen mode settings: Allow apps to bypass DND -->
-    <plurals name="zen_mode_bypassing_apps_subtext">
-        <item quantity="one"><xliff:g id="app_name" example="Nest">%s</xliff:g> can interrupt</item>
-        <item quantity="other"><xliff:g id="app_names" example="Nest and Google Play Store">%s</xliff:g> can interrupt</item>
-    </plurals>
-    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional apps are
-     allowed to bypass Do Not Disturb. For example, "Nest, Messages, and 2 more can interrupt". -->
-    <string name="zen_mode_apps_bypassing_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Lists apps that can bypass DND. For example, "Nest, Messages, and 2 more can interrupt". -->
+    <string name="zen_mode_bypassing_apps_subtext">
+        {count, plural, offset:2
+            =0    {No apps can interrupt}
+            =1    {{app_1} can interrupt}
+            =2    {{app_1} and {app_2} can interrupt}
+            =3    {{app_1}, {app_2}, and {app_3} can interrupt}
+            other {{app_1}, {app_2}, and # more can interrupt}
+        }
+    </string>
     <!-- [CHAR LIMIT=100] Zen mode settings: Allow apps to bypass DND title-->
     <string name="zen_mode_bypassing_apps_title">Apps</string>
     <!-- [CHAR LIMIT=100] Zen mode settings: App that can bypass DND's secondary text describing which notification channels from the app can bypass DND-->
@@ -9190,18 +9200,18 @@
     toggle title -->
     <string name="zen_mode_bypassing_app_channels_toggle_all">Allow all notifications</string>
 
-    <!-- [CHAR LIMIT=120] Zen mode settings: Summary for sound interruption settings -->
-    <plurals name="zen_mode_other_sounds_summary">
-        <item quantity="one"><xliff:g id="sound_category">%s</xliff:g> can interrupt</item>
-        <item quantity="other"><xliff:g id="sound_categories" example="Alarms, media sounds, and 2 more">%s</xliff:g> can interrupt</item>
-    </plurals>
-    <!-- [CHAR LIMIT=120] Zen mode settings: No other sounds are allowed to bypass DND -->
-    <string name="zen_mode_other_sounds_none">Nothing can interrupt</string>
-    <!-- [CHAR LIMIT=30] Zen mode settings: List item in a summary indicating additional sounds
-    are allowed to bypass Do Not Disturb. For example, "Alarms, media sounds, and 2 more can
-    interrupt". -->
-    <string name="zen_mode_other_sounds_list_count"><xliff:g id="number" example="2">%d</xliff:g> more</string>
-
+    <!-- [CHAR LIMIT=NONE] Zen mode settings: Summary for sound interruption settings -->
+    <string name="zen_mode_other_sounds_summary">
+        {count, plural, offset:2
+            =0    {Nothing can interrupt}
+            =1    {{sound_category_1} can interrupt}
+            =2    {{sound_category_1} and {sound_category_2} can interrupt}
+            =3    {{sound_category_1}, {sound_category_2}, and {sound_category_3} can interrupt}
+            other {{sound_category_1}, {sound_category_2}, and # more can interrupt}
+        }
+    </string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: No sounds are allowed to bypass DND -->
+    <string name="zen_mode_sounds_none">Nothing can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
     <string name="zen_mode_people_none">No one can interrupt</string>
     <!-- [CHAR LIMIT=120] Zen mode settings: Summary for people category -->
