@@ -39,7 +39,6 @@ public class OneHandedEnablePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
     private OneHandedEnablePreferenceController mController;
 
     @Before
