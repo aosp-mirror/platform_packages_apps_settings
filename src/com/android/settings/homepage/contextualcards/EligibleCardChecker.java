@@ -120,9 +120,13 @@ public class EligibleCardChecker implements Callable<ContextualCard> {
 
         // Workaround of unpinning slice in the same SerialExecutor of AsyncTask as SliceCallback's
         // observer.
-        ThreadUtils.postOnMainThread(() ->
-                AsyncTask.execute(() -> manager.unregisterSliceCallback(uri, callback))
-        );
+        ThreadUtils.postOnMainThread(() -> AsyncTask.execute(() -> {
+            try {
+                manager.unregisterSliceCallback(uri, callback);
+            } catch (SecurityException e) {
+                Log.d(TAG, "No permission currently: " + e);
+            }
+        }));
 
         return slice;
     }
