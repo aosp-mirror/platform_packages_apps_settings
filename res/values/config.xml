@@ -420,4 +420,15 @@
 
     <!-- RTT setting intent action -->
     <string name="config_rtt_setting_intent_action" translatable="false"></string>
+
+    <!-- Package name of dialer supports RTT setting-->
+    <string name="config_rtt_setting_package_name" translatable="false"></string>
+
+    <!-- Reset application package name -->
+    <string-array name="config_skip_reset_apps_package_name" translatable="false">
+        <item>android</item>
+        <item>com.android.providers.downloads</item>
+        <item>com.android.systemui</item>
+        <item>com.android.vending</item>
+    </string-array>
 </resources>

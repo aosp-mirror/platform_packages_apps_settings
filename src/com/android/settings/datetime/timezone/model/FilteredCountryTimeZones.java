@@ -16,7 +16,7 @@
 
 package com.android.settings.datetime.timezone.model;
 
-import libcore.timezone.CountryTimeZones;
+import com.android.i18n.timezone.CountryTimeZones;
 
 import java.util.Collections;
 import java.util.List;
