@@ -34,6 +34,13 @@
         settings:controller="com.android.settings.gestures.SwipeToNotificationPreferenceController" />
 
     <Preference
+        android:key="gesture_swipe_bottom_to_notification"
+        android:title="@string/swipe_bottom_to_notifications_title"
+        android:fragment="com.android.settings.gestures.SwipeBottomToNotificationSettings"
+        settings:searchable="false"
+        settings:controller="com.android.settings.gestures.SwipeBottomToNotificationPreferenceController" />
+
+    <Preference
         android:key="gesture_double_tap_power_input_summary"
         android:title="@string/double_tap_power_for_camera_title"
         android:fragment="com.android.settings.gestures.DoubleTapPowerSettings"
