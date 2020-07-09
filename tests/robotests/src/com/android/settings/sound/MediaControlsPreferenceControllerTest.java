@@ -17,7 +17,6 @@
 package com.android.settings.sound;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -65,20 +64,7 @@ public class MediaControlsPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailability_flagNotEnabled_returnUnsupportedOnDevice() {
-        // When the qs_media flag is not enabled
-        Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 0);
-
-        // Then the media resume option should not appear
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void getAvailability_flagEnabled_returnAvailable() {
-        // When the qs_media flag is enabled
-        Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
-
-        // Then the media resume option should appear
+    public void getAvailability_returnAvailable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
