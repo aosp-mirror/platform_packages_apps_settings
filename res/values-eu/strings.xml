@@ -811,14 +811,14 @@
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Gordetako kalitate handiko sare batetik (adibidez, etxeko saretik) gertu zaudenean aktibatuko da berriro wifi-konexioa"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Ez dago erabilgarri kokapena desaktibatuta dagoelako. Aktibatu "<annotation id="link">"kokapena"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Ez dago erabilgarri, Wifi-sareen bilaketa desaktibatuta dagoelako"</string>
-    <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bat"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Erabiltzeko, hautatu sare-balorazioen hornitzaile bat"</string>
     <string name="wifi_poor_network_detection" msgid="8210035875160288422">"Saihestu konexio ahulak"</string>
     <string name="wifi_poor_network_detection_summary" msgid="383834617032605347">"Ez erabili wifi-sareak ez badute Interneteko konexio onik"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4993203473116721772">"Erabili Interneteko konexio ona duten sareak soilik"</string>
     <string name="use_open_wifi_automatically_title" msgid="7193846454986712009">"Konektatu sare publikoetara"</string>
     <string name="use_open_wifi_automatically_summary" msgid="6663890845558591023">"Konektatu automatikoki kalitate handiko sare publikoetara"</string>
-    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bat"</string>
-    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Erabiltzeko, hautatu sareen balorazioen hornitzaile bateragarri bat"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Erabiltzeko, hautatu sare-balorazioen hornitzaile bat"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Erabiltzeko, hautatu sare-balorazioen hornitzaile bateragarri bat"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instalatu ziurtagiriak"</string>
     <string name="wifi_scan_notify_text" msgid="2518097467707535013">"Kokapenaren zehaztasuna hobetzeko, aplikazioek eta zerbitzuek wifi-sareak bilatzen jarraituko dute, baita wifi-konexioa desaktibatuta dagoenean ere. Besteak beste, kokapenean oinarritutako eginbideak eta zerbitzuak hobetzeko erabil daiteke. Aukera hori aldatzeko, joan <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>bilatzeko ezarpenetara<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="6189528915806353667">"Kokapenaren zehaztasuna hobetzeko, aktibatu Wifi-sareen bilaketa <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>bilatzeko ezarpenetan<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -1685,7 +1685,7 @@
     <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"SMS mezuetarako aplikazioa aldatu?"</string>
     <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"<xliff:g id="NEW_APP">%1$s</xliff:g> aplikazioaren ordez, <xliff:g id="CURRENT_APP">%2$s</xliff:g> aplikazioa erabili SMS mezuetarako?"</string>
     <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Erabili <xliff:g id="NEW_APP">%s</xliff:g> SMS mezuetarako aplikazio gisa?"</string>
-    <string name="network_scorer_picker_title" msgid="2022922801936206195">"Sareen balorazioen hornitzailea"</string>
+    <string name="network_scorer_picker_title" msgid="2022922801936206195">"Sare-balorazioen hornitzailea"</string>
     <string name="network_scorer_picker_none_preference" msgid="8894034333043177807">"Bat ere ez"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Wifi-laguntzailea aldatu nahi duzu?"</string>
     <string name="network_scorer_change_active_dialog_text" msgid="7006057749370850706">"Sareko konexioak kudeatzeko <xliff:g id="NEW_APP">%1$s</xliff:g> erabili nahi duzu, <xliff:g id="CURRENT_APP">%2$s</xliff:g> erabili beharrean?"</string>
@@ -3324,11 +3324,8 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Pizteko soinuak"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Istanteko azpitituluak"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Ezarri azpitituluak automatikoki"</string>
-    <string name="zen_mode_settings_summary_off" msgid="3604559081434571933">"Bat ere ez"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1460413335725340350">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> programazio ezarri dira</item>
-      <item quantity="one">1 programazio ezarri da</item>
-    </plurals>
+    <!-- no translation found for zen_mode_settings_schedules_summary (2047688589286811617) -->
+    <skip />
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ez molestatzeko modua"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Jaso jende eta aplikazio garrantzitsuen jakinarazpenak soilik"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Mugatu etenaldiak"</string>
@@ -3396,20 +3393,15 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Lehentasuna dutenak soilik"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Aktibatuta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off_with_info" msgid="2032265904095185048">"Desaktibatuta / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_off" msgid="2102424480808968673">"Desaktibatuta"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Aktibatuta"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Galdetu beti"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Zuk desaktibatu arte"</string>
-    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="3601160794696489864">
-      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ordu</item>
-      <item quantity="one">1 ordu</item>
-    </plurals>
-    <string name="zen_mode_duration_summary_time_minutes" msgid="3187122993179039992">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minutu"</string>
-    <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="3812633366476034740">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> programazio aktiba daitezke automatikoki</item>
-      <item quantity="one">1 programazio aktiba daiteke automatikoki</item>
-    </plurals>
+    <!-- no translation found for zen_mode_duration_summary_time_hours (2602655749780428308) -->
+    <skip />
+    <!-- no translation found for zen_mode_duration_summary_time_minutes (5755536844016835693) -->
+    <skip />
+    <!-- no translation found for zen_mode_sound_summary_off (7350437977839985836) -->
+    <skip />
     <string name="zen_category_behavior" msgid="3214056473947178507">"Ez molestatzeko modua eten dezaketenak"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Jendea"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Aplikazioak"</string>
@@ -3745,11 +3737,8 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Elkarrizketa guztiak"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Lehentasunezko elkarrizketak"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Bat ere ez"</string>
-    <plurals name="zen_mode_conversations_count" formatted="false" msgid="8348944826762075457">
-      <item quantity="other"><xliff:g id="CONVERSATIONS">%d</xliff:g> elkarrizketa</item>
-      <item quantity="one">1 elkarrizketa</item>
-    </plurals>
-    <string name="zen_mode_conversations_count_none" msgid="4745022470794983983">"Bat ere ez"</string>
+    <!-- no translation found for zen_mode_conversations_count (3199310723073707153) -->
+    <skip />
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Eten zaitzaketen pertsonak"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Deiak"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Deiak"</string>
@@ -3758,11 +3747,8 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Baimendutako deiak jasotzean soinua entzuten dela ziurtatzeko, egiaztatu gailua tonua jotzeko ezarrita dagoela"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"“<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” arauan, blokeatuta dago deiak jasotzeko aukera. Lagunak, familia eta beste kontaktu batzuk zurekin harremanetan jartzeko aukera izan dezaten, aldatu ezarpenak."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontaktu izardunak"</string>
-    <plurals name="zen_mode_starred_contacts_summary_additional_contacts" formatted="false" msgid="7001724653833724925">
-      <item quantity="other">Beste <xliff:g id="NUM_PEOPLE">%d</xliff:g></item>
-      <item quantity="one">Beste bat</item>
-    </plurals>
-    <string name="zen_mode_starred_contacts_summary_none" msgid="6320777044373994482">"Bat ere ez"</string>
+    <!-- no translation found for zen_mode_starred_contacts_summary_contacts (1629467178444895094) -->
+    <skip />
     <string name="zen_mode_messages" msgid="7315084748885170585">"Mezuak"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"Mezu"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Mezuak"</string>
@@ -3771,11 +3757,8 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"“<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” antolaketan, blokeatuta dago mezuak jasotzeko aukera. Lagunak, familia eta beste kontaktu batzuk zurekin harremanetan jartzeko aukera izan dezaten, aldatu ezarpenak."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Mezu guztiak iritsiko zaizkizu"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Dei guztiak iritsiko zaizkizu"</string>
-    <string name="zen_mode_contacts_count_none" msgid="7928563147160462589">"Bat ere ez"</string>
-    <plurals name="zen_mode_contacts_count" formatted="false" msgid="3434092344686708445">
-      <item quantity="other"><xliff:g id="NUM_CONTACTS">%d</xliff:g> kontaktu</item>
-      <item quantity="one">1 kontaktu</item>
-    </plurals>
+    <!-- no translation found for zen_mode_contacts_count (6568631261119795799) -->
+    <skip />
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Edonor"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontaktuak"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontaktu izardunak"</string>
@@ -3813,22 +3796,17 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Jakinarazpen guztiak"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Jakinarazpen batzuk"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Aplikazioek jarduera eteteko baimenik ez badute ere, hautatzen duzun jendea salbuetsita geratuko da"</string>
-    <plurals name="zen_mode_bypassing_apps_subtext" formatted="false" msgid="7781990918323204156">
-      <item quantity="other"><xliff:g id="APP_NAMES">%s</xliff:g> aplikazioek eten dezakete</item>
-      <item quantity="one"><xliff:g id="APP_NAME_0">%s</xliff:g> aplikazioak eten dezake</item>
-    </plurals>
-    <string name="zen_mode_apps_bypassing_list_count" msgid="1581384924379825405">"Beste <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <!-- no translation found for zen_mode_bypassing_apps_subtext (5258652366929842710) -->
+    <skip />
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplikazioak"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Jakinarazpen guztiak"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Jakinarazpen batzuk"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Jarduera eten dezaketen jakinarazpenak"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Eman baimena jakinarazpen guztiei"</string>
-    <plurals name="zen_mode_other_sounds_summary" formatted="false" msgid="945147615383565311">
-      <item quantity="other">Eten dezaketenak: <xliff:g id="SOUND_CATEGORIES">%s</xliff:g></item>
-      <item quantity="one">Eten dezaketenak: <xliff:g id="SOUND_CATEGORY">%s</xliff:g></item>
-    </plurals>
-    <string name="zen_mode_other_sounds_none" msgid="6219663385759635854">"Ez dago eten dezakeen ezer"</string>
-    <string name="zen_mode_other_sounds_list_count" msgid="1443126333853419582">"Beste <xliff:g id="NUMBER">%d</xliff:g>"</string>
+    <!-- no translation found for zen_mode_other_sounds_summary (8784400697494837032) -->
+    <skip />
+    <!-- no translation found for zen_mode_sounds_none (6557474361948269420) -->
+    <skip />
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ezin du inork eten"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Pertsona batzuek eten dezakete"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Edonork eten dezake"</string>
