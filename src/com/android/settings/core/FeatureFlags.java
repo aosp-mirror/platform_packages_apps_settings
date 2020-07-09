@@ -23,7 +23,6 @@ public class FeatureFlags {
     public static final String AUDIO_SWITCHER_SETTINGS = "settings_audio_switcher";
     public static final String DYNAMIC_SYSTEM = "settings_dynamic_system";
     public static final String HEARING_AID_SETTINGS = "settings_bluetooth_hearing_aid";
-    public static final String SETTINGS_FUSE_FLAG = "settings_fuse";
     public static final String WIFI_DETAILS_DATAUSAGE_HEADER =
             "settings_wifi_details_datausage_header";
     public static final String CONTROLLER_ENHANCEMENT = "settings_controller_loading_enhancement";
