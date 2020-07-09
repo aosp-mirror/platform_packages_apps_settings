@@ -17,10 +17,15 @@
 package com.android.settings.notification.zen;
 
 import android.content.Context;
+import android.icu.text.MessageFormat;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class ZenModeDurationPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
@@ -51,12 +56,19 @@ public class ZenModeDurationPreferenceController extends AbstractZenModePreferen
             summary = mContext.getString(R.string.zen_mode_duration_summary_forever);
         } else {
             if (zenDuration >= 60) {
-                int hours = zenDuration / 60;
-                summary = mContext.getResources().getQuantityString(
-                        R.plurals.zen_mode_duration_summary_time_hours, hours, hours);
+                MessageFormat msgFormat = new MessageFormat(
+                        mContext.getString(R.string.zen_mode_duration_summary_time_hours),
+                        Locale.getDefault());
+                Map<String, Object> msgArgs = new HashMap<>();
+                msgArgs.put("count", zenDuration / 60);
+                summary = msgFormat.format(msgArgs);
             } else {
-                summary = mContext.getResources().getString(
-                        R.string.zen_mode_duration_summary_time_minutes, zenDuration);
+                MessageFormat msgFormat = new MessageFormat(
+                        mContext.getString(R.string.zen_mode_duration_summary_time_minutes),
+                        Locale.getDefault());
+                Map<String, Object> msgArgs = new HashMap<>();
+                msgArgs.put("count", zenDuration);
+                summary = msgFormat.format(msgArgs);
             }
         }
 
