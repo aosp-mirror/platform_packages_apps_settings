@@ -925,7 +925,7 @@
     <string name="wifi_dpp_sharing_wifi_with_this_device" msgid="7250369936882080107">"Wi‑Fi бул түзмөк менен бөлүшүлүүдө…"</string>
     <string name="wifi_dpp_connecting" msgid="2312769193202897589">"Туташууда…"</string>
     <string name="wifi_dpp_share_hotspot" msgid="6186452780604755316">"Жалпы байланыш түйүнү"</string>
-    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Сиз экениңизди ырастаңыз"</string>
+    <string name="wifi_dpp_lockscreen_title" msgid="4231438175617953652">"Өзүңүздү ырастаңыз"</string>
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi‑Fi сырсөзү: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Байланыш түйүнүнүн сырсөзү: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Авто-туташуу"</string>
@@ -3324,8 +3324,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Түзмөк күйгүзүлгөндөгү үндөр"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Ыкчам коштомо жазуулар"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматтык коштомо жазуулар"</string>
-    <!-- no translation found for zen_mode_settings_schedules_summary (2047688589286811617) -->
-    <skip />
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Жок}=1{1 график коюлду}other{# график коюлду}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Тынчымды алба"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Маанилүү байланыштар менен колдонмолордон гана билдирмелерди алуу"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Билдирмелерди чектөө"</string>
@@ -3396,12 +3395,9 @@
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Күйүк"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Ар дайым суралсын"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Бул функция өчүрүлгөнгө чейин"</string>
-    <!-- no translation found for zen_mode_duration_summary_time_hours (2602655749780428308) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_summary_time_minutes (5755536844016835693) -->
-    <skip />
-    <!-- no translation found for zen_mode_sound_summary_off (7350437977839985836) -->
-    <skip />
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 саат}other{# саат}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 мүнөт}other{# мүнөт}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Өчүк}=1{Өчүк / 1 ырааттама автоматтык түрдө иштетилет}other{Өчүк / # ырааттама автоматтык түрдө иштетилет}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"\"Тынчымды алба\" режимин эмне үзгүлтүккө учуратышы мүмкүн"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Байланыштар"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Колдонмолор"</string>
@@ -3737,8 +3733,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Бардык жазышуулар"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Маанилүү жазышуулар"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Эч бири"</string>
-    <!-- no translation found for zen_mode_conversations_count (3199310723073707153) -->
-    <skip />
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Жок}=1{1 жазышуу}other{# жазышуу}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"\"Тынчымды алба\" режими таасир этпеген колдонуучулар"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Чалуулар"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Чалуулар"</string>
@@ -3747,8 +3742,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Маанилүү чалууларды өткөрүп жибербөө үчүн, түзмөгүңүздүн үнүн чыгарып коюңуз."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Кирүүчү чалуулар \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" эрежеси менен бөгөттөлгөн. Достордун, үй-бүлө мүчөлөрүнүн же башка тааныштарыңыздын чалууларын кабыл алуу үчүн жөндөөлөрдү тууралап алыңыз."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Жылдызчаланган байланыштар"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_contacts (1629467178444895094) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Жок}=1{{contact_1}}=2{{contact_1} жана {contact_2}}=3{{contact_1}, {contact_2} жана {contact_3}}other{{contact_1}, {contact_2} жана дагы #}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Билдирүүлөр"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"билдирүүлөр"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Билдирүүлөр"</string>
@@ -3757,8 +3751,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"\"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" эрежеси иштетилгенде, билдирүүлөр алынбайт. Достордун, үй-бүлө мүчөлөрүнүн же башка тааныштарыңыздын билдирүүлөрүн алуу үчүн жөндөөлөрдү тууралап алыңыз."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"\"Тынчымды алба\" режими айрым билдирүүлөр үчүн иштебейт"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"\"Тынчымды алба\" режими айрым чалуулар үчүн иштебейт"</string>
-    <!-- no translation found for zen_mode_contacts_count (6568631261119795799) -->
-    <skip />
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Жок}=1{1 байланыш}other{# байланыш}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Баары"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Байланыштар"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Жылдызчаланган байланыштар"</string>
@@ -3796,17 +3789,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Бардык билдирмелер"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Айрым билдирмелер"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Колдонмолор үчүн \"Тынчымды алба\" режими иштетилген болсо да, тандалган адамдар сиз менен баары бир байланыша беришет."</string>
-    <!-- no translation found for zen_mode_bypassing_apps_subtext (5258652366929842710) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Бир да колдонмо үзгүлтүккө учурата албайт}=1{{app_1} үзгүлтүккө учурата алат}=2{{app_1} жана {app_2} үзгүлтүккө учурата алат}=3{{app_1}, {app_2} жана {app_3} үзгүлтүккө учурата алат}other{{app_1}, {app_2} жана дагы # үзгүлтүккө учурата алат}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Колдонмолор"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Бардык билдирмелер"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Айрым билдирмелер"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"\"Тынчымды алба\" режими таасир этпеген билдирмелер"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Бардык билдирмелерге уруксат берүү"</string>
-    <!-- no translation found for zen_mode_other_sounds_summary (8784400697494837032) -->
-    <skip />
-    <!-- no translation found for zen_mode_sounds_none (6557474361948269420) -->
-    <skip />
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Эч нерсе үзгүлтүккө учурата албайт}=1{{sound_category_1} үзгүлтүккө учурата алат}=2{{sound_category_1} жана {sound_category_2} үзгүлтүккө учурата алат}=3{{sound_category_1}, {sound_category_2} жана {sound_category_3} үзгүлтүккө учурата алат}other{{sound_category_1}, {sound_category_2} жана дагы # үзгүлтүккө учурата алат}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Эч нерсе үзгүлтүккө учурата албайт"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Эч ким үзгүлтүккө учурата албайт"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Айрым байланыштар үзгүлтүккө учуратышы мүмкүн"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Бардык байланыштар үзгүлтүккө учуратышы мүмкүн"</string>
