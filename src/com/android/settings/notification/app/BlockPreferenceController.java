@@ -106,8 +106,11 @@ public class BlockPreferenceController extends NotificationPreferenceController
             // It's always safe to override the importance if it's meant to be blocked or if
             // it was blocked and we are unblocking it.
             if (blocked || originalImportance == IMPORTANCE_NONE) {
-                final int importance = blocked ? IMPORTANCE_NONE
-                        : isDefaultChannel() ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_DEFAULT;
+                final int importance = blocked
+                        ? IMPORTANCE_NONE
+                        : isDefaultChannel()
+                                ? IMPORTANCE_UNSPECIFIED
+                                : mChannel.getOriginalImportance();
                 mChannel.setImportance(importance);
                 saveChannel();
             }
