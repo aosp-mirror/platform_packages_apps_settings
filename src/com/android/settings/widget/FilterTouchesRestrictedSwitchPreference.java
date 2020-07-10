@@ -52,7 +52,8 @@ public class FilterTouchesRestrictedSwitchPreference extends RestrictedSwitchPre
         super.onBindViewHolder(holder);
         final View switchView = holder.findViewById(android.R.id.switch_widget);
         if (switchView != null) {
-            switchView.setFilterTouchesWhenObscured(true);
+            final View rootView = switchView.getRootView();
+            rootView.setFilterTouchesWhenObscured(true);
         }
     }
 }
