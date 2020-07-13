@@ -3635,6 +3635,14 @@
             </intent-filter>/>
         </receiver>
 
+        <receiver
+            android:name=".sim.receivers.SimSlotChangeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.telephony.action.SIM_SLOT_STATUS_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
