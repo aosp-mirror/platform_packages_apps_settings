@@ -18,8 +18,6 @@ package com.android.settings.sound;
 
 import static android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME;
 
-import static com.android.settings.sound.MediaControlsPreferenceController.useQsMediaPlayer;
-
 import android.content.Context;
 import android.provider.Settings;
 
@@ -37,7 +35,7 @@ public class MediaControlsParentPreferenceController extends BasePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
-        return useQsMediaPlayer(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return AVAILABLE;
     }
 
     @Override
