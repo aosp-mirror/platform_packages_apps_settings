@@ -16,7 +16,6 @@
 
 package com.android.settings.sound;
 
-import static android.provider.Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS;
 import static android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME;
 
 import android.content.Context;
@@ -47,11 +46,6 @@ public class MediaControlsPreferenceController extends TogglePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return useQsMediaPlayer(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    protected static boolean useQsMediaPlayer(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(),
-                SHOW_MEDIA_ON_QUICK_SETTINGS, 1) > 0;
+        return AVAILABLE;
     }
 }
