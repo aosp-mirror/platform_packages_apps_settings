@@ -23,6 +23,7 @@ import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -147,7 +148,7 @@ public class MediaOutputPreferenceControllerTest {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
 
-        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        doReturn(mMediaSessionManager).when(mContext).getSystemService(MediaSessionManager.class);
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
         mPlaybackInfo = new MediaController.PlaybackInfo(
