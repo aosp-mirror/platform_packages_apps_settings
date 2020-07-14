@@ -21,6 +21,7 @@ import static com.android.settings.media.MediaOutputSlice.MEDIA_PACKAGE_NAME;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -92,7 +93,7 @@ public class MediaOutputPanelTest {
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGENAME);
         when(mMediaSessionManager.getActiveSessions(any())).thenReturn(mMediaControllers);
         when(mContext.getApplicationContext()).thenReturn(mContext);
-        when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mMediaSessionManager);
+        doReturn(mMediaSessionManager).when(mContext).getSystemService(MediaSessionManager.class);
         MediaDescription.Builder builder = new MediaDescription.Builder();
         builder.setTitle(TEST_SONG);
         builder.setSubtitle(TEST_ARTIST);
