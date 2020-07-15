@@ -368,12 +368,12 @@ public class TetherEnabler implements SwitchWidgetController.OnSwitchChangeListe
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
         // we don't care, since we just want to read the value
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
         // we don't care, since we just want to read the value
     }
 

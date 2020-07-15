@@ -82,8 +82,8 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        mDataSaverBackend.refreshWhitelist();
-        mDataSaverBackend.refreshBlacklist();
+        mDataSaverBackend.refreshAllowlist();
+        mDataSaverBackend.refreshDenylist();
         mDataSaverBackend.addListener(this);
         mDataUsageBridge.resume();
     }
@@ -125,11 +125,11 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
+    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
     }
 
     @Override
-    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
+    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
     }
 
     @Override
@@ -146,7 +146,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
                 continue;
             }
             if (entry.extraInfo != null && ((AppStateDataUsageBridge.DataUsageState)
-                    entry.extraInfo).isDataSaverWhitelisted) {
+                    entry.extraInfo).isDataSaverAllowlisted) {
                 count++;
             }
         }

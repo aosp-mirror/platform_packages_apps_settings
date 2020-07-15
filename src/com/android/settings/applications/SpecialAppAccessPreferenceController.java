@@ -110,7 +110,7 @@ public class SpecialAppAccessPreferenceController extends BasePreferenceControll
                 continue;
             }
             if (entry.extraInfo instanceof DataUsageState
-                    && ((DataUsageState) entry.extraInfo).isDataSaverWhitelisted) {
+                    && ((DataUsageState) entry.extraInfo).isDataSaverAllowlisted) {
                 count++;
             }
         }
