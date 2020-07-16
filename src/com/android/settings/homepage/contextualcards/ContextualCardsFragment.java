@@ -40,6 +40,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.homepage.contextualcards.slices.BluetoothUpdateWorker;
 import com.android.settings.homepage.contextualcards.slices.SwipeDismissalDelegate;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.slice.ContextualWifiScanWorker;
 
 public class ContextualCardsFragment extends InstrumentedFragment implements
         FocusRecyclerView.FocusListener {
@@ -79,6 +80,7 @@ public class ContextualCardsFragment extends InstrumentedFragment implements
         super.onStart();
         registerScreenOffReceiver();
         registerKeyEventReceiver();
+        ContextualWifiScanWorker.newVisibleUiSession();
         mContextualCardManager.loadContextualCards(LoaderManager.getInstance(this),
                 sRestartLoaderNeeded);
         sRestartLoaderNeeded = false;
