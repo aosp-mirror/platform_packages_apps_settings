@@ -18,6 +18,7 @@ package com.android.settings.testutils.shadow;
 
 import static org.robolectric.RuntimeEnvironment.application;
 
+import android.net.wifi.ScanResult;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -79,6 +80,11 @@ public class ShadowWifiManager extends org.robolectric.shadows.ShadowWifiManager
     @Implementation
     protected boolean isDualModeSupported() {
         return false;
+    }
+
+    @Implementation
+    protected List<ScanResult> getScanResults() {
+        return new ArrayList<ScanResult>();
     }
 
     public static ShadowWifiManager get() {
