@@ -50,7 +50,7 @@ public class WifiDialogActivityTest {
 
     private static final String AP1_SSID = "\"ap1\"";
     @Mock
-    private WifiConfigController mController;
+    private WifiConfigController2 mController;
 
     @Before
     public void setUp() {
@@ -63,8 +63,12 @@ public class WifiDialogActivityTest {
 
     @Test
     public void onSubmit_shouldConnectToNetwork() {
-        WifiDialogActivity activity = Robolectric.setupActivity(WifiDialogActivity.class);
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
+        WifiDialogActivity activity =
+                Robolectric.buildActivity(WifiDialogActivity.class,
+                        new Intent().putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY,
+                                "StandardWifiEntry:OpenNetwork,0"))
+                        .setup().get();
+        WifiDialog2 dialog = (WifiDialog2) ShadowAlertDialogCompat.getLatestAlertDialog();
         assertThat(dialog).isNotNull();
 
         ReflectionHelpers.setField(dialog, "mController", mController);
@@ -75,34 +79,17 @@ public class WifiDialogActivityTest {
     }
 
     @Test
-    public void onSubmit_whenConnectForCallerIsFalse_shouldNotConnectToNetwork() {
-        WifiDialogActivity activity =
-                Robolectric.buildActivity(
-                        WifiDialogActivity.class,
-                        new Intent().putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false))
-                        .setup().get();
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
-
-        assertThat(dialog).isNotNull();
-
-        ReflectionHelpers.setField(dialog, "mController", mController);
-
-        activity.onSubmit(dialog);
-
-        assertThat(ShadowWifiManager.get().savedWifiConfig).isNull();
-    }
-
-    @Test
     public void onSubmit_whenLaunchInSetupFlow_shouldBeLightThemeForWifiDialog() {
         WifiDialogActivity activity =
                 Robolectric.buildActivity(
                         WifiDialogActivity.class,
                         new Intent()
-                                .putExtra(WifiDialogActivity.KEY_CONNECT_FOR_CALLER, false)
                                 .putExtra(WizardManagerHelper.EXTRA_IS_FIRST_RUN, true)
-                                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true))
+                                .putExtra(WizardManagerHelper.EXTRA_IS_SETUP_FLOW, true)
+                                .putExtra(WifiDialogActivity.KEY_CHOSEN_WIFIENTRY_KEY,
+                                        "StandardWifiEntry:OpenNetwork,0"))
                         .setup().get();
-        WifiDialog dialog = (WifiDialog) ShadowAlertDialogCompat.getLatestAlertDialog();
+        WifiDialog2 dialog = (WifiDialog2) ShadowAlertDialogCompat.getLatestAlertDialog();
 
         assertThat(dialog).isNotNull();
 

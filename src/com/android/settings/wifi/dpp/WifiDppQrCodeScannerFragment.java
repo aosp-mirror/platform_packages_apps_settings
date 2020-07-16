@@ -57,7 +57,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.qrcode.QrCamera;
 import com.android.settings.wifi.qrcode.QrDecorateView;
 import com.android.wifitrackerlib.WifiEntry;
@@ -91,7 +90,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     // Key for Bundle usage
     private static final String KEY_IS_CONFIGURATOR_MODE = "key_is_configurator_mode";
     private static final String KEY_LATEST_ERROR_CODE = "key_latest_error_code";
-    private static final String KEY_WIFI_CONFIGURATION = "key_wifi_configuration";
+    public static final String KEY_WIFI_CONFIGURATION = "key_wifi_configuration";
 
     private static final int ARG_RESTART_CAMERA = 1;
 
@@ -689,8 +688,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
     @Override
     public void onSuccess() {
         final Intent resultIntent = new Intent();
-        resultIntent.putExtra(WifiDialogActivity.KEY_WIFI_CONFIGURATION,
-                mEnrolleeWifiConfiguration);
+        resultIntent.putExtra(KEY_WIFI_CONFIGURATION, mEnrolleeWifiConfiguration);
 
         final Activity hostActivity = getActivity();
         hostActivity.setResult(Activity.RESULT_OK, resultIntent);
