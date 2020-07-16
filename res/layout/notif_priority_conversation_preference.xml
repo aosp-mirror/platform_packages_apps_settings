@@ -32,7 +32,7 @@
         android:clickable="true"
         android:focusable="true">
         <ImageView
-            android:id="@+id/priority_icon"
+            android:id="@+id/icon"
             android:src="@drawable/ic_important_outline"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
@@ -41,19 +41,19 @@
             android:clickable="false"
             android:focusable="false"/>
         <TextView
-            android:id="@+id/priority_label"
+            android:id="@+id/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:clickable="false"
             android:focusable="false"
-            android:layout_toEndOf="@id/priority_icon"
+            android:layout_toEndOf="@id/icon"
             android:layout_marginStart="@dimen/notification_importance_drawable_padding"
             android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
             android:text="@string/notification_priority_title"/>
         <TextView
-            android:id="@+id/priority_summary"
+            android:id="@+id/summary"
             android:paddingTop="@dimen/notification_importance_button_padding"
             android:text="@string/notification_channel_summary_priority"
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:focusable="false"
             android:ellipsize="end"
             android:maxLines="3"
-            android:layout_below="@id/priority_icon"
+            android:layout_below="@id/icon"
             android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
             android:visibility="gone" />
     </com.android.settings.notification.NotificationButtonRelativeLayout>
@@ -76,7 +76,7 @@
         android:clickable="true"
         android:focusable="true">
         <ImageView
-            android:id="@+id/alert_icon"
+            android:id="@+id/icon"
             android:src="@drawable/ic_notifications_alert"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
@@ -85,19 +85,19 @@
             android:clickable="false"
             android:focusable="false"/>
         <TextView
-            android:id="@+id/alert_label"
+            android:id="@+id/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:clickable="false"
             android:focusable="false"
-            android:layout_toEndOf="@id/alert_icon"
+            android:layout_toEndOf="@id/icon"
             android:layout_marginStart="@dimen/notification_importance_drawable_padding"
             android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
             android:text="@string/notification_alert_title"/>
         <TextView
-            android:id="@+id/alert_summary"
+            android:id="@+id/summary"
             android:paddingTop="@dimen/notification_importance_button_padding"
             android:text="@string/notification_channel_summary_default"
             android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:focusable="false"
             android:ellipsize="end"
             android:maxLines="2"
-            android:layout_below="@id/alert_icon"
+            android:layout_below="@id/icon"
             android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
             android:visibility="gone" />
     </com.android.settings.notification.NotificationButtonRelativeLayout>
@@ -120,7 +120,7 @@
         android:clickable="true"
         android:focusable="true">
         <ImageView
-            android:id="@+id/silence_icon"
+            android:id="@+id/icon"
             android:src="@drawable/ic_notifications_off_24dp"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
@@ -129,19 +129,19 @@
             android:clickable="false"
             android:focusable="false"/>
         <TextView
-            android:id="@+id/silence_label"
+            android:id="@+id/label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:clickable="false"
             android:focusable="false"
-            android:layout_toEndOf="@id/silence_icon"
+            android:layout_toEndOf="@id/icon"
             android:layout_marginStart="@dimen/notification_importance_drawable_padding"
             android:textAppearance="@style/TextAppearance.NotificationImportanceButton.Unselected"
             android:text="@string/notification_silence_title"/>
         <TextView
-            android:id="@+id/silence_summary"
+            android:id="@+id/summary"
             android:paddingTop="@dimen/notification_importance_button_padding"
             android:text="@string/notification_conversation_summary_low"
             android:layout_width="match_parent"
@@ -150,7 +150,7 @@
             android:focusable="false"
             android:ellipsize="end"
             android:maxLines="2"
-            android:layout_below="@id/silence_icon"
+            android:layout_below="@id/icon"
             android:textAppearance="@style/TextAppearance.NotificationImportanceDetail"
             android:visibility="gone" />
     </com.android.settings.notification.NotificationButtonRelativeLayout>
