@@ -1064,6 +1064,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             return true;
         } else if (pref == mAddGuest) {
+            mAddGuest.setEnabled(false); // prevent multiple tap issue
             UserInfo guest = mUserManager.createGuest(
                     getContext(), getString(com.android.settingslib.R.string.user_guest));
             openUserDetails(guest, true);
