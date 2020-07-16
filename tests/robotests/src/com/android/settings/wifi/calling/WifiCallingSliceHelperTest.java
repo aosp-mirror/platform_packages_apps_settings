@@ -21,6 +21,7 @@ import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -152,7 +153,7 @@ public class WifiCallingSliceHelperTest {
         mQueryImsState.setIsEnabledByUser(false);
         mQueryImsState.setIsTtyOnVolteEnabled(false);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
-        mWfcSliceHelper.setActivationAppIntent(new Intent()); // dummy Intent
+        mWfcSliceHelper.setActivationAppIntent(new Intent()); // unused Intent
 
         final Slice slice  = mWfcSliceHelper.createWifiCallingSlice(
                 CustomSliceRegistry.WIFI_CALLING_URI);
