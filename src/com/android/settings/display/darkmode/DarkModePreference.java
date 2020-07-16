@@ -19,14 +19,16 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.PowerManager;
 import android.util.AttributeSet;
+
 import com.android.settings.R;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import java.time.LocalTime;
 
 /**
- * component for the display settings dark ui summary*/
-public class DarkModePreference extends MasterSwitchPreference {
+ * component for the display settings dark ui summary
+ */
+public class DarkModePreference extends PrimarySwitchPreference {
 
     private UiModeManager mUiModeManager;
     private DarkModeObserver mDarkModeObserver;

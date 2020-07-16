@@ -39,17 +39,17 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class MasterSwitchPreferenceTest {
+public class PrimarySwitchPreferenceTest {
 
     private Context mContext;
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
     private PreferenceViewHolder mHolder;
     private LinearLayout mWidgetView;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mPreference = new MasterSwitchPreference(mContext);
+        mPreference = new PrimarySwitchPreference(mContext);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mHolder = PreferenceViewHolder.createInstanceForTests(inflater.inflate(
                 com.android.settingslib.R.layout.preference_two_target, null));

@@ -33,27 +33,27 @@ import com.android.settingslib.RestrictedPreference;
  * A custom preference that provides inline switch toggle. It has a mandatory field for title, and
  * optional fields for icon and sub-text. And it can be restricted by admin state.
  */
-public class MasterSwitchPreference extends RestrictedPreference {
+public class PrimarySwitchPreference extends RestrictedPreference {
 
     private Switch mSwitch;
     private boolean mChecked;
     private boolean mCheckedSet;
     private boolean mEnableSwitch = true;
 
-    public MasterSwitchPreference(Context context, AttributeSet attrs,
+    public PrimarySwitchPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public MasterSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PrimarySwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MasterSwitchPreference(Context context, AttributeSet attrs) {
+    public PrimarySwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MasterSwitchPreference(Context context) {
+    public PrimarySwitchPreference(Context context) {
         super(context);
     }
 
@@ -101,6 +101,11 @@ public class MasterSwitchPreference extends RestrictedPreference {
         return mSwitch != null && mChecked;
     }
 
+    /**
+     * Set the checked status to be {@code checked}.
+     *
+     * @param checked The new checked status
+     */
     public void setChecked(boolean checked) {
         // Always set checked the first time; don't assume the field's default of false.
         final boolean changed = mChecked != checked;
@@ -113,6 +118,11 @@ public class MasterSwitchPreference extends RestrictedPreference {
         }
     }
 
+    /**
+     * Set the Switch to be the status of {@code enabled}.
+     *
+     * @param enabled The new enabled status
+     */
     public void setSwitchEnabled(boolean enabled) {
         mEnableSwitch = enabled;
         if (mSwitch != null) {

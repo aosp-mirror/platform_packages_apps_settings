@@ -23,17 +23,17 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-/*
- * The switch controller that is used to update the switch widget in the MasterSwitchPreference
+/**
+ * The switch controller that is used to update the switch widget in the PrimarySwitchPreference
  * layout.
  */
-public class MasterSwitchController extends SwitchWidgetController implements
-    Preference.OnPreferenceChangeListener {
+public class PrimarySwitchController extends SwitchWidgetController implements
+        Preference.OnPreferenceChangeListener {
 
-    private final MasterSwitchPreference mPreference;
+    private final PrimarySwitchPreference mPreference;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public MasterSwitchController(MasterSwitchPreference preference) {
+    public PrimarySwitchController(PrimarySwitchPreference preference) {
         mPreference = preference;
         mMetricsFeatureProvider = FeatureFactory.getFactory(preference.getContext())
                 .getMetricsFeatureProvider();

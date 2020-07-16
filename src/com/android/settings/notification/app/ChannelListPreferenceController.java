@@ -23,11 +23,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.graphics.BlendMode;
-import android.graphics.BlendModeColorFilter;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -43,7 +39,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
@@ -177,7 +173,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
 
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
             final NotificationChannel channel, final boolean groupBlocked) {
-        MasterSwitchPreference channelPref = new MasterSwitchPreference(mContext);
+        PrimarySwitchPreference channelPref = new PrimarySwitchPreference(mContext);
         channelPref.setSwitchEnabled(mAdmin == null
                 && isChannelBlockable(channel)
                 && isChannelConfigurable(channel)
@@ -186,7 +182,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
         if (channel.getImportance() > IMPORTANCE_LOW) {
             channelPref.setIcon(getAlertingIcon());
         }
-        channelPref.setIconSize(MasterSwitchPreference.ICON_SIZE_SMALL);
+        channelPref.setIconSize(PrimarySwitchPreference.ICON_SIZE_SMALL);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
         channelPref.setSummary(NotificationBackend.getSentSummary(
@@ -210,7 +206,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                     int importance = value ? channel.getOriginalImportance() : IMPORTANCE_NONE;
                     channel.setImportance(importance);
                     channel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
-                    MasterSwitchPreference channelPref1 = (MasterSwitchPreference) preference;
+                    PrimarySwitchPreference channelPref1 = (PrimarySwitchPreference) preference;
                     channelPref1.setIcon(null);
                     if (channel.getImportance() > IMPORTANCE_LOW) {
                         channelPref1.setIcon(getAlertingIcon());
@@ -243,7 +239,7 @@ public class ChannelListPreferenceController extends NotificationPreferenceContr
                 int childCount = groupGroup.getPreferenceCount();
                 for (int i = 0; i < childCount; i++) {
                     Preference pref = groupGroup.getPreference(i);
-                    if (pref instanceof MasterSwitchPreference) {
+                    if (pref instanceof PrimarySwitchPreference) {
                         toRemove.add(pref);
                     }
                 }
