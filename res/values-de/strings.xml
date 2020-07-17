@@ -759,7 +759,7 @@
     <string name="wifi_display_status_connected" msgid="2189925211258519539">"Verbunden"</string>
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"In Verwendung"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Nicht verfügbar"</string>
-    <string name="wifi_display_details" msgid="2351632307998142920">"Display-Einstellungen"</string>
+    <string name="wifi_display_details" msgid="2351632307998142920">"Displayeinstellungen"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Optionen für kabellose Übertragung (WiDi)"</string>
     <string name="wifi_display_options_forget" msgid="3140558691112356024">"Entfernen"</string>
     <string name="wifi_display_options_done" msgid="7608851767701954020">"Fertig"</string>
@@ -1727,7 +1727,7 @@
     <string name="assisted_gps" msgid="1714546606018821498">"Unterstütztes GPS verwenden"</string>
     <string name="assisted_gps_enabled" msgid="6220188450779319248">"Server zur Unterstützung von GPS verwenden (zur Verringerung der Netzwerkauslastung nicht auswählen)"</string>
     <string name="assisted_gps_disabled" msgid="1062496503892849">"Server zur Unterstützung von GPS verwenden (zur Verbesserung der GPS-Leistung deaktivieren)"</string>
-    <string name="use_location_title" msgid="1345594777162897654">"Standort &amp; Google-Suche"</string>
+    <string name="use_location_title" msgid="1345594777162897654">"Standort &amp; Google Suche"</string>
     <string name="use_location_summary" msgid="377322574549729921">"Google darf Suchergebnisse und andere Dienste an meinen Standort anpassen"</string>
     <string name="location_access_title" msgid="4052667453826272040">"Zugriff auf meinen Standort"</string>
     <string name="location_access_summary" msgid="8634100005481578143">"Meine Standortdaten dürfen von Apps verwendet werden, die ich dazu berechtigt habe."</string>
@@ -3325,8 +3325,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Töne beim Hochfahren"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Automatische Untertitel"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Medien automatisch untertiteln"</string>
-    <!-- no translation found for zen_mode_settings_schedules_summary (2047688589286811617) -->
-    <skip />
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Keiner}=1{1 Zeitplan festgelegt}other{# Zeitpläne festgelegt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bitte nicht stören"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Benachrichtigungen nur von wichtigen Personen und Apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Unterbrechungen einschränken"</string>
@@ -3397,12 +3396,9 @@
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"An"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Jedes Mal fragen"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Bis zur Deaktivierung"</string>
-    <!-- no translation found for zen_mode_duration_summary_time_hours (2602655749780428308) -->
-    <skip />
-    <!-- no translation found for zen_mode_duration_summary_time_minutes (5755536844016835693) -->
-    <skip />
-    <!-- no translation found for zen_mode_sound_summary_off (7350437977839985836) -->
-    <skip />
+    <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 Stunde}other{# Stunden}}"</string>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 Minute}other{# Minuten}}"</string>
+    <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Aus}=1{Aus/1 Zeitplan kann automatisch aktiviert werden}other{Aus/# Zeitpläne können automatisch aktiviert werden}}"</string>
     <string name="zen_category_behavior" msgid="3214056473947178507">"Was den \"Bitte nicht stören\"-Modus unterbrechen kann"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"Personen"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
@@ -3738,8 +3734,7 @@
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"Alle Unterhaltungen"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"Vorrangige Unterhaltungen"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Keine"</string>
-    <!-- no translation found for zen_mode_conversations_count (3199310723073707153) -->
-    <skip />
+    <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Keine}=1{1 Unterhaltung}other{# Unterhaltungen}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Wer unterbrechen darf"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Anrufe"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Anrufe"</string>
@@ -3748,8 +3743,7 @@
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Damit sichergestellt ist, dass bei zugelassenen Anrufen auch wirklich ein akustisches Signal ertönt, solltest du prüfen, ob der Klingeltonmodus aktiviert ist"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Im Modus \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" werden eingehende Anrufe blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Markierte Kontakte"</string>
-    <!-- no translation found for zen_mode_starred_contacts_summary_contacts (1629467178444895094) -->
-    <skip />
+    <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Keiner}=1{{contact_1}}=2{{contact_1} und {contact_2}}=3{{contact_1}, {contact_2} und {contact_3}}other{{contact_1}, {contact_2} und # weitere Kontakte}}"</string>
     <string name="zen_mode_messages" msgid="7315084748885170585">"Nachrichten"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"Nachrichten"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Nachrichten"</string>
@@ -3758,8 +3752,7 @@
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Eingehende Nachrichten für \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" werden blockiert. Du kannst die Einstellungen anpassen, sodass dich Freunde, Familie oder andere Kontakte erreichen können."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Alle Nachrichten können dich erreichen"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Alle Anrufe können dich erreichen"</string>
-    <!-- no translation found for zen_mode_contacts_count (6568631261119795799) -->
-    <skip />
+    <string name="zen_mode_contacts_count" msgid="6568631261119795799">"{count,plural, =0{Keiner}=1{1 Kontakt}other{# Kontakte}}"</string>
     <string name="zen_mode_from_anyone" msgid="6027004263046694174">"Alle"</string>
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakte"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Markierte Kontakte"</string>
@@ -3797,17 +3790,14 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alle Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Einige Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Ausgewählte Personen können dich weiterhin erreichen, auch wenn du nicht zulässt, dass Apps dich unterbrechen."</string>
-    <!-- no translation found for zen_mode_bypassing_apps_subtext (5258652366929842710) -->
-    <skip />
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Keine Apps können ihn unterbrechen}=1{Die App \"{app_1}\" kann ihn unterbrechen}=2{Die Apps \"{app_1}\" und \"{app_2}\" können ihn unterbrechen}=3{Die Apps \"{app_1}\", \"{app_2}\" und \"{app_3}\" können ihn unterbrechen}other{Die App \"{app_1}\", \"{app_2}\" und # weitere können ihn unterbrechen}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Alle Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Einige Benachrichtigungen"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Benachrichtigungen, die unterbrechen dürfen"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Alle Benachrichtigungen zulassen"</string>
-    <!-- no translation found for zen_mode_other_sounds_summary (8784400697494837032) -->
-    <skip />
-    <!-- no translation found for zen_mode_sounds_none (6557474361948269420) -->
-    <skip />
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Nichts kann ihn unterbrechen}=1{Geräusche der Kategorie \"{sound_category_1}\" können ihn unterbrechen}=2{Geräusche der Kategorie \"{sound_category_1}\" und \"{sound_category_2}\" können ihn unterbrechen}=3{Geräusche der Kategorie \"{sound_category_1}\", \"{sound_category_2}\" und \"{sound_category_3}\" können ihn unterbrechen}other{Geräusche der Kategorie \"{sound_category_1}\", \"{sound_category_2}\" und # weiteren können ihn unterbrechen}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Nichts kann ihn unterbrechen"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Niemand kann ihn unterbrechen"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Einige Personen können ihn unterbrechen"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Alle Personen können ihn unterbrechen"</string>
