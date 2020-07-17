@@ -19,17 +19,17 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 
-public class InstallCredentialsPreferenceController extends
+public class InstallCertificatePreferenceController extends
         RestrictedEncryptionPreferenceController {
 
-    private static final String KEY_CREDENTIALS_INSTALL = "credentials_install";
+    private static final String KEY_INSTALL_CERTIFICATE = "install_certificate";
 
-    public InstallCredentialsPreferenceController(Context context) {
+    public InstallCertificatePreferenceController(Context context) {
         super(context, UserManager.DISALLOW_CONFIG_CREDENTIALS);
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_CREDENTIALS_INSTALL;
+        return KEY_INSTALL_CERTIFICATE;
     }
 }

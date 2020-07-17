@@ -5887,10 +5887,8 @@
 
     <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
     <string name="credentials_title">Credential storage</string>
-    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
-    <string name="credentials_install" product="nosdcard">Install from storage</string>
-    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
-    <string name="credentials_install" product="default">Install from SD card</string>
+    <!-- Title of preference to install certificates [CHAR LIMIT=30] -->
+    <string name="credentials_install">Install a certificate</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
     <string name="credentials_install_summary" product="nosdcard">Install certificates from storage</string>
     <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
@@ -5929,6 +5927,22 @@
     <string name="credentials_not_erased">Credential storage couldn\u2019t be erased.</string>
     <!-- Title of Usage Access preference item [CHAR LIMIT=30] -->
     <string name="usage_access_title">Apps with usage access</string>
+    <!-- Title of CA certificate [CHAR LIMIT=30] -->
+    <string name="ca_certificate">CA certificate</string>
+    <!-- Title of User certificate [CHAR LIMIT=30] -->
+    <string name="user_certificate">VPN &amp; app user certificate</string>
+    <!-- Title of Wi-Fi certificate [CHAR LIMIT=30] -->
+    <string name="wifi_certificate">Wi\u2011Fi certificate</string>
+    <!-- Title of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_title">Your data won\u2019t be private</string>
+    <!-- Description of warning shown to the user before they can install a CA certificate [CHAR LIMIT=NONE] -->
+    <string name="ca_certificate_warning_description">CA certificates are used by websites, apps, and VPNs for encryption. Only install CA certificates from organizations you trust. \n\n If you install a CA certificate, the certificate owner could access your data, such as passwords or credit card details, from websites you visit or apps you use – even if your data is encrypted.</string>
+    <!-- Label for button to not install a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_dont_install">Don\u2019t install</string>
+    <!-- Label for button to continue installing a certificate [CHAR_LIMIT=50] -->
+    <string name="certificate_warning_install_anyway">Install anyway</string>
+    <!-- Toast message that a certificate was not installed -->
+    <string name="cert_not_installed">Certificate not installed</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency dialing signal</string>
@@ -6890,6 +6904,8 @@
     <string name="help_url_security" translatable="false"></string>
     <!-- Help URL, Encryption settings [DO NOT TRANSLATE] -->
     <string name="help_url_encryption" translatable="false"></string>
+    <!-- Help URL, Install certificate settings [DO NOT TRANSLATE] -->
+    <string name="help_url_install_certificate" translatable="false"></string>
     <!-- Help URL, Tap & pay [DO NOT TRANSLATE] -->
     <string name="help_url_nfc_payment" translatable="false"></string>
     <!-- Help URL, Remote display [DO NOT TRANSLATE] -->
