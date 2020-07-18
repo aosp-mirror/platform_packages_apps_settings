@@ -730,6 +730,12 @@
     <string name="security_settings_face_enroll_education_message"></string>
     <!-- Button that takes the user to the enrollment activity [CHAR LIMIT=20] -->
     <string name="security_settings_face_enroll_education_start">Start</string>
+    <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message">If accessibility face unlock is turned off, some setup steps may not work properly with TalkBack.</string>
+    <!-- Negative button text for users who were shown the accessibility dialog [CHAR LIMIT=10] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative">Go back</string>
+    <!-- Positive button text for users who were shown the accessibility dialog [CHAR LIMIT=20] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive">Continue setup</string>
     <!-- Button shown which shows accessibility toggles for face enrollment when clicked. [CHAR LIMIT=32] -->
     <string name="security_settings_face_enroll_introduction_accessibility">Use accessibility setup</string>
     <!-- Additional details shown when the accessibility toggle is expanded. [CHAR LIMIT=NONE]-->
@@ -10916,8 +10922,6 @@
     <string name="one_handed_timeout_medium">8 seconds</string>
     <!-- Timeout(Long) title for one handed [CHAR LIMIT=60] -->
     <string name="one_handed_timeout_long">12 seconds</string>
-    <!-- Timeout summary [CHAR LIMIT=60] -->
-    <string name="one_handed_timeout_summary"><xliff:g id="timeout" example="4 seconds">After %1$s of inactivity</xliff:g></string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
 

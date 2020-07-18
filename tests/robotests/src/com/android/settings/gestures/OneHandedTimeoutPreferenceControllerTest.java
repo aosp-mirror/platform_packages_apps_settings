@@ -103,7 +103,7 @@ public class OneHandedTimeoutPreferenceControllerTest {
                 OneHandedSettingsUtils.OneHandedTimeout.SHORT.getValue());
 
         assertThat(mController.getSummary()).isEqualTo(String.format(
-                mContext.getResources().getString(R.string.one_handed_timeout_summary),
+                mContext.getResources().getString(R.string.screen_timeout_summary),
                 timeoutTitles[OneHandedSettingsUtils.OneHandedTimeout.SHORT.ordinal()]));
     }
 }
