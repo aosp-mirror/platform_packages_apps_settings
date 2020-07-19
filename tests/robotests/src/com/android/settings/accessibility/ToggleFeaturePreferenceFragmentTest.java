@@ -54,10 +54,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleFeaturePreferenceFragmentTest {
@@ -159,9 +155,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
             PreferredShortcut shortcut) {
-        Set<String> value = new HashSet<>(Collections.singletonList(shortcut.toString()));
-
-        SharedPreferenceUtils.setUserShortcutType(context, value);
+        PreferredShortcuts.saveUserShortcutType(context, shortcut);
     }
 
     private void callEmptyOnClicked(DialogInterface dialog, int which) {}

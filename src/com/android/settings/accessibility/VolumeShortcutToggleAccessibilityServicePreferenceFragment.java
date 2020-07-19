@@ -24,8 +24,6 @@ import android.view.View;
 
 import com.android.settings.R;
 
-import com.google.common.collect.ImmutableSet;
-
 /**
  * Fragment that only allowed hardware {@link UserShortcutType} for shortcut to open.
  *
@@ -70,7 +68,6 @@ public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
         final String componentNameString = mComponentName.flattenToString();
         final PreferredShortcut shortcut = new PreferredShortcut(componentNameString, type);
 
-        SharedPreferenceUtils.setUserShortcutType(getPrefContext(),
-                ImmutableSet.of(shortcut.toString()));
+        PreferredShortcuts.saveUserShortcutType(getPrefContext(), shortcut);
     }
 }

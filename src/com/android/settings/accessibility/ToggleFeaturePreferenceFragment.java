@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.getScreenHeightPixels;
 import static com.android.settings.accessibility.AccessibilityUtil.getScreenWidthPixels;
+import static com.android.settings.accessibility.PreferredShortcuts.retrieveUserShortcutType;
+import static com.android.settings.accessibility.PreferredShortcuts.saveUserShortcutType;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -44,6 +46,7 @@ import android.view.accessibility.AccessibilityManager.TouchExplorationStateChan
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -57,16 +60,11 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.FooterPreference;
 
-import com.google.common.annotations.VisibleForTesting;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Base class for accessibility fragments with toggle, shortcut, some helper functions
@@ -525,30 +523,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (saveChanges) {
             final boolean isChanged = (mUserShortcutTypesCache != UserShortcutType.EMPTY);
             if (isChanged) {
-                setUserShortcutType(getPrefContext(), mUserShortcutTypesCache);
+                final PreferredShortcut shortcut = new PreferredShortcut(
+                        mComponentName.flattenToString(), mUserShortcutTypesCache);
+                saveUserShortcutType(getPrefContext(), shortcut);
             }
             mUserShortcutTypes = mUserShortcutTypesCache;
         }
-    }
-
-    private void setUserShortcutType(Context context, int type) {
-        if (mComponentName == null) {
-            return;
-        }
-
-        Set<String> info = SharedPreferenceUtils.getUserShortcutTypes(context);
-        final String componentName = mComponentName.flattenToString();
-        if (info.isEmpty()) {
-            info = new HashSet<>();
-        } else {
-            final Set<String> filtered = info.stream()
-                    .filter(str -> str.contains(componentName))
-                    .collect(Collectors.toSet());
-            info.removeAll(filtered);
-        }
-        final PreferredShortcut shortcut = new PreferredShortcut(componentName, type);
-        info.add(shortcut.toString());
-        SharedPreferenceUtils.setUserShortcutType(context, info);
     }
 
     protected CharSequence getShortcutTypeSummary(Context context) {
@@ -560,7 +540,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return context.getText(R.string.switch_off_text);
         }
 
-        final int shortcutTypes = getUserShortcutTypes(context, UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(context,
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         int resId = R.string.accessibility_shortcut_edit_summary_software;
         if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
             resId = AccessibilityUtil.isTouchExploreEnabled(context)
@@ -587,25 +568,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
                 null, joinStrings);
-    }
-
-    protected int getUserShortcutTypes(Context context, @UserShortcutType int defaultValue) {
-        if (mComponentName == null) {
-            return defaultValue;
-        }
-
-        final Set<String> info = SharedPreferenceUtils.getUserShortcutTypes(context);
-        final String componentName = mComponentName.flattenToString();
-        final Set<String> filtered = info.stream()
-                .filter(str -> str.contains(componentName))
-                .collect(Collectors.toSet());
-        if (filtered.isEmpty()) {
-            return defaultValue;
-        }
-
-        final String str = (String) filtered.toArray()[0];
-        final PreferredShortcut shortcut = PreferredShortcut.fromString(str);
-        return shortcut.getType();
     }
 
     /**
@@ -638,10 +600,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mUserShortcutTypes = AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
         if (mUserShortcutTypes != UserShortcutType.EMPTY) {
-            setUserShortcutType(getPrefContext(), mUserShortcutTypes);
+            final PreferredShortcut shortcut = new PreferredShortcut(
+                    mComponentName.flattenToString(), mUserShortcutTypes);
+            saveUserShortcutType(getPrefContext(), shortcut);
         } else {
             //  Get the user shortcut type from shared_prefs if cannot get from settings provider.
-            mUserShortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+            mUserShortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                    mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         }
     }
 
@@ -664,10 +629,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         mShortcutPreference.setChecked(
-                    AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
-                            mComponentName));
+                AccessibilityUtil.hasValuesInSettings(getPrefContext(), shortcutTypes,
+                        mComponentName));
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
@@ -681,7 +647,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
-        final int shortcutTypes = getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE);
+        final int shortcutTypes = retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         if (preference.isChecked()) {
             AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), shortcutTypes,
                     mComponentName);
@@ -697,7 +664,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public void onSettingsClicked(ShortcutPreference preference) {
         // Do not restore shortcut in shortcut chooser dialog when shortcutPreference is turned off.
         mUserShortcutTypesCache = mShortcutPreference.isChecked()
-                ? getUserShortcutTypes(getPrefContext(), UserShortcutType.SOFTWARE)
+                ? retrieveUserShortcutType(getPrefContext(),
+                mComponentName.flattenToString(), UserShortcutType.SOFTWARE)
                 : UserShortcutType.EMPTY;
         showDialog(DialogEnums.EDIT_SHORTCUT);
     }

@@ -54,10 +54,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 @RunWith(RobolectricTestRunner.class)
 public class ToggleScreenMagnificationPreferenceFragmentTest {
 
@@ -217,9 +213,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
             PreferredShortcut shortcut) {
-        Set<String> value = new HashSet<>(Collections.singletonList(shortcut.toString()));
-
-        SharedPreferenceUtils.setUserShortcutType(context, value);
+        PreferredShortcuts.saveUserShortcutType(context, shortcut);
     }
 
     private void setMagnificationTripleTapEnabled(boolean enabled) {
