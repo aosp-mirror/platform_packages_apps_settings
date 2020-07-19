@@ -66,7 +66,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
@@ -481,51 +480,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
     }
 
-    static final class AccessibilityUserShortcutType {
-        private static final char COMPONENT_NAME_SEPARATOR = ':';
-        private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
-                new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
-
-        private String mComponentName;
-        private int mType;
-
-        AccessibilityUserShortcutType(String componentName, int type) {
-            this.mComponentName = componentName;
-            this.mType = type;
-        }
-
-        AccessibilityUserShortcutType(String flattenedString) {
-            sStringColonSplitter.setString(flattenedString);
-            if (sStringColonSplitter.hasNext()) {
-                this.mComponentName = sStringColonSplitter.next();
-                this.mType = Integer.parseInt(sStringColonSplitter.next());
-            }
-        }
-
-        String getComponentName() {
-            return mComponentName;
-        }
-
-        void setComponentName(String componentName) {
-            this.mComponentName = componentName;
-        }
-
-        int getType() {
-            return mType;
-        }
-
-        void setType(int type) {
-            this.mType = type;
-        }
-
-        String flattenToString() {
-            final StringJoiner joiner = new StringJoiner(String.valueOf(COMPONENT_NAME_SEPARATOR));
-            joiner.add(mComponentName);
-            joiner.add(String.valueOf(mType));
-            return joiner.toString();
-        }
-    }
-
     private void setDialogTextAreaClickListener(View dialogView, CheckBox checkBox) {
         final View dialogTextArea = dialogView.findViewById(R.id.container);
         dialogTextArea.setOnClickListener(v -> {
@@ -592,9 +546,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                     .collect(Collectors.toSet());
             info.removeAll(filtered);
         }
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                componentName, type);
-        info.add(shortcut.flattenToString());
+        final PreferredShortcut shortcut = new PreferredShortcut(componentName, type);
+        info.add(shortcut.toString());
         SharedPreferenceUtils.setUserShortcutType(context, info);
     }
 
@@ -651,7 +604,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         final String str = (String) filtered.toArray()[0];
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
+        final PreferredShortcut shortcut = PreferredShortcut.fromString(str);
         return shortcut.getType();
     }
 

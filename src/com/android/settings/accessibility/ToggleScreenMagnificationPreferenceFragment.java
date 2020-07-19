@@ -226,9 +226,9 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                     Collectors.toSet());
             info.removeAll(filtered);
         }
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                MAGNIFICATION_CONTROLLER_NAME, type);
-        info.add(shortcut.flattenToString());
+        final PreferredShortcut shortcut = new PreferredShortcut(MAGNIFICATION_CONTROLLER_NAME,
+                type);
+        info.add(shortcut.toString());
         SharedPreferenceUtils.setUserShortcutType(context, info);
     }
 
@@ -284,7 +284,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         }
 
         final String str = (String) filtered.toArray()[0];
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
+        final PreferredShortcut shortcut = PreferredShortcut.fromString(str);
         return shortcut.getType();
     }
 

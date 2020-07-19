@@ -43,7 +43,6 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
-import com.android.settings.accessibility.ToggleFeaturePreferenceFragment.AccessibilityUserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
@@ -58,17 +57,10 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleFeaturePreferenceFragmentTest {
-
-    private static final String TEST_SERVICE_KEY_1 = "abc:111";
-    private static final String TEST_SERVICE_KEY_2 = "mno:222";
-    private static final String TEST_SERVICE_KEY_3 = "xyz:333";
-    private static final String TEST_SERVICE_NAME_1 = "abc";
-    private static final int TEST_SERVICE_VALUE_1 = 111;
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
@@ -95,59 +87,6 @@ public class ToggleFeaturePreferenceFragmentTest {
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
         doReturn(null).when(mFragment).getPreferenceScreen();
-    }
-
-    @Test
-    public void a11yUserShortcutType_setConcatString_shouldReturnTargetValue() {
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                TEST_SERVICE_KEY_1);
-
-        assertThat(shortcut.getComponentName()).isEqualTo(TEST_SERVICE_NAME_1);
-        assertThat(shortcut.getType()).isEqualTo(TEST_SERVICE_VALUE_1);
-    }
-
-    @Test
-    public void a11yUserShortcutType_shouldUpdateConcatString() {
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                TEST_SERVICE_KEY_2);
-
-        shortcut.setComponentName(TEST_SERVICE_NAME_1);
-        shortcut.setType(TEST_SERVICE_VALUE_1);
-
-        assertThat(shortcut.flattenToString()).isEqualTo(TEST_SERVICE_KEY_1);
-    }
-
-    @Test
-    public void stringSet_convertA11yPreferredShortcut_shouldRemoveTarget() {
-        Set<String> mySet = new HashSet<>();
-        mySet.add(TEST_SERVICE_KEY_1);
-        mySet.add(TEST_SERVICE_KEY_2);
-        mySet.add(TEST_SERVICE_KEY_3);
-
-        final Set<String> filtered = mySet.stream()
-                .filter(str -> str.contains(TEST_SERVICE_NAME_1))
-                .collect(Collectors.toSet());
-        mySet.removeAll(filtered);
-
-        assertThat(mySet).doesNotContain(TEST_SERVICE_KEY_1);
-        assertThat(mySet).hasSize(/* expectedSize= */2);
-    }
-
-    @Test
-    public void stringSet_convertA11yUserShortcutType_shouldReturnPreferredShortcut() {
-        Set<String> mySet = new HashSet<>();
-        mySet.add(TEST_SERVICE_KEY_1);
-        mySet.add(TEST_SERVICE_KEY_2);
-        mySet.add(TEST_SERVICE_KEY_3);
-
-        final Set<String> filtered = mySet.stream()
-                .filter(str -> str.contains(TEST_SERVICE_NAME_1))
-                .collect(Collectors.toSet());
-
-        final String str = (String) filtered.toArray()[0];
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(str);
-        final int type = shortcut.getType();
-        assertThat(type).isEqualTo(TEST_SERVICE_VALUE_1);
     }
 
     @Test
@@ -184,7 +123,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
-        final AccessibilityUserShortcutType hardwareShortcut = new AccessibilityUserShortcutType(
+        final PreferredShortcut hardwareShortcut = new PreferredShortcut(
                 PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
 
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
@@ -219,8 +158,8 @@ public class ToggleFeaturePreferenceFragmentTest {
     }
 
     private void putUserShortcutTypeIntoSharedPreference(Context context,
-            AccessibilityUserShortcutType shortcut) {
-        Set<String> value = new HashSet<>(Collections.singletonList(shortcut.flattenToString()));
+            PreferredShortcut shortcut) {
+        Set<String> value = new HashSet<>(Collections.singletonList(shortcut.toString()));
 
         SharedPreferenceUtils.setUserShortcutType(context, value);
     }

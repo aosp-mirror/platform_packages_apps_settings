@@ -67,10 +67,10 @@ public class VolumeShortcutToggleAccessibilityServicePreferenceFragment extends
     }
 
     private void setAllowedPreferredShortcutType(int type) {
-        final AccessibilityUserShortcutType shortcut = new AccessibilityUserShortcutType(
-                mComponentName.flattenToString(), type);
+        final String componentNameString = mComponentName.flattenToString();
+        final PreferredShortcut shortcut = new PreferredShortcut(componentNameString, type);
 
         SharedPreferenceUtils.setUserShortcutType(getPrefContext(),
-                ImmutableSet.of(shortcut.flattenToString()));
+                ImmutableSet.of(shortcut.toString()));
     }
 }
