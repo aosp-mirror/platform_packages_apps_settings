@@ -87,7 +87,7 @@ public class OneHandedTimeoutPreferenceController extends BasePreferenceControll
             return mContext.getResources().getString(R.string.screensaver_settings_summary_never);
         }
         return String.format(mContext.getResources().getString(
-                R.string.one_handed_timeout_summary), mTimeoutMap.get(getTimeoutValue()));
+                R.string.screen_timeout_summary), mTimeoutMap.get(getTimeoutValue()));
     }
 
     @Override
