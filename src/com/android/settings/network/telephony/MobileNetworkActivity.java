@@ -158,6 +158,11 @@ public class MobileNetworkActivity extends SettingsBaseActivity
 
         // Remove the dialog if the subscription associated with this activity changes.
         if (info == null) {
+            // Close the activity when subscription removed
+            if ((oldSubIndex != SUB_ID_NULL)
+                    && (!isFinishing()) && (!isDestroyed())) {
+                finish();
+            }
             return;
         }
         int subIndex = info.getSubscriptionId();
