@@ -3571,6 +3571,15 @@
                        android:value="com.android.settings.sound.MediaControlsSettings" />
         </activity>
 
+        <receiver android:name=".sim.receivers.SimSlotChangeReceiver"
+                  android:permission="com.qualcomm.permission.USE_QCRIL_MSG_TUNNEL"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="qualcomm.intent.action.ACTION_SLOT_STATUS_CHANGED_IND" />
+                <action android:name="android.telephony.action.SIM_SLOT_STATUS_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
