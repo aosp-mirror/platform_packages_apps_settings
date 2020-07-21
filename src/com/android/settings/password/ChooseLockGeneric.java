@@ -142,7 +142,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         @VisibleForTesting
         static final int SKIP_FINGERPRINT_REQUEST = 104;
 
-        private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+        private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;
         private boolean mHasChallenge = false;
         private long mChallenge;
@@ -150,7 +150,6 @@ public class ChooseLockGeneric extends SettingsActivity {
         private boolean mWaitingForConfirmation = false;
         private boolean mForChangeCredRequiredForBoot = false;
         private LockscreenCredential mUserPassword;
-        private LockPatternUtils mLockPatternUtils;
         private FingerprintManager mFingerprintManager;
         private FaceManager mFaceManager;
         private int mUserId;
@@ -199,7 +198,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
             mFaceManager = Utils.getFaceManagerOrNull(activity);
             mDpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(activity);
             mLockPatternUtils = new LockPatternUtils(activity);
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
                     || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
@@ -274,15 +272,17 @@ public class ChooseLockGeneric extends SettingsActivity {
                             mUserId), false);
                 }
             } else if (!mWaitingForConfirmation) {
-                ChooseLockSettingsHelper helper =
-                        new ChooseLockSettingsHelper(activity, this);
+                final ChooseLockSettingsHelper.Builder builder =
+                        new ChooseLockSettingsHelper.Builder(activity, this);
+                builder.setRequestCode(CONFIRM_EXISTING_REQUEST)
+                        .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
+                        .setReturnCredentials(true)
+                        .setUserId(mUserId);
                 boolean managedProfileWithUnifiedLock =
                         UserManager.get(activity).isManagedProfile(mUserId)
                         && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 boolean skipConfirmation = managedProfileWithUnifiedLock && !mIsSetNewPassword;
-                if (skipConfirmation
-                        || !helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                        getString(R.string.unlock_set_unlock_launch_picker_title), true, mUserId)) {
+                if (skipConfirmation || !builder.show()) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish(savedInstanceState != null);
                 } else {
@@ -797,10 +797,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 if (mUserPassword != null) {
                     // No need to call setLockCredential if the user currently doesn't
                     // have a password
-                    mChooseLockSettingsHelper.utils().setLockCredential(
+                    mLockPatternUtils.setLockCredential(
                             LockscreenCredential.createNone(), mUserPassword, mUserId);
                 }
-                mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled, mUserId);
+                mLockPatternUtils.setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
                 finish();
             }

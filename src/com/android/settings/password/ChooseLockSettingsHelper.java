@@ -18,14 +18,15 @@ package com.android.settings.password;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
+import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
@@ -38,6 +39,8 @@ import com.android.settings.core.SubSettingLauncher;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 public final class ChooseLockSettingsHelper {
+
+    private static final String TAG = "ChooseLockSettingsHelper";
 
     public static final String EXTRA_KEY_TYPE = "type";
     public static final String EXTRA_KEY_PASSWORD = "password";
@@ -84,319 +87,192 @@ public final class ChooseLockSettingsHelper {
      * controls if we relax the enforcement of
      * {@link Utils#enforceSameOwner(android.content.Context, int)}.
      */
-    public static final String EXTRA_ALLOW_ANY_USER = "allow_any_user";
+    public static final String EXTRA_KEY_ALLOW_ANY_USER = "allow_any_user";
 
-    @VisibleForTesting LockPatternUtils mLockPatternUtils;
-    private Activity mActivity;
-    private Fragment mFragment;
+    @VisibleForTesting @NonNull LockPatternUtils mLockPatternUtils;
+    @NonNull private final Activity mActivity;
+    @Nullable private final Fragment mFragment;
+    @NonNull private final Builder mBuilder;
 
-    public ChooseLockSettingsHelper(Activity activity) {
+    private ChooseLockSettingsHelper(@NonNull Builder builder, @NonNull Activity activity,
+            @Nullable Fragment fragment) {
+        mBuilder = builder;
         mActivity = activity;
+        mFragment = fragment;
         mLockPatternUtils = new LockPatternUtils(activity);
     }
 
-    public ChooseLockSettingsHelper(Activity activity, Fragment fragment) {
-        this(activity);
-        mFragment = fragment;
-    }
+    public static class Builder {
+        @NonNull private final Activity mActivity;
+        @Nullable private Fragment mFragment;
 
-    public LockPatternUtils utils() {
-        return mLockPatternUtils;
-    }
+        private int mRequestCode;
+        @Nullable private CharSequence mTitle;
+        @Nullable private CharSequence mHeader;
+        @Nullable private CharSequence mDescription;
+        @Nullable private CharSequence mAlternateButton;
+        private boolean mReturnCredentials;
+        private boolean mExternal;
+        private boolean mForegroundOnly;
+        // ChooseLockSettingsHelper will determine the caller's userId if none provided.
+        private int mUserId;
+        private boolean mAllowAnyUserId;
+        // The challenge can be 0, which is different than "no challenge"
+        @Nullable Long mChallenge;
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    public boolean launchConfirmationActivity(int request, CharSequence title) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                null /* header */,
-                null /* description */,
-                false /* returnCredentials */,
-                false /* external */,
-                false /* foregroundOnly */);
-    }
+        public Builder(@NonNull Activity activity) {
+            mActivity = activity;
+            mUserId = Utils.getCredentialOwnerUserId(mActivity);
+        }
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
-     *                          this can only be called internally.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    public boolean launchConfirmationActivity(int request, CharSequence title, boolean returnCredentials) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                null /* header */,
-                null /* description */,
-                returnCredentials /* returnCredentials */,
-                false /* external */,
-                false /* foregroundOnly */);
-    }
+        public Builder(@NonNull Activity activity, @NonNull Fragment fragment) {
+            this(activity);
+            mFragment = fragment;
+        }
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
-     *                          this can only be called internally.
-     * @param userId The userId for whom the lock should be confirmed.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    public boolean launchConfirmationActivity(int request, CharSequence title,
-            boolean returnCredentials, int userId) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                null /* header */,
-                null /* description */,
-                returnCredentials /* returnCredentials */,
-                false /* external */,
-                false /* hasChallenge */,
-                0 /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */,
-                false /* foregroundOnly */);
-    }
+        /**
+         * @param requestCode for onActivityResult
+         */
+        @NonNull public Builder setRequestCode(int requestCode) {
+            mRequestCode = requestCode;
+            return this;
+        }
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param header header of the confirmation screen; shown as large text
-     * @param description description of the confirmation screen
-     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
-     *                          this can only be called internally.
-     * @param external specifies whether this activity is launched externally, meaning that it will
-     *                 get a dark theme, allow fingerprint authentication and it will forward
-     *                 activity result.
-     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            boolean returnCredentials, boolean external, boolean foregroundOnly) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                returnCredentials /* returnCredentials */,
-                external /* external */,
-                false /* hasChallenge */,
-                0 /* challenge */,
-                Utils.getCredentialOwnerUserId(mActivity) /* userId */,
-                foregroundOnly /* foregroundOnly */);
-    }
+        /**
+         * @param title of the confirmation screen; shown in the action bar
+         */
+        @NonNull public Builder setTitle(@Nullable CharSequence title) {
+            mTitle = title;
+            return this;
+        }
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param header header of the confirmation screen; shown as large text
-     * @param description description of the confirmation screen
-     * @param returnCredentials if true, put credentials into intent. Note that if this is true,
-     *                          this can only be called internally.
-     * @param external specifies whether this activity is launched externally, meaning that it will
-     *                 get a dark theme, allow fingerprint authentication and it will forward
-     *                 activity result.
-     * @param userId The userId for whom the lock should be confirmed.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            boolean returnCredentials, boolean external, int userId) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                returnCredentials /* returnCredentials */,
-                external /* external */,
-                false /* hasChallenge */,
-                0 /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */,
-                false /* foregroundOnly */);
-    }
+        /**
+         * @param header of the confirmation screen; shown as large text
+         */
+        @NonNull public Builder setHeader(@Nullable CharSequence header) {
+            mHeader = header;
+            return this;
+        }
 
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param header header of the confirmation screen; shown as large text
-     * @param description description of the confirmation screen
-     * @param challenge a challenge to be verified against the device credential.
-     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            long challenge, boolean foregroundOnly) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                true /* returnCredentials */,
-                false /* external */,
-                true /* hasChallenge */,
-                challenge /* challenge */,
-                Utils.getCredentialOwnerUserId(mActivity) /* userId */,
-                foregroundOnly /* foregroundOnly */);
+        /**
+         * @param description of the confirmation screen
+         */
+        @NonNull public Builder setDescription(@Nullable CharSequence description) {
+            mDescription = description;
+            return this;
+        }
+
+        /**
+         * @param alternateButton text for an alternate button
+         */
+        @NonNull public Builder setAlternateButton(@Nullable CharSequence alternateButton) {
+            mAlternateButton = alternateButton;
+            return this;
+        }
+
+        /**
+         * @param returnCredentials if true, puts the following credentials into intent for
+         *                          onActivityResult with the following keys:
+         *                          {@link #EXTRA_KEY_TYPE}, {@link #EXTRA_KEY_PASSWORD},
+         *                          {@link #EXTRA_KEY_CHALLENGE_TOKEN}.
+         *                          Note that if this is true, this can only be called internally.
+         */
+        @NonNull public Builder setReturnCredentials(boolean returnCredentials) {
+            mReturnCredentials = returnCredentials;
+            return this;
+        }
+
+        /**
+         * @param userId for whom the credential should be confirmed.
+         */
+        @NonNull public Builder setUserId(int userId) {
+            mUserId = userId;
+            return this;
+        }
+
+        /**
+         * @param allowAnyUserId Allows the caller to prompt for credentials of any user, including
+         *                       those which aren't associated with the current user. As an example,
+         *                       this is useful when unlocking the storage for secondary users.
+         */
+        @NonNull public Builder setAllowAnyUserId(boolean allowAnyUserId) {
+            mAllowAnyUserId = allowAnyUserId;
+            return this;
+        }
+
+        /**
+         * @param external specifies whether this activity is launched externally, meaning that it
+         *                 will get a dark theme, allow biometric authentication, and it will
+         *                 forward the activity result.
+         */
+        @NonNull public Builder setExternal(boolean external) {
+            mExternal = external;
+            return this;
+        }
+
+        /**
+         * @param foregroundOnly if true, the confirmation activity will be finished if it loses
+         *                       foreground.
+         */
+        @NonNull public Builder setForegroundOnly(boolean foregroundOnly) {
+            mForegroundOnly = foregroundOnly;
+            return this;
+        }
+
+        /**
+         * @param challenge an opaque payload that will be wrapped in the Gatekeeper's payload
+         *                  if authentication is successful. Common use case is for the caller's
+         *                  secure layer (e.g. Trusted Execution Environment) to 1) verify that
+         *                  the Gatekeeper HAT's HMAC is valid, and 2) if so, perform an operation
+         *                  based on the challenge.
+         */
+        @NonNull public Builder setChallenge(long challenge) {
+            mChallenge = challenge;
+            return this;
+        }
+
+        @NonNull public ChooseLockSettingsHelper build() {
+            if (!mAllowAnyUserId && mUserId != LockPatternUtils.USER_FRP) {
+                Utils.enforceSameOwner(mActivity, mUserId);
+            }
+
+            if (mExternal && mReturnCredentials) {
+                throw new IllegalArgumentException("External and ReturnCredentials specified. "
+                        + " External callers should never be allowed to receive credentials in"
+                        + " onActivityResult");
+            }
+
+            if (mChallenge != null && !mReturnCredentials) {
+                // HAT containing the signed challenge will not be available to the caller.
+                Log.w(TAG, "Challenge set but not requesting ReturnCredentials. Are you sure this"
+                        + " is what you want?");
+            }
+
+            return new ChooseLockSettingsHelper(this, mActivity, mFragment);
+        }
+
+        public boolean show() {
+            return build().launch();
+        }
     }
 
     /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param header header of the confirmation screen; shown as large text
-     * @param description description of the confirmation screen
-     * @param challenge a challenge to be verified against the device credential.
-     * @param userId The userId for whom the lock should be confirmed.
-     * @param foregroundOnly if the confirmation activity should be finished if it loses foreground.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
+     * If a PIN, Pattern, or Password exists, prompt the user to confirm it.
+     * @return true if the confirmation activity is shown (e.g. user has a credential set up)
      */
-    public boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            long challenge, int userId, boolean foregroundOnly) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                true /* returnCredentials */,
-                false /* external */,
-                true /* hasChallenge */,
-                challenge /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */,
-                foregroundOnly);
-    }
-
-    /**
-     * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
-     *
-     * @param title title of the confirmation screen; shown in the action bar
-     * @param header header of the confirmation screen; shown as large text
-     * @param description description of the confirmation screen
-     * @param external specifies whether this activity is launched externally, meaning that it will
-     *                 get a dark theme, allow fingerprint authentication and it will forward
-     *                 activity result.
-     * @param challenge a challenge to be verified against the device credential.
-     * @param userId The userId for whom the lock should be confirmed.
-     * @return true if one exists and we launched an activity to confirm it
-     * @see Activity#onActivityResult(int, int, android.content.Intent)
-     */
-    public boolean launchConfirmationActivityWithExternalAndChallenge(int request,
-            @Nullable CharSequence title, @Nullable CharSequence header,
-            @Nullable CharSequence description, boolean external, long challenge, int userId) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                false /* returnCredentials */,
-                external /* external */,
-                true /* hasChallenge */,
-                challenge /* challenge */,
-                Utils.enforceSameOwner(mActivity, userId) /* userId */,
-                false /* foregroundOnly */);
-    }
-
-    /**
-     * Variant that allows you to prompt for credentials of any user, including
-     * those which aren't associated with the current user. As an example, this
-     * is useful when unlocking the storage for secondary users.
-     */
-    public boolean launchConfirmationActivityForAnyUser(int request,
-            @Nullable CharSequence title, @Nullable CharSequence header,
-            @Nullable CharSequence description, int userId) {
-        final Bundle extras = new Bundle();
-        extras.putBoolean(EXTRA_ALLOW_ANY_USER, true);
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                false /* returnCredentials */,
-                false /* external */,
-                true /* hasChallenge */,
-                0 /* challenge */,
-                userId /* userId */,
-                extras /* extras */);
+    public boolean launch() {
+        final long challenge = mBuilder.mChallenge != null ? mBuilder.mChallenge : 0L;
+        return launchConfirmationActivity(mBuilder.mRequestCode, mBuilder.mTitle, mBuilder.mHeader,
+                mBuilder.mDescription, mBuilder.mReturnCredentials, mBuilder.mExternal,
+                mBuilder.mChallenge != null, challenge, mBuilder.mUserId,
+                mBuilder.mAlternateButton, mBuilder.mAllowAnyUserId, mBuilder.mForegroundOnly);
     }
 
     private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
             @Nullable CharSequence header, @Nullable CharSequence description,
             boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int userId, boolean foregroundOnly) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                returnCredentials /* returnCredentials */,
-                external /* external */,
-                hasChallenge /* hasChallenge */,
-                challenge /* challenge */,
-                userId /* userId */,
-                null /* alternateButton */,
-                null /* extras */,
-                foregroundOnly /* foregroundOnly */);
-    }
-
-    private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int userId, Bundle extras) {
-        return launchConfirmationActivity(
-                request /* request */,
-                title /* title */,
-                header /* header */,
-                description /* description */,
-                returnCredentials /* returnCredentials */,
-                external /* external */,
-                hasChallenge /* hasChallenge */,
-                challenge /* challenge */,
-                userId /* userId */,
-                null /* alternateButton */,
-                extras /* extras */,
-                false /* foregroundOnly */);
-    }
-
-    public boolean launchFrpConfirmationActivity(int request, @Nullable CharSequence header,
-            @Nullable CharSequence description, @Nullable CharSequence alternateButton) {
-        return launchConfirmationActivity(
-                request /* request */,
-                null /* title */,
-                header /* header */,
-                description /* description */,
-                false /* returnCredentials */,
-                true /* external */,
-                false /* hasChallenge */,
-                0 /* challenge */,
-                LockPatternUtils.USER_FRP /* userId */,
-                alternateButton /* alternateButton */,
-                null /* extras */,
-                false /* foregroundOnly */);
-    }
-
-    private boolean launchConfirmationActivity(int request, @Nullable CharSequence title,
-            @Nullable CharSequence header, @Nullable CharSequence description,
-            boolean returnCredentials, boolean external, boolean hasChallenge,
-            long challenge, int userId, @Nullable CharSequence alternateButton, Bundle extras,
-            boolean foregroundOnly) {
+            long challenge, int userId, @Nullable CharSequence alternateButton,
+            boolean allowAnyUser, boolean foregroundOnly) {
         final int effectiveUserId = UserManager.get(mActivity).getCredentialOwnerProfile(userId);
         boolean launched = false;
 
@@ -406,7 +282,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPattern.InternalActivity.class
                                 : ConfirmLockPattern.class, returnCredentials, external,
-                                hasChallenge, challenge, userId, alternateButton, extras,
+                                hasChallenge, challenge, userId, alternateButton, allowAnyUser,
                                 foregroundOnly);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
@@ -419,7 +295,7 @@ public final class ChooseLockSettingsHelper {
                         returnCredentials || hasChallenge
                                 ? ConfirmLockPassword.InternalActivity.class
                                 : ConfirmLockPassword.class, returnCredentials, external,
-                                hasChallenge, challenge, userId, alternateButton, extras,
+                                hasChallenge, challenge, userId, alternateButton, allowAnyUser,
                                 foregroundOnly);
                 break;
         }
@@ -429,7 +305,7 @@ public final class ChooseLockSettingsHelper {
     private boolean launchConfirmationActivity(int request, CharSequence title, CharSequence header,
             CharSequence message, Class<?> activityClass, boolean returnCredentials,
             boolean external, boolean hasChallenge, long challenge,
-            int userId, @Nullable CharSequence alternateButton, Bundle extras,
+            int userId, @Nullable CharSequence alternateButton, boolean allowAnyUser,
             boolean foregroundOnly) {
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
@@ -446,9 +322,8 @@ public final class ChooseLockSettingsHelper {
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL, alternateButton);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOREGROUND_ONLY, foregroundOnly);
-        if (extras != null) {
-            intent.putExtras(extras);
-        }
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_ALLOW_ANY_USER, allowAnyUser);
+
         intent.setClassName(SETTINGS_PACKAGE_NAME, activityClass.getName());
         if (external) {
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);

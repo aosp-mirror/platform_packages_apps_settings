@@ -160,11 +160,16 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
             if (mDevHitCountdown == 0 && !mProcessingLastDevHit) {
                 // Add 1 count back, then start password confirmation flow.
                 mDevHitCountdown++;
-                final ChooseLockSettingsHelper helper =
-                        new ChooseLockSettingsHelper(mActivity, mFragment);
-                mProcessingLastDevHit = helper.launchConfirmationActivity(
-                        REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
-                        mContext.getString(R.string.unlock_set_unlock_launch_picker_title));
+
+                final String title = mContext
+                        .getString(R.string.unlock_set_unlock_launch_picker_title);
+                final ChooseLockSettingsHelper.Builder builder =
+                        new ChooseLockSettingsHelper.Builder(mActivity, mFragment);
+                mProcessingLastDevHit = builder
+                        .setRequestCode(REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF)
+                        .setTitle(title)
+                        .show();
+
                 if (!mProcessingLastDevHit) {
                     enableDevelopmentSettings();
                 }

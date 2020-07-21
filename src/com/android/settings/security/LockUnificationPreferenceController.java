@@ -118,11 +118,15 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
             startUnification();
         } else {
             final String title = mContext.getString(R.string.unlock_set_unlock_launch_picker_title);
-            final ChooseLockSettingsHelper helper =
-                    new ChooseLockSettingsHelper(mHost.getActivity(), mHost);
-            if (!helper.launchConfirmationActivity(
-                    UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST,
-                    title, true /* returnCredentials */, MY_USER_ID)) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+            final boolean launched = builder.setRequestCode(UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST)
+                    .setTitle(title)
+                    .setReturnCredentials(true)
+                    .setUserId(MY_USER_ID)
+                    .show();
+
+            if (!launched) {
                 ununifyLocks();
             }
         }
@@ -176,10 +180,14 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         // Confirm profile lock
         final String title = mContext.getString(
                 R.string.unlock_set_unlock_launch_picker_title_profile);
-        final ChooseLockSettingsHelper helper =
-                new ChooseLockSettingsHelper(mHost.getActivity(), mHost);
-        if (!helper.launchConfirmationActivity(
-                UNIFY_LOCK_CONFIRM_PROFILE_REQUEST, title, true, mProfileUserId)) {
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+        final boolean launched = builder.setRequestCode(UNIFY_LOCK_CONFIRM_PROFILE_REQUEST)
+                .setTitle(title)
+                .setReturnCredentials(true)
+                .setUserId(mProfileUserId)
+                .show();
+        if (!launched) {
             // If profile has no lock, go straight to unification.
             unifyLocks();
             // TODO: update relevant prefs.

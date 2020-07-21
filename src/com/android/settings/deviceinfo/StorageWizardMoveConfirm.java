@@ -85,8 +85,14 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
                     Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
                     final CharSequence description = TextUtils.expandTemplate(
                             getText(R.string.storage_wizard_move_unlock), user.name);
-                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
-                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    final ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(this);
+                    builder.setRequestCode(REQUEST_CREDENTIAL)
+                            .setDescription(description)
+                            .setUserId(user.id)
+                            .setChallenge(0L)
+                            .setAllowAnyUserId(true)
+                            .show();
                     return;
                 }
             }
