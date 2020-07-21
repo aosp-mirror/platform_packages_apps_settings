@@ -68,6 +68,10 @@ android_robolectric_test {
         "androidx.test.ext.junit",
     ],
 
+    libs: [
+        "ims-common",
+    ],
+
     java_resource_dirs: ["config", "resources"],
 
     instrumentation_for: "SettingsRoboTestStub",
