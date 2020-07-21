@@ -69,8 +69,8 @@ android_robolectric_test {
     ],
 
     libs: [
+        "framework-wifi.impl",
         "ims-common",
-        "telephony-common",
     ],
 
     java_resource_dirs: ["config", "resources"],
