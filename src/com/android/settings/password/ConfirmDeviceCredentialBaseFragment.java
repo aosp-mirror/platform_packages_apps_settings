@@ -71,6 +71,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     protected static final long CLEAR_WRONG_ATTEMPT_TIMEOUT_MS = 3000;
 
     protected boolean mReturnCredentials = false;
+    protected boolean mReturnGatekeeperPassword = false;
+    protected boolean mVerifyChallenge = false;
     protected Button mCancelButton;
     /** Button allowing managed profile password reset, null when is not shown. */
     @Nullable protected Button mForgotButton;
@@ -93,12 +95,18 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFrpAlternateButtonText = getActivity().getIntent().getCharSequenceExtra(
+        final Intent intent = getActivity().getIntent();
+        mFrpAlternateButtonText = intent.getCharSequenceExtra(
                 KeyguardManager.EXTRA_ALTERNATE_BUTTON_LABEL);
-        mReturnCredentials = getActivity().getIntent().getBooleanExtra(
+        mReturnCredentials = intent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
+
+        mReturnGatekeeperPassword = intent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
+        mVerifyChallenge = intent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+
         // Only take this argument into account if it belongs to the current profile.
-        Intent intent = getActivity().getIntent();
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras(),
                 isInternalActivity());
         mFrp = (mUserId == LockPatternUtils.USER_FRP);

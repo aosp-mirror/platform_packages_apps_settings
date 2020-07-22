@@ -47,6 +47,7 @@ import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
 import com.android.internal.widget.LockscreenCredential;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -913,19 +914,24 @@ public class ChooseLockPattern extends SettingsActivity {
             }
             Intent result = null;
             if (success && mHasChallenge) {
-                byte[] token;
+                VerifyCredentialResponse response;
                 try {
-                    token = mUtils.verifyCredential(mChosenPattern, mChallenge, userId);
+                    response = mUtils.verifyCredential(mChosenPattern, mChallenge, userId,
+                            0 /* flags */);
                 } catch (RequestThrottledException e) {
-                    token = null;
+                    response = null;
                 }
 
-                if (token == null) {
-                    Log.e(TAG, "critical: no token returned for known good pattern");
+                if (response == null) {
+                    Log.e(TAG, "critial: null response for known good pattern");
+                } else if (!response.isMatched() || response.getGatekeeperHAT() == null) {
+                    Log.e(TAG, "critical: bad response or missing GK HAT for known good pattern: "
+                            + response.toString());
                 }
 
                 result = new Intent();
-                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN,
+                        response.getGatekeeperHAT());
             }
             return Pair.create(success, result);
         }
