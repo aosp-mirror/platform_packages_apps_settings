@@ -27,7 +27,7 @@ import android.os.UserManager;
 
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
+import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 
 import org.junit.After;
 import org.junit.Before;
@@ -47,7 +47,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class TopLevelNetworkEntryPreferenceControllerTest {
 
     @Mock
-    private WifiMasterSwitchPreferenceController mWifiPreferenceController;
+    private WifiPrimarySwitchPreferenceController mWifiPreferenceController;
     @Mock
     private MobileNetworkPreferenceController mMobileNetworkPreferenceController;
     @Mock

@@ -60,7 +60,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -336,16 +336,16 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void setSwitchChecked(Preference pref, boolean checked) {
-        if (pref instanceof MasterSwitchPreference) {
-            ((MasterSwitchPreference) pref).setChecked(checked);
+        if (pref instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) pref).setChecked(checked);
         } else if (pref instanceof SwitchPreference) {
             ((SwitchPreference) pref).setChecked(checked);
         }
     }
 
     private void setSwitchEnabled(Preference pref, boolean enabled) {
-        if (pref instanceof MasterSwitchPreference) {
-            ((MasterSwitchPreference) pref).setSwitchEnabled(enabled);
+        if (pref instanceof PrimarySwitchPreference) {
+            ((PrimarySwitchPreference) pref).setSwitchEnabled(enabled);
         } else {
             pref.setEnabled(enabled);
         }

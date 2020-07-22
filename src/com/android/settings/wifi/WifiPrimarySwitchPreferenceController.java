@@ -21,8 +21,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.MasterSwitchController;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchController;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -32,19 +32,22 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-// TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
-public class WifiMasterSwitchPreferenceController extends AbstractPreferenceController
+/**
+ * PreferenceController to update the wifi state.
+ */
+public class WifiPrimarySwitchPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, SummaryUpdater.OnSummaryChangeListener,
         LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
+    //TODO(b/151133650): Replace AbstractPreferenceController with BasePreferenceController.
 
     public static final String KEY_TOGGLE_WIFI = "main_toggle_wifi";
 
-    private MasterSwitchPreference mWifiPreference;
+    private PrimarySwitchPreference mWifiPreference;
     private WifiEnabler mWifiEnabler;
     private final WifiSummaryUpdater mSummaryHelper;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public WifiMasterSwitchPreferenceController(Context context,
+    public WifiPrimarySwitchPreferenceController(Context context,
             MetricsFeatureProvider metricsFeatureProvider) {
         super(context);
         mMetricsFeatureProvider = metricsFeatureProvider;
@@ -85,8 +88,8 @@ public class WifiMasterSwitchPreferenceController extends AbstractPreferenceCont
 
     @Override
     public void onStart() {
-        mWifiEnabler = new WifiEnabler(mContext, new MasterSwitchController(mWifiPreference),
-            mMetricsFeatureProvider);
+        mWifiEnabler = new WifiEnabler(mContext, new PrimarySwitchController(mWifiPreference),
+                mMetricsFeatureProvider);
     }
 
     @Override

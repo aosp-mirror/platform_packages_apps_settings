@@ -38,7 +38,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -52,21 +52,21 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowRestrictedLockUtilsInternal.class)
-public class WifiMasterSwitchPreferenceControllerTest {
+public class WifiPrimarySwitchPreferenceControllerTest {
 
     @Mock
     private WifiManager mWifiManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
     private NetworkScoreManager mNetworkScoreManager;
 
     private Context mContext;
-    private WifiMasterSwitchPreferenceController mController;
+    private WifiPrimarySwitchPreferenceController mController;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
@@ -76,20 +76,20 @@ public class WifiMasterSwitchPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
         when(mContext.getSystemService(NetworkScoreManager.class)).thenReturn(mNetworkScoreManager);
-        mController = new WifiMasterSwitchPreferenceController(mContext, mMetricsFeatureProvider);
+        mController = new WifiPrimarySwitchPreferenceController(mContext, mMetricsFeatureProvider);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mWifiManager.getWifiState()).thenReturn(WifiManager.WIFI_STATE_DISABLED);
     }
 
     @Test
-    public void testWifiMasterSwitch_byDefault_shouldBeShown() {
+    public void testWifiPrimarySwitch_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void testWifiMasterSwitch_ifDisabled_shouldNotBeShown() {
+    public void testWifiPrimarySwitch_ifDisabled_shouldNotBeShown() {
         assertThat(mController.isAvailable()).isFalse();
     }
 
