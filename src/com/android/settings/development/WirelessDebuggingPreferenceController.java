@@ -35,7 +35,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -132,7 +132,7 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
         boolean enabled = Settings.Global.getInt(mContentResolver,
                 Settings.Global.ADB_WIFI_ENABLED, AdbPreferenceController.ADB_SETTING_OFF)
                     != AdbPreferenceController.ADB_SETTING_OFF;
-        ((MasterSwitchPreference) preference).setChecked(enabled);
+        ((PrimarySwitchPreference) preference).setChecked(enabled);
     }
 
     /**

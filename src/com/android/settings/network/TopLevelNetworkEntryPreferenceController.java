@@ -24,14 +24,14 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.wifi.WifiMasterSwitchPreferenceController;
+import com.android.settings.wifi.WifiPrimarySwitchPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopLevelNetworkEntryPreferenceController extends BasePreferenceController {
 
-    private final WifiMasterSwitchPreferenceController mWifiPreferenceController;
+    private final WifiPrimarySwitchPreferenceController mWifiPreferenceController;
     private final MobileNetworkPreferenceController mMobileNetworkPreferenceController;
     private final TetherPreferenceController mTetherPreferenceController;
 
@@ -40,7 +40,7 @@ public class TopLevelNetworkEntryPreferenceController extends BasePreferenceCont
         mMobileNetworkPreferenceController = new MobileNetworkPreferenceController(mContext);
         mTetherPreferenceController = new TetherPreferenceController(
                 mContext, null /* lifecycle */);
-        mWifiPreferenceController = new WifiMasterSwitchPreferenceController(
+        mWifiPreferenceController = new WifiPrimarySwitchPreferenceController(
                 mContext, null /* metrics */);
     }
 

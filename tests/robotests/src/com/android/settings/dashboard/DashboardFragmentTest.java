@@ -50,7 +50,7 @@ import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
@@ -327,12 +327,12 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void createPreference_isActivityTileAndHasSwitch_returnMasterSwitchPreference() {
+    public void createPreference_isActivityTileAndHasSwitch_returnPrimarySwitchPreference() {
         mActivityTile.getMetaData().putString(META_DATA_PREFERENCE_SWITCH_URI, "uri");
 
         final Preference pref = mTestFragment.createPreference(mActivityTile);
 
-        assertThat(pref).isInstanceOf(MasterSwitchPreference.class);
+        assertThat(pref).isInstanceOf(PrimarySwitchPreference.class);
     }
 
     @Test
