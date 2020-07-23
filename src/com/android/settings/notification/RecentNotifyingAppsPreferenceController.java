@@ -33,13 +33,19 @@ import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Slog;
 
+import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.app.AppNotificationSettings;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -51,12 +57,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceScreen;
 
 /**
  * This controller displays a list of recently used apps and a "See all" button. If there is
@@ -223,13 +223,13 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
 
         // Rebind prefs/avoid adding new prefs if possible. Adding/removing prefs causes jank.
         // Build a cached preference pool
-        final Map<String, MasterSwitchPreference> appPreferences = new ArrayMap<>();
+        final Map<String, PrimarySwitchPreference> appPreferences = new ArrayMap<>();
         int prefCount = mCategory.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = mCategory.getPreference(i);
             final String key = pref.getKey();
             if (!TextUtils.equals(key, KEY_SEE_ALL)) {
-                appPreferences.put(key, (MasterSwitchPreference) pref);
+                appPreferences.put(key, (PrimarySwitchPreference) pref);
             }
         }
         final int recentAppsCount = recentApps.size();
@@ -244,10 +244,10 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             }
 
             boolean rebindPref = true;
-            MasterSwitchPreference pref = appPreferences.remove(getKey(app.getUserId(),
+            PrimarySwitchPreference pref = appPreferences.remove(getKey(app.getUserId(),
                     pkgName));
             if (pref == null) {
-                pref = new MasterSwitchPreference(prefContext);
+                pref = new PrimarySwitchPreference(prefContext);
                 rebindPref = false;
             }
             pref.setKey(getKey(app.getUserId(), pkgName));

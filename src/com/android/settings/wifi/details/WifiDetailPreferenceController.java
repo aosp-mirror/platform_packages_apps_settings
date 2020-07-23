@@ -846,7 +846,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
     }
 
     private void refreshButtons() {
-        // Ephemeral network won't be removed permanently, but be putted in blacklist.
+        // Ephemeral network won't be removed permanently, but be putted in blocklist.
         mButtonsPref.setButton1Text(
                 mIsEphemeral ? R.string.wifi_disconnect_button_text : R.string.forget);
 

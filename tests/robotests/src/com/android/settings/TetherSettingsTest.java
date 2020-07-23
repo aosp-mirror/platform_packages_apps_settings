@@ -113,7 +113,7 @@ public class TetherSettingsTest {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // We can ignore the condition of Utils.isMonkeyRunning()
         // In normal case, monkey and robotest should not execute at the same time
-        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"dummyRegex"});
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
@@ -135,7 +135,7 @@ public class TetherSettingsTest {
     public void testTetherNonIndexableKeys_bluetoothAvailable_bluetoothKeyNotReturned() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         when(mConnectivityManager.getTetherableBluetoothRegexs())
-                .thenReturn(new String[]{"dummyRegex"});
+                .thenReturn(new String[]{"fakeRegex"});
 
         final List<String> niks =
             TetherSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);

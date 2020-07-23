@@ -42,7 +42,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +60,7 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private MasterSwitchPreference mPreference;
+    private PrimarySwitchPreference mPreference;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
