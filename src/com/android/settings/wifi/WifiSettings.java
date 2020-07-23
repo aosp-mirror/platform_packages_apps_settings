@@ -220,8 +220,8 @@ public class WifiSettings extends RestrictedSettingsFragment
             setProgressBarVisible(false);
         }
         ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
-                R.string.wifi_settings_master_switch_title,
-                R.string.wifi_settings_master_switch_title);
+                R.string.wifi_settings_primary_switch_title,
+                R.string.wifi_settings_primary_switch_title);
     }
 
     @Override
@@ -490,7 +490,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         // "forget" for normal saved network. And "disconnect" for ephemeral network because it
-        // could only be disconnected and be put in blacklists so it won't be used again.
+        // could only be disconnected and be put in blocklists so it won't be used again.
         if (canForgetNetwork()) {
             menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
         }

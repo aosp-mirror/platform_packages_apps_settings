@@ -39,7 +39,7 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.ArrayList;
@@ -92,8 +92,8 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
                         // the 0th index is the mAllNotificationsToggle which allows users to
                         // toggle all notifications from this app to bypass DND
                         for (int i = 1; i < mPreferenceCategory.getPreferenceCount(); i++) {
-                            MasterSwitchPreference childPreference =
-                                    (MasterSwitchPreference) mPreferenceCategory.getPreference(i);
+                            PrimarySwitchPreference childPreference =
+                                    (PrimarySwitchPreference) mPreferenceCategory.getPreference(i);
                             childPreference.setChecked(showNotificationInDnd(mChannels.get(i - 1)));
                         }
                         return true;
@@ -158,7 +158,7 @@ public class AppChannelsBypassingDndPreferenceController extends NotificationPre
         mPreferenceCategory.removeAll();
         mPreferenceCategory.addPreference(mAllNotificationsToggle);
         for (NotificationChannel channel : mChannels) {
-            MasterSwitchPreference channelPreference = new MasterSwitchPreference(mContext);
+            PrimarySwitchPreference channelPreference = new PrimarySwitchPreference(mContext);
             channelPreference.setDisabledByAdmin(mAdmin);
             channelPreference.setSwitchEnabled(
                     (mAdmin == null || !channelPreference.isDisabledByAdmin())
