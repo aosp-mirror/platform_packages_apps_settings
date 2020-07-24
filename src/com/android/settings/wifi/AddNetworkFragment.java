@@ -124,7 +124,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
 
     @Override
     public int getMode() {
-        return WifiConfigUiBase.MODE_CONNECT;
+        return WifiConfigUiBase2.MODE_CONNECT;
     }
 
     @Override
