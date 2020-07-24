@@ -70,7 +70,6 @@ import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
@@ -363,19 +362,6 @@ public class WifiConfigController2 implements TextWatcher,
                             && signalLevel != null) {
                     mConfigUi.setSubmitButton(res.getString(R.string.wifi_connect));
                 } else {
-                    // TODO(b/143326832): Add fine-grained state information.
-                    //WifiConfiguration config = mWifiEntry.getWifiConfiguration();
-                    //String suggestionOrSpecifierPackageName = null;
-                    //if (config != null
-                    //        && (config.fromWifiNetworkSpecifier
-                    //        || config.fromWifiNetworkSuggestion)) {
-                    //    suggestionOrSpecifierPackageName = config.creatorName;
-                    //}
-                    //String summary = AccessPoint.getSummary(
-                    //        mConfigUi.getContext(), /* ssid */ null, state, isEphemeral,
-                    //        suggestionOrSpecifierPackageName);
-                    //addRow(group, R.string.wifi_status, summary);
-
                     if (signalLevel != null) {
                         addRow(group, R.string.wifi_signal, signalLevel);
                     }
@@ -390,11 +376,11 @@ public class WifiConfigController2 implements TextWatcher,
                         final int frequency = info.frequencyMhz;
                         String band = null;
 
-                        if (frequency >= WifiEntryShell.LOWER_FREQ_24GHZ
-                                && frequency < WifiEntryShell.HIGHER_FREQ_24GHZ) {
+                        if (frequency >= WifiEntry.MIN_FREQ_24GHZ
+                                && frequency < WifiEntry.MAX_FREQ_24GHZ) {
                             band = res.getString(R.string.wifi_band_24ghz);
-                        } else if (frequency >= WifiEntryShell.LOWER_FREQ_5GHZ
-                                && frequency < WifiEntryShell.HIGHER_FREQ_5GHZ) {
+                        } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ
+                                && frequency < WifiEntry.MAX_FREQ_5GHZ) {
                             band = res.getString(R.string.wifi_band_5ghz);
                         } else {
                             Log.e(TAG, "Unexpected frequency " + frequency);
@@ -598,13 +584,11 @@ public class WifiConfigController2 implements TextWatcher,
         WifiConfiguration config = new WifiConfiguration();
 
         if (mWifiEntry == null) {
-            config.SSID = AccessPoint.convertToQuotedString(
-                    mSsidView.getText().toString());
+            config.SSID = "\"" + mSsidView.getText().toString() + "\"";
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = mHiddenSettingsSpinner.getSelectedItemPosition() == HIDDEN_NETWORK;
         } else if (!mWifiEntry.isSaved()) {
-            config.SSID = AccessPoint.convertToQuotedString(
-                    mWifiEntry.getTitle());
+            config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         } else {
             config.networkId = mWifiEntry.getWifiConfiguration().networkId;
             config.hiddenSSID = mWifiEntry.getWifiConfiguration().hiddenSSID;

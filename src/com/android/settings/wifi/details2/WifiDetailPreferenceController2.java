@@ -65,7 +65,6 @@ import com.android.settings.datausage.WifiDataUsageSummaryPreferenceController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
-import com.android.settings.wifi.WifiEntryShell;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -576,11 +575,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
 
         final int frequency = connectedInfo.frequencyMhz;
         String band = null;
-        if (frequency >= WifiEntryShell.LOWER_FREQ_24GHZ
-                && frequency < WifiEntryShell.HIGHER_FREQ_24GHZ) {
+        if (frequency >= WifiEntry.MIN_FREQ_24GHZ && frequency < WifiEntry.MAX_FREQ_24GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_24ghz);
-        } else if (frequency >= WifiEntryShell.LOWER_FREQ_5GHZ
-                && frequency < WifiEntryShell.HIGHER_FREQ_5GHZ) {
+        } else if (frequency >= WifiEntry.MIN_FREQ_5GHZ && frequency < WifiEntry.MAX_FREQ_5GHZ) {
             band = mContext.getResources().getString(R.string.wifi_band_5ghz);
         } else {
             // Connecting state is unstable, make it disappeared if unexpected

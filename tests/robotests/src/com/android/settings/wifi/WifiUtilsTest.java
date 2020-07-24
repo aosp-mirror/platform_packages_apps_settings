@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 import android.net.wifi.WifiConfiguration;
 
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Test;
@@ -62,7 +61,7 @@ public class WifiUtilsTest {
         final WifiConfiguration config = WifiUtils.getWifiConfig(wifiEntry, null /* scanResult */);
 
         assertThat(config).isNotNull();
-        assertThat(config.SSID).isEqualTo(AccessPoint.convertToQuotedString(testSSID));
+        assertThat(config.SSID).isEqualTo("\"" + testSSID + "\"");
     }
 
     @Test(expected = IllegalArgumentException.class)
