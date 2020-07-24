@@ -233,7 +233,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
                 throw new IllegalArgumentException("Invalid access point");
             }
             final WifiNetworkConfig networkConfig = WifiNetworkConfig.getValidConfigOrNull(
-                    selectedWifiEntry.getSecurityString(/* concise */ true),
+                    WifiDppUtils.getSecurityString(selectedWifiEntry),
                     wifiConfig.getPrintableSsid(), wifiConfig.preSharedKey, wifiConfig.hiddenSSID,
                     wifiConfig.networkId, /* isHotspot */ false);
             if (mOnChooseNetworkListener != null) {
