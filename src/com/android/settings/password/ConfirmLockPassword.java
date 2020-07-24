@@ -49,7 +49,6 @@ import com.android.internal.widget.LockPatternChecker;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.TextViewInputDisabler;
-import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -390,7 +389,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                             LockPatternUtils.VERIFY_FLAG_RETURN_GK_PW);
                     return;
                 }
-            } else if (mVerifyChallenge)  {
+            } else if (mForceVerifyPath)  {
                 if (isInternalActivity()) {
                     startVerifyPassword(credential, intent, 0 /* flags */);
                     return;
@@ -409,8 +408,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
 
         private void startVerifyPassword(LockscreenCredential credential, final Intent intent,
                 @LockPatternUtils.VerifyFlag int flags) {
-            long challenge = getActivity().getIntent().getLongExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
             final int localEffectiveUserId = mEffectiveUserId;
             final int localUserId = mUserId;
             final LockPatternChecker.OnVerifyCallback onVerifyCallback = (response, timeoutMs) -> {
@@ -430,12 +427,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         localEffectiveUserId);
             };
             mPendingLockCheck = (localEffectiveUserId == localUserId)
-                    ? LockPatternChecker.verifyCredential(
-                            mLockPatternUtils, credential, challenge, localUserId, flags,
-                            onVerifyCallback)
-                    : LockPatternChecker.verifyTiedProfileChallenge(
-                            mLockPatternUtils, credential, challenge, localUserId, flags,
-                            onVerifyCallback);
+                    ? LockPatternChecker.verifyCredential(mLockPatternUtils, credential,
+                            localUserId, flags, onVerifyCallback)
+                    : LockPatternChecker.verifyTiedProfileChallenge(mLockPatternUtils, credential,
+                            localUserId, flags, onVerifyCallback);
         }
 
         private void startCheckPassword(final LockscreenCredential credential,

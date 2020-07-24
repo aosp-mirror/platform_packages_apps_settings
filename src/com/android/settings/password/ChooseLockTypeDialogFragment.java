@@ -74,7 +74,7 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
             // Copy the original extras into the new intent
             copyBooleanExtra(activityIntent, intent,
-                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
             copyBooleanExtra(activityIntent, intent,
                     ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (activityIntent.hasExtra(
@@ -83,8 +83,6 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
                         ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
             }
             intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, selectedLockType.defaultQuality);
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
-                    activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
             activity.startActivity(intent);
             activity.finish();

@@ -164,7 +164,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 // It's possible to have a token but mLaunchedConfirmLock == false, since
                 // ChooseLockGeneric can pass us a token.
                 mConfirmingCredentials = true;
-                launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
+                launchConfirmLock(getConfirmLockTitleResId());
             }
         }
     }
@@ -217,12 +217,10 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     private void launchChooseLock() {
         Intent intent = getChooseLockIntent();
-        long challenge = getChallenge();
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
         intent.putExtra(getExtraKeyForBiometric(), true);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
@@ -271,8 +269,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             if (resultCode == RESULT_FINISHED) {
                 updatePasswordQuality();
-                mToken = data.getByteArrayExtra(
-                        ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, getChallenge());
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 mConfirmingCredentials = false;
                 return;
@@ -283,7 +280,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         } else if (requestCode == CONFIRM_REQUEST) {
             mConfirmingCredentials = false;
             if (resultCode == RESULT_OK && data != null) {
-                mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, getChallenge());
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
             } else {
                 setResult(resultCode, data);
