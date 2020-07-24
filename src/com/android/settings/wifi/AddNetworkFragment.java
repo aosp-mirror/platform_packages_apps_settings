@@ -32,6 +32,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.wifi.dpp.WifiDppQrCodeScannerFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 
 /**
@@ -116,14 +117,14 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
             }
 
             final WifiConfiguration config = data.getParcelableExtra(
-                    WifiDialogActivity.KEY_WIFI_CONFIGURATION);
+                    WifiDppQrCodeScannerFragment.KEY_WIFI_CONFIGURATION);
             successfullyFinish(config);
         }
     }
 
     @Override
     public int getMode() {
-        return WifiConfigUiBase.MODE_CONNECT;
+        return WifiConfigUiBase2.MODE_CONNECT;
     }
 
     @Override
