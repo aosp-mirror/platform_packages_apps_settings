@@ -30,7 +30,6 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.android.settings.Utils;
-import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.WifiEntry;
 
 import java.nio.charset.StandardCharsets;
@@ -158,11 +157,11 @@ public class WifiUtils {
         final int security;
 
         if (wifiEntry == null) {
-            config.SSID = AccessPoint.convertToQuotedString(scanResult.SSID);
+            config.SSID = "\"" + scanResult.SSID + "\"";
             security = getWifiEntrySecurity(scanResult);
         } else {
             if (wifiEntry.getWifiConfiguration() == null) {
-                config.SSID = AccessPoint.convertToQuotedString(wifiEntry.getSsid());
+                config.SSID = "\"" + wifiEntry.getSsid() + "\"";
             } else {
                 config.networkId = wifiEntry.getWifiConfiguration().networkId;
                 config.hiddenSSID = wifiEntry.getWifiConfiguration().hiddenSSID;
@@ -227,33 +226,5 @@ public class WifiUtils {
         }
 
         return WifiEntry.SECURITY_NONE;
-    }
-
-    public static final int CONNECT_TYPE_OTHERS = 0;
-    public static final int CONNECT_TYPE_OPEN_NETWORK = 1;
-    public static final int CONNECT_TYPE_SAVED_NETWORK = 2;
-    public static final int CONNECT_TYPE_OSU_PROVISION = 3;
-
-    /**
-     * Gets the connecting type of {@link AccessPoint}.
-     */
-    public static int getConnectingType(AccessPoint accessPoint) {
-        final WifiConfiguration config = accessPoint.getConfig();
-        if (accessPoint.isOsuProvider()) {
-            return CONNECT_TYPE_OSU_PROVISION;
-        } else if ((accessPoint.getSecurity() == AccessPoint.SECURITY_NONE) ||
-                (accessPoint.getSecurity() == AccessPoint.SECURITY_OWE)) {
-            return CONNECT_TYPE_OPEN_NETWORK;
-        } else if (accessPoint.isSaved() && config != null
-                && config.getNetworkSelectionStatus() != null
-                && config.getNetworkSelectionStatus().hasEverConnected()) {
-            return CONNECT_TYPE_SAVED_NETWORK;
-        } else if (accessPoint.isPasspoint()) {
-            // Access point provided by an installed Passpoint provider, connect using
-            // the associated config.
-            return CONNECT_TYPE_SAVED_NETWORK;
-        } else {
-            return CONNECT_TYPE_OTHERS;
-        }
     }
 }
