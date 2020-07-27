@@ -634,12 +634,19 @@ public class FingerprintSettings extends SubSettings {
         }
 
         private void launchChooseOrConfirmLock() {
-            Intent intent = new Intent();
-            long challenge = mFingerprintManager.generateChallengeBlocking();
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
-            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(R.string.security_settings_fingerprint_preference_title),
-                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
+            final Intent intent = new Intent();
+            final long challenge = mFingerprintManager.generateChallengeBlocking();
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(getActivity(), this);
+            final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
+                    .setTitle(getString(R.string.security_settings_fingerprint_preference_title))
+                    .setChallenge(challenge)
+                    .setUserId(mUserId)
+                    .setForegroundOnly(true)
+                    .setReturnCredentials(true)
+                    .show();
+
+            if (!launched) {
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);

@@ -206,12 +206,18 @@ public class FaceSettings extends DashboardFragment {
             // created while Keyguard is showing, in which case the resetLockout revokeChallenge
             // will invalidate the too-early created challenge here.
             final long challenge = mFaceManager.generateChallengeBlocking();
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(getActivity(), this);
+            final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
+                    .setTitle(getString(R.string.security_settings_face_preference_title))
+                    .setChallenge(challenge)
+                    .setUserId(mUserId)
+                    .setForegroundOnly(true)
+                    .setReturnCredentials(true)
+                    .show();
 
             mConfirmingPassword = true;
-            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(R.string.security_settings_face_preference_title),
-                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
+            if (!launched) {
                 Log.e(TAG, "Password not set");
                 finish();
             }

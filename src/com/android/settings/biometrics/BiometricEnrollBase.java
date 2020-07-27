@@ -181,18 +181,19 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     }
 
     protected void launchConfirmLock(int titleResId, long challenge) {
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-        boolean launchedConfirmationActivity;
-        if (mUserId == UserHandle.USER_NULL) {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(titleResId),
-                    null, null, challenge, true /* foregroundOnly */);
-        } else {
-            launchedConfirmationActivity = helper.launchConfirmationActivity(CONFIRM_REQUEST,
-                    getString(titleResId),
-                    null, null, challenge, mUserId, true /* foregroundOnly */);
+        final ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this);
+        builder.setRequestCode(CONFIRM_REQUEST)
+                .setTitle(getString(titleResId))
+                .setChallenge(challenge)
+                .setForegroundOnly(true)
+                .setReturnCredentials(true);
+
+        if (mUserId != UserHandle.USER_NULL) {
+            builder.setUserId(mUserId);
         }
-        if (!launchedConfirmationActivity) {
+
+        final boolean launched = builder.show();
+        if (!launched) {
             // This shouldn't happen, as we should only end up at this step if a lock thingy is
             // already set.
             finish();
