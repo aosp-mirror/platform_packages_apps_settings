@@ -184,7 +184,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     /**
-     * Listens to the state change of the lock-to-app master switch.
+     * Listens to the state change of the overall lock-to-app switch.
      */
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
