@@ -163,11 +163,13 @@ public class AddAccountSettings extends Activity {
         } else {
             // If the user is locked by fbe: we couldn't start the authenticator. So we must ask the
             // user to unlock it first.
-            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-            if (!helper.launchConfirmationActivity(UNLOCK_WORK_PROFILE_REQUEST,
-                    getString(R.string.unlock_set_unlock_launch_picker_title),
-                    false,
-                    mUserHandle.getIdentifier())) {
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            final boolean launched = builder.setRequestCode(UNLOCK_WORK_PROFILE_REQUEST)
+                    .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
+                    .setUserId(mUserHandle.getIdentifier())
+                    .show();
+            if (!launched) {
                 requestChooseAccount();
             }
         }

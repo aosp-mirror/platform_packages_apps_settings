@@ -357,9 +357,11 @@ public final class CredentialStorage extends FragmentActivity {
      */
     private boolean confirmKeyGuard(int requestCode) {
         final Resources res = getResources();
-        return new ChooseLockSettingsHelper(this)
-                .launchConfirmationActivity(requestCode,
-                        res.getText(R.string.credentials_title), true);
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(this);
+        return builder.setRequestCode(requestCode)
+                .setTitle(res.getText(R.string.credentials_title))
+                .show();
     }
 
     @Override

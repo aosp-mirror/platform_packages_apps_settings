@@ -228,7 +228,6 @@ public class ChooseLockPassword extends SettingsActivity {
         private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
         private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
-        private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         protected Stage mUiStage = Stage.Introduction;
         private PasswordRequirementAdapter mPasswordRequirementAdapter;
         private GlifLayout mLayout;
@@ -396,8 +395,6 @@ public class ChooseLockPassword extends SettingsActivity {
                         mLockPatternUtils.getRequestedPasswordMetrics(mUnificationProfileId));
             }
 
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
                 SaveAndFinishWorker w = new SaveAndFinishWorker();
@@ -406,10 +403,11 @@ public class ChooseLockPassword extends SettingsActivity {
                 LockscreenCredential currentCredential = intent.getParcelableExtra(
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
 
+                final LockPatternUtils utils = new LockPatternUtils(getActivity());
+
                 w.setBlocking(true);
                 w.setListener(this);
-                w.start(mChooseLockSettingsHelper.utils(), required, false, 0,
-                        currentCredential, currentCredential, mUserId);
+                w.start(utils, required, false, 0, currentCredential, currentCredential, mUserId);
             }
             mTextChangedHandler = new TextChangedHandler();
         }
@@ -499,9 +497,13 @@ public class ChooseLockPassword extends SettingsActivity {
             if (savedInstanceState == null) {
                 updateStage(Stage.Introduction);
                 if (confirmCredentials) {
-                    mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
-                            getString(R.string.unlock_set_unlock_launch_picker_title), true,
-                            mUserId);
+                    final ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(getActivity());
+                    builder.setRequestCode(CONFIRM_EXISTING_REQUEST)
+                            .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
+                            .setReturnCredentials(true)
+                            .setUserId(mUserId)
+                            .show();
                 }
             } else {
 

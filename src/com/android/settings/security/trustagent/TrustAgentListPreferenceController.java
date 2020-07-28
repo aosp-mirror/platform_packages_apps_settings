@@ -120,11 +120,14 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         if (!mTrustAgentsKeyList.contains(preference.getKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(
-                mHost.getActivity(), mHost);
+
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
+        final boolean confirmationLaunched = builder.setRequestCode(CHANGE_TRUST_AGENT_SETTINGS)
+                .setTitle(preference.getTitle())
+                .show();
+
         mTrustAgentClickIntent = preference.getIntent();
-        boolean confirmationLaunched = helper.launchConfirmationActivity(
-                CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
 
         if (!confirmationLaunched && mTrustAgentClickIntent != null) {
             // If this returns false, it means no password confirmation is required.
