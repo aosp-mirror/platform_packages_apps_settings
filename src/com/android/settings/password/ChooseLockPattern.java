@@ -452,7 +452,7 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         };
 
-        private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+        private LockPatternUtils mLockPatternUtils;
         private SaveAndFinishWorker mSaveAndFinishWorker;
         protected int mUserId;
         protected boolean mForFingerprint;
@@ -465,13 +465,14 @@ public class ChooseLockPattern extends SettingsActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
             if (!(getActivity() instanceof ChooseLockPattern)) {
                 throw new SecurityException("Fragment contained in wrong activity");
             }
             Intent intent = getActivity().getIntent();
             // Only take this argument into account if it belongs to the current profile.
             mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+
+            mLockPatternUtils = new LockPatternUtils(getActivity());
 
             if (intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_CHANGE_CRED_REQUIRED_FOR_BOOT, false)) {
@@ -482,8 +483,7 @@ public class ChooseLockPattern extends SettingsActivity {
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 w.setBlocking(true);
                 w.setListener(this);
-                w.start(mChooseLockSettingsHelper.utils(), required,
-                        false, 0, current, current, mUserId);
+                w.start(mLockPatternUtils, required, false, 0, current, current, mUserId);
             }
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
@@ -543,7 +543,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
             mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
             mLockPatternView.setTactileFeedbackEnabled(
-                    mChooseLockSettingsHelper.utils().isTactileFeedbackEnabled());
+                    mLockPatternUtils.isTactileFeedbackEnabled());
             mLockPatternView.setFadePattern(false);
 
             mFooterText = (TextView) view.findViewById(R.id.footerText);
@@ -572,12 +572,16 @@ public class ChooseLockPattern extends SettingsActivity {
                     // first launch. As a security measure, we're in NeedToConfirm mode until we
                     // know there isn't an existing password or the user confirms their password.
                     updateStage(Stage.NeedToConfirm);
-                    boolean launchedConfirmationActivity =
-                        mChooseLockSettingsHelper.launchConfirmationActivity(
-                                CONFIRM_EXISTING_REQUEST,
-                                getString(R.string.unlock_set_unlock_launch_picker_title), true,
-                                mUserId);
-                    if (!launchedConfirmationActivity) {
+
+                    final ChooseLockSettingsHelper.Builder builder =
+                            new ChooseLockSettingsHelper.Builder(getActivity());
+                    final boolean launched = builder.setRequestCode(CONFIRM_EXISTING_REQUEST)
+                            .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
+                            .setReturnCredentials(true)
+                            .setUserId(mUserId)
+                            .show();
+
+                    if (!launched) {
                         updateStage(Stage.Introduction);
                     }
                 } else {
@@ -853,7 +857,7 @@ public class ChooseLockPattern extends SettingsActivity {
                             profileCredential);
                 }
             }
-            mSaveAndFinishWorker.start(mChooseLockSettingsHelper.utils(), required,
+            mSaveAndFinishWorker.start(mLockPatternUtils, required,
                     mHasChallenge, mChallenge, mChosenPattern, mCurrentCredential, mUserId);
         }
 

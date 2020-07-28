@@ -38,16 +38,17 @@ public class ChooseLockSettingsHelperTest {
     @Test
     public void testLaunchConfirmationActivityWithExternalAndChallenge() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
-        helper.launchConfirmationActivityWithExternalAndChallenge(
-            100, // request
-            "title",
-            "header",
-            "description",
-            true, // external
-            10000L,
-            UserHandle.myUserId()
-        );
+
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
+        builder.setRequestCode(100)
+                .setTitle("title")
+                .setHeader("header")
+                .setDescription("description")
+                .setExternal(true)
+                .setChallenge(10000L)
+                .setUserId(UserHandle.myUserId());
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
+        helper.launch();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
@@ -73,16 +74,17 @@ public class ChooseLockSettingsHelperTest {
     @Test
     public void testLaunchConfirmationActivityInternalAndChallenge() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
-        helper.launchConfirmationActivityWithExternalAndChallenge(
-            100,
-            "title",
-            "header",
-            "description",
-            false, // external
-            10000L,
-            UserHandle.myUserId()
-        );
+
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
+        builder.setRequestCode(100)
+                .setTitle("title")
+                .setHeader("header")
+                .setDescription("description")
+                .setChallenge(10000L)
+                .setUserId(UserHandle.myUserId());
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
+        helper.launch();
+
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
 
@@ -109,8 +111,14 @@ public class ChooseLockSettingsHelperTest {
         Intent intent = new Intent()
                 .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V2);
         Activity activity = Robolectric.buildActivity(Activity.class, intent).get();
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
-        helper.launchConfirmationActivity(123, "test title", true, 0 /* userId */);
+
+        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
+        builder.setRequestCode(123)
+                .setTitle("test title")
+                .setReturnCredentials(true)
+                .setUserId(0);
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
+        helper.launch();
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
@@ -119,12 +127,13 @@ public class ChooseLockSettingsHelperTest {
                 .isEqualTo(ThemeHelper.THEME_GLIF_V2);
     }
 
-    private ChooseLockSettingsHelper getChooseLockSettingsHelper(Activity activity) {
+    private ChooseLockSettingsHelper getChooseLockSettingsHelper(
+            ChooseLockSettingsHelper.Builder builder) {
         LockPatternUtils mockLockPatternUtils = mock(LockPatternUtils.class);
         when(mockLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
 
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(activity);
+        ChooseLockSettingsHelper helper = builder.build();
         helper.mLockPatternUtils = mockLockPatternUtils;
         return helper;
     }

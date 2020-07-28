@@ -39,9 +39,11 @@ public class ConvertToFbe extends InstrumentedFragment {
 
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this)
-                .launchConfirmationActivity(request,
-                        res.getText(R.string.convert_to_file_encryption));
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder.setRequestCode(request)
+                .setTitle(res.getText(R.string.convert_to_file_encryption))
+                .show();
     }
 
     @Override

@@ -139,8 +139,11 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
      */
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
-        return new ChooseLockSettingsHelper(getActivity(), this).launchConfirmationActivity(
-                request, res.getText(R.string.master_clear_short_title));
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder.setRequestCode(request)
+                .setTitle(res.getText(R.string.master_clear_short_title))
+                .show();
     }
 
     @VisibleForTesting

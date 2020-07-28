@@ -37,6 +37,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.CryptKeeperConfirm;
 import com.android.settings.R;
@@ -169,17 +170,20 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
      * @return true if confirmation launched
      */
     private boolean runKeyguardConfirmation(int request) {
-        Resources res = getActivity().getResources();
-        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
-
-        if (helper.utils().getKeyguardStoredPasswordQuality(UserHandle.myUserId())
+        final LockPatternUtils utils = new LockPatternUtils(getActivity());
+        if (utils.getKeyguardStoredPasswordQuality(UserHandle.myUserId())
                 == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
             showFinalConfirmation(StorageManager.CRYPT_TYPE_DEFAULT, "".getBytes());
             return true;
         }
 
-        return helper.launchConfirmationActivity(request,
-                res.getText(R.string.crypt_keeper_encrypt_title), true);
+        final Resources res = getActivity().getResources();
+        final ChooseLockSettingsHelper.Builder builder =
+                new ChooseLockSettingsHelper.Builder(getActivity(), this);
+        return builder.setRequestCode(request)
+                .setTitle(res.getText(R.string.crypt_keeper_encrypt_title))
+                .setReturnCredentials(true)
+                .show();
     }
 
     @Override

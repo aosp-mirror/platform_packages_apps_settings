@@ -98,7 +98,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
     private LockPatternUtils mLockPatternUtils;
     private UserManager mUserManager;
     private TrustManager mTrustManager;
-    private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private Context mContext;
     private boolean mCheckDevicePolicyManager;
@@ -214,8 +213,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             mTitle = getTitleFromOrganizationName(mUserId);
         }
 
-
-        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         final LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
 
         final PromptInfo promptInfo = new PromptInfo();
@@ -240,8 +237,14 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         // tied profile so it will enable work mode and unlock managed profile, when personal
         // challenge is unlocked.
         if (frp) {
-            launchedCDC = mChooseLockSettingsHelper.launchFrpConfirmationActivity(
-                    0, mTitle, mDetails, alternateButton);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launchedCDC = builder.setHeader(mTitle) // Show the title in the header location
+                    .setDescription(mDetails)
+                    .setAlternateButton(alternateButton)
+                    .setExternal(true)
+                    .setUserId(LockPatternUtils.USER_FRP)
+                    .show();
         } else if (isManagedProfile && isInternalActivity()
                 && !lockPatternUtils.isSeparateProfileChallengeEnabled(mUserId)) {
             mCredentialMode = CREDENTIAL_MANAGED;
@@ -385,15 +388,22 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         // LockPatternChecker and LockPatternUtils. verifyPassword should be the only API to use,
         // which optionally accepts a challenge.
         if (mCredentialMode == CREDENTIAL_MANAGED) {
-            launched = mChooseLockSettingsHelper
-                    .launchConfirmationActivityWithExternalAndChallenge(
-                            0 /* request code */, null /* title */, mTitle, mDetails,
-                            true /* isExternal */, 0L /* challenge */, mUserId);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launched = builder.setHeader(mTitle)
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(mUserId)
+                    .setChallenge(0L)
+                    .show();
         } else if (mCredentialMode == CREDENTIAL_NORMAL) {
-            launched = mChooseLockSettingsHelper.launchConfirmationActivity(
-                    0 /* request code */, null /* title */,
-                    mTitle, mDetails, false /* returnCredentials */, true /* isExternal */,
-                    mUserId);
+            final ChooseLockSettingsHelper.Builder builder =
+                    new ChooseLockSettingsHelper.Builder(this);
+            launched = builder.setHeader(mTitle) // Show the title string in the header area
+                    .setDescription(mDetails)
+                    .setExternal(true)
+                    .setUserId(mUserId)
+                    .show();
         }
         if (!launched) {
             Log.d(TAG, "No pin/pattern/pass set");
