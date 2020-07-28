@@ -21,6 +21,12 @@
     android:title="@string/gesture_preference_title">
 
     <Preference
+        android:key="emergency_sos_button_summary"
+        android:title="@string/emergency_sos_gesture_screen_title"
+        android:fragment="com.android.settings.gestures.EmergencySosGestureSettings"
+        settings:controller="com.android.settings.gestures.EmergencySosGesturePreferenceController" />
+
+    <Preference
         android:key="gesture_assist_input_summary"
         android:title="@string/assist_gesture_title"
         android:fragment="com.android.settings.gestures.AssistGestureSettings"
