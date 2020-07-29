@@ -761,7 +761,7 @@ public class ChooseLockGeneric extends SettingsActivity {
          * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}
          */
         void updateUnlockMethodAndFinish(int quality, boolean disabled, boolean chooseLockSkipped) {
-            // Sanity check. We should never get here without confirming user's existing password.
+            // We should never get here without confirming user's existing password.
             if (!mPasswordConfirmed) {
                 throw new IllegalStateException("Tried to update password without confirming it");
             }
