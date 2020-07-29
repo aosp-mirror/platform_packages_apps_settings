@@ -239,7 +239,7 @@ public class AddAccountSettings extends Activity {
          * or broadcasts.
          *
          * Unfortunately for legacy reasons we still need to support this. But
-         * we can cripple the intent so that 3rd party authenticators can't
+         * we can disable the intent so that 3rd party authenticators can't
          * fill in addressing information and launch arbitrary actions.
          */
         Intent identityIntent = new Intent();

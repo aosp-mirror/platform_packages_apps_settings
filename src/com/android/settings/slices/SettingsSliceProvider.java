@@ -426,7 +426,7 @@ public class SettingsSliceProvider extends SliceProvider {
         try {
             KEY_VALUE_LIST_PARSER.setString(value);
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Bad Settings Slices Whitelist flags", e);
+            Log.e(TAG, "Bad Settings Slices Allowlist flags", e);
             return set;
         }
 
