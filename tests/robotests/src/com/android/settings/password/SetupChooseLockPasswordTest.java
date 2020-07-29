@@ -80,7 +80,7 @@ public class SetupChooseLockPasswordTest {
 
     @Test
     public void createActivity_shouldNotCrash() {
-        // Basic sanity test for activity created without crashing
+        // Basic test for activity created without crashing
         final Intent intent =
                 SetupChooseLockPassword.modifyIntentForSetup(
                         application,
