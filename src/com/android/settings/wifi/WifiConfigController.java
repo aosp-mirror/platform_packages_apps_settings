@@ -42,7 +42,6 @@ import android.text.InputType;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -69,8 +68,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settings.wifi.details.WifiPrivacyPreferenceController;
-import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -143,6 +140,10 @@ public class WifiConfigController implements TextWatcher,
         UNDESIRED_CERTIFICATE_MACRANDSECRET,
         UNDESIRED_CERTIFICATE_MACRANDSAPSECRET
     };
+
+    // Should be the same index value as wifi_privacy_entries in arrays.xml
+    @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC = 0;
+    @VisibleForTesting static final int PRIVACY_SPINNER_INDEX_DEVICE_MAC = 1;
 
     /* Phase2 methods supported by PEAP are limited */
     private ArrayAdapter<CharSequence> mPhase2PeapAdapter;
@@ -305,15 +306,9 @@ public class WifiConfigController implements TextWatcher,
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
 
-                int prefMacValue;
-                if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                    prefMacValue = WifiPrivacyPreferenceController2
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                } else {
-                    prefMacValue = WifiPrivacyPreferenceController
-                            .translateMacRandomizedValueToPrefValue(config.macRandomizationSetting);
-                }
-                mPrivacySettingsSpinner.setSelection(prefMacValue);
+                mPrivacySettingsSpinner.setSelection(
+                        config.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_PERSISTENT
+                        ? PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC : PRIVACY_SPINNER_INDEX_DEVICE_MAC);
 
                 if (config.getIpConfiguration().getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
@@ -833,15 +828,10 @@ public class WifiConfigController implements TextWatcher,
         }
 
         if (mPrivacySettingsSpinner != null) {
-            int macValue;
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SETTINGS_WIFITRACKER2)) {
-                macValue = WifiPrivacyPreferenceController2.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            } else {
-                macValue = WifiPrivacyPreferenceController.translatePrefValueToMacRandomizedValue(
-                        mPrivacySettingsSpinner.getSelectedItemPosition());
-            }
-            config.macRandomizationSetting = macValue;
+            config.macRandomizationSetting = mPrivacySettingsSpinner.getSelectedItemPosition()
+                    == PRIVACY_SPINNER_INDEX_RANDOMIZED_MAC
+                    ? WifiConfiguration.RANDOMIZATION_PERSISTENT
+                    : WifiConfiguration.RANDOMIZATION_NONE;
         }
 
         return config;
