@@ -62,8 +62,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private static final int FINISH_DELAY = 250;
 
     /**
-     * If we don't see progress during this time, we show an error message to remind the user that
-     * he needs to lift the finger and touch again.
+     * If we don't see progress during this time, we show an error message to remind the users that
+     * they need to lift the finger and touch again.
      */
     private static final int HINT_TIMEOUT_DURATION = 2500;
 
