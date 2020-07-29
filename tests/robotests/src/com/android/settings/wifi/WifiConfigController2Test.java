@@ -225,6 +225,35 @@ public class WifiConfigController2Test {
     }
 
     @Test
+    public void isSubmittable_caCertWithoutDomain_shouldReturnFalse() {
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_CONNECT);
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        final Spinner eapCaCertSpinner = mView.findViewById(R.id.ca_cert);
+        eapCaCertSpinner.setAdapter(mController.getSpinnerAdapter(new String[]{"certificate"}));
+        eapCaCertSpinner.setSelection(0);
+        mView.findViewById(R.id.l_domain).setVisibility(View.VISIBLE);
+
+        assertThat(mController.isSubmittable()).isFalse();
+    }
+
+    @Test
+    public void isSubmittable_caCertWithDomain_shouldReturnTrue() {
+        when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_EAP);
+        mController = new TestWifiConfigController2(mConfigUiBase, mView, mWifiEntry,
+                WifiConfigUiBase2.MODE_CONNECT);
+        mView.findViewById(R.id.l_ca_cert).setVisibility(View.VISIBLE);
+        final Spinner eapCaCertSpinner = mView.findViewById(R.id.ca_cert);
+        eapCaCertSpinner.setAdapter(mController.getSpinnerAdapter(new String[]{"certificate"}));
+        eapCaCertSpinner.setSelection(0);
+        mView.findViewById(R.id.l_domain).setVisibility(View.VISIBLE);
+        ((TextView) mView.findViewById(R.id.domain)).setText("fakeDomain");
+
+        assertThat(mController.isSubmittable()).isTrue();
+    }
+
+    @Test
     public void getSignalString_notReachable_shouldHaveNoSignalString() {
         when(mWifiEntry.getLevel()).thenReturn(WifiEntry.WIFI_LEVEL_UNREACHABLE);
 
