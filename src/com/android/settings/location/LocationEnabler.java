@@ -109,7 +109,7 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
 
         if (isRestricted()) {
             // Location toggling disabled by user restriction. Read the current location mode to
-            // update the location master switch.
+            // update the location primary switch.
             if (Log.isLoggable(TAG, Log.INFO)) {
                 Log.i(TAG, "Restricted user, not setting location mode");
             }
