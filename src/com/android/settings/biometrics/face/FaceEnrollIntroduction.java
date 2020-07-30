@@ -180,12 +180,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected long getChallenge() {
+    protected void getChallenge(GenerateChallengeCallback callback) {
         mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
-            return 0;
+            callback.onChallengeGenerated(0L);
+            return;
         }
-        return mFaceManager.generateChallengeBlocking();
+        mFaceManager.generateChallenge(callback::onChallengeGenerated);
     }
 
     @Override
