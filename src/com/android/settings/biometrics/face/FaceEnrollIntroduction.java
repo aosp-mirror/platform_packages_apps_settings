@@ -46,19 +46,9 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mFaceManager = Utils.getFaceManagerOrNull(this);
-        // Check if the Gateekeper Password exists. If so, request for a Gatekeeper HAT to be
-        // created. This needs to be cleaned up, since currently it's not very clear which
-        // superclass is responsible for what. Doing the check here is the least risky way.
-        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
-            // We either block on generateChallenge, or need to gray out the "next" button until
-            // the challenge is ready. Let's just do this for now.
-            final long challenge = mFaceManager.generateChallengeBlocking();
-            mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
-        }
-
         super.onCreate(savedInstanceState);
 
+        mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
 
@@ -106,6 +96,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         ? R.string.security_settings_face_enroll_introduction_footer_part_2
                         : R.string.security_settings_face_settings_footer_attention_not_supported;
         footer2.setText(footer2TextResource);
+
+        // This path is an entry point for SetNewPasswordController, e.g.
+        // adb shell am start -a android.app.action.SET_NEW_PASSWORD
+        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
+            mFooterBarMixin.getPrimaryButton().setEnabled(false);
+            // We either block on generateChallenge, or need to gray out the "next" button until
+            // the challenge is ready. Let's just do this for now.
+            mFaceManager.generateChallenge(challenge -> {
+                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+                mFooterBarMixin.getPrimaryButton().setEnabled(true);
+            });
+        }
     }
 
     @Override

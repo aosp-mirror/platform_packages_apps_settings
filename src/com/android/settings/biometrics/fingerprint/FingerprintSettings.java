@@ -411,6 +411,8 @@ public class FingerprintSettings extends SubSettings {
         private void updateAddPreference() {
             if (getActivity() == null) return; // Activity went away
 
+            final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
+
             /* Disable preference if too many fingerprints added */
             final int max = getContext().getResources().getInteger(
                     com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
@@ -420,9 +422,8 @@ public class FingerprintSettings extends SubSettings {
             final boolean removalInProgress = mRemovalSidecar.inProgress();
             CharSequence maxSummary = tooMany ?
                     getContext().getString(R.string.fingerprint_add_max, max) : "";
-            Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
             addPreference.setSummary(maxSummary);
-            addPreference.setEnabled(!tooMany && !removalInProgress);
+            addPreference.setEnabled(!tooMany && !removalInProgress && mToken != null);
         }
 
         private void createFooterPreference(PreferenceGroup root) {
@@ -569,11 +570,19 @@ public class FingerprintSettings extends SubSettings {
             if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                    if (data != null) {
-                        final long challenge = mFingerprintManager.generateChallengeBlocking();
-                        mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data, mUserId,
-                                challenge);
+                    if (data != null && BiometricUtils.containsGatekeeperPassword(data)) {
+                        mFingerprintManager.generateChallenge(challenge -> {
+                            mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data,
+                                    mUserId, challenge);
+                            updateAddPreference();
+                        });
+                    } else {
+                        Log.d(TAG, "Data null or GK PW missing");
+                        finish();
                     }
+                } else {
+                    Log.d(TAG, "Password not confirmed");
+                    finish();
                 }
             } else if (requestCode == ADD_FINGERPRINT_REQUEST) {
                 mEnrollClicked = false;
@@ -582,11 +591,6 @@ public class FingerprintSettings extends SubSettings {
                     activity.setResult(resultCode);
                     activity.finish();
                 }
-            }
-
-            if (mToken == null) {
-                // Didn't get an authentication, finishing
-                getActivity().finish();
             }
         }
 

@@ -61,18 +61,24 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
 
+        // This is an entry point for SetNewPasswordController, e.g.
+        // adb shell am start -a android.app.action.SET_NEW_PASSWORD
         if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
-            final long challenge = fpm.generateChallengeBlocking();
-            mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+            fpm.generateChallenge(challenge -> {
+                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
 
-            // Put this into the intent. This is really just to work around the fact that the
-            // enrollment sidecar gets the HAT from the activity's intent, rather than having
-            // it passed in.
-            getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+                // Put this into the intent. This is really just to work around the fact that the
+                // enrollment sidecar gets the HAT from the activity's intent, rather than having
+                // it passed in.
+                getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+
+                startLookingForFingerprint();
+            });
+        } else if (mToken != null) {
+            // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
+            startLookingForFingerprint();
         }
-
-        startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
 
         View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
         if (animationView instanceof FingerprintFindSensorAnimation) {
