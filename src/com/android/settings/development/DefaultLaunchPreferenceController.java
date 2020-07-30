@@ -24,7 +24,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 /**
  * This controller is used for preference that has fragment or launch intent defined in the
  * preference xml, and do not need any handling to update the preference state, except when the
- * master developer options switch is turned on/off, the preference needs to be enabled/disabled.
+ * primary developer options switch is turned on/off, the preference needs to be enabled/disabled.
  *
  */
 public class DefaultLaunchPreferenceController extends DeveloperOptionsPreferenceController

@@ -43,7 +43,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
- * This controls the master switch controller in the developer options page for
+ * This controls the primary switch controller in the developer options page for
  * "Wireless debugging".
  */
 public class WirelessDebuggingPreferenceController extends DeveloperOptionsPreferenceController
