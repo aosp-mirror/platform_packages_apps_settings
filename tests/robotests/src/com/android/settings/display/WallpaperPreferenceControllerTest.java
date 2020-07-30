@@ -73,19 +73,60 @@ public class WallpaperPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_wallpaperPickerEnabled_shouldReturnTrue() {
+    public void isAvailable_wallpaperPickerEnabledAndStylePickerEnabled_returnsTrue() {
         mShadowPackageManager.setResolveInfosForIntent(
                 mWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_wallpaperPickerDisabled_shouldReturnFalse() {
+    public void isAvailable_wallpaperPickerEnabledAndStylePickerDisabled_returnsTrue() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList());
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_wallpaperPickerDisabledAndStylePickerEnabled_returnsTrue() {
         mShadowPackageManager.setResolveInfosForIntent(
                 mWallpaperIntent, Lists.newArrayList());
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
+
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_wallpaperPickerDisabledAndStylePickerDisabled_returnsFalse() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mWallpaperIntent, Lists.newArrayList());
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList());
 
         assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void getComponentClassString_stylesAvailable_returnsStylePickerClassString() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent,
+                Lists.newArrayList(mock(ResolveInfo.class)));
+        assertThat(mController.getComponentClassString())
+                .isEqualTo(mContext.getString(R.string.config_styles_and_wallpaper_picker_class));
+    }
+
+    @Test
+    public void getComponentClassString_stylesUnavailable_returnsWallpaperPickerClassString() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mStylesAndWallpaperIntent, Lists.newArrayList());
+        assertThat(mController.getComponentClassString())
+                .isEqualTo(mContext.getString(R.string.config_wallpaper_picker_class));
     }
 
     @Test
