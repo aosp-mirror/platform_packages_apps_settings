@@ -37,5 +37,11 @@ public class AppSwitchPreference extends SwitchPreference {
 
         view.findViewById(R.id.summary_container)
                 .setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
+
+        final View switchView = view.findViewById(android.R.id.switch_widget);
+        if (switchView != null) {
+            final View rootView = switchView.getRootView();
+            rootView.setFilterTouchesWhenObscured(true);
+        }
     }
 }
