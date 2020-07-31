@@ -35,6 +35,8 @@ import android.os.IBinder;
 import android.os.UserManager;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -77,7 +79,9 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -157,7 +161,8 @@ public class WifiConfigController2 implements TextWatcher,
 
     private ScrollView mDialogContainer;
     private Spinner mSecuritySpinner;
-    private Spinner mEapMethodSpinner;
+    @VisibleForTesting Spinner mEapMethodSpinner;
+    @VisibleForTesting Spinner mEapSimSpinner;    // For EAP-SIM, EAP-AKA and EAP-AKA-PRIME.
     private Spinner mEapCaCertSpinner;
     private Spinner mEapOcspSpinner;
     private TextView mEapDomainView;
@@ -201,6 +206,8 @@ public class WifiConfigController2 implements TextWatcher,
     Integer[] mSecurityInPosition;
 
     private final WifiManager mWifiManager;
+
+    private final List<SubscriptionInfo> mActiveSubscriptionInfos = new ArrayList<>();
 
     public WifiConfigController2(WifiConfigUiBase2 parent, View view, WifiEntry wifiEntry,
             int mode) {
@@ -690,6 +697,12 @@ public class WifiConfigController2 implements TextWatcher,
                         break;
                 }
 
+                if (config.enterpriseConfig.isAuthenticationSimBased()
+                        && mActiveSubscriptionInfos.size() > 0) {
+                    config.carrierId = mActiveSubscriptionInfos
+                            .get(mEapSimSpinner.getSelectedItemPosition()).getCarrierId();
+                }
+
                 String caCert = (String) mEapCaCertSpinner.getSelectedItem();
                 config.enterpriseConfig.setCaCertificateAliases(null);
                 config.enterpriseConfig.setCaPath(null);
@@ -964,6 +977,7 @@ public class WifiConfigController2 implements TextWatcher,
             initiateEnterpriseNetworkUi = true;
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mEapMethodSpinner.setOnItemSelectedListener(this);
+            mEapSimSpinner = (Spinner) mView.findViewById(R.id.sim);
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
             mPhase2Spinner.setOnItemSelectedListener(this);
             mEapCaCertSpinner = (Spinner) mView.findViewById(R.id.ca_cert);
@@ -1001,6 +1015,8 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         if (refreshCertificates) {
+            loadSims();
+
             loadCertificates(
                     mEapCaCertSpinner,
                     Credentials.CA_CERTIFICATE,
@@ -1022,10 +1038,10 @@ public class WifiConfigController2 implements TextWatcher,
 
         // Modifying an existing network
         if (initiateEnterpriseNetworkUi && mWifiEntry != null && mWifiEntry.isSaved()) {
-            WifiEnterpriseConfig enterpriseConfig = mWifiEntry.getWifiConfiguration()
-                    .enterpriseConfig;
-            int eapMethod = enterpriseConfig.getEapMethod();
-            int phase2Method = enterpriseConfig.getPhase2Method();
+            final WifiConfiguration wifiConfig = mWifiEntry.getWifiConfiguration();
+            final WifiEnterpriseConfig enterpriseConfig = wifiConfig.enterpriseConfig;
+            final int eapMethod = enterpriseConfig.getEapMethod();
+            final int phase2Method = enterpriseConfig.getPhase2Method();
             mEapMethodSpinner.setSelection(eapMethod);
             showEapFieldsByMethod(eapMethod);
             switch (eapMethod) {
@@ -1073,6 +1089,16 @@ public class WifiConfigController2 implements TextWatcher,
                 default:
                     break;
             }
+
+            if (enterpriseConfig.isAuthenticationSimBased()) {
+                for (int i = 0; i < mActiveSubscriptionInfos.size(); i++) {
+                    if (wifiConfig.carrierId == mActiveSubscriptionInfos.get(i).getCarrierId()) {
+                        mEapSimSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+
             if (!TextUtils.isEmpty(enterpriseConfig.getCaPath())) {
                 setSelection(mEapCaCertSpinner, mUseSystemCertsString);
             } else {
@@ -1161,6 +1187,7 @@ public class WifiConfigController2 implements TextWatcher,
         mView.findViewById(R.id.l_ocsp).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
         mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
+        mView.findViewById(R.id.l_sim).setVisibility(View.VISIBLE);
 
         Context context = mConfigUi.getContext();
         switch (eapMethod) {
@@ -1171,12 +1198,14 @@ public class WifiConfigController2 implements TextWatcher,
                 setDomainInvisible();
                 setAnonymousIdentInvisible();
                 setUserCertInvisible();
+                mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
                 break;
             case WIFI_EAP_METHOD_TLS:
                 mView.findViewById(R.id.l_user_cert).setVisibility(View.VISIBLE);
                 setPhase2Invisible();
                 setAnonymousIdentInvisible();
                 setPasswordInvisible();
+                mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
                 break;
             case WIFI_EAP_METHOD_PEAP:
                 // Reset adapter if needed
@@ -1198,6 +1227,7 @@ public class WifiConfigController2 implements TextWatcher,
                 mView.findViewById(R.id.l_phase2).setVisibility(View.VISIBLE);
                 mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
                 setUserCertInvisible();
+                mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
                 break;
             case WIFI_EAP_METHOD_SIM:
             case WIFI_EAP_METHOD_AKA:
@@ -1235,11 +1265,13 @@ public class WifiConfigController2 implements TextWatcher,
             mEapIdentityView.setText("");
             mView.findViewById(R.id.l_identity).setVisibility(View.GONE);
             setPasswordInvisible();
+            mView.findViewById(R.id.l_sim).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.l_identity).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.l_anonymous).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.password_layout).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.show_password_layout).setVisibility(View.VISIBLE);
+            mView.findViewById(R.id.l_sim).setVisibility(View.GONE);
         }
     }
 
@@ -1400,6 +1432,44 @@ public class WifiConfigController2 implements TextWatcher,
     @VisibleForTesting
     KeyStore getKeyStore() {
         return KeyStore.getInstance();
+    }
+
+    @VisibleForTesting
+    void loadSims() {
+        List<SubscriptionInfo> activeSubscriptionInfos = mContext
+                .getSystemService(SubscriptionManager.class).getActiveSubscriptionInfoList();
+        if (activeSubscriptionInfos == null) {
+            activeSubscriptionInfos = Collections.EMPTY_LIST;
+        }
+        mActiveSubscriptionInfos.clear();
+
+        // De-duplicates active subscriptions and caches in mActiveSubscriptionInfos.
+        for (SubscriptionInfo newInfo : activeSubscriptionInfos) {
+            for (SubscriptionInfo cachedInfo : mActiveSubscriptionInfos) {
+                if (newInfo.getCarrierId() == cachedInfo.getCarrierId()) {
+                    continue;
+                }
+            }
+            mActiveSubscriptionInfos.add(newInfo);
+        }
+
+        // Shows disabled 'No SIM' when there is no active subscription.
+        if (mActiveSubscriptionInfos.size() == 0) {
+            final String[] noSim = new String[]{mContext.getString(R.string.wifi_no_sim_card)};
+            mEapSimSpinner.setAdapter(getSpinnerAdapter(noSim));
+            mEapSimSpinner.setSelection(0 /* position */);
+            mEapSimSpinner.setEnabled(false);
+            return;
+        }
+
+        // Shows display name of each active subscription.
+        final String[] displayNames = mActiveSubscriptionInfos.stream().map(
+                SubscriptionInfo::getDisplayName).toArray(String[]::new);
+        mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
+        mEapSimSpinner.setSelection(0 /* position */);
+        if (displayNames.length == 1) {
+            mEapSimSpinner.setEnabled(false);
+        }
     }
 
     @VisibleForTesting
