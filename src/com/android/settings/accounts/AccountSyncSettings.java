@@ -294,7 +294,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     }
                     // if we're enabling sync, this will request a sync as well
                     ContentResolver.setSyncAutomaticallyAsUser(account, authority, syncOn, userId);
-                    // if the master sync switch is off, the request above will
+                    // if the primary sync switch is off, the request above will
                     // get dropped.  when the user clicks on this toggle,
                     // we want to force the sync, however.
                     if (!ContentResolver.getMasterSyncAutomaticallyAsUser(userId) || !syncOn) {

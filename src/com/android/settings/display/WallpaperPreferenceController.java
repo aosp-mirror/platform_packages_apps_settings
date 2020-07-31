@@ -62,8 +62,11 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     }
 
     public ComponentName getComponentName() {
-        return new ComponentName(mWallpaperPackage,
-                areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass);
+        return new ComponentName(mWallpaperPackage, getComponentClassString());
+    }
+
+    public String getComponentClassString() {
+        return areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass;
     }
 
     public String getKeywords() {
@@ -76,11 +79,12 @@ public class WallpaperPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if (TextUtils.isEmpty(mWallpaperPackage) || TextUtils.isEmpty(mWallpaperClass)) {
+        if ((TextUtils.isEmpty(mWallpaperClass) && TextUtils.isEmpty(mStylesAndWallpaperClass))
+                || TextUtils.isEmpty(mWallpaperPackage)) {
             Log.e(TAG, "No Wallpaper picker specified!");
             return UNSUPPORTED_ON_DEVICE;
         }
-        return canResolveWallpaperComponent(mWallpaperClass)
+        return canResolveWallpaperComponent(getComponentClassString())
                 ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
