@@ -58,12 +58,12 @@ public class AppFilterRegistry {
     // Filters will appear sorted based on their value defined here.
     public static final int FILTER_APPS_POWER_WHITELIST = 0;
     public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
-    public static final int FILTER_APPS_ALL = 2;
-    public static final int FILTER_APPS_ENABLED = 3;
-    public static final int FILTER_APPS_INSTANT = 4;
-    public static final int FILTER_APPS_DISABLED = 5;
-    public static final int FILTER_APPS_RECENT = 6;
-    public static final int FILTER_APPS_FREQUENT = 7;
+    public static final int FILTER_APPS_RECENT = 2;
+    public static final int FILTER_APPS_FREQUENT = 3;
+    public static final int FILTER_APPS_ALL = 4;
+    public static final int FILTER_APPS_ENABLED = 5;
+    public static final int FILTER_APPS_INSTANT = 6;
+    public static final int FILTER_APPS_DISABLED = 7;
     public static final int FILTER_APPS_PERSONAL = 8;
     public static final int FILTER_APPS_WORK = 9;
     public static final int FILTER_APPS_USAGE_ACCESS = 10;
