@@ -554,12 +554,11 @@ public class WifiConfigController implements TextWatcher,
                 // Disallow submit if the user has not selected a CA certificate for an EAP network
                 // configuration.
                 enabled = false;
-            }
-            if (caCertSelection.equals(mUseSystemCertsString)
+            } else if (!caCertSelection.equals(mDoNotValidateEapServerString)
                     && mEapDomainView != null
                     && mView.findViewById(R.id.l_domain).getVisibility() != View.GONE
                     && TextUtils.isEmpty(mEapDomainView.getText().toString())) {
-                // Disallow submit if the user chooses to use system certificates for EAP server
+                // Disallow submit if the user chooses to use a certificate for EAP server
                 // validation, but does not provide a domain.
                 enabled = false;
             }
@@ -595,14 +594,12 @@ public class WifiConfigController implements TextWatcher,
                 // Display warning if user chooses not to validate the EAP server with a
                 // user-supplied CA certificate in an EAP network configuration.
                 mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.VISIBLE);
-            }
-            if (caCertSelection.equals(mUseSystemCertsString)
+            } else if (!caCertSelection.equals(mUnspecifiedCertString)
                     && mEapDomainView != null
                     && mView.findViewById(R.id.l_domain).getVisibility() != View.GONE
                     && TextUtils.isEmpty(mEapDomainView.getText().toString())) {
-                // Display warning if user chooses to use pre-installed public CA certificates
-                // without restricting the server domain that these certificates can be used to
-                // validate.
+                // Display warning if user chooses to use a certificate without restricting the
+                // server domain that these certificates can be used to validate.
                 mView.findViewById(R.id.no_domain_warning).setVisibility(View.VISIBLE);
             }
         }
@@ -1713,7 +1710,8 @@ public class WifiConfigController implements TextWatcher,
                 mContext.getResources().getStringArray(contentStringArrayResId));
     }
 
-    private ArrayAdapter<CharSequence> getSpinnerAdapter(
+    @VisibleForTesting
+    ArrayAdapter<CharSequence> getSpinnerAdapter(
             String[] contentStringArray) {
         ArrayAdapter<CharSequence> spinnerAdapter = new ArrayAdapter<>(mContext,
                 android.R.layout.simple_spinner_item, contentStringArray);
