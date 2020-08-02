@@ -2141,8 +2141,6 @@
     <string name="wifi_do_not_provide_eap_user_cert">Do not provide</string>
     <!-- Menu option for not validating the EAP server -->
     <string name="wifi_do_not_validate_eap_server">Do not validate</string>
-    <!-- Warning message displayed if user choses not to validate the EAP server -->
-    <string name="wifi_do_not_validate_eap_server_warning">No certificate specified. Your connection will not be private.</string>
     <!-- Warning message displayed if network name (ssid) is too long -->
     <string name="wifi_ssid_too_long">Network name is too long.</string>
     <!-- Warning message displayed if user does not specify a domain for the CA certificate.
@@ -11520,6 +11518,17 @@
 
     <!-- Message informs the user that has no SIM card in personalized Settings [CHAR LIMIT=30] -->
     <string name="no_sim_card">No SIM card</string>
+
+    <!-- A title for a SIM card spinner UI component which users can choose a SIM card. [CHAR LIMIT=NONE] -->
+    <string name="sim_card">SIM</string>
+    <!-- A label when there is no SIM card to choose. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_sim_card">No SIM</string>
+    <!-- A label when there is no SIM card information of a Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_no_related_sim_card">None</string>
+    <!-- A label wen a user needs a SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_sim_card_to_connect">Requires SIM to connect</string>
+    <!-- A label wen a user needs a specific SIM to connect to the Wi-Fi network. [CHAR LIMIT=NONE] -->
+    <string name="wifi_require_specific_sim_card_to_connect">Requires <xliff:g id="wireless_carrier" example="Verizon">%s</xliff:g> SIM to connect</string>
 
     <!-- The following strings are summaries for preferred network modes in Mobile network settings,
      and have a character limit of 100 -->

@@ -20,6 +20,7 @@ import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_INCOMING_
 import static android.provider.Settings.ENABLE_MMS_DATA_REQUEST_REASON_OUTGOING_MMS;
 import static android.provider.Settings.EXTRA_ENABLE_MMS_DATA_REQUEST_REASON;
 import static android.provider.Settings.EXTRA_SUB_ID;
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
@@ -209,6 +210,7 @@ public class SimSelectNotification extends BroadcastReceiver {
                 .setContentText(resources.getText(R.string.sim_notification_summary))
                 .setAutoCancel(true);
         Intent resultIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+        resultIntent.setPackage(SETTINGS_PACKAGE_NAME);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
