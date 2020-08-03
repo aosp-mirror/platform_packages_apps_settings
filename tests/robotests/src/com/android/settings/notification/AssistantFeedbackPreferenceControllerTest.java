@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_FEEDBACK_ENABLED;
+import static android.provider.Settings.Global.NOTIFICATION_FEEDBACK_ENABLED;
 
 import static com.android.settings.notification.AssistantFeedbackPreferenceController.OFF;
 import static com.android.settings.notification.AssistantFeedbackPreferenceController.ON;
@@ -76,7 +76,7 @@ public class AssistantFeedbackPreferenceControllerTest {
     public void updateState_preferenceSetCheckedWhenSettingIsOn() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
         final Context context = RuntimeEnvironment.application;
-        Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
+        Settings.Global.putInt(context.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
 
         mController = new AssistantFeedbackPreferenceController(context, KEY);
         mController.updateState(preference);
@@ -88,7 +88,7 @@ public class AssistantFeedbackPreferenceControllerTest {
     public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
         final Context context = RuntimeEnvironment.application;
-        Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
+        Settings.Global.putInt(context.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
 
         mController = new AssistantFeedbackPreferenceController(context, KEY);
         mController.updateState(preference);
@@ -98,24 +98,24 @@ public class AssistantFeedbackPreferenceControllerTest {
 
     @Test
     public void isChecked_settingIsOff_shouldReturnFalse() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_settingIsOn_shouldReturnTrue() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
 
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     public void setChecked_setFalse_disablesSetting() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, ON);
 
         mController.setChecked(false);
-        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
+        int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_FEEDBACK_ENABLED, -1);
 
         assertThat(updatedValue).isEqualTo(OFF);
@@ -123,10 +123,10 @@ public class AssistantFeedbackPreferenceControllerTest {
 
     @Test
     public void setChecked_setTrue_enablesSetting() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
+        Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_FEEDBACK_ENABLED, OFF);
 
         mController.setChecked(true);
-        int updatedValue = Settings.Secure.getInt(mContext.getContentResolver(),
+        int updatedValue = Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_FEEDBACK_ENABLED, -1);
 
         assertThat(updatedValue).isEqualTo(ON);
