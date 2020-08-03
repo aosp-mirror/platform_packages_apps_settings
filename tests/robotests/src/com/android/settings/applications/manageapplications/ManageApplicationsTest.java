@@ -570,12 +570,14 @@ public class ManageApplicationsTest {
 
         mFragment.createHeader();
 
-        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(3);
+        assertThat(mFragment.mFilterAdapter.getCount()).isEqualTo(4);
         assertThat(mFragment.mFilterAdapter.getItem(0)).isEqualTo(
                 mContext.getString(R.string.sort_order_recent_notification));
         assertThat(mFragment.mFilterAdapter.getItem(1)).isEqualTo(
                 mContext.getString(R.string.sort_order_frequent_notification));
         assertThat(mFragment.mFilterAdapter.getItem(2)).isEqualTo(
+                mContext.getString(R.string.filter_all_apps));
+        assertThat(mFragment.mFilterAdapter.getItem(3)).isEqualTo(
                 mContext.getString(R.string.filter_notif_blocked_apps));
     }
 
