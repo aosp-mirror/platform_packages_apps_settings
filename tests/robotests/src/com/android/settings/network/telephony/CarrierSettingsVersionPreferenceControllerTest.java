@@ -44,7 +44,7 @@ public class CarrierSettingsVersionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
-        mController = new CarrierSettingsVersionPreferenceController(context, "dummy_key");
+        mController = new CarrierSettingsVersionPreferenceController(context, "mock_key");
         mController.init(mSubscriptionId);
         mCarrierConfigManager = Shadows.shadowOf(
                 context.getSystemService(CarrierConfigManager.class));

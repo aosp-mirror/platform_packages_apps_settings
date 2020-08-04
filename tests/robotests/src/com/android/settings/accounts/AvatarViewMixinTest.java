@@ -62,9 +62,9 @@ import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public class AvatarViewMixinTest {
-    private static final String DUMMY_ACCOUNT = "test@domain.com";
-    private static final String DUMMY_DOMAIN = "domain.com";
-    private static final String DUMMY_AUTHORITY = "authority.domain.com";
+    private static final String FAKE_ACCOUNT = "test@domain.com";
+    private static final String FAKE_DOMAIN = "domain.com";
+    private static final String FAKE_AUTHORITY = "authority.domain.com";
     private static final String METHOD_GET_ACCOUNT_AVATAR = "getAccountAvatar";
 
     private Context mContext;
@@ -134,7 +134,7 @@ public class AvatarViewMixinTest {
     @Config(qualifiers = "mcc999")
     public void onStart_noAccount_mAccountNameShouldBeNull() {
         final AvatarViewMixin avatarViewMixin = new AvatarViewMixin(mActivity, mImageView);
-        avatarViewMixin.mAccountName = DUMMY_ACCOUNT;
+        avatarViewMixin.mAccountName = FAKE_ACCOUNT;
 
         avatarViewMixin.onStart();
 
@@ -159,7 +159,7 @@ public class AvatarViewMixinTest {
         accountProvider.applicationInfo.packageName = accountProvider.packageName;
         accountProvider.providers = new ProviderInfo[1];
         accountProvider.providers[0] = new ProviderInfo();
-        accountProvider.providers[0].authority = DUMMY_AUTHORITY;
+        accountProvider.providers[0].authority = FAKE_AUTHORITY;
         accountProvider.providers[0].packageName = accountProvider.packageName;
         accountProvider.providers[0].name = "test.class";
         accountProvider.providers[0].applicationInfo = accountProvider.applicationInfo;
@@ -168,22 +168,22 @@ public class AvatarViewMixinTest {
         resolveInfo.providerInfo = accountProvider.providers[0];
         shadowPackageManager.addResolveInfoForIntent(AvatarViewMixin.INTENT_GET_ACCOUNT_DATA,
                 resolveInfo);
-        assertThat(avatarViewMixin.queryProviderAuthority()).isEqualTo(DUMMY_AUTHORITY);
+        assertThat(avatarViewMixin.queryProviderAuthority()).isEqualTo(FAKE_AUTHORITY);
     }
 
     @Test
-    public void callWithGetAccountAvatarMethod_useDummyData_shouldReturnAccountNameAndAvatar() {
+    public void callWithGetAccountAvatarMethod_useFakeData_shouldReturnAccountNameAndAvatar() {
         final ContentResolver contentResolver = mContext.getContentResolver();
         final Uri uri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT).authority(
-                DUMMY_AUTHORITY).build();
+                FAKE_AUTHORITY).build();
         final ContentProvider mockContentProvider = mock(ContentProvider.class);
 
-        ShadowContentResolver.registerProviderInternal(DUMMY_AUTHORITY, mockContentProvider);
+        ShadowContentResolver.registerProviderInternal(FAKE_AUTHORITY, mockContentProvider);
 
         final Bundle bundle = new Bundle();
         final Bitmap bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
         bundle.putParcelable("account_avatar", bitmap);
-        bundle.putString("account_name", DUMMY_ACCOUNT);
+        bundle.putString("account_name", FAKE_ACCOUNT);
         doReturn(bundle).when(mockContentProvider).call(anyString(), anyString(),
                 any(Bundle.class));
 
@@ -191,7 +191,7 @@ public class AvatarViewMixinTest {
 
         final Object object = bundle.getParcelable("account_avatar");
         assertThat(object instanceof Bitmap).isTrue();
-        assertThat(bundle.getString("account_name")).isEqualTo(DUMMY_ACCOUNT);
+        assertThat(bundle.getString("account_name")).isEqualTo(FAKE_ACCOUNT);
     }
 
     @Test
@@ -209,7 +209,7 @@ public class AvatarViewMixinTest {
 
         @Implementation
         protected Account[] getAccounts(Context context) {
-            return new Account[]{new Account(DUMMY_ACCOUNT, DUMMY_DOMAIN)};
+            return new Account[]{new Account(FAKE_ACCOUNT, FAKE_DOMAIN)};
         }
     }
 }

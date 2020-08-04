@@ -215,7 +215,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
-        SliceData data = getDummyData();
+        SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
         SliceTestUtils.insertSliceToDb(mContext, data.getKey());
@@ -229,7 +229,7 @@ public class SettingsSliceProviderTest {
     public void onBindSlice_mainThread_shouldNotOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(true);
         final StrictMode.ThreadPolicy oldThreadPolicy = StrictMode.getThreadPolicy();
-        SliceData data = getDummyData();
+        SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
 
@@ -243,7 +243,7 @@ public class SettingsSliceProviderTest {
     public void onBindSlice_backgroundThread_shouldOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
 
-        SliceData data = getDummyData();
+        SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
 
@@ -271,7 +271,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void onBindSlice_nightModeChanged_shouldReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
-        final SliceData data = getDummyData();
+        final SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
 
@@ -284,7 +284,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void onBindSlice_nightModeNotChanged_shouldNotReloadTheme() {
         mContext.getResources().getConfiguration().uiMode = UI_MODE_NIGHT_NO;
-        SliceData data = getDummyData();
+        SliceData data = getMockData();
         mProvider.mSliceWeakDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
 
@@ -696,7 +696,7 @@ public class SettingsSliceProviderTest {
         assertThat(mProvider.isPrivateSlicesNeeded(uri)).isFalse();
     }
 
-    private static SliceData getDummyData() {
+    private static SliceData getMockData() {
         return new SliceData.Builder()
                 .setKey(KEY)
                 .setUri(URI)

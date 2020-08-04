@@ -74,7 +74,7 @@ public class BatteryInfoTest {
             "1 min left until charged";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15 min";
-    private static final Estimate DUMMY_ESTIMATE = new Estimate(
+    private static final Estimate MOCK_ESTIMATE = new Estimate(
             1000, /* estimateMillis */
             false, /* isBasedOnUsage */
             1000 /* averageDischargeTime */);
@@ -211,10 +211,10 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_basedOnUsageFalse_usesDefaultString() {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                mBatteryStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
         BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                mBatteryStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 true /* shortString */);
 
         assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
@@ -228,7 +228,7 @@ public class BatteryInfoTest {
                 .computeChargeTimeRemaining(anyLong());
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                mBatteryStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
         assertThat(info.remainingTimeUs).isEqualTo(TEST_CHARGE_TIME_REMAINING);
         assertThat(info.remainingLabel.toString())
@@ -240,7 +240,7 @@ public class BatteryInfoTest {
         mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 100);
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                mBatteryStats, MOCK_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
                 false /* shortString */);
 
         assertThat(info.chargeLabel).isEqualTo("100%");

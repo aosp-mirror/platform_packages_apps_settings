@@ -69,7 +69,7 @@ public class WallpaperSuggestionActivity extends StyleSuggestionActivityBase imp
                         boolean enabled) {
                     final List<SearchIndexableRaw> result = new ArrayList<>();
                     WallpaperPreferenceController controller =
-                            new WallpaperPreferenceController(context, "dummy key");
+                            new WallpaperPreferenceController(context, "unused key");
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = controller.getTitle();
                     data.screenTitle = data.title;

@@ -44,9 +44,9 @@ public final class AccessibilityUtilTest {
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final String SECURE_TEST_KEY = "secure_test_key";
-    private static final String DUMMY_PACKAGE_NAME = "com.dummy.example";
-    private static final String DUMMY_CLASS_NAME = DUMMY_PACKAGE_NAME + ".dummy_a11y_service";
-    private static final String DUMMY_CLASS_NAME2 = DUMMY_PACKAGE_NAME + ".dummy_a11y_service2";
+    private static final String DUMMY_PACKAGE_NAME = "com.mock.example";
+    private static final String DUMMY_CLASS_NAME = DUMMY_PACKAGE_NAME + ".mock_a11y_service";
+    private static final String DUMMY_CLASS_NAME2 = DUMMY_PACKAGE_NAME + ".mock_a11y_service2";
     private static final ComponentName DUMMY_COMPONENT_NAME = new ComponentName(DUMMY_PACKAGE_NAME,
             DUMMY_CLASS_NAME);
     private static final ComponentName DUMMY_COMPONENT_NAME2 = new ComponentName(DUMMY_PACKAGE_NAME,

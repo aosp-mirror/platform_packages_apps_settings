@@ -142,7 +142,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.dummy_preference_screen;
+        return R.xml.placeholder_preference_screen;
     }
 
     @Override
