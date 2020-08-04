@@ -46,7 +46,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         final boolean isSettingsPackage = TextUtils.equals(packageName, context.getPackageName())
                 || TextUtils.equals(getSettingsIntelligencePkgName(context), packageName);
         final boolean isWhitelistedPackage =
-                isSignatureWhitelisted(context, caller.getPackageName());
+                isSignatureAllowlisted(context, caller.getPackageName());
         if (isSettingsPackage || isWhitelistedPackage) {
             return;
         }
@@ -69,7 +69,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
                 .putExtra(Intent.EXTRA_REFERRER, buildReferrer(context, pageId));
     }
 
-    protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
+    protected boolean isSignatureAllowlisted(Context context, String callerPackage) {
         return false;
     }
 
