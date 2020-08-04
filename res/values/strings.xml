@@ -2341,7 +2341,7 @@
     <!-- Label for Wifi hotspot name. -->
     <string name="wifi_hotspot_name_title">Hotspot name</string>
     <!-- Summary for Wifi hotspot name when connection is in progress. -->
-    <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
+    <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>\u2026</string>
     <!-- Summary for Wifi hotspot name when connected. -->
     <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
     <!-- Label for Wifi hotspot password. -->
@@ -3715,29 +3715,29 @@
     <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
     <string name="reset_esim_error_msg">Downloaded SIMs can\u2019t be erased due to an error.\n\nRestart your device and try again.</string>
 
-    <!-- Master Clear -->
-    <!-- Button title to factory data reset the entire device -->
-    <string name="master_clear_title">Erase all data (factory reset)</string>
+    <!-- Main Clear -->
+    <!-- Button title to factory data reset the entire device [CHAR LIMIT=NONE] -->
+    <string name="main_clear_title">Erase all data (factory reset)</string>
     <!-- Button title to factory data reset the entire device. The "(factory reset)" part is optional for translation. [CHAR LIMIT=30 BACKUP_MESSAGE_ID=3531267871084279512]-->
-    <string name="master_clear_short_title">Erase all data (factory reset)</string>
+    <string name="main_clear_short_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="main_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
+    <string name="main_clear_desc" product="default">"This will erase all data from your phone\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
-    <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
+    <string name="main_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
-    <string name="master_clear_other_users_present" product="default">"\n\nThere are other users present on this device.\n"</string>
+    <string name="main_clear_other_users_present" product="default">"\n\nThere are other users present on this device.\n"</string>
     <!-- SD card & phone storage settings screen, list of items in user data storage (USB storage or SD card) that will be erased during this operation [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc_also_erases_external">"<li>Music</li>\n<li>Photos</li>\n<li>Other user data</li>"</string>
+    <string name="main_clear_desc_also_erases_external">"<li>Music</li>\n<li>Photos</li>\n<li>Other user data</li>"</string>
     <!-- SD card & phone storage settings screen, list of items on an eSIM (embedded SIM) that will be erased during this operation [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc_also_erases_esim">"<li>eSIMs</li>"</string>
+    <string name="main_clear_desc_also_erases_esim">"<li>eSIMs</li>"</string>
     <!-- SD card & phone storage settings screen, notification if there are eSIM (embedded SIM) profiles present that the user's mobile service plan will not be canceled [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc_no_cancel_mobile_plan">"\n\nThis will not cancel your mobile service plan.</string>
+    <string name="main_clear_desc_no_cancel_mobile_plan">"\n\nThis will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard">"\n\nTo clear music, pictures, and other user data, the <b>USB storage</b> needs to be erased."</string>
+    <string name="main_clear_desc_erase_external_storage" product="nosdcard">"\n\nTo clear music, pictures, and other user data, the <b>USB storage</b> needs to be erased."</string>
     <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc_erase_external_storage" product="default">"\n\nTo clear music, pictures, and other user data, the <b>SD card</b> needs to be erased."</string>
+    <string name="main_clear_desc_erase_external_storage" product="default">"\n\nTo clear music, pictures, and other user data, the <b>SD card</b> needs to be erased."</string>
     <!-- SD card & phone storage settings screen, label for check box to erase USB storage [CHAR LIMIT=30] -->
     <string name="erase_external_storage" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings screen, label for check box to erase SD card [CHAR LIMIT=30] -->
@@ -3746,26 +3746,22 @@
     <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the internal USB storage, such as music or photos</string>
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
     <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos</string>
-    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="tablet">Erase all data</string>
-    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text" product="default">Erase all data</string>
-    <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
-    <string name="master_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action.</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_button_text" product="tablet">Erase all data</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="main_clear_button_text" product="default">Erase all data</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
-    <string name="master_clear_final_desc_esim">All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can\u2019t undo this action.</string>
-    <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
-    <string name="master_clear_final_button_text">Erase everything</string>
-    <!-- Master clear failed message -->
-    <string name="master_clear_failed">No reset was performed because the System Clear service isn\u2019t available.</string>
-    <!-- Master clear confirmation screen title [CHAR LIMIT=33] -->
-    <string name="master_clear_confirm_title">Erase all data?</string>
+    <string name="main_clear_final_desc">All of your personal information and downloaded apps will be deleted. You can\u2019t undo this action.</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button [CHAR LIMIT=NONE] -->
+    <string name="main_clear_final_desc_esim">All of your personal information, including downloaded apps &amp; SIMs, will be deleted. You can\u2019t undo this action.</string>
+    <!-- Main clear confirmation screen title [CHAR LIMIT=33] -->
+    <string name="main_clear_confirm_title">Erase all data?</string>
     <!-- Error message for users that aren't allowed to factory reset [CHAR LIMIT=none] -->
-    <string name="master_clear_not_available">Factory reset is not available for this user</string>
-    <!-- Master clear progress screen title [CHAR LIMIT=30] -->
-    <string name="master_clear_progress_title" >Erasing</string>
-    <!-- Master clear progress screen text [CHAR LIMIT=75] -->
-    <string name="master_clear_progress_text">Please wait...</string>
+    <string name="main_clear_not_available">Factory reset is not available for this user</string>
+    <!-- Main clear progress screen title [CHAR LIMIT=30] -->
+    <string name="main_clear_progress_title" >Erasing</string>
+    <!-- Main clear progress screen text [CHAR LIMIT=75] -->
+    <string name="main_clear_progress_text">Please wait\u2026</string>
 
     <!-- Main settings screen, Call settings title for item to go into the call settings -->
     <string name="call_settings_title">Call settings</string>
@@ -5124,8 +5120,8 @@
     <string name="accessibility_ring_vibration_title">Ring vibration</string>
     <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
     <string name="accessibility_touch_vibration_title">Touch feedback</string>
-    <!-- Used in the accessibility service settings to control turning on/off the service entirely -->
-    <string name="accessibility_service_master_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to control turning on/off the service entirely [CHAR LIMIT=60] -->
+    <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
@@ -7058,7 +7054,7 @@
     <!-- Button the users can click to indicate they understood and dismiss the screen -->
     <string name="nfc_how_it_works_got_it">Got it</string>
     <!-- NFC More... title.  [CHAR LIMIT=40] -->
-    <string name="nfc_more_title">More...</string>
+    <string name="nfc_more_title">More\u2026</string>
     <!-- Label for the dialog that is shown when the user is asked to set a
          preferred payment application -->
     <string name="nfc_payment_set_default_label">Set default payment app</string>
@@ -7418,7 +7414,7 @@
     <!-- Message for selecting sim for SMS in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_sms">Select a SIM for SMS</string>
     <!-- Message for switching data SIM; switching takes a while -->
-    <string name="data_switch_started">Switching data SIM, this may take up to a minute...</string>
+    <string name="data_switch_started">Switching data SIM, this may take up to a minute\u2026</string>
     <!-- Message for selecting sim for call in settings.  [CHAR LIMIT=40] -->
     <string name="select_sim_for_calls">Call with</string>
     <!-- Title for selecting a SIM card.  [CHAR LIMIT=40] -->
@@ -8781,7 +8777,7 @@
     <string name="zen_access_empty_text">No installed apps have requested Do Not Disturb access</string>
 
     <!-- [CHAR LIMIT=NONE] Text when loading app list in notification settings -->
-    <string name="loading_notification_apps">Loading apps...</string>
+    <string name="loading_notification_apps">Loading apps\u2026</string>
 
     <!-- [CHAR LIMIT=NONE] Text appearing when app notifications are off -->
     <string name="app_notifications_off_desc">At your request, Android is blocking this app\'s notifications from appearing on this device</string>
@@ -9846,7 +9842,7 @@
     <string name="usb_control_device">This device</string>
     <!-- The summary text that appears under a USB control option while it is in the process of
          switching control or power. -->
-    <string name="usb_switching">Switching...</string>
+    <string name="usb_switching">Switching\u2026</string>
     <!-- The summary text that appears under a USB control option when switching control or power has
          failed. -->
     <string name="usb_switching_failed">Couldn\'t switch</string>
@@ -12067,7 +12063,7 @@
     <!-- DSU Loader Description. Do not translate. -->
     <string name="dsu_loader_description" translatable="false">Load a Dynamic System Update Image</string>
     <!-- DSU Loader Loading. Do not translate. -->
-    <string name="dsu_loader_loading" translatable="false">Loading...</string>
+    <string name="dsu_loader_loading" translatable="false">Loading\u2026</string>
     <!-- DSU Loader. Do not translate. -->
     <string name="dsu_is_running" translatable="false">DSU is running</string>
 

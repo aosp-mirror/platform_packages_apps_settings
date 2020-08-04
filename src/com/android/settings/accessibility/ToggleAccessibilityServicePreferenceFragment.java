@@ -200,7 +200,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
         final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         final String switchBarText = (info == null) ? "" :
-                getString(R.string.accessibility_service_master_switch_title,
+                getString(R.string.accessibility_service_primary_switch_title,
                         info.getResolveInfo().loadLabel(getPackageManager()));
         switchPreference.setTitle(switchBarText);
     }

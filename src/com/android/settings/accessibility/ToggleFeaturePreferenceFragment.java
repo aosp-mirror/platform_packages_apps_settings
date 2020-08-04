@@ -365,7 +365,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     abstract int getUserShortcutTypes();
 
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
-        switchPreference.setTitle(R.string.accessibility_service_master_switch_title);
+        switchPreference.setTitle(R.string.accessibility_service_primary_switch_title);
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
