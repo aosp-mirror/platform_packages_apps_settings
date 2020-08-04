@@ -61,7 +61,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
             return;
         }
 
-        // Sanity check that target volume is candidate
+        // Check that target volume is candidate
         Preconditions.checkState(
                 getPackageManager().getPackageCandidateVolumes(mApp).contains(mVolume));
 

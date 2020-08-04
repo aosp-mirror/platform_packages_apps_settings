@@ -16,7 +16,7 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_FEEDBACK_ENABLED;
+import static android.provider.Settings.Global.NOTIFICATION_FEEDBACK_ENABLED;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -82,20 +82,20 @@ public class AssistantFeedbackPreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_FEEDBACK_ENABLED, OFF) == ON;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.Secure.putInt(mContext.getContentResolver(),
+        return Settings.Global.putInt(mContext.getContentResolver(),
                 NOTIFICATION_FEEDBACK_ENABLED, isChecked ? ON : OFF);
     }
 
     class SettingObserver extends ContentObserver {
 
         private final Uri NOTIFICATION_URI =
-                Settings.Secure.getUriFor(NOTIFICATION_FEEDBACK_ENABLED);
+                Settings.Global.getUriFor(NOTIFICATION_FEEDBACK_ENABLED);
 
         private final Preference mPreference;
 
