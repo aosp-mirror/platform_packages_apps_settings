@@ -87,7 +87,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void buildIntentSlice_returnsMatchingSlice() {
-        final SliceData sliceData = getDummyData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT);
+        final SliceData sliceData = getMockData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT);
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, sliceData);
 
         SliceTester.testSettingsIntentSlice(mContext, slice, sliceData);
@@ -95,21 +95,21 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void buildToggleSlice_returnsMatchingSlice() {
-        final SliceData dummyData = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH);
+        final SliceData mockData = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH);
 
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
                         SettingsEnums.PAGE_UNKNOWN,
-                        dummyData.getKey(),
+                        mockData.getKey(),
                         0);
-        SliceTester.testSettingsToggleSlice(mContext, slice, dummyData);
+        SliceTester.testSettingsToggleSlice(mContext, slice, mockData);
     }
 
     @Test
     public void buildSliderSlice_returnsMatchingSlice() {
-        final SliceData data = getDummyData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER);
+        final SliceData data = getMockData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
         verify(mFeatureFactory.metricsFeatureProvider)
@@ -123,22 +123,22 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void buildCopyableSlice_returnsMatchingSlice() {
-        final SliceData dummyData = getDummyData(COPYABLE_CONTROLLER, -1);
+        final SliceData mockData = getMockData(COPYABLE_CONTROLLER, -1);
 
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
         verify(mFeatureFactory.metricsFeatureProvider)
                 .action(SettingsEnums.PAGE_UNKNOWN,
                         MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
                         SettingsEnums.PAGE_UNKNOWN,
-                        dummyData.getKey(),
+                        mockData.getKey(),
                         0);
-        SliceTester.testSettingsCopyableSlice(mContext, slice, dummyData);
+        SliceTester.testSettingsCopyableSlice(mContext, slice, mockData);
     }
 
     @Test
     public void testGetPreferenceController_buildsMatchingController() {
         final BasePreferenceController controller =
-                SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
+                SliceBuilderUtils.getPreferenceController(mContext, getMockData());
 
         assertThat(controller).isInstanceOf(FakeToggleController.class);
     }
@@ -147,14 +147,14 @@ public class SliceBuilderUtilsTest {
     public void testGetPreferenceController_contextOnly_buildsMatchingController() {
         final BasePreferenceController controller =
                 SliceBuilderUtils.getPreferenceController(mContext,
-                        getDummyData(CONTEXT_CONTROLLER, 0));
+                        getMockData(CONTEXT_CONTROLLER, 0));
 
         assertThat(controller).isInstanceOf(FakeContextOnlyPreferenceController.class);
     }
 
     @Test
     public void getDynamicSummary_allowDynamicSummary_returnsControllerSummary() {
-        final SliceData data = getDummyData();
+        final SliceData data = getMockData();
         final FakePreferenceController controller = spy(
                 new FakePreferenceController(mContext, KEY));
         final String controllerSummary = "new_Summary";
@@ -167,7 +167,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getDynamicSummary_allowDynamicSummary_nullSummary_returnsNull() {
-        final SliceData data = getDummyData();
+        final SliceData data = getMockData();
         final FakePreferenceController controller = spy(
                 new FakePreferenceController(mContext, KEY));
 
@@ -180,7 +180,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getDynamicSummary_noScreenTitle_returnsPrefControllerSummary() {
-        final SliceData data = getDummyData("", "");
+        final SliceData data = getMockData("", "");
         final FakePreferenceController controller = spy(
                 new FakePreferenceController(mContext, KEY));
         final String controllerSummary = "new_Summary";
@@ -193,7 +193,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getDynamicSummary_screenTitleMatchesTitle_returnsPrefControllerSummary() {
-        final SliceData data = getDummyData("", TITLE);
+        final SliceData data = getMockData("", TITLE);
         final FakePreferenceController controller = spy(
                 new FakePreferenceController(mContext, KEY));
         final String controllerSummary = "new_Summary";
@@ -206,7 +206,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void getDynamicSummary_emptyScreenTitle_emptyControllerSummary_returnsEmptyString() {
-        final SliceData data = getDummyData(null, null);
+        final SliceData data = getMockData(null, null);
         final FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
         final CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
@@ -216,7 +216,7 @@ public class SliceBuilderUtilsTest {
     @Test
     public void getDynamicSummary_screenTitleAndControllerPlaceholder_returnsSliceEmptyString() {
         final String summaryPlaceholder = mContext.getString(R.string.summary_placeholder);
-        final SliceData data = getDummyData(summaryPlaceholder, summaryPlaceholder);
+        final SliceData data = getMockData(summaryPlaceholder, summaryPlaceholder);
         final FakePreferenceController controller = spy(
                 new FakePreferenceController(mContext, KEY));
         doReturn(summaryPlaceholder).when(controller).getSummary();
@@ -283,7 +283,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testUnsupportedSlice_validTitleSummary() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+        final SliceData data = getMockData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
@@ -296,7 +296,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testDisabledForUserSlice_validTitleSummary() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+        final SliceData data = getMockData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
@@ -309,7 +309,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testDisabledDependentSettingSlice_validTitleSummary() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+        final SliceData data = getMockData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.INTENT);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
@@ -329,7 +329,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testConditionallyUnavailableSlice_validTitleSummary() {
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+        final SliceData data = getMockData(FakeUnavailablePreferenceController.class,
                 SliceData.SliceType.SWITCH);
         Settings.Global.putInt(mContext.getContentResolver(),
                 FakeUnavailablePreferenceController.AVAILABILITY_KEY,
@@ -347,7 +347,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testContentIntent_includesUniqueData() {
-        final SliceData sliceData = getDummyData();
+        final SliceData sliceData = getMockData();
         final Uri expectedUri = new Uri.Builder().appendPath(sliceData.getKey()).build();
 
         final Intent intent = SliceBuilderUtils.getContentIntent(mContext, sliceData);
@@ -360,7 +360,7 @@ public class SliceBuilderUtilsTest {
     public void buildIntentSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_accent).toIcon().getResId();
-        final SliceData sliceData = getDummyData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT,
+        final SliceData sliceData = getMockData(CONTEXT_CONTROLLER, SliceData.SliceType.INTENT,
                 0x0);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, sliceData);
@@ -375,7 +375,7 @@ public class SliceBuilderUtilsTest {
     public void buildDisabledDependentSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_accent).toIcon().getResId();
-        final SliceData data = getDummyData(FakeUnavailablePreferenceController.class,
+        final SliceData data = getMockData(FakeUnavailablePreferenceController.class,
                 SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE, 0 /* icon */,
                 null /* unavailableSliceSubtitle */);
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -394,10 +394,10 @@ public class SliceBuilderUtilsTest {
     public void buildToggleSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_accent).toIcon().getResId();
-        final SliceData dummyData = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+        final SliceData mockData = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 0x0);
 
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, dummyData);
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
 
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);
         final SliceAction primaryAction = metadata.getPrimaryAction();
@@ -409,7 +409,7 @@ public class SliceBuilderUtilsTest {
     public void buildSliderSlice_noIconPassed_returnsSliceWithIcon() {
         final int expectedIconResource = IconCompat.createWithResource(mContext,
                 R.drawable.ic_settings_accent).toIcon().getResId();
-        final SliceData data = getDummyData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER, 0x0);
+        final SliceData data = getMockData(SLIDER_CONTROLLER, SliceData.SliceType.SLIDER, 0x0);
 
         final Slice slice = SliceBuilderUtils.buildSlice(mContext, data);
 
@@ -421,7 +421,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void buildSliderSlice_invalidSlider_returnNull() {
-        final SliceData data = getDummyData(INVALID_SLIDER_CONTROLLER, SliceData.SliceType.SLIDER,
+        final SliceData data = getMockData(INVALID_SLIDER_CONTROLLER, SliceData.SliceType.SLIDER,
                 0x0 /* icon */);
 
         assertThat(SliceBuilderUtils.buildSlice(mContext, data)).isNull();
@@ -431,7 +431,7 @@ public class SliceBuilderUtilsTest {
     public void getSafeIcon_replacesEmptyIconWithSettingsIcon() {
         final int settingsIcon = R.drawable.ic_settings_accent;
         final int zeroIcon = 0x0;
-        final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+        final SliceData data = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 zeroIcon);
 
         final IconCompat actualIcon = SliceBuilderUtils.getSafeIcon(mContext, data);
@@ -445,7 +445,7 @@ public class SliceBuilderUtilsTest {
     public void getSafeIcon_invalidResource_shouldFallbackToSettingsIcon() {
         final int settingsIcon = R.drawable.ic_settings_accent;
         final int badIcon = 0x12345678;
-        final SliceData data = getDummyData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
+        final SliceData data = getMockData(TOGGLE_CONTROLLER, SliceData.SliceType.SWITCH,
                 badIcon);
 
         final IconCompat actualIcon = SliceBuilderUtils.getSafeIcon(mContext, data);
@@ -454,27 +454,27 @@ public class SliceBuilderUtilsTest {
         assertThat(actualIconResource).isEqualTo(settingsIcon);
     }
 
-    private SliceData getDummyData() {
-        return getDummyData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE,
+    private SliceData getMockData() {
+        return getMockData(TOGGLE_CONTROLLER, SUMMARY, SliceData.SliceType.SWITCH, SCREEN_TITLE,
                 ICON, null /* unavailableSliceSubtitle */);
     }
 
-    private SliceData getDummyData(Class prefController, int sliceType, int icon) {
-        return getDummyData(prefController, SUMMARY, sliceType, SCREEN_TITLE,
+    private SliceData getMockData(Class prefController, int sliceType, int icon) {
+        return getMockData(prefController, SUMMARY, sliceType, SCREEN_TITLE,
                 icon, null /* unavailableSliceSubtitle */);
     }
 
-    private SliceData getDummyData(String summary, String screenTitle) {
-        return getDummyData(TOGGLE_CONTROLLER, summary, SliceData.SliceType.SWITCH, screenTitle,
+    private SliceData getMockData(String summary, String screenTitle) {
+        return getMockData(TOGGLE_CONTROLLER, summary, SliceData.SliceType.SWITCH, screenTitle,
                 ICON, null /* unavailableSliceSubtitle */);
     }
 
-    private SliceData getDummyData(Class prefController, int sliceType) {
-        return getDummyData(prefController, SUMMARY, sliceType, SCREEN_TITLE, ICON,
+    private SliceData getMockData(Class prefController, int sliceType) {
+        return getMockData(prefController, SUMMARY, sliceType, SCREEN_TITLE, ICON,
                 null /* unavailableSliceSubtitle */);
     }
 
-    private SliceData getDummyData(Class prefController, String summary, int sliceType,
+    private SliceData getMockData(Class prefController, String summary, int sliceType,
             String screenTitle, int icon, String unavailableSliceSubtitle) {
         return new SliceData.Builder()
                 .setKey(KEY)

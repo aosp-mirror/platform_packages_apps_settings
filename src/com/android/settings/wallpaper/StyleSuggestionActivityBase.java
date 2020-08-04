@@ -38,7 +38,7 @@ public abstract class StyleSuggestionActivityBase extends Activity {
         super.onCreate(savedInstanceState);
         final PackageManager pm = getPackageManager();
         final Intent intent = new Intent()
-                .setComponent(new WallpaperPreferenceController(this, "dummy key")
+                .setComponent(new WallpaperPreferenceController(this, "unused key")
                         .getComponentName())
                 .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
