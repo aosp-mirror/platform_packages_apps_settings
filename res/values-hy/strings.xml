@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Միացնել Wi-Fi-ը"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Օգտագործել Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Օգտագործել Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi‑Fi կարգավորումներ"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Կարգավորել և կառավարել անլար միացման կետերը"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-ի գաղտնաբառ՝ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Թեժ կետի գաղտնաբառը՝ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ավտոմատ միացում"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Թույլատրել հեռախոսին ավտոմատ միանալ այս ցանցի տարածքում"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Թույլատրել պլանշետին ավտոմատ միանալ այս ցանցի տարածքում"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Թույլատրեք միանալ այս ցանցին, երբ այն հասանելի լինի"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Ավելացնել սարք"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Այս ցանցին սարք ավելացնելու համար օգտագործեք QR կոդ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR կոդը վավեր ձևաչափ չէ"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Օգտագործել համակարգի հավաստագրերը"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Չտրամադրել"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Չվավերացնել"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Վկայականը նշված չէ: Միացումը գաղտնի չի լինի:"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Ցանցի անունը չափազանց երկար է։"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Անհրաժեշտ է նշել տիրույթը:"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Պահանջվում է հավաստագիր։"</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Միանալ"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi-ը միացած է"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Միացած է <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ցանցին"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Միացում <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ցանցին"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Միացում…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Ցանցին միանալ չհաջողվեց"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Ցանցն անհասանելի է"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Սահուն պատկեր"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Որոշակի բովանդակության համար թարմացման հաճախականությունը 60-ից կդառնա 90 Հց։ Երկարացնում է մարտկոցի օգտագործման ժամանակը։"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Սահուն պատկեր"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Պարտադիր միացնել 90 Հց թարմացման հաճախականությունը"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Էկրանի թարմացման բարձր հաճախականությունը լավացնում է հպման արձագանքը և շարժանկարների որակը։ Այն նաև երկարացնում է մարտկոցի օգտագործման ժամանակը։"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ադապտիվ քնի ռեժիմ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Միացված է – Եթե նայում եք էկրանին, այն չի անջատվի։"</string>
@@ -1684,10 +1683,10 @@
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Օգնություն"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Բջջային ցանց"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Բջջային փաթեթ"</string>
-    <string name="sms_application_title" msgid="4791107002724108809">"SMS-ի հավելված"</string>
-    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Փոխե՞լ SMS հավելվածը"</string>
-    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Որպես SMS ծրագիր` <xliff:g id="CURRENT_APP">%2$s</xliff:g>-ի փոխարեն օգտագործե՞լ <xliff:g id="NEW_APP">%1$s</xliff:g>-ը:"</string>
-    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Որպես SMS ծրագիր` օգտագործե՞լ <xliff:g id="NEW_APP">%s</xliff:g>-ը:"</string>
+    <string name="sms_application_title" msgid="4791107002724108809">"SMS-ների փոխանակման հավելված"</string>
+    <string name="sms_change_default_dialog_title" msgid="2343439998715457307">"Փոխե՞լ SMS-ների փոխանակման հավելվածը"</string>
+    <string name="sms_change_default_dialog_text" msgid="8777606240342982531">"Որպես SMS-ների փոխանակման հավելված <xliff:g id="CURRENT_APP">%2$s</xliff:g>-ի փոխարեն օգտագործե՞լ <xliff:g id="NEW_APP">%1$s</xliff:g>-ը:"</string>
+    <string name="sms_change_default_no_previous_dialog_text" msgid="6215622785087181275">"Որպես SMS-ների փոխանակման հավելված օգտագործե՞լ <xliff:g id="NEW_APP">%s</xliff:g>-ը:"</string>
     <string name="network_scorer_picker_title" msgid="2022922801936206195">"Ցանցերի վարկանիշի աղբյուրը"</string>
     <string name="network_scorer_picker_none_preference" msgid="8894034333043177807">"Չկա"</string>
     <string name="network_scorer_change_active_dialog_title" msgid="7005220310238618141">"Փոխե՞լ Wi-Fi օգնականին:"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ստեղծել ժամանակացույց"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Երկարացնել մարտկոցի աշխատաժամանակը"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Անջատել, երբ լիցքավորվի"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ հեռախոսի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g> է"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ պլանշետի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g> է"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ ձեր սարքի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g> է"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ հեռախոսի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g>-ից անցնում է։"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ պլանշետի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g>-ից անցնում է։"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"Մարտկոցի տնտեսման ռեժիմն անջատվում է, երբ սարքի լիցքը <xliff:g id="PERCENT">%1$s</xliff:g>-ից անցնում է։"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Միացնել"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Օգտատիրոջ մուտքի տվյալներ"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Դիտել և փոփոխել պահված մուտքի տվյալները"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Ընդլայնված"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Պահոցի տեսակը"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Սարքակազմ"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Միայն ծրագրային"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Հավատարմագրերը հասանելի չեն այս օգտատիրոջ"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Տեղադրվել է VPN-ի և հավելվածների համար"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Տեղադրվել է Wi-Fi-ի համար"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Հպեք՝ պլանշետը ստուգելու համար"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Հպեք՝ սարքը ստուգելու համար"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ժամը, ծանուցումները և այլ տեղեկություններ տեսնելու համար կրկնակի հպեք էկրանին:"</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"Խուճապային ազդանշանի կոճակ"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"Արտակարգ իրավիճակներում գործարկեք SOS գործողությունները՝ սնուցման կոճակը 5 անգամ արագ սեղմելով։"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Ծանուցումները դիտելու համար օգտագործել մատնահետքերի սկաները"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Մատնահետքերի սկաներ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Ծանուցումները տեսնելու համար՝ մատը սահեցրեք ներքև հեռախոսի հետևի մասում գտնվող մատնահետքերի սկաների վրա"</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Չհաջողվեց ցանցեր գտնել: Նորից փորձեք:"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(արգելված)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM քարտ չկա"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM քարտ"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"SIM քարտ չկա"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Չկա"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Միանալու համար անհրաժեշտ է SIM քարտ"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Միանալու համար անհրաժեշտ է <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>-ի SIM քարտ"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Ցանցի նախընտրելի ռեժիմը՝ WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Ցանցի նախընտրելի ռեժիմը՝ միայն GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Ցանցի նախընտրելի ռեժիմը՝ միայն WCDMA"</string>

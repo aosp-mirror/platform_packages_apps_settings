@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"I-Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Vula i-Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"I-Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Sebenzisa i-Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Sebenzisa i-Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Izilungiselelo ze-Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"I-Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Hlela, uphathe izindawo zokungena ezingenantambo"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Iphasiwedi ye-Wi‑Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Iphasiwedi ye-hotspot: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Ukuxhumeka okuzenzakalelayo"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Vumela ifoni ukuba ixhume ngokuzenzakalelayo eduze nale nethiwekhi"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Vumela ithebulethi ukuba ixhume ngokuzenzakalelayo eduze nale nethiwekhi"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Vumela ukuxhumeka kule nethiwekhi uma ikubanga"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Engeza idivayisi"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Sebenzisa ikhodi ye-QR ukuze ungeze idivayisi kule nethiwekhi"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Ikhodi ye-QR ayiyona ifomethi evumelekile"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Sebenzisa izitifiketi zesistimu"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Unganikezeli"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ungaqinisekisi"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Asikho isitifiketi esicacisiwe. Ukuxhumeka kwakho ngeke kube yimfihlo."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Igama lenethiwekhi lide kakhulu."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Kumele icacise isizinda."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Isitifiketi siyadingeka."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Xhuma kwi-inthanethi"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"I-Wi-Fi ivuliwe"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Ixhumeke ku-<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Ixhuma ku-<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Iyaxhuma…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Yehlulekile ukuxhuma kunethiwekhi"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Inethiwekhi ayikho kubanga"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Isibonisi esibushelelezi"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Iphakamisa ngokuzenzakalela isilinganiso sokuvuselela kusukela kokungu-60 ukuya kokungu-90 Hz kokunye okuqukethwe. Ikhuphula ukusetshenziswa kwebhethri."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Isibonisi esibushelelezi"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Phoqa inani lokuvuselela elingu-90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Inani lokuvuselela eliphezulu kakhulu lokuphendula kokuthinta okuthuthukisiwe nekhwalithi yokugqwayiza. Ikhuphula ukusetshenziswa kwebhethri."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ukunaka isikrini"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Kuvuliwe / Isikrini ngeke size sivaleke uma usibhekile"</string>
@@ -2593,9 +2592,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Setha ishejuli"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Khulisa impilo yebhethri"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Vala lapho ishajiwe"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Isilondolozi sebhethri sivalwa uma ifoni yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Isilondolozi sebhethri siyavalwa uma ithebulethi yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Isilondolozi sebhethri siyavalwa uma idivayisi yakho iku-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Isilondolozi sebhethri sivala lapho ifoni yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"Isilondolozi sebhethri sivala lapho ithebulethi yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"Isilondolozi sebhethri sivala lapho idivayisi yakho ishaja ngaphezu kuka-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Vula"</string>
@@ -2671,9 +2670,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Ukuqinisekisa komsebenzisi"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Buka uphinde ulungise ukuqinisekisa okugciniwe"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Ithuthukisiwe"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Uhlobo lwesitoreji"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Izingxenyekazi zekhompyutha zisekelwe ngokulondoloza"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Isofthiwe kuphela"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Izifakazo azitholakaleli lo msebenzisi"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Kufakelwe i-VPN nezinhlelo zokusebenza"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Kufakelwe i-Wi-Fi"</string>
@@ -4462,6 +4458,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Thepha ukuze uhlole ithebulethi"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Thepha ukuze uhlole idivayisi"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Ukuze uhlole isikhathi, izaziso, nolunye ulwazi, thepha isikrini sakho."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"inkinobho yokwesaba"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"Qala izenzo ze-SOS yesimo esiphuthumayo ngokucindezela inkinobho yamandla ngokushesha izikhathi ezi-5."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Swayipha izigxivizo zeminwe ukuze uthole izaziso"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Swayipha izigxivizo zeminwe"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Ukuze uhlole izaziso zakho, swayiphela phansi kunzwa yezigxivizo zeminwe ngemuva kwefoni yakho."</string>
@@ -4685,6 +4683,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Ayikwazanga ukuthola amanethiwekhi. Zama futhi."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(kunqatshelwe)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Alikho ikhadi le-SIM."</string>
+    <string name="sim_card" msgid="6381158752066377709">"I-SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Ayikho i-SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Lutho"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Idinga i-SIM ukuze ixhume"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Idinga i-SIM ye-<xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ukuze ixhume"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Imodi yenethiwekhi ekhethwayo: i-WCDMA ekhethwayo"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Imodi yenethiwekhi ekhethwayo: i-GSM kuphela"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Imodi yenethiwekhi ekhethwayo: i-WCDMA kuphela"</string>

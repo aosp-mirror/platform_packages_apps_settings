@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Вклучи Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Користи Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Користи Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Поставки за Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Постави и управувај со безжични пристапни точки"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Лозинка за Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Лозинка за точката на пристап: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Автоматско поврзување"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Дозволи телефонот автоматски да се поврзува во близина на мрежава"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Дозволи таблетот автоматски да се поврзува во близина на мрежава"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Дозволете поврзување на мрежава кога ќе биде во опсег"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Додајте уред"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Користете QR-код за да додадете уред на мрежава"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR-кодот не е во важечки формат"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Користи системски сертификати"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не обезбедувај"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не потврдувај"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Нема назначено сертификат. Вашата врска нема да биде приватна."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Името на мрежата е премногу долго."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Мора да се наведе домен."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Потребен е сертификат."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Поврзи се"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi мрежата е вклучена"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Поврзано со <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Поврзување со <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Се поврзува…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Не успеа да се поврзе со мрежата"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Мрежата не е во опсег"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Течен приказ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматски ја зголемува зачестеноста на освежување од 60 на 90 Hz за некои содржини. Го зголемува користењето на батеријата."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Течен приказ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Наметни стапка на освежување од 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Највисока стапка на освежување за подобрена реакција на допир и квалитет на анимацијата. Го зголемува користењето на батеријата."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Вклучен екран"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Вклучено/Екранот нема да се исклучи додека гледате во него"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Поставете распоред"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Продолжете го траењето на батеријата"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Исклучи кога ќе се наполни"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"„Штедачот на батерија“ ќе се исклучи кога нивото на батеријата на телефонот ќе биде <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"„Штедачот на батерија“ ќе се исклучи кога нивото на батеријата на таблетот ќе биде на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"„Штедачот на батерија“ ќе се исклучи кога нивото на батеријата на уредот ќе биде на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"„Штедачот на батерија“ ќе се исклучи кога телефонот е наполнет над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"„Штедачот на батерија“ ќе се исклучи кога таблетот е наполнет над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"„Штедачот на батерија“ ќе се исклучи кога уредот е наполнет над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Вклучи"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Кориснички акредитиви"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Прегледајте и изменете ги зачуваните акредитиви"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Напредни"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Тип меморија"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Хардверска"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Само софтвер"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Акредитивите не се достапни за овој корисник"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Инсталиран за VPN и апликации"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Инсталиран за Wi-Fi"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Допрете за да го проверите таблетот"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Допрете за да го проверите уредот"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да ги проверите времето, известувањата и другите информации, допрете го екранот."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"Копче за паника"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"Започнете ги SOS-дејствата за итни случаи со брзо притискање на копчето за вклучување 5 пати."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Повлечете отпечаток за известувања"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Повлечете отпечаток"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"За да ги проверите известувањата, повлечете надолу на сензорот за отпечатоци на задната страна на телефонот."</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Не најдовме мрежи. Обидете се повторно."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(забранета)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Нема SIM-картичка"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Нема SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Нема"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Потребна е SIM за поврзување"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Потребна е SIM од <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> за поврзување"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Претпочитан режим на мрежа: претпочитан е WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Претпочитан режим на мрежа: само GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Претпочитан режим на мрежа: само WCDMA"</string>
