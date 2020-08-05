@@ -70,7 +70,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         if (twoTarget) {
             if (widgetFrame != null) {
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
+                        .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
 
                 View divider = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.preference_two_target_divider, view, false);

@@ -180,7 +180,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
-        switchPreference.setTitle(R.string.accessibility_daltonizer_master_switch_title);
+        switchPreference.setTitle(R.string.accessibility_daltonizer_primary_switch_title);
     }
 
     @Override
