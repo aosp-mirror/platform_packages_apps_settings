@@ -53,7 +53,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.ims.ImsException;
 import com.android.ims.ImsManager;
 import com.android.internal.telephony.Phone;
-import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -375,7 +374,7 @@ public class MobileNetworkUtils {
                 CarrierConfigManager.class).getConfigForSubId(subId);
 
 
-        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
             return true;
         } else if (carrierConfig != null
                 && !carrierConfig.getBoolean(
@@ -434,7 +433,7 @@ public class MobileNetworkUtils {
         final PersistableBundle carrierConfig = context.getSystemService(
                 CarrierConfigManager.class).getConfigForSubId(subId);
 
-        if (telephonyManager.getPhoneType() == PhoneConstants.PHONE_TYPE_GSM) {
+        if (telephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_GSM) {
             return true;
         } else if (carrierConfig != null
                 && !carrierConfig.getBoolean(
