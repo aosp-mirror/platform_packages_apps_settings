@@ -43,6 +43,8 @@ import com.google.android.setupdesign.span.LinkSpan;
 public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         implements LinkSpan.OnClickListener {
 
+    private static final String KEY_CONFIRMING_CREDENTIALS = "confirming_credentials";
+
     private UserManager mUserManager;
     private boolean mHasPassword;
     private boolean mBiometricUnlockDisabledByAdmin;
@@ -127,6 +129,10 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState != null) {
+            mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
+        }
+
         Intent intent = getIntent();
         if (intent.getStringExtra(WizardManagerHelper.EXTRA_THEME) == null) {
             // Put the theme in the intent so it gets propagated to other activities in the flow
@@ -149,15 +155,17 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mUserManager = UserManager.get(this);
         updatePasswordQuality();
 
-        if (!mHasPassword) {
-            // No password registered, launch into enrollment wizard.
-            mConfirmingCredentials = true;
-            launchChooseLock();
-        } else if (mToken == null) {
-            // It's possible to have a token but mLaunchedConfirmLock == false, since
-            // ChooseLockGeneric can pass us a token.
-            mConfirmingCredentials = true;
-            launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
+        if (!mConfirmingCredentials) {
+            if (!mHasPassword) {
+                // No password registered, launch into enrollment wizard.
+                mConfirmingCredentials = true;
+                launchChooseLock();
+            } else if (mToken == null) {
+                // It's possible to have a token but mLaunchedConfirmLock == false, since
+                // ChooseLockGeneric can pass us a token.
+                mConfirmingCredentials = true;
+                launchConfirmLock(getConfirmLockTitleResId(), getChallenge());
+            }
         }
     }
 
@@ -176,6 +184,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             getNextButton().setText(getResources().getString(R.string.done));
             getNextButton().setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
     }
 
     @Override
