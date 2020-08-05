@@ -39,6 +39,7 @@ import androidx.slice.builders.SliceAction;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.MobileDataContentObserver;
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -177,7 +178,7 @@ public class MobileDataSlice implements CustomSliceable {
      */
     private boolean isMobileDataAvailable() {
         final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getSelectableSubscriptionInfoList();
+                SubscriptionUtil.getSelectableSubscriptionInfoList(mContext);
 
         return !(subInfoList == null || subInfoList.isEmpty());
     }
