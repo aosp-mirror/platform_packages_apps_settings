@@ -80,39 +80,10 @@ public class SubscriptionUtil {
             return sAvailableResultsForTesting;
         }
         final SubscriptionManager subMgr = context.getSystemService(SubscriptionManager.class);
-        final TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
 
         final List<SubscriptionInfo> subscriptions =
                 new ArrayList<>(emptyIfNull(subMgr.getSelectableSubscriptionInfoList()));
 
-        // Look for inactive but present physical SIMs that are missing from the selectable list.
-        final List<UiccSlotInfo> missing = new ArrayList<>();
-        final UiccSlotInfo[] slotsInfo = telMgr.getUiccSlotsInfo();
-        for (int i = 0; slotsInfo != null && i < slotsInfo.length; i++) {
-            final UiccSlotInfo slotInfo = slotsInfo[i];
-            if (isInactiveInsertedPSim(slotInfo)) {
-                final int index = slotInfo.getLogicalSlotIdx();
-                final String cardId = slotInfo.getCardId();
-
-                final boolean found = subscriptions.stream().anyMatch(info ->
-                        index == info.getSimSlotIndex() && cardId.equals(info.getCardString()));
-                if (!found) {
-                    missing.add(slotInfo);
-                }
-            }
-        }
-        if (missing.isEmpty()) {
-            return subscriptions;
-        }
-        for (SubscriptionInfo info : subMgr.getAllSubscriptionInfoList()) {
-            for (UiccSlotInfo slotInfo : missing) {
-                if (info.getSimSlotIndex() == slotInfo.getLogicalSlotIdx()
-                        && info.getCardString().equals(slotInfo.getCardId())) {
-                    subscriptions.add(info);
-                    break;
-                }
-            }
-        }
         return subscriptions;
     }
 
