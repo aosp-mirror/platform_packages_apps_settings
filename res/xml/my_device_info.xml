@@ -43,6 +43,7 @@
         android:order="2"
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
 
     <!-- Phone number -->
