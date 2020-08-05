@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
 package com.android.settings;
@@ -69,7 +69,7 @@ import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
-public class MasterClearTest {
+public class MainClearTest {
 
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
     private static final String TEST_CONFIRMATION_PACKAGE = "android.test.conf.pkg";
@@ -93,7 +93,7 @@ public class MasterClearTest {
     @Mock
     private Intent mMockIntent;
 
-    private MasterClear mMasterClear;
+    private MainClear mMainClear;
     private ShadowActivity mShadowActivity;
     private FragmentActivity mActivity;
     private ShadowUserManager mShadowUserManager;
@@ -102,13 +102,13 @@ public class MasterClearTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mMasterClear = spy(new MasterClear());
+        mMainClear = spy(new MainClear());
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mShadowActivity = Shadows.shadowOf(mActivity);
         UserManager userManager = mActivity.getSystemService(UserManager.class);
         mShadowUserManager = Shadows.shadowOf(userManager);
         mShadowUserManager.setIsAdminUser(true);
-        mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
+        mContentView = LayoutInflater.from(mActivity).inflate(R.layout.main_clear, null);
 
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
@@ -123,78 +123,78 @@ public class MasterClearTest {
     @Test
     public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimChecked() {
         final Context context = mock(Context.class);
-        when(mMasterClear.getContext()).thenReturn(context);
+        when(mMainClear.getContext()).thenReturn(context);
 
-        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
-        mMasterClear.mEsimStorage.setChecked(true);
-        mMasterClear.showFinalConfirmation();
+        mMainClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMainClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMainClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMainClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
+        mMainClear.mEsimStorage.setChecked(true);
+        mMainClear.showFinalConfirmation();
 
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false))
                 .isTrue();
     }
 
     @Test
     public void testShowFinalConfirmation_eraseEsimVisible_eraseEsimUnchecked() {
         final Context context = mock(Context.class);
-        when(mMasterClear.getContext()).thenReturn(context);
+        when(mMainClear.getContext()).thenReturn(context);
 
-        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mMasterClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
-        mMasterClear.mEsimStorage.setChecked(false);
-        mMasterClear.showFinalConfirmation();
+        mMainClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMainClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMainClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMainClear.mEsimStorageContainer.setVisibility(View.VISIBLE);
+        mMainClear.mEsimStorage.setChecked(false);
+        mMainClear.showFinalConfirmation();
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false))
                 .isFalse();
     }
 
     @Test
     public void testShowFinalConfirmation_eraseEsimGone_eraseEsimChecked() {
         final Context context = mock(Context.class);
-        when(mMasterClear.getContext()).thenReturn(context);
+        when(mMainClear.getContext()).thenReturn(context);
 
-        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
-        mMasterClear.mEsimStorage.setChecked(true);
-        mMasterClear.showFinalConfirmation();
+        mMainClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMainClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMainClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMainClear.mEsimStorageContainer.setVisibility(View.GONE);
+        mMainClear.mEsimStorage.setChecked(true);
+        mMainClear.showFinalConfirmation();
 
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false))
             .isTrue();
     }
 
     @Test
     public void testShowFinalConfirmation_eraseEsimGone_eraseEsimUnchecked() {
         final Context context = mock(Context.class);
-        when(mMasterClear.getContext()).thenReturn(context);
+        when(mMainClear.getContext()).thenReturn(context);
 
-        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
-        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
-        mMasterClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mMasterClear.mEsimStorageContainer.setVisibility(View.GONE);
-        mMasterClear.mEsimStorage.setChecked(false);
-        mMasterClear.showFinalConfirmation();
+        mMainClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMainClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMainClear.mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mMainClear.mEsimStorageContainer.setVisibility(View.GONE);
+        mMainClear.mEsimStorage.setChecked(false);
+        mMainClear.showFinalConfirmation();
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
         verify(context).startActivity(intent.capture());
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false))
             .isFalse();
     }
 
@@ -204,7 +204,7 @@ public class MasterClearTest {
                 false /* isEuiccEnabled */,
                 true /* isEuiccProvisioned */,
                 false /* isDeveloper */);
-        assertThat(mMasterClear.showWipeEuicc()).isFalse();
+        assertThat(mMainClear.showWipeEuicc()).isFalse();
     }
 
     @Test
@@ -213,7 +213,7 @@ public class MasterClearTest {
                 true /* isEuiccEnabled */,
                 false /* isEuiccProvisioned */,
                 false /* isDeveloper */);
-        assertThat(mMasterClear.showWipeEuicc()).isFalse();
+        assertThat(mMainClear.showWipeEuicc()).isFalse();
     }
 
     @Test
@@ -222,7 +222,7 @@ public class MasterClearTest {
                 true /* isEuiccEnabled */,
                 true /* isEuiccProvisioned */,
                 false /* isDeveloper */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+        assertThat(mMainClear.showWipeEuicc()).isTrue();
     }
 
     @Test
@@ -231,7 +231,7 @@ public class MasterClearTest {
                 true /* isEuiccEnabled */,
                 false /* isEuiccProvisioned */,
                 true /* isDeveloper */);
-        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+        assertThat(mMainClear.showWipeEuicc()).isTrue();
     }
 
     @Test
@@ -243,32 +243,32 @@ public class MasterClearTest {
     public void testHasReachedBottom_NotScrollDown_returnFalse() {
         initScrollView(100, 0, 200);
 
-        assertThat(mMasterClear.hasReachedBottom(mScrollView)).isFalse();
+        assertThat(mMainClear.hasReachedBottom(mScrollView)).isFalse();
     }
 
     @Test
     public void testHasReachedBottom_CanNotScroll_returnTrue() {
         initScrollView(100, 0, 80);
 
-        assertThat(mMasterClear.hasReachedBottom(mScrollView)).isTrue();
+        assertThat(mMainClear.hasReachedBottom(mScrollView)).isTrue();
     }
 
     @Test
     public void testHasReachedBottom_ScrollToBottom_returnTrue() {
         initScrollView(100, 100, 200);
 
-        assertThat(mMasterClear.hasReachedBottom(mScrollView)).isTrue();
+        assertThat(mMainClear.hasReachedBottom(mScrollView)).isTrue();
     }
 
     @Test
-    public void testInitiateMasterClear_inDemoMode_sendsIntent() {
+    public void testInitiateMainClear_inDemoMode_sendsIntent() {
         ShadowUtils.setIsDemoUser(true);
 
         final ComponentName componentName =
                 ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
         ShadowUtils.setDeviceOwnerComponent(componentName);
 
-        mMasterClear.mInitiateListener.onClick(mContentView);
+        mMainClear.mInitiateListener.onClick(mContentView);
         final Intent intent = mShadowActivity.getNextStartedActivity();
         assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
         assertThat(componentName).isNotNull();
@@ -278,87 +278,87 @@ public class MasterClearTest {
     @Test
     public void testOnActivityResultInternal_invalideRequest() {
         int invalidRequestCode = -1;
-        doReturn(false).when(mMasterClear).isValidRequestCode(eq(invalidRequestCode));
+        doReturn(false).when(mMainClear).isValidRequestCode(eq(invalidRequestCode));
 
-        mMasterClear.onActivityResultInternal(invalidRequestCode, Activity.RESULT_OK, null);
+        mMainClear.onActivityResultInternal(invalidRequestCode, Activity.RESULT_OK, null);
 
-        verify(mMasterClear, times(1)).isValidRequestCode(eq(invalidRequestCode));
-        verify(mMasterClear, times(0)).establishInitialState();
-        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
-        verify(mMasterClear, times(0)).showFinalConfirmation();
+        verify(mMainClear, times(1)).isValidRequestCode(eq(invalidRequestCode));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(0)).getAccountConfirmationIntent();
+        verify(mMainClear, times(0)).showFinalConfirmation();
     }
 
     @Test
     public void testOnActivityResultInternal_resultCanceled() {
-        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        doNothing().when(mMasterClear).establishInitialState();
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        doNothing().when(mMainClear).establishInitialState();
 
-        mMasterClear
-                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED,
+        mMainClear
+                .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED,
                         null);
 
-        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        verify(mMasterClear, times(1)).establishInitialState();
-        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
-        verify(mMasterClear, times(0)).showFinalConfirmation();
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear, times(1)).establishInitialState();
+        verify(mMainClear, times(0)).getAccountConfirmationIntent();
+        verify(mMainClear, times(0)).showFinalConfirmation();
     }
 
     @Test
     public void testOnActivityResultInternal_keyguardRequestTriggeringConfirmAccount() {
-        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        doReturn(mMockIntent).when(mMasterClear).getAccountConfirmationIntent();
-        doNothing().when(mMasterClear).showAccountCredentialConfirmation(eq(mMockIntent));
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        doReturn(mMockIntent).when(mMainClear).getAccountConfirmationIntent();
+        doNothing().when(mMainClear).showAccountCredentialConfirmation(eq(mMockIntent));
 
-        mMasterClear
-                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+        mMainClear
+                .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
-        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        verify(mMasterClear, times(0)).establishInitialState();
-        verify(mMasterClear, times(1)).getAccountConfirmationIntent();
-        verify(mMasterClear, times(1)).showAccountCredentialConfirmation(eq(mMockIntent));
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(1)).getAccountConfirmationIntent();
+        verify(mMainClear, times(1)).showAccountCredentialConfirmation(eq(mMockIntent));
     }
 
     @Test
     public void testOnActivityResultInternal_keyguardRequestTriggeringShowFinal() {
-        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        doReturn(null).when(mMasterClear).getAccountConfirmationIntent();
-        doNothing().when(mMasterClear).showFinalConfirmation();
+        doReturn(true).when(mMainClear).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        doReturn(null).when(mMainClear).getAccountConfirmationIntent();
+        doNothing().when(mMainClear).showFinalConfirmation();
 
-        mMasterClear
-                .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+        mMainClear
+                .onActivityResultInternal(MainClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
-        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
-        verify(mMasterClear, times(0)).establishInitialState();
-        verify(mMasterClear, times(1)).getAccountConfirmationIntent();
-        verify(mMasterClear, times(1)).showFinalConfirmation();
+        verify(mMainClear, times(1)).isValidRequestCode(eq(MainClear.KEYGUARD_REQUEST));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(1)).getAccountConfirmationIntent();
+        verify(mMainClear, times(1)).showFinalConfirmation();
     }
 
     @Test
     public void testOnActivityResultInternal_confirmRequestTriggeringShowFinal() {
-        doReturn(true).when(mMasterClear)
-                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
-        doNothing().when(mMasterClear).showFinalConfirmation();
+        doReturn(true).when(mMainClear)
+                .isValidRequestCode(eq(MainClear.CREDENTIAL_CONFIRM_REQUEST));
+        doNothing().when(mMainClear).showFinalConfirmation();
 
-        mMasterClear.onActivityResultInternal(
-                MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
+        mMainClear.onActivityResultInternal(
+                MainClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
 
-        verify(mMasterClear, times(1))
-                .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
-        verify(mMasterClear, times(0)).establishInitialState();
-        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
-        verify(mMasterClear, times(1)).showFinalConfirmation();
+        verify(mMainClear, times(1))
+                .isValidRequestCode(eq(MainClear.CREDENTIAL_CONFIRM_REQUEST));
+        verify(mMainClear, times(0)).establishInitialState();
+        verify(mMainClear, times(0)).getAccountConfirmationIntent();
+        verify(mMainClear, times(1)).showFinalConfirmation();
     }
 
     @Test
     public void testGetAccountConfirmationIntent_unsupported() {
-        when(mMasterClear.getActivity()).thenReturn(mActivity);
+        when(mMainClear.getActivity()).thenReturn(mActivity);
         /* Using the default resources, account confirmation shouldn't trigger */
-        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
+        assertThat(mMainClear.getAccountConfirmationIntent()).isNull();
     }
 
     @Test
     public void testGetAccountConfirmationIntent_no_relevant_accounts() {
-        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        when(mMainClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
                 .thenReturn(TEST_CONFIRMATION_PACKAGE);
@@ -368,12 +368,12 @@ public class MasterClearTest {
         Account[] accounts = new Account[0];
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
-        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
+        assertThat(mMainClear.getAccountConfirmationIntent()).isNull();
     }
 
     @Test
     public void testGetAccountConfirmationIntent_unresolved() {
-        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        when(mMainClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
                 .thenReturn(TEST_CONFIRMATION_PACKAGE);
@@ -385,12 +385,12 @@ public class MasterClearTest {
         // The package manager should not resolve the confirmation intent targeting the non-existent
         // confirmation package.
         when(mMockActivity.getPackageManager()).thenReturn(mPackageManager);
-        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
+        assertThat(mMainClear.getAccountConfirmationIntent()).isNull();
     }
 
     @Test
     public void testTryShowAccountConfirmation_ok() {
-        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        when(mMainClear.getActivity()).thenReturn(mMockActivity);
         // Only try to show account confirmation if the appropriate resource overlays are available.
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package))
@@ -411,7 +411,7 @@ public class MasterClearTest {
         resolveInfo.activityInfo = activityInfo;
         when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
 
-        Intent actualIntent = mMasterClear.getAccountConfirmationIntent();
+        Intent actualIntent = mMainClear.getAccountConfirmationIntent();
         assertThat(TEST_CONFIRMATION_PACKAGE).isEqualTo(
                 actualIntent.getComponent().getPackageName());
         assertThat(TEST_CONFIRMATION_CLASS).isEqualTo(actualIntent.getComponent().getClassName());
@@ -420,40 +420,40 @@ public class MasterClearTest {
     @Test
     public void testShowAccountCredentialConfirmation() {
         // Finally mock out the startActivityForResultCall
-        doNothing().when(mMasterClear)
+        doNothing().when(mMainClear)
                 .startActivityForResult(eq(mMockIntent),
-                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
-        mMasterClear.showAccountCredentialConfirmation(mMockIntent);
-        verify(mMasterClear, times(1))
+                        eq(MainClear.CREDENTIAL_CONFIRM_REQUEST));
+        mMainClear.showAccountCredentialConfirmation(mMockIntent);
+        verify(mMainClear, times(1))
                 .startActivityForResult(eq(mMockIntent),
-                        eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+                        eq(MainClear.CREDENTIAL_CONFIRM_REQUEST));
     }
 
     @Test
     public void testIsValidRequestCode() {
-        assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
-        assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST))
+        assertThat(mMainClear.isValidRequestCode(MainClear.KEYGUARD_REQUEST)).isTrue();
+        assertThat(mMainClear.isValidRequestCode(MainClear.CREDENTIAL_CONFIRM_REQUEST))
                 .isTrue();
-        assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
+        assertThat(mMainClear.isValidRequestCode(0)).isFalse();
     }
 
     @Test
     public void testOnGlobalLayout_shouldNotRemoveListener() {
         final ViewTreeObserver viewTreeObserver = mock(ViewTreeObserver.class);
-        mMasterClear.mScrollView = mScrollView;
-        doNothing().when(mMasterClear).onGlobalLayout();
-        doReturn(true).when(mMasterClear).hasReachedBottom(any());
+        mMainClear.mScrollView = mScrollView;
+        doNothing().when(mMainClear).onGlobalLayout();
+        doReturn(true).when(mMainClear).hasReachedBottom(any());
         when(mScrollView.getViewTreeObserver()).thenReturn(viewTreeObserver);
 
-        mMasterClear.onGlobalLayout();
+        mMainClear.onGlobalLayout();
 
-        verify(viewTreeObserver, never()).removeOnGlobalLayoutListener(mMasterClear);
+        verify(viewTreeObserver, never()).removeOnGlobalLayoutListener(mMainClear);
     }
 
     private void prepareEuiccState(
             boolean isEuiccEnabled, boolean isEuiccProvisioned, boolean isDeveloper) {
-        doReturn(mActivity).when(mMasterClear).getContext();
-        doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
+        doReturn(mActivity).when(mMainClear).getContext();
+        doReturn(isEuiccEnabled).when(mMainClear).isEuiccEnabled(any());
         ContentResolver cr = mActivity.getContentResolver();
         Settings.Global.putInt(cr, Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mActivity, isDeveloper);

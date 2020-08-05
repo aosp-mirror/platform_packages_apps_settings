@@ -188,7 +188,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setMessage(
-                context.getString(R.string.master_clear_progress_text));
+                context.getString(R.string.main_clear_progress_text));
         return progressDialog;
     }
 
@@ -251,7 +251,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
         if (args != null) {
             mSubId = args.getInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
+            mEraseEsim = args.getBoolean(MainClear.ERASE_ESIMS_EXTRA);
         }
 
         mActivity = getActivity();
