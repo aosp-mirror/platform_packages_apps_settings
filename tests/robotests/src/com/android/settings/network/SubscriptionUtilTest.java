@@ -61,7 +61,7 @@ public class SubscriptionUtilTest {
 
     @Test
     public void getAvailableSubscriptions_nullInfoFromSubscriptionManager_nonNullResult() {
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(null);
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(null);
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
         assertThat(subs).isNotNull();
         assertThat(subs).isEmpty();
@@ -70,7 +70,7 @@ public class SubscriptionUtilTest {
     @Test
     public void getAvailableSubscriptions_oneSubscription_oneResult() {
         final SubscriptionInfo info = mock(SubscriptionInfo.class);
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(1);
@@ -80,7 +80,7 @@ public class SubscriptionUtilTest {
     public void getAvailableSubscriptions_twoSubscriptions_twoResults() {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
         final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2));
         final List<SubscriptionInfo> subs = SubscriptionUtil.getAvailableSubscriptions(mContext);
         assertThat(subs).isNotNull();
         assertThat(subs).hasSize(2);
@@ -101,7 +101,7 @@ public class SubscriptionUtilTest {
         when(info3.getSubscriptionId()).thenReturn(333);
         when(info3.getSimSlotIndex()).thenReturn(0);
 
-        when(mSubMgr.getSelectableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
+        when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(Arrays.asList(info1));
         when(mSubMgr.getAllSubscriptionInfoList()).thenReturn(Arrays.asList(info1, info2, info3));
 
         final UiccSlotInfo info2slot = mock(UiccSlotInfo.class);
