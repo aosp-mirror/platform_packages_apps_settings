@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Wi-Fi bekapcsolása"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Wi-Fi használata"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi használata"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi beállítások"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Vezeték nélküli hozzáférési pontok beállítása és kezelése"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi-jelszó: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Hotspot jelszava: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Automatikus csatlakozás"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"A telefon automatikusan csatlakozhat e hálózat közelében"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"A táblagép automatikusan csatlakozhat e hálózat közelében"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"A hálózathoz való csatlakozás engedélyezése hatótávolságon belül"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Eszköz hozzáadása"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Használjon QR-kódot, ha új eszközt szeretne hozzáadni a hálózathoz"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"A QR-kód nem érvényes formátum"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Rendszertanúsítvány használata"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne adja meg"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne hitelesítse"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Nincs megadva tanúsítvány. A kapcsolat nem privát jellegű lesz."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"A hálózat neve túl hosszú."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"A domain megadása kötelező."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Tanúsítvány szükséges."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Kapcsolódás"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi bekapcsolva"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Kapcsolódva a(z) <xliff:g id="NETWORK_NAME">%1$s</xliff:g> hálózathoz"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Csatlakozás a következőhöz: <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Csatlakozás…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Nem sikerült hálózathoz csatlakozni."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"A hálózat nincs hatókörön belül"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Néhány tartalomnál automatikusan megemeli a frissítés gyakoriságát 60-ról 90 Hz-re. Növeli az akkumulátorhasználatot."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"90 Hz-es frissítési gyakoriság kényszerítése"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Legnagyobb frissítési gyakoriság a kifinomultabb érintési érzékenység és a jobb minőségű animációk érdekében. Növeli az akkumulátorhasználatot."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Képernyőfigyelő"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Be / A képernyő nem kapcsol majd ki, ha Ön épp azt nézi"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Ütemezés beállítása"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Az akkumulátor élettartamának növelése"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Kikapcsolás töltés közben"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Az Akkumulátorkímélő mód <xliff:g id="PERCENT">%1$s</xliff:g>-os töltöttségi szint elérésekor kikapcsol"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Az Akkumulátorkímélő mód kikapcsol, ha a telefon akkumulátora <xliff:g id="PERCENT">%1$s</xliff:g>-os szintre emelkedik."</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"Az Akkumulátorkímélő mód kikapcsol, ha a táblagép akkumulátora <xliff:g id="PERCENT">%1$s</xliff:g>-os szintre emelkedik."</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"Az Akkumulátorkímélő mód kikapcsol, ha az eszköz akkumulátora <xliff:g id="PERCENT">%1$s</xliff:g>-os szintre emelkedik."</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Bekapcsolás"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Felhasználó hitelesítési adatai"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"A tárolt hitelesítési adatok megtekintése és módosítása"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Speciális"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Tárhelytípus"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Hardveresen támogatott"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Kizárólag szoftveres"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"A hitelesítési adatok nem érhetők el ennél a felhasználónál"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN-hez és alkalmazásokhoz telepítve"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Wi-Fi-hez telepítve"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Koppintson a táblagép megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Koppintson az eszköz megtekintéséhez"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Az idő, az értesítések és egyéb információk megtekintéséhez koppintson a képernyőre."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"Pánik gomb"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"A bekapcsológombot egymás után gyorsan ötször lenyomva vészhelyzeti műveleteket kezdeményezhet."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Értesítések ujjlenyomattal"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Ujjlenyomat csúsztatása"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Megtekintheti értesítéseit, ha ujját lefelé húzza a telefonja hátulján található ujjlenyomat-érzékelőn."</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Nincs hálózat. Próbálja újra."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(tiltott)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Nincs SIM-kártya"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Nincs SIM-kártya"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Nincs"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"A csatlakozáshoz SIM-kártya szükséges"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"A csatlakozáshoz <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> SIM-kártya szükséges"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Előnyben részesített hálózati mód: preferált WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Előnyben részesített hálózati mód: csak GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Előnyben részesített hálózati mód: csak WCDMA"</string>

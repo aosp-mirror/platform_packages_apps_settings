@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"‏Wi‑Fi آن کریں"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"‏Wi-Fi استعمال کریں"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"‏Wi-Fi کا استعمال کریں"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"‏Wi‑Fi ترتیبات"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"وائرلیس رسائی پوائنٹس کو ترتیب دیں اور ان کا نظم کریں"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏Wi-Fi کا پاس ورڈ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ہاٹ اسپاٹ کا پاس ورڈ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"خود کار طور پر منسلک کریں"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"فون کو خود کار طور پر اس نیٹ ورک کے قریب منسلک ہونے کی اجازت دیں"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ٹیبلیٹ کو خود کار طور پر اس نیٹ ورک کے قریب منسلک ہونے کی اجازت دیں"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"رینج میں ہونے پر اس نیٹ ورک سے کنکشن کی اجازت دیں"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"آلہ شامل کریں"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏اس نیٹ ورک میں کوئی آلہ شامل کرنے کے لیے QR کوڈ استعمال کریں"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏QR کوڈ درست فارمیٹ نہیں ہے"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"سسٹم سرٹیفکیٹس استعمال کریں"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"فراہم نہ کریں"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"توثیق نہ کریں"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"کوئی سرٹیفیکیٹ متعین نہیں کیا گیا۔ آپ کا کنکشن نجی نہیں ہو گا۔"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"نیٹ ورک کا نام کافی بڑا ہے۔"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"کوئی ڈومین مختص کرنا لازمی ہے۔"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"سرٹیفکیٹ درکار ہے۔"</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"مربوط کریں"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"‏Wi‑Fi کو آن کر دیا گیا"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> سے منسلک کردہ"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> سے منسلک ہو رہا ہے"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"منسلک ہو رہا ہے…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"نیٹ ورک سے مربوط ہونے میں ناکام رہا"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"نیٹ ورک رینج میں نہیں ہے"</string>
@@ -1193,7 +1192,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"ہموار ڈسپلے"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏کچھ مواد کے لیے 60 سے 90 Hz تک ریفریش کی شرح خودکار طور پر بڑھ جاتی ہے۔ بیٹری کے استعمال میں اضافہ کرتا ہے۔"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"ہموار ڈسپلے"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
+    <skip />
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"اعلی ترین ریفریش کرنے کی بہتر شرح کے ليے ٹچ کی کارکردگی اور اینیمیشن کوالٹی۔ بیٹری کے استعمال میں اضافہ کرتا ہے۔"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"اسکرین پر توجہ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"اگر آپ آن اسکرین دیکھ رہے ہیں تو یہ آف نہیں ہوگی"</string>
@@ -2592,9 +2592,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"شیڈیول سیٹ کریں"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"بیٹری لائف میں توسیع کریں"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"چارج ہونے پر آف کریں"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"جب آپ کا فون <xliff:g id="PERCENT">%1$s</xliff:g> ہو جاتا ہے تو بیٹری سیور آف ہو جاتی ہے"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"جب آپ کا ٹیبلیٹ <xliff:g id="PERCENT">%1$s</xliff:g> پر ہوتا ہے تو بیٹری سیور آف ہو جاتی ہے"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"جب آپ کا آلہ <xliff:g id="PERCENT">%1$s</xliff:g> پر ہوتا ہے تو بیٹری سیور آف جاتی ہے"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (4969508893424116609) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (6613068787945311001) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (8707774542183385479) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"آن کریں"</string>
@@ -2670,9 +2673,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"صارف کی اسناد"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"اسٹور کردہ اسناد دیکھیں اور ان میں ترمیم کریں"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"جدید ترین"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"اسٹوریج کی قسم"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"ہارڈ ویئر کے ذریعے تعاون یافتہ"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"صرف سافٹ ویئر"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"اس صارف کیلئے اسنادات دستیاب نہیں ہیں"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"‏VPN اور ایپس کیلئے انسٹال کردہ"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"‏Wi-Fi کیلئے انسٹال کردہ"</string>
@@ -4461,6 +4461,10 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ٹیبلیٹ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"آلہ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
+    <!-- no translation found for emergency_sos_gesture_screen_title (3318900013176821617) -->
+    <skip />
+    <!-- no translation found for emergency_sos_gesture_screen_summary (2673458710436425024) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"فنگر پرنٹ سوائپ کریں"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
@@ -4684,6 +4688,16 @@
     <string name="network_query_error" msgid="6406348372070035274">"نیٹ ورکس نہیں مل سکے۔ دوبارہ کوشش کریں۔"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ممنوع)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"‏کوئی SIM کارڈ نہیں ہے"</string>
+    <!-- no translation found for sim_card (6381158752066377709) -->
+    <skip />
+    <!-- no translation found for wifi_no_sim_card (7144290066491585672) -->
+    <skip />
+    <!-- no translation found for wifi_no_related_sim_card (3568255415415630510) -->
+    <skip />
+    <!-- no translation found for wifi_require_sim_card_to_connect (1524984445750423666) -->
+    <skip />
+    <!-- no translation found for wifi_require_specific_sim_card_to_connect (8136020469861668506) -->
+    <skip />
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"‏ترجیحی نیٹ ورک کی وضع: WCDMA ترجیحی"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"‏ترجیحی نیٹ ورک کی وضع: صرف GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"‏ترجیحی نیٹ ورک کی وضع: صرف WCDMA"</string>

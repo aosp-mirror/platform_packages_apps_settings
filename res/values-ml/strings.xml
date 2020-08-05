@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"വൈഫൈ"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"വൈഫൈ ഓണാക്കുക"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"വൈഫൈ"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"വൈഫൈ ഉപയോഗിക്കുക"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"വൈഫൈ ഉപയോഗിക്കുക"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"വൈഫൈ ക്രമീകരണങ്ങൾ"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"വൈഫൈ"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"വയർലെസ് ആക്‌സസ് പോയിന്റുകൾ സജ്ജീകരിക്കുക, നിയന്ത്രിക്കുക"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"വൈഫൈ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ഹോട്ട്‌സ്‌പോട്ടിന്റെ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"സ്വയമേവ കണ‌ക്റ്റ് ചെയ്യുക"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"ഈ നെറ്റ്‌വർക്കിന് സമീപമെത്തുമ്പോൾ സ്വയമേവ കണക്‌റ്റ് ചെയ്യാൻ ഫോണിനെ അനുവദിക്കുക"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ഈ നെറ്റ്‌വർക്കിന് സമീപമെത്തുമ്പോൾ സ്വയമേവ കണക്‌റ്റ് ചെയ്യാൻ ടാബ്‌ലെറ്റിനെ അനുവദിക്കുക"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"പരിധിയിൽ വരുമ്പോൾ ഈ നെറ്റവർക്കിലേക്ക് കണക്ഷൻ അനുവദിക്കുക"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ഉപകരണം ചേർക്കുക"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ഈ നെറ്റ്‌വർക്കിലേക്ക് ഒരു ഉപകരണം ചേർക്കാൻ ഒരു QR കോഡ് ഉപയോഗിക്കൂ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR കോഡ് സാധുവായ ഫോർമാറ്റിലല്ല"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"സിസ്റ്റം സർട്ടിഫിക്കറ്റുകൾ ഉപയോഗിക്കുക"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"നൽകരുത്"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"സാധൂകരിക്കരുത്"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"സർട്ടിഫിക്കറ്റൊന്നും വ്യക്തമാക്കിയിട്ടില്ല. നിങ്ങളുടെ കണക്ഷൻ സ്വകാര്യമായിരിക്കുകയില്ല."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"നെറ്റ്‌വർക്കിന്റെ പേര് ദൈർഘ്യമേറിയതാണ്."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ഒരു ഡൊമെയ്ൻ വ്യക്തമാക്കിയിരിക്കണം."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"സർട്ടിഫിക്കറ്റ് ആവശ്യമാണ്."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"കണക്റ്റ് ചെയ്യുക"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"വൈഫൈ ഓണാക്കി"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> എന്നതിലേക്ക് കണക്റ്റ് ചെയ്‌തു"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> എന്നതിലേക്ക് കണക്‌റ്റ് ചെയ്യുന്നു"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"കണക്റ്റ് ചെയ്യുന്നു…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"നെറ്റ്‌വർക്കിൽ കണക്റ്റുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"നെറ്റ്‌വർക്ക് പരിധിയിലില്ല"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"ചില ഉള്ളടക്കങ്ങളുടെ പുതുക്കൽ നിരക്ക് 60 Hz-ൽ നിന്നും 90 Hz-ലേക്ക് സ്വയമേവ ഉയർത്തുന്നു. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"സ്‌മൂത്ത് ഡിസ്പ്ലേ"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ഫോഴ്‌സ് 90 Hz പുതുക്കൽ നിരക്ക്"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"മെച്ചപ്പെട്ട സ്‌പർശന പ്രതികരണശേഷി, ആനിമേഷൻ നിലവാരം എന്നിവയ്‌ക്കുള്ള ഉയർന്ന പുതുക്കൽ നിരക്ക്. ബാറ്ററി ഉപയോഗം വർദ്ധിപ്പിക്കുന്നു."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"സ്ക്രീൻ ശ്രദ്ധ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ഓണാണ് / നിങ്ങൾ അതിൽ നോക്കുന്നുണ്ടെങ്കിൽ സ്ക്രീൻ ഓഫാക്കില്ല"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"ഷെഡ്യൂള്‍‌ സജ്ജീകരിക്കൂ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ബാറ്ററി ലൈഫ് നീട്ടുക"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ചാർജായാൽ ഓഫാക്കുക"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"നിങ്ങളുടെ ഫോൺ <xliff:g id="PERCENT">%1$s</xliff:g>-ത്തിൽ എത്തുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാകും"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് <xliff:g id="PERCENT">%1$s</xliff:g> എത്തുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാവും"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"നിങ്ങളുടെ ഉപകരണം <xliff:g id="PERCENT">%1$s</xliff:g> എത്തുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാവും"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"നിങ്ങളുടെ ഫോണിന്റെ ചാർജ് <xliff:g id="PERCENT">%1$s</xliff:g>-ത്തിന് മുകളിലാകുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാകും"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"നിങ്ങളുടെ ടാബ്‌ലെറ്റിന്റെ ചാർജ് <xliff:g id="PERCENT">%1$s</xliff:g>-ത്തിന് മുകളിലാകുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാകും"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"നിങ്ങളുടെ ഉപകരണത്തിന്റെ ചാർജ് <xliff:g id="PERCENT">%1$s</xliff:g>-ത്തിന് മുകളിലാകുമ്പോൾ ബാറ്ററി ലാഭിക്കൽ ഓഫാകും"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ഓണാക്കുക"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"ഉപയോക്തൃ ക്രെഡന്‍ഷ്യലുകൾ"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"സംഭരിച്ച ക്രെഡന്‍ഷ്യലുകൾ കാണുക, പരിഷ്ക്കരിക്കുക"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"വിപുലമായത്"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"സ്‌റ്റോറേജ് തരം"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"ഹാർഡ്‌വെയറിൽ സംഭരിച്ചത്"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"സോഫ്‌റ്റ്‌വെയറിൽ മാത്രം"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"ഈ ഉപയോക്താവിന് ക്രെഡൻഷ്യലുകളൊന്നും ലഭ്യമല്ല"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN, ആപ്‌സ് എന്നിവയ്ക്കായി ഇൻസ്റ്റാൾ ചെയ്തു"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"വൈഫൈ ഇൻസ്റ്റാൾ ചെയ്തു"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ടാബ്‌ലെറ്റ് പരിശോധിക്കാൻ, ടാപ്പ് ചെയ്യുക"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ഉപകരണം പരിശോധിക്കാൻ, ടാപ്പ് ചെയ്യുക"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"സമയവും അറിയിപ്പുകളും മറ്റ് വിവരങ്ങളും പരിശോധിക്കാൻ, നിങ്ങളുടെ സ്ക്രീനിൽ ടാപ്പ് ചെയ്യുക."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"പാനിക് ബട്ടൺ"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"പവർ ബട്ടൺ വേഗത്തിൽ 5 പ്രാവശ്യം അമർത്തുന്നതിലൂടെ അടിയന്തര SOS പ്രവർത്തനങ്ങൾ ആരംഭിക്കുക."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"അറിയിപ്പുകൾക്ക് ഫിംഗർപ്രിന്റ് സ്വൈപ്പ് ചെയ്യുക"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"ഫിംഗർപ്രിന്റ് സ്വൈപ്പ്"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"അറിയിപ്പുകൾ പരിശോധിക്കാൻ ഫോണിന്‍റെ പിൻവശത്തുള്ള ഫിംഗർപ്രിന്റ് സെൻസറിൽ താഴേക്ക് സ്വൈപ്പ് ചെയ്യുക."</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"നെറ്റ്‌വർക്കുകൾ കണ്ടെത്താനായില്ല. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(നിരോധിക്കപ്പെട്ടത്)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"സിം കാർഡില്ല"</string>
+    <string name="sim_card" msgid="6381158752066377709">"സിം"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"സിം ഇല്ല"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"ഒന്നുമില്ല"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"കണക്റ്റ് ചെയ്യാൻ സിം ആവശ്യമാണ്"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"കണക്റ്റ് ചെയ്യാൻ <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> സിം ആവശ്യമാണ്"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: WCDMA-യ്ക്ക് മുൻഗണന"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: GSM മാത്രം"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"മുൻഗണന നൽകുന്ന നെറ്റ്‌വർക്ക് മോഡ്: WCDMA മാത്രം"</string>

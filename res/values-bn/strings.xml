@@ -329,6 +329,9 @@
     <string name="security_settings_face_enroll_education_title_unlock_disabled" msgid="8810954233979716906">"যাচাইকরণ করতে আপনার ফেস ব্যবহার করুন"</string>
     <string name="security_settings_face_enroll_education_message" msgid="4308030157487176799"></string>
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"শুরু করুন"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"অ্যাক্সেসিবিলিটি ফেস আনলক বন্ধ থাকলে কিছু সেটআপ পদ্ধতি টকব্যাকের ক্ষেত্রে সঠিকভাবে কাজ নাও করতে পারে।"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"ফিরে যান"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"সেটআপ চালিয়ে যান"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"অ্যাক্সেসিবিলিটি সেট-আপ ব্যবহার"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -795,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"ওয়াই-ফাই"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"ওয়াই-ফাই চালু করুন"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"ওয়াই-ফাই"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"ওয়াই-ফাই ব্যবহার করুন"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ওয়াই-ফাই ব্যবহার করুন"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"ওয়াই-ফাই সেটিংস"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"ওয়াই-ফাই"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"ওয়্যারলেস অ্যাক্সেস পয়েন্ট সেট-আপ ও পরিচালনা করুন"</string>
@@ -929,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"ওয়াই-ফাইয়ের পাসওয়ার্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"হটস্পটের পাসওয়ার্ড: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"অটো-কানেক্ট"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"এই নেটওয়ার্কের কাছাকাছি আসলেই আপনার ফোন যাতে অটোমেটিক কানেক্ট হয়ে যায়, তার অনুমতি দিন"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"এই নেটওয়ার্কের কাছাকাছি আসলেই আপনার ট্যাবলেট যাতে অটোমেটিক কানেক্ট হয়ে যায়, তার অনুমতি দিন"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"সীমার মধ্যে থাকলে এই নেটওয়ার্কে কানেকশনের অনুমতি দিন"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ডিভাইস যোগ করুন"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"এই নেটওয়ার্কে কোনও ডিভাইস যোগ করার জন্য QR কোড ব্যবহার করুন"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR কোড ফর্ম্যাট ভুল"</string>
@@ -942,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"সিস্টেমের সার্টিফিকেটগুলি ব্যবহার করুন"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"প্রদান করবেন না"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"যাচাই করবেন না"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"কোনও সার্টিফিকেট নির্দিষ্ট করা নেই৷ আপনার কানেকশন ব্যক্তিগত করা হবে না৷"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"নেটওয়ার্কের নাম খুব বড়।"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"একটি ডোমেন উল্লেখ করা আবশ্যক৷"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"সার্টিফিকেট প্রয়োজন।"</string>
@@ -969,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"কানেক্ট করুন"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"ওয়াই-ফাই চালু আছে"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-এ কানেক্ট আছে"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>-এ কানেক্ট করা হচ্ছে"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"কানেক্ট করা হচ্ছে…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"নেটওয়ার্কের সাথে কানেক্ট করতে ব্যর্থ হয়েছে"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"নেটওয়ার্ক পরিষেবা সীমার মধ্যে নেই"</string>
@@ -1190,7 +1192,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"স্মুথ ডিসপ্লে"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"কিছু কন্টেন্টের রিফ্রেশ রেট অটোমেটিক ৬০ থেকে ৯০ Hz পর্যন্ত বেড়ে যায়। ব্যাটারির ব্যবহার বেড়ে যায়।"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"স্মুথ ডিসপ্লে"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
+    <skip />
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"সর্বাধিক রিফ্রেশ রেট সেট করে টাচ রেসপন্সিভনেস এবং অ্যানিমেশন কোয়ালিটি উন্নত করুন। ব্যাটারির খরচ বেড়ে যায়।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"স্ক্রিন অ্যাটেনশন"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"চালু আছে / আপনি এটির দিকে তাকিয়ে থাকলে স্ক্রিন বন্ধ হবে না"</string>
@@ -2589,9 +2592,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"সময়সূচি সেট করুন"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ব্যাটারি আরও বেশি সময় চলবে"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"চার্জের সময় বন্ধ করুন"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"আপনার ফোনের চার্জ <xliff:g id="PERCENT">%1$s</xliff:g> হলে ব্যাটারি সেভার বন্ধ হয়ে যায়"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"আপনার ট্যাবলেটের চার্জ <xliff:g id="PERCENT">%1$s</xliff:g> হলে ব্যাটারি সেভার বন্ধ হয়ে যায়"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"আপনার ডিভাইসের চার্জ <xliff:g id="PERCENT">%1$s</xliff:g> হলে ব্যাটারি সেভার বন্ধ হয়ে যায়"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (4969508893424116609) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (6613068787945311001) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (8707774542183385479) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"চালু করুন"</string>
@@ -2667,9 +2673,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"ব্যবহারকারীর সার্টিফিকেট"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"সংরক্ষিত সার্টিফিকেট দেখুন এবং সংশোধন করুন"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"উন্নত"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"স্টোরেজের প্রকার"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"হার্ডওয়্যার-ব্যাকড"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"শুধুমাত্র সফ্টওয়্যার"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"এই ব্যবহারকারীর জন্য প্রমাণপ্রত্রাদি উপলব্ধ নয়"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN এবং অ্যাপ্সের জন্য ইনস্টল করা হয়েছে"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"ওয়াই-ফাই এর জন্য ইনস্টল করা হয়েছে"</string>
@@ -4445,8 +4448,6 @@
     <string name="one_handed_timeout_short" msgid="304069319841702995">"৪ সেকেন্ড"</string>
     <string name="one_handed_timeout_medium" msgid="6723411319911799018">"৮ সেকেন্ড"</string>
     <string name="one_handed_timeout_long" msgid="6537332654662635890">"১২ সেকেন্ড"</string>
-    <!-- no translation found for one_handed_timeout_summary (9065351488686900738) -->
-    <skip />
     <string name="keywords_one_handed" msgid="969440592493034101">"রিচেবিলিটি"</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার স্ক্রিনে ডবল-ট্যাপ করুন।"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"ফোন চেক করতে সেটিকে হাতে নিন"</string>
@@ -4460,6 +4461,10 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ট্যাবলেট যাচাই করতে ট্যাপ করুন"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ডিভাইস যাচাই করতে ট্যাপ করুন"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"সময়, বিজ্ঞপ্তি এবং অন্যান্য তথ্য দেখতে আপনার স্ক্রিনে ট্যাপ করুন।"</string>
+    <!-- no translation found for emergency_sos_gesture_screen_title (3318900013176821617) -->
+    <skip />
+    <!-- no translation found for emergency_sos_gesture_screen_summary (2673458710436425024) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"বিজ্ঞপ্তির জন্য আঙ্গুলের ছাপ সোয়াইপ করা"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"আঙ্গুলের ছাপ সোয়াইপ করুন"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"আপনার বিজ্ঞপ্তিগুলি চেক করতে, আপনার ফোনের পিছনে আঙ্গুলের ছাপ নেওয়ার সেন্সরে নিচের দিকে সোয়াইপ করুন৷"</string>
@@ -4683,6 +4688,16 @@
     <string name="network_query_error" msgid="6406348372070035274">"নেটওয়ার্ক পাওয়া যায়নি। আবার চেষ্টা করুন।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(নিষিদ্ধ)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"কোনও সিম কার্ড নেই"</string>
+    <!-- no translation found for sim_card (6381158752066377709) -->
+    <skip />
+    <!-- no translation found for wifi_no_sim_card (7144290066491585672) -->
+    <skip />
+    <!-- no translation found for wifi_no_related_sim_card (3568255415415630510) -->
+    <skip />
+    <!-- no translation found for wifi_require_sim_card_to_connect (1524984445750423666) -->
+    <skip />
+    <!-- no translation found for wifi_require_specific_sim_card_to_connect (8136020469861668506) -->
+    <skip />
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"পছন্দের নেটওয়ার্ক মোড: বেছে নেওয়া WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"পছন্দের নেটওয়ার্ক মোড: শুধুমাত্র GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"পছন্দের নেটওয়ার্ক মোড: শুধুমাত্র WCDMA"</string>

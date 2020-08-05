@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"開啟 Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"使用 Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"使用 Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi 設定"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"設定、管理無線網路存取點"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi 密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"無線基地台密碼：<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"自動連線"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"允許手機在進入連線範圍內時自動連上這個網路"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"允許平板電腦在進入連線範圍內時自動連上這個網路"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"允許裝置在進入有效範圍時連線至這個網路"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"新增裝置"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"使用 QR 圖碼將裝置新增至這個網路"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR 圖碼格式無效"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"使用系統憑證"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"不進行驗證"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"你未指定任何憑證，因此無法為你設定私人連線。"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"網路名稱太長。"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"必須指定網域。"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"需要憑證。"</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"連線"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi‑Fi 已開啟"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"已連線到「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"正在連線到「<xliff:g id="NETWORK_NAME">%1$s</xliff:g>」"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"連線中…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"無法連線至網路"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"不在網路有效範圍內"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"自動將某些內容的重新整理頻率從 60 調高到 90 赫茲 (Hz)。請注意，開啟這項設定會增加電池用量。"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"流暢顯示"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"強制使用 90 Hz 重新整理頻率"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"強制使用最高重新整理頻率可提升觸控回應和動畫品質。請注意，開啟這項設定會增加電池用量。"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"螢幕感知"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"啟用/螢幕不會在你注視時關閉"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"設定時間表"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"延長電池續航力"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"充電時關閉"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"在你手機的電池電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉省電模式"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"在你平板電腦的電池電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉省電模式"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"在你裝置的電池電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉省電模式"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"在手機電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉節約耗電量模式"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"在平板電腦電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉節約耗電量模式"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"在裝置電量達 <xliff:g id="PERCENT">%1$s</xliff:g> 時關閉節約耗電量模式"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"開啟"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"使用者憑證"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"查看及修改已儲存的憑證"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"進階"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"儲存空間類型"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"硬體備份"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"僅限軟體"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"這位使用者無法存取憑證"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"已為 VPN 和應用程式安裝"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"已為 Wi-Fi 安裝"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"輕觸以查看平板電腦"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"輕觸以查看裝置"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"如要查看時間、通知和其他資訊，請輕觸螢幕。"</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"緊急按鈕"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"快速按下電源按鈕 5 次即可觸發緊急求救動作。"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"滑動指紋感應器以查看通知"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"滑動手指"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"將手指放在手機背面的指紋感應器上並向下滑動，即可查看通知。"</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"找不到網路，請再試一次。"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(已禁止)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"沒有 SIM 卡"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM 卡"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"沒有 SIM 卡"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"無"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"必須要有 SIM 卡才能連上網路"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"必須要有「<xliff:g id="WIRELESS_CARRIER">%s</xliff:g>」的 SIM 卡才能連上網路"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"首選網路模式：首選 WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"首選網路模式：僅限 GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"首選網路模式：僅限 WCDMA"</string>

@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wifi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Activar a wifi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wifi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Usar rede wifi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Usar wifi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Configuración da wifi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wifi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Configura e xestiona puntos de acceso sen fíos"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Contrasinal da rede wifi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Contrasinal da zona wifi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Conectar automaticamente"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Permite que o teléfono se conecte automaticamente a esta rede cando estea preto dela"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Permite que a tableta se conecte automaticamente a esta rede cando estea preto dela"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Permite que o dispositivo se conecte a esta rede cando estea dentro da súa zona de cobertura"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Engadir dispositivo"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utiliza un código QR para engadir un dispositivo a esta rede"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"O formato do código QR non é válido"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utilizar certificados do sistema"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Non fornecer"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Non validar"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Non se especificou ningún certificado. A túa conexión non será privada."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"O nome da rede é demasiado longo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Debe especificarse un dominio."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Necesítase un certificado."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Conectar"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"A wifi está activada"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Conectácheste á rede <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Conectando con <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Conectando…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Erro ao conectar á rede"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Estás fóra da zona de cobertura da rede"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Incrementa automaticamente a frecuencia de actualización de 60 a 90 Hz en determinados tipos de contido. Aumenta o uso da batería."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Forzar taxa de actualización de 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"A taxa de actualización máis alta para mellorar a resposta aos toques e a calidade das animacións. Aumenta o uso da batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Atención á pantalla"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado/A pantalla non se apagará se miras para ela"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer unha planificación"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Aumenta a duración da batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar cando a batería estea cargada"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"A función Aforro de batería desactívase cando o nivel de batería do teu teléfono está ao <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"A función Aforro de batería desactívase cando o nivel de batería da túa tableta sexa o <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"A función Aforro de batería desactívase cando o nivel de batería do teu dispositivo sexa o <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"A función Aforro de batería desactívase cando a carga do teléfono é superior ao <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"A función Aforro de batería desactívase cando a carga da tableta é superior ao <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"A función Aforro de batería desactívase cando a carga do dispositivo é superior ao <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activar"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Credenciais do usuario"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Mostra e modifica as credenciais almacenadas"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Configuración avanzada"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Tipo de almacenamento"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"Almacenado en hardware"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Só software"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"As credenciais non están dispoñibles para este usuario"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Instalada para a VPN e as aplicacións"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Instalada para a wifi"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Toca para consultar a tableta"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Tocar para consultar o dispositivo"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"Para consultar a hora, as notificacións e outra información, toca a pantalla."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"Botón de pánico"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"Inicia as accións SOS de emerxencia premendo rapidamente o botón de acendido 5 veces."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Pasar o dedo polo sensor de impresións dixitais para ver as notificacións"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Pasar dedo polo sensor"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Para consultar as notificacións, pasa o dedo cara abaixo sobre o sensor de impresión dixital situado na parte traseira do teléfono."</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Non se puido encontrar ningunha rede. Téntao de novo."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(rede non-permitida)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Non hai ningunha tarxeta SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Sen SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Ningunha"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"Require unha SIM para conectarse"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"Require unha SIM de <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> para conectarse"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Modo de rede preferido: WCDMA preferido"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Modo de rede preferido: só GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Modo de rede preferido: só WCDMA"</string>
