@@ -138,7 +138,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      * Check whether data is still make sense. If not, try recover.
      * @param context used to do validate check
      */
-    public void sanityCheck(Context context) {
+    public void validateCheck(Context context) {
         // do nothing
     }
 
