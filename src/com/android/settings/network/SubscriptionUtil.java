@@ -115,24 +115,7 @@ public class SubscriptionUtil {
             return null;
         }
 
-        if (subInfo.isEmbedded()) {
-            return subInfo;
-        }
-
-        // Look for physical SIM which presented in slots no mater active or not.
-        final UiccSlotInfo[] slotsInfo = getUiccSlotsInfo(context);
-        if (slotsInfo == null) {
-            return null;
-        }
-        for (UiccSlotInfo slotInfo : slotsInfo) {
-            if ((!slotInfo.getIsEuicc())
-                    && (slotInfo.getCardStateInfo() == CARD_STATE_INFO_PRESENT)
-                    && (slotInfo.getLogicalSlotIdx() == subInfo.getSimSlotIndex())
-                    && TextUtils.equals(slotInfo.getCardId(), subInfo.getCardString())) {
-                return subInfo;
-            }
-        }
-        return null;
+        return subInfo;
     }
 
     private static UiccSlotInfo [] getUiccSlotsInfo(Context context) {
