@@ -145,6 +145,15 @@ public class SavedBluetoothDeviceUpdaterTest {
     }
 
     @Test
+    public void onClick_Preference_connected_setActive() {
+        when(mCachedBluetoothDevice.isConnected()).thenReturn(true);
+
+        mBluetoothDeviceUpdater.onPreferenceClick(mPreference);
+
+        verify(mCachedBluetoothDevice).setActive();
+    }
+
+    @Test
     public void forceUpdate_findCachedBluetoothDeviceIsMatched_addPreference() {
         final List<BluetoothDevice> bluetoothDevices = new ArrayList<>();
         bluetoothDevices.add(mBluetoothDevice);
