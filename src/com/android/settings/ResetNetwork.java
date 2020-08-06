@@ -125,7 +125,7 @@ public class ResetNetwork extends InstrumentedFragment {
             args.putInt(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                     subscription.getSubscriptionId());
         }
-        args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA,
+        args.putBoolean(MainClear.ERASE_ESIMS_EXTRA,
                 mEsimContainer.getVisibility() == View.VISIBLE && mEsimCheckbox.isChecked());
         new SubSettingLauncher(getContext())
                 .setDestination(ResetNetworkConfirm.class.getName())
