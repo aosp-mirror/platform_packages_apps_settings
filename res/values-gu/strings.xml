@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"વાઇ-ફાઇ"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"વાઇ-ફાઇ ચાલુ કરો"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"વાઇ-ફાઇ"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"વાઇ-ફાઇનો ઉપયોગ કરો"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"વાઇ-ફાઇનો ઉપયોગ કરો"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"વાઇ-ફાઇ સેટિંગ્સ"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"વાઇ-ફાઇ"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"વાયરલેસ ઍક્સેસ બિંદુઓને સેટ અને સંચાલિત કરો"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"વાઇ-ફાઇનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"હૉટસ્પૉટનો પાસવર્ડ: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ઑટોમૅટિક રીતે કનેક્ટ કરો"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"આ નેટવર્કની નજીક ફોનને ઑટોમૅટિક રીતે કનેક્ટ થવાની મંજૂરી આપો"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"આ નેટવર્કની નજીક ટૅબ્લેટને ઑટોમૅટિક રીતે કનેક્ટ થવાની મંજૂરી આપો"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"જ્યારે રેન્જમાં હોય, ત્યારે આ નેટવર્કના કનેક્શનની મંજૂરી આપો"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ડિવાઇસ ઉમેરો"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"આ નેટવર્ક પર ડિવાઇસ ઉમેરવા માટે QR કોડનો ઉપયોગ કરો"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR કોડનું માન્ય ફોર્મેટ નથી"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"સિસ્ટમ પ્રમાણપત્રોનો ઉપયોગ કરો"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"પ્રદાન કરશો નહીં"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"માન્ય કરશો નહીં"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"કોઇ પ્રમાણપત્ર સ્પષ્ટ કરેલ નથી. તમારું કનેક્શન ખાનગી રહેશે નહીં."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"નેટવર્કનું નામ ખૂબ લાંબુ છે."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ડોમેનનો ઉલ્લેખ કરવો આવશ્યક છે."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"પ્રમાણપત્ર જરૂરી છે."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"કનેક્ટ કરો"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wifi ચાલુ કર્યું"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>થી કનેક્ટ થયા"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> સાથે કનેક્ટ કરી રહ્યાં છીએ"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"કનેક્ટ થઈ રહ્યું છે…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"નેટવર્ક સાથે કનેક્ટ કરવામાં નિષ્ફળ થયાં"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"નેટવર્ક રેન્જમાં નથી"</string>
@@ -1193,7 +1192,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"અમુક કન્ટેન્ટ માટે રિફ્રેશ થવાનો રેટ ઑટોમૅટિક રીતે 60થી વધારીને 90 Hz કરે છે. બૅટરીનો વપરાશ વધારે છે."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
+    <skip />
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"સ્પર્શના પ્રતિભાવમાં સુધારણા અને ઍનિમેશનની ક્વૉલિટી માટે ઉચ્ચતમ રિફ્રેશ રેટ. આ સુવિધા બૅટરીનો વપરાશ વધારે છે."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"સ્ક્રીન અટેન્શન"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"ચાલુ / જો તમે સ્ક્રીન તરફ જોતા હો, તો તમારી સ્ક્રીન બંધ થશે નહીં"</string>
@@ -2592,9 +2592,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"શેડ્યૂલ સેટ કરો"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"બૅટરી આવરદા વધારો"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"ચાર્જ થાય ત્યારે બંધ કરો"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"તમારો ફોન <xliff:g id="PERCENT">%1$s</xliff:g> પર હોય ત્યારે બૅટરી સેવર બંધ થાય છે"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"તમારું ટૅબ્લેટ <xliff:g id="PERCENT">%1$s</xliff:g> પર હોય ત્યારે બૅટરી સેવર બંધ થાય છે"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"તમારું ડિવાઇસ <xliff:g id="PERCENT">%1$s</xliff:g> પર હોય ત્યારે બૅટરી સેવર બંધ થાય છે"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (4969508893424116609) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (6613068787945311001) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (8707774542183385479) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ચાલુ કરો"</string>
@@ -2670,9 +2673,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"વપરાશકર્તા ઓળખપત્ર"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"સંગ્રહિત ઓળખપત્ર જુઓ અને સંશોધિત કરો"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"વિગતવાર"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"સંગ્રહ પ્રકાર"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"હાર્ડવેર-બેક્ડ"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"ફક્ત સોફ્ટવેર"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"આ વપરાશકર્તા માટે ઓળખપત્રો ઉપલબ્ધ નથી"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN અને ઍપ્લિકેશનો માટે ઇન્સ્ટૉલ કરેલ"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"વાઇ-ફાઇ માટે ઇન્સ્ટૉલ કરેલ"</string>
@@ -2888,7 +2888,7 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"મીટર કરેલ"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"મીટર કરેલ નથી"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"કેરિઅર ડેટા એકાઉન્ટિંગ તમારા ઉપકરણથી અલગ હોઈ શકે છે."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"કટોકટીમાં કૉલ જોડો"</string>
+    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"ઇમર્જન્સી કૉલ"</string>
     <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"કૉલ પર પાછા ફરો"</string>
     <string name="vpn_name" msgid="3806456074909253262">"નામ"</string>
     <string name="vpn_type" msgid="5533202873260826663">"પ્રકાર"</string>
@@ -4461,6 +4461,10 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ટૅબ્લેટ ચેક કરવા માટે ટૅપ કરો"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ડિવાઇસ ચેક કરવા માટે ટૅપ કરો"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"સમય, નોટિફિકેશન અને અન્ય માહિતી ચેક કરવા માટે, તમારી સ્ક્રીન પર ટૅપ કરો."</string>
+    <!-- no translation found for emergency_sos_gesture_screen_title (3318900013176821617) -->
+    <skip />
+    <!-- no translation found for emergency_sos_gesture_screen_summary (2673458710436425024) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"નોટિફિકેશનો માટે ફિંગરપ્રિન્ટને સ્વાઇપ કરો"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"ફિંગરપ્રિન્ટને સ્વાઇપ કરો"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"તમારા નોટિફિકેશનને જોવા માટે, તમારા ફોનની પાછળની બાજુએ ફિંગરપ્રિન્ટ સેન્સર પર નીચે સ્વાઇપ કરો."</string>
@@ -4684,6 +4688,16 @@
     <string name="network_query_error" msgid="6406348372070035274">"નેટવર્ક શોધી શક્યાં નથી. ફરી પ્રયાસ કરો."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(પ્રતિબંધિત)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"કોઈ સિમ કાર્ડ નથી"</string>
+    <!-- no translation found for sim_card (6381158752066377709) -->
+    <skip />
+    <!-- no translation found for wifi_no_sim_card (7144290066491585672) -->
+    <skip />
+    <!-- no translation found for wifi_no_related_sim_card (3568255415415630510) -->
+    <skip />
+    <!-- no translation found for wifi_require_sim_card_to_connect (1524984445750423666) -->
+    <skip />
+    <!-- no translation found for wifi_require_specific_sim_card_to_connect (8136020469861668506) -->
+    <skip />
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"પસંદગીનો નેટવર્ક મોડ: WCDMA પસંદ કરેલ છે"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"પસંદગીનો નેટવર્ક મોડ: માત્ર GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"પસંદગીનો નેટવર્ક મોડ: માત્ર WCDMA"</string>

@@ -331,7 +331,7 @@
     <string name="security_settings_face_enroll_education_start" msgid="8830924400907195590">"Стартиране"</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_message" msgid="4681495507974718824">"Ако функцията за отключване с лице е изключена, някои стъпки за настройване може да не работят правилно с TalkBack."</string>
     <string name="security_settings_face_enroll_education_accessibility_dialog_negative" msgid="7872647360361245461">"Назад"</string>
-    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Настройване: Напред"</string>
+    <string name="security_settings_face_enroll_education_accessibility_dialog_positive" msgid="3148077647572203458">"Продължаване за настройване"</string>
     <string name="security_settings_face_enroll_introduction_accessibility" msgid="5748221179069430975">"Настр. на ф-ята за достъпност: Ползване"</string>
     <string name="security_settings_face_enroll_introduction_accessibility_expanded" msgid="6763509014732769185"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Включване на Wi‑Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Използване на Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Използване на Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Настройки за Wi‑Fi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"Задаване и управление на безжични точки за достъп"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Парола за Wi-Fi: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"Парола за точката за достъп: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"Автоматично свързване"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"Разрешаване телефонът автоматично да се свързва в района на тази мрежа"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"Разрешаване таблетът автоматично да се свързва в района на тази мрежа"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"Разрешете свързване с тази мрежа, когато е в обхват"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"Добавяне на устройство"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Използвайте код за бърза реакция, за да добавите устройство към тази мрежа"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Невалиден формат на кода за бърза реакция"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Използване на системни сертификати"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Без предоставяне"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Без удостоверяване"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"Не е посочен сертификат. Връзката ви няма да бъде частна."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Името на мрежата е твърде дълго."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Трябва да посочите домейн."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Изисква се сертификат."</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"Свързване"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Функцията за Wi-Fi е включена"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Установена е връзка с(ъс) <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"Свързване към <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Свързва се…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Свързването с мрежата не бе успешно"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Мрежата не е в обхват"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавно показване"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично увеличава честотата на опресняване от 60 на 90 Hz за част от съдържанието. По-интензивно използване на батерията."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Плавно показване"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"Принудителна честота на опресняване при 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Най-висока честота на опресняване за по-добро реагиране при докосване и качество на анимациите. По-интензивно използване на батерията."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Внимание към екрана"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Вкл. – Екранът няма да се изключи, ако гледате в него"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Задаване на график"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Удължаване на живота на батерията"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Изключване при зареждане"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"Режимът за запазване на батерията се изключва, когато телефонът ви е зареден на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"Режимът за запазване на батерията се изключва, когато таблетът ви е зареден на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"Режимът за запазване на батерията се изключва, когато устройството ви е заредено на <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"Режимът за запазване на батерията се изключва, когато телефонът ви се зареди над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"Режимът за запазване на батерията се изключва, когато таблетът ви се зареди над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"Режимът за запазване на батерията се изключва, когато устройството ви се зареди над <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Включване"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"Идентиф. данни на потребителя"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Преглед и промяна на съхранените идентификационни данни"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Разширени"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"Тип на хранилището"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"С хардуерна поддръжка"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"Само софтуерно"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Идентификационните данни не са налице за този потребител"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"Инсталирани за виртуалната частна мрежа (VPN) и приложения"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Инсталирани за Wi-Fi"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"Докоснете за проверка на таблета"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"Докоснете за проверка на устройството"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"За да проверите часа, известията и друга информация, докоснете екрана."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"Паник бутон"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"Стартирайте действията при спешни случаи (SOS) с бързо петкратно натискане на бутона за захранване."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Преглед на известията с плъзване през сензора за отпечатъци"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Плъзване през сензора за отпечат."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"Не можаха да бъдат намерени мрежи. Опитайте отново."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(забранено)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"Няма SIM карта"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"Няма SIM карта"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"Няма"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"За установяването на връзка се изисква SIM карта"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"За установяването на връзка се изисква SIM карта от <xliff:g id="WIRELESS_CARRIER">%s</xliff:g>"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"Предпочитан режим на мрежата: Предпочита се WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"Предпочитан режим на мрежата: Само GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"Предпочитан режим на мрежата: Само WCDMA"</string>

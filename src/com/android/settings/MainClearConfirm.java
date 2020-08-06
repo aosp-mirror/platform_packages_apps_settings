@@ -64,8 +64,8 @@ import com.google.android.setupdesign.GlifLayout;
  *
  * This is the confirmation screen.
  */
-public class MasterClearConfirm extends InstrumentedFragment {
-    private final static String TAG = "MasterClearConfirm";
+public class MainClearConfirm extends InstrumentedFragment {
+    private static final String TAG = "MainClearConfirm";
 
     @VisibleForTesting View mContentView;
     private boolean mEraseSdCard;
@@ -103,7 +103,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                         mProgressDialog.hide();
                         if (getActivity() != null) {
                             getActivity().setRequestedOrientation(mOldOrientation);
-                            doMasterClear();
+                            doMainClear();
                         }
                     }
 
@@ -121,7 +121,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                     }
                 }.execute();
             } else {
-                doMasterClear();
+                doMainClear();
             }
         }
 
@@ -130,9 +130,9 @@ public class MasterClearConfirm extends InstrumentedFragment {
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
             progressDialog.setTitle(
-                    getActivity().getString(R.string.master_clear_progress_title));
+                    getActivity().getString(R.string.main_clear_progress_title));
             progressDialog.setMessage(
-                    getActivity().getString(R.string.master_clear_progress_text));
+                    getActivity().getString(R.string.main_clear_progress_text));
             return progressDialog;
         }
     };
@@ -180,11 +180,11 @@ public class MasterClearConfirm extends InstrumentedFragment {
         return !WizardManagerHelper.isDeviceProvisioned(getActivity());
     }
 
-    private void doMasterClear() {
+    private void doMainClear() {
         Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
         intent.setPackage("android");
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
+        intent.putExtra(Intent.EXTRA_REASON, "MainClearConfirm");
         intent.putExtra(Intent.EXTRA_WIPE_EXTERNAL_STORAGE, mEraseSdCard);
         intent.putExtra(Intent.EXTRA_WIPE_ESIMS, mEraseEsims);
         getActivity().sendBroadcast(intent);
@@ -200,7 +200,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getActivity())
-                        .setText(R.string.master_clear_button_text)
+                        .setText(R.string.main_clear_button_text)
                         .setListener(mFinalClickListener)
                         .setButtonType(ButtonType.OTHER)
                         .setTheme(R.style.SudGlifButton_Primary)
@@ -230,7 +230,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                 getActivity(), UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
         if (RestrictedLockUtilsInternal.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
-            return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
+            return inflater.inflate(R.layout.main_clear_disallowed_screen, null);
         } else if (admin != null) {
             new ActionDisabledByAdminDialogHelper(getActivity())
                     .prepareDialogBuilder(UserManager.DISALLOW_FACTORY_RESET, admin)
@@ -238,7 +238,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
                     .show();
             return new View(getActivity());
         }
-        mContentView = inflater.inflate(R.layout.master_clear_confirm, null);
+        mContentView = inflater.inflate(R.layout.main_clear_confirm, null);
         setUpActionBarAndTitle();
         establishFinalConfirmationState();
         setAccessibilityTitle();
@@ -260,7 +260,7 @@ public class MasterClearConfirm extends InstrumentedFragment {
     void setSubtitle() {
         if (mEraseEsims) {
             ((TextView) mContentView.findViewById(R.id.sud_layout_description))
-                .setText(R.string.master_clear_final_desc_esim);
+                .setText(R.string.main_clear_final_desc_esim);
         }
     }
 
@@ -270,9 +270,9 @@ public class MasterClearConfirm extends InstrumentedFragment {
 
         Bundle args = getArguments();
         mEraseSdCard = args != null
-                && args.getBoolean(MasterClear.ERASE_EXTERNAL_EXTRA);
+                && args.getBoolean(MainClear.ERASE_EXTERNAL_EXTRA);
         mEraseEsims = args != null
-                && args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
+                && args.getBoolean(MainClear.ERASE_ESIMS_EXTRA);
     }
 
     @Override

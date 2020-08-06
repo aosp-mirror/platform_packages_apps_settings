@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"Wi-Fi खोल्नुहोस्"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"Wi-Fi प्रयोग गर्नुहोस्"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"Wi-Fi प्रयोग गर्नुहोस्"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"Wi-Fi सेटिङहरू"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"ताररहित पहुँच बिन्दुहरू सेटअप र प्रबन्ध गर्नुहोस्"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"Wi-Fi को पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"हटस्पटको पासवर्ड: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"स्वतः जडान"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"फोनलाई यो नेटवर्कका छेउमा हुँदा स्वतः कनेक्ट हुन दिनुहोस्"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"ट्याब्लेटलाई यो नेटवर्कका छेउमा हुँदा स्वतः जोडिन दिनुहोस्"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"दायराभित्र भएको बेला यो नेटवर्कमा जडान हुने अनुमति दिनुहोस्"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"यन्त्र थप्नुहोस्"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"यो नेटवर्कमा थप्नका ला्गि कुनै QR प्रयोग गर्नुहोस्"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR कोडको ढाँचा मान्य छैन"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"प्रणालीका प्रमाणपत्रहरू प्रयोग गर्नुहोस्"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"प्रदान नगर्नुहोस्"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"प्रमाणित नगर्नुहोस्"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"कुनै प्रमाणपत्र निर्दिष्ट गरिएको छैन। तपाईंको जडान निजी हुने छैन।"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"नेटवर्कको नाम धेरै लामो भयो।"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"डोमेन तोक्नु पर्छ"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"प्रमाणपत्र चाहिन्छ।"</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"जडान गर्नुहोस्"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"Wi-Fi सक्रिय गरियो"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> मा कनेक्ट गरियो"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g> मा कनेक्ट गरिँदै"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"जडान गर्दै…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"सञ्जालमा जडान गर्न विफल"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"नेटवर्क दायरामा छैन"</string>
@@ -1193,7 +1192,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"केही सामग्रीका लागि रिफ्रेस रेट स्वतः ६० हर्ट्जबाट बढाएर ९० हर्ट्ज बनाउँछ। ब्याट्रीको उपयोग बढाउँछ।"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
+    <skip />
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"स्क्रिनमा छुँदा स्क्रिनले जनाउने प्रतिक्रिया र एनिमेसनको गुणस्तर सुधार्न उच्चतम रिफ्रेस रेट। ब्याट्रीको खपत बढाउँछ।"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"स्क्रिनमा हेरिरहेको पहिचान गर्ने सुविधा"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"सक्रिय / तपाईं स्क्रिनमा हेर्दै हुनुहुन्छ भने यो बन्द हुने छैन"</string>
@@ -2592,9 +2592,12 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"समयतालिका सेट गर्नुहोस्‌"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"ब्याट्रीको खपत बढाउनुहोस्"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"चार्ज भएपछि अफ गर्नुहोस्"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"तपाईंको फोन <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"तपाईंको ट्याब्लेटको चार्ज <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"तपाईंको यन्त्र <xliff:g id="PERCENT">%1$s</xliff:g> भएपछि ब्याट्री सेभर अफ हुन्छ"</string>
+    <!-- no translation found for battery_saver_sticky_description_new (4969508893424116609) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (6613068787945311001) -->
+    <skip />
+    <!-- no translation found for battery_saver_sticky_description_new (8707774542183385479) -->
+    <skip />
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"सक्रिय गर्नुहोस्"</string>
@@ -2670,9 +2673,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"प्रयोगकर्ताका प्रमाणपत्रहरू"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"भण्डारमा भएका प्रमाणपत्रहरू हेर्नुहोस् र परिमार्जन गर्नुहोस्"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"उन्नत"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"भण्डारण प्रकार"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"हार्डवेयर-ब्याक गरिएको"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"सफ्टवेयर मात्र"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"साखकर्ताहरू यस प्रयोगकर्ताका लागि उपलव्ध छैन"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"VPN र अनुप्रयोगहरूका लागि स्थापना गरिएको"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"Wi-Fi का लागि स्थापना गरिएको"</string>
@@ -4461,6 +4461,10 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ट्याब्लेटको जाँच गर्न ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"यन्त्रको जाँच गर्न ट्याप गर्नुहोस्"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"समय, सूचना र अन्य जानकारी हेर्न आफ्नो यन्त्रको स्क्रिनमा ट्याप गर्नुहोस्।"</string>
+    <!-- no translation found for emergency_sos_gesture_screen_title (3318900013176821617) -->
+    <skip />
+    <!-- no translation found for emergency_sos_gesture_screen_summary (2673458710436425024) -->
+    <skip />
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"सूचनाहरू प्राप्त गर्न फिंगरप्रिन्ट स्वाइप गर्नुहोस्"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"फिंगरप्रिन्ट स्वाइप गर्नु"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"अफ्ना सूचनाहरूको जाँच गर्न आफ्नो फोनको पछाडिको भागमा रहेको फिंगरप्रिन्ट सेन्सरमा तलतिर स्वाइप गर्नुहोस्।"</string>
@@ -4684,6 +4688,16 @@
     <string name="network_query_error" msgid="6406348372070035274">"नेटवर्कहरू फेला पार्न सकिएन। फेरि प्रयास गर्नुहोस्।"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(निषेध गरिएको)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"SIM कार्ड छैन"</string>
+    <!-- no translation found for sim_card (6381158752066377709) -->
+    <skip />
+    <!-- no translation found for wifi_no_sim_card (7144290066491585672) -->
+    <skip />
+    <!-- no translation found for wifi_no_related_sim_card (3568255415415630510) -->
+    <skip />
+    <!-- no translation found for wifi_require_sim_card_to_connect (1524984445750423666) -->
+    <skip />
+    <!-- no translation found for wifi_require_specific_sim_card_to_connect (8136020469861668506) -->
+    <skip />
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"रुचाइएको नेटवर्क मोड: WCDMA रुचाइएको"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"रुचाइएको नेटवर्क मोड: GSM मात्र"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"रुचाइएको नेटवर्क मोड: WCDMA मात्र"</string>

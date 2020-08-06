@@ -83,16 +83,16 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutListener {
-    private static final String TAG = "MasterClear";
+public class MainClear extends InstrumentedFragment implements OnGlobalLayoutListener {
+    private static final String TAG = "MainClear";
 
     @VisibleForTesting
     static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting
     static final int CREDENTIAL_CONFIRM_REQUEST = 56;
 
-    private static final String KEY_SHOW_ESIM_RESET_CHECKBOX
-            = "masterclear.allow_retain_esim_profiles_after_fdr";
+    private static final String KEY_SHOW_ESIM_RESET_CHECKBOX =
+            "masterclear.allow_retain_esim_profiles_after_fdr";
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
@@ -142,7 +142,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(getActivity(), this);
         return builder.setRequestCode(request)
-                .setTitle(res.getText(R.string.master_clear_short_title))
+                .setTitle(res.getText(R.string.main_clear_short_title))
                 .show();
     }
 
@@ -188,9 +188,9 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
         args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
         new SubSettingLauncher(getContext())
-                .setDestination(MasterClearConfirm.class.getName())
+                .setDestination(MainClearConfirm.class.getName())
                 .setArguments(args)
-                .setTitleRes(R.string.master_clear_confirm_title)
+                .setTitleRes(R.string.main_clear_confirm_title)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
@@ -296,7 +296,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         if (mScrollView != null) {
             mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
-        mScrollView = mContentView.findViewById(R.id.master_clear_scrollview);
+        mScrollView = mContentView.findViewById(R.id.main_clear_scrollview);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -354,9 +354,9 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         loadAccountList(um);
         final StringBuffer contentDescription = new StringBuffer();
-        final View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
-        getContentDescription(masterClearContainer, contentDescription);
-        masterClearContainer.setContentDescription(contentDescription);
+        final View mainClearContainer = mContentView.findViewById(R.id.main_clear_container);
+        getContentDescription(mainClearContainer, contentDescription);
+        mainClearContainer.setContentDescription(contentDescription);
 
         // Set the status of initiateButton based on scrollview
         mScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
@@ -424,7 +424,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setPrimaryButton(
                 new FooterButton.Builder(getActivity())
-                        .setText(R.string.master_clear_button_text)
+                        .setText(R.string.main_clear_button_text)
                         .setListener(mInitiateListener)
                         .setButtonType(ButtonType.OTHER)
                         .setTheme(R.style.SudGlifButton_Primary)
@@ -475,15 +475,15 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
             final int profileId = userInfo.id;
             final UserHandle userHandle = new UserHandle(profileId);
             Account[] accounts = mgr.getAccountsAsUser(profileId);
-            final int N = accounts.length;
-            if (N == 0) {
+            final int accountLength = accounts.length;
+            if (accountLength == 0) {
                 continue;
             }
-            accountsCount += N;
+            accountsCount += accountLength;
 
             AuthenticatorDescription[] descs = AccountManager.get(context)
                     .getAuthenticatorTypesAsUser(profileId);
-            final int M = descs.length;
+            final int descLength = descs.length;
 
             if (profilesSize > 1) {
                 View titleView = Utils.inflateCategoryHeader(inflater, contents);
@@ -493,10 +493,10 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                 contents.addView(titleView);
             }
 
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < accountLength; i++) {
                 Account account = accounts[i];
                 AuthenticatorDescription desc = null;
-                for (int j = 0; j < M; j++) {
+                for (int j = 0; j < descLength; j++) {
                     if (account.type.equals(descs[j].type)) {
                         desc = descs[j];
                         break;
@@ -524,7 +524,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                     icon = context.getPackageManager().getDefaultActivityIcon();
                 }
 
-                View child = inflater.inflate(R.layout.master_clear_account, contents, false);
+                View child = inflater.inflate(R.layout.main_clear_account, contents, false);
                 ((ImageView) child.findViewById(android.R.id.icon)).setImageDrawable(icon);
                 ((TextView) child.findViewById(android.R.id.title)).setText(account.name);
                 contents.addView(child);
@@ -552,7 +552,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
                 .hasBaseUserRestriction(context, UserManager.DISALLOW_FACTORY_RESET,
                         UserHandle.myUserId());
         if (disallow && !Utils.isDemoUser(context)) {
-            return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
+            return inflater.inflate(R.layout.main_clear_disallowed_screen, null);
         } else if (admin != null) {
             new ActionDisabledByAdminDialogHelper(getActivity())
                     .prepareDialogBuilder(UserManager.DISALLOW_FACTORY_RESET, admin)
@@ -561,7 +561,7 @@ public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutL
             return new View(getContext());
         }
 
-        mContentView = inflater.inflate(R.layout.master_clear, null);
+        mContentView = inflater.inflate(R.layout.main_clear, null);
 
         establishInitialState();
         return mContentView;

@@ -832,7 +832,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"‏הפעל את ה-Wi-Fi"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi-Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"‏שימוש ב-Wi-Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"‏שימוש ב-Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"‏הגדרות Wi-Fi"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"הגדרה וניהול של נקודות גישה אלחוטיות"</string>
@@ -966,8 +966,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏סיסמת ה-Wi‑Fi היא: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"סיסמה של נקודה לשיתוף אינטרנט: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"חיבור אוטומטי"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"הטלפון יוכל להתחבר באופן אוטומטי בסביבת הרשת הזו"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"הטאבלט יוכל להתחבר באופן אוטומטי בסביבת הרשת הזו"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"יש להפעיל את החיבור לרשת זו כשנמצאים בטווח"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"הוספת מכשיר"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"‏אפשר להשתמש בקוד QR כדי להוסיף מכשיר לרשת זו"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"‏קוד QR אינו בפורמט חוקי"</string>
@@ -979,7 +978,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"השתמש באישורי מערכת"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"ללא אישור"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"ללא אימות"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"לא הוגדר אישור. החיבור שלך לא יהיה פרטי."</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"שם הרשת ארוך מדי."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"חובה לציין דומיין."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"נדרש אישור."</string>
@@ -1006,6 +1004,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"התחברות"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"‏Wi-Fi הופעל"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"יש חיבור אל <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"מתבצעת התחברות אל <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"מתחבר…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"נכשל הניסיון להתחבר לרשת"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"הרשת לא בטווח"</string>
@@ -1233,7 +1232,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"תצוגה חלקה"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏קצב הרענון עולה באופן אוטומטי מ-60 ל-Hz‏90 לחלק מהתוכן. פעולה זו מגבירה את השימוש בסוללה."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"תצוגה חלקה"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"אילוץ קצב רענון של 90 הרץ"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"קצב הרענון הגבוה ביותר לתגובה משופרת למגע ולאיכות אנימציה טובה יותר. פעולה זו מגבירה את השימוש בסוללה."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"המסך נשאר דלוק"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"התכונה פועלת / המסך לא נכבה כשמביטים בו"</string>
@@ -2668,9 +2667,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"הגדרת לוח זמנים"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"הארכת חיי הסוללה"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"כיבוי כשהסוללה טעונה"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"\'חיסכון בסוללה\' כבה כשהטלפון מגיע ל-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"\'חיסכון בסוללה\' כבה כשהטאבלט מגיע ל-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"\'חיסכון בסוללה\' כבה כשהמכשיר מגיע ל-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"\'חיסכון בסוללה\' כבה כשטעינת הטלפון גבוהה מ-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"\'חיסכון בסוללה\' כבה כשטעינת הטאבלט גבוהה מ-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"\'חיסכון בסוללה\' כבה כשטעינת המכשיר גבוהה מ-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"הפעלה"</string>
@@ -2746,9 +2745,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"פרטי משתמש"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"הצגה ועריכה של פרטי כניסה מאוחסנים"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"אפשרויות מתקדמות"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"סוג אחסון"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"מגובה באמצעות חומרה"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"תוכנה בלבד"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"פרטי כניסה אינם זמינים עבור המשתמש הזה"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"‏מותקן עבור VPN ואפליקציות"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"‏מותקן עבור Wi-Fi"</string>
@@ -3743,9 +3739,9 @@
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"הפעלת ההרשאה \'נא לא להפריע\'"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"אין אפליקציות מותקנות שביקשו גישה אל \'נא לא להפריע\'"</string>
     <string name="loading_notification_apps" msgid="1458413761470945269">"טוען אפליקציות..."</string>
-    <string name="app_notifications_off_desc" msgid="6691342160980435901">"‏לבקשתך, מערכת Android חוסמת במכשיר זה הצגת התראות מאפליקציה זו"</string>
-    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏לבקשתך, מערכת Android חוסמת במכשיר הצגה של קטגוריית התראות זו"</string>
-    <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android חוסמת במכשיר הצגה של מקבץ הודעות זה"</string>
+    <string name="app_notifications_off_desc" msgid="6691342160980435901">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מהאפליקציה הזו"</string>
+    <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות ששייכות לקטגוריה הזו"</string>
+    <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏לבקשתך, מערכת Android לא מאפשרת להציג במכשיר הזה התראות מקבוצה זו"</string>
     <string name="notification_channels" msgid="1502969522886493799">"קטגוריות"</string>
     <string name="notification_channels_other" msgid="18159805343647908">"אחר"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="483490958130993160">
@@ -4607,6 +4603,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"הקשה לבדיקת הטאבלט"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"הקשה לבדיקת המכשיר"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"כדי להתעדכן מה השעה, לבדוק התראות ולהציג מידע נוסף, צריך להקיש על המסך."</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"לחצן מצוקה"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"כדי להפעיל את הפעולות למקרה חירום, יש ללחוץ על לחצן ההפעלה 5 פעמים במהירות."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"החלקת טביעת אצבע לקריאת התראות"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"החלקה של טביעת אצבע"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"כדי לבדוק התראות יש להחליק כלפי מטה בחיישן טביעות האצבע שבחלק האחורי של הטלפון."</string>
@@ -4844,6 +4842,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"לא נמצאו רשתות. אפשר לנסות שוב."</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(אסור)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"‏אין כרטיס SIM"</string>
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"‏אין כרטיס SIM"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"‏אין מידע על רשת ה-Wi-Fi"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"‏נדרש כרטיס SIM כדי להתחבר לרשת ה-Wi-Fi"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"‏נדרש כרטיס SIM של <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> כדי להתחבר לרשת ה-Wi-Fi"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"‏מצב רשת מועדפת: WCDMA מועדף"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"‏מצב רשת מועדפת: GSM בלבד"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"‏מצב רשת מועדפת: WCDMA בלבד"</string>

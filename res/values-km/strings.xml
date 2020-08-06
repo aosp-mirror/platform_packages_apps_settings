@@ -798,7 +798,7 @@
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="4957267477820468553">"បើក​វ៉ាយហ្វាយ"</string>
     <string name="wifi_settings" msgid="8313301946393559700">"Wi‑Fi"</string>
-    <string name="wifi_settings_master_switch_title" msgid="6043556596728888">"ប្រើ Wi‑Fi"</string>
+    <string name="wifi_settings_primary_switch_title" msgid="628360786662947258">"ប្រើ Wi‑Fi"</string>
     <string name="wifi_settings_category" msgid="3523464780563778321">"ការកំណត់​វ៉ាយហ្វាយ"</string>
     <string name="wifi_settings_title" msgid="3879649725059512799">"Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="784074686763572811">"រៀបចំ &amp; គ្រប់គ្រង​ចំណុច​ចូល​ដំណើរការ​ឥត​ខ្សែ"</string>
@@ -932,8 +932,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"ពាក្យសម្ងាត់ Wi‑Fi៖ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ពាក្យសម្ងាត់​ហតស្ប៉ត៖ <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"ភ្ជាប់ដោយ​ស្វ័យប្រវត្តិ"</string>
-    <string name="wifi_auto_connect_summary" product="default" msgid="5383749408911542382">"អនុញ្ញាតឱ្យ​ទូរសព្ទភ្ជាប់ដោយស្វ័យប្រវត្តិ នៅពេលនៅជិត​បណ្ដាញនេះ"</string>
-    <string name="wifi_auto_connect_summary" product="tablet" msgid="5209799194164396401">"អនុញ្ញាតឱ្យ​ថេប្លេតភ្ជាប់ដោយស្វ័យប្រវត្តិ នៅពេលនៅជិត​បណ្ដាញនេះ"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"អនុញ្ញាត​ឱ្យភ្ជាប់​ជាមួយ​បណ្ដាញនេះ នៅពេល​មានសេវា"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"បញ្ចូល​ឧបករណ៍"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ប្រើកូដ QR ដើម្បី​បញ្ចូល​ឧបករណ៍​ទៅ​បណ្តាញ​នេះ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"កូដ QR មិនមែនជា​ទម្រង់​ដែលត្រឹមត្រូវ​ទេ"</string>
@@ -945,7 +944,6 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"ប្រើវិញ្ញាបនបត្រប្រព័ន្ធ"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"កុំផ្តល់"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"កុំបញ្ជាក់សុពលភាព"</string>
-    <string name="wifi_do_not_validate_eap_server_warning" msgid="5741728006175181647">"មិនមានវិញ្ញាបនបត្រដែលបានបញ្ជាក់ទេ។ ការតភ្ជាប់របស់អ្នកនឹងមិនមានលក្ខណៈឯកជនទេ។"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"ឈ្មោះ​បណ្តាញ​វែងពេក​ហើយ។"</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"ត្រូវតែបញ្ជាក់ដែន"</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"តម្រូវឱ្យ​មាន​វិញ្ញាបនបត្រ។"</string>
@@ -972,6 +970,7 @@
     <string name="wifi_connect" msgid="2481467560349907397">"តភ្ជាប់"</string>
     <string name="wifi_turned_on_message" msgid="8069855406962662881">"បានបើក Wi‑Fi"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"បានភ្ជាប់ជាមួយ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_connecting_to_message" msgid="3153205024060064551">"កំពុងភ្ជាប់ទៅ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"កំពុងភ្ជាប់…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"បាន​បរាជ័យ​ក្នុង​ការ​តភ្ជាប់​បណ្ដាញ"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"បណ្ដាញ​មិន​មានសេវា​ទេ"</string>
@@ -1193,7 +1192,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"បង្កើន​អត្រា​ផ្ទុកឡើងវិញ​ដោយស្វ័យប្រវត្តិ​ពី 60 ទៅ 90 Hz សម្រាប់​ខ្លឹមសារ​មួយចំនួន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
-    <string name="force_high_refresh_rate_toggle" msgid="7458268305727889355">"Smooth Display"</string>
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"ជំរុញឱ្យមានអត្រា​ផ្ទុកឡើងវិញ 90 Hz"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"អត្រា​ផ្ទុកឡើងវិញ​ខ្ពស់បំផុតសម្រាប់​គុណភាពនៃ​រូបមានចលនា និង​ការឆ្លើយតបនៃ​ការចុចប្រសើរជាងមុន។ ប្រើប្រាស់ថ្ម​ច្រើន​ជាងមុន។"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"ការដឹងថាកំពុងនៅប្រើ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"បើក / អេក្រង់​នឹងមិន​បិទទេ ប្រសិនបើ​អ្នក​កំពុង​មើល​អេក្រង់"</string>
@@ -2592,9 +2591,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"កំណត់​កាលវិភាគ"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"បង្កើនកម្រិត​ថាមពល​ថ្ម"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"បិទ នៅពេល​សាកថ្មពេញ"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="6862168106613838677">"កម្មវិធី​សន្សំ​ថ្មនឹង​បិទ​ នៅពេលទូរសព្ទរបស់អ្នកមានថ្ម <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6740553373344759992">"កម្មវិធី​សន្សំ​ថ្មនឹង​បិទ​ នៅពេលថេប្លេត​របស់អ្នកមានថ្ម <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
-    <string name="battery_saver_sticky_description_new" product="device" msgid="8512106347424406909">"កម្មវិធី​សន្សំ​ថ្មនឹង​បិទ​ នៅពេលឧបករណ៍របស់អ្នកមានថ្ម <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ទូរសព្ទរបស់អ្នក​សាកថ្មលើសពី <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ថេប្លេតរបស់អ្នក​សាកថ្មលើសពី <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"មុខងារសន្សំថ្មនឹងបិទ នៅពេល​ឧបករណ៍របស់អ្នក​សាកថ្មលើសពី <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"បើក"</string>
@@ -2670,9 +2669,6 @@
     <string name="user_credentials" msgid="4044405430790970775">"ព័ត៌មានសម្គាល់ខ្លួនអ្នកប្រើ"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"មើល និងកែប្រែព័ត៌មានសម្គាល់ខ្លួនដែលបានផ្ទុក"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"កម្រិត​ខ្ពស់"</string>
-    <string name="credential_storage_type" msgid="930861336971619888">"ប្រភេទ​ឧបករណ៍​ផ្ទុក"</string>
-    <string name="credential_storage_type_hardware" msgid="2630040425119817220">"កន្លែង​ផ្ទុក​របស់​​ផ្នែក​រឹង"</string>
-    <string name="credential_storage_type_software" msgid="4786996040468294626">"កន្លែង​ផ្ទុក​របស់​​កម្មវិធី"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"ព័ត៌មាន​សម្ងាត់​មិន​មាន​សម្រាប់​អ្នកប្រើ​នេះ​ទេ"</string>
     <string name="credential_for_vpn_and_apps" msgid="2208229692860871136">"បានដំឡើេងសម្រាប់ VPN និងកម្មវិធី"</string>
     <string name="credential_for_wifi" msgid="1963335263280604998">"បានដំឡើងសម្រាប់ Wi-Fi"</string>
@@ -4461,6 +4457,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ចុចដើម្បី​ពិនិត្យមើលថេប្លេត"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"ចុចដើម្បី​ពិនិត្យមើល​ឧបករណ៍"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"ដើម្បី​ពិនិត្យមើល​ម៉ោង ការជូន​ដំណឹង និងព័ត៌មាន​ផ្សេងទៀត សូម​ចុចអេក្រង់​របស់អ្នក។"</string>
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"ប៊ូតុង​បំភ័យ"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"ចាប់ផ្ដើម​សកម្មភាព​ហៅទូរសព្ទទៅ​សេវាសង្គ្រោះបន្ទាន់ ដោយចុច​ប៊ូតុងថាមពលឱ្យរហ័ស 5 ដង។"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"អូសលើ​ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​សម្រាប់​ការជូនដំណឹង"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"អូសស្នាមម្រាមដៃ"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"ដើម្បីពិនិត្យមើលការជូនដំណឹងរបស់អ្នក សូមអូសចុះក្រោមនៅលើឧបករណ៍ចាប់ស្នាមម្រាមដៃ ដែលស្ថិតនៅផ្នែកខាងក្រោយទូរសព្ទរបស់អ្នក។"</string>
@@ -4684,6 +4682,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"រក​បណ្ដាញ​មិនឃើញទេ។ សូមព្យាយាម​ម្ដង​ទៀត។"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ហាម)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"គ្មាន​ស៊ីម​កាត​ទេ"</string>
+    <string name="sim_card" msgid="6381158752066377709">"ស៊ីម"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"មិនមានស៊ីមទេ"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"គ្មាន"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"តម្រូវឱ្យមាន​ស៊ីម ដើម្បីភ្ជាប់"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"តម្រូវឱ្យមានស៊ីម <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> ដើម្បីភ្ជាប់"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ ប្រើ WCDMA"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ GSM ប៉ុណ្ណោះ"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"មុខងារ​​​បណ្ដាញដែលប្រើជាអាទិភាព​៖ WCDMA ប៉ុណ្ណោះ"</string>
