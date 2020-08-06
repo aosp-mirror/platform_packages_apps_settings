@@ -29,6 +29,8 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
@@ -50,7 +52,7 @@ import java.time.ZoneOffset;
  * controller class when there is a wifi connection present.
  */
 public class WifiConnectionPreferenceController extends AbstractPreferenceController implements
-        WifiPickerTracker.WifiPickerTrackerCallback {
+        WifiPickerTracker.WifiPickerTrackerCallback, LifecycleObserver {
 
     private static final String TAG = "WifiConnPrefCtrl";
 
@@ -97,6 +99,7 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
             UpdateListener updateListener, String preferenceGroupKey, int order,
             int metricsCategory) {
         super(context);
+        lifecycle.addObserver(this);
         mUpdateListener = updateListener;
         mPreferenceGroupKey = preferenceGroupKey;
         this.order = order;
@@ -122,6 +125,14 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
                 MAX_SCAN_AGE_MILLIS,
                 SCAN_INTERVAL_MILLIS,
                 this);
+    }
+
+    /**
+     * This event is triggered when users click back button at 'Network & internet'.
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
+        mWorkerThread.quit();
     }
 
     @Override
