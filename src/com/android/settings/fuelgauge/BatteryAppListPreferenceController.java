@@ -391,11 +391,11 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private boolean shouldShowSummary(BatterySipper sipper) {
-        final CharSequence[] whitelistPackages = mContext.getResources()
-                .getTextArray(R.array.whitelist_hide_summary_in_battery_usage);
+        final CharSequence[] allowlistPackages = mContext.getResources()
+                .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
         final String target = sipper.packageWithHighestDrain;
 
-        for (CharSequence packageName: whitelistPackages) {
+        for (CharSequence packageName: allowlistPackages) {
             if (TextUtils.equals(target, packageName)) {
                 return false;
             }

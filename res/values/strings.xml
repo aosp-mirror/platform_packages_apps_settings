@@ -1418,9 +1418,6 @@
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
-    <!-- Error shown when a user is choosing a PIN for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PIN that's less common and more complicated. -->
-    <string name="lockpassword_pin_blacklisted_by_admin">Common PINs are blocked by your IT admin. Try a different PIN.</string>
-
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
 
@@ -1477,9 +1474,6 @@
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
         password</string>
-
-    <!-- Error shown when a user is choosing a PASSWORD for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PASSWORD that's less common and more complicated. -->
-    <string name="lockpassword_password_blacklisted_by_admin">Common passwords are blocked by your IT admin. Try a different password.</string>
 
     <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
     <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
@@ -5533,8 +5527,8 @@
     <string name="background_activity_summary">Allow the app to run in the background</string>
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
-    <!-- TODO: Pending UX review. Summary for the background activity when it is whitlisted [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_whitelisted">Background usage can\u2019t be restricted</string>
+    <!-- TODO: Pending UX review. Summary for the background activity when it is allowlisted [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary_allowlisted">Background usage can\u2019t be restricted</string>
     <!-- TODO: Pending UX review. Title for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
@@ -10505,8 +10499,8 @@
     <!-- Button that leads to list of apps with unrestricted data access [CHAR LIMIT=60] -->
     <string name="unrestricted_data_saver">Unrestricted data</string>
 
-    <!-- Description of message shown when app is blacklisted for background data access [CHAR LIMIT=NONE] -->
-    <string name="restrict_background_blacklisted">Background data is turned off</string>
+    <!-- Description of message shown when app is blocklisted for background data access [CHAR LIMIT=NONE] -->
+    <string name="restrict_background_blocklisted">Background data is turned off</string>
 
     <!-- Summary for the Data Saver feature being on [CHAR LIMIT=NONE] -->
     <string name="data_saver_on">On</string>
