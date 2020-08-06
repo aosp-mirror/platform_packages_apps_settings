@@ -35,8 +35,8 @@ import com.android.settingslib.applications.ApplicationsState;
 public class AppFilterRegistry {
 
     @IntDef(value = {
-            FILTER_APPS_POWER_WHITELIST,
-            FILTER_APPS_POWER_WHITELIST_ALL,
+            FILTER_APPS_POWER_ALLOWLIST,
+            FILTER_APPS_POWER_ALLOWLIST_ALL,
             FILTER_APPS_ALL,
             FILTER_APPS_ENABLED,
             FILTER_APPS_INSTANT,
@@ -56,8 +56,8 @@ public class AppFilterRegistry {
 
     // Filter options used for displayed list of applications
     // Filters will appear sorted based on their value defined here.
-    public static final int FILTER_APPS_POWER_WHITELIST = 0;
-    public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
+    public static final int FILTER_APPS_POWER_ALLOWLIST = 0;
+    public static final int FILTER_APPS_POWER_ALLOWLIST_ALL = 1;
     public static final int FILTER_APPS_RECENT = 2;
     public static final int FILTER_APPS_FREQUENT = 3;
     public static final int FILTER_APPS_ALL = 4;
@@ -82,20 +82,20 @@ public class AppFilterRegistry {
     private AppFilterRegistry() {
         mFilters = new AppFilterItem[18];
 
-        // High power whitelist, on
-        mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
+        // High power allowlist, on
+        mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
                 new ApplicationsState.CompoundFilter(
-                        AppStatePowerBridge.FILTER_POWER_WHITELISTED,
+                        AppStatePowerBridge.FILTER_POWER_ALLOWLISTED,
                         ApplicationsState.FILTER_ALL_ENABLED),
-                FILTER_APPS_POWER_WHITELIST,
+                FILTER_APPS_POWER_ALLOWLIST,
                 R.string.high_power_filter_on);
 
         // Without disabled until used
-        mFilters[FILTER_APPS_POWER_WHITELIST_ALL] = new AppFilterItem(
+        mFilters[FILTER_APPS_POWER_ALLOWLIST_ALL] = new AppFilterItem(
                 new ApplicationsState.CompoundFilter(
                         ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
                         ApplicationsState.FILTER_ALL_ENABLED),
-                FILTER_APPS_POWER_WHITELIST_ALL,
+                FILTER_APPS_POWER_ALLOWLIST_ALL,
                 R.string.filter_all_apps);
 
         // All apps
@@ -200,7 +200,7 @@ public class AppFilterRegistry {
             case ManageApplications.LIST_TYPE_USAGE_ACCESS:
                 return FILTER_APPS_USAGE_ACCESS;
             case ManageApplications.LIST_TYPE_HIGH_POWER:
-                return FILTER_APPS_POWER_WHITELIST;
+                return FILTER_APPS_POWER_ALLOWLIST;
             case ManageApplications.LIST_TYPE_OVERLAY:
                 return FILTER_APPS_WITH_OVERLAY;
             case ManageApplications.LIST_TYPE_WRITE_SETTINGS:
