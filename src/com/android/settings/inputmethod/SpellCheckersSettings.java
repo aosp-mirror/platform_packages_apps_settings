@@ -93,8 +93,8 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         super.onResume();
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
         mSwitchBar.setSwitchBarText(
-                R.string.spell_checker_master_switch_title,
-                R.string.spell_checker_master_switch_title);
+                R.string.spell_checker_primary_switch_title,
+                R.string.spell_checker_primary_switch_title);
         mSwitchBar.show();
         mSwitchBar.addOnSwitchChangeListener(this);
         updatePreferenceScreen();
