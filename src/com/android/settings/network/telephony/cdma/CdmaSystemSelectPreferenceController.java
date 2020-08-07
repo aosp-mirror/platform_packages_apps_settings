@@ -16,6 +16,9 @@
 
 package com.android.settings.network.telephony.cdma;
 
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA;
+import static com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA;
+
 import android.content.Context;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
@@ -53,8 +56,9 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
                 TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
-        listPreference.setEnabled(
-                settingsNetworkMode != TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
+                && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA;
+        listPreference.setEnabled(enableList);
     }
 
     @Override
