@@ -39,7 +39,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
@@ -167,7 +166,7 @@ public class EnabledNetworkModePreferenceController extends
     private int getPreferredNetworkMode() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                Phone.PREFERRED_NT_MODE);
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
     }
 
     private void updatePreferenceEntries(ListPreference preference) {
@@ -181,7 +180,7 @@ public class EnabledNetworkModePreferenceController extends
             final int settingsNetworkMode = android.provider.Settings.Global.getInt(
                     mContext.getContentResolver(),
                     android.provider.Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    Phone.PREFERRED_NT_MODE);
+                    TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
             if (mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()) {
                 if (lteForced == 0) {
                     preference.setEntries(
