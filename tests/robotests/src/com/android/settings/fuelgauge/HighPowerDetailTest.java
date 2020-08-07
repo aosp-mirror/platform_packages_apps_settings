@@ -32,7 +32,7 @@ import android.content.DialogInterface;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +52,7 @@ public class HighPowerDetailTest {
 
     private Context mContext;
     @Mock
-    private PowerWhitelistBackend mPowerWhitelistBackend;
+    private PowerAllowlistBackend mPowerAllowlistBackend;
     @Mock
     private BatteryUtils mBatteryUtils;
 
@@ -63,7 +63,7 @@ public class HighPowerDetailTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mFragment = spy(new HighPowerDetail());
-        mFragment.mBackend = mPowerWhitelistBackend;
+        mFragment.mBackend = mPowerAllowlistBackend;
         mFragment.mBatteryUtils = mBatteryUtils;
         mFragment.mPackageUid = TEST_UID;
         mFragment.mPackageName = TEST_PACKAGE;
@@ -71,21 +71,21 @@ public class HighPowerDetailTest {
 
     @Test
     public void logSpecialPermissionChange() {
-        // Deny means app is whitelisted to opt out of power save restrictions
+        // Deny means app is allowlisted to opt out of power save restrictions
         HighPowerDetail.logSpecialPermissionChange(true, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY), eq("app"));
 
-        // Allow means app is NOT whitelisted to opt out of power save restrictions
+        // Allow means app is NOT allowlisted to opt out of power save restrictions
         HighPowerDetail.logSpecialPermissionChange(false, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW), eq("app"));
     }
 
     @Test
-    public void onClick_appAddedToDozeWhitelist_getsUnrestricted() {
+    public void onClick_appAddedToDozeAllowlist_getsUnrestricted() {
         mFragment.mIsEnabled = true;
-        when(mPowerWhitelistBackend.isWhitelisted(TEST_PACKAGE)).thenReturn(false);
+        when(mPowerAllowlistBackend.isAllowlisted(TEST_PACKAGE)).thenReturn(false);
         mFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
         verify(mBatteryUtils).setForceAppStandby(TEST_UID, TEST_PACKAGE,
                 AppOpsManager.MODE_ALLOWED);
@@ -93,9 +93,9 @@ public class HighPowerDetailTest {
 
     @Test
     public void getSummary_defaultActivePackage_returnUnavailable() {
-        doReturn(true).when(mPowerWhitelistBackend).isDefaultActiveApp(TEST_PACKAGE);
+        doReturn(true).when(mPowerAllowlistBackend).isDefaultActiveApp(TEST_PACKAGE);
 
-        assertThat(HighPowerDetail.getSummary(mContext, mPowerWhitelistBackend, TEST_PACKAGE))
+        assertThat(HighPowerDetail.getSummary(mContext, mPowerAllowlistBackend, TEST_PACKAGE))
                 .isEqualTo(mContext.getString(R.string.high_power_system));
     }
 }

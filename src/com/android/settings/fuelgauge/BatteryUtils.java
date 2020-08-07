@@ -50,7 +50,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
-import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
+import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -578,7 +578,7 @@ public class BatteryUtils {
     /**
      * Return {@code true} if we should hide anomaly app represented by {@code uid}
      */
-    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid,
+    public boolean shouldHideAnomaly(PowerAllowlistBackend powerAllowlistBackend, int uid,
             AnomalyInfo anomalyInfo) {
         final String[] packageNames = mPackageManager.getPackagesForUid(uid);
         if (ArrayUtils.isEmpty(packageNames)) {
@@ -586,7 +586,7 @@ public class BatteryUtils {
             return true;
         }
 
-        return isSystemUid(uid) || powerWhitelistBackend.isWhitelisted(packageNames)
+        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames)
                 || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
                 || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
     }
