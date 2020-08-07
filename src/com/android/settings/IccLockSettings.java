@@ -674,7 +674,9 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
         if (attemptsRemaining == 0) {
             displayMessage = mRes.getString(R.string.wrong_pin_code_pukked);
-        } else if (attemptsRemaining > 0) {
+        } else if (attemptsRemaining == 1) {
+            displayMessage = mRes.getString(R.string.wrong_pin_code_one, attemptsRemaining);
+        } else if (attemptsRemaining > 1) {
             displayMessage = mRes
                     .getQuantityString(R.plurals.wrong_pin_code, attemptsRemaining,
                             attemptsRemaining);
