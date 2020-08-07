@@ -1042,7 +1042,8 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"កម្មវិធីកំពុងចែករំលែកខ្លឹមសារ។ ដើម្បីចែករំលែកការភ្ជាប់អ៊ីនធឺណិត សូមបិទហតស្ប៉ត រួចបើកឡើងវិញ"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"មិនមានការកំណត់ពាក្យសម្ងាត់​ទេ"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"ឈ្មោះ​ហតស្ប៉ត"</string>
-    <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"កំពុងបើក <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
+    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
+    <skip />
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"ឧបករណ៍​ផ្សេងទៀត​អាចភ្ជាប់​ជាមួយ <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"ពាក្យសម្ងាត់​ហតស្ប៉ត"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"កម្រិតបញ្ជូន AP"</string>
@@ -1605,31 +1606,48 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"បានកំណត់ការកំណត់បណ្តាញឡើងវិញ"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"មិន​អាចលុប​ស៊ីម​បានទេ"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"មិន​អាច​លុប​ស៊ីម​ដែលបានទាញយក​ទេ ដោយសារ​មានបញ្ហា។\n\nសូម​ចាប់ផ្ដើម​​ឧបករណ៍​របស់អ្នក​ឡើងវិញ រួចព្យាយាម​ម្ដងទៀត។"</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"លុបទិន្នន័យទាំងអស់ (កំណត់ដូចថ្មីវិញ)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"លុបទិន្នន័យទាំងអស់ (កំណត់ដូចថ្មីវិញ)"</string>
-    <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"ការធ្វើបែបនេះ​នឹង​លុប​ទិន្នន័យ​ទាំងអស់ពី "<b>"ទំហំផ្ទុកខាងក្នុង"</b>"នៃថេប្លេត​របស់អ្នក រួមទាំង៖\n\n"<li>"កម្មវិធី​ដែលបានទាញយក"</li>\n<li>"ទិន្នន័យ​កម្មវិធី និង​ប្រព័ន្ធ​ ព្រមទាំងការកំណត់​"</li>\n<li>"គណនី Google របស់អ្នក"</li></string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"ការធ្វើបែបនេះ​នឹង​លុប​ទិន្នន័យ​ទាំងអស់​ពី​ "<b>"ទំហំផ្ទុក​ខាង​ក្នុង"</b>"នៃ​ទូរសព្ទ​របស់​អ្នក រួមទាំង៖\n\n"<li>"កម្មវិធី​ដែលបាន​ទាញ​យក"</li>\n<li>"ទិន្នន័យ​កម្មវិធី និង​ប្រព័ន្ធ​ ព្រមទាំងការកំណត់"</li>\n<li>"គណនី Google របស់​អ្នក"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"បច្ចុប្បន្ន​ អ្នក​បាន​ចូល​គណនី​ដូច​ខាង​ក្រោម៖ \n"</string>
-    <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"មានអ្នកផ្សេងច្រើនទៀតមានវត្តមាននៅលើឧបករណ៍នេះ។\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"តន្ត្រី"</li>\n<li>"រូបថត"</li>\n<li>"ទិន្នន័យ​អ្នក​ប្រើ​ផ្សេង​ទៀត"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIM"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"ការធ្វើបែបនេះនឹងមិនបោះបង់គម្រោងសេវាកម្មទូរសព្ទចល័តរបស់អ្នកទេ។"</string>
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">\n\n"ដើម្បី​សម្អាត​តន្ត្រី រូបថត និង​ទិន្នន័យ​អ្នក​ប្រើ​ផ្សេងៗ តម្រូវ​ឲ្យ​លុប"<b>"ឧបករណ៍​ផ្ទុក​យូអេសប៊ី"</b>" ។"</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"ដើម្បី​សម្អាត​តន្ត្រី, រូបភាព និង​ទិន្នន័យ​អ្នកប្រើ​ផ្សេងទៀត "<b>"ចាំបាច់​ត្រូវ"</b>" លុប​កាត​អេសឌី។"</string>
+    <!-- no translation found for main_clear_title (277664302144837723) -->
+    <skip />
+    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (1651178880680056849) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (6984348811887162647) -->
+    <skip />
+    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
+    <skip />
+    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"លុប​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"លុប​កាត​​អេសឌី"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"លុប​ទិន្នន័យ​ទាំងអស់​លើ​ឧបករណ៍​ផ្ទុក​យូអេសប៊ី​ខាង​ក្នុង ដូច​ជា​តន្ត្រី ឬ​​រូបថត"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"លុប​ទិន្នន័យ​ទាំងអស់​លើ​កាត​អេសឌី ដូច​ជា​តន្ត្រី ឬ​រូបថត"</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"លុប​ទិន្នន័យ​ទាំង​អស់"</string>
-    <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"លុប​ទិន្នន័យ​ទាំង​អស់"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"ព័ត៌មាន​ផ្ទាល់ខ្លួន និងកម្មវិធី​ដែលបានទាញយក​ទាំងអស់​របស់អ្នកនឹងត្រូវបានលុបចេញ។ អ្នកមិន​អាចត្រឡប់​សកម្មភាពនេះ​វិញបានទេ។"</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"ព័ត៌មាន​ផ្ទាល់ខ្លួន​ទាំងអស់​របស់អ្នក រួម​ទាំង​ស៊ីម និងកម្មវិធី​ដែលបាន​ទាញយកនឹងត្រូវបានលុបចេញ។ អ្នកមិន​អាចត្រឡប់​សកម្មភាពនេះ​វិញបានទេ។"</string>
-    <string name="master_clear_final_button_text" msgid="1721164700940719292">"លុប​អ្វីៗ​ទាំងអស់"</string>
-    <string name="master_clear_failed" msgid="6458678864313618526">"គ្មាន​ការ​កំណត់​ឡើងវិញ​ត្រូវ​បាន​អនុវត្ត ព្រោះ​សេវាកម្ម​សម្អាត​ប្រព័ន្ធ​មិន​អាច​ប្រើ​បាន។"</string>
-    <string name="master_clear_confirm_title" msgid="632482173088680058">"លុប​ទិន្នន័យ​ទាំង​អស់​?"</string>
-    <string name="master_clear_not_available" msgid="3419345724070828273">"ការ​កំណត់​ដូច​ចេញ​ពី​រោងចក្រ​ឡើង​វិញ​មិន​អាច​ប្រើ​បាន​សម្រាប់​អ្នក​ប្រើ​ម្នាក់​នេះ"</string>
-    <string name="master_clear_progress_title" msgid="480032747847804624">"លុប"</string>
-    <string name="master_clear_progress_text" msgid="8891964820486632180">"សូម​រង់ចាំ..."</string>
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
+    <skip />
+    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
+    <skip />
+    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
+    <skip />
     <string name="call_settings_title" msgid="2531072044177194164">"កំណត់​ការ​ហៅ"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"រៀបចំ​សារ​ជា​សំឡេង បញ្ជូន​ការ​ហៅ​បន្ត រង់ចាំ​ការ​ហៅ លេខ​សម្គាល់​អ្នក​ហៅ"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"ការ​ភ្ជាប់តាម USB"</string>
@@ -2211,7 +2229,8 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"ការ​ញ័រនៃការជូនដំណឹង"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"ការញ័រ​នៃសំឡេងរោទ៍"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ប្រតិកម្មតបនឹងការប៉ះ"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"ប្រើ <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <skip />
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"បើក <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"ប្រើ​ការ​កែតម្រូវពណ៌"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"បង្ហាញ​អក្សររត់"</string>
@@ -2245,6 +2264,8 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ការមើល​មិនឃើញ​ពណ៌​បៃតង"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"ការមើល​មិនឃើញ​ពណ៌ក្រហម"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ការមើល​មិនឃើញ​ពណ៌ខៀវ"</string>
+    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"ក្រហម-បៃតង"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"ក្រហម-បៃតង"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"ខៀវ-លឿង"</string>
@@ -3057,7 +3078,8 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"បង់ប្រាក់នៅកន្លែងដែលមានឧបករណ៍គិតប្រាក់"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"ដំឡើងកម្មវិធីបង់ប្រាក់ ហើយបន្ទាប់មកដាក់ផ្នែកខាងក្រោយនៃទូរសព្ទរបស់អ្នកទៅលើឧបករណ៍គិតប្រាក់ណាមួយដែលមាននិមិត្តសញ្ញាមិនចាំបាច់ប៉ះម៉ាស៊ីនគិតប្រាក់។"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"យល់ហើយ"</string>
-    <string name="nfc_more_title" msgid="4202405349433865488">"ច្រើន​ទៀត..."</string>
+    <!-- no translation found for nfc_more_title (1041094244767216498) -->
+    <skip />
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"កំណត់​កម្មវិធី​បង់ប្រាក់​លំនាំដើម"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"ធ្វើបច្ចុប្បន្នភាព​កម្មវិធី​បង់ប្រាក់​លំនាំដើម"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"នៅម៉ាស៊ីន​គិតប្រាក់​ដោយ​មិនចាំបាច់ប៉ះ សូមបង់ប្រាក់​តាមរយៈ <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3141,7 +3163,8 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"ប្រើ​វា​សម្រាប់​ការ​ហៅ​ជា​និច្ច"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"ជ្រើស​ស៊ីម​សម្រាប់​ទិន្នន័យ"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"ជ្រើសរើស​ស៊ីម​សម្រាប់​សារ SMS"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"កំពុងប្តូរស៊ីមទិន្នន័យ វាអាចចំណាយពេលមួយនាទី..."</string>
+    <!-- no translation found for data_switch_started (6292759843974720112) -->
+    <skip />
     <string name="select_sim_for_calls" msgid="7843107015635189868">"ហៅ​ជាមួយ"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"ជ្រើស​ស៊ី​ម​កាត"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"ស៊ី​ម <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3284,6 +3307,8 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ទម្លាប់ កាលវិភាគ កម្មវិធីសន្សំថ្ម កម្មវិធីសន្សំថាមពល ថ្ម ស្វ័យប្រវត្តិ ភាគរយ"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ការហៅទូរសព្ទ​កម្រិតខ្ពស់, ការហៅទូរសព្ទតាមរយៈប្រព័ន្ធ 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"បញ្ចូលភាសា បញ្ចូលភាសាមួយ"</string>
+    <!-- no translation found for keywords_font_size (336803136451166298) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"សំឡេង​លំនាំ​ដើម"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"កម្រិតសំឡេង​រោទ៍ និង​ការជូន​ដំណឹង​ត្រឹម <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"កម្រិត​សំឡេង ការញ័រ កុំរំខាន"</string>
@@ -3640,7 +3665,8 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"ចូលដំណើរការមុខងារកុំរំខាន"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"អនុញ្ញាតមុខងារកុំរំខាន"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"គ្មានកម្មវិធីបានដំឡើងណាមួយបានស្នើការចូលដំណើរការមុខងារកុំរំខានទេ"</string>
-    <string name="loading_notification_apps" msgid="1458413761470945269">"កំពុង​ផ្ទុក​កម្មវិធី..."</string>
+    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"តាមសំណើ​របស់អ្នក Android កំពុង​ទប់ស្កាត់​ការជូនដំណឹង​របស់កម្មវិធី​នេះ​មិន​ឱ្យ​បង្ហាញ​នៅលើ​ឧបករណ៍​នេះទេ"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"តាមសំណើ​របស់អ្នក ប្រព័ន្ធ​ប្រតិបត្តិការ Android កំពុង​ទប់ស្កាត់​ប្រភេទនៃការជូនដំណឹង​​នេះ​មិន​ឱ្យ​បង្ហាញ​នៅលើ​ឧបករណ៍​នេះទេ"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"តាមសំណើ​របស់អ្នក ប្រព័ន្ធ​ប្រតិបត្តិការ Android កំពុង​ទប់ស្កាត់​ក្រុមនៃ​ការជូនដំណឹង​នេះ​មិន​ឱ្យ​បង្ហាញ​នៅលើ​ឧបករណ៍​នេះទេ"</string>
@@ -4039,7 +4065,8 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB ត្រូវបានគ្រប់គ្រងដោយ"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"​ឧបករណ៍ដែលបាន​ភ្ជាប់"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ឧបករណ៍នេះ"</string>
-    <string name="usb_switching" msgid="3713602881103295766">"កំពុង​ប្ដូរ..."</string>
+    <!-- no translation found for usb_switching (3654709188596609354) -->
+    <skip />
     <string name="usb_switching_failed" msgid="5721262697715454137">"មិន​អាច​ប្ដូរ​បានទេ"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"កំពុងសាកថ្ម​ឧបករណ៍​នេះ"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"សាកថ្ម​ឧបករណ៍​ដែលបាន​ភ្ជាប់"</string>

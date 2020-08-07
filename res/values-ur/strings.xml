@@ -1042,7 +1042,8 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"ایپ مواد کا اشتراک کر رہی ہے۔ انٹرنیٹ کنکشن کا اشتراک کرنے کیلئے، ہاٹ اسپاٹ آف کر کے پھر آن کریں"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"کوئی پاس ورڈ سیٹ نہیں ہے"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"ہاٹ اسپاٹ کا نام"</string>
-    <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> آن ہو رہا ہے..."</string>
+    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
+    <skip />
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"دیگر آلات <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> سے منسلک ہو سکتی ہیں"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"ہاٹ اسپاٹ کا پاس ورڈ"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"‏AP بینڈ"</string>
@@ -1192,8 +1193,7 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"ہموار ڈسپلے"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"‏کچھ مواد کے لیے 60 سے 90 Hz تک ریفریش کی شرح خودکار طور پر بڑھ جاتی ہے۔ بیٹری کے استعمال میں اضافہ کرتا ہے۔"</string>
-    <!-- no translation found for force_high_refresh_rate_toggle (5861514655252832828) -->
-    <skip />
+    <string name="force_high_refresh_rate_toggle" msgid="5861514655252832828">"‏زبردستی 90 Hz ریفریش کی شرح"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"اعلی ترین ریفریش کرنے کی بہتر شرح کے ليے ٹچ کی کارکردگی اور اینیمیشن کوالٹی۔ بیٹری کے استعمال میں اضافہ کرتا ہے۔"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"اسکرین پر توجہ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"اگر آپ آن اسکرین دیکھ رہے ہیں تو یہ آف نہیں ہوگی"</string>
@@ -1606,31 +1606,48 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"نیٹ ورک کی ترتیبات کو دوبارہ ترتیب دیا گیا ہے"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"‏SIMs کو نہیں مٹا سکتے"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"‏کسی خرابی کی وجہ سے ڈاؤن لوڈ کردہ SIMs کو مٹایا نہیں جا سکتا ہے۔\n\nاپنا آلہ دوبارہ شروع کریں اور دوبارہ کوشش کریں۔"</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"تمام ڈیٹا حذف کریں (فیکٹری ری سیٹ)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"سبھی ڈیٹا کو حذف کریں (فیکٹری ری سیٹ)"</string>
-    <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"‏یہ آپ کے ٹیبلیٹ کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو صاف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"‏یہ آپ کے فون کے "<b>"داخلی اسٹوریج"</b>" سے سبھی ڈیٹا کو صاف کر دے گا، بشمول:\n\n"<li>"آپ کا Google اکاؤنٹ"</li>\n<li>"سسٹم اور ایپ ڈیٹا اور ترتیبات"</li>\n<li>"ڈاؤن لوڈ کردہ ایپس"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"آپ فی الحال مندرجہ ذیل اکاؤنٹس میں سائن ان ہیں:\n"</string>
-    <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"اس آلہ پر دوسرے صارفین موجود ہیں۔\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"موسیقی"</li>\n<li>"تصاویر"</li>\n<li>"صارف کا دیگر ڈیٹا"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIMs"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"اس سے آپ کے موبائل سروس کا پلان منسوخ نہیں ہوگا۔"</string>
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">"‏\n\nموسیقی، تصاویر اور صارف کا دیگر ڈیٹا، "<b>"USB اسٹوریج"</b>" کو حذف کیے جانے کی ضرورت ہے۔"</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">"‏\n\nموسیقی، تصاویر اور صارف کا دیگر ڈیٹا صاف کرنے کیلئے، "<b>"SD کارڈ"</b>" کو حذف کیے جانے کی ضرورت ہے۔"</string>
+    <!-- no translation found for main_clear_title (277664302144837723) -->
+    <skip />
+    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (1651178880680056849) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (6984348811887162647) -->
+    <skip />
+    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
+    <skip />
+    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"‏USB اسٹوریج کو حذف کریں"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"‏SD کارڈ حذف کریں"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"‏داخلی USB اسٹوریج پر موجود سبھی ڈیٹا، جیسے موسیقی یا تصاویر کو حذف کریں"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"‏SD کارڈ پر موجود سبھی ڈیٹا حذف کریں، جیسے موسیقی یا تصاویر"</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"سبھی ڈیٹا صاف کریں"</string>
-    <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"سبھی ڈیٹا صاف کریں"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"آپ کی سبھی ذاتی معلومات اور ڈاؤن لوڈ کردہ ایپس کو حذف کر دیا جائے گا۔ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"‏ڈاؤن لوڈ کردہ ایپس اور SIMs سمیت آپ کی سبھی ذاتی معلومات کو حذف کر دیا جائے گا۔ آپ اس کارروائی کو کالعدم نہیں کر سکتے ہیں۔"</string>
-    <string name="master_clear_final_button_text" msgid="1721164700940719292">"ہر چیز کو حذف کریں"</string>
-    <string name="master_clear_failed" msgid="6458678864313618526">"کوئی ری سیٹ انجام نہیں دیا گیا کیونکہ سسٹم صاف کریں سروس دستیاب نہیں ہے۔"</string>
-    <string name="master_clear_confirm_title" msgid="632482173088680058">"سبھی ڈیٹا صاف کریں؟"</string>
-    <string name="master_clear_not_available" msgid="3419345724070828273">"اس صارف کیلئے فیکٹری ری سیٹ دستیاب نہیں ہے"</string>
-    <string name="master_clear_progress_title" msgid="480032747847804624">"صاف کیا جا رہا ہے"</string>
-    <string name="master_clear_progress_text" msgid="8891964820486632180">"براہ کرم انتظار کریں…"</string>
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
+    <skip />
+    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
+    <skip />
+    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
+    <skip />
     <string name="call_settings_title" msgid="2531072044177194164">"کال کی ترتیبات"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"‏صوتی میل، کال فاورڈنگ، کال ویٹنگ، کالر ID کو ترتیب دیں"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"‏USB ٹیدرنگ"</string>
@@ -2212,7 +2229,8 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"اطلاع وائبریشن"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"رنگ وائبریشن"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"ٹچ تاثرات"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> استعمال کریں"</string>
+    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <skip />
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> کھوليں"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"رنگ کی اصلاح استعمال کریں"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"کیپشنز دکھائیں"</string>
@@ -2246,6 +2264,8 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"سرخ اور سبز رنگ دیکھنے کی صلاحیت میں کمی"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"سرخ اور سبز کی بے قاعدہ رنگ بینی"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"نیلے پیلے رنگ کی شناخت کرنے میں دشواری"</string>
+    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"سرخ-سبز"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"سرخ-سبز"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"نیلا-پیلا"</string>
@@ -2592,12 +2612,9 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"شیڈیول سیٹ کریں"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"بیٹری لائف میں توسیع کریں"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"چارج ہونے پر آف کریں"</string>
-    <!-- no translation found for battery_saver_sticky_description_new (4969508893424116609) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (6613068787945311001) -->
-    <skip />
-    <!-- no translation found for battery_saver_sticky_description_new (8707774542183385479) -->
-    <skip />
+    <string name="battery_saver_sticky_description_new" product="default" msgid="4969508893424116609">"فون <xliff:g id="PERCENT">%1$s</xliff:g> سے اوپر چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
+    <string name="battery_saver_sticky_description_new" product="tablet" msgid="6613068787945311001">"ٹیبلیٹ <xliff:g id="PERCENT">%1$s</xliff:g> سے اوپر چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
+    <string name="battery_saver_sticky_description_new" product="device" msgid="8707774542183385479">"آلہ <xliff:g id="PERCENT">%1$s</xliff:g> سے اوپر چارج ہونے پر بیٹری سیور آف ہو جاتا ہے"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"آن کریں"</string>
@@ -3061,7 +3078,8 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"ٹرمینل پر ادا کرنا"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"ادائیگی کی ایپ سیٹ اپ کریں۔ پھر بس اپنے فون کے پچھلے حصے کو کسی بھی بغیر رابطے والی علامت کے ٹرمینل کے پاس پکڑ کر رکھیں۔"</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"سمجھ آ گئی"</string>
-    <string name="nfc_more_title" msgid="4202405349433865488">"مزید…"</string>
+    <!-- no translation found for nfc_more_title (1041094244767216498) -->
+    <skip />
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"ادائیگی کی ڈیفالٹ ایپ سیٹ کریں"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"ادائیگی کی ڈیفالٹ ایپ اپ ڈیٹ کریں"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"کنٹیکٹ لیس ٹرمینل پر، <xliff:g id="APP">%1$s</xliff:g> کے ساتھ ادائیگی کریں"</string>
@@ -3145,7 +3163,8 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"کالز کیلئے ہمیشہ اس کا استعمال کریں"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"‏ڈیٹا کیلئے ایک SIM منتخب کریں"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"‏SMS کے لیے SIM منتخب کریں"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"‏ڈیٹا SIM کو سوئچ کیا جا رہا ہے، اس میں ایک منٹ تک کا وقت لگ سکتا ہے…"</string>
+    <!-- no translation found for data_switch_started (6292759843974720112) -->
+    <skip />
     <string name="select_sim_for_calls" msgid="7843107015635189868">"کال کریں مع"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"‏ایک SIM کارڈ منتخب کریں"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3288,6 +3307,8 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"روٹین، شیڈول، بیٹری سیور، پاور سیور، بیٹری، خودکار طور پر، فیصد"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"‏volte، اعلی درجے کی کالنگ، 4G کالنگ"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"زبان شامل کریں، ایک زبان شامل کریں"</string>
+    <!-- no translation found for keywords_font_size (336803136451166298) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"ڈیفالٹ ساؤنڈ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"گھنٹی بجنے اور اطلاعات کا والیوم <xliff:g id="PERCENTAGE">%1$s</xliff:g> پر ہے"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"والیوم، ارتعاش، ڈسٹرب نہ کریں"</string>
@@ -3644,7 +3665,8 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"ڈسٹرب نہ کریں تک رسائی"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"\'ڈسٹرب نہ کریں\' کو اجازت دیں"</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"کسی انسٹال کردہ ایپس نے ڈسٹرب نہ کریں تک رسائی کی درخواست نہیں کی ہے"</string>
-    <string name="loading_notification_apps" msgid="1458413761470945269">"ایپس لوڈ ہو رہی ہیں…"</string>
+    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"‏آپ کی درخواست پر، Android اس ایپ کی اطلاعات کو اس آلہ پر ظاہر ہونے سے مسدود کررہا ہے"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"‏آپ کی درخواست پر، Android اطلاعات کے اس زمرے کو اس آلہ پر ظاہر ہونے سے مسدود کررہا ہے"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"‏آپ کی درخواست پر، Android اطلاعات کے اس گروپ کو اس آلہ پر ظاہر ہونے سے مسدود کر رہا ہے"</string>
@@ -4043,7 +4065,8 @@
     <string name="usb_control_title" msgid="1946791559052157693">"‏USB کنٹرول کردہ بذریعہ"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"منسلک آلہ"</string>
     <string name="usb_control_device" msgid="527916783743021577">"یہ آلہ"</string>
-    <string name="usb_switching" msgid="3713602881103295766">"سوئچ کیا جا رہا ہے..."</string>
+    <!-- no translation found for usb_switching (3654709188596609354) -->
+    <skip />
     <string name="usb_switching_failed" msgid="5721262697715454137">"سوئچ نہیں کیا جا سکا"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"اس آلہ کو چارج کر رہی ہے"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"منسلک آلہ چارج ہو رہا ہے"</string>
@@ -4461,10 +4484,8 @@
     <string name="ambient_display_tap_screen_title" product="tablet" msgid="6461531447715370632">"ٹیبلیٹ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_title" product="device" msgid="4423803387551153840">"آلہ چیک کرنے کے لیے تھپتھپائیں"</string>
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"وقت، اطلاعات، اور دیگر معلومات چیک کرنے کے لیے اپنی اسکرین کو دو بار تھپتھپائیں۔"</string>
-    <!-- no translation found for emergency_sos_gesture_screen_title (3318900013176821617) -->
-    <skip />
-    <!-- no translation found for emergency_sos_gesture_screen_summary (2673458710436425024) -->
-    <skip />
+    <string name="emergency_sos_gesture_screen_title" msgid="3318900013176821617">"ڈرانے کا بٹن"</string>
+    <string name="emergency_sos_gesture_screen_summary" msgid="2673458710436425024">"‏5 بار پاور بٹن کو تیزی سے دبا کر کے ہنگامی SOS کاروائیوں کو شروع کریں۔"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"اطلاعات کیلئے فنگر پرنٹ سوائپ"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"فنگر پرنٹ سوائپ کریں"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"اپنی اطلاعات چیک کرنے کیلئے اپنے فون کی پشت پر فنگر پرنٹ سینسر پر نیچے سوائپ کریں۔"</string>
@@ -4688,16 +4709,11 @@
     <string name="network_query_error" msgid="6406348372070035274">"نیٹ ورکس نہیں مل سکے۔ دوبارہ کوشش کریں۔"</string>
     <string name="forbidden_network" msgid="7404863971282262991">"(ممنوع)"</string>
     <string name="no_sim_card" msgid="1497407489810953863">"‏کوئی SIM کارڈ نہیں ہے"</string>
-    <!-- no translation found for sim_card (6381158752066377709) -->
-    <skip />
-    <!-- no translation found for wifi_no_sim_card (7144290066491585672) -->
-    <skip />
-    <!-- no translation found for wifi_no_related_sim_card (3568255415415630510) -->
-    <skip />
-    <!-- no translation found for wifi_require_sim_card_to_connect (1524984445750423666) -->
-    <skip />
-    <!-- no translation found for wifi_require_specific_sim_card_to_connect (8136020469861668506) -->
-    <skip />
+    <string name="sim_card" msgid="6381158752066377709">"SIM"</string>
+    <string name="wifi_no_sim_card" msgid="7144290066491585672">"‏کوئی SIM نہیں ہے"</string>
+    <string name="wifi_no_related_sim_card" msgid="3568255415415630510">"کوئی نہیں"</string>
+    <string name="wifi_require_sim_card_to_connect" msgid="1524984445750423666">"‏منسلک کرنے کے لیے SIM درکار ہے"</string>
+    <string name="wifi_require_specific_sim_card_to_connect" msgid="8136020469861668506">"‏منسلک کرنے کے لیے SIM <xliff:g id="WIRELESS_CARRIER">%s</xliff:g> درکار ہے"</string>
     <string name="preferred_network_mode_wcdma_perf_summary" msgid="230527592752934655">"‏ترجیحی نیٹ ورک کی وضع: WCDMA ترجیحی"</string>
     <string name="preferred_network_mode_gsm_only_summary" msgid="2936969642076535162">"‏ترجیحی نیٹ ورک کی وضع: صرف GSM"</string>
     <string name="preferred_network_mode_wcdma_only_summary" msgid="632816273979433076">"‏ترجیحی نیٹ ورک کی وضع: صرف WCDMA"</string>
