@@ -112,9 +112,10 @@ public class ChooseLockPattern extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setRequestGatekeeperPassword(boolean requestGatekeeperPassword) {
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW,
-                    requestGatekeeperPassword);
+        public IntentBuilder setRequestGatekeeperPasswordHandle(
+                boolean requestGatekeeperPasswordHandle) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE,
+                    requestGatekeeperPasswordHandle);
             return this;
         }
 
@@ -562,7 +563,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mCurrentCredential =
                     intent.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             mRequestGatekeeperPassword = intent.getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, false);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
@@ -575,7 +576,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     final boolean launched = builder.setRequestCode(CONFIRM_EXISTING_REQUEST)
                             .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
                             .setReturnCredentials(true)
-                            .setRequestGatekeeperPassword(mRequestGatekeeperPassword)
+                            .setRequestGatekeeperPasswordHandle(mRequestGatekeeperPassword)
                             .setUserId(mUserId)
                             .show();
 
@@ -915,16 +916,16 @@ public class ChooseLockPattern extends SettingsActivity {
                 // path to return a Gatekeeper Password based on the credential that the user
                 // chose. This should only be run if the credential was successfully set.
                 final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPattern,
-                        userId, LockPatternUtils.VERIFY_FLAG_RETURN_GK_PW);
+                        userId, LockPatternUtils.VERIFY_FLAG_REQUEST_GK_PW_HANDLE);
 
-                if (!response.isMatched() || response.getGatekeeperPw() == null) {
-                    Log.e(TAG, "critical: bad response or missing GK HAT for known good pattern: "
-                            + response.toString());
+                if (!response.isMatched() || !response.containsGatekeeperPasswordHandle()) {
+                    Log.e(TAG, "critical: bad response or missing GK PW handle for known good"
+                            + " pattern: " + response.toString());
                 }
 
                 result = new Intent();
-                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW,
-                        response.getGatekeeperPw());
+                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+                        response.getGatekeeperPasswordHandle());
             }
             return Pair.create(success, result);
         }

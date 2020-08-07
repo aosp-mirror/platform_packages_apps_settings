@@ -67,6 +67,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
             final FingerprintManager fpm = getSystemService(FingerprintManager.class);
             fpm.generateChallenge((sensorId, challenge) -> {
                 mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+                BiometricUtils.removeGatekeeperPasswordHandle(this, getIntent());
 
                 // Put this into the intent. This is really just to work around the fact that the
                 // enrollment sidecar gets the HAT from the activity's intent, rather than having

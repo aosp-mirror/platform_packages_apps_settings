@@ -224,7 +224,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
         intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
+        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         intent.putExtra(getExtraKeyForBiometric(), true);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
@@ -278,6 +278,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 getNextButton().setEnabled(false);
                 getChallenge(((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
+                    BiometricUtils.removeGatekeeperPasswordHandle(this, data);
                     getNextButton().setEnabled(true);
                 }));
             } else {
@@ -291,6 +292,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 getNextButton().setEnabled(false);
                 getChallenge(((sensorId, challenge) -> {
                     mToken = BiometricUtils.requestGatekeeperHat(this, data, mUserId, challenge);
+                    BiometricUtils.removeGatekeeperPasswordHandle(this, data);
                     getNextButton().setEnabled(true);
                 }));
             } else {

@@ -139,7 +139,7 @@ final class SetNewPasswordController {
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
                 ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
         return chooseLockExtras;
     }
@@ -150,7 +150,7 @@ final class SetNewPasswordController {
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
                 ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW_HANDLE, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, true);
         return chooseLockExtras;
     }
