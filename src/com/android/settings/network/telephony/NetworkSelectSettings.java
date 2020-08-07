@@ -222,10 +222,11 @@ public class NetworkSelectSettings extends DashboardFragment {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case EVENT_SET_NETWORK_SELECTION_MANUALLY_DONE:
+                    final boolean isSucceed = (boolean) msg.obj;
+                    stopNetworkQuery();
                     setProgressBarVisible(false);
                     getPreferenceScreen().setEnabled(true);
 
-                    boolean isSucceed = (boolean) msg.obj;
                     mSelectedPreference.setSummary(isSucceed
                             ? R.string.network_connected
                             : R.string.network_could_not_connect);
