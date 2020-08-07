@@ -69,26 +69,26 @@ public class MediaControlsPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_enable_shouldTurnOff() {
+    public void setChecked_enable_shouldTurnOn() {
         Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
         Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 1);
 
-        assertThat(mController.isChecked()).isFalse();
+        assertThat(mController.isChecked()).isTrue();
 
-        mController.setChecked(true);
+        mController.setChecked(false);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(0);
     }
 
     @Test
-    public void setChecked_disable_shouldTurnOn() {
+    public void setChecked_disable_shouldTurnOff() {
         Settings.Global.putInt(mContentResolver, Settings.Global.SHOW_MEDIA_ON_QUICK_SETTINGS, 1);
         Settings.Secure.putInt(mContentResolver, Settings.Secure.MEDIA_CONTROLS_RESUME, 0);
 
-        assertThat(mController.isChecked()).isTrue();
+        assertThat(mController.isChecked()).isFalse();
 
-        mController.setChecked(false);
+        mController.setChecked(true);
 
         assertThat(Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.MEDIA_CONTROLS_RESUME, -1)).isEqualTo(1);
