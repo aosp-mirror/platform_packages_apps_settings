@@ -164,7 +164,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 // No password registered, launch into enrollment wizard.
                 mConfirmingCredentials = true;
                 launchChooseLock();
-            } else if (mToken == null) {
+            } else if (!BiometricUtils.containsGatekeeperPassword(getIntent()) && mToken == null) {
                 // It's possible to have a token but mLaunchedConfirmLock == false, since
                 // ChooseLockGeneric can pass us a token.
                 mConfirmingCredentials = true;

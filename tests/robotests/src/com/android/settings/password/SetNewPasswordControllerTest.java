@@ -54,8 +54,6 @@ import org.robolectric.RobolectricTestRunner;
 public final class SetNewPasswordControllerTest {
 
     private static final int CURRENT_USER_ID = 101;
-    private static final long FINGERPRINT_CHALLENGE = -9876512313131L;
-    private static final long FACE_CHALLENGE = 1352057789L;
 
     @Mock
     private PackageManager mPackageManager;
@@ -76,11 +74,7 @@ public final class SetNewPasswordControllerTest {
         mSetNewPasswordController = new SetNewPasswordController(
                 CURRENT_USER_ID, mPackageManager, mFingerprintManager, mFaceManager,
                 mDevicePolicyManager, mUi);
-
-        when(mFingerprintManager.generateChallengeBlocking()).thenReturn(FINGERPRINT_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FINGERPRINT))).thenReturn(true);
-
-        when(mFaceManager.generateChallengeBlocking()).thenReturn(FACE_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FACE))).thenReturn(true);
     }
 
