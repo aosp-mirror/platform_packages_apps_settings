@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -38,16 +39,26 @@ import com.google.android.setupdesign.template.RequireScrollMixin;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
-    private static final String TAG = "FaceIntro";
+    private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
     private FaceFeatureProvider mFaceFeatureProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mFaceManager = Utils.getFaceManagerOrNull(this);
+        // Check if the Gateekeper Password exists. If so, request for a Gatekeeper HAT to be
+        // created. This needs to be cleaned up, since currently it's not very clear which
+        // superclass is responsible for what. Doing the check here is the least risky way.
+        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
+            // We either block on generateChallenge, or need to gray out the "next" button until
+            // the challenge is ready. Let's just do this for now.
+            final long challenge = mFaceManager.generateChallengeBlocking();
+            mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+        }
+
         super.onCreate(savedInstanceState);
 
-        mFaceManager = Utils.getFaceManagerOrNull(this);
         mFaceFeatureProvider = FeatureFactory.getFactory(getApplicationContext())
                 .getFaceFeatureProvider();
 
@@ -86,9 +97,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     RequireScrollMixin.class);
             requireScrollMixin.requireScrollWithButton(this, agreeButton,
                     R.string.security_settings_face_enroll_introduction_more,
-                    button -> {
-                        onNextButtonClick(button);
-                    });
+                    this::onNextButtonClick);
         }
 
         final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);

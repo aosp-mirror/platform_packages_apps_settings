@@ -54,6 +54,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -565,14 +566,13 @@ public class FingerprintSettings extends SubSettings {
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST
-                    || requestCode == CONFIRM_REQUEST) {
+            if (requestCode == CONFIRM_REQUEST || requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
                 mLaunchedConfirm = false;
                 if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
-                    // The lock pin/pattern/password was set. Start enrolling!
                     if (data != null) {
-                        mToken = data.getByteArrayExtra(
-                                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                        final long challenge = mFingerprintManager.generateChallengeBlocking();
+                        mToken = BiometricUtils.requestGatekeeperHat(getActivity(), data, mUserId,
+                                challenge);
                     }
                 }
             } else if (requestCode == ADD_FINGERPRINT_REQUEST) {
@@ -635,26 +635,26 @@ public class FingerprintSettings extends SubSettings {
 
         private void launchChooseOrConfirmLock() {
             final Intent intent = new Intent();
-            final long challenge = mFingerprintManager.generateChallengeBlocking();
             final ChooseLockSettingsHelper.Builder builder =
                     new ChooseLockSettingsHelper.Builder(getActivity(), this);
             final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
                     .setTitle(getString(R.string.security_settings_fingerprint_preference_title))
-                    .setChallenge(challenge)
+                    .setRequestGatekeeperPassword(true)
                     .setUserId(mUserId)
                     .setForegroundOnly(true)
                     .setReturnCredentials(true)
                     .show();
 
             if (!launched) {
+                // TODO: This should be cleaned up. ChooseLockGeneric should provide a way of
+                //  specifying arguments/requests, instead of relying on callers setting extras.
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ChooseLockGeneric.class.getName());
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
                 intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS,
                         true);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
-                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 startActivityForResult(intent, CHOOSE_LOCK_GENERIC_REQUEST);
             }

@@ -88,7 +88,13 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToken = getIntent().getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        // Don't need to retrieve the HAT if it already exists. In some cases, the extras do not
+        // contain EXTRA_KEY_CHALLENGE_TOKEN but contain EXTRA_KEY_GK_PW, in which case enrollment
+        // classes may request a HAT to be created (as opposed to being passed in)
+        if (mToken == null) {
+            mToken = getIntent().getByteArrayExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+        }
         mFromSettingsSummary = getIntent().getBooleanExtra(EXTRA_FROM_SETTINGS_SUMMARY, false);
         if (savedInstanceState != null && mToken == null) {
             mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
@@ -180,11 +186,11 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         return intent;
     }
 
-    protected void launchConfirmLock(int titleResId, long challenge) {
+    protected void launchConfirmLock(int titleResId) {
         final ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(this);
         builder.setRequestCode(CONFIRM_REQUEST)
                 .setTitle(getString(titleResId))
-                .setChallenge(challenge)
+                .setRequestGatekeeperPassword(true)
                 .setForegroundOnly(true)
                 .setReturnCredentials(true);
 

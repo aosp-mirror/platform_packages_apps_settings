@@ -72,7 +72,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
     protected boolean mReturnCredentials = false;
     protected boolean mReturnGatekeeperPassword = false;
-    protected boolean mVerifyChallenge = false;
+    protected boolean mForceVerifyPath = false;
     protected Button mCancelButton;
     /** Button allowing managed profile password reset, null when is not shown. */
     @Nullable protected Button mForgotButton;
@@ -103,8 +103,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
 
         mReturnGatekeeperPassword = intent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
-        mVerifyChallenge = intent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+        mForceVerifyPath = intent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, false);
 
         // Only take this argument into account if it belongs to the current profile.
         mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras(),
