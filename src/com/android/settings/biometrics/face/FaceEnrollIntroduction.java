@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -38,7 +39,7 @@ import com.google.android.setupdesign.template.RequireScrollMixin;
 
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
-    private static final String TAG = "FaceIntro";
+    private static final String TAG = "FaceEnrollIntroduction";
 
     private FaceManager mFaceManager;
     private FaceFeatureProvider mFaceFeatureProvider;
@@ -86,9 +87,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                     RequireScrollMixin.class);
             requireScrollMixin.requireScrollWithButton(this, agreeButton,
                     R.string.security_settings_face_enroll_introduction_more,
-                    button -> {
-                        onNextButtonClick(button);
-                    });
+                    this::onNextButtonClick);
         }
 
         final TextView footer2 = findViewById(R.id.face_enroll_introduction_footer_part_2);
@@ -97,6 +96,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                         ? R.string.security_settings_face_enroll_introduction_footer_part_2
                         : R.string.security_settings_face_settings_footer_attention_not_supported;
         footer2.setText(footer2TextResource);
+
+        // This path is an entry point for SetNewPasswordController, e.g.
+        // adb shell am start -a android.app.action.SET_NEW_PASSWORD
+        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
+            mFooterBarMixin.getPrimaryButton().setEnabled(false);
+            // We either block on generateChallenge, or need to gray out the "next" button until
+            // the challenge is ready. Let's just do this for now.
+            mFaceManager.generateChallenge(challenge -> {
+                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
+                mFooterBarMixin.getPrimaryButton().setEnabled(true);
+            });
+        }
     }
 
     @Override
@@ -171,12 +182,13 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected long getChallenge() {
+    protected void getChallenge(GenerateChallengeCallback callback) {
         mFaceManager = Utils.getFaceManagerOrNull(this);
         if (mFaceManager == null) {
-            return 0;
+            callback.onChallengeGenerated(0L);
+            return;
         }
-        return mFaceManager.generateChallengeBlocking();
+        mFaceManager.generateChallenge(callback::onChallengeGenerated);
     }
 
     @Override

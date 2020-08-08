@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.biometrics.BiometricEnrollSidecar.Listener;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -60,8 +61,24 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
 
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
 
+        // This is an entry point for SetNewPasswordController, e.g.
+        // adb shell am start -a android.app.action.SET_NEW_PASSWORD
+        if (mToken == null && BiometricUtils.containsGatekeeperPassword(getIntent())) {
+            final FingerprintManager fpm = getSystemService(FingerprintManager.class);
+            fpm.generateChallenge(challenge -> {
+                mToken = BiometricUtils.requestGatekeeperHat(this, getIntent(), mUserId, challenge);
 
-        startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
+                // Put this into the intent. This is really just to work around the fact that the
+                // enrollment sidecar gets the HAT from the activity's intent, rather than having
+                // it passed in.
+                getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
+
+                startLookingForFingerprint();
+            });
+        } else if (mToken != null) {
+            // HAT passed in from somewhere else, such as FingerprintEnrollIntroduction
+            startLookingForFingerprint();
+        }
 
         View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
         if (animationView instanceof FingerprintFindSensorAnimation) {
@@ -160,10 +177,13 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_OK && data != null) {
+                throw new IllegalStateException("Pretty sure this is dead code");
+                /*
                 mToken = data.getByteArrayExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
                 overridePendingTransition(R.anim.sud_slide_next_in, R.anim.sud_slide_next_out);
                 getIntent().putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, mToken);
                 startLookingForFingerprint();
+                */
             } else {
                 finish();
             }

@@ -135,26 +135,22 @@ final class SetNewPasswordController {
 
     private Bundle getFingerprintChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFingerprintManager.generateChallengeBlocking();
         chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
                 ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        chooseLockExtras.putLong(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, true);
         return chooseLockExtras;
     }
 
     private Bundle getFaceChooseLockExtras() {
         Bundle chooseLockExtras = new Bundle();
-        long challenge = mFaceManager.generateChallengeBlocking();
         chooseLockExtras.putInt(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
                 PASSWORD_QUALITY_SOMETHING);
         chooseLockExtras.putBoolean(
                 ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS, true);
-        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        chooseLockExtras.putLong(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, true);
         chooseLockExtras.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, true);
         return chooseLockExtras;
     }

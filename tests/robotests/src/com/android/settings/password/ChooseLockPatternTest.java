@@ -59,8 +59,8 @@ public class ChooseLockPatternTest {
                 .build();
 
         assertThat(intent
-                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true))
-                .named("EXTRA_KEY_HAS_CHALLENGE")
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, false))
+                .named("EXTRA_KEY_FORCE_VERIFY")
                 .isFalse();
         assertThat((LockscreenCredential) intent
                 .getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD))
@@ -72,20 +72,16 @@ public class ChooseLockPatternTest {
     }
 
     @Test
-    public void intentBuilder_setChallenge_shouldAddExtras() {
+    public void intentBuilder_setRequestGatekeeperPassword_shouldAddExtras() {
         Intent intent = new IntentBuilder(application)
-                .setChallenge(12345L)
+                .setRequestGatekeeperPassword(true)
                 .setUserId(123)
                 .build();
 
         assertThat(intent
-                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false))
-                .named("EXTRA_KEY_HAS_CHALLENGE")
+                .getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false))
+                .named("EXTRA_KEY_REQUEST_GK_PW")
                 .isTrue();
-        assertThat(intent
-                .getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L))
-                .named("EXTRA_KEY_CHALLENGE")
-                .isEqualTo(12345L);
         assertThat(intent
                 .getIntExtra(Intent.EXTRA_USER_ID, 0))
                 .named("EXTRA_USER_ID")

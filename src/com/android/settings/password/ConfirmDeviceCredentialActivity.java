@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.biometrics.BiometricConstants;
-import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback;
 import android.hardware.biometrics.PromptInfo;
@@ -81,18 +80,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         return intent;
     }
 
-    public static Intent createIntent(CharSequence title, CharSequence details, long challenge) {
-        Intent intent = new Intent();
-        intent.setClassName(SETTINGS_PACKAGE_NAME,
-                ConfirmDeviceCredentialActivity.class.getName());
-        intent.putExtra(KeyguardManager.EXTRA_TITLE, title);
-        intent.putExtra(KeyguardManager.EXTRA_DESCRIPTION, details);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
-        intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-        return intent;
-    }
-
-    private BiometricManager mBiometricManager;
     private BiometricFragment mBiometricFragment;
     private DevicePolicyManager mDevicePolicyManager;
     private LockPatternUtils mLockPatternUtils;
@@ -181,7 +168,6 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        mBiometricManager = getSystemService(BiometricManager.class);
         mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         mUserManager = UserManager.get(this);
         mTrustManager = getSystemService(TrustManager.class);
@@ -394,7 +380,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                     .setDescription(mDetails)
                     .setExternal(true)
                     .setUserId(mUserId)
-                    .setChallenge(0L)
+                    .setForceVerifyPath(true)
                     .show();
         } else if (mCredentialMode == CREDENTIAL_NORMAL) {
             final ChooseLockSettingsHelper.Builder builder =
