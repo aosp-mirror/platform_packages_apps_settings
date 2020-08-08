@@ -144,8 +144,7 @@ public class ChooseLockGeneric extends SettingsActivity {
 
         private LockPatternUtils mLockPatternUtils;
         private DevicePolicyManager mDpm;
-        private boolean mHasChallenge = false;
-        private long mChallenge;
+        private boolean mRequestGatekeeperPassword = false;
         private boolean mPasswordConfirmed = false;
         private boolean mWaitingForConfirmation = false;
         private boolean mForChangeCredRequiredForBoot = false;
@@ -211,10 +210,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             }
 
-            mHasChallenge = intent.getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
-            mChallenge = intent.getLongExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+            mRequestGatekeeperPassword = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             mForFace = intent.getBooleanExtra(
@@ -386,9 +383,12 @@ public class ChooseLockGeneric extends SettingsActivity {
                         mForFingerprint);
                 intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE,
                         mForFace);
+                // If the caller requested Gatekeeper Password to be returned, we assume it came
+                // from biometric enrollment. This should be cleaned up, since requesting
+                // Gatekeeper Password should not imply it came from biometric setup/settings.
                 startActivityForResult(
                         intent,
-                        mIsSetNewPassword && mHasChallenge
+                        mIsSetNewPassword && mRequestGatekeeperPassword
                                 ? CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                                 : ENABLE_ENCRYPTION_REQUEST);
             } else {
@@ -438,6 +438,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                     && resultCode == BiometricEnrollBase.RESULT_FINISHED) {
                 Intent intent = getBiometricEnrollIntent(getActivity());
                 if (data != null) {
+                    // ChooseLockGeneric should have requested that the Gatekeeper Password be
+                    // returned, so that biometric enrollment(s) can subsequently request Gatekeeper
+                    // to create HardwareAuthToken(s) wrapping biometric-specific challenges. Send
+                    // the extras (including the GK Password) to the enrollment activity.
                     intent.putExtras(data.getExtras());
                 }
                 // Forward the target user id to fingerprint setup page.
@@ -722,10 +726,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setRequestedMinComplexity(mRequestedMinComplexity)
                             .setForFingerprint(mForFingerprint)
                             .setForFace(mForFace)
-                            .setUserId(mUserId);
-            if (mHasChallenge) {
-                builder.setChallenge(mChallenge);
-            }
+                            .setUserId(mUserId)
+                            .setRequestGatekeeperPassword(mRequestGatekeeperPassword);
             if (mUserPassword != null) {
                 builder.setPassword(mUserPassword);
             }
@@ -740,10 +742,8 @@ public class ChooseLockGeneric extends SettingsActivity {
                     new ChooseLockPattern.IntentBuilder(getContext())
                             .setForFingerprint(mForFingerprint)
                             .setForFace(mForFace)
-                            .setUserId(mUserId);
-            if (mHasChallenge) {
-                builder.setChallenge(mChallenge);
-            }
+                            .setUserId(mUserId)
+                            .setRequestGatekeeperPassword(mRequestGatekeeperPassword);
             if (mUserPassword != null) {
                 builder.setPattern(mUserPassword);
             }
@@ -784,8 +784,13 @@ public class ChooseLockGeneric extends SettingsActivity {
                     intent.putExtra(EXTRA_SHOW_OPTIONS_BUTTON, chooseLockSkipped);
                 }
                 intent.putExtra(EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS, getIntent().getExtras());
+                // If the caller requested Gatekeeper Password to be returned, we assume it came
+                // from biometric enrollment. onActivityResult will put the LockSettingsService
+                // into the extras and launch biometric enrollment. This should be cleaned up,
+                // since requesting Gatekeeper Password should not imply it came from biometric
+                // setup/settings.
                 startActivityForResult(intent,
-                        mIsSetNewPassword && mHasChallenge
+                        mIsSetNewPassword && mRequestGatekeeperPassword
                                 ? CHOOSE_LOCK_BEFORE_BIOMETRIC_REQUEST
                                 : CHOOSE_LOCK_REQUEST);
                 return;

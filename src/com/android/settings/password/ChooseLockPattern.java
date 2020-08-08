@@ -42,11 +42,11 @@ import androidx.fragment.app.Fragment;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
 import com.android.internal.widget.LockscreenCredential;
+import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -54,7 +54,6 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
-import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 
 import com.google.android.collect.Lists;
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -106,7 +105,6 @@ public class ChooseLockPattern extends SettingsActivity {
             mIntent = new Intent(context, ChooseLockPattern.class);
             mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
         }
 
         public IntentBuilder setUserId(int userId) {
@@ -114,9 +112,9 @@ public class ChooseLockPattern extends SettingsActivity {
             return this;
         }
 
-        public IntentBuilder setChallenge(long challenge) {
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, true);
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, challenge);
+        public IntentBuilder setRequestGatekeeperPassword(boolean requestGatekeeperPassword) {
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW,
+                    requestGatekeeperPassword);
             return this;
         }
 
@@ -206,8 +204,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private static final String FRAGMENT_TAG_SAVE_AND_FINISH = "save_and_finish_worker";
 
         private LockscreenCredential mCurrentCredential;
-        private boolean mHasChallenge;
-        private long mChallenge;
+        private boolean mRequestGatekeeperPassword;
         protected TextView mTitleText;
         protected TextView mHeaderText;
         protected TextView mMessageText;
@@ -483,7 +480,8 @@ public class ChooseLockPattern extends SettingsActivity {
                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
                 w.setBlocking(true);
                 w.setListener(this);
-                w.start(mLockPatternUtils, required, false, 0, current, current, mUserId);
+                w.start(mLockPatternUtils, required, false /* requestGatekeeperPassword */, current,
+                        current, mUserId);
             }
             mForFingerprint = intent.getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
@@ -563,9 +561,8 @@ public class ChooseLockPattern extends SettingsActivity {
             Intent intent = getActivity().getIntent();
             mCurrentCredential =
                     intent.getParcelableExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
-            mHasChallenge = intent.getBooleanExtra(
-                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
-            mChallenge = intent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0);
+            mRequestGatekeeperPassword = intent.getBooleanExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW, false);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
@@ -578,6 +575,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     final boolean launched = builder.setRequestCode(CONFIRM_EXISTING_REQUEST)
                             .setTitle(getString(R.string.unlock_set_unlock_launch_picker_title))
                             .setReturnCredentials(true)
+                            .setRequestGatekeeperPassword(mRequestGatekeeperPassword)
                             .setUserId(mUserId)
                             .show();
 
@@ -858,7 +856,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 }
             }
             mSaveAndFinishWorker.start(mLockPatternUtils, required,
-                    mHasChallenge, mChallenge, mChosenPattern, mCurrentCredential, mUserId);
+                    mRequestGatekeeperPassword, mChosenPattern, mCurrentCredential, mUserId);
         }
 
         @Override
@@ -888,10 +886,10 @@ public class ChooseLockPattern extends SettingsActivity {
         private LockscreenCredential mCurrentCredential;
         private boolean mLockVirgin;
 
-        public void start(LockPatternUtils utils, boolean credentialRequired, boolean hasChallenge,
-                long challenge, LockscreenCredential chosenPattern,
+        public void start(LockPatternUtils utils, boolean credentialRequired,
+                boolean requestGatekeeperPassword, LockscreenCredential chosenPattern,
                 LockscreenCredential currentCredential, int userId) {
-            prepare(utils, credentialRequired, hasChallenge, challenge, userId);
+            prepare(utils, credentialRequired, requestGatekeeperPassword, userId);
 
             mCurrentCredential = currentCredential != null ? currentCredential
                     : LockscreenCredential.createNone();
@@ -912,20 +910,21 @@ public class ChooseLockPattern extends SettingsActivity {
                 unifyProfileCredentialIfRequested();
             }
             Intent result = null;
-            if (success && mHasChallenge) {
-                byte[] token;
-                try {
-                    token = mUtils.verifyCredential(mChosenPattern, mChallenge, userId);
-                } catch (RequestThrottledException e) {
-                    token = null;
-                }
+            if (success && mRequestGatekeeperPassword) {
+                // If a Gatekeeper Password was requested, invoke the LockSettingsService code
+                // path to return a Gatekeeper Password based on the credential that the user
+                // chose. This should only be run if the credential was successfully set.
+                final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPattern,
+                        userId, LockPatternUtils.VERIFY_FLAG_RETURN_GK_PW);
 
-                if (token == null) {
-                    Log.e(TAG, "critical: no token returned for known good pattern");
+                if (!response.isMatched() || response.getGatekeeperPw() == null) {
+                    Log.e(TAG, "critical: bad response or missing GK HAT for known good pattern: "
+                            + response.toString());
                 }
 
                 result = new Intent();
-                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
+                result.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW,
+                        response.getGatekeeperPw());
             }
             return Pair.create(success, result);
         }

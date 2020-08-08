@@ -42,8 +42,7 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     private Intent mResultData;
 
     protected LockPatternUtils mUtils;
-    protected boolean mHasChallenge;
-    protected long mChallenge;
+    protected boolean mRequestGatekeeperPassword;
     protected boolean mWasSecureBefore;
     protected int mUserId;
     protected int mUnificationProfileId = UserHandle.USER_NULL;
@@ -69,12 +68,10 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
     }
 
     protected void prepare(LockPatternUtils utils, boolean credentialRequired,
-            boolean hasChallenge, long challenge, int userId) {
+            boolean requestGatekeeperPassword, int userId) {
         mUtils = utils;
         mUserId = userId;
-
-        mHasChallenge = hasChallenge;
-        mChallenge = challenge;
+        mRequestGatekeeperPassword = requestGatekeeperPassword;
         // This will be a no-op for non managed profiles.
         mWasSecureBefore = mUtils.isSecure(mUserId);
 

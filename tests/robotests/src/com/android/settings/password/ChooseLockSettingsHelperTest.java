@@ -36,7 +36,7 @@ import org.robolectric.shadows.ShadowActivity.IntentForResult;
 public class ChooseLockSettingsHelperTest {
 
     @Test
-    public void testLaunchConfirmationActivityWithExternalAndChallenge() {
+    public void testLaunchConfirmationActivityWithExternal() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
@@ -45,7 +45,6 @@ public class ChooseLockSettingsHelperTest {
                 .setHeader("header")
                 .setDescription("description")
                 .setExternal(true)
-                .setChallenge(10000L)
                 .setUserId(UserHandle.myUserId());
         ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
         helper.launch();
@@ -53,15 +52,10 @@ public class ChooseLockSettingsHelperTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
 
-        assertEquals(new ComponentName("com.android.settings",
-                        ConfirmLockPattern.InternalActivity.class.getName()),
+        assertEquals(new ComponentName("com.android.settings", ConfirmLockPattern.class.getName()),
                 startedIntent.getComponent());
         assertFalse(startedIntent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false));
-        assertTrue(startedIntent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
-        assertEquals(10000L, startedIntent.getLongExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
         assertTrue((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
@@ -72,7 +66,7 @@ public class ChooseLockSettingsHelperTest {
     }
 
     @Test
-    public void testLaunchConfirmationActivityInternalAndChallenge() {
+    public void testLaunchConfirmationActivityInternal() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
 
         ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
@@ -80,7 +74,8 @@ public class ChooseLockSettingsHelperTest {
                 .setTitle("title")
                 .setHeader("header")
                 .setDescription("description")
-                .setChallenge(10000L)
+                .setForceVerifyPath(true)
+                .setReturnCredentials(true)
                 .setUserId(UserHandle.myUserId());
         ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
         helper.launch();
@@ -91,12 +86,10 @@ public class ChooseLockSettingsHelperTest {
         assertEquals(new ComponentName("com.android.settings",
                         ConfirmLockPattern.InternalActivity.class.getName()),
                 startedIntent.getComponent());
-        assertFalse(startedIntent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false));
         assertTrue(startedIntent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
-        assertEquals(10000L, startedIntent.getLongExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
+                ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, true));
+        assertTrue(startedIntent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, true));
         assertFalse((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));

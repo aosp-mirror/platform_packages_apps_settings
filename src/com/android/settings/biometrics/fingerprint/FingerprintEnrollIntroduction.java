@@ -131,12 +131,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected long getChallenge() {
+    protected void getChallenge(GenerateChallengeCallback callback) {
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
         if (mFingerprintManager == null) {
-            return 0;
+            callback.onChallengeGenerated(0L);
+            return;
         }
-        return mFingerprintManager.generateChallengeBlocking();
+        mFingerprintManager.generateChallenge(callback::onChallengeGenerated);
     }
 
     @Override
