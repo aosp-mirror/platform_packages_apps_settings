@@ -968,17 +968,9 @@ public class ChooseLockPassword extends SettingsActivity {
             }
             Intent result = null;
             if (success && mHasChallenge) {
-                VerifyCredentialResponse response;
-                try {
-                    response = mUtils.verifyCredential(mChosenPassword, mChallenge, mUserId,
-                            0 /* flags */);
-                } catch (RequestThrottledException e) {
-                    response = null;
-                }
-
-                if (response == null) {
-                    Log.e(TAG, "critical: null response for known good password");
-                } else if (!response.isMatched() || response.getGatekeeperHAT() == null) {
+                final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPassword,
+                        mChallenge, mUserId, 0 /* flags */);
+                if (!response.isMatched() || response.getGatekeeperHAT() == null) {
                     Log.e(TAG, "critical: bad response or missing GK HAT for known good password: "
                             + response.toString());
                 }

@@ -914,17 +914,10 @@ public class ChooseLockPattern extends SettingsActivity {
             }
             Intent result = null;
             if (success && mHasChallenge) {
-                VerifyCredentialResponse response;
-                try {
-                    response = mUtils.verifyCredential(mChosenPattern, mChallenge, userId,
-                            0 /* flags */);
-                } catch (RequestThrottledException e) {
-                    response = null;
-                }
+                final VerifyCredentialResponse response = mUtils.verifyCredential(mChosenPattern,
+                        mChallenge, userId, 0 /* flags */);
 
-                if (response == null) {
-                    Log.e(TAG, "critial: null response for known good pattern");
-                } else if (!response.isMatched() || response.getGatekeeperHAT() == null) {
+                if (!response.isMatched() || response.getGatekeeperHAT() == null) {
                     Log.e(TAG, "critical: bad response or missing GK HAT for known good pattern: "
                             + response.toString());
                 }
