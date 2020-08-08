@@ -1042,7 +1042,8 @@
     <string name="wifi_hotspot_on_local_only_subtext" msgid="965051079784031636">"L\'app sta condividendo contenuti. Per condividere la connessione Internet, disattiva e riattiva l\'hotspot"</string>
     <string name="wifi_hotspot_no_password_subtext" msgid="3685689196772398783">"Nessuna password impostata"</string>
     <string name="wifi_hotspot_name_title" msgid="6633480190014369846">"Nome hotspot"</string>
-    <string name="wifi_hotspot_name_summary_connecting" msgid="6178719924661022928">"Attivazione di <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>..."</string>
+    <!-- no translation found for wifi_hotspot_name_summary_connecting (2094754115215428892) -->
+    <skip />
     <string name="wifi_hotspot_name_summary_connected" msgid="6935457127884928249">"Gli altri dispositivi possono collegarsi a <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_hotspot_password_title" msgid="9096340919454296786">"Password hotspot"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="560262446129195042">"Banda AP"</string>
@@ -1605,31 +1606,48 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"Le impostazioni di rete sono state reimpostate"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"Impossibile resettare le SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"Le SIM scaricate non possono essere resettate a causa di un errore.\n\nRiavvia il dispositivo e riprova."</string>
-    <string name="master_clear_title" msgid="5309249309235959383">"Cancella tutti i dati (ripristino dati fabbrica)"</string>
-    <string name="master_clear_short_title" msgid="5331449583601739360">"Cancella tutti i dati"</string>
-    <string name="master_clear_desc" product="tablet" msgid="3114467865487750525">"Tutti i dati saranno cancellati dalla "<b>"memoria interna"</b>" del tablet, inclusi:\n\n"<li>"Il tuo Account Google"</li>\n<li>"I dati e le impostazioni del sistema e delle app"</li>\n<li>"Le app scaricate"</li></string>
-    <string name="master_clear_desc" product="default" msgid="8447637796694856323">"Tutti i dati saranno cancellati dalla "<b>"memoria interna"</b>" del telefono, inclusi:\n\n"<li>"Il tuo Account Google"</li>\n<li>"Le impostazioni e i dati di sistema e delle app"</li>\n<li>"Le app scaricate"</li></string>
-    <string name="master_clear_accounts" product="default" msgid="142220980039357651">\n\n"Al momento hai eseguito l\'accesso ai seguenti account:\n"</string>
-    <string name="master_clear_other_users_present" product="default" msgid="7492338002408466023">\n\n"Sono presenti altri utenti su questo dispositivo.\n"</string>
-    <string name="master_clear_desc_also_erases_external" msgid="4738661805356792736"><li>"Musica"</li>\n<li>"Foto"</li>\n<li>"Altri dati utente"</li></string>
-    <string name="master_clear_desc_also_erases_esim" msgid="6418163562288667727"><li>"eSIM"</li></string>
-    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="3112614935795369143">\n\n"Il tuo piano di servizio dati mobile non verrà annullato."</string>
-    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7088655731755912201">\n\n"Per cancellare musica, foto e altri dati dell\'utente, è necessario cancellare i dati dell\'"<b>"archivio USB"</b>"."</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="4145566517710675883">\n\n"Per cancellare musica, foto e altri dati dell\'utente, è necessario cancellare i dati della "<b>"scheda SD"</b>"."</string>
+    <!-- no translation found for main_clear_title (277664302144837723) -->
+    <skip />
+    <!-- no translation found for main_clear_short_title (4752094765533020696) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (1651178880680056849) -->
+    <skip />
+    <!-- no translation found for main_clear_desc (6984348811887162647) -->
+    <skip />
+    <!-- no translation found for main_clear_accounts (7675859115108318537) -->
+    <skip />
+    <!-- no translation found for main_clear_other_users_present (2672976674798019077) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_external (3687911419628956693) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_also_erases_esim (4553469876411831729) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_no_cancel_mobile_plan (369883568059127035) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (4441604184663452046) -->
+    <skip />
+    <!-- no translation found for main_clear_desc_erase_external_storage (1498514970618215728) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="2182181846128639635">"Cancella archivio USB"</string>
     <string name="erase_external_storage" product="default" msgid="2610056855012660451">"Cancella scheda SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="6358699244894944843">"Cancella tutti i dati nell\'archivio USB interno, come musica o foto"</string>
     <string name="erase_external_storage_description" product="default" msgid="3367779850546310380">"Cancella tutti i dati sulla scheda SD, come musica o foto"</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3554085992851027633">"Cancella tutti i dati"</string>
-    <string name="master_clear_button_text" product="default" msgid="3554085992851027633">"Cancella tutti i dati"</string>
-    <string name="master_clear_final_desc" msgid="5218005891800878932">"Tutte le tue informazioni personali e le app scaricate saranno eliminate. Questa azione non può essere annullata."</string>
-    <string name="master_clear_final_desc_esim" msgid="3570139379312933326">"Tutte le tue informazioni personali, tra cui le app e le SIM scaricate, saranno eliminate. Questa azione non può essere annullata."</string>
-    <string name="master_clear_final_button_text" msgid="1721164700940719292">"Cancella tutto"</string>
-    <string name="master_clear_failed" msgid="6458678864313618526">"Nessun ripristino eseguito perché il servizio System Clear non è disponibile."</string>
-    <string name="master_clear_confirm_title" msgid="632482173088680058">"Cancellare tutti i dati?"</string>
-    <string name="master_clear_not_available" msgid="3419345724070828273">"Il ripristino dati di fabbrica non è consentito per questo utente"</string>
-    <string name="master_clear_progress_title" msgid="480032747847804624">"Cancellazione in corso"</string>
-    <string name="master_clear_progress_text" msgid="8891964820486632180">"Attendere prego…"</string>
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_button_text (6246087475569640671) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc (5800877928569039580) -->
+    <skip />
+    <!-- no translation found for main_clear_final_desc_esim (440406836793824969) -->
+    <skip />
+    <!-- no translation found for main_clear_confirm_title (6577071819657853713) -->
+    <skip />
+    <!-- no translation found for main_clear_not_available (3433795327146684827) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_title (7239741132015617719) -->
+    <skip />
+    <!-- no translation found for main_clear_progress_text (4636695115176327972) -->
+    <skip />
     <string name="call_settings_title" msgid="2531072044177194164">"Impostazioni chiamate"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Imposta segreteria, deviazione chiamate, avviso di chiamata, ID chiamante"</string>
     <string name="tether_settings_title_usb" msgid="5926474044238409099">"Tethering USB"</string>
@@ -2211,7 +2229,8 @@
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrazione notifiche"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrazione allo squillo"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Feedback tattile"</string>
-    <string name="accessibility_service_master_switch_title" msgid="3001666897585097640">"Usa <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_service_primary_switch_title (437610853412159406) -->
+    <skip />
     <string name="accessibility_service_master_open_title" msgid="7437956750557583681">"Apri <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="3580563017377754890">"Usa correzione del colore"</string>
     <string name="accessibility_caption_master_switch_title" msgid="3821125170899547375">"Mostra sottotitoli"</string>
@@ -2245,6 +2264,8 @@
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Deuteranomalia"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Protanomalia"</string>
     <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Tritanomalia"</string>
+    <!-- no translation found for daltonizer_mode_grayscale_title (152005391387952588) -->
+    <skip />
     <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Rosso-verde"</string>
     <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Rosso-verde"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Blu-giallo"</string>
@@ -3057,7 +3078,8 @@
     <string name="nfc_how_it_works_title" msgid="1363791241625771084">"Pagamento al terminale"</string>
     <string name="nfc_how_it_works_content" msgid="1141382684788210772">"Configura un\'app per il pagamento e appoggia il retro del telefono su qualsiasi terminale con il simbolo del pagamento contactless."</string>
     <string name="nfc_how_it_works_got_it" msgid="4717868843368296630">"OK"</string>
-    <string name="nfc_more_title" msgid="4202405349433865488">"Altro..."</string>
+    <!-- no translation found for nfc_more_title (1041094244767216498) -->
+    <skip />
     <string name="nfc_payment_set_default_label" msgid="7395939287766230293">"Imposta app predefinita per i pagamenti"</string>
     <string name="nfc_payment_update_default_label" msgid="8201975914337221246">"Aggiorna l\'app predefinita per i pagamenti"</string>
     <string name="nfc_payment_set_default" msgid="4101484767872365195">"Se è disponibile un terminale contactless, paga con l\'app <xliff:g id="APP">%1$s</xliff:g>"</string>
@@ -3141,7 +3163,8 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"Usa sempre questa per chiamare"</string>
     <string name="select_sim_for_data" msgid="1577092784244587369">"Seleziona una SIM per i dati"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Seleziona una SIM per gli SMS"</string>
-    <string name="data_switch_started" msgid="6205259094233452188">"Passaggio a un\'altra SIM dati in corso. L\'operazione potrebbe richiedere un minuto."</string>
+    <!-- no translation found for data_switch_started (6292759843974720112) -->
+    <skip />
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Chiama con"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Seleziona una scheda SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3284,6 +3307,8 @@
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"routine, programmazione, risparmio energetico, risparmiare batteria, batteria, automatico, percento"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, chiamate avanzate, chiamate 4g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"aggiungere lingua, aggiungere una lingua"</string>
+    <!-- no translation found for keywords_font_size (336803136451166298) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"Suono predefinito"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volume suoneria e notifiche: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibrazione, Non disturbare"</string>
@@ -3640,7 +3665,8 @@
     <string name="manage_zen_access_title" msgid="1562322900340107269">"Accesso Non disturbare"</string>
     <string name="zen_access_detail_switch" msgid="4183681772666138993">"Consenti \"Non disturbare\""</string>
     <string name="zen_access_empty_text" msgid="3779921853282293080">"Nessuna delle app installate ha richiesto l\'accesso Non disturbare"</string>
-    <string name="loading_notification_apps" msgid="1458413761470945269">"Caricamento app..."</string>
+    <!-- no translation found for loading_notification_apps (5139471829295287945) -->
+    <skip />
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Come richiesto, Android sta bloccando la visualizzazione delle notifiche dell\'app su questo dispositivo"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Come richiesto, Android sta bloccando la visualizzazione di questa categoria di notifiche su questo dispositivo"</string>
     <string name="channel_group_notifications_off_desc" msgid="9096417708500595424">"Come richiesto, Android sta bloccando la visualizzazione di questo gruppo di notifiche su questo dispositivo"</string>
@@ -4039,7 +4065,8 @@
     <string name="usb_control_title" msgid="1946791559052157693">"USB controllata da"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo connesso"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Questo dispositivo"</string>
-    <string name="usb_switching" msgid="3713602881103295766">"Commutazione…"</string>
+    <!-- no translation found for usb_switching (3654709188596609354) -->
+    <skip />
     <string name="usb_switching_failed" msgid="5721262697715454137">"Impossibile eseguire la commutazione"</string>
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Ricarica del dispositivo"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Ricarica del dispositivo collegato"</string>

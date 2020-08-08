@@ -40,7 +40,7 @@ import java.lang.annotation.RetentionPolicy;
  * A LinearLayout with a twist: if the contents don't fit, it takes space away from the
  * MATCH_PARENT children, instead of taking it from the weighted ones.
  *
- * TODO: Remove once we redesign the ChooseLockPattern screen with a sane layout.
+ * TODO: Remove once we redesign the ChooseLockPattern screen with a rational layout.
  */
 public class MatchParentShrinkingLinearLayout extends ViewGroup {
     /** @hide */
