@@ -109,7 +109,7 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
                             .setDescription(description)
                             .setUserId(user.id)
                             .setAllowAnyUserId(true)
-                            .setChallenge(0L)
+                            .setForceVerifyPath(true)
                             .show();
                     return;
                 }

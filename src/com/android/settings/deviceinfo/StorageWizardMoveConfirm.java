@@ -90,7 +90,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
                     builder.setRequestCode(REQUEST_CREDENTIAL)
                             .setDescription(description)
                             .setUserId(user.id)
-                            .setChallenge(0L)
+                            .setForceVerifyPath(true)
                             .setAllowAnyUserId(true)
                             .show();
                     return;

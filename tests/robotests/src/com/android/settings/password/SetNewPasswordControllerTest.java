@@ -19,14 +19,11 @@ package com.android.settings.password;
 import static android.content.pm.PackageManager.FEATURE_FACE;
 import static android.content.pm.PackageManager.FEATURE_FINGERPRINT;
 
-import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
-        .HIDE_DISABLED_PREFS;
-import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment
-        .MINIMUM_QUALITY_KEY;
-import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE;
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.HIDE_DISABLED_PREFS;
+import static com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT;
-import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE;
+import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUEST_GK_PW;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -57,8 +54,6 @@ import org.robolectric.RobolectricTestRunner;
 public final class SetNewPasswordControllerTest {
 
     private static final int CURRENT_USER_ID = 101;
-    private static final long FINGERPRINT_CHALLENGE = -9876512313131L;
-    private static final long FACE_CHALLENGE = 1352057789L;
 
     @Mock
     private PackageManager mPackageManager;
@@ -79,11 +74,7 @@ public final class SetNewPasswordControllerTest {
         mSetNewPasswordController = new SetNewPasswordController(
                 CURRENT_USER_ID, mPackageManager, mFingerprintManager, mFaceManager,
                 mDevicePolicyManager, mUi);
-
-        when(mFingerprintManager.generateChallengeBlocking()).thenReturn(FINGERPRINT_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FINGERPRINT))).thenReturn(true);
-
-        when(mFaceManager.generateChallengeBlocking()).thenReturn(FACE_CHALLENGE);
         when(mPackageManager.hasSystemFeature(eq(FEATURE_FACE))).thenReturn(true);
     }
 
@@ -278,12 +269,8 @@ public final class SetNewPasswordControllerTest {
                 "All disabled preference should be removed.",
                 actualBundle.getBoolean(HIDE_DISABLED_PREFS));
         assertTrue(
-                "There must be a fingerprint challenge.",
-                actualBundle.getBoolean(EXTRA_KEY_HAS_CHALLENGE));
-        assertEquals(
-                "The fingerprint challenge must come from the FingerprintManager",
-                FINGERPRINT_CHALLENGE,
-                actualBundle.getLong(EXTRA_KEY_CHALLENGE));
+                "Fingerprint enroll must request Gatekeeper Password.",
+                actualBundle.getBoolean(EXTRA_KEY_REQUEST_GK_PW));
         assertTrue(
                 "The request must be a fingerprint set up request.",
                 actualBundle.getBoolean(EXTRA_KEY_FOR_FINGERPRINT));
@@ -302,12 +289,8 @@ public final class SetNewPasswordControllerTest {
                 "All disabled preference should be removed.",
                 actualBundle.getBoolean(HIDE_DISABLED_PREFS));
         assertTrue(
-                "There must be a face challenge.",
-                actualBundle.getBoolean(EXTRA_KEY_HAS_CHALLENGE));
-        assertEquals(
-                "The face challenge must come from the FaceManager",
-                FACE_CHALLENGE,
-                actualBundle.getLong(EXTRA_KEY_CHALLENGE));
+                "Face enroll must request Gatekeeper Password",
+                actualBundle.getBoolean(EXTRA_KEY_REQUEST_GK_PW));
         assertTrue(
                 "The request must be a face set up request.",
                 actualBundle.getBoolean(EXTRA_KEY_FOR_FACE));
