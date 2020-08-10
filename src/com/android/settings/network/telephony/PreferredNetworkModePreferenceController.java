@@ -49,8 +49,6 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     @Override
     public int getAvailabilityStatus(int subId) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        final TelephonyManager telephonyManager = TelephonyManager
-                .from(mContext).createForSubscriptionId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -81,14 +79,15 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object object) {
-        final int settingsMode = Integer.parseInt((String) object);
+        final int newPreferredNetworkMode = Integer.parseInt((String) object);
 
-        if (mTelephonyManager.setPreferredNetworkType(mSubId, settingsMode)) {
+        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
+                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
-                    settingsMode);
+                    newPreferredNetworkMode);
             final ListPreference listPreference = (ListPreference) preference;
-            listPreference.setSummary(getPreferredNetworkModeSummaryResId(settingsMode));
+            listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
             return true;
         }
 
