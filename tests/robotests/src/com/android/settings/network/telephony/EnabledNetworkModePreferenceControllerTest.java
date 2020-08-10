@@ -153,8 +153,9 @@ public class EnabledNetworkModePreferenceControllerTest {
     public void init_initDisplay5gList_returnTrue() {
         long testBitmask = TelephonyManager.NETWORK_TYPE_BITMASK_NR
                 | TelephonyManager.NETWORK_TYPE_BITMASK_LTE;
+        long allowedNetworkTypes = -1;
         doReturn(testBitmask).when(mTelephonyManager).getSupportedRadioAccessFamily();
-
+        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
         mController.init(mLifecycle, SUB_ID);
 
         assertThat(mController.mDisplay5gList).isTrue();
@@ -171,6 +172,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_updateByNetworkMode() {
+        long allowedNetworkTypes = -1;
+        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
                 TelephonyManagerConstants.NETWORK_MODE_TDSCDMA_GSM_WCDMA);
@@ -184,6 +187,8 @@ public class EnabledNetworkModePreferenceControllerTest {
 
     @Test
     public void updateState_updateByNetworkMode_useDefaultValue() {
+        long allowedNetworkTypes = -1;
+        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
                 TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
@@ -399,9 +404,8 @@ public class EnabledNetworkModePreferenceControllerTest {
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isEqualTo(
-                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        assertThat(mPreference.getValue()).isEqualTo(
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
     }
 
     @Test
@@ -412,14 +416,15 @@ public class EnabledNetworkModePreferenceControllerTest {
         mController.onPreferenceChange(mPreference,
                 String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
 
-        assertThat(Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID, 0)).isNotEqualTo(
-                TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA);
+        assertThat(mPreference.getValue()).isNotEqualTo(
+                String.valueOf(TelephonyManagerConstants.NETWORK_MODE_LTE_GSM_WCDMA));
     }
 
     @Test
     public void preferredNetworkModeNotification_preferenceUpdates() {
         PreferenceScreen screen = mock(PreferenceScreen.class);
+        long allowedNetworkTypes = -1;
+        doReturn(allowedNetworkTypes).when(mTelephonyManager).getAllowedNetworkTypes();
         doReturn(mPreference).when(screen).findPreference(KEY);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.PREFERRED_NETWORK_MODE + SUB_ID,
