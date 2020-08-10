@@ -164,6 +164,16 @@ public class ContextualCardLoader extends AsyncLoaderCompat<List<ContextualCard>
                     SettingsEnums.ACTION_CONTEXTUAL_CARD_NOT_SHOW,
                     ContextualCardLogUtils.buildCardListLog(hiddenCards));
         }
+
+        // Add a default card if no other visible cards
+        if (visibleCards.isEmpty() && maxCardCount == 1) {
+            final ContextualCard defaultCard = FeatureFactory.getFactory(mContext)
+                    .getContextualCardFeatureProvider(mContext).getDefaultContextualCard();
+            if (defaultCard != null) {
+                Log.i(TAG, "Default card: " + defaultCard.getSliceUri());
+                visibleCards.add(defaultCard);
+            }
+        }
         return visibleCards;
     }
 
