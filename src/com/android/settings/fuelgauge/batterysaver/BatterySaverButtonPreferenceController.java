@@ -16,8 +16,11 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.os.PowerManager;
+import android.provider.SettingsSlicesContract;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -38,6 +41,7 @@ public class BatterySaverButtonPreferenceController extends
         LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
 
     private final BatterySaverReceiver mBatterySaverReceiver;
+
     private final PowerManager mPowerManager;
 
     private TwoStateButtonPreference mPreference;
@@ -57,6 +61,15 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public boolean isSliceable() {
         return true;
+    }
+
+    public Uri getSliceUri() {
+        return new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(SettingsSlicesContract.AUTHORITY)
+                .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
+                .appendPath(SettingsSlicesContract.KEY_BATTERY_SAVER)
+                .build();
     }
 
     @Override
