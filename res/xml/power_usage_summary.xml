@@ -37,8 +37,7 @@
         android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
         android:key="battery_saver_summary"
         android:title="@string/battery_saver"
-        settings:controller="com.android.settings.fuelgauge.BatterySaverController"
-        settings:platform_slice="true" />
+        settings:controller="com.android.settings.fuelgauge.BatterySaverController" />
 
     <Preference
         android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
