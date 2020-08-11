@@ -216,6 +216,7 @@ public class AccessibilitySettings extends DashboardFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         initializeAllPreferences();
+        updateAllPreferences();
     }
 
     @Override
@@ -229,7 +230,6 @@ public class AccessibilitySettings extends DashboardFragment {
     @Override
     public void onStart() {
         super.onStart();
-        updateAllPreferences();
 
         mSettingsPackageMonitor.register(getActivity(), getActivity().getMainLooper(), false);
         mSettingsContentObserver.register(getContentResolver());
