@@ -224,9 +224,13 @@ public class NetworkSelectSettings extends DashboardFragment {
                     setProgressBarVisible(false);
                     getPreferenceScreen().setEnabled(true);
 
-                    mSelectedPreference.setSummary(isSucceed
-                            ? R.string.network_connected
-                            : R.string.network_could_not_connect);
+                    if (mSelectedPreference != null) {
+                        mSelectedPreference.setSummary(isSucceed
+                                ? R.string.network_connected
+                                : R.string.network_could_not_connect);
+                    } else {
+                        Log.e(TAG, "No preference to update!");
+                    }
                     break;
                 case EVENT_NETWORK_SCAN_RESULTS:
                     final List<CellInfo> results = (List<CellInfo>) msg.obj;
