@@ -57,21 +57,21 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             "SearchIndexableProvider must either provide no resource to index, or valid ones. "
                     + "But the followings contain resource with xml id = 0\n";
 
-    private final List<String> notImplementingIndexProviderGrandfatherList;
-    private final List<String> notInSearchIndexableRegistryGrandfatherList;
-    private final List<String> notSharingPrefControllersGrandfatherList;
+    private final List<String> mNotImplementingIndexProviderExemptList;
+    private final List<String> mNotInSearchIndexableRegistryExemptList;
+    private final List<String> mNotSharingPrefControllersExemptList;
 
     public SearchIndexProviderCodeInspector(List<Class<?>> classes) {
         super(classes);
-        notImplementingIndexProviderGrandfatherList = new ArrayList<>();
-        notInSearchIndexableRegistryGrandfatherList = new ArrayList<>();
-        notSharingPrefControllersGrandfatherList = new ArrayList<>();
-        initializeGrandfatherList(notImplementingIndexProviderGrandfatherList,
-                "grandfather_not_implementing_index_provider");
-        initializeGrandfatherList(notInSearchIndexableRegistryGrandfatherList,
-                "grandfather_not_in_search_index_provider_registry");
-        initializeGrandfatherList(notSharingPrefControllersGrandfatherList,
-                "grandfather_not_sharing_pref_controllers_with_search_provider");
+        mNotImplementingIndexProviderExemptList = new ArrayList<>();
+        mNotInSearchIndexableRegistryExemptList = new ArrayList<>();
+        mNotSharingPrefControllersExemptList = new ArrayList<>();
+        initializeExemptList(mNotImplementingIndexProviderExemptList,
+                "exempt_not_implementing_index_provider");
+        initializeExemptList(mNotInSearchIndexableRegistryExemptList,
+                "exempt_not_in_search_index_provider_registry");
+        initializeExemptList(mNotSharingPrefControllersExemptList,
+                "exempt_not_sharing_pref_controllers_with_search_provider");
     }
 
     @Override
@@ -100,7 +100,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             final boolean hasSearchIndexProvider = hasSearchIndexProvider(clazz);
             // If it implements Indexable, it must also implement the index provider field.
             if (!hasSearchIndexProvider) {
-                if (!notImplementingIndexProviderGrandfatherList.remove(className)) {
+                if (!mNotImplementingIndexProviderExemptList.remove(className)) {
                     notImplementingIndexProvider.add(className);
                 }
                 continue;
@@ -110,14 +110,14 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             final boolean isSharingPrefControllers = DashboardFragmentSearchIndexProviderInspector
                     .isSharingPreferenceControllers(clazz);
             if (!isSharingPrefControllers) {
-                if (!notSharingPrefControllersGrandfatherList.remove(className)) {
+                if (!mNotSharingPrefControllersExemptList.remove(className)) {
                     notSharingPreferenceControllers.add(className);
                 }
                 continue;
             }
             // Must be in SearchProviderRegistry
             if (!providerClasses.contains(clazz)) {
-                if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
+                if (!mNotInSearchIndexableRegistryExemptList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }
             }
@@ -149,13 +149,13 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         assertWithMessage(notProvidingValidResourceError)
                 .that(notProvidingValidResource)
                 .isEmpty();
-        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_index_provider",
-                notImplementingIndexProviderGrandfatherList);
-        assertNoObsoleteInGrandfatherList("grandfather_not_in_search_index_provider_registry",
-                notInSearchIndexableRegistryGrandfatherList);
-        assertNoObsoleteInGrandfatherList(
-                "grandfather_not_sharing_pref_controllers_with_search_provider",
-                notSharingPrefControllersGrandfatherList);
+        assertNoObsoleteInExemptList("exempt_not_implementing_index_provider",
+                mNotImplementingIndexProviderExemptList);
+        assertNoObsoleteInExemptList("exempt_not_in_search_index_provider_registry",
+                mNotInSearchIndexableRegistryExemptList);
+        assertNoObsoleteInExemptList(
+                "exempt_not_sharing_pref_controllers_with_search_provider",
+                mNotSharingPrefControllersExemptList);
     }
 
     private boolean hasSearchIndexProvider(Class clazz) {
