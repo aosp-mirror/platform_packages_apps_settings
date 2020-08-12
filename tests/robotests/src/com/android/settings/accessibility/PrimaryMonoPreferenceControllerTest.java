@@ -33,7 +33,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class MasterMonoPreferenceControllerTest {
+public class PrimaryMonoPreferenceControllerTest {
 
     private static final int ON = 1;
     private static final int OFF = 0;
@@ -41,13 +41,13 @@ public class MasterMonoPreferenceControllerTest {
 
     private Context mContext;
     private SwitchPreference mPreference;
-    private MasterMonoPreferenceController mController;
+    private PrimaryMonoPreferenceController mController;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
-        mController = new MasterMonoPreferenceController(mContext, "master_mono");
+        mController = new PrimaryMonoPreferenceController(mContext, "test_key");
     }
 
     @Test
