@@ -306,7 +306,7 @@ public class PanelFragment extends Fragment {
                  * Watching for the {@link Slice} to load.
                  * <p>
                  *     If the Slice comes back {@code null} or with the Error attribute, if slice
-                 *     uri is not in the whitelist, remove the Slice data from the list, otherwise
+                 *     uri is not in the allowlist, remove the Slice data from the list, otherwise
                  *     keep the Slice data.
                  * <p>
                  *     If the Slice has come back fully loaded, then mark the Slice as loaded.  No
@@ -337,10 +337,10 @@ public class PanelFragment extends Fragment {
     }
 
     private void removeSliceLiveData(Uri uri) {
-        final List<String> whiteList = Arrays.asList(
+        final List<String> allowList = Arrays.asList(
                 getResources().getStringArray(
                         R.array.config_panel_keep_observe_uri));
-        if (!whiteList.contains(uri.toString())) {
+        if (!allowList.contains(uri.toString())) {
             mSliceLiveData.remove(uri);
         }
     }

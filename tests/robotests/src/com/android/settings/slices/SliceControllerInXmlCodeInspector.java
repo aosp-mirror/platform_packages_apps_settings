@@ -111,12 +111,12 @@ public class SliceControllerInXmlCodeInspector extends CodeInspector {
             }
 
             if (!mXmlDeclaredControllers.contains(clazz.getName())) {
-                // Class clazz should have been declared in XML (unless whitelisted).
+                // Class clazz should have been declared in XML (unless allowlisted).
                 missingControllersInXml.add(clazz.getName());
             }
         }
 
-        // Removed whitelisted classes
+        // Removed allowlisted classes
         missingControllersInXml.removeAll(mExemptedClasses);
 
         final String missingControllerError =

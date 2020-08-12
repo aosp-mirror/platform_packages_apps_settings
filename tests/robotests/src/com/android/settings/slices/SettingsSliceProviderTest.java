@@ -625,25 +625,25 @@ public class SettingsSliceProviderTest {
 
     @Test
     @Config(qualifiers = "mcc998")
-    public void grantWhitelistedPackagePermissions_noWhitelist_shouldNotGrant() {
+    public void grantAllowlistedPackagePermissions_noAllowlist_shouldNotGrant() {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantAllowlistedPackagePermissions(mContext, uris);
 
         verify(mManager, never()).grantSlicePermission(anyString(), any(Uri.class));
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void grantWhitelistedPackagePermissions_hasPackageWhitelist_shouldGrant() {
+    public void grantAllowlistedPackagePermissions_hasPackageAllowlist_shouldGrant() {
         final List<Uri> uris = new ArrayList<>();
         uris.add(Uri.parse("content://settings/slice"));
 
-        SettingsSliceProvider.grantWhitelistedPackagePermissions(mContext, uris);
+        SettingsSliceProvider.grantAllowlistedPackagePermissions(mContext, uris);
 
         verify(mManager)
-                .grantSlicePermission("com.android.settings.slice_whitelist_package", uris.get(0));
+                .grantSlicePermission("com.android.settings.slice_allowlist_package", uris.get(0));
     }
 
     @Test
