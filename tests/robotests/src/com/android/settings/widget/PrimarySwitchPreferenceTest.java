@@ -54,13 +54,13 @@ public class PrimarySwitchPreferenceTest {
         mHolder = PreferenceViewHolder.createInstanceForTests(inflater.inflate(
                 com.android.settingslib.R.layout.preference_two_target, null));
         mWidgetView = mHolder.itemView.findViewById(android.R.id.widget_frame);
-        inflater.inflate(R.layout.restricted_preference_widget_master_switch, mWidgetView, true);
+        inflater.inflate(R.layout.restricted_preference_widget_primary_switch, mWidgetView, true);
     }
 
     @Test
     public void createNewPreference_shouldSetLayout() {
         assertThat(mPreference.getWidgetLayoutResource())
-                .isEqualTo(R.layout.restricted_preference_widget_master_switch);
+                .isEqualTo(R.layout.restricted_preference_widget_primary_switch);
     }
 
     @Test
