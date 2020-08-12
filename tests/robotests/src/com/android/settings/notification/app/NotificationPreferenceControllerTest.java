@@ -206,7 +206,7 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsBlockable_oemWhitelist() {
+    public void testIsBlockable_oemAllowlist() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);

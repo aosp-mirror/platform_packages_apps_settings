@@ -55,7 +55,7 @@ public class SettingsBaseActivity extends FragmentActivity {
 
     // Serves as a temporary list of tiles to ignore until we heard back from the PM that they
     // are disabled.
-    private static ArraySet<ComponentName> sTileBlacklist = new ArraySet<>();
+    private static ArraySet<ComponentName> sTileDenylist = new ArraySet<>();
 
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private final List<CategoryListener> mCategoryListeners = new ArrayList<>();
@@ -177,9 +177,9 @@ public class SettingsBaseActivity extends FragmentActivity {
         boolean isEnabled = state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         if (isEnabled != enabled || state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT) {
             if (enabled) {
-                sTileBlacklist.remove(component);
+                sTileDenylist.remove(component);
             } else {
-                sTileBlacklist.add(component);
+                sTileDenylist.add(component);
             }
             pm.setComponentEnabledSetting(component, enabled
                             ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
@@ -217,7 +217,7 @@ public class SettingsBaseActivity extends FragmentActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            mCategoryManager.updateCategoryFromBlacklist(sTileBlacklist);
+            mCategoryManager.updateCategoryFromDenylist(sTileDenylist);
             onCategoriesChanged();
         }
     }

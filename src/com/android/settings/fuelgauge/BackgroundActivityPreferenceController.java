@@ -118,7 +118,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
 
     public void updateSummary(Preference preference) {
         if (mPowerAllowlistBackend.isAllowlisted(mTargetPackage)) {
-            preference.setSummary(R.string.background_activity_summary_whitelisted);
+            preference.setSummary(R.string.background_activity_summary_allowlisted);
             return;
         }
         final int mode = mAppOpsManager

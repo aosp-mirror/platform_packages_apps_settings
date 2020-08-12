@@ -21,6 +21,7 @@ import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
 import static com.android.settings.SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static junit.framework.Assert.fail;
@@ -88,11 +89,11 @@ public class SettingsGatewayTest {
     @Presubmit
     public void publicFragmentMustAppearInSettingsGateway()
             throws PackageManager.NameNotFoundException {
-        final List<String> whitelistedFragment = new ArrayList<>();
+        final List<String> allowlistedFragment = new ArrayList<>();
         final StringBuilder error = new StringBuilder();
 
         for (String fragment : SettingsGateway.ENTRY_FRAGMENTS) {
-            whitelistedFragment.add(fragment);
+            allowlistedFragment.add(fragment);
         }
         final PackageInfo pi = mPackageManager.getPackageInfo(mPackageName,
                 GET_META_DATA | MATCH_DISABLED_COMPONENTS | GET_ACTIVITIES);
@@ -106,7 +107,7 @@ public class SettingsGatewayTest {
             final String fragmentName = metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
 
             assertThat(fragmentName).isNotNull();
-            if (!whitelistedFragment.contains(fragmentName)) {
+            if (!allowlistedFragment.contains(fragmentName)) {
                 error.append("SettingsGateway.ENTRY_FRAGMENTS must contain " + fragmentName
                         + " because this fragment is used in manifest for " + activity.name)
                         .append("\n");

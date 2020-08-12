@@ -56,7 +56,7 @@ public class UniquePreferenceTest {
     private static final List<String> IGNORE_PREF_TYPES = Arrays.asList(
             "com.android.settingslib.widget.FooterPreference");
 
-    private static final List<String> WHITELISTED_DUPLICATE_KEYS = Arrays.asList(
+    private static final List<String> ALLOWLISTED_DUPLICATE_KEYS = Arrays.asList(
             "owner_info_settings",          // Lock screen message in security - multiple xml files
                                             // contain this because security page is constructed by
                                             // combining small xml chunks. Eventually the page
@@ -185,7 +185,7 @@ public class UniquePreferenceTest {
                     nullKeyClasses.add(className);
                     continue;
                 }
-                if (uniqueKeys.contains(key) && !WHITELISTED_DUPLICATE_KEYS.contains(key)) {
+                if (uniqueKeys.contains(key) && !ALLOWLISTED_DUPLICATE_KEYS.contains(key)) {
                     Log.e(TAG, "Every preference key must unique; found "
                             + " in " + className
                             + " / " + key);
@@ -209,7 +209,7 @@ public class UniquePreferenceTest {
                 nullKeyClasses.add(className);
                 continue;
             }
-            if (uniqueKeys.contains(raw.key) && !WHITELISTED_DUPLICATE_KEYS.contains(raw.key)) {
+            if (uniqueKeys.contains(raw.key) && !ALLOWLISTED_DUPLICATE_KEYS.contains(raw.key)) {
                 Log.e(TAG, "Every SearchIndexableRaw key must unique; found " + raw.key
                         + " in " + className);
                 duplicatedKeys.add(raw.key);

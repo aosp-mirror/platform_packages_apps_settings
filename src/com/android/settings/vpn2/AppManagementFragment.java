@@ -231,7 +231,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     private boolean setAlwaysOnVpn(boolean isEnabled, boolean isLockdown) {
         return mConnectivityManager.setAlwaysOnVpnPackageForUser(mUserId,
-                isEnabled ? mPackageName : null, isLockdown, /* lockdownWhitelist */ null);
+                isEnabled ? mPackageName : null, isLockdown, /* lockdownAllowlist */ null);
     }
 
     private void updateUI() {

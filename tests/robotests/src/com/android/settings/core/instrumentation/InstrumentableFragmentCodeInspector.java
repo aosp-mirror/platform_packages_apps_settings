@@ -53,11 +53,11 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             }
             final String className = clazz.getName();
             // If it's a fragment, it must also be instrumentable.
-            final boolean whitelisted =
+            final boolean allowlisted =
                     mNotImplementingInstrumentableExemptList.remove(className);
             if (Fragment.class.isAssignableFrom(clazz)
                     && !Instrumentable.class.isAssignableFrom(clazz)
-                    && !whitelisted) {
+                    && !allowlisted) {
                 broken.add(className);
             }
         }

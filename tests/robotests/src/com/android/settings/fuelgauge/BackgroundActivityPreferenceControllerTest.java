@@ -155,7 +155,7 @@ public class BackgroundActivityPreferenceControllerTest {
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.getSummary()).isEqualTo(
-                mShadowContext.getText(R.string.background_activity_summary_whitelisted));
+                mShadowContext.getText(R.string.background_activity_summary_allowlisted));
     }
 
     @Test
