@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -43,6 +44,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         Enhanced4gLtePreferenceController.On4gLteUpdateListener {
 
     private Preference mPreference;
+    private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
     @VisibleForTesting
     ImsManager mImsManager;
@@ -55,7 +57,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new MobileDataEnabledListener(context, this);
-        mPhoneStateListener = new PhoneCallStateListener();
+        mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
     }
 
     @Override
@@ -74,7 +76,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     @Override
     public void onStart() {
-        mPhoneStateListener.register(mContext, mSubId);
+        mPhoneStateListener.register(mSubId);
         mDataContentObserver.start(mSubId);
     }
 
@@ -115,7 +117,9 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         }
 
@@ -152,11 +156,9 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     private class PhoneCallStateListener extends PhoneStateListener {
 
-        PhoneCallStateListener() {
-            super();
+        public PhoneCallStateListener(Looper looper) {
+            super(looper);
         }
-
-        private TelephonyManager mTelephonyManager;
 
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -164,11 +166,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             updateState(mPreference);
         }
 
-        public void register(Context context, int subId) {
-            mTelephonyManager = context.getSystemService(TelephonyManager.class);
-            if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
-            }
+        public void register(int subId) {
+            mSubId = subId;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
