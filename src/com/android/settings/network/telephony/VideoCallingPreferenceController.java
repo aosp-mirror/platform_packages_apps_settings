@@ -17,12 +17,8 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.Handler;
 import android.os.Looper;
 import android.os.PersistableBundle;
-import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
@@ -34,6 +30,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.ims.ImsManager;
+import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -43,6 +40,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  */
 public class VideoCallingPreferenceController extends TelephonyTogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop,
+        MobileDataEnabledListener.Client,
         Enhanced4gLtePreferenceController.On4gLteUpdateListener {
 
     private Preference mPreference;
@@ -51,12 +49,14 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @VisibleForTesting
     ImsManager mImsManager;
     private PhoneCallStateListener mPhoneStateListener;
-    private DataContentObserver mDataContentObserver;
+    @VisibleForTesting
+    Integer mCallState;
+    private MobileDataEnabledListener mDataContentObserver;
 
     public VideoCallingPreferenceController(Context context, String key) {
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
-        mDataContentObserver = new DataContentObserver(new Handler(Looper.getMainLooper()));
+        mDataContentObserver = new MobileDataEnabledListener(context, this);
         mPhoneStateListener = new PhoneCallStateListener(Looper.getMainLooper());
     }
 
@@ -77,18 +77,21 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @Override
     public void onStart() {
         mPhoneStateListener.register(mSubId);
-        mDataContentObserver.register(mContext, mSubId);
+        mDataContentObserver.start(mSubId);
     }
 
     @Override
     public void onStop() {
         mPhoneStateListener.unregister();
-        mDataContentObserver.unRegister(mContext);
+        mDataContentObserver.stop();
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (mCallState == null) {
+            return;
+        }
         final SwitchPreference switchPreference = (SwitchPreference) preference;
         final boolean videoCallEnabled = isVideoCallEnabled(mSubId, mImsManager);
         switchPreference.setVisible(videoCallEnabled);
@@ -96,7 +99,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             final boolean is4gLteEnabled = mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
                     && mImsManager.isNonTtyOrTtyOnVolteEnabled();
             preference.setEnabled(is4gLteEnabled &&
-                    mTelephonyManager.getCallState(mSubId) == TelephonyManager.CALL_STATE_IDLE);
+                    mCallState == TelephonyManager.CALL_STATE_IDLE);
             switchPreference.setChecked(is4gLteEnabled && mImsManager.isVtEnabledByUser());
         }
     }
@@ -114,8 +117,9 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
-        mTelephonyManager = TelephonyManager.from(mContext).createForSubscriptionId(mSubId);
+        mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
             mImsManager = ImsManager.getInstance(mContext, SubscriptionManager.getPhoneId(mSubId));
         }
 
@@ -132,8 +136,10 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     @VisibleForTesting
     boolean isVideoCallEnabled(int subId, ImsManager imsManager) {
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
-        final TelephonyManager telephonyManager = TelephonyManager
-                .from(mContext).createForSubscriptionId(subId);
+        TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
+        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            telephonyManager = telephonyManager.createForSubscriptionId(subId);
+        }
         return carrierConfig != null && imsManager != null
                 && imsManager.isVtEnabledByPlatform()
                 && imsManager.isVtProvisionedOnDevice()
@@ -156,6 +162,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
+            mCallState = state;
             updateState(mPreference);
         }
 
@@ -165,36 +172,15 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         }
 
         public void unregister() {
+            mCallState = null;
             mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
     }
 
     /**
-     * Listener that listens mobile data state change.
+     * Implementation of MobileDataEnabledListener.Client
      */
-    public class DataContentObserver extends ContentObserver {
-
-        public DataContentObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            updateState(mPreference);
-        }
-
-        public void register(Context context, int subId) {
-            Uri uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA);
-            if (TelephonyManager.getDefault().getSimCount() != 1) {
-                uri = Settings.Global.getUriFor(Settings.Global.MOBILE_DATA + subId);
-            }
-            context.getContentResolver().registerContentObserver(uri,
-                    false /* notifyForDescendants */, this /* observer */);
-        }
-
-        public void unRegister(Context context) {
-            context.getContentResolver().unregisterContentObserver(this);
-        }
+    public void onMobileDataEnabledChange() {
+        updateState(mPreference);
     }
 }
