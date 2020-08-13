@@ -24,6 +24,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -32,9 +33,11 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +46,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowBluetoothAdapter.class)
 public class PreviouslyConnectedDevicePreferenceControllerTest {
 
     private final String KEY = "test_key";
@@ -59,10 +65,13 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     private PackageManager mPackageManager;
     @Mock
     private PreferenceManager mPreferenceManager;
+    @Mock
+    private Preference mSeeAllPreference;
 
     private Context mContext;
     private PreviouslyConnectedDevicePreferenceController mPreConnectedDeviceController;
     private PreferenceGroup mPreferenceGroup;
+    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
 
     @Before
     public void setUp() {
@@ -74,11 +83,13 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
                 new PreviouslyConnectedDevicePreferenceController(mContext, KEY);
         mPreConnectedDeviceController.setBluetoothDeviceUpdater(mBluetoothDeviceUpdater);
         mPreConnectedDeviceController.setSavedDockUpdater(mDockUpdater);
+        mShadowBluetoothAdapter = Shadow.extract(BluetoothAdapter.getDefaultAdapter());
 
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         mPreferenceGroup.setVisible(false);
         mPreConnectedDeviceController.setPreferenceGroup(mPreferenceGroup);
+        mPreConnectedDeviceController.mSeeAllPreference = mSeeAllPreference;
     }
 
     @Test
@@ -87,11 +98,14 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.onStart();
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mDockUpdater).registerCallback();
+        verify(mContext).registerReceiver(mPreConnectedDeviceController.mReceiver,
+                mPreConnectedDeviceController.mIntentFilter);
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();
         verify(mBluetoothDeviceUpdater).unregisterCallback();
         verify(mDockUpdater).unregisterCallback();
+        verify(mContext).unregisterReceiver(mPreConnectedDeviceController.mReceiver);
     }
 
     @Test
@@ -124,7 +138,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     public void onDeviceAdded_addDevicePreference_displayIt() {
         mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
 
-        assertThat(mPreferenceGroup.isVisible()).isTrue();
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(1);
     }
 
@@ -135,7 +148,6 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
         mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
         mPreConnectedDeviceController.onDeviceAdded(new Preference(mContext));
 
-        assertThat(mPreferenceGroup.isVisible()).isTrue();
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(3);
     }
 
@@ -143,11 +155,26 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     public void onDeviceRemoved_removeLastDevice_setInvisible() {
         final Preference preference = new Preference(mContext);
         mPreferenceGroup.addPreference(preference);
-        mPreferenceGroup.setVisible(true);
 
         mPreConnectedDeviceController.onDeviceRemoved(preference);
 
-        assertThat(mPreferenceGroup.isVisible()).isFalse();
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void updatePreferenceVisibility_bluetoothIsEnable_shouldShowCorrectText() {
+        mShadowBluetoothAdapter.setEnabled(true);
+        mPreConnectedDeviceController.updatePreferenceVisibility();
+
+        verify(mSeeAllPreference).setSummary("");
+    }
+
+    @Test
+    public void updatePreferenceVisibility_bluetoothIsDisable_shouldShowCorrectText() {
+        mShadowBluetoothAdapter.setEnabled(false);
+        mPreConnectedDeviceController.updatePreferenceVisibility();
+
+        verify(mSeeAllPreference).setSummary(
+                mContext.getString(R.string.connected_device_see_all_summary));
     }
 }

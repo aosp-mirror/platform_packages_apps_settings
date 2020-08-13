@@ -175,7 +175,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
             if (isDisabledByAdmin()) {
                 setSummary(R.string.disabled_by_admin);
             } else if (mDataUsageState.isDataSaverDenylisted) {
-                setSummary(R.string.restrict_background_blacklisted);
+                setSummary(R.string.restrict_background_blocklisted);
             } else {
                 setSummary("");
             }

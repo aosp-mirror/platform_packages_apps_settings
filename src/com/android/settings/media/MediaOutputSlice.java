@@ -106,10 +106,15 @@ public class MediaOutputSlice implements CustomSliceable {
             final MediaDevice connectedDevice = worker.getCurrentConnectedMediaDevice();
             if (devices.size() == 1) {
                 // Zero state
-                for (MediaDevice device : devices) {
-                    addRow(device, device, listBuilder);
+                final MediaDevice device = devices.iterator().next();
+                addRow(device, device, listBuilder);
+                // Add "pair new" only when local output device exists
+                final int type = device.getDeviceType();
+                if (type == MediaDevice.MediaDeviceType.TYPE_PHONE_DEVICE
+                        || type == MediaDevice.MediaDeviceType.TYPE_3POINT5_MM_AUDIO_DEVICE
+                        || type == MediaDevice.MediaDeviceType.TYPE_USB_C_AUDIO_DEVICE) {
+                    listBuilder.addRow(getPairNewRow());
                 }
-                listBuilder.addRow(getPairNewRow());
             } else {
                 final boolean isTouched = worker.getIsTouched();
                 // Fix the last top device when user press device to transfer.

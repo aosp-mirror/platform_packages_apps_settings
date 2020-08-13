@@ -666,8 +666,8 @@
     <string name="Accounts_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
     <string name="location_settings_title">Location</string>
-    <!-- Used in the location settings to control turning on/off the feature entirely -->
-    <string name="location_settings_master_switch_title">Use location</string>
+    <!-- Used in the location settings to control turning on/off the feature entirely [CHAR LIMIT=60] -->
+    <string name="location_settings_primary_switch_title">Use location</string>
     <!-- Summary for Location settings when location is off [CHAR LIMIT=NONE] -->
     <string name="location_settings_summary_location_off">Off</string>
     <!-- Summary for Location settings when location is on, explaining how many apps have location permission [CHAR LIMIT=NONE]-->
@@ -1418,9 +1418,6 @@
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
-    <!-- Error shown when a user is choosing a PIN for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PIN that's less common and more complicated. -->
-    <string name="lockpassword_pin_blacklisted_by_admin">Common PINs are blocked by your IT admin. Try a different PIN.</string>
-
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
 
@@ -1477,9 +1474,6 @@
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
         password</string>
-
-    <!-- Error shown when a user is choosing a PASSWORD for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PASSWORD that's less common and more complicated. -->
-    <string name="lockpassword_password_blacklisted_by_admin">Common passwords are blocked by your IT admin. Try a different password.</string>
 
     <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
     <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
@@ -5041,16 +5035,16 @@
     <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
-    <!-- Title for the accessibility preference for master mono. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_master_mono_title">Mono audio</string>
-    <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
-    <string name="accessibility_toggle_master_mono_summary">Combine channels when playing audio</string>
-    <!-- Title for the accessibility preference for master balance. [CHAR LIMIT=35] -->
-    <string name="accessibility_toggle_master_balance_title">Audio balance</string>
-    <!-- 'Left' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
-    <string name="accessibility_toggle_master_balance_left_label">Left</string>
-    <!-- 'Right' balance text for the accessibility preference for master balance. [CHAR LIMIT=20] -->
-    <string name="accessibility_toggle_master_balance_right_label">Right</string>
+    <!-- Title for the accessibility preference for primary mono. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_primary_mono_title">Mono audio</string>
+    <!-- Summary for the accessibility preference for primary mono. [CHAR LIMIT=50] -->
+    <string name="accessibility_toggle_primary_mono_summary">Combine channels when playing audio</string>
+    <!-- Title for the accessibility preference for primary balance. [CHAR LIMIT=35] -->
+    <string name="accessibility_toggle_primary_balance_title">Audio balance</string>
+    <!-- 'Left' balance text for the accessibility preference for primary balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_primary_balance_left_label">Left</string>
+    <!-- 'Right' balance text for the accessibility preference for primary balance. [CHAR LIMIT=20] -->
+    <string name="accessibility_toggle_primary_balance_right_label">Right</string>
 
     <!-- Option heading to leave the timeout requirement for accessibility users at its default level. [CHAR LIMIT=35] -->
     <string name="accessibility_timeout_default">Default</string>
@@ -5123,13 +5117,13 @@
     <!-- Used in the accessibility service settings to control turning on/off the service entirely [CHAR LIMIT=60] -->
     <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_master_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
-    <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
-    <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
-    <!-- Title for Captions settings screen to control turning on/off the feature entirely -->
-    <string name="accessibility_caption_master_switch_title">Show captions</string>
+    <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
+    <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
+    <!-- Title for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
+    <string name="accessibility_caption_primary_switch_title">Show captions</string>
     <!-- Summary for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
-    <string name="accessibility_caption_master_switch_summary">For supported app only</string>
+    <string name="accessibility_caption_primary_switch_summary">For supported app only</string>
     <!-- Title for Caption preference settings screen for configuring font style. [CHAR LIMIT=NONE] -->
     <string name="captioning_caption_appearance_title">Caption size and style</string>
     <!-- Summary for Captions settings, explaining important settings under it. [CHAR LIMIT=NONE] -->
@@ -5533,8 +5527,8 @@
     <string name="background_activity_summary">Allow the app to run in the background</string>
     <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
     <string name="background_activity_summary_disabled">App not allowed to run in background</string>
-    <!-- TODO: Pending UX review. Summary for the background activity when it is whitlisted [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_whitelisted">Background usage can\u2019t be restricted</string>
+    <!-- TODO: Pending UX review. Summary for the background activity when it is allowlisted [CHAR_LIMIT=120] -->
+    <string name="background_activity_summary_allowlisted">Background usage can\u2019t be restricted</string>
     <!-- TODO: Pending UX review. Title for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
@@ -10505,8 +10499,8 @@
     <!-- Button that leads to list of apps with unrestricted data access [CHAR LIMIT=60] -->
     <string name="unrestricted_data_saver">Unrestricted data</string>
 
-    <!-- Description of message shown when app is blacklisted for background data access [CHAR LIMIT=NONE] -->
-    <string name="restrict_background_blacklisted">Background data is turned off</string>
+    <!-- Description of message shown when app is blocklisted for background data access [CHAR LIMIT=NONE] -->
+    <string name="restrict_background_blocklisted">Background data is turned off</string>
 
     <!-- Summary for the Data Saver feature being on [CHAR LIMIT=NONE] -->
     <string name="data_saver_on">On</string>
@@ -10579,8 +10573,8 @@
     <!-- [CHAR LIMIT=30] Title for dialog for setting to control the default spell checker -->
     <string name="choose_spell_checker">Choose spell checker</string>
 
-    <!-- [CHAR LIMIT=45] Title for the master switch for spell checker, turning off will disable entire spell check feature. -->
-    <string name="spell_checker_master_switch_title">Use spell checker</string>
+    <!-- [CHAR LIMIT=45] Title for the primary switch for spell checker, turning off will disable entire spell check feature. -->
+    <string name="spell_checker_primary_switch_title">Use spell checker</string>
 
     <!-- [CHAR LIMIT=30] Label for the placeholder of the current spell checker name.  Used when no spell checker is currently selected. -->
     <string name="spell_checker_not_selected">Not selected</string>
@@ -10793,8 +10787,8 @@
     <!-- Preference title for the automatic storage manager toggle. [CHAR LIMIT=60]-->
     <string name="automatic_storage_manager_preference_title">Storage manager</string>
 
-    <!-- Used in the storage manager settings screen to control turning on/off the feature entirely -->
-    <string name="automatic_storage_manager_master_switch_title">Use Storage manager</string>
+    <!-- Used in the storage manager settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
+    <string name="automatic_storage_manager_primary_switch_title">Use Storage manager</string>
 
     <!-- Category title for the automatic settings in the storage manager settings. [CHAR LIMIT=40] -->
     <string name="deletion_helper_automatic_title">Automatic</string>
@@ -12200,4 +12194,7 @@
     <string name="media_controls_no_players">No players available</string>
     <!-- Keywords for the media controls setting [CHAR LIMIT=NONE]-->
     <string name="keywords_media_controls">media</string>
+
+    <!-- Summary for see all preference when bluetooth is disable [CHAR LIMIT=none]-->
+    <string name="connected_device_see_all_summary">Bluetooth will turn on</string>
 </resources>
