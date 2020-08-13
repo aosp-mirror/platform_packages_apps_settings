@@ -18,10 +18,6 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -30,6 +26,9 @@ import android.os.Bundle;
 
 import com.android.settingslib.wifi.AccessPoint;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
@@ -48,11 +47,12 @@ public class WifiUtilsTest {
     public void testPassword() {
         final String longPassword = "123456789012345678901234567890"
                 + "1234567890123456789012345678901234567890";
-        assertThat(WifiUtils.isHotspotPasswordValid("123")).isFalse();
-        assertThat(WifiUtils.isHotspotPasswordValid("12345678")).isTrue();
-        assertThat(WifiUtils.isHotspotPasswordValid("1234567890")).isTrue();
-        assertThat(WifiUtils.isHotspotPasswordValid(longPassword)).isFalse();
-        assertThat(WifiUtils.isHotspotPasswordValid("")).isFalse();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid("123")).isFalse();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid("12345678")).isTrue();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid("1234567890")).isTrue();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid(longPassword)).isFalse();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid("")).isFalse();
+        assertThat(WifiUtils.isHotspotWpa2PasswordValid("€¥£")).isFalse();
     }
 
     @Test

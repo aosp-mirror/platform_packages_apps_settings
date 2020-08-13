@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.NetworkCapabilities;
 import android.net.wifi.ScanResult;
+import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiConfiguration;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -38,8 +39,6 @@ public class WifiUtils {
 
     private static final int SSID_ASCII_MIN_LENGTH = 1;
     private static final int SSID_ASCII_MAX_LENGTH = 32;
-    private static final int PASSWORD_MIN_LENGTH = 8;
-    private static final int PASSWORD_MAX_LENGTH = 63;
 
 
     public static boolean isSSIDTooLong(String ssid) {
@@ -56,13 +55,17 @@ public class WifiUtils {
         return ssid.length() < SSID_ASCII_MIN_LENGTH;
     }
 
-    public static boolean isHotspotPasswordValid(String password) {
-        if (TextUtils.isEmpty(password)) {
+    /**
+     * Check if the WPA2-PSK hotspot password is valid.
+     */
+    public static boolean isHotspotWpa2PasswordValid(String password) {
+        final SoftApConfiguration.Builder configBuilder = new SoftApConfiguration.Builder();
+        try {
+            configBuilder.setPassphrase(password, SoftApConfiguration.SECURITY_TYPE_WPA2_PSK);
+        } catch (IllegalArgumentException e) {
             return false;
         }
-
-        final int length = password.length();
-        return length >= PASSWORD_MIN_LENGTH && length <= PASSWORD_MAX_LENGTH;
+        return true;
     }
 
     /**
